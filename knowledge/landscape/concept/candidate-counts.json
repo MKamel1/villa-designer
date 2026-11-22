@@ -1,0 +1,126 @@
+{
+ "south": {
+  "H/screened": {
+   "sampled": 48000,
+   "packed": 230,
+   "no_hard_fail_structures": 5,
+   "distinct_top_structures": 5,
+   "planted_variants_tried": 40,
+   "survivors": 16,
+   "rejects": {
+    "packing failed": 47770,
+    "LDG-SHADE": 191,
+    "LDG-PRIV": 151,
+    "LS-CAPACITY": 125,
+    "LS-FIRE-CLEAR": 92
+   }
+  },
+  "O/screened": {
+   "sampled": 48000,
+   "packed": 254,
+   "no_hard_fail_structures": 4,
+   "distinct_top_structures": 4,
+   "planted_variants_tried": 32,
+   "survivors": 16,
+   "rejects": {
+    "packing failed": 47746,
+    "LDG-SHADE": 187,
+    "LS-CAPACITY": 166,
+    "LDG-PRIV": 165,
+    "LS-FIRE-CLEAR": 69,
+    "LS-DINE-CLEAR": 9
+   }
+  },
+  "W/screened": {
+   "sampled": 48000,
+   "packed": 1173,
+   "no_hard_fail_structures": 4,
+   "distinct_top_structures": 4,
+   "planted_variants_tried": 32,
+   "survivors": 8,
+   "rejects": {
+    "packing failed": 46827,
+    "LDG-GEOM": 1021,
+    "LDG-PRIV": 784,
+    "LDG-SHADE": 711,
+    "LS-FIRE-CLEAR": 555
+   }
+  },
+  "H/open": {
+   "sampled": 48000,
+   "packed": 1440,
+   "no_hard_fail_structures": 34,
+   "distinct_top_structures": 34,
+   "planted_variants_tried": 200,
+   "survivors": 80,
+   "rejects": {
+    "packing failed": 46560,
+    "LDG-SHADE": 1072,
+    "LDG-PRIV": 967,
+    "LS-CAPACITY": 650,
+    "LS-FIRE-CLEAR": 410
+   }
+  },
+  "O/open": {
+   "sampled": 48000,
+   "packed": 686,
+   "no_hard_fail_structures": 15,
+   "distinct_top_structures": 15,
+   "planted_variants_tried": 120,
+   "survivors": 32,
+   "rejects": {
+    "packing failed": 47314,
+    "LDG-PRIV": 478,
+    "LDG-SHADE": 455,
+    "LS-CAPACITY": 290,
+    "LS-FIRE-CLEAR": 171,
+    "LS-DINE-CLEAR": 18
+   }
+  },
+  "W/open": {
+   "sampled": 48000,
+   "packed": 2739,
+   "no_hard_fail_structures": 6,
+   "distinct_top_structures": 6,
+   "planted_variants_tried": 48,
+   "survivors": 0,
+   "rejects": {
+    "packing failed": 45261,
+    "LDG-GEOM": 2341,
+    "LDG-PRIV": 1889,
+    "LDG-SHADE": 1645,
+    "LS-FIRE-CLEAR": 934
+   }
+  }
+ },
+ "courts": {
+  "north/no-pond": {
+   "packed": 20000,
+   "no_hard_fail_distinct": 449,
+   "planted_tried": 320,
+   "survivors": 320
+  },
+  "north/pond": {
+   "packing failed": 19956,
+   "packed": 44,
+   "LDG-GEOM": 3,
+   "no_hard_fail_distinct": 31,
+   "planted_tried": 248,
+   "survivors": 248
+  },
+  "east/no-pond": {
+   "packed": 20000,
+   "no_hard_fail_distinct": 3,
+   "planted_tried": 24,
+   "survivors": 24
+  },
+  "east/pond": {
+   "packing failed": 18224,
+   "packed": 1776,
+   "no_hard_fail_distinct": 90,
+   "planted_tried": 320,
+   "survivors": 320
+  }
+ },
+ "sampler": "random sequential packing at rule distances; see docs/lanes/LDG.md"
+}

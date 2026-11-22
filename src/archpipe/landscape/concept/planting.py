@@ -23,7 +23,7 @@ DRY_LOW = {"gazania_rigens", "origanum_majorana", "bougainvillea_glabra"}      #
 # species never scheduled in these roles, with the reason recorded in the rejected list
 ROLE_LAYERS = {
     "screen": ("climber", "ground"), "south": ("climber", "ground"), "edge": ("ground",), "herb": ("herb", "ground"),
-    "orchard": ("climber", "ground"), "street": ("climber", "shrub"), "pond-edge": ("aquatic", "ground"), "yard": ("climber", "ground"),
+    "orchard": ("climber", "ground"), "street": ("climber", "shrub"), "pond-edge": ("aquatic", "climber", "ground"), "yard": ("climber", "ground"),
     "east-edge": ("ground",),
 }
 
@@ -63,7 +63,9 @@ def feasible(pool, role, june, depth, length, near_seat, rng, taken_flowers=()):
             continue
         if sp.slug in ("lantana_montevidensis",):                 # toxic and invasive-flagged: never beside seats, herbs or a pond
             continue
-        if role == "pond-edge" and sp.slug not in AQUATIC and lay not in ("climber",):
+        if sp.slug == "ceratophyllum_demersum":                    # submerged: lives in the water, never in a land bed
+            continue
+        if sp.slug == "pontederia_cordata" and role != "pond-edge":
             continue
         if role != "pond-edge" and sp.slug in AQUATIC:
             continue
@@ -82,7 +84,7 @@ def feasible(pool, role, june, depth, length, near_seat, rng, taken_flowers=()):
     return out
 
 
-def plant_bed(bed: dict, rect_model: list, june: float, near_seat: bool, rng: random.Random, pool: dict) -> dict:
+def plant_bed(bed: dict, rect_model: list, june: float, near_seat: bool, rng: random.Random, pool: dict, force_hz: str | None = None) -> dict:
     """Compose one bed. Returns {species: [...], instances: [{species, layer, count, positions}], hydrozone, notes}."""
     role = bed["role"]
     x0, y0, x1, y1 = rect_model
@@ -95,10 +97,13 @@ def plant_bed(bed: dict, rect_model: list, june: float, near_seat: bool, rng: ra
     for lay, lst in feas.items():
         for sp, sun in lst:
             zones.setdefault(sp.water, []).append((lay, sp, sun))
-    zones.pop(None, None)
+    if None in zones:                                  # water need is a GAP in LDL: kept as its own, unevaluated class
+        zones["unknown"] = zones.pop(None)
     if not zones:
         return {"species": [], "instances": [], "hydrozone": None, "notes": ["no species fits this bed's sun and size"]}
-    scored = sorted(zones.items(), key=lambda kv: (-len({l for l, _, _ in kv[1]}), rng.random()))
+    if force_hz and force_hz in zones:
+        zones = {force_hz: zones[force_hz]}
+    scored = sorted(zones.items(), key=lambda kv: (-len({l for l, _, _ in kv[1]}) + (0.5 if kv[0] == "unknown" else 0), rng.random()))
     hz, cands = scored[0] if rng.random() < .7 or len(scored) == 1 else scored[1]
     picks, seen = [], set()
     for lay in ROLE_LAYERS[role]:

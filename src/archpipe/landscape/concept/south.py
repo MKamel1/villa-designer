@@ -54,7 +54,7 @@ def sample(idea: str, variant: str, rng: random.Random, P: dict) -> dict | None:
     """
     screened = variant == "screened"
     wm = rng.choice([0.3, 0.45, 0.6, 0.8, 1.0]) if screened else rng.choice([0.0, 0.0, 0.4])
-    hw = rng.choice([0.0, 0.6, 0.8, 1.0])                         # east strip: herb / sun bed (0 = herbs go to the east yard)
+    hw = rng.choice([0.0, 0.6, 0.7, 0.75])                         # east strip: herb / sun bed (0 = herbs go to the east yard)
     sbd = rng.choice([0.6, 0.8, 1.0, 1.2]) if idea != "O" else rng.choice([0.6, 0.8])
     n_d = rng.choice([4, 4, 5, 6])
     n_l = rng.choice([4, 6, 6, 8])
@@ -164,6 +164,8 @@ def sample(idea: str, variant: str, rng: random.Random, P: dict) -> dict | None:
             lounge[3] = min(lounge[3], dining[1])
         if lounge[1] >= lounge[3] or box(*lounge).intersection(rbox(dining)).area > 0.05:
             return None
+    if min(lounge[2] - lounge[0], lounge[3] - lounge[1]) < 1.0:
+        return None
     # --- quiet nook: a 2-seat bench, least overlooked of a few trial positions -------------------
     best, bestq = None, 1e9
     for _ in range(120):
@@ -219,9 +221,7 @@ def sample(idea: str, variant: str, rng: random.Random, P: dict) -> dict | None:
     trees = []
     if idea == "O":
         c = next(b["rect"] for b in beds if b["id"] == "bed-corner")
-        trees.append({"species": "olea_europaea", "center": ((c[0] + c[2]) / 2 + 0.2, (c[1] + c[3]) / 2)})
-        if rng.random() < .5:
-            trees.append({"species": "punica_granatum", "center": (c[2] - 0.55, c[3] - 0.55 if c[3] - 0.55 > c[1] else (c[1] + c[3]) / 2)})
+        trees.append({"species": "punica_granatum", "center": ((c[0] + c[2]) / 2, (c[1] + c[3]) / 2)})
     elif rng.random() < .5:
         sbl = [b["rect"] for b in beds if b["id"].startswith("bed-south")]
         if not sbl:

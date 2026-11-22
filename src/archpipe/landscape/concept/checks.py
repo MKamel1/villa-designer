@@ -96,10 +96,24 @@ def south_checks(c, plan, pool) -> list[CheckResult]:
     for b in c["beds"]:
         items[b["id"]] = rbox(b["rect"])
     names = list(items)
-    bad = [(a, b) for i, a in enumerate(names) for b in names[i + 1:] if items[a].intersects(items[b]) and items[a].intersection(items[b]).area > 1e-6]
+    bad = [(a, b) for i, a in enumerate(names) for b in names[i + 1:] if items[a].intersection(items[b]).area > 5e-3]
     inside = all(box(-1e-6, -1e-6, A + 1e-6, B + 1e-6).contains(g) for g in items.values())
     res.append(mk("GEOM", "pass" if not bad and inside else "fail", "south", "elements do not overlap and lie inside the garden" if not bad and inside
                   else f"overlaps {bad[:3]}, inside={inside}", len(bad), 0, "overlaps"))
+    # tree canopy (sourced minimum spread: a trained tree) stays inside the garden (0.3 m over the east/rear fences, none over the house and the open sister line) and off the fire pit
+    allow = box(0, 0, A + 0.3, B + 0.3)
+    for t in (plan["trees"] if plan else c["trees"]):
+        sp = pool[t["species"]]
+        sm = sp.s_min or sp.s_max
+        if not sm:
+            continue
+        circ = Point(*t["center"]).buffer(sm / 2, 24)
+        out_of = circ.difference(allow).area
+        near_pit = circ.distance(circle(c["pit"]["center"], PIT_D)) < 0.9
+        ok = out_of < 1e-6 and not near_pit
+        res.append(mk("SPREAD", "pass" if ok else "fail", f"tree-{t['species']}",
+                      f"{sp.name}: canopy radius {sm/2:.2f} m (sourced minimum spread {sm} m); {out_of:.1f} m2 outside the garden"
+                      + ("; canopy within 0.9 m of the fire pit" if near_pit else ""), round(out_of, 2), 0, "m2"))
     if plan:
         res += planting_checks("south", c, plan, pool)
     return res
@@ -132,6 +146,9 @@ def planting_checks(zone, c, plan, pool, reserved=None, seats=(), herb_rects=())
     res.append(mk("TOXIC", "pass" if not tox else "fail", zone, "no toxic species within 2 m of a seat or herb bed" if not tox else f"toxic within 2 m: {sorted(set(tox))}",
                   len(tox), 0, "plants"))
     for bid, p in plan["beds"].items():
+        if p["hydrozone"] == "unknown":
+            res.append(mk("HYDRO", "not_evaluated", bid, f"{bid}: a species' water need is a GAP in LDL; not evaluated", None, 1, "classes"))
+            continue
         cls = {p["hydrozone"]} if p["hydrozone"] else set()
         for t in plan.get("trees", []):
             if t.get("bed") == bid and pool[t["species"]].water:

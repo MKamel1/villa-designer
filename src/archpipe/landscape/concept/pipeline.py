@@ -36,16 +36,21 @@ def to_model_shape(g):
 def plan_south(c, rng, pool):
     plan = {"beds": {}, "trees": [], "pots": c.get("pots", [])}
     seats = [rbox(s["rect"]) for s in c["seats"]] + [rbox(c["quiet"]["bench"])]
+    tree_bed = {}
+    for t in c["trees"]:
+        bed = next((b["id"] for b in c["beds"] if rbox(b["rect"]).contains(Point_(t["center"]))), None)
+        w = pool[t["species"]].water
+        if bed in tree_bed and tree_bed[bed][0] != w:
+            continue                                   # a second tree of another water class would break the bed's hydrozone: left out
+        tree_bed.setdefault(bed, (w, []))[1].append({**t, "bed": bed})
     for b in c["beds"]:
         rm = LY.M(b["rect"])
         june = S.mean("sun", "sun_hours_summer_solstice", rm) or 0.0
         near = any(rbox(b["rect"]).distance(s) < 2.0 for s in seats) or b["role"] == "herb"
-        plan["beds"][b["id"]] = PL.plant_bed(b, rm, june, near, rng, pool)
+        plan["beds"][b["id"]] = PL.plant_bed(b, rm, june, near, rng, pool, force_hz=tree_bed.get(b["id"], (None,))[0])
         plan["beds"][b["id"]]["june"] = round(june, 2)
         plan["beds"][b["id"]]["rect_local"] = b["rect"]
-    for t in c["trees"]:
-        bed = next((b["id"] for b in c["beds"] if rbox(b["rect"]).contains(Point_(t["center"]))), None)
-        plan["trees"].append({**t, "bed": bed})
+    plan["trees"] = [t for _, (_, lst) in tree_bed.items() for t in lst]
     return plan
 
 
@@ -91,7 +96,8 @@ def south_score(c, L, res, plan, pool):
     P["quiet"] = min(1.0, ((qp[0] - qc[0]) ** 2 + (qp[1] - qc[1]) ** 2) ** .5 / 4)
     hb = [b for b in c["beds"] if b["role"] == "herb"]
     P["herb"] = min(1.0, (S.mean("sun", "sun_hours_summer_solstice", LY.M(hb[0]["rect"])) or 0) / 7) if hb else 0.0
-    P["view"] = min(1.0, (S.mean("views", "rooms_seeing_cell", LY.M(c["beds"][-1]["rect"])) or 0) / 2) if True else 0
+    vv = [S.mean("views", "rooms_seeing_cell", LY.M(b["rect"])) or 0 for b in c["beds"]]
+    P["view"] = min(1.0, (sum(vv) / len(vv)) / 2) if vv else 0.0
     # fire pit lee: farther from the east fence = more shelter from the 75 % east wind (station-level; no site wind data)
     P["pit"] = min(1.0, (SO.B - qp[1]) / 4)
     P["soft"] = min(1.0, soft / total / 0.3)
@@ -101,59 +107,82 @@ def south_score(c, L, res, plan, pool):
                                                                       "seats_dl": seats_dl, "event_standing": round(event, 1), "stand_zone_people": stand}
 
 
-def run_south(n_samples: int, seed: int, top_k: int, n_plant: int):
+def _chunk(args):
+    """One worker: sample `n` structures for (idea, variant); return counts and the no-hard-fail ones with scores."""
+    idea, variant, seed, n = args
     rs = load()
     pool = species.pool()
-    counts = {}
-    best = {}
-    t0 = time.time()
+    rng = random.Random(f"{seed}-{idea}-{variant}")
+    packed, rejects, keep = 0, Counter(), []
+    for _ in range(n):
+        c = SO.sample(idea, variant, rng, rs.params)
+        if c is None:
+            rejects["packing failed"] += 1
+            continue
+        packed += 1
+        L, res = evaluate_south(c, None, pool, rs)
+        hf = [r for r in K.hard_fails(res) if r.criterion not in ("LDG-SPREAD", "LDG-TOXIC", "LDG-HYDRO")]
+        if hf:
+            for r in {r.criterion for r in hf}:
+                rejects[r] += 1
+            continue
+        sc, P = south_score(c, L, res, None, pool)
+        keep.append((sc, c, P))
+    keep.sort(key=lambda t: -t[0])
+    return idea, variant, n, packed, dict(rejects), keep[:40]
+
+
+def run_south(n_samples: int, seed: int, top_k: int, n_plant: int, chunks: int = 8, procs: int = 30):
+    import multiprocessing as mp
+    rs = load()
+    pool = species.pool()
+    jobs = [(idea, variant, f"{seed}-{k}", n_samples // chunks) for variant in ("screened", "open") for idea in SO.IDEAS for k in range(chunks)]
+    with mp.Pool(procs) as P:
+        outs = P.map(_chunk, jobs, chunksize=1)
+    counts, best = {}, {}
     for variant in ("screened", "open"):
         for idea in SO.IDEAS:
-            rng = random.Random(f"{seed}-{idea}-{variant}")
-            valid, nofail, rejects = [], [], Counter()
-            for _ in range(n_samples):
-                c = SO.sample(idea, variant, rng, rs.params)
-                if c is None:
-                    rejects["packing failed"] += 1
+            mine = [o for o in outs if o[0] == idea and o[1] == variant]
+            cand = sorted([x for o in mine for x in o[5]], key=lambda t: -t[0])
+            rejects = Counter()
+            for o in mine:
+                rejects.update(o[4])
+            nofail_total = len(cand)
+            # distinct structures only (the same packing can recur): key on seat/pit geometry
+            seen, uniq = set(), []
+            for sc, c, Pp in cand:
+                k = (round(c["pit"]["center"][0], 1), round(c["pit"]["center"][1], 1), round(c["table"]["center"][1], 1), len(c["seats"]), c["params"]["n_d"])
+                if k in seen:
                     continue
-                L, res = evaluate_south(c, None, pool, rs)
-                hf = K.hard_fails(res)
-                hf = [r for r in hf if r.criterion not in ("LDG-SPREAD", "LDG-TOXIC", "LDG-HYDRO")]
-                valid.append(1)
-                if hf:
-                    for r in {r.criterion for r in hf}:
-                        rejects[r] += 1
-                    continue
-                sc, P = south_score(c, L, res, None, pool)
-                nofail.append((sc, c, P))
-            nofail.sort(key=lambda t: -t[0])
-            # planting stage on the top structures
-            planted = []
-            for sc, c, P in nofail[:top_k]:
+                seen.add(k)
+                uniq.append((sc, c, Pp))
+            planted, tried = [], 0
+            for sc, c, Pp in uniq[:top_k]:
                 for k in range(n_plant):
-                    plan = plan_south(c, random.Random(f"{seed}-plant-{id(c)}-{k}"), pool)
+                    tried += 1
+                    plan = plan_south(c, random.Random(f"{seed}-plant-{idea}-{variant}-{tried}"), pool)
                     L, res = evaluate_south(c, plan, pool, rs)
                     res += K.planting_checks("south", c, plan, pool, reserved=south_reserved(c),
                                              seats=[to_model_shape(rbox(s["rect"])) for s in c["seats"]] + [to_model_shape(rbox(c["quiet"]["bench"]))],
                                              herb_rects=[to_model_shape(rbox(b["rect"])) for b in c["beds"] if b["role"] == "herb"])
-                    hf = K.hard_fails(res)
-                    if hf:
+                    if K.hard_fails(res):
                         continue
                     sc2, P2 = south_score(c, L, res, plan, pool)
-                    planted.append({"score": sc2, "parts": P2, "cand": c, "plan": plan, "layout": L, "n_warn": P2["warns"]})
+                    planted.append({"score": sc2, "parts": P2, "cand": c, "plan": plan, "layout": L, "results": res})
             planted.sort(key=lambda d: -d["score"])
-            counts[f"{idea}/{variant}"] = {"sampled": n_samples, "packed": len(valid), "no_hard_fail_structures": len(nofail),
-                                           "planted_variants_tried": min(top_k, len(nofail)) * n_plant, "survivors": len(planted),
-                                           "rejects": dict(rejects.most_common(8))}
+            counts[f"{idea}/{variant}"] = {"sampled": sum(o[2] for o in mine), "packed": sum(o[3] for o in mine),
+                                           "no_hard_fail_structures": nofail_total, "distinct_top_structures": len(uniq),
+                                           "planted_variants_tried": tried, "survivors": len(planted), "rejects": dict(rejects.most_common(8))}
             best[(idea, variant)] = planted
-            print(idea, variant, counts[f"{idea}/{variant}"], round(time.time() - t0), "s", flush=True)
     return best, counts
 
 
 if __name__ == "__main__":
     import sys
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 3000
-    best, counts = run_south(n, 1, 6, 4)
+    best, counts = run_south(n, 1, 15, 6)
+    for k, v in counts.items():
+        print(k, v)
     for k, v in best.items():
         if v:
             print(k, v[0]["score"], v[0]["parts"])

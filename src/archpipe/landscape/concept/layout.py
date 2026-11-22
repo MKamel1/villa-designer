@@ -24,6 +24,7 @@ def planting_entries(sp_slugs, pool):
 
 def to_layout(c: dict, plan: dict | None, pool: dict) -> dict:
     """plan = {"beds": {bed_id: [species,...]}, "trees": [...]} from planting.py, or None (structure stage)."""
+    trees_in = plan["trees"] if plan is not None else c["trees"]
     plan = plan or {"beds": {}, "trees": []}
     ax = lambda p: (S.SX0 + p[0], S.SY0 + p[1])          # noqa: E731
     L: dict = {"schema": "landscape-layout/1", "frame": "model metres; zone: south garden", "buildings": BUILDINGS}
@@ -66,12 +67,13 @@ def to_layout(c: dict, plan: dict | None, pool: dict) -> dict:
                           "trace": ["U-S-HERB", "LS-HERB-SUN"]})
     L["planting_groups"] = beds
     L["features"] = feats
-    for i, tr in enumerate(plan["trees"] or c["trees"]):
+    for i, tr in enumerate(trees_in):
         p = pool[tr["species"]]
         e = {"id": f"tree-{i}-{tr['species']}", "species": tr["species"], "center": ax(tr["center"]), "form": p.form, "over_structure": False,
              "trace": ["D-SHADE-OVER-SUN", "LS-TREE-BUILDING"]}
         if p.s_max:
             e["mature_spread_m"] = p.s_max
+            e["canopy_r_m"] = (p.s_min or p.s_max) / 2          # drawn radius: the sourced minimum spread (trained tree)
         if p.h_max:
             e["mature_height_m"] = p.h_max
         if p.water:

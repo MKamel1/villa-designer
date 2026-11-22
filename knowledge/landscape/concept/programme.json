@@ -1,0 +1,206 @@
+{
+ "schema": "ldg-programme/1",
+ "step": "1 Programme",
+ "date": "2026-11-22",
+ "zones_measured_m2": {
+  "south": {
+   "polygon": 53.19,
+   "open_cells": 54.62
+  },
+  "north": {
+   "polygon": 23.65,
+   "usable": 17.5,
+   "note": "8.75 open + 8.75 under the GF terrace slab (covered), the rest is the steps block and the yard wall"
+  },
+  "east": {
+   "polygon": 21.48,
+   "open_cells": 21.0,
+   "note": "3.0 m deep x 7.2 m; the dining and living doors and the dirty-kitchen window face it"
+  }
+ },
+ "uses": {
+  "U-S-DINE": {
+   "text": "south garden: a dining group (brief: gatherings, ~10-20 people)",
+   "rule": "LS-DINE-AREA",
+   "value": "3.46 m2 per seat, table edge 1200 mm clear"
+  },
+  "U-S-LOUNGE": {
+   "text": "south garden: a lounge group around the fire",
+   "rule": "LS-LOUNGE-AREA / LS-LOUNGE-CLUSTER",
+   "value": "1.8 m2 per seat, room at least 3.66 m across (13.4 m2)"
+  },
+  "U-S-STAND": {
+   "text": "south garden: standing room for guests",
+   "rule": "LS-STAND-AREA",
+   "value": "1.3 m2 per person"
+  },
+  "U-S-QUIET": {
+   "text": "south garden: a quieter relaxation corner inside it",
+   "rule": "AD-COMP prompts + LDG privacy policy",
+   "value": "2-seat bench, least overlooked cells"
+  },
+  "U-S-FIRE": {
+   "text": "south garden: fire pit or heater for winter evenings; flush and concealed (client addendum)",
+   "rule": "LS-FIRE-CLEAR/-SEAT/-STRUCT/-COVER/-OVERHEAD, LS-FLUSH-LIP/-OPENING",
+   "value": "900 mm clear ground, seats 1500 mm away, 2000 mm to structure and planting (4572 mm for a wood fire), 2000 mm overhead, cover 15.0 kN"
+  },
+  "U-S-BBQ": {
+   "text": "south garden: a small, possibly portable BBQ: a stand place on hard surface clear of planting and the facade",
+   "rule": "LS-FIRE-CLEAR, LS-FIRE-STRUCT",
+   "value": "0.9 x 0.6 m stand, 900 mm clear"
+  },
+  "U-S-HERB": {
+   "text": "herb bed and/or fruit trees",
+   "rule": "LS-HERB-SUN",
+   "value": "6 h direct midsummer sun; the LDS sun layer has 6 h or more only on a strip along the east fence (about 3.4 m2)"
+  },
+  "U-N-QUIET": {
+   "text": "north garden: relaxation and quiet time",
+   "rule": "AD-COMP prompts",
+   "value": "bench, planting, water sound/view"
+  },
+  "U-POND": {
+   "text": "small koi pond with lush tropical/Japanese planting, flush and discreet, north court OR in front of the dirty kitchen",
+   "rule": "LS-POND-DEPTH/-STOCK/-GUARD/-FREEBOARD/-FLUSH-MARGIN/-EDGE-SLOPE/-SHADE",
+   "value": "deepest 900 mm, 28.7 in of fish per m2 (unaerated), rigid grille or a 1.1 m fence, shore 1:4, plant shade 50-75 %"
+  },
+  "U-PRIVACY": {
+   "text": "privacy critical: strong screening from the neighbours and the apartment above",
+   "rule": "LS-SCREEN 1.8 m; LDS sightline layers",
+   "value": "boundary screens cannot stop upper-storey views (LDS): overhead cover is needed over seats"
+  },
+  "U-ACCESS": {
+   "text": "doors reach the garden: paths at least 1.2 m (main)",
+   "rule": "LS-PATH-MAIN",
+   "value": "1.2 m"
+  },
+  "D-FLUSH": {
+   "text": "client addendum 2026-11-22: pond and fire pit flush and concealed",
+   "rule": "client decision",
+   "value": "flush"
+  },
+  "D-DST": {
+   "text": "lead decision: summer nights are judged on the local (DST) clock",
+   "rule": "client/lead decision",
+   "value": "17-20 h DST clock layer is primary"
+  },
+  "D-SHADE-OVER-SUN": {
+   "text": "standing decision: shade over sun",
+   "rule": "client decision",
+   "value": "cover over seats"
+  },
+  "D-FRANGIPANI": {
+   "text": "standing decision: frangipani",
+   "rule": "client decision",
+   "value": "Plumeria rubra in a pot (frost-conditional per LDL)"
+  },
+  "D-TERRACOTTA": {
+   "text": "standing decision: terracotta pots",
+   "rule": "client decision",
+   "value": "pots"
+  },
+  "D-COLOUR-DRIFTS": {
+   "text": "standing decision: colourful drifts; any beautiful, shading, site-viable plant",
+   "rule": "client decision",
+   "value": "repeated drifts"
+  },
+  "D-MAINT-HIGH": {
+   "text": "maintenance high is acceptable",
+   "rule": "client decision",
+   "value": "no constraint"
+  },
+  "SITE-FENCE": {
+   "text": "existing 4 m concrete fences (east, rear)",
+   "rule": "LDS inventory",
+   "value": "fixed"
+  }
+ },
+ "south_scenarios": {
+  "minimum (10 seated, none standing)": {
+   "dining_seats": 4,
+   "lounge_seats": 6,
+   "standing": 0,
+   "dining_m2": 13.8,
+   "lounge_m2": 13.4,
+   "standing_m2": 0.0,
+   "rooms_total_m2": 27.2,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 0.51,
+   "left_for_planting_paths_bbq_m2": 26.0,
+   "fits_with_30pct_planting": true
+  },
+  "10 seated + 10 standing": {
+   "dining_seats": 4,
+   "lounge_seats": 6,
+   "standing": 10,
+   "dining_m2": 13.8,
+   "lounge_m2": 13.4,
+   "standing_m2": 13.0,
+   "rooms_total_m2": 40.2,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 0.76,
+   "left_for_planting_paths_bbq_m2": 13.0,
+   "fits_with_30pct_planting": false
+  },
+  "12 seated + 8 standing": {
+   "dining_seats": 6,
+   "lounge_seats": 6,
+   "standing": 8,
+   "dining_m2": 20.8,
+   "lounge_m2": 13.4,
+   "standing_m2": 10.4,
+   "rooms_total_m2": 44.5,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 0.84,
+   "left_for_planting_paths_bbq_m2": 8.6,
+   "fits_with_30pct_planting": false
+  },
+  "16 seated + 4 standing": {
+   "dining_seats": 8,
+   "lounge_seats": 8,
+   "standing": 4,
+   "dining_m2": 27.7,
+   "lounge_m2": 14.4,
+   "standing_m2": 5.2,
+   "rooms_total_m2": 47.3,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 0.89,
+   "left_for_planting_paths_bbq_m2": 5.9,
+   "fits_with_30pct_planting": false
+  },
+  "20 seated (a full dining + lounge group)": {
+   "dining_seats": 12,
+   "lounge_seats": 8,
+   "standing": 0,
+   "dining_m2": 41.5,
+   "lounge_m2": 14.4,
+   "standing_m2": 0.0,
+   "rooms_total_m2": 55.9,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 1.05,
+   "left_for_planting_paths_bbq_m2": -2.7,
+   "fits_with_30pct_planting": false
+  },
+  "20 seated + 20 standing (the top of the brief, all at once)": {
+   "dining_seats": 12,
+   "lounge_seats": 8,
+   "standing": 20,
+   "dining_m2": 41.5,
+   "lounge_m2": 14.4,
+   "standing_m2": 26.0,
+   "rooms_total_m2": 81.9,
+   "south_garden_m2": 53.19,
+   "share_of_garden": 1.54,
+   "left_for_planting_paths_bbq_m2": -28.7,
+   "fits_with_30pct_planting": false
+  }
+ },
+ "fire_ring_note": "A flush fire pit (0.9 m) with its seats 1.5 m away needs a lounge ring about 5.3 m across; the south garden is 5.71 m deep and the pit must be 2.0 m from the house and the rear fence, so the pit can only sit in a band about 0.81 m deep.",
+ "honest_summary": [
+  "The rules put 10 seated at about 24.6 m2 (4 dining seats 13.8 m2 + 6 lounge seats in a 13.4 m2 minimum room) and every extra dining seat costs 3.46 m2: 20 seated is 55.9 m2, more than the whole 53.2 m2 garden. 20 people can only be there standing (26 m2 at 1.3 m2) or as a mix.",
+  "A wood fire needs 4.57 m from structures (International Fire Code, LS-FIRE-STRUCT): impossible in a 5.71 m deep garden. Every concept therefore specifies a gas (or bio-ethanol) flush pit; the product instructions govern.",
+  "Herbs need 6 h midsummer sun: only a strip along the east fence of the south garden gets it, so herbs go there; the east yard cannot take a herb bed (0.5 m2 at 6 h).",
+  "The east yard is 3.0 m deep: a 1.2 m main path, a 0.3 m planted buffer and a 1.2 m pond use all of it; it cannot also hold seats.",
+  "The north court has 8.75 m2 of open ground and 8.75 m2 under the slab above; under the slab nothing grows without light and rain."
+ ]
+}
