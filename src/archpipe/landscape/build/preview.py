@@ -27,7 +27,7 @@ def _mesh_parts(o):
     return out
 
 
-def scene_spec(scene, views, size=(1500, 950), samples=96, mature_note=""):
+def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
     objs = []
     for o in scene.objects:
         d = dict(id=o.id, kind=o.kind, label=o.label, state=o.state, standin=o.standin)
@@ -36,7 +36,7 @@ def scene_spec(scene, views, size=(1500, 950), samples=96, mature_note=""):
         if o.asset:
             d["asset"] = {k: o.asset[k] for k in ("asset_id", "gltf", "at", "bounds", "grade")}
         objs.append(d)
-    return dict(ground_z=scene.ground_z, age=scene.age, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, note=mature_note)
+    return dict(ground_z=scene.ground_z, age=scene.age, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
 
 
 def default_views(scene, tag):
@@ -53,17 +53,17 @@ def default_views(scene, tag):
     return v
 
 
-def render(scene, out_dir, tag, views=None, samples=96, timeout=1500):
+def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True):
     """Write the spec and run Blender through jobq (GPU lock). Returns the receipt (measured asset placement, per-view files)."""
     out = Path(out_dir).resolve()
     out.mkdir(parents=True, exist_ok=True)
     views = views or default_views(scene, tag)
-    spec = scene_spec(scene, views, samples=samples)
+    spec = scene_spec(scene, views, samples=samples, device="GPU" if gpu else "CPU")
     sp = Path("/tmp/ldb-specs"); sp.mkdir(exist_ok=True)
     spec_path = sp / ("%s.spec.json" % tag)
     spec_path.write_text(json.dumps(spec))
     jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text()).encode()).hexdigest()[:10])
-    cmd = [JOBQ, "submit", "--gpu", "--timeout", str(timeout), "--id", jid, "--", BLENDER, "-b", "--factory-startup", "--python-exit-code", "1",
+    cmd = [JOBQ, "submit", *(["--gpu"] if gpu else []), "--timeout", str(timeout), "--id", jid, "--", BLENDER, "-b", "--factory-startup", "--python-exit-code", "1",
            "-P", str(SCRIPT), "--", str(spec_path), str(out), tag]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode == 0:

@@ -172,6 +172,8 @@ sc.render.resolution_x, sc.render.resolution_y = spec["size"]
 sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"; sc.view_settings.exposure = spec.get("exposure", -0.5)
 sc.render.image_settings.file_format = "JPEG"; sc.render.image_settings.quality = 90
 try:
+    if spec.get("device") == "CPU":
+        raise RuntimeError("cpu requested")
     prefs = bpy.context.preferences.addons["cycles"].preferences
     prefs.compute_device_type = "CUDA"; prefs.get_devices()
     for d in prefs.devices:
