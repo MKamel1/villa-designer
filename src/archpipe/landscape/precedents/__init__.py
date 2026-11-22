@@ -23,7 +23,7 @@ PLAN_METRICS = (
 # Counted/classified from photographs or text; allowed on photo-only gardens (flagged as such).
 QUALITATIVE = ("privacy_approach",)
 # Free-text / flag annotations carried with a pass; never statistics.
-ANNOTATIONS = ("scope", "scale_note", "confidence", "rooms_note", "privacy_note", "has_pond", "pond_area_m2")
+ANNOTATIONS = ("scope", "scale_note", "confidence", "rooms_note", "privacy_note", "has_pond", "pond_area_m2", "water_edge", "water_note", "species_count")
 # Shares that must sum to 1 within tolerance when all are given.
 SURFACE = ("hard_share", "soft_share", "water_share")
 LAYERS = ("layer_canopy", "layer_shrub", "layer_ground")

@@ -51,3 +51,30 @@ Path hierarchy, drift sizes, layer proportions, species-versus-area, enclosure r
 1. Source landscape-plan-grade precedents (HALS/LOC measured drawings, APLD/AILA small-garden portfolios, Bawa/Kyoto surveys, books) and re-run; ranges can only be **added** under a new, dated, separately hashed file, never by editing this one.
 2. Visual curation of the calibration photo lists (some may be interior or aerial).
 3. A human check of the hand-estimated areas for the 5 in-band south gardens.
+
+## SECOND PASS — targets-2.json (2026-11-22)
+`knowledge/landscape/precedents/targets-2.json`, frozen **2026-11-22**, file **sha256 = b08542f0d9fd3be889fe1b48092abf78cc851b98b2e57764dd42565691edb677** (separate from targets.json above, which is unchanged: 3f8caec2...). Recorded before any concept exists. `targets2.freeze2()` refuses to overwrite; the guard test reads this hash.
+
+**Added gardens** (`south2.json` 9, `north2.json` 7; pages and plan images cached in `~/archpipe/shared/landscape-precedents/{south2,north2}`, never committed):
+- south2: 2 show-garden (MIFGS 2013/2015), 3 award entries (MIFGS 2015, Parkside, Al Barsha 37 Dubai), 4 designer portfolio (Perth, Sydney, London x2). Climate tagged per garden (6 temperate, 2 mediterranean, 1 hot-dry). Only **2 have a usable scale** (S2-04 scale bar, S2-11 printed dimensions); S2-20 states 1:75@A3 but the raster has no scale bar, so no numerics.
+- north2: 7 portfolio (ArchDaily, mooool) tsubo-niwa / tropical courtyards, all with a scale bar except N2-06 (unlabelled bar: all null). **No survey, paper, award or HALS entries**.
+- Where the numbers sit: groups are `<set>_combined` (first pass + new) and `<set>2_only`; climate tag per garden in the JSON. With 1 hot-dry new garden, a hot-dry-only set cannot be derived.
+- Numerics are only kept for gardens with a scale (build.py drops plan metrics from unscaled gardens; the first import let unscaled `n_rooms` through).
+
+**Metrics with a range now** (interquartile, n_usable of gardens, median A/B spread; all low-confidence hand estimates):
+| group | metric | range | n | spread |
+|---|---|---|---|---|
+| south_combined | area_m2 (30-150 band) | 46.0-87.8 m² | 6 | 0.07 |
+| south_combined | hard_share (wide band) | 0.52-0.82 | 7 | 0.17 |
+| south_combined | trees/100 m² (wide band) | 1.56-3.26 | 6 | 0.19 |
+| north_combined | area_m2 (8-60 band) | 12.3-23.2 m² | 6 | 0.03 |
+| north_combined | n_rooms | 1-1 (all one court) | 6 | 0.0 |
+| north_combined | room_area_mean_m2 | 12.3-23.2 | 6 | 0.03 |
+The north "range" is the area of whichever tiny courts were scaled, not a design target. The south hard-share range moved from 0.44-0.87 (n=6) to 0.52-0.82 (n=7).
+Qualitative tallies (counts, no range): privacy approach and water edge are in the file. Privacy: most gardens disagree between passes (13 of 18 north, 7 of 21 south), so no approach is a target. Water edge (flush vs raised): n=4 south, 0 north; one "flush", three disagree. **No north water-edge precedent.**
+
+**Still GAP** (both sets): path widths, drift size, layer shares, species per 100 m², enclosure ratio, soft share, water share, south n_rooms/room area, north hard/soft/water share, north trees (n=2). **Hot-dry planted small gardens: effectively none** (one scaled, Al Barsha 37).
+Why: web access offered mostly whole-house plans or planting plans without a scale bar; LOC/HALS answers scripted requests with a Cloudflare challenge (not bypassed); Landezine refused connections; MDPI/ResearchGate/archnet blocked; J-STAGE reachable but plan figures were not extracted; no Bawa plan. The south2 sourcing agent stalled after 9 gardens.
+**To close the gaps** a human (or a browser session) needs to fetch HALS drawings, RHS/Chelsea planting plans with scale bars and J-STAGE/Heritage Science PDFs; ranges can again only be added in a targets-3.json.
+
+**Calibration photos (visual curation)**: all 88 photos viewed on contact sheets; 55 removed (interior, street facade, aerial, construction, duplicate), 33 kept (south 11 gardens/20, north 8/13); list in `calibration.json` `removed_photos`.

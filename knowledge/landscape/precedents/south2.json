@@ -1,0 +1,330 @@
+{
+ "set": "south2",
+ "gardens": [
+  {
+   "id": "S2-01",
+   "name": "Urban Sanctuary (MIFGS 2013 student concept competition garden)",
+   "designer": "Lee Bailey, Bella Botanics",
+   "location": "Melbourne, Australia (MIFGS)",
+   "year": 2013,
+   "climate": "temperate",
+   "source_type": "show-garden",
+   "page_url": "https://gardendrum.com/2013/04/08/my-student-garden-at-mifgs-2013/",
+   "plan_url": "https://gardendrum.com/wp-content/uploads/2013/04/Urban-Sanctuary-Design-Lee-Bailey-MIFGS-Student-Competition-2013.png",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-01",
+   "passes": {
+    "A": {
+     "scope": "Whole show garden (single square plot)",
+     "scale_note": "No scale bar or printed dimensions on plan; all plan numerics null.",
+     "privacy_approach": "wall",
+     "water_edge": "raised",
+     "privacy_note": "Dark boundary fence/screens plus overhanging background trees (photo).",
+     "rooms_note": "Lawn, paved front terrace, stepping-stone/gravel strip, circular water/tub feature, planted top-left tree corner (plan).",
+     "water_note": "Plan shows blue circle; photo shows a raised timber tub, not a pool.",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Urban Sanctuary show garden",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null. Stated area not used.",
+     "privacy_approach": "mixed",
+     "privacy_note": "Planting and canopy trees surround; plan-based.",
+     "rooms_note": "Lawn with seat, circular pool, stepping stones, paved edge.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-02",
+   "name": "Latin Influences (MIFGS 2015 Boutique Garden)",
+   "designer": "Carlo Gabriele, Gardenridge (Don Thomson)",
+   "location": "Melbourne, Australia (MIFGS)",
+   "year": 2015,
+   "climate": "temperate",
+   "source_type": "show-garden",
+   "page_url": "https://gardendrum.com/2015/03/11/latin-influences-at-melbourne-flower-and-garden-show/",
+   "plan_url": "https://gardendrum.com/wp-content/uploads/2015/03/MIFGS-plan.jpg",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-02",
+   "passes": {
+    "A": {
+     "scope": "Whole show garden (single square plot)",
+     "scale_note": "No scale bar or printed dimensions on plan; all plan numerics null.",
+     "privacy_approach": "hedge-screen",
+     "water_edge": "raised",
+     "privacy_note": "Tall clipped hedge blocks left and right, feature wall at rear (photo/render).",
+     "rooms_note": "Paved court with table, raised water-feature end, three planting blocks, lawn strips (plan).",
+     "water_note": "Water feature in framed raised basin with fountain (plan).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Square courtyard plan",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null.",
+     "rooms_note": "Paved court with fountain/rill, table, planted beds, lawn strips.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-03",
+   "name": "Cross Roads (MIFGS 2015 show garden, Best in Show)",
+   "designer": "Ian Barker Gardens",
+   "location": "Melbourne, Australia (MIFGS)",
+   "year": 2015,
+   "climate": "temperate",
+   "source_type": "award",
+   "page_url": "https://gardendrum.com/2015/04/07/melbourne-2015-my-best-in-show-gardens/",
+   "plan_url": "https://gardendrum.com/wp-content/uploads/2015/04/Ian-Barker-Gardens_Melbourne-International-Flower-Garden-Show-2015_Cross-Roads-Garden-Plan.jpg",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-03",
+   "passes": {
+    "A": {
+     "scope": "Whole show garden incl. meadow islands (sketch)",
+     "scale_note": "No scale bar or printed dimensions on plan; all plan numerics null.",
+     "privacy_approach": "tree-screen",
+     "privacy_note": "Existing trees and mixed shrub hedge on the courtyard boundary (photo/plan labels).",
+     "rooms_note": "Paved courtyard with pond and sunken/stone seating, two meadow islands with mown paths (plan labels).",
+     "water_note": "Pond labelled on sketch; edge not visible in photo.",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Garden concept sketch (courtyard area; meadow beds excluded)",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null.",
+     "privacy_approach": "hedge-screen",
+     "privacy_note": "Mixed shrub hedge labelled around courtyard.",
+     "rooms_note": "Courtyard with granite paving strips, pond, meadow mown pathway.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-04",
+   "name": "Claremont front courtyard, Perth",
+   "designer": "Janine Mendel, Cultivart",
+   "location": "Claremont, Perth, Australia",
+   "year": 2015,
+   "climate": "mediterranean",
+   "source_type": "portfolio",
+   "page_url": "https://gardendrum.com/2015/02/10/3-tiny-courtyard-makeovers/",
+   "plan_url": "https://gardendrum.com/wp-content/uploads/2015/02/Courtyard-design-Janine-Mendel-Cultivart-Perth-plan.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-04",
+   "passes": {
+    "A": {
+     "scope": "Front courtyard (whole)",
+     "scale_note": "Scale bar 0-4 m: 175 px = 4 m (43.75 px/m); area by shoelace of outline incl. entry paving ~60000 px2.",
+     "area_m2": 31,
+     "hard_share": 0.55,
+     "soft_share": 0.4,
+     "n_rooms": 2,
+     "room_area_mean_m2": 8.4,
+     "path_primary_m": 1.6,
+     "privacy_approach": "wall",
+     "water_edge": "raised",
+     "privacy_note": "Painted raised walls and planting on boundary (photo).",
+     "rooms_note": "Timber deck lounge, entry paving court (plan).",
+     "water_note": "Raised painted pond with waterfall spout (photo); water share not separable on plan.",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Front courtyard (whole plan)",
+     "scale_note": "Plan bar 0-4 m, ~43 px/m (bar ticks x=166..337 in 540px image); area by shoelace on estimated outline.",
+     "area_m2": 34.5,
+     "hard_share": 0.8,
+     "soft_share": 0.2,
+     "water_share": 0.0,
+     "n_rooms": 2,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Walled by building and courtyard walls on plan.",
+     "water_note": "Teal outline unclear (edging vs rill); water taken as 0.",
+     "rooms_note": "Timber deck lounge and paved entry court.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-05",
+   "name": "Inner-west Sydney terrace courtyard",
+   "designer": "OUTHOUSE designs",
+   "location": "Sydney (inner west), Australia",
+   "year": 2015,
+   "climate": "temperate",
+   "source_type": "portfolio",
+   "page_url": "https://gardendrum.com/2015/02/10/3-tiny-courtyard-makeovers/",
+   "plan_url": "https://gardendrum.com/wp-content/uploads/2015/02/Courtyard-by-Outhouse-Designs.png",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-05",
+   "passes": {
+    "A": {
+     "scope": "Whole courtyard (renovation plan)",
+     "scale_note": "No scale bar or printed dimensions; numerics null.",
+     "privacy_approach": "wall",
+     "privacy_note": "High block wall with timber battens and vertical green wall (plan notes/photo).",
+     "rooms_note": "Paved terrace, timber deck/seat with raised bed, BBQ and mass groundcover under three trees (plan).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Courtyard with raised bed, deck and planted trees (retrofit plan)",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null. Only annotations.",
+     "privacy_approach": "wall",
+     "privacy_note": "Feature wall and green wall annotated.",
+     "rooms_note": "Paved courtyard, timber deck seat, planted bed with trees.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-10",
+   "name": "Parkside Garden",
+   "designer": "Scott Lewis Landscape Architecture",
+   "location": "San Francisco, CA, USA (rowhouse lot adjacent to the Presidio)",
+   "year": 2010,
+   "climate": "mediterranean",
+   "source_type": "award",
+   "page_url": "https://www.asla.org/2010awards/196",
+   "plan_url": "https://www.asla.org/getContentAsset/0a06c14e-a096-d05c-d393-5547ef673c52/e477a59e-1df6-4e2f-9986-20ab37342540/GalleryFullImage/Parkside-Garden87eed458_GalleryFullImage.webp",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-10",
+   "passes": {
+    "A": {
+     "scope": "Rear garden (right-hand Garden Plan)",
+     "scale_note": "No scale bar or printed dimensions on plan; all plan numerics null.",
+     "privacy_approach": "mixed",
+     "privacy_note": "Fence, dense planted edges, tree canopy (photo).",
+     "rooms_note": "Paved terrace, shaded studio patio, timber deck at house (plan).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Rear garden plan (right drawing, with studio)",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null.",
+     "privacy_approach": "mixed",
+     "privacy_note": "Dense boundary planting and trees; plan-based.",
+     "rooms_note": "Large paved court, planted wedge borders, timber deck, studio.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-11",
+   "name": "Al Barsha 37",
+   "designer": "Villa & More (Zeid Maoulawi)",
+   "location": "Dubai, UAE (villa garden)",
+   "year": 2025,
+   "climate": "hot-dry",
+   "source_type": "award",
+   "page_url": "https://landezine-award.com/?p=69525",
+   "plan_url": "https://landezine-award.com/wp-content/uploads/2025/05/zzz-Site_Plan_ALBARSHA_37.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-11",
+   "passes": {
+    "A": {
+     "scope": "Walled villa courtyard west/south of house block (excl. blank house footprint, side rooms)",
+     "scale_note": "Printed dims: gazebo 4400x8000 mm = ~150x280 px; pool 5000 mm = ~170 px; ~34.8 px/m. Area = enclosed wall outline minus house void, side rooms, cut corner (~921000 px2).",
+     "area_m2": 760,
+     "hard_share": 0.74,
+     "soft_share": 0.16,
+     "water_share": 0.1,
+     "n_rooms": 6,
+     "room_area_mean_m2": 127,
+     "path_primary_m": 3.3,
+     "path_secondary_m": 2.0,
+     "trees_per_100m2": 0.26,
+     "privacy_approach": "wall",
+     "water_edge": "flush",
+     "privacy_note": "Thick boundary wall with planted strip (plan/photo).",
+     "rooms_note": "Gazebo dining/lounge, long pool terrace, sunken lounge, lawn court, east/south terrace, gravel palm court.",
+     "water_note": "Pool coping flush with paving, tile band (photo).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Pool courtyard west of house block (excludes front gravel court, house block, outbuildings)",
+     "scale_note": "Dimension labels: gazebo 4400x8000 and pool width 5000 give ~34 px/m (original image 2000px wide). Areas by pixel-box estimate.",
+     "area_m2": 527,
+     "hard_share": 0.66,
+     "soft_share": 0.17,
+     "water_share": 0.17,
+     "n_rooms": 5,
+     "path_primary_m": 2.6,
+     "path_secondary_m": 2.0,
+     "trees_per_100m2": 0.19,
+     "privacy_approach": "wall",
+     "privacy_note": "Thick perimeter wall (plan); height unknown.",
+     "water_edge": "flush",
+     "water_note": "Long pool edge flush with paving on plan; no section.",
+     "rooms_note": "Gazebo, long pool, sunken lounge, lawn, paved terrace.",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "S2-20",
+   "name": "Small London garden with pergola dining, lawn and perimeter beds (House Designer 'Modern Garden Design in London' case study)",
+   "designer": "House Designer (online garden design service)",
+   "location": "London, UK (within M25)",
+   "year": "2023",
+   "climate": "temperate",
+   "source_type": "portfolio",
+   "page_url": "https://housedesigner.com/modern-garden-design-case-study-sustainable-functional-and-stylish/",
+   "plan_url": "https://housedesigner.com/wp-content/uploads/2023/07/planting-plan-1024x726-optimized.png",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-20",
+   "passes": {
+    "A": {
+     "scope": "Back garden (planting plan)",
+     "scale_note": "Stated 1:75 @A3 but raster print size unknown; area/trees not derived. Legend and quantities read directly.",
+     "drift_size_median": 6.5,
+     "layer_canopy": 0.14,
+     "layer_shrub": 0.44,
+     "layer_ground": 0.42,
+     "privacy_approach": "wall",
+     "privacy_note": "Fence with climbers and pergola (render photo).",
+     "rooms_note": "Patio near house, planted perimeter beds with magnolias (plan).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Back garden (HouseDesigner planting plan)",
+     "scale_note": "Plan states 1:75@A3 but image has no scale bar and print size unknown; not used. Numerics null except scale-free layer shares from legend quantities (trees 7, shrubs 10 + perennials 11 as shrub/tall, grasses 21 + climber 1 as ground).",
+     "layer_canopy": 0.14,
+     "layer_shrub": 0.42,
+     "layer_ground": 0.44,
+     "privacy_approach": "mixed",
+     "privacy_note": "Magnolia trees and planted border along walls.",
+     "rooms_note": "Narrow rear garden with terrace and planted edge.",
+     "confidence": "low",
+     "species_count": 8
+    }
+   }
+  },
+  {
+   "id": "S2-21",
+   "name": "Corner garden with summer house, shed, fire-pit seating and curved lawn path (House Designer sample planting plan)",
+   "designer": "House Designer (online garden design service)",
+   "location": "UK (location not stated)",
+   "year": "2023",
+   "climate": "temperate",
+   "source_type": "portfolio",
+   "page_url": "https://housedesigner.com/whats-included-in-our-garden-design-package/",
+   "plan_url": "https://housedesigner.com/wp-content/uploads/2023/06/planting-plan-1024x662-optimized.png",
+   "scaled_plan": false,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south2/S2-21",
+   "passes": {
+    "A": {
+     "scope": "Whole back garden (planting plan)",
+     "scale_note": "No scale bar or printed dimensions on plan; all plan numerics null. ~35 named species legible but area null.",
+     "privacy_approach": "mixed",
+     "privacy_note": "Dark boundary fence plus trees (photo).",
+     "rooms_note": "Seating/fire-pit corner under trees, curved path lawn, summer house, shed (plan).",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Rear garden of house plan (HouseDesigner planting plan)",
+     "scale_note": "No scale bar or printed dimension on plan; all numeric plan metrics null.",
+     "privacy_approach": "mixed",
+     "privacy_note": "Planting border and trees along boundary; plan-based.",
+     "rooms_note": "Fire-pit seating under tree canopy, lawn/path, summer house, shed.",
+     "confidence": "low"
+    }
+   }
+  }
+ ]
+}

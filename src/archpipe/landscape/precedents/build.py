@@ -8,7 +8,7 @@ CACHE = Path.home() / "archpipe/shared/landscape-precedents"
 KEEP = PLAN_METRICS + QUALITATIVE + ANNOTATIONS
 
 
-def build(name):
+def build(name, out_name=None):
     index = {g["id"]: g for g in json.loads((CACHE / name / "index.json").read_text())}
     passes = {p: {g["id"]: g for g in json.loads((CACHE / "measure" / f"{name}-{p}.json").read_text())["gardens"]} for p in "AB"}
     out = []
@@ -16,15 +16,16 @@ def build(name):
         meta = index.get(gid) or next(v for k, v in index.items() if k.startswith(gid) or gid.startswith(k))
         out.append({
             "id": gid, "name": meta["name"], "designer": meta.get("designer"), "location": meta.get("location"),
-            "year": meta.get("year"), "page_url": meta["page_url"], "plan_url": meta.get("plan_url"),
+            "year": meta.get("year"), "climate": meta.get("climate"), "source_type": meta.get("source_type"), "page_url": meta["page_url"], "plan_url": meta.get("plan_url"),
             "scaled_plan": bool(meta.get("has_scaled_plan")), "cache_dir": f"~/archpipe/shared/landscape-precedents/{name}/{gid}",
-            "passes": {p: {k: v for k, v in passes[p].get(gid, {}).items() if k in KEEP and v is not None} for p in "AB"},
+            "passes": {p: {k: v for k, v in passes[p].get(gid, {}).items() if k in KEEP and v is not None
+                           and (k not in PLAN_METRICS or meta.get("has_scaled_plan"))} for p in "AB"},  # no scale => no plan numerics
         })
     probs = validate_set(out)
-    (DATA / f"{name}.json").write_text(json.dumps({"set": name, "gardens": out}, indent=1) + "\n")
+    (DATA / f"{out_name or name}.json").write_text(json.dumps({"set": out_name or name, "gardens": out}, indent=1) + "\n")
     return len(out), probs
 
 
 if __name__ == "__main__":
-    for n in ("south", "north"):
+    for n in ("south2", "north2"):  # first-pass sets south/north are already imported and frozen
         print(n, build(n))
