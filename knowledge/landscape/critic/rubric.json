@@ -1,5 +1,5 @@
 {
- "version": "v0-preregistered",
+ "version": "frozen-v0",
  "model": "qwen3.8:27b-mtp-q4_K_M",
  "options": {
   "temperature": 0,

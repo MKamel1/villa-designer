@@ -1,0 +1,37 @@
+{
+ "item": "base",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/base.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dining area under pergola is bounded by house, wall, and planting; fire pit area is bounded by house, wall, and dense planting; standing/BBO area is bounded by house, wall, and paving edge."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Fire pit, dining table, and pond court are all prominent and visually compete for attention; no single element clearly dominates as the primary focal point."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Gravel and paved areas connect the house doors to the fire pit, dining table, standing/BBO area, and seating. All circulation paths terminate at defined functional zones or features."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Large mass of citrus/small trees in the bottom-left corner, a distinct group of four trees in the top-right, and a row of small shrubs along the bottom edge."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Bottom-left corner shows a large canopy tree circle overlapping medium small-tree circles and lighter shrub circles, creating distinct vertical layers."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Multiple distinct zones with different floor surfaces: gravel seating/fire pit area, paved dining area under pergola, paved standing/BBO area, and a separate herbs bed."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (dining, fire pit, standing/BBQ, pond court), defined edges via walls and paving, and structured planting masses (Citrus, herbs, pond court trees)."
+  }
+ }
+}

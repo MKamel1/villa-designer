@@ -1,0 +1,37 @@
+{
+ "item": "P-S2-20",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-S2-20.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The main dining area is enclosed by a building wall on the left, a dense planting border on the top and right, and a pergola structure overhead. A secondary seating area is defined by walls and planting on three sides."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Large canopy tree at bottom right corner; pergola over dining area; no water or fire pit visible."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main path leads to house door; side path leads to dining pergola and seating."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Large, overlapping masses of canopy trees and shrubs are grouped along the left and top boundaries, and distinct drifts of ground cover are repeated at the bottom left and bottom right corners."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Plan shows canopy trees (dark green), small trees (medium green), shrubs (light green), and ground cover (pale green) distributed throughout, creating distinct vertical layers."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "A large paved dining area under a pergola, a separate lawn area, and a distinct seating area with a table and chairs near the house."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear L-shaped planting masses along walls, defined paving/gravel zones, pergola structure, and distinct seating areas create a structured, room-based layout."
+  }
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "item": "P-SME-01",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SME-01.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 0,
+   "evidence": "The plan shows a large, open grid area with a central circular planting and a single seat. There are no walls, hedges, or dense plantings creating enclosed outdoor rooms; the space is open ground."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large central circular planting bed with 'paulownia' label and 'patio' text; brown square seat to the right is smaller and subordinate."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "No paths, axes, or lines of travel are drawn in the plan."
+  },
+  "V-RHYTHM": {
+   "score": 0,
+   "evidence": "A single large green circle (canopy tree) is located in the center-left of the plan. No other plants are visible."
+  },
+  "V-LAYERING": {
+   "score": 0,
+   "evidence": "The plan shows a single large green circle (canopy tree) and a brown square (seat) on a grid background. No shrubs, ground cover, or layered planting are visible."
+  },
+  "V-ROOMS": {
+   "score": 0,
+   "evidence": "The plan shows a single, undivided area with a uniform grid pattern covering the entire garden space. There are no distinct outdoor rooms or places with different floor surfaces or uses."
+  },
+  "V-OVERALL": {
+   "score": 0,
+   "evidence": "Plan shows a large, uniform grid pattern covering the entire area, with a single circular planting mass and a single brown square seat placed arbitrarily within it. There are no defined edges, rooms, or structural elements to create a designed landscape."
+  }
+ }
+}

@@ -39,3 +39,8 @@ when this file is committed except for anchors edited on the TUNING half, logged
 stored in `rubric.json` `split`. Gate rule: a VLM criterion gates iff on the tuning half separation (share of bad < 2 minus share of good < 2) >= 0.30 and no good
 item scores 0. Image verdict: FAIL if a gating criterion scores 0 or two gating criteria score 1. The held-out half is scored once after `rubric.version` is set to `frozen-*`.
 A VLM criterion reaches `calibrated: true` only by the frozen rule above on the HELD-OUT half (n is tiny: held-out bad 4, good 5; one-sided 95 % bounds are reported).
+
+## Log after the tuning half (2026-11-22)
+Tuning half (4 bad, 6 good) scored with v0 prompts: **no VLM criterion met the gate rule** (V-ENCLOSURE and V-FOCAL separation 0.25 and a good item scored 0; the other five
+scored 2 on nearly everything, including D1). No anchor was edited (the model reads D1's symbol-level layers as present; the defects of D1 are brief-level, not visible as composition).
+Rubric frozen unchanged as `frozen-v0`; the held-out half and the photo set are scored once with it. With no gating criterion, every VLM criterion is advisory (`calibrated: false`).

@@ -1,0 +1,37 @@
+{
+ "item": "P-SAU-01",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SAU-01.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 0,
+   "evidence": "The garden consists of open ground with scattered plantings and no defined outdoor rooms with enclosing edges."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large blue pond in the upper right quadrant serves as the dominant visual anchor, with surrounding planting and paving directing attention towards it."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Paved areas connect the house door to the garden court, pond, and seating areas; no paths lead to blank edges or dead ends."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Multiple groups of identical circles (shrubs and small trees) are clustered together in distinct beds on the left, top, and bottom right, indicating mass planting and repetition."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Canopy trees (e.g., Olea, Punica) are layered over shrubs and ground/perennials in the left and right planting beds, creating distinct vertical layers."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct areas include a paved pond terrace, a garden court with different paving, and multiple planting beds with shrubs and trees, creating a sequence of spaces."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Distinct planting beds with defined edges, a central paved garden court, a pond feature, and grouped planting masses create clear spatial structure and rooms."
+  }
+ }
+}
