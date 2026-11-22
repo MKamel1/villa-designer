@@ -1,0 +1,92 @@
+{
+  "schema": "flythrough-villa-policy/1",
+  "status": "WT lane 2026-11-22: whole-villa walkthrough; registered before any villa frame was rendered",
+  "fps": 24,
+  "frames": null,
+  "preview": {
+    "resolution": [
+      480,
+      270
+    ],
+    "samples": 32,
+    "denoise": true
+  },
+  "final_resolution": [
+    1920,
+    1080
+  ],
+  "blender_version": "4.5.14",
+  "seed": 0,
+  "eye_height_m": 1.35,
+  "eye_height_source": "docs/decisions/ADR-0013-presentation-renders.md, decision part 8; render_views.choose default",
+  "obstacle_clearance_m": 0.15,
+  "wall_clearance_m": 0.3,
+  "clearance_source": ".agents/skills/villa-render/SKILL.md, Order 1; render_views.choose standing-point policy",
+  "walking_height_m": 1.8,
+  "walking_height_basis": "ASSUMED conservative camera-operator envelope, not an architectural standard",
+  "maximum_speed_m_s": 1.462,
+  "maximum_yaw_rate_deg_s": 30,
+  "motion_basis": "ASSUMED slow walkthrough camera operation; no published speed or yaw standard claimed",
+  "sample_candidates": [
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "reference_samples": 1024,
+  "sample_difference": {
+    "basis": "ASSUMED image fidelity criterion, registered before measurements",
+    "metric": "mean absolute RGB channel error in developed 8-bit PNG divided by 255, same camera, seed, exposure, white balance, full 1920x1080 frame",
+    "maximum": 0.01,
+    "requirement": "all three representative frames also pass unmodified render_qa"
+  },
+  "temporal_difference": {
+    "basis": "ASSUMED temporal noise criterion, registered before measurements",
+    "metric": "mean absolute RGB change between adjacent candidate frames on static opaque high-roughness surfaces reprojected using measured world position and first-hit position agreement within 0.03 m; reject disocclusion, four-pixel borders, depth edges, glass, emissive and unmatched pixels; RGB divided by 255; includes real view-dependent changes conservatively",
+    "maximum": 0.01,
+    "minimum_static_pixels": 1000,
+    "registration_revision": "2026-10-15 before any walkthrough image rendering or measurement: use actual reprojected candidate changes, avoiding an unnecessary 1024-sample reference for every final frame; threshold unchanged at 0.01",
+    "coverage": "every adjacent frame pair; insufficient valid static pixels refuses acceptance",
+    "minimum_material_roughness": 0.7,
+    "reprojection_match_m": 0.03,
+    "edge_offset_pixels": 4,
+    "maximum_edge_world_jump_m": 0.1
+  },
+  "exposure_rule": "knowledge/exposure-group-rule.json",
+  "exposure_scope": "all 720 path frames; one complete-clip source population and one upper-median meter lock; no still-view lock reuse",
+  "final_gate": "~/archpipe/logs/render/finals.done must exist before final GPU work",
+  "encode": {
+    "codec": "libx264",
+    "pixel_format": "yuv420p",
+    "final_crf": 16,
+    "preview_crf": 23
+  },
+  "maximum_speed_basis": "Bohannon 1997, Age and Ageing 26(1):15-19, doi:10.1093/ageing/26.1.15: highest published mean comfortable gait speed 146.2 cm/s (men in their forties). Value taken from the abstract; full text not read.",
+  "cruise_speed_m_s": 1.272,
+  "cruise_speed_basis": "Bohannon 1997 (as above): lowest published mean comfortable gait speed 127.2 cm/s (women in their seventies); chosen as the slowest cited walking pace, which suits a camera. Abstract only.",
+  "stair_speed_m_s": 0.7,
+  "stair_speed_basis": "ASSUMED slower pace on the flight; no source held",
+  "acceleration_m_s2": 0.8,
+  "acceleration_basis": "ASSUMED comfortable start/stop ramp; no source held",
+  "hold_seconds_default": 3.0,
+  "hold_basis": "ASSUMED pause at a key view",
+  "stair_clearance_m": 0.25,
+  "stair_clearance_basis": "ASSUMED: sweep box starts this far above the lower tread line so the next nosing (rise 0.176 m per 0.28 m going, up to 0.095 m inside the 0.15 m margin) is not a hit",
+  "transit_room_min_dimension_m": 0.6,
+  "transit_basis": "a room narrower than twice the 0.30 m wall clearance cannot hold a standing point; it is crossed, not stood in",
+  "door_open_degrees": [
+    90,
+    75,
+    60,
+    45
+  ],
+  "door_open_basis": "ASSUMED swing angles tried in order; hinge side is not authored (except the core entrance) so the first collision-free option is used",
+  "interior_preview_every_nth_frame_for_exposure": 24,
+  "maximum_yaw_rate_basis": "ASSUMED slow camera pan (the earlier clip registered 20); 20 made the whole-villa pace 0.37 m/s on average because most rooms are small and need a 90-180 degree look-in",
+  "door_route_gap_m": [
+    0.35,
+    0.25
+  ],
+  "door_route_gap_basis": "ASSUMED; 0.35 m keeps a leaf clear of the 0.30 m standing policy, 0.25 m is the fallback and the 0.15 m swept guard still decides at admission"
+}

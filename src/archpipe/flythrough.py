@@ -177,9 +177,19 @@ def require_renderable(guards):
         raise ValueError('Walkthrough render refused: full per-frame admission is required')
 
 
+def is_villa_path(path):
+    return path.get('schema') == 'flythrough-villa-path/1'
+
+
 def frame_views(path, scene):
     """Authored day state shared by the basement stills; only cameras are new."""
     require_path_hash(path)
+    if is_villa_path(path):
+        if scene.get('views'):
+            if len(scene['views']) != len(path['frames']):
+                raise ValueError('Prepared frame camera inventory differs from bound path')
+            return scene['views']
+        return villa_frame_views(path, scene)
     if scene.get('views'):
         views=scene['views']
         if (len(views)!=len(path['frames']) or any(v['id']!='frame-%04d'%f['index']
@@ -252,10 +262,14 @@ def admit_path(path, scene, layout, specification, evaluated_meshes):
     return guards
 
 
-def clip_source_group(rows):
-    """Apply the registered strict-majority rule to the complete clip population."""
+def clip_source_group(rows, expected=720):
+    """Apply the registered strict-majority rule to the complete clip population.
+
+    `expected` is the frame count the clip route requires; the villa route passes None because its groups are
+    metered on a registered subsample.
+    """
     from .exposure_groups import classify,rule
-    if len(rows) != policy()['frames']:
+    if (expected is not None and len(rows) != policy()['frames']) or not rows:
         raise ValueError('Complete clip source population required')
     lamps = sum(r['lamp_luminance_sum'] for r in rows)
     daylight = sum(r['daylight_luminance_sum'] for r in rows)
@@ -366,3 +380,747 @@ def retain_cache_materials(materials):
     for name, material in materials.items():
         if material is None:raise ValueError('Missing referenced cache material: '+name)
         material.use_fake_user=True
+
+
+# =====================================================================================================
+# Whole-villa walkthrough (lane WT, 2026-11-22). Both floors, the real flight, garden placeholders.
+# Everything above is the original level-B clip and stays unchanged; these functions share its
+# guards. Distances metres, times seconds, yaw degrees anticlockwise from +x.
+# =====================================================================================================
+LEVEL_Z = {'B': -3.0, 'GF': 0.0}
+CELL = 0.1
+
+
+def villa_policy():
+    return json.loads((ROOT/'knowledge/flythrough/villa-policy.json').read_text())
+
+
+def villa_route():
+    return json.loads((ROOT/'knowledge/flythrough/villa-route.json').read_text())
+
+
+def level_at(ground_z):
+    return 'GF' if ground_z > -1.5 else 'B'
+
+
+def stair_ground(x, spec):
+    """Floor height along the flight: least-squares line through the real tread tops, clamped to the landings.
+
+    The treads are the spec's boxes (millimetres) thinner than 300 mm; only their x-extent and top matter.
+    """
+    treads = [b for b in spec['stair'] if b[5]-b[2] < 300]
+    xs = np.array([(b[0]+b[3])/2000 for b in treads]); zs = np.array([b[5]/1000 for b in treads])
+    slope, offset = np.polyfit(xs, zs, 1)
+    return float(min(0., max(-3., slope*x+offset)))
+
+
+def stair_extent(spec):
+    treads = [b for b in spec['stair'] if b[5]-b[2] < 300]
+    return min(b[0] for b in treads)/1000, max(b[3] for b in treads)/1000
+
+
+class VillaMap:
+    """Per-level free-space grids built from the production standing-point policy.
+
+    A cell is free when the existing `standing_point_clear` accepts it for a room of that level. Garden
+    and entrance glazing is therefore never free (the policy refuses those door zones). The flight
+    opening on GF and the under-stair joinery on B are handled explicitly: neither may be walked.
+    """
+
+    def __init__(self, layout, spec, items=None):
+        from .concept import villa_furnish as F
+        self.layout, self.spec, self.F = layout, spec, F
+        self.items = items if items is not None else F.layout(layout)
+        self.pieces = {lv: [F.footprint(i) for i in self.items if i['level'] == lv] for lv in LEVEL_Z}
+        self.rooms = {lv: {n: r for n, r in layout['rooms'].items() if r['level'] == lv} for lv in LEVEL_Z}
+        xs = [r['rect'][0] for r in layout['rooms'].values()]+[r['rect'][2] for r in layout['rooms'].values()]
+        ys = [r['rect'][1] for r in layout['rooms'].values()]+[r['rect'][3] for r in layout['rooms'].values()]
+        self.x0, self.y0 = min(xs)-.5, min(ys)-.5
+        self.nx = int((max(xs)+.5-self.x0)/CELL)+1; self.ny = int((max(ys)+.5-self.y0)/CELL)+1
+        self._free = {}; self._room = {}; self._plan = {}
+        # B: the whole stair-b rectangle lies under the flight (cupboard, low soffit): never walkable
+        sb = self.rooms['B']['stair-b']['rect']
+        self.blocked = {'B': (sb[0]-.3, sb[1]-.3, sb[2], sb[3]+.3)}
+
+    def xy(self, i, j):
+        return self.x0+i*CELL, self.y0+j*CELL
+
+    def cell(self, x, y):
+        return int(round((x-self.x0)/CELL)), int(round((y-self.y0)/CELL))
+
+    def _build(self, lv):
+        from .concept.render_views import standing_point_clear
+        F = self.F
+        walls = F._walls(self.spec, lv)+F._columns()
+        free = np.zeros((self.nx, self.ny), bool); room_of = np.full((self.nx, self.ny), '', dtype=object)
+        rooms = self.rooms[lv]
+        opening = None
+        blocked = self.blocked.get(lv)
+        if lv == 'GF':
+            o = self.spec['gf_opening']; m = .3
+            opening = (o[0]+.001, o[1]-m, o[2]+m, o[3]+m)   # the landing side (x<5.177) stays walkable
+        for i in range(self.nx):
+            for j in range(self.ny):
+                x, y = self.xy(i, j)
+                if opening and opening[0] < x < opening[2] and opening[1] < y < opening[3]:
+                    continue
+                if blocked and blocked[0] < x < blocked[2] and blocked[1] < y < blocked[3]:
+                    continue
+                for name, r in rooms.items():
+                    rx = r['rect']
+                    if not (rx[0]-.4 < x < rx[2]+.4 and rx[1]-.4 < y < rx[3]+.4):
+                        continue
+                    if standing_point_clear(self.layout, self.spec, name, x, y, self.pieces[lv], walls):
+                        free[i, j] = True; room_of[i, j] = name
+                        if rx[0] < x < rx[2] and rx[1] < y < rx[3]:
+                            break   # prefer the room that contains the point
+        self._free[lv], self._room[lv] = free, room_of
+
+    def free(self, lv):
+        if lv not in self._free:
+            self._build(lv)
+        return self._free[lv]
+
+    def room_at(self, lv, x, y):
+        """Room whose rectangle contains the point (None outside every room)."""
+        for n, r in self.rooms[lv].items():
+            rx = r['rect']
+            if rx[0] < x < rx[2] and rx[1] < y < rx[3]:
+                return n
+        return None
+
+    def plan_free(self, lv):
+        """Free cells with one cell (0.1 m) of extra margin, except in doorway slots (kept as the policy has them).
+
+        The policy mask is evaluated at cell centres; a straight line between two centres can clip a corner by
+        up to 0.07 m. Planning on the eroded mask keeps the walked line inside the policy.
+        """
+        if lv not in self._plan:
+            free = self.free(lv); core = free.copy()
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)):
+                core &= np.roll(np.roll(free, dx, 0), dy, 1)
+            door = np.zeros_like(free)
+            for d in self.spec['doors']:
+                if d['level'] != lv or d.get('garden') or d.get('entrance'):
+                    continue
+                h = self.F._door_axis(d) == 'h'
+                for i in range(self.nx):
+                    for j in range(self.ny):
+                        x, y = self.xy(i, j)
+                        along, across = (x-d['x'], y-d['y']) if h else (y-d['y'], x-d['x'])
+                        if abs(across) <= .8 and abs(along) <= d['width']/2+.5:
+                            door[i, j] = True
+            self._plan[lv] = core | (free & door)
+        return self._plan[lv]
+
+    def comfort(self, lv, radius=3):
+        free = self.free(lv); ok = free.copy()
+        for k in range(1, radius+1):
+            shifted = free.copy()
+            for dx, dy in ((k, 0), (-k, 0), (0, k), (0, -k), (k, k), (-k, -k), (k, -k), (-k, k)):
+                shifted &= np.roll(np.roll(free, dx, 0), dy, 1)
+            ok &= shifted
+        return ok
+
+    def clearance_cells(self, lv, limit=10):
+        free = self.free(lv); level = free.astype(int)
+        cur = free.copy()
+        for k in range(1, limit+1):
+            nxt = cur.copy()
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)):
+                nxt &= np.roll(np.roll(cur, dx, 0), dy, 1)
+            level += nxt; cur = nxt
+        return level
+
+    def line_free(self, lv, a, b, tight=False):
+        free = self.free(lv) if tight else self.plan_free(lv); n = max(2, int(math.dist(a, b)/(CELL/2)))
+        for t in np.linspace(0, 1, n):
+            i, j = self.cell(a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t)
+            if not (0 <= i < self.nx and 0 <= j < self.ny and free[i, j]):
+                return False
+        return True
+
+    def astar(self, lv, a, b):
+        """Plan on the eroded mask; where a room is too tight for that (the guest WC), fall back to the policy mask."""
+        try:
+            return self._astar(lv, a, b, False)
+        except ValueError:
+            return self._astar(lv, a, b, True)
+
+    def _astar(self, lv, a, b, tight):
+        """8-connected A*; cells outside the comfort band cost four times as much, so routes stay mid-room."""
+        import heapq
+        free = self.free(lv) if tight else self.plan_free(lv); comfy = self.comfort(lv)
+        s, g = self.cell(*a), self.cell(*b)
+        if not free[s] or not free[g]:
+            raise ValueError(f'route endpoint not free on {lv}: {a} -> {b}')
+        best = {s: 0.}; came = {}; heap = [(0., s)]
+        while heap:
+            _, c = heapq.heappop(heap)
+            if c == g:
+                break
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)):
+                n = (c[0]+dx, c[1]+dy)
+                if not (0 <= n[0] < self.nx and 0 <= n[1] < self.ny) or not free[n]:
+                    continue
+                if dx and dy and not (free[c[0]+dx, c[1]] and free[c[0], c[1]+dy]):
+                    continue
+                cost = best[c]+math.hypot(dx, dy)*(1. if comfy[n] else 4.)
+                if cost < best.get(n, 1e18):
+                    best[n] = cost; came[n] = c
+                    heapq.heappush(heap, (cost+math.hypot(g[0]-n[0], g[1]-n[1]), n))
+        if g not in came and g != s:
+            raise ValueError(f'no walkable route on {lv}: {a} -> {b}')
+        cells = [g]
+        while cells[-1] != s:
+            cells.append(came[cells[-1]])
+        pts = [self.xy(*c) for c in reversed(cells)]
+        # string-pull: keep a vertex only when the straight line to the next kept target leaves free space
+        out = [pts[0]]; k = 0
+        while k < len(pts)-1:
+            m = len(pts)-1
+            while m > k+1 and not self.line_free(lv, pts[k], pts[m], tight):
+                m -= 1
+            out.append(pts[m]); k = m
+        out[0], out[-1] = tuple(a), tuple(b)
+        return out
+
+    def anchor(self, lv, room, near=None):
+        """Free cell in the room with the greatest clearance, nearest the room centre. None for a transit room."""
+        r = self.rooms[lv][room]['rect']
+        clear = self.clearance_cells(lv)
+        best = None
+        cx, cy = ((r[0]+r[2])/2, (r[1]+r[3])/2) if near is None else near
+        for i in range(self.nx):
+            for j in range(self.ny):
+                x, y = self.xy(i, j)
+                if clear[i, j] and r[0] < x < r[2] and r[1] < y < r[3]:
+                    key = (min(clear[i, j], 6), -math.hypot(x-cx, y-cy))
+                    if best is None or key > best[0]:
+                        best = (key, (x, y))
+        return best[1] if best else None
+
+
+def _inward_point(vm, door, offset=.7):
+    """A free point just inside a garden door on B, on the side of the room that contains it."""
+    x, y = door
+    for dx, dy in ((offset, 0), (-offset, 0), (0, offset), (0, -offset)):
+        if vm.room_at('B', x+dx, y+dy):
+            return (x+dx, y+dy)
+    raise ValueError(f'door {door} has no room on either side')
+
+
+def plan_villa_route(vm, route=None):
+    """Turn the authored tour into a connected polyline of (x, y, ground_z, flags) nodes plus stations.
+
+    Same-level hops use A* over the policy grid; the only level change is the real flight, entered at the
+    authored top/bottom nodes. A garden station walks to the glazing threshold (inside, closed pane), then
+    out to placeholder waypoints and back. Raises when any hop has no walkable route.
+    """
+    route = route or villa_route(); spec = vm.spec
+    top, bottom = route['stair']['top'], route['stair']['bottom']
+    nodes = []          # dict(x, y, level, stair)
+    stations = []       # dict(node, hold_s, room, kind)
+    pos, lv = None, None
+
+    def go(to, to_level, kind='walk'):
+        nonlocal pos, lv
+        if pos is None:
+            nodes.append(dict(x=to[0], y=to[1], level=to_level)); pos, lv = tuple(to), to_level; return
+        if to_level != lv:
+            raise ValueError('level change only through the flight')
+        if math.dist(pos, to) < 1e-6:
+            return
+        for p in vm.astar(lv, pos, to)[1:]:
+            nodes.append(dict(x=p[0], y=p[1], level=lv))
+        pos = tuple(to)
+
+    def mark(room, hold, kind):
+        stations.append(dict(node=len(nodes)-1, hold_s=hold, room=room, kind=kind))
+
+    for st in route['stations']:
+        if st.get('room'):
+            room = st['room']
+            level = next(l for l in LEVEL_Z if room in vm.rooms[l])
+            at = vm.anchor(level, room)
+            if at is None:
+                raise ValueError(f'room {room} has no free standing cell')
+            go(at, level); mark(room, st['hold_s'], 'room')
+            r = vm.rooms[level][room]['rect']
+            stations[-1]['transit'] = min(r[2]-r[0], r[3]-r[1]) < villa_policy()['transit_room_min_dimension_m']
+        elif st.get('stair') == 'down':
+            go(top, 'GF'); mark('stair-gf', st['hold_s'], 'stair-top')
+            x0, x1 = stair_extent(spec)
+            for x in np.arange(x0, x1+.5, .5):
+                nodes.append(dict(x=float(x), y=top[1], level='GF' if x < x0+.3 else 'B', stair=True))
+            nodes.append(dict(x=bottom[0], y=bottom[1], level='B'))
+            pos, lv = tuple(bottom), 'B'
+        elif st.get('garden'):
+            inside = _inward_point(vm, st['door'])
+            go(inside, 'B'); mark(None, 3., 'garden-threshold')
+            for p in [st['door']]+st['outside']+[st['door'], inside]:
+                nodes.append(dict(x=p[0], y=p[1], level='B', garden=st['garden']))
+            nodes[-1].pop('garden'); pos = tuple(inside)
+            stations[-1]['garden'] = st['garden']
+    return nodes, stations
+
+
+def _opaque_grid(vm, lv):
+    """Wall and column footprints for a level (door gaps already cut), used only to choose view directions."""
+    F = vm.F
+    grid = np.zeros((vm.nx, vm.ny), bool)
+    for w in F._walls(vm.spec, lv)+F._columns():
+        i0, j0 = vm.cell(w[0], w[1]); i1, j1 = vm.cell(w[2], w[3])
+        grid[max(i0, 0):i1+1, max(j0, 0):j1+1] = True
+    return grid
+
+
+def _ray(vm, grid, x, y, yaw, limit=8.):
+    c, s = math.cos(yaw), math.sin(yaw)
+    for d in np.arange(.1, limit, .05):
+        i, j = vm.cell(x+c*d, y+s*d)
+        if not (0 <= i < vm.nx and 0 <= j < vm.ny) or grid[i, j]:
+            return d
+    return limit
+
+
+def view_yaw(vm, lv, point, grid=None, prefer=None):
+    """Direction (radians) with the deepest unobstructed view from a standing point.
+
+    Five rays across the central 50 degrees are scored by mean depth, subject to the 1 m forward-wall
+    sightline rule; if no direction meets 1.5 m the one with the best minimum is returned.
+    """
+    grid = _opaque_grid(vm, lv) if grid is None else grid
+    scored = []
+    for deg in range(0, 360, 10):
+        rays = [_ray(vm, grid, point[0], point[1], math.radians(deg+o)) for o in (-25, -12, 0, 12, 25)]
+        scored.append(((min(rays) >= 1.5, np.mean(rays) if min(rays) >= 1.5 else min(rays)), math.radians(deg)))
+    top = max(k for k, _ in scored)
+    if prefer is None or not top[0]:
+        return max(scored)[1]
+    # among views at least 85 % as deep as the best, take the one needing the smallest turn
+    good = [y for k, y in scored if k[0] and k[1] >= .85*top[1]]
+    return min(good, key=lambda y: abs((y-prefer+math.pi) % (2*math.pi)-math.pi))
+
+
+def _smooth(values, sigma_samples):
+    k = int(4*sigma_samples)
+    kernel = np.exp(-.5*(np.arange(-k, k+1)/sigma_samples)**2); kernel /= kernel.sum()
+    padded = np.concatenate([np.full(k, values[0]), values, np.full(k, values[-1])])
+    return np.convolve(padded, kernel, mode='valid')
+
+
+def repair_yaw(vm, xy, levels, yaw, margin=1.15, buckets=72, iterations=3):
+    """Turn each look direction away from a wall closer than `margin` along the central sightline.
+
+    The admission rule fails a frame whose central sightline meets a wall within 1 m. For every
+    0.1 m of route, the directions whose first wall is at least `margin` away are tabulated against the
+    wall/column grid; the desired yaw is moved to the nearest such direction, smoothed, and re-projected,
+    so the result always lies in an allowed direction where one exists. A point with no allowed
+    direction (a space smaller than the margin all round) keeps the deepest one and is left to the guard.
+    """
+    grids = {lv: _opaque_grid(vm, lv) for lv in LEVEL_Z}
+    step = 5; pick = np.arange(0, len(xy), step)
+    angles = np.arange(buckets)*2*math.pi/buckets
+    distances = np.arange(.05, margin+.05, .05)
+    allowed = np.zeros((len(pick), buckets), bool); depth = np.zeros((len(pick), buckets))
+    for lv in LEVEL_Z:
+        rows = np.where(np.array(levels)[pick] == lv)[0]
+        if not len(rows):
+            continue
+        px = xy[pick[rows], 0][:, None, None]+np.cos(angles)[None, :, None]*distances[None, None, :]
+        py = xy[pick[rows], 1][:, None, None]+np.sin(angles)[None, :, None]*distances[None, None, :]
+        ci = np.rint((px-vm.x0)/CELL).astype(int); cj = np.rint((py-vm.y0)/CELL).astype(int)
+        inside = (ci >= 0) & (ci < vm.nx) & (cj >= 0) & (cj < vm.ny)
+        hit = np.where(inside, grids[lv][np.clip(ci, 0, vm.nx-1), np.clip(cj, 0, vm.ny-1)], True)
+        first = np.where(hit.any(2), hit.argmax(2), len(distances))
+        depth[rows] = first; allowed[rows] = first >= len(distances)
+    # tight spots: relax the margin to 1.05 m, then to the deepest direction available
+    for relaxed in (1.05/.05,):
+        none = ~allowed.any(1)
+        allowed[none] = depth[none] >= relaxed
+    none = ~allowed.any(1)
+    allowed[none] = depth[none] >= depth[none].max(1, keepdims=True)-1
+    # Viterbi over direction buckets, one state per 0.1 m of route: a forbidden direction costs a lot, the
+    # distance from the wanted yaw costs a little, and the yaw may change by one bucket (5 deg) per step.
+    want = yaw[pick]; n = len(pick)
+    wrapped = (angles[None, :]-want[:, None]+math.pi) % (2*math.pi)-math.pi
+    cost = wrapped**2+np.where(allowed, 0., 400.)
+    total = np.zeros(buckets); back = np.zeros((n, buckets), int)
+    total = cost[0].copy()
+    for i in range(1, n):
+        options = np.stack([np.roll(total, 1), total, np.roll(total, -1)])+np.array([[.02], [0.], [.02]])
+        choice = options.argmin(0)
+        back[i] = (np.arange(buckets)+(choice-1)) % buckets
+        total = options.min(0)+cost[i]
+    state = int(total.argmin()); chosen = np.zeros(n, int)
+    for i in range(n-1, -1, -1):
+        chosen[i] = state; state = back[i, state]
+    direction = angles[chosen]
+    # continuous, unwrapped, and smoothed lightly; the margin over the 1 m rule absorbs the smoothing
+    steps = np.cumsum(((np.diff(direction, prepend=direction[0])+math.pi) % (2*math.pi))-math.pi)+direction[0]
+    offset = np.round((yaw[pick[0]]-steps[0])/(2*math.pi))*2*math.pi
+    full = np.interp(np.arange(len(xy)), pick, steps+offset)
+    return _smooth(full, .12/.02)
+
+
+def sample_villa_path(vm, nodes, stations, settings=None):
+    """Constant-pace walk with holds, sampled at 24 fps.
+
+    Position follows the polyline at the cited cruise speed (stair speed on the flight), accelerating at the
+    registered rate and slowing wherever the camera would have to turn faster than the registered yaw rate.
+    Yaw looks ahead along the route and is pulled to the chosen view direction around each hold.
+    """
+    settings = dict(settings or villa_policy()); spec = vm.spec
+    ds = .02; x0s, x1s = stair_extent(spec)
+    P = []   # (x, y, ground, stair, garden)
+    for a, b in zip(nodes, nodes[1:]):
+        za = stair_ground(a['x'], spec) if a.get('stair') else LEVEL_Z[a['level']]
+        zb = stair_ground(b['x'], spec) if b.get('stair') else LEVEL_Z[b['level']]
+        if a.get('stair') is None and b.get('stair'):
+            za = LEVEL_Z['GF']                  # the top node stands on the landing
+        if a.get('stair') and b.get('stair') is None:
+            zb = LEVEL_Z['B']
+        length = math.dist((a['x'], a['y'], za), (b['x'], b['y'], zb))
+        n = max(1, int(math.ceil(length/ds)))
+        for k in range(n):
+            t = k/n
+            P.append((a['x']+(b['x']-a['x'])*t, a['y']+(b['y']-a['y'])*t, za+(zb-za)*t,
+                      bool(a.get('stair') or b.get('stair')), a.get('garden')))
+    last = nodes[-1]; P.append((last['x'], last['y'], LEVEL_Z[last['level']], False, None))
+    arr = np.array([(p[0], p[1], p[2]) for p in P]); stair = np.array([p[3] for p in P]); garden = [p[4] for p in P]
+    seg = np.hypot.reduce(np.diff(arr, axis=0), axis=1) if False else np.sqrt((np.diff(arr, axis=0)**2).sum(1))
+    s = np.concatenate([[0.], np.cumsum(seg)])
+    node_s = []
+    cursor = 0.
+    for a, b in zip(nodes, nodes[1:]):
+        node_s.append(cursor)
+        za = stair_ground(a['x'], spec) if a.get('stair') else LEVEL_Z[a['level']]
+        zb = stair_ground(b['x'], spec) if b.get('stair') else LEVEL_Z[b['level']]
+        if a.get('stair') is None and b.get('stair'): za = LEVEL_Z['GF']
+        if a.get('stair') and b.get('stair') is None: zb = LEVEL_Z['B']
+        cursor += math.dist((a['x'], a['y'], za), (b['x'], b['y'], zb))
+    node_s.append(s[-1])
+    # heading along the route with look-ahead, then smoothed
+    L = 1.2
+    tangent = np.zeros(len(arr))
+    for i in range(len(arr)):
+        j = min(len(arr)-1, int(np.searchsorted(s, s[i]+L)))
+        k = max(0, j-10)
+        d = arr[j, :2]-arr[k, :2]
+        tangent[i] = math.atan2(d[1], d[0]) if np.hypot(*d) > 1e-6 else (tangent[i-1] if i else 0.)
+    base = _smooth(np.unwrap(tangent), .8/ds)
+    yaw = base.copy()
+    holds = []
+    grids = {}
+    for st in stations:
+        n = nodes[st['node']]; lv = n['level']
+        if st['kind'] == 'garden-threshold':
+            nxt = nodes[st['node']+1]
+            target = math.atan2(nxt['y']-n['y'], nxt['x']-n['x'])
+        elif st['kind'] == 'stair-top':
+            target = 0.
+        elif not st.get('transit'):
+            grids.setdefault(lv, _opaque_grid(vm, lv))
+            i = min(int(np.searchsorted(s, node_s[st['node']])), len(s)-1)
+            target = view_yaw(vm, lv, (n['x'], n['y']), grids[lv], prefer=base[i])
+        else:
+            continue
+        i = int(np.searchsorted(s, node_s[st['node']]))
+        i = min(i, len(s)-1)
+        R = 2.5
+        window = np.clip(1-np.abs(s-s[i])/R, 0, 1)
+        weight = np.sin(window*math.pi/2)**2
+        delta = (target-yaw[i]+math.pi) % (2*math.pi)-math.pi
+        yaw = yaw+weight*delta
+        if st['hold_s'] > 0:
+            holds.append((i, st['hold_s']))
+    lv_samples = [level_at(g) for g in arr[:, 2]]
+    yaw = repair_yaw(vm, arr[:, :2], lv_samples, _smooth(yaw, .3/ds))
+    dyaw = np.abs(np.gradient(yaw, s))
+    vlim = np.minimum(settings['cruise_speed_m_s'], np.where(stair, settings['stair_speed_m_s'], 9.))
+    vlim = np.minimum(vlim, .9*math.radians(settings['maximum_yaw_rate_deg_s'])/np.maximum(dyaw, 1e-9))
+    vlim = np.maximum(vlim, .15)
+    stops = {0, len(s)-1}|{i for i, h in holds}
+    for i in stops:
+        vlim[i] = 0.
+    a = settings['acceleration_m_s2']; v = vlim.copy(); dsi = np.diff(s)
+    for _ in range(2):
+        for i in range(1, len(v)):
+            v[i] = min(v[i], math.sqrt(v[i-1]**2+2*a*dsi[i-1]))
+        for i in range(len(v)-2, -1, -1):
+            v[i] = min(v[i], math.sqrt(v[i+1]**2+2*a*dsi[i]))
+    dt = np.where(v[:-1]+v[1:] > 1e-9, 2*dsi/np.maximum(v[:-1]+v[1:], 1e-9), 0.)
+    # a stop sample between two zero speeds needs a finite time; use the acceleration ramp from rest
+    zero = v[:-1]+v[1:] <= 1e-9
+    dt[zero] = 2*np.sqrt(2*dsi[zero]/(2*a))*0+np.sqrt(2*dsi[zero]/a)
+    t = np.concatenate([[0.], np.cumsum(dt)])
+    hold_end = {}
+    shift = 0.; ts = t.copy()
+    pause = [(i, h) for i, h in sorted(holds)]
+    # build (time, s-index) table with flat segments for the holds
+    table_t, table_i = [], []
+    extra = 0.; k = 0
+    for i in range(len(s)):
+        table_t.append(t[i]+extra); table_i.append(i)
+        while k < len(pause) and pause[k][0] == i:
+            extra += pause[k][1]; table_t.append(t[i]+extra); table_i.append(i); k += 1
+    final_hold = [h for i, h in holds if i == len(s)-1]
+    total = table_t[-1]
+    frames_n = int(math.floor(total*settings['fps']))+1
+    tt = np.arange(frames_n)/settings['fps']
+    idx = np.interp(tt, table_t, table_i)
+    eye = settings['eye_height_m']; frames = []
+    for f, fi in enumerate(idx):
+        i0 = int(math.floor(fi)); i1 = min(i0+1, len(s)-1); w = fi-i0
+        pos = arr[i0]*(1-w)+arr[i1]*w; yw = yaw[i0]*(1-w)+yaw[i1]*w
+        yaw_deg = math.degrees(yw); ground = float(pos[2])
+        cam = [float(pos[0]), float(pos[1]), ground+eye]
+        lvl = level_at(ground); on_stair = bool(stair[i0] and stair[i1])
+        room = vm.room_at(lvl, cam[0], cam[1]) if not garden[i0] else None
+        frames.append(dict(index=f, seconds=f/settings['fps'], yaw_deg=yaw_deg, ground_m=ground,
+                           level=lvl, stair=on_stair, room=room,
+                           segment='garden-placeholder' if garden[i0] else 'interior',
+                           camera=dict(position=cam, target=[cam[0]+math.cos(yw), cam[1]+math.sin(yw), cam[2]],
+                                       lens_mm=24, sensor_mm=36, shift_x=0, shift_y=0)))
+    settings['frames'] = frames_n
+    record = dict(schema='flythrough-villa-path/1', settings=settings, frames=frames,
+                  distance_m=float(s[-1]), duration_s=frames_n/settings['fps'],
+                  stations=[dict(room=st['room'], kind=st['kind'], hold_s=st['hold_s'], garden=st.get('garden'),
+                                 first_frame=None) for st in stations])
+    for rec, st in zip(record['stations'], stations):
+        i = int(np.searchsorted(s, node_s[st['node']]))
+        j = int(np.argmin(np.abs(idx-i)))
+        rec['first_frame'] = j
+    record['sha256'] = digest(record)
+    return record
+
+
+# ---- door leaves: an explicit open state, never hidden geometry --------------------------------------
+def _rect_poly(cx, cy, ux, uy, length, width):
+    """Corners of a rectangle starting at (cx, cy) running `length` along unit (ux, uy), `width` across it."""
+    px, py = -uy, ux
+    return np.array([[cx-px*width/2, cy-py*width/2], [cx+ux*length-px*width/2, cy+uy*length-py*width/2],
+                     [cx+ux*length+px*width/2, cy+uy*length+py*width/2], [cx+px*width/2, cy+py*width/2]])
+
+
+def _polys_overlap(a, b):
+    """Convex polygon separating-axis test (touching edges do not overlap)."""
+    for poly in (a, b):
+        for i in range(len(poly)):
+            e = poly[(i+1) % len(poly)]-poly[i]; n = np.array([-e[1], e[0]])
+            pa, pb = a@n, b@n
+            if pa.max() <= pb.min()+1e-9 or pb.max() <= pa.min()+1e-9:
+                return False
+    return True
+
+
+def _rect_to_poly(r, grow=0.):
+    return np.array([[r[0]-grow, r[1]-grow], [r[2]+grow, r[1]-grow], [r[2]+grow, r[3]+grow], [r[0]-grow, r[3]+grow]])
+
+
+def open_interior_doors(scene, vm, frames, policy_=None):
+    """Swing every interior door leaf open about a jamb, in place, and report what was done.
+
+    The leaf keeps every vertex and face (it is rotated, not removed); its lever handle follows it. The hinge
+    end and swing side are not authored (except the core entrance), so all four are tried at each registered
+    angle and the first with no contact with furniture, walls or the walked route (0.35 m, then 0.25 m as a fallback) is taken: the
+    largest angle that works, then the largest clearance. Entrance leaves are left closed. A door with no
+    collision-free option stays closed and is reported so the route test fails loudly.
+    """
+    policy_ = policy_ or villa_policy(); F = vm.F; report = []
+    route = {lv: np.array([f['camera']['position'][:2] for f in frames if f['level'] == lv and not f['stair']])
+             for lv in LEVEL_Z}
+    handle = next((m for m in scene['meshes'] if m['id'] == 'detail-door-handles'), None)
+    for mesh in scene['meshes']:
+        if mesh.get('part_kind') != 'door-leaf' or not mesh['id'].startswith('door-leaf-'):
+            continue
+        pts = np.array([v for face in mesh['faces'] for v in face])
+        lo, hi = pts.min(0), pts.max(0)
+        name = (mesh.get('element_ids') or [mesh['id']])[0]
+        entry = dict(id=mesh['id'], element=name)
+        if 'core' in name:
+            report.append(dict(entry, state='closed', reason='entrance to the unmodelled shared core; not on the route'))
+            continue
+        lv = level_at((lo[2]+hi[2])/2)
+        along_x = (hi[0]-lo[0]) >= (hi[1]-lo[1])
+        length = (hi[0]-lo[0]) if along_x else (hi[1]-lo[1]); width = (hi[1]-lo[1]) if along_x else (hi[0]-lo[0])
+        mid = ((lo[1]+hi[1])/2) if along_x else ((lo[0]+hi[0])/2)
+        ends = [(lo[0], mid), (hi[0], mid)] if along_x else [(mid, lo[1]), (mid, hi[1])]
+        obstacles = [_rect_to_poly(r, .02) for r in vm.pieces[lv]]
+        obstacles += [_rect_to_poly(w) for w in F._walls(vm.spec, lv)+F._columns()]
+        best = None
+        for minimum_gap, angle in [(g, a) for g in policy_['door_route_gap_m'] for a in policy_['door_open_degrees']]:
+            for h, hinge in enumerate(ends):
+                for sign in (1, -1):
+                    free_end = ends[1-h]
+                    ux, uy = free_end[0]-hinge[0], free_end[1]-hinge[1]; norm = math.hypot(ux, uy); ux, uy = ux/norm, uy/norm
+                    a = math.radians(angle)*sign
+                    rx, ry = ux*math.cos(a)-uy*math.sin(a), ux*math.sin(a)+uy*math.cos(a)
+                    poly = _rect_poly(hinge[0], hinge[1], rx, ry, length, width)
+                    # the hinge corner sits in the jamb by half a leaf thickness; test the leaf from 0.12 m out
+                    probe = _rect_poly(hinge[0]+rx*.12, hinge[1]+ry*.12, rx, ry, length-.12, width*.6)
+                    if any(_polys_overlap(probe, o) for o in obstacles):
+                        continue
+                    track = route[lv]
+                    # distance from the route to the leaf polygon, sampled along the leaf's centre line and corners
+                    samples = np.vstack([poly, [(hinge[0]+rx*length*t, hinge[1]+ry*length*t) for t in np.linspace(0, 1, 9)]])
+                    gap = min(float(np.min(np.hypot(*(track[:, None, :]-samples[None]).transpose(2, 0, 1)))), 9.) if len(track) else 9.
+                    if gap < minimum_gap:
+                        continue
+                    if best is None or (angle, gap) > (best[0], best[1]):
+                        best = (angle, gap, hinge, sign, h)
+            if best:
+                break
+        if best is None:
+            report.append(dict(entry, state='closed', reason='no collision-free swing found'))
+            continue
+        angle, gap, hinge, sign, h = best; a = math.radians(angle)*sign; c, s_ = math.cos(a), math.sin(a)
+
+        def rot(v):
+            dx, dy = v[0]-hinge[0], v[1]-hinge[1]
+            return [hinge[0]+dx*c-dy*s_, hinge[1]+dx*s_+dy*c, v[2]]
+        mesh['faces'] = [[rot(v) for v in face] for face in mesh['faces']]
+        moved = 0
+        if handle:
+            for k, face in enumerate(handle['faces']):
+                cx = sum(v[0] for v in face)/len(face); cy = sum(v[1] for v in face)/len(face); cz = sum(v[2] for v in face)/len(face)
+                if lo[0]-.12 <= cx <= hi[0]+.12 and lo[1]-.12 <= cy <= hi[1]+.12 and lo[2] <= cz <= hi[2]:
+                    handle['faces'][k] = [rot(v) for v in face]; moved += 1
+        report.append(dict(entry, state='open', angle_deg=angle, swing_sign=sign, hinge=[round(hinge[0], 3), round(hinge[1], 3)],
+                           route_gap_m=round(gap, 3), handle_faces_moved=moved))
+    return report
+
+
+# ---- admission for the whole-villa path --------------------------------------------------------------
+def villa_frame_views(path, scene):
+    """Same authored day state as the basement stills; subject follows the room the camera is in."""
+    from .concept.villa_render import curtain_hidden_meshes, sun_for_timestamp
+    sun = sun_for_timestamp('2026-10-15T10:30:00+03:00')
+    hidden = curtain_hidden_meshes(scene.get('curtains', []), 'day')
+    views = []
+    for f in path['frames']:
+        garden = f['segment'] != 'interior'
+        views.append(dict(id='frame-%04d' % f['index'], title='Whole-villa walkthrough', camera=f['camera'],
+                          state='day', exposure='exterior-day' if garden else 'day',
+                          subjects=['landscape-g6-terrace'] if (garden or not f['room']) else ['room:'+f['room']],
+                          resolution=path['settings']['final_resolution'], samples=1024,
+                          layers_on=['ambient', 'accent'], dimmers={'ambient': .5, 'accent': .5},
+                          hide_meshes=list(hidden), sun=dict(sun),
+                          caption_notes=['Interior doors are shown swung open; garden glazing stays closed.']))
+    return views
+
+
+def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, frames=None):
+    """Per-frame admission with the production guards, level- and stair-aware.
+
+    Interior frames (flat floor) get the standing-point policy, the one-metre forward-wall rule, the
+    camera lens clearance and the swept walking envelope. Frames on the flight skip the plan-view
+    standing policy and the plan-view furniture clearance (both are blind to height: the under-stair
+    joinery lies directly beneath the treads) and are judged by the 3D swept envelope only, which
+    starts `stair_clearance_m` above the lower tread line. Garden-placeholder frames are screened the
+    same way but reported separately: the garden is being rebuilt (LDB) and its glazing is closed.
+    Returns rows plus a summary by segment; `passed` covers interior rows only.
+    """
+    from scripts.villa_render_views import camera_proximity_violations, CameraProximityGeometry
+    from .concept import villa_furnish as F
+    from .concept.render_views import standing_point_clear
+    settings = path['settings']; vm = vm or VillaMap(layout, spec)
+    items = {i['id']: i for i in vm.items}
+    walls_by_level = {lv: F._walls(spec, lv)+F._columns() for lv in LEVEL_Z}
+    host_walls = scene_wall_hosts(scene)
+    sweeps = [CameraSweep(scene)]+([CameraSweep({'meshes': evaluated_meshes})] if evaluated_meshes else [])
+    geometry = CameraProximityGeometry(scene)
+    rows = motion_findings(path['frames'], settings)
+    plan = plan_findings(path, vm)
+    previous = path['frames'][0]
+    for frame, view, row in zip(path['frames'], villa_frame_views(path, scene), rows):
+        pos = frame['camera']['position']; x, y = pos[:2]; lv = frame['level']
+        if abs(pos[2]-frame['ground_m']-settings['eye_height_m']) > 1e-9:
+            row['failures'].append('camera eye height differs from still-view rule')
+        row['failures'].extend(wall_sightline_findings(view, host_walls))
+        room = frame['room']
+        row['failures'].extend(plan.get(frame['index'], []))
+        view['standing_room'] = room or ('stair-b' if frame['ground_m'] < -1.5 else 'stair-gf')
+        row['lens_clearance'] = camera_proximity_violations(view, scene, {} if frame['stair'] else items, geometry=geometry)
+        if row['lens_clearance']:
+            row['failures'].append('existing interior lens clearance failed')
+        a, b = previous['camera']['position'], pos
+        if frame['stair'] or previous['stair']:
+            ground = min(previous['ground_m'], frame['ground_m'])+settings['stair_clearance_m']
+            height = settings['walking_height_m']-settings['stair_clearance_m']+abs(previous['ground_m']-frame['ground_m'])
+        else:
+            ground, height = frame['ground_m'], settings['walking_height_m']
+        hits = sorted({h for sw in sweeps for h in sw.findings(a, b, ground_m=ground, clearance_m=settings['obstacle_clearance_m'], height_m=height)})
+        row['swept_obstacles'] = hits
+        if hits:
+            row['failures'].append('physical walking envelope intersects design geometry')
+        row.update(room=room, level=lv, stair=frame['stair'], segment=frame['segment'])
+        row['passed'] = not row['failures']
+        previous = frame
+    interior = [r for r in rows if r['segment'] == 'interior']; garden = [r for r in rows if r['segment'] != 'interior']
+    return dict(schema='flythrough-villa-guards/1', path_sha256=path['sha256'], frames=rows,
+                passed=all(r['passed'] for r in interior),
+                summary=dict(interior=dict(frames=len(interior), failed=sum(not r['passed'] for r in interior)),
+                             garden_placeholder=dict(frames=len(garden), failed=sum(not r['passed'] for r in garden))),
+                max_speed_m_s=max(r['speed_m_s'] for r in rows), max_yaw_rate_deg_s=max(r['yaw_rate_deg_s'] for r in rows),
+                acceptance_scope='complete per-frame render admission' if evaluated_meshes else 'authored geometry only; evaluated meshes pending')
+
+
+def route_rooms(path, layout, rooms=None):
+    """Rooms entered, in order of first visit, counting a room when any frame stands inside its rectangle."""
+    seen = []
+    for f in path['frames']:
+        r = f['room']
+        if r and r not in seen:
+            seen.append(r)
+    return seen
+
+
+def plan_findings(path, vm):
+    """Plan-level admission that needs no scene: standing policy per flat frame and no wall crossing.
+
+    A segment between successive frames fails if it crosses a built wall rectangle (door gaps already cut)
+    or a column on its level. Flight and garden frames are skipped here (the flight lies over the under-stair
+    joinery; the garden is outside the walls). Returns {frame index: [failures]} for failing frames only.
+    """
+    from .concept.render_views import standing_point_clear
+    F = vm.F; out = {}
+    walls = {lv: [_rect_to_poly(w) for w in F._walls(vm.spec, lv)+F._columns()] for lv in LEVEL_Z}
+    standing = {lv: F._walls(vm.spec, lv)+F._columns() for lv in LEVEL_Z}
+    previous = None
+    for f in path['frames']:
+        bad = []
+        x, y = f['camera']['position'][:2]
+        flat = not f['stair'] and f['segment'] == 'interior'
+        if flat:
+            if f['room'] is None or not standing_point_clear(vm.layout, vm.spec, f['room'], x, y, vm.pieces[f['level']], standing[f['level']]):
+                bad.append('existing standing-point clearance policy failed')
+            if previous is not None and previous['level'] == f['level'] and not previous['stair']:
+                a = previous['camera']['position'][:2]
+                if math.dist(a, (x, y)) > 1e-9:
+                    if any(_segment_hits_rect(a, (x, y), r) for r in walls[f['level']]):
+                        bad.append('route segment crosses a built wall')
+        if bad:
+            out[f['index']] = bad
+        previous = f
+    return out
+
+
+def _segment_hits_rect(a, b, poly):
+    """Liang-Barsky clip of segment a-b against the axis-aligned rectangle polygon."""
+    x0, y0 = poly.min(0); x1, y1 = poly.max(0)
+    dx, dy = b[0]-a[0], b[1]-a[1]; t0, t1 = 0., 1.
+    for p, q in ((-dx, a[0]-x0), (dx, x1-a[0]), (-dy, a[1]-y0), (dy, y1-a[1])):
+        if abs(p) < 1e-12:
+            if q < 0:
+                return False
+        else:
+            r = q/p
+            if p < 0:
+                t0 = max(t0, r)
+            else:
+                t1 = min(t1, r)
+            if t0 > t1:
+                return False
+    return t1 > t0 and (t1-t0) > 1e-9

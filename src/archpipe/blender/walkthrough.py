@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/'src'))
 from archpipe.blender import villa_scene as V
 from archpipe.safe_io import save_bytes
-from archpipe.flythrough import admit_path, frame_views, require_renderable, digest, clip_source_group, policy, static_material_eligible, static_coverage, retain_cache_materials
+from archpipe.flythrough import is_villa_path, admit_path, frame_views, require_renderable, digest, clip_source_group, policy, static_material_eligible, static_coverage, retain_cache_materials
 
 
 def save(path, value):
@@ -31,7 +31,21 @@ def evaluated_path_meshes(path):
     """Read actual runtime faces near the whole path; bounds only prune."""
     positions=np.array([f['camera']['position'] for f in path['frames']])
     low=positions.min(0)-.31;high=positions.max(0)+.31
-    low[2],high[2]=-2.95,-1.2
+    if is_villa_path(path):
+        # whole villa: keep only faces inside 0.5 m cells around the walked envelope (floor to 2.2 m above it)
+        low[2]=min(f['ground_m'] for f in path['frames'])-.05;high[2]=max(f['ground_m'] for f in path['frames'])+2.3
+        occupied=set()
+        for f in path['frames']:
+            x,y,_=f['camera']['position'];g=f['ground_m']
+            for i in range(int((x-.6)//.5),int((x+.6)//.5)+1):
+                for j in range(int((y-.6)//.5),int((y+.6)//.5)+1):
+                    for k in range(int((g-.1)//.5),int((g+2.3)//.5)+1):occupied.add((i,j,k))
+        def near(pts):
+            lo=np.floor(pts.min(0)/.5).astype(int);hi=np.floor(pts.max(0)/.5).astype(int)
+            return any((i,j,k) in occupied for i in range(lo[0],hi[0]+1) for j in range(lo[1],hi[1]+1) for k in range(lo[2],hi[2]+1))
+    else:
+        low[2],high[2]=-2.95,-1.2
+        near=lambda pts:True
     dependencies=bpy.context.evaluated_depsgraph_get()
     result=[]
     for obj in bpy.context.scene.objects:
@@ -45,7 +59,7 @@ def evaluated_path_meshes(path):
             faces=[]
             for polygon in mesh.polygons:
                 pts=coordinates[list(polygon.vertices)]
-                if np.all(pts.min(0)<=high) and np.all(pts.max(0)>=low):faces.append(pts.tolist())
+                if np.all(pts.min(0)<=high) and np.all(pts.max(0)>=low) and near(pts):faces.append(pts.tolist())
             if faces:result.append(dict(id=obj.name,faces=faces))
         finally:evaluated.to_mesh_clear()
     return result
@@ -157,30 +171,52 @@ def source_probe(scene,context,view,out):
 
 
 def measure(args,path,scene,context):
+    """Source isolations plus camera meter per frame, then one lock per exposure group.
+
+    Clip route: every frame, one lock. Villa route: each segment (interior, garden placeholder) is its own
+    group with its own lock; only every Nth frame of a segment is metered (registered, default 24 = one per
+    second) because 10,000 metered frames would cost more than the preview itself. --segments limits which
+    groups are measured.
+    """
     from archpipe.exposure_groups import RULE_SHA256,transport_digest
     out=Path(args.root)/'exposure';out.mkdir(parents=True,exist_ok=True)
-    views=frame_views(path,scene);rows=[];meters={}
-    for view in views:
-        file=out/(view['id']+'.json')
-        if file.exists():record=json.loads(file.read_text())
-        else:
-            row=source_probe(scene,context,view,out)
-            camera,_,_=setup(scene,context,view)
-            s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=policy()['final_resolution']
-            s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
-            ev,logavg=V.photoreal.camera_meter(bias_stops=-.4,look='AgX - Medium High Contrast')
-            remove_camera(camera)
-            record=dict(source=row,meter=dict(exposure_stops=ev,log_average=logavg),path_sha256=path['sha256'])
-            save(file,record)
-        if record['path_sha256']!=path['sha256']:raise ValueError('Stale frame source measurement')
-        rows.append(record['source']);meters[view['id']]=record['meter']
-        print('WALKTHROUGH exposure',len(rows),'/ 720',flush=True)
-    lock=clip_source_group(rows)
-    lock.update(exposure_stops=sorted(m['exposure_stops'] for m in meters.values())[len(meters)//2],
-                group_meters=meters,source_measurements=rows,rule_sha256=RULE_SHA256,
-                path_sha256=path['sha256'],transport_sha256=transport_digest(scene))
-    lock['sha256']=digest(lock)
-    save(out/'lock.json',lock)
+    views=frame_views(path,scene);villa=is_villa_path(path)
+    segments=sorted({f.get('segment','interior') for f in path['frames']})
+    if args.segments:segments=[s for s in segments if s in args.segments.split(',')]
+    every=path['settings'].get('interior_preview_every_nth_frame_for_exposure',1) if villa else 1
+    for segment in segments:
+        indices=[f['index'] for f in path['frames'] if f.get('segment','interior')==segment]
+        if villa:indices=indices[::every]+([indices[-1]] if indices[-1] not in indices[::every] else [])
+        rows=[];meters={}
+        for index in indices:
+            view=views[index];file=out/(view['id']+'.json')
+            if file.exists():record=json.loads(file.read_text())
+            else:
+                row=source_probe(scene,context,view,out)
+                camera,_,_=setup(scene,context,view)
+                s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=path['settings']['final_resolution']
+                s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
+                ev,logavg=V.photoreal.camera_meter(bias_stops=-.4,look='AgX - Medium High Contrast')
+                remove_camera(camera)
+                record=dict(source=row,meter=dict(exposure_stops=ev,log_average=logavg),path_sha256=path['sha256'])
+                save(file,record)
+            if record['path_sha256']!=path['sha256']:raise ValueError('Stale frame source measurement')
+            rows.append(record['source']);meters[view['id']]=record['meter']
+            print('WALKTHROUGH exposure',segment,len(rows),'/',len(indices),flush=True)
+        lock=clip_source_group(rows,expected=None if villa else policy()['frames'])
+        lock.update(exposure_stops=sorted(m['exposure_stops'] for m in meters.values())[len(meters)//2],
+                    group_meters=meters,source_measurements=rows,rule_sha256=RULE_SHA256,segment=segment,
+                    metered_frames=indices,path_sha256=path['sha256'],transport_sha256=transport_digest(scene))
+        lock['sha256']=digest(lock)
+        save(out/('lock.json' if not villa else f'lock-{segment}.json'),lock)
+
+
+def load_lock(args,path,frame):
+    name='lock.json' if not is_villa_path(path) else f"lock-{frame.get('segment','interior')}.json"
+    lock=json.loads((Path(args.root)/'exposure'/name).read_text())
+    if lock['path_sha256']!=path['sha256'] or lock['sha256']!=digest({k:v for k,v in lock.items() if k!='sha256'}):
+        raise ValueError('Clip camera lock binding changed')
+    return lock
 
 
 def static_position_output(out):
@@ -225,15 +261,15 @@ def render_frames(args,path,scene,context):
     out=Path(args.root)/args.stage
     if args.stage=='sampling':out/=str(args.samples)
     out.mkdir(parents=True,exist_ok=True)
-    lock=json.loads((Path(args.root)/'exposure/lock.json').read_text())
-    if lock['path_sha256']!=path['sha256'] or lock['sha256']!=digest({k:v for k,v in lock.items() if k!='sha256'}):
-        raise ValueError('Clip camera lock binding changed')
     views=frame_views(path,scene)
-    resolution=policy()['preview']['resolution'] if args.stage in ('draft','preview') else policy()['final_resolution']
+    resolution=path['settings']['preview']['resolution'] if args.stage in ('draft','preview') else path['settings']['final_resolution']
     samples=32 if args.stage in ('draft','preview') else args.samples
-    indices=[0,359,719] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else range(720)
+    n=len(path['frames'])
+    default=[f['index'] for f in path['frames'] if f.get('segment','interior') in (args.segments.split(',') if args.segments else ['interior','garden-placeholder'])]
+    indices=[0,(n-1)//2,n-1] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else default
     position_output=static_position_output(out) if args.stage=='final' else None
     for index in indices:
+        lock=load_lock(args,path,path['frames'][index])
         view=views[index];png=out/(view['id']+'.png');receipt_file=png.with_suffix('.json')
         identity=digest(dict(path=path['sha256'],lock=lock['sha256'],resolution=resolution,samples=samples))
         if receipt_file.exists():
@@ -279,14 +315,14 @@ def measure_static_coverage(args,path,scene,context):
     out=Path(args.root)/'coverage';out.mkdir(exist_ok=True)
     node=static_position_output(out);views=frame_views(path,scene);rows=[]
     s=bpy.context.scene
-    s.render.resolution_x,s.render.resolution_y=policy()['preview']['resolution']
+    s.render.resolution_x,s.render.resolution_y=path['settings']['preview']['resolution']
     s.render.resolution_percentage=100;s.cycles.samples=4
     s.cycles.seed=0;s.cycles.use_animated_seed=False
     s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=False
     s.view_settings.view_transform='Standard';s.view_settings.look='None'
     s.view_settings.exposure=0;s.view_settings.use_white_balance=False
     s.render.image_settings.file_format='OPEN_EXR';s.render.image_settings.color_depth='32'
-    for index in (0,359,719):
+    for index in (0,(len(views)-1)//2,len(views)-1):
         camera,_,_=setup(scene,context,views[index])
         name=f'frame-{index:04d}'
         node.file_slots[0].path=name+'-positions-'
@@ -311,7 +347,7 @@ def main():
     parser.add_argument('--root',required=True)
     parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
-    parser.add_argument('--frames')
+    parser.add_argument('--frames');parser.add_argument('--segments')
     parser.add_argument('--target-stage')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production pin is Blender 4.5.14')
