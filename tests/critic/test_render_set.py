@@ -68,3 +68,27 @@ def test_real_set_covers_every_room_at_24mm():
     assert all(v["camera"]["lens_mm"] >= 24 for v in views)
     missing = [r for r, ids in S.coverage(views, data, lay["rooms"]).items() if not ids]
     assert missing == []
+
+
+def test_room_views_at_room_edge_or_in_an_opening_are_doorway_views():
+    """Guard for the L9P draft defect: 5 of 17 chosen views stood in a door opening without being marked
+    `doorway`, so the build kept the door leaf and the camera faced it. The flag follows villa_render._VIEWS."""
+    from archpipe.concept import villa_r11 as R, villa_render as VR
+    lay = R.design("D1")
+    data = S.load()
+    views = {v["id"]: v for v in S.resolve(data, lay, VR.VIEWS(lay))}
+    checked = 0
+    for e in data["views"]:
+        if "room" not in e:
+            continue
+        v = views[e["id"]]
+        x, y = v["camera"]["position"][:2]
+        x0, y0, x1, y1 = lay["rooms"][e["room"]]["rect"]
+        strictly_inside = x0 < x < x1 and y0 < y < y1
+        checked += 1
+        if not strictly_inside:
+            assert v["camera"]["reframed"] == "doorway", e["id"]
+        else:
+            assert v["camera"]["reframed"] in ("chosen", "doorway"), e["id"]   # may still be in an opening
+    assert checked >= 8
+    assert any(v["camera"].get("reframed") == "doorway" for v in views.values())   # the negative would be vacuous

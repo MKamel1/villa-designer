@@ -123,7 +123,13 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
                 (k for k, r in lay["rooms"].items() if r["level"] == e["level"]
                  and r["rect"][0] <= px <= r["rect"][2] and r["rect"][1] <= py <= r["rect"][3]), None)})
         else:
-            fill_defaults(c, {"home_room": room, "reframed": "chosen"})
+            # same rule as villa_render._VIEWS: a standing point in a door opening, or not strictly inside the
+            # room, is a doorway view, and the build then hides that door's leaf (a draft without this flag put
+            # the camera against the leaf in 5 of 17 views)
+            x, y = got["position"]
+            x0, y0, x1, y1 = lay["rooms"][room]["rect"]
+            doorway = RV._in_opening(sp, lay["rooms"][room]["level"], x, y, room) or not (x0 < x < x1 and y0 < y < y1)
+            fill_defaults(c, {"home_room": room, "reframed": "doorway" if doorway else "chosen"})
         v = {"id": e["id"], "title": e["purpose"].split(" (")[0], "state": state,
              "when": DAY if state == "day" else DUSK, "camera": c, "resolution": [1920, 1280],
              "layers_on": layers, "dimmers": dimmers, "exposure": state, "subjects": e["subjects"],
