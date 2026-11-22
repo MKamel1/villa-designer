@@ -68,7 +68,7 @@ TYPE_SPEC = {
                     beam=(None, "linear downward emission, luminance control UGR<19 (L <= 3000 cd/m2); compare the IES/LDT, not a beam angle"), cct=2700,
                     ugr="UGR<19, luminance control L<=3000 cd/m2 (maker)", ip="IP20", ik="-",
                     lumens_text="Client decision 2026-11-22: a decorative pendant scaled to the 1.8 m table, 1140 mm = 63 % of its length (policy: <= 2/3). ONE 1079 lm module: "
-                                "the scenes run it at 16 % (Evening), 20 % (Dinner) and 50 % (Day) of its output (every scene >= 15 %, driver 0.50 <= 0.80); it meets the Dinner "
+                                "the scenes run it at 15.5 % (Evening), 15.2 % (Dinner) and 37 % (Day) of its output (every scene >= 15 %, driver 0.37 <= 0.80); it meets the Dinner "
                                 "100 lx and homework-end 200 lx cards alone",
                     dimming=DIM_DALI + " via the external 48 V DALI-2 power supply (the module is PWM-controlled: the supply is ordered separately, DALI-2 version); "
                                        "supplier states the lowest level (the maker's page gives none)",

@@ -18,7 +18,7 @@ DB-B,DB-B/D7,dedicated,Gas hob ignition and extractor hood supply COOK-HOOD,L1,1
 DB-B,DB-B/D8,dedicated,Dishwasher DISHWASHER,L1,8.18,10.0,2.5,"2C+E 2.5 mm2 PVC, conduit_wall_2",11.8,0.7,16.1,0.79,1.42,5.0,,,
 DB-B,DB-B/D9,dedicated,Fridge-freezer FRIDGE,L3,2.27,6.0,2.5,"2C+E 2.5 mm2 PVC, conduit_wall_2",12.4,0.7,16.1,0.23,0.86,5.0,,,
 DB-B,DB-B/L1,lighting,Lighting store-ramp +9,L3,1.85,6.0,1.5,"2C+E 1.5 mm2 PVC, in_insulation_2",88.3,0.609,8.5,2.15,2.78,3.0,,,
-DB-B,DB-B/L2,lighting,Lighting kitchen +7,L2,1.94,6.0,1.5,"2C+E 1.5 mm2 PVC, in_insulation_2",84.2,0.609,8.5,2.15,2.78,3.0,,,
+DB-B,DB-B/L2,lighting,Lighting kitchen +7,L2,1.93,6.0,1.5,"2C+E 1.5 mm2 PVC, in_insulation_2",84.2,0.609,8.5,2.14,2.77,3.0,,,
 DB-B,DB-B/L3,lighting,Escape/night marker lighting DB-B,L2,0.02,6.0,1.5,"2C+E 1.5 mm2 PVC, in_insulation_2",23.1,0.609,8.5,0.01,0.63,3.0,,,
 DB-B,DB-B/S1,socket,Worktop sockets kitchen,L2,20.0,20.0,4,"2C+E 4 mm2 PVC, conduit_wall_2",11.9,0.7,21.0,1.19,1.82,5.0,,,
 DB-B,DB-B/S10,socket,Sockets family,L3,16.0,16.0,2.5,"2C+E 2.5 mm2 PVC, conduit_wall_2",10.7,0.7,16.1,1.4,2.03,5.0,,,

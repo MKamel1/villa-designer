@@ -16,7 +16,7 @@
 | 12 | DB-B/D2 | L2 | Split AC 2 HP AC-CINEMA | RCBO 10 A C 30 mA Type A | 8.59 | 2C+E 2.5 mm2 PVC | 17.2 | 16.1 | 1.84 |
 | 13 | DB-B/D5 | L2 | Storage water heater 30 L WH-GUEST | RCBO 10 A B 30 mA Type A | 6.82 | 2C+E 2.5 mm2 PVC | 13.1 | 16.1 | 1.36 |
 | 14 | DB-B/D6 | L2 | Built-in electric oven COOK-OVEN | RCBO 16 A B 30 mA Type A | 13.64 | 2C+E 2.5 mm2 PVC | 10.5 | 16.1 | 1.8 |
-| 15 | DB-B/L2 | L2 | Lighting kitchen +7 | RCBO 6 A B 30 mA Type A | 1.94 | 2C+E 1.5 mm2 PVC | 84.2 | 8.5 | 2.78 |
+| 15 | DB-B/L2 | L2 | Lighting kitchen +7 | RCBO 6 A B 30 mA Type A | 1.93 | 2C+E 1.5 mm2 PVC | 84.2 | 8.5 | 2.77 |
 | 16 | DB-B/L3 | L2 | Escape/night marker lighting DB-B | RCBO 6 A B 30 mA Type A | 0.02 | 2C+E 1.5 mm2 PVC | 23.1 | 8.5 | 0.63 |
 | 17 | DB-B/S1 | L2 | Worktop sockets kitchen | RCBO 20 A B 30 mA Type A | 20.0 | 2C+E 4 mm2 PVC | 11.9 | 21.0 | 1.82 |
 | 18 | DB-B/S12 | L2 | Sockets dining-side +1 | RCBO 16 A B 30 mA Type A | 16.0 | 2C+E 2.5 mm2 PVC | 24.7 | 16.1 | 3.86 |

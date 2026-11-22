@@ -970,11 +970,11 @@ SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
         "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.40, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Dinner": {"table-pendant": 0.41, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
-        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.32, "island-pendants": 0.4},
+        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.42, "island-pendants": 0.4},
         # L6d: every zone in every scene runs at >= 15 % of its output unless it is a night/film orientation level (see test_l6d.py): the table
-        # pendant (RP65 since the client decision of 2026-11-22, driver 0.50) at 0.40 / 0.32 in Dinner / Evening = 20 / 16 %, the island globes (driver 0.70) at 0.22 in Reading = 15.4 % (was 0.2 = 14 %)
+        # pendant (RP65 since the client decision of 2026-11-22, driver 0.37) at 0.41 / 0.42 in Dinner / Evening = 15.2 / 15.5 %, the island globes (driver 0.70) at 0.22 in Reading = 15.4 % (was 0.2 = 14 %)
         "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2, "island-pendants": 0.22},
         "Film": {"lounge-decorative": 0.15, "*night": 0.1},
         "Night": _NIGHT,

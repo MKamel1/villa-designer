@@ -48,7 +48,7 @@ cinema,B,SWI-cinema-181,power/lighting control,switch,8077,-23591,1150,EA1-switc
 cinema,B,SWI-cinema-182,power/lighting control,switch,3125,-21546,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
 cinema,B,TV_-cinema-186,power/lighting control,tv_sat,9227,-21646,400,EA1-tv-cluster,,,
 dining,B,SMOKE-012,ELV/fire,smoke,16634,-25131,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
-dining,B,lum-PEN-LIN-dining-01,luminaire,task,16800,-25900,,,Z-B-DINING-TABLE-PENDANT,DB-B/L2,12.3 W
+dining,B,lum-PEN-LIN-dining-01,luminaire,task,16950,-25900,,,Z-B-DINING-TABLE-PENDANT,DB-B/L2,9.7 W
 dining,B,ISO-dining-150,power/lighting control,isolator_ac,15584,-23591,2200,EA1-ac-point,AC-DINING,DB-B/D4,moved 1050 mm along the wall (inside door door-B-dining-yard)
 dining,B,SOC-dining-151,power/lighting control,socket,18367,-23911,300,EA1-general-pitch,,DB-B/S12,moved 450 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
 dining,B,SOC-dining-152,power/lighting control,socket,15768,-26071,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
@@ -348,7 +348,7 @@ parents-ensuite,GF,lum-MIRROR-parents-ensuite-06,luminaire,task,19874,-29281,,,Z
 parents-ensuite,GF,lum-VANITY-LIN-parents-ensuite-04,luminaire,task,19847,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L1,0.59 W
 parents-ensuite,GF,FCU-parents-ensuite-088,power/lighting control,fcu,20284,-28881,2300,EA2-fcu-outside-zones,WH-ENSUITE,DB-GF/D6,
 parents-ensuite,GF,SWI-parents-ensuite-087,power/lighting control,switch,21100,-28881,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
-parents-entry,GF,lum-COVE-parents-entry-01,luminaire,decorative,18977,-26741,,,Z-GF-PARENTS-ENTRY-DECORATIVE,DB-GF/L2,4 W
+parents-entry,GF,lum-COVE-parents-entry-01,luminaire,decorative,18977,-26911,,,Z-GF-PARENTS-ENTRY-DECORATIVE,DB-GF/L2,4 W
 parents-entry,GF,SWI-parents-entry-093,power/lighting control,switch,18427,-26971,1150,EA1-switch-open-plan,,DB-GF/L2,
 stair-gf,GF,SMOKE-014,ELV/fire,smoke,7032,-27521,2800,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 stair-gf,GF,lum-PEN-GLOBE-stair-gf-01,luminaire,decorative,6290,-28088,,,Z-GF-STAIR-GF-DECORATIVE,DB-GF/L1,8.89 W

@@ -58,7 +58,7 @@ def test_night_and_film_levels_stay_above_the_dimming_floor_of_the_spec(villa):
 def test_guard_is_not_vacuous_the_old_pendant_and_globes_would_fail():
     """Negative: with the L6c numbers (Jilly driver 0.13, Evening 0.3, Dinner 0.47; globes 0.70 x Reading 0.2) the guard's own arithmetic is below 15 %."""
     assert 0.13 * 0.3 < FLOOR and 0.13 * 0.47 < FLOOR and 0.70 * 0.2 < FLOOR
-    assert 0.50 * 0.40 > FLOOR and 0.50 * 0.32 > FLOOR and 0.70 * 0.22 > FLOOR - 0.0001      # the table pendant (RP65) and the globes now
+    assert 0.37 * 0.41 > FLOOR and 0.37 * 0.42 > FLOOR and 0.70 * 0.22 > FLOOR - 0.0001      # the table pendant (RP65) and the globes now
 
 
 def test_table_pendant_is_scaled_to_the_table(villa):

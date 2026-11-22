@@ -8,7 +8,7 @@ MIRROR,,,"backlit mirror halo, 2700 K",2700,93.2,0.0,,0,1,0.0,type-luminaire---M
 NL,,,night-light strip under the bed / plinth,2200,183.0,0.0,,2,2,0.0,type-luminaire---NL-strip-1830-0
 PATH,,,low recessed path marker (0.3 m AFF),2200,60.0,0.0,,0,5,0.0,type-luminaire---PATH-wall-marker-300-0
 PEN-GLOBE,,,opal glass globe pendant D300,2700,394.9,0.0,,3,3,0.0,type-luminaire---PEN-GLOBE-pendant-300-300
-PEN-LIN,iguzzini,QA03,"table pendant downlight O59 x 250 mm, direct (L6d: was a 1.5 m linear pendant of 3558 lm)",2700.0,291.1,12.3,23.7,1,0,12.3,type-luminaire-iguzzini-QA03-PEN-LIN-pendant-46-46
+PEN-LIN,iguzzini,RP65,"dining table pendant: 1140 mm slim linear blade, direct, UGR<19 (client decision 2026-11-22: a decorative pendant scaled to the 1.8 m table, <= 2/3 of its length)",2700.0,539.5,9.7,55.6,1,0,9.7,type-luminaire-iguzzini-RP65-PEN-LIN-pendant-1140-19
 RAIL,,,LED strip over the hanging rail (in-wardrobe),2700,810.0,0.0,,0,2,0.0,type-luminaire---RAIL-strip-1620-0
 SCONCE,,,"vanity wall light, opal, each side of the mirror",2700,101.7,0.0,,0,2,0.0,type-luminaire---SCONCE-wall-0-0
 STEP,,,recessed step marker in the stair wall,2200,60.0,0.0,,3,0,0.0,type-luminaire---STEP-wall-marker-0-0
