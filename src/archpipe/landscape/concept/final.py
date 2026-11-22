@@ -36,7 +36,7 @@ TREE_PRUNING = {
                           source_status="GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)"),
 }
 
-PAR = dict(table_a0=1.5, table_b0=4.05, tree=(3.15, 8.4), east_b0=7.2, bbq=(2.0, 2.3), crape=(3.45, 6.1), crown_shift=(-0.75, -1.0), crape_spread=4.0, gravel2=(1.4, 3.9, 5.3, 7.6), olive=(4.2, 7.4), olive_spread=3.6)
+PAR = dict(table_a0=1.5, table_b0=4.05, tree=(3.15, 8.4), east_b0=7.2, bbq=(2.0, 2.3), crape=(3.45, 6.1), crown_shift=(-0.75, -1.0), crape_spread=4.0, gravel2=(1.4, 3.7, 5.4, 7.6), olive=(4.2, 7.4), olive_spread=3.6)
 
 
 def shade_tree(f, tid, slug, at, lean=(0.0, 0.0), spread=None):
@@ -72,23 +72,24 @@ def south(p=PAR):
     t0, tb = p["table_a0"], p["table_b0"]
     table = (t0, tb, t0 + 2.4, tb + 0.9)
     cr = p["crape"]
+    wall3 = (5.4, 3.2, A, 5.5)                                          # thin strip (0.31 m) where the table extends to 10: 1.2 m clear of its south end
     wall2 = (4.3, 1.45, 5.1, 2.8)                                      # second wall bed, west of the table's reach
     pocket = (cr[0] - 0.3, 6.15, cr[0] + 0.8, 6.9)                       # planting pocket in the gravel east of the trunk, 1.2 m clear of the table
-    wall = (5.1, 1.45, A, 4.6)                                       # planted edge along the south wall: 1.2 m clear of the table end (LS-DINE-CLEAR)
+    wall = (5.1, 1.45, A, 3.2)                                       # planted edge along the south wall: 1.2 m clear of the table end (LS-DINE-CLEAR)
     bq = p["bbq"]
     bbq = (bq[0], bq[1], bq[0] + 0.5, bq[1] + 0.5)
     mass = (1.9, ea, 4.7, B - 0.6)
     herb = (1.3, B - 0.6, 2.5, B)
     mass2 = (2.5, B - 0.6, 4.7, B)
-    rbench = (A - 0.45, 4.7, A, 6.9)                                  # lounge, 3 seats
+    rbench = (A - 0.45, 5.6, A, 6.9)                                  # lounge, 3 seats
     qbench = (A - 0.45, 7.3, A, 8.5)                                  # quiet, 2 seats
     gravel = (4.7, ea, A - 0.45, B)                                   # permeable floor under the pomegranate and the quiet bench
     # permeable gravel floor under the crowns (LS-ROOTZONE keeps paving out of every dripline); a BBQ stand place keeps a paved slab (hard surface, brief)
     g2 = p["gravel2"]
     # (0, 7.9)-(0.3, B): the east yard tree's dripline reaches 0.27 m into the garden mouth
-    grav2 = [(A - 0.45, 6.9, A, 7.3), (A - 0.45, 8.5, A, B), (0.0, 7.0, 0.65, B)] + [tuple(r) for r in rects_of(box(*g2).difference(unary_union([box(bq[0] - 0.3, bq[1] - 0.3, bq[0] + 0.8, bq[1] + 0.8), box(*wall), box(*wall2), box(*pocket), box(*mass), box(*gravel)])), 0.02)] if g2 else []
+    grav2 = [(A - 0.45, 6.9, A, 7.3), (A - 0.45, 8.5, A, B), (0.0, 7.0, 1.2, B)] + [tuple(r) for r in rects_of(box(*g2).difference(unary_union([box(bq[0] - 0.3, bq[1] - 0.3, bq[0] + 0.8, bq[1] + 0.8), box(*wall), box(*wall2), box(*wall3), box(*pocket), box(*mass), box(*gravel)])), 0.02)] if g2 else []
     scr = [(0.0, 0.15, OPEN_A[0], 1.45), (OPEN_A[1], 0.15, A, 1.45)]            # climber beds at the foot of the screen stubs
-    cuts = [wall, wall2, pocket, mass, herb, mass2, rbench, qbench, gravel] + scr + grav2
+    cuts = [wall, wall2, wall3, pocket, mass, herb, mass2, rbench, qbench, gravel] + scr + grav2
     paving(f, "s", RM(0, 0, A, B), [RM(*c) for c in cuts])
     # zones -----------------------------------------------------------------------------------------------------------
     def zone(zid, use, r, surface, h=4.0, **kw):
@@ -105,7 +106,7 @@ def south(p=PAR):
     zone("s-standing", "standing", sz, "paving", 2.7, design_people=int((sz[2] - sz[0]) * (sz[3] - sz[1]) / 1.3))
     f["tables"].append({"id": "s-dining-table", "zone": "s-dining", "center": list(P((table[0] + table[2]) / 2, (table[1] + table[3]) / 2)), "size_m": [2.4, 0.9], "seats": 8,
                         "extends_to_seats": 10, "trace": ["U-S-DINE", "LS-DINE-CLEAR"]})
-    f["seating"] += [{"id": "s-bench-rear", "zone": "s-lounge", "rect": RM(*rbench), "seats": 3, "built_in": True, "trace": ["U-S-LOUNGE", "LS-FIRE-SEAT"]},
+    f["seating"] += [{"id": "s-bench-rear", "zone": "s-lounge", "rect": RM(*rbench), "seats": 2, "built_in": True, "trace": ["U-S-LOUNGE", "LS-FIRE-SEAT"]},
                      {"id": "s-bench-quiet", "zone": "s-quiet", "rect": RM(*qbench), "seats": 2, "built_in": True, "trace": ["U-S-QUIET", "LS-FIRE-SEAT"]}]
     f["seatwalls"].append({"id": "s-seat-wall", "height_mm": 450, "width_mm": 450, "trace": ["LS-SEATWALL"]})
     # fire pit on the west line -------------------------------------------------------------------------------------------
@@ -121,14 +122,14 @@ def south(p=PAR):
     shade_tree(f, "s-tree-olive", "olea_europaea", P(*p["olive"]), spread=p["olive_spread"])
     tree(f, "s-tree-punica", "punica_granatum", P(*p["tree"]))
     # path: living door to the east yard along the house face (rect: LDB builds rects) ------------------------------------------
-    f["paths"].append({"id": "s-path-door", "class": "main", "width_m": 1.2, "cross_slope_pct": 1.5, "rect": RM(0.0, 2.4, 1.2, B), "trace": ["U-ACCESS", "LS-PATH-MAIN"]})
+    f["paths"].append({"id": "s-path-door", "class": "main", "width_m": 1.2, "cross_slope_pct": 1.5, "rect": RM(0.0, 2.4, 1.2, 7.0), "trace": ["U-ACCESS", "LS-PATH-MAIN"]})      # the last 2.3 m to the yard mouth is the gravel floor under the east tree (no path object over a gravel zone)
     # planting: every bed layered (climber / understorey or palm / shrub / perennial / groundcover), one water class per bed (LS-HYDROZONE) -------------------------------
     mr, m2 = RM(*mass), RM(*mass2)
     bed(f, "s-bed-mass", mr, row(mr, "x", 1.4, ["jasminum_sambac", "petrea_volubilis"], 1.2, run=2, cap=C.SPREAD_CAP_CLIMBER)
         + row(mr, "x", 0.95, ["phoenix_roebelenii", "justicia_brandegeeana"], 0.9, run=1, how="min")
         + row(mr, "x", 0.5, ["pennisetum_alopecuroides", "salvia_leucantha"], 0.7, run=3, how="min")
         + row(mr, "x", 0.15, ["aspidistra_elatior", "justicia_brandegeeana"], 0.5, run=4, how="min"), "mass")
-    bed(f, "s-bed-mass-corner", m2, row(m2, "x", 0.3, ["justicia_brandegeeana", "salvia_leucantha"], 0.6, run=3, how="min"), "strip")
+    bed(f, "s-bed-mass-corner", m2, row(m2, "x", 0.3, ["jasminum_sambac", "petrea_volubilis"], 0.8, run=2, cap=0.5), "wall-climber")      # climbers on the east fence
     bed(f, "s-bed-herb", hr, row(hr, "x", 0.3, ["origanum_majorana", "rosmarinus_officinalis"], 0.6, run=3, how="min"), "herb", trace=("U-S-HERB", "LS-HYDROZONE"))
     # west screen beds (1.3 m deep from the screen, 1.1-1.2 m along it: the pit side clearance fixes the length): grape (deciduous) on the north stub, sambac jasmine on the south stub
     rn, rs_ = RM(0.0, 0.15, OPEN_A[0], 1.45), RM(OPEN_A[1], 0.15, A, 1.45)
@@ -138,9 +139,11 @@ def south(p=PAR):
         + row(rs_, "x", 0.75, ["justicia_brandegeeana"], 0.6, run=2, how="min") + row(rs_, "x", 1.15, ["aspidistra_elatior"], 0.45, run=3, how="min"), "screen-climber", trace=("U-PRIVACY", "LS-HYDROZONE"))
     # south wall edge (two beds, 1.2 m clear of the table): climbers on the wall face, understorey palm and perennial / groundcover drifts in front, under the crape
     wr, wr2 = RM(*wall), RM(*wall2)
-    bed(f, "s-bed-wall", wr, row(wr, "y", 0.5, ["petrea_volubilis", "jasminum_sambac"], 0.9, run=2, cap=C.SPREAD_CAP_CLIMBER) + row(wr, "y", 0.15, ["aspidistra_elatior"], 0.45, run=8, how="min"), "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
-    bed(f, "s-bed-wall-b", wr2, row(wr2, "x", 1.2, ["petrea_volubilis"], 1.2, run=2, cap=C.SPREAD_CAP_CLIMBER) + row(wr2, "x", 0.8, ["rhapis_excelsa"], 1.4, run=1, how="min")
+    bed(f, "s-bed-wall", wr, row(wr, "y", 0.3, ["petrea_volubilis", "jasminum_sambac"], 0.9, run=2, cap=0.6) + row(wr, "y", 0.15, ["aspidistra_elatior"], 0.45, run=8, how="min"), "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
+    bed(f, "s-bed-wall-b", wr2, row(wr2, "x", 1.0, ["justicia_brandegeeana"], 0.7, run=3, how="min") + row(wr2, "x", 0.55, ["rhapis_excelsa"], 1.4, run=1, how="min")
         + row(wr2, "y", 0.2, ["aspidistra_elatior"], 0.45, run=6, how="min") , "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
+    w3 = RM(*wall3)
+    bed(f, "s-bed-wall-c", w3, [entry("petrea_volubilis", P(5.55, 3.7 + i * 0.9), 0.5, "shrub") for i in range(3)] + [entry("jasminum_sambac", P(5.55, 4.15 + i * 0.9), 0.5, "shrub") for i in range(2)], "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
     pk = RM(*pocket)
     bed(f, "s-bed-pocket", pk, row(pk, "x", 0.55, ["aspidistra_elatior", "farfugium_japonicum"], 0.45, run=3, how="min") , "strip", trace=("D-SHADE-OVER-SUN", "LS-HYDROZONE"))
     f["meta"].update(pit=PIT, opening_a=OPEN_A)
@@ -194,6 +197,10 @@ def court(kit, zid, pfx):
     for b in kit["beds"]:
         bed(f, f"{pfx}-{b['id']}", b["rect"], TC.layered(b["rect"], b["pal"], b.get("back", "lo")), b["role"],
             trace=("U-POND" if b["pal"].startswith(("pond", "north_edge")) else "U-PRIVACY", "LS-HYDROZONE"))
+    for cl in kit.get("climbers", []):                       # climbers on the court or yard fence face (jasmine; the beds here are all medium water)
+        bid = f"{pfx}-{cl['bed']}"
+        g = next(g for g in f["planting_groups"] if g["id"] == bid)
+        g["plants"] += [entry("jasminum_sambac", at, 0.5, "shrub") for at in cl["at"]]
     if kit.get("pond"):
         f["features"].append(pond_feat(f"{pfx}-pond", kit["pond"], kit["entry_side"]))
     if kit.get("bench"):
@@ -215,18 +222,20 @@ def north_kit():
                       dict(id="edge-far", rect=NR(1.4, 4.5, 3.4, NW), role="strip", pal="north_edge", back="hi"),
                       dict(id="edge-back", rect=NR(3.4, 3.1, NH, NW), role="strip", pal="north_edge", back="hi")],
                 bench=NR(1.6, 0.0, 3.0, 0.45), quiet=NR(1.2, 0.0, 3.2, 1.9), pergola=None,
+                climbers=[dict(bed="screen", at=[(NX1 - (NH - 0.25), NY0 + v) for v in (2.1, 2.6, 3.0)])],
                 paths=[NR(0, 1.9, 1.4, 3.1)], focal="the pond past the planted screen, from the lounge door")
 
 
 def east_kit():
-    ER, EL, EW = TC.ER, TC.EL, TC.EW
+    ER, EL, EW, EX0, EY0 = TC.ER, TC.EL, TC.EW, TC.EX0, TC.EY0
     pond = ER(1.5, 1.35, 4.7, 2.75)                     # 3.2 x 1.4
     return dict(zone=ER(0, 0, EL, EW), pond=pond, entry_side="low v (toward the service path along the house wall)",
                 beds=[dict(id="divider", rect=ER(5.95, 1.5, EL, EW), role="mass", pal="yard_mass", back="hi"),
                       dict(id="far", rect=ER(0, 1.5, 1.2, EW), role="mass", pal="yard_mass", back="hi"),
                       dict(id="edge", rect=ER(1.5, 2.75, 4.2, EW), role="strip", pal="pond_edge", back="hi")],
                 bench=ER(5.0, 1.35, 5.45, 2.75), quiet=ER(4.8, 1.3, 5.6, EW), pergola=None,
-                paths=[ER(0.2, 0, EL, 1.2)], path_class="service", gravel=ER(4.3, 0.5, EL, EW), focal="the pond is the focal point of the quiet room, bench at its end")
+                climbers=[dict(bed="far", at=[(EX0 + u, EY0 + EW - 0.2) for u in (0.4, 0.9)]), dict(bed="divider", at=[(EX0 + 6.9, EY0 + EW - 0.2)])],
+                paths=[ER(0.2, 0, 4.3, 1.2)], path_class="service", gravel=ER(4.3, 0.5, EL, EW), focal="the pond is the focal point of the quiet room, bench at its end")
 
 
 P_EAST = dict(u=6.25, v=2.3, lean=(-0.7, -0.4), spread=2.6)       # east yard tree: trunk in the divider bed; lean toward the bench
