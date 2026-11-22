@@ -109,7 +109,13 @@ Totals 291 pass / 20 fail / 10 n.e. both; mutations 39, 36 caught, the same thre
 
 ## Tests (fresh clone of the pushed branch)
 
-See the end of this file (filled after the run).
+Fresh clone of pushed `lane/SC3` `46db0fe` (jobq `SC3-tests1`, 2,197 s): the INT lane suite (luminaires, compliance, design, model, electrical, lightcalc, lightverify, critic, ops, documents, drawings2d,
+pipeline, exchange, approvals, test_villa_lighting, test_exposure_groups) + tests/parity, tests/markup, tests/test_villa_render*.py, tests/test_mounting*.py, tests/test_d1_*.py, tests/test_villa_parking.py:
+**878 passed, 7 skipped, 1 xfailed, 4 failed**. The 4 are exactly LV's old-product pins (`tests/lightverify/test_v10_erco.py` x2, `test_v1_design.py` x2); nothing else fails.
+`python -m archpipe.compliance.run_d1` (jobq `SC3-compliance`): exit 0, 198 results, 0 failing gates (regenerated L1 report reverted).
+`python scripts/lane_guard.py SC3 --base origin/lane/L6d`: reports 3 files: `knowledge/c4-e-lead-approvals.json`, `src/archpipe/fixture_record.py` (the two ownership exceptions above) and `ops/lanes.yaml` (the lead's own SC3 ownership commit, cherry-picked from the old lane head).
+
+**Shared-file step not done:** `origin/integ/aplus` (`7203c57`) does not yet contain `origin/lane/L6d` / `lane/LV`; the final merge of integ/aplus, receipt regeneration, re-measure and rebuild is still to do once they merge (procedure above, all jobq ids reusable as templates).
 
 ## Open items
 
