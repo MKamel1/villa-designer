@@ -59,13 +59,13 @@ class Snapshot(unittest.TestCase):
     def test_luminaires_carry_photometry_ref(self):
         lums = [e for e in self.els if e.kind == "luminaire"]
         with_ies = [e for e in lums if e.params["photometry"]["ies"]]
-        self.assertEqual(len(with_ies), 75)      # L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
+        self.assertEqual(len(with_ies), 74)      # L6d: the entry-lobby DL became a generic cove (75 -> 74). L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
         # every luminaire without an IES must say so: generic, no product, no manufacturer code (never a silent gap)
         for e in lums:
             ph = e.params["photometry"]
             if not ph["ies"]:
                 self.assertTrue(ph["generic"] and not ph["code"] and not e.product_id, e.id)
-        self.assertEqual(len(lums) - len(with_ies), 57)
+        self.assertEqual(len(lums) - len(with_ies), 58)
         for e in with_ies:
             self.assertFalse(e.params["photometry"]["ies"].startswith(("C:", "/", "\\")), e.id)
             self.assertTrue(e.params["photometry"]["ies"].endswith(".ies"))

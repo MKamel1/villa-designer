@@ -1,14 +1,14 @@
 mark,manufacturer,code,description,cct_k,lumens,watts,lm_per_w,count_B,count_GF,total_watts,type_id
-ADJ,erco,A9000028,adjustable narrow-spot accent (track/recessed),2700.0,200.6,6.3,31.8,3,1,25.2,type-luminaire-erco-A9000028-ADJ-recessed-77-77
+ADJ,erco,A9003138,adjustable flood-spot accent and reading light (track),2700.0,266.0,11.7,22.7,3,1,46.8,type-luminaire-erco-A9003138-ADJ-recessed-50-50
 BACK,,,LED strip inside glass-door book cabinet,2700,192.0,0.0,,12,0,0.0,type-luminaire---BACK-strip-480-0
-COVE,,,"LED strip in the cove, 2700 K",2700,1093.5,0.0,,4,1,0.0,type-luminaire---COVE-strip-2430-0
+COVE,,,"LED strip in the cove, 2700 K",2700,1093.5,0.0,,4,2,0.0,type-luminaire---COVE-strip-2430-0
 DESK,erco,31327,"adjustable desk lamp, shielded head, 2700 K",2700.0,80.7,12.0,6.7,2,3,60.0,type-luminaire-erco-31327-DESK-task-lamp-1-1
-DL,erco,41321,"flush trimless downlight, wide",2700.0,1065.0,14.4,74.0,33,20,763.2,type-luminaire-erco-41321-DL-recessed-76-76
+DL,erco,41321,"flush trimless downlight, wide",2700.0,1065.0,14.4,74.0,33,19,748.8,type-luminaire-erco-41321-DL-recessed-76-76
 MIRROR,,,"backlit mirror halo, 2700 K",2700,93.2,0.0,,0,1,0.0,type-luminaire---MIRROR-strip-700-0
 NL,,,night-light strip under the bed / plinth,2200,183.0,0.0,,2,2,0.0,type-luminaire---NL-strip-1830-0
 PATH,,,low recessed path marker (0.3 m AFF),2200,60.0,0.0,,0,5,0.0,type-luminaire---PATH-wall-marker-300-0
 PEN-GLOBE,,,opal glass globe pendant D300,2700,394.9,0.0,,3,3,0.0,type-luminaire---PEN-GLOBE-pendant-300-300
-PEN-LIN,erco,50674,"linear pendant 1.5 m, direct",2700.0,462.5,27.0,17.1,1,0,27.0,type-luminaire-erco-50674-PEN-LIN-pendant-350-115
+PEN-LIN,iguzzini,QA03,"table pendant downlight O59 x 250 mm, direct (L6d: was a 1.5 m linear pendant of 3558 lm)",2700.0,291.1,12.3,23.7,1,0,12.3,type-luminaire-iguzzini-QA03-PEN-LIN-pendant-46-46
 RAIL,,,LED strip over the hanging rail (in-wardrobe),2700,810.0,0.0,,0,2,0.0,type-luminaire---RAIL-strip-1620-0
 SCONCE,,,"vanity wall light, opal, each side of the mirror",2700,101.7,0.0,,0,2,0.0,type-luminaire---SCONCE-wall-0-0
 STEP,,,recessed step marker in the stair wall,2200,60.0,0.0,,3,0,0.0,type-luminaire---STEP-wall-marker-0-0

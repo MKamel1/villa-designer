@@ -50,6 +50,26 @@
    "shape": "circular",
    "basis": "IES LM-63 luminous opening, diameter 77.0 mm",
    "sha256": "e8b89cd7fed3cb31d6a46c246e72fbaffe532b493446363305c88eeb0b6744c0"
+  },
+  "erco/A9003138": {
+   "size_mm": [
+    50.0,
+    50.0,
+    0.0
+   ],
+   "shape": "circular",
+   "basis": "IES LM-63 luminous opening, diameter 50.0 mm",
+   "sha256": "72f443b7f9d085e4778b56c068c002e88873dbdfdf86c1993290c46a99d6d848"
+  },
+  "iguzzini/QA03": {
+   "size_mm": [
+    46.0,
+    46.0,
+    0.0
+   ],
+   "shape": "circular",
+   "basis": "IES LM-63 luminous opening, diameter 46.0 mm",
+   "sha256": "5972b9941bb9966a04d147134f25616dff62947ddd0474c3b06ccdf1d710a8e8"
   }
  },
  "assets": {
