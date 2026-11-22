@@ -220,12 +220,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement on NCSU or RHS pages",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
-    "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "AMWUA litter rating: Low"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/trailing-gazania",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA plant page",
+    "quote": "\"litter\":\"Low\""
+   }
   },
   "maintenance": {
    "status": "SOURCED",

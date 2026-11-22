@@ -134,11 +134,9 @@
    "preview": "asset-previews/sf_ixora.jpg",
    "grade": "B",
    "leaf_type": "real_leaves+flowers",
-   "species_fit": "genus",
-   "maps_to": [
-    "ixora_coccinea"
-   ],
-   "rationale": "Looked at: dense rounded shrub with red flower heads, no cards; small (1.2 m). Author title 'Chinese jungle geranium' = Ixora chinensis/coccinea group. NOTE Ixora is not viable on this site (frost, see plants.json)."
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: dense rounded shrub with red flower heads, no cards; small (1.2 m). Author title 'Chinese jungle geranium' = Ixora chinensis/coccinea group. NOTE Ixora is not viable on this site (frost, see plants.json). Ixora dropped from the palette (pass 2); asset kept as a record only."
   },
   {
    "id": "sf_garden_flower_clump",
@@ -357,7 +355,9 @@
    "leaf_type": "leaf_cards",
    "species_fit": "look-alike",
    "maps_to": [],
-   "rationale": "Looked at: foliage is broad lobed leaves (maple/oak-like), not the bipinnate jacaranda leaf; very dark; 3.86M tris. Fine as a generic heavy canopy tree, wrong as a jacaranda."
+   "rationale": "Looked at: foliage is broad lobed leaves (maple/oak-like), not the bipinnate jacaranda leaf; very dark; 3.86M tris. Fine as a generic heavy canopy tree, wrong as a jacaranda.",
+   "misnamed_as": "jacaranda_mimosifolia",
+   "identity_note": "Library name 'jacaranda_tree' is wrong: broad lobed (maple/oak-like) leaves, genus unidentified. Not a Jacaranda; the real one is sf_jacaranda."
   },
   {
    "id": "wild_rooibos_bush",
@@ -709,7 +709,13 @@
    "leaf_type": "untextured",
    "species_fit": "none",
    "maps_to": [],
-   "rationale": "Looked at: renders solid white (texture maps not applied); banana-palm look-alike only. Broken material."
+   "rationale": "Looked at: renders solid white (texture maps not applied); banana-palm look-alike only. Broken material.",
+   "defect": {
+    "cause": "no textures in the exported glTF: images and textures absent and no baseColorFactor, so every material falls back to white",
+    "also": "the model is a mixed Ravenala (traveller's palm) and banana-leaf plant in pots, not a banana",
+    "fix": "none from this file; re-export with textures from the author or replace"
+   },
+   "untextured_material_share": 1.0
   },
   {
    "id": "skf_1ab9bf84",
@@ -752,6 +758,449 @@
    "species_fit": "look-alike",
    "maps_to": [],
    "rationale": "Looked at: potted Livistona fan palm with long real fronds, good silhouette at 5 m. Livistona chinensis is not on the list; similar fan-palm habit to Rhapis excelsa but a different species, so only a stand-in with the client's approval."
+  },
+  {
+   "id": "ph_island_tree_01",
+   "source": "https://polyhaven.com/a/island_tree_01",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Island Tree 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 1599403,
+   "size_m": [
+    4.755,
+    4.818,
+    5.027
+   ],
+   "alpha_card_tri_share": 0.663,
+   "preview": "asset-previews/ph_island_tree_01.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "look-alike",
+   "maps_to": [],
+   "rationale": "Looked at: gnarled trunk, olive-like small lanceolate leaves, full crown, no cards or flat planes visible at 5 m; reads as a small Mediterranean tree at 15 m. Source names no species (tags 'island, coastal'), so it cannot be mapped to Olea europaea.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/island_tree_01"
+  },
+  {
+   "id": "ph_island_tree_02",
+   "source": "https://polyhaven.com/a/island_tree_02",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Island Tree 02 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 1072212,
+   "size_m": [
+    4.208,
+    4.071,
+    3.407
+   ],
+   "alpha_card_tri_share": 0.667,
+   "preview": "asset-previews/ph_island_tree_02.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "look-alike",
+   "maps_to": [],
+   "rationale": "Looked at: twisted multi-stem trunk with a ground disc, olive-like leaves; credible at 5 m and 15 m. Species not named by the source; look-alike only.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/island_tree_02"
+  },
+  {
+   "id": "ph_island_tree_03",
+   "source": "https://polyhaven.com/a/island_tree_03",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Island Tree 03 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 2085320,
+   "size_m": [
+    2.972,
+    2.913,
+    2.615
+   ],
+   "alpha_card_tri_share": 0.676,
+   "preview": "asset-previews/ph_island_tree_03.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "look-alike",
+   "maps_to": [],
+   "rationale": "Looked at: low multi-stem shrub-tree on a visible rock/soil base plate (flat disc shows at 5 m), small at 15 m. Species not named.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/island_tree_03"
+  },
+  {
+   "id": "ph_tree_small_02",
+   "source": "https://polyhaven.com/a/tree_small_02",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Tree Small 02 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 2062487,
+   "size_m": [
+    2.917,
+    4.292,
+    4.557
+   ],
+   "alpha_card_tri_share": 0.94,
+   "preview": "asset-previews/ph_tree_small_02.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: slender trunk, light feathery crown with real leaflets; reads as a small tree at 5 m and 15 m. It is Burkea africana (source tag 'wild syringa'), not in the palette; usable only as a generic light-canopy tree.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/tree_small_02"
+  },
+  {
+   "id": "ph_pachira_aquatica_01",
+   "source": "https://polyhaven.com/a/pachira_aquatica_01",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Pachira Aquatica 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 76914,
+   "size_m": [
+    6.869,
+    0.997,
+    1.904
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/ph_pachira_aquatica_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: set of five young saplings, spindly, 0.5-1 m; reads as seedlings not a tree at 5 m and vanishes at 15 m. Pachira aquatica is not in the palette.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/pachira_aquatica_01"
+  },
+  {
+   "id": "ph_shrub_01",
+   "source": "https://polyhaven.com/a/shrub_01",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Shrub 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 156012,
+   "size_m": [
+    2.587,
+    0.219,
+    0.396
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_shrub_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: set of 8 weed-like seedlings (source tag Ageratina adenophora), 0.3-0.5 m; sparse, no mass at 5 m, invisible at 15 m.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/shrub_01"
+  },
+  {
+   "id": "ph_shrub_02",
+   "source": "https://polyhaven.com/a/shrub_02",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Shrub 02 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 27254,
+   "size_m": [
+    6.054,
+    2.285,
+    1.703
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_shrub_02.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: wispy brown-green weedy stems; sparse, not a shrub mass; poor at 5 m.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/shrub_02"
+  },
+  {
+   "id": "ph_shrub_03",
+   "source": "https://polyhaven.com/a/shrub_03",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Shrub 03 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 8287,
+   "size_m": [
+    1.367,
+    0.151,
+    0.403
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_shrub_03.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: four tiny thin plants; too small to read at 5 m, gone at 15 m.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/shrub_03"
+  },
+  {
+   "id": "ph_shrub_04",
+   "source": "https://polyhaven.com/a/shrub_04",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Shrub 04 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 27327,
+   "size_m": [
+    0.584,
+    0.146,
+    0.219
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_shrub_04.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: four tiny rosette seedlings; too small to read at 5 m.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/shrub_04"
+  },
+  {
+   "id": "ph_fern_02",
+   "source": "https://polyhaven.com/a/fern_02",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Fern 02 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 6232,
+   "size_m": [
+    1.973,
+    1.724,
+    0.428
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_fern_02.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: small fern clumps 0.3 m; fine at 5 m as understory but invisible at 15 m; no palette species is a fern.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/fern_02"
+  },
+  {
+   "id": "ph_calathea_orbifolia_01",
+   "source": "https://polyhaven.com/a/calathea_orbifolia_01",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Calathea Orbifolia 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 16688,
+   "size_m": [
+    2.492,
+    1.194,
+    0.424
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_calathea_orbifolia_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: scattered small calathea plants; sparse at 5 m. Not in the palette.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/calathea_orbifolia_01"
+  },
+  {
+   "id": "ph_anthurium_botany_01",
+   "source": "https://polyhaven.com/a/anthurium_botany_01",
+   "licence": "CC0",
+   "author": "Rob Tuytel, Rico Cilliers",
+   "title": "Anthurium Botany 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 67152,
+   "size_m": [
+    2.796,
+    1.798,
+    0.5
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_anthurium_botany_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: small anthurium-like rosettes 0.3 m; sparse. Not in the palette; no use for Monstera or Thaumatophyllum (different leaf form).",
+   "storage": "shared",
+   "manifest_key": "polyhaven/anthurium_botany_01"
+  },
+  {
+   "id": "ph_potted_plant_01",
+   "source": "https://polyhaven.com/a/potted_plant_01",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Potted Plant 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 176226,
+   "size_m": [
+    0.587,
+    0.634,
+    1.35
+   ],
+   "alpha_card_tri_share": 0.607,
+   "preview": "asset-previews/ph_potted_plant_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: small leafy plant in a terracotta pot (the pot is part of the model); 0.6 m; unidentified species.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/potted_plant_01"
+  },
+  {
+   "id": "ph_searsia_lucida",
+   "source": "https://polyhaven.com/a/searsia_lucida",
+   "licence": "CC0",
+   "author": "James Ray Cock, Jenelle van Heerden",
+   "title": "Searsia Lucida (Poly Haven, 1k glTF from shared store)",
+   "triangles": 377192,
+   "size_m": [
+    4.777,
+    2.838,
+    2.339
+   ],
+   "alpha_card_tri_share": 0.343,
+   "preview": "asset-previews/ph_searsia_lucida.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: six dense dry-climate shrubs with real leaves and branching, readable at 5 m, small mass at 15 m. Searsia lucida is not in the palette; a generic dry shrub only.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/searsia_lucida"
+  },
+  {
+   "id": "ph_wild_rooibos_bush",
+   "source": "https://polyhaven.com/a/wild_rooibos_bush",
+   "licence": "CC0",
+   "author": "James Ray Cock, Jenelle van Heerden",
+   "title": "Wild Rooibos Bush (Poly Haven, 1k glTF from shared store)",
+   "triangles": 27519,
+   "size_m": [
+    2.279,
+    0.843,
+    0.541
+   ],
+   "alpha_card_tri_share": 0.651,
+   "preview": "asset-previews/ph_wild_rooibos_bush.jpg",
+   "grade": "D",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: foliage renders near-black at 5 m and 15 m under this sun; a set of five small bushes. Not usable as authored.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/wild_rooibos_bush"
+  },
+  {
+   "id": "ph_periwinkle_plant",
+   "source": "https://polyhaven.com/a/periwinkle_plant",
+   "licence": "CC0",
+   "author": "Amal Kumar",
+   "title": "Periwinkle Plant (Poly Haven, 1k glTF from shared store)",
+   "triangles": 34350,
+   "size_m": [
+    1.235,
+    0.321,
+    0.411
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/ph_periwinkle_plant.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: set of small sprawling plants 0.3 m with tiny flowers; instanced as a 3 m drift it is still thin and vanishes at 15 m (drift test). Not in the palette.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/periwinkle_plant"
+  },
+  {
+   "id": "ph_flower_gazania",
+   "source": "https://polyhaven.com/a/flower_gazania",
+   "licence": "CC0",
+   "author": "James Ray Cock, Jenelle van Heerden",
+   "title": "Flower Gazania (Poly Haven, 1k glTF from shared store)",
+   "triangles": 14340,
+   "size_m": [
+    1.481,
+    0.703,
+    0.166
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/ph_flower_gazania.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "genus",
+   "maps_to": [
+    "gazania_rigens"
+   ],
+   "rationale": "Looked at: the single asset is a 4-plant set 0.3 m, tiny at 5 m and 15 m (grade C alone). DRIFT TEST (70 instances over 3 m, drift_preview.py): at 5 m it reads as an orange-flowered gazania groundcover drift; at 15 m a 3 m patch is a thin line, so use drifts of 6 m and wider. B for instanced drift use only; genus Gazania (source names no species).",
+   "storage": "shared",
+   "manifest_key": "polyhaven/flower_gazania",
+   "drift_preview": "asset-previews/ph_flower_gazania_drift.jpg"
+  },
+  {
+   "id": "ph_grass_bermuda_01",
+   "source": "https://polyhaven.com/a/grass_bermuda_01",
+   "licence": "CC0",
+   "author": "Rico Cilliers",
+   "title": "Grass Bermuda 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 941,
+   "size_m": [
+    1.686,
+    0.142,
+    0.158
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/ph_grass_bermuda_01.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: set of separate dark grass tufts. DRIFT TEST (400 instances over 4 m): scattered dark tufts, not turf, at 5 m; a grey smudge at 15 m. Not usable as lawn.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/grass_bermuda_01"
+  },
+  {
+   "id": "ph_bananas",
+   "source": "https://polyhaven.com/a/bananas",
+   "licence": "CC0",
+   "author": "Alexander Shulha",
+   "title": "Bananas (Poly Haven, 1k glTF from shared store)",
+   "triangles": 46868,
+   "size_m": [
+    0.6,
+    0.244,
+    0.179
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/ph_bananas.jpg",
+   "grade": "C",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a hand of banana FRUIT (0.6 m), not a plant. No use for Musa foliage.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/bananas"
+  },
+  {
+   "id": "ph_food_pomegranate_01",
+   "source": "https://polyhaven.com/a/food_pomegranate_01",
+   "licence": "CC0",
+   "author": "Oliver Harries",
+   "title": "Food Pomegranate 01 (Poly Haven, 1k glTF from shared store)",
+   "triangles": 8142,
+   "size_m": [
+    0.114,
+    0.115,
+    0.115
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/ph_food_pomegranate_01.jpg",
+   "grade": "C",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a single pomegranate fruit (about 10 cm), a dot at 5 m. Fruit only, not a tree.",
+   "storage": "shared",
+   "manifest_key": "polyhaven/food_pomegranate_01"
   }
  ],
  "species": [
@@ -1010,8 +1459,8 @@
   },
   {
    "slug": "cynodon_dactylon",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "ph_grass_bermuda_01",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
   },
@@ -1176,9 +1625,9 @@
   },
   {
    "slug": "gazania_rigens",
-   "best_asset": "flower_gazania",
-   "grade": "C",
-   "drawable": "not drawable yet",
+   "best_asset": "ph_flower_gazania",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -1216,12 +1665,6 @@
    "grade": null,
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
-  },
-  {
-   "slug": "ixora_coccinea",
-   "best_asset": "sf_ixora",
-   "grade": "B",
-   "drawable": "drawable"
   },
   {
    "slug": "jacaranda_mimosifolia",
@@ -1851,5 +2294,6 @@
    "free_candidates_to_preview": []
   }
  ],
- "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded."
+ "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded.",
+ "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json: downloadable CC0/CC-BY models, ungraded; download needs a Sketchfab API token that does not exist on this machine (HTTP 401)"
 }

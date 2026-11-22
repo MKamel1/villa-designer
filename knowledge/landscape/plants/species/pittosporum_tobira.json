@@ -199,11 +199,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "NCSU mentions root rot/nematodes only, no root-system description",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/pittosporum-tobira",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/pittosporum-tobira (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",
@@ -218,11 +225,17 @@
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "NCSU silent on litter",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/pittosporum-tobira",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/pittosporum-tobira (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

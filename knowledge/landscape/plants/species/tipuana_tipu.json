@@ -197,24 +197,38 @@
   "root_behaviour": {
    "status": "SOURCED",
    "value": {
-    "class": "aggressive",
-    "text": "very aggressive root system; roots lift concrete and asphalt (Wikipedia)"
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
    },
    "source": {
-    "source_id": "Wikipedia",
-    "url": "https://en.wikipedia.org/wiki/Tipuana_tipu",
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/tipuana-tipu",
     "accessed": "2026-11-22",
-    "locator": "Invasiveness",
-    "quote": "known for having a very aggressive root system"
+    "locator": "SelecTree tree-detail/tipuana-tipu (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   },
+   "superseded": {
+    "source_id": "Wikipedia",
+    "value": {
+     "class": "aggressive",
+     "text": "very aggressive root system; roots lift concrete and asphalt (Wikipedia)"
+    },
+    "url": "https://en.wikipedia.org/wiki/Tipuana_tipu"
    }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "Tropical Plants DB lists Known Hazards \"None known\" only; no toxicity statement, not recorded as non-toxic.",
-   "searched": [
-    "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
-    "https://en.wikipedia.org/wiki/Tipuana_tipu"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/tipuana-tipu",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/tipuana-tipu (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "litter": {
    "status": "SOURCED",

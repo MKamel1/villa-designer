@@ -215,12 +215,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement on NCSU or UF pages",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/muhlenbergia-capillaris/",
-    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "AMWUA litter rating: Low"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/pink-muhly",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA plant page",
+    "quote": "\"litter\":\"Low\""
+   }
   },
   "maintenance": {
    "status": "SOURCED",

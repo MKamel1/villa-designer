@@ -18,3 +18,9 @@
    xeriscape pages, printed 333-335, and Tables 550-1, 550-3, 550-4, 550-7); the scan's printed page labels are flagged unreliable.
 7. **Research agents write plausible enums.** Mappings such as "water need low" to `low` or `Resistance To Challenges: Drought` to `moderate` are judgment calls;
    each record keeps the source wording in `text` so a reviewer can disagree.
+8. **A page that hides its data in a script tag cannot verify a quote taken from the script.** AMWUA pages hold their fields as JSON in a script; the checker strips scripts, so one quote failed. Quote visible text, or the field must be in the fetched body. Guard: `verify_quotes` re-fetches every cited page and the podranea case is now fixed by quoting the visible binomial.
+9. **A server missing its intermediate certificate is not a reason to disable verification.** MBG sent only its leaf; the fix is a CA bundle with the intermediate from the certificate's AIA URL. Guard: `verify_quotes` uses `ca-bundle-mbg.pem` for those hosts only.
+10. **List inclusion is not a stated tolerance.** 12 heat values come from "listed in a hot-desert plant list"; they are flagged `inferred` with an INFERENCE text and a test fails if the flag is missing, so nobody reads them as measured.
+11. **A white render is a missing-texture defect first.** The banana's glTF had no images and no base colour; measure the material (`gltf_untextured_share`) before touching lights. A validator rule caps such assets at D.
+12. **Assets of the same name from two stores are not the same file.** The 1k Poly Haven glTFs graded differently from the library props of the same name; both are kept as separate rows, each with its own preview, rather than merged.
+13. **No credential, no download, and say so.** Sketchfab downloads return 401 without a token; the lane reported the blocker with the unblock step instead of substituting stylised packs.

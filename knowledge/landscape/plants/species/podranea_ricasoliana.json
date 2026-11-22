@@ -84,13 +84,19 @@
    ]
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
-    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
-    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class moderate (our sun attribute does not include full sun: shade-tolerant plant listed)"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/pink-trumpet-vine",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA Landscape Plants for the Arizona Desert: plant page \"Pink Trumpet Vine\"",
+    "quote": "Podranea ricasoliana"
+   }
   },
   "drought": {
    "status": "GAP",
@@ -189,13 +195,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
-    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
-    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "AMWUA litter rating: Seasonal"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/pink-trumpet-vine",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA plant page",
+    "quote": "\"litter\":\"Seasonal\""
+   }
   },
   "maintenance": {
    "status": "GAP",

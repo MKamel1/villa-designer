@@ -183,12 +183,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "Only rooting depth stated (2-6 m deep); no statement on invasiveness.",
-   "searched": [
-    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
-    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree root damage potential: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/phoenix-dactylifera (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Moderate\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",
@@ -199,12 +205,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "No litter statement found.",
-   "searched": [
-    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
-    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit, Leaves"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/phoenix-dactylifera (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\",\"Leaves\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

@@ -98,11 +98,18 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat tolerance not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "MBG: Plants appreciate some relief from hot summer sun"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=276173",
+    "accessed": "2026-11-22",
+    "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+    "quote": "Plants appreciate some relief from hot summer sun"
+   }
   },
   "drought": {
    "status": "GAP",

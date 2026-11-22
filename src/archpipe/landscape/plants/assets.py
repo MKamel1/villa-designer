@@ -8,7 +8,35 @@ from .library import DATA
 
 GRADES = {"A", "B", "C", "D"}
 FITS = {"species", "genus", "look-alike", "none"}
+LICENCES = {"CC0", "CC Attribution"}   # free assets only; anything else is a paid or unclear licence (own table)
 DRAWABLE = {"drawable", "drawable_as_genus_standin", "not drawable yet"}
+
+
+def gltf_untextured_share(path) -> float:
+    """Share of glTF materials with neither a base-colour texture nor a base-colour factor: such a material
+    renders white (the Sketchfab banana palm). 1.0 = fully untextured."""
+    g = json.loads(Path(path).read_text(encoding="utf-8"))
+    mats = g.get("materials") or []
+    if not mats:
+        return 1.0
+    bare = sum(1 for m in mats if "baseColorTexture" not in m.get("pbrMetallicRoughness", {})
+               and "baseColorFactor" not in m.get("pbrMetallicRoughness", {}))
+    return round(bare / len(mats), 3)
+
+
+def validate_manifest(doc: dict, manifest: dict) -> list[str]:
+    """Every asset stored outside git ('storage': 'shared') must be pinned by sha256 with a url."""
+    errs = []
+    for a in doc.get("assets", []):
+        if a.get("storage") != "shared":
+            continue
+        files = manifest.get("assets", {}).get(a.get("manifest_key", ""), [])
+        if not files:
+            errs.append(f"{a['id']}: shared asset has no manifest entry")
+        for f in files:
+            if not (len(f.get("sha256", "")) == 64 and f.get("url", "").startswith("https://")):
+                errs.append(f"{a['id']}: manifest file {f.get('file')} needs a 64-hex sha256 and an https url")
+    return errs
 
 
 def validate_assets(doc: dict, species_slugs, base: Path = DATA) -> list[str]:
@@ -26,6 +54,12 @@ def validate_assets(doc: dict, species_slugs, base: Path = DATA) -> list[str]:
             errs.append(f"{i}: source url and licence required")
         if not (base / a.get("preview", "missing")).is_file():
             errs.append(f"{i}: preview file missing")
+        if a.get("licence") not in LICENCES:
+            errs.append(f"{i}: licence {a.get('licence')!r} is not a free licence ({sorted(LICENCES)})")
+        if a.get("untextured_material_share", 0) > 0.5 and a.get("grade") != "D":
+            errs.append(f"{i}: untextured material share {a['untextured_material_share']} renders white; grade must be D")
+        if a.get("misnamed_as") and (a.get("species_fit") not in ("look-alike", "none") or a.get("maps_to")):
+            errs.append(f"{i}: misnamed as {a['misnamed_as']} so it must be look-alike/none and map to nothing")
         if a.get("species_fit") == "look-alike" and a.get("maps_to"):
             errs.append(f"{i}: a look-alike cannot be mapped to a species")
     rows = {r["slug"]: r for r in doc.get("species", [])}

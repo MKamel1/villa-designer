@@ -125,11 +125,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-carica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-carica (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -176,11 +183,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "page states suckers/thickets, not a root-behaviour class",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-carica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-carica (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "SOURCED",

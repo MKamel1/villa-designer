@@ -96,11 +96,18 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "no soil pH statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree upper soil pH limit: Slightly Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+    "quote": "\"soil_ph_high\":5"
+   }
   },
   "salt": {
    "status": "SOURCED",
@@ -146,29 +153,49 @@
    ]
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "page says roots can extend beyond the drip line; no benign/aggressive statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "no toxicity statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "toxicity_fish": {
    "status": "NA",
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Wet Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+    "quote": "\"litter_type\":[\"Wet Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

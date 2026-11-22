@@ -127,11 +127,18 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "page silent on soil pH",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/nerium-oleander",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/nerium-oleander (Cal Poly)",
+    "quote": "\"soil_ph_high\":7"
+   }
   },
   "salt": {
    "status": "SOURCED",
@@ -202,11 +209,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "page does not describe root system",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/nerium-oleander",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/nerium-oleander (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "SOURCED",

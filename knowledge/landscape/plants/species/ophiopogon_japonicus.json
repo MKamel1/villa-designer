@@ -100,18 +100,33 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+   },
+   "source": {
+    "source_id": "SNRPC-2026",
+    "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Ophiopogon japonicus (Thunb.) Ker Gawl.",
+    "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+   }
   },
   "drought": {
-   "status": "GAP",
-   "reason": "drought not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "MBG lists Drought under Tolerate (class moderate: the source does not grade it)"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282276",
+    "accessed": "2026-11-22",
+    "locator": "Plant Finder, Tolerate",
+    "quote": "Tolerate: Drought"
+   }
   },
   "alkaline_soil": {
    "status": "GAP",

@@ -146,6 +146,10 @@ def validate_species(rec: dict) -> list[str]:
         elif st == "POLICY":
             if a != "egypt_availability" or not o.get("value", {}).get("text", "").startswith("unknown"):
                 errs.append(f"{a}: POLICY status only for egypt_availability 'unknown — supplier check'")
+    for d in rec.get("lead_decisions", []):
+        if not (isinstance(d, dict) and d.get("factor") in ("frost", "heat", "alkaline_soil")
+                and d.get("decision") == "accepted" and d.get("reason") and d.get("note")):
+            errs.append("lead_decisions: each needs factor (frost/heat/alkaline_soil), decision 'accepted', reason and note")
     if rec["pond_relevant"] and at.get("toxicity_fish", {}).get("status") == "NA":
         errs.append("toxicity_fish: pond-relevant species cannot be NA")
     av = at.get("egypt_availability", {})
@@ -211,13 +215,34 @@ def site_viability(rec: dict, climate: dict = SITE_CLIMATE) -> dict:
     if a["status"] != "SOURCED":
         factors["alkaline_soil"] = "unknown"; reasons.append("alkaline-soil tolerance is a GAP (site soil unmeasured)")
     elif a["value"]["class"] == "intolerant":
-        factors["alkaline_soil"] = "conditional"; reasons.append("alkaline soil: intolerant; site soil pH not tested")
+        factors["alkaline_soil"] = "conditional"; reasons.append("alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)")
     else:
         factors["alkaline_soil"] = "pass"
-    vals = set(factors.values())
+    # Lead decisions (e.g. a client-chosen species): only a *conditional* factor can be accepted; a fail never is.
+    for d in rec.get("lead_decisions", []):
+        if factors.get(d["factor"]) == "conditional" and d.get("decision") == "accepted" and d.get("reason"):
+            factors[d["factor"]] = "accepted"
+            reasons.append(f"{d['factor']}: accepted by lead decision ({d['reason']})")
+    vals = {("pass" if v == "accepted" else v) for v in factors.values()}
     verdict = ("not_viable" if "fail" in vals else "viable_with_conditions" if "conditional" in vals
                else "unverified" if "unknown" in vals else "viable")
     return {"verdict": verdict, "factors": factors, "reasons": reasons}
+
+
+def placement_constraints(rec: dict) -> list[str]:
+    """Derived placement rules from toxicity (people, fish). Never stored by hand."""
+    at, out = rec["attributes"], []
+    tp = at["toxicity_people"]
+    if tp["status"] == "SOURCED" and tp["value"]["class"] in ("toxic", "highly_toxic"):
+        out.append("away from seating and edibles (toxic to people per source)")
+    tf = at["toxicity_fish"]
+    if tf["status"] == "SOURCED" and tf["value"]["class"] in ("toxic", "highly_toxic"):
+        out.append("not beside the koi pond (toxic to fish per source)")
+    elif rec["pond_relevant"] and tf["status"] != "SOURCED":
+        out.append("not beside the koi pond until sourced (fish toxicity is a GAP)")
+    if rec.get("koi_pond_note"):
+        out.append("not beside the koi pond: " + rec["koi_pond_note"])
+    return out
 
 
 def build_plants_json(directory: Path = DATA / "species", out: Path = DATA / "plants.json") -> dict:
@@ -233,7 +258,7 @@ def build_plants_json(directory: Path = DATA / "species", out: Path = DATA / "pl
     doc = {
         "schema": "plant-library/1",
         "site_climate": SITE_CLIMATE,
-        "species": [dict(species[s], site_viability=site_viability(species[s])) for s in sorted(species)],
+        "species": [dict(species[s], site_viability=site_viability(species[s]), placement_constraints=placement_constraints(species[s])) for s in sorted(species)],
         "rejected": rejected,
     }
     out.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")

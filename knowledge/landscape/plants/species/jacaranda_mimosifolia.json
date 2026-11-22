@@ -208,13 +208,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "No source states whether roots are invasive or non-invasive (Tropical Plants DB only says deep-rooted).",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
-    "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/jacaranda-mimosifolia",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/jacaranda-mimosifolia (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",

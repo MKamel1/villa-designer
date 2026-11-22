@@ -1,0 +1,491 @@
+{
+"tipuana_tipu": {
+"tree_id": 1419,
+"soil_ph_low": 1,
+"soil_ph_high": 5,
+"salt_tolerance": "High",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit",
+"Flowers"
+],
+"water_use": "Low",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "tipuana-tipu"
+},
+"strelitzia_nicolai": {
+"tree_id": 1356,
+"soil_ph_low": 3,
+"soil_ph_high": 5,
+"salt_tolerance": "High",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "strelitzia-nicolai"
+},
+"rhapis_excelsa": {
+"tree_id": 1277,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "Low",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "rhapis-excelsa"
+},
+"punica_granatum": {
+"tree_id": 1211,
+"soil_ph_low": 1,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+8,
+9,
+10
+],
+"slug": "punica-granatum"
+},
+"psidium_guajava": {
+"tree_id": 1203,
+"soil_ph_low": 4,
+"soil_ph_high": 5,
+"salt_tolerance": "High",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "psidium-guajava"
+},
+"plumeria_rubra": {
+"tree_id": 1112,
+"soil_ph_low": 2,
+"soil_ph_high": 6,
+"salt_tolerance": "High",
+"root_damage_potential": "Low",
+"health_hazard": [],
+"litter_type": [
+"Leaves"
+],
+"water_use": "Low",
+"usda_zone": [
+10,
+11,
+12
+],
+"slug": "plumeria-rubra"
+},
+"pittosporum_tobira": {
+"tree_id": 1096,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10
+],
+"slug": "pittosporum-tobira"
+},
+"phoenix_roebelenii": {
+"tree_id": 1004,
+"soil_ph_low": 2,
+"soil_ph_high": 2,
+"salt_tolerance": "Low",
+"root_damage_potential": "Low",
+"health_hazard": [],
+"litter_type": [],
+"water_use": "Medium",
+"usda_zone": [
+10,
+11
+],
+"slug": "phoenix-roebelenii"
+},
+"phoenix_dactylifera": {
+"tree_id": 1002,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "High",
+"root_damage_potential": "Moderate",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Dry Fruit",
+"Leaves"
+],
+"water_use": "Low",
+"usda_zone": [],
+"slug": "phoenix-dactylifera"
+},
+"olea_europaea": {
+"tree_id": 970,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Moderate",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Low",
+"usda_zone": [
+8,
+9,
+10
+],
+"slug": "olea-europaea"
+},
+"nerium_oleander": {
+"tree_id": 955,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"Irritant",
+"Poisonous"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Low",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "nerium-oleander"
+},
+"murraya_paniculata": {
+"tree_id": 1675,
+"soil_ph_low": 2,
+"soil_ph_high": 5,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [],
+"litter_type": [
+"Dry Fruit",
+"Flowers"
+],
+"water_use": "Low",
+"usda_zone": [
+10,
+11,
+12
+],
+"slug": "murraya-paniculata"
+},
+"laurus_nobilis": {
+"tree_id": 804,
+"soil_ph_low": 1,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Moderate",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+8,
+9,
+10
+],
+"slug": "laurus-nobilis"
+},
+"lagerstroemia_indica": {
+"tree_id": 790,
+"soil_ph_low": 1,
+"soil_ph_high": 5,
+"salt_tolerance": "Low",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Low",
+"usda_zone": [
+7,
+8,
+9
+],
+"slug": "lagerstroemia-indica"
+},
+"jacaranda_mimosifolia": {
+"tree_id": 741,
+"soil_ph_low": 3,
+"soil_ph_high": 4,
+"salt_tolerance": "Low",
+"root_damage_potential": "Low",
+"health_hazard": [],
+"litter_type": [
+"Dry Fruit",
+"Leaves",
+"Flowers"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "jacaranda-mimosifolia"
+},
+"ficus_pumila": {
+"tree_id": 1740,
+"soil_ph_low": null,
+"soil_ph_high": null,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [],
+"litter_type": [
+"Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+8,
+9,
+10,
+11
+],
+"slug": "ficus-pumila"
+},
+"ficus_microcarpa": {
+"tree_id": 609,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "moderate",
+"root_damage_potential": "Moderate",
+"health_hazard": [
+"Irritant"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11,
+12
+],
+"slug": "ficus-microcarpa"
+},
+"ficus_carica": {
+"tree_id": 604,
+"soil_ph_low": 1,
+"soil_ph_high": 5,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"Irritant"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+6,
+7,
+8,
+9,
+10
+],
+"slug": "ficus-carica"
+},
+"eriobotrya_japonica": {
+"tree_id": 509,
+"soil_ph_low": 1,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+8,
+9,
+10
+],
+"slug": "eriobotrya-japonica"
+},
+"dodonaea_viscosa": {
+"tree_id": 495,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "High",
+"root_damage_potential": "Low",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10
+],
+"slug": "dodonaea-viscosa"
+},
+"delonix_regia": {
+"tree_id": 486,
+"soil_ph_low": 2,
+"soil_ph_high": 6,
+"salt_tolerance": "Low",
+"root_damage_potential": "High",
+"health_hazard": [],
+"litter_type": [
+"Dry Fruit",
+"Leaves",
+"Flowers"
+],
+"water_use": "Medium",
+"usda_zone": [
+11,
+12
+],
+"slug": "delonix-regia"
+},
+"cupressus_sempervirens": {
+"tree_id": 477,
+"soil_ph_low": 2,
+"soil_ph_high": 5,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Moderate",
+"health_hazard": [
+"None Known"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+8,
+9,
+10,
+7
+],
+"slug": "cupressus-sempervirens"
+},
+"citrus_limon": {
+"tree_id": 364,
+"soil_ph_low": 1,
+"soil_ph_high": 7,
+"salt_tolerance": "Moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Wet Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "citrus-limon"
+},
+"cinnamomum_camphora": {
+"tree_id": 357,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "moderate",
+"root_damage_potential": "High",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Dry Fruit"
+],
+"water_use": "Medium",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "camphora-officinarum"
+},
+"callistemon_citrinus": {
+"tree_id": 238,
+"soil_ph_low": 3,
+"soil_ph_high": 7,
+"salt_tolerance": "moderate",
+"root_damage_potential": "Low",
+"health_hazard": [
+"Allergy"
+],
+"litter_type": [
+"Flowers"
+],
+"water_use": "Low",
+"usda_zone": [
+9,
+10,
+11
+],
+"slug": "callistemon-citrinus"
+}
+}

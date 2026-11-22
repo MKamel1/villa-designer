@@ -198,30 +198,49 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "NCSU page does not describe roots",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree root damage potential: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Moderate\""
+   }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "NCSU page silent on toxicity; Time-Saver Table 550-3 does not list Cupressus",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
-    "held:landscape-timesaver Table 550-3"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "toxicity_fish": {
    "status": "NA",
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "NCSU page silent on litter",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

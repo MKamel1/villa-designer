@@ -91,11 +91,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat tolerance not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class moderate (our sun attribute does not include full sun: shade-tolerant plant listed)"
+   },
+   "source": {
+    "source_id": "SNRPC-2026",
+    "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Fatsia japonica (Thunb.) Decne. & Planch.",
+    "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+   }
   },
   "drought": {
    "status": "SOURCED",

@@ -136,13 +136,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "no source opened mentions salt",
-   "searched": [
-    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -204,13 +209,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "no source opened describes roots",
-   "searched": [
-    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",
@@ -226,13 +236,17 @@
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no source opened states litter",
-   "searched": [
-    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit, Flowers"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\",\"Flowers\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

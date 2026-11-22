@@ -194,11 +194,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/eriobotrya-japonica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/eriobotrya-japonica (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "SOURCED",

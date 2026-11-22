@@ -117,11 +117,18 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "source says acidic to neutral pH only; silent on alkaline",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree upper soil pH limit: Slightly Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/strelitzia-nicolai",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/strelitzia-nicolai (Cal Poly)",
+    "quote": "\"soil_ph_high\":5"
+   }
   },
   "salt": {
    "status": "SOURCED",

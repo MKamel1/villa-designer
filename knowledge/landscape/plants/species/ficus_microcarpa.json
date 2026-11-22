@@ -114,20 +114,32 @@
    ]
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "No soil-pH statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+    "quote": "\"soil_ph_high\":7"
+   }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "No salt-tolerance statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -199,12 +211,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "No litter statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

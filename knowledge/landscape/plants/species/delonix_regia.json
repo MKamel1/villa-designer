@@ -129,15 +129,23 @@
   "salt": {
    "status": "SOURCED",
    "value": {
-    "class": "moderate",
-    "text": "Wikipedia: tolerates drought and salty conditions (no degree stated)"
+    "class": "low",
+    "text": "SelecTree salt tolerance: Low"
    },
    "source": {
-    "source_id": "Wikipedia",
-    "url": "https://en.wikipedia.org/wiki/Delonix_regia",
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/delonix-regia",
     "accessed": "2026-11-22",
-    "locator": "Cultivation: Required conditions",
-    "quote": "can tolerate drought and salty conditions"
+    "locator": "SelecTree tree-detail/delonix-regia (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Low\""
+   },
+   "superseded": {
+    "source_id": "Wikipedia",
+    "value": {
+     "class": "moderate",
+     "text": "Wikipedia: tolerates drought and salty conditions (no degree stated)"
+    },
+    "url": "https://en.wikipedia.org/wiki/Delonix_regia"
    }
   },
   "frost": {
@@ -205,12 +213,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "No litter statement found.",
-   "searched": [
-    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
-    "https://en.wikipedia.org/wiki/Delonix_regia"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit, Leaves, Flowers"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/delonix-regia",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/delonix-regia (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\",\"Leaves\",\"Flowers\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

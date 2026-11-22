@@ -100,3 +100,54 @@ PYTHONPATH=src python -m archpipe.landscape.plants.library f.json     # validate
 PYTHONPATH=src python -m archpipe.landscape.plants.verify_quotes --write
 PYTHONPATH=src python -m pytest tests/landscape -q
 ```
+
+
+## Pass 2 (2026-11-22): hot-arid evidence, viability decisions, assets
+
+Full tables: `docs/lanes/LDL-assets-shortfall.md` (free shortfall per species, paid options). Counts from `python scripts/ldl_stats.py`.
+
+### Gaps before -> after (required-attribute slots; 78 species -> 77 after Ixora was dropped)
+
+| attribute | before | after |
+|---|---|---|
+| heat | 54 | **35** |
+| litter | 70 | 46 |
+| root behaviour | 65 | 45 |
+| toxicity to people | 50 | 42 |
+| salt | 43 | 32 |
+| alkaline soil | 30 | 22 |
+| drought | 27 | 25 |
+| toxicity to fish | 22 | 22 (see below) |
+| all others | unchanged | unchanged |
+| total GAP slots | 456 | **364** |
+
+Viability: 11 viable / 13 conditional / 2 not viable / 52 unverified -> **19 / 20 / 1 / 37** (the 1 is *Nassella tenuissima*, low heat tolerance; Ixora left the library). Sources opened this pass:
+SelecTree (Cal Poly) JSON API (62 attributes, 25 trees), the Southern Nevada Regional Plant List June 2026 (12 heat), AMWUA *Landscape Plants for the Arizona Desert* (1 heat; 206 plant pages crawled, 13 of our species matched), Missouri Botanical Garden Plant Finder (6). Wikipedia attributes **33 -> 31** (the replaced ones were not in any new source; the remaining 31 are mostly height, sun, water, flowering, foliage; 4 frost, 1 heat, 1 alkaline, 1 human toxicity).
+Quote re-check: 870 verified, 77 API-derived, 9 not matched (all older, stitched quotes), 14 page unreachable.
+
+* **MBG certificate**: the server omits its GeoTrust intermediate. Verification stays ON: bundle = system roots + the intermediate fetched from the certificate's own AIA URL (`~/archpipe/shared/assets/user/landscape/ca-bundle-mbg.pem`; `verify_quotes` uses it for mobot.org hosts). MBG yields zone, "Tolerate" lists and prose; it does **not** publish AHS heat zones, so it closed only 6 heat attributes.
+* **Heat inference, flagged**: 12 of the 19 new heat values are **inferences from inclusion** in a hot-desert list (Las Vegas / Phoenix) when the source states no heat tolerance in words; they carry `inferred: true` and an `INFERENCE` text, class high only if our own sun attribute includes full sun, otherwise moderate. A tree rated 3+ stars in the Las Vegas list is the one case where the source says in words that it is well adapted to desert heat. Test `test_inferred_heat_is_always_flagged_as_inference`.
+* **Not reachable / no species data**: Earth-Kind plant selector (JavaScript app, no data URL found), Abu Dhabi Public Realm Design Manual and Dubai Municipality Greenery and Plantation Manual 2026 (no species list found by search; the Abu Dhabi 2009 guideline is on SlideShare, headings only), ADWR Phoenix list and Tucson plants book (HTTP 403), Arizona Extension az1153/az1876/az1673/az1100a (downloaded; they name 5 of our species and give no per-species heat data), Cal Poly SelecTree (done), `wucol` (no response).
+* **Fish toxicity**: no fish-toxicity statement exists for any of the 22 pond species. The Midwest Pond and Koi Society list (`mpks.org/poisonous-plants`, read) names none of them; it names **Plumeria** and **Lantana** (placement-carefully), recorded as `koi_pond_note` on those two. Absence from a koi-society list is not evidence of safety, so the 22 stay GAP and `placement_constraints` says "not beside the koi pond until sourced". Garden Gate (a magazine) and retail pages were not accepted as sources.
+* **Placement constraints (derived, `plants.json`)**: toxic to people (oleander, lantana, nandina, plumbago, Strelitzia nicolai, star jasmine, calla): "away from seating and edibles"; no children or pets in the brief.
+* **Decisions applied**: frangipani VIABLE via `lead_decisions` (frost accepted, winter-cold note with the 1.7 C figure; only a *conditional* factor can be accepted, a fail never is); Ixora removed from the species set and recorded in `rejected.json`; **`knowledge/garden-palette.json`, `site-orientation.json`, `src/archpipe/concept/villa_landscape.py` and others still name Ixora: not my files, lead to align**; alkaline-intolerant species read "conditional on soil test (a professional item)".
+
+### Assets
+
+* **Blocker**: no Sketchfab API token on this machine (`sketchfab-api.txt` absent; the download endpoint returns 401), so none of the Sketchfab candidates could be downloaded. `sketchfab-candidates.json` lists downloadable CC0/CC-BY models for **44 of 77 species** (21 name the species) by public search; ungraded. **Unblock: create a free Sketchfab account token and save it as `sketchfab-api.txt` at the repo root of the lead checkout** (`ops/workstation/fetch_sketchfab.py` already does licence re-reading, front-axis checks and provenance).
+* Downloaded instead: 21 Poly Haven (CC0) 1k glTF models into `~/archpipe/shared/assets/user/landscape/polyhaven/` (not in git); `asset-manifest.json` pins every file by sha256 and URL. All 20 new sheets were rendered through `jobq` (CPU) and looked at; plus a **drift test** (`drift_preview.py`: instanced scatter at 5 m and 15 m) for gazania, bermuda grass and periwinkle.
+* Result: of 20, 0 A, 4 B (two olive-like island trees, a Burkea tree, a Searsia shrub, all **look-alikes with no palette species**), 1 B-by-drift (Gazania), 12 C, 1 D. **Drawable species 5 -> 5** (+1 genus stand-in): Ixora left (dropped), Gazania joined (drift use, patches 6 m and wider). The shortfall is real and is the Sketchfab token plus paid libraries.
+* **Misnamed jacaranda**: the library prop `jacaranda_tree` (Poly Haven) is a broad-lobed-leaf tree; it now carries `misnamed_as` and the validator forces look-alike/none with no mapping. The real jacaranda is `sf_jacaranda`. The prop name itself lives in the shared library and was not renamed (other lanes may reference it).
+* **White banana**: cause measured, not guessed: the glTF has **no images or textures and no baseColorFactor**, so every material falls back to default white; it is also not a banana (Ravenala and banana-leaf in pots). Not fixable from this file. Guard: `gltf_untextured_share` plus validator rule (untextured share > 0.5 caps the grade at D) and tests against the real file.
+* Licence rule: only CC0 / CC Attribution count as free; validated.
+
+### Tests
+
+`tests/landscape`: 136 -> see hand-back for the new count. New: lead decisions (positive, never rescues a fail, needs reason), placement constraints, Ixora dropped, frangipani accepted, inferred-heat flag, misnamed asset, untextured asset (positive on the real banana file, negative on a textured one), licence, manifest sha256 (and live hash check when the store exists).
+
+### Open items (pass 2)
+
+* Sketchfab token; then run `ldl_sketchfab_candidates.py` output through `fetch_sketchfab.py` and the preview jobs (Japanese set, screens, palms, drifts first).
+* 35 heat gaps remain: citrus, hibiscus, fig, delonix, camphor, ficus microcarpa, guava, jasmines, Strelitzia, papyrus, lotus, monstera, bamboo and others. A Gulf source with species tables (Abu Dhabi PRDM PDF, Dubai manual) would close most; the PDFs were not found by search.
+* Fish toxicity needs a vet/aquaculture source per species.
+* Bauhinia, mango, Washingtonia and the other dropped species: **not added** (time went to evidence and assets).

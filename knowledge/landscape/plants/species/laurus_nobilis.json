@@ -110,12 +110,18 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no heat statement",
-   "searched": [
-    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "Rated 4 of 5 stars (3+ = well-adapted to desert heat) in the Las Vegas list"
+   },
+   "source": {
+    "source_id": "SNRPC-2026",
+    "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Southern Nevada Regional Plant List June 2026, Trees: Laurus nobilis L. rated 4 stars; How to Use the List",
+    "quote": "Trees rated 3 stars and above are recommended trees because they are well-adapted to our desert heat and seasonal drought."
+   }
   },
   "drought": {
    "status": "GAP",
@@ -140,12 +146,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "PFAF says only 'not maritime exposure'; no explicit salt statement",
-   "searched": [
-    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -197,12 +209,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "no statement about roots",
-   "searched": [
-    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree root damage potential: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Moderate\""
+   }
   },
   "toxicity_people": {
    "status": "SOURCED",
@@ -219,12 +237,17 @@
    }
   },
   "litter": {
-   "status": "GAP",
-   "reason": "sources silent on litter (NCSU notes only that female plants produce fleshy black drupes)",
-   "searched": [
-    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",
