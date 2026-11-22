@@ -136,3 +136,41 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
         v["sun"] = sun_for_timestamp(v["when"], loc)
         out.append(v)
     return out
+
+
+def write_scene(path, views: list[dict], group_record: Path | None = None, *, measure: bool = False):
+    """`villa_render.write` for the set. That function reads the frozen exposure record from the fixed path
+    knowledge/exposure-groups.json (the 41-view record, which a different view inventory cannot use), so the set
+    carries its own record: measure first (`measure=True`, then Blender --measure-exposure-groups), then pass the
+    record. Ask L6d to give write() a record-path argument and drop this copy."""
+    from ..concept import villa_render as VR
+    from ..exposure_groups import require_record
+    from ..safe_io import save_bytes
+    from ..villa_render_contract import validate_scene
+    before = VR.source_provenance()
+    scene = VR.build(views=views)
+    if not measure:
+        scene["exposure_group_mode"] = "dominant-light"
+        scene["exposure_groups"] = require_record(VR.EID.without_ids(scene),
+                                                  json.loads(Path(group_record).read_text(encoding="utf-8")))
+    errors = validate_scene(VR.EID.without_ids(scene))
+    if errors:
+        raise ValueError("invalid exported scene: " + "; ".join(errors))
+    after = VR.source_provenance()
+    if before["source_hash"] != after["source_hash"]:
+        raise RuntimeError("Villa scene source changed during build; retry the export")
+    scene["provenance"] = after
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    for light in scene["lights"]:
+        ies = light.get("ies", "")
+        if ies.startswith("generic/"):
+            kind = Path(ies).stem
+            target = path.parent / "ies" / ies
+            target.parent.mkdir(parents=True, exist_ok=True)
+            rec = light.get("fixture_record")
+            flux = rec["flux_lm"] if light.get("garden_g4d") else VR.VL.KINDS[kind]["lm"]
+            beam = rec["beam_deg"] if light.get("garden_g4d") else VR.VL.KINDS[kind]["beam"]
+            target.write_text(VR.VL.generic_ies(flux, beam, kind), encoding="utf-8")
+    save_bytes(path, json.dumps(scene).encode("utf-8"))
+    return path, scene
