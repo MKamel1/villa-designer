@@ -1,0 +1,21 @@
+{
+ "item": "good-14",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "High walls on all sides, overhead structure implied by shadows, defined paving, and enclosed staircases create a clear outdoor room effect."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "One olive tree and a small shrub near the door; no distinct ground cover layer. Planting is sparse, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The olive tree is centrally placed, with the courtyard, seating, and children's play area arranged around it, making it the clear focal point."
+  }
+ }
+}

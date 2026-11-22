@@ -1,0 +1,21 @@
+{
+ "item": "good-22",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 0,
+   "evidence": "The garden is open to the sky with no overhead structure or defined side enclosure; edges are soft and undefined, lacking the sense of an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "The garden features a clear tree layer (young deciduous trees), a shrub layer (dense green bushes and perennials), and a ground cover layer (mulch, grass, and low plants), creating a lush, multi-layered appearance."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The wooden carport with the bicycle is the dominant architectural element, drawing the eye and organizing the surrounding planting and hardscape."
+  }
+ }
+}

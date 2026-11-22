@@ -1,0 +1,21 @@
+{
+ "item": "good-04",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo4.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The garden has defined edges with a curved concrete path and raised planting beds, but lacks overhead or side enclosure, making it feel open rather than an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Image shows a large tree (right), mid-height shrubs and ornamental grasses, and a low groundcover layer along the path, creating clear vertical layering and lushness."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The dark, gabled building in the background serves as a strong visual anchor. The curved path and planting beds lead the eye directly toward it, creating a clear focal point."
+  }
+ }
+}

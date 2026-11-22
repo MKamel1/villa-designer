@@ -1,0 +1,124 @@
+{
+ "south": {
+  "H/screened": {
+   "sampled": 240000,
+   "packed": 1137,
+   "no_hard_fail_structures": 12,
+   "distinct_top_structures": 12,
+   "planted_variants_tried": 144,
+   "survivors": 144,
+   "rejects": {
+    "packing failed": 238863,
+    "LDG-SHADE": 957,
+    "LDG-PRIV": 743,
+    "LS-CAPACITY": 616,
+    "LS-FIRE-CLEAR": 451
+   }
+  },
+  "O/screened": {
+   "sampled": 240000,
+   "packed": 1313,
+   "no_hard_fail_structures": 11,
+   "distinct_top_structures": 11,
+   "planted_variants_tried": 132,
+   "survivors": 50,
+   "rejects": {
+    "packing failed": 238687,
+    "LDG-SHADE": 953,
+    "LS-CAPACITY": 866,
+    "LDG-PRIV": 855,
+    "LS-FIRE-CLEAR": 353,
+    "LS-DINE-CLEAR": 46
+   }
+  },
+  "W/screened": {
+   "sampled": 240000,
+   "packed": 5769,
+   "no_hard_fail_structures": 344,
+   "distinct_top_structures": 324,
+   "planted_variants_tried": 480,
+   "survivors": 380,
+   "rejects": {
+    "packing failed": 234231,
+    "LDG-PRIV": 3800,
+    "LDG-SHADE": 3500,
+    "LS-FIRE-CLEAR": 2744
+   }
+  },
+  "H/open": {
+   "sampled": 240000,
+   "packed": 7124,
+   "no_hard_fail_structures": 215,
+   "distinct_top_structures": 197,
+   "planted_variants_tried": 480,
+   "survivors": 480,
+   "rejects": {
+    "packing failed": 232876,
+    "LDG-SHADE": 5350,
+    "LDG-PRIV": 4725,
+    "LS-CAPACITY": 3150,
+    "LS-FIRE-CLEAR": 1927
+   }
+  },
+  "O/open": {
+   "sampled": 240000,
+   "packed": 3520,
+   "no_hard_fail_structures": 98,
+   "distinct_top_structures": 96,
+   "planted_variants_tried": 480,
+   "survivors": 168,
+   "rejects": {
+    "packing failed": 236480,
+    "LDG-PRIV": 2368,
+    "LDG-SHADE": 2236,
+    "LS-CAPACITY": 1639,
+    "LS-FIRE-CLEAR": 824,
+    "LS-DINE-CLEAR": 78
+   }
+  },
+  "W/open": {
+   "sampled": 240000,
+   "packed": 13197,
+   "no_hard_fail_structures": 1103,
+   "distinct_top_structures": 944,
+   "planted_variants_tried": 480,
+   "survivors": 371,
+   "rejects": {
+    "packing failed": 226803,
+    "LDG-PRIV": 8848,
+    "LDG-SHADE": 7842,
+    "LS-FIRE-CLEAR": 4551
+   }
+  }
+ },
+ "courts": {
+  "north/no-pond": {
+   "packed": 40000,
+   "no_hard_fail_distinct": 450,
+   "planted_tried": 480,
+   "survivors": 480
+  },
+  "north/pond": {
+   "packing failed": 39939,
+   "packed": 61,
+   "LDG-GEOM": 4,
+   "no_hard_fail_distinct": 36,
+   "planted_tried": 360,
+   "survivors": 360
+  },
+  "east/no-pond": {
+   "packed": 40000,
+   "no_hard_fail_distinct": 3,
+   "planted_tried": 30,
+   "survivors": 30
+  },
+  "east/pond": {
+   "packing failed": 36521,
+   "packed": 3479,
+   "no_hard_fail_distinct": 90,
+   "planted_tried": 480,
+   "survivors": 480
+  }
+ },
+ "n_samples_per_south_cell": 240000
+}

@@ -1,0 +1,21 @@
+{
+ "item": "good-00",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden features a defined pool edge, brick retaining walls, and dense surrounding foliage that creates a sense of enclosure, resembling an outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tall dracaena and background trees form upper layers; mid-height shrubs and potted plants fill the middle; ground-level foliage and poolside planting complete the base. Lush, multi-layered composition."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The large, centrally positioned succulent plant dominates the frame and acts as the clear focal point, with the pool and surrounding greenery arranged around it."
+  }
+ }
+}

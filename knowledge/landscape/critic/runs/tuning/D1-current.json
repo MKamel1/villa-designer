@@ -1,0 +1,37 @@
+{
+ "item": "D1-current",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/D1-current.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The main garden area is open on two sides (left and bottom), with no walls, hedges, or dense planting to enclose it. The upper right section has some enclosure but is not fully defined."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large canopy tree in lower center with lounge seating and table directly beneath it; pergola and other plantings are smaller and positioned around it."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main path leads to house doors and seating areas; secondary paths connect to pergola and planting beds."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Large canopy tree mass in center, repeated shrub clusters in bottom-left and right-side planting beds, and uniform ground cover strips along the right edge."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Large canopy tree (dark green circle) in the lower center overlaps with medium green small trees and lighter green shrubs in the lower left and right planting beds, creating a clear three-layer vertical structure."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a paved patio with seating near the house, a lawn area with a pergola and table, and a separate planting bed area with shrubs and ground cover."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with distinct rooms (lounge, dining, planting beds), defined edges via walls and building, and organized planting masses including a large canopy tree and structured shrub borders."
+  }
+ }
+}

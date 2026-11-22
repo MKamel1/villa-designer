@@ -1,0 +1,37 @@
+{
+ "item": "P-SAU-02",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SAU-02.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The central 'round lawn' is bounded by the street wall to the north, the building to the east, and dense planting to the west and south, creating a clearly defined and enclosed outdoor room."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large canopy tree (P-SAU-02) at the north end of the round lawn, with a smaller Punica tree isolated on the far left."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "No distinct paths are drawn; circulation is implied through the open round lawn connecting the street edge to the sunken seat and side court seating areas."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Multiple groups of identical-sized circles (shrubs) are arranged in linear rows along the top and bottom boundaries, and a cluster of three similar circles sits centrally, indicating clear repetition and massing."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Plan shows canopy trees (dark green), small trees (medium green), shrubs (light green), and ground/perennials (pale green) layered together, particularly in the central and lower-left planting beds."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Plan shows a 'side court' with grid paving, a central 'round lawn', and a 'sunken seat' area with distinct paving, creating multiple defined zones."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with defined rooms (round lawn, side court, sunken seat), strong planting masses along the street and south edge, and distinct paving/lawn zones creating a cohesive, designed composition."
+  }
+ }
+}

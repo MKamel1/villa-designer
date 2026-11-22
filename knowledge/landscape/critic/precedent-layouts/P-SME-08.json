@@ -1,0 +1,167 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SME-08",
+ "source": "LDP precedent P-SME-08: Hanging Home, Malta: lawn, planter and dining deck (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "other",
+   "surface": "lawn",
+   "rect": [
+    2.5,
+    0.0,
+    7.69,
+    6.35
+   ],
+   "label": "lawn"
+  },
+  {
+   "id": "z2",
+   "use": "dining",
+   "surface": "paving",
+   "rect": [
+    2.31,
+    9.23,
+    5.0,
+    14.81
+   ],
+   "label": "dining deck"
+  },
+  {
+   "id": "z3",
+   "use": "other",
+   "surface": "planting",
+   "rect": [
+    5.19,
+    6.54,
+    7.69,
+    18.27
+   ],
+   "label": "planter"
+  }
+ ],
+ "paths": [],
+ "tables": [
+  {
+   "id": "tb8",
+   "center": [
+    3.65,
+    12.04
+   ],
+   "diameter_m": 1.2,
+   "seats": 6
+  }
+ ],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b11",
+   "rect": [
+    6.92,
+    6.54,
+    7.69,
+    18.27
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 8,
+     "stand_in": true
+    },
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t4",
+   "species": "Punica granatum",
+   "center": [
+    6.35,
+    7.69
+   ],
+   "mature_spread_m": 2.1,
+   "form": "small_tree",
+   "mature_height_m": 2.5
+  },
+  {
+   "id": "t5",
+   "species": "Punica granatum",
+   "center": [
+    6.35,
+    10.19
+   ],
+   "mature_spread_m": 2.1,
+   "form": "small_tree",
+   "mature_height_m": 2.5
+  },
+  {
+   "id": "t6",
+   "species": "Punica granatum",
+   "center": [
+    6.54,
+    13.27
+   ],
+   "mature_spread_m": 2.7,
+   "form": "small_tree",
+   "mature_height_m": 3.2
+  },
+  {
+   "id": "t7",
+   "species": "Punica granatum",
+   "center": [
+    6.35,
+    17.12
+   ],
+   "mature_spread_m": 2.1,
+   "form": "small_tree",
+   "mature_height_m": 2.5
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   -3.65,
+   3.85,
+   2.31,
+   17.88
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w9",
+   "rect": [
+    -0.19,
+    0.0,
+    0.19,
+    24.04
+   ],
+   "height_m": 3.0
+  },
+  {
+   "id": "w10",
+   "rect": [
+    7.69,
+    -0.38,
+    8.0,
+    19.04
+   ],
+   "height_m": 3.0
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

@@ -1,0 +1,37 @@
+{
+ "item": "P-SME-08",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SME-08.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The dining deck area is bounded by the building to the north, a dense row of Punicas and shrubs to the south, and the lawn edge to the west, creating a defined three-sided enclosure."
+  },
+  "V-FOCAL": {
+   "score": 0,
+   "evidence": "No specimen tree, water feature, fire pit, or pergola is present. The plan shows a dining deck, lawn, and a row of equal-sized Punicas, resulting in no clear primary focal point."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Paved area leads directly to the dining deck and table; planting bed edges align with the house boundary, creating clear destinations."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Five Punicas (small trees) are repeated in a row along the front boundary, with a cluster of ground cover to the left, creating a clear rhythm and massing rather than scattered singles."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "The plan shows a clear layered planting structure: large canopy trees (Punica) in the background, medium-sized shrubs in the middle ground, and ground cover/perennials in the foreground, creating depth and spatial layering."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "The plan shows a large lawn area on the left, a paved dining deck with a table in the center, and a planting bed with shrubs and ground cover on the right, creating distinct outdoor rooms."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with distinct zones: lawn on left, paved dining deck with pergola in center, and a structured planting bed with layered trees and shrubs along the front boundary."
+  }
+ }
+}

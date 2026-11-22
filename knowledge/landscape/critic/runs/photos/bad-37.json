@@ -1,0 +1,21 @@
+{
+ "item": "bad-37",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v28-east-yard-below.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall white walls on left, right, and back clearly enclose the space, creating a defined outdoor room with a sense of enclosure and privacy."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "The garden features a tree, multiple shrubs, and ground-level plants, creating a clear sense of layered depth and lushness."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The flowering tree at the far end serves as a clear focal point, with the path and plantings leading the eye toward it."
+  }
+ }
+}

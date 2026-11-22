@@ -1,0 +1,21 @@
+{
+ "item": "good-25",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N03-shimogamo-machiya-villa/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Garden is bounded by wooden walls on three sides, a building wall on the fourth, and a dark overhead canopy, creating a clearly defined enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Garden features tall trees, mid-height shrubs, and a dense ground layer of moss and low plants, creating clear vertical layering and lush depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The stone water basin (tsukubai) on the left serves as a distinct focal point, with the stepping stones and gravel path leading the eye toward it and the surrounding plants framing it."
+  }
+ }
+}

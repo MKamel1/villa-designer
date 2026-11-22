@@ -1,0 +1,37 @@
+{
+ "item": "P-SAU-05",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SAU-05.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Garden court is bounded by the building on the left, a wall on the top, and dense planting on the right; the green roof area is bounded by the building on three sides."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Three large canopy trees clustered in the upper-left quadrant form a dominant mass, while the green roof and paving are flat and subordinate."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "No paths, walkways, or circulation lines are drawn in the plan; only planting, paving, and green roof areas are shown."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Two distinct rows of repeated shrubs along the top wall and a cluster of three overlapping small trees in the center."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Upper left corner shows overlapping circles of varying sizes (canopy tree, small tree, shrub) and a row of pale ground cover circles along the top wall, indicating three distinct planting layers."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Garden court with grid paving and trees; green roof area with planting; distinct floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with defined garden court, green roof, and planting masses; strong edges from walls and building; intentional room separation and planting composition."
+  }
+ }
+}

@@ -1,0 +1,1222 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "concept-O",
+ "zones": [
+  {
+   "id": "dining",
+   "use": "dining",
+   "rect": [
+    22.597,
+    -25.39,
+    26.047,
+    -21.29
+   ],
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ]
+  },
+  {
+   "id": "lounge",
+   "use": "lounge",
+   "rect": [
+    22.597,
+    -29.787,
+    26.714,
+    -25.497
+   ],
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ]
+  },
+  {
+   "id": "quiet",
+   "use": "quiet",
+   "rect": [
+    26.058,
+    -24.162,
+    27.458,
+    -22.762
+   ],
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-S-QUIET"
+   ]
+  },
+  {
+   "id": "quiet",
+   "use": "quiet",
+   "rect": [
+    1.4408376256546687,
+    -25.996429658569117,
+    2.6908376256546687,
+    -23.996429658569117
+   ],
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  }
+ ],
+ "paths": [
+  {
+   "id": "path-door",
+   "class": "main",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    22.597,
+    -27.331,
+    23.797,
+    -24.031
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  },
+  {
+   "id": "path-main",
+   "class": "main",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    2.417,
+    -28.0,
+    3.617,
+    -24.3
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  },
+  {
+   "id": "path-main",
+   "class": "main",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    15.912,
+    -23.591,
+    22.597,
+    -22.391000000000002
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  }
+ ],
+ "paved_areas": [
+  {
+   "id": "paving-0",
+   "rect": [
+    22.597,
+    -29.616,
+    26.307,
+    -27.616
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-1",
+   "rect": [
+    22.597,
+    -27.616,
+    27.507,
+    -21.351
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-2",
+   "rect": [
+    22.597,
+    -21.351,
+    23.597,
+    -20.601
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-0",
+   "rect": [
+    1.75,
+    -28.671,
+    3.617,
+    -28.221
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-1",
+   "rect": [
+    1.077,
+    -28.221,
+    3.617,
+    -24.291
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-2",
+   "rect": [
+    1.75,
+    -24.291,
+    3.617,
+    -23.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "paving-0",
+   "rect": [
+    15.412,
+    -23.591,
+    22.597,
+    -22.391
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "id": "dining-table",
+   "zone": "dining",
+   "center": [
+    24.397000000000002,
+    -23.340083900424148
+   ],
+   "size_m": [
+    0.9,
+    1.5
+   ],
+   "seats": 4,
+   "trace": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ]
+  }
+ ],
+ "seating": [
+  {
+   "id": "lounge-seat-0",
+   "zone": "lounge",
+   "rect": [
+    23.172,
+    -29.14,
+    23.872,
+    -28.44
+   ],
+   "seats": 1,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "lounge-seat-1",
+   "zone": "lounge",
+   "rect": [
+    24.635,
+    -28.711,
+    26.035,
+    -28.011
+   ],
+   "seats": 2,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "lounge-seat-2",
+   "zone": "lounge",
+   "rect": [
+    22.655,
+    -28.115,
+    23.355,
+    -27.415
+   ],
+   "seats": 1,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "lounge-seat-3",
+   "zone": "lounge",
+   "rect": [
+    23.821,
+    -28.098,
+    24.521,
+    -27.398
+   ],
+   "seats": 1,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "lounge-seat-4",
+   "zone": "lounge",
+   "rect": [
+    24.339,
+    -29.587,
+    25.039,
+    -28.887
+   ],
+   "seats": 1,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "quiet-bench",
+   "zone": "quiet",
+   "rect": [
+    26.358,
+    -24.062,
+    26.908,
+    -22.862
+   ],
+   "seats": 2,
+   "trace": [
+    "U-S-QUIET"
+   ]
+  },
+  {
+   "id": "bench",
+   "zone": "quiet",
+   "rect": [
+    1.8408376256546686,
+    -25.696429658569116,
+    2.390837625654669,
+    -24.296429658569117
+   ],
+   "seats": 2,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  }
+ ],
+ "planting_groups": [
+  {
+   "id": "bed-corner",
+   "rect": [
+    26.307,
+    -29.616,
+    28.307,
+    -27.616
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      26.756999999999998,
+      -29.116
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      26.756999999999998,
+      -28.116
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      27.756999999999998,
+      -29.116
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      27.756999999999998,
+      -28.116
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-S-QUIET",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-west",
+   "rect": [
+    22.597,
+    -29.916,
+    28.307,
+    -29.616
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      23.310750000000002,
+      -29.766
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      24.73825,
+      -29.766
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      26.16575,
+      -29.766
+     ],
+     "drift": 2,
+     "form": "shrub"
+    },
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      27.593249999999998,
+      -29.766
+     ],
+     "drift": 3,
+     "form": "shrub"
+    }
+   ],
+   "trace": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-south",
+   "rect": [
+    27.507,
+    -27.616,
+    28.307,
+    -21.351
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      27.687,
+      -26.832875
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "jasminum_sambac",
+     "count": 1,
+     "at": [
+      27.687,
+      -25.266624999999998
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      27.687,
+      -23.700375
+     ],
+     "drift": 2,
+     "form": "shrub"
+    },
+    {
+     "species": "jasminum_sambac",
+     "count": 1,
+     "at": [
+      27.687,
+      -22.134124999999997
+     ],
+     "drift": 3,
+     "form": "shrub"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      28.087,
+      -27.2244375
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      28.087,
+      -25.6581875
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      28.087,
+      -24.0919375
+     ],
+     "drift": 2,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      28.087,
+      -22.5256875
+     ],
+     "drift": 3,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-east",
+   "rect": [
+    23.597,
+    -21.351,
+    28.307,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      23.9895,
+      -20.976
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      25.5595,
+      -20.976
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      27.1295,
+      -20.976
+     ],
+     "drift": 2,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-street",
+   "rect": [
+    -0.123,
+    -28.671,
+    1.077,
+    -23.841
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "pittosporum_tobira",
+     "count": 1,
+     "at": [
+      0.477,
+      -27.866
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "pittosporum_tobira",
+     "count": 1,
+     "at": [
+      0.477,
+      -26.256
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "pittosporum_tobira",
+     "count": 1,
+     "at": [
+      0.477,
+      -24.646
+     ],
+     "drift": 2,
+     "form": "shrub"
+    }
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-steps",
+   "rect": [
+    1.077,
+    -28.671,
+    1.75,
+    -28.221
+   ],
+   "over_structure": false,
+   "plants": [],
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-wall",
+   "rect": [
+    1.077,
+    -24.291,
+    1.75,
+    -23.841
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      1.24525,
+      -24.066000000000003
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      1.58175,
+      -24.066000000000003
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-pond-path",
+   "rect": [
+    16.3259957511026,
+    -22.391000000000002,
+    20.9259957511026,
+    -22.091
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      17.092662417769265,
+      -22.241
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "jasminum_sambac",
+     "count": 1,
+     "at": [
+      18.6259957511026,
+      -22.241
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      20.159329084435935,
+      -22.241
+     ],
+     "drift": 2,
+     "form": "shrub"
+    }
+   ],
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-pond-fence",
+   "rect": [
+    16.3259957511026,
+    -21.091,
+    20.9259957511026,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "zantedeschia_aethiopica",
+     "count": 1,
+     "at": [
+      16.517662417769266,
+      -20.846
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "zantedeschia_aethiopica",
+     "count": 1,
+     "at": [
+      18.0509957511026,
+      -20.846
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    },
+    {
+     "species": "zantedeschia_aethiopica",
+     "count": 1,
+     "at": [
+      19.584329084435936,
+      -20.846
+     ],
+     "drift": 2,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-pond-end-w",
+   "rect": [
+    16.3259957511026,
+    -22.091,
+    16.6259957511026,
+    -21.091
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      16.4759957511026,
+      -21.841
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "petrea_volubilis",
+     "count": 1,
+     "at": [
+      16.4759957511026,
+      -21.341
+     ],
+     "drift": 1,
+     "form": "shrub"
+    }
+   ],
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-pond-end-e",
+   "rect": [
+    20.6259957511026,
+    -22.091,
+    20.9259957511026,
+    -21.091
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      20.6934957511026,
+      -21.841
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      20.6934957511026,
+      -21.341
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "gazania_rigens",
+     "count": 1,
+     "at": [
+      20.8434957511026,
+      -21.841
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "gazania_rigens",
+     "count": 1,
+     "at": [
+      20.8434957511026,
+      -21.341
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-yard-west",
+   "rect": [
+    15.412,
+    -22.391000000000002,
+    16.3259957511026,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      15.868997875551301,
+      -21.9435
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "bougainvillea_glabra",
+     "count": 1,
+     "at": [
+      15.868997875551301,
+      -21.0485
+     ],
+     "drift": 1,
+     "form": "shrub"
+    }
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "bed-yard-east",
+   "rect": [
+    20.9259957511026,
+    -22.391000000000002,
+    22.597,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "jasminum_sambac",
+     "count": 1,
+     "at": [
+      21.301971707104517,
+      -21.9435
+     ],
+     "drift": 0,
+     "form": "shrub"
+    },
+    {
+     "species": "jasminum_sambac",
+     "count": 1,
+     "at": [
+      21.301971707104517,
+      -21.0485
+     ],
+     "drift": 1,
+     "form": "shrub"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      22.137473831553216,
+      -21.9435
+     ],
+     "drift": 0,
+     "form": "ground_cover"
+    },
+    {
+     "species": "salvia_leucantha",
+     "count": 1,
+     "at": [
+      22.137473831553216,
+      -21.0485
+     ],
+     "drift": 1,
+     "form": "ground_cover"
+    }
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "tree-0-punica_granatum",
+   "species": "punica_granatum",
+   "center": [
+    27.307000000000002,
+    -28.616
+   ],
+   "form": "small_tree",
+   "over_structure": false,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "mature_spread_m": 3.0,
+   "canopy_r_m": 1.2,
+   "mature_height_m": 3.7,
+   "water_demand": "moderate"
+  }
+ ],
+ "features": [
+  {
+   "id": "firepit",
+   "kind": "firepit",
+   "center": [
+    26.063606187570812,
+    -26.14651184692371
+   ],
+   "diameter_m": 0.9,
+   "flush": true,
+   "fuel": "gas",
+   "cover": {
+    "load_rating_kN": 15.0,
+    "lip_mm": 6.0,
+    "bevelled": false,
+    "max_opening_mm": 12.0
+   },
+   "overhead_clear_m": 3.0,
+   "trace": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ]
+  },
+  {
+   "id": "bbq",
+   "kind": "bbq",
+   "rect": [
+    24.016,
+    -26.298,
+    24.616,
+    -25.398
+   ],
+   "trace": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ]
+  },
+  {
+   "id": "herb-bed",
+   "kind": "herb_bed",
+   "rect": [
+    23.597,
+    -21.351,
+    28.307,
+    -20.601
+   ],
+   "midsummer_sun_hours": 6.37,
+   "trace": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ]
+  },
+  {
+   "id": "pond",
+   "kind": "pond",
+   "rect": [
+    16.6259957511026,
+    -22.091,
+    20.6259957511026,
+    -21.091
+   ],
+   "flush": true,
+   "edge": "soft",
+   "freeboard_mm": 150,
+   "depth_mm": 900,
+   "volume_m3": 2.52,
+   "koi_count": 4,
+   "koi_adult_length_cm": 70,
+   "aerated": false,
+   "child_protection": "rigid_grille",
+   "edge_slope_run_per_rise": 4,
+   "margin_slope_back_mm": 600,
+   "trace": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ]
+  }
+ ],
+ "obstacles": [
+  {
+   "id": "fence-rear",
+   "rect": [
+    28.307,
+    -29.916,
+    28.557,
+    -20.601
+   ],
+   "trace": [
+    "SITE-FENCE"
+   ]
+  },
+  {
+   "id": "fence-east",
+   "rect": [
+    22.597,
+    -20.601,
+    28.557,
+    -20.351
+   ],
+   "trace": [
+    "SITE-FENCE"
+   ]
+  },
+  {
+   "id": "pot-0-plumeria",
+   "rect": [
+    26.458,
+    -22.712,
+    27.058,
+    -22.112
+   ],
+   "trace": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ]
+  },
+  {
+   "id": "sister-screen",
+   "rect": [
+    22.597,
+    -29.916,
+    28.307000000000002,
+    -29.766000000000002
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ]
+  }
+ ],
+ "buildings": [
+  [
+   3.617,
+   -31.311,
+   22.597,
+   -23.591
+  ],
+  [
+   -0.123,
+   -23.591,
+   15.412,
+   -20.601
+  ],
+  [
+   3.617,
+   -31.311,
+   22.597,
+   -23.591
+  ],
+  [
+   -0.123,
+   -23.591,
+   15.412,
+   -20.601
+  ],
+  [
+   3.617,
+   -31.311,
+   22.597,
+   -23.591
+  ],
+  [
+   -0.123,
+   -23.591,
+   15.412,
+   -20.601
+  ]
+ ],
+ "walls": [],
+ "screens": [],
+ "canopies": [
+  {
+   "id": "pergola-0",
+   "kind": "pergola",
+   "rect": [
+    22.597,
+    -25.39,
+    26.047,
+    -21.29
+   ],
+   "height_m": 3.0,
+   "shade_fraction": 0.5
+  },
+  {
+   "id": "pergola-1",
+   "kind": "pergola",
+   "rect": [
+    22.597,
+    -29.787,
+    26.714,
+    -25.497
+   ],
+   "height_m": 3.0,
+   "shade_fraction": 0.5
+  },
+  {
+   "id": "pergola-2",
+   "kind": "pergola",
+   "rect": [
+    26.058,
+    -24.162,
+    27.458,
+    -22.762
+   ],
+   "height_m": 3.0,
+   "shade_fraction": 0.5
+  },
+  {
+   "id": "pergola-3",
+   "kind": "pergola",
+   "rect": [
+    1.4408376256546687,
+    -25.996429658569117,
+    2.6908376256546687,
+    -23.996429658569117
+   ],
+   "height_m": 3.0,
+   "shade_fraction": 0.5
+  }
+ ],
+ "doors": []
+}

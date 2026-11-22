@@ -1,0 +1,220 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SAU-02",
+ "source": "LDP precedent P-SAU-02: Garland Garden, New Farm: circular lawn garden (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "lawn",
+   "rect": [
+    0.93,
+    9.33,
+    6.16,
+    14.55
+   ],
+   "label": "round lawn"
+  },
+  {
+   "id": "z2",
+   "use": "quiet",
+   "surface": "paving",
+   "rect": [
+    4.1,
+    13.62,
+    6.34,
+    16.42
+   ],
+   "label": "sunken seat"
+  },
+  {
+   "id": "z3",
+   "use": "other",
+   "surface": "paving",
+   "rect": [
+    5.04,
+    1.87,
+    8.02,
+    7.09
+   ],
+   "label": "side court"
+  }
+ ],
+ "paths": [
+  {
+   "id": "p11",
+   "class": "main",
+   "width_m": 1.2,
+   "polyline": [
+    [
+     5.04,
+     16.42
+    ],
+    [
+     5.04,
+     14.55
+    ]
+   ]
+  },
+  {
+   "id": "p12",
+   "class": "secondary",
+   "width_m": 1.0,
+   "polyline": [
+    [
+     6.53,
+     7.09
+    ],
+    [
+     5.78,
+     9.33
+    ]
+   ]
+  }
+ ],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b4",
+   "rect": [
+    0.0,
+    7.46,
+    1.04,
+    15.67
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 2,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 8,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rect": [
+    6.9,
+    2.43,
+    8.02,
+    13.81
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 8,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rect": [
+    5.6,
+    8.96,
+    6.9,
+    11.94
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 3,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 5,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t7",
+   "species": "Olea europaea",
+   "center": [
+    -0.19,
+    13.81
+   ],
+   "mature_spread_m": 2.6,
+   "form": "large_tree",
+   "mature_height_m": 3.1
+  },
+  {
+   "id": "t8",
+   "species": "Punica granatum",
+   "center": [
+    0.56,
+    2.99
+   ],
+   "mature_spread_m": 1.7,
+   "form": "small_tree",
+   "mature_height_m": 2.0
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   0.75,
+   16.6,
+   7.09,
+   26.12
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w9",
+   "rect": [
+    -0.07,
+    0.0,
+    0.15,
+    25.75
+   ],
+   "height_m": 2.0
+  },
+  {
+   "id": "w10",
+   "rect": [
+    8.02,
+    0.0,
+    8.21,
+    16.42
+   ],
+   "height_m": 2.0
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

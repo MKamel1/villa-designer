@@ -1,0 +1,21 @@
+{
+ "item": "good-13",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo4.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The space is clearly defined by a solid white wall on one side, a building structure with a roof overhead, and a bamboo screen on the other, creating a distinct enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Planting is sparse and minimal: a few shrubs and a small tree on the edges, with a large expanse of bare gravel. No lush, layered ground cover or dense shrub layer is visible."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is split between the open lounge area on the left and the large blank wall on the right, creating competing visual weights with no single dominant focal point."
+  }
+ }
+}

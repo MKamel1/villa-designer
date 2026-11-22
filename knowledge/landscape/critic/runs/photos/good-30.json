@@ -1,0 +1,21 @@
+{
+ "item": "good-30",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dense trees flank both sides, architecture forms overhead canopy, and the pool and lawn create a defined, enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tall trees flank both sides, shrubs and small trees fill the mid-ground, and a manicured lawn forms the ground layer, creating lush, layered depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The composition is organized around the central modern pavilion with its green roof and external staircase, framed by the pool and lawn leading the eye directly to it."
+  }
+ }
+}

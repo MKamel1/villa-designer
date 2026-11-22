@@ -1,0 +1,21 @@
+{
+ "item": "good-31",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Wooden ceiling overhead, solid side walls with planters, and a central gate clearly define an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Distinct tree layer (right), shrub layer (monstera, potted plants), and ground cover (grass, low plants) create lush, layered depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The central wooden gate and vertical slat screen create a strong, symmetrical focal point. The paving, planters, and lawn edges all lead the eye directly to this center."
+  }
+ }
+}

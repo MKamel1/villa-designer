@@ -1,0 +1,21 @@
+{
+ "item": "good-09",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-05-courtyard-house-paddington/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Garden is bounded by a tall white brick wall on one side and a low concrete retaining wall on the other, creating a defined, room-like enclosure with clear edges."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Bare mulch dominates the foreground with sparse, scattered ground plants. A single tree and a few shrubs exist, but the planting is sparse, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is split between the upper balcony with people and the lower interior view, creating two competing focal points rather than one clear organizational center."
+  }
+ }
+}

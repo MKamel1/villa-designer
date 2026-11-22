@@ -1,0 +1,37 @@
+{
+ "item": "privacy-exposed",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/privacy-exposed.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The dining area is bounded by the building on the left and the street wall on the right, but is open on the top and bottom. The fire pit area is open on the top and bottom."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Fire pit, dining table, and pond court are all prominent, competing focal points with no clear hierarchy."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Paving and gravel areas connect the house doors to the fire pit, dining table, standing/BBO area, and seating zones; no paths lead to blank edges."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Top right corner shows a distinct mass of four canopy trees and a cluster of three small trees/shrubs, demonstrating clear grouping and repetition."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Top right corner shows canopy trees, small trees, shrubs, and ground cover layered together, creating distinct vertical depth."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Multiple distinct zones with different floor surfaces: gravel fire pit area, paved dining area, paved standing/BBQ area, and a separate herb bed."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (fire pit, dining, standing/BBQ, pond court), defined edges via walls and paving types, and grouped planting masses."
+  }
+ }
+}

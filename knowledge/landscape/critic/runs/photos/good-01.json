@@ -1,0 +1,21 @@
+{
+ "item": "good-01",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dense foliage and a building wall form clear side and background boundaries, while the tree canopy provides overhead cover, creating a defined, enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Distinct tree canopy overhead, dense shrub layer with monstera and ferns, and lush ground cover create clear vertical layering."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The image features a large, sculptural tree with prominent branches that dominate the frame and serve as the central visual anchor, with surrounding foliage and architecture supporting it."
+  }
+ }
+}

@@ -1,0 +1,1004 @@
+{
+ "schema": "landscape-layout/1",
+ "source": "src/archpipe/concept/villa_landscape.py review_candidate (read-only)",
+ "frame": "model metres; street side = north = -x; south garden = +x",
+ "assumptions": [
+  "paths: every door-link route is class 'secondary' (the garden has no main path); width = the short side of its rectangle",
+  "seats: a bench counts floor(length / 0.5 m) seats (TS 520-24: 500 mm bench space per person); each chair one seat",
+  "plant form: mature height <= 0.5 m -> ground_cover, otherwise shrub; no height -> unknown (not evaluated)",
+  "trees: mature spread = upper bound of the verified palette range (Plumeria 7.6 m); mature height = upper bound of the height range",
+  "trees: water_demand = moderate, NHBC 2024 4.2 default for a species not on its high list (Plumeria is not named); LDL should confirm",
+  "boundary: fence-street = street side; fence-east, fence-west, fence-rear = neighbour side; height = z1 - z0 of the Revit element",
+  "water_need, slopes, soil depth under trees, steps: not present in the garden data, so left absent"
+ ],
+ "zones": [
+  {
+   "id": "south-garden",
+   "use": "lounge",
+   "rect": [
+    22.597,
+    -29.91566,
+    28.557,
+    -20.351
+   ],
+   "surface": "artificial-turf",
+   "enclosure_height_m": 4.0
+  },
+  {
+   "id": "north-court",
+   "use": "quiet",
+   "rect": [
+    -0.373,
+    -29.916,
+    3.617,
+    -23.591
+   ],
+   "surface": "planting",
+   "enclosure_height_m": 4.0
+  },
+  {
+   "id": "east-yard",
+   "use": "other",
+   "rect": [
+    15.412,
+    -23.591,
+    22.597,
+    -20.351
+   ],
+   "surface": "artificial-turf"
+  },
+  {
+   "id": "top-deck",
+   "use": "other",
+   "rect": [
+    6.877,
+    -23.591,
+    15.412,
+    -20.601
+   ],
+   "surface": "paving"
+  }
+ ],
+ "paths": [
+  {
+   "id": "dining",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    16.432,
+    -23.591,
+    17.346,
+    -21.35
+   ]
+  },
+  {
+   "id": "living-east",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    20.1,
+    -23.591,
+    21.014,
+    -21.35
+   ]
+  },
+  {
+   "id": "living-south",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    22.597,
+    -26.588,
+    25.1,
+    -25.674
+   ]
+  },
+  {
+   "id": "lounge-north",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    1.0,
+    -26.613,
+    3.617,
+    -25.699
+   ]
+  },
+  {
+   "id": "study",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    7.82,
+    -23.591,
+    8.734,
+    -20.601
+   ]
+  },
+  {
+   "id": "gate-link",
+   "class": "secondary",
+   "width_m": 0.914,
+   "rect": [
+    6.877,
+    -22.55,
+    8.734,
+    -21.636
+   ]
+  }
+ ],
+ "paved_areas": [],
+ "steps": [],
+ "tables": [],
+ "seating": [
+  {
+   "id": "landscape-g6-seating-bench",
+   "zone": "south-garden",
+   "rect": [
+    22.825,
+    -29.009999999999998,
+    23.474999999999998,
+    -27.61
+   ],
+   "seats": 2
+  },
+  {
+   "id": "landscape-g6-seating-chair-0",
+   "zone": "south-garden",
+   "rect": [
+    24.575,
+    -27.825,
+    25.224999999999998,
+    -27.175
+   ],
+   "seats": 1
+  },
+  {
+   "id": "landscape-g6-seating-chair-1",
+   "zone": "south-garden",
+   "rect": [
+    24.575,
+    -29.445,
+    25.224999999999998,
+    -28.795
+   ],
+   "seats": 1
+  }
+ ],
+ "planting_groups": [
+  {
+   "id": "bed-north",
+   "rect": [
+    -0.05,
+    -28.5,
+    3.45,
+    -26.9
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      0.65,
+      -27.7
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      1.8,
+      -27.7
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      1.1,
+      -24.5
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      0.45,
+      -28.25
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      1.6,
+      -28.25
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      3.42,
+      -24.07
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Chlorophytum comosum",
+     "form": "ground_cover",
+     "at": [
+      0.4,
+      -27.15
+     ],
+     "spread_m": 0.3048
+    },
+    {
+     "species": "Chlorophytum comosum",
+     "form": "ground_cover",
+     "at": [
+      1.5,
+      -27.15
+     ],
+     "spread_m": 0.3048
+    },
+    {
+     "species": "Chlorophytum comosum",
+     "form": "ground_cover",
+     "at": [
+      2.7,
+      -27.15
+     ],
+     "spread_m": 0.3048
+    },
+    {
+     "species": "Ophiopogon japonicus",
+     "form": "ground_cover",
+     "at": [
+      0.2,
+      -28.33
+     ],
+     "spread_m": 0.1524
+    },
+    {
+     "species": "Ophiopogon japonicus",
+     "form": "ground_cover",
+     "at": [
+      0.9,
+      -28.33
+     ],
+     "spread_m": 0.1524
+    },
+    {
+     "species": "Ophiopogon japonicus",
+     "form": "ground_cover",
+     "at": [
+      1.6,
+      -28.33
+     ],
+     "spread_m": 0.1524
+    },
+    {
+     "species": "Ophiopogon japonicus",
+     "form": "ground_cover",
+     "at": [
+      2.3,
+      -28.33
+     ],
+     "spread_m": 0.1524
+    },
+    {
+     "species": "Ophiopogon japonicus",
+     "form": "ground_cover",
+     "at": [
+      3,
+      -28.33
+     ],
+     "spread_m": 0.1524
+    }
+   ]
+  },
+  {
+   "id": "bed-east",
+   "rect": [
+    17.45,
+    -22.7,
+    20.05,
+    -20.65
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      17.9,
+      -21.05
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      18.75,
+      -21.05
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      19.6,
+      -21.05
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      17.9,
+      -21.65
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      18.75,
+      -21.65
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      19.6,
+      -21.65
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      17.9,
+      -22.3
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      18.75,
+      -22.3
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      19.6,
+      -22.3
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      15.75,
+      -20.95
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      16.4,
+      -20.95
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      17.05,
+      -20.95
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Trachelospermum jasminoides",
+     "form": null,
+     "at": [
+      18.75,
+      -20.607
+     ],
+     "spread_m": 1.5
+    }
+   ]
+  },
+  {
+   "id": "bed-south-foliage",
+   "rect": [
+    26.25,
+    -29.65,
+    28.25,
+    -27.05
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.55,
+      -29.15
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.55,
+      -28.48
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.55,
+      -27.81
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      26.8,
+      -29.15
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      26.8,
+      -28.15
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Fatsia japonica",
+     "form": "shrub",
+     "at": [
+      26.8,
+      -27.15
+     ],
+     "spread_m": 1.2192
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      26.38,
+      -29.1
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      26.38,
+      -28.4
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aspidistra elatior",
+     "form": "shrub",
+     "at": [
+      26.38,
+      -27.7
+     ],
+     "spread_m": 0.5
+    }
+   ]
+  },
+  {
+   "id": "bed-south-rear-a",
+   "rect": [
+    26.95,
+    -26.450000000000003,
+    28.25,
+    -24.349999999999998
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -26.1
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -25.4
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -24.7
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -26.1
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -25.4
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -24.7
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -26.1
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -25.4
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -24.7
+     ],
+     "spread_m": 0.35
+    }
+   ]
+  },
+  {
+   "id": "bed-south-rear-b",
+   "rect": [
+    26.95,
+    -24.150000000000002,
+    28.25,
+    -22.049999999999997
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -23.8
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -23.1
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.89,
+      -22.4
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -23.8
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -23.1
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+     "form": null,
+     "at": [
+      27.34,
+      -22.4
+     ],
+     "spread_m": 0.65
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -23.8
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -23.1
+     ],
+     "spread_m": 0.35
+    },
+    {
+     "species": "Plectranthus 'Mona Lavender'",
+     "form": "shrub",
+     "at": [
+      27.1,
+      -22.4
+     ],
+     "spread_m": 0.35
+    }
+   ]
+  },
+  {
+   "id": "landscape-top-trough-deck-east",
+   "rect": [
+    9.2,
+    -21.1,
+    12.4,
+    -20.76
+   ],
+   "over_structure": true,
+   "soil_depth_mm": 245,
+   "plants": [
+    {
+     "species": "Salvia rosmarinus Prostrata Group",
+     "form": "ground_cover",
+     "at": [
+      9.8,
+      -20.93
+     ],
+     "spread_m": 1
+    },
+    {
+     "species": "Salvia rosmarinus Prostrata Group",
+     "form": "ground_cover",
+     "at": [
+      10.8,
+      -20.93
+     ],
+     "spread_m": 1
+    },
+    {
+     "species": "Salvia rosmarinus Prostrata Group",
+     "form": "ground_cover",
+     "at": [
+      11.8,
+      -20.93
+     ],
+     "spread_m": 1
+    }
+   ]
+  },
+  {
+   "id": "landscape-top-trough-roof-east",
+   "rect": [
+    13.02,
+    -21.16,
+    15.15,
+    -20.76
+   ],
+   "over_structure": true,
+   "soil_depth_mm": 245,
+   "plants": [
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      13.4,
+      -20.96
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      14.1,
+      -20.96
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      14.8,
+      -20.96
+     ],
+     "spread_m": 0.5
+    }
+   ]
+  },
+  {
+   "id": "landscape-top-trough-roof-west",
+   "rect": [
+    13.02,
+    -23.44,
+    15.15,
+    -23.04
+   ],
+   "over_structure": true,
+   "soil_depth_mm": 245,
+   "plants": [
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      13.4,
+      -23.24
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      14.1,
+      -23.24
+     ],
+     "spread_m": 0.5
+    },
+    {
+     "species": "Aloe vera",
+     "form": null,
+     "at": [
+      14.8,
+      -23.24
+     ],
+     "spread_m": 0.5
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "sf_frangipani",
+   "species": "Plumeria rubra",
+   "center": [
+    25.576999999999998,
+    -24.41111528638369
+   ],
+   "mature_spread_m": 7.6,
+   "form": "large_tree",
+   "over_structure": true,
+   "mature_height_m": 7.6,
+   "water_demand": "moderate"
+  }
+ ],
+ "features": [],
+ "boundary": [
+  {
+   "id": "fence-street",
+   "side": "street",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-east",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-rear",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-west",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  }
+ ],
+ "buildings": [
+  [
+   1.787,
+   -28.671,
+   3.617,
+   -23.591
+  ],
+  [
+   3.617,
+   -28.671,
+   22.597,
+   -23.591
+  ],
+  [
+   19.604,
+   -31.311,
+   22.324,
+   -28.671
+  ]
+ ],
+ "obstacles": [],
+ "id": "D1-current",
+ "walls": [
+  {
+   "id": "fence-street",
+   "rect": [
+    -0.373,
+    -39.48,
+    -0.123,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-east",
+   "rect": [
+    -0.373,
+    -20.601,
+    28.557,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-rear",
+   "rect": [
+    28.307,
+    -39.48,
+    28.557,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-west",
+   "rect": [
+    -0.373,
+    -39.48,
+    28.557,
+    -39.23
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "yard-wall-ne",
+   "rect": [
+    -0.123,
+    -23.841,
+    3.617,
+    -23.591
+   ],
+   "height_m": 1.4
+  }
+ ],
+ "doors": [
+  {
+   "id": "door-B-9",
+   "at": [
+    3.617,
+    -26.156
+   ],
+   "faces": "-x",
+   "room": "lounge",
+   "width_m": 3.71
+  },
+  {
+   "id": "door-GF-17",
+   "at": [
+    8.277,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "study-game",
+   "width_m": 1.8
+  },
+  {
+   "id": "door-B-6",
+   "at": [
+    16.889,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "dining",
+   "width_m": 2.35
+  },
+  {
+   "id": "door-B-7",
+   "at": [
+    20.557,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "living",
+   "width_m": 2.76
+  },
+  {
+   "id": "door-B-8",
+   "at": [
+    22.597,
+    -26.131
+   ],
+   "faces": "+x",
+   "room": "living",
+   "width_m": 2.4
+  }
+ ]
+}

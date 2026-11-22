@@ -1,0 +1,21 @@
+{
+ "item": "good-26",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N06-water-courtyard-house-singapore/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden features a defined lawn area bordered by a stone path, a pool, and dense trees on both sides, creating a sense of enclosure. The house structure also contributes to the feeling of a defined outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tall trees frame the scene, shrubs and ornamental grasses form a mid-layer around the pool and lawn, and a manicured grass ground layer is visible. The planting appears lush and clearly layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The modern two-story house with its distinctive wooden overhang and large glass windows serves as the dominant visual anchor. The garden elements, including the pool, lawn, and stone path, are arranged to lead the eye directly toward the building, establishing it as the singular focal point."
+  }
+ }
+}

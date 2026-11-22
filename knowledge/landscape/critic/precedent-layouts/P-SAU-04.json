@@ -1,0 +1,194 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SAU-04",
+ "source": "LDP precedent P-SAU-04: Subiaco oval courtyard, Perth (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "lawn",
+   "rect": [
+    0.12,
+    4.24,
+    13.41,
+    8.24
+   ],
+   "label": "oval court"
+  },
+  {
+   "id": "z2",
+   "use": "other",
+   "surface": "paving",
+   "rect": [
+    4.82,
+    0.71,
+    8.35,
+    4.24
+   ],
+   "label": "patio"
+  },
+  {
+   "id": "z3",
+   "use": "dining",
+   "surface": "paving",
+   "rect": [
+    16.0,
+    0.71,
+    17.88,
+    10.82
+   ],
+   "label": "entry deck"
+  }
+ ],
+ "paths": [
+  {
+   "id": "p12",
+   "class": "main",
+   "width_m": 1.5,
+   "polyline": [
+    [
+     17.88,
+     4.82
+    ],
+    [
+     19.76,
+     4.82
+    ]
+   ]
+  }
+ ],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b11",
+   "rect": [
+    18.12,
+    0.24,
+    19.53,
+    11.76
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 6,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 10,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t4",
+   "species": "Punica granatum",
+   "center": [
+    1.41,
+    6.59
+   ],
+   "mature_spread_m": 1.4,
+   "form": "small_tree",
+   "mature_height_m": 1.7
+  },
+  {
+   "id": "t5",
+   "species": "Punica granatum",
+   "center": [
+    1.76,
+    9.76
+   ],
+   "mature_spread_m": 1.3,
+   "form": "small_tree",
+   "mature_height_m": 1.6
+  },
+  {
+   "id": "t6",
+   "species": "Olea europaea",
+   "center": [
+    8.35,
+    4.71
+   ],
+   "mature_spread_m": 3.8,
+   "form": "large_tree",
+   "mature_height_m": 4.5
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   8.59,
+   0.71,
+   15.76,
+   4.24
+  ],
+  [
+   3.88,
+   8.59,
+   15.76,
+   11.29
+  ],
+  [
+   0.12,
+   0.71,
+   4.82,
+   4.35
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w7",
+   "rect": [
+    -0.05,
+    -0.05,
+    0.14,
+    12.0
+   ],
+   "height_m": 2.0
+  },
+  {
+   "id": "w8",
+   "rect": [
+    19.65,
+    -0.05,
+    19.84,
+    12.0
+   ],
+   "height_m": 2.0
+  },
+  {
+   "id": "w9",
+   "rect": [
+    -0.05,
+    -0.05,
+    19.84,
+    0.14
+   ],
+   "height_m": 2.0
+  },
+  {
+   "id": "w10",
+   "rect": [
+    -0.05,
+    11.81,
+    19.84,
+    12.0
+   ],
+   "height_m": 2.0
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

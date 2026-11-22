@@ -1,0 +1,742 @@
+{
+ "allowed": {
+  "bougainvillea_glabra": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline soil: intolerant; site soil pH not tested"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "callistemon_citrinus": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat tolerance is a GAP",
+    "alkaline soil: intolerant; site soil pH not tested"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "ceratophyllum_demersum": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost tolerance is a GAP",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "cupressus_sempervirens": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "delonix_regia": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost tolerance is a GAP",
+    "heat tolerance is a GAP",
+    "alkaline soil: intolerant; site soil pH not tested"
+   ],
+   "drawable": "drawable"
+  },
+  "dodonaea_viscosa": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "ficus_carica": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat tolerance is a GAP",
+    "alkaline soil: intolerant; site soil pH not tested"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "gazania_rigens": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "jacaranda_mimosifolia": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "drawable"
+  },
+  "jasminum_sambac": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "lantana_montevidensis": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "muhlenbergia_capillaris": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "murraya_paniculata": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "olea_europaea": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "origanum_majorana": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "petrea_volubilis": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "phoenix_dactylifera": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "pittosporum_tobira": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "plumeria_rubra": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "drawable": "drawable"
+  },
+  "pontederia_cordata": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "punica_granatum": {
+   "verdict": "viable",
+   "conditions": [],
+   "drawable": "not drawable yet"
+  },
+  "salvia_leucantha": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "tipuana_tipu": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline soil: intolerant; site soil pH not tested"
+   ],
+   "drawable": "not drawable yet"
+  },
+  "zantedeschia_aethiopica": {
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "drawable": "not drawable yet"
+  }
+ },
+ "held_back_heat_gap_or_not_viable": [
+  {
+   "slug": "acorus_gramineus",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "agapanthus_praecox",
+   "verdict": "unverified",
+   "layers": [
+    "perennial"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "aloe_vera",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "alpinia_zerumbet",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "aspidistra_elatior",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn",
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "bambusa_multiplex",
+   "verdict": "unverified",
+   "layers": [
+    "screen_hedge",
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "chlorophytum_comosum",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "cinnamomum_camphora",
+   "verdict": "unverified",
+   "layers": [
+    "canopy_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "citrus_limon",
+   "verdict": "unverified",
+   "layers": [
+    "small_fruit_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "citrus_x_sinensis",
+   "verdict": "unverified",
+   "layers": [
+    "small_fruit_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "cymbopogon_citratus",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "cynodon_dactylon",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "cyperus_involucratus",
+   "verdict": "unverified",
+   "layers": [
+    "aquatic_marginal"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "cyperus_papyrus",
+   "verdict": "unverified",
+   "layers": [
+    "aquatic_marginal"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "eriobotrya_japonica",
+   "verdict": "unverified",
+   "layers": [
+    "small_fruit_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "farfugium_japonicum",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "fatsia_japonica",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "ficus_microcarpa",
+   "verdict": "unverified",
+   "layers": [
+    "canopy_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "ficus_pumila",
+   "verdict": "unverified",
+   "layers": [
+    "climber"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "hibiscus_rosa_sinensis",
+   "verdict": "unverified",
+   "layers": [
+    "screen_hedge",
+    "flowering_shrub"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "iris_laevigata",
+   "verdict": "unverified",
+   "layers": [
+    "aquatic_marginal"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "ixora_coccinea",
+   "verdict": "not_viable",
+   "layers": [
+    "flowering_shrub"
+   ],
+   "reasons": [
+    "frost: needs >= 10 C but typical-year minimum is 5.1 C",
+    "heat tolerance is a GAP",
+    "alkaline soil: intolerant; site soil pH not tested"
+   ]
+  },
+  {
+   "slug": "jasminum_grandiflorum",
+   "verdict": "unverified",
+   "layers": [
+    "climber"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "justicia_brandegeeana",
+   "verdict": "unverified",
+   "layers": [
+    "flowering_shrub"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "lagerstroemia_indica",
+   "verdict": "unverified",
+   "layers": [
+    "small_fruit_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "laurus_nobilis",
+   "verdict": "unverified",
+   "layers": [
+    "herb",
+    "screen_hedge"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "lavandula_dentata",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "liriope_muscari",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "mentha_spicata",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "monstera_deliciosa",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "nandina_domestica",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "nassella_tenuissima",
+   "verdict": "not_viable",
+   "layers": [
+    "grass"
+   ],
+   "reasons": [
+    "heat: low tolerance; 154 days with daily max above 30 C"
+   ]
+  },
+  {
+   "slug": "nelumbo_nucifera",
+   "verdict": "unverified",
+   "layers": [
+    "aquatic_marginal"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "nerium_oleander",
+   "verdict": "unverified",
+   "layers": [
+    "screen_hedge",
+    "flowering_shrub"
+   ],
+   "reasons": [
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "nymphaea_caerulea",
+   "verdict": "unverified",
+   "layers": [
+    "aquatic_marginal"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "ocimum_basilicum",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "ophiopogon_japonicus",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn",
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "paspalum_vaginatum",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "pennisetum_alopecuroides",
+   "verdict": "unverified",
+   "layers": [
+    "grass"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "pentas_lanceolata",
+   "verdict": "unverified",
+   "layers": [
+    "perennial"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "phoenix_roebelenii",
+   "verdict": "unverified",
+   "layers": [
+    "palm",
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "phyla_nodiflora",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "plumbago_auriculata",
+   "verdict": "unverified",
+   "layers": [
+    "flowering_shrub"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "podranea_ricasoliana",
+   "verdict": "unverified",
+   "layers": [
+    "climber"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "psidium_guajava",
+   "verdict": "unverified",
+   "layers": [
+    "small_fruit_tree"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "rhapis_excelsa",
+   "verdict": "unverified",
+   "layers": [
+    "palm",
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "rosmarinus_officinalis",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "strelitzia_nicolai",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "strelitzia_reginae",
+   "verdict": "unverified",
+   "layers": [
+    "perennial"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "thaumatophyllum_bipinnatifidum",
+   "verdict": "unverified",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "thymus_vulgaris",
+   "verdict": "unverified",
+   "layers": [
+    "herb"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "trachelospermum_jasminoides",
+   "verdict": "unverified",
+   "layers": [
+    "climber"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  },
+  {
+   "slug": "vitis_vinifera",
+   "verdict": "unverified",
+   "layers": [
+    "climber"
+   ],
+   "reasons": [
+    "heat tolerance is a GAP"
+   ]
+  },
+  {
+   "slug": "zoysia_japonica",
+   "verdict": "unverified",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "reasons": [
+    "frost tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "item": "P-SAU-04",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SAU-04.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The central oval court is bounded by the building on the left and a long wall on the right, but is open at the top and bottom. The patio is enclosed on three sides by the building and walls."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large central 'olive' tree in the oval court is significantly larger than the two smaller 'Punica' trees, establishing a clear primary focal point."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Entry deck leads to the central oval court and patio; the court is anchored by the large citrus tree and flanked by the patio and lawn areas."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Six identical medium-green circles (small trees) are repeated in a continuous row along the bottom boundary, and two identical 'Punica' trees are repeated in the upper right."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Plan shows canopy trees (large dark circles) in the central court, small trees (medium circles) along the bottom edge, and ground cover/perennials (pale circles) at the bottom right, indicating three distinct planting layers."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Plan shows a paved patio, a central lawn oval court with a tree, a separate entry deck, and a planting bed along the street, creating distinct zones with different surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into a central oval court, flanking hatched building masses, a defined patio, and a structured entry deck with a linear planting mass along the street edge."
+  }
+ }
+}
