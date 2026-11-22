@@ -70,6 +70,16 @@
    "shape": "circular",
    "basis": "IES LM-63 luminous opening, diameter 46.0 mm",
    "sha256": "5972b9941bb9966a04d147134f25616dff62947ddd0474c3b06ccdf1d710a8e8"
+  },
+  "iguzzini/RP65": {
+   "size_mm": [
+    1140.0,
+    19.0,
+    1.0
+   ],
+   "shape": "rectangular",
+   "basis": "IES LM-63 luminous opening",
+   "sha256": "b25eccf72e26a94fecf592be6429e3c2dd07cb70fc8aece82070d8c2a819bb26"
   }
  },
  "assets": {

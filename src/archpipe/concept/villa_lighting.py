@@ -43,8 +43,11 @@ CEILING = 2.70                 # false ceiling above FFL
 COVE_FIELD = 2.80              # the raised field inside a cove (slab soffit)
 COVE_BAND = 0.40
 # L6d (LV open item): the entry lobby has ONE cove side, on the bedroom side (y1): a 0.30 m lowered band at 2.70 (the bedroom's ceiling carried into
-# the lobby) with an 80 mm upstand on its lobby edge, the strip in the coffer above the band (below the 2.80 slab soffit), aimed into the lobby.
+# the lobby) with a 50 mm upstand on its lobby edge, the strip standing on the band 30 mm behind the upstand (z 2.72, under the 2.80 slab soffit),
+# aimed into the lobby. The setback matters: a sight line from a pillow crosses the 2.70 plane up to 11 mm in front of the strip.
 LOBBY_COVE_DEPTH = 0.30
+LOBBY_COVE_UPSTAND = 0.05
+LOBBY_COVE_SETBACK = 0.03
 LOBBY_COVE_ROOM = "parents-entry"
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
@@ -564,10 +567,10 @@ def design(lay=None):
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",
         card="ies-res-vanity-grooming-300")
     PE = rc["parents-entry"]
-    ys = PE[3] - LOBBY_COVE_DEPTH - 0.015     # 15 mm behind the upstand, in the coffer above the band
-    strip("COVE", "parents-entry", (PE[0] + 0.1, ys), (PE[2] - 0.1, ys), CEILING + 0.03, (0, -0.4, 1),
-          why="entry lobby cove on the bedroom side, aimed up and into the lobby: in a coffer above a 0.30 m band at 2.70 with an 80 mm upstand "
-              "(strip at 2.73, soffit 2.80): hidden from the pillows by the band, from the lobby by the upstand (LA4)", card="ies-res-passage-30")
+    ys = PE[3] - LOBBY_COVE_DEPTH + LOBBY_COVE_SETBACK     # on the band, behind the upstand
+    strip("COVE", "parents-entry", (PE[0] + 0.1, ys), (PE[2] - 0.1, ys), CEILING + 0.02, (0, -0.4, 1),
+          why="entry lobby cove on the bedroom side, aimed up and into the lobby: a 0.30 m band at 2.70 with a 50 mm upstand, the strip standing on the band "
+              "30 mm behind the upstand (z 2.72) under the 2.80 soffit: hidden from the pillows by the band, from the lobby by the upstand (LA4)", card="ies-res-passage-30")
     out[-1].extra["cove_band"] = dict(room="parents-entry", side="y1", depth=LOBBY_COVE_DEPTH)
     # L6d LA4: the entry lobby DL (18.98, -26.98) is open to the bed (no door: it is the passage into the bedroom) and 1.2-1.8 m
     # from the pillows, inside the 45 deg cone (122 595 cd/m2). No point of the 1.0 x 0.68 m lobby is 2.0 m from both pillows, so the

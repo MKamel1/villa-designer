@@ -59,23 +59,52 @@ def _ends(f, z=None):
     return [(f.x + s * h * f.along[0], f.y + s * h * f.along[1], zz) for s in (-1, 0, 1)]
 
 
-def test_strip_is_below_the_slab_soffit_and_above_the_band_not_above_a_ceiling(scene, cove):
+def _indirect_path(scene, strip_pt, floor_pt, field):
+    """Light from the strip reaches `floor_pt` by one bounce off the slab soffit: some soffit point P in `field` (x0, y0, x1, y1) with strip->P and
+    P->floor both clear of every ceiling mesh."""
+    x0, y0, x1, y1 = field
+    for i in range(9):
+        for j in range(9):
+            P = (x0 + (x1 - x0) * (i + .5) / 9, y0 + (y1 - y0) * (j + .5) / 9, VL.COVE_FIELD)
+            if not _blocked(scene, strip_pt, P) and not _blocked(scene, P, floor_pt):
+                return P
+    return None
+
+
+def _lobby_rects():
+    from archpipe.concept import villa_furnish as F, villa_r11 as R
+    x0, y0, x1, y1 = F.clear_rect(R.design("D1"), ROOM)
+    return (x0, y0, x1, y1), (x0, y0, x1, y1 - VL.LOBBY_COVE_DEPTH)
+
+
+def test_strip_is_below_the_slab_soffit_and_stands_on_the_band(scene, cove):
     band = next(m for m in scene["meshes"] if m["id"] == "ceiling-" + ROOM)
     zs = sorted({round(p[2], 3) for q in band["faces"] for p in q})
-    assert zs == [2.70, 2.78], zs                           # the band at 2.70 and its 80 mm upstand
-    assert 2.70 < cove.z < VL.COVE_FIELD - 0.02             # in the coffer: above the band, under the 2.80 soffit
-    # nothing of the room's ceiling lies above the strip: a vertical ray up from every point of it meets no ceiling mesh
+    assert zs[0] == 2.70 and zs[-1] == round(2.70 + VL.LOBBY_COVE_UPSTAND, 3) and set(zs) <= {2.70, 2.701, zs[-1]}, zs     # band + its upstand (+ 1 mm sheet)
+    assert 2.70 < cove.z < VL.COVE_FIELD - 0.05             # in the coffer: above the band, under the 2.80 soffit
+    assert cove.z < 2.70 + VL.LOBBY_COVE_UPSTAND            # below the upstand's top: not visible over it from the lobby
+    lobby, field = _lobby_rects()
     for p in _ends(cove):
-        assert not _blocked(scene, p, (p[0], p[1], VL.COVE_FIELD)), p
+        assert lobby[1] + VL.LOBBY_COVE_DEPTH - 1e-6 <= p[1]    # on the band, not over the open field
+        assert not _blocked(scene, p, (p[0], p[1], VL.COVE_FIELD)), p      # nothing above it up to the soffit
 
 
-def test_the_strips_light_has_a_clear_path_into_the_lobby_over_the_upstand(scene, cove):
-    """Along its aim (up and toward the lobby) no ceiling piece is crossed before the slab soffit."""
-    aim = np.array(cove.aim, float)
-    aim /= np.linalg.norm(aim)
-    p = np.array(_ends(cove)[1])
-    t = (VL.COVE_FIELD - p[2]) / aim[2]
-    assert not _blocked(scene, p, p + aim * t)
+def test_the_strips_light_reaches_the_lobby_floor_by_bouncing_off_the_soffit(scene, cove):
+    """The Cycles failure class: with the strip above a flat ceiling the light has no path into the room."""
+    lobby, field = _lobby_rects()
+    floor = ((lobby[0] + lobby[2]) / 2, (field[1] + field[3]) / 2, 0.0)
+    for p in _ends(cove):
+        assert _indirect_path(scene, p, floor, field) is not None, p
+
+
+def test_negative_the_old_flat_ceiling_over_the_strip_leaves_no_path(scene, cove):
+    """The old build: a flat 2.70 ceiling across the whole lobby, the strip at 2.73 above it: no path from the strip to the lobby floor."""
+    lobby, field = _lobby_rects()
+    x0, y0, x1, y1 = lobby
+    flat = {"meshes": [dict(id="ceiling-old", faces=[[[x0, y0, 2.70], [x0, y1, 2.70], [x1, y1, 2.70], [x1, y0, 2.70]]])]}
+    floor = ((x0 + x1) / 2, (field[1] + field[3]) / 2, 0.0)
+    strip_pt = (cove.x, y1 - 0.10, 2.73)
+    assert _indirect_path(flat, strip_pt, floor, field) is None
 
 
 def test_the_source_is_hidden_from_both_pillows_by_the_built_band(scene, cove):
@@ -93,14 +122,6 @@ def test_negative_a_strip_below_the_band_is_seen_from_a_pillow(scene, cove):
     v = V.Villa()
     eyes = [s for s in VC.bed_lying_sightlines(v) if s["room"] == "parents-bed"]
     assert any(not _blocked(scene, s["eye"], p) for s in eyes for p in _ends(cove, 2.48))
-
-
-def test_negative_the_old_strip_above_a_flat_ceiling_is_flagged(scene, cove):
-    """The old build (flat 2.70 ceiling across the lobby, strip at 2.73): a vertical ray up from the strip IS blocked by the ceiling."""
-    flat = {"meshes": [dict(id="ceiling-old", faces=[[[18.0, -28.0, 2.70], [18.0, -26.0, 2.70], [20.0, -26.0, 2.70], [20.0, -28.0, 2.70]]])]}
-    p = (_ends(cove)[1][0], _ends(cove)[1][1], 2.73)
-    q = (19.0, -27.0, 2.73)
-    assert _blocked(flat, (q[0], q[1], 2.73), (q[0], q[1], 2.80))
 
 
 def test_model_ceiling_of_the_lobby_has_the_band_and_the_raised_field():

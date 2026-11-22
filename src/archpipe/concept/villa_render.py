@@ -749,15 +749,15 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             continue
         zc = z + VL.CEILING
         if rid in one_side:
-            # L6d (LV open item): ONE cove side. A lowered band at 2.70 on the named side (the bedroom's ceiling carried into the lobby), an
-            # 80 mm upstand on its room-side edge, the strip in the coffer above the band; the field is the 2.80 slab soffit. The strip is
+            # L6d (LV open item): ONE cove side. A lowered band at 2.70 on the named side (the bedroom's ceiling carried into the lobby), a
+            # 50 mm upstand on its room-side edge, the strip in the coffer above the band; the field is the 2.80 slab soffit. The strip is
             # below the soffit and above the band: the band hides it from below on the bedroom side, the upstand from the lobby.
             cb = one_side[rid]
             assert cb["side"] == "y1", "only the y1 (north) side is built"
             yb = y1 - cb["depth"]
             mesh("ceiling-" + rid, "ceiling-white", [quad_down(x0, yb, x1, y1, zc),
-                 [[x1, yb, zc], [x0, yb, zc], [x0, yb, zc + 0.08], [x1, yb, zc + 0.08]]], "shell", room=rid,
-                 label="detail: cove band (2.70) with 80 mm upstand, strip in the coffer under the 2.80 soffit", kind="finish-layer", surface=True,
+                 [[x1, yb, zc], [x0, yb, zc], [x0, yb, zc + VL.LOBBY_COVE_UPSTAND], [x1, yb, zc + VL.LOBBY_COVE_UPSTAND]]], "shell", room=rid,
+                 label="detail: cove band (2.70) with 50 mm upstand, strip on the band under the 2.80 soffit", kind="finish-layer", surface=True,
                  occupied_side=(0, 0, -1))
         elif rid in cove_rooms:
             b = VL.COVE_BAND

@@ -214,8 +214,8 @@ def room_surfaces(els, lay, sp, finish, recs) -> list[DesignElement]:
             kind, why = "cove", ("false ceiling at %.0f mm in a %.0f mm perimeter band (bulkhead), slab soffit exposed at %.0f mm in the "
                                  "field (villa_lighting CEILING / COVE_BAND / COVE_FIELD)" % (VL.CEILING * 1000, VL.COVE_BAND * 1000, VL.COVE_FIELD * 1000))
         elif rid == VL.LOBBY_COVE_ROOM:
-            kind, why = "cove", ("one-sided cove on the bedroom side: false ceiling at %.0f mm in a %.0f mm band (bulkhead) with an 80 mm upstand on its lobby edge, "
-                                 "the LED strip in the coffer above the band, slab soffit exposed at %.0f mm in the field (villa_lighting CEILING / "
+            kind, why = "cove", ("one-sided cove on the bedroom side: false ceiling at %.0f mm in a %.0f mm band (bulkhead) with a 50 mm upstand on its lobby edge, "
+                                 "the LED strip standing on the band behind it, slab soffit exposed at %.0f mm in the field (villa_lighting CEILING / "
                                  "LOBBY_COVE_DEPTH / COVE_FIELD)" % (VL.CEILING * 1000, VL.LOBBY_COVE_DEPTH * 1000, VL.COVE_FIELD * 1000))
         elif rid == "stair-gf":
             kind, why = "slab-soffit", "slab soffit over the double-height stair void (villa_lighting COVE_FIELD)"
