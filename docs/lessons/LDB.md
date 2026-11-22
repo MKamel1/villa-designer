@@ -13,20 +13,3 @@
 * **Hiding the house box from the camera leaves it in the light path**: the bird's-eye showed a black hole where the house stood. Hidden-from-camera
   context is also hidden from shadows in the preview (stated in the receipt).
 * **GPU queue**: other lanes' jobs hold the lock for minutes to hours. A preview job waits in `queued`; plan one batch per age, not one per view.
-
-## Round 3 (decided garden: shade trees, half pit, pond section, visualisation)
-* **A ground plane under the rim buried every pond.** The far-ground plane (6 cm below the surfaces) ran under the pond openings, so the water (150 mm down) was never
-  visible: "the water reads as a flat beige slab" was geometry, not shading, and two rounds of material tuning would not have fixed it. Found by a top-down debug render, not by reading.
-  Guard: the ground plane is built with the pond openings left out (`pond_rects` in the spec) and `test_the_ground_plane_has_a_hole_over_every_pond` states it.
-* **Two scenes with one tag shared one spec file and a sister-plot scene rendered into the production folder.** `/tmp/ldb-specs/<tag>.spec.json` was keyed by tag only; a main and a
-  visualisation render started together overwrote each other, and the main job rendered the visualisation spec (unstamped) into a production directory. Guards: the spec file is keyed by
-  tag + output directory, the spec carries `spec_sha` which the receipt must echo (`render` refuses images whose receipt does not match), and the visualisation scene may only be written under
-  a directory named `visualisation` and is stamped and re-checked pixel-wise. Tests: `test_render_only_into_a_visualisation_directory`, `test_a_receipt_of_another_spec_is_refused`.
-* **A glass block is not water.** A closed refractive solid with volume absorption rendered as an opaque grey slab (caustics off, bump on a smooth interface). Water is now one transparent surface
-  with a Fresnel-weighted glossy reflection and a ripple; the depth tint is in the liner (Z-ramp). The measured pond section is kept as a closed solid for the checks but only its top face is rendered.
-* **A pond lip outside the layout rect collides with its neighbours.** Edge planting, paths and paving all stand against the pond rect; a coping ring outside it clipped them (13 clips).
-  The coping now lies inside the rect, overhanging the water edge on a bearing ledge, and the pond check measures it (top at ground level, a finish unlike the paving).
-* **A bounding box is not a fish.** The koi bounds were a square of the fish length, so a 0.7 m koi "stuck out" of a 0.5 m trench; the bounds are the rotated fish box, and the koi swim along the pond.
-* **Climber leaf panels clipped the benches they climb behind.** A panel centred on a plant ran 0.2 m past the end of the bench it stood behind. `climb_target` now trims the panel to the free stretch round the plant.
-* **Free-text asset metadata is data.** The koi row said "head toward -X, body curves toward +Y": `_front` reads the first signed axis from the text and falls back to -Y; a role with no parsable front is placed
-  by symmetry, and the receipt measures the result.
