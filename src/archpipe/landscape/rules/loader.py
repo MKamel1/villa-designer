@@ -7,6 +7,7 @@ number, or a computed rule backed only by `unverified` cards is a ValueError. Ru
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 from ...contracts import SourceCard
@@ -15,6 +16,8 @@ from ...rules import Remedy, Rule
 RULES_JSON = Path(__file__).resolve().parents[4] / "knowledge/landscape/rules/rules.json"
 SCHEMA = "landscape-rules/1"
 WITHDRAWN_STATUS = "unverified — not used"
+NUMERIC_KEYS = {"measurement", "params", "threshold", "value", "limit", "unit"}
+APL_BOOK = "pattern-language"
 
 
 def _remedies(fix: str) -> tuple[Remedy, ...]:
@@ -36,6 +39,7 @@ class RuleSet:
             self.sources[s["id"]] = SourceCard(id=s["id"], document=s["document"], edition=s["edition"],
                                               locator=s["locator"], quote=s["quote"], value=s["value"],
                                               status=s["status"], url_or_path=s.get("book") or s.get("url", ""))
+        self._check_pattern_cards()
         self.params: dict[str, dict] = {}
         self.rules: dict[str, Rule] = {}
         self.severity: dict[str, str] = {}
@@ -46,8 +50,9 @@ class RuleSet:
             self.severity[r["id"]] = r["severity"]
         self.advisory_ids = []
         for a in data["advisory"]:
-            if "measurement" in a or "params" in a:
+            if NUMERIC_KEYS & a.keys():
                 raise ValueError(f"{a['id']}: an advisory rule carries no measurement")
+            self._check_pattern_rule(a)
             self._add(a, "advisory", "Raise it with the designer as a judgement prompt; do not score it")
             self.advisory_ids.append(a["id"])
         self.gaps = {g["id"]: g for g in data["gaps"]}
@@ -59,6 +64,36 @@ class RuleSet:
                 raise ValueError(f"{w['id']}: withdrawn rules must have status {WITHDRAWN_STATUS!r}")
             if w["id"] in self.rules:
                 raise ValueError(f"{w['id']}: both active and withdrawn")
+
+    def _check_pattern_cards(self) -> None:
+        """A Pattern Language cards name their pattern; the card id, number and role must agree, and the
+        quote must sit on a page (the page-text guard in tests/ reads the PDF)."""
+        for s in self.data["sources"]:
+            if s.get("book") != APL_BOOK:
+                continue
+            n, role = s.get("pattern"), s.get("role")
+            if not isinstance(n, int) or role not in ("problem", "therefore") or not s.get("pattern_name"):
+                raise ValueError(f"{s['id']}: a Pattern Language card needs pattern (int), pattern_name and role")
+            if s["id"] != f"APL-{n}-{role}":
+                raise ValueError(f"{s['id']}: id does not match pattern {n} / {role}")
+            if not s.get("quote") or not isinstance(s.get("pdf_page"), int):
+                raise ValueError(f"{s['id']}: needs a quote and a pdf_page")
+            if role == "therefore" and not isinstance(s.get("therefore_pdf_page"), int):
+                raise ValueError(f"{s['id']}: a therefore card needs therefore_pdf_page")
+
+    def _check_pattern_rule(self, a: dict) -> None:
+        """AD-APL-n cites only pattern n's own cards, and is titled with the book's name for n."""
+        m = re.fullmatch(r"AD-APL-(\d+)", a["id"])
+        if not m:
+            return
+        n = int(m.group(1))
+        for i in a.get("sources", ()):
+            raw = next((s for s in self.data["sources"] if s["id"] == i), {})
+            if raw.get("pattern") != n:
+                raise ValueError(f"{a['id']}: source {i} is not a card of pattern {n}")
+        names = {s["pattern_name"] for s in self.data["sources"] if s.get("pattern") == n}
+        if a["title"] not in names:
+            raise ValueError(f"{a['id']}: title {a['title']!r} is not the book's name for pattern {n} ({names})")
 
     def _add(self, r: dict, kind: str, fix: str) -> None:
         ids = tuple(r.get("sources", ()))

@@ -2621,6 +2621,910 @@
    "value": "600 mm",
    "status": "sourced",
    "note": "Does not mention ponds; kept so nobody cites Approved Document K as covering a garden pond. Applies to: Guarding threshold for a drop in a dwelling. Applies to floors, stairs, balconies, roofs, light wells/sunken areas connected to a building. A garden pond is not covered by AD-K; 600 mm is a fall-height threshold not a water-depth threshold. Printed page shown on page as 22 (inferred)."
+  },
+  {
+   "id": "APL-106-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 106 Positive Outdoor Space, problem statement (bold paragraph after the context lines); PDF page 421 (1-based)",
+   "quote": "Outdoor spaces which are merely “left over” between buildings will, in general, not be used.",
+   "value": "problem of pattern 106",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 420,
+   "pattern": 106,
+   "pattern_name": "Positive Outdoor Space",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-106-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 106 Positive Outdoor Space, solution paragraph after Therefore:; PDF page 426 (1-based)",
+   "quote": "Make all the outdoor spaces which surround and lie between your buildings positive. Give each one some degree of enclosure; surround each space with wings of buildings, trees, hedges, fences, arcades, and trellised walks, until it becomes an entity with a positive quality and does not spill out indefinitely around corners.",
+   "value": "therefore of pattern 106",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 425,
+   "pattern": 106,
+   "pattern_name": "Positive Outdoor Space",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 425
+  },
+  {
+   "id": "APL-163-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 163 Outdoor Room, problem statement (bold paragraph after the context lines); PDF page 603 (1-based)",
+   "quote": "A garden is the place for lying in the grass, swinging, croquet, growing flowers, throwing a ball for the dog. But there is another way of being outdoors: and its needs are not met by the garden at all.",
+   "value": "problem of pattern 163",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 602,
+   "pattern": 163,
+   "pattern_name": "Outdoor Room",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-163-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 163 Outdoor Room, solution paragraph after Therefore:; PDF page 605 (1-based)",
+   "quote": "Build a place outdoors which has so much enclosure round it, that it takes on the feeling of a room, even though it is open to the sky. To do this, define it at the comers with columns, perhaps roof it partially with a trellis or a sliding canvas roof, and create “walls” around it, with fences, sitting walls, screens, hedges, or the exterior walls of the building itself.",
+   "value": "therefore of pattern 163",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 604,
+   "pattern": 163,
+   "pattern_name": "Outdoor Room",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 604
+  },
+  {
+   "id": "APL-114-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 114 Hierarchy Of Open Space, problem statement (bold paragraph after the context lines); PDF page 455 (1-based)",
+   "quote": "Outdoors, people always try to find a spot where they can have their backs protected, looking out toward some larger opening, beyond the space immediately in front of them.",
+   "value": "problem of pattern 114",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 454,
+   "pattern": 114,
+   "pattern_name": "Hierarchy of Open Space",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-114-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 114 Hierarchy Of Open Space, solution paragraph after Therefore:; PDF page 456 (1-based, continues to 457)",
+   "quote": "Whatever space you are shaping—whether it is a garden, terrace, street, park, public outdoor room, or courtyard, make sure of two things. First, make at least one smaller space, which looks into it and forms a natural back for it Second, place it, and its openings, so that it looks into at least one larger space. When you have done this, every outdoor space will have a natural “back”; and every person who takes up the natural position, with his back to this “back,” will be looking out toward some larger distant view.",
+   "value": "therefore of pattern 114",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 455,
+   "pattern": 114,
+   "pattern_name": "Hierarchy of Open Space",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "pdf_page_end": 456,
+   "therefore_pdf_page": 455
+  },
+  {
+   "id": "APL-105-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 105 South Facing Outdoors, problem statement (bold paragraph after the context lines); PDF page 417 (1-based)",
+   "quote": "People use open space if it is sunny, and do not use it if it isn’t, in all but desert climates.",
+   "value": "problem of pattern 105",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 416,
+   "pattern": 105,
+   "pattern_name": "South Facing Outdoors",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-105-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 105 South Facing Outdoors, solution paragraph after Therefore:; PDF page 419 (1-based)",
+   "quote": "Always place buildings to the north of the outdoor spaces that go with them, and keep the outdoor spaces to the south. Never leave a deep band of shade between the building and the sunny part of the outdoors.",
+   "value": "therefore of pattern 105",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 418,
+   "pattern": 105,
+   "pattern_name": "South Facing Outdoors",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. The pattern states no figure in its solution; 'deep band of shade' is qualitative.",
+   "therefore_pdf_page": 418
+  },
+  {
+   "id": "APL-111-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 111 Half-Hidden Garden, problem statement (bold paragraph after the context lines); PDF page 445 (1-based)",
+   "quote": "If a garden is too close to the street, people won’t use it because it isn’t private enough. But if it is too far from the street, then it won’t be used either, because it is too isolated.",
+   "value": "problem of pattern 111",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 444,
+   "pattern": 111,
+   "pattern_name": "Half-hidden Garden",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-111-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 111 Half-Hidden Garden, solution paragraph after Therefore:; PDF page 447 (1-based)",
+   "quote": "Do not place the garden fully in front of the house, nor fully to the back. Instead, place it in some kind of half-way position, side-by-side with the house, in a position which is half-hidden from the street, and half-exposed.",
+   "value": "therefore of pattern 111",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 446,
+   "pattern": 111,
+   "pattern_name": "Half-hidden Garden",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 446
+  },
+  {
+   "id": "APL-59-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 59 Quiet Backs, problem statement (bold paragraph after the context lines); PDF page 249 (1-based)",
+   "quote": "Any one who has to work in noise, in offices with people all around, needs to be able to pause and refresh himself with quiet in a more natural situation.",
+   "value": "problem of pattern 59",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 248,
+   "pattern": 59,
+   "pattern_name": "Quiet Backs",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-59-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 59 Quiet Backs, solution paragraph after Therefore:; PDF page 250 (1-based, continues to 251)",
+   "quote": "Give the buildings in the busy parts of town a quiet “back” behind them and away from the noise. Build a walk along this quiet back, far enough from the building so that it gets full sunlight, but protected from noise by walls and distance and buildings. Make certain that the path is not a natural shortcut for busy foot traffic, and connect it up with other walks, to form a long ribbon of quiet alleyways which converge on the local pools and streams and the local greens.",
+   "value": "therefore of pattern 59",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 249,
+   "pattern": 59,
+   "pattern_name": "Quiet Backs",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "pdf_page_end": 250,
+   "therefore_pdf_page": 249
+  },
+  {
+   "id": "APL-171-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 171 Tree Places, problem statement (bold paragraph after the context lines); PDF page 632 (1-based)",
+   "quote": "When trees are planted or pruned without regard for the special places they can create, they are as good as dead for the people who need them.",
+   "value": "problem of pattern 171",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 631,
+   "pattern": 171,
+   "pattern_name": "Tree Places",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-171-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 171 Tree Places, solution paragraph after Therefore:; PDF page 634 (1-based, continues to 635)",
+   "quote": "If you are planting trees, plant them according to their nature, to form enclosures, avenues, squares, groves, and single spreading trees toward the middle of open spaces. And shape the nearby buildings in response to trees, so that the trees themselves, and the trees and buildings together, form places which people can use.",
+   "value": "therefore of pattern 171",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 633,
+   "pattern": 171,
+   "pattern_name": "Tree Places",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "pdf_page_end": 634,
+   "therefore_pdf_page": 633
+  },
+  {
+   "id": "APL-176-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 176 Garden Seat, problem statement (bold paragraph after the context lines); PDF page 647 (1-based)",
+   "quote": "Somewhere in every garden, there must be at least one spot, a quiet garden seat, in which a person—or two people—can reach into themselves and be in touch with nothing eke but nature.",
+   "value": "problem of pattern 176",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 646,
+   "pattern": 176,
+   "pattern_name": "Garden Seat",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-176-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 176 Garden Seat, solution paragraph after Therefore:; PDF page 649 (1-based)",
+   "quote": "Make a quiet place in the garden—a private enclosure with a comfortable seat, thick planting, sun. Pick the place for the seat carefully; pick the place that will give you the most intense kind of solitude.",
+   "value": "therefore of pattern 176",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 648,
+   "pattern": 176,
+   "pattern_name": "Garden Seat",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 647
+  },
+  {
+   "id": "APL-172-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 172 Garden Growing Wild, problem statement (bold paragraph after the context lines); PDF page 637 (1-based)",
+   "quote": "A garden which grows true to its own laws is not a wilderness, yet not entirely artificial either.",
+   "value": "problem of pattern 172",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 636,
+   "pattern": 172,
+   "pattern_name": "Garden Growing Wild",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-172-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 172 Garden Growing Wild, solution paragraph after Therefore:; PDF page 638 (1-based)",
+   "quote": "Grow grasses, mosses, bushes, flowers, and trees in a way which comes close to the way that they occur in nature: intermingled, without barriers between them, without bare earth, without formal flower beds, and with all the boundaries and edges made in rough stone and brick and wood which become a part of the natural growth.",
+   "value": "therefore of pattern 172",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 637,
+   "pattern": 172,
+   "pattern_name": "Garden Growing Wild",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 637
+  },
+  {
+   "id": "APL-64-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 64 Pools And Streams, problem statement (bold paragraph after the context lines); PDF page 263 (1-based)",
+   "quote": "We came from the water; our bodies are largely water; and water plays a fundamental role in our psychology. We need constant access to water, all around us; and we cannot have it without reverence for water in all its forms. But everywhere in cities water is out of reach.",
+   "value": "problem of pattern 64",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 262,
+   "pattern": 64,
+   "pattern_name": "Pools and Streams",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-64-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 64 Pools And Streams, solution paragraph after Therefore:; PDF page 266 (1-based)",
+   "quote": "Preserve natural pools and streams and allow them to run through the city; make paths for people to walk along them and footbridges to cross them. Let the streams form natural barriers in the city, with traffic crossing them only infrequently on bridges. Whenever possible, collect rainwater in open gutters and allow it to flow above ground, along pedestrian paths and in front of houses. In places without natural running water, create fountains in the streets.",
+   "value": "therefore of pattern 64",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 265,
+   "pattern": 64,
+   "pattern_name": "Pools and Streams",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 265
+  },
+  {
+   "id": "APL-71-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 71 Still Water, problem statement (bold paragraph after the context lines); PDF page 290 (1-based)",
+   "quote": "To be in touch with water, we must above all be able to swim; and to swim daily, the pools and ponds and holes for swimming must be so widely scattered through the city, that each person can reach one within minutes.",
+   "value": "problem of pattern 71",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 289,
+   "pattern": 71,
+   "pattern_name": "Still Water",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-71-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 71 Still Water, solution paragraph after Therefore:; PDF page 292 (1-based)",
+   "quote": "In every neighborhood, provide some still water—a pond, a pool— for swimming. Keep the pool open to the public at all times, but make the entrance to the pool only from the shallow side of the pool, and make the pool deepen gradually, starting from one or two inches deep.",
+   "value": "solution of pattern 71; figure in the book: 1-2 in (25-50 mm) starting depth; entrance from the shallow side",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 291,
+   "pattern": 71,
+   "pattern_name": "Still Water",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. A swimming-pool pattern: the book states no depth for ornamental ponds. A gradual shallow entrance is what the koi-pond hazard prompt asks about, so it is a prompt, not a threshold; LS-POND-FREEBOARD / AD-POND-DEPTH-HAZARD carry the pond rules.",
+   "therefore_pdf_page": 291
+  },
+  {
+   "id": "APL-124-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 124 Activity Pockets, problem statement (bold paragraph after the context lines); PDF page 481 (1-based)",
+   "quote": "The life of a public square forms naturally around its edge. If the edge fails, then the space never becomes lively.",
+   "value": "problem of pattern 124",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 480,
+   "pattern": 124,
+   "pattern_name": "Activity Pockets",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-124-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 124 Activity Pockets, solution paragraph after Therefore:; PDF page 482 (1-based)",
+   "quote": "Surround public gathering places with pockets of activity—small, partly enclosed areas at the edges, which jut forward into the open space between the paths, and contain activities which make it natural for people to pause and get involved.",
+   "value": "therefore of pattern 124",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 481,
+   "pattern": 124,
+   "pattern_name": "Activity Pockets",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 481
+  },
+  {
+   "id": "APL-126-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 126 Something Roughly In The, problem statement (bold paragraph after the context lines); PDF page 484 (1-based)",
+   "quote": "A public space without a middle is quite likely to stay empty.",
+   "value": "problem of pattern 126",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 483,
+   "pattern": 126,
+   "pattern_name": "Something Roughly in the Middle",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-126-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 126 Something Roughly In The, solution paragraph after Therefore:; PDF page 486 (1-based)",
+   "quote": "Between the natural paths which cross a public square or courtyard or a piece of common land choose something to stand roughly in the middle: a fountain, a tree, a statue, a clock-tower with seats, a windmill, a bandstand. Make it something which gives a strong and steady pulse to the square, drawing people in toward the center. Leave it exactly where it falls between the paths; resist the impulse to put it exactly in the middle.",
+   "value": "therefore of pattern 126",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 485,
+   "pattern": 126,
+   "pattern_name": "Something Roughly in the Middle",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 485
+  },
+  {
+   "id": "APL-173-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 173 Garden Wall, problem statement (bold paragraph after the context lines); PDF page 639 (1-based)",
+   "quote": "Gardens and small public parks don’t give enough relief from noise unless they are well protected.",
+   "value": "problem of pattern 173",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 638,
+   "pattern": 173,
+   "pattern_name": "Garden Wall",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-173-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 173 Garden Wall, solution paragraph after Therefore:; PDF page 641 (1-based)",
+   "quote": "Form some kind of enclosure to protect the interior of a quiet garden from the sights and sounds of passing traffic. If it is a large garden or a park, the enclosure can be soft, can include bushes, trees, slopes, and so on. The smaller the garden, however, the harder and more definite the enclosure must become. In a very small garden, form the enclosure with buildings or walls; even hedges and fences will not be enough to keep out sound.",
+   "value": "therefore of pattern 173",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 640,
+   "pattern": 173,
+   "pattern_name": "Garden Wall",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 640
+  },
+  {
+   "id": "APL-246-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 246 Climbing Plants, problem statement (bold paragraph after the context lines); PDF page 915 (1-based)",
+   "quote": "A building finally becomes a part of its surroundings when the plants grow over parts of it as freely as they grow along the ground.",
+   "value": "problem of pattern 246",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 914,
+   "pattern": 246,
+   "pattern_name": "Climbing Plants",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-246-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 246 Climbing Plants, solution paragraph after Therefore:; PDF page 916 (1-based)",
+   "quote": "On sunny walls, train climbing plants to grow up round the openings in the wall—the windows, doors, porches, arcades, and trellises.",
+   "value": "therefore of pattern 246",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 915,
+   "pattern": 246,
+   "pattern_name": "Climbing Plants",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 915
+  },
+  {
+   "id": "APL-174-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 174 Trellised Walk, problem statement (bold paragraph after the context lines); PDF page 643 (1-based)",
+   "quote": "Trellised walks have their own special beauty. They are so unique, so different from other ways of shaping a path, that they are almost archetypal.",
+   "value": "problem of pattern 174",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 642,
+   "pattern": 174,
+   "pattern_name": "Trellised Walk",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-174-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 174 Trellised Walk, solution paragraph after Therefore:; PDF page 643 (1-based)",
+   "quote": "Where paths need special protection or where they need some intimacy, build a trellis over the path and plant it with climbing flowers. Use the trellis to help shape the outdoor spaces on cither side of it.",
+   "value": "therefore of pattern 174",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 642,
+   "pattern": 174,
+   "pattern_name": "Trellised Walk",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 642
+  },
+  {
+   "id": "APL-177-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 177 Vegetable Garden, problem statement (bold paragraph after the context lines); PDF page 650 (1-based)",
+   "quote": "In a healthy town every family can grow vegetables for itself. The time is past to think of this as a hobby for enthusiasts; it is a fundamental part of human life.",
+   "value": "problem of pattern 177",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 649,
+   "pattern": 177,
+   "pattern_name": "Vegetable Garden",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-177-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 177 Vegetable Garden, solution paragraph after Therefore:; PDF page 651 (1-based, continues to 652)",
+   "quote": "Set aside one piece of land either in the private garden or on common land as a vegetable garden. About one-tenth of an acre is needed for each family of four. Make sore the vegetable garden is in a sunny place and central to all the households it serves. Fence it in and build a small storage shed for gardening tools beside it.",
+   "value": "solution of pattern 177; figure in the book: about 1/10 acre (about 405 m2) per family of four",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 650,
+   "pattern": 177,
+   "pattern_name": "Vegetable Garden",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. A community/neighbourhood allocation for self-sufficiency, not a herb-bed size for one villa; the brief asks for a herb bed, not a kitchen garden. Recorded, not enforced.",
+   "pdf_page_end": 651,
+   "therefore_pdf_page": 650
+  },
+  {
+   "id": "APL-170-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 170 Fruit Trees, problem statement (bold paragraph after the context lines); PDF page 630 (1-based)",
+   "quote": "In the climates where fruit trees grow, the orchards give the land an almost magical identity: think of the orange groves of Southern California, the cherry trees of Japan, the olive trees of Greece. But the growth of cities seems always to destroy these trees and the quality they possess.",
+   "value": "problem of pattern 170",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 629,
+   "pattern": 170,
+   "pattern_name": "Fruit Trees",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-170-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 170 Fruit Trees, solution paragraph after Therefore:; PDF page 630 (1-based)",
+   "quote": "Plant small orchards of fruit trees in gardens and on common land along paths and streets, in parks, in neighborhoods: wherever there are well-established groups that can themselves care for the trees and harvest the fruit.",
+   "value": "therefore of pattern 170",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 629,
+   "pattern": 170,
+   "pattern_name": "Fruit Trees",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated (small orchards).",
+   "therefore_pdf_page": 629
+  },
+  {
+   "id": "APL-120-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 120 Paths And Goals, problem statement (bold paragraph after the context lines); PDF page 473 (1-based)",
+   "quote": "The layout of paths will seem right and comfortable only when it is compatible with the process of walking. And the process of walking is far more subtle than one might imagine.",
+   "value": "problem of pattern 120",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 472,
+   "pattern": 120,
+   "pattern_name": "Paths and Goals",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-120-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 120 Paths And Goals, solution paragraph after Therefore:; PDF page 474 (1-based)",
+   "quote": "To lay out paths, first place goals at natural points of interest Then connect the goals to one another to form the paths. The paths may be straight, or gently curving between goals; their paving should swell around the goal. The goals should never be more than a few hundred feet apart.",
+   "value": "therefore of pattern 120",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 473,
+   "pattern": 120,
+   "pattern_name": "Paths and Goals",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 473
+  },
+  {
+   "id": "APL-121-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 121 Path Shape, problem statement (bold paragraph after the context lines); PDF page 475 (1-based)",
+   "quote": "Streets should be for staying in, and not just for moving through, the way they are today.",
+   "value": "problem of pattern 121",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 474,
+   "pattern": 121,
+   "pattern_name": "Path Shape",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-121-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 121 Path Shape, solution paragraph after Therefore:; PDF page 476 (1-based)",
+   "quote": "Make a bulge in the middle of a public path, and make the ends narrower, so that the path forms an enclosure which is a place to stay, not just a place to pass through.",
+   "value": "therefore of pattern 121",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 475,
+   "pattern": 121,
+   "pattern_name": "Path Shape",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 475
+  },
+  {
+   "id": "APL-125-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 125 Stair Seats, problem statement (bold paragraph after the context lines); PDF page 483 (1-based)",
+   "quote": "Wherever there is action in a place, the spots which are the most inviting, are those high enough to give people a vantage point, and low enough to put them in action.",
+   "value": "problem of pattern 125",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 482,
+   "pattern": 125,
+   "pattern_name": "Stair Seats",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-125-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 125 Stair Seats, solution paragraph after Therefore:; PDF page 484 (1-based)",
+   "quote": "In any public place where people loiter, add a few steps at the edge where stain come down or where there is a change of level Make these raised areas immediately accessible from below, so that people may congregate and sit to watch the goings-on.",
+   "value": "therefore of pattern 125",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 483,
+   "pattern": 125,
+   "pattern_name": "Stair Seats",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 483
+  },
+  {
+   "id": "APL-241-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 241 Seat Spots, problem statement (bold paragraph after the context lines); PDF page 898 (1-based)",
+   "quote": "Where outdoor aeati are set down without regard for tew and climate, they will almost certainly be useless.",
+   "value": "problem of pattern 241",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 897,
+   "pattern": 241,
+   "pattern_name": "Seat Spots",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-241-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 241 Seat Spots, solution paragraph after Therefore:; PDF page 899 (1-based)",
+   "quote": "Choosing good spots for outdoor seats is far more important than building fancy benches. Indeed, if the spot is right, the most simple kind of seat is perfect. In cool climates, choose them to face the sun, and to be protected from the wind; in hot climates, put them in shade and open to summer breezes. In both cases, place them to face activities.",
+   "value": "therefore of pattern 241",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 898,
+   "pattern": 241,
+   "pattern_name": "Seat Spots",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips.",
+   "therefore_pdf_page": 898
+  },
+  {
+   "id": "APL-245-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 245 Raised Flowers, problem statement (bold paragraph after the context lines); PDF page 914 (1-based)",
+   "quote": "Flowers are beautiful along the edges of paths, buildings, outdoor rooms—but it is just in these places that they need the most protection from traffic. Without some protection they cannot easily survive.",
+   "value": "problem of pattern 245",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 913,
+   "pattern": 245,
+   "pattern_name": "Raised Flowers",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-245-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 245 Raised Flowers, solution paragraph after Therefore:; PDF page 915 (1-based)",
+   "quote": "Soften the edges of buildings, paths, and outdoor areas with flowers. Raise the flower beds so that people can touch the flowers, bend to smell them, and sit by them. And build the flower beds with solid edges, so that people can sit on them, among the flowers too.",
+   "value": "therefore of pattern 245",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 914,
+   "pattern": 245,
+   "pattern_name": "Raised Flowers",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 914
+  },
+  {
+   "id": "APL-247-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 247 Paving With Cracks Between, problem statement (bold paragraph after the context lines); PDF page 917 (1-based)",
+   "quote": "Asphalt and concrete surfaces outdoors are easy to wash down, but they do nothing for us, nothing for the paths, and nothing for the rainwater and plants.",
+   "value": "problem of pattern 247",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 916,
+   "pattern": 247,
+   "pattern_name": "Paving with Cracks between the Stones",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-247-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 247 Paving With Cracks Between, solution paragraph after Therefore:; PDF page 918 (1-based)",
+   "quote": "On paths and terraces, lay paving stones with a I inch crack between the stones, so that grass and mosses and small (lowers can grow between the stones. Lay the stones directly into earth, not into mortar, and, of course, use no cement or mortar in between the stones.",
+   "value": "solution of pattern 247; figure in the book: 1 in (about 25 mm) crack between stones, stones laid in earth not mortar",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 917,
+   "pattern": 247,
+   "pattern_name": "Paving with Cracks between the Stones",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. A detail, and unambiguous as a figure, but the garden's paving is specified by Time-Saver slope and surface rules and by client finishes (concrete, flagstone); a crack width is a build instruction, not a pass/fail test of the layout. Advisory.",
+   "therefore_pdf_page": 917
+  },
+  {
+   "id": "APL-168-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 168 Connection To The Earth, problem statement (bold paragraph after the context lines); PDF page 622 (1-based)",
+   "quote": "A house feels isolated from the nature around it, unless its floors are interleaved directly with the earth that is around the house.",
+   "value": "problem of pattern 168",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 621,
+   "pattern": 168,
+   "pattern_name": "Connection to the Earth",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-168-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 168 Connection To The Earth, solution paragraph after Therefore:; PDF page 623 (1-based)",
+   "quote": "Connect the building to the earth around it by building a series of paths and terraces and steps around the edge. Place them deliberately to make the boundary ambiguous—so that it is impossible to say exactly where the building stops and earth begins.",
+   "value": "therefore of pattern 168",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 622,
+   "pattern": 168,
+   "pattern_name": "Connection to the Earth",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 622
+  },
+  {
+   "id": "APL-104-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 104 Site Repair, problem statement (bold paragraph after the context lines); PDF page 413 (1-based)",
+   "quote": "Buildings must always be built on those parts of the land which are in the worst condition, not the best.",
+   "value": "problem of pattern 104",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 412,
+   "pattern": 104,
+   "pattern_name": "Site Repair",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-104-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 104 Site Repair, solution paragraph after Therefore:; PDF page 415 (1-based)",
+   "quote": "On no account place buildings in the places which are most beautiful. In fact, do the opposite. Consider the site and its buildings as a single living eco-system. Leave those areas that are the most precious, beautiful, comfortable, and healthy as they are, and build new structures in those parts of the site which are least pleasant now.",
+   "value": "therefore of pattern 104",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 414,
+   "pattern": 104,
+   "pattern_name": "Site Repair",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "therefore_pdf_page": 414
+  },
+  {
+   "id": "APL-60-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 60 Accessible Green, problem statement (bold paragraph after the context lines); PDF page 252 (1-based)",
+   "quote": "People need green open places to go to; when they are close they use them. But if the greens are more than three minutes away, the distance overwhelms the need.",
+   "value": "problem of pattern 60",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 251,
+   "pattern": 60,
+   "pattern_name": "Accessible Green",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-60-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 60 Accessible Green, solution paragraph after Therefore:; PDF page 256 (1-based)",
+   "quote": "Build one open public green within three minutes’ walk—about 750 feet—of every house and workplace. This means that the greens need to be uniformly scattered at 1500-foot intervals, throughout the city. Make the greens at least 150 feet across, and at least 60,000 square feet in area.",
+   "value": "solution of pattern 60; figure in the book: 3 minutes walk (about 750 ft = 229 m); 150 ft (46 m) across; 60,000 sq ft (5 574 m2)",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 255,
+   "pattern": 60,
+   "pattern_name": "Accessible Green",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. City-planning scale: a public green per neighbourhood. A private villa garden is not a public green; the figures do not apply to the plot. Advisory.",
+   "therefore_pdf_page": 255
+  },
+  {
+   "id": "APL-243-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 243 Sitting Wall, problem statement (bold paragraph after the context lines); PDF page 906 (1-based)",
+   "quote": "In many places walls and fences between outdoor spaces are too high; but no boundary at all does injustice to the subtlety of the divisions between the spaces.",
+   "value": "problem of pattern 243",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 905,
+   "pattern": 243,
+   "pattern_name": "Sitting Wall",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-243-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 243 Sitting Wall, solution paragraph after Therefore:; PDF page 907 (1-based)",
+   "quote": "Surround any natural outdoor area, and make minor boundaries between outdoor areas with low walls, about 16 inches high, and wide enough to sit on, at least 12 inches wide.",
+   "value": "solution of pattern 243; figure in the book: about 16 in (about 405 mm) high, at least 12 in (about 305 mm) wide",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 906,
+   "pattern": 243,
+   "pattern_name": "Sitting Wall",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. Consistent with computed LS-SEATWALL (350-450 high, 400-450 wide from Time-Saver); that rule keeps the Time-Saver figure, which is wider than this book's minimum. Alexander's figure is not used to change it. Advisory.",
+   "therefore_pdf_page": 906
+  },
+  {
+   "id": "APL-244-problem",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 244 Canvas Roofs, problem statement (bold paragraph after the context lines); PDF page 910 (1-based)",
+   "quote": "There is a very special beauty about tents and canvas awnings. The canvas has a softness, a suppleness, which is in harmony with wind and light and sun. A house or any building built with some canvas will touch all the elements more nearly than it can when it is made only with hard conventional materials.",
+   "value": "problem of pattern 244",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 909,
+   "pattern": 244,
+   "pattern_name": "Canvas Roofs",
+   "role": "problem",
+   "note": "Quote is the text layer verbatim, including its OCR slips."
+  },
+  {
+   "id": "APL-244-therefore",
+   "document": "Alexander, Ishikawa, Silverstein et al., A Pattern Language",
+   "edition": "Oxford University Press, 1977 (reflowed PDF of the client's purchased copy; no printed page numbers in this PDF)",
+   "locator": "pattern 244 Canvas Roofs, solution paragraph after Therefore:; PDF page 911 (1-based, continues to 912)",
+   "quote": "Build canvas roofs and walls and awnings wherever there are spaces which need softer light or partial shade in summer, or partial protection from mist and dew in autumn and winter. Build them to fold away, with ropes or wires to pull them, so that they can easily be opened.",
+   "value": "therefore of pattern 244",
+   "status": "sourced",
+   "book": "pattern-language",
+   "pdf_page": 910,
+   "pattern": 244,
+   "pattern_name": "Canvas Roofs",
+   "role": "therefore",
+   "note": "Quote is the text layer verbatim, including its OCR slips. No figure stated.",
+   "pdf_page_end": 911,
+   "therefore_pdf_page": 910
   }
  ],
  "rules": [
@@ -3407,7 +4311,13 @@
     "CH-122-9",
     "CH-144-0",
     "CH-165-5",
-    "CH-17-7"
+    "CH-17-7",
+    "APL-106-problem",
+    "APL-106-therefore",
+    "APL-163-problem",
+    "APL-163-therefore",
+    "APL-173-problem",
+    "APL-173-therefore"
    ],
    "prompt": "Does each use area have a defined floor, a wall at or above eye level on at least one side, and an overhead plane (tree, pergola)? Ching: a wall along an edge begins to define a positive outdoor space; a plane near eye height begins to separate one space from another; trellis members give moderate enclosure.",
    "applies_to": "dining, lounge, quiet"
@@ -3419,7 +4329,9 @@
    "sources": [
     "CH-130-2",
     "CH-132-47",
-    "CH-228-48"
+    "CH-228-48",
+    "APL-124-problem",
+    "APL-124-therefore"
    ],
    "prompt": "Is each zone distinguished from its neighbour by a perceptible change of surface, texture or level (rather than a drawn line)?",
    "applies_to": "all zones"
@@ -3430,7 +4342,9 @@
    "reference": "Ching pp.213-216",
    "sources": [
     "CH-213-13",
-    "CH-215-14"
+    "CH-215-14",
+    "APL-111-problem",
+    "APL-111-therefore"
    ],
    "prompt": "Is the pond, the best planting or the garden beyond revealed through a deliberate opening, and tighter framed from one place than another?",
    "applies_to": "pond, quiet corner"
@@ -3444,7 +4358,9 @@
     "CH-402-22",
     "CH-402-23",
     "CH-234-24",
-    "CP-256-25"
+    "CP-256-25",
+    "APL-126-problem",
+    "APL-126-therefore"
    ],
    "prompt": "Does the gathering space have one primary focal point (the fire, a tree or a table) with lesser accents, rather than everything emphasised? Ching: when everything is emphasised, nothing is.",
    "applies_to": "south garden"
@@ -3494,7 +4410,9 @@
     "CH-290-34",
     "CH-290-35",
     "CH-291-36",
-    "CP-313-40"
+    "CP-313-40",
+    "APL-174-problem",
+    "APL-174-therefore"
    ],
    "prompt": "Is each passage between zones (house to terrace, south garden to quiet corner) marked by a threshold: a change of level or surface, a pergola or a gate-like pair of elements?",
    "applies_to": "transitions"
@@ -3506,7 +4424,11 @@
    "sources": [
     "CH-304-37",
     "CH-232-38",
-    "CP-258-39"
+    "CP-258-39",
+    "APL-114-problem",
+    "APL-114-therefore",
+    "APL-59-problem",
+    "APL-59-therefore"
    ],
    "prompt": "Is there a graded sequence from the social space through a semi-private zone to the quiet corner, with the quiet corner reached without crossing the gathering space?",
    "applies_to": "whole garden"
@@ -3519,7 +4441,11 @@
     "CH-282-41",
     "CH-304-43",
     "CH-305-44",
-    "CH-318-45"
+    "CH-318-45",
+    "APL-120-problem",
+    "APL-120-therefore",
+    "APL-121-problem",
+    "APL-121-therefore"
    ],
    "prompt": "Does each path run to a destination, is the main route distinguishable from minor ones, and does it pass a space along its edge rather than through the middle where the space is for lingering?",
    "applies_to": "paths"
@@ -3530,7 +4456,11 @@
    "reference": "Ching p.137",
    "sources": [
     "CH-137-49",
-    "CH-130-46"
+    "CH-130-46",
+    "APL-176-problem",
+    "APL-176-therefore",
+    "APL-241-problem",
+    "APL-241-therefore"
    ],
    "prompt": "Is there a place to sit that is slightly apart or raised, with a view of the activity (Ching: a retreat from the activity or a platform for viewing)?",
    "applies_to": "quiet corner"
@@ -3542,7 +4472,9 @@
    "sources": [
     "CH-144-0",
     "CH-159-53",
-    "CH-175-52"
+    "CH-175-52",
+    "APL-171-problem",
+    "APL-171-therefore"
    ],
    "prompt": "Is a shade tree or small grove used as the roof of a gathering place, with a seat beneath?",
    "applies_to": "lounge, quiet"
@@ -3565,7 +4497,9 @@
    "title": "Court planting and water cool a hot dry site",
    "reference": "Ching p.57",
    "sources": [
-    "CH-57-51"
+    "CH-57-51",
+    "APL-64-problem",
+    "APL-64-therefore"
    ],
    "prompt": "In a hot-arid climate, do the enclosed court, planting and water work as a cooling microclimate? (Ching lists water features for evaporative cooling for hot-arid regions.)",
    "applies_to": "south garden, pond"
@@ -3681,6 +4615,160 @@
    ],
    "prompt": "A koi pond at 900 mm is deeper than the 300 mm at which Queensland treats a structure as a pool (ornamental fish ponds are exempt there, and RLSS WA still recommends a barrier). Somerset says a 500 mm pond is equivalent to an adult falling into 1 800 mm. Has the client been told this at the concept gate, and is a grille or protection chosen (LS-POND-GUARD)?",
    "applies_to": "koi pond"
+  },
+  {
+   "id": "AD-APL-105",
+   "title": "South Facing Outdoors",
+   "reference": "Alexander, A Pattern Language, 105 South Facing Outdoors; PDF pages 417-419",
+   "sources": [
+    "APL-105-problem",
+    "APL-105-therefore"
+   ],
+   "prompt": "Is the outdoor space placed to the south of the building, with no deep band of shade between the building and the sunny part? (Latitude is a stand-in until the real site is set.)",
+   "applies_to": "dining, lounge, quiet"
+  },
+  {
+   "id": "AD-APL-172",
+   "title": "Garden Growing Wild",
+   "reference": "Alexander, A Pattern Language, 172 Garden Growing Wild; PDF pages 637-638",
+   "sources": [
+    "APL-172-problem",
+    "APL-172-therefore"
+   ],
+   "prompt": "Is any planting meant to read as a garden growing wild (intermingled, no bare earth, rough-edged boundaries) rather than a formal bed? A taste, to put to the client, not a test.",
+   "applies_to": "planting"
+  },
+  {
+   "id": "AD-APL-71",
+   "title": "Still Water",
+   "reference": "Alexander, A Pattern Language, 71 Still Water; PDF pages 290-292",
+   "sources": [
+    "APL-71-problem",
+    "APL-71-therefore"
+   ],
+   "prompt": "Where water is a still pond or pool, does a person enter it by a shallow edge that deepens gradually, rather than a sheer drop? Alexander writes this for swimming pools; here it is a prompt for the koi pond edge, to read with AD-POND-DEPTH-HAZARD.",
+   "applies_to": "koi pond"
+  },
+  {
+   "id": "AD-APL-246",
+   "title": "Climbing Plants",
+   "reference": "Alexander, A Pattern Language, 246 Climbing Plants; PDF pages 915-916",
+   "sources": [
+    "APL-246-problem",
+    "APL-246-therefore"
+   ],
+   "prompt": "On the sunny walls of the house or garden walls, are climbing plants trained round windows, doors, pergolas or trellises?",
+   "applies_to": "planting on structure"
+  },
+  {
+   "id": "AD-APL-177",
+   "title": "Vegetable Garden",
+   "reference": "Alexander, A Pattern Language, 177 Vegetable Garden; PDF pages 650-652",
+   "sources": [
+    "APL-177-problem",
+    "APL-177-therefore"
+   ],
+   "prompt": "Is there a sunny, central, fenced piece of ground for growing food, with a tool store beside it? Alexander sizes this per family from a community perspective, which does not scale to one villa; use it as a prompt for the herb bed.",
+   "applies_to": "herb bed"
+  },
+  {
+   "id": "AD-APL-170",
+   "title": "Fruit Trees",
+   "reference": "Alexander, A Pattern Language, 170 Fruit Trees; PDF pages 630-630",
+   "sources": [
+    "APL-170-problem",
+    "APL-170-therefore"
+   ],
+   "prompt": "Are fruit trees planted as a small orchard or group that people care for and harvest, rather than as a single ornamental tree?",
+   "applies_to": "fruit trees"
+  },
+  {
+   "id": "AD-APL-125",
+   "title": "Stair Seats",
+   "reference": "Alexander, A Pattern Language, 125 Stair Seats; PDF pages 483-484",
+   "sources": [
+    "APL-125-problem",
+    "APL-125-therefore"
+   ],
+   "prompt": "Where the garden changes level, are a few steps at the edge raised so people can sit and watch from them, immediately reachable from below?",
+   "applies_to": "steps, level changes"
+  },
+  {
+   "id": "AD-APL-245",
+   "title": "Raised Flowers",
+   "reference": "Alexander, A Pattern Language, 245 Raised Flowers; PDF pages 914-915",
+   "sources": [
+    "APL-245-problem",
+    "APL-245-therefore"
+   ],
+   "prompt": "Are flower beds raised with solid, sit-on edges beside paths, entrances and outdoor rooms, so people can touch and smell them, instead of low borders or tall tubs?",
+   "applies_to": "planting"
+  },
+  {
+   "id": "AD-APL-247",
+   "title": "Paving with Cracks between the Stones",
+   "reference": "Alexander, A Pattern Language, 247 Paving with Cracks between the Stones; PDF pages 917-918",
+   "sources": [
+    "APL-247-problem",
+    "APL-247-therefore"
+   ],
+   "prompt": "On paths and terraces, is any paving laid so grass, moss and small flowers can grow between the stones, rather than sealed concrete or mortar joints? (A finish choice for the client; the book's 1 in joint is in the card.)",
+   "applies_to": "paths, terraces"
+  },
+  {
+   "id": "AD-APL-168",
+   "title": "Connection to the Earth",
+   "reference": "Alexander, A Pattern Language, 168 Connection to the Earth; PDF pages 622-623",
+   "sources": [
+    "APL-168-problem",
+    "APL-168-therefore"
+   ],
+   "prompt": "Do paths, terraces and steps interleave the house with the earth so the boundary between building and ground is ambiguous, rather than a hard edge?",
+   "applies_to": "house-garden edge"
+  },
+  {
+   "id": "AD-APL-104",
+   "title": "Site Repair",
+   "reference": "Alexander, A Pattern Language, 104 Site Repair; PDF pages 413-415",
+   "sources": [
+    "APL-104-problem",
+    "APL-104-therefore"
+   ],
+   "prompt": "Is the building placed on the poorest part of the site, leaving the most beautiful and healthy parts (mature trees, best soil, best view) untouched? A siting prompt for the concept gate, before the garden is drawn.",
+   "applies_to": "site"
+  },
+  {
+   "id": "AD-APL-60",
+   "title": "Accessible Green",
+   "reference": "Alexander, A Pattern Language, 60 Accessible Green; PDF pages 252-256",
+   "sources": [
+    "APL-60-problem",
+    "APL-60-therefore"
+   ],
+   "prompt": "Is there a green place to go to within a few minutes' walk of the house? In a private villa the garden itself is that green; this is a prompt, because the book's sizes are for public greens.",
+   "applies_to": "garden as a whole"
+  },
+  {
+   "id": "AD-APL-243",
+   "title": "Sitting Wall",
+   "reference": "Alexander, A Pattern Language, 243 Sitting Wall; PDF pages 906-907",
+   "sources": [
+    "APL-243-problem",
+    "APL-243-therefore"
+   ],
+   "prompt": "Are minor boundaries between outdoor areas low walls at sitting height, wide enough to sit on, rather than high fences or no boundary at all? Read with LS-SEATWALL, which carries the number.",
+   "applies_to": "seat walls, edges"
+  },
+  {
+   "id": "AD-APL-244",
+   "title": "Canvas Roofs",
+   "reference": "Alexander, A Pattern Language, 244 Canvas Roofs; PDF pages 910-912",
+   "sources": [
+    "APL-244-problem",
+    "APL-244-therefore"
+   ],
+   "prompt": "Where a dining or lounge space needs softer light or partial summer shade, is a folding canvas roof or awning considered, which can be opened and closed?",
+   "applies_to": "dining, lounge"
   }
  ],
  "gaps": [
@@ -3773,335 +4861,7 @@
    "interim": "LS-SCREEN warns on hedges"
   }
  ],
- "withdrawn": [
-  {
-   "id": "AD-APL-106",
-   "title": "Positive Outdoor Space",
-   "reference": "Alexander, A Pattern Language, 106 Positive Outdoor Space",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "covered",
-   "held_idea": "(a)/(h) enclosure, place-making",
-   "held_note": "Ching uses \"positive outdoor space\" for building edges defining an outdoor space.",
-   "regrounded_as": [
-    "AD-COMP-ENCLOSURE"
-   ]
-  },
-  {
-   "id": "AD-APL-163",
-   "title": "Outdoor Room",
-   "reference": "Alexander, A Pattern Language, 163 Outdoor Room",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "covered",
-   "held_idea": "(a) enclosure of a space",
-   "held_note": "Ching names the outdoor room strategy and the overhead/vertical/base planes that make it.",
-   "regrounded_as": [
-    "AD-COMP-ENCLOSURE"
-   ]
-  },
-  {
-   "id": "AD-APL-114",
-   "title": "Hierarchy of Open Space",
-   "reference": "Alexander, A Pattern Language, 114 Hierarchy of Open Space",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(f) public-to-private hierarchy",
-   "held_note": "Held text grades public, private and service routes and graded enclosure, but at building not open-space scale.",
-   "regrounded_as": [
-    "AD-COMP-HIERARCHY"
-   ]
-  },
-  {
-   "id": "AD-APL-105",
-   "title": "South Facing Outdoors",
-   "reference": "Alexander, A Pattern Language, 105 South Facing Outdoors",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(none) sun orientation of outdoor space",
-   "held_note": "No held equivalent; Ching climate remarks are about shading windows and outdoor spaces by region, not facing the sun.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-111",
-   "title": "Half-Hidden Garden",
-   "reference": "Alexander, A Pattern Language, 111 Half-Hidden Garden",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(b)/(e) partial reveal, concealment",
-   "held_note": "\"hint at what lies beyond\" covers partial reveal; not the half-hidden garden itself.",
-   "regrounded_as": [
-    "AD-COMP-FRAMING"
-   ]
-  },
-  {
-   "id": "AD-APL-59",
-   "title": "Quiet Backs",
-   "reference": "Alexander, A Pattern Language, 59 Quiet Backs",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(f) privacy / back vs front",
-   "held_note": "Held text only says spaces must be segregated for privacy and puts service on the back of a wing; quiet side of a street is not addressed.",
-   "regrounded_as": [
-    "AD-COMP-HIERARCHY"
-   ]
-  },
-  {
-   "id": "AD-APL-171",
-   "title": "Tree Places",
-   "reference": "Alexander, A Pattern Language, 171 Tree Places",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(j) planting as element / (a) overhead",
-   "held_note": "Shade tree as overhead plane and bosket as shady place; no tree-place siting guidance.",
-   "regrounded_as": [
-    "AD-COMP-TREE-CANOPY"
-   ]
-  },
-  {
-   "id": "AD-APL-176",
-   "title": "Garden Seat",
-   "reference": "Alexander, A Pattern Language, 176 Garden Seat",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(i) seating at edge, prospect and refuge",
-   "held_note": "Raised retreat with view is covered; seat placement at a garden edge is not.",
-   "regrounded_as": [
-    "AD-COMP-REFUGE"
-   ]
-  },
-  {
-   "id": "AD-APL-172",
-   "title": "Garden Growing Wild",
-   "reference": "Alexander, A Pattern Language, 172 Garden Growing Wild",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) planting character",
-   "held_note": "No equivalent in held texts.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-64",
-   "title": "Pools and Streams",
-   "reference": "Alexander, A Pattern Language, 64 Pools and Streams",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(j) water as element",
-   "held_note": "Only water features for evaporative cooling in a court.",
-   "regrounded_as": [
-    "AD-COMP-COURT-COOL"
-   ]
-  },
-  {
-   "id": "AD-APL-71",
-   "title": "Still Water",
-   "reference": "Alexander, A Pattern Language, 71 Still Water",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) water as element",
-   "held_note": "No passage on still water as a quality; only the cooling remark and a metaphor.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-124",
-   "title": "Activity Pockets",
-   "reference": "Alexander, A Pattern Language, 124 Activity Pockets",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(h)/(i) small defined places along an edge",
-   "held_note": "Zones defined within a larger context by surface or level change are covered; edge pockets for activity are not.",
-   "regrounded_as": [
-    "AD-COMP-BASE-PLANE"
-   ]
-  },
-  {
-   "id": "AD-APL-126",
-   "title": "Something Roughly in the Middle",
-   "reference": "Alexander, A Pattern Language, 126 Something Roughly in the Middle",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(c) centre / focal point",
-   "held_note": "Central dominant space and hierarchy of placement are covered; a garden middle object is not specifically addressed.",
-   "regrounded_as": [
-    "AD-COMP-FOCAL"
-   ]
-  },
-  {
-   "id": "AD-APL-173",
-   "title": "Garden Wall",
-   "reference": "Alexander, A Pattern Language, 173 Garden Wall",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "covered",
-   "held_idea": "(a) enclosure by vertical plane",
-   "held_note": "Height of a vertical plane against body and eye level is covered explicitly.",
-   "regrounded_as": [
-    "AD-COMP-ENCLOSURE"
-   ]
-  },
-  {
-   "id": "AD-APL-246",
-   "title": "Climbing Plants",
-   "reference": "Alexander, A Pattern Language, 246 Climbing Plants",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) planting on structure",
-   "held_note": "Trellis as enclosure is covered, but climbers are not mentioned.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-174",
-   "title": "Trellised Walk",
-   "reference": "Alexander, A Pattern Language, 174 Trellised Walk",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(a)/(g) pergola promenade",
-   "held_note": "Colonnaded arbor and tree-bordered promenade defining a linear space are listed; no walking-experience guidance.",
-   "regrounded_as": [
-    "AD-COMP-THRESHOLD"
-   ]
-  },
-  {
-   "id": "AD-APL-177",
-   "title": "Vegetable Garden",
-   "reference": "Alexander, A Pattern Language, 177 Vegetable Garden",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) planting use",
-   "held_note": "Productive planting is outside the held texts.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-170",
-   "title": "Fruit Trees",
-   "reference": "Alexander, A Pattern Language, 170 Fruit Trees",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) planting",
-   "held_note": "No equivalent; only shade tree and grove references.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-120",
-   "title": "Paths and Goals",
-   "reference": "Alexander, A Pattern Language, 120 Paths and Goals",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "covered",
-   "held_idea": "(g) path to a destination",
-   "held_note": "Path terminating in a space, axis ends and approach all covered.",
-   "regrounded_as": [
-    "AD-COMP-PATH"
-   ]
-  },
-  {
-   "id": "AD-APL-121",
-   "title": "Path Shape",
-   "reference": "Alexander, A Pattern Language, 121 Path Shape",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(g) path configuration",
-   "held_note": "Configuration, nodes and pause points covered; no detailed shaping of widths or bends for walking.",
-   "regrounded_as": [
-    "AD-COMP-PATH"
-   ]
-  },
-  {
-   "id": "AD-APL-125",
-   "title": "Stair Seats",
-   "reference": "Alexander, A Pattern Language, 125 Stair Seats",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(i) seating at level change",
-   "held_note": "Stairs as human-scale elements appear, but seating on stairs does not.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-241",
-   "title": "Seat Spots",
-   "reference": "Alexander, A Pattern Language, 241 Seat Spots",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "partly",
-   "held_idea": "(i) seating at edge, prospect and refuge",
-   "held_note": "Retreat and viewing platform covered; no seat siting rules.",
-   "regrounded_as": [
-    "AD-COMP-REFUGE"
-   ]
-  },
-  {
-   "id": "AD-APL-245",
-   "title": "Raised Flowers",
-   "reference": "Alexander, A Pattern Language, 245 Raised Flowers",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(j) raised planting",
-   "held_note": "Raised base plane is covered generically, not as planting beds.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-247",
-   "title": "Paving with Cracks Between the Stones",
-   "reference": "Alexander, A Pattern Language, 247 Paving with Cracks Between the Stones",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(none) surface detail",
-   "held_note": "No equivalent; surface articulation only at zone level.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-168",
-   "title": "Connection to the Earth",
-   "reference": "Alexander, A Pattern Language, 168 Connection to the Earth",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(a)/(h) ground plane, building and ground",
-   "held_note": "Only figure captions (building embedded in the landscape); no passage.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-104",
-   "title": "Site Repair",
-   "reference": "Alexander, A Pattern Language, 104 Site Repair",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(none) siting strategy",
-   "held_note": "No equivalent in held texts.",
-   "regrounded_as": []
-  },
-  {
-   "id": "AD-APL-60",
-   "title": "Accessible Green",
-   "reference": "Alexander, A Pattern Language, 60 Accessible Green",
-   "status": "unverified — not used",
-   "reason": "A Pattern Language is not held; cited from memory in the first pass, so no critic may cite it.",
-   "held_equivalent": "none",
-   "held_idea": "(f)/(g) proximity of open space",
-   "held_note": "Held texts do not address access to green space.",
-   "regrounded_as": []
-  }
- ],
+ "withdrawn": [],
  "closed_gaps": [
   {
    "id": "GAP-PATH-SERVICE",
@@ -4163,5 +4923,243 @@
    "closed_by": "AD-COMP-*",
    "figure": "composition prompts re-grounded on Ching, Form Space and Order and Clark & Pause, Precedents in Architecture (Unwin: image-only PDF, not readable)"
   }
- ]
+ ],
+ "apl_verification": {
+  "date": "2026-11-22",
+  "source": "client-purchased A Pattern Language PDF (not committed)",
+  "patterns": [
+   {
+    "pattern": 106,
+    "memory_name": "Positive Outdoor Space",
+    "book_name": "Positive Outdoor Space",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-ENCLOSURE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 163,
+    "memory_name": "Outdoor Room",
+    "book_name": "Outdoor Room",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-ENCLOSURE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 114,
+    "memory_name": "Hierarchy of Open Space",
+    "book_name": "Hierarchy of Open Space",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-HIERARCHY",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 105,
+    "memory_name": "South Facing Outdoors",
+    "book_name": "South Facing Outdoors",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-105",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 111,
+    "memory_name": "Half-Hidden Garden",
+    "book_name": "Half-hidden Garden",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-FRAMING",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 59,
+    "memory_name": "Quiet Backs",
+    "book_name": "Quiet Backs",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-HIERARCHY",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 171,
+    "memory_name": "Tree Places",
+    "book_name": "Tree Places",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-TREE-CANOPY",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 176,
+    "memory_name": "Garden Seat",
+    "book_name": "Garden Seat",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-REFUGE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 172,
+    "memory_name": "Garden Growing Wild",
+    "book_name": "Garden Growing Wild",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-172",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 64,
+    "memory_name": "Pools and Streams",
+    "book_name": "Pools and Streams",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-COURT-COOL",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 71,
+    "memory_name": "Still Water",
+    "book_name": "Still Water",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-71",
+    "figure_in_solution": "1-2 in (25-50 mm) starting depth; entrance from the shallow side"
+   },
+   {
+    "pattern": 124,
+    "memory_name": "Activity Pockets",
+    "book_name": "Activity Pockets",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-BASE-PLANE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 126,
+    "memory_name": "Something Roughly in the Middle",
+    "book_name": "Something Roughly in the Middle",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-FOCAL",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 173,
+    "memory_name": "Garden Wall",
+    "book_name": "Garden Wall",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-ENCLOSURE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 246,
+    "memory_name": "Climbing Plants",
+    "book_name": "Climbing Plants",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-246",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 174,
+    "memory_name": "Trellised Walk",
+    "book_name": "Trellised Walk",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-THRESHOLD",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 177,
+    "memory_name": "Vegetable Garden",
+    "book_name": "Vegetable Garden",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-177",
+    "figure_in_solution": "about 1/10 acre (about 405 m2) per family of four"
+   },
+   {
+    "pattern": 170,
+    "memory_name": "Fruit Trees",
+    "book_name": "Fruit Trees",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-170",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 120,
+    "memory_name": "Paths and Goals",
+    "book_name": "Paths and Goals",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-PATH",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 121,
+    "memory_name": "Path Shape",
+    "book_name": "Path Shape",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-PATH",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 125,
+    "memory_name": "Stair Seats",
+    "book_name": "Stair Seats",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-125",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 241,
+    "memory_name": "Seat Spots",
+    "book_name": "Seat Spots",
+    "name_match": true,
+    "disposition": "cited beside the held-book source by AD-COMP-REFUGE",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 245,
+    "memory_name": "Raised Flowers",
+    "book_name": "Raised Flowers",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-245",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 247,
+    "memory_name": "Paving with Cracks Between the Stones",
+    "book_name": "Paving with Cracks between the Stones",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-247",
+    "figure_in_solution": "1 in (about 25 mm) crack between stones, stones laid in earth not mortar"
+   },
+   {
+    "pattern": 168,
+    "memory_name": "Connection to the Earth",
+    "book_name": "Connection to the Earth",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-168",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 104,
+    "memory_name": "Site Repair",
+    "book_name": "Site Repair",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-104",
+    "figure_in_solution": null
+   },
+   {
+    "pattern": 60,
+    "memory_name": "Accessible Green",
+    "book_name": "Accessible Green",
+    "name_match": true,
+    "disposition": "reinstated advisory AD-APL-60",
+    "figure_in_solution": "3 minutes walk (about 750 ft = 229 m); 150 ft (46 m) across; 60,000 sq ft (5 574 m2)"
+   },
+   {
+    "pattern": 243,
+    "memory_name": null,
+    "book_name": "Sitting Wall",
+    "name_match": null,
+    "disposition": "added advisory AD-APL-243 (not in the first-pass list)",
+    "figure_in_solution": "about 16 in (about 405 mm) high, at least 12 in (about 305 mm) wide"
+   },
+   {
+    "pattern": 244,
+    "memory_name": null,
+    "book_name": "Canvas Roofs",
+    "name_match": null,
+    "disposition": "added advisory AD-APL-244 (not in the first-pass list)",
+    "figure_in_solution": null
+   }
+  ]
+ }
 }

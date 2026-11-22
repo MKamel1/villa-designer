@@ -26,7 +26,7 @@ class Loader(unittest.TestCase):
         for rid, ids in RS.source_ids.items():
             self.assertTrue(ids, rid)
         self.assertEqual(len(RS.params), 41)
-        self.assertEqual(len(RS.advisory_ids), 30)
+        self.assertEqual(len(RS.advisory_ids), 44)
 
     def test_advisory_rules_carry_no_measurement_and_are_advisory_kind(self):
         for i in RS.advisory_ids:
@@ -57,18 +57,46 @@ class Loader(unittest.TestCase):
         used = {i for ids in RS.source_ids.values() for i in ids}
         self.assertNotIn("TS-530-15-depth-NOT-KOI", used)
 
-    def test_pattern_language_is_withdrawn_and_cannot_be_cited(self):
-        self.assertEqual(len(RS.withdrawn), 27)
-        self.assertFalse([i for i in RS.rules if i.startswith("AD-APL")])
-        self.assertNotIn("AL-APL-numbers", RS.sources)
-        self.assertTrue(all(w["status"] == "unverified — not used" for w in RS.withdrawn.values()))
-        # a withdrawn rule that is also active, or with the wrong status, is refused
+    def test_pattern_language_is_held_and_every_pattern_is_advisory(self):
+        self.assertEqual(RS.withdrawn, {})
+        ver = RS.data["apl_verification"]["patterns"]
+        self.assertEqual(len(ver), 29)  # 27 first-pass + 2 added
+        self.assertTrue(all(v["name_match"] in (True, None) for v in ver))
+        apl = [i for i in RS.rules if i.startswith("AD-APL")]
+        self.assertEqual(len(apl), 14)
+        self.assertTrue(set(apl) <= set(RS.advisory_ids))
+        for w in (105, 172, 71, 246, 177, 170, 125, 245, 247, 168, 104, 60):
+            self.assertIn(f"AD-APL-{w}", RS.rules)
+        # the 15 re-grounded keep the held-book source and gain the Alexander cards
+        for rid in ("AD-COMP-ENCLOSURE", "AD-COMP-HIERARCHY", "AD-COMP-REFUGE"):
+            ids = RS.source_ids[rid]
+            self.assertTrue(any(i.startswith("APL-") for i in ids), rid)
+            self.assertTrue(any(not i.startswith("APL-") for i in ids), rid)
+
+    def _mutated(self, fn):
         data = copy.deepcopy(RS.data)
-        data["withdrawn"][0]["status"] = "unverified"
+        fn(data)
         with self.assertRaises(ValueError):
             RuleSet(data)
+
+    def test_loader_refuses_a_pattern_rule_with_a_number(self):
+        adv = lambda d: next(a for a in d["advisory"] if a["id"] == "AD-APL-247")
+        for key in ("measurement", "params", "threshold", "value"):
+            self._mutated(lambda d, k=key: adv(d).update({k: 25}))
+
+    def test_loader_refuses_a_wrong_pattern_name_or_foreign_card(self):
+        adv = lambda d: next(a for a in d["advisory"] if a["id"] == "AD-APL-247")
+        self._mutated(lambda d: adv(d).update(title="Paving With Gaps"))
+        self._mutated(lambda d: adv(d).update(sources=["APL-60-therefore"]))
+        self._mutated(lambda d: next(s for s in d["sources"] if s["id"] == "APL-247-problem").update(pattern=248))
+        self._mutated(lambda d: next(s for s in d["sources"] if s["id"] == "APL-247-therefore").pop("therefore_pdf_page"))
+
+    def test_loader_refuses_a_withdrawn_rule_with_the_wrong_status_or_also_active(self):
         data = copy.deepcopy(RS.data)
-        data["withdrawn"][0]["id"] = RS.advisory_ids[0]
+        data["withdrawn"] = [dict(id="AD-APL-9", status="unverified")]
+        with self.assertRaises(ValueError):
+            RuleSet(data)
+        data["withdrawn"] = [dict(id=RS.advisory_ids[0], status="unverified — not used")]
         with self.assertRaises(ValueError):
             RuleSet(data)
 
