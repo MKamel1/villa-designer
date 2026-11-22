@@ -30,3 +30,6 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - Nursery availability in Egypt.
 - Roots near foundations of unknown depth.
 - Fire pit: clearance to the facade and to planting follows the product's instructions.
+
+## Lead decision (2026-11-22): summer-evening clock
+"Summer nights" is analysed on the local clock in force: Egypt observes summer time (DST, reinstated in 2023). LDS's DST-clock layer is primary and the standard-time layer is kept for reference. The source citation is to be added by the generation lane.
