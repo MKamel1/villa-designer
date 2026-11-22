@@ -176,6 +176,16 @@ def fixture_placements(f) -> list[Placement]:
         pho = load_ies(prod["ies"])
         scale = rec.flux_lm / pho.integrated_flux()
         watts = float(prod.get("watts") or 0.0) * f.extra.get("dimmer", 1.0)
+        if rec.length and rec.length > 0:
+            # L6c: a product with a length is sampled along it (a single point source overstates the near field). PEN-LIN: the bound
+            # file is the derived x2 file (both 1779 lm modules, 3558 lm); strips: the file is per metre and the fixture's flux
+            # is lm/m x length (record_for).
+            n = 8 if f.kind == "PEN-LIN" else max(1, int(round(rec.length / PROJECT_EDGE)))
+            return [Placement("%s#%d" % (f.id, k), pho, tuple(c + a * ((k + 0.5) / n - 0.5) * rec.length
+                                                            for c, a in zip((x, y, z), rec.along)),
+                              aim=aim, dim=scale / n, zone=zone, layer=layer, watts=watts / n,
+                              meta={"ies_path": prod["ies"], "generic": False, "kind": f.kind, "parent": f.id})
+                    for k in range(n)]
         return [Placement(f.id, pho, (x, y, z), aim=aim, dim=scale, zone=zone, layer=layer, watts=watts,
                           meta={"ies_path": prod["ies"], "generic": False, "kind": f.kind})]
     out = []

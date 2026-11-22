@@ -1,0 +1,29 @@
+{
+ "maker": "ERCO",
+ "code": "41321.000",
+ "name": "Quintessence downlight, wide flood, 12.1 W 2700 K CRI 92, DALI",
+ "url": "https://www.erco.com/41321.000",
+ "claims": {
+  "lumens": 1065,
+  "watts": 14.4,
+  "cct_k": 2700,
+  "cri": 92,
+  "ip": "IP20",
+  "dimming": "DALI-2",
+  "flicker": "TLA SVM <= 0.1; PstLM <= 1",
+  "cutoff_deg": 40,
+  "finish": "white RAL9002"
+ },
+ "points": [
+  {
+   "kind": "imax",
+   "published": 1147,
+   "source": "ERCO datasheet p1 polar diagram Imax=1147cd"
+  },
+  {
+   "kind": "beam_angle",
+   "published": 56,
+   "source": "ERCO datasheet p1 beam angle C0 56 deg"
+  }
+ ]
+}
