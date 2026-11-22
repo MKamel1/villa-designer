@@ -301,6 +301,30 @@ lanes:
     - knowledge/*.json.gz
     - docs/lanes/SC3*.md
     - docs/lessons/SC3.md
+  LDS: # landscape: site analysis
+    - src/archpipe/landscape/site/**
+    - tests/landscape/site/**
+    - knowledge/landscape/site/**
+    - docs/lanes/LDS*.md
+    - docs/lessons/LDS.md
+  LDK: # landscape: sourced rules
+    - src/archpipe/landscape/rules/**
+    - tests/landscape/rules/**
+    - knowledge/landscape/rules/**
+    - docs/lanes/LDK*.md
+    - docs/lessons/LDK.md
+  LDL: # landscape: plant library
+    - src/archpipe/landscape/plants/**
+    - tests/landscape/plants/**
+    - knowledge/landscape/plants/**
+    - docs/lanes/LDL*.md
+    - docs/lessons/LDL.md
+  LDP: # landscape: precedent statistics
+    - src/archpipe/landscape/precedents/**
+    - tests/landscape/precedents/**
+    - knowledge/landscape/precedents/**
+    - docs/lanes/LDP*.md
+    - docs/lessons/LDP.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
