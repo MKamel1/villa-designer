@@ -48,7 +48,7 @@ SPEC = {  # name: (base colour, roughness, metallic)
     "paving-joint": ((0.22, 0.21, 0.19), 0.95, 0), "path-unit": ((0.50, 0.46, 0.40), 0.75, 0), "bed-soil": ((0.16, 0.11, 0.07), 1.0, 0),
     "wall-render": ((0.82, 0.80, 0.75), 0.9, 0), "trellis-timber": ((0.40, 0.28, 0.17), 0.7, 0), "pergola-alu": ((0.09, 0.075, 0.065), 0.35, 0.8),
     "table-timber": ((0.40, 0.26, 0.14), 0.6, 0), "chair-timber": ((0.45, 0.30, 0.17), 0.6, 0), "seat-timber": ((0.40, 0.26, 0.14), 0.6, 0),
-    "terracotta": ((0.60, 0.28, 0.16), 0.8, 0), "pond-concrete": ((0.42, 0.42, 0.41), 0.9, 0), "pond-edge": ((0.06, 0.06, 0.065), 0.5, 0),
+    "terracotta": ((0.60, 0.28, 0.16), 0.8, 0), "pond-concrete": ((0.05, 0.06, 0.055), 0.9, 0), "pond-edge": ((0.06, 0.06, 0.065), 0.5, 0),
     "grille-steel": ((0.18, 0.18, 0.19), 0.4, 0.9), "pit-steel": ((0.10, 0.10, 0.10), 0.5, 0.8), "lava-rock": ((0.05, 0.045, 0.045), 1.0, 0),
     "burner": ((0.15, 0.15, 0.15), 0.4, 0.9), "bbq-steel": ((0.04, 0.04, 0.04), 0.45, 0.6), "ctx": ((0.80, 0.79, 0.77), 0.95, 0),
     "ground-far": ((0.50, 0.44, 0.34), 1.0, 0),
@@ -169,7 +169,7 @@ sc.render.engine = "CYCLES"
 sc.cycles.samples = spec.get("samples", 96); sc.cycles.use_denoising = True
 sc.cycles.max_bounces = 8; sc.cycles.transmission_bounces = 8
 sc.render.resolution_x, sc.render.resolution_y = spec["size"]
-sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"
+sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"; sc.view_settings.exposure = spec.get("exposure", -0.5)
 sc.render.image_settings.file_format = "JPEG"; sc.render.image_settings.quality = 90
 try:
     prefs = bpy.context.preferences.addons["cycles"].preferences
@@ -183,7 +183,7 @@ except Exception as e:
 w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
 nt = w.node_tree
 sky = nt.nodes.new("ShaderNodeTexSky"); sky.sky_type = "NISHITA"
-sky.sun_elevation = math.radians(52); sky.sun_rotation = math.radians(210); sky.sun_size = math.radians(0.6); sky.air_density = 1.0; sky.dust_density = 1.5
+sky.sun_elevation = math.radians(52); sky.sun_rotation = math.radians(210); sky.sun_size = math.radians(0.6); sky.air_density = 1.0; sky.dust_density = 1.5; sky.sun_intensity = spec.get("sun_intensity", 0.45)
 nt.links.new(sky.outputs["Color"], nt.nodes["Background"].inputs["Color"]); nt.nodes["Background"].inputs["Strength"].default_value = 1.0
 
 receipt = dict(tag=TAG, assets=[], views=[], objects=0, note="preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)")
@@ -206,7 +206,7 @@ for c in spec["context"]:
     x0, y0, x1, y1 = c["rect"]
     ob = mesh_object(c["id"], [dict(material="ctx", verts=[[x0, y0, c["z0"]], [x1, y0, c["z0"]], [x1, y1, c["z0"]], [x0, y1, c["z0"]], [x0, y0, c["z1"]], [x1, y0, c["z1"]], [x1, y1, c["z1"]], [x0, y1, c["z1"]]],
                       faces=[[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]])])
-    ob["ld_id"] = c["id"]
+    ob["ld_id"] = c["id"]; ob["ld_context"] = True
 # far ground, a little below the surfaces so nothing z-fights
 mesh_object("ctx-ground", [dict(material="ground-far", verts=[[-60, -80, G - 0.06], [80, -80, G - 0.06], [80, 40, G - 0.06], [-60, 40, G - 0.06]], faces=[[0, 1, 2, 3]])])
 
@@ -216,6 +216,9 @@ for v in spec["views"]:
     for o in spec["objects"]:
         for n in o.get("_blender", []):
             bpy.data.objects[n].hide_render = bool(o["state"]) and o["state"] != v["state"]
+    for ob in bpy.data.objects:                       # the house box is hidden from the camera (not from light) in bird's-eye views so the garden is legible
+        if ob.get("ld_context") and ob.name.startswith("ctx-building"):
+            ob.visible_camera = ob.visible_shadow = not v.get("hide_house", False)
     cam.data.lens = v["lens"]
     cam.location = Vector(v["eye"])
     cam.rotation_euler = (Vector(v["target"]) - cam.location).to_track_quat("-Z", "Y").to_euler()

@@ -127,10 +127,7 @@ def _ell_hits_box(env, b, shrink=TOL_CLIP):
     c = np.array([cx, cy, cz]); r = np.array([rx, ry, rz]) - shrink
     if (r <= 0).any():
         return False
-    lo, hi = np.array(b[:3]) + shrink, np.array(b[3:]) - shrink
-    if (lo >= hi).any():
-        return False
-    q = np.clip(c, lo, hi)
+    q = np.clip(c, np.array(b[:3]), np.array(b[3:]))      # the foliage is shrunk by the tolerance; thin rigid parts (blades) stay as they are
     return float((((q - c) / r) ** 2).sum()) < 1.0
 
 

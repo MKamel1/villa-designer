@@ -138,7 +138,8 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source=""):
         else:
             warns.append("screen %s kind %r not built" % (s["id"], s.get("kind")))
     avoid = list(bench_rects) + [R(f["rect"]) for f in feats if "rect" in f] + [R(o["rect"]) for o in layout.get("obstacles", []) if o["id"].startswith("pot")]
-    avoid += [(t["center"][0] - t["size_m"][0] / 2, t["center"][1] - t["size_m"][1] / 2, t["center"][0] + t["size_m"][0] / 2, t["center"][1] + t["size_m"][1] / 2) for t in layout.get("tables", [])]
+    cl = P.CHAIR["off"] + P.CHAIR["seat"] / 2 + 0.1          # chairs stand round the table: keep intermediate posts out of that ring
+    avoid += [(t["center"][0] - t["size_m"][0] / 2 - cl, t["center"][1] - t["size_m"][1] / 2 - cl, t["center"][0] + t["size_m"][0] / 2 + cl, t["center"][1] + t["size_m"][1] / 2 + cl) for t in layout.get("tables", [])]
     avoid += [(t["center"][0] - .2, t["center"][1] - .2, t["center"][0] + .2, t["center"][1] + .2) for t in layout.get("trees", [])]
     for c in layout.get("canopies", []):
         if c.get("kind") == "pergola":
