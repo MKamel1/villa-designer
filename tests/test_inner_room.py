@@ -5,7 +5,7 @@ inner room has one window in its north wall. Fixtures are built from the quantit
 size and sill, storey height, occupancy) and check their own geometry (docs/LEARNINGS.md, 2026-09-25)."""
 import unittest
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 
 WT = (model.WallType("EXT", 300.0, (), True, ""), model.WallType("INT", 100.0, (), False, ""))
 

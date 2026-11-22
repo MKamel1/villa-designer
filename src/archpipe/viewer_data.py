@@ -11,7 +11,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from .model import Project, load
+from .spec_model import Project, load
 from .web import render_svg
 
 

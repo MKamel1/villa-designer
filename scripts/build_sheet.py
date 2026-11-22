@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from archpipe import acad, preview, sheet  # noqa: E402
-from archpipe.model import load  # noqa: E402
+from archpipe.spec_model import load  # noqa: E402
 from archpipe.units import MM_PER_INCH  # noqa: E402
 
 PT_PER_MM = 72.0 / MM_PER_INCH       # 72 PostScript points per inch

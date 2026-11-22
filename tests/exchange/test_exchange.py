@@ -281,5 +281,5 @@ def test_light_zones_are_the_published_l6b_zones(out):
     f = ifcopenshell.open(str(out[0] / "D1-LIGHT.ifc"))
     pub = {z["id"] for z in json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))["zones"]}
     groups = [g for g in f.by_type("IfcGroup") if g.ObjectType == "LightingControlZone"]
-    assert {g.Name for g in groups} == pub and len(groups) == 69          # none provisional (negative: no Z-PROV-*)
+    assert {g.Name for g in groups} == pub and len(groups) == 68          # none provisional (negative: no Z-PROV-*)
     assert not any(g.Name.startswith("Z-PROV") for g in groups)

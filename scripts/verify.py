@@ -44,7 +44,7 @@ import yaml  # noqa: E402
 from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
                       feasibility as F, rules, site as S, solar,
                       vocabulary as V, web)
-from archpipe.model import load as load_model  # noqa: E402
+from archpipe.spec_model import load as load_model  # noqa: E402
 from archpipe.asset_intake import audit_scene_manifest, manifest_assumptions, manifest_overrides  # noqa: E402
 from archpipe.concept import villa_render as VR  # noqa: E402
 from archpipe.stage_result import enforce_clean_verdict, validate_stage_result, write_stage_result  # noqa: E402

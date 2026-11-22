@@ -204,7 +204,7 @@ def critique(layout, available_m2=None, circulation_m2=None) -> dict:
 
 def rule_findings(spec_path) -> list[dict]:
     """The existing rule engine on the emitted spec, level by level. Legacy rules are diagnostic (rule audit)."""
-    from .. import model, rules
+    from .. import spec_model as model, rules
     p = model.load(spec_path)
     out = []
     for lv in p.levels:

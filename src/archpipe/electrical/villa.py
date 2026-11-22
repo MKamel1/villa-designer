@@ -128,7 +128,14 @@ def _published_zones(lums: list[Luminaire]) -> list[contracts.LightingZone] | No
     # the rated luminaire watts when those are higher (upper bound). EA13 then equals circuit W = sum of luminaire W.
     zs = [contracts.LightingZone(z["id"], z["room"], z["layer"], tuple(z["luminaire_ids"]),
                                  max(float(z["watts"]), round(sum(byid[i].watts for i in z["luminaire_ids"] if i in byid), 2)), z["dimming"]) for z in raw]
-    for z in zs:
+    for z, rz in zip(zs, raw):
+        members = [byid[i] for i in z.luminaire_ids if i in byid]
+        have = sum(m.watts for m in members)
+        if members and have > 0 and float(rz["watts"]) > have + 0.05:
+            # INT2 (L6c): a generic strip's model W is flux/efficacy, a placeholder; L6c sizes its driver (Z-B-STAIR-B-ACCENT 7.1 W vs
+            # 4.39 W). The published W is the better figure, so the luminaires carry it (pro rata) and circuit W = sum of luminaire W (EA13).
+            for m in members:
+                m.watts = round(m.watts * float(rz["watts"]) / have, 4)
         for i in z.luminaire_ids:
             if i in byid:
                 byid[i].zone = z.id

@@ -13,7 +13,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from .model import SpecError, load
+from .spec_model import SpecError, load
 from .safe_io import save_json
 
 

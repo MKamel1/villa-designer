@@ -290,7 +290,7 @@ class StairFirstPackage(unittest.TestCase):
         from archpipe.concept.ceiling_requirements import product_depth, requirements
         from archpipe.concept.mounting_resume import apply_approvals, APPROVALS
         from archpipe.concept import villa_lighting as VL
-        for kind,depth in [('DL',95),('DLN',95),('ADJ',98),('WW',95)]:
+        for kind,depth in [('DL',95),('DLN',92),('ADJ',169),('WW',92)]:   # L6c ERCO LDT body heights (41321, 41369, A9000028, 41374); were the iGuzzini 95/95/98/95
             self.assertEqual(product_depth(kind)['housing_depth_mm'],depth)
         recorded=product_depth('DL',{'installation_clearance_mm':40,'installation_depth_mm':110})
         self.assertEqual(recorded['clearance_mm'],40)
@@ -303,11 +303,13 @@ class StairFirstPackage(unittest.TestCase):
             self.assertEqual(zone['required_void_mm'],zone['max_housing_depth_mm']+25)
         meshes=[m for m in self.scene['meshes'] if m.get('mounting',{}).get('geometry_role')=='recessed-trim'
                 and m.get('mounting_package')=='d-ceiling']
-        self.assertEqual(len(meshes),80)
+        self.assertEqual(len(meshes),69)   # L6c design: 53 DL + 12 WW + 4 ADJ recessed fittings (80 before the L6b/L6c ambient cuts)
         for root in (meshes[0],next(m for m in meshes if 'cinema' in m['id'])):
             mutant=deepcopy(self.scene)
             host=mutant['mounting_hosts'][root['mounting']['host_id']]
-            host['void_depth_m']-=.03
+            # a void 1 mm shallower than this fitting's housing must be caught (was `-= .03`, which only bit while every zone's
+            # void was housing+25 mm; the L6c ADJ housing, 169 mm, makes the lounge void 194 mm)
+            host['void_depth_m']=root['mounting']['housing_depth_m']-.001
             self.assertTrue(any('void' in f for f in scene_findings(mutant) if f.startswith(root['id']+':')))
         with __import__('unittest.mock',fromlist=['patch']).patch.object(VL,'PRODUCT_CHOICE',{**VL.PRODUCT_CHOICE,'DL':('iguzzini','NO-DEPTH-RECORD','missing')}):
             req=requirements([VL.Fixture('custom','DL','new-room','GF',1,1,2.7)])
@@ -391,19 +393,45 @@ class StairFirstPackage(unittest.TestCase):
                     self.assertLessEqual(point[0], end + 1e-9)
 
     def test_design_elevations_and_tread_ends_remain_frozen(self):
-        frozen = json.loads((Path(__file__).parent / "fixtures/c4-stair-phase1.json").read_text(encoding="utf-8"))
+        """Elevations stay at the pre-G1 freeze; plan x follows the approved G1 stair (16 mm tread overlap, infill).
+
+        The x freeze is tests/approvals/g1-stair-frozen.json, derived from the model; every x must also differ from
+        the pre-G1 fixture by 0, 8 or 16 mm only (the overlap), so a different shift cannot hide behind a re-freeze."""
+        here = Path(__file__).parent
+        frozen = json.loads((here / "fixtures/c4-stair-phase1.json").read_text(encoding="utf-8"))
+        g1 = json.loads((here / "approvals/g1-stair-frozen.json").read_text(encoding="utf-8"))["members"]
         old = {m["id"]: m for m in frozen["meshes"]}
-        for mesh in self.members:
-            before = old[mesh["id"]]
-            for axis in (0, 2):
-                if mesh["id"].endswith("stringer-06") or (axis == 2 and mesh["id"].endswith("stringer-15")):
-                    continue  # stepped return contact and approved floor bearing trim
-                self.assertEqual([p[axis] for f in mesh["faces"] for p in f],
-                                  [p[axis] for f in before["faces"] for p in f])
-        for mesh in self.members:
-            if mesh["part_kind"] == "stair-stringer":
-                self.assertEqual(max(p[1] for f in mesh["faces"] for p in f),
-                                 max(p[1] for f in old[mesh["id"]]["faces"] for p in f))
+
+        def mismatches(meshes, tolerance=1e-9):
+            bad = []
+            for mesh in meshes:
+                pts = [p for f in mesh["faces"] for p in f]
+                want = g1[mesh["id"]]
+                if any(abs(p[0] - x) > tolerance for p, x in zip(pts, want["x"])) or len(pts) != len(want["x"]):
+                    bad.append((mesh["id"], "x"))
+                if mesh["id"].endswith("stringer-06"):
+                    continue  # stepped return contact
+                before = [p for f in old[mesh["id"]]["faces"] for p in f]
+                if not mesh["id"].endswith("stringer-15") and \
+                        any(abs(p[2] - q[2]) > 1e-9 for p, q in zip(pts, before)):
+                    bad.append((mesh["id"], "z"))  # approved floor bearing trim is stringer-15 only
+                if any(abs(p[0] - q[0]) not in (0, 0.008, 0.016) and
+                       min(abs(abs(p[0] - q[0]) - d) for d in (0, 0.008, 0.016)) > 1e-6
+                       for p, q in zip(pts, before)):
+                    bad.append((mesh["id"], "shift"))
+                if mesh["part_kind"] == "stair-stringer" and \
+                        abs(max(p[1] for p in pts) - max(p[1] for f in old[mesh["id"]]["faces"] for p in f)) > 1e-9:
+                    bad.append((mesh["id"], "y"))
+            return bad
+
+        self.assertEqual(mismatches(self.members), [])
+        # negative: a 1 mm move of one tread end, and an elevation change, are both still caught
+        moved = deepcopy(self.members)
+        moved[2]["faces"][0][0][0] += 0.001
+        self.assertIn((moved[2]["id"], "x"), mismatches(moved))
+        lifted = deepcopy(self.members)
+        lifted[2]["faces"][0][0][2] += 0.001
+        self.assertIn((lifted[2]["id"], "z"), mismatches(lifted))
 
     def test_render_meshes_contain_no_diagnostic_or_host_face_meshes(self):
         from archpipe.villa_render_contract import validate_scene
