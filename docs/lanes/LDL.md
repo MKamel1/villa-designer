@@ -143,7 +143,7 @@ Quote re-check: 870 verified, 77 API-derived, 9 not matched (all older, stitched
 
 ### Tests
 
-`tests/landscape`: 136 -> see hand-back for the new count. New: lead decisions (positive, never rescues a fail, needs reason), placement constraints, Ixora dropped, frangipani accepted, inferred-heat flag, misnamed asset, untextured asset (positive on the real banana file, negative on a textured one), licence, manifest sha256 (and live hash check when the store exists).
+`tests/landscape`: 136 passed (was 112 before pass 2: +24 incl. 8 lead-decision/placement, 3 decision, 7 asset guards); lane suite (landscape, luminaires, compliance, design, model, electrical, lightcalc, lightverify, critic, ops, documents, drawings2d, pipeline, exchange, approvals, parity, markup, villa_render*): 825 passed, 6 skipped. New: lead decisions (positive, never rescues a fail, needs reason), placement constraints, Ixora dropped, frangipani accepted, inferred-heat flag, misnamed asset, untextured asset (positive on the real banana file, negative on a textured one), licence, manifest sha256 (and live hash check when the store exists).
 
 ### Open items (pass 2)
 
