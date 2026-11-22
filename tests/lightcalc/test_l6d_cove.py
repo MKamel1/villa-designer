@@ -81,6 +81,9 @@ def test_strip_is_below_the_slab_soffit_and_stands_on_the_band(scene, cove):
     band = next(m for m in scene["meshes"] if m["id"] == "ceiling-" + ROOM)
     zs = sorted({round(p[2], 3) for q in band["faces"] for p in q})
     assert zs[0] == 2.70 and zs[-1] == round(2.70 + VL.LOBBY_COVE_UPSTAND, 3) and set(zs) <= {2.70, 2.701, zs[-1]}, zs     # band + its upstand (+ 1 mm sheet)
+    trough = next(m for m in scene["meshes"] if m["id"] == "ceiling-" + ROOM + "-trough")      # the closed trough's back wall, band to soffit
+    assert sorted({round(p[2], 3) for q in trough["faces"] for p in q}) == [2.70, VL.COVE_FIELD]
+    assert cove.lm == pytest.approx(VL.LOBBY_COVE_LM_PER_M * cove.length)
     assert 2.70 < cove.z < VL.COVE_FIELD - 0.05             # in the coffer: above the band, under the 2.80 soffit
     assert cove.z < 2.70 + VL.LOBBY_COVE_UPSTAND            # below the upstand's top: not visible over it from the lobby
     lobby, field = _lobby_rects()
