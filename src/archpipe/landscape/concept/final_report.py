@@ -145,9 +145,9 @@ def main():
     L += ["## Planting schedule (drawable versus stand-in)", ""]
     L += _tbl(["zone", "bed", "species", "count", "layer", "verdict", "status", "conditions"],
               [[s["zone"], s["bed"], s["species"], s["count"], s["layer"], s["verdict"], s["status"], "; ".join(s["conditions"])[:120]] for s in d["schedule"]])
-    L += ["", "Drawable on this machine means a graded A/B glTF file is present; the Fab/Megascans species graded by LDL are not present here as files ("graded asset file missing on this machine"), so only the species counted below draw as plants. Everything else is a labelled generic stand-in.", "",
+    L += ["", "Drawable on this machine means a graded A/B glTF file is present; the Fab/Megascans species graded by LDL are not present here as files (\"graded asset file missing on this machine\"), so only the species counted below draw as plants. Everything else is a labelled generic stand-in.", "",
           "Plants drawable versus stand-in, before -> after: " + (f"drawable {ba['plant_counts']['before']['drawable']} -> {ba['plant_counts']['after']['drawable']}, stand-in {ba['plant_counts']['before']['stand_in']} -> {ba['plant_counts']['after']['stand_in']}; species drawable {ba['plant_counts']['before']['species_drawable']} of {ba['plant_counts']['before']['species_total']} -> {ba['plant_counts']['after']['species_drawable']} of {ba['plant_counts']['after']['species_total']}." if ba["plant_counts"]["before"] else str(ba["plant_counts"]["after"])),
-          "The olives are stand-ins (grade C asset); the crape myrtle draws when its glTF is present.",", ""]
+          "The olives are stand-ins (grade C asset); the crape myrtle draws when its glTF is present.", ""]
     try:
         L += ["## Images (looked at)", "", open(OUT / "IMAGES.md").read(), ""]
     except FileNotFoundError:
