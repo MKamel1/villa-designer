@@ -100,6 +100,14 @@ three documented misses (M1, M6-180, M-K10-move0.1), nothing dropped. K09 remain
 * `sc-patio-steps.png`: vertical stainless bars with a top rail on the steps' north edge, standing on the paving, the patio court and the terrace glass edge beyond; nothing floating.
   (The two terrace/patio cameras and the two cupboard cameras are preview-only views injected into a copy of the SC scene built by the same code; they are not part of the production views.)
 
+## Tests (merged tree, `NO_COLOR=1`, jobq `SC-tests3`, 33 min)
+
+`tests/luminaires compliance design model electrical lightcalc lightverify critic ops documents drawings2d pipeline exchange approvals test_villa_lighting.py
+test_exposure_groups.py parity test_villa_render*.py test_mounting*.py test_d1_*.py`: **772 passed, 6 skipped, 0 failed**. `python -m archpipe.compliance.run_d1`: exit 0
+(0 failing gates; the regenerated L1 report was reverted). Before the merge the same suite had 6 failures: 5 `test_mounting_scene` + `test_d1_wp1` on the stale staging receipts (they also fail on
+`origin/integ/staging` itself), and one real SC defect found by the mounting guard (the `ext` wardrobe strips built inside the wardrobe), fixed.
+New: `tests/test_villa_render_g1_geometry.py` 14 tests (positive and negative).
+
 ## Open items
 
 1. Cupboard depth (above): lead decision, and K10 will keep reporting 128 mm until the model or the steel moves.
