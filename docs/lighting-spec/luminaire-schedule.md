@@ -11,7 +11,7 @@ Every row: **or approved equivalent - submit IES/LDT + datasheet**. Reference pr
 | DESK | Adjustable desk task lamp, shielded | 5 | ERCO 31327.000 | 234 lm (198-269, +/-15 %) | wide beam, shielded head; compare the IES/LDT | IP20 / - | on-board push dimmer, 1-100 % |
 | PEN-GLOBE-A | Opal glass globe pendant | 3 | none held | 800 lm rated (>= 720, <= 1000) | diffuse, opal glass, near-Lambertian | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut or 0-10 V into a DALI gateway |
 | PEN-GLOBE-B | Opal glass globe pendant | 3 | none held | 564 lm rated (>= 507, <= 705) | diffuse, opal glass, near-Lambertian | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut or 0-10 V into a DALI gateway |
-| COVE | LED strip, cove | 6 (15.9 m total) | iGuzzini ST49 | 449 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, indirect onto the ceiling (120 deg, +/-18 deg) | IP20 (IP65 if the cove can be wet-cleaned) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via a constant-voltage/current driver |
+| COVE | LED strip, cove | 6 (15.9 m total) | iGuzzini ST49 | 472 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, indirect onto the ceiling (120 deg, +/-18 deg) | IP20 (IP65 if the cove can be wet-cleaned) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via a constant-voltage/current driver |
 | BACK | LED strip, cabinet | 12 (11.2 m total) | iGuzzini ST49 | 402 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide (120 deg, +/-18 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut zone |
 | TOE | LED strip, toe-kick / basin glow (night) | 3 (3.9 m total) | iGuzzini ST49 | 148 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, downward (120 deg, +/-18 deg) | IP20 (bathrooms IP44) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut; dim to 10 % in the Night scene |
 | NL | LED strip, night light | 4 (9.9 m total) | iGuzzini ST49 | 100 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, downward (120 deg, +/-18 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut |
@@ -175,7 +175,7 @@ Every row: **or approved equivalent - submit IES/LDT + datasheet**. Reference pr
 - **Qty:** 6 (15.9 m total)
 - **Reference product (maker, code, URL):** iGuzzini ST49 - Underscore15 ledstrip hi performance, 680 lm/m, 5 W/m, 2700 K | https://www.iguzzini.com/en/st49/
 - **Reference status:** ST49: V10 lumens only
-- **Lumens (full output, per fitting) and tolerance:** 449 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed)
+- **Lumens (full output, per fitting) and tolerance:** 472 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed)
 - **Beam / distribution:** wide, indirect onto the ceiling (120 deg, +/-18 deg)
 - **CCT:** 2700 K +/- 100 K, <= 3 SDCM
 - **CRI / R9:** CRI >= 90; R9 >= 50 if stated
