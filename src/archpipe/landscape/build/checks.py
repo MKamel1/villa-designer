@@ -161,7 +161,7 @@ def clips(scene, state="closed"):
             if ka == kb or kb in ok[ka]:
                 continue
             ea, eb = items[a][3], items[b][3]
-            if ea and eb:          # plant against plant: massing overlap is normal
+            if (ea and eb) or (objs[ka].kind == "plant" and objs[kb].kind == "plant"):     # foliage against foliage (masses, climber panels): massing overlap is normal
                 continue
             if ea or eb:
                 env, other = (ea, items[b][1]) if ea else (eb, items[a][1])

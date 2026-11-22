@@ -8,7 +8,7 @@ from shapely.geometry import MultiPolygon, Polygon, box as sbox
 from shapely.ops import unary_union
 
 from . import policy as P
-from .geom import Obj, Part, box, cyl, prism, rbox, slanted_slat
+from .geom import Obj, Part, box, cyl, extrude_profile, half_frustum, prism, rbox, shifted, slanted_slat
 
 
 def R(r):
@@ -44,18 +44,18 @@ def surface(oid, kind, label, material, geom, z0, z1, **kw):
     return Obj(oid, kind, label, parts, footprint_poly=geom, footprint_mode="poly", **kw)
 
 
-def paving(oid, layout_id, rect, g, paths, pit):
+def paving(oid, layout_id, rect, g, paths, pit, holes=()):
     """Bedding slab (joint colour) + running-bond units; units are cut around path rects (built as the path) and the pit cover opening."""
     pv = P.PAVER
     x0, y0, x1, y1 = rect
     r = sbox(*rect)
-    slab_geom = r
+    slab_geom = r.difference(unary_union([sbox(*q) for q in holes])) if holes else r
     if pit:
         h = P.PIT["hole"] / 2
-        slab_geom = r.difference(sbox(pit[0] - h, pit[1] - h, pit[0] + h, pit[1] + h))
+        slab_geom = slab_geom.difference(sbox(pit[0] - h, pit[1] - h, pit[0] + h, pit[1] + h))
     top = g - pv["thick"]
     parts = [rbox("paving-joint", *q, top - pv["bedding"], top) for q in poly_rects(slab_geom)]
-    cut = [sbox(*p) for p in paths]
+    cut = [sbox(*p) for p in paths] + [sbox(*q) for q in holes]
     if pit:
         rr = pit[2] / 2 + P.PIT["gap"]
         cut.append(Polygon([(pit[0] + rr * math.cos(2 * math.pi * i / 24), pit[1] + rr * math.sin(2 * math.pi * i / 24)) for i in range(24)]))
@@ -64,7 +64,7 @@ def paving(oid, layout_id, rect, g, paths, pit):
                parts, layout_id=layout_id, footprint=rect, meta=dict(units=len(parts) - len(poly_rects(slab_geom))))
 
 
-def units(rect, cuts, g, ulen, uwid, along, material):
+def units(rect, cuts, g, ulen, uwid, along, material, clip=None):
     """Running-bond unit patches inside rect minus cuts; returns Parts (4 mm inset each side = 8 mm joint)."""
     pv = P.PAVER
     x0, y0, x1, y1 = rect
@@ -81,6 +81,8 @@ def units(rect, cuts, g, ulen, uwid, along, material):
         while a < a1 - 1e-9:
             u = sbox(b, a, b + uwid, a + ulen) if swap else sbox(a, b, a + ulen, b + uwid)
             u = u.intersection(r)
+            if clip is not None:
+                u = u.intersection(clip)
             if cut is not None:
                 u = u.difference(cut)
             for g_ in (u.geoms if hasattr(u, "geoms") else [u]):
@@ -244,21 +246,23 @@ def chair(oid, cx, cy, face, g):
                footprint_mode=None)
 
 
-def chairs_for(table_id, center, size, seats, g):
+def chair_spots(center, size, seats):
+    """[((x, y), (face dx, dy))] of the chairs round a table: long sides first, then the ends."""
     cx, cy = center
     w, d = size
     off = P.CHAIR["off"]
     n_long = max(0, (seats - 2) // 2)
-    out = []
     xs = [cx + (k - (n_long - 1) / 2) * (w / max(n_long, 1)) for k in range(n_long)]
     spots = []
     for x in xs:
         spots += [((x, cy + d / 2 + off), (0, -1)), ((x, cy - d / 2 - off), (0, 1))]
     if seats >= 2 and len(spots) < seats:
         spots += [((cx + w / 2 + off, cy), (-1, 0)), ((cx - w / 2 - off, cy), (1, 0))]
-    for i, ((x, y), f) in enumerate(spots[:seats]):
-        out.append(chair("ld-%s-chair-%d" % (table_id, i), x, y, f, g))
-    return out
+    return spots[:seats]
+
+
+def chairs_for(table_id, center, size, seats, g):
+    return [chair("ld-%s-chair-%d" % (table_id, i), x, y, f, g) for i, ((x, y), f) in enumerate(chair_spots(center, size, seats))]
 
 
 def bbq(oid, layout_id, rect, g):
@@ -280,56 +284,123 @@ def pot(oid, layout_id, rect, g):
                layout_id=layout_id, footprint=R(rect))
 
 
+def pond_axes(f):
+    """-> (across, entry_is_max): section runs across the SHORT plan side; the entry margin is the low side unless the layout says high."""
+    x0, y0, x1, y1 = R(f["rect"])
+    across = "y" if (y1 - y0) <= (x1 - x0) else "x"
+    es = ((f.get("section") or {}).get("entry_side") or "low").lower()
+    return across, ("high" in es and "low" not in es)
+
+
+def pond_profile(f, g):
+    """Water cross-section [(s, z)] from the layout `section` (s from the entry edge). Entry slope waterline -> shelf, shelf, 900 mm trench, far wall."""
+    x0, y0, x1, y1 = R(f["rect"])
+    across, _ = pond_axes(f)
+    W = (y1 - y0) if across == "y" else (x1 - x0)
+    sec = f.get("section") or {}
+    free = sec.get("freeboard_mm", f.get("freeboard_mm", 150)) / 1000
+    wl = g - free
+    sd = sec.get("shelf_below_water_mm", 150) / 1000
+    e = sec.get("entry_run_m", 0.0)
+    sh = sec.get("shelf_m", 0.25)
+    td = sec.get("trench_below_water_mm", (f.get("depth_mm", 1000) - free * 1000)) / 1000
+    if e + sh >= W:
+        raise ValueError("pond %s: entry %.2f + shelf %.2f m leave no trench in a %.2f m section" % (f["id"], e, sh, W))
+    return W, wl, [(0.0, wl), (e, wl - sd), (e + sh, wl - sd), (e + sh, wl - td), (W, wl - td), (W, wl)], dict(entry_run=e, shelf=sh, shelf_depth=sd, trench_depth=td, freeboard=free)
+
+
 def pond(oid, layout_id, f, g):
-    """Flush koi pond: rim at ground level, water below it (freeboard from the layout), safety shelf, submerged rigid grille, flush contrast lip."""
+    """Flush koi pond built from the layout section: vertical freeboard face, 1:4 entry slope to a shelf, a trench, a rigid grille 40 mm under the water,
+    and a flush contrasting lip. The water is a closed solid (so the renderer can tint it by depth), the liner is the solid under the profile."""
     p = P.POND
     x0, y0, x1, y1 = R(f["rect"])
-    free = f.get("freeboard_mm", 150) / 1000
-    depth = f.get("depth_mm", 1000) / 1000
-    wl = g - free
-    w_, sh = p["wall_t"], p["shelf_w"]
-    shelf_top = wl - p["shelf_below_water"]
-    fl = g - depth
-    ix0, iy0, ix1, iy1 = x0 + w_, y0 + w_, x1 - w_, y1 - w_
-    parts = [box("pond-concrete", x0, y0, fl - p["floor_t"], x1, y1, fl)]
-    parts += [box("pond-concrete", x0, y0, fl, x1, iy0, g - p["lip_t"]), box("pond-concrete", x0, iy1, fl, x1, y1, g - p["lip_t"]),
-              box("pond-concrete", x0, iy0, fl, ix0, iy1, g - p["lip_t"]), box("pond-concrete", ix1, iy0, fl, x1, iy1, g - p["lip_t"])]
-    sx0, sy0, sx1, sy1 = ix0 + sh, iy0 + sh, ix1 - sh, iy1 - sh
-    parts += [box("pond-concrete", ix0, iy0, fl, ix1, sy0, shelf_top), box("pond-concrete", ix0, sy1, fl, ix1, iy1, shelf_top),
-              box("pond-concrete", ix0, sy0, fl, sx0, sy1, shelf_top), box("pond-concrete", sx1, sy0, fl, ix1, sy1, shelf_top)]
+    W, wl, wp, d = pond_profile(f, g)
+    across, entry_max = pond_axes(f)
+    a0, a1 = (x0, x1) if across == "y" else (y0, y1)
+    lo = (y0 if across == "y" else x0)
+    hi = (y1 if across == "y" else x1)
+    origin, flip = (hi, True) if entry_max else (lo, False)
+    fl = wl - d["trench_depth"]
+    wt, ct = p["wall_t"], p["floor_t"]
+    ztop = g - p["coping_h"]                     # shell top, under the coping
+    def ex(mat, prof, u0, u1):
+        return extrude_profile(mat, prof, u0, u1, across=across, origin=origin, flip=flip)
+    def slab(mat, s0, s1, u0, u1, z0, z1):      # box in (s, u, z): s across the section, u along the pond
+        return ex(mat, [(s0, z0), (s1, z0), (s1, z1), (s0, z1)], u0, u1)
+    liner_prof = [wp[0], wp[1], wp[2], wp[3], wp[4], (W, fl - ct), (0.0, fl - ct)]
+    parts = [ex("pond-liner", liner_prof, a0, a1)]
+    parts += [slab("pond-liner", -wt, 0.0, a0 - wt, a1 + wt, fl - ct, ztop), slab("pond-liner", W, W + wt, a0 - wt, a1 + wt, fl - ct, ztop),
+              slab("pond-liner", -wt, W + wt, a0 - wt, a0, fl - ct, ztop), slab("pond-liner", -wt, W + wt, a1, a1 + wt, fl - ct, ztop)]
     lw = p["edge_lip"]
-    lt = g - p["lip_t"]
-    parts += [box("pond-edge", x0, y0, lt, x1, y0 + lw, g), box("pond-edge", x0, y1 - lw, lt, x1, y1, g),
-              box("pond-edge", x0, y0 + lw, lt, x0 + lw, y1 - lw, g), box("pond-edge", x1 - lw, y0 + lw, lt, x1, y1 - lw, g)]
-    basin = Obj(oid, "pond", "flush koi pond %.1f x %.1f m: rim at ground level, water %d mm below the rim, %d mm contrasting flush lip, safety shelf %d mm wide at %d mm below water "
-                "(shelf width ASSUMED: GAP-POND-EDGE-SAFETY); layout edge slope 1:%s is not modelled (it needs %.1f m of run in a %.1f m wide pond)"
-                % (x1 - x0, y1 - y0, int(free * 1000), int(lw * 1000), int(sh * 1000), int(p["shelf_below_water"] * 1000), f.get("edge_slope_run_per_rise"),
-                   (f.get("edge_slope_run_per_rise") or 0) * (depth - free), min(x1 - x0, y1 - y0)),
-                parts, layout_id=layout_id, footprint=(x0, y0, x1, y1), meta=dict(water_z=wl, shelf_top=shelf_top, floor_z=fl, depth_m=depth, freeboard_m=free))
-    water = Obj(oid + "-water", "water", "pond water surface %d mm below the rim" % int(free * 1000), [box("water", ix0, iy0, wl - 0.02, ix1, iy1, wl)],
-                rests_on=(oid,), footprint=(ix0, iy0, ix1, iy1), footprint_mode="bbox", meta=dict(z=wl))
-    bars = []
-    gp, gb = p["grille_pitch"], p["grille_bar"]
+    bear = 0.04                                   # the wall carries a bearing ledge under the coping, above the water (ASSUMED detail)
+    zl = ztop - bear
+    parts += [slab("pond-liner", 0.0, bear, a0, a1, zl, ztop), slab("pond-liner", W - bear, W, a0, a1, zl, ztop),
+              slab("pond-liner", bear, W - bear, a0, a0 + bear, zl, ztop), slab("pond-liner", bear, W - bear, a1 - bear, a1, zl, ztop)]
+    lip_parts = [slab("pond-edge", 0.0, lw, a0, a1, ztop, g), slab("pond-edge", W - lw, W, a0, a1, ztop, g),
+                 slab("pond-edge", lw, W - lw, a0, a0 + lw, ztop, g), slab("pond-edge", lw, W - lw, a1 - lw, a1, ztop, g)]
+    basin = Obj(oid, "pond", "flush koi pond %.1f x %.1f m from the layout section: %.0f mm freeboard, entry slope 1:%.0f over %.2f m to a %.2f m shelf at %.0f mm below water, "
+                "%.2f m trench at %.0f mm; 100 mm liner walls and floor ASSUMED construction" % (x1 - x0, y1 - y0, d["freeboard"] * 1000, d["entry_run"] / d["shelf_depth"] if d["shelf_depth"] else 0,
+                d["entry_run"], d["shelf"], d["shelf_depth"] * 1000, W - d["entry_run"] - d["shelf"], d["trench_depth"] * 1000),
+                parts, layout_id=layout_id, footprint=None, footprint_mode=None,
+                meta=dict(water_z=wl, floor_z=fl, across=across, entry_max=entry_max, section=d, W=W, rect=(x0, y0, x1, y1)))
+    lip = Obj(oid + "-lip", "pond-lip", "flush contrasting lip: %d mm wide coping inside the pond rect, top at ground level, overhanging the water edge (layout: flush, contrasting)" % int(lw * 1000), lip_parts, rests_on=(oid,), footprint_mode=None,
+              meta=dict(top_z=g, width_m=lw))
+    water = Obj(oid + "-water", "water", "pond water surface %d mm below the rim, depth-tinted closed solid" % int(d["freeboard"] * 1000), [ex("water", wp, a0, a1)],
+                rests_on=(oid,), layout_id=layout_id, footprint=(x0, y0, x1, y1), footprint_mode="bbox", meta=dict(z=wl))
     gt = wl - p["grille_top_below_water"]
+    gb, gp, gth = p["grille_bar"], p["grille_pitch"], p["grille_t"]
+    sg = d["entry_run"] * p["grille_top_below_water"] / d["shelf_depth"] + 0.002          # where the entry slope reaches the grille level
+    bars = []
     k = 0
-    while ix0 + gb + k * gp <= ix1 - gb + 1e-9 or k == 0:
-        px = ix0 + k * gp
-        bars.append(box("grille-steel", px, iy0, shelf_top, min(px + gb, ix1), iy1, gt)); k += 1
-        if px + gb >= ix1: break
-    bars.append(box("grille-steel", ix1 - gb, iy0, shelf_top, ix1, iy1, gt))
-    k = 0
-    while iy0 + k * gp < iy1 - gb:
-        py = iy0 + k * gp
-        bars.append(box("grille-steel", ix0, py, shelf_top, ix1, py + gb, gt)); k += 1
-    bars.append(box("grille-steel", ix0, iy1 - gb, shelf_top, ix1, iy1, gt))
-    grille = Obj(oid + "-grille", "grille", "rigid child-protection grille %d mm below the water surface, bars %d mm at %d mm (layout: rigid_grille; bar section/pitch ASSUMED; "
-                 "no published load figure, GAP-POND-GRILLE-LOAD)" % (int(p["grille_top_below_water"] * 1000), int(gb * 1000), int(gp * 1000)), bars,
-                 rests_on=(oid,), footprint=(ix0, iy0, ix1, iy1), footprint_mode="bbox", meta=dict(top_z=gt, below_water_m=p["grille_top_below_water"]))
-    return [basin, water, grille]
+    while sg + k * gp + gb <= W + 1e-9:
+        bars.append(slab("grille-steel", sg + k * gp, sg + k * gp + gb, a0, a1, gt - gth, gt)); k += 1
+    bars.append(slab("grille-steel", W - gb, W, a0, a1, gt - gth, gt))
+    u = a0
+    while u + gb <= a1 + 1e-9:
+        bars.append(slab("grille-steel", sg, W, u, u + gb, gt - gth, gt)); u += gp
+    bars.append(slab("grille-steel", sg, W, a1 - gb, a1, gt - gth, gt))
+    se = d["entry_run"] + d["shelf"]
+    bars.append(slab("grille-steel", se - 0.03, se, a0, a1, wl - d["shelf_depth"], gt - gth))      # rib: the grille rests on the shelf edge
+    grille = Obj(oid + "-grille", "grille", "rigid child-protection grille %d mm below the water surface, bars %d x %d mm at %d mm, resting on a rib on the shelf and on the walls "
+                 "(layout: rigid_grille; bar section/pitch ASSUMED; no published load figure, GAP-POND-GRILLE-LOAD)" % (int(p["grille_top_below_water"] * 1000), int(gb * 1000), int(gth * 1000), int(gp * 1000)),
+                 bars, rests_on=(oid, oid + "-water"), footprint_mode=None, meta=dict(top_z=gt, below_water_m=p["grille_top_below_water"], s0=sg))
+    return [basin, lip, water, grille]
 
 
-def firepit(oid, layout_id, f, g):
-    """Flush gas fire pit: liner box below the paving, burner with a flame (open state), flush cover disc (closed) or the cover set aside (open)."""
+def pond_point(f, s, u, g=None):
+    """Plan (x, y) of section position s (from the entry edge) and along-pond fraction u in 0..1."""
+    x0, y0, x1, y1 = R(f["rect"])
+    across, entry_max = pond_axes(f)
+    a0, a1 = (x0, x1) if across == "y" else (y0, y1)
+    lo, hi = (y0, y1) if across == "y" else (x0, x1)
+    sv = hi - s if entry_max else lo + s
+    uv = a0 + u * (a1 - a0)
+    return (uv, sv) if across == "y" else (sv, uv)
+
+
+def _half_poly(cx, cy, r, axis, sign, n=24):
+    a0 = {("y", 1): 0.0, ("y", -1): math.pi, ("x", 1): -math.pi / 2, ("x", -1): math.pi / 2}[(axis, sign)]
+    return Polygon([(cx + r * math.cos(a0 + math.pi * i / n), cy + r * math.sin(a0 + math.pi * i / n)) for i in range(n + 1)])
+
+
+def _full_poly(cx, cy, r, n=24):
+    return Polygon([(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n)) for i in range(n)])
+
+
+def cover_parts(cx, cy, d, ctop, grid_rect, half):
+    """Fire-pit cover that CONTINUES THE PAVER PATTERN: a thin steel plate carrying the same 0.6 x 0.3 running-bond units, on the paving's own grid
+    (`grid_rect` is the paving rect whose grid they belong to), clipped to the disc (or the half disc on our side of the boundary)."""
+    p, pv = P.PIT, P.PAVER
+    poly = _half_poly(cx, cy, d / 2, *half) if half else _full_poly(cx, cy, d / 2)
+    pl = list(poly.exterior.coords)[:-1]
+    parts = [prism("paving-joint", pl, ctop - p["cover_t"], ctop - pv["thick"])]
+    parts += units(grid_rect, [], ctop, pv["len"], pv["wid"], "x", "paving-unit", clip=poly)
+    return parts
+
+
+def firepit(oid, layout_id, f, g, half=None, grid_rect=None, tag=""):
+    """Flush gas fire pit: liner box below the paving, burner with a flame (open state), flush paver-pattern cover (closed) or the cover set aside (open).
+    `half` = (axis, sign): build only that half (the pit straddles the shared boundary; the other half is the neighbour's and is never part of our scene)."""
     p = P.PIT
     cx, cy = f["center"]
     d = f["diameter_m"]
@@ -338,20 +409,63 @@ def firepit(oid, layout_id, f, g):
     t = p["liner_t"]
     fl = g - p["depth"]
     pv_top = g - P.PAVER["thick"]
-    parts = [box("pit-steel", cx - h, cy - h, fl - 0.02, cx + h, cy + h, fl)]
-    parts += [box("pit-steel", cx - h, cy - h, fl, cx + h, cy - h + t, pv_top), box("pit-steel", cx - h, cy + h - t, fl, cx + h, cy + h, pv_top),
-              box("pit-steel", cx - h, cy - h + t, fl, cx - h + t, cy + h - t, pv_top), box("pit-steel", cx + h - t, cy - h + t, fl, cx + h, cy + h - t, pv_top)]
-    parts += [cyl("lava-rock", cx, cy, 0.28, fl, fl + 0.10), cyl("burner", cx, cy, 0.30, fl + 0.10, fl + 0.13, r_top=0.30)]
-    chamber = Obj(oid, "firepit", "flush gas fire pit chamber (gas, %s; liner/burner dimensions ASSUMED, product not chosen: LS-FIRE-PRODUCT)" % f.get("fuel", "gas"), parts, layout_id=layout_id,
-                  footprint=(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2), footprint_mode="within", meta=dict(cover=f.get("cover")))
-    flame = Obj(oid + "-flame", "flame", "flame shown in the open state: an emissive cone (not simulated fire)", [cyl("flame", cx, cy, 0.18, fl + 0.13, fl + 0.13 + p["flame_h"], r_top=0.02, n=16)],
+    ax, sg = half if half else ("y", 1)
+    def hb(material, x0, y0, z0, x1, y1, z1):        # box clipped to the kept half
+        if half:
+            if ax == "y":
+                y0, y1 = (max(y0, cy), y1) if sg > 0 else (y0, min(y1, cy))
+            else:
+                x0, x1 = (max(x0, cx), x1) if sg > 0 else (x0, min(x1, cx))
+            if x1 - x0 <= 1e-9 or y1 - y0 <= 1e-9:
+                return None
+        return box(material, x0, y0, z0, x1, y1, z1)
+    def hc(material, r, z0, z1, r_top=None, n=24):
+        return half_frustum(material, cx, cy, r, z0, z1, r_top, ax, sg, n) if half else cyl(material, cx, cy, r, z0, z1, n=n, r_top=r_top)
+    parts = [hb("pit-steel", cx - h, cy - h, fl - 0.02, cx + h, cy + h, fl),
+             hb("pit-steel", cx - h, cy - h, fl, cx + h, cy - h + t, pv_top), hb("pit-steel", cx - h, cy + h - t, fl, cx + h, cy + h, pv_top),
+             hb("pit-steel", cx - h, cy - h + t, fl, cx - h + t, cy + h - t, pv_top), hb("pit-steel", cx + h - t, cy - h + t, fl, cx + h, cy + h - t, pv_top)]
+    parts = [q for q in parts if q is not None]
+    parts += [hc("lava-rock", 0.28, fl, fl + 0.10), hc("burner", 0.30, fl + 0.10, fl + 0.13)]
+    where = "ours half only (the pit straddles the shared west line; the neighbour's half is not part of this scene)" if half else "whole pit"
+    chamber = Obj(oid, "firepit", "flush gas fire pit chamber (gas, %s; %s; liner/burner dimensions ASSUMED, product not chosen: LS-FIRE-PRODUCT)" % (f.get("fuel", "gas"), where), parts, layout_id=layout_id,
+                  footprint=(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2), footprint_mode="within", meta=dict(cover=f.get("cover"), half=half))
+    flame = Obj(oid + "-flame", "flame", "flame shown in the open state: an emissive cone (not simulated fire)", [hc("flame", 0.18, fl + 0.13, fl + 0.13 + p["flame_h"], 0.02, 16)],
                 rests_on=(oid,), footprint_mode=None, state="open")
-    ctop = g + lip
-    closed = Obj(oid + "-cover", "firepit-cover", "flush fire-pit cover, CLOSED: paving-faced disc %.0f mm proud (layout lip %d mm, load rating %s kN), 3 mm gap to the paving"
-                 % (lip * 1000, int((f.get("cover") or {}).get("lip_mm", 6)), (f.get("cover") or {}).get("load_rating_kN")),
-                 [cyl("cover-top", cx, cy, d / 2, ctop - p["cover_t"], ctop)], layout_id=layout_id,
-                 footprint=(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2), rests_on=("ground",), state="closed")
-    ox = cx + 1.05
-    opened = Obj(oid + "-cover", "firepit-cover", "flush fire-pit cover, OPEN: lifted off and set on the paving beside the pit", [cyl("cover-top", ox, cy, d / 2, g, g + p["cover_t"])],
-                 layout_id=layout_id, footprint_mode=None, rests_on=("ground",), state="open")
+    gr = grid_rect or (cx - 1.5, cy - 1.5, cx + 1.5, cy + 1.5)
+    cov = dict(rests_on=("ground",), layout_id=layout_id)
+    closed = Obj(oid + "-cover", "firepit-cover", "flush fire-pit cover, CLOSED: paver-pattern top continuing the paving grid, %.0f mm proud (layout lip %d mm, load rating %s kN), 3 mm gap to the paving%s"
+                 % (lip * 1000, int((f.get("cover") or {}).get("lip_mm", 6)), (f.get("cover") or {}).get("load_rating_kN"), "; our half" if half else ""),
+                 cover_parts(cx, cy, d, g + lip, gr, half), footprint=(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2), footprint_mode="within", state="closed", **cov)
+    dx = 1.05
+    opened = Obj(oid + "-cover", "firepit-cover", "flush fire-pit cover, OPEN: lifted off and set on the paving beside the pit (paver-pattern face up)",
+                 [shifted(q, dx=dx, dz=P.PIT["cover_t"] - lip) for q in cover_parts(cx, cy, d, g + lip, gr, half)], footprint_mode=None, state="open", **cov)
     return [chamber, flame, closed, opened]
+
+
+def root_barrier(oid, layout_id, center, rect, radius, g, depth):
+    """Root barrier: a thin vertical sheet ringing a tree, top flush with the ground, `depth` m deep (ASSUMED 0.9 m: no published depth is claimed).
+    Ring = the declared / enclosing bed rect inset 30 mm, else a polygon of `radius` (default 1.0 m) round the trunk."""
+    b = P.ROOT_BARRIER
+    t = b["t"]
+    z0, z1 = g - depth, g
+    if rect is not None:
+        x0, y0, x1, y1 = rect
+        x0, y0, x1, y1 = x0 + 0.03, y0 + 0.03, x1 - 0.03, y1 - 0.03
+        parts = [box("root-barrier", x0, y0, z0, x1, y0 + t, z1), box("root-barrier", x0, y1 - t, z0, x1, y1, z1),
+                 box("root-barrier", x0, y0 + t, z0, x0 + t, y1 - t, z1), box("root-barrier", x1 - t, y0 + t, z0, x1, y1 - t, z1)]
+        what = "ringing the bed %.1f x %.1f m" % (x1 - x0, y1 - y0)
+    else:
+        r = radius or 1.0
+        cx, cy = center
+        n = 16
+        pts = [(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n)) for i in range(n)]
+        parts = []
+        for i in range(n):
+            (ax, ay), (bx, by) = pts[i], pts[(i + 1) % n]
+            nx_, ny_ = by - ay, -(bx - ax)
+            ln = math.hypot(nx_, ny_)
+            nx_, ny_ = nx_ / ln * t, ny_ / ln * t
+            parts.append(prism("root-barrier", [(ax, ay), (bx, by), (bx + nx_, by + ny_), (ax + nx_, ay + ny_)], z0, z1))
+        what = "ring of radius %.1f m round the trunk" % r
+    return Obj(oid, "root-barrier", "root barrier sheet %.1f m deep, %d mm, top flush with the ground, %s (depth and thickness ASSUMED; the layout declares the barrier, not its section)" % (depth, int(t * 1000), what),
+               parts, layout_id=layout_id, footprint_mode=None, meta=dict(depth_m=depth, top_z=z1))
