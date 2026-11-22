@@ -48,3 +48,10 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
   - LDC's pond-sun criterion reads as a known, accepted condition, not a defect.
 - **Fire pit:** the client wants it placed between the two villas (on the west line with the sister villa), to share with them. Location and screen opening are pending confirmation.
 - **Pergola climbers:** the client asked. Lead recommendation pending confirmation.
+
+## Concept gate, round 2 (client, 2026-11-22): DECIDED
+- **Concept B (Two rooms), adapted:** a social terrace at the west opening to a shared fire pit, and a quiet room east behind a planted mass.
+- **Fire pit:** ON THE SHARED BOUNDARY with the sister villa (west line), to share with them. Gas, a certified product (clearances per its installation manual), flush and concealed with a flush cover. The west screen stays tall except for an opening at the fire pit. Note: a fixture on the boundary needs the sister owner's agreement; that is the client's matter.
+- **Climbers:** grape vine on the dining pergola (deciduous: summer shade, winter sun). On the west screen, the lead's recommendation stands (jasmine for scent, or English ivy, which can be rendered). No climber or pergola over the fire pit.
+- **Ponds:** keep BOTH (north court and east yard) in the design for now; the client will remove one later.
+- **Visualisation:** mirror the south garden symmetrically onto the sister plot (west side) FOR VIEWING ONLY. It is not our land and not our design. It must be labelled visualisation-only in every image and excluded from schedules, quantities and checks.
