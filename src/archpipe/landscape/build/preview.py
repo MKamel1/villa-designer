@@ -15,7 +15,7 @@ from . import policy as P
 BLENDER = str(Path("~/opt/blender/blender").expanduser())
 JOBQ = str(Path("~/archpipe/bin/jobq").expanduser())
 SCRIPT = Path(__file__).with_name("preview_blender.py")
-EXPOSURE = {"bird": -2.0, "eye": -2.0, "court": -2.0, "pond": -2.0, "grape": -2.0, "vis": -2.0}   # fixed per view group (tuned from the test renders, see LDB.md)
+EXPOSURE = {"bird": -3.2, "eye": -3.2, "court": -3.2, "pond": -2.8, "grape": -3.2, "vis": -3.2}   # fixed per view group (tuned from the test renders, see LDB.md)
 EYE = 1.6          # m above the garden level (assumed: the door sills are at garden level)
 
 # Doors from the LDS inventory (src/archpipe/landscape/critic/site.doors()); stored so the preview does not import the critic stack.
@@ -36,6 +36,19 @@ def _mesh_parts(o):
     return out
 
 
+def ground_quads(pond_rects, x=(-60.0, 80.0), y=(-80.0, 40.0)):
+    """Far-ground quads (x0, y0, x1, y1) as a grid whose cells over a pond opening are left out: a plane under the rim would bury the pond."""
+    xs = sorted({*x, *[r[i] for r in pond_rects for i in (0, 2)]})
+    ys = sorted({*y, *[r[i] for r in pond_rects for i in (1, 3)]})
+    out = []
+    for i in range(len(xs) - 1):
+        for j in range(len(ys) - 1):
+            cx, cy = (xs[i] + xs[i + 1]) / 2, (ys[j] + ys[j + 1]) / 2
+            if not any(r[0] < cx < r[2] and r[1] < cy < r[3] for r in pond_rects):
+                out.append([xs[i], ys[j], xs[i + 1], ys[j + 1]])
+    return out
+
+
 def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
     objs = []
     for o in scene.objects:
@@ -47,7 +60,14 @@ def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
         objs.append(d)
     ponds = [o.meta for o in scene.objects if o.kind == "pond"]
     wr = [min(m["floor_z"] for m in ponds), max(m["water_z"] for m in ponds)] if ponds else None
-    return dict(pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
+    return dict(ground_quads=ground_quads([list(m['rect']) for m in ponds]), pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
+
+
+def E_pond_trench_xy(r):
+    """Plan centre of the trench of a pond rect whose entry margin is the low side of the short axis (the layout's `entry_side`)."""
+    x0, y0, x1, y1 = r
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    return (cx, y0 + 1.15) if (y1 - y0) <= (x1 - x0) else (x0 + 1.15, cy)
 
 
 def default_views(scene, tag):
@@ -61,19 +81,24 @@ def default_views(scene, tag):
     if sp.get("pit") and sp.get("table"):
         px, py = sp["pit"]
         tx, ty = sp["table"]
-        v.append(dict(name="eye-dining-firepit", group="eye", eye=[tx, ty + 3.0, e], target=[px, py + 0.2, g + 0.9], lens=26, state="closed"))
-        v.append(dict(name="firepit-open", group="eye", eye=[px - 0.6, py + 3.2, g + 1.5], target=[px, py + 0.3, g], lens=30, state="open"))
-        v.append(dict(name="firepit-closed", group="eye", eye=[px - 0.6, py + 3.2, g + 1.5], target=[px, py + 0.3, g], lens=30, state="closed"))
+        size_x = sp.get("table_w", 2.4)
+        ex = tx + size_x / 2 + 0.9                   # seated at the east end of the table, looking along the table side to the pit and the screen opening
+        v.append(dict(name="eye-dining-firepit", group="eye", eye=[ex, ty + 0.4, g + 1.25], target=[px - 0.3, py + 0.3, g + 0.7], lens=26, state="closed"))
+        v.append(dict(name="firepit-open", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="open"))
+        v.append(dict(name="firepit-closed", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="closed"))
     for pid, r in sorted(sp.get("ponds", {}).items()):
         cx, cy = (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
         if pid.startswith("n"):
             v.append(dict(name="court-north-pond", group="court", eye=[r[2] + 1.6, r[1] - 3.6, g + 3.0], target=[cx, cy, g - 0.2], lens=22, state="closed", hide_house=True))
         else:
-            v.append(dict(name="yard-east-pond", group="court", eye=[r[2] + 2.6, r[1] - 1.5, g + 1.9], target=[cx, cy, g - 0.2], lens=24, state="closed"))
+            v.append(dict(name="yard-east-pond", group="court", eye=[r[2] + 2.0, r[1] - 0.95, g + 1.7], target=[cx, cy, g - 0.2], lens=24, state="closed"))
+        if pid.startswith("e"):                          # the stocked trench seen from above (the koi swim below the grille)
+            ts = E_pond_trench_xy(r)
+            v.append(dict(name="pond-koi-" + pid, group="pond", eye=[ts[0], ts[1] - 0.55, g + 1.5], target=[ts[0], ts[1], g - 0.5], lens=40, state="closed"))
         if pid.startswith("n"):
             v.append(dict(name="pond-close-" + pid, group="pond", eye=[cx + 1.9, cy - 2.2, g + 2.1], target=[cx, cy, g - 0.35], lens=32, state="closed", hide_house=True))
         else:
-            v.append(dict(name="pond-close-" + pid, group="pond", eye=[r[2] + 2.4, r[1] - 1.1, g + 1.6], target=[cx, cy, g - 0.35], lens=34, state="closed"))
+            v.append(dict(name="pond-close-" + pid, group="pond", eye=[r[2] + 1.9, r[1] - 0.9, g + 1.5], target=[cx, cy, g - 0.35], lens=34, state="closed"))
     for o in scene.objects:
         if o.kind == "plant" and o.meta.get("deciduous") and o.meta.get("climbing"):
             b = o.bounds()
@@ -100,7 +125,8 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     spec = scene_spec(scene, views, size=size, samples=samples, device="GPU" if gpu else "CPU")
     spec["exposure_by_group"] = dict(EXPOSURE)
     sp = Path("/tmp/ldb-specs"); sp.mkdir(exist_ok=True)
-    spec_path = sp / ("%s.spec.json" % tag)
+    spec["spec_sha"] = hashlib.sha1(json.dumps(spec, sort_keys=True).encode()).hexdigest()
+    spec_path = sp / ("%s-%s.spec.json" % (tag, hashlib.sha1(str(out).encode()).hexdigest()[:8]))      # one spec file per (tag, output dir): two scenes with one tag must not share it
     spec_path.write_text(json.dumps(spec))
     jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text()).encode()).hexdigest()[:10])
     cmd = [JOBQ, "submit", *(["--gpu"] if gpu else []), "--timeout", str(timeout), "--id", jid, "--", BLENDER, "-b", "--factory-startup", "--python-exit-code", "1",
@@ -112,6 +138,8 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     if r.returncode != 0 or not rec.exists():
         raise RuntimeError("preview job %s failed (exit %s): %s; log ~/archpipe/queue/jobs/%s/job.log" % (jid, r.returncode, (r.stdout + r.stderr)[-300:], jid))
     receipt = json.loads(rec.read_text())
+    if receipt.get("spec_sha") != spec["spec_sha"]:       # the job rendered some other spec (a shared spec file once let a sister-plot scene render into a production folder)
+        raise RuntimeError("receipt %s does not belong to this scene (spec_sha %s != %s): refusing its images" % (rec, receipt.get("spec_sha"), spec["spec_sha"]))
     if scene.visualisation_only:                       # a red band in EVERY image; the receipt says so
         from .visualisation import band_present, stamp_band
         for v in receipt["views"]:

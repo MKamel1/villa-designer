@@ -383,6 +383,50 @@ class OutdoorAssets(unittest.TestCase):
         self.assertEqual(outdoor.load(d / "missing.json"), {})
 
 
+class PreviewGuards(unittest.TestCase):
+    def test_the_ground_plane_has_a_hole_over_every_pond(self):
+        from archpipe.landscape.build import preview
+        sp = preview.scene_spec(S, [])
+        q = sp["ground_quads"]
+        area = sum((b[2] - b[0]) * (b[3] - b[1]) for b in q)
+        ponds = list(S.spec["ponds"].values())
+        self.assertAlmostEqual(area, 140.0 * 120.0 - sum((r[2] - r[0]) * (r[3] - r[1]) for r in ponds), places=4)
+        for r in ponds:
+            cx, cy = (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
+            self.assertFalse([b for b in q if b[0] < cx < b[2] and b[1] < cy < b[3]])
+        self.assertEqual(len(preview.ground_quads([])), 1)                          # no pond: one plane, unchanged
+
+    def test_a_receipt_of_another_spec_is_refused(self):
+        from unittest import mock
+        import subprocess
+        from archpipe.landscape.build import preview
+        out = Path(tempfile.mkdtemp())
+        (out / "x.receipt.json").write_text(json.dumps(dict(spec_sha="not-this-scene", views=[])))
+        ok = subprocess.CompletedProcess([], 0, "", "")
+        with mock.patch.object(preview.subprocess, "run", return_value=ok):
+            with self.assertRaises(RuntimeError) as c:
+                preview.render(S, out, "x", views=[])
+        self.assertIn("does not belong", str(c.exception))
+
+    def test_two_scenes_with_one_tag_do_not_share_a_spec_file(self):
+        from unittest import mock
+        import subprocess
+        from archpipe.landscape.build import preview
+        seen = []
+        def fake(cmd, **kw):
+            seen.append([c for c in cmd if str(c).endswith(".spec.json")])
+            return subprocess.CompletedProcess(cmd, 0, "", "")
+        a, b = Path(tempfile.mkdtemp()), Path(tempfile.mkdtemp())
+        with mock.patch.object(preview.subprocess, "run", side_effect=fake):
+            for d in (a, b):
+                try:
+                    preview.render(S, d, "same", views=[])
+                except RuntimeError:
+                    pass
+        paths = {x[0] for x in seen if x}
+        self.assertEqual(len(paths), 2)
+
+
 class Agnostic(unittest.TestCase):
     def test_final_and_visualisation_layouts_build_clean_at_three_years(self):
         for lay in (L, V):

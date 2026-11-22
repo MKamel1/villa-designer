@@ -74,14 +74,17 @@ def climber_material(m, base, bare):
     mix = nt.nodes.new("ShaderNodeMixShader")
     cvar = nt.nodes.new("ShaderNodeTexNoise"); cvar.inputs["Scale"].default_value = 18.0
     cc = nt.nodes.new("ShaderNodeMixRGB")
-    nt.links.new(tc.outputs["Object"], vo.inputs["Vector"]); nt.links.new(tc.outputs["Object"], no.inputs["Vector"]); nt.links.new(tc.outputs["Object"], cvar.inputs["Vector"])
+    wp = nt.nodes.new("ShaderNodeTexNoise"); wp.inputs["Scale"].default_value = 2.5; wp.inputs["Detail"].default_value = 1.0       # domain warp: organic, not a regular cell pattern
+    vm = nt.nodes.new("ShaderNodeVectorMath"); vm.operation = "MULTIPLY_ADD"; vm.inputs[1].default_value = (0.35, 0.35, 0.35)
+    nt.links.new(tc.outputs["Object"], wp.inputs["Vector"]); nt.links.new(wp.outputs["Color"], vm.inputs[0]); nt.links.new(tc.outputs["Object"], vm.inputs[2])
+    nt.links.new(vm.outputs["Vector"], vo.inputs["Vector"]); nt.links.new(tc.outputs["Object"], no.inputs["Vector"]); nt.links.new(tc.outputs["Object"], cvar.inputs["Vector"])
     if bare:
-        vo.feature = "DISTANCE_TO_EDGE"
+        vo.feature = "DISTANCE_TO_EDGE"; vo.inputs["Scale"].default_value = 7.0
         cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = (1, 1, 1, 1)
-        cr.color_ramp.elements[1].position = 0.05; cr.color_ramp.elements[1].color = (0, 0, 0, 1)
+        cr.color_ramp.elements[1].position = 0.035; cr.color_ramp.elements[1].color = (0, 0, 0, 1)
         nt.links.new(vo.outputs["Distance"], cr.inputs["Fac"])
-        ncr.color_ramp.elements[0].position = 0.42; ncr.color_ramp.elements[1].position = 0.52
-        c1, c2 = (0.20, 0.14, 0.09), (0.32, 0.23, 0.15)
+        ncr.color_ramp.elements[0].position = 0.30; ncr.color_ramp.elements[1].position = 0.40
+        c1, c2 = (0.07, 0.045, 0.03), (0.16, 0.11, 0.07)
     else:
         vo.feature = "F1"
         cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = (1, 1, 1, 1)
@@ -297,7 +300,7 @@ sky = nt.nodes.new("ShaderNodeTexSky"); sky.sky_type = "NISHITA"
 sky.sun_elevation = math.radians(52); sky.sun_rotation = math.radians(210); sky.sun_size = math.radians(0.6); sky.air_density = 1.0; sky.dust_density = 1.5; sky.sun_intensity = spec.get("sun_intensity", 0.4)
 nt.links.new(sky.outputs["Color"], nt.nodes["Background"].inputs["Color"]); nt.nodes["Background"].inputs["Strength"].default_value = 1.0
 
-receipt = dict(tag=TAG, assets=[], views=[], objects=0, note="preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)")
+receipt = dict(tag=TAG, spec_sha=spec.get("spec_sha"), assets=[], views=[], objects=0, note="preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)")
 for o in spec["objects"]:
     name = o["id"] if not o["state"] else "%s@%s" % (o["id"], o["state"])
     ob = None
@@ -319,17 +322,11 @@ for c in spec["context"]:
                       faces=[[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]])])
     ob["ld_id"] = c["id"]; ob["ld_context"] = True
 # far ground, a little below the surfaces so nothing z-fights; cells over a pond opening are left out (a plane under the rim would bury the pond)
-xs = sorted({-60.0, 80.0, *[r[i] for r in spec.get("pond_rects", []) for i in (0, 2)]})
-ys = sorted({-80.0, 40.0, *[r[i] for r in spec.get("pond_rects", []) for i in (1, 3)]})
 gv, gf = [], []
-for i in range(len(xs) - 1):
-    for j in range(len(ys) - 1):
-        cx_, cy_ = (xs[i] + xs[i + 1]) / 2, (ys[j] + ys[j + 1]) / 2
-        if any(r[0] < cx_ < r[2] and r[1] < cy_ < r[3] for r in spec.get("pond_rects", [])):
-            continue
-        k = len(gv)
-        gv += [[xs[i], ys[j], G - 0.06], [xs[i + 1], ys[j], G - 0.06], [xs[i + 1], ys[j + 1], G - 0.06], [xs[i], ys[j + 1], G - 0.06]]
-        gf.append([k, k + 1, k + 2, k + 3])
+for x0_, y0_, x1_, y1_ in spec["ground_quads"]:
+    k = len(gv)
+    gv += [[x0_, y0_, G - 0.06], [x1_, y0_, G - 0.06], [x1_, y1_, G - 0.06], [x0_, y1_, G - 0.06]]
+    gf.append([k, k + 1, k + 2, k + 3])
 mesh_object("ctx-ground", [dict(material="ground-far", verts=gv, faces=gf)])
 
 cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
