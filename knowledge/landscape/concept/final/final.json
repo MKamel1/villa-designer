@@ -2,7 +2,7 @@
  "design": "B adapted (client decided 2026-11-22)",
  "hard_fails": [],
  "tally": {
-  "pass": 122,
+  "pass": 123,
   "fail": 0,
   "warn": 3,
   "not_evaluated": 8
@@ -1637,6 +1637,15 @@
    "message": "every element id is unique across all gardens (74 ids)"
   },
   {
+   "criterion": "LDG-ZONE-CLASS",
+   "status": "pass",
+   "subject": "zones",
+   "achieved": 0,
+   "required": 0,
+   "unit": "items",
+   "message": "every seat and table is classified into its declared zone"
+  },
+  {
    "criterion": "LDG-SURFACE",
    "status": "pass",
    "subject": "gardens",
@@ -2633,6 +2642,13 @@
    "item": "LDG-IDS [layout]",
    "achieved": "0 duplicates",
    "required": "0 duplicates",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-ZONE-CLASS [zones]",
+   "achieved": "0 items",
+   "required": "0 items",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },

@@ -2,7 +2,7 @@
 
 Client decisions applied: concept B adapted; shared gas fire pit on the west line; west screen tall except an opening at the pit; grape vine on the dining pergola; both ponds kept; mirrored visualisation of the south garden on the sister plot (viewing only). Numbers below are generated from `final.json`; `layout-final.json` is the design, `layout-visualisation.json` is the mirror (excluded everywhere).
 
-**Result: 0 hard failures.** Tally {'pass': 122, 'fail': 0, 'warn': 3, 'not_evaluated': 8}. LDK `LS-FIRE-STRUCT` (2.0 m open-fire floor, a wood-fire bylaw) is reported as a warning for the pit and replaced by the manuals' own clearances (see Fire pit); the client's screen opening is recorded as a visible waiver (`LDG-PRIV-OPENING`). Critic findings are listed, not gated.
+**Result: 0 hard failures.** Tally {'pass': 123, 'fail': 0, 'warn': 3, 'not_evaluated': 8}. LDK `LS-FIRE-STRUCT` (2.0 m open-fire floor, a wood-fire bylaw) is reported as a warning for the pit and replaced by the manuals' own clearances (see Fire pit); the client's screen opening is recorded as a visible waiver (`LDG-PRIV-OPENING`). Critic findings are listed, not gated.
 
 ## The design in one paragraph
 
@@ -180,6 +180,7 @@ LDB build of this layout (age 3): {'footprint:pass': 67, 'id:pass': 142, 'plant-
 | LDG-SUNFIT [site] | 0 bed-species | 0 bed-species | pass | POLICY / decision (ours) |
 | LDG-SPREAD [s-tree-punica] | 0.0 m2 | 0 m2 | pass | POLICY / decision (ours) |
 | LDG-IDS [layout] | 0 duplicates | 0 duplicates | pass | POLICY / decision (ours) |
+| LDG-ZONE-CLASS [zones] | 0 items | 0 items | pass | POLICY / decision (ours) |
 | LDG-SURFACE [gardens] | 0.0 m2 | 0.02 m2 | pass | POLICY / decision (ours) |
 | LDG-GRAVEL-ZONE [zones] | 0 zones | 0 zones | pass | POLICY / decision (ours) |
 | LDG-TREE-PERGOLA [trees] | 0 trees | 0 trees | pass | POLICY / decision (ours) |
@@ -213,7 +214,7 @@ Counts {'landscape-architect': {'pass': 13, 'fail': 4, 'warn': 1, 'not_evaluated
 - climate C-PRIVACY (fail, blocking): 6 of 15 south seats overlooked by more than 8 eye points seated (raw LDS median 13.0; residual after layout screens 8.0); brief: privacy is critical
 - climate C-POND-SUN (fail, major): pond cell gets 1.75 h direct sun on 21 Jun (required >= 2.0 h, policy: deep shade drops the planting and the water goes green); LS-POND-SHADE covers the opposite excess
 
-Reading them: C-PRIVACY (6 of 15 seats) is the screen opening again (the critic cuts sight lines with the two stubs only); H-SUN-FIT reads the ground sun for the grape, not the 5.6 h at foliage level; A-ENCLOSURE on the two quiet rooms and A-FOCAL (8 focal elements, counted: pit, two ponds, tree, four pergolas) are conventions of the uncalibrated architect critic; U-GATHER-GROUPS counted no lounge seats in the first run because the dining zone covered the rear bench (zone priority); C-POND-SUN reads the first pond (north court) only.
+Reading them: C-PRIVACY (6 of 15 seats) is the screen opening again (the critic cuts sight lines with the two stubs only); H-SUN-FIT reads the ground sun for the grape, not the 5.6 h at foliage level; A-ENCLOSURE on the dining room (37 %: the west side is the opening) and the two quiet rooms (the critic counts a room's perimeter against walls, buildings, screens and planting of 1.8 m; the quiet benches are backed by a 4 m fence the critic did not credit, as in pass 2) and A-FOCAL (8 focal elements, counted: pit, two ponds, tree, four pergolas) are conventions of the uncalibrated architect critic; C-POND-SUN reads the first pond (north court, 1.69 h) only: the east pond gets 4.45 h.
 
 ## Planting schedule (drawable versus stand-in)
 
@@ -242,3 +243,16 @@ Reading them: C-PRIVACY (6 of 15 seats) is the screen opening again (the critic 
 | south | s-bed-vine | Vitis vinifera L. | 2 | shrub/perennial | viable | STAND-IN (generic mass, labelled): not drawable yet | sun conditional at 5.6 h (21 Jun) |
 
 Drawable on this machine means a graded A/B glTF file is present; the Fab/Megascans species graded in LDL pass 5 are not present here as files, so only Phoenix roebelenii, Rhapis excelsa, Punica granatum (and frangipani by genus) draw as plants. Everything else is a labelled generic stand-in.
+
+## Images (looked at)
+
+All images are in `plans/`. I looked at each one. Plans use LDC style 2 (client north up); massing is clay (CPU Cycles, 48 samples: the GPU queue was behind other lanes' long jobs, so the clay views were rendered on CPU, which takes no GPU lock).
+
+* **final-south.png (plan, south garden + east yard).** The house block is at the top; the west line is the left edge of the garden. The flush fire pit (orange disc in a white ring) sits half outside the garden frame, centred on the line. The 2.1 m screen shows only as two short grey stubs with a round jasmine stand-in each; between them is the 3.4 m opening, level with the pit and the table's west chairs. The 8-seat table (white rectangle, six chairs per long side shown as outline) stands 2 m east of the pit under the dashed grape pergola; the BBQ is a crossed square east of it; the rear bench and quiet bench sit under a second pergola along the bottom wall; the pomegranate (large circle with shadow) and the shrub mass fill the east end, with a small herb patch and the tiny vine dots at the rear wall. The east yard (right, narrow) holds the blue pond with its dashed grille, a bench under a pergola, and two shrub masses. Weak points I see: the terrace is mostly empty paving, the west side has no planting except two jasmine circles, the pomegranate crown piles over the mass, and the pit outside the frame makes the sheet look as if the pit were off the plot (it is on the line).
+* **final-north.png (plan, north court).** A paved room with a pergola over a bench niche at the left, one large Rhapis circle with a strip of Aspidistra beside it, and the pond (2.0 x 1.4 m, grille crossed) at the right edged by Acorus drifts; a gravel-coloured path leads from the door at the bottom. It reads as a small, tidy quiet room; the paving at the bottom is large and plain.
+* **final-visualisation-plan.png.** Red band above and below ("VISUALISATION ONLY: SISTER PLOT, NOT OUR LAND OR DESIGN"), the title repeats it, the sister half (left of the line) is washed pink and the mirrored garden is a labelled zone. The mirror is exact: the table, pergolas, benches, tree and shrub mass appear reflected, the pit is shared on the line, our design is untinted on the right. The leader lines on the left are long and crowded (the plan style puts every label outside the drawing); the sister house is not drawn (unknown).
+* **final-massing-south.png.** Clay view from above, house block at the top, garden below. The screen stubs are translucent grey at the left, the louvre pergolas show as timber slats, the table and benches as timber boxes, the pomegranate a green sphere at the lower right over the shrub eggs, the pond a blue slab at the right. The camera hides the pit under the pergola slats' shadows: the pit is not legible in this view. Clay views show volumes, not finish.
+* **final-massing-east.png (azimuth 90).** The east yard from the east: pond (blue) with a row of Acorus balls on its far edge, the bench pergola, shrub masses at both ends and the edge of the south terrace at the left. Reads clearly. My first east view (azimuth 300) showed only the house block and was discarded.
+* **final-massing-north.png (azimuth 250).** North court seen through see-through fences: the pond with its Acorus balls and a Rhapis mass, the bench pergola and the bench in the foreground. Readable but dim and foggy; my first north view (azimuth 205) was a haze and was discarded.
+* **final-visualisation-massing.png.** Same red bands. Two gardens side by side with the house block between; the left (sister) garden is the reflection, with its own tree, table and pergolas. It is the weakest image: there is no way to tint the mirrored half in the clay render, so only the bands label it, and the sister's house and ground are absent.
+
