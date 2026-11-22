@@ -74,3 +74,13 @@ def test_the_bound_file_must_be_the_download(monkeypatch, tmp_path):
     monkeypatch.setitem(PRODUCTS, "DL", dict(PRODUCTS["DL"], ies=str(other)))
     rows = _rows(V.run(), "DL")
     assert next(s for n, s, _ in rows if n == "bound-file") == "fail"
+
+
+def test_cri_overstated_in_the_record_fails_and_understated_is_flagged(monkeypatch):
+    real = V._bound_row
+    monkeypatch.setattr(V, "_bound_row", lambda mk, c: dict(real(mk, c), cri=95.0) if c == "A9003138" else real(mk, c))
+    rows = V.run().table
+    adj = next(t for t in rows if t["code"] == "A9003138")["rows"]
+    assert next(s for n, s, _ in adj if n == "cri") == "fail"
+    qa = next(t for t in rows if t["code"] == "QA03")["rows"]
+    assert "understates" in next(m for n, _, m in qa if n == "cri")      # the page prints CRI 92, the record says 90

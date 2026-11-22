@@ -14,7 +14,9 @@ Compared with the area-weighted mean of the cluster's room-* planes (their heigh
 """
 from __future__ import annotations
 
+import json
 import math
+from pathlib import Path
 
 from .common import LayerResult, check
 from .sources import ids
@@ -77,6 +79,39 @@ def hand_estimate(villa, cluster) -> dict:
                 A_floor=af, A_tot=at, UF=uf, E_hand=MF * phi * uf / af)
 
 
+SUBPLANES = Path(__file__).resolve().parents[3] / "knowledge" / "lighting" / "v6-subplanes.json"
+SUB_CLUSTER = "B-open"      # the open-plan cluster holds the dining table, homework end and daybed (no room-* plane of their own)
+
+
+def subplanes(villa, rad_dir, L: LayerResult, path: Path = SUBPLANES):
+    """The engine lane's lumen-method estimate for planes smaller than a room (`lightcalc/handcalc.py`, v6-subplanes.json), judged here:
+    the file's own arithmetic (hand = direct + indirect), its Radiance value against THIS lane's frozen Radiance results (a stale file
+    fails), and the ratio against the +/-25 % bar recomputed from my Radiance value, not the file's `within_25_percent`."""
+    from ..concept.villa_lighting import SCENES
+    from ..lightcalc import villa_report as VR
+    rows = json.loads(Path(path).read_text())
+    res = VR.ClusterRes.load(Path(rad_dir) / (SUB_CLUSTER + ".json"))
+    for p in villa.planes():
+        if p.id not in rows:
+            continue
+        r = rows[p.id]
+        mine = res.stats(p.id, VR.scene_levels(res, SCENES[SUB_CLUSTER], p.scene)).em
+        ratio = mine / r["e_hand"]
+        problems = []
+        if abs(r["e_hand"] - r["e_direct"] - r["e_indirect"]) > 0.2:
+            problems.append("hand %.1f != direct %.1f + indirect %.1f" % (r["e_hand"], r["e_direct"], r["e_indirect"]))
+        if abs(mine / r["radiance"] - 1) > 0.02:
+            problems.append("file's Radiance %.1f lx vs this lane's %.1f lx: stale file (re-run lightcalc.handcalc)" % (r["radiance"], mine))
+        if r["scene"] != p.scene:
+            problems.append("file scene %s vs plane scene %s" % (r["scene"], p.scene))
+        ok = abs(ratio - 1) <= TOL and not problems
+        st = "pass" if ok else "fail"
+        L.planes[p.id] = st
+        L.results.append(check("LV6", st, p.id, SRC, achieved=round(mine, 1), required=r["e_hand"], unit="lx",
+                               message="%s plane (%s): Radiance %.0f lx vs lumen method %.0f lx (direct %.0f + indirect %.0f) = %+.0f %%%s"
+                               % (p.id, p.scene, mine, r["e_hand"], r["e_direct"], r["e_indirect"], 100 * (ratio - 1), ("; " + "; ".join(problems)) if problems else "")))
+
+
 def run(villa, rad_dir) -> LayerResult:
     from pathlib import Path
     from ..lightcalc import villa_report as VR
@@ -102,4 +137,6 @@ def run(villa, rad_dir) -> LayerResult:
                                % (em, h["E_hand"], 100 * (ratio - 1), h["phi"], h["direct_floor"], h["direct_wall"], h["direct_ceiling"], h["rho_bar"], h["UF"])))
         for r in {p.room for p in mine}:
             L.mark(r, "pass" if ok else "fail")
+    if (Path(rad_dir) / (SUB_CLUSTER + ".json")).exists():
+        subplanes(villa, rad_dir, L)
     return L

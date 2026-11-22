@@ -10,10 +10,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import subprocess
 from pathlib import Path
 
+from . import ies
 from .common import LayerResult, check
 from .sources import ids
 
@@ -65,10 +67,21 @@ def cycles_lights(villa, cluster, tmp: Path):
     return specs
 
 
+RENDERER_DIR = ROOT / "src" / "archpipe" / "blender"      # what Cycles runs: the production light/scene constructors (villa_scene.py ...)
+
+
+def renderer_sha() -> str:
+    """Hash of the probe and of every renderer source: a renderer fix must change the job key (L6d had to use a nonce to see its own fix)."""
+    h = hashlib.sha1()
+    for f in [Path(__file__).with_name("cycles_probe.py"), *sorted(RENDERER_DIR.glob("*.py"))]:
+        h.update(f.name.encode() + f.read_bytes())
+    return h.hexdigest()[:8]
+
+
 def run_cycles(job: dict, workdir: Path, reuse=True) -> dict:
     workdir.mkdir(parents=True, exist_ok=True)
     jp, op = workdir / "job.json", workdir / "out.json"
-    job = dict(job, probe_sha=hashlib.sha1(Path(__file__).with_name("cycles_probe.py").read_bytes()).hexdigest()[:8])
+    job = dict(job, probe_sha=renderer_sha())
     blob = json.dumps(job)
     sha = hashlib.sha1(blob.encode()).hexdigest()[:10]
     shaf = workdir / "job.sha"
@@ -200,6 +213,36 @@ def kind_orientation(villa, work: Path = ROOT / "out" / "LV" / "kind", spin_add:
         out.append(dict(kind=kind, aim=tuple(round(x, 3) for x in aim), spin=p.spin_deg + spin_add, sum_dev=sum(c) / sum(a) - 1,
                         l1=sum(abs(x - y) for x, y in zip(c, a)) / sum(a)))
     return out
+
+
+def file_probe(villa, ies_path, work: Path = ROOT / "out" / "LV" / "file", aim=(0.0, 0.0, -1.0), n=11) -> dict:
+    """Any one IES file, straight down at 2.7 m in an unlit room: Cycles (production constructor) vs the analytic engine on an n x n floor
+    grid sized to the file's own pool (to where the intensity falls to 2 % of peak, at most 75 deg). `sum_dev` is the renderer's gain error
+    for that file (the IES multi-plane gain's residual); `ratio_spread` is max-min of the per-point Cycles/analytic ratio over points
+    above 5 % of the pool's peak (a pure scale error has none)."""
+    import dataclasses
+    from .. import photometry
+    from ..lightcalc.direct import direct_illuminance
+    ies_path = Path(ies_path)
+    d = ies.parse(ies_path.read_text(encoding="utf-8-sig", errors="replace").replace("\ufeff", ""))
+    peak = ies.peak_cd(d)
+    cut = next((g / 4 for g in range(720, -1, -1) if max(ies.candela(d, g / 4, c) for c in (0.0, 90.0)) > 0.02 * peak), 75.0)
+    R = 2.7 * math.tan(math.radians(min(cut + 2.0, 75.0)))
+    pts = [[R * (2 * i / (n - 1) - 1), R * (2 * j / (n - 1) - 1), 0.0] for i in range(n) for j in range(n)]
+    p = next(p for p in villa.placements if p.meta.get("kind") == "DL" and not p.meta.get("generic"))
+    P = dataclasses.replace(p, position=(0.0, 0.0, 2.7), dim=1.0, aim=aim, spin_deg=0.0, photometry=photometry.load(str(ies_path)))
+    w = work / ies_path.stem
+    (w / "ies").mkdir(parents=True, exist_ok=True)
+    (w / "ies" / "p.ies").write_bytes(ies_path.read_bytes())
+    spec = dict(id="L0", type="ies", cct_k=2700, ies="p.ies", lumens=P.photometry.integrated_flux(), position=[0, 0, 2.7], aim=list(aim), spin_deg=0.0)
+    job = dict(src=str(ROOT / "src"), ies_dir=str(w / "ies"), lights=[spec],
+               room=dict(polygon=[[-9, -9], [9, -9], [9, 9], [-9, 9]], floor=0.0, ceiling=3.0, rho_floor=0.0, rho_wall=0.0, rho_ceiling=0.0),
+               points=pts, mf=1.0, samples=64, bounces=1)
+    c = [r["direct_lux"] for r in run_cycles(job, w)["readings"]]
+    a = [direct_illuminance([P], tuple(q)) for q in pts]
+    big = [x / y for x, y in zip(c, a) if y > 0.05 * max(a)]
+    return dict(file=ies_path.name, planes=len(d.cang), sum_dev=sum(c) / sum(a) - 1, l1=sum(abs(x - y) for x, y in zip(c, a)) / sum(a),
+                ratio_spread=max(big) - min(big), n_points=len(big), pool_radius_m=R)
 
 
 def run_orientation(villa, L: LayerResult) -> None:

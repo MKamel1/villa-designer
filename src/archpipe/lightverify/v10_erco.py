@@ -38,6 +38,8 @@ def pdf_text(code: str) -> str:
 def datasheet(text: str) -> dict:
     """What page 1 prints: flux, load, Imax (all printed, as many as appear), cone table rows (h, E, D), printed beam angle."""
     out = {"lumens": None, "watts": None, "imax": [], "cone": [], "beam_angle": None}
+    m = re.search(r"Colour rendition index\s+CRI\s*(\d+)", text)
+    out["cri"] = float(m.group(1)) if m else None
     m = re.search(r"Luminous flux of the luminaire\s+(\d+)\s*lm", text)
     out["lumens"] = float(m.group(1)) if m else None
     m = re.search(r"Connected load\s+([\d.]+)\s*W", text)
@@ -120,7 +122,7 @@ def datasheet_iguzzini(text: str) -> dict:
     """What the iGuzzini product page prints (it IS their datasheet): system lm/W, Imax, LOR, flux at/above 90 deg, beam class angle."""
     m = re.search(r"Optic and beam angle\s*\n\s*[A-Z]+\s*-\s*[\w ]+?(\d+(?:\.\d+)?)\s*°", text)
     return {"lumens": _label_value(text, "lm system"), "watts": _label_value(text, "W system"), "imax": [v] if (v := _label_value(text, "Maximum intensity (cd)")) else [],
-            "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"),
+            "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"), "cri": _label_value(text, "CRI"),
             "above90": _label_value(text, "Total light flux at or above an angle of 90° (Lm)"), "lamp_lm": _label_value(text, "lm source")}
 
 
@@ -134,6 +136,12 @@ def datasheet_of(maker: str, code: str) -> dict:
     if maker == "erco" and pdfs:
         return datasheet(pdf_text(code))
     return datasheet_iguzzini(next(d.glob("*product-page.txt")).read_text(encoding="utf-8"))
+
+
+def _bound_row(maker: str, code: str):
+    """The binding's own row (`knowledge/lighting/products-frozen.json`) for a product: the record the design carries (CRI is not in PRODUCTS)."""
+    rows = json.loads((ROOT / "knowledge" / "lighting" / "products-frozen.json").read_text(encoding="utf-8")).values()
+    return next((r for r in rows if r["manufacturer"] == maker and r["code"] == code), None)
 
 
 def verify_product(L: LayerResult, label: str, maker: str, code: str, bound: Path | None, villa_gate: bool) -> dict:
@@ -169,6 +177,11 @@ def verify_product(L: LayerResult, label: str, maker: str, code: str, bound: Pat
         add("lumens", False, "no system lumen figure in the data sheet text", status="not_evaluated")
     if ds["watts"]:
         add("watts", abs(f0.input_watts - ds["watts"]) < 0.15 * ds["watts"] + 0.1, "file %.2f W vs data-sheet load %g W" % (f0.input_watts, ds["watts"]), f0.input_watts, ds["watts"], "W")
+    row = _bound_row(maker, code)
+    if ds.get("cri") and row and row.get("cri"):
+        # a bound CRI BELOW the published one understates the product (harmless to colour checks, still wrong in the record): reported, not failed
+        add("cri", row["cri"] <= ds["cri"] + 1e-9, "bound record CRI %g vs data sheet CRI %g%s" % (row["cri"], ds["cri"], "" if row["cri"] == ds["cri"] else
+            " (record %s the data sheet: fix the record)" % ("understates" if row["cri"] < ds["cri"] else "OVERSTATES")), row["cri"], ds["cri"], "")
     if ds["imax"]:
         pk = ies.peak_cd(f0)
         add("imax", abs(pk / ds["imax"][0] - 1) <= TOL, "file peak %.0f cd vs data sheet Imax %g cd (%+.2f %%)" % (pk, ds["imax"][0], 100 * (pk / ds["imax"][0] - 1)), round(pk, 0), ds["imax"][0], "cd")

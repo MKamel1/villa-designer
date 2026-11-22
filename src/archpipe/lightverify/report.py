@@ -61,7 +61,7 @@ def render(villa, layers, meta=None) -> str:
     for room in sorted(by_room):
         for p in by_room[room]:
             st = {"V1": layers["V1"].room_status(room), "V2": layers["V2"].room_status(room), "V3": v3.get(p.id), "V5": layers["V5"].room_status(room),
-                  "V6": layers["V6"].room_status(room), "V7": layers["V7"].room_status(room) if layers["V7"].rooms else None,
+                  "V6": layers["V6"].planes.get(p.id) or layers["V6"].room_status(room), "V7": layers["V7"].room_status(room) if layers["V7"].rooms else None,
                   "V10": layers["V10"].room_status(room),
                   "V12": v12.get(p.id) if not p.id.startswith("room-") else "pass"}
             ok = all(v == "pass" for v in st.values()) and glob["V4"].startswith("pass") and glob["V8"].startswith("pass")

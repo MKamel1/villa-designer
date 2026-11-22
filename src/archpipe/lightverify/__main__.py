@@ -53,6 +53,8 @@ def main(argv=None) -> int:
     layers["V1"] = v1_inputs.check_inputs(villa)
     layers["V2"] = v2_placement.check_placement(villa)
     scene = a.scene or next((s for s in SCENE_CANDIDATES if Path(s).exists()), None)
+    from . import v_la4
+    layers["V2"].results += v_la4.results(villa, scene)        # L6d's LA4 lying-looking-up sightlines, recomputed here
     ts = None
     if scene:
         ts = scene_geom.load_scene(scene)
