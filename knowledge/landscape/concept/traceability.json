@@ -1,0 +1,3138 @@
+{
+ "H-screened-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-5": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/plant/bed-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "H-screened-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-5": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/plant/bed-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "H-open-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-5": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/plant/bed-south/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "H-open-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-5": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/plant/bed-south/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "O-screened-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-corner": [
+    "U-S-QUIET",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/trees/tree-0-punica_granatum": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/plant/bed-corner/petrea_volubilis": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-corner/salvia_leucantha": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "O-screened-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-4": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-corner": [
+    "U-S-QUIET",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/trees/tree-0-punica_granatum": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/plant/bed-corner/petrea_volubilis": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-corner/salvia_leucantha": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-west/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "O-open-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-corner": [
+    "U-S-QUIET",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/trees/tree-0-punica_granatum": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/plant/bed-corner/jasminum_sambac": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-corner/salvia_leucantha": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "O-open-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/lounge-seat-0": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-2": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-3": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-corner": [
+    "U-S-QUIET",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/trees/tree-0-punica_granatum": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/plant/bed-corner/jasminum_sambac": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-corner/salvia_leucantha": [
+    "D-SHADE-OVER-SUN",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "W-screened-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-3": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-4": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/seat-wall": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-0": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-1": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/seatwalls/seat-wall": [
+    "LS-SEATWALL"
+   ],
+   "south/plant/bed-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-0/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-0",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-1",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "W-screened-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-3": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-4": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/seat-wall": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/lounge-seat-1": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-west": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-0": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-1": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/obstacles/sister-screen": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ],
+   "south/seatwalls/seat-wall": [
+    "LS-SEATWALL"
+   ],
+   "south/plant/bed-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-0/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/origanum_majorana": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/gazania_rigens": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-west",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-0",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-1",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "W-open-north": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-3": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-4": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/seat-wall": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-south-0": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-1": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-2": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/seatwalls/seat-wall": [
+    "LS-SEATWALL"
+   ],
+   "south/plant/bed-south-0/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-1/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-2/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-2/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/salvia_leucantha": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-3": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-4": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-5": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-yard": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-herb": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/plant/bed-yard/jasminum_sambac": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-herb/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south-0",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-1",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-2",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ },
+ "W-open-east": {
+  "elements": {
+   "south/zones/dining": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ],
+   "south/zones/lounge": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ],
+   "south/zones/quiet": [
+    "U-S-QUIET"
+   ],
+   "south/zones/standing": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "south/paths/path-door": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "south/paved_areas/paving-0": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-1": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-2": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-3": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/paved_areas/paving-4": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "south/tables/dining-table": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ],
+   "south/seating/seat-wall": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ],
+   "south/seating/quiet-bench": [
+    "U-S-QUIET"
+   ],
+   "south/planting_groups/bed-south-0": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-1": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-south-2": [
+    "U-S-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "south/planting_groups/bed-east": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ],
+   "south/features/firepit": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ],
+   "south/features/bbq": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ],
+   "south/features/herb-bed": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ],
+   "south/boundary/fence-east": [
+    "LS-SCREEN"
+   ],
+   "south/boundary/fence-rear": [
+    "LS-SCREEN"
+   ],
+   "south/obstacles/fence-rear": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/fence-east": [
+    "SITE-FENCE"
+   ],
+   "south/obstacles/pot-0-plumeria": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ],
+   "south/seatwalls/seat-wall": [
+    "LS-SEATWALL"
+   ],
+   "south/plant/bed-south-0/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-1/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-2/petrea_volubilis": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-south-2/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "south/plant/bed-east/salvia_leucantha": [
+    "U-S-HERB",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/zones/quiet": [
+    "U-N-QUIET"
+   ],
+   "north/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "north/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-1": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/paved_areas/paving-2": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "north/seating/bench": [
+    "U-N-QUIET"
+   ],
+   "north/planting_groups/bed-street": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-steps": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/planting_groups/bed-wall": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "north/plant/bed-street/pittosporum_tobira": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "north/plant/bed-wall/salvia_leucantha": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/paths/path-main": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ],
+   "east/paved_areas/paving-0": [
+    "U-ACCESS",
+    "LS-SLOPE"
+   ],
+   "east/planting_groups/bed-pond-path": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-fence": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-w": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-pond-end-e": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-west": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/planting_groups/bed-yard-east": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "east/features/pond": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN"
+   ],
+   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-fence/salvia_leucantha": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-w/jasminum_sambac": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/pontederia_cordata": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-west/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/bougainvillea_glabra": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-yard-east/gazania_rigens": [
+    "U-PRIVACY",
+    "D-COLOUR-DRIFTS"
+   ]
+  },
+  "untraced": [
+   [
+    "south",
+    "planting_groups",
+    "bed-south-0",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-1",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ],
+   [
+    "south",
+    "planting_groups",
+    "bed-south-2",
+    [
+     "U-S-PRIVACY",
+     "LS-HYDROZONE"
+    ]
+   ]
+  ]
+ }
+}

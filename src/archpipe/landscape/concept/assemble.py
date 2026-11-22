@@ -92,7 +92,7 @@ def draw_package(pk, name, title, pond_label=""):
     return str(path.relative_to(S.ROOT))
 
 
-def main(n_south=240000, seed=7, chunks=60, procs=30):
+def main(n_south=240000, seed=7, chunks=60, procs=30, top_k=40, n_plant=12, n_court=40000):
     t0 = time.time()
     OUT.mkdir(parents=True, exist_ok=True)
     rs = load()
@@ -100,12 +100,12 @@ def main(n_south=240000, seed=7, chunks=60, procs=30):
     programme.write(OUT / "programme.json")
     json.dump(zoning.build(), open(OUT / "zoning.json", "w"), indent=1)
     print("programme + zoning written", round(time.time() - t0), flush=True)
-    best_s, counts_s = PP.run_south(n_south, seed, 25, 8, chunks=chunks, procs=procs)
+    best_s, counts_s = PP.run_south(n_south, seed, top_k, n_plant, chunks=chunks, procs=procs)
     print("south done", round(time.time() - t0), flush=True)
     courts, counts_c = {}, {}
     for zone in ("north", "east"):
         for pond in (False, True):
-            out, st = CE.run_zone(zone, pond, 20000, seed, 10, 8, pool, rs)
+            out, st = CE.run_zone(zone, pond, n_court, seed, 12, 10, pool, rs)
             courts[(zone, pond)] = out
             counts_c[f"{zone}/{'pond' if pond else 'no-pond'}"] = st
     print("courts done", round(time.time() - t0), flush=True)
@@ -128,13 +128,13 @@ def main(n_south=240000, seed=7, chunks=60, procs=30):
                 if not n_ or not e_:
                     continue
                 cd["packages"][(vname, where)] = package(idea, S_, None, n_[0], e_[0], where, pool, rs)
-    return concepts, best_s, courts, counts_s, counts_c, pool, rs
+    return concepts, best_s, courts, counts_s, counts_c, pool, rs, counts_s, t0
 
 
 if __name__ == "__main__":
     import sys
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 48000
-    concepts, best_s, courts, cs, cc, pool, rs = main(n, 7, 24, 30)
+    concepts, best_s, courts, cs, cc, pool, rs, _, _ = main(n, 7, 24, 30)
     for idea, cd in concepts.items():
         for k, pk in cd["packages"].items():
             print(idea, k, pk["score"], tally(pk["results"]))

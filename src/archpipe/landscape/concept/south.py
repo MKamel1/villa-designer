@@ -222,12 +222,7 @@ def sample(idea: str, variant: str, rng: random.Random, P: dict) -> dict | None:
     if idea == "O":
         c = next(b["rect"] for b in beds if b["id"] == "bed-corner")
         trees.append({"species": "punica_granatum", "center": ((c[0] + c[2]) / 2, (c[1] + c[3]) / 2)})
-    elif rng.random() < .5:
-        sbl = [b["rect"] for b in beds if b["id"].startswith("bed-south")]
-        if not sbl:
-            return None
-        sb = max(sbl, key=lambda r: r[3] - r[1])
-        trees.append({"species": "punica_granatum", "center": (A - sbd / 2, rng.uniform(sb[1] + 0.8, max(sb[1] + 0.9, sb[3] - 0.8)))})
+    # H and W: the south beds are 0.6-1.2 m deep; no tree canopy fits (LDG-SPREAD), so no tree (0 per 100 m2, below the precedent range)
     cover_rooms = rng.choice([("dining",), ("dining", "lounge"), ("dining", "lounge", "quiet")])
     cover = []
     if "dining" in cover_rooms:

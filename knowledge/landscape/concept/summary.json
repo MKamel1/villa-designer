@@ -1,0 +1,128 @@
+{
+ "H": {
+  "screened/north": {
+   "score": 0.7015,
+   "tally": {
+    "pass": 82,
+    "fail": 0,
+    "warn": 4,
+    "not_evaluated": 7
+   },
+   "plan": "knowledge/landscape/concept/plans/H-screened-pond-north.png"
+  },
+  "screened/east": {
+   "score": 0.7555,
+   "tally": {
+    "pass": 84,
+    "fail": 0,
+    "warn": 4,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/H-screened-pond-east.png"
+  },
+  "open/north": {
+   "score": 0.7412,
+   "tally": {
+    "pass": 79,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/H-open-pond-north.png"
+  },
+  "open/east": {
+   "score": 0.7953,
+   "tally": {
+    "pass": 81,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 9
+   },
+   "plan": "knowledge/landscape/concept/plans/H-open-pond-east.png"
+  }
+ },
+ "O": {
+  "screened/north": {
+   "score": 0.7421,
+   "tally": {
+    "pass": 88,
+    "fail": 0,
+    "warn": 5,
+    "not_evaluated": 7
+   },
+   "plan": "knowledge/landscape/concept/plans/O-screened-pond-north.png"
+  },
+  "screened/east": {
+   "score": 0.7962,
+   "tally": {
+    "pass": 90,
+    "fail": 0,
+    "warn": 5,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/O-screened-pond-east.png"
+  },
+  "open/north": {
+   "score": 0.7688,
+   "tally": {
+    "pass": 85,
+    "fail": 0,
+    "warn": 3,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/O-open-pond-north.png"
+  },
+  "open/east": {
+   "score": 0.8228,
+   "tally": {
+    "pass": 87,
+    "fail": 0,
+    "warn": 3,
+    "not_evaluated": 9
+   },
+   "plan": "knowledge/landscape/concept/plans/O-open-pond-east.png"
+  }
+ },
+ "W": {
+  "screened/north": {
+   "score": 0.7076,
+   "tally": {
+    "pass": 90,
+    "fail": 0,
+    "warn": 3,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/W-screened-pond-north.png"
+  },
+  "screened/east": {
+   "score": 0.7617,
+   "tally": {
+    "pass": 92,
+    "fail": 0,
+    "warn": 3,
+    "not_evaluated": 9
+   },
+   "plan": "knowledge/landscape/concept/plans/W-screened-pond-east.png"
+  },
+  "open/north": {
+   "score": 0.7379,
+   "tally": {
+    "pass": 91,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 7
+   },
+   "plan": "knowledge/landscape/concept/plans/W-open-pond-north.png"
+  },
+  "open/east": {
+   "score": 0.7919,
+   "tally": {
+    "pass": 93,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 8
+   },
+   "plan": "knowledge/landscape/concept/plans/W-open-pond-east.png"
+  }
+ }
+}
