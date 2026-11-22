@@ -1118,6 +1118,138 @@
         -28.457999999999995,
         0.32
       ]
+    },
+    {
+      "id": "host-face-support-marker-PATH-landing-gf-01",
+      "host_id": "support-marker-PATH-landing-gf-01",
+      "old": [
+        3.617,
+        -28.470999999999997,
+        0.0,
+        5.102,
+        -28.470999999999997,
+        2.8
+      ],
+      "new": [
+        3.617,
+        -28.457999999999995,
+        0.0,
+        5.102,
+        -28.457999999999995,
+        2.8
+      ],
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "docs/lanes/INT2-integration.md",
+        "caused_by": [
+          "Lane INT2 moved the L6b landing PATH markers onto the landing south-wall +y face (no real host on the west wall); finished-face move = interior plaster 13 mm, the same physical case as the approved marker-PATH-corridor-07/08/09 rows on the same wall line y -28.471"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        },
+        "approved_by": "lead (orchestrator) 2026-11-21"
+      }
+    },
+    {
+      "id": "marker-PATH-landing-gf-01",
+      "host_id": "support-marker-PATH-landing-gf-01",
+      "old": [
+        3.837,
+        -28.469999999999995,
+        0.27999999999999997,
+        3.937,
+        -28.469999999999995,
+        0.32
+      ],
+      "new": [
+        3.837,
+        -28.457999999999995,
+        0.27999999999999997,
+        3.937,
+        -28.457999999999995,
+        0.32
+      ],
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "docs/lanes/INT2-integration.md",
+        "caused_by": [
+          "Lane INT2 moved the L6b landing PATH markers onto the landing south-wall +y face (no real host on the west wall); finished-face move = interior plaster 13 mm, the same physical case as the approved marker-PATH-corridor-07/08/09 rows on the same wall line y -28.471"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        },
+        "approved_by": "lead (orchestrator) 2026-11-21"
+      }
+    },
+    {
+      "id": "host-face-support-marker-PATH-landing-gf-02",
+      "host_id": "support-marker-PATH-landing-gf-02",
+      "old": [
+        3.617,
+        -28.470999999999997,
+        0.0,
+        5.102,
+        -28.470999999999997,
+        2.8
+      ],
+      "new": [
+        3.617,
+        -28.457999999999995,
+        0.0,
+        5.102,
+        -28.457999999999995,
+        2.8
+      ],
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "docs/lanes/INT2-integration.md",
+        "caused_by": [
+          "Lane INT2 moved the L6b landing PATH markers onto the landing south-wall +y face (no real host on the west wall); finished-face move = interior plaster 13 mm, the same physical case as the approved marker-PATH-corridor-07/08/09 rows on the same wall line y -28.471"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        },
+        "approved_by": "lead (orchestrator) 2026-11-21"
+      }
+    },
+    {
+      "id": "marker-PATH-landing-gf-02",
+      "host_id": "support-marker-PATH-landing-gf-02",
+      "old": [
+        3.9670000000000005,
+        -28.469999999999995,
+        0.27999999999999997,
+        4.067,
+        -28.469999999999995,
+        0.32
+      ],
+      "new": [
+        3.9670000000000005,
+        -28.457999999999995,
+        0.27999999999999997,
+        4.067,
+        -28.457999999999995,
+        0.32
+      ],
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "docs/lanes/INT2-integration.md",
+        "caused_by": [
+          "Lane INT2 moved the L6b landing PATH markers onto the landing south-wall +y face (no real host on the west wall); finished-face move = interior plaster 13 mm, the same physical case as the approved marker-PATH-corridor-07/08/09 rows on the same wall line y -28.471"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        },
+        "approved_by": "lead (orchestrator) 2026-11-21"
+      }
     }
   ],
   "rejected": [
