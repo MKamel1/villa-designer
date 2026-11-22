@@ -29,6 +29,7 @@ class JobqTest(unittest.TestCase):
         self.lock = self.root / "graphics.lock"
 
     def queue(self, **kw):
+        kw.setdefault("gpu_slots", 1)
         return jobq.Queue(self.root / "q", self.lock, **kw)
 
     def run_all(self, q):
@@ -120,7 +121,7 @@ class JobqTest(unittest.TestCase):
         self.assertEqual(q.status("oom")["state"], "died")
 
     def test_scheduler_starts_one_gpu_job_in_submit_order_but_cpu_in_parallel(self):
-        q = self.queue(cpu_slots=2)
+        q = self.queue(cpu_slots=2, gpu_slots=1)
         q.launcher = lambda j: None
         q.submit(py("pass"), job_id="g1", gpu=True)
         q.submit(py("pass"), job_id="g2", gpu=True)
@@ -167,6 +168,124 @@ class JobqTest(unittest.TestCase):
         q.cancel("c")
         self.assertEqual(q.status("c")["state"], "cancelled")
         self.assertEqual(q.tick()["started"], [])
+
+
+class GpuSlotsTest(unittest.TestCase):
+    """N GPU slots, VRAM guard, --exclusive, graphics.lock compatibility."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.lock = self.root / "graphics.lock"
+        self.free = 20000
+
+    def queue(self, **kw):
+        q = jobq.Queue(self.root / "q", self.lock, gpu_slots=3, vram_free=lambda: self.free, **kw)
+        q.launcher = lambda j: None
+        return q
+
+    def submit(self, q, *ids, **kw):
+        for j in ids:
+            q.submit(py("pass"), job_id=j, gpu=True, **kw)
+
+    def test_three_gpu_jobs_run_together_fourth_waits_then_fifo(self):
+        q = self.queue()
+        self.submit(q, "g1", "g2", "g3", "g4", "g5")
+        self.assertEqual(q.tick()["started"], ["g1", "g2", "g3"])
+        self.assertEqual(q.status("g4")["state"], "queued")
+        q.set_status("g1", state="done")
+        self.assertEqual(q.tick()["started"], ["g4"])  # g5 still behind
+
+    def test_runners_really_overlap_on_three_slots_but_not_four(self):
+        log = self.root / "spans.txt"
+        code = ("import time,sys; f=open(sys.argv[1],'a'); f.write('s\\n'); f.flush(); time.sleep(1.0); "
+                "f.write('e\\n'); f.close()")
+        q = self.queue()
+        for j in "abcd":
+            q.submit(py(code) + [str(log)], job_id=j, gpu=True)
+            q.set_status(j, state="launching", attempt=1)
+        threads = [threading.Thread(target=q.execute, args=(j,)) for j in "abcd"]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        depth = peak = 0
+        for ev in log.read_text().split():
+            depth += 1 if ev == "s" else -1
+            peak = max(peak, depth)
+        self.assertEqual(peak, 3)  # concurrent, and never four
+        self.assertTrue((self.root / "graphics.lock.2").exists())
+
+    def test_vram_guard_holds_job_and_later_gpu_jobs_keep_order(self):
+        q = self.queue()
+        self.free = 6000 + 1023              # one MB short of need + margin
+        self.submit(q, "big", vram_mb=6000)
+        self.submit(q, "small", vram_mb=100)  # fits, but must not jump the queue
+        q.submit(py("pass"), job_id="cpu")    # CPU jobs are unaffected
+        self.assertEqual(q.tick()["started"], ["cpu"])
+        self.free = 6000 + 1024               # exactly enough
+        self.assertEqual(q.tick()["started"], ["big"])
+
+    def test_vram_reserved_for_job_still_starting(self):
+        q = self.queue()
+        self.free = 9000                      # room for one 6000 job (+1024), not two
+        self.submit(q, "g1", "g2")
+        self.assertEqual(q.tick()["started"], ["g1"])
+
+    def test_unreadable_nvidia_smi_falls_back_to_slots_only(self):
+        q = self.queue()
+        q.vram_free = lambda: None
+        self.submit(q, "g1", "g2", "g3", "g4")
+        self.assertEqual(q.tick()["started"], ["g1", "g2", "g3"])
+
+    def test_exclusive_waits_for_empty_gpu_and_blocks_later_jobs(self):
+        q = self.queue()
+        self.submit(q, "g1")
+        self.submit(q, "ex", exclusive=True)
+        self.submit(q, "g2")
+        self.assertEqual(q.tick()["started"], ["g1"])     # ex waits for g1, g2 queued behind ex
+        q.set_status("g1", state="done")
+        self.assertEqual(q.tick()["started"], ["ex"])
+        self.assertEqual(q.tick()["started"], [])         # g2 waits while ex runs
+        q.set_status("ex", state="done")
+        self.assertEqual(q.tick()["started"], ["g2"])
+
+    def test_exclusive_runner_holds_every_slot(self):
+        q = self.queue()
+        q.submit(py("pass"), job_id="ex", gpu=True, exclusive=True)
+        with jobq.gpu_locks(self.lock, 3, exclusive=True):
+            for path in jobq.slot_paths(self.lock, 3):
+                with open(path, "a+b") as fh:
+                    self.assertFalse(jobq._try_lock(fh))
+        for path in jobq.slot_paths(self.lock, 3):        # and released afterwards
+            with open(path, "a+b") as fh:
+                self.assertTrue(jobq._try_lock(fh))
+                jobq._unlock(fh)
+
+    def test_direct_graphics_lock_holder_blocks_only_slot_zero(self):
+        self.lock.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.lock, "a+b") as direct:
+            self.assertTrue(jobq._try_lock(direct))        # e.g. critic_vlm_batch under flock
+            got = []
+
+            def take():
+                with jobq.gpu_locks(self.lock, 3):
+                    got.append(time.time())
+            t = threading.Thread(target=take)
+            t.start()
+            t.join(5)
+            self.assertEqual(len(got), 1)                  # went to slot 1 without waiting
+            # negative: with slot 1 also taken, a second runner must wait for the direct holder
+            with jobq.gpu_locks(self.lock, 3), jobq.gpu_locks(self.lock, 3):  # slots 1 and 2
+                blocked = threading.Thread(target=take, daemon=True)
+                blocked.start()
+                blocked.join(0.8)
+                self.assertTrue(blocked.is_alive())
+                self.assertEqual(len(got), 1)
+            jobq._unlock(direct)
+            blocked.join(5)
+            self.assertEqual(len(got), 2)
 
 
 if __name__ == "__main__":

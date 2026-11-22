@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 from . import policy as P
-from .geom import Obj, ellipsoid, cyl
+from .geom import Obj, box, ellipsoid, cyl
 
 ROOT = Path(__file__).resolve().parents[4]
 PLANTS = ROOT / "knowledge/landscape/plants"
@@ -69,7 +69,7 @@ def species_facts(slug):
     at = s["attributes"]
     gr = at.get("growth_rate", {})
     foliage = at.get("foliage", {})
-    return dict(known=True, layers=s["layers"], height=_val(at.get("height_m")), spread=_val(at.get("spread_m")),
+    return dict(known=True, layers=s["layers"], habit=(foliage.get("value") or {}).get("habit") if foliage.get("status") != "GAP" else None, height=_val(at.get("height_m")), spread=_val(at.get("spread_m")),
                 growth=(gr.get("value") or {}).get("class") if gr.get("status") != "GAP" else None,
                 foliage_text=((foliage.get("value") or {}).get("character") or "") if foliage.get("status") != "GAP" else "",
                 flowers=((at.get("flowering", {}).get("value") or {}).get("colours")) if at.get("flowering", {}).get("status") != "GAP" else None)
@@ -136,7 +136,11 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
     x, y = at
     row = dict(id=oid, species=slug, age_years=age, mature_height_m=round(h_m, 3), mature_spread_m=round(s_m, 3), shown_height_m=round(h, 3),
                shown_spread_m=round(s, 3), size_basis=basis, size_fraction=round(frac, 3))
-    if r["drawable"] and climbing is None:
+    if climbing is not None:
+        if basis.startswith("GAP"):          # no sourced height: a climber is taken to cover 80 % of the structure it climbs at maturity (policy)
+            h = 0.8 * climbing["max_h"] * frac; row["size_basis"] = "POLICY: 80 % of the structure height at maturity (height not sourced)"
+        return _climber_panel(oid, slug, f, climbing, s, h, age, base_z, support, row)
+    if r["drawable"]:
         a = _best_asset(r["assets"], h_m, f.get("spread"))
         sc = h / a["size_m"][2]
         if max_spread and max(a["size_m"][:2]) * sc > max_spread:      # restrained to the room it has (pots beside walls)
@@ -156,16 +160,6 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
         return o, row
     col, why = foliage_colour(f.get("foliage_text", ""))
     mat = "standin:%.3f,%.3f,%.3f" % col
-    if climbing is not None:
-        face_y, sgn, max_h = climbing
-        hh = min(h, max_h)
-        rx, rz = s / 2, hh / 2
-        part = ellipsoid(mat, x, face_y + sgn * 0.12, base_z + rz, rx, 0.12, rz)   # flattened against the trellis face
-        # a climber's mass is a flat veil, so its spread is the width along the screen
-        o = Obj(oid, "plant", "STAND-IN generic climber mass (%s has no drawable asset; %s) on the screen" % (slug, r["why"]), [part],
-                rests_on=support, footprint_mode=None, standin=True, meta=dict(species=slug, age=age, climbing=True, colour=why))
-        row.update(status="standin", reason=r["why"], colour_basis=why, climbing=True, shown_height_m=round(hh, 3))
-        return o, row
     z0 = base_z
     part = ellipsoid(mat, x, y, z0 + h / 2, s / 2, s / 2, h / 2)
     o = Obj(oid, "plant", "STAND-IN generic %s mass (%s has no drawable asset: %s) at %.2f x %.2f m" % (form or "plant", slug, r["why"], s, h), [part],
@@ -173,3 +167,116 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
     row.update(status="standin", reason=r["why"], colour_basis=why)
     return o, row
 
+
+
+def climber_panels():
+    """Leaf-scan / curtain assets for climbers: assets.json `climber_panels` rows {slug, texture|gltf, tile_m, grade, licence, author} (added by lane LDL), graded A/B only."""
+    return [x for x in _assets().get("climber_panels", []) if x.get("grade") in ("A", "B")]
+
+
+def _climber_panel(oid, slug, f, cl, s, h, age, base_z, support, row):
+    """A climber on a screen or wall: a leaf panel on the garden face of the structure (axis, face coordinate, side, span, max height from the layout rect).
+
+    Order of preference: a graded curtain asset of the species (tiled, at most six tiles) > a graded leaf-scan atlas of the species > a procedural leaf-cutout panel
+    (STAND-IN, said so). Width follows height at the stated age (policy), clipped to the structure."""
+    C = P.CLIMBER
+    hh = min(h, cl["max_h"])
+    c = cl["at"][0] if cl["axis"] == "x" else cl["at"][1]
+    w = min(max(C["min_w"], C["width_per_height"] * hh), cl["span"][1] - cl["span"][0])
+    lo = min(max(cl["span"][0], c - w / 2), cl["span"][1] - w)
+    hi = lo + w
+    sgn, face = cl["sgn"], cl["face"]
+    near, far = face + sgn * C["lift"], face + sgn * (C["lift"] + C["panel_t"])
+    n0, n1 = min(near, far), max(near, far)
+    row.update(climbing=True, shown_height_m=round(hh, 3), panel_width_m=round(w, 3), on=cl.get("on"))
+    assets = [a for a in climber_panels() if slug in (a.get("maps_to") or [a.get("slug")])]
+    rr = resolve(slug)
+    curtains = [x for x in rr["assets"] if x["size_m"][1] < 0.2 * x["size_m"][0] and x["size_m"][2] > 0.5]     # a graded vertical curtain of leaves (e.g. the English ivy)
+    if not assets and curtains:
+        x = curtains[0]
+        assets = [dict(id=x["id"], gltf=str(gltf_path(x)), tile_m=[x["size_m"][0], x["size_m"][2]], grade=x["grade"], licence=x["licence"], author=x["author"], source=x["source"])]
+    if assets and assets[0].get("gltf") and Path(assets[0]["gltf"]).exists():
+        a = assets[0]
+        tw, th = a["tile_m"][0], a["tile_m"][1]
+        sc = max(1.0, (w * hh / (6 * tw * th)) ** 0.5)
+        nx, nz = max(1, math.ceil(w / (tw * sc))), max(1, math.ceil(hh / (th * sc)))
+        tiles = []
+        for ix in range(nx):
+            for iz in range(nz):
+                u = lo + (ix + 0.5) * w / nx
+                zb = base_z + iz * hh / nz
+                at = [u, (near + far) / 2, zb] if cl["axis"] == "x" else [(near + far) / 2, u, zb]
+                tiles.append(dict(at=at, scale_xyz=[w / nx / tw, w / nx / tw, hh / nz / th], yaw_deg=0 if cl["axis"] == "x" else 90))
+        bounds = (lo, n0, base_z, hi, n1, base_z + hh) if cl["axis"] == "x" else (n0, lo, base_z, n1, hi, base_z + hh)
+        o = Obj(oid, "plant", "%s climber panel: %d tile(s) of graded %s asset %s (%s, %s)" % (slug, len(tiles), a["grade"], a["id"], a["licence"], a["author"]), rests_on=support, footprint_mode=None,
+                asset=dict(asset_id=a["id"], gltf=a["gltf"], at=tiles[0]["at"], bounds=bounds, mode="tiles", tiles=tiles, tile_native_m=a["tile_m"], grade=a["grade"], licence=a["licence"], author=a["author"],
+                           source=a.get("source", ""), species_fit="species"), meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit")))
+        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit="species")
+        return o, row
+    col, why = foliage_colour(f.get("foliage_text", ""))
+    atlas = next((a for a in assets if a.get("texture") and Path(a["texture"]).exists()), None)
+    mat = ("atlas:%s:%.3f,%.3f,%.3f" % (atlas["texture"], *col)) if atlas else "climber:%.3f,%.3f,%.3f:%s" % (*col, "d" if f.get("habit") == "deciduous" else "e")
+    z1 = base_z + hh
+    part = box(mat, lo, n0, base_z, hi, n1, z1) if cl["axis"] == "x" else box(mat, n0, lo, base_z, n1, hi, z1)
+    if atlas:
+        o = Obj(oid, "plant", "%s climber panel: leaf-scan atlas %s (%s, %s) on a plane" % (slug, atlas["id"], atlas["licence"], atlas["author"]), [part], rests_on=support, footprint_mode=None,
+                meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit"), atlas=atlas["id"]))
+        row.update(status="asset", asset=atlas["id"], grade=atlas["grade"], species_fit="species")
+        return o, row
+    r = resolve(slug)
+    o = Obj(oid, "plant", "STAND-IN procedural leaf-cutout panel for the climber %s (no graded climber asset: %s), %.2f m wide x %.2f m high on %s" % (slug, r["why"], w, hh, cl.get("on")), [part],
+            rests_on=support, footprint_mode=None, standin=True, meta=dict(species=slug, age=age, climbing=True, colour=why, habit=f.get("habit")))
+    row.update(status="standin", reason=r["why"], colour_basis=why)
+    return o, row
+
+
+def canopy_clumps(cx, cy, base_z, h, spread, stem, mat):
+    """Pruned umbrella / lollipop crown as a cloud of overlapping oblate clumps on a trunk: STAND-IN geometry. Returns Parts (trunk(s) + clumps)."""
+    parts = []
+    tr = max(0.05, min(0.14, 0.03 * h))
+    parts.append(cyl("trunk-bark", cx, cy, tr, base_z, base_z + stem + 0.1 * h, n=12, r_top=tr * 0.8))
+    cz0 = base_z + stem
+    ch = h - stem
+    R = spread / 2
+    # clump layout: one crown ellipsoid plus a ring of six lower clumps: the silhouette is an umbrella, bounded by the pruned spread and height
+    parts.append(ellipsoid(mat, cx, cy, cz0 + ch * 0.62, R * 0.70, R * 0.70, ch * 0.38))
+    for k in range(6):
+        a = 2 * math.pi * k / 6
+        rr = R * 0.45
+        parts.append(ellipsoid(mat, cx + rr * math.cos(a), cy + rr * math.sin(a), cz0 + ch * 0.42, R * 0.55, R * 0.55, ch * 0.32))
+    return parts
+
+
+def pruned_tree(oid, slug, t, age, ground_z):
+    """A trimmed evergreen shade tree: size is the PRUNED canopy the layout asks for (pruned_*), not the species' natural mature size. -> (Obj, row)"""
+    pr = t.get("pruned") or {}
+    f = species_facts(slug)
+    h_m = pr.get("height_m") or t.get("pruned_height_m") or t.get("mature_height_m") or 3.5
+    s_m = pr.get("spread_m") or t.get("pruned_spread_m") or t.get("mature_spread_m") or 3.0
+    stem_m = pr.get("clear_stem_m") or t.get("clear_stem_m") or P.TREE_CLEAR_STEM * h_m
+    frac = size_fraction(age, f.get("growth"), "small_tree")
+    h, sp, stem = h_m * frac, s_m * frac, stem_m * frac
+    x, y = t["center"]
+    r = resolve(slug)
+    row = dict(id=oid, species=slug, age_years=age, mature_height_m=round(h_m, 3), mature_spread_m=round(s_m, 3), shown_height_m=round(h, 3), shown_spread_m=round(sp, 3),
+               size_basis="PRUNED canopy from the layout (natural size not used)", size_fraction=round(frac, 3), pruned=True, clear_stem_m=round(stem, 3))
+    if r["drawable"]:
+        a = _best_asset(r["assets"], h_m, None)
+        nz, nxy = a["size_m"][2], max(a["size_m"][:2])
+        sz, sxy = h / nz, sp / nxy
+        sxy = min(max(sxy, 0.6 * sz), 1.6 * sz)
+        w, d = a["size_m"][0] * sxy, a["size_m"][1] * sxy
+        bounds = (x - w / 2, y - d / 2, ground_z, x + w / 2, y + d / 2, ground_z + h)
+        o = Obj(oid, "plant", "%s pruned shade tree: graded %s asset %s (%s, %s), scaled to the pruned canopy %.1f m wide x %.1f m high" % (slug, a["grade"], a["id"], a["licence"], a["author"], w, h),
+                rests_on=("ground",), footprint_mode=None, asset=dict(asset_id=a["id"], gltf=str(gltf_path(a)), mode="xyz", scale_xyz=[sxy, sxy, sz], at=[x, y, ground_z], bounds=bounds, native_size_m=a["size_m"],
+                grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"], species_fit=a["species_fit"]), meta=dict(species=slug, age=age, pruned=True))
+        c0 = ground_z + max(stem, 0.3 * h)
+        o.meta["envelope"] = (x, y, (ground_z + h + c0) / 2, w / 2, d / 2, (ground_z + h - c0) / 2)
+        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit=a["species_fit"], achieved_spread_m=round(max(w, d), 3))
+        return o, row
+    col, why = foliage_colour(f.get("foliage_text", ""))
+    parts = canopy_clumps(x, y, ground_z, h, sp, stem, "standin:%.3f,%.3f,%.3f" % col)
+    o = Obj(oid, "plant", "STAND-IN pruned umbrella canopy for %s (no graded asset: %s): trunk and overlapping clumps, %.1f m wide x %.1f m high, clear stem %.1f m" % (slug, r["why"], sp, h, stem), parts,
+            rests_on=("ground",), footprint_mode=None, standin=True, meta=dict(species=slug, age=age, pruned=True, colour=why))
+    row.update(status="standin", reason=r["why"], colour_basis=why)
+    return o, row
