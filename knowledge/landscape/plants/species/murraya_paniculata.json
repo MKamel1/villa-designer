@@ -98,14 +98,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no source opened states heat tolerance",
-   "searched": [
-    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
-    "https://plants.ces.ncsu.edu/plants/murraya-paniculata/ (404)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate. Also in the Cairo Festival City survey as M. paniculata."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Murraya exotica (synonym of M. paniculata)",
+    "quote": "Murraya exotica Orange Jasmine, Satin Wood, Honey Bush, Chinese Box D SSS"
+   }
   },
   "drought": {
    "status": "SOURCED",

@@ -98,11 +98,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat tolerance not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group E: Requires total shade and shelter; no heat tolerance stated in words; class moderate."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Rhapis excelsa Lady Palm (user note: needs shaded and sheltered location)",
+    "quote": "Rhapis excelsa Lady Palm E SSS"
+   }
   },
   "drought": {
    "status": "SOURCED",

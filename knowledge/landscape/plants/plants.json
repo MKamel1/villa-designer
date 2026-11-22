@@ -3062,11 +3062,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Citrus limonum (Lemon Tree)",
+      "quote": "Citrus limonum Lemon Tree D SSSS"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -3241,14 +3249,14 @@
    },
    "uses": "edible fruit",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
    },
    "placement_constraints": []
@@ -4696,11 +4704,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "NCSU page states no heat tolerance",
-     "searched": [
-      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Mitt. Bot. Staatssamml. Munchen, Rediscovery of Papyrus in Wadi Natroun (Egypt)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high. Wild stand in a desert depression, always in marsh water."
+     },
+     "source": {
+      "source_id": "Egypt-papyrus",
+      "url": "https://archive.org/download/biostor-185341/biostor-185341.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Mitt. Bot. Staatssamml. Munchen, Rediscovery of Papyrus in Wadi Natroun (Egypt): Wadi Natroun depression, Egypt",
+      "quote": "a stand consisting of about 20 plants of Cyperus papyrus L. which were growing among other reeds in a fresh water marsh close to Umm Risha lake"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -4844,15 +4860,13 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
+    "reasons": []
    },
    "placement_constraints": [
     "not beside the koi pond until sourced (fish toxicity is a GAP)"
@@ -4956,12 +4970,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "No statement of heat tolerance found (only mean annual temperature 14-26 C).",
-     "searched": [
-      "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
-      "https://en.wikipedia.org/wiki/Delonix_regia"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group C: Requires shelter from afternoon sun and strong wind; no heat tolerance stated in words; class moderate. PRDM also says use only in humid coastal areas (the site is dry inland); also in the Cairo Festival City survey and the 1986 UAE list."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Delonix regia (Royal Poinciana)",
+      "quote": "Use only in humid coastal areas, excellent park, urban plaza and street tree"
+     }
     },
     "drought": {
      "status": "SOURCED",
@@ -5121,12 +5142,12 @@
     "verdict": "viable_with_conditions",
     "factors": {
      "frost": "unknown",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "conditional"
     },
     "reasons": [
      "frost tolerance is a GAP",
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
    },
@@ -6379,11 +6400,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement of heat tolerance (only 'south wall ... radiant heat' for cold sites)",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group B: Requires some wind shelter for best growth; no heat tolerance stated in words; class high."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ficus carica Fig",
+      "quote": "Ficus carica Fig B SSS"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -6548,11 +6577,10 @@
     "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "conditional"
     },
     "reasons": [
-     "heat tolerance is a GAP",
      "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
    },
@@ -6664,12 +6692,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "No heat-tolerance statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-      "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group C: Requires shelter from afternoon sun and strong wind; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ficus microcarpa (Malayan Banyan), user note: good street and park tree providing dense shade",
+      "quote": "C. Requires shelter from afternoon sun and strong wind"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -6824,14 +6859,14 @@
    },
    "invasive_flag": "NCSU: considered invasive in many parts of the world; NCSU Problems: Weedy",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
    },
    "placement_constraints": []
@@ -7509,11 +7544,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "page gives humidity/wind/frost needs, no heat statement",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group C: Requires shelter from afternoon sun and strong wind; no heat tolerance stated in words; class moderate. PRDM user note: badly damaged by insect attacks, use not advised; also in the Cairo Festival City survey and the 1986 UAE list."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Hibiscus rosa-sinensis",
+      "quote": "Hibiscus rosasinensis Tropical Hibiscus, Rose of China C SSS"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -7647,14 +7690,14 @@
     "uses": "flowers listed as edible by NCSU"
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
    },
@@ -8312,13 +8355,19 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
-      "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
-      "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019); no exposure group given; class from our sun attribute (not full sun); no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "CFC-2021",
+      "url": "https://www.plantarchives.org/article/landscape-use-and-aesthetical-value-of-surveyed-woody-ornamental-plants-in-cairo-festival-city-cairo-egypt-in-landscape-gardening.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Jasminum grandiflorum L.",
+      "quote": "Jasminum grandiflorum L."
+     }
     },
     "drought": {
      "status": "GAP",
@@ -8418,15 +8467,15 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "unknown",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
      "frost tolerance is a GAP",
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
    },
@@ -8533,13 +8582,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no heat statement on pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
-      "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
-      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019); no exposure group given; class from our sun attribute (not full sun); no heat tolerance stated in words; class moderate. Also in the 1986 UAE list (Arabian jasmine)."
+     },
+     "source": {
+      "source_id": "CFC-2021",
+      "url": "https://www.plantarchives.org/article/landscape-use-and-aesthetical-value-of-surveyed-woody-ornamental-plants-in-cairo-festival-city-cairo-egypt-in-landscape-gardening.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Jasminum sambac (L.) Aiton",
+      "quote": "Jasminum sambac (L.) Aiton"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -8672,12 +8727,12 @@
     "verdict": "viable_with_conditions",
     "factors": {
      "frost": "conditional",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
      "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
    },
@@ -9057,11 +9112,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance stated only for the cultivar 'Carolina Beauty', not the species",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high."
+     },
+     "source": {
+      "source_id": "CFC-2021",
+      "url": "https://www.plantarchives.org/article/landscape-use-and-aesthetical-value-of-surveyed-woody-ornamental-plants-in-cairo-festival-city-cairo-egypt-in-landscape-gardening.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Lagerstroemia indica L.",
+      "quote": "Lagerstroemia indica L."
+     }
     },
     "drought": {
      "status": "SOURCED",
@@ -9237,15 +9300,13 @@
    },
    "notes": "NCSU tags: non-toxic for cats, horses, dogs (people not stated).",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
+    "reasons": []
    },
    "placement_constraints": []
   },
@@ -11304,14 +11365,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no source opened states heat tolerance",
-     "searched": [
-      "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-      "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-      "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
-      "https://plants.ces.ncsu.edu/plants/murraya-paniculata/ (404)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate. Also in the Cairo Festival City survey as M. paniculata."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Murraya exotica (synonym of M. paniculata)",
+      "quote": "Murraya exotica Orange Jasmine, Satin Wood, Honey Bush, Chinese Box D SSS"
+     }
     },
     "drought": {
      "status": "SOURCED",
@@ -11495,12 +11561,12 @@
     "verdict": "viable_with_conditions",
     "factors": {
      "frost": "conditional",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
      "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
    },
    "placement_constraints": []
@@ -17276,11 +17342,19 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "only optimum productivity temperature 73-82 F; no heat-tolerance statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group C: Requires shelter from afternoon sun and strong wind; no heat tolerance stated in words; class moderate. Also in the 1986 UAE list."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Psidium guajava (Tropical Guava)",
+      "quote": "C. Requires shelter from afternoon sun and strong wind"
+     }
     },
     "drought": {
      "status": "SOURCED",
@@ -17423,14 +17497,14 @@
    "invasive_flag": "UF/IFAS: listed as a 'caution' plant for Central and South Florida; page says this does not mean it is invasive",
    "notes": "Flowers are white and one inch in diameter (UF/IFAS Characteristics); no months stated.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
    },
    "placement_constraints": []
@@ -17838,11 +17912,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group E: Requires total shade and shelter; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Rhapis excelsa Lady Palm (user note: needs shaded and sheltered location)",
+      "quote": "Rhapis excelsa Lady Palm E SSS"
+     }
     },
     "drought": {
      "status": "SOURCED",
@@ -18018,14 +18100,14 @@
    },
    "notes": "NCSU tags: non-toxic for cats, dogs, horses.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
    },
    "placement_constraints": [
@@ -20392,11 +20474,19 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: listed for outdoor use in a hot-desert source (Emirates Natural History Group Bulletin 29 (1986), Common Landscape Plants in the UAE (Arabian Gulf cities)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high."
+     },
+     "source": {
+      "source_id": "ENHG-1986",
+      "url": "https://enhg.org/bulletin/b29/29_23.htm",
+      "accessed": "2026-11-22",
+      "locator": "Emirates Natural History Group Bulletin 29 (1986), Common Landscape Plants in the UAE (Arabian Gulf cities): Introduced Shrubs and Climbers, Vitaceae",
+      "quote": "Vitis vinifera grape vine"
+     }
     },
     "drought": {
      "status": "GAP",
@@ -20530,15 +20620,13 @@
    "uses": "edible fruit, leaves and flowers (NCSU Edibility)",
    "notes": "NCSU: hot and humid summers negatively affect fruit production (not a heat-class statement, so heat left GAP)",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
+    "reasons": []
    },
    "placement_constraints": []
   },

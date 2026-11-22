@@ -91,12 +91,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "No statement of heat tolerance found (only mean annual temperature 14-26 C).",
-   "searched": [
-    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
-    "https://en.wikipedia.org/wiki/Delonix_regia"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group C: Requires shelter from afternoon sun and strong wind; no heat tolerance stated in words; class moderate. PRDM also says use only in humid coastal areas (the site is dry inland); also in the Cairo Festival City survey and the 1986 UAE list."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Delonix regia (Royal Poinciana)",
+    "quote": "Use only in humid coastal areas, excellent park, urban plaza and street tree"
+   }
   },
   "drought": {
    "status": "SOURCED",

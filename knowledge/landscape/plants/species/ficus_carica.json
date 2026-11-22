@@ -97,11 +97,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no statement of heat tolerance (only 'south wall ... radiant heat' for cold sites)",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group B: Requires some wind shelter for best growth; no heat tolerance stated in words; class high."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ficus carica Fig",
+    "quote": "Ficus carica Fig B SSS"
+   }
   },
   "drought": {
    "status": "GAP",
