@@ -1,6 +1,6 @@
 {
  "tag": "age3-winter",
- "spec_sha": "01e6790b004cc2b6af4de273eea89da98fd4c122",
+ "spec_sha": "7f5bde87bc38074bf6dee7212e36f2ffb55b259c",
  "assets": [
   {
    "native_m": [
@@ -454,6 +454,36 @@
   },
   {
    "native_m": [
+    9.8202,
+    9.8961,
+    7.2702
+   ],
+   "scale": [
+    0.1486,
+    0.1486,
+    0.2476
+   ],
+   "measured_min": [
+    26.074,
+    -23.2796,
+    -3.0
+   ],
+   "measured_max": [
+    27.5329,
+    -21.8094,
+    -1.2
+   ],
+   "base_z_error_m": 0.0,
+   "centre_z_error_m": 0.9,
+   "height_m": 1.8,
+   "spread_m": 1.4701,
+   "asset": "fab_olive_tree_source",
+   "target_height_m": 1.8,
+   "mode": "xyz",
+   "id": "ld-s-tree-olive"
+  },
+  {
+   "native_m": [
     3.5661,
     3.3309,
     4.5326
@@ -481,6 +511,36 @@
    "target_height_m": 1.9656250000000002,
    "mode": "height",
    "id": "ld-s-tree-punica"
+  },
+  {
+   "native_m": [
+    9.8202,
+    9.8961,
+    7.2702
+   ],
+   "scale": [
+    0.1486,
+    0.1486,
+    0.2476
+   ],
+   "measured_min": [
+    20.939,
+    -22.0546,
+    -3.0
+   ],
+   "measured_max": [
+    22.3979,
+    -20.5844,
+    -1.2
+   ],
+   "base_z_error_m": 0.0,
+   "centre_z_error_m": 0.9,
+   "height_m": 1.8,
+   "spread_m": 1.4701,
+   "asset": "fab_olive_tree_source",
+   "target_height_m": 1.8,
+   "mode": "xyz",
+   "id": "ld-e-tree-olive"
   },
   {
    "native_m": [

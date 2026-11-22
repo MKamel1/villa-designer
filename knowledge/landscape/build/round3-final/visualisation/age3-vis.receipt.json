@@ -1,6 +1,6 @@
 {
  "tag": "age3-vis",
- "spec_sha": "6a4cf9332aa0969ab37287b60c05998cf88f2f74",
+ "spec_sha": "61fcf5b24304b38ae915279651c5916e1d5e464d",
  "assets": [
   {
    "native_m": [
@@ -454,6 +454,36 @@
   },
   {
    "native_m": [
+    9.8202,
+    9.8961,
+    7.2702
+   ],
+   "scale": [
+    0.1486,
+    0.1486,
+    0.2476
+   ],
+   "measured_min": [
+    26.074,
+    -23.2796,
+    -3.0
+   ],
+   "measured_max": [
+    27.5329,
+    -21.8094,
+    -1.2
+   ],
+   "base_z_error_m": 0.0,
+   "centre_z_error_m": 0.9,
+   "height_m": 1.8,
+   "spread_m": 1.4701,
+   "asset": "fab_olive_tree_source",
+   "target_height_m": 1.8,
+   "mode": "xyz",
+   "id": "ld-s-tree-olive"
+  },
+  {
+   "native_m": [
     3.5661,
     3.3309,
     4.5326
@@ -481,6 +511,36 @@
    "target_height_m": 1.9656250000000002,
    "mode": "height",
    "id": "ld-s-tree-punica"
+  },
+  {
+   "native_m": [
+    9.8202,
+    9.8961,
+    7.2702
+   ],
+   "scale": [
+    0.1486,
+    0.1486,
+    0.2476
+   ],
+   "measured_min": [
+    20.939,
+    -22.0546,
+    -3.0
+   ],
+   "measured_max": [
+    22.3979,
+    -20.5844,
+    -1.2
+   ],
+   "base_z_error_m": 0.0,
+   "centre_z_error_m": 0.9,
+   "height_m": 1.8,
+   "spread_m": 1.4701,
+   "asset": "fab_olive_tree_source",
+   "target_height_m": 1.8,
+   "mode": "xyz",
+   "id": "ld-e-tree-olive"
   },
   {
    "native_m": [
@@ -1744,6 +1804,36 @@
   },
   {
    "native_m": [
+    9.8202,
+    9.8961,
+    7.2702
+   ],
+   "scale": [
+    0.1486,
+    0.1486,
+    0.2476
+   ],
+   "measured_min": [
+    26.074,
+    -38.0796,
+    -3.0
+   ],
+   "measured_max": [
+    27.5329,
+    -36.6094,
+    -1.2
+   ],
+   "base_z_error_m": 0.0,
+   "centre_z_error_m": 0.9,
+   "height_m": 1.8,
+   "spread_m": 1.4701,
+   "asset": "fab_olive_tree_source",
+   "target_height_m": 1.8,
+   "mode": "xyz",
+   "id": "ld-vis-s-tree-olive"
+  },
+  {
+   "native_m": [
     3.5661,
     3.3309,
     4.5326
@@ -2578,7 +2668,7 @@
  "objects": 276,
  "note": "preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)",
  "black_check": {
-  "max": 0.03,
+  "max": 0.06,
   "failed": []
  },
  "visualisation_only": true
