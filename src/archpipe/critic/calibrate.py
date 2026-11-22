@@ -60,7 +60,7 @@ def load_vlm_dir(d: str | Path) -> dict[str, dict]:
     """Load cached VLM results. `d` may be several directories joined by ',' (scores are merged per view)."""
     out: dict[str, dict] = {}
     for one in str(d).split(","):
-        for p in sorted(Path(one).glob("v*.json")):
+        for p in sorted(Path(one).glob("*.json")):
             j = json.loads(p.read_text(encoding="utf-8"))
             if j["view"] in out:
                 out[j["view"]]["scores"].update(j["scores"])
@@ -68,4 +68,27 @@ def load_vlm_dir(d: str | Path) -> dict[str, dict]:
                     out[j["view"]]["status"] = j["status"]
             else:
                 out[j["view"]] = j
+    return out
+
+
+def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """Wilson score interval for k of n (two-sided 95 % by default); (0, 1) when n is 0.
+    The L3 groups hold 2-8 views, so every rate is reported with this interval."""
+    if n == 0:
+        return (0.0, 1.0)
+    p = k / n
+    d = 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / d
+    half = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / d
+    return (max(0.0, centre - half), min(1.0, centre + half))
+
+
+def pooled(*groups: dict) -> dict:
+    """Add `confusion()` outputs' (k, n) pairs so the audit set and an extension set read as one table."""
+    keys = ("recall_must_fail", "false_fail_should_pass", "recall_c_or_worse", "middle_fail")
+    out = {}
+    for key in keys:
+        k = sum(g[key][0] for g in groups)
+        n = sum(g[key][1] for g in groups)
+        out[key] = dict(k=k, n=n, wilson95=tuple(round(x, 3) for x in wilson(k, n)))
     return out

@@ -1,0 +1,12 @@
+{
+ "name": "L9P extension of the L3 calibration",
+ "registered": "2026-11-22, before any L9P draft render was opened or scored",
+ "rubric": "knowledge/critic/rubric.json version frozen-v1, unchanged; model qwen3.8:27b-mtp-q4_K_M; gating criteria R8, R10, R11 plus the deterministic six (as frozen). No prompt, threshold or gate is edited in this extension.",
+ "new_images": "every interior view of the L9P render set (knowledge/render-set/views.json) rendered at draft quality from the current production scene (1920x1280, reduced samples). One image per view.",
+ "labels": "assigned by the lane agent (an AI, not a human) by looking at each image at full frame next to bedroom-overcast-door.png, on the same A-F scale and with the same defect classes as docs/reviews/2026-11/visual-audit.md; recorded in knowledge/critic/extension-L9P-labels.json and committed BEFORE the critic is run on any new image. Draft-only defects (noise, fireflies from low samples) are not graded down; real geometry, material, scale, exposure-policy and camera defects are.",
+ "tiers": "labels.tier unchanged: must_fail D+ or worse, should_pass B- or better, middle C+..C-.",
+ "split": "none: the new images are scored once with the frozen rubric, so all of them are held out. They are NOT merged into tuning.",
+ "targets": "unchanged: recall on must_fail >= 90 %, false-fail on should_pass <= 10 %. Reported with n and Wilson 95 % intervals, alone and pooled with the 38 audit views (held-out + tuning, with the tuning caveat stated).",
+ "rule_against_tuning": "a criterion that fails a labelled good view is reported as a failure; it is not edited to pass. Any change to the critic after this point goes in a NEW rubric version (v2) that is scored on views that did not inform it.",
+ "known_confounds": "labels by an AI reader who also knows the rubric; draft-quality images (fewer samples) vs 1024-sample finals the critic was calibrated on; views were chosen by the lane, not sampled; the render of the same room by day and dusk is not independent."
+}
