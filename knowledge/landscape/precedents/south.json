@@ -1,0 +1,503 @@
+{
+ "set": "south",
+ "gardens": [
+  {
+   "id": "SME-01",
+   "name": "Domus Maya House",
+   "designer": "Studio Kyriakos Miltiadou",
+   "location": "Nicosia, Cyprus",
+   "year": 2024,
+   "page_url": "https://www.archdaily.com/1025262/domus-maya-house-studio-kyriakos-miltiadou",
+   "plan_url": "https://images.adsttc.com/media/images/6776/f1b8/56c0/e400/01ca/d78b/large_jpg/002_GROUND_FLOOR_PLAN.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-01",
+   "passes": {
+    "A": {
+     "scope": "Central patio (1), roofed-over side patio excluded; walled court with a single tree in a circular planter",
+     "scale_note": "bar 0-5 m = 288 px on 1892px-wide view => 57.6 px/m; patio 10.2 x 7.0 m",
+     "area_m2": 71,
+     "hard_share": 0.93,
+     "soft_share": 0.07,
+     "water_share": 0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 71,
+     "trees_per_100m2": 1.4,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "one paved court with central tree planter",
+     "privacy_note": "walls on all sides, entry door to street",
+     "confidence": "medium"
+    },
+    "B": {
+     "scope": "Central patio (1) of Domus Maya, with yellow-ringed tree; outer lawn and patio 3 excluded",
+     "scale_note": "Bar 0..5 m = 293 px => ~58 px/m; patio ~10 x 6.8 m",
+     "area_m2": 70,
+     "hard_share": 0.91,
+     "soft_share": 0.09,
+     "n_rooms": 1,
+     "room_area_mean_m2": 70,
+     "trees_per_100m2": 1.4,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "Central courtyard with timber deck and one tree planter",
+     "privacy_note": "Walls enclose the patio, entrance wall to south",
+     "confidence": "medium"
+    }
+   }
+  },
+  {
+   "id": "SME-02",
+   "name": "MV024 Residence",
+   "designer": "CV Architects + Associates",
+   "location": "Limassol, Cyprus",
+   "year": 2020,
+   "page_url": "https://www.archdaily.com/997010/mv024-residence-cv-architects-plus-associates",
+   "plan_url": "https://images.adsttc.com/media/images/63f8/98f2/e8da/b065/7892/5508/large_jpg/drawings-01-ground-floor-plan-1.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-02",
+   "passes": {
+    "A": {
+     "scope": "Open south-west lawn garden (excludes roofed dining terrace and east garden)",
+     "scale_note": "bar 0-10 m = 486 px => 48.6 px/m; lawn ~13.6 x 12.9 m plus ~6 m2 corner",
+     "area_m2": 181,
+     "hard_share": 0.05,
+     "soft_share": 0.95,
+     "water_share": 0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 181,
+     "trees_per_100m2": 0.6,
+     "privacy_approach": "wall",
+     "rooms_note": "one lawn court with a single large tree, edge planting along west/south wall",
+     "privacy_note": "boundary walls with narrow edge planting",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "South-west lawn garden plus south-east terrace of MV024",
+     "scale_note": "Bar 0..10 m = 488 px => 48.8 px/m; lawn ~195 m2 + terrace ~32 m2",
+     "area_m2": 227,
+     "hard_share": 0.14,
+     "soft_share": 0.86,
+     "water_share": 0,
+     "n_rooms": 2,
+     "room_area_mean_m2": 113,
+     "trees_per_100m2": 1.8,
+     "privacy_approach": "wall",
+     "rooms_note": "Lawn with one large canopy tree, edge shrubs; terrace with 3 trees; surface classes assumed so shares coarse",
+     "privacy_note": "Boundary wall with shrub edge",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SME-04",
+   "name": "Lima Villa",
+   "designer": "Loci Architecture + Design",
+   "location": "Dubai, UAE",
+   "year": 2018,
+   "page_url": "https://www.archdaily.com/948029/lima-villa-loci-architecture-plus-design",
+   "plan_url": "https://images.adsttc.com/media/images/5f64/ca50/63c0/17fe/dd00/01b2/large_jpg/131-LIMA-Plan_0.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-04",
+   "passes": {
+    "A": {
+     "scope": "East lawn + pool garden (right of the house), excluding west and north strips",
+     "scale_note": "bar 0-10 m = 266 px => 26.6 px/m; area ~380k px2",
+     "area_m2": 537,
+     "hard_share": 0.28,
+     "soft_share": 0.65,
+     "water_share": 0.07,
+     "n_rooms": 3,
+     "room_area_mean_m2": 179,
+     "trees_per_100m2": 1.3,
+     "privacy_approach": "wall",
+     "rooms_note": "lawn court, pool deck, paved terrace; ~7 palm symbols",
+     "privacy_note": "perimeter wall with palm planting",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "East lawn garden with pool, pool deck and terrace (lawn court bounded by house and plot wall); front court excluded",
+     "scale_note": "Bar 0..10 m = 265 px => 26.5 px/m; area via px polygons /702",
+     "area_m2": 536,
+     "hard_share": 0.15,
+     "soft_share": 0.75,
+     "water_share": 0.1,
+     "n_rooms": 3,
+     "room_area_mean_m2": 179,
+     "trees_per_100m2": 0.9,
+     "privacy_approach": "mixed",
+     "rooms_note": "Large lawn, pool 14, paved terrace, pool deck; about 5 palms, many small shrubs",
+     "privacy_note": "Perimeter boundary wall with palm planting",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SME-05",
+   "name": "The Avli Houses",
+   "designer": "Ona i Ona Architecture and Design",
+   "location": "Paralimni, Cyprus",
+   "year": 2025,
+   "page_url": "https://www.archdaily.com/1181483/the-avli-houses-ona-i-ona-architecture-and-design",
+   "plan_url": "https://images.adsttc.com/media/images/6a69/fa85/f4d2/6d01/88b1/745d/large_jpg/plan-ground-floor-33.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-05",
+   "passes": {
+    "A": {
+     "scope": "Central hexagonal courtyard with dining and round pool",
+     "scale_note": "bar 0-5 m = 239 px on 1413px-wide view => 47.8 px/m; hexagon polygon area by shoelace",
+     "area_m2": 54,
+     "hard_share": 0.65,
+     "soft_share": 0.2,
+     "water_share": 0.15,
+     "n_rooms": 1,
+     "room_area_mean_m2": 54,
+     "trees_per_100m2": 5.5,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "one courtyard with dining zone and circular pool; ~3 tree/shrub symbols",
+     "privacy_note": "fully enclosed by the two house wings",
+     "confidence": "medium"
+    },
+    "B": {
+     "scope": "Hexagonal central courtyard with circular pond (dashed hexagon)",
+     "scale_note": "Bar 0..5 m = 239 px => 47.8 px/m; hexagon ~12 x 7 m",
+     "area_m2": 65,
+     "hard_share": 0.78,
+     "soft_share": 0.06,
+     "water_share": 0.16,
+     "n_rooms": 1,
+     "room_area_mean_m2": 65,
+     "trees_per_100m2": 4.6,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "One hexagonal court; circular hatched pond ~3.7 m dia, 3-4 small tree symbols, dining table",
+     "privacy_note": "Enclosed by the house glazing on all sides",
+     "confidence": "medium"
+    }
+   }
+  },
+  {
+   "id": "SME-06",
+   "name": "Dar It-Tarag Residence",
+   "designer": "Periti Studio",
+   "location": "Naxxar, Malta",
+   "year": 2025,
+   "page_url": "https://www.archdaily.com/1035614/dar-it-tarag-residence-periti-studio",
+   "plan_url": "https://images.adsttc.com/media/images/6904/b187/436b/c600/01fd/ba32/large_jpg/Ground_floor_plan_-_proposed.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-06",
+   "passes": {
+    "A": {
+     "scope": "Courtyard (2) including narrow tail toward entrance",
+     "scale_note": "bar 0-5 m = 239 px on 1414px-wide view => 47.8 px/m; ~9.5x8.6 m plus 4.3x3.3 m tail",
+     "area_m2": 92,
+     "hard_share": 0.92,
+     "soft_share": 0.08,
+     "water_share": 0,
+     "n_rooms": 2,
+     "room_area_mean_m2": 46,
+     "trees_per_100m2": 1.1,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "dining zone and lounge zone (plus stair tail); one central tree, two small planters",
+     "privacy_note": "thick masonry walls all round",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Courtyard (2) of Dar It-Tarag, enclosed in old stone walls",
+     "scale_note": "Bar 0..5 m = 240 px => 48 px/m; courtyard ~98 m2 from px polygon",
+     "area_m2": 95,
+     "hard_share": 0.91,
+     "soft_share": 0.09,
+     "n_rooms": 1,
+     "room_area_mean_m2": 95,
+     "trees_per_100m2": 1.05,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "One paved courtyard with central tree and small planters",
+     "privacy_note": "Building and boundary walls enclose it completely",
+     "confidence": "medium"
+    }
+   }
+  },
+  {
+   "id": "SME-07",
+   "name": "H Saket House (HS House)",
+   "designer": "Sahel AlHiyari Architects",
+   "location": "Amman, Jordan",
+   "year": 2015,
+   "page_url": "https://www.archdaily.com/939205/h-saket-house-sahel-alhiyari-architects",
+   "plan_url": "https://images.adsttc.com/media/images/5eb5/67be/b357/6579/8b00/0464/large_jpg/HS_House_-_Ground_Floor.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-07",
+   "passes": {
+    "A": {
+     "scope": "Terrace + pool court east of the house, within retaining walls",
+     "scale_note": "bar 0-5 m = 160 px => 32 px/m; ~268k px2",
+     "area_m2": 262,
+     "hard_share": 0.62,
+     "soft_share": 0.13,
+     "water_share": 0.25,
+     "n_rooms": 2,
+     "room_area_mean_m2": 131,
+     "privacy_approach": "mixed",
+     "rooms_note": "paved lounge terrace and pool deck; grey patch by house ambiguous (planter or roof)",
+     "privacy_note": "retaining walls plus hillside tree canopy beyond; trees outside scope not counted",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Terrace-and-pool court east of the house (terrace, pool, decks); sloping tree garden beyond excluded",
+     "scale_note": "Bar 0..5 m = 175 px => 35 px/m (ticks 0,1,2 at 35 px pitch); pool ~9.4 x 5.7 m",
+     "area_m2": 212,
+     "hard_share": 0.72,
+     "soft_share": 0.03,
+     "water_share": 0.25,
+     "n_rooms": 2,
+     "room_area_mean_m2": 106,
+     "trees_per_100m2": 0,
+     "privacy_approach": "mixed",
+     "rooms_note": "Paved terrace and pool with timber deck; canopies lie beyond scope so trees set 0",
+     "privacy_note": "Tree canopies on slope and walls to west; terrace open to hillside",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SME-08",
+   "name": "Hanging Home (Dalli House)",
+   "designer": "Chris Briffa Architects",
+   "location": "Malta",
+   "year": 2011,
+   "page_url": "https://www.archdaily.com/324866/hanging-home-chris-briffa-architects",
+   "plan_url": "https://images.adsttc.com/media/images/5106/e309/b3fc/4b79/9200/03e3/large_jpg/DALLI_HOUSE_-_Ground_Floor_Plan.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SME-08",
+   "passes": {
+    "A": {
+     "scope": "South garden: lawn, covered dining, pool and planter strip (NE pool-deck court excluded)",
+     "scale_note": "bar 0-10 m = 572 px => 57.2 px/m; ~410k px2",
+     "area_m2": 125,
+     "hard_share": 0.33,
+     "soft_share": 0.57,
+     "water_share": 0.1,
+     "n_rooms": 3,
+     "room_area_mean_m2": 42,
+     "trees_per_100m2": 3.2,
+     "privacy_approach": "wall",
+     "rooms_note": "lawn, dining terrace, pool, tree planter with 4 big trees",
+     "privacy_note": "thick dark boundary wall on south and east",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Lower garden south of house: lawn, planter with 4 trees, pool and steps; upper pool deck (9) and glazed dining (8) excluded",
+     "scale_note": "Bar 0..10 m = 572 px => 57.2 px/m; area from polygon in px/3272",
+     "area_m2": 102,
+     "hard_share": 0.22,
+     "soft_share": 0.71,
+     "water_share": 0.07,
+     "n_rooms": 3,
+     "room_area_mean_m2": 34,
+     "trees_per_100m2": 3.9,
+     "privacy_approach": "wall",
+     "rooms_note": "Lawn court, tree planter, pool terrace; coarse polygon area",
+     "privacy_note": "Boundary walls plus row of four trees",
+     "confidence": "medium"
+    }
+   }
+  },
+  {
+   "id": "SAU-01",
+   "name": "rush-wright-preston",
+   "designer": "Catherine Rush and Michael Wright (Rush Wright Associates)",
+   "location": "Preston, Melbourne VIC, Australia",
+   "year": null,
+   "page_url": "https://landscapeaustralia.com/articles/home-ground-catherine-rush-and-michael-wright/",
+   "plan_url": "https://media4.architecturemedia.net/site_media/media/cache/0a/81/0a812eaee618a98ba98c3e6ae69b9628.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SAU-01",
+   "passes": {
+    "A": {
+     "scope": "Planted courtyard garden with pool and left planted garden, north of house",
+     "scale_note": "bar 0-5 m = 288 px => 57.6 px/m; area ~835k px2",
+     "area_m2": 252,
+     "hard_share": 0.38,
+     "soft_share": 0.55,
+     "water_share": 0.07,
+     "n_rooms": 3,
+     "room_area_mean_m2": 84,
+     "trees_per_100m2": 2.4,
+     "privacy_approach": "mixed",
+     "rooms_note": "left planted garden, crazy-paved pool court, side terrace; hand-drawn so shares are rough",
+     "privacy_note": "buildings plus boundary walls and dense planting",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Whole courtyard garden north of the house (pool court + planted left court), pavilion excluded",
+     "scale_note": "Bar: 0..5 m = 288 px => 57.6 px/m; garden ~23 x 12 m minus ~35 m2 pavilion",
+     "area_m2": 240,
+     "hard_share": 0.35,
+     "soft_share": 0.57,
+     "water_share": 0.08,
+     "n_rooms": 2,
+     "room_area_mean_m2": 120,
+     "trees_per_100m2": 1.7,
+     "privacy_approach": "mixed",
+     "rooms_note": "Pool court with crazy paving and large tree; left court of palms/ferns; shares coarse (pool ~18 m2)",
+     "privacy_note": "Boundary walls plus dense tree canopy, vine-covered walls",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SAU-02",
+   "name": "garland-garden-new-farm",
+   "designer": "Landscapology (Brisbane)",
+   "location": "New Farm, Brisbane QLD, Australia",
+   "year": null,
+   "page_url": "https://landscapeaustralia.com/articles/a-new-rural-garland-garden/",
+   "plan_url": "https://media5.architecturemedia.net/site_media/media/cache/f5/b4/f5b4de6ec29794735d18c0dc85d697ca.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SAU-02",
+   "passes": {
+    "A": {
+     "scope": "Circular lawn/gravel court with planting ring and round pool",
+     "scale_note": "bar 0-5 m = 242 px => 48.4 px/m; court ~540x470 px",
+     "area_m2": 108,
+     "hard_share": 0.55,
+     "soft_share": 0.4,
+     "water_share": 0.05,
+     "n_rooms": 3,
+     "room_area_mean_m2": 36,
+     "privacy_approach": "mixed",
+     "rooms_note": "hand sketch; stipple read as gravel; circular court, pool court, side terrace",
+     "privacy_note": "boundary hedge/shrub planting plus house walls",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Circular lawn/planting court with small round pool and adjoining terrace (garland garden), approx 45 m2 union of the two circles",
+     "scale_note": "Bar 0..5 m = 242 px => 48.4 px/m; outer ring ~6.8 m dia, small circle ~3.9 m dia",
+     "area_m2": 45,
+     "n_rooms": 2,
+     "room_area_mean_m2": 22,
+     "privacy_approach": "hedge-screen",
+     "rooms_note": "Hand sketch, loose scale; two circle rooms plus linear side terraces. Shares not measurable from sketch",
+     "privacy_note": "Boundary planting and walls; sketch only",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SAU-03",
+   "name": "garden-project-annandale",
+   "designer": "Welsh+Major (architects) with garden design",
+   "location": "Annandale, Sydney NSW, Australia",
+   "year": 2013,
+   "page_url": "https://www.archdaily.com/528834/the-garden-room-welsh-major",
+   "plan_url": "https://images.adsttc.com/media/images/53c8/9c90/c07a/805e/0800/01f5/large_jpg/Garden_Project_Site_PlanR.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SAU-03",
+   "passes": {
+    "A": {
+     "scope": "Rear garden incl. pavilions at ground",
+     "scale_note": "bar 0-10 m = 270 px => 27 px/m; ~191k px2 gross",
+     "area_m2": 262,
+     "hard_share": 0.5,
+     "soft_share": 0.5,
+     "water_share": 0,
+     "n_rooms": 3,
+     "room_area_mean_m2": 87,
+     "trees_per_100m2": 1.9,
+     "privacy_approach": "mixed",
+     "rooms_note": "pavilion/garden room, eastern planted court, west planted edge",
+     "privacy_note": "neighbour boundaries plus tree canopy",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Rear garden courtyard between studio and existing house (x 570-770 px, y 620-850)",
+     "scale_note": "Bar 0..10 m = 270 px (displayed) => ~27 px/m; court ~7.4 x 8.5 m",
+     "area_m2": 55,
+     "n_rooms": 1,
+     "room_area_mean_m2": 55,
+     "privacy_approach": "mixed",
+     "rooms_note": "Small planted court with stepping paving; dense mixed planting symbols not countable",
+     "privacy_note": "Neighbour walls and buildings around plus tree canopies",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SAU-04",
+   "name": "subiaco-oval-courtyard",
+   "designer": "Luigi Rosselli Architects",
+   "location": "Subiaco, Perth WA, Australia",
+   "year": 2014,
+   "page_url": "https://www.archdaily.com/539843/the-subiaco-oval-courtyard-luigi-rosselli",
+   "plan_url": "https://images.adsttc.com/media/images/53f5/8a81/c07a/8038/8e00/0639/large_jpg/the_subiaco_oval_-_plan.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SAU-04",
+   "passes": {
+    "A": {
+     "scope": "Oval courtyard only (patio 3 and perimeter decks excluded)",
+     "scale_note": "bar 0-10 m = 425 px => 42.5 px/m; ellipse ~28 x 9 m",
+     "area_m2": 198,
+     "hard_share": 0.11,
+     "soft_share": 0.89,
+     "water_share": 0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 198,
+     "trees_per_100m2": 1.5,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "one lawn oval ringed by curved deck/steps; ~3 tree symbols at the edge",
+     "privacy_note": "enclosed by the curved house wall and boundary",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Central elliptical courtyard (inside curved wall/deck ring); front/rear plot garden excluded",
+     "scale_note": "Bar 0..10 m = 425 px (displayed) => 42.5 px/m; ellipse ~28.4 x ~9.4 m",
+     "area_m2": 205,
+     "n_rooms": 1,
+     "room_area_mean_m2": 205,
+     "trees_per_100m2": 0.5,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "One long elliptical court with a large central tree canopy crossing into patio 3; surface (lawn vs gravel) not legible so shares null",
+     "privacy_note": "Encircled by the curved house wall with glazing; no street view",
+     "confidence": "low"
+    }
+   }
+  },
+  {
+   "id": "SAU-05",
+   "name": "courtyard-house-paddington",
+   "designer": "Aileen Sage Architects",
+   "location": "Paddington, Sydney NSW, Australia",
+   "year": 2014,
+   "page_url": "https://www.archdaily.com/602097/courtyard-house-aileen-sage-architects",
+   "plan_url": "https://images.adsttc.com/media/images/54ec/cc06/e58e/ce5d/cd00/000b/large_jpg/Courtyard_House_plans.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/south/SAU-05",
+   "passes": {
+    "A": {
+     "scope": "Ground-floor garden (6) between sitting room and kitchen",
+     "scale_note": "bar 0-5 m = 147 px => 29.4 px/m; ~293x125 px",
+     "area_m2": 42,
+     "hard_share": 0.75,
+     "soft_share": 0.25,
+     "water_share": 0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 42,
+     "trees_per_100m2": 2.4,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "one small courtyard; circle read as tree, hatching as decking",
+     "privacy_note": "enclosed by house wings and walls",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Ground-floor courtyard garden (room 6) of the Paddington courtyard house; roof/green-roof terraces excluded",
+     "scale_note": "Bar 1:200: 0..5 m = ~148 px (displayed) => ~30 px/m; courtyard ~293x125 px = ~9.8x4.2 m",
+     "area_m2": 41,
+     "n_rooms": 1,
+     "room_area_mean_m2": 41,
+     "trees_per_100m2": 2.4,
+     "privacy_approach": "building-enclosed",
+     "rooms_note": "One small courtyard with hatched strip (deck/pond ambiguous), a circular tree canopy and glazed doors to living room",
+     "privacy_note": "Fully building-enclosed on three sides, wall on fourth",
+     "confidence": "low"
+    }
+   }
+  }
+ ]
+}

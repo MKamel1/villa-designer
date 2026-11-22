@@ -1,0 +1,44 @@
+{
+ "date": "2026-11-22",
+ "source": "concept/villa_landscape.review_candidate(revit_spec.build(D1)), read-only",
+ "gardens": {
+  "south": {
+   "area_m2": 57.01,
+   "hard_share": 0.265,
+   "soft_share": 0.735,
+   "water_share": 0.0,
+   "n_rooms": 2,
+   "path_primary_m": 0.914,
+   "trees_per_100m2": 1.75,
+   "drift_size_median": 3,
+   "layer_canopy": 0.027,
+   "layer_shrub": 0.595,
+   "layer_ground": 0.378,
+   "species_per_100m2": 14.03,
+   "n_species": 8,
+   "enclosure_ratio": null,
+   "room_area_mean_m2": null,
+   "path_secondary_m": null,
+   "notes": "rooms: g6 terrace (12.36 m2, pergola) and the lawn; the lawn is artificial turf; no water feature; boundary heights and room widths not measured (GAP)"
+  },
+  "north": {
+   "area_m2": 25.24,
+   "hard_share": 0.688,
+   "soft_share": 0.312,
+   "water_share": 0.0,
+   "n_rooms": 1,
+   "path_primary_m": 0.914,
+   "trees_per_100m2": 0.0,
+   "drift_size_median": 3,
+   "layer_canopy": 0.0,
+   "layer_shrub": 0.467,
+   "layer_ground": 0.533,
+   "species_per_100m2": 19.81,
+   "n_species": 5,
+   "enclosure_ratio": null,
+   "room_area_mean_m2": null,
+   "path_secondary_m": null,
+   "notes": "gravel court counted hard; one swing/lounge room; no water feature (a pond is new in the brief)"
+  }
+ }
+}

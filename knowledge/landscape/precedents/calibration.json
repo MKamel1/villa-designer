@@ -1,0 +1,424 @@
+{
+ "date": "2026-11-22",
+ "note": "Known-good = published professional gardens (images cached OUTSIDE the repo, analysis only, copyright held by publishers). The photos were chosen by script from each source page and NOT yet visually curated: some may be interior or aerial shots; the critic-calibration lane must screen them first (open item). The north good set is weaker: only gardens with a confirmed pond are marked pond=true.",
+ "known_bad": {
+  "source": "docs/reviews/2026-11/visual-audit.md (R2 audit of finals-2026-10-15)",
+  "garden_views": [
+   {
+    "view": "v19 garden-facade",
+    "grade": "C"
+   },
+   {
+    "view": "v25 top-garden-gate",
+    "grade": "C-"
+   },
+   {
+    "view": "v26 top-garden-east",
+    "grade": "D"
+   },
+   {
+    "view": "v27 east-yard-above",
+    "grade": "D"
+   },
+   {
+    "view": "v28 east-yard-below",
+    "grade": "D+"
+   },
+   {
+    "view": "v36 north-garden",
+    "grade": "F"
+   },
+   {
+    "view": "v37 north-garden-lounge",
+    "grade": "D"
+   },
+   {
+    "view": "v39 hanging-retreat",
+    "grade": "D+"
+   },
+   {
+    "view": "v40 south-garden-espalier",
+    "grade": "D+"
+   }
+  ],
+  "borderline_not_bad": [
+   {
+    "view": "v41 south-garden-terrace",
+    "grade": "B-",
+    "why": "best exterior; should NOT be forced into the bad set"
+   }
+  ],
+  "caveat": "These grade ASSET and render defects (low-poly, card leaves, camera), not the plan structure; the plan-level fail (A2/A3) of the current garden is measured in d1.json against targets.json."
+ },
+ "known_good": {
+  "south": {
+   "n_gardens": 12,
+   "n_images": 48,
+   "gardens": [
+    {
+     "garden": "SAU-01-rush-wright-preston",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-01-rush-wright-preston/photo4.jpg"
+     ],
+     "page_url": "https://landscapeaustralia.com/articles/home-ground-catherine-rush-and-michael-wright/",
+     "photo_urls": [
+      "https://media4.architecturemedia.net/site_media/media/cache/c0/8b/c08b703cc43b4dfd458ec588e2613926.jpg",
+      "https://media4.architecturemedia.net/site_media/media/cache/a3/45/a345398e4a97bf8d2a354173a77f7f44.jpg",
+      "https://media2.architecturemedia.net/site_media/media/cache/4f/37/4f3717f41e449edb350edaddf6732622.jpg",
+      "https://media3.architecturemedia.net/site_media/media/cache/99/f8/99f8bc24d442efa7b2a6c1e2ddab0f46.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SAU-02-garland-garden-new-farm",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo4.jpg"
+     ],
+     "page_url": "https://landscapeaustralia.com/articles/a-new-rural-garland-garden/",
+     "photo_urls": [
+      "https://media2.architecturemedia.net/site_media/media/cache/42/07/4207f2f5ae86e37f75ec87395f2d3045.jpg",
+      "https://media2.architecturemedia.net/site_media/media/cache/39/20/3920eabea49a24257f756a6e554473e8.jpg",
+      "https://media3.architecturemedia.net/site_media/media/cache/6b/8a/6b8ab8004841c70b72071b71f6be1766.jpg",
+      "https://media2.architecturemedia.net/site_media/media/cache/0c/d5/0cd58ef1746e6f88167555bfd003dc5a.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SAU-03-garden-project-annandale",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/528834/the-garden-room-welsh-major",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/53c8/9aaa/c07a/80c6/4a00/01d2/large_jpg/00portada.jpg",
+      "https://images.adsttc.com/media/images/53c8/9ac8/c07a/80c6/4a00/01d3/large_jpg/01_of_10.jpg",
+      "https://images.adsttc.com/media/images/53c8/9afb/c07a/80c6/4a00/01d4/large_jpg/03_of_10.jpg",
+      "https://images.adsttc.com/media/images/53c8/9b5c/c07a/8049/2d00/01c4/large_jpg/05_of_10.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SAU-04-subiaco-oval-courtyard",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/539843/the-subiaco-oval-courtyard-luigi-rosselli",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/53f5/89de/c07a/80c3/8400/06b8/large_jpg/PORTADA.jpg",
+      "https://images.adsttc.com/media/images/53f5/8b46/c07a/8038/8e00/063b/large_jpg/Subiaco_Oval_-_Luigi_Rosselli_Architects_(10).jpg",
+      "https://images.adsttc.com/media/images/53f5/8bf2/c07a/80c3/8400/06bf/large_jpg/Subiaco_Oval_-_Luigi_Rosselli_Architects_(17).jpg",
+      "https://images.adsttc.com/media/images/53f5/8a78/c07a/8009/6200/0605/large_jpg/Subiaco_Oval_-_Luigi_Rosselli_Architects_(3).jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SAU-05-courtyard-house-paddington",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SAU-05-courtyard-house-paddington/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-05-courtyard-house-paddington/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-05-courtyard-house-paddington/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SAU-05-courtyard-house-paddington/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/602097/courtyard-house-aileen-sage-architects",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/54ec/cd1e/e58e/ce5d/cd00/000d/large_jpg/10.jpg",
+      "https://images.adsttc.com/media/images/54ec/cd57/e58e/ce5d/cd00/000e/large_jpg/12.jpg",
+      "https://images.adsttc.com/media/images/54ec/cd15/e58e/ce55/9800/000d/large_jpg/09.jpg",
+      "https://images.adsttc.com/media/images/54ec/cca6/e58e/ce55/9800/000b/large_jpg/06.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-01-domus-maya",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-01-domus-maya/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-01-domus-maya/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-01-domus-maya/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-01-domus-maya/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1025262/domus-maya-house-studio-kyriakos-miltiadou",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6776/f1b5/56c0/e400/01ca/d77e/large_jpg/014_526A7774.jpg",
+      "https://images.adsttc.com/media/images/6776/f1b5/56c0/e400/01ca/d77f/large_jpg/028_526A8052.jpg",
+      "https://images.adsttc.com/media/images/6776/f1b7/56c0/e400/01ca/d785/large_jpg/024_526A7925.jpg",
+      "https://images.adsttc.com/media/images/6776/f1b4/56c0/e400/01ca/d77d/large_jpg/031_526A8547.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-02-mv024-limassol",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-02-mv024-limassol/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-02-mv024-limassol/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-02-mv024-limassol/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-02-mv024-limassol/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/997010/mv024-residence-cv-architects-plus-associates",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/63f8/994f/e8da/b065/7892/5510/large_jpg/mv024-residence-cv-architects-plus-associates_1.jpg",
+      "https://images.adsttc.com/media/images/63f8/9952/2b86/6c3f/4371/10b6/large_jpg/mv024-residence-cv-architects-plus-associates_4.jpg",
+      "https://images.adsttc.com/media/images/63f8/9950/e8da/b065/7892/5511/large_jpg/mv024-residence-cv-architects-plus-associates_6.jpg",
+      "https://images.adsttc.com/media/images/63f8/9951/e8da/b065/7892/5514/large_jpg/mv024-residence-cv-architects-plus-associates_10.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-04-lima-villa-dubai",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-04-lima-villa-dubai/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-04-lima-villa-dubai/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-04-lima-villa-dubai/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-04-lima-villa-dubai/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/948029/lima-villa-loci-architecture-plus-design",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/5f64/cba4/63c0/17c8/ec00/02d8/large_jpg/00FI_LOCI13.LIMA1210319_NateleeCocks_0069_3000px.jpg",
+      "https://images.adsttc.com/media/images/5f64/cdb6/63c0/17fe/dd00/01ce/large_jpg/LOCI13.LIMA1210319_NateleeCocks_0075_3000px.jpg",
+      "https://images.adsttc.com/media/images/5f64/cd92/63c0/17c8/ec00/02ee/large_jpg/LOCI13.LIMA1210319_NateleeCocks_0073_3000px.jpg",
+      "https://images.adsttc.com/media/images/5f64/cd49/63c0/17fe/dd00/01c8/large_jpg/LOCI13.LIMA1210319_NateleeCocks_0054_3000px.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-05-avli-houses-paralimni",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1181483/the-avli-houses-ona-i-ona-architecture-and-design",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6a60/c5cf/237b/e900/01c8/74de/large_jpg/2_Creative_Photo_Room.jpg",
+      "https://images.adsttc.com/media/images/6a60/c5d1/237b/e900/01c8/74ed/large_jpg/17_Creative_Photo_Room.jpg",
+      "https://images.adsttc.com/media/images/6a60/c5ce/237b/e900/01c8/74db/large_jpg/19_Creative_Photo_Room.jpg",
+      "https://images.adsttc.com/media/images/6a60/c5d1/237b/e900/01c8/74e7/large_jpg/11_Creative_Photo_Room.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-06-dar-it-tarag-naxxar",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1035614/dar-it-tarag-residence-periti-studio",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6904/b183/436b/c600/01fd/ba21/large_jpg/_MG_6295-Edit-min.jpg",
+      "https://images.adsttc.com/media/images/6904/b187/436b/c600/01fd/ba2b/large_jpg/_MG_6689-Edit-min.jpg",
+      "https://images.adsttc.com/media/images/6904/b186/436b/c600/01fd/ba27/large_jpg/_MG_6539-Edit-min.jpg",
+      "https://images.adsttc.com/media/images/6904/b184/436b/c600/01fd/ba23/large_jpg/_MG_6412-Edit1-min.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-07-hs-house-amman",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/939205/h-saket-house-sahel-alhiyari-architects",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/5eb5/673c/b357/6579/8b00/0461/large_jpg/HS-0001_-_by_Pino_Musi.jpg",
+      "https://images.adsttc.com/media/images/5eb5/6755/b357/65f8/f900/0965/large_jpg/HS-0002_-_by_Pino_Musi.jpg",
+      "https://images.adsttc.com/media/images/5ec5/0f8e/b357/657a/0500/0311/large_jpg/RH2544-0073.jpg",
+      "https://images.adsttc.com/media/images/5eb5/6b05/b357/65bd/2b00/0003/large_jpg/HS-0007_-_by_Pino_Musi.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "SME-08-hanging-home-malta",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/south/SME-08-hanging-home-malta/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-08-hanging-home-malta/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-08-hanging-home-malta/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/south/SME-08-hanging-home-malta/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/324866/hanging-home-chris-briffa-architects",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/5106/df41/b3fc/4b79/9200/03ce/large_jpg/01.jpg",
+      "https://images.adsttc.com/media/images/5106/df8a/b3fc/4b79/9200/03d2/large_jpg/09.jpg",
+      "https://images.adsttc.com/media/images/5106/df3c/b3fc/4b79/9200/03cd/large_jpg/02.jpg",
+      "https://images.adsttc.com/media/images/5106/df63/b3fc/4b79/9200/03cf/large_jpg/05.jpg"
+     ],
+     "pond": null
+    }
+   ]
+  },
+  "north": {
+   "n_gardens": 12,
+   "n_images": 40,
+   "gardens": [
+    {
+     "garden": "N01-plan21-small-garden-house",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo3.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/968734/house-with-a-small-garden-plan21",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6148/8331/777f/ad01/648e/4032/medium_jpg/photo-2.jpg",
+      "https://images.adsttc.com/media/images/6148/8331/9f45/c901/646d/e068/medium_jpg/photo-1.jpg",
+      "https://images.adsttc.com/media/images/6148/857c/9f45/c901/646d/e074/medium_jpg/photo-15.jpg"
+     ],
+     "pond": false
+    },
+    {
+     "garden": "N02-tsubo-niwa-extension-kyoto",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N02-tsubo-niwa-extension-kyoto/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N02-tsubo-niwa-extension-kyoto/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N02-tsubo-niwa-extension-kyoto/photo3.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/954226/tsubo-niwa-extension-kenzo-makino-and-associates",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/5feb/6163/63c0/1745/4e00/008d/medium_jpg/00_FI_007_.jpg",
+      "https://images.adsttc.com/media/images/5feb/6184/63c0/1745/4e00/008f/medium_jpg/004_.jpg",
+      "https://images.adsttc.com/media/images/5feb/6163/63c0/17b1/fd00/00db/medium_jpg/001.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "N03-shimogamo-machiya-villa",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N03-shimogamo-machiya-villa/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N03-shimogamo-machiya-villa/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N03-shimogamo-machiya-villa/photo3.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/869067/shimogamo-machiya-villa-takuma-ohira",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/58ee/5e66/e58e/cee9/1600/0003/medium_jpg/IMG_5151-1.jpg",
+      "https://images.adsttc.com/media/images/58ee/5e93/e58e/cee9/1600/0005/medium_jpg/IMG_5221-1.jpg",
+      "https://images.adsttc.com/media/images/58ee/5ecd/e58e/cee9/1600/0007/medium_jpg/IMG_5631-1.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "N04-anjin-gosho-ebisugawa-kyoto",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N04-anjin-gosho-ebisugawa-kyoto/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N04-anjin-gosho-ebisugawa-kyoto/photo2.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1032829/anjin-gosho-ebisugawa-studio-aluc",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6891/d688/a805/bb20/539c/bcbd/medium_jpg/anjin-gosho-ebisugawa-studio-aluc_1.jpg",
+      "https://images.adsttc.com/media/images/6891/d689/9a2f/b601/7e5e/8c07/medium_jpg/anjin-gosho-ebisugawa-studio-aluc_21.jpg"
+     ],
+     "pond": null
+    },
+    {
+     "garden": "N06-water-courtyard-house-singapore",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N06-water-courtyard-house-singapore/photo1.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/981890/water-courtyard-house-guz-architects",
+     "photo_urls": [
+      "https://images.adsttc.com/media/images/6283/58a7/3e4b/317f/ca00/0022/medium_jpg/01_Water_Courtyard_House_Image_13.jpg"
+     ],
+     "pond": true
+    },
+    {
+     "garden": "N08-22-toh-yi-road-singapore",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N08-22-toh-yi-road-singapore/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N08-22-toh-yi-road-singapore/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N08-22-toh-yi-road-singapore/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N08-22-toh-yi-road-singapore/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/803687/22-toh-yi-road-ming-architects",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N09-wood-white-house-jakarta",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N09-wood-white-house-jakarta/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N09-wood-white-house-jakarta/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N09-wood-white-house-jakarta/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N09-wood-white-house-jakarta/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/993739/woohite-house-rcab-studio",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N10-pb-house-chiang-rai",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N10-pb-house-chiang-rai/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N10-pb-house-chiang-rai/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N10-pb-house-chiang-rai/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N10-pb-house-chiang-rai/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1011637/pb-house-d-compose-architect",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N11-vertical-oasis-house-singapore",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/999190/vertical-oasis-house-hyla-architects",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N12-willow-house-singapore",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N12-willow-house-singapore/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/901120/willow-house-guz-architects",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N13-wa-house-bandung",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N13-wa-house-bandung/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N13-wa-house-bandung/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N13-wa-house-bandung/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N13-wa-house-bandung/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/1014467/wa-house-pranala-associates",
+     "photo_urls": [],
+     "pond": true
+    },
+    {
+     "garden": "N14-seiryuu-koi-pavilion-bandung",
+     "photos": [
+      "~/archpipe/shared/landscape-precedents/north/N14-seiryuu-koi-pavilion-bandung/photo1.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N14-seiryuu-koi-pavilion-bandung/photo2.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N14-seiryuu-koi-pavilion-bandung/photo3.jpg",
+      "~/archpipe/shared/landscape-precedents/north/N14-seiryuu-koi-pavilion-bandung/photo4.jpg"
+     ],
+     "page_url": "https://www.archdaily.com/944288/seiryuu-pavilion-studio-avana",
+     "photo_urls": [],
+     "pond": true
+    }
+   ]
+  }
+ }
+}
