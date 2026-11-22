@@ -371,7 +371,8 @@ def main():
         args.path=str(Path(args.root)/'path.json');args.ies_dir=str(Path(args.root)/'ies')
         args.library_root=None;args.cpu=False;args.views='all';args.calibrate=False
         args.measure_lighting=False;args.measure_exposure_groups=False;args.walkthrough_callback=prepare
-        V.render(json.loads((Path(args.root)/'scene.json').read_text()),args)
+        from archpipe.blender.element_ids import without_ids
+        V.render(without_ids(json.loads((Path(args.root)/'scene.json').read_text())),args)
     else:
         path,scene,context=load_context(args)
         if args.stage=='coverage':measure_static_coverage(args,path,scene,context)
