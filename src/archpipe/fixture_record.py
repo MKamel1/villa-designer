@@ -149,11 +149,9 @@ _GEOMETRY = {
     'SWING': dict(arm_length=.30, plate_depth=.012, plate_radius=.05, arm_radius=.018,
                   knuckle_radius=.022, shade_radius=.06, shade_height=.10, shade_tilt=.03,
                   shade_inner_drop=.008, shade_wall=.006, shade_lip=.002, emitter_radius=.055, emitter_z=-.002),
-    # L6d: the O59 x 250 mm pendant is drawn with the old linear pendant's branch of villa_render (not mine to extend). The wire keeps the
-    # 4 mm section and the 0.06 m body height of the only shape knowledge/c3-part-exemptions.json admits for a 'lamp-wire' (its digest is the
-    # box 4 x 4 x (ceiling - top of body) mm): a 250 mm body would make a new, unregistered wire shape and the scene build refuses it
-    # (PartError: bare rectangular proxy for lamp-wire). The render therefore shows a 59 x 59 x 60 mm body: OPEN ITEM for the render lane.
-    'PEN-LIN': dict(half_width=.0295, height=.06, diffuser_end=.004, diffuser_half_width=.025,
+    # SC3: the QA03 body at its published size: O59 x 250 mm (QA03.ldt header: diameter 59, height 250; page: diameter 59). The
+    # square 59 mm box is the body's envelope (the lamp-housing proxy); the wire runs from its top to the ceiling.
+    'PEN-LIN': dict(half_width=.0295, height=.25, diffuser_end=.004, diffuser_half_width=.025,
                     diffuser_z=-.001, wire_span=.012, wire_radius=.002),
     'strip': dict(width=.012, spread=120),
     'wall-marker': dict(width=.10, height=.04, face_offset=.001),
