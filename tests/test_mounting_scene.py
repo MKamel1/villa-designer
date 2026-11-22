@@ -290,7 +290,7 @@ class StairFirstPackage(unittest.TestCase):
         from archpipe.concept.ceiling_requirements import product_depth, requirements
         from archpipe.concept.mounting_resume import apply_approvals, APPROVALS
         from archpipe.concept import villa_lighting as VL
-        for kind,depth in [('DL',95),('DLN',92),('ADJ',169),('WW',92)]:   # L6c ERCO LDT body heights (41321, 41369, A9000028, 41374); were the iGuzzini 95/95/98/95
+        for kind,depth in [('DL',95),('DLN',92),('ADJ',174),('WW',92)]:   # ERCO LDT body heights (41321, 41369, A9003138 (L6d; A9000028 was 169), 41374); were the iGuzzini 95/95/98/95
             self.assertEqual(product_depth(kind)['housing_depth_mm'],depth)
         recorded=product_depth('DL',{'installation_clearance_mm':40,'installation_depth_mm':110})
         self.assertEqual(recorded['clearance_mm'],40)
@@ -303,7 +303,7 @@ class StairFirstPackage(unittest.TestCase):
             self.assertEqual(zone['required_void_mm'],zone['max_housing_depth_mm']+25)
         meshes=[m for m in self.scene['meshes'] if m.get('mounting',{}).get('geometry_role')=='recessed-trim'
                 and m.get('mounting_package')=='d-ceiling']
-        self.assertEqual(len(meshes),69)   # L6c design: 53 DL + 12 WW + 4 ADJ recessed fittings (80 before the L6b/L6c ambient cuts)
+        self.assertEqual(len(meshes),68)   # L6d design: 52 DL + 12 WW + 4 ADJ recessed fittings (69 in L6c: the entry-lobby DL became a cove; 80 before the L6b/L6c ambient cuts)
         for root in (meshes[0],next(m for m in meshes if 'cinema' in m['id'])):
             mutant=deepcopy(self.scene)
             host=mutant['mounting_hosts'][root['mounting']['host_id']]

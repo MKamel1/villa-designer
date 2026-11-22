@@ -101,9 +101,14 @@ section digests** (`section_diff.py`: `receipt_component` true for every section
 17 baseline-relative reviews (16 individual + joint): all ok, 0 findings (`refresh_furniture_integ5.py review-current`); receipts rewritten with `refresh_receipts.py` (visual approvals retained: none of the sixteen items is in a room whose look changed:
 the pendant, a cove and three downlight trims). Evidence: `out/L6d-rc/section-diff.json`, `out/L6d-rc/review.log` (not committed).
 
+Exposure record re-measured on the L6d lighting (stale transport hash: the lights changed): jobq `L6d-measure-exposure-1` (GPU lock, `villa_scene.py --measure-exposure-groups` on the measure scene, full ies dir including `erco/A9003138.ies`), the
+measured `exposure-group-measurements.json` copied byte-for-byte to `knowledge/exposure-groups.json`. Production scene rebuilt without bypass (`scripts/benchmark_scene_build.py --write-scene`, receipts and record active): **1,210 meshes** (was 1,212: the
+entry-lobby downlight's trim and lens), 113 lights (4 ADJ on `erco/A9003138.ies`), scene sha256 `d41190a6cc87fa0a9a554bfd3b1e1033238936936e8152a00e415fb03bad0d8f`, ids-stripped sha256 `0a7811f1bafe67701ca462ba9336586f12c7244647c313bf3178f31c0e25043d`,
+producer source hash `8a3180db6b83034e47de02a0421a1e95742a9d4cc604258c7e01a2ab8927ae58`.
+
 ## Open items
 
-* **LV's V10 is hard-wired to the old products** (ADJ A9000028, Jilly 50674): it reports the new bound files as "DIFFERS" (8 failures); `tests/lightverify/test_v10_erco.py`, `test_v1_design.py` (Jilly samples) and the old Radiance-baseline tests encode L6c.
+* **LV's V10 is hard-wired to the old products** (ADJ A9000028, Jilly 50674): it reports the new bound files as "DIFFERS" (8 failures); `tests/lightverify`: 51 pass, 4 fail by design (`test_v10_erco.py` x2: ADJ partial / Jilly points; `test_v1_design.py` x2: the Jilly's 8 samples), all four encode the L6c products and are LV's to update; the orientation and radiance-baseline tests pass.
   The new products' own V10 numbers are in `knowledge/lighting-products/*/source.json` (lane L6d, from the maker's data sheet / page). LV must add A9003138 and QA03 (and the 8-sample Jilly logic goes).
 * LV's `run_cycles` cache and jobq id do not include the renderer source: a renderer fix is invisible to a re-run. Hash `villa_scene.py` into the job.
 * V6 n/e for dining-table, homework-end and daybed (LV does not read `v6-subplanes.json`); the dressing room V6 -40 % is the documented miss (lumen method at room index 0.43).
