@@ -24,6 +24,8 @@ def good():
         "features": [
             {"id": "fire-1", "kind": "firepit", "center": [16, 10], "diameter_m": 1.0, "flush": True,
              "cover": {"load_rating_kN": 5}, "product_clearance_mm": 1500},
+            {"id": "bbq-1", "kind": "bbq", "rect": [26, 10, 26.6, 10.6]},
+            {"id": "herb-1", "kind": "herb_bed", "rect": [30, 10, 32, 11]},
             {"id": "pond-1", "kind": "pond", "rect": [20, 8, 23, 10], "edge": "soft", "freeboard_mm": 150, "flush": True,
              "margin_slope_back_mm": 600},
         ],

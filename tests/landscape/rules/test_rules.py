@@ -25,7 +25,7 @@ class Loader(unittest.TestCase):
         self.assertTrue(all(isinstance(r, Rule) for r in RS.rules.values()))
         for rid, ids in RS.source_ids.items():
             self.assertTrue(ids, rid)
-        self.assertEqual(len(RS.params), 23)
+        self.assertEqual(len(RS.params), 24)
         self.assertEqual(len(RS.advisory_ids), 34)
 
     def test_advisory_rules_carry_no_measurement_and_are_advisory_kind(self):
@@ -87,6 +87,13 @@ class Negatives(unittest.TestCase):
         self.assertIn(status, statuses(L, rule), rule)
         if positive:
             self.assertNotIn("fail", statuses(good(), rule))
+
+    def test_brief_features(self):
+        self.case("LS-BRIEF-FEATURES", lambda L: L["features"].pop(0))                 # drop the fire pit
+        self.case("LS-BRIEF-FEATURES", lambda L: L["features"].remove(L["features"][2]))  # drop the herb bed
+        L = good(); L["features"][0]["kind"] = "heater"                                # heater is an allowed alternative
+        self.assertNotIn("fail", statuses(L, "LS-BRIEF-FEATURES"))
+        self.assertEqual(statuses(good(), "LS-BRIEF-FEATURES"), {"pass"})
 
     def test_path_main(self):
         self.case("LS-PATH-MAIN", lambda L: L["paths"][0].update(width_m=0.9))
@@ -164,15 +171,15 @@ class Negatives(unittest.TestCase):
         self.assertEqual(statuses(L, "LS-FIRE-COVER"), {"not_evaluated"})
 
     def test_pond_freeboard(self):
-        self.case("LS-POND-FREEBOARD", lambda L: L["features"][1].update(freeboard_mm=100))
-        self.case("LS-POND-FREEBOARD", lambda L: L["features"][1].update(edge="hard", freeboard_mm=50))
+        self.case("LS-POND-FREEBOARD", lambda L: L["features"][3].update(freeboard_mm=100))
+        self.case("LS-POND-FREEBOARD", lambda L: L["features"][3].update(edge="hard", freeboard_mm=50))
         self.assertEqual(statuses(good(), "LS-POND-FREEBOARD"), {"pass"})
-        L = good(); L["features"][1]["edge"] = "hard"; L["features"][1]["freeboard_mm"] = 75
+        L = good(); L["features"][3]["edge"] = "hard"; L["features"][3]["freeboard_mm"] = 75
         self.assertEqual(statuses(L, "LS-POND-FREEBOARD"), {"pass"})
 
     def test_pond_flush_margin(self):
-        self.case("LS-POND-FLUSH-MARGIN", lambda L: L["features"][1].update(margin_slope_back_mm=300), status="warn")
-        L = good(); L["features"][1]["flush"] = False
+        self.case("LS-POND-FLUSH-MARGIN", lambda L: L["features"][3].update(margin_slope_back_mm=300), status="warn")
+        L = good(); L["features"][3]["flush"] = False
         self.assertEqual(statuses(L, "LS-POND-FLUSH-MARGIN"), set())
 
     def test_soil_depth(self):

@@ -105,6 +105,15 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
     P = rs.params
     L = layout
 
+    # --- brief features (traceability) ---------------------------------------------------------
+    have = {f.get("kind") for f in L.get("features", [])}
+    alts = P["LS-BRIEF-FEATURES"]["alternatives"]
+    for kind in P["LS-BRIEF-FEATURES"]["required_kinds"]:
+        ok = bool(have & set(alts.get(kind, [kind])))
+        c.add("LS-BRIEF-FEATURES", "pass" if ok else "fail", kind,
+              f"brief feature {kind}: {'present' if ok else 'absent from the layout'}", achieved=int(ok), required=1,
+              unit="count")
+
     # --- paths -------------------------------------------------------------------------------
     for p in L.get("paths", []):
         w = p["width_m"] * 1000
@@ -238,6 +247,8 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
             continue
         forms = {g["form"]} if "form" in g else {p.get("form") for p in g.get("plants", [])}
         depth = g.get("soil_depth_mm")
+        if not any(forms):
+            c.skip("LS-SOIL-DEPTH", g["id"], "plant form (ground_cover|shrub|small_tree|large_tree) not known")
         for form in sorted(f for f in forms if f):
             if form not in mins:
                 c.skip("LS-SOIL-DEPTH", g["id"], f"unknown plant form {form!r}")

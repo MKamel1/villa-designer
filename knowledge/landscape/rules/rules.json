@@ -97,6 +97,8 @@
      "note": "About shading a BUILDING for energy, true-compass sides (north-hemisphere). Advisory only; the client's 'south garden' is the model +x side and is not true south (CLAUDE.md orientation)."},
     {"id": "POL-brief-capacity", "document": "Garden brief (client decision 2026-11-22)", "edition": "docs/decisions/garden-brief-2026-11-22.md", "locator": "Uses: south garden", "pdf_page": -1, "book": "",
      "quote": "gatherings and social events for ~10-20 people", "value": ">= 10 seats (a dining group plus a lounge group)", "status": "policy", "note": "Client decision, not a published standard."},
+    {"id": "POL-brief-features", "document": "Garden brief (client decision 2026-11-22)", "edition": "docs/decisions/garden-brief-2026-11-22.md", "locator": "Features", "pdf_page": -1, "book": "",
+     "quote": "Fire pit or heater in the south garden, for winter evenings. Small BBQ in the south garden. Small koi pond with lush green planting. Herbs and fruit: a herb bed and/or fruit trees.", "value": "fire pit or heater, BBQ stand, koi pond, herb bed or fruit trees", "status": "policy", "note": "Client decision. The pond may sit in the north garden or in front of the dirty kitchen: the designers propose, the client chooses at the concept gate."},
     {"id": "POL-product", "document": "Garden brief (client decision 2026-11-22)", "edition": "docs/decisions/garden-brief-2026-11-22.md", "locator": "Professional and site items", "pdf_page": -1, "book": "",
      "quote": "Fire pit: clearance to the facade and to planting follows the product's instructions", "value": "per product", "status": "policy", "note": "Client decision: no published number is invented."},
     {"id": "POL-screen-neighbour", "document": "Garden brief (client decision 2026-11-22)", "edition": "docs/decisions/garden-brief-2026-11-22.md", "locator": "Constraints", "pdf_page": -1, "book": "",
@@ -107,6 +109,9 @@
   ],
 
   "rules": [
+    {"id": "LS-BRIEF-FEATURES", "title": "Features the brief asks for are present", "severity": "violation", "sources": ["POL-brief-features"], "reference": "Client brief 2026-11-22 (policy; traceability A1)",
+     "params": {"required_kinds": ["firepit", "bbq", "pond", "herb_bed"], "alternatives": {"firepit": ["firepit", "heater"], "herb_bed": ["herb_bed", "fruit_tree"]}}, "layout": "features[].kind",
+     "fix": "Add the missing feature to the plan, or record the client's waiver of it."},
     {"id": "LS-PATH-MAIN", "title": "Main path clear width", "severity": "violation", "sources": ["TS-340-5-width"], "reference": "Time-Saver Landscape 2nd ed. p. 340-5",
      "params": {"min_width_mm": 1200}, "layout": "paths[class=main].width_m",
      "fix": "Widen the main path to 1 200 mm clear, or reclassify it as secondary if it carries one person at a time."},
