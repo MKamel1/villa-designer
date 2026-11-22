@@ -72,6 +72,34 @@ def build_material(name, d):
     return mat
 
 
+def build_game_materials(d):
+    """A game-asset archive with PNG maps and no Megascans JPGs (the Fab olive, LDL pass 6): slot 0 = foliage (colour + ALPHA cut-out, normal, AORM green = roughness),
+    slot 1 = trunk (colour, normal). Same wiring as LDL's `olive_preview.py`."""
+    def img(n, nc):
+        i = bpy.data.images.load(os.path.join(d, n), check_existing=True)
+        i.colorspace_settings.name = "Non-Color" if nc else "sRGB"
+        return i
+
+    def mat(name, color, normal, alpha, rough_from=None):
+        m = bpy.data.materials.new(name); m.use_nodes = True
+        nt = m.node_tree; nt.nodes.clear()
+        out = nt.nodes.new("ShaderNodeOutputMaterial"); pb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+        c = nt.nodes.new("ShaderNodeTexImage"); c.image = img(color, False); nt.links.new(c.outputs["Color"], pb.inputs["Base Color"])
+        n = nt.nodes.new("ShaderNodeTexImage"); n.image = img(normal, True); nm = nt.nodes.new("ShaderNodeNormalMap")
+        nt.links.new(n.outputs["Color"], nm.inputs["Color"]); nt.links.new(nm.outputs["Normal"], pb.inputs["Normal"])
+        if rough_from:
+            r = nt.nodes.new("ShaderNodeTexImage"); r.image = img(rough_from, True); sp = nt.nodes.new("ShaderNodeSeparateColor")
+            nt.links.new(r.outputs["Color"], sp.inputs["Color"]); nt.links.new(sp.outputs["Green"], pb.inputs["Roughness"])
+        sh = pb.outputs["BSDF"]
+        if alpha:
+            tp = nt.nodes.new("ShaderNodeBsdfTransparent"); mx = nt.nodes.new("ShaderNodeMixShader")
+            nt.links.new(c.outputs["Alpha"], mx.inputs[0]); nt.links.new(tp.outputs[0], mx.inputs[1]); nt.links.new(sh, mx.inputs[2]); sh = mx.outputs[0]
+        nt.links.new(sh, out.inputs["Surface"])
+        return m
+    return [mat("fab:olive-foliage", "T_ItalianTress_Olive_D.PNG", "T_ItalianTress_Olive_N.PNG", True, "T_ItalianTress_Olive_AORM.PNG"),
+            mat("fab:olive-trunk", "T_ItalianTress_Olivio_Tronco_D.PNG", "T_ItalianTress_Olivio_N.PNG", False)]
+
+
 _MATS, _SRC = {}, {}
 
 
@@ -79,7 +107,7 @@ def import_fbx(path):
     """-> list of new mesh objects. The first import of a file is a real import (materials rebuilt from the archive's maps); later ones share its mesh data."""
     d = os.path.dirname(path)
     if d not in _MATS:
-        _MATS[d] = build_material("fab:" + os.path.basename(d), d)
+        _MATS[d] = build_material("fab:" + os.path.basename(d), d) if maps_of(d) else build_game_materials(d)
     if path in _SRC:
         src, mw = _SRC[path]
         ob = bpy.data.objects.new("ld-fab-instance", src.data)
@@ -90,13 +118,15 @@ def import_fbx(path):
     bpy.ops.import_scene.fbx(filepath=path)
     new = [o for o in bpy.data.objects if o not in before]
     ms = [o for o in new if o.type == "MESH"]
+    ms = [o for o in ms if not o.name.startswith("UCX_")]            # collision hulls
     assert len(ms) == 1, (path, len(ms))
     o = ms[0]
     mw = o.matrix_world.copy(); o.parent = None; o.matrix_world = mw
     for e in new:
         if e is not o:
             bpy.data.objects.remove(e)
-    for s in o.material_slots:
-        s.material = _MATS[d]
+    mats = _MATS[d] if isinstance(_MATS[d], list) else [_MATS[d]] * len(o.material_slots)
+    for s, m in zip(o.material_slots, mats):
+        s.material = m
     _SRC[path] = (o, mw)
     return [o]

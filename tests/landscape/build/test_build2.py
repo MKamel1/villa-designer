@@ -170,7 +170,7 @@ class FirePit(unittest.TestCase):
 class ShadeTree(unittest.TestCase):
     """The provisional composition (`provisional.py`) is kept ONLY here, to exercise the root-barrier and graded-asset-tree builders: the final layout declares neither."""
     def setUp(self):
-        self.L = provisional.with_shade_tree(L)
+        self.L = provisional.with_shade_tree(L, species="tipuana_tipu")      # a species with no graded asset: the stand-in builder
         self.s = build.build_scene(self.L)
         self.m = build.build_scene(self.L, age=None)
 
@@ -242,7 +242,21 @@ class FinalTrees(unittest.TestCase):
         self.assertEqual(self.tree(S, "ld-e-tree-olive").winter_parts, [])
         rows = {r["id"]: r for r in S.schedule}
         self.assertEqual(rows["ld-s-tree-crape"]["leaf_states"], ["leaf-on", "leaf-off"])
-        self.assertEqual(rows["ld-s-tree-olive"]["leaf_states"], ["evergreen"])
+        self.assertEqual(rows["ld-s-tree-olive"]["leaf_states"], ["evergreen"])      # (asset or stand-in)
+
+    def test_the_olive_is_the_graded_fab_scan_scaled_to_the_pruned_canopy(self):
+        o = self.tree(S, "ld-s-tree-olive")
+        if o.standin:
+            self.skipTest("Fab olive archive not on this machine")
+        self.assertTrue(o.asset["gltf"].lower().endswith(".fbx") and o.asset["asset_id"] == "fab_olive_tree_source")
+        self.assertEqual(o.asset["mode"], "xyz")
+        m = build.build_scene(L, age=None).by_id("ld-s-tree-olive").bounds()
+        self.assertAlmostEqual(m[5] - m[2], 4.5, delta=0.02)                       # pruned height, not the scan's 7.3 m
+        self.assertAlmostEqual(max(m[3] - m[0], m[4] - m[1]), 3.6, delta=0.1)      # pruned spread, not the scan's 9.9 m
+        row = next(r for r in S.schedule if r["id"] == "ld-s-tree-olive")
+        self.assertEqual((row["status"], row["leaf_states"]), ("asset", ["evergreen"]))
+        src = (ROOT / "src/archpipe/landscape/build/fab_blender.py").read_text()
+        self.assertIn('outputs["Alpha"]', src)                                       # the foliage is an alpha cut-out (LDL olive_preview wiring)
 
     def test_leaf_off_crape_stays_inside_the_pruned_crown_and_is_see_through(self):
         crape = self.tree(S, "ld-s-tree-crape")
@@ -303,6 +317,18 @@ class FabAssets(unittest.TestCase):
         im = Image.open(next(arch.glob("*_Opacity.jpg"))).convert("RGB").resize((256, 256))
         r, g, b = (np.asarray(im)[..., i].mean() for i in range(3))
         self.assertGreater(r, 10 * max(g, b, 0.1))                                       # data really is in R: wiring it as colour would be wrong
+
+
+class ClimberLookAlikes(unittest.TestCase):
+    def test_no_layout_climber_borrows_a_panel_of_another_species(self):
+        # LDL pass 6 grades star jasmine (Trachelospermum) and creeping fig panels; the layout plants Jasminum sambac, Petrea and Vitis: none maps, so none is drawn from them
+        panels = [o for o in S.objects if o.meta.get("climbing")]
+        self.assertTrue(panels)
+        for o in panels:
+            self.assertTrue(o.standin, o.id)
+            self.assertNotIn("fab_star_jasmine_trellis", o.label)
+            self.assertNotIn("fab_creeping_fig_wall", o.label)
+        self.assertFalse(planting.resolve("jasminum_sambac")["drawable"])
 
 
 class GrilleAndContext(unittest.TestCase):

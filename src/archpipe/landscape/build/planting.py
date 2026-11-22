@@ -41,9 +41,10 @@ def is_fab(asset):
 
 
 def fab_variants(asset):
-    """LOD0 FBX of every variation of a Fab/Megascans plant archive (sorted); [] when the archive is not unzipped on this machine."""
+    """LOD0 FBX of every variation of a Fab/Megascans plant archive (sorted), else the archive's single FBX; [] when the archive is not unzipped on this machine."""
     d = FAB / Path(asset["manifest_key"]).name
-    return sorted(str(f) for f in d.glob("*_LOD0.fbx"))
+    lod0 = sorted(str(f) for f in d.glob("*_LOD0.fbx"))
+    return lod0 or sorted(str(f) for f in d.iterdir() if f.suffix.lower() == ".fbx") if d.is_dir() else []      # a game-asset archive (the olive) has one FBX, no LOD names
 
 
 def gltf_path(asset):
@@ -352,11 +353,11 @@ def pruned_tree(oid, slug, t, age, ground_z):
         w, d = a["size_m"][0] * sxy, a["size_m"][1] * sxy
         bounds = (x - w / 2, y - d / 2, ground_z, x + w / 2, y + d / 2, ground_z + h)
         o = Obj(oid, "plant", "%s pruned shade tree: graded %s asset %s (%s, %s), scaled to the pruned canopy %.1f m wide x %.1f m high" % (slug, a["grade"], a["id"], a["licence"], a["author"], w, h),
-                rests_on=("ground",), footprint_mode=None, asset=dict(asset_id=a["id"], gltf=str(gltf_path(a)), mode="xyz", scale_xyz=[sxy, sxy, sz], at=[x, y, ground_z], bounds=bounds, native_size_m=a["size_m"],
+                rests_on=("ground",), footprint_mode=None, asset=dict(asset_id=a["id"], gltf=pick_variant(a, oid), mode="xyz", scale_xyz=[sxy, sxy, sz], at=[x, y, ground_z], bounds=bounds, native_size_m=a["size_m"],
                 grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"], species_fit=a["species_fit"]), meta=dict(species=slug, age=age, pruned=True))
         c0 = ground_z + max(stem, 0.3 * h)
         o.meta["envelope"] = (x, y, (ground_z + h + c0) / 2, w / 2, d / 2, (ground_z + h - c0) / 2)
-        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit=a["species_fit"], achieved_spread_m=round(max(w, d), 3))
+        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit=a["species_fit"], achieved_spread_m=round(max(w, d), 3), leaf_states=["evergreen"])    # an asset tree is one leaf state: only evergreens reach here
         return o, row
     col, why = foliage_colour(f.get("foliage_text", ""))
     deciduous = f.get("habit") == "deciduous"
