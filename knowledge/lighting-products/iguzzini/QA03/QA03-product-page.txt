@@ -1,0 +1,326 @@
+
+QA03
+PRODUCTS
+Services
+Inspiration
+Configurators
+ About us
+ Contacts
+ Global
+PRODUCTS
+Services
+Inspiration
+Configurators
+ About us
+ Contacts
+Global
+ Indoor
+ Outdoor
+ Smart Controls
+ iGuzzini Echoes
+Laser Evo
+Lander
+All indoor products
+Downlights & recessed luminaires
+Fixtures for mains voltage track
+Fixtures for low voltage track
+Pendants
+Linear systems
+Wall luminaires
+Ceiling luminaires
+Floor recessed luminaires
+Table & floor lamps
+Emergency lighting
+Led strips
+Lighting effect luminaries
+Laser Evo
+Newfo
+All outdoor products
+Pole & wall mounted systems
+Pole & wall mounted multiple floodlights
+Poles
+Linear systems
+Floodlights
+Recessed in-ground luminaires
+Recessed wall luminaires
+Recessed ceiling luminaires
+Bollards
+Wall mounted luminaries
+Ceiling mounted luminaires
+Lighting effect luminaires
+Agorà
+Lander
+All Smart Controls
+Wireless
+Wired DALI
+Wired DMX
+Wireless DALI
+EPBD Compliance
+CESPUGLIO | Design Ennio Lucini | Re-edition 2026
+POLSINO | design Gio Ponti, 1968 | re-edition 2022
+NITIA | design Rodolfo Bonetto, 1971 | re-edition 2023
+CLAN | design Harvey, 1968 | re-edition 2023
+SORELLA | design Harvey, 1972 | re-edition 2023
+ZURIGO | design Luigi Massoni, 1966 | re-edition 2022
+LE PERROQUET | Design Piano Design
+LINGOTTO | Design Renzo Piano
+PIZZAKOBRA | Design Ron Arad
+Sorella
+Polsino
+ Global network
+ Technical consulting
+ Bespoke
+ Smart Services
+ Certifications
+ Warranty
+ EPBD Compliance
+ Culture
+ Retail
+ Hospitality & Residential
+ Working
+ Urban
+ Infrastructure
+The Fernand Cina winery tasting complex
+A new lighting system for Michelangelo’s La Pietà
+All indoor products
+Downlights & recessed luminaires
+Fixtures for mains voltage track
+Fixtures for low voltage track
+Pendants
+Linear systems
+Wall luminaires
+Ceiling luminaires
+Floor recessed luminaires
+Table & floor lamps
+Emergency lighting
+Led strips
+Lighting effect luminaries
+Laser Evo
+Newfo
+All outdoor products
+Pole & wall mounted systems
+Pole & wall mounted multiple floodlights
+Poles
+Linear systems
+Floodlights
+Recessed in-ground luminaires
+Recessed wall luminaires
+Recessed ceiling luminaires
+Bollards
+Wall mounted luminaries
+Ceiling mounted luminaires
+Lighting effect luminaires
+Agorà
+Lander
+All Smart Controls
+Wireless
+Wired DALI
+Wired DMX
+Wireless DALI
+EPBD Compliance
+CESPUGLIO | Design Ennio Lucini | Re-edition 2026
+POLSINO | design Gio Ponti, 1968 | re-edition 2022
+NITIA | design Rodolfo Bonetto, 1971 | re-edition 2023
+CLAN | design Harvey, 1968 | re-edition 2023
+SORELLA | design Harvey, 1972 | re-edition 2023
+ZURIGO | design Luigi Massoni, 1966 | re-edition 2022
+LE PERROQUET | Design Piano Design
+LINGOTTO | Design Renzo Piano
+PIZZAKOBRA | Design Ron Arad
+Sorella
+Polsino
+ History
+ Social Innovation
+ Responsibility
+ Warm technology
+ Region and Language
+Product standard
+Global
+China
+North America
+Your language
+English
+italiano (Italia)
+Deutsch (Deutschland)
+español (España)
+français (France)
+English (world)
+English
+français
+Update
+Indoor
+/
+Ceiling luminaires
+/
+Laser
+/
+ceiling
+QA03
+Save to favorites
+Favourites
+Downloads
+Downloads
+Colour
+Optional components
+Technical data
+Photometric data
+Electrical data
+Installation
+Downloads
+ Reset
+QA03
+Part of 
+Laser ceiling
+Laser pendant
+Description
+Ø59 Tech - DALI - Flood Beam
+ WF - Wide Flood 44°
+ 12.3 W system
+ 831.6 lm system
+ 67.61 lm/W
+ 2700 K
+CRI 
+ 92
+ - Rf (Colour Fidelity Index) 92 - Rg (Gamut Index) 99
+ Control  
+DALI-2
+Designed by
+iGuzzini
+Colour
+Optional components
+ Technical Data
+ last update:
+ 25/09/2026
+Description
+Cylindrical lighting body for ceiling or pendant-mounted applications. Fixed optic lighting system with a high definition reflector made of metallised thermoplastic. The LEDs are set back to minimize glare and guarantee a high level of visual comfort. Structural cylinder made of painted extruded aluminium with an inner ring made of thermoplastic available in different painted or metallised finishes. Glass cover Using specific accessory kits, ceiling or pendant-mounted installations can be made with minimum intervention and simplified by a practical bayonet coupling system. DALI dimmable driver integrated in the luminaire.
+Dimensions
+Diameter (mm)
+ø59
+Technical performance
+ Complies with EN60598-1 and pertinent regulations
+Physical properties
+Weight (kg)
+0.47
+Material
+Aluminium and thermoplastic
+Product certification
+ View certification countries
+ BIS
+ CCC S&E
+ CE
+ EAC
+ ENEC-03
+ NOM
+ Retilap
+ TISI
+ Photometric data
+Details
+lm system
+831.6 
+W system
+12.3 
+lm source
+1080 
+W source
+11 
+Luminous efficiency - lm/W (system value)
+67.61 
+lm in emergency mode
+- 
+Maximum intensity (cd)
+1809 
+Total light flux at or above an angle of 90° (Lm)
+0 
+Light output ratio (LOR)
+77 
+Optic and beam angle
+WF - Wide Flood 44° 
+Ugr Rating
+UGR
+Adjustability
+fixed 
+Light colour quality
+CRI 
+ 92
+ - Rf (Colour Fidelity Index) 92 - Rg (Gamut Index) 99
+Colour temperature
+2700 K 
+MacAdam Step
+2 
+Lifetime LED 1
+50,000h - L90 - B10 (Ta 25°C) '
+ data-photometric-key='lifetime1'
+ data-unit=''
+ data-dc-product-code-photometric-values-ref="values[]"
+ >>50,000h - L90 - B10 (Ta 25°C) 
+Lifetime LED 2
+Charts and polar curves
+ Electrical data
+Operating ambient temperature range (C°)
+from 0°C to 35°C.
+Supply voltage
+220-240 VAC
+ZVEI code
+LED
+Power Supply
+Electronic Driver included
+Mounting options
+Integral
+Dimmable option
+Dimmable
+Control
+DALI-2
+ Installation
+Description
+Ceiling or pendant-mounted - use the appropriate assembly kits available with a separate item code.
+Mounting
+Ceiling surface, Ceiling pendant
+Wiring
+The lighting body is fitted with an internal terminal board for connectinf it to the power line or pendant cable.
+Notes
+A wide range of decorative accessories and diffusers is available.
+ Stay connected with our latest innovations. Subscribe to our newsletter for updates on new products, fairs, and initiatives.
+Subscribe
+ -->
+ -->
+ -->
+ -->
+ -->
+ -->
+ -->
+ Thank you for subscribing!
+iGuzzini illuminazione S.p.A 
+Via Mariano Guzzini 37
+62019 Recanati (Italy)
+Share Capital €21.050.000,00 i.v.
+VAT N. and R.I. : (IT)00082630435
+CCIAA Macerata, R.E.A. 40632
+iGuzzini® is a registered trademark of
+iGuzzini Illuminazione S.p.A. All rights reserved.
+Contacts & Locations
+Social
+ Instagram
+ LinkedIn
+ Facebook
+ YouTube
+ Pinterest
+ Products
+ Indoor
+ Outdoor
+ Smart control
+ iGuzzini Echoes
+ About us
+ Social Innovation
+ History
+ Warm Technology
+ Responsibility
+ Work with us
+ Privacy
+ Certifications
+ 5 Year Warranty
+ Whistleblowing
+ Cookie Policy
+ Accessibility statement
+ Our Codes
+ Knowledge Base (login required)
+ Downloads

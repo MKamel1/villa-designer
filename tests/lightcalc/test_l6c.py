@@ -42,14 +42,23 @@ def test_bound_products_emit_their_own_lumens_at_driver_one(villa):
         pytest.skip("every DL is dimmed")
 
 
-def test_table_pendant_is_sampled_along_its_length(villa):
+def test_table_pendant_is_one_point_source_of_the_bound_product(villa):
+    """L6d: the 1.5 m Jilly (8 samples along its length, 2 x 1779 lm) was replaced by one O59 pendant (iGuzzini QA03, 831.6 lm): a single point
+    source carrying the commissioned fraction of the rated flux."""
     f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
     ps = V.fixture_placements(f)
+    assert len(ps) == 1
+    assert ps[0].dim * ps[0].photometry.integrated_flux() == pytest.approx(831.6 * f.extra.get("dimmer", 1.0), rel=0.01)
+
+
+def test_a_product_strip_is_still_sampled_along_its_length(villa):
+    """The sampling path kept for products with a length (the Jilly's, strips): a fixture with a length yields several samples that sum to its flux."""
+    import dataclasses
+    f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
+    long = dataclasses.replace(f, length=1.5, along=(1.0, 0.0, 0.0))
+    ps = V.fixture_placements(long)
     assert len(ps) == 8
-    flux = sum(p.dim * p.photometry.integrated_flux() for p in ps)
-    assert flux == pytest.approx(3558 * f.extra.get("dimmer", 1.0), rel=0.01)       # two 1779 lm modules, not one
-    xs = sorted(p.position[0] for p in ps)
-    assert xs[-1] - xs[0] == pytest.approx(1.5 * 7 / 8, abs=0.01)
+    assert sum(p.dim * p.photometry.integrated_flux() for p in ps) == pytest.approx(831.6 * f.extra.get("dimmer", 1.0), rel=0.01)
 
 
 def test_zone_drivers_respect_v12_and_the_rated_output(villa):
@@ -94,3 +103,27 @@ def test_handcalc_flux_on_rect_matches_the_point_sum_for_a_downlight():
 def test_handcalc_rejects_a_plane_above_the_luminaire():
     pho = ph.load(ERCO_DL)
     assert handcalc.flux_on_rect(Placement("t", pho, (0, 0, 1.0)), (-1, -1, 1, 1), 2.0) == 0.0
+
+
+@pytest.mark.parametrize("pid, cluster", [("room-corridor", "GF-circulation"), ("room-parents-bed", "GF-parents-bed")])
+def test_l6d_grids_converge_under_2_percent(villa, pid, cluster):
+    """L6d (LV V7): halving the pitch must move the direct result < 2 % (corridor was -6.23 % at 0.85 m, parents' bedroom -3.39 % at 0.43 m)."""
+    from archpipe.lightverify.v7_convergence import grid_em
+    pl = next(p for p in villa.planes() if p.id == pid)
+    plc = [p for p in villa.cluster_placements(cluster) if p.layer not in ("night", "emergency")]
+    e1, (dx, dy) = grid_em(pl, plc, pl.spacing)
+    e2, _ = grid_em(pl, plc, min(dx, dy) / 2)
+    assert abs(e1 / e2 - 1) < 0.02
+
+
+def test_l6d_the_old_corridor_and_bedroom_grids_would_have_failed():
+    """Negative: a 0.85 m pitch is visibly unstable on the same rooms (corridor -6.8 %, bedroom +4.7 %); the test above is not vacuous.
+    (LV's -3.39 % at the bedroom's old 0.43 m pitch came with the bed DL 1.4 m from the pillow; with the DL moved the 0.43 m pitch gives +0.6 %.)"""
+    from archpipe.lightverify.v7_convergence import grid_em
+    v = V.Villa()
+    for pid, cl, old in (("room-corridor", "GF-circulation", 0.85), ("room-parents-bed", "GF-parents-bed", 0.85)):
+        pl = next(p for p in v.planes() if p.id == pid)
+        plc = [p for p in v.cluster_placements(cl) if p.layer not in ("night", "emergency")]
+        coarse, (dx, dy) = grid_em(pl, plc, old)
+        fine, _ = grid_em(pl, plc, min(dx, dy) / 2)
+        assert abs(coarse / fine - 1) > 0.03, pid

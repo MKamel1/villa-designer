@@ -73,3 +73,27 @@ def test_the_old_construction_was_wrong_for_a_tilted_asymmetric_light(mats):
     """Negative / regression: for the wallwasher's aim (0, -0.25, -1) the old matrix differs from the engine's (the 90 deg error)."""
     k = CASES.index(((0, -0.25, -1), 0.0))
     assert not _close(mats[k]["old"], mats[k]["new"], 1e-3)
+
+
+GAIN_SCRIPT = r'''
+import json, sys
+sys.path.insert(0, %(src)r)
+from archpipe.blender import villa_scene as VS
+out = {}
+for name in %(names)r:
+    p = %(root)r + "/knowledge/lighting/ies/" + name
+    out[name] = [VS.ies_horizontal_planes(p), VS.ies_plane_gain(p)]
+print("RESULT" + json.dumps(out))
+'''
+
+
+def test_multiplane_files_get_the_measured_gain_and_single_plane_files_do_not():
+    """L6d (LV defect B): Cycles renders multi-plane Type-C files 8.6 % dim. WW (145 planes) and DESK (73) get the gain; DL, ADJ (1 plane) do not."""
+    import pathlib
+    root = pathlib.Path(__file__).resolve().parents[2]
+    names = ["ERCO-41374.ies", "ERCO-31327.ies", "ERCO-41321.ies", "ERCO-A9000028.ies"]
+    r = subprocess.run([BLENDER, "-b", "--python-expr", GAIN_SCRIPT % {"src": str(root / "src"), "names": names, "root": str(root)}],
+                       capture_output=True, text=True, timeout=300)
+    out = json.loads(next(l for l in r.stdout.splitlines() if l.startswith("RESULT"))[len("RESULT"):])
+    assert out["ERCO-41374.ies"] == [145, 1.094] and out["ERCO-31327.ies"] == [73, 1.094]
+    assert out["ERCO-41321.ies"] == [1, 1.0] and out["ERCO-A9000028.ies"] == [1, 1.0]

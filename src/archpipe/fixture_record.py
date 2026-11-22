@@ -48,7 +48,7 @@ KINDS = {
                  layer="ambient", aperture=0.075),
     "DLN":  dict(what="flush trimless downlight, extra wide (task)", mount="recessed", lm=904, beam=91, cct=2700,
                  cri=90, layer="task", aperture=0.075),
-    "ADJ":  dict(what="adjustable narrow-spot accent (track/recessed)", mount="recessed", lm=304, beam=6, cct=2700, cri=90,
+    "ADJ":  dict(what="adjustable flood-spot accent and reading light (track)", mount="recessed", lm=760, beam=28, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
     "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=399, beam=None, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
@@ -61,8 +61,8 @@ KINDS = {
     "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
                   "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=60,
                   cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
-    "PEN-LIN": dict(what="linear pendant 1.5 m, direct", mount="pendant", lm=3558, beam=87, cct=2700,
-                    cri=90, layer="task", length=1.6),
+    "PEN-LIN": dict(what="table pendant downlight O59 x 250 mm, direct (L6d: was a 1.5 m linear pendant of 3558 lm)", mount="pendant", lm=832, beam=44,
+                    cct=2700, cri=90, layer="task", length=0.059),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
                    cct=2700, cri=90, layer="task", diameter=0.12),
     "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
@@ -100,11 +100,11 @@ KINDS = {
 PRODUCT_CHOICE = {
     "DL": ("erco", "41321", "Quintessence downlight, wide flood 56 deg, 1065 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
     "DLN": ("erco", "41369", "Quintessence downlight, extra wide flood 89 deg, 904 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "ADJ": ("erco", "A9000028", "Optec New spot M, narrow spot, 304 lm, 2700 K CRI 92, track, on-board dim "
-                                 "(V10 PARTIAL: published beam diameter not reproduced, see LP-candidates; the L spot A9001547 "
-                                 "is 855 lm and needs 3x the dimming)"),
+    "ADJ": ("erco", "A9003138", "Optec New spotlight S, flood 28 deg, 760 lm, 2700 K CRI 92, DALI-2 track adapter (V10 pass: "
+                                 "published beam 28.0 deg vs 28.9 in the file; L6d replaced the V10-partial narrow spot A9000028)"),
     "WW": ("erco", "41374", "Quintessence lens wallwasher, recessed, 399 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "PEN-LIN": ("erco", "50674", "Jilly pendant downlight 1500 mm, 3558 lm (2 x 1779 lm modules), 2700 K CRI 92, DALI-2, UGR 19 (V10 pass)"),
+    "PEN-LIN": ("iguzzini", "QA03", "Laser pendant O59 Tech, wide flood 44 deg, 832 lm, 2700 K CRI 90, DALI-2 (V10 pass; L6d replaced the 1.5 m "
+                                    "Jilly, 3558 lm, which ran at 3.9 % of its output in the Evening scene)"),
     "DESK": ("erco", "31327", "Lucy task light, wide beam, 234 lm, 2700 K CRI 92, on-board dim (V10 pass)"),
 }
 
@@ -149,8 +149,8 @@ _GEOMETRY = {
     'SWING': dict(arm_length=.30, plate_depth=.012, plate_radius=.05, arm_radius=.018,
                   knuckle_radius=.022, shade_radius=.06, shade_height=.10, shade_tilt=.03,
                   shade_inner_drop=.008, shade_wall=.006, shade_lip=.002, emitter_radius=.055, emitter_z=-.002),
-    'PEN-LIN': dict(half_width=.03, height=.06, diffuser_end=.05, diffuser_half_width=.015,
-                    diffuser_z=-.001, wire_span=.6, wire_radius=.002),
+    'PEN-LIN': dict(half_width=.0295, height=.25, diffuser_end=.004, diffuser_half_width=.025,
+                    diffuser_z=-.001, wire_span=.012, wire_radius=.0015),
     'strip': dict(width=.012, spread=120),
     'wall-marker': dict(width=.10, height=.04, face_offset=.001),
     'globe': dict(inner_ratio=.55, cord_radius=.003, canopy_radius=.05, canopy_depth=.02),

@@ -390,12 +390,16 @@ def design(lay=None):
             card="ies-res-kitchen-general-50")
     strip("TOE", "kitchen", (isl[0] + 0.05, isl[3] - 0.05), (isl[2] - 0.05, isl[3] - 0.05), LEVEL_Z["B"] + 0.05,
           (0, 0.3, -1), why="island plinth glow: night light and the island floats")
-    # dining: linear pendant over the table (task + decorative), two adjustable fills crossing, sideboard accent
+    # dining: pendant over the table (task + decorative), two adjustable fills crossing, sideboard accent
+    # L6d: the 1.5 m ERCO Jilly (3558 lm) ran at 3.9 % (Evening) and 6.1 % (Dinner) of its output over this table; replaced by ONE iGuzzini
+    # Laser pendant O59 (832 lm, 44 deg, DALI-2): the scenes need 140 / 220 / 460 lm (Evening / Dinner / Day), i.e. 17 / 26 / 55 % of it. A single
+    # point pendant lights a pool of about 0.65 m, so it hangs 0.15 m toward the homework end (west) of the table centre: from there the 0.6 m
+    # homework-end plane (Day, 200 lx) is reached at a driver of 0.30-0.48 and the table average (Dinner, 100 lx) at 21-23 % of the output.
+    # Table length 1.8 m; pendant 0.059 m (policy: a pendant over a table should not exceed about 2/3 of its length).
     tb = fp["dining-table"]
-    add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2, (tb[1] + tb[3]) / 2,
+    add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2 - 0.15, (tb[1] + tb[3]) / 2,
         z=LEVEL_Z["B"] + it["dining-table"]["h"] + 0.762, extra={"hang_from": ceiling_z("B"), "zone": "table-pendant"},
-        length=1.5, along=(1.0, 0.0, 0.0) if (tb[2] - tb[0]) >= (tb[3] - tb[1]) else (0.0, 1.0, 0.0),   # L6c: ERCO Jilly 1500 mm
-        why="linear pendant along the table, 762 mm above it", card="rid-pendant-above-table-762")
+        length=0.0, why="pendant over the table (west of centre, over the homework end), 762 mm above it", card="rid-pendant-above-table-762")
     # L6b: the two crossed adjustable fills put ~950 lx on the table centre (9x the 100 lx card; truth probe, variant A):
     # cut. The pendant is the table's light (Dinner dims it, Day lifts the homework end); the sideboard accent stays.
     sb = fp["dining-sideboard"]
@@ -517,6 +521,8 @@ def design(lay=None):
     for room, desks, bed in (("kids-a", ("ka-desk-1", "ka-desk-2"), "ka-bunk"), ("kids-b", ("kb-desk",), "kb-bed")):
         K = rc[room]
         for x, y in _grid(K, 1, 1, mx=0.9):          # L6c: 2 -> 1 ambient (ERCO DL 1065 lm); each desk gets its own task downlight
+            if room == "kids-b":     # L6d LA4 (lying, looking up): the bed's pillow end is the west wall; a DL within 45 deg of the vertical
+                x = (fp["kb-desk"][0] + fp["kb-desk"][2]) / 2         # over it was 113 931 cd/m2; over the desk axis it is 2.25 m from the pillow
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
@@ -540,13 +546,21 @@ def design(lay=None):
     # swing-arm lamps on the head wall are the reading lights
     # L6c: 2 -> 1 ambient (ERCO DL 1065 lm). The one kept is the west one by the entry: the bed-foot one is 23 000 cd/m2 into the eye
     # of a person lying on the bed (LA4 cap 3000), which the old 732 lm fittings did not show
-    for x, y in ((PB[0] + 0.55, (PB[1] + PB[3]) / 2),):
-        add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50", zone="ambient")
+    # L6d LA4 'lying, looking up': that DL (19.03, -25.19) was 89 953 cd/m2 at 39.4 deg off the vertical of a person lying on the pillow
+    # (118 820 at pillow 1, 34 deg). The 45 deg cone over the pillows (eye 0.7 m, ceiling 2.7 m) has a 2.0 m radius: the ambient DL
+    # now stands at the foot of the bed on its axis, 0.16 m off the south wall, 2.28 m from the nearer pillow
+    for x, y in (((b[0] + b[2]) / 2, PB[3] - 0.16),):
+        add("DL", "parents-bed", x, y, why="ambient, dimmable (foot of the bed: outside the 45 deg cone over the pillows)",
+            card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",
         card="ies-res-vanity-grooming-300")
     PE = rc["parents-entry"]
-    add("DL", "parents-entry", (PE[0] + PE[2]) / 2, (PE[1] + PE[3]) / 2, why="entry lobby", card="ies-res-passage-30")
+    strip("COVE", "parents-entry", (PE[0] + 0.1, PE[3] - 0.10), (PE[2] - 0.1, PE[3] - 0.10), CEILING + 0.03, (0, -0.4, 1),
+          why="entry lobby cove on the bedroom side, aimed up and away from the bed: lights the lobby floor by the ceiling (LA4)", card="ies-res-passage-30")
+    # L6d LA4: the entry lobby DL (18.98, -26.98) is open to the bed (no door: it is the passage into the bedroom) and 1.2-1.8 m
+    # from the pillows, inside the 45 deg cone (122 595 cd/m2). No point of the 1.0 x 0.68 m lobby is 2.0 m from both pillows, so the
+    # downlight is replaced by the cove above (generic, hidden behind its upstand: ASSUMED, not an LA4 product check).
     # dressing: light inside the hanging, and an aisle light
     for w in ("pd-hang-1", "pd-hang-2"):
         q = fp[w]
@@ -942,10 +956,12 @@ SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
         "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.47, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Dinner": {"table-pendant": 0.43, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
-        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
-        "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2},
+        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.45, "island-pendants": 0.4},
+        # L6d: every zone in every scene runs at >= 15 % of its output unless it is a night/film orientation level (see test_l6d.py): the table
+        # pendant (driver 0.35) at 0.43 / 0.45 in Dinner / Evening = 15.1 / 15.8 %, the island globes (driver 0.70) at 0.22 in Reading = 15.4 % (was 0.2 = 14 %)
+        "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2, "island-pendants": 0.22},
         "Film": {"lounge-decorative": 0.15, "*night": 0.1},
         "Night": _NIGHT,
     },

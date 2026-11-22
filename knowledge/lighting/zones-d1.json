@@ -92,7 +92,7 @@
     "lum-ADJ-dining-side-01",
     "lum-ADJ-dining-side-02"
    ],
-   "watts": 12.6,
+   "watts": 23.4,
    "dimming": "dali2"
   },
   {
@@ -102,7 +102,7 @@
    "luminaire_ids": [
     "lum-PEN-LIN-dining-01"
    ],
-   "watts": 3.5,
+   "watts": 4.3,
    "dimming": "dali2"
   },
   {
@@ -319,7 +319,7 @@
    "luminaire_ids": [
     "lum-ADJ-lounge-09"
    ],
-   "watts": 4.2,
+   "watts": 4.1,
    "dimming": "dali2"
   },
   {
@@ -383,7 +383,7 @@
     "lum-BACK-stair-b-02",
     "lum-BACK-stair-b-03"
    ],
-   "watts": 7.1,
+   "watts": 4.4,
    "dimming": "dali2"
   },
   {
@@ -590,7 +590,7 @@
    "luminaire_ids": [
     "lum-ADJ-parents-bed-05"
    ],
-   "watts": 6.3,
+   "watts": 11.7,
    "dimming": "dali2"
   },
   {
@@ -703,13 +703,13 @@
    "dimming": "dali2"
   },
   {
-   "id": "Z-GF-PARENTS-ENTRY-AMBIENT",
+   "id": "Z-GF-PARENTS-ENTRY-DECORATIVE",
    "room": "parents-entry",
-   "layer": "ambient",
+   "layer": "decorative",
    "luminaire_ids": [
-    "lum-DL-parents-entry-01"
+    "lum-COVE-parents-entry-01"
    ],
-   "watts": 14.4,
+   "watts": 4.0,
    "dimming": "dali2"
   },
   {
@@ -772,7 +772,7 @@
     "run-task": 1.0
    },
    "Dinner": {
-    "table-pendant": 0.47,
+    "table-pendant": 0.43,
     "island-pendants": 0.3,
     "*decorative": 0.3,
     "living-ambient": 0.2,
@@ -782,14 +782,15 @@
     "*ambient": 0.4,
     "*decorative": 0.7,
     "*accent": 0.7,
-    "table-pendant": 0.3,
+    "table-pendant": 0.45,
     "island-pendants": 0.4
    },
    "Reading": {
     "armchair-reading": 1.0,
     "daybed-reading": 1.0,
     "*ambient": 0.15,
-    "*decorative": 0.2
+    "*decorative": 0.2,
+    "island-pendants": 0.22
    },
    "Film": {
     "lounge-decorative": 0.15,
