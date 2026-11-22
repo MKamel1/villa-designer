@@ -97,11 +97,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat tolerance: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: listed or grown outdoors in a hot-desert source (USDA FAS Cairo, Egypt Citrus Annual EG2025-0031 (17 Dec 2025)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high. Commercial crop evidence (cultivation), not a landscape list; PRDM rates Citrus limonum group D (partial shade in summer), so treat orange similarly when sited."
+   },
+   "source": {
+    "source_id": "USDA-FAS-EG2025-0031",
+    "url": "https://agriexchange.apeda.gov.in/MarketReport/04111020620251227151540182.pdf",
+    "accessed": "2026-11-22",
+    "locator": "USDA FAS Cairo, Egypt Citrus Annual EG2025-0031 (17 Dec 2025): Production: oranges on reclaimed desert land, north to south",
+    "quote": "Oranges are Egypt's primary citrus crop, accounting for about 80 percent of the total citrus cultivation area and are grown throughout the country from north to south."
+   }
   },
   "drought": {
    "status": "SOURCED",

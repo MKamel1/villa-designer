@@ -1,0 +1,236 @@
+{
+ "slug": "colocasia_esculenta",
+ "layers": [
+  "aquatic_marginal",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Colocasia esculenta (L.) Schott",
+    "family": "Araceae",
+    "common_names": [
+     "taro",
+     "elephant ear",
+     "dasheen"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Colocasia%20esculenta",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "scientificName: Colocasia esculenta (L.) Schott; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 3 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun or partial shade (2-6 h); grows best in part shade or filtered sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "moist rich soil, must not dry out; landscape location pond/riparian"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The plant grows best in part shade or filtered sun and moist, rich soil. It should not be allowed to dry out"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "NCSU page states no heat tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU lists only Wet Soil resistance; states it should not dry out",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "NCSU lists no soil pH for this species",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 8a-11b; described as tender"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "white",
+     "yellow",
+     "green"
+    ],
+    "text": "rarely flowers; no season given"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Rarely flowers. White or yellow spadix with a greenish or yellow spathe."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "clumping; very large heart-shaped leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Taro, or elephant ear, is a tender herbaceous perennial in the Araceae (arum) family with a clumping growth habit."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU: grows from a corm and may spread by division; nothing on root damage",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "Poison Severity: Medium; calcium oxalate crystals"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "Oral irritation, pain and swelling of mouth, tongue, and lips, excessive drooling, vomiting, and difficulty swallowing can result from eating parts of this plant."
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "koi pond fish toxicity (not stated on page opened)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NCSU tags: problem for cats, dogs, horses, children (poisonous until cooked)."
+}

@@ -1,0 +1,243 @@
+{
+ "slug": "livistona_chinensis",
+ "layers": [
+  "palm"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Livistona chinensis (Jacq.) R.Br. ex Mart.",
+    "family": "Arecaceae",
+    "common_names": [
+     "Chinese fan palm",
+     "fountain palm"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Livistona%20chinensis",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "scientificName: Livistona chinensis (Jacq.) R.Br. ex Mart.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 8,
+    "max": 12,
+    "text": "RHS max height 8-12 m (NParks: 15-25 ft commonly seen in Singapore)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Max Height",
+    "quote": "Max Height 8-12 metres"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.5,
+    "max": 4,
+    "text": "RHS max spread"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Max Spread",
+    "quote": "Max Spread 2.5-4 metres"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NParks growth rate field Moderate; its prose says slowly growing"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+    "accessed": "2026-11-22",
+    "locator": "Plant Growth Rate",
+    "quote": "Plant Growth Rate Moderate"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Position",
+    "quote": "Position Full sun, Partial shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "NParks water preference moderate"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+    "accessed": "2026-11-22",
+    "locator": "Water Preference",
+    "quote": "Water Preference Moderate Water"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Livistona chinensis (Chinese Fan Palm), user note: needs shelter and afternoon shade in this region",
+    "quote": "D. Requires partial shade all day during summer, full shade in afternoon and wind shelter"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no source opened states drought tolerance",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+    "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "RHS pH: acid, alkaline or neutral"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "pH",
+    "quote": "pH Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no source opened states salt tolerance",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+    "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": -6,
+    "damage_text": "Wikipedia: tolerates down to about 22 F (-6 C)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Livistona_chinensis",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "It is hardy in USDA zones 9-11, tolerating temperatures down to about 22 °F (−6 °C)."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "cream"
+    ],
+    "text": "cream flowers in summer (mapped Jun-Aug)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Panicles of cream flowers in summer, followed by glossy blue-green or pinkish fruits"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "single-stemmed fan palm"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Botanical Details",
+    "quote": "Livistona are single-stemmed, evergreen palms with long-stalked, fan-shaped leaves"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no source opened states root behaviour",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity; silence is not safety",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+    "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance rating given (RHS: pruning generally unnecessary)",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "Wikipedia: can become a weed or invasive species in Bermuda, Hawaii, Florida wetlands and some Caribbean islands (invasive-flag question for Egypt not evidenced). NCSU and UF/IFAS pages for this species were not reachable."
+}

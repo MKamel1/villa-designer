@@ -1,0 +1,248 @@
+{
+ "slug": "dypsis_lutescens",
+ "layers": [
+  "palm"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Dypsis lutescens (H.Wendl.) Beentje & J.Dransf.",
+    "family": "Arecaceae",
+    "common_names": [
+     "areca palm",
+     "golden cane palm",
+     "butterfly palm"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Dypsis%20lutescens",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "scientificName: Dypsis lutescens (H.Wendl.) Beentje & J.Dransf.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 9.1,
+    "text": "10-30 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 10 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 4.6,
+    "text": "8-15 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 8 ft. 0 in. - 15 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "shade",
+     "part_shade",
+     "full_sun"
+    ],
+    "hours_text": "dappled shade, partial shade (2-6 h) or full sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Dappled Sunlight (Shade through upper canopy all day) Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist but well-drained soils outdoors"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Outdoors in zones 10-11, the plant tolerates full sun but prefers partial shade and moist but well-drained soils."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "listed under Resistance To Challenges: Heat; no detail (NCSU page lists the NCSU name Chrysalidocarpus lutescens)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Heat Humidity"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU resistance list gives heat and humidity only; no drought statement",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH listed acid and neutral (6.0-8.0); alkaline not listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Soil pH: Acid (<6.0) Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 10a-11b; no damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "yellow"
+    ],
+    "text": "small yellow flowers in summer, not particularly showy"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "2 feet long panicles of small yellow flowers in summer hang below the leaves are not particularly showy."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen clustering palm"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU page states nothing on root behaviour",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "Poison Severity: Low; heart-of-palm cyanogenic"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "The heart-of-palm (the meristem and young leaf buds) are cyanogenic and should not be consumed. Symptoms include nausea and vomiting."
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NCSU page is filed under Chrysalidocarpus lutescens (previously Dypsis lutescens) and tags it non-toxic for cats, dogs, horses. NCSU heat entry is a bare listing; the lead adds Cairo evidence."
+}

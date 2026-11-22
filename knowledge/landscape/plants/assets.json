@@ -2292,6 +2292,41 @@
    "grade": null,
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
+  },
+  {
+   "slug": "ravenala_madagascariensis",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "alocasia_macrorrhizos",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "livistona_chinensis",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "dypsis_lutescens",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "colocasia_esculenta",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
   }
  ],
  "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded.",

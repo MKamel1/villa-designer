@@ -539,6 +539,272 @@
    "placement_constraints": []
   },
   {
+   "slug": "alocasia_macrorrhizos",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Alocasia macrorrhizos (L.) G.Don",
+      "family": "Araceae",
+      "common_names": [
+       "giant taro",
+       "giant elephant ear"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Alocasia%20macrorrhizos",
+      "accessed": "2026-11-22",
+      "locator": "match result",
+      "quote": "scientificName: Alocasia macrorrhizos (L.) G.Don; status: ACCEPTED; matchType: EXACT"
+     },
+     "quote_check": "api_derived"
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 1.5,
+      "max": 2.5,
+      "text": "RHS max height (NParks: up to 4 m)"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Max Height",
+      "quote": "Max Height 1.5-2.5 metres"
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 1.5,
+      "max": 2.5,
+      "text": "RHS max spread"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Max Spread",
+      "quote": "Max Spread 1.5-2.5 metres"
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NParks: fast to moderate (recorded as the lower class)"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+      "accessed": "2026-11-22",
+      "locator": "Plant Growth Rate",
+      "quote": "Plant Growth Rate Fast to Moderate"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "shade",
+       "part_shade",
+       "full_sun"
+      ],
+      "hours_text": "bright light with light shade; tolerates shade to full sun"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation",
+      "quote": "This species grows best in bright light with light shade and moist, but well-drained loamy soil. However, it can tolerate shade to full sun, and sandy to clayey soils."
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "high",
+      "text": "NParks water preference: lots of water, moderate water"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+      "accessed": "2026-11-22",
+      "locator": "Water Preference",
+      "quote": "Water Preference Lots of Water, Moderate Water"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Alocasia macrorrhiza (Elephants Ear, Wild Taro), user note: full shade",
+      "quote": "D. Requires partial shade all day during summer, full shade in afternoon and wind shelter"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "no source opened states drought tolerance",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "RHS pH: acid, alkaline or neutral"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "pH",
+      "quote": "pH Acid or Alkaline or Neutral"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no source opened states salt tolerance",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "frost": {
+     "status": "GAP",
+     "reason": "RHS gives only a UK glasshouse rating code and neither source states a minimum temperature in words",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       6,
+       7,
+       8
+      ],
+      "colours": [
+       "pale green"
+      ],
+      "text": "may produce a pale green flower in summer (mapped Jun-Aug)"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It may produce a pale green flower in summer."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "large glossy rosette leaves"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+      "accessed": "2026-11-22",
+      "locator": "Foliar",
+      "quote": "Foliage Retention Evergreen"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "NParks: corm, fibrous roots; nothing on damage to structures",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "toxic",
+      "text": "RHS: toxic if eaten, skin/eye irritant; NParks: calcium oxalate raphides"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Potentially harmful",
+      "quote": "TOXIC if eaten; skin/eye irritant."
+     },
+     "quote_check": "verified"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "source silent on litter",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "maintenance": {
+     "status": "GAP",
+     "reason": "no maintenance rating given",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+     ]
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    }
+   },
+   "notes": "NParks: in wet, poorly-drained soil the corms are prone to rot; RHS also flags TOXIC to pets. NCSU and UF/IFAS species pages not available.",
+   "site_viability": {
+    "verdict": "viable_with_conditions",
+    "factors": {
+     "frost": "unknown",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "frost tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
+  },
+  {
    "slug": "aloe_vera",
    "layers": [
     "herb"
@@ -3074,7 +3340,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Citrus limonum (Lemon Tree)",
       "quote": "Citrus limonum Lemon Tree D SSSS"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -3366,11 +3633,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: listed or grown outdoors in a hot-desert source (USDA FAS Cairo, Egypt Citrus Annual EG2025-0031 (17 Dec 2025)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high. Commercial crop evidence (cultivation), not a landscape list; PRDM rates Citrus limonum group D (partial shade in summer), so treat orange similarly when sited."
+     },
+     "source": {
+      "source_id": "USDA-FAS-EG2025-0031",
+      "url": "https://agriexchange.apeda.gov.in/MarketReport/04111020620251227151540182.pdf",
+      "accessed": "2026-11-22",
+      "locator": "USDA FAS Cairo, Egypt Citrus Annual EG2025-0031 (17 Dec 2025): Production: oranges on reclaimed desert land, north to south",
+      "quote": "Oranges are Egypt's primary citrus crop, accounting for about 80 percent of the total citrus cultivation area and are grown throughout the country from north to south."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -3523,17 +3799,278 @@
    "uses": "edible fruit",
    "notes": "drought class 'high' follows the brief's mapping of 'drought tolerant'; page also says flourishes when kept moist.",
    "site_viability": {
+    "verdict": "viable",
+    "factors": {
+     "frost": "pass",
+     "heat": "pass",
+     "alkaline_soil": "pass"
+    },
+    "reasons": []
+   },
+   "placement_constraints": []
+  },
+  {
+   "slug": "colocasia_esculenta",
+   "layers": [
+    "aquatic_marginal",
+    "tropical_foliage"
+   ],
+   "pond_relevant": true,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Colocasia esculenta (L.) Schott",
+      "family": "Araceae",
+      "common_names": [
+       "taro",
+       "elephant ear",
+       "dasheen"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Colocasia%20esculenta",
+      "accessed": "2026-11-22",
+      "locator": "match result",
+      "quote": "scientificName: Colocasia esculenta (L.) Schott; status: ACCEPTED; matchType: EXACT"
+     },
+     "quote_check": "api_derived"
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.9,
+      "max": 1.8,
+      "text": "3-6 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Height",
+      "quote": "Height: 3 ft. 0 in. - 6 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.9,
+      "max": 1.8,
+      "text": "3-6 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Width",
+      "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Growth Rate",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "full sun or partial shade (2-6 h); grows best in part shade or filtered sun"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Light",
+      "quote": "Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "high",
+      "text": "moist rich soil, must not dry out; landscape location pond/riparian"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "The plant grows best in part shade or filtered sun and moist, rich soil. It should not be allowed to dry out"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "GAP",
+     "reason": "NCSU page states no heat tolerance",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "NCSU lists only Wet Soil resistance; states it should not dry out",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "GAP",
+     "reason": "NCSU lists no soil pH for this species",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "NCSU page states no salt tolerance",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "8a",
+      "min_temp_c": null,
+      "damage_text": "USDA zones 8a-11b; described as tender"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [],
+      "colours": [
+       "white",
+       "yellow",
+       "green"
+      ],
+      "text": "rarely flowers; no season given"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Flowers",
+      "quote": "Rarely flowers. White or yellow spadix with a greenish or yellow spathe."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "herbaceous",
+      "character": "clumping; very large heart-shaped leaves"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Taro, or elephant ear, is a tender herbaceous perennial in the Araceae (arum) family with a clumping growth habit."
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "NCSU: grows from a corm and may spread by division; nothing on root damage",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "toxic",
+      "text": "Poison Severity: Medium; calcium oxalate crystals"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Poisonous to Humans",
+      "quote": "Oral irritation, pain and swelling of mouth, tongue, and lips, excessive drooling, vomiting, and difficulty swallowing can result from eating parts of this plant."
+     },
+     "quote_check": "verified"
+    },
+    "toxicity_fish": {
+     "status": "GAP",
+     "reason": "no source opened states toxicity to pond fish",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "koi pond fish toxicity (not stated on page opened)"
+     ]
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "source silent on litter",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/colocasia-esculenta/"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/colocasia-esculenta/",
+      "accessed": "2026-11-22",
+      "locator": "Maintenance",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    }
+   },
+   "notes": "NCSU tags: problem for cats, dogs, horses, children (poisonous until cooked).",
+   "site_viability": {
     "verdict": "unverified",
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "pass"
+     "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat tolerance is a GAP",
+     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
    },
-   "placement_constraints": []
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)",
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "cupressus_sempervirens",
@@ -4716,7 +5253,8 @@
       "accessed": "2026-11-22",
       "locator": "Mitt. Bot. Staatssamml. Munchen, Rediscovery of Papyrus in Wadi Natroun (Egypt): Wadi Natroun depression, Egypt",
       "quote": "a stand consisting of about 20 plants of Cyperus papyrus L. which were growing among other reeds in a fresh water marsh close to Umm Risha lake"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -4982,7 +5520,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Delonix regia (Royal Poinciana)",
       "quote": "Use only in humid coastal areas, excellent park, urban plaza and street tree"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -5458,6 +5997,279 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
+   },
+   "placement_constraints": []
+  },
+  {
+   "slug": "dypsis_lutescens",
+   "layers": [
+    "palm"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Dypsis lutescens (H.Wendl.) Beentje & J.Dransf.",
+      "family": "Arecaceae",
+      "common_names": [
+       "areca palm",
+       "golden cane palm",
+       "butterfly palm"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Dypsis%20lutescens",
+      "accessed": "2026-11-22",
+      "locator": "match result",
+      "quote": "scientificName: Dypsis lutescens (H.Wendl.) Beentje & J.Dransf.; status: ACCEPTED; matchType: EXACT"
+     },
+     "quote_check": "api_derived"
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 3.0,
+      "max": 9.1,
+      "text": "10-30 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Height",
+      "quote": "Height: 10 ft. 0 in. - 30 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 2.4,
+      "max": 4.6,
+      "text": "8-15 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Width",
+      "quote": "Width: 8 ft. 0 in. - 15 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Growth Rate",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "shade",
+       "part_shade",
+       "full_sun"
+      ],
+      "hours_text": "dappled shade, partial shade (2-6 h) or full sun"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Light",
+      "quote": "Dappled Sunlight (Shade through upper canopy all day) Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "moist but well-drained soils outdoors"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Outdoors in zones 10-11, the plant tolerates full sun but prefers partial shade and moist but well-drained soils."
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "listed under Resistance To Challenges: Heat; no detail (NCSU page lists the NCSU name Chrysalidocarpus lutescens)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Resistance To Challenges",
+      "quote": "Resistance To Challenges: Heat Humidity"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "NCSU resistance list gives heat and humidity only; no drought statement",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "Soil pH listed acid and neutral (6.0-8.0); alkaline not listed"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Soil pH",
+      "quote": "Soil pH: Acid (<6.0) Neutral (6.0-8.0)"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "NCSU page states no salt tolerance",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "10a",
+      "min_temp_c": null,
+      "damage_text": "USDA zones 10a-11b; no damage description"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       6,
+       7,
+       8
+      ],
+      "colours": [
+       "yellow"
+      ],
+      "text": "small yellow flowers in summer, not particularly showy"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Flowers",
+      "quote": "2 feet long panicles of small yellow flowers in summer hang below the leaves are not particularly showy."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "broadleaf evergreen clustering palm"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Leaves",
+      "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "NCSU page states nothing on root behaviour",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "mild",
+      "text": "Poison Severity: Low; heart-of-palm cyanogenic"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Poisonous to Humans",
+      "quote": "The heart-of-palm (the meristem and young leaf buds) are cyanogenic and should not be consumed. Symptoms include nausea and vomiting."
+     },
+     "quote_check": "verified"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "source silent on litter",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/dypsis-lutescens/"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "low",
+      "text": "Maintenance: Low"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/dypsis-lutescens/",
+      "accessed": "2026-11-22",
+      "locator": "Maintenance",
+      "quote": "Maintenance: Low"
+     },
+     "quote_check": "verified"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    }
+   },
+   "notes": "NCSU page is filed under Chrysalidocarpus lutescens (previously Dypsis lutescens) and tags it non-toxic for cats, dogs, horses. NCSU heat entry is a bare listing; the lead adds Cairo evidence.",
+   "site_viability": {
+    "verdict": "viable_with_conditions",
+    "factors": {
+     "frost": "pass",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
    },
    "placement_constraints": []
   },
@@ -6412,7 +7224,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ficus carica Fig",
       "quote": "Ficus carica Fig B SSS"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -6704,7 +7517,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ficus microcarpa (Malayan Banyan), user note: good street and park tree providing dense shade",
       "quote": "C. Requires shelter from afternoon sun and strong wind"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -7556,7 +8370,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Hibiscus rosa-sinensis",
       "quote": "Hibiscus rosasinensis Tropical Hibiscus, Rose of China C SSS"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -8367,7 +9182,8 @@
       "accessed": "2026-11-22",
       "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Jasminum grandiflorum L.",
       "quote": "Jasminum grandiflorum L."
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -8594,7 +9410,8 @@
       "accessed": "2026-11-22",
       "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Jasminum sambac (L.) Aiton",
       "quote": "Jasminum sambac (L.) Aiton"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -9124,7 +9941,8 @@
       "accessed": "2026-11-22",
       "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Lagerstroemia indica L.",
       "quote": "Lagerstroemia indica L."
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -10448,6 +11266,272 @@
    ]
   },
   {
+   "slug": "livistona_chinensis",
+   "layers": [
+    "palm"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Livistona chinensis (Jacq.) R.Br. ex Mart.",
+      "family": "Arecaceae",
+      "common_names": [
+       "Chinese fan palm",
+       "fountain palm"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Livistona%20chinensis",
+      "accessed": "2026-11-22",
+      "locator": "match result",
+      "quote": "scientificName: Livistona chinensis (Jacq.) R.Br. ex Mart.; status: ACCEPTED; matchType: EXACT"
+     },
+     "quote_check": "api_derived"
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 8,
+      "max": 12,
+      "text": "RHS max height 8-12 m (NParks: 15-25 ft commonly seen in Singapore)"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Max Height",
+      "quote": "Max Height 8-12 metres"
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 2.5,
+      "max": 4,
+      "text": "RHS max spread"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Max Spread",
+      "quote": "Max Spread 2.5-4 metres"
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NParks growth rate field Moderate; its prose says slowly growing"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+      "accessed": "2026-11-22",
+      "locator": "Plant Growth Rate",
+      "quote": "Plant Growth Rate Moderate"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "full sun to partial shade"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Position",
+      "quote": "Position Full sun, Partial shade"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "NParks water preference moderate"
+     },
+     "source": {
+      "source_id": "NParks",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+      "accessed": "2026-11-22",
+      "locator": "Water Preference",
+      "quote": "Water Preference Moderate Water"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Livistona chinensis (Chinese Fan Palm), user note: needs shelter and afternoon shade in this region",
+      "quote": "D. Requires partial shade all day during summer, full shade in afternoon and wind shelter"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "no source opened states drought tolerance",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+      "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "RHS pH: acid, alkaline or neutral"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "pH",
+      "quote": "pH Acid or Alkaline or Neutral"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no source opened states salt tolerance",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+      "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "9a",
+      "min_temp_c": -6,
+      "damage_text": "Wikipedia: tolerates down to about 22 F (-6 C)"
+     },
+     "source": {
+      "source_id": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Livistona_chinensis",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation",
+      "quote": "It is hardy in USDA zones 9-11, tolerating temperatures down to about 22 °F (−6 °C)."
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       6,
+       7,
+       8
+      ],
+      "colours": [
+       "cream"
+      ],
+      "text": "cream flowers in summer (mapped Jun-Aug)"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Panicles of cream flowers in summer, followed by glossy blue-green or pinkish fruits"
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "single-stemmed fan palm"
+     },
+     "source": {
+      "source_id": "RHS",
+      "url": "https://www.rhs.org.uk/plants/10385/wd/details",
+      "accessed": "2026-11-22",
+      "locator": "Botanical Details",
+      "quote": "Livistona are single-stemmed, evergreen palms with long-stalked, fan-shaped leaves"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "no source opened states root behaviour",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+     ]
+    },
+    "toxicity_people": {
+     "status": "GAP",
+     "reason": "no source opened states toxicity; silence is not safety",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649",
+      "Wikipedia https://en.wikipedia.org/wiki/Livistona_chinensis"
+     ]
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "source silent on litter",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+     ]
+    },
+    "maintenance": {
+     "status": "GAP",
+     "reason": "no maintenance rating given (RHS: pruning generally unnecessary)",
+     "searched": [
+      "RHS https://www.rhs.org.uk/plants/10385/wd/details",
+      "NParks https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2649"
+     ]
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    }
+   },
+   "notes": "Wikipedia: can become a weed or invasive species in Bermuda, Hawaii, Florida wetlands and some Caribbean islands (invasive-flag question for Egypt not evidenced). NCSU and UF/IFAS pages for this species were not reachable.",
+   "site_viability": {
+    "verdict": "viable_with_conditions",
+    "factors": {
+     "frost": "pass",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
+   },
+   "placement_constraints": []
+  },
+  {
    "slug": "mentha_spicata",
    "layers": [
     "herb"
@@ -11377,7 +12461,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Murraya exotica (synonym of M. paniculata)",
       "quote": "Murraya exotica Orange Jasmine, Satin Wood, Honey Bush, Chinese Box D SSS"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -17354,7 +18439,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Psidium guajava (Tropical Guava)",
       "quote": "C. Requires shelter from afternoon sun and strong wind"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -17807,6 +18893,278 @@
    "placement_constraints": []
   },
   {
+   "slug": "ravenala_madagascariensis",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Ravenala madagascariensis Sonn.",
+      "family": "Strelitziaceae",
+      "common_names": [
+       "traveller's palm",
+       "traveller's tree"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Ravenala%20madagascariensis",
+      "accessed": "2026-11-22",
+      "locator": "match result",
+      "quote": "scientificName: Ravenala madagascariensis Sonn.; status: ACCEPTED; matchType: EXACT"
+     },
+     "quote_check": "api_derived"
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 9.1,
+      "max": 15.2,
+      "text": "30-50 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Height",
+      "quote": "Height: 30 ft. 0 in. - 50 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 4.6,
+      "max": 7.6,
+      "text": "15-25 ft converted"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Width",
+      "quote": "Width: 15 ft. 0 in. - 25 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Growth Rate",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun"
+      ],
+      "hours_text": "full sun (6 or more hours); no shade tolerance stated"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Light",
+      "quote": "Full sun (6 or more hours of direct sunlight a day)"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "moderately moist, well-drained loam"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Plant in organically rich, moderately moist, well-drained loam in full sun in an area protected from strong winds."
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group E: Requires total shade and shelter; no heat tolerance stated in words; class moderate."
+     },
+     "source": {
+      "source_id": "PRDM-2011",
+      "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ravenala madagascariensis (Traveler's Palm), user note: sheltered from wind and afternoon summer sun",
+      "quote": "E. Requires total shade and shelter"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "hedged: water stored in leaf bases 'may enable' it to withstand dry conditions"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "The water that is stored in the leaf bases may enable it to withstand dry conditions."
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "Soil pH lists acid, alkaline (>8.0) and neutral"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Soil pH",
+      "quote": "Soil pH: Acid (<6.0) Alkaline (>8.0) Neutral (6.0-8.0)"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "NCSU page states no salt tolerance",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "10a",
+      "min_temp_c": 4.4,
+      "damage_text": "not winter hardy; does not tolerate below 40 F (4.4 C)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It is not winter hardy and does not tolerate temperatures below 40 degrees F"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       6,
+       7,
+       8
+      ],
+      "colours": [
+       "white"
+      ],
+      "text": "white flowers in summer and sporadically through the rest of the year (mapped Jun-Aug)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Flowers",
+      "quote": "Showy 3-petaled 6 to 12 inch white flowers in cymes rise from boat-shaped spathes similar to bird-of-paradise. Flowers bloom in summer and sporadically throughout the rest of the year."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "broadleaf evergreen; fan of 20-30 banana-like leaves"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Leaves",
+      "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "NCSU states root suckers/offsets but nothing on root damage to structures",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+     ]
+    },
+    "toxicity_people": {
+     "status": "GAP",
+     "reason": "NCSU page carries no poison fields; silence is not safety",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+     ]
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "source silent on litter",
+     "searched": [
+      "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+      "accessed": "2026-11-22",
+      "locator": "Maintenance",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    }
+   },
+   "notes": "Records the NCSU full-sun rating as stated; shade performance in a north courtyard is not evidenced by that page. NCSU: unbranched root suckers must be removed or the tree form is lost.",
+   "site_viability": {
+    "verdict": "viable_with_conditions",
+    "factors": {
+     "frost": "conditional",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "frost: hardy only to 4.4 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
+   },
+   "placement_constraints": []
+  },
+  {
    "slug": "rhapis_excelsa",
    "layers": [
     "palm",
@@ -17924,7 +19282,8 @@
       "accessed": "2026-11-22",
       "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Rhapis excelsa Lady Palm (user note: needs shaded and sheltered location)",
       "quote": "Rhapis excelsa Lady Palm E SSS"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -20486,7 +21845,8 @@
       "accessed": "2026-11-22",
       "locator": "Emirates Natural History Group Bulletin 29 (1986), Common Landscape Plants in the UAE (Arabian Gulf cities): Introduced Shrubs and Climbers, Vitaceae",
       "quote": "Vitis vinifera grape vine"
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
