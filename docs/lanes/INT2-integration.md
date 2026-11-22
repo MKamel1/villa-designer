@@ -14,6 +14,10 @@ Merge of `origin/lane/RA2` onto `origin/integ/aplus` (1cf511a): no textual confl
 Receipts and exposure record redone by RA2's baseline-relative procedure, twice (after the lighting merge: fixtures/markers only,
 `evidence-int2/section-diff.json`; after the housing-depth fix: 26 `fix-*` meshes, `section-diff-housing-depth.json`). 17 reviews, 0 findings each time.
 
-**Approval rows needed (lead):** `marker-PATH-landing-gf-01/02` finished-face move of -12 mm (plaster 13 mm; same physical case as the approved
-`marker-PATH-corridor-07/08/09` rows in `knowledge/c4-e-lead-approvals.json`). Not added by this lane. Until then
-`test_migrated_plane_contracts_quiet_but_core_coverage_fails` and verify.py's finished-surface check report exactly these 4 findings.
+**INT2b (2026-11-21, on `integ/staging` e8aea48):** the lead's four approval rows moved `marker-PATH-landing-gf-01/02` 12 mm
+(y -28.470 -> -28.458, `approval: PENDING` cleared), which changed the `meshes` receipt section and so tripped the furniture receipt
+guard (`ValueError: ... changed sections: meshes`; 4 tests in `test_mounting_scene.py` and `test_d1_wp1` via its subprocess `VR.build()`).
+Baseline-relative refresh: old baseline (my last receipts) reproduces all 8 stored digests; the only difference is those two meshes
+(`evidence-int2/section-diff-approved-markers.json`); 17 reviews, 0 findings; receipts rewritten. Exposure record was stale (transport
+hash) and re-measured (jobq `INT2b-measure-exposure-2`, copied unedited). Production scene rebuilt without bypass: 1,212 meshes,
+scene sha256 `f0fcba2e66ae3ea48e83e3bb7997fad2fe56afb163ff37be31d593731ff9c868`, ids-stripped `1d131beb68759fbf2f8335f942103bc4f24676be41a14018a9733d790f852808`.
