@@ -1,0 +1,71 @@
+{
+ "code": "QA11",
+ "maker": "iguzzini",
+ "name": "Laser pendant, \u00d859 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.iguzzini.com/en/qa11/",
+ "file_urls": {
+  "ldt": "https://www.iguzzini.com/globalassets/shared-photometric-media/q/a/1/qa11/117079/qa11-43_c86b.ldt",
+  "ies": "https://www.iguzzini.com/globalassets/shared-photometric-media/q/a/1/qa11/117079/qa11-43_c86b.ies"
+ },
+ "retrieval": "robots.txt (Allow: /) read; static GET with generic client name, 3 s pauses; product page text read in Chrome",
+ "datasheet_note": "installation sheet PDF is the same generic Laser file saved under QA03",
+ "files": {
+  "QA11.ldt": {
+   "path": "knowledge/lighting-products/iguzzini/QA11/QA11.ldt",
+   "sha256": "1eb0799ef26b949263a21a6a3f9a1a33bc2f8a920a56e23b3c6b850849490a75"
+  },
+  "QA11.ies": {
+   "path": "knowledge/lighting-products/iguzzini/QA11/QA11.ies",
+   "sha256": "4c727e4ec569761d3c524357fa0d12bbd908bdb57f9157de45f21d44a19de336"
+  },
+  "QA11-product-page.txt": {
+   "path": "knowledge/lighting-products/iguzzini/QA11/QA11-product-page.txt",
+   "sha256": "f55138830f298a8a7ed8c56c30848a76388c25acccb147f4d3011d6c59929293"
+  }
+ },
+ "v10": {
+  "v10_status": "pass",
+  "lumens": {
+   "stated": 766.8,
+   "independent": 766.8,
+   "archpipe": 766.5,
+   "worst_error": 0.0004,
+   "tolerance": 0.02,
+   "status": "pass"
+  },
+  "points": [
+   {
+    "kind": "imax",
+    "distance_m": null,
+    "published": 1824,
+    "engine": 1806.8,
+    "independent": 1806.8,
+    "worst_error": 0.0094,
+    "status": "pass",
+    "source": "product page 'Maximum intensity (cd)'"
+   },
+   {
+    "kind": "beam_angle",
+    "distance_m": null,
+    "published": 38,
+    "engine": 38.6,
+    "independent": 38.5791,
+    "worst_error": 0.0158,
+    "status": "pass",
+    "source": "product page 'Optic and beam angle'"
+   },
+   {
+    "kind": "lumens",
+    "distance_m": null,
+    "published": 766.8,
+    "engine": 766.5147,
+    "independent": 766.766,
+    "worst_error": 0.0004,
+    "status": "pass",
+    "source": "product page 'lm system'"
+   }
+  ]
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read"
+}

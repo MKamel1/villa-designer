@@ -8,3 +8,11 @@
 | A gate that was global (`V10` pass/fail for the whole design) could not express "one product is partial". | One failing point would have made every room unverified, or been hidden. | V10 is a per-room status; the partial ADJ makes only the lounge unverified, with the armchair sensitivity in numbers. |
 | The wallwasher is thrown 90 deg off in Cycles versus the engine and Radiance; V5 only compared room averages. | Room averages mix many lights; the calibrated azimuth offset was proven on straight-down lights only. | V5 single-light orientation probe per product kind (`kind_orientation`), a negative test that the probe responds to spin, and a quiet test for the symmetric DL. |
 | LA4 passes with a 90 000 cd/m2 downlight in the room. | The check only counts sources inside 45 deg of one chosen sightline. | Reported as a design finding with the numbers; add a "looking up" sightline (not mine to edit). |
+
+## L6d verification (2026-11-22)
+| defect | why missed | guard |
+|---|---|---|
+| V10 hard-wired product ids; a product change was reported as a failure | ids in a module constant | products read from `bind_products()`; test rebinds ADJ and expects the table to follow |
+| `run_cycles` cache ignored the renderer | key = job JSON + probe | `renderer_sha()` over `blender/*.py` + probe; test edits a renderer file and expects a new jobq id |
+| V6 n/e for three sub-planes | rooms without a room-* plane had no V6 row | `v6_handcalc.subplanes` judges `v6-subplanes.json` against this lane's Radiance (stale file fails) |
+| QA03 CRI recorded 90, page says 92 | spec read from the product name | V10 `cri` row: overstated fails, understated flagged |

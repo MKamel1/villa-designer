@@ -38,19 +38,19 @@ def test_wrong_spec_cct_is_caught(villa, monkeypatch):
     assert any(r.status == "fail" and "CCT" in r.message for r in V1.check_inputs(Villa()).results)
 
 
-def test_sampled_pendant_is_summed_by_parent(villa):
-    """The Jilly pendant is 8 samples of ~58 lm; each alone != the record (462 lm), their sum equals it (L6c)."""
-    parts = [p for p in villa.placements if (p.meta.get("parent") or "").startswith("PEN-LIN")]
-    assert len(parts) == 8
+def test_bound_pendant_is_one_emitter_at_its_record_flux(villa):
+    """L6d: the dining pendant is the iGuzzini QA03, one point (the Jilly was 8 samples). Engine flux = 0.35 x 831.3 lm = record."""
+    f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
+    mine = [p for p in villa.placements if (p.meta.get("parent") or p.id) == f.id]
+    assert len(mine) == 1 and mine[0].meta["ies_path"].endswith("IGUZZINI-QA03.ies")
     assert V1.instance_problems(villa) == {}
 
 
-def test_wrong_parent_total_is_still_caught(villa):
-    """Negative: a sampled fixture whose samples do not add up to its record is flagged."""
+def test_wrong_pendant_flux_is_still_caught(villa):
+    """Negative: a bound emitter whose dimming no longer matches its record is flagged."""
     import dataclasses
     from types import SimpleNamespace
     f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
-    mine = [p for p in villa.placements if p.meta.get("parent") == f.id][:4]
-    ps = [dataclasses.replace(p, dim=p.dim * 2) if p in mine else p for p in villa.placements]
+    ps = [dataclasses.replace(p, dim=p.dim * 2) if (p.meta.get("parent") or p.id) == f.id else p for p in villa.placements]
     bad = V1.instance_problems(SimpleNamespace(fixtures=villa.fixtures, placements=ps))
     assert f.id in bad and not [k for k in bad if k != f.id]

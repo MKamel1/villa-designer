@@ -1,0 +1,168 @@
+{
+ "code": "68119",
+ "maker": "erco",
+ "name": "Gimbal Recessed spotlight size 4, flood 28 deg, 7.9 W 2700 K CRI 92, DALI-2, black",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/68119.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=68119.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; public pages, no login; types 15 (datasheet), 4 (LDT), 3 (IES) fetched one at a time",
+ "files": {
+  "erco-68119-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/68119/erco-68119-000-en-specs.pdf",
+   "sha256": "e3321feb8b840cabfec22de60b2b31889a55d9dcbcc2a9983667a0299e1e4ba1"
+  },
+  "erco-68119-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/68119/erco-68119-000-en-ldt.ldt",
+   "sha256": "7770668a8055107d2bfbc3eb2dca0ee3961ea3aa184922d1443560d7b790bd88"
+  },
+  "erco-68119-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/68119/erco-68119-000-en-ies.ies",
+   "sha256": "a194e826bf65ac28653055a23a2df0a5febad200cb32ad266d6f7fffcdc52f8d"
+  }
+ },
+ "v10": {
+  "v10_status": "pass",
+  "lumens": {
+   "stated": 580,
+   "independent": 582.8,
+   "archpipe": 580.9,
+   "worst_error": 0.0048,
+   "tolerance": 0.02,
+   "status": "pass"
+  },
+  "points": [
+   {
+    "kind": "imax",
+    "distance_m": null,
+    "published": 2061,
+    "engine": 2054.7,
+    "independent": 2054.7,
+    "worst_error": 0.0031,
+    "status": "pass",
+    "source": "datasheet p1 polar diagram Imax"
+   },
+   {
+    "kind": "lumens",
+    "distance_m": null,
+    "published": 580,
+    "engine": 580.8674,
+    "independent": 582.8035,
+    "worst_error": 0.0048,
+    "status": "pass",
+    "source": "datasheet p1 'Luminous flux of the luminaire'"
+   },
+   {
+    "kind": "lux_axis",
+    "distance_m": 1,
+    "published": 2065,
+    "engine": 2054.7,
+    "independent": 2054.7,
+    "worst_error": 0.005,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=1 E=2065"
+   },
+   {
+    "kind": "lux_axis",
+    "distance_m": 2,
+    "published": 516,
+    "engine": 513.675,
+    "independent": 513.675,
+    "worst_error": 0.0045,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=2 E=516"
+   },
+   {
+    "kind": "lux_axis",
+    "distance_m": 3,
+    "published": 229,
+    "engine": 228.3,
+    "independent": 228.3,
+    "worst_error": 0.0031,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=3 E=229"
+   },
+   {
+    "kind": "lux_axis",
+    "distance_m": 4,
+    "published": 129,
+    "engine": 128.4187,
+    "independent": 128.4187,
+    "worst_error": 0.0045,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=4 E=129"
+   },
+   {
+    "kind": "lux_axis",
+    "distance_m": 5,
+    "published": 83,
+    "engine": 82.188,
+    "independent": 82.188,
+    "worst_error": 0.0098,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=5 E=83"
+   },
+   {
+    "kind": "beam_diameter",
+    "distance_m": 1,
+    "published": 0.51,
+    "engine": 0.5247,
+    "independent": 0.5241,
+    "worst_error": 0.0288,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=1 D=0.51"
+   },
+   {
+    "kind": "beam_diameter",
+    "distance_m": 2,
+    "published": 1.02,
+    "engine": 1.0494,
+    "independent": 1.0483,
+    "worst_error": 0.0288,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=2 D=1.02"
+   },
+   {
+    "kind": "beam_diameter",
+    "distance_m": 3,
+    "published": 1.53,
+    "engine": 1.5741,
+    "independent": 1.5724,
+    "worst_error": 0.0288,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=3 D=1.53"
+   },
+   {
+    "kind": "beam_diameter",
+    "distance_m": 4,
+    "published": 2.03,
+    "engine": 2.0988,
+    "independent": 2.0966,
+    "worst_error": 0.0339,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=4 D=2.03"
+   },
+   {
+    "kind": "beam_diameter",
+    "distance_m": 5,
+    "published": 2.54,
+    "engine": 2.6235,
+    "independent": 2.6207,
+    "worst_error": 0.0329,
+    "status": "pass",
+    "source": "datasheet p1 cone table h=5 D=2.54"
+   },
+   {
+    "kind": "beam_angle",
+    "distance_m": null,
+    "published": 28.5,
+    "engine": 29.4,
+    "independent": 29.3706,
+    "worst_error": 0.0316,
+    "status": "pass",
+    "source": "datasheet p1 cone table header 28.5"
+   }
+  ]
+ },
+ "note": "V10 pass",
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

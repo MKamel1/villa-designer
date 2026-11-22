@@ -143,7 +143,7 @@
 <text x="822" y="384" text-anchor="middle">2.5 mm2</text>
 <text x="822" y="396" text-anchor="middle">19.6 m</text>
 <text x="822" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="822" y="420" text-anchor="middle">dV 3.20 %</text>
+<text x="822" y="420" text-anchor="middle">dV 3.19 %</text>
 <rect x="782" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="822" y="446" text-anchor="middle">Sockets cinema .</text>
 <text x="822" y="460" text-anchor="middle">cinema,hall-b</text>
@@ -158,7 +158,7 @@
 <text x="914" y="384" text-anchor="middle">2.5 mm2</text>
 <text x="914" y="396" text-anchor="middle">14 m</text>
 <text x="914" y="408" text-anchor="middle">Ib 10.0 A</text>
-<text x="914" y="420" text-anchor="middle">dV 1.78 %</text>
+<text x="914" y="420" text-anchor="middle">dV 1.77 %</text>
 <rect x="874" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="914" y="446" text-anchor="middle">Washing machine.</text>
 <text x="914" y="460" text-anchor="middle">dirty-kitchen</text>
@@ -178,80 +178,80 @@
 <text x="1006" y="446" text-anchor="middle">ELV rack, PoE s.</text>
 <text x="1006" y="460" text-anchor="middle">stair-b</text>
 </g>
-<g id="DB-B/D15">
+<g id="DB-B/D2">
 <line x1="1098" y1="250" x2="1098" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="1062" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1098" y="283" text-anchor="middle" font-weight="bold">D15 (L2)</text>
-<text x="1098" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="1098" y="283" text-anchor="middle" font-weight="bold">D2 (L2)</text>
+<text x="1098" y="295" text-anchor="middle">RCBO 10A C</text>
 <text x="1098" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1098" y1="314" x2="1098" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1098" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1098" y="396" text-anchor="middle">32.9 m</text>
-<text x="1098" y="408" text-anchor="middle">Ib 0.8 A</text>
-<text x="1098" y="420" text-anchor="middle">dV 0.83 %</text>
+<text x="1098" y="396" text-anchor="middle">17.2 m</text>
+<text x="1098" y="408" text-anchor="middle">Ib 8.6 A</text>
+<text x="1098" y="420" text-anchor="middle">dV 1.84 %</text>
 <rect x="1058" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1098" y="446" text-anchor="middle">Interlinked smo.</text>
-<text x="1098" y="460" text-anchor="middle">hall-b</text>
+<text x="1098" y="446" text-anchor="middle">Split AC 2 HP A.</text>
+<text x="1098" y="460" text-anchor="middle">cinema</text>
 </g>
-<g id="DB-B/D2">
+<g id="DB-B/D5">
 <line x1="1190" y1="250" x2="1190" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="1154" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1190" y="283" text-anchor="middle" font-weight="bold">D2 (L2)</text>
-<text x="1190" y="295" text-anchor="middle">RCBO 10A C</text>
+<text x="1190" y="283" text-anchor="middle" font-weight="bold">D5 (L2)</text>
+<text x="1190" y="295" text-anchor="middle">RCBO 10A B</text>
 <text x="1190" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1190" y1="314" x2="1190" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1190" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1190" y="396" text-anchor="middle">17.2 m</text>
-<text x="1190" y="408" text-anchor="middle">Ib 8.6 A</text>
-<text x="1190" y="420" text-anchor="middle">dV 1.84 %</text>
+<text x="1190" y="396" text-anchor="middle">13.1 m</text>
+<text x="1190" y="408" text-anchor="middle">Ib 6.8 A</text>
+<text x="1190" y="420" text-anchor="middle">dV 1.36 %</text>
 <rect x="1150" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1190" y="446" text-anchor="middle">Split AC 2 HP A.</text>
-<text x="1190" y="460" text-anchor="middle">cinema</text>
+<text x="1190" y="446" text-anchor="middle">Storage water h.</text>
+<text x="1190" y="460" text-anchor="middle">guest-wc</text>
 </g>
-<g id="DB-B/D5">
+<g id="DB-B/D6">
 <line x1="1282" y1="250" x2="1282" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="1246" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1282" y="283" text-anchor="middle" font-weight="bold">D5 (L2)</text>
-<text x="1282" y="295" text-anchor="middle">RCBO 10A B</text>
+<text x="1282" y="283" text-anchor="middle" font-weight="bold">D6 (L2)</text>
+<text x="1282" y="295" text-anchor="middle">RCBO 16A B</text>
 <text x="1282" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1282" y1="314" x2="1282" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1282" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1282" y="396" text-anchor="middle">13.1 m</text>
-<text x="1282" y="408" text-anchor="middle">Ib 6.8 A</text>
-<text x="1282" y="420" text-anchor="middle">dV 1.36 %</text>
+<text x="1282" y="396" text-anchor="middle">10.5 m</text>
+<text x="1282" y="408" text-anchor="middle">Ib 13.6 A</text>
+<text x="1282" y="420" text-anchor="middle">dV 1.80 %</text>
 <rect x="1242" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1282" y="446" text-anchor="middle">Storage water h.</text>
-<text x="1282" y="460" text-anchor="middle">guest-wc</text>
-</g>
-<g id="DB-B/D6">
-<line x1="1374" y1="250" x2="1374" y2="270" stroke="#111" stroke-width="2"/>
-<rect x="1338" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1374" y="283" text-anchor="middle" font-weight="bold">D6 (L2)</text>
-<text x="1374" y="295" text-anchor="middle">RCBO 16A B</text>
-<text x="1374" y="307" text-anchor="middle">30 mA Type A</text>
-<line x1="1374" y1="314" x2="1374" y2="370" stroke="#111" stroke-width="2"/>
-<text x="1374" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1374" y="396" text-anchor="middle">10.5 m</text>
-<text x="1374" y="408" text-anchor="middle">Ib 13.6 A</text>
-<text x="1374" y="420" text-anchor="middle">dV 1.80 %</text>
-<rect x="1334" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1374" y="446" text-anchor="middle">Built-in electr.</text>
-<text x="1374" y="460" text-anchor="middle">kitchen</text>
+<text x="1282" y="446" text-anchor="middle">Built-in electr.</text>
+<text x="1282" y="460" text-anchor="middle">kitchen</text>
 </g>
 <g id="DB-B/L2">
+<line x1="1374" y1="250" x2="1374" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="1338" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1374" y="283" text-anchor="middle" font-weight="bold">L2 (L2)</text>
+<text x="1374" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="1374" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1374" y1="314" x2="1374" y2="370" stroke="#111" stroke-width="2"/>
+<text x="1374" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="1374" y="396" text-anchor="middle">84.2 m</text>
+<text x="1374" y="408" text-anchor="middle">Ib 1.9 A</text>
+<text x="1374" y="420" text-anchor="middle">dV 2.78 %</text>
+<rect x="1334" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1374" y="446" text-anchor="middle">Lighting kitche.</text>
+<text x="1374" y="460" text-anchor="middle">kitchen,dirty-kitchen</text>
+</g>
+<g id="DB-B/L3">
 <line x1="1466" y1="250" x2="1466" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="1430" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1466" y="283" text-anchor="middle" font-weight="bold">L2 (L2)</text>
+<text x="1466" y="283" text-anchor="middle" font-weight="bold">L3 (L2)</text>
 <text x="1466" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="1466" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1466" y1="314" x2="1466" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1466" y="384" text-anchor="middle">1.5 mm2</text>
-<text x="1466" y="396" text-anchor="middle">84.2 m</text>
-<text x="1466" y="408" text-anchor="middle">Ib 2.0 A</text>
-<text x="1466" y="420" text-anchor="middle">dV 2.81 %</text>
+<text x="1466" y="396" text-anchor="middle">23.1 m</text>
+<text x="1466" y="408" text-anchor="middle">Ib 0.0 A</text>
+<text x="1466" y="420" text-anchor="middle">dV 0.63 %</text>
 <rect x="1426" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1466" y="446" text-anchor="middle">Lighting kitche.</text>
-<text x="1466" y="460" text-anchor="middle">kitchen,dirty-kitchen</text>
+<text x="1466" y="446" text-anchor="middle">Escape/night ma.</text>
+<text x="1466" y="460" text-anchor="middle">family,stair-b</text>
 </g>
 <g id="DB-B/S1">
 <line x1="1558" y1="250" x2="1558" y2="270" stroke="#111" stroke-width="2"/>
@@ -343,80 +343,80 @@
 <text x="2018" y="446" text-anchor="middle">Split AC 3 HP A.</text>
 <text x="2018" y="460" text-anchor="middle">lounge</text>
 </g>
-<g id="DB-B/D3">
+<g id="DB-B/D15">
 <line x1="2110" y1="250" x2="2110" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="2074" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="2110" y="283" text-anchor="middle" font-weight="bold">D3 (L3)</text>
-<text x="2110" y="295" text-anchor="middle">RCBO 16A C</text>
+<text x="2110" y="283" text-anchor="middle" font-weight="bold">D15 (L3)</text>
+<text x="2110" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="2110" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="2110" y1="314" x2="2110" y2="370" stroke="#777" stroke-width="2"/>
 <text x="2110" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="2110" y="396" text-anchor="middle">21.5 m</text>
-<text x="2110" y="408" text-anchor="middle">Ib 12.1 A</text>
-<text x="2110" y="420" text-anchor="middle">dV 2.76 %</text>
+<text x="2110" y="396" text-anchor="middle">32.9 m</text>
+<text x="2110" y="408" text-anchor="middle">Ib 0.8 A</text>
+<text x="2110" y="420" text-anchor="middle">dV 0.83 %</text>
 <rect x="2070" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="2110" y="446" text-anchor="middle">Split AC 3 HP A.</text>
-<text x="2110" y="460" text-anchor="middle">living</text>
+<text x="2110" y="446" text-anchor="middle">Interlinked smo.</text>
+<text x="2110" y="460" text-anchor="middle">hall-b</text>
 </g>
-<g id="DB-B/D4">
+<g id="DB-B/D3">
 <line x1="2202" y1="250" x2="2202" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="2166" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="2202" y="283" text-anchor="middle" font-weight="bold">D4 (L3)</text>
-<text x="2202" y="295" text-anchor="middle">RCBO 10A C</text>
+<text x="2202" y="283" text-anchor="middle" font-weight="bold">D3 (L3)</text>
+<text x="2202" y="295" text-anchor="middle">RCBO 16A C</text>
 <text x="2202" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="2202" y1="314" x2="2202" y2="370" stroke="#777" stroke-width="2"/>
 <text x="2202" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="2202" y="396" text-anchor="middle">14.8 m</text>
-<text x="2202" y="408" text-anchor="middle">Ib 8.6 A</text>
-<text x="2202" y="420" text-anchor="middle">dV 1.67 %</text>
+<text x="2202" y="396" text-anchor="middle">21.5 m</text>
+<text x="2202" y="408" text-anchor="middle">Ib 12.1 A</text>
+<text x="2202" y="420" text-anchor="middle">dV 2.76 %</text>
 <rect x="2162" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="2202" y="446" text-anchor="middle">Split AC 2 HP A.</text>
-<text x="2202" y="460" text-anchor="middle">dining</text>
+<text x="2202" y="446" text-anchor="middle">Split AC 3 HP A.</text>
+<text x="2202" y="460" text-anchor="middle">living</text>
 </g>
-<g id="DB-B/D9">
+<g id="DB-B/D4">
 <line x1="2294" y1="250" x2="2294" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="2258" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="2294" y="283" text-anchor="middle" font-weight="bold">D9 (L3)</text>
-<text x="2294" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="2294" y="283" text-anchor="middle" font-weight="bold">D4 (L3)</text>
+<text x="2294" y="295" text-anchor="middle">RCBO 10A C</text>
 <text x="2294" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="2294" y1="314" x2="2294" y2="370" stroke="#777" stroke-width="2"/>
 <text x="2294" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="2294" y="396" text-anchor="middle">12.4 m</text>
-<text x="2294" y="408" text-anchor="middle">Ib 2.3 A</text>
-<text x="2294" y="420" text-anchor="middle">dV 0.86 %</text>
+<text x="2294" y="396" text-anchor="middle">14.8 m</text>
+<text x="2294" y="408" text-anchor="middle">Ib 8.6 A</text>
+<text x="2294" y="420" text-anchor="middle">dV 1.67 %</text>
 <rect x="2254" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="2294" y="446" text-anchor="middle">Fridge-freezer .</text>
-<text x="2294" y="460" text-anchor="middle">kitchen</text>
+<text x="2294" y="446" text-anchor="middle">Split AC 2 HP A.</text>
+<text x="2294" y="460" text-anchor="middle">dining</text>
 </g>
-<g id="DB-B/L1">
+<g id="DB-B/D9">
 <line x1="2386" y1="250" x2="2386" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="2350" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="2386" y="283" text-anchor="middle" font-weight="bold">L1 (L3)</text>
+<text x="2386" y="283" text-anchor="middle" font-weight="bold">D9 (L3)</text>
 <text x="2386" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="2386" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="2386" y1="314" x2="2386" y2="370" stroke="#777" stroke-width="2"/>
-<text x="2386" y="384" text-anchor="middle">1.5 mm2</text>
-<text x="2386" y="396" text-anchor="middle">88.3 m</text>
-<text x="2386" y="408" text-anchor="middle">Ib 1.8 A</text>
-<text x="2386" y="420" text-anchor="middle">dV 2.77 %</text>
+<text x="2386" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="2386" y="396" text-anchor="middle">12.4 m</text>
+<text x="2386" y="408" text-anchor="middle">Ib 2.3 A</text>
+<text x="2386" y="420" text-anchor="middle">dV 0.86 %</text>
 <rect x="2346" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="2386" y="446" text-anchor="middle">Lighting store-.</text>
-<text x="2386" y="460" text-anchor="middle">store-ramp,pantry</text>
+<text x="2386" y="446" text-anchor="middle">Fridge-freezer .</text>
+<text x="2386" y="460" text-anchor="middle">kitchen</text>
 </g>
-<g id="DB-B/L3">
+<g id="DB-B/L1">
 <line x1="2478" y1="250" x2="2478" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="2442" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="2478" y="283" text-anchor="middle" font-weight="bold">L3 (L3)</text>
+<text x="2478" y="283" text-anchor="middle" font-weight="bold">L1 (L3)</text>
 <text x="2478" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="2478" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="2478" y1="314" x2="2478" y2="370" stroke="#777" stroke-width="2"/>
 <text x="2478" y="384" text-anchor="middle">1.5 mm2</text>
-<text x="2478" y="396" text-anchor="middle">23.1 m</text>
-<text x="2478" y="408" text-anchor="middle">Ib 0.0 A</text>
-<text x="2478" y="420" text-anchor="middle">dV 0.64 %</text>
+<text x="2478" y="396" text-anchor="middle">88.3 m</text>
+<text x="2478" y="408" text-anchor="middle">Ib 1.9 A</text>
+<text x="2478" y="420" text-anchor="middle">dV 2.78 %</text>
 <rect x="2438" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="2478" y="446" text-anchor="middle">Escape/night ma.</text>
-<text x="2478" y="460" text-anchor="middle">family,stair-b</text>
+<text x="2478" y="446" text-anchor="middle">Lighting store-.</text>
+<text x="2478" y="460" text-anchor="middle">store-ramp,pantry</text>
 </g>
 <g id="DB-B/S10">
 <line x1="2570" y1="250" x2="2570" y2="270" stroke="#777" stroke-width="2"/>
@@ -473,7 +473,7 @@
 <text x="2846" y="384" text-anchor="middle">2.5 mm2</text>
 <text x="2846" y="396" text-anchor="middle">14.4 m</text>
 <text x="2846" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="2846" y="420" text-anchor="middle">dV 2.52 %</text>
+<text x="2846" y="420" text-anchor="middle">dV 2.51 %</text>
 <rect x="2806" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="2846" y="446" text-anchor="middle">Sockets pantry</text>
 <text x="2846" y="460" text-anchor="middle">pantry</text>

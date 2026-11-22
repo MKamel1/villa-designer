@@ -1,4 +1,4 @@
-"""V10 for the ERCO products bound by L6c: data-sheet numbers parsed from the PDFs, against the files the engine loads."""
+"""V10 for the bound products (read from the binding, L6d: ERCO A9003138 + iGuzzini QA03): data-sheet numbers parsed by this lane, against the files the engine loads."""
 import pytest
 
 from archpipe.lightverify import v10_erco as V
@@ -14,22 +14,43 @@ def _rows(layer, kind):
 
 
 def test_datasheet_parser_reads_every_row_of_the_cone_table():
-    ds = V.datasheet(V.pdf_text("A9000028"))
+    ds = V.datasheet(V.pdf_text("A9003138"))
     assert [c[0] for c in ds["cone"]] == [1.0, 2.0, 3.0, 4.0, 5.0]      # the 1 m row sits beside other text on its line
-    assert ds["cone"][0] == (1.0, 22846.0, 0.08) and ds["lumens"] == 304 and ds["imax"] == [22846.0]
+    assert ds["cone"][0] == (1.0, 3014.0, 0.50) and ds["lumens"] == 760 and ds["imax"] == [3014.0] and ds["beam_angle"] == 28.0
 
 
-def test_every_bound_product_but_the_adjustable_spot_passes_every_point(layer):
-    for kind in ("DL", "DLN", "WW", "PEN-LIN", "DESK"):
-        assert all(s == "pass" for _, s, _ in _rows(layer, kind)), (kind, [r for r in _rows(layer, kind) if r[1] != "pass"])
+def test_iguzzini_page_is_read_by_label_not_by_the_description_text():
+    ds = V.datasheet_of("iguzzini", "QA03")
+    assert (ds["lumens"], ds["watts"], ds["imax"], ds["beam_angle"], ds["lor"], ds["above90"]) == (831.6, 12.3, [1809.0], 44.0, 77.0, 0.0)
 
 
-def test_adjustable_spot_is_partial_not_hidden(layer):
-    rows = _rows(layer, "ADJ")
-    bad = {n for n, s, _ in rows if s == "fail"}
-    assert "beam-angle" in bad and {"beam-dia-1m", "beam-dia-5m"} <= bad       # the unreproduced published beam
-    good = {n for n, s, _ in rows if s == "pass"}
-    assert {"lumens", "imax", "lux-1m", "lux-5m", "bound-file"} <= good
+def test_tables_follow_the_binding_not_ids_in_the_code(layer):
+    from archpipe.fixture_record import bind_products
+    got = {t["kind"]: t["code"] for t in layer.table if t["kind"] != "ALT"}
+    assert got == {k: p["code"] for k, p in bind_products().items()}
+    assert "A9003138" in got.values() and "QA03" in got.values()
+
+
+def test_every_bound_product_and_alternate_passes_every_point(layer):
+    for t in layer.table:
+        assert all(s == "pass" for _, s, _ in t["rows"]), (t["kind"], t["code"], [r for r in t["rows"] if r[1] != "pass"])
+    assert {t["code"] for t in layer.table if t["kind"] == "ALT"} == {"68887", "68119", "QA11"}
+
+
+def test_a_product_change_in_the_binding_is_verified_without_touching_the_code(monkeypatch):
+    """Rebind ADJ to the Starpoint's files: V10 verifies that product (and its bound file) from the binding alone."""
+    from archpipe.fixture_record import PRODUCTS
+    f = V.ERCO / "68887" / "erco-68887-000-en-ies.ies"
+    monkeypatch.setitem(PRODUCTS, "ADJ", dict(PRODUCTS["ADJ"], code="68887", ies=str(f)))
+    rows = _rows(V.run(), "ADJ")
+    assert next(s for n, s, m in rows if n == "lumens") == "pass" and "551" in next(m for n, s, m in rows if n == "lumens")
+
+
+def test_a_wrong_iguzzini_lumen_figure_is_caught(monkeypatch):
+    real = V.datasheet_of
+    monkeypatch.setattr(V, "datasheet_of", lambda mk, c: dict(real(mk, c), lumens=1200.0) if c == "QA03" else real(mk, c))
+    rows = _rows(V.run(), "PEN-LIN")
+    assert next(s for n, s, _ in rows if n == "lumens") == "fail"
 
 
 def test_a_wrong_datasheet_lumen_figure_is_caught(monkeypatch):
@@ -47,9 +68,19 @@ def test_a_wrong_peak_intensity_is_caught(monkeypatch):
 
 
 def test_the_bound_file_must_be_the_download(monkeypatch, tmp_path):
+    from archpipe.fixture_record import PRODUCTS
     other = tmp_path / "x.ies"
     other.write_bytes((V.ERCO / "41321" / "erco-41321-000-en-ies.ies").read_bytes() + b"\n")
-    real = V._bound_path
-    monkeypatch.setattr(V, "_bound_path", lambda kind: other if kind == "DL" else real(kind))
+    monkeypatch.setitem(PRODUCTS, "DL", dict(PRODUCTS["DL"], ies=str(other)))
     rows = _rows(V.run(), "DL")
     assert next(s for n, s, _ in rows if n == "bound-file") == "fail"
+
+
+def test_cri_overstated_in_the_record_fails_and_understated_is_flagged(monkeypatch):
+    real = V._bound_row
+    monkeypatch.setattr(V, "_bound_row", lambda mk, c: dict(real(mk, c), cri=95.0) if c == "A9003138" else real(mk, c))
+    rows = V.run().table
+    adj = next(t for t in rows if t["code"] == "A9003138")["rows"]
+    assert next(s for n, s, _ in adj if n == "cri") == "fail"
+    qa = next(t for t in rows if t["code"] == "QA03")["rows"]
+    assert "understates" in next(m for n, _, m in qa if n == "cri")      # the page prints CRI 92, the record says 90

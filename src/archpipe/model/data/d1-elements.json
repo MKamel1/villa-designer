@@ -53,7 +53,7 @@
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 109,
+  "type": 110,
   "wall": 36,
   "window": 8
  },
@@ -13478,28 +13478,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    77.0,
-    77.0,
+    50.0,
+    50.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "erco/A9000028",
+   "product_id": "erco/A9003138",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "adjustable narrow-spot accent (track/recessed)",
-    "flux_lm": 200.6,
-    "watts": 6.3,
+    "what": "adjustable flood-spot accent and reading light (track)",
+    "flux_lm": 266.0,
+    "watts": 11.7,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 5.7,
+    "beam_deg": 28.0,
     "photometry": {
      "manufacturer": "erco",
-     "code": "A9000028",
-     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
+     "code": "A9003138",
+     "ies": "knowledge/lighting/ies/ERCO-A9003138.ies",
      "substitute": false,
      "generic": false
     },
@@ -13517,8 +13517,8 @@
     "illuminance_card": "ies-res-chair-reading-200",
     "why": "reading light over the armchair, aimed ~20 deg",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
+    "size_basis": "IES LM-63 luminous opening, diameter 50.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9003138-ADJ-recessed-50-50"
    }
   },
   {
@@ -15038,34 +15038,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    16950.0,
+    16800.0,
     -25900.0,
     1512.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    350.0,
-    115.0,
+    46.0,
+    46.0,
     0.0
    ],
    "host": "",
    "room": "dining",
-   "product_id": "erco/50674",
+   "product_id": "iguzzini/QA03",
    "finish_codes": [],
    "params": {
     "fixture_kind": "PEN-LIN",
     "layer": "task",
     "mount": "pendant",
-    "what": "linear pendant 1.5 m, direct",
-    "flux_lm": 462.5,
-    "watts": 27.0,
+    "what": "table pendant downlight O59 x 250 mm, direct (L6d: was a 1.5 m linear pendant of 3558 lm)",
+    "flux_lm": 291.1,
+    "watts": 12.3,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 87.0,
+    "beam_deg": 44.0,
     "photometry": {
-     "manufacturer": "erco",
-     "code": "50674",
-     "ies": "knowledge/lighting/ies/ERCO-50674-x2.ies",
+     "manufacturer": "iguzzini",
+     "code": "QA03",
+     "ies": "knowledge/lighting/ies/IGUZZINI-QA03.ies",
      "substitute": false,
      "generic": false
     },
@@ -15079,12 +15079,12 @@
      0.0,
      0.0
     ],
-    "length_mm": 1500.0,
+    "length_mm": 0.0,
     "illuminance_card": "rid-pendant-above-table-762",
-    "why": "linear pendant along the table, 762 mm above it",
+    "why": "pendant over the table (west of centre, over the homework end), 762 mm above it",
     "emitter_z_scene_mm": -1488.0,
-    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-50674-PEN-LIN-pendant-350-115"
+    "size_basis": "IES LM-63 luminous opening, diameter 46.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-QA03-PEN-LIN-pendant-46-46"
    }
   },
   {
@@ -15098,28 +15098,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    77.0,
-    77.0,
+    50.0,
+    50.0,
     0.0
    ],
    "host": "",
    "room": "dining-side",
-   "product_id": "erco/A9000028",
+   "product_id": "erco/A9003138",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "adjustable narrow-spot accent (track/recessed)",
-    "flux_lm": 304.0,
-    "watts": 6.3,
+    "what": "adjustable flood-spot accent and reading light (track)",
+    "flux_lm": 760.0,
+    "watts": 11.7,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 5.7,
+    "beam_deg": 28.0,
     "photometry": {
      "manufacturer": "erco",
-     "code": "A9000028",
-     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
+     "code": "A9003138",
+     "ies": "knowledge/lighting/ies/ERCO-A9003138.ies",
      "substitute": false,
      "generic": false
     },
@@ -15137,8 +15137,8 @@
     "illuminance_card": "ldb-accent-aim-30",
     "why": "accent on the sideboard and the art above it, ~30 deg",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
+    "size_basis": "IES LM-63 luminous opening, diameter 50.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9003138-ADJ-recessed-50-50"
    }
   },
   {
@@ -15152,28 +15152,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    77.0,
-    77.0,
+    50.0,
+    50.0,
     0.0
    ],
    "host": "",
    "room": "dining-side",
-   "product_id": "erco/A9000028",
+   "product_id": "erco/A9003138",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "adjustable narrow-spot accent (track/recessed)",
-    "flux_lm": 304.0,
-    "watts": 6.3,
+    "what": "adjustable flood-spot accent and reading light (track)",
+    "flux_lm": 760.0,
+    "watts": 11.7,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 5.7,
+    "beam_deg": 28.0,
     "photometry": {
      "manufacturer": "erco",
-     "code": "A9000028",
-     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
+     "code": "A9003138",
+     "ies": "knowledge/lighting/ies/ERCO-A9003138.ies",
      "substitute": false,
      "generic": false
     },
@@ -15191,8 +15191,8 @@
     "illuminance_card": "ldb-accent-aim-30",
     "why": "accent on the sideboard and the art above it, ~30 deg",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
+    "size_basis": "IES LM-63 luminous opening, diameter 50.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9003138-ADJ-recessed-50-50"
    }
   },
   {
@@ -18818,7 +18818,7 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    16689.0,
+    17650.0,
     -25856.0,
     2700.0
    ],
@@ -19196,8 +19196,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    19027.0,
-    -25191.0,
+    20330.0,
+    -23951.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -19239,7 +19239,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-bedroom-general-50",
-    "why": "ambient, dimmable",
+    "why": "ambient, dimmable (foot of the bed: outside the 45 deg cone over the pillows)",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
@@ -19256,28 +19256,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    77.0,
-    77.0,
+    50.0,
+    50.0,
     0.0
    ],
    "host": "",
    "room": "parents-bed",
-   "product_id": "erco/A9000028",
+   "product_id": "erco/A9003138",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "adjustable narrow-spot accent (track/recessed)",
-    "flux_lm": 304.0,
-    "watts": 6.3,
+    "what": "adjustable flood-spot accent and reading light (track)",
+    "flux_lm": 760.0,
+    "watts": 11.7,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 5.7,
+    "beam_deg": 28.0,
     "photometry": {
      "manufacturer": "erco",
-     "code": "A9000028",
-     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
+     "code": "A9003138",
+     "ies": "knowledge/lighting/ies/ERCO-A9003138.ies",
      "substitute": false,
      "generic": false
     },
@@ -19295,62 +19295,62 @@
     "illuminance_card": "ies-res-vanity-grooming-300",
     "why": "vanity light",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
+    "size_basis": "IES LM-63 luminous opening, diameter 50.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9003138-ADJ-recessed-50-50"
    }
   },
   {
-   "id": "lum-DL-parents-entry-01",
+   "id": "lum-COVE-parents-entry-01",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
     18977.0,
-    -26981.0,
-    2700.0
+    -26741.0,
+    2730.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    76.0,
-    76.0,
+    800.0,
+    0.0,
     0.0
    ],
    "host": "",
    "room": "parents-entry",
-   "product_id": "erco/41321",
+   "product_id": "",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 1065.0,
-    "watts": 14.4,
-    "cct_k": 2700.0,
+    "fixture_kind": "COVE",
+    "layer": "decorative",
+    "mount": "strip",
+    "what": "LED strip in the cove, 2700 K",
+    "flux_lm": 360.0,
+    "watts": null,
+    "cct_k": 2700,
     "cri": 90,
-    "beam_deg": 57.0,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "erco",
-     "code": "41321",
-     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
      "substitute": false,
-     "generic": false
+     "generic": true
     },
     "aim": [
-     0.0,
-     0.0,
-     -1.0
+     0,
+     -0.4,
+     1
     ],
     "along": [
      1.0,
      0.0,
      0.0
     ],
-    "length_mm": 0.0,
+    "length_mm": 800.0,
     "illuminance_card": "ies-res-passage-30",
-    "why": "entry lobby",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
+    "why": "entry lobby cove on the bedroom side, aimed up and away from the bed: lights the lobby floor by the ceiling (LA4)",
+    "emitter_z_scene_mm": 2730.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---COVE-strip-800-0"
    }
   },
   {
@@ -31040,7 +31040,7 @@
       "generic": false
      }
     },
-    "occurrences": 53,
+    "occurrences": 52,
     "occurrence_ids": [
      "lum-DL-lounge-01",
      "lum-DL-lounge-02",
@@ -31091,7 +31091,6 @@
      "lum-DL-kids-b-01",
      "lum-DL-kids-b-02",
      "lum-DL-parents-bed-04",
-     "lum-DL-parents-entry-01",
      "lum-DL-parents-dressing-06",
      "lum-DL-parents-dressing-07",
      "lum-DL-parents-ensuite-03"
@@ -31214,7 +31213,7 @@
    }
   },
   {
-   "id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77",
+   "id": "type-luminaire-erco-A9003138-ADJ-recessed-50-50",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31224,13 +31223,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    77.0,
-    77.0,
+    50.0,
+    50.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "erco/A9000028",
+   "product_id": "erco/A9003138",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31238,15 +31237,15 @@
      "fixture_kind": "ADJ",
      "mount": "recessed",
      "layer": "accent",
-     "flux_lm": 200.6,
-     "watts": 6.3,
+     "flux_lm": 266.0,
+     "watts": 11.7,
      "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 5.7,
+     "beam_deg": 28.0,
      "photometry": {
       "manufacturer": "erco",
-      "code": "A9000028",
-      "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
+      "code": "A9003138",
+      "ies": "knowledge/lighting/ies/ERCO-A9003138.ies",
       "substitute": false,
       "generic": false
      }
@@ -31260,11 +31259,11 @@
     ],
     "key": [
      "luminaire",
-     "erco/A9000028",
+     "erco/A9003138",
      "ADJ",
      "recessed",
-     77.0,
-     77.0
+     50.0,
+     50.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -31765,7 +31764,7 @@
    }
   },
   {
-   "id": "type-luminaire-erco-50674-PEN-LIN-pendant-350-115",
+   "id": "type-luminaire-iguzzini-QA03-PEN-LIN-pendant-46-46",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31775,13 +31774,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    350.0,
-    115.0,
+    46.0,
+    46.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "erco/50674",
+   "product_id": "iguzzini/QA03",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31789,15 +31788,15 @@
      "fixture_kind": "PEN-LIN",
      "mount": "pendant",
      "layer": "task",
-     "flux_lm": 462.5,
-     "watts": 27.0,
+     "flux_lm": 291.1,
+     "watts": 12.3,
      "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 87.0,
+     "beam_deg": 44.0,
      "photometry": {
-      "manufacturer": "erco",
-      "code": "50674",
-      "ies": "knowledge/lighting/ies/ERCO-50674-x2.ies",
+      "manufacturer": "iguzzini",
+      "code": "QA03",
+      "ies": "knowledge/lighting/ies/IGUZZINI-QA03.ies",
       "substitute": false,
       "generic": false
      }
@@ -31808,11 +31807,11 @@
     ],
     "key": [
      "luminaire",
-     "erco/50674",
+     "iguzzini/QA03",
      "PEN-LIN",
      "pendant",
-     350.0,
-     115.0
+     46.0,
+     46.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -32680,6 +32679,59 @@
      "WALL-READ",
      "wall",
      0.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-luminaire---COVE-strip-800-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    800.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "COVE",
+     "mount": "strip",
+     "layer": "decorative",
+     "flux_lm": 360.0,
+     "watts": null,
+     "cct_k": 2700,
+     "cri": 90,
+     "beam_deg": null,
+     "photometry": {
+      "manufacturer": "",
+      "code": "",
+      "ies": "",
+      "substitute": false,
+      "generic": true
+     }
+    },
+    "occurrences": 1,
+    "occurrence_ids": [
+     "lum-COVE-parents-entry-01"
+    ],
+    "key": [
+     "luminaire",
+     "-",
+     "COVE",
+     "strip",
+     800.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"

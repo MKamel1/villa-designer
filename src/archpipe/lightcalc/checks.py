@@ -118,9 +118,9 @@ def check_la4_luminance(subject: str, sightlines: list[dict], placements: list[P
     sightline = {"id", "eye": (x,y,z), "dir": (dx,dy,dz)}; a placement with
     meta['shielded'] True is excluded (shielded sources are the declared exception).
     """
-    cards = ["L6-POLICY-LA4-luminance-3000"]
     out = []
     for sl in sightlines:
+        cards = ["L6-POLICY-LA4-luminance-3000"] + list(sl.get("cards", ()))
         eye = tuple(sl["eye"])
         sdir = _norm(tuple(sl["dir"]))
         worst = (0.0, "")

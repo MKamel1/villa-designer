@@ -2,8 +2,10 @@
 
 Independent of lane LP: the data-sheet numbers are parsed here from each product's PDF (pdftotext), not taken from LP's
 transcription (`luminaires/lp_erco.py`); the files are read by `lightverify.ies` / `ldt` (not `archpipe.photometry`).
-Per product, with the bound file (the one the engine loads, from `fixture_record.PRODUCTS`):
-  (a) the bound file is byte-identical to the downloaded ERCO .ies (or, for the Jilly, is exactly 2 x its per-module file);
+Products are read from the design's binding (`fixture_record.bind_products`), never by id here (L6d: ADJ and the pendant changed).
+ERCO data sheets are PDFs; iGuzzini's is the product page text (lm/W system, Imax, LOR, flux above 90 deg, beam class).
+Per product, with the bound file (the one the engine loads):
+  (a) the bound file is byte-identical to the manufacturer's downloaded .ies;
   (b) .ies and .ldt of the download agree (lumens, watts, peak cd, axis points);
   (c) integrated lumens vs the data-sheet "Luminous flux of the luminaire" (2 %), watts vs "Connected load";
   (d) Imax vs the data-sheet polar diagram, lux on axis at each h of the cone table, beam diameter D at each h, the printed
@@ -12,6 +14,7 @@ Per product, with the bound file (the one the engine loads, from `fixture_record
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import re
 import subprocess
@@ -25,7 +28,6 @@ from .v10_manufacturer import TOL, cone, cross_check, engine_axis
 SRC = ids("LV-V10-TOL", "LV-V1-LUMEN", "LV-LM63")
 ROOT = Path(__file__).resolve().parents[3]
 ERCO = ROOT / "knowledge" / "lighting-products" / "erco"
-KINDS = {"DL": "41321", "DLN": "41369", "ADJ": "A9000028", "WW": "41374", "PEN-LIN": "50674", "DESK": "31327"}
 
 
 def pdf_text(code: str) -> str:
@@ -36,6 +38,8 @@ def pdf_text(code: str) -> str:
 def datasheet(text: str) -> dict:
     """What page 1 prints: flux, load, Imax (all printed, as many as appear), cone table rows (h, E, D), printed beam angle."""
     out = {"lumens": None, "watts": None, "imax": [], "cone": [], "beam_angle": None}
+    m = re.search(r"Colour rendition index\s+CRI\s*(\d+)", text)
+    out["cri"] = float(m.group(1)) if m else None
     m = re.search(r"Luminous flux of the luminaire\s+(\d+)\s*lm", text)
     out["lumens"] = float(m.group(1)) if m else None
     m = re.search(r"Connected load\s+([\d.]+)\s*W", text)
@@ -75,10 +79,10 @@ def _write_ies(d, gamma_k, cd_k, path):
     Path(path).write_text("\n".join(rows) + "\n")
 
 
-def adj_sensitivity(villa, tmp: Path) -> list:
-    """What the unreproduced published beam (4.7 deg vs the file's 5.7) would do to the armchair reading plane.
-    Two what-ifs, both narrower by 4.7/5.7: (A) Imax kept, so flux falls to ~2/3 (contradicts the published 304 lm);
-    (B) flux kept, so the peak rises 1.47x (contradicts the published Imax). Returns [(name, em_adj_direct, em_total, driver_needed)]."""
+def adj_sensitivity(villa, tmp: Path, ratios: dict) -> list:
+    """What a narrower real beam would do to the armchair reading plane. `ratios` = {label: real/file beam angle}; for each, two what-ifs:
+    (A) Imax kept, so flux falls by k^2; (B) flux kept, so the peak rises 1/k^2 (each contradicts one published figure, so both bound the truth).
+    Returns [(name, em_adj_direct, em_total, driver_needed)]."""
     import dataclasses
     from ..lightcalc.direct import direct_illuminance
     from ..lightcalc.villa import MF
@@ -89,9 +93,11 @@ def adj_sensitivity(villa, tmp: Path) -> list:
     pl = next(p for p in villa.planes() if p.id == "armchair")
     pts, _, _ = plane_points(pl)
     d = ies.parse(Path(adj.meta["ies_path"]).read_text(encoding="utf-8-sig", errors="replace").replace("\ufeff", ""))
-    k = 4.7 / 5.7
     out = []
-    for name, (gk, ck) in {"file as bound (5.7 deg)": (1, 1), "A: 4.7 deg, Imax kept": (k, 1), "B: 4.7 deg, flux kept": (k, 1 / k ** 2)}.items():
+    cases = {"file as bound": (1, 1)}
+    for lab, k in ratios.items():
+        cases.update({"A: %s, Imax kept" % lab: (k, 1), "B: %s, flux kept" % lab: (k, 1 / k ** 2)})
+    for name, (gk, ck) in cases.items():
         path = tmp / ("adj_%.3f_%.3f.ies" % (gk, ck))
         _write_ies(d, gk, ck, path)
         a2 = dataclasses.replace(adj, photometry=photometry.load(str(path)))
@@ -106,89 +112,142 @@ def adj_sensitivity(villa, tmp: Path) -> list:
     return res
 
 
+def _label_value(text: str, label: str):
+    """First number on the line after `label` (iGuzzini's page prints 'label' and its value on separate lines)."""
+    m = re.search(r"(?m)^\s*" + re.escape(label) + r"\s*\n\s*(-?\d+(?:\.\d+)?)", text)
+    return float(m.group(1)) if m else None
+
+
+def datasheet_iguzzini(text: str) -> dict:
+    """What the iGuzzini product page prints (it IS their datasheet): system lm/W, Imax, LOR, flux at/above 90 deg, beam class angle."""
+    m = re.search(r"Optic and beam angle\s*\n\s*[A-Z]+\s*-\s*[\w ]+?(\d+(?:\.\d+)?)\s*°", text)
+    return {"lumens": _label_value(text, "lm system"), "watts": _label_value(text, "W system"), "imax": [v] if (v := _label_value(text, "Maximum intensity (cd)")) else [],
+            "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"), "cri": _label_value(text, "CRI"),
+            "above90": _label_value(text, "Total light flux at or above an angle of 90° (Lm)"), "lamp_lm": _label_value(text, "lm source")}
+
+
+def product_dir(maker: str, code: str) -> Path:
+    return ERCO.parent / maker / code
+
+
+def datasheet_of(maker: str, code: str) -> dict:
+    d = product_dir(maker, code)
+    pdfs = list(d.glob("*specs.pdf"))
+    if maker == "erco" and pdfs:
+        return datasheet(pdf_text(code))
+    return datasheet_iguzzini(next(d.glob("*product-page.txt")).read_text(encoding="utf-8"))
+
+
+def _bound_row(maker: str, code: str):
+    """The binding's own row (`knowledge/lighting/products-frozen.json`) for a product: the record the design carries (CRI is not in PRODUCTS)."""
+    rows = json.loads((ROOT / "knowledge" / "lighting" / "products-frozen.json").read_text(encoding="utf-8")).values()
+    return next((r for r in rows if r["manufacturer"] == maker and r["code"] == code), None)
+
+
+def verify_product(L: LayerResult, label: str, maker: str, code: str, bound: Path | None, villa_gate: bool) -> dict:
+    """All V10 rows of one product. `bound` is the file the engine loads (None for an alternate that is not bound anywhere)."""
+    subj = "%s/%s" % (label, code)
+    ds = datasheet_of(maker, code)
+    d = product_dir(maker, code)
+    fi, fl = sorted(d.glob("*.ies")), sorted(d.glob("*.ldt"))
+    di = [ies.parse(f.read_text(encoding="utf-8-sig", errors="replace").replace("﻿", "")) for f in fi]
+    dl = [ldt.parse(f.read_text(encoding="latin-1")) for f in fl]
+    rows = []
+
+    def add(name, ok, msg, ach=None, req=None, unit="", status=None):
+        st = status or ("pass" if ok else "fail")
+        L.results.append(check("LV10", st, "%s/%s" % (subj, name), SRC, achieved=ach, required=req, unit=unit, message=msg))
+        rows.append((name, st, msg))
+
+    if bound is not None:
+        if not bound.exists():
+            add("bound-file", False, "the design's bound file is missing (%s)" % bound)
+            return dict(kind=label, code=code, rows=rows, datasheet=ds, gate=villa_gate)
+        same = hashlib.sha256(bound.read_bytes()).hexdigest() == hashlib.sha256(fi[0].read_bytes()).hexdigest()
+        add("bound-file", same, "bound file %s %s the manufacturer download %s" % (bound.name, "is byte-identical to" if same else "DIFFERS from", fi[0].name))
+    for n, (a, b) in enumerate(zip(di, dl)):
+        ok, worst = cross_check(a, b)
+        add("ies-vs-ldt-%d" % n, ok, ".ies %.1f lm %.2f W peak %.0f cd; .ldt %.1f lm %.2f W peak %.0f cd; worst axis point %.2f %%" %
+            (ies.lumens(a), a.input_watts, ies.peak_cd(a), ies.lumens(b), b.input_watts, ies.peak_cd(b), 100 * worst), ies.lumens(a), ies.lumens(b), "lm")
+    f0 = di[0]
+    lm = ies.lumens(f0)
+    if ds["lumens"]:
+        add("lumens", abs(lm / ds["lumens"] - 1) < 0.02, "integrated %.1f lm vs data sheet %g lm (%+.2f %%)" % (lm, ds["lumens"], 100 * (lm / ds["lumens"] - 1)), round(lm, 1), ds["lumens"], "lm")
+    else:
+        add("lumens", False, "no system lumen figure in the data sheet text", status="not_evaluated")
+    if ds["watts"]:
+        add("watts", abs(f0.input_watts - ds["watts"]) < 0.15 * ds["watts"] + 0.1, "file %.2f W vs data-sheet load %g W" % (f0.input_watts, ds["watts"]), f0.input_watts, ds["watts"], "W")
+    row = _bound_row(maker, code)
+    if ds.get("cri") and row and row.get("cri"):
+        # a bound CRI BELOW the published one understates the product (harmless to colour checks, still wrong in the record): reported, not failed
+        add("cri", row["cri"] <= ds["cri"] + 1e-9, "bound record CRI %g vs data sheet CRI %g%s" % (row["cri"], ds["cri"], "" if row["cri"] == ds["cri"] else
+            " (record %s the data sheet: fix the record)" % ("understates" if row["cri"] < ds["cri"] else "OVERSTATES")), row["cri"], ds["cri"], "")
+    if ds["imax"]:
+        pk = ies.peak_cd(f0)
+        add("imax", abs(pk / ds["imax"][0] - 1) <= TOL, "file peak %.0f cd vs data sheet Imax %g cd (%+.2f %%)" % (pk, ds["imax"][0], 100 * (pk / ds["imax"][0] - 1)), round(pk, 0), ds["imax"][0], "cd")
+    if ds.get("lor") and ds.get("lamp_lm"):
+        add("lor", abs(100 * lm / ds["lamp_lm"] / ds["lor"] - 1) <= TOL, "integrated %.1f lm over the data sheet's source %g lm = LOR %.1f %% vs published %g %%" %
+            (lm, ds["lamp_lm"], 100 * lm / ds["lamp_lm"], ds["lor"]), round(100 * lm / ds["lamp_lm"], 1), ds["lor"], "%")
+    if ds.get("above90") is not None:
+        up = lm - ies.lumens_below(f0, 90.0)
+        add("flux-above-90", up <= 0.01 * lm + ds["above90"], "flux at or above 90 deg: file %.2f lm vs data sheet %g lm" % (up, ds["above90"]), round(up, 2), ds["above90"], "lm")
+    for h, e, dm in ds["cone"]:
+        c = cone(f0, h)
+        eng = engine_axis(code, fi[0], h)
+        add("lux-%gm" % h, abs(c["E_axis_lx"] / e - 1) <= TOL and abs(eng / e - 1) <= TOL,
+            "data sheet %g lx at %g m; file %.0f lx, engine %.0f lx (%+.1f %%)" % (e, h, c["E_axis_lx"], eng, 100 * (eng / e - 1)), round(eng, 0), e, "lx")
+        add("beam-dia-%gm" % h, abs(c["d50_m"] / dm - 1) <= TOL,
+            "data sheet D %.2f m at %g m; file 50 %% diameter %.3f m (%+.1f %%)" % (dm, h, c["d50_m"], 100 * (c["d50_m"] / dm - 1)), round(c["d50_m"], 3), dm, "m")
+    if ds["beam_angle"]:
+        ba = _beam_full_angle(f0)
+        add("beam-angle", abs(ba / ds["beam_angle"] - 1) <= TOL, "data sheet beam angle %g deg; file 50 %% full angle %.1f deg (%+.1f %%); the file reaches the published angle at %.0f %% of peak" %
+            (ds["beam_angle"], ba, 100 * (ba / ds["beam_angle"] - 1), 100 * level_for_angle(f0, ds["beam_angle"])), round(ba, 2), ds["beam_angle"], "deg")
+    if not ds["cone"] and not ds["beam_angle"] and not ds["imax"]:
+        add("points", False, "no published point could be read from the data sheet", status="not_evaluated")
+    return dict(kind=label, code=code, rows=rows, datasheet=ds, gate=villa_gate)
+
+
+ALTERNATES = ROOT / "knowledge" / "lighting-verify" / "v10-alternates.json"
+
+
 def run(villa=None) -> LayerResult:
+    """Every product is read from the design's binding (`fixture_record.bind_products`), none by id here; alternates come from
+    `knowledge/lighting-verify/v10-alternates.json` (verified, never gating a room)."""
+    from ..fixture_record import bind_products
     L = LayerResult("V10")
-    for kind, code in KINDS.items():
-        subj = "%s/%s" % (kind, code)
-        text = pdf_text(code)
-        ds = datasheet(text)
-        two = code == "50674"
-        fi = sorted(ERCO.joinpath(code).glob("*-ies*.ies"))
-        fl = sorted(ERCO.joinpath(code).glob("*-ldt*.ldt"))
-        di = [ies.parse(f.read_text(encoding="utf-8-sig", errors="replace").replace("﻿", "")) for f in fi]
-        dl = [ldt.parse(f.read_text(encoding="latin-1")) for f in fl]
-        rows, problems = [], []
-
-        def add(name, ok, msg, ach=None, req=None, unit="", status=None):
-            L.results.append(check("LV10", status or ("pass" if ok else "fail"), "%s/%s" % (subj, name), SRC, achieved=ach, required=req, unit=unit, message=msg))
-            rows.append((name, status or ("pass" if ok else "fail"), msg))
-
-        # (a) bound file == download (Jilly: the derived file is two modules in one)
-        bp = _bound_path(kind)
-        if bp is None or not bp.exists():
-            add("bound-file", False, "the design's bound file is missing (%s)" % bp)
-            continue
-        bd = ies.parse(bp.read_text(encoding="utf-8-sig", errors="replace").replace("﻿", ""))
-        if two:
-            ratio = ies.lumens(bd) / sum(ies.lumens(d) for d in di)
-            add("bound-file", abs(ratio - 1) < 0.01, "bound file %s integrates to %.1f lm = %.3f x the two per-module files (%s lm)" %
-                (bp.name, ies.lumens(bd), ratio, " + ".join("%.1f" % ies.lumens(d) for d in di)), ies.lumens(bd), sum(ies.lumens(d) for d in di), "lm")
-        else:
-            same = hashlib.sha256(bp.read_bytes()).hexdigest() == hashlib.sha256(fi[0].read_bytes()).hexdigest()
-            add("bound-file", same, "bound file %s %s the ERCO download %s" % (bp.name, "is byte-identical to" if same else "DIFFERS from", fi[0].name))
-        # (b) ies vs ldt
-        for a, b, n in zip(di, dl, range(len(di))):
-            ok, worst = cross_check(a, b)
-            add("ies-vs-ldt-%d" % n, ok, ".ies %.1f lm %.2f W peak %.0f cd; .ldt %.1f lm %.2f W peak %.0f cd; worst axis point %.2f %%" %
-                (ies.lumens(a), a.input_watts, ies.peak_cd(a), ies.lumens(b), b.input_watts, ies.peak_cd(b), 100 * worst), ies.lumens(a), ies.lumens(b), "lm")
-        f0 = di[0]
-        lm_tot = sum(ies.lumens(d) for d in di)
-        # (c) lumens, watts
-        if ds["lumens"]:
-            add("lumens", abs(lm_tot / ds["lumens"] - 1) < 0.02, "integrated %.1f lm vs data sheet %g lm (%+.2f %%)" %
-                (lm_tot, ds["lumens"], 100 * (lm_tot / ds["lumens"] - 1)), round(lm_tot, 1), ds["lumens"], "lm")
-        else:
-            add("lumens", False, "no 'Luminous flux of the luminaire' in the data sheet text", status="not_evaluated")
-        if ds["watts"]:
-            w = sum(d.input_watts for d in di)
-            add("watts", abs(w - ds["watts"]) < 0.15 * ds["watts"] + 0.1, "file %.2f W vs data-sheet connected load %g W" % (w, ds["watts"]), w, ds["watts"], "W")
-        # (d) published points
-        if ds["imax"]:
-            pk = ies.peak_cd(f0)
-            add("imax", all(abs(pk / v - 1) <= TOL for v in ds["imax"][:1]), "file peak %.0f cd vs data-sheet polar diagram Imax %g cd (%+.2f %%)" %
-                (pk, ds["imax"][0], 100 * (pk / ds["imax"][0] - 1)), round(pk, 0), ds["imax"][0], "cd")
-        for h, e, dm in ds["cone"]:
-            c = cone(f0, h)
-            eng = engine_axis(code, fi[0], h)
-            add("lux-%gm" % h, abs(c["E_axis_lx"] / e - 1) <= TOL and abs(eng / e - 1) <= TOL,
-                "data sheet %g lx at %g m; file %.0f lx, engine %.0f lx (%+.1f %%)" % (e, h, c["E_axis_lx"], eng, 100 * (eng / e - 1)), round(eng, 0), e, "lx")
-            add("beam-dia-%gm" % h, abs(c["d50_m"] / dm - 1) <= TOL,
-                "data sheet D %.2f m at %g m; file 50 %% diameter %.3f m (%+.1f %%)" % (dm, h, c["d50_m"], 100 * (c["d50_m"] / dm - 1)), round(c["d50_m"], 3), dm, "m")
-        if ds["beam_angle"]:
-            ba = _beam_full_angle(f0)
-            add("beam-angle", abs(ba / ds["beam_angle"] - 1) <= TOL, "data sheet beam angle %g deg; file 50 %% full angle %.1f deg (%+.1f %%); the file reaches the published angle at %.0f %% of peak" %
-                (ds["beam_angle"], ba, 100 * (ba / ds["beam_angle"] - 1), 100 * level_for_angle(f0, ds["beam_angle"])), round(ba, 2), ds["beam_angle"], "deg")
-        if not ds["cone"] and not ds["beam_angle"] and not ds["imax"]:
-            add("points", False, "no published point could be read from the data sheet", status="not_evaluated")
-        L.table.append(dict(kind=kind, code=code, rows=rows, datasheet=ds))
+    prods = bind_products()
+    for kind, p in prods.items():
+        L.table.append(verify_product(L, kind, p["manufacturer"], p["code"], Path(p["ies"]), True))
+    bound = {(p["manufacturer"], p["code"]) for p in prods.values()}
+    for entry in json.loads(ALTERNATES.read_text()):
+        maker, code = entry.split("/")
+        if (maker, code) not in bound:
+            L.table.append(verify_product(L, "ALT", maker, code, None, False))
     if villa is not None:
         zone_of = {(p.meta.get("parent") or p.id): p.zone for p in villa.placements}
         for f in villa.fixtures:
             L.mark(f.room, "pass")          # not applicable where a room has no bound product (generic fittings only)
         for f in villa.fixtures:
-            code = KINDS.get(f.kind)
-            if not code:
+            t = next((x for x in L.table if x["kind"] == f.kind and x["gate"]), None)
+            if t is None:
                 continue
-            t = next(x for x in L.table if x["code"] == code)
             partial = any(r[1] == "fail" for r in t["rows"])
             accent_only = "ACCENT" in zone_of.get(f.id, "")      # an accent zone carries no illuminance card
             L.mark(f.room, "pass" if (not partial or accent_only) else "not_evaluated")
         import tempfile
-        for name, em_adj, tot, drv in adj_sensitivity(villa, Path(tempfile.mkdtemp(prefix="lv-adj-"))):
+        adj = next((x for x in L.table if x["kind"] == "ADJ" and x["gate"]), None)
+        pub = adj and adj["datasheet"]["beam_angle"]
+        ratios = {"20 % narrower (pessimistic)": 0.8}
+        if pub:
+            ratios["published %g deg" % pub] = min(1.0, pub / _beam_full_angle(ies.parse(Path(_bound_path("ADJ")).read_text(encoding="utf-8-sig", errors="replace").replace("﻿", ""))))
+        for name, em_adj, tot, drv in (adj_sensitivity(villa, Path(tempfile.mkdtemp(prefix="lv-adj-")), ratios) if adj else []):
             ok = drv <= 0.80
             L.results.append(check("LV10", "pass" if ok else "fail", "ADJ/armchair-sensitivity/" + name, SRC, achieved=round(tot, 1), required=200,
                                    unit="lx", message="%s: ADJ direct %.0f lx, plane total ~%.0f lx (card 200); driver to restore 200 lx = %.2f (bar 0.80)" % (name, em_adj, tot, drv)))
-    L.notes.append("A9000028 is PARTIAL: lumens, Imax and lux on axis reproduce (<= 3.5 %), the published beam diameter/angle does not (4.7 vs 5.7 deg)")
+    for t in L.table:
+        bad = [r[0] for r in t["rows"] if r[1] == "fail"]
+        if bad:
+            L.notes.append("%s %s is PARTIAL: %s do not reproduce" % (t["kind"], t["code"], ", ".join(bad)))
     L.notes.append("data-sheet numbers parsed from the product PDFs by this lane; ERCO .ies/.ldt are the manufacturer's own lab files")
     return L
 

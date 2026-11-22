@@ -239,7 +239,32 @@ def sightlines(v) -> list[dict]:
         {"id": "dining-seat-along-table", "room": "dining", "eye": (dt[0] + 0.5, (dt[1] + dt[3]) / 2, B + 1.2), "dir": (1, 0, 0)},
         {"id": "dining-seat-to-sideboard", "room": "dining", "eye": ((dt[0] + dt[2]) / 2, dt[1] + 0.2, B + 1.2), "dir": (0, -1, 0)},
         {"id": "parents-bed-lying", "room": "parents-bed", "eye": ((bed[0] + bed[2]) / 2, bed[1] + 0.4, G + 0.7), "dir": (0, 1, 0.3)},
-    ]
+    ] + bed_lying_sightlines(v)
+
+
+# bed -> (room, head end, eye height above the floor). Head ends from the furnishing spec: the parents' bed head is on the north
+# wall (wall reading lights at its head), kids' B "head to the west wall"; the bunk's is not declared, so both ends are tested.
+# Eye heights: 0.7 m on a 0.5 m bed (as the reclined sightline above); upper berth 1.5 m (ASSUMED: furnishing h = 1.7 m).
+BEDS = {"pb-bed": ("parents-bed", ("min-y",), 0.7), "kb-bed": ("kids-b", ("min-x",), 0.7), "ka-bunk": ("kids-a", ("min-y", "max-y"), 1.5)}
+PILLOW_OFFSET = 0.4      # m from the head end to the eye of a person lying on the pillow
+
+
+def bed_lying_sightlines(v) -> list[dict]:
+    """LA4 'lying, looking up': for every bed in every bedroom, the eye on each pillow looking straight up (policy card)."""
+    out = []
+    for bid, (room, heads, eye_z) in BEDS.items():
+        x0, y0, x1, y1 = v.fp[bid]
+        for head in heads:
+            along_x = head.endswith("x")
+            width = (y1 - y0) if along_x else (x1 - x0)
+            offs = (-0.4, 0.4) if width >= 1.4 else (0.0,)        # a double bed has two pillows
+            for k, off in enumerate(offs):
+                a = {"min-x": x0 + PILLOW_OFFSET, "max-x": x1 - PILLOW_OFFSET, "min-y": y0 + PILLOW_OFFSET, "max-y": y1 - PILLOW_OFFSET}[head]
+                c = ((y0 + y1) / 2 if along_x else (x0 + x1) / 2) + off
+                eye = (a, c, eye_z) if along_x else (c, a, eye_z)
+                out.append({"id": "%s-lying-up-%s%s" % (bid, head, "" if len(offs) == 1 else "-p%d" % (k + 1)), "room": room, "eye": eye,
+                            "dir": (0, 0, 1), "cards": ("L6-POLICY-LA4-bed-lying-looking-up",)})
+    return out
 
 
 # ------------------------------------------------------------------ LA12 exterior (what exists: 4 garden uplights in the render scene)

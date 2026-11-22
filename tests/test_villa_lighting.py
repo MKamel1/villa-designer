@@ -140,9 +140,10 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
 class Photometry(unittest.TestCase):
     def test_verified_products_are_cached_and_unverified_kinds_stay_generic(self):
         self.assertIs(VL.products(), VL.products())
-        # L6c: the bound products are ERCO (V10-verified), not the iGuzzini LSEVO of the pre-L6b scheme
+        # L6c: the bound products are ERCO (V10-verified), not the iGuzzini LSEVO of the pre-L6b scheme; L6d: ADJ is the flood A9003138
+        # (the narrow A9000028 was V10 partial) and the table pendant the iGuzzini QA03 (the 1.5 m Jilly ran at 3.9 % of its output)
         self.assertEqual({k: v["code"] for k, v in VL.products().items()},
-                         {"DL": "41321", "DLN": "41369", "ADJ": "A9000028", "WW": "41374", "PEN-LIN": "50674", "DESK": "31327"})
+                         {"DL": "41321", "DLN": "41369", "ADJ": "A9003138", "WW": "41374", "PEN-LIN": "QA03", "DESK": "31327"})
         self.assertFalse(VL.photometry_for("DLN")[1])
         self.assertTrue(VL.photometry_for("PEN-GLOBE")[1])
 
