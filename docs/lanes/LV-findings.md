@@ -236,3 +236,27 @@ Nothing is verified by V11 (DIALux not run) or V9 (declined).
 5. Parents' bedroom: LA4 "lying, looking up" sightline against the bed DL (finding in 5); pendant oversizing (3.9 % at Evening).
 6. Pantry radiosity bar (4); V7 grid pitches (corridor 0.85 m, parents' bedroom 0.43 m).
 7. Egypt availability, R9 and cut-out sizes for the ERCO products (the supplier sheet asks).
+
+## Verification of lane L6d (2026-11-22)
+
+Run: `python -m archpipe.lightverify --design D1 --scene ~/archpipe/lanes/L6d/out/L6d/prod/scene.json` (sha256 5968c5b8..., matches L6d's report), Radiance baseline regenerated on the L6d design
+and frozen. 452 pass / 1 fail / 3 n.e.; room-plane rows **verified 39 of 40** (L6d's own run: 34/40). Per layer pass/fail/n.e.: V1 20/0/0, V2 150/0/0 (incl. 5 LA4 lying sightlines),
+V3 40/0/0, V4 26/0/0, V5 20/0/0, V6 15/1/0, V7 40/0/0, V8 9/0/0, V10 92/0/0, V11 0/0/3, V12 40/0/0.
+Remaining: parents' dressing room V6 -40 % (engine 390 lx vs lumen method 646 lx at room index 0.43: the documented miss of the uniform-reflection closed form, not argued away);
+V11 DIALux not run (3 n.e.); V9 declined.
+
+* V10 (own parsing of the ERCO PDFs and the iGuzzini page text; no ids in code, products read from the binding): A9003138 lumens -1.46 %, Imax -1.54 %, lux 1-5 m -1.3..-1.9 %, beam angle +3.2 %;
+  QA03 lumens -0.03 %, Imax -0.46 %, LOR 77.0 vs 77, flux >= 90 deg 0, beam -0.7 %; alternates 68887, 68119, QA11 pass. Disagreements with L6d's source.json: beam *diameter* (mine -1.4..-1.8 %
+  at the 50 % of axial-lux level, theirs +3.1..3.5 %: a different level, both inside 5 %); 68887 lumens +0.31 % vs their +0.7 % (integration grid); **QA03 CRI: the page prints 92 (Rf 92), the bound record says 90**
+  (understated; harmless to lux, fix the record).
+* WW orientation fix confirmed: single-light probe WW +1.2 % total / 2.8 % pattern at its design aim; tilt 25 deg at azimuths 0/90/180/270: +0.9 % / 3.2 % each (before: +35.6 % / 153 %); ADJ -0.5 % / 3.7 %
+  at all four; straight-down kinds unchanged (DL -1.2/2.6, DESK +1.0/1.0, PEN-LIN -1.2/2.3).
+* IES multi-plane gain 1.094 holds on files L6d did not measure (straight down, total Cycles/analytic): 26141 (73 planes) -1.3 %, 35720 (73) -2.7 %, LSEVO-AAKR2I (37) -1.0 %, ST49 (19) -1.9 %; measured ones
+  DESK +0.6 %, WW -0.3 %; single-plane DL -1.0, DLN -1.3, A9003138 -1.2, QA03 -1.1, 68887 -1.9 %. Worst residual -2.7 % (35720). Not checked: 2-5 plane files (none in the repo; L6d's own
+  measurement shows -5.1 / -7.3 % at 3 / 5 planes, so a future 2-5 plane file would be under-corrected by the step at 6).
+* LA4 lying sightlines reproduced from my own IES reading: pillow 1 nothing in view, pillow 2 ADJ 1656 cd/m2 (engine 1656), kids' B and the bunk 0. Fittings of other rooms in the cone (dressing-room DLs 82-101 kcd/m2,
+  kids-a DL-kids-a-04 42 kcd/m2 as driven, 84 kcd/m2 full) are behind walls (4 vertical shell faces crossed each) so rightly excluded.
+* Entry-lobby cove "hidden from the pillows": true by orientation, **not by built geometry**. The strip aims (0,-0.37,0.93), i.e. 155 deg from the direction to pillow 1's eye, outside its 120 deg spread, so
+  nothing reaches the pillows. But the scene has no upstand mesh (assumed), and the strip sits at z 2.73 *above* the parents' ceiling mesh (2.70-2.701) in the render scene while the engine room's ceiling is 2.74:
+  in Cycles the 1 mm ceiling plane is between the strip and the room, so the render may not show the cove light at all. Not rendered here; open item for the render/design lane.
+* Open (not mine): `tests/luminaires/test_erco.py::test_stored_files_match_source_sha` fails on `QA11-product-page.txt` (file sha differs from QA11/source.json) already on origin/lane/L6d.
