@@ -25,8 +25,8 @@ class Loader(unittest.TestCase):
         self.assertTrue(all(isinstance(r, Rule) for r in RS.rules.values()))
         for rid, ids in RS.source_ids.items():
             self.assertTrue(ids, rid)
-        self.assertEqual(len(RS.params), 24)
-        self.assertEqual(len(RS.advisory_ids), 34)
+        self.assertEqual(len(RS.params), 41)
+        self.assertEqual(len(RS.advisory_ids), 30)
 
     def test_advisory_rules_carry_no_measurement_and_are_advisory_kind(self):
         for i in RS.advisory_ids:
@@ -42,7 +42,8 @@ class Loader(unittest.TestCase):
         with self.assertRaises(ValueError):
             RuleSet(data)
         data = copy.deepcopy(RS.data)
-        data["rules"][0]["sources"] = ["AL-APL-numbers"]
+        data["sources"].append({**data["sources"][0], "id": "UNV", "status": "unverified"})
+        data["rules"][0]["sources"] = ["UNV"]
         with self.assertRaises(ValueError):
             RuleSet(data)
 
@@ -56,6 +57,39 @@ class Loader(unittest.TestCase):
         used = {i for ids in RS.source_ids.values() for i in ids}
         self.assertNotIn("TS-530-15-depth-NOT-KOI", used)
 
+    def test_pattern_language_is_withdrawn_and_cannot_be_cited(self):
+        self.assertEqual(len(RS.withdrawn), 27)
+        self.assertFalse([i for i in RS.rules if i.startswith("AD-APL")])
+        self.assertNotIn("AL-APL-numbers", RS.sources)
+        self.assertTrue(all(w["status"] == "unverified — not used" for w in RS.withdrawn.values()))
+        # a withdrawn rule that is also active, or with the wrong status, is refused
+        data = copy.deepcopy(RS.data)
+        data["withdrawn"][0]["status"] = "unverified"
+        with self.assertRaises(ValueError):
+            RuleSet(data)
+        data = copy.deepcopy(RS.data)
+        data["withdrawn"][0]["id"] = RS.advisory_ids[0]
+        with self.assertRaises(ValueError):
+            RuleSet(data)
+
+    def test_crowd_maximum_and_lily_pool_cards_are_not_wired_to_any_rule(self):
+        used = {i for ids in RS.source_ids.values() for i in ids}
+        for k in ("MH-15-6-tableIII-crowd-max-NOT-COMFORT", "NF-113-lily-pool-NOT-KOI", "H-adk-k2-600"):
+            self.assertIn(k, RS.sources)
+            self.assertNotIn(k, used)
+
+    def test_every_web_and_held_card_is_a_sourced_quote(self):
+        for s in RS.sources.values():
+            if s.status == "sourced":
+                self.assertTrue(s.quote.strip(), s.id)
+
+    def test_closed_gaps_name_their_rule(self):
+        for g in RS.data["closed_gaps"]:
+            self.assertNotIn(g["id"], RS.gaps)
+            for part in g["closed_by"].replace(",", " ").split():
+                if part.startswith(("LS-", "AD-")) and not part.endswith("*"):
+                    self.assertIn(part, RS.rules, g["id"])
+
     def test_layout_without_schema_is_refused(self):
         with self.assertRaises(ValueError):
             validate_layout({})
@@ -65,8 +99,7 @@ class GoodLayoutIsQuiet(unittest.TestCase):
     def test_no_fail_or_warn(self):
         bad = [(r.criterion, r.subject, r.status, r.message) for r in evaluate(good(), RS)
                if r.status in ("fail", "warn")]
-        # the declared fire cover is reported as a warning by design (no required value is held)
-        self.assertEqual([b[0] for b in bad], ["LS-FIRE-COVER"], bad)
+        self.assertEqual(bad, [], bad)
 
     def test_every_computed_rule_ran(self):
         ran = {r.criterion for r in evaluate(good(), RS)}
@@ -104,8 +137,11 @@ class Negatives(unittest.TestCase):
         self.case("LS-PATH-SECONDARY", lambda L: L["paths"][1].update(width_m=0.5))
         self.assertEqual(statuses(good(), "LS-PATH-SECONDARY"), {"pass"})
 
-    def test_service_path_is_a_gap_not_a_pass(self):
-        L = good(); L["paths"].append({"id": "p-svc", "class": "service", "width_m": 0.3})
+    def test_service_path(self):
+        self.case("LS-PATH-SERVICE", lambda L: L["paths"][2].update(width_m=0.4))                 # below a wheelbarrow
+        self.case("LS-PATH-SERVICE", lambda L: L["paths"][2].update(width_m=0.7), status="warn")  # 600-900
+        self.assertEqual(statuses(good(), "LS-PATH-SERVICE"), {"pass"})
+        L = good(); L["paths"][2]["class"] = "weird"
         self.assertIn("not_evaluated", statuses(L, "LS-PATH-SECONDARY"))
 
     def test_step_riser(self):
@@ -165,10 +201,90 @@ class Negatives(unittest.TestCase):
         L = good(); del L["features"][0]["product_clearance_mm"]
         self.assertEqual(statuses(L, "LS-FIRE-PRODUCT"), {"not_evaluated"})
 
-    def test_fire_cover_never_passes(self):
-        self.assertEqual(statuses(good(), "LS-FIRE-COVER"), {"warn"})
+    def test_fire_cover_load(self):
+        self.case("LS-FIRE-COVER", lambda L: L["features"][0]["cover"].update(load_rating_kN=5))
+        r = res(good(), "LS-FIRE-COVER")[0]
+        self.assertEqual((r.status, r.achieved, r.required), ("pass", 15, 15.0))
         L = good(); del L["features"][0]["cover"]
         self.assertEqual(statuses(L, "LS-FIRE-COVER"), {"not_evaluated"})
+
+    def test_fire_overhead(self):
+        self.case("LS-FIRE-OVERHEAD", lambda L: L["features"][0].update(overhead_clear_m=1.5))
+        self.assertEqual(statuses(good(), "LS-FIRE-OVERHEAD"), {"pass"})
+        L = good(); del L["features"][0]["overhead_clear_m"]
+        self.assertEqual(statuses(L, "LS-FIRE-OVERHEAD"), {"not_evaluated"})
+
+    def test_fire_distance_to_structure_and_wood_tier(self):
+        self.case("LS-FIRE-STRUCT", lambda L: L["buildings"].append([16, 11.2, 20, 14]))   # 0.7 m from the pit edge
+        self.case("LS-FIRE-STRUCT", lambda L: L["features"][0].update(fuel="wood"))        # tree 3.8 m < 4.57 m
+        self.assertEqual(statuses(good(), "LS-FIRE-STRUCT"), {"pass"})                     # gas: nearest is the tree at ~3.8 m
+
+    def test_flush_lip_and_opening(self):
+        self.case("LS-FLUSH-LIP", lambda L: L["features"][0]["cover"].update(lip_mm=10))                 # needs a bevel
+        self.case("LS-FLUSH-LIP", lambda L: L["features"][0]["cover"].update(lip_mm=20, bevelled=True))
+        L = good(); L["features"][0]["cover"].update(lip_mm=10, bevelled=True)
+        self.assertEqual(statuses(L, "LS-FLUSH-LIP"), {"pass"})
+        self.assertEqual(statuses(good(), "LS-FLUSH-LIP"), {"pass"})
+        self.case("LS-FLUSH-OPENING", lambda L: L["features"][0]["cover"].update(max_opening_mm=25))
+        self.assertEqual(statuses(good(), "LS-FLUSH-OPENING"), {"pass"})
+
+    def test_pond_child_protection(self):
+        self.case("LS-POND-GUARD", lambda L: L["features"][3].pop("child_protection"))
+        self.case("LS-POND-GUARD", lambda L: L["features"][3].update(child_protection="fence", fence_height_mm=900))
+        self.case("LS-POND-GUARD", lambda L: L["features"][3].update(child_protection="net"))
+        L = good(); L["features"][3].update(child_protection="fence", fence_height_mm=1100)
+        self.assertEqual(statuses(L, "LS-POND-GUARD"), {"pass"})
+        L = good(); L["features"][3]["flush"] = False                                      # raised pond: rule silent
+        self.assertEqual(statuses(L, "LS-POND-GUARD"), set())
+        self.assertEqual(statuses(good(), "LS-POND-GUARD"), {"pass"})
+
+    def test_pond_edge_slope_and_light(self):
+        self.case("LS-POND-EDGE-SLOPE", lambda L: L["features"][3].update(edge_slope_run_per_rise=2))
+        self.case("LS-POND-EDGE-LIGHT", lambda L: L["features"][3].update(edge_lux=1))
+        self.case("LS-POND-EDGE-LIGHT", lambda L: L["features"][0].update(edge_lux=0.5))
+        self.assertEqual(statuses(good(), "LS-POND-EDGE-SLOPE") | statuses(good(), "LS-POND-EDGE-LIGHT"), {"pass"})
+        L = good(); del L["features"][3]["edge_lux"]
+        self.assertIn("not_evaluated", statuses(L, "LS-POND-EDGE-LIGHT"))
+
+    def test_pond_depth_stock_shade(self):
+        self.case("LS-POND-DEPTH", lambda L: L["features"][3].update(depth_mm=500))
+        self.case("LS-POND-STOCK", lambda L: L["features"][3].update(koi_count=20, koi_adult_length_cm=60))   # 472 in / 6 m2
+        L = good(); L["features"][3].update(koi_count=20, koi_adult_length_cm=60, aerated=True)            # 78.7 in/m2 > 43.1
+        self.assertIn("warn", statuses(L, "LS-POND-STOCK"))
+        L = good(); L["features"][3].update(koi_count=12, koi_adult_length_cm=40, aerated=True)           # 189 in / 6 = 31.5 <= 43.1
+        self.assertEqual(statuses(L, "LS-POND-STOCK"), {"pass"})
+        L = good(); L["features"][3].update(koi_count=12, koi_adult_length_cm=40, aerated=False)          # 31.5 > 28.7
+        self.assertIn("warn", statuses(L, "LS-POND-STOCK"))
+        self.case("LS-POND-SHADE", lambda L: L["features"][3].update(surface_shade_pct=20))
+        self.case("LS-POND-SHADE", lambda L: L["features"][3].update(surface_shade_pct=90))
+        self.assertEqual(statuses(good(), "LS-POND-DEPTH") | statuses(good(), "LS-POND-STOCK") | statuses(good(), "LS-POND-SHADE"), {"pass"})
+
+    def test_lounge_and_standing_area(self):
+        self.case("LS-LOUNGE-AREA", lambda L: L["seating"][0].update(seats=25))                 # 36 / 25 = 1.44
+        self.case("LS-LOUNGE-CLUSTER", lambda L: L["zones"][1].update(rect=[8, 0, 11, 6]))      # 3 m wide
+        self.case("LS-STAND-AREA", lambda L: L["zones"][2].update(design_people=40))            # 36 / 40
+        self.assertEqual(statuses(good(), "LS-LOUNGE-AREA") | statuses(good(), "LS-LOUNGE-CLUSTER") | statuses(good(), "LS-STAND-AREA"), {"pass"})
+        L = good(); L["zones"] = [z for z in L["zones"] if z["use"] != "standing"]
+        self.assertEqual(statuses(L, "LS-STAND-AREA"), {"not_evaluated"})                       # no standing zone is visible, not silent
+
+    def test_tree_distance_to_building(self):
+        self.case("LS-TREE-BUILDING", lambda L: L["trees"][0].update(mature_height_m=20, water_demand="high"))   # 25 m > 12 m
+        L = good(); L["trees"][0].update(mature_height_m=10); del L["trees"][0]["water_demand"]                  # unknown: assume high, 12.5 m
+        r = res(L, "LS-TREE-BUILDING")[0]
+        self.assertEqual((r.status, r.required), ("warn", 12.5))
+        self.assertIn("assume high", r.message)
+        L = good(); del L["trees"][0]["mature_height_m"]
+        self.assertEqual(statuses(L, "LS-TREE-BUILDING"), {"not_evaluated"})
+        self.assertEqual(statuses(good(), "LS-TREE-BUILDING"), {"pass"})
+
+    def test_hedge_spacing_and_herb_sun(self):
+        self.case("LS-HEDGE-SPACING", lambda L: L["boundary"][1].update(row_spacing_mm=900))
+        self.case("LS-HEDGE-SPACING", lambda L: L["boundary"][1].update(row_spacing_mm=150))
+        self.assertEqual(statuses(good(), "LS-HEDGE-SPACING"), {"pass"})
+        self.case("LS-HERB-SUN", lambda L: L["features"][2].update(midsummer_sun_hours=3))
+        L = good(); del L["features"][2]["midsummer_sun_hours"]
+        self.assertEqual(statuses(L, "LS-HERB-SUN"), {"not_evaluated"})
+        self.assertEqual(statuses(good(), "LS-HERB-SUN"), {"pass"})
 
     def test_pond_freeboard(self):
         self.case("LS-POND-FREEBOARD", lambda L: L["features"][3].update(freeboard_mm=100))
@@ -193,7 +309,7 @@ class Negatives(unittest.TestCase):
         self.case("LS-SLOPE", lambda L: L["paved_areas"][0].update(slope_pct=4))
         self.case("LS-SLOPE", lambda L: L["paved_areas"][0].update(slope_pct=0))    # ponds water
         self.case("LS-SLOPE", lambda L: L["paths"][0].update(cross_slope_pct=3))    # main path: accessible 2 %
-        self.case("LS-SLOPE", lambda L: L["zones"][2].update(slope_pct=9))
+        self.case("LS-SLOPE", lambda L: L["zones"][3].update(slope_pct=9))
         self.assertEqual(statuses(good(), "LS-SLOPE"), {"pass"})
 
     def test_hydrozone(self):

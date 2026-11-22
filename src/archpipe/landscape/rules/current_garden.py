@@ -16,7 +16,8 @@ ASSUMPTIONS = (
     "paths: every door-link route is class 'secondary' (the garden has no main path); width = the short side of its rectangle",
     "seats: a bench counts floor(length / 0.5 m) seats (TS 520-24: 500 mm bench space per person); each chair one seat",
     "plant form: mature height <= 0.5 m -> ground_cover, otherwise shrub; no height -> unknown (not evaluated)",
-    "trees: mature spread = upper bound of the verified palette range (Plumeria 7.6 m)",
+    "trees: mature spread = upper bound of the verified palette range (Plumeria 7.6 m); mature height = upper bound of the height range",
+    "trees: water_demand = moderate, NHBC 2024 4.2 default for a species not on its high list (Plumeria is not named); LDL should confirm",
     "boundary: fence-street = street side; fence-east, fence-west, fence-rear = neighbour side; height = z1 - z0 of the Revit element",
     "water_need, slopes, soil depth under trees, steps: not present in the garden data, so left absent",
 )
@@ -64,7 +65,9 @@ def build() -> dict:
         sp = tree[2]
         spread = pal[sp]["spread"]["range_m"][1]
         trees.append({"id": tree[1], "species": sp, "center": list(tree[3]), "mature_spread_m": spread,
-                      "form": "large_tree", "over_structure": True})
+                      "form": "large_tree", "over_structure": True,
+                      "mature_height_m": (pal[sp].get("height") or {}).get("range_m", [None, None])[1],
+                      "water_demand": "moderate"})
     boundary = []
     side = {"fence-street": "street"}
     elements = {e["id"]: e for e in E.spec()["elements"]}

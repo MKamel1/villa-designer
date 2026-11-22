@@ -14,6 +14,7 @@ from ...rules import Remedy, Rule
 
 RULES_JSON = Path(__file__).resolve().parents[4] / "knowledge/landscape/rules/rules.json"
 SCHEMA = "landscape-rules/1"
+WITHDRAWN_STATUS = "unverified — not used"
 
 
 def _remedies(fix: str) -> tuple[Remedy, ...]:
@@ -34,7 +35,7 @@ class RuleSet:
                 raise ValueError(f"duplicate source id {s['id']}")
             self.sources[s["id"]] = SourceCard(id=s["id"], document=s["document"], edition=s["edition"],
                                               locator=s["locator"], quote=s["quote"], value=s["value"],
-                                              status=s["status"], url_or_path=s.get("book", ""))
+                                              status=s["status"], url_or_path=s.get("book") or s.get("url", ""))
         self.params: dict[str, dict] = {}
         self.rules: dict[str, Rule] = {}
         self.severity: dict[str, str] = {}
@@ -50,6 +51,14 @@ class RuleSet:
             self._add(a, "advisory", "Raise it with the designer as a judgement prompt; do not score it")
             self.advisory_ids.append(a["id"])
         self.gaps = {g["id"]: g for g in data["gaps"]}
+        # Withdrawn rules cite a source we do not hold ("unverified - not used"). They are data for the
+        # lead (what is missing), never Rule objects, so a critic cannot cite them.
+        self.withdrawn = {w["id"]: w for w in data.get("withdrawn", [])}
+        for w in self.withdrawn.values():
+            if w.get("status") != WITHDRAWN_STATUS:
+                raise ValueError(f"{w['id']}: withdrawn rules must have status {WITHDRAWN_STATUS!r}")
+            if w["id"] in self.rules:
+                raise ValueError(f"{w['id']}: both active and withdrawn")
 
     def _add(self, r: dict, kind: str, fix: str) -> None:
         ids = tuple(r.get("sources", ()))
