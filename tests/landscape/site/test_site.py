@@ -148,6 +148,16 @@ def test_privacy_street_is_blind_and_neighbours_see_the_yard(layers):
     assert rear[j, i] == 0
 
 
+def test_no_zone_is_private_and_the_stats_agree_with_the_layer(layers):
+    st = layers["privacy"]["eyes_any_standing_stats_by_zone"]
+    assert all(v["min"] >= 1 for v in st.values())          # conservative: every cell is overlooked by someone
+    a = G.from_rows(layers["privacy"]["layers"]["overlooking_eyes_any_standing"])
+    zi = M.zone_of_cells()
+    for k, z in enumerate(M.ZONES):
+        v = a[zi == k]
+        assert st[z]["max"] == np.nanmax(v) and st[z]["min"] == np.nanmin(v)
+
+
 def test_boundary_screen_is_above_the_existing_fence_for_every_visible_sightline(layers):
     b = layers["privacy"]["boundaries"]["east-fence"]
     seen = [z for s in b["segments"] for z in s["required_top_z_standing"] if z is not None]
