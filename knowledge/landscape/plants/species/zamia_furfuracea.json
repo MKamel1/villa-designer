@@ -1,0 +1,254 @@
+{
+ "slug": "zamia_furfuracea",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Zamia furfuracea L.f.",
+    "family": "Zamiaceae",
+    "common_names": [
+     "cardboard palm",
+     "cardboard cycad",
+     "Jamaican sago"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Zamia%20furfuracea",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.5,
+    "text": "2-5 ft as stated (NCSU); MBG to 4.25 ft"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 5 ft. 0 in. Width: 5 ft. 0 in. - 8 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 2.6,
+    "text": "5-8.5 ft as stated (NCSU); MBG 4-7 ft"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 5 ft. 0 in. Width: 5 ft. 0 in. - 8 ft. 6 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow",
+    "text": "NCSU: slow-growing"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Slow"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is easy to grow in well-drained soils in full sun to partial shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "MBG Water: dry to medium; allow soil to dry between waterings (NCSU)"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Water: Dry to medium"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no source opened states heat tolerance in words",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+    "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU: drought- and salt-tolerant; Resistance To Challenges lists Drought, Dry Soil; MBG: some drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They are drought- and salt-tolerant."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no soil-pH statement (MBG notes a native habitat of limestone sea cliffs, which is not a tolerance statement)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+    "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: salt-tolerant (no degree); MBG: tolerant of salt spray; Wikipedia: fairly salt-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They are drought- and salt-tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "NCSU zones 9a-11b and must be brought indoors for winter in NC; MBG: hardy zones 9-11, does not tolerate hard frosts; Wikipedia: protect from extreme cold. No temperature figure stated, so the zone floor is used"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [],
+    "text": "no true flowers; cones on separate male and female plants"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Flowers",
+    "quote": "Gymnosperms have no true flowers."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "rosette of stiff, fuzzy, pinnately compound leaves like a palm"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+    "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "NCSU Poison Severity Medium; seeds contain cycasin; 1-2 seeds can be fatal. Also toxic to cats, dogs, horses"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Poisonous to Humans",
+    "quote": "1-2 seeds can be fatal."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+    "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Low"
+   }
+  }
+ },
+ "notes": "A cycad, not a palm; layer set to tropical_foliage. Seeds toxic (placement rule derives from toxicity_people). Wikipedia: Endangered in the wild, illegally collected; supplier check should confirm nursery-propagated stock."
+}
