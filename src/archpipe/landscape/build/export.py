@@ -5,6 +5,8 @@ carries one finish; `element_ids` is declared (P2 'declared' basis), and the id 
 """
 from __future__ import annotations
 
+from . import guard
+
 
 def _faces(part):
     v = part.verts
@@ -12,6 +14,7 @@ def _faces(part):
 
 
 def to_villa_scene(scene, state="closed"):
+    guard.refuse(scene, "the production villa scene")
     meshes, props = [], []
     for o in scene.select(state):
         by = {}
@@ -24,6 +27,6 @@ def to_villa_scene(scene, state="closed"):
                                element_ids=[o.id], ld_state=o.state, ld_standin=o.standin))
         if o.asset:
             a = o.asset
-            props.append(dict(id=o.id, asset=a["asset_id"], gltf=a["gltf"], scale_to_height_m=a["bounds"][5] - a["bounds"][2], base_at=a["at"], rotation_deg=[0, 0, 0],
+            props.append(dict(id=o.id, asset=a["asset_id"], gltf=a["gltf"], scale_to_height_m=a["bounds"][5] - a["bounds"][2], base_at=a["at"], rotation_deg=[0, 0, a.get("yaw_deg", 0.0)], placement=dict(mode=a.get("mode", "height"), scale_xyz=a.get("scale_xyz"), box_m=a.get("box_m"), length_m=a.get("length_m"), tiles=a.get("tiles")),
                               zone="lower", label=o.label, element_ids=[o.id], grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"]))
     return meshes, props

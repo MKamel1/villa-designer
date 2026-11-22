@@ -1,0 +1,599 @@
+{
+ "schema": "outdoor-assets/1",
+ "generated": "2026-11-22",
+ "koi_found": true,
+ "notes": "size_m is the native extents after Blender glTF import (Z-up) in the file's own units; many Sketchfab authors used cm/mm/arbitrary units, so scale each asset by target dimension, not by unit. Licences re-read from the Sketchfab API (/v3/models/<uid>) at download time and recorded verbatim; Poly Haven models are CC0 by site policy. Grades by eye on 4-azimuth previews (camera 2.2 x longest side, 35 mm) plus measured stats; no asset graded A.",
+ "assets": [
+  {
+   "id": "skf_12cf06b5",
+   "role": "dining_table",
+   "source_url": "https://sketchfab.com/3d-models/wooden-dining-table-set-12cf06b544574248bab985de436b15e2",
+   "licence": "CC Attribution",
+   "author": "aziseptian",
+   "title": "Wooden Dining Table Set",
+   "triangles": 5320,
+   "size_m": [
+    0.02,
+    0.013,
+    0.009
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): symmetric table, long axis X; chairs face the table.",
+   "front": "symmetric table, long axis X; chairs face the table",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_12cf06b5/scene.gltf",
+   "grade": "B",
+   "rationale": "Slatted teak-look rectangular table with 6 matching slat-back chairs (3 per long side) and a cross-trestle base; reads as garden dining set, clean meshes, one wood texture, proportions plausible (table ~2.0 x 1.3 incl. chairs). Chairs are separate mesh nodes (125 meshes, Mesh*__Wood___Rust) so can be duplicated/trimmed. Native units tiny: bbox 0.020 m, scale x100 gives ~2.0 x 1.3 x 0.9 m. Open (non-closed) shells, usable at garden distance.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_12cf06b5.jpg",
+   "measured": {
+    "textures": 1,
+    "boundary_edge_share": 0.659,
+    "flat_card": false,
+    "mesh_objects": 125
+   }
+  },
+  {
+   "id": "skf_4febe1ee",
+   "role": "dining_table",
+   "source_url": "https://sketchfab.com/3d-models/worn-garden-table-lowpoly-4febe1eec0a5419a8816ac7f30aa9189",
+   "licence": "CC Attribution",
+   "author": "toxiccrack",
+   "title": "Worn garden table (LowPoly)",
+   "triangles": 648,
+   "size_m": [
+    0.705,
+    2.464,
+    0.851
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): symmetric, long axis Y.",
+   "front": "symmetric, long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_4febe1ee/scene.gltf",
+   "grade": "B",
+   "rationale": "Weathered plank-top trestle table with X legs, 2.46 x 0.71 x 0.85 m in native metres: best size match to a 2.4 m table (width 0.7 not 0.9: scale Y 1.25 if needed). Clean, 648 tris, three textures; low-poly, so soft at 1 m but fine at garden scale; reads rustic outdoor.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_4febe1ee.jpg",
+   "measured": {
+    "textures": 3,
+    "boundary_edge_share": 0.778,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "ph_wooden_picnic_table",
+   "role": "dining_table",
+   "source_url": "https://polyhaven.com/a/wooden_picnic_table",
+   "licence": "CC0 (Poly Haven: all assets CC0; the API carries no per-asset licence field, checked against polyhaven.com/license)",
+   "author": "Ulan Cabanilla",
+   "title": "Wooden Picnic Table",
+   "triangles": 10210,
+   "size_m": [
+    2.241,
+    3.022,
+    0.746
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): benches on both long sides; symmetric.",
+   "front": "benches on both long sides; symmetric",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/ph_wooden_picnic_table/scene.gltf",
+   "grade": "B",
+   "rationale": "Poly Haven photoscan-style weathered picnic table with attached benches: 10k tris, 6 PBR textures, clean. Reads outdoor/park-like rather than villa dining; seats 8 on benches at native size (2.24 x 3.02 m incl. benches). Use only if a rustic look is acceptable.",
+   "preview": "knowledge/landscape/build/outdoor-previews/ph_wooden_picnic_table.jpg",
+   "measured": {
+    "textures": 6,
+    "boundary_edge_share": 0.181,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_76d6011a",
+   "role": "dining_table",
+   "source_url": "https://sketchfab.com/3d-models/external-metal-table-and-chairs-76d6011abc8848c89f080df54ed4d0f8",
+   "licence": "CC Attribution",
+   "author": "Francesco Coldesina",
+   "title": "External Metal Table and Chairs",
+   "triangles": 55338,
+   "size_m": [
+    6.533,
+    8.397,
+    4.146
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): chairs on all 4 sides; symmetric.",
+   "front": "chairs on all 4 sides; symmetric",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_76d6011a/scene.gltf",
+   "grade": "B",
+   "rationale": "Stone-top rectangular table with 4 wrought-iron chairs with green cushions (set); 55k tris, 6 textures, clean modelling, reads garden/terrace set. Native extents 6.5 x 8.4 x 4.1 (units ~cm-ish; scale so table is 1.4-2.4 m); only 4 chairs, table shorter than 2.4 m.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_76d6011a.jpg",
+   "measured": {
+    "textures": 6,
+    "boundary_edge_share": 0.465,
+    "flat_card": false,
+    "mesh_objects": 5
+   }
+  },
+  {
+   "id": "skf_02633251",
+   "role": "dining_table",
+   "source_url": "https://sketchfab.com/3d-models/garden-wooden-chair-garden-wooden-table-02633251bccf486099021286a8069333",
+   "licence": "CC Attribution",
+   "author": "YIK",
+   "title": "Garden Wooden Chair & Garden wooden Table",
+   "triangles": 532,
+   "size_m": [
+    1.5,
+    2.0,
+    0.75
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): symmetric, long axis Y.",
+   "front": "symmetric, long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_02633251/scene.gltf",
+   "grade": "C",
+   "rationale": "Plank picnic table with two benches, 1.5 x 2.0 x 0.75 m in metres. Only 532 tris, no fine detail; reads as outdoor table but is flat/low-poly at 1-2 m; kept only as a fallback.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_02633251.jpg",
+   "measured": {
+    "textures": 4,
+    "boundary_edge_share": 0.77,
+    "flat_card": false,
+    "mesh_objects": 3
+   }
+  },
+  {
+   "id": "skf_2ead6426",
+   "role": "dining_table",
+   "source_url": "https://sketchfab.com/3d-models/outdoor-chair-table-2ead6426d18f4f94ae53bfcb46bbb05b",
+   "licence": "CC Attribution",
+   "author": "Momo",
+   "title": "Outdoor Chair & Table",
+   "triangles": 660,
+   "size_m": [
+    1.188,
+    1.157,
+    0.687
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): symmetric.",
+   "front": "symmetric",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_2ead6426/scene.gltf",
+   "grade": "C",
+   "rationale": "Slatted table with 4 slat chairs (set), 660 tris, no textures (flat colours); recognisable outdoor set but plain and toy-like. Fallback only.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_2ead6426.jpg",
+   "measured": {
+    "textures": 0,
+    "boundary_edge_share": 0.8,
+    "flat_card": false,
+    "mesh_objects": 4
+   }
+  },
+  {
+   "id": "ph_plastic_monobloc_chair_01",
+   "role": "dining_chair",
+   "source_url": "https://polyhaven.com/a/plastic_monobloc_chair_01",
+   "licence": "CC0 (Poly Haven: all assets CC0; the API carries no per-asset licence field, checked against polyhaven.com/license)",
+   "author": "Kuutti Siitonen",
+   "title": "Plastic Monobloc Chair 01",
+   "triangles": 3356,
+   "size_m": [
+    0.642,
+    0.628,
+    0.88
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front (seat opening, arms forward) faces -Y.",
+   "front": "front (seat opening, arms forward) faces -Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/ph_plastic_monobloc_chair_01/scene.gltf",
+   "grade": "B",
+   "rationale": "CC0 monobloc plastic stacking garden chair, 3.4k tris, 3 textures, clean closed form, 0.64 x 0.63 x 0.88 m (native metres, plausible). Recognisable outdoor chair; down-market for a villa but safe and needs no attribution. Same modeller as Sketchfab skf_68089dce (identical triangle count), CC0 copy preferred.",
+   "preview": "knowledge/landscape/build/outdoor-previews/ph_plastic_monobloc_chair_01.jpg",
+   "measured": {
+    "textures": 3,
+    "boundary_edge_share": 0.444,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_7f558fcd",
+   "role": "dining_chair",
+   "source_url": "https://sketchfab.com/3d-models/patio-chair-reconstruction-7f558fcd893a4a78aaa6e91e41ce798f",
+   "licence": "CC Attribution",
+   "author": "pigfinite",
+   "title": "Patio Chair (reconstruction)",
+   "triangles": 876,
+   "size_m": [
+    1.036,
+    1.22,
+    1.739
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front faces -Y.",
+   "front": "front faces -Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_7f558fcd/scene.gltf",
+   "grade": "B",
+   "rationale": "Folding sling patio chair with metal frame and fabric seat, 876 tris, one texture; metal frame thin but clean; 1.04 x 1.22 x 1.74 as imported (recliner-style tilt included; real chair is ~0.6 x 0.6 x 1.0), so scale ~0.57 to seat height 0.45. Reads garden chair; slightly thin at <2 m.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_7f558fcd.jpg",
+   "measured": {
+    "textures": 1,
+    "boundary_edge_share": 0.709,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "ph_outdoor_table_chair_set_01",
+   "role": "dining_chair",
+   "source_url": "https://polyhaven.com/a/outdoor_table_chair_set_01",
+   "licence": "CC0 (Poly Haven: all assets CC0; the API carries no per-asset licence field, checked against polyhaven.com/license)",
+   "author": "James Ray Cock",
+   "title": "Outdoor Table Chair Set 01",
+   "triangles": 9828,
+   "size_m": [
+    0.742,
+    1.717,
+    0.859
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): chairs face the table; symmetric.",
+   "front": "chairs face the table; symmetric",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/ph_outdoor_table_chair_set_01/scene.gltf",
+   "grade": "B",
+   "rationale": "CC0 folding wood-and-metal bistro set: small square table and 2 folding slat chairs (3 mesh objects), 9.8k tris, 6 textures, clean, plausible sizes (0.74 x 1.72 x 0.86 m). Chairs are separate objects and can be duplicated; table too small for dining.",
+   "preview": "knowledge/landscape/build/outdoor-previews/ph_outdoor_table_chair_set_01.jpg",
+   "measured": {
+    "textures": 6,
+    "boundary_edge_share": 0.547,
+    "flat_card": false,
+    "mesh_objects": 3
+   }
+  },
+  {
+   "id": "skf_01a5b644",
+   "role": "bench",
+   "source_url": "https://sketchfab.com/3d-models/classic-park-bench-low-poly-01a5b64427984632bb44242da3813bb1",
+   "licence": "CC Attribution",
+   "author": "Berk Gedik",
+   "title": "Classic Park Bench (Low Poly)",
+   "triangles": 4796,
+   "size_m": [
+    2.0,
+    0.723,
+    0.899
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front (seat side) faces -Y.",
+   "front": "front (seat side) faces -Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_01a5b644/scene.gltf",
+   "grade": "B",
+   "rationale": "Classic park bench: slatted wood seat and back on cast-iron ends, 4.8k tris, 9 textures, 2.00 x 0.72 x 0.90 m native metres (ideal). Closed clean forms, recognisable at 1-5 m. Best bench for a garden.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_01a5b644.jpg",
+   "measured": {
+    "textures": 9,
+    "boundary_edge_share": 0.398,
+    "flat_card": false,
+    "mesh_objects": 3
+   }
+  },
+  {
+   "id": "skf_d0d03173",
+   "role": "bench",
+   "source_url": "https://sketchfab.com/3d-models/bench-aged-and-gritty-d0d03173e900450e9aae4276f344b9b3",
+   "licence": "CC Attribution",
+   "author": "Glowbox 3D",
+   "title": "Bench -- aged and gritty",
+   "triangles": 9310,
+   "size_m": [
+    1659.299,
+    3490.631,
+    2233.367
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front (seat side) faces +X; long axis Y.",
+   "front": "front (seat side) faces +X; long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_d0d03173/scene.gltf",
+   "grade": "B",
+   "rationale": "Aged cast-iron and timber park bench with scrolled arms, 9.3k tris, 3 textures; realistically weathered. Native extents 1659 x 3490 x 2233 units (model units, not metres): scale to bench length 1.5-1.8 m (~x0.00045). Single mesh.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_d0d03173.jpg",
+   "measured": {
+    "textures": 3,
+    "boundary_edge_share": 0.682,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_df71b965",
+   "role": "bench",
+   "source_url": "https://sketchfab.com/3d-models/japanese-garden-bench-df71b965d0ba4a9596375133ac785e21",
+   "licence": "CC Attribution",
+   "author": "Anastasiia Shevchenko",
+   "title": "Japanese Garden Bench",
+   "triangles": 969,
+   "size_m": [
+    2.08,
+    0.732,
+    1.101
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front faces -Y.",
+   "front": "front faces -Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_df71b965/scene.gltf",
+   "grade": "B",
+   "rationale": "Wooden garden bench with slatted back and centre plaque, 969 tris, 3 textures, 2.08 x 0.73 x 1.10 m native (a little deep and tall: scale 0.85 gives 1.77 m). Clean teak-look, plain but readable.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_df71b965.jpg",
+   "measured": {
+    "textures": 3,
+    "boundary_edge_share": 0.511,
+    "flat_card": false,
+    "mesh_objects": 5
+   }
+  },
+  {
+   "id": "skf_1ddafec2",
+   "role": "bench",
+   "source_url": "https://sketchfab.com/3d-models/street-bench-1ddafec2fda5430697aaf403b3deba96",
+   "licence": "CC Attribution",
+   "author": "donnichols",
+   "title": "Street Bench",
+   "triangles": 13076,
+   "size_m": [
+    203.745,
+    67.023,
+    76.072
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front faces -Y.",
+   "front": "front faces -Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_1ddafec2/scene.gltf",
+   "grade": "B",
+   "rationale": "Street bench, timber slats on cast-iron legs, 13k tris, 3 textures, native extents 203.7 x 67.0 x 76.1 (cm: scale 0.01 gives 2.04 x 0.67 x 0.76; seat height ~0.45 plausible). Clean.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_1ddafec2.jpg",
+   "measured": {
+    "textures": 3,
+    "boundary_edge_share": 0.164,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_82cadef8",
+   "role": "bench",
+   "source_url": "https://sketchfab.com/3d-models/fancy-bench-82cadef8dfb24c0784eefff7be71610c",
+   "licence": "CC Attribution",
+   "author": "SomeKevin",
+   "title": "Fancy Bench",
+   "triangles": 97814,
+   "size_m": [
+    3.225,
+    7.25,
+    3.459
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): front faces +X; long axis Y.",
+   "front": "front faces +X; long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_82cadef8/scene.gltf",
+   "grade": "B",
+   "rationale": "Ornate cast-iron-ended park bench with wooden slats, 98k tris (heavy), 9 textures; native 3.2 x 7.3 x 3.5 units (model units, long axis Y: scale to length 1.6-1.8 m, ~x0.24). Good detail, heavy mesh; use one at most.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_82cadef8.jpg",
+   "measured": {
+    "textures": 9,
+    "boundary_edge_share": 0.129,
+    "flat_card": false,
+    "mesh_objects": 3
+   }
+  },
+  {
+   "id": "skf_3e1b80c3",
+   "role": "koi",
+   "source_url": "https://sketchfab.com/3d-models/koi-fish-3e1b80c3653f43349252aab3b4fb1d86",
+   "licence": "CC Attribution",
+   "author": "SDPM Esare",
+   "title": "Koi Fish",
+   "triangles": 17993,
+   "size_m": [
+    0.888,
+    0.569,
+    0.41
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): head toward -X, body curves toward +Y; swim in the XY plane, belly -Z.",
+   "front": "head toward -X, body curves toward +Y; swim in the XY plane, belly -Z",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_3e1b80c3/scene.gltf",
+   "grade": "B",
+   "rationale": "Single koi, red/white (kohaku-like) with scale texture, translucent fins, banked S-curve pose, 18k tris, 1 texture, closed mesh. Reads as koi at 1.5 m (red patches, body shape). No black patches. 0.89 x 0.57 x 0.41 m native (curved pose; length ~0.9 m, scale 0.6-0.7 for a 0.6 m fish).",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_3e1b80c3.jpg",
+   "measured": {
+    "textures": 1,
+    "boundary_edge_share": 0.061,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_602b3cbf",
+   "role": "koi",
+   "source_url": "https://sketchfab.com/3d-models/koi-fish-602b3cbfc4014fc3b890936c019ffb6f",
+   "licence": "CC Attribution",
+   "author": "amalie.kma",
+   "title": "Koi fish",
+   "triangles": 9970,
+   "size_m": [
+    121.235,
+    230.165,
+    83.182
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): head toward +Y (toward screen right at az 90); long axis Y.",
+   "front": "head toward +Y (toward screen right at az 90); long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_602b3cbf/scene.gltf",
+   "grade": "B",
+   "rationale": "Tricolour (orange/white/black patches, Sanke/Showa-like) koi, 10k tris, 5 textures, closed, soft fin shapes. Looks like two fish in the top view (a second fish or a bent pose). Reads as koi at 1.5 m. Native 121 x 230 x 83 units (cm: scale 0.01 gives 2.3 m, too big: scale ~0.003 for a 0.7 m fish).",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_602b3cbf.jpg",
+   "measured": {
+    "textures": 5,
+    "boundary_edge_share": 0.05,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_8bc4556d",
+   "role": "koi",
+   "source_url": "https://sketchfab.com/3d-models/koi-fish-8bc4556dbd9b4991ac877d24ab2d0081",
+   "licence": "CC Attribution",
+   "author": "local.yany",
+   "title": "Koi Fish",
+   "triangles": 37800,
+   "size_m": [
+    1.371,
+    1.064,
+    0.297
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): fish swim in various directions in the XY plane; belly -Z.",
+   "front": "fish swim in various directions in the XY plane; belly -Z",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_8bc4556d/scene.gltf",
+   "grade": "B",
+   "rationale": "A school of about 15 koi in orange, red and white (and some solid orange), 37.8k tris, 1 shared texture, reads clearly as koi seen from above at 1.5 m. Native 1.37 x 1.06 x 0.30 m: a ready-made school footprint; fish are ~0.25 m long at native size (scale 2-2.5 for 0.5-0.6 m fish, footprint then 3 x 2.5 m). Fish are separate meshes frozen in poses.",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_8bc4556d.jpg",
+   "measured": {
+    "textures": 1,
+    "boundary_edge_share": 0.118,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_236859b8",
+   "role": "koi",
+   "source_url": "https://sketchfab.com/3d-models/koi-fish-236859b809984f52b70c94fd040b9c59",
+   "licence": "CC Attribution",
+   "author": "7PLUS",
+   "title": "Koi Fish",
+   "triangles": 522,
+   "size_m": [
+    6.391,
+    2.344,
+    2.893
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): head toward +X.",
+   "front": "head toward +X",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_236859b8/scene.gltf",
+   "grade": "C",
+   "rationale": "Realistic koi shape, 522 tris, 2 textures, but the pattern is muddy grey-blue/red mottling rather than clean koi colour blocks; fins are fine. Reads fish rather than koi at 1.5 m. Native 6.4 x 2.3 x 2.9 units (scale ~0.1 for 0.6 m).",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_236859b8.jpg",
+   "measured": {
+    "textures": 2,
+    "boundary_edge_share": 0.439,
+    "flat_card": false,
+    "mesh_objects": 1
+   }
+  },
+  {
+   "id": "skf_8ffded4f",
+   "role": "koi",
+   "source_url": "https://sketchfab.com/3d-models/koi-fish-8ffded4f28514e439ea0a26d28c1852a",
+   "licence": "CC Attribution",
+   "author": "RunemarkStudio",
+   "title": "Koi Fish",
+   "triangles": 1126,
+   "size_m": [
+    222.35,
+    561.561,
+    219.482
+   ],
+   "up_axis_note": "Blender glTF import (Z-up) extents; file itself is glTF Y-up (+Z Blender = +Y glTF). Extents are the file's own units as imported (glTF nominally metres; a value that is not plausible in metres means the author used other units, see rationale). front given in Blender Z-up axes after glTF import (front -Y = glTF +Z): head toward -Y; long axis Y.",
+   "front": "head toward -Y; long axis Y",
+   "gltf": "/home/omar/archpipe/shared/assets/user/landscape/outdoor/skf_8ffded4f/scene.gltf",
+   "grade": "C",
+   "rationale": "Kohaku-style flat-colour low-poly koi (1126 tris, no textures, hard-edged red patches): clear koi colour scheme and body shape from above at 1.5 m, but faceted and plasticky at closer range. Native 222 x 562 x 219 units (cm: scale ~0.0012 for 0.7 m).",
+   "preview": "knowledge/landscape/build/outdoor-previews/skf_8ffded4f.jpg",
+   "measured": {
+    "textures": 0,
+    "boundary_edge_share": 0.989,
+    "flat_card": false,
+    "mesh_objects": 4
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "id": "skf_0d077097",
+   "title": "Garden Chair 2 (Medhatelo)",
+   "reason": "Sun lounger, not a dining chair."
+  },
+  {
+   "id": "skf_706fe87e",
+   "title": "Garden Chair (Medhatelo)",
+   "reason": "Sun lounger, not a dining chair."
+  },
+  {
+   "id": "skf_f43d440c",
+   "title": "Rustic Pergola Dining Set (Line Zero Studio)",
+   "reason": "Table, benches and a pergola in one mesh set; baked texture renders as black-white noise; 26k tris. Grade D for our use."
+  },
+  {
+   "id": "skf_030f3d20",
+   "title": "Metal Indoor-Outdoor Restaurant Dining Table (allenbranch)",
+   "reason": "0.79 m square bistro table, no textures: cannot seat 8-10 (grade C for the role)."
+  },
+  {
+   "id": "skf_4288fde5",
+   "title": "Exterior Table Abrela (octoyisus)",
+   "reason": "White plastic folding banquet table 1.83 x 0.75 m, event/catering look, not garden dining (grade C)."
+  },
+  {
+   "id": "skf_30596680",
+   "title": "Metallic garden table (anDDDres)",
+   "reason": "Round glass table with 4 chairs in a 40-mesh set, black wire look, 0.7 m: too small, no textures (C)."
+  },
+  {
+   "id": "skf_253df7f7",
+   "title": "Set Mesa & sillas de jardin en madera (Roberto Dominguez)",
+   "reason": "A lounge set (sofa, armchairs, coffee table), not a dining table; 75k tris."
+  },
+  {
+   "id": "skf_59f257ea",
+   "title": "juego de mesa y sillas para jardin (CastroArbell)",
+   "reason": "Round glass table, 4 chairs and an umbrella in one mesh; noisy textures; 93k tris (C)."
+  },
+  {
+   "id": "skf_38f93c56",
+   "title": "Outdoor Table Scan MEDPOLY (sixonetwo)",
+   "reason": "Wicker coffee table scan, 0.49 x 0.87 m: too small for dining; 69 MB."
+  },
+  {
+   "id": "skf_68089dce",
+   "title": "Monobloc Plastic Garden Chair (Kuutti Siitonen)",
+   "reason": "Same mesh (3356 tris) as the CC0 Poly Haven copy ph_plastic_monobloc_chair_01; the CC0 copy was preferred, no attribution needed."
+  },
+  {
+   "id": "ph_modular_street_seating",
+   "title": "Modular Street Seating (Poly Haven, CC0)",
+   "reason": "Urban modular seating, 4.3 m, with attached litter bin pieces (16 meshes); not a garden bench (C)."
+  },
+  {
+   "id": "ph_painted_wooden_sofa",
+   "title": "Painted Wooden Sofa (Poly Haven, CC0)",
+   "reason": "Upholstered painted settee, reads as indoor furniture despite the \"outdoor\" tag (C for garden)."
+  },
+  {
+   "id": "ph_dining_chair_02",
+   "title": "Dining Chair 02 (Poly Haven, CC0)",
+   "reason": "Tufted leather indoor dining chair; not outdoor furniture."
+  },
+  {
+   "id": "skf_081c8148",
+   "title": "DAE The Flying Circus Koi Fish (Petru Grati)",
+   "reason": "Koi inside a glass sphere; not a koi asset (D)."
+  },
+  {
+   "id": "skf_ef0c406d",
+   "title": "Carp Fish (huykhoi2407)",
+   "reason": "Brown common carp, not a koi; 7.5k tris (D for the role)."
+  },
+  {
+   "id": "skf_d880a531",
+   "title": "3D KOI orange fish (Sasha Carvajal)",
+   "reason": "Cartoon stubby koi (big head, thick fins), 21k tris, reads as a toy (C)."
+  },
+  {
+   "id": "sketchfab: ffish.asia CC0 carp scans",
+   "title": "CC0 Carp (Cyprinus carpio) scans by ffish.asia / floraZia.com",
+   "reason": "Licence CC0 but 0.5-3.4 M faces and a common (brown) carp, not a koi; too heavy for a garden preview, not downloaded."
+  },
+  {
+   "id": "sketchfab/other licences",
+   "title": "Any NC, ND, \"Standard\" or editorial licence",
+   "reason": "Search used downloadable=true and filtered licence label to CC0 Public Domain or CC Attribution only; other labels were never downloaded (no list kept)."
+  },
+  {
+   "id": "polyhaven koi/fish",
+   "title": "Poly Haven fish/koi",
+   "reason": "Poly Haven has no fish or koi model (only a bronze shark and whale statue)."
+  }
+ ]
+}
