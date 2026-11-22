@@ -1,0 +1,291 @@
+{
+ "set": "north2",
+ "gardens": [
+  {
+   "id": "N2-01",
+   "name": "Minomi House",
+   "designer": "Hankura Design",
+   "location": "Fukuyama, Japan",
+   "year": 2017,
+   "climate": "humid subtemperate",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/948022/minomi-house-hankura-design",
+   "plan_url": "https://images.adsttc.com/media/images/5f64/b08f/63c0/17c8/ec00/0274/large_jpg/Minomi_House_Plan2.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-01",
+   "passes": {
+    "A": {
+     "scope": "Small rotated-square inner court (moss/rock/tree) beside entrance corridor; whole-house plan has several other small gardens",
+     "scale_note": "scale bar 0-3 m = ~350 px on 1414-px display -> ~117 px/m; court side ~216 px = 1.85 m",
+     "area_m2": 3.4,
+     "n_rooms": 1,
+     "room_area_mean_m2": 3.4,
+     "trees_per_100m2": 29,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "court walled on all sides by house, glazed to corridor/LDK",
+     "water_note": "no open water drawn; pale curved band may be gravel stream, not assessed",
+     "rooms_note": "single rock-and-moss court with one canopy tree; area is tiny and approximate",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Terrace garden north-west of the rotated house; central inner court (~3.5 m2) and perimeter gravel excluded",
+     "scale_note": "Scale bar 0 at x=988, 3 m at x=1333 (displayed 1414-wide image): 115 px/m. Polygon area by shoelace ~13,200 px2",
+     "confidence": "low",
+     "area_m2": 5.4,
+     "n_rooms": 1,
+     "room_area_mean_m2": 5.4,
+     "privacy_approach": "wall",
+     "privacy_note": "Boundary wall to the north; guest room and house on other sides.",
+     "rooms_note": "Rocks, moss/gravel ground and 3-4 tree symbols; ground material unclear so shares and tree density null. Garden extent is ambiguous.",
+     "water_note": "No water identified."
+    }
+   }
+  },
+  {
+   "id": "N2-02",
+   "name": "Halaman The Courtyard House",
+   "designer": "ZERO Studio",
+   "location": "Aluva, Kerala, India",
+   "year": null,
+   "climate": "tropical monsoon",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/943527/halaman-the-courtyard-house-zero-studio",
+   "plan_url": "https://images.adsttc.com/media/images/5f08/e520/b357/65c9/0e00/02ed/large_jpg/02._HALAMAN_GF_PLAN.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-02",
+   "passes": {
+    "A": {
+     "scope": "Courtyard 16/17 (shallow pool + fern garden) at NE of ground floor plan",
+     "scale_note": "scale bar 0-5 m = ~245 px (x1590-1835) -> ~49 px/m; court ~5.1 x 4.9 m",
+     "area_m2": 24,
+     "n_rooms": 1,
+     "room_area_mean_m2": 24,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "enclosed by bedroom/living walls and glazing; photos show only interiors",
+     "water_note": "shallow pool labelled and tinted but water/hard split not measurable; photos do not show it; edge unknown",
+     "rooms_note": "single courtyard with shallow pool, stepping slabs and fern planter; interior-edge of bedrooms",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Shallow-pool / fern-garden courtyard (16+17) in ground-floor plan; front garden with well excluded",
+     "scale_note": "Scale bar 0 at x=1591, 5 m at x=1834: ~48.6 px/m. Court ~255x240 px = 5.2x5.0 m (partly roofed)",
+     "confidence": "low",
+     "area_m2": 25.0,
+     "hard_share": 0.4,
+     "soft_share": 0.3,
+     "water_share": 0.3,
+     "n_rooms": 1,
+     "room_area_mean_m2": 25.0,
+     "path_primary_m": 0.73,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Enclosed by bedroom wings, kitchen block and a wall.",
+     "rooms_note": "Shallow pool with stepping slabs plus a fern planter; tree canopies on plan are existing trees, not counted for this court. Shares are estimates.",
+     "water_note": "Pool present but the edge cannot be told from the plan; photos viewed show only interior views."
+    }
+   }
+  },
+  {
+   "id": "N2-03",
+   "name": "Zhan Yuan Courtyard House for Gazing",
+   "designer": "Wee Studio",
+   "location": "China (city not verified)",
+   "year": null,
+   "climate": "unknown",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/951466/zhan-yuan-courtyard-house-for-gazing-wee-studio",
+   "plan_url": "https://images.adsttc.com/media/images/5fb1/47aa/63c0/171e/a800/0138/large_jpg/Plan_01.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-03",
+   "passes": {
+    "A": {
+     "scope": "Central courtyard (3) of first floor plan, 6.4 x 6.25 m rectangle excl. planter strip",
+     "scale_note": "scale bar 0-5 m: x1637-1857 -> ~44 px/m",
+     "area_m2": 40,
+     "n_rooms": 1,
+     "room_area_mean_m2": 40,
+     "trees_per_100m2": 2.5,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "fully enclosed by house walls",
+     "water_note": "none",
+     "rooms_note": "one large paved courtyard with one tree; two other small courts exist",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Central courtyard (3), first-floor plan; roof terrace vs ground not clear",
+     "scale_note": "Scale bar 0 at x=1637, 5 m at x=1857: 44 px/m. Court ~282x~285 px = 6.4x6.5 m",
+     "confidence": "low",
+     "area_m2": 41.0,
+     "hard_share": 0.92,
+     "soft_share": 0.08,
+     "water_share": 0.0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 41.0,
+     "trees_per_100m2": 2.4,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Surrounded by building wings and perimeter wall.",
+     "rooms_note": "Brick-paved court with one tree and a small planter strip; soft share is an estimate.",
+     "water_note": "No water."
+    }
+   }
+  },
+  {
+   "id": "N2-05",
+   "name": "Tsubo-Niwa Extension",
+   "designer": "Kenzo Makino & Associates",
+   "location": "Kyoto, Japan",
+   "year": 2018,
+   "climate": "humid subtemperate",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/954226/tsubo-niwa-extension-kenzo-makino-and-associates",
+   "plan_url": "https://images.adsttc.com/media/images/5feb/6088/63c0/17b1/fd00/00da/large_jpg/siteplan_plan.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-05",
+   "passes": {
+    "A": {
+     "scope": "Tea-garden court on site plan (3.0 x 3.0 m inside veranda ring)",
+     "scale_note": "scale bar 0-8 m: 1 m ~128 px (x767-1792)",
+     "area_m2": 8.8,
+     "n_rooms": 1,
+     "room_area_mean_m2": 8.8,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "walled/framed by veranda and building; no section height",
+     "water_note": "small circular basin symbol only; share not measurable",
+     "rooms_note": "one square court: planting mass with boulders left, stone paving strip right",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Tsubo-niwa courtyard in the site plan (left drawing)",
+     "scale_note": "Scale bar 1.0 m at x=895, 8.0 m at x=1792 (0 at ~767): 128.3 px/m. Court 377x377 px = 2.94x2.94 m",
+     "confidence": "low",
+     "area_m2": 8.6,
+     "hard_share": 0.3,
+     "soft_share": 0.7,
+     "water_share": 0.0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 8.6,
+     "trees_per_100m2": 11.6,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Enclosed by the house walls; the court is deep and narrow.",
+     "rooms_note": "Stone-paved strip on east (~1.9 m2) plus rocks counted hard; bamboo-like clump counted as 1 canopy tree; bare ground material unspecified, counted soft.",
+     "water_note": "Small basin only; no open water."
+    }
+   }
+  },
+  {
+   "id": "N2-06",
+   "name": "Tropical Shift House",
+   "designer": "O2 Design Atelier + Choo Poo Liang Architect",
+   "location": "Selangor, Malaysia",
+   "year": 2024,
+   "climate": "tropical",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/1039318/tropical-shift-house-o2-design-atelier-plus-choo-poo-liang-architect",
+   "plan_url": "https://images.adsttc.com/media/images/69a8/1d9e/785c/2701/893f/909c/large_jpg/ground-floor-4.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-06",
+   "passes": {
+    "A": {
+     "scope": "Principal garden: pool deck / lawn landscape on plot",
+     "scale_note": "scale bar present but unlabelled; segment ratio 1:1:2:4 not confirmed in metres -> all numerics null",
+     "privacy_approach": "tree-screen",
+     "privacy_note": "perimeter tree screen on plot edge",
+     "water_note": "swimming pool present, not measured",
+     "rooms_note": "pool deck, car porch and large perimeter landscape; not measured",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Whole-plot landscape with pool deck; no scale",
+     "scale_note": "Scale bar has no numeric labels or stated length; no usable scale, all numeric plan metrics null",
+     "confidence": "low",
+     "privacy_approach": "mixed",
+     "privacy_note": "Street-side concrete wall plus dense perimeter tree planting on the plan and in photos.",
+     "rooms_note": "Pool deck, yoga deck, car porch, lawn/landscape zones, but not measured.",
+     "water_note": "Pool present on plan (08); edge detail not determinable at plan scale and not checked in photos."
+    }
+   }
+  },
+  {
+   "id": "N2-07",
+   "name": "Inner Garden House",
+   "designer": "Takanori Ineyama Architects",
+   "location": "Kofu, Japan",
+   "year": 2018,
+   "climate": "temperate",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/1001476/inner-garden-house-takanori-ineyama-architects",
+   "plan_url": "https://images.adsttc.com/media/images/646d/f93b/8e31/b82f/067f/e3d6/large_jpg/1f-plan-1.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-07",
+   "passes": {
+    "A": {
+     "scope": "Inner Garden room on 1F plan (glazed, with planter and pots)",
+     "scale_note": "scale bar 0-5 m: 1 m ~96.5 px; room ~6.7 x 3.1 m less stair",
+     "area_m2": 19.5,
+     "n_rooms": 1,
+     "room_area_mean_m2": 19.5,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "enclosed within glazed envelope",
+     "water_note": "none",
+     "rooms_note": "one long glazed inner garden room; plants in pots/beds, no ground-cover detail",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Inner Garden, glazed interior garden hall at north of 1F plan (stair strip excluded)",
+     "scale_note": "Scale bar 0 at x=1222, 5 m at x=1705: 96.5 px/m. Garden ~620x303 px = 6.4x3.1 m",
+     "confidence": "low",
+     "area_m2": 19.0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 19.0,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Glazed room inside the building envelope.",
+     "rooms_note": "Indoor/glazed garden room; floor finish not shown so hard/soft/water shares null; plants are potted/planter shrubs, no trees.",
+     "water_note": "No water."
+    }
+   }
+  },
+  {
+   "id": "N2-10",
+   "name": "House Tenjin",
+   "designer": "atelier yoo",
+   "location": "Japan (city not verified)",
+   "year": null,
+   "climate": "humid subtemperate",
+   "source_type": "portfolio",
+   "page_url": "https://www.archdaily.com/en/1042853/house-tenjin-atelier-yoo",
+   "plan_url": "https://images.adsttc.com/media/images/6a42/a611/0789/c600/018c/26b5/large_jpg/1F_Plan.jpg",
+   "scaled_plan": true,
+   "cache_dir": "~/archpipe/shared/landscape-precedents/north2/N2-10",
+   "passes": {
+    "A": {
+     "scope": "Back Garden (13) at east end of 1F plan",
+     "scale_note": "scale bar 0-5 m: 1 m ~96 px; garden ~2.3 x 5.1 m",
+     "area_m2": 11.7,
+     "n_rooms": 1,
+     "room_area_mean_m2": 11.7,
+     "trees_per_100m2": 17,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "walled by house on all sides",
+     "water_note": "small basin (tsukubai) only, share not measurable",
+     "rooms_note": "one narrow back garden with stones, basin, black pine and one other tree; also inner garden 5 and front garden 2",
+     "confidence": "low"
+    },
+    "B": {
+     "scope": "Back Garden (13), east end of ground-floor plan; front garden and indoor inner garden (5) excluded",
+     "scale_note": "Scale bar 0-5 m spans x=357-836 px: 95.8 px/m. Garden 272x500 px = 2.84x5.22 m",
+     "confidence": "low",
+     "area_m2": 14.8,
+     "hard_share": 0.25,
+     "soft_share": 0.75,
+     "water_share": 0.0,
+     "n_rooms": 1,
+     "room_area_mean_m2": 14.8,
+     "trees_per_100m2": 20.3,
+     "privacy_approach": "building-enclosed",
+     "privacy_note": "Enclosed on all sides by the house and boundary wall (plan only; photos not used).",
+     "rooms_note": "One narrow court with boulders, basin, 3 tree symbols. Shares are plan-symbol estimates (stone slabs/rocks/basin vs planting).",
+     "water_note": "Stone basin only, negligible; no open water."
+    }
+   }
+  }
+ ]
+}
