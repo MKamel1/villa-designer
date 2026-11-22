@@ -69,20 +69,21 @@ The 2.30 m is the standard window head (`HEAD`), applied to a window marked full
 
 * **Receipt sections reviewed baseline-relative** (RA method): staging tree and SC tree both exported with receipts bypassed
   (`refresh_furniture_integ5.py export`), `section_diff.py`: layout, specification, furniture, architecture, meshes, models, props, materials **all unchanged by SC**
-  (`evidence-sc/section-diff-vs-staging.json`): the 11 new meshes (guards 2, infill 1, cupboard 5, strips 3) are outside every receipt room.
-  The staging receipts were already stale before SC (a build with receipts active fails on `origin/integ/staging` itself: "changed sections: meshes"):
-  the only changed meshes against INT2's pre-approval scene are `marker-PATH-landing-gf-01/02` (lead approval `158023a`). 16 individual + joint
-  reviews: all ok, 0 findings (`evidence-sc/room-review-summary.json`); `refresh_receipts.py` rewrote `furniture-stage2.json.gz`, `parents-bed.json.gz`
-  (room_context `b0d60ad21e1c8a06` / `03eb73a322988584`).
-* **Exposure groups re-measured** through the documented Blender procedure (`write(measure_exposure_groups=True)`, then `villa_scene.py
-  --measure-exposure-groups` via jobq `SC-measure-exposure-2`), record copied byte for byte. Result: transport hash changed (new meshes); sums moved
-  by under 1 %; **one group flips: `v37-north-garden-lounge` exterior-shade -> exterior-day** (solar fraction 0.4983 -> 0.5023 across the 0.5
-  threshold). The measurement is deterministic (staging and INT2 give identical 0.4983), so the shift is the new terrace guard in that frame, not noise.
-  v37 will be exposed as exterior-day.
-* **Production build** (`scripts/benchmark_scene_build.py --write-scene`, receipts and exposure record active, no bypass, jobq `SC-prod2`, 353 s):
-  scene.json 631,331,061 bytes sha256 `6cb3e29198365a7d614af715262dee72cce3d80725682598d2cadfb7d0f9ba33`; ids stripped (`json.dumps(without_ids(scene), sort_keys=True)`)
-  `59e6ff79a67014e33712bdcd96643cea26b2ba244d675b76cd7847471e9754e3`; **1,223 meshes** (staging 1,212: +11), 64 lead-approved rows, `source_hash`
-  `a31e85b7137f4da4def8d821d8c6316fdb5db702d8ff1716029f8b77948fbc86`. The file hash includes `provenance` (HEAD, dirty flag).
+  (`evidence-sc/section-diff-vs-staging.json`): the 11 new meshes (guards 2, infill 1, cupboard 5, strips 3) are outside every receipt room, and the id,
+  slab, wet-zone and non-model changes are made after the receipts are computed. 16 individual + joint baseline-relative reviews: all ok, 0 findings
+  (`evidence-sc/room-review-summary.json`). So SC changes **no receipt section**.
+* Staging then moved (`b577bf5`, INT2b refreshed the receipts for the approved landing-marker move). Per the shared-file rule I merged it and took THEIR
+  `furniture-stage2.json.gz`, `parents-bed.json.gz`, `exposure-groups.json` and `refresh_receipts.py` over mine. Proof that no SC regeneration is needed: the SC tree builds
+  with those receipts active (`SC-prod3`: "OK build, receipts active"). The receipts in this branch are therefore INT2b's.
+* **Exposure groups re-measured** (the SC meshes change the transport hash) through the documented procedure (`write(measure_exposure_groups=True)`, then
+  `villa_scene.py --measure-exposure-groups`, jobq `SC-measure-exposure-3`), record copied byte for byte. Sums move by under 1 %; **one group flips:
+  `v37-north-garden-lounge` exterior-shade -> exterior-day** (solar fraction 0.4983 -> 0.5023 across the 0.5 threshold). The measurement is
+  deterministic (staging and INT2 give identical 0.4983), so the shift is the new terrace glass guard in that frame, not noise. v37 will be exposed as exterior-day.
+* **Production build** on the merged tree (`scripts/benchmark_scene_build.py --write-scene`, receipts and exposure record active, no bypass, jobq `SC-prod4`, 169 s):
+  scene.json 631,331,049 bytes sha256 `35cca4a4e54b5f4da09d28b74a7d134e4f60e8339cb91f71a0ee3ffb30061ff5`; ids stripped (`json.dumps(without_ids(scene), sort_keys=True)`)
+  `357298be4ede6d8889acd712eae7d8dfcc691622aabb6c195f25f8164b822724`; **1,223 meshes** (staging 1,212: +11), 64 lead-approved rows, `source_hash`
+  `5e370f239f87777cca69904a7e1d44b9363b7f507cafa67dabf89713d77acd11`. The file hash includes `provenance` (HEAD, dirty flag). (An earlier build on the
+  pre-merge tree, `6cb3e291...`, is superseded.)
 
 ## RV1 on the production scene (`--prove`)
 
@@ -106,5 +107,5 @@ three documented misses (M1, M6-180, M-K10-move0.1), nothing dropped. K09 remain
 3. `VSTRIP-ext-01/02` and `MIRROR-parents-ensuite-06` positions: lighting lane (L6d).
 4. K06 / `wall-B-ext-16`: 2.65 m wall under a 2.80 m soffit, glazing to 2.30 m (design decision, not changed).
 5. v37 changes exposure group (exterior-day); the lead should know before v37 is re-presented.
-6. Receipts/exposure/scene are generated files: after `origin/integ/staging` takes INT2's refreshed receipts and L6d's lighting, merge and repeat the last step (SC adds no receipt change of its own, so INT2's receipts should hold; the exposure record must be re-measured again).
+6. Receipts/exposure/scene are generated files: done after merging staging `b577bf5`. If staging moves again (L6d lighting), merge, take their receipts, re-measure exposure (the record is tied to the scene's meshes), rebuild.
 7. `python scripts/lane_guard.py SC` compares with `origin/integ/aplus` by default and lists staging's 114 files; against `--base origin/integ/staging` it is clean.
