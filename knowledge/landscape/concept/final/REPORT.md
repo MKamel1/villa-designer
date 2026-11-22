@@ -122,7 +122,7 @@ Reading: the table is the **winter-sun sitting place**, with 3.1 h of the 5 h wi
 | n-bench | 50 % | 50 % | 50 % | 75 % |
 | e-bench | 82 % | 5 % | 5 % | 30 % |
 
-The canopy counts as cover only where a crown stands over the seat (crown disc as 0.25 m cells; leafed in summer, evergreen only in winter). **Summer** is hard (every seat inside its limit). **Winter** is the cost of deciduous: the table and the rear bench go back to the 'no tree' figure while the crape is bare, reported as `LDG-PRIV-WINTER` warnings with the figures; the client accepted winter sun, but a winter lunch is overlooked more than a summer one. The olives keep the quiet bench and the east yard bench covered all year. Fire pit: no crown within 2.0 m overhead (`LDG-FIRE-MANUAL`).
+The canopy counts as cover only where a crown stands over the seat (crown disc as 0.25 m cells; leafed in summer, evergreen only in winter). **Summer** is hard (every seat inside its limit). **Winter** is the cost of deciduous: the table goes back to the 'no tree' figure (65 %, limit 30 %) while the crape is bare; the rear bench stays covered by the olive, reported as `LDG-PRIV-WINTER` warnings with the figures; the client accepted winter sun, but a winter lunch is overlooked more than a summer one. The olives keep the quiet bench and the east yard bench covered all year. Fire pit: no crown within 2.0 m overhead (`LDG-FIRE-MANUAL`).
 
 ### Trade: the BBQ stand place
 
