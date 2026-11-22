@@ -368,6 +368,16 @@
    "url": "https://sketchfab.com/3d-models/none-07cc911352904b0c954e0236975839ca",
    "matched_on": "papyrus",
    "match": "genus/common"
+  },
+  {
+   "uid": "d0248242b885491aae74e4d334281226",
+   "name": "Papyrus Plant",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 330544,
+   "url": "https://sketchfab.com/3d-models/d0248242b885491aae74e4d334281226",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
   }
  ],
  "delonix_regia": [
@@ -1231,6 +1241,16 @@
    "url": "https://sketchfab.com/3d-models/none-3d0510cc9b5b4360a6b8b4952d69f77d",
    "matched_on": "lady palm",
    "match": "genus/common"
+  },
+  {
+   "uid": "869827893cfa45e4837fafb0cfa2064c",
+   "name": "Rhapis Palm 3D Model by Wade Connolly",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 20552,
+   "url": "https://sketchfab.com/3d-models/869827893cfa45e4837fafb0cfa2064c",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
   }
  ],
  "rosmarinus_officinalis": [
@@ -1285,7 +1305,18 @@
    "match": "genus/common"
   }
  ],
- "salvia_leucantha": [],
+ "salvia_leucantha": [
+  {
+   "uid": "c2b66c5043f4452589e47293ef93e9e1",
+   "name": "Salvia Guaranitica",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 188264,
+   "url": "https://sketchfab.com/3d-models/c2b66c5043f4452589e47293ef93e9e1",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
+  }
+ ],
  "strelitzia_nicolai": [
   {
    "uid": "a6f5e2c3edc24c1bb25c1ddb3bc803df",
@@ -1419,5 +1450,49 @@
    "match": "genus/common"
   }
  ],
- "zoysia_japonica": []
+ "zoysia_japonica": [],
+ "alocasia_macrorrhizos": [
+  {
+   "uid": "09127a0699ea4d1c9246227e19ab452b",
+   "name": "Alocasia macrorrhizos",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 1707,
+   "url": "https://sketchfab.com/3d-models/09127a0699ea4d1c9246227e19ab452b",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
+  },
+  {
+   "uid": "75882b72d1374270aeac76c96db2aa4e",
+   "name": "Elephant Ear Bush",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 2268,
+   "url": "https://sketchfab.com/3d-models/75882b72d1374270aeac76c96db2aa4e",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
+  }
+ ],
+ "livistona_chinensis": [
+  {
+   "uid": "f59bab2a81244b869e1ca5aefd4ad94a",
+   "name": "[FREE] Livistona Chinensis - Fan Palm",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 61856,
+   "url": "https://sketchfab.com/3d-models/f59bab2a81244b869e1ca5aefd4ad94a",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
+  },
+  {
+   "uid": "d8083a67960b4c9f827bd8aaa321aaec",
+   "name": "Livistona",
+   "licence": "CC Attribution",
+   "author": "?",
+   "faces": 433691,
+   "url": "https://sketchfab.com/3d-models/d8083a67960b4c9f827bd8aaa321aaec",
+   "matched_on": "pass-3b targeted search",
+   "match": "genus/common"
+  }
+ ]
 }
