@@ -26,7 +26,7 @@ FIRE_SIDE_M = 1.25                  # design clearance to combustibles: the stri
 FIRE_OVER_M = 2.0                   # design overhead clearance: MAD ESF 2000 mm to trees/curtains (PTI 1.83 m, Planika n/a, Solus 1.95 m)
 OPEN_A = (1.1, 4.5)                 # screen opening along the west line (a range): pit edge to each screen end >= FIRE_SIDE_M; sized to the seating
 VINE_UNDERSIDE_M = 2.4              # POLICY: grape foliage hangs 0.3 m below the 2.7 m beam top
-GRAPE = {"summer_density": 0.75, "winter_density": 0.15}   # POLICY: same winter figure as LDC CROWN deciduous_winter; summer is our assumption (no source gives leaf density)
+GRAPE = {"summer_density": 0.75, "winter_density": 0.15, "winter_closed_density": 0.6}   # POLICY: same winter figure as LDC CROWN deciduous_winter; summer is our assumption (no source gives leaf density)
 
 PAR = dict(table_a0=1.5, table_b0=2.55, bbq=(2.0, 4.65), tree=(3.15, 8.4), east_b0=7.2)
 
@@ -57,11 +57,11 @@ def south(p=PAR):
     bbq = (bq[0], bq[1], bq[0] + 0.5, bq[1] + 0.5)
     vine = (A - 0.31, 1.8, A, 4.5)                                   # 0.31 m strip at the rear fence foot: vines trained up the fence and along the pergola
     mass = (1.9, ea, 4.7, B - 0.6)
-    herb = (0.4, B - 0.6, 1.7, B)
-    mass2 = (1.7, B - 0.6, 4.7, B)
+    herb = (1.3, B - 0.6, 2.5, B)
+    mass2 = (2.5, B - 0.6, 4.7, B)
     rbench = (A - 0.45, 4.7, A, 6.9)                                  # lounge, 3 seats
     qbench = (A - 0.45, 7.3, A, 8.5)                                  # quiet, 2 seats
-    gravel = (4.75, ea, A - 0.45, B)                                   # permeable floor under the pomegranate and the quiet bench
+    gravel = (4.7, ea, A - 0.45, B)                                   # permeable floor under the pomegranate and the quiet bench
     scr = [(0.0, 0.15, OPEN_A[0], 0.55), (OPEN_A[1], 0.15, A, 0.55)]            # climber beds at the foot of the screen stubs
     cuts = [vine, mass, herb, mass2, rbench, qbench, gravel] + scr
     paving(f, "s", RM(0, 0, A, B), [RM(*c) for c in cuts])
@@ -90,15 +90,15 @@ def south(p=PAR):
     hr = RM(*herb)
     f["features"].append({"id": "s-herb-bed", "kind": "herb_bed", "rect": hr, "midsummer_sun_hours": round(C.bed_sun(hr), 2), "trace": ["U-S-HERB", "LS-HERB-SUN"]})
     # grape pergola over the dining table (open rafters; the vine is the roof) -------------------------------------------------
-    f["canopies"].append({"id": "s-pergola-grape", "rect": RM(1.0, 1.7, A - 0.1, 4.3), "kind": "pergola", "roof": "vine", "height_m": 2.7, "shade_fraction": GRAPE["summer_density"],
-                          "shade_fraction_winter": GRAPE["winter_density"], "deciduous": True})
+    f["canopies"].append({"id": "s-pergola-grape", "rect": RM(1.0, 1.7, A - 0.1, 4.3), "kind": "pergola", "roof": "vine", "louvred": True, "height_m": 2.7, "shade_fraction": GRAPE["summer_density"],
+                          "shade_fraction_winter_open": GRAPE["winter_density"], "shade_fraction_winter_closed": GRAPE["winter_closed_density"], "deciduous": True})
     f["canopies"].append({"id": "s-pergola-rear", "rect": RM(A - 1.0, 4.5, A, B - 0.1), "kind": "pergola", "height_m": 2.7, "shade_fraction": 0.6})     # louvred roof over both rear benches
     tree(f, "s-tree-punica", "punica_granatum", P(*p["tree"]))
     # path: living door to the east yard along the house face (rect: LDB builds rects) ------------------------------------------
     f["paths"].append({"id": "s-path-door", "class": "main", "width_m": 1.2, "cross_slope_pct": 1.5, "rect": RM(0.0, 2.4, 1.2, B), "trace": ["U-ACCESS", "LS-PATH-MAIN"]})
     # planting ---------------------------------------------------------------------------------------------------------------
     vr = RM(*vine)
-    bed(f, "s-bed-vine", vr, [entry("vitis_vinifera", P(A - 0.15, 2.4), 1.2, "shrub"), entry("vitis_vinifera", P(A - 0.15, 3.6), 1.2, "shrub")], "climber-strip", trace=("U-S-DINE", "LS-HYDROZONE"))
+    bed(f, "s-bed-vine", vr, [entry("vitis_vinifera", P(A - 0.155, 2.4), 0.3, "shrub"), entry("vitis_vinifera", P(A - 0.155, 3.6), 0.3, "shrub")], "climber-strip", trace=("U-S-DINE", "LS-HYDROZONE"))
     mr, m2 = RM(*mass), RM(*mass2)
     bed(f, "s-bed-mass", mr, row(mr, "x", 1.4, ["jasminum_sambac", "petrea_volubilis"], 1.2, run=2, cap=C.SPREAD_CAP_CLIMBER)
         + row(mr, "x", 0.95, ["justicia_brandegeeana", "salvia_leucantha"], 0.7, run=4, how="min")
@@ -177,7 +177,7 @@ def north_kit():
                 beds=[dict(id="screen", rect=NR(1.5, 1.9, NH, 3.1), role="mass", pal="north_shade", back="lo"),
                       dict(id="edge-far", rect=NR(1.4, 4.5, 3.4, NW), role="strip", pal="north_edge", back="hi"),
                       dict(id="edge-back", rect=NR(3.4, 3.1, NH, NW), role="strip", pal="north_edge", back="hi")],
-                bench=NR(1.6, 0.0, 3.0, 0.45), quiet=NR(1.2, 0.0, 3.2, 1.9), pergola=NR(1.2, 0.0, 3.2, 1.9),
+                bench=NR(1.6, 0.0, 3.0, 0.45), quiet=NR(1.2, 0.0, 3.2, 1.9), pergola=NR(1.2, 0.0, 3.2, 1.6),
                 paths=[NR(0, 1.9, 1.4, 3.1)], focal="the pond past the planted screen, from the lounge door")
 
 
@@ -185,10 +185,10 @@ def east_kit():
     ER, EL, EW = TC.ER, TC.EL, TC.EW
     pond = ER(1.5, 1.35, 4.7, 2.75)                     # 3.2 x 1.4
     return dict(zone=ER(0, 0, EL, EW), pond=pond, entry_side="low v (toward the service path along the house wall)",
-                beds=[dict(id="divider", rect=ER(5.6, 1.5, EL, EW), role="mass", pal="yard_mass", back="hi"),
+                beds=[dict(id="divider", rect=ER(5.95, 1.5, EL, EW), role="mass", pal="yard_mass", back="hi"),
                       dict(id="far", rect=ER(0, 1.5, 1.2, EW), role="mass", pal="yard_mass", back="hi"),
-                      dict(id="edge", rect=ER(1.5, 2.75, 4.7, EW), role="strip", pal="pond_edge", back="hi")],
-                bench=ER(5.0, 1.35, 5.45, 2.75), quiet=ER(4.8, 1.3, 5.6, EW), pergola=ER(4.3, 1.2, 6.1, EW),
+                      dict(id="edge", rect=ER(1.5, 2.75, 4.2, EW), role="strip", pal="pond_edge", back="hi")],
+                bench=ER(5.0, 1.35, 5.45, 2.75), quiet=ER(4.8, 1.3, 5.6, EW), pergola=ER(4.3, 1.2, 5.9, EW),
                 paths=[ER(0.2, 0, EL, 1.2)], path_class="service", focal="the pond is the focal point of the quiet room, bench at its end")
 
 

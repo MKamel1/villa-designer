@@ -236,13 +236,13 @@ def grape_check(L):
                 tot1 += 0.25 * (1 - (d if hit else 0.0))
         return round(tot0 / len(pts), 2), round(tot1 / len(pts), 2)
     sb, sa = run("2026-06-21", 10, 15, F.GRAPE["summer_density"])
-    wb, wa = run("2026-12-21", 10, 15, F.GRAPE["winter_density"])
-    _, wev = run("2026-12-21", 10, 15, F.GRAPE["summer_density"])
+    wb, wa = run("2026-12-21", 10, 15, F.GRAPE["winter_density"])           # bare vine, louvres open
+    _, wev = run("2026-12-21", 10, 15, F.GRAPE["winter_closed_density"])    # bare vine, louvres closed (opaque)
     st = "pass" if (sb > 0 and sa <= 0.5 * sb + 1e-9 and wa >= 0.8 * wb - 1e-9) else "fail"
     return _r("LDG-GRAPE-SEASON", st, cn["id"],
               f"table seats, direct sun 10-15 h: 21 Jun {sb} h open sky, {sa} h under the leafed vine (density {F.GRAPE['summer_density']}, POLICY); 21 Dec {wb} h open sky, {wa} h under the bare vine (density {F.GRAPE['winter_density']}, POLICY), "
-              f"{wev} h if the cover stayed as dense as in summer. Pass = summer midday sun at least halved and winter sun at least 80 % kept.", wa, wb, "h"), \
-        {"summer": {"open": sb, "leafed": sa}, "winter": {"open": wb, "bare": wa, "if_evergreen": wev}, "window": "10-15 h local standard time"}
+              f"{wev} h with the louvres closed. Pass = summer midday sun at least halved and winter sun at least 80 % kept.", wa, wb, "h"), \
+        {"summer": {"open": sb, "leafed": sa}, "winter": {"open": wb, "bare": wa, "louvres_closed": wev}, "window": "10-15 h local standard time"}
 
 
 def leaf_sun(L):
@@ -267,6 +267,70 @@ def sun_checks_final(L, leaf):
               else f"sun class not met: {[(k, round(v[1], 1)) for k, v in bad][:4]}", len(bad), 0, "bed-species"), seen
 
 
+
+# ---- privacy with the screen opening honoured (own_checks assumes an unbroken screen) ---------------------------------------------
+def _group_open(g, posture, top_z, open_x):
+    """S._group with no screen at the opening: sister-group eye points whose cell lies in the opening's x range are not removed."""
+    a = np.nan_to_num(S.arr("privacy", f"overlooking_eyes_{g}_{posture}"))
+    if g not in S.SISTER:
+        return a
+    seg = S._file("privacy")["boundaries"]["sister-line"]["segments"]
+    gk = g.replace("_", "-")
+    out = a.copy()
+    for j, y in enumerate(S._CY):
+        d = y - S.SY0
+        band = 0 if d < 1 else 1 if d < 2 else 2 if d < 3 else 3
+        for i, x in enumerate(S._CX):
+            if out[j, i] == 0 or open_x[0] <= x <= open_x[1]:
+                continue
+            need = None
+            for sg in seg:
+                if sg["along_m"][0] <= x < sg["along_m"][1] + 1e-9:
+                    need = sg["by_group"][gk][posture][band]
+                    break
+            if need is None or top_z >= need:
+                out[j, i] = 0.0
+    return out
+
+
+def eyes_open(rect, covers, open_x, top_z=S.FLOOR_Z + C.SCREEN_H, posture="seated"):
+    m = S.mask(rect) & ~np.isnan(S.arr("privacy", f"overlooking_eyes_any_{posture}"))
+    n = int(m.sum())
+    cov = np.zeros_like(m)
+    for r in covers:
+        cov |= S.mask(r)
+    tot = 0.0
+    for g in S.GROUPS:
+        a = _group_open(g, posture, top_z, open_x)
+        sel = m & ~cov if g in S.UPPER else m
+        tot += float(a[sel].sum() / n) if n else 0.0
+    return tot
+
+
+def privacy_checks(L, rooms, covers_summer, covers_winter_open, covers_winter_closed):
+    """Per seated room: remaining share of today's overlooking. HARD: screen unbroken, upper-storey groups cut by covers (summer = leafed vine on closed louvres;
+    winter louvres closed = opaque while closed, LDK GAP-OVERLOOK-ABOVE). The opening the client asked for at the pit lets the sister plot see in: that share is the client's
+    decision (waiver), reported as a warning with its figure, never hidden."""
+    ox = (S.SX0 + F.OPEN_A[0], S.SX0 + F.OPEN_A[1])
+    top = S.FLOOR_Z + C.SCREEN_H
+    res, tab = [], {}
+    for name, (rect, lim) in rooms.items():
+        base = S.eyes_total(rect, "seated")
+        row = {}
+        for lab, cv in (("summer", covers_summer), ("winter_louvres_open", covers_winter_open), ("winter_louvres_closed", covers_winter_closed)):
+            row[lab] = round(S.eyes_total(rect, "seated", cover_rects=cv, screen_top_z=top) / base, 3) if base else 0.0
+            row[lab + "_with_opening"] = round(eyes_open(rect, cv, ox) / base, 3) if base else 0.0
+        tab[name] = {"limit": lim, "today_eye_points": round(base, 1), **row}
+        for lab in ("summer", "winter_louvres_closed"):
+            res.append(_r("LDG-PRIV", "pass" if row[lab] <= lim + 1e-9 else "fail", f"{name}/{lab}",
+                          f"{name}, {lab.replace('_', ' ')}: {row[lab]:.0%} of today's overlooking remains with the screen unbroken (limit {lim:.0%})", row[lab], lim, "share"))
+            w = row[lab + "_with_opening"]
+            if w > lim + 1e-9 and w > row[lab] + 1e-9:
+                res.append(_r("LDG-PRIV-OPENING", "warn", f"{name}/{lab}",
+                              f"WAIVED by the client's decision (screen opening at the shared fire pit): {name} {lab.replace('_', ' ')} would be overlooked at {w:.0%} of today's through the opening (limit {lim:.0%}); a closable screen leaf would restore {row[lab]:.0%}", w, lim, "share"))
+    return res, tab
+
+
 # ---- pond section fits the real width ---------------------------------------------------------------------------------------
 def pond_section_check(L):
     out = []
@@ -289,13 +353,18 @@ HARD_WARN = R.HARD_WARN
 
 def evaluate_all(L, rooms, covers):
     res = list(C.ldk(L))
-    own = C.own_checks(L, rooms, covers, S.FLOOR_Z + C.SCREEN_H, None)
+    own = [r for r in C.own_checks(L, rooms, covers, S.FLOOR_Z + C.SCREEN_H, None) if r.criterion != "LDG-PRIV"]
+    allc = [c["rect"] for c in L["canopies"]]
+    nonvine = [c["rect"] for c in L["canopies"] if not c.get("roof") == "vine"]
+    prv, ptab = privacy_checks(L, rooms, allc, nonvine, allc)
+    own += prv
     sunr, seen = sun_checks_final(L, leaf_sun(L))
     sun = [sunr]
     extra = [id_check(L), surface_check(L), gravel_check(L), tree_pergola_check(L), plant_solid_check(L), pot_check(L)] + fire_manual_check(L) + pond_section_check(L)
     g, gdata = grape_check(L)
     extra.append(g)
     gdata["leaf_level_sun_21jun_h"] = leaf_sun(L)
+    gdata['privacy_table'] = ptab
     return res + own + sun + R.tree_checks(L) + extra, seen, gdata
 
 
