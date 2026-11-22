@@ -1,5 +1,31 @@
 # LDG: landscape concept generation (2026-11-22)
 
+> **Pass 2 (2026-11-22, typology first) supersedes pass 1 for the concepts shown.** Read `knowledge/landscape/concept/pass2/REPORT.md` (generated; the three concepts, programme tables, schedules, trade-offs, recommendation) and the section below. Pass 1 (random furniture packing) is kept below as the record of what was rejected.
+
+## Pass 2: typology first, then furniture (what changed and why)
+Lead review of pass 1: three functional packings, not landscapes (a large paved rectangle with a 0.6 m perimeter strip, two with no tree, identical north court and east yard, a 4-seat table for a 10-20 person brief).
+Pass 2 reverses the order. A **typology** fixes the bones (rooms, axis and focal point, planting masses, canopy); the furniture is then fitted into the bones at the rule distances, and the LDK rules plus our policy checks decide what survives.
+
+| | A Tree court | B Two rooms | C Axial terrace |
+|---|---|---|---|
+| organising idea | courtyard room around one focal tree (centralised organisation, Ching) | sociable terrace + quiet garden room (the east yard) divided by a planted mass; graded public-to-private | terrace wrapped by deep borders with a main axis door -> fire pit -> sculpture place |
+| focal point | pomegranate (+ the pond in the yard) | the pond in the quiet yard room | fire pit on the axis, lit sculpture place at its end |
+| hearth | east (fire pit 5.45 m from the west line) | west end (wind), bench along the screen | on the axis (b 4.0), BBQ west, table east |
+| own north court | gravel room around a fatsia/Phoenix mass | quiet niche behind a planted screen | axis to a sculpture place / the pond |
+| own east yard | layered fence border; bench + pergola facing the pond | quiet room with the pond as focal | service path to a sculpture place / long pond |
+
+Code: `src/archpipe/landscape/concept/ty_core.py` (frames, planting drifts, own checks, assembly), `ty_south.py` (three south typologies), `ty_courts.py` (north court and east yard kits), `ty_run.py` (runner), `ty_report.py` (REPORT.md). Run: `python -m archpipe.landscape.concept.ty_run` then `python -m archpipe.landscape.concept.ty_report` (plans and massing need LDC plan style 2 and `massing_png`, i.e. `origin/lane/LDC`, and jobq). Tests: `tests/landscape/concept/test_pass2.py` (24 with the pass-1 tests).
+Furniture parameters in `ty_run.PARAMS` were fitted by hand-guided probes at the rule distances (not a random search); the typology is the part that is designed.
+
+**What the rules fix in a 5.71 x 9.32 m garden (why every concept has a paved hearth court):** the fire pit needs 2.0 m from the house, fences, beds, trees' crowns and the pot (LS-FIRE-STRUCT) and 1.5 m from any seat or table (LS-FIRE-SEAT), so its centre sits at depth 2.45-3.26 m and no bed can come within 2 m; a table needs 1.2 m from beds, walls, seats and the BBQ (LS-DINE-CLEAR), so an 8-seat table (2.4 m) plus pit, BBQ, 1.2 m border and herb strip uses the whole 9.3 m width with 0.1-0.3 m to spare. Planting therefore goes where the fire is not: the west and east borders, the rear corners and the yard.
+
+Results (all six packages, west line screened): zero hard failures (LDK `fail` plus the LDK shortfalls graded `warn` for FIRE-STRUCT, FIRE-SEAT, ROOTZONE, HYDROZONE, TREE-BUILDING, plus ours: privacy, evening shade, border depth, spread, toxicity, sun fit, geometry). Dining 8 (end chairs 10; 12 does not clear 1.2 m: measured 600-700 mm), built-in benches 0.6 m per person (policy), seated 15-23, standing 18-21 at 1.3 m2. One canopy tree per south garden (1.88 per 100 m2, inside the range; 1.34 on south + yard). Hard share 0.818 (A, inside), 0.856 (B) and 0.826 (C) against 0.52-0.82. LDC critics (uncalibrated) fail 5-9 findings per package; C fewest. Recommendation: **C, pond in the east yard** (runner-up A). Details, caveats and what is rejected are in the REPORT.
+
+Merge note: pass 2 renders with LDC's `plan_png` style 2 and `massing_png` (origin/lane/LDC); this branch contains none of LDC's files (lane_guard clean against integ/staging).
+
+---
+
+
 Stage LD-G of `docs/quality/LANDSCAPE-METHOD.md`. Nothing is drawn freehand: concepts are composed from LDK rules, LDS layers, LDL plants (viable or conditional only)
 and the frozen LDP ranges (`targets-2.json`), generated as random candidates, filtered by the hard checks, ranked and then selected.
 Rebuild: `PYTHONPATH=src python -m archpipe.landscape.concept.run_all 240000` (about 10 min, 30 cores). Output: `knowledge/landscape/concept/`.
