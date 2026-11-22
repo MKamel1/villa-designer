@@ -127,7 +127,10 @@ def main(n_south=240000, seed=7, chunks=60, procs=30, top_k=40, n_plant=12, n_co
                 e_ = courts[("east", where == "east")]
                 if not n_ or not e_:
                     continue
-                cd["packages"][(vname, where)] = package(idea, S_, None, n_[0], e_[0], where, pool, rs)
+                # each concept takes a different court candidate (rank by concept) so the three plans differ in all three zones
+                k = list(SO.IDEAS).index(idea)
+                pick = lambda lst: next(iter([x for x in lst if x is not None][k * 3:k * 3 + 1]), lst[0])    # noqa: E731
+                cd["packages"][(vname, where)] = package(idea, S_, None, pick(n_), pick(e_), where, pool, rs)
     return concepts, best_s, courts, counts_s, counts_c, pool, rs, counts_s, t0
 
 

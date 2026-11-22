@@ -1222,10 +1222,6 @@
     "U-ACCESS",
     "LS-SLOPE"
    ],
-   "east/paved_areas/paving-2": [
-    "U-ACCESS",
-    "LS-SLOPE"
-   ],
    "east/planting_groups/bed-yard": [
     "U-PRIVACY",
     "LS-HYDROZONE"
@@ -1234,11 +1230,11 @@
     "U-PRIVACY",
     "LS-HYDROZONE"
    ],
-   "east/plant/bed-yard/jasminum_sambac": [
+   "east/plant/bed-yard/petrea_volubilis": [
     "U-PRIVACY",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-yard/petrea_volubilis": [
+   "east/plant/bed-yard/jasminum_sambac": [
     "U-PRIVACY",
     "D-COLOUR-DRIFTS"
    ],
@@ -1533,11 +1529,15 @@
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-w/jasminum_sambac": [
+   "east/plant/bed-pond-end-w/zantedeschia_aethiopica": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-e/pontederia_cordata": [
+   "east/plant/bed-pond-end-e/bougainvillea_glabra": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/gazania_rigens": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
@@ -1768,10 +1768,6 @@
     "U-ACCESS",
     "LS-SLOPE"
    ],
-   "east/paved_areas/paving-2": [
-    "U-ACCESS",
-    "LS-SLOPE"
-   ],
    "east/planting_groups/bed-yard": [
     "U-PRIVACY",
     "LS-HYDROZONE"
@@ -1780,11 +1776,11 @@
     "U-PRIVACY",
     "LS-HYDROZONE"
    ],
-   "east/plant/bed-yard/jasminum_sambac": [
+   "east/plant/bed-yard/petrea_volubilis": [
     "U-PRIVACY",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-yard/petrea_volubilis": [
+   "east/plant/bed-yard/jasminum_sambac": [
     "U-PRIVACY",
     "D-COLOUR-DRIFTS"
    ],
@@ -2034,11 +2030,15 @@
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-w/jasminum_sambac": [
+   "east/plant/bed-pond-end-w/zantedeschia_aethiopica": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-e/pontederia_cordata": [
+   "east/plant/bed-pond-end-e/bougainvillea_glabra": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-end-e/gazania_rigens": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
@@ -2264,10 +2264,6 @@
     "LS-SLOPE"
    ],
    "east/paved_areas/paving-1": [
-    "U-ACCESS",
-    "LS-SLOPE"
-   ],
-   "east/paved_areas/paving-2": [
     "U-ACCESS",
     "LS-SLOPE"
    ],
@@ -2542,7 +2538,11 @@
     "LS-POND-STOCK",
     "LS-POND-FLUSH-MARGIN"
    ],
-   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+   "east/plant/bed-pond-path/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-path/jasminum_sambac": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
@@ -2558,11 +2558,11 @@
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-w/jasminum_sambac": [
+   "east/plant/bed-pond-end-w/zantedeschia_aethiopica": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-e/pontederia_cordata": [
+   "east/plant/bed-pond-end-e/petrea_volubilis": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
@@ -2798,10 +2798,6 @@
     "LS-SLOPE"
    ],
    "east/paved_areas/paving-1": [
-    "U-ACCESS",
-    "LS-SLOPE"
-   ],
-   "east/paved_areas/paving-2": [
     "U-ACCESS",
     "LS-SLOPE"
    ],
@@ -3068,7 +3064,11 @@
     "LS-POND-STOCK",
     "LS-POND-FLUSH-MARGIN"
    ],
-   "east/plant/bed-pond-path/zantedeschia_aethiopica": [
+   "east/plant/bed-pond-path/petrea_volubilis": [
+    "U-POND",
+    "D-COLOUR-DRIFTS"
+   ],
+   "east/plant/bed-pond-path/jasminum_sambac": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
@@ -3084,11 +3084,11 @@
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-w/jasminum_sambac": [
+   "east/plant/bed-pond-end-w/zantedeschia_aethiopica": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],
-   "east/plant/bed-pond-end-e/pontederia_cordata": [
+   "east/plant/bed-pond-end-e/petrea_volubilis": [
     "U-POND",
     "D-COLOUR-DRIFTS"
    ],

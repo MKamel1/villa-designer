@@ -23,11 +23,11 @@
     "edge": "soft",
     "freeboard_mm": 150
    },
-   "score": 0.7076,
+   "score": 0.6955,
    "scores": {
     "south": 0.7932,
     "north": 0.3413,
-    "east": 0.8173
+    "east": 0.7565
    },
    "south_parts": {
     "cap": 0.964,
@@ -56,12 +56,12 @@
     "warns": 0
    },
    "east_parts": {
-    "lush": 0.801,
+    "lush": 0.68,
     "species": 0.833,
     "warns": 0
    },
    "tally": {
-    "pass": 90,
+    "pass": 89,
     "fail": 0,
     "warn": 3,
     "not_evaluated": 8
@@ -679,7 +679,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 16,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -1861,20 +1861,6 @@
     {
      "criterion": "LS-SLOPE",
      "status": "pass",
-     "subject": "paving-2",
-     "achieved": 1.5,
-     "required": 2,
-     "unit": "%",
-     "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required",
-     "source_ids": [
-      "TS-320-13-slopes",
-      "TS-240-8-crossslope",
-      "TS-340-8-tread-slope"
-     ]
-    },
-    {
-     "criterion": "LS-SLOPE",
-     "status": "pass",
      "subject": "path-main/cross",
      "achieved": 1.5,
      "required": 2,
@@ -2027,7 +2013,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/W-screened-pond-north.png",
    "traceability": {
-    "elements": 58,
+    "elements": 57,
     "untraced": [
      [
       "south",
@@ -2066,14 +2052,14 @@
    "pond": {
     "where": "east",
     "rect": [
-     16.6259957511026,
+     16.4660172694296,
      -22.091,
-     20.6259957511026,
+     20.4660172694296,
      -21.091
     ],
     "area_m2": 4.0,
-    "depth_mm": 900,
-    "volume_m3_est": 2.52,
+    "depth_mm": 1000,
+    "volume_m3_est": 2.8,
     "koi_count": 4,
     "koi_adult_length_cm": 70,
     "aerated": false,
@@ -2429,10 +2415,10 @@
      "criterion": "LS-POND-DEPTH",
      "subject": "pond",
      "status": "pass",
-     "achieved": 900,
+     "achieved": 1000,
      "required": 900,
      "unit": "mm",
-     "message": "deepest section of the pond: 900 mm achieved, 900 mm required"
+     "message": "deepest section of the pond: 1000 mm achieved, 900 mm required"
     },
     {
      "use": "U-POND",
@@ -2697,24 +2683,9 @@
     ],
     "east": [
      {
-      "species": "Pontederia cordata L.",
-      "slug": "pontederia_cordata",
-      "count": 2,
-      "layer": "aquatic",
-      "verdict": "viable",
-      "conditions": [
-       "sun conditional (21 Jun hours vs class)"
-      ],
-      "water": "high",
-      "toxic": null,
-      "drawable": "not drawable yet",
-      "mature_h_m": 1.2,
-      "mature_spread_m": 0.6
-     },
-     {
       "species": "Zantedeschia aethiopica (L.) Spreng.",
       "slug": "zantedeschia_aethiopica",
-      "count": 12,
+      "count": 2,
       "layer": "aquatic",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2747,7 +2718,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 3,
+      "count": 2,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2765,7 +2736,7 @@
      {
       "species": "Petrea volubilis L.",
       "slug": "petrea_volubilis",
-      "count": 2,
+      "count": 6,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2783,7 +2754,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 18,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -3814,10 +3785,10 @@
      "criterion": "LS-POND-DEPTH",
      "status": "pass",
      "subject": "pond",
-     "achieved": 900,
+     "achieved": 1000,
      "required": 900,
      "unit": "mm",
-     "message": "deepest section of the pond: 900 mm achieved, 900 mm required",
+     "message": "deepest section of the pond: 1000 mm achieved, 900 mm required",
      "source_ids": [
       "W-okstate-koi-depth-3-4ft",
       "W-okstate-koi-heat-stress"
@@ -3927,7 +3898,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -3957,7 +3928,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -3972,7 +3943,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -4053,7 +4024,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-path: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-path: water classes ['medium'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -4077,7 +4048,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-w: water classes ['medium'] (1 allowed)",
+     "message": "bed-pond-end-w: water classes ['high'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -4089,7 +4060,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-e: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-end-e: water classes ['medium'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -4169,7 +4140,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/W-screened-pond-east.png",
    "traceability": {
-    "elements": 62,
+    "elements": 63,
     "untraced": [
      [
       "south",
@@ -4222,11 +4193,11 @@
     "edge": "soft",
     "freeboard_mm": 150
    },
-   "score": 0.7379,
+   "score": 0.7257,
    "scores": {
     "south": 0.8436,
     "north": 0.3413,
-    "east": 0.8173
+    "east": 0.7565
    },
    "south_parts": {
     "cap": 0.929,
@@ -4255,12 +4226,12 @@
     "warns": 0
    },
    "east_parts": {
-    "lush": 0.801,
+    "lush": 0.68,
     "species": 0.833,
     "warns": 0
    },
    "tally": {
-    "pass": 91,
+    "pass": 90,
     "fail": 0,
     "warn": 2,
     "not_evaluated": 7
@@ -4871,7 +4842,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 16,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -6039,20 +6010,6 @@
     {
      "criterion": "LS-SLOPE",
      "status": "pass",
-     "subject": "paving-2",
-     "achieved": 1.5,
-     "required": 2,
-     "unit": "%",
-     "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required",
-     "source_ids": [
-      "TS-320-13-slopes",
-      "TS-240-8-crossslope",
-      "TS-340-8-tread-slope"
-     ]
-    },
-    {
-     "criterion": "LS-SLOPE",
-     "status": "pass",
      "subject": "path-main/cross",
      "achieved": 1.5,
      "required": 2,
@@ -6205,7 +6162,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/W-open-pond-north.png",
    "traceability": {
-    "elements": 56,
+    "elements": 55,
     "untraced": [
      [
       "south",
@@ -6244,14 +6201,14 @@
    "pond": {
     "where": "east",
     "rect": [
-     16.6259957511026,
+     16.4660172694296,
      -22.091,
-     20.6259957511026,
+     20.4660172694296,
      -21.091
     ],
     "area_m2": 4.0,
-    "depth_mm": 900,
-    "volume_m3_est": 2.52,
+    "depth_mm": 1000,
+    "volume_m3_est": 2.8,
     "koi_count": 4,
     "koi_adult_length_cm": 70,
     "aerated": false,
@@ -6607,10 +6564,10 @@
      "criterion": "LS-POND-DEPTH",
      "subject": "pond",
      "status": "pass",
-     "achieved": 900,
+     "achieved": 1000,
      "required": 900,
      "unit": "mm",
-     "message": "deepest section of the pond: 900 mm achieved, 900 mm required"
+     "message": "deepest section of the pond: 1000 mm achieved, 900 mm required"
     },
     {
      "use": "U-POND",
@@ -6868,24 +6825,9 @@
     ],
     "east": [
      {
-      "species": "Pontederia cordata L.",
-      "slug": "pontederia_cordata",
-      "count": 2,
-      "layer": "aquatic",
-      "verdict": "viable",
-      "conditions": [
-       "sun conditional (21 Jun hours vs class)"
-      ],
-      "water": "high",
-      "toxic": null,
-      "drawable": "not drawable yet",
-      "mature_h_m": 1.2,
-      "mature_spread_m": 0.6
-     },
-     {
       "species": "Zantedeschia aethiopica (L.) Spreng.",
       "slug": "zantedeschia_aethiopica",
-      "count": 12,
+      "count": 2,
       "layer": "aquatic",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -6918,7 +6860,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 3,
+      "count": 2,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -6936,7 +6878,7 @@
      {
       "species": "Petrea volubilis L.",
       "slug": "petrea_volubilis",
-      "count": 2,
+      "count": 6,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -6954,7 +6896,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 18,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -7971,10 +7913,10 @@
      "criterion": "LS-POND-DEPTH",
      "status": "pass",
      "subject": "pond",
-     "achieved": 900,
+     "achieved": 1000,
      "required": 900,
      "unit": "mm",
-     "message": "deepest section of the pond: 900 mm achieved, 900 mm required",
+     "message": "deepest section of the pond: 1000 mm achieved, 900 mm required",
      "source_ids": [
       "W-okstate-koi-depth-3-4ft",
       "W-okstate-koi-heat-stress"
@@ -8084,7 +8026,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -8114,7 +8056,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -8129,7 +8071,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -8210,7 +8152,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-path: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-path: water classes ['medium'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -8234,7 +8176,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-w: water classes ['medium'] (1 allowed)",
+     "message": "bed-pond-end-w: water classes ['high'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -8246,7 +8188,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-e: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-end-e: water classes ['medium'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -8326,7 +8268,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/W-open-pond-east.png",
    "traceability": {
-    "elements": 60,
+    "elements": 61,
     "untraced": [
      [
       "south",

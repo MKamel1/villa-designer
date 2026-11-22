@@ -43,9 +43,9 @@
  },
  "O": {
   "screened/north": {
-   "score": 0.7421,
+   "score": 0.73,
    "tally": {
-    "pass": 88,
+    "pass": 87,
     "fail": 0,
     "warn": 5,
     "not_evaluated": 7
@@ -63,9 +63,9 @@
    "plan": "knowledge/landscape/concept/plans/O-screened-pond-east.png"
   },
   "open/north": {
-   "score": 0.7688,
+   "score": 0.7566,
    "tally": {
-    "pass": 85,
+    "pass": 84,
     "fail": 0,
     "warn": 3,
     "not_evaluated": 8
@@ -85,9 +85,9 @@
  },
  "W": {
   "screened/north": {
-   "score": 0.7076,
+   "score": 0.6955,
    "tally": {
-    "pass": 90,
+    "pass": 89,
     "fail": 0,
     "warn": 3,
     "not_evaluated": 8
@@ -105,9 +105,9 @@
    "plan": "knowledge/landscape/concept/plans/W-screened-pond-east.png"
   },
   "open/north": {
-   "score": 0.7379,
+   "score": 0.7257,
    "tally": {
-    "pass": 91,
+    "pass": 90,
     "fail": 0,
     "warn": 2,
     "not_evaluated": 7

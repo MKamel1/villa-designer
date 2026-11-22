@@ -23,11 +23,11 @@
     "edge": "soft",
     "freeboard_mm": 150
    },
-   "score": 0.7421,
+   "score": 0.73,
    "scores": {
     "south": 0.8507,
     "north": 0.3413,
-    "east": 0.8173
+    "east": 0.7565
    },
    "south_parts": {
     "cap": 0.857,
@@ -56,12 +56,12 @@
     "warns": 0
    },
    "east_parts": {
-    "lush": 0.801,
+    "lush": 0.68,
     "species": 0.833,
     "warns": 0
    },
    "tally": {
-    "pass": 88,
+    "pass": 87,
     "fail": 0,
     "warn": 5,
     "not_evaluated": 7
@@ -712,7 +712,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 2,
+      "count": 1,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -730,7 +730,7 @@
      {
       "species": "Petrea volubilis L.",
       "slug": "petrea_volubilis",
-      "count": 1,
+      "count": 2,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -748,7 +748,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 16,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -1916,20 +1916,6 @@
     {
      "criterion": "LS-SLOPE",
      "status": "pass",
-     "subject": "paving-2",
-     "achieved": 1.5,
-     "required": 2,
-     "unit": "%",
-     "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required",
-     "source_ids": [
-      "TS-320-13-slopes",
-      "TS-240-8-crossslope",
-      "TS-340-8-tread-slope"
-     ]
-    },
-    {
-     "criterion": "LS-SLOPE",
-     "status": "pass",
      "subject": "path-main/cross",
      "achieved": 1.5,
      "required": 2,
@@ -2082,7 +2068,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/O-screened-pond-north.png",
    "traceability": {
-    "elements": 65,
+    "elements": 64,
     "untraced": [
      [
       "south",
@@ -2812,24 +2798,9 @@
     ],
     "east": [
      {
-      "species": "Pontederia cordata L.",
-      "slug": "pontederia_cordata",
-      "count": 2,
-      "layer": "aquatic",
-      "verdict": "viable",
-      "conditions": [
-       "sun conditional (21 Jun hours vs class)"
-      ],
-      "water": "high",
-      "toxic": null,
-      "drawable": "not drawable yet",
-      "mature_h_m": 1.2,
-      "mature_spread_m": 0.6
-     },
-     {
       "species": "Zantedeschia aethiopica (L.) Spreng.",
       "slug": "zantedeschia_aethiopica",
-      "count": 12,
+      "count": 14,
       "layer": "aquatic",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2846,7 +2817,7 @@
      {
       "species": "Bougainvillea glabra Choisy",
       "slug": "bougainvillea_glabra",
-      "count": 4,
+      "count": 6,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2862,7 +2833,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 3,
+      "count": 1,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -2898,7 +2869,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 14,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -4058,7 +4029,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -4073,7 +4044,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (low)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -4178,7 +4149,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-w: water classes ['medium'] (1 allowed)",
+     "message": "bed-pond-end-w: water classes ['high'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -4190,7 +4161,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-e: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-end-e: water classes ['low'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -4270,7 +4241,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/O-screened-pond-east.png",
    "traceability": {
-    "elements": 69,
+    "elements": 70,
     "untraced": [
      [
       "south",
@@ -4314,11 +4285,11 @@
     "edge": "soft",
     "freeboard_mm": 150
    },
-   "score": 0.7688,
+   "score": 0.7566,
    "scores": {
     "south": 0.8951,
     "north": 0.3413,
-    "east": 0.8173
+    "east": 0.7565
    },
    "south_parts": {
     "cap": 0.857,
@@ -4347,12 +4318,12 @@
     "warns": 0
    },
    "east_parts": {
-    "lush": 0.801,
+    "lush": 0.68,
     "species": 0.833,
     "warns": 0
    },
    "tally": {
-    "pass": 85,
+    "pass": 84,
     "fail": 0,
     "warn": 3,
     "not_evaluated": 8
@@ -4976,7 +4947,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 2,
+      "count": 1,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -4994,7 +4965,7 @@
      {
       "species": "Petrea volubilis L.",
       "slug": "petrea_volubilis",
-      "count": 1,
+      "count": 2,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -5012,7 +4983,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 16,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -6127,20 +6098,6 @@
     {
      "criterion": "LS-SLOPE",
      "status": "pass",
-     "subject": "paving-2",
-     "achieved": 1.5,
-     "required": 2,
-     "unit": "%",
-     "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required",
-     "source_ids": [
-      "TS-320-13-slopes",
-      "TS-240-8-crossslope",
-      "TS-340-8-tread-slope"
-     ]
-    },
-    {
-     "criterion": "LS-SLOPE",
-     "status": "pass",
      "subject": "path-main/cross",
      "achieved": 1.5,
      "required": 2,
@@ -6293,7 +6250,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/O-open-pond-north.png",
    "traceability": {
-    "elements": 56,
+    "elements": 55,
     "untraced": [
      [
       "south",
@@ -6987,24 +6944,9 @@
     ],
     "east": [
      {
-      "species": "Pontederia cordata L.",
-      "slug": "pontederia_cordata",
-      "count": 2,
-      "layer": "aquatic",
-      "verdict": "viable",
-      "conditions": [
-       "sun conditional (21 Jun hours vs class)"
-      ],
-      "water": "high",
-      "toxic": null,
-      "drawable": "not drawable yet",
-      "mature_h_m": 1.2,
-      "mature_spread_m": 0.6
-     },
-     {
       "species": "Zantedeschia aethiopica (L.) Spreng.",
       "slug": "zantedeschia_aethiopica",
-      "count": 12,
+      "count": 14,
       "layer": "aquatic",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -7021,7 +6963,7 @@
      {
       "species": "Bougainvillea glabra Choisy",
       "slug": "bougainvillea_glabra",
-      "count": 4,
+      "count": 6,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -7037,7 +6979,7 @@
      {
       "species": "Jasminum sambac (L.) Aiton",
       "slug": "jasminum_sambac",
-      "count": 3,
+      "count": 1,
       "layer": "climber",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -7073,7 +7015,7 @@
      {
       "species": "Gazania rigens (L.) Gaertn.",
       "slug": "gazania_rigens",
-      "count": 12,
+      "count": 14,
       "layer": "ground",
       "verdict": "viable_with_conditions",
       "conditions": [
@@ -8180,7 +8122,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -8195,7 +8137,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "water-need classes in the group: 1 achieved, 1 allowed (high)",
+     "message": "water-need classes in the group: 1 achieved, 1 allowed (low)",
      "source_ids": [
       "TS-750-11-hydrozone",
       "W-az-hydrozone-principle",
@@ -8300,7 +8242,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-w: water classes ['medium'] (1 allowed)",
+     "message": "bed-pond-end-w: water classes ['high'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -8312,7 +8254,7 @@
      "achieved": 1,
      "required": 1,
      "unit": "classes",
-     "message": "bed-pond-end-e: water classes ['high'] (1 allowed)",
+     "message": "bed-pond-end-e: water classes ['low'] (1 allowed)",
      "source_ids": [
       "LDG-POL-HYDRO"
      ]
@@ -8392,7 +8334,7 @@
    ],
    "plan_png": "knowledge/landscape/concept/plans/O-open-pond-east.png",
    "traceability": {
-    "elements": 60,
+    "elements": 61,
     "untraced": [
      [
       "south",

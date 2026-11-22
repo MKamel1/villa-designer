@@ -1,0 +1,8 @@
+# LDG lessons
+
+1. **A per-seat rule set can make a brief infeasible and the generator should say so, not tune around it.** Table 1.2 m clear, pit 1.5 m from seats and 2 m from structure, 3.46 m2 per dining seat: only 0.5-5.5 % of random packings fit the 53 m2 garden. Guard: `candidate-counts.json` records packed vs sampled per cell; `programme.json` states what does not fit.
+2. **A check added late can empty a cell.** The canopy-spread check removed every south tree and then every W and H planted variant (a tree the sampler still placed). Found because survivors read 0; guard: survivors per cell are printed and the run is only accepted when every (idea, variant) has a package (`test_outputs_zero_fails_and_traceable` needs all summary entries).
+3. **Planting that picks species before hydrozone breaks the hydrozone check** (olive low + bed plants medium). Guard: `plant_bed(force_hz=...)` and `LDG-HYDRO` count trees in the bed.
+4. **A guard against the real defect, not a synthetic one:** olive passed every LDK rule and was drawn at 7.6 m spread over the sister plot's corner; `test_tree_spread_check_catches_olive` fails without the spread check.
+5. **Rounding in rectangle decomposition made phantom overlaps** (0.001 m slivers failed GEOM for 80 % of the wall candidates). Guard: overlap threshold 5e-3 m2.
+6. **A score that cannot discriminate hides nothing but also helps nothing** (the `view` term was 1.0 for every candidate). Replaced by the mean rooms-seeing over the beds. Per-concept court picks did not diversify because planted variants of one structure score alike: next time pick distinct structures.
