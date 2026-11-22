@@ -35,8 +35,8 @@ class AssetTable(unittest.TestCase):
 
     def test_grade_c_asset_never_makes_a_species_drawable(self):
         rows = {r["slug"]: r for r in self.doc["species"]}
-        self.assertEqual(rows["olea_europaea"]["grade"], "C")
-        self.assertEqual(rows["olea_europaea"]["drawable"], "not drawable yet")
+        self.assertEqual(rows["rosmarinus_officinalis"]["grade"], "C")
+        self.assertEqual(rows["rosmarinus_officinalis"]["drawable"], "not drawable yet")
 
     def test_look_alike_cannot_map_to_species_and_missing_preview_fails(self):
         d = copy.deepcopy(self.doc)
@@ -148,7 +148,7 @@ class FabAssets(unittest.TestCase):
         cls.assets = [a for a in cls.doc["assets"] if a["id"].startswith("fab_")]
 
     def test_every_archive_is_an_asset_and_pinned(self):
-        self.assertEqual(len(self.assets), 27)
+        self.assertEqual(len(self.assets), 31)
         self.assertEqual({a["manifest_key"][4:] for a in self.assets}, set(self.fab["archives"]))
         self.assertFalse([e for e in validate_manifest(self.doc, {"assets": {}}, self.fab) if e.startswith("fab_")])
         self.assertTrue(all("Fab Standard License" in a["licence_quote"] and "Resell or redistribute" in a["licence_quote"] for a in self.fab["archives"].values()))
@@ -218,3 +218,27 @@ class FabAssets(unittest.TestCase):
         r, g, b = (sum(c.getdata()) / 65536 for c in im.split())
         self.assertGreater(r, 20); self.assertLess(g, 2); self.assertLess(b, 2)
 
+
+
+class AtlasBuiltTests(unittest.TestCase):
+    """Pass 6: an atlas-built climber panel is drawable for the climber use only and must say so (LDL)."""
+
+    def test_atlas_built_assets_carry_the_climber_scope(self):
+        from archpipe.landscape.plants.assets import load_assets
+        built = [a for a in load_assets()["assets"] if a.get("construction") == "atlas-built"]
+        self.assertGreaterEqual(len(built), 3)
+        for a in built:
+            self.assertIn("climber panel only", a["grade_scope"], a["id"])
+            self.assertEqual(a["use"], "climber-panel")
+            self.assertEqual(a["leaf_type"], "atlas_cutouts")
+
+    def test_foliage_stand_in_is_not_drawable(self):   # negative: bougainvillea flowers over jasmine leaves
+        from archpipe.landscape.plants.assets import load_assets
+        d = load_assets(); a = next(x for x in d["assets"] if x["id"] == "fab_bougainvillea_dressing")
+        self.assertEqual(a["grade"], "C")
+        self.assertFalse(a["maps_to"])
+
+    def test_jasmine_leaf_cutouts_exclude_dead_leaves(self):   # the first render showed brown dead scan leaves on the panel
+        import json, re
+        src = (Path(__file__).resolve().parents[3] / "src/archpipe/landscape/plants/atlas_panel.py").read_text()
+        self.assertIn('x[5] >= 1.0', src)

@@ -8946,7 +8946,8 @@
       "accessed": "2026-11-22",
       "locator": "Light",
       "quote": "In the Phoenix area, English ivy DOES NOT tolerate full sun and will quickly die when exposed to western afternoon sun during summer. Because of this, plant English ivy only in light to full shade in Phoenix."
-     }
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",

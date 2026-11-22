@@ -28,7 +28,7 @@ def main():
     ev = json.loads(FM.EV.read_text()); man = json.loads((P / "fab-manifest.json").read_text())
     for name, uid in UIDS.items():
         ev[uid] = listing(uid); d = FAB / "unzipped" / name
-        zp = FAB / (name + ".zip")
+        zp = FAB / ("source.zip" if name == "olive_tree_source" else name + ".zip")   # the olive archive is named source.zip
         meta = next((json.loads(f.read_text()) for f in d.glob("*.json")), None)
         man["archives"][name] = {
             "kind": KIND[name], "megascans_id": meta["id"] if meta else None, "name": ev[uid]["title"],

@@ -1,7 +1,7 @@
 """Cut-out rectangles of an atlas's Opacity map (4-connected components on a 4x-downsampled mask; no scipy).
     python -I atlas_rects.py OUT.json   ->  {name: {"scan_m", "rects": [[x0,y0,x1,y1] in 4096-px, area_px]}}
 Rects are in atlas pixels (origin top-left). Components under min_px are dropped (stems, specks)."""
-import json, sys
+import json, os, sys
 from collections import deque
 import numpy as np
 from PIL import Image
@@ -31,6 +31,11 @@ if __name__ == "__main__":
     for k, (p, scan, mn) in SRC.items():
         o = np.asarray(Image.open(FAB + p + "_Opacity.jpg"))[..., 0]
         m = np.asarray(Image.fromarray(o).resize((1024, 1024), Image.BILINEAR)) > 128
-        res[k] = {"scan_m": scan, "rects": components(m, mn)}
+        col = np.asarray(Image.open(FAB + p + "_BaseColor.jpg").convert("RGB")).astype(float)
+        rs = components(m, mn)
+        for r in rs:   # mean colour of the cut-out: dead (brown) leaves have R >= G
+            sub = col[r[1]:r[3], r[0]:r[2]]; w = np.asarray(Image.fromarray(o).crop((r[0], r[1], r[2], r[3]))) > 128
+            mc = sub[w].mean(axis=0); r.append(round(float(mc[1] / max(mc[0], 1)), 3))   # index 5 = G/R ratio
+        res[k] = {"scan_m": scan, "rects": rs}
         print(k, len(res[k]["rects"]), [(round((r[2]-r[0])*scan/4096*100, 1), round((r[3]-r[1])*scan/4096*100, 1)) for r in res[k]["rects"]][:30])
     json.dump(res, open(sys.argv[1], "w"))

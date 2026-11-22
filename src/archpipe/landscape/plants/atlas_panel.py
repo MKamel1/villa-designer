@@ -36,7 +36,7 @@ def load(d):
 def cutouts(mat, rects, scan, name):
     """one quad mesh per rect (origin at the bottom centre = the petiole end), UV = that rect of the atlas, real size."""
     k = scan / PX; out = []
-    for i, (x0, y0, x1, y1, _a) in enumerate(rects):
+    for i, (x0, y0, x1, y1, *_r) in enumerate(rects):
         w, h = (x1 - x0) * k, (y1 - y0) * k
         me = bpy.data.meshes.new(f"{name}{i}")
         me.from_pydata([(-w / 2, 0, 0), (w / 2, 0, 0), (w / 2, h, 0), (-w / 2, h, 0)], [], [(0, 1, 2, 3)])
@@ -114,7 +114,7 @@ def fig_material(maps, meta):
     build_material(mat, maps, meta, uvscale=1.0)
     nt = mat.node_tree
     mp = next(n for n in nt.nodes if n.type == "MAPPING"); mp.inputs["Scale"].default_value = (W / 0.85, H / 0.85, 1)
-    out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL"); sh = out.inputs["Surface"].links[0].from_node
+    out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL"); sh = out.inputs["Surface"].links[0].from_socket
     g = nt.nodes.new("ShaderNodeTexCoord"); sx = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(g.outputs["Generated"], sx.inputs[0])
 
     def m(op, a, b, clamp=False):
@@ -158,7 +158,7 @@ def build(sid):
     plaster(sc, width=3 * W + 1.0)
     st = {"id": sid, "panel_m": [W, H]}
     jm, jmeta = load("star_jasmine_pjycl2_4k"); jmat = bpy.data.materials.new("jasmine"); build_material(jmat, jm, jmeta)
-    jl = cutouts(jmat, RECTS["star_jasmine"]["rects"], RECTS["star_jasmine"]["scan_m"], "jl")
+    jl = cutouts(jmat, [x for x in RECTS["star_jasmine"]["rects"] if x[5] >= 1.0], RECTS["star_jasmine"]["scan_m"], "jl")
     st["leaf_cutouts"] = len(jl)
     for pi, cx in enumerate(panels):
         r2 = random.Random(100 * pi + 7)
@@ -175,7 +175,7 @@ def build(sid):
             st["leaf_area_m2_per_panel"] = round(a, 2)
             if sid == "bougainvillea_dressing":
                 bl = [x for x in RECTS["bougainvillea_flower"]["rects"]
-                      if (x[2] - x[0]) * 0.25 / PX >= 0.02 and 0.03 <= (x[3] - x[1]) * 0.25 / PX < 0.06]
+                      if x[5] < 0.6 and (x[2] - x[0]) * 0.25 / PX >= 0.02 and 0.03 <= (x[3] - x[1]) * 0.25 / PX < 0.06]
                 bm, bmeta = load("bougainvillea_flower_phfeffeh2_4k"); bmat = bpy.data.materials.new("bougainvillea"); build_material(bmat, bm, bmeta)
                 bq = cutouts(bmat, bl, RECTS["bougainvillea_flower"]["scan_m"], "bq")
                 st["bract_cutouts"] = len(bq)

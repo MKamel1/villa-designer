@@ -82,6 +82,7 @@ def reset_scene(RES, SAMPLES):
     sc.render.resolution_x = sc.render.resolution_y = RES
     sc.render.image_settings.file_format = "PNG"
     try:
+        if os.environ.get("ARCHPIPE_CPU"): raise RuntimeError("CPU requested (GPU lock held elsewhere)")
         prefs = bpy.context.preferences.addons["cycles"].preferences
         prefs.compute_device_type = "CUDA"
         prefs.get_devices()

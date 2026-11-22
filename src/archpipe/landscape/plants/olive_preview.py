@@ -22,7 +22,7 @@ sc.cycles.transparent_max_bounces = 32
 bpy.ops.import_scene.fbx(filepath=D + "SM_ItalianTress_Olive.FBX")
 for o in [o for o in bpy.data.objects if o.name.startswith("UCX_")]:
     bpy.data.objects.remove(o)
-tree = next(o for o in bpy.data.objects if o.type == "MESH")
+tree = bpy.data.objects["SM_ItalianTress_Olive"]
 
 
 def img(name, nc):
