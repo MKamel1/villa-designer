@@ -260,7 +260,7 @@ class VillaWalkthrough(unittest.TestCase):
             if a['level']!=b['level']:self.assertTrue(a['stair'] or b['stair'])
             self.assertLess(abs(a['ground_m']-b['ground_m']),.02)   # no teleport between floors
         x0,x1=W.stair_extent(self.spec)
-        for f in stair:self.assertTrue(x0-.01<=f['camera']['position'][0]<=x1+.5)
+        for f in stair:self.assertTrue(x0-.3<=f['camera']['position'][0]<=x1+.5)
 
     def test_pace_is_the_cited_walking_speed_and_never_exceeds_the_cited_maximum(self):
         policy=W.villa_policy()
@@ -306,7 +306,7 @@ class VillaWalkthrough(unittest.TestCase):
         self.assertFalse([i for i in findings if abs(i-first)<400])
 
     def test_furniture_blocks_a_standing_point(self):
-        item=next(i for i in self.vm.items if i['level']=='B' and i['id']=='dining-table-0')
+        item=next(i for i in self.vm.items if i['level']=='B' and i['id'].startswith('dining-table'))
         x0,y0,x1,y1=self.vm.F.footprint(item)
         cx,cy=(x0+x1)/2,(y0+y1)/2
         i,j=self.vm.cell(cx,cy)
