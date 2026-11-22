@@ -25,3 +25,26 @@ def test_pooled_adds_groups():
     p = C.pooled(a, b)
     assert (p["false_fail_should_pass"]["k"], p["false_fail_should_pass"]["n"]) == (1, 6)
     assert (p["recall_must_fail"]["k"], p["recall_must_fail"]["n"]) == (10, 10)
+
+
+def test_table_counts_recall_and_false_fail_with_intervals():
+    from archpipe.critic import extension as X
+    labels = {"a": dict(grade="D"), "b": dict(grade="F"), "c": dict(grade="B-"), "d": dict(grade="B-"), "e": dict(grade="C")}
+    verdicts = dict(a="fail", b="pass", c="pass", d="fail", e="fail")      # b is a missed bad view, d a false fail
+    t = X.table(labels, verdicts)
+    assert t["new"]["recall_must_fail"] == (1, 2)
+    assert t["new"]["false_fail_should_pass"] == (1, 2)
+    p = t["pooled_with_all_38"]["false_fail_should_pass"]
+    assert (p["k"], p["n"]) == (1 + 1 + 1, 2 + 2 + 3)          # new + held-out (1/2) + tuning (1/3)
+
+
+def test_score_set_fails_closed_without_vlm(tmp_path):
+    """Negative: with no VLM result a view must not pass, however clean its pixels are."""
+    import json
+    from PIL import Image
+    from archpipe.critic import extension as X, verdict as V
+    Image.new("RGB", (300, 200), (128, 128, 128)).save(tmp_path / "x.png")
+    (tmp_path / "x.json").write_text(json.dumps(dict(camera=dict(lens_mm=24, position=[0, 0, 1.35], target=[1, 0, 1.35],
+                                                                  sensor_mm=36), subjects=[])))
+    v, rows, notes = X.score_set({"x": dict(grade="B-")}, tmp_path, None, V.load_rubric())
+    assert v["x"] == "fail" and any("VLM" in r or "not evaluated" in r for r in notes["x"]["reasons"])
