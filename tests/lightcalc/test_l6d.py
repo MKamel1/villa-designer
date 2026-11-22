@@ -58,24 +58,43 @@ def test_night_and_film_levels_stay_above_the_dimming_floor_of_the_spec(villa):
 def test_guard_is_not_vacuous_the_old_pendant_and_globes_would_fail():
     """Negative: with the L6c numbers (Jilly driver 0.13, Evening 0.3, Dinner 0.47; globes 0.70 x Reading 0.2) the guard's own arithmetic is below 15 %."""
     assert 0.13 * 0.3 < FLOOR and 0.13 * 0.47 < FLOOR and 0.70 * 0.2 < FLOOR
-    assert 0.35 * 0.43 > FLOOR - 0.0001 and 0.70 * 0.22 > FLOOR - 0.0001      # the L6d numbers
+    assert 0.50 * 0.40 > FLOOR and 0.50 * 0.32 > FLOOR and 0.70 * 0.22 > FLOOR - 0.0001      # the table pendant (RP65) and the globes now
 
 
 def test_table_pendant_is_scaled_to_the_table(villa):
+    """Client decision 2026-11-22: a decorative pendant scaled to the 1.8 m table (about 1.2 m, policy <= 2/3 of its length), 2700 K, CRI >= 90,
+    DALI-2, no phase-cut, V10-verifiable (maker file + datasheet), at a driver <= 0.80."""
     f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
     tb = villa.fp["dining-table"]
     table_len = max(tb[2] - tb[0], tb[3] - tb[1])
     prod = dict(f.record.product)
-    assert prod["code"] == "QA03" and prod["manufacturer"] == "iguzzini"
+    assert prod["code"] == "RP65" and prod["manufacturer"] == "iguzzini"
     size = f.record.definition.spec["length"]
-    assert size <= table_len * 2 / 3                                    # policy: a pendant over a table <= about 2/3 of its length
-    assert prod["lm"] <= 933                                            # 140 lm Evening at >= 15 % of its output (L6c scene demand)
+    assert size == pytest.approx(f.length)
+    assert table_len * 0.5 <= size <= table_len * 2 / 3                 # a centrepiece (>= half the table) within the policy (<= 2/3)
+    row = json.loads((ROOT / "knowledge/lighting/products-frozen.json").read_text())["PEN-LIN"]
+    assert row["cct"] == 2700 and row["cri"] >= 90 and row["v10"] == "pass" and "DALI-2" in row["dimming"] and "phase" not in row["dimming"].lower()
+    src = json.loads((ROOT / "knowledge/lighting-products/iguzzini/RP65/source.json").read_text())
+    assert src["v10"]["v10_status"] == "pass" and any(k.endswith(".ldt") for k in src["files"]) and any(k.endswith("product-page.txt") for k in src["files"])
+    assert VL._drivers()["Z-B-DINING-TABLE-PENDANT"] <= 0.80
+
+
+def test_dining_cards_are_met_by_the_pendant_alone(villa):
+    """The decorative fitting meets both cards without a separate downlight: Dinner table 100 lx and the homework end (Day) 200 lx, from the Radiance
+    results with the drivers applied (the scene levels are the design's own)."""
+    res = VR.ClusterRes.load(RES / "B-open.json")
+    from archpipe.lightcalc.villa_report import scene_levels
+    for pid, scene, card in (("dining-table", "Dinner", 100), ("homework-end", "Day", 200)):
+        pl = next(p for p in villa.planes() if p.id == pid)
+        em = res.stats(pid, scene_levels(res, VL.SCENES["B-open"], scene)).em
+        assert em >= card * 0.99, (pid, scene, em)
+    assert not [f for f in villa.fixtures if f.room == "dining" and f.kind in ("DL", "DLN")]      # no downlight was needed
 
 
 def test_every_bound_product_is_v10_pass():
     frozen = json.loads((ROOT / "knowledge/lighting/products-frozen.json").read_text())
     assert {k: v["v10"] for k, v in frozen.items()} == {k: "pass" for k in frozen}, {k: v["v10"] for k, v in frozen.items() if v["v10"] != "pass"}
-    assert frozen["ADJ"]["code"] == "A9003138" and frozen["PEN-LIN"]["code"] == "QA03"
+    assert frozen["ADJ"]["code"] == "A9003138" and frozen["PEN-LIN"]["code"] == "RP65"
 
 
 class _Narrow:

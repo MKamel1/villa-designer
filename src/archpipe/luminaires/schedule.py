@@ -60,16 +60,21 @@ TYPE_SPEC = {
                ugr="cut-off 80 deg (datasheet)", ip="IP20", ik="-", dimming=DIM_DALI,
                size="recessed, size-3 ring, 76 mm trim; ceiling thickness 1-25 mm", finish="white RAL 9002",
                note="wall-wash mean illuminance table on the datasheet (3 m wall, 0.9-1.2 m offset) must be matched +/-10 %"),
-    "PEN-LIN": dict(name="Pendant downlight over the dining table, direct", role="Dining table task and decorative light", mount="suspended, 762 mm over the table",
-                    ref=[dict(maker="iGuzzini", code="QA03", url="https://www.iguzzini.com/en/qa03/", v10="pass",
-                              name="Laser pendant O59 Tech, wide flood 44 deg, 12.3 W, 831.6 lm, 2700 K, CRI 90, DALI-2"),
-                         dict(maker="iGuzzini", code="QA11", url="https://www.iguzzini.com/en/qa11/", v10="pass",
-                              name="Laser pendant O59 Deco, flood 38 deg, 12.3 W, 766.8 lm, 2700 K, CRI 90, DALI-2 (alternate)")],
-                    beam=(44, "downward wide flood 44 deg, no light above 90 deg"), cct=2700, ugr="UGR < 10 (maker)", ip="IP20", ik="-",
-                    lumens_text="L6d: ONE pendant of 600-900 lm for the 1.8 m table (the 1.5 m 3558 lm Jilly it replaces ran at 3.9 % of its output in the Evening "
-                                "scene). The scenes need about 140 / 220 / 460 lm (Evening / Dinner / Day): 15 % or more of the rating in every scene and <= 80 % in Day",
-                    dimming=DIM_DALI + "; supplier states the lowest level (the maker's page gives none)", size="diameter 59 mm, body 250 mm, hung 0.15 m west of the table centre; suspension kit separate",
-                    finish="white", note="a pendant should not exceed about 2/3 of the table length (policy); a single point pendant lights a pool of about 0.65 m"),
+    "PEN-LIN": dict(name="Decorative linear pendant over the dining table, direct (UGR<19)", role="Dining table light: the centrepiece, and the task light (cards: Dinner 100 lx, homework end 200 lx)", mount="suspended, 762 mm over the table",
+                    ref=[dict(maker="iGuzzini", code="RP65", url="https://www.iguzzini.com/en/rp65/", v10="pass",
+                              name="Libera System down light module, frame, L 1140, UGR<19 Space optic, 9.7 W, 1079 lm, 2700 K, CRI 90 (Rf 91), 48 V PWM"),
+                         dict(maker="iGuzzini", code="RP25", url="https://www.iguzzini.com/en/rp25/", v10="pass",
+                              name="Libera System down light module, frameless, L 1140, general-light Space optic, 18.7 W, 2058 lm, 2700 K, CRI 90 (Rf 91) (alternate, brighter)")],
+                    beam=(None, "linear downward emission, luminance control UGR<19 (L <= 3000 cd/m2); compare the IES/LDT, not a beam angle"), cct=2700,
+                    ugr="UGR<19, luminance control L<=3000 cd/m2 (maker)", ip="IP20", ik="-",
+                    lumens_text="Client decision 2026-11-22: a decorative pendant scaled to the 1.8 m table, 1140 mm = 63 % of its length (policy: <= 2/3). ONE 1079 lm module: "
+                                "the scenes run it at 16 % (Evening), 20 % (Dinner) and 50 % (Day) of its output (every scene >= 15 %, driver 0.50 <= 0.80); it meets the Dinner "
+                                "100 lx and homework-end 200 lx cards alone",
+                    dimming=DIM_DALI + " via the external 48 V DALI-2 power supply (the module is PWM-controlled: the supply is ordered separately, DALI-2 version); "
+                                       "supplier states the lowest level (the maker's page gives none)",
+                    size="1140 x 20 x 27 mm blade (LDT header 1140 x 23 x 28), two suspension wires 0.45 m either side of its centre, centred on the table, 762 mm over it; "
+                         "power supply, suspension and connection accessories ordered separately",
+                    finish="white / transparent white (G0)", note="a pendant should not exceed about 2/3 of the table length (policy); the module sits over the table's centre line along its length"),
     "DESK": dict(name="Adjustable desk task lamp, shielded", role="Desk lamps: cinema desk, children's desks", mount="desk or wall arm, 450 mm over the desktop",
                  ref=[dict(maker="ERCO", code="31327.000", url="https://www.erco.com/31327.000", v10="pass",
                            name="Lucy task light, wide beam, 9.4 W, 234 lm, 2700 K, CRI 92, on-board dim")],

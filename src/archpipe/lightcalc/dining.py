@@ -51,7 +51,7 @@ def extract_input(out: Path = INPUT, scene_json: Path | None = None) -> dict:
                          "kind": e.params["fixture_kind"], "flux_lm": e.params["flux_lm"], "watts": e.params["watts"],
                          "ies": e.params["photometry"]["ies"], "generic": e.params["photometry"]["generic"],
                          "beam_deg": e.params["beam_deg"], "card": e.params["illuminance_card"],
-                         "length_m": 1.6 if e.params["fixture_kind"] == "PEN-LIN" else 0.0})
+                         "length_m": e.params.get("length_mm", 0.0) / 1000 if e.params["fixture_kind"] == "PEN-LIN" else 0.0})
     table = next(e for e in els if e.id == "furn-dining-table")
     tx, ty = table.placement[0] / 1000, table.placement[1] / 1000
     tw, td, th = (v / 1000 for v in table.size)

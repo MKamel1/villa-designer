@@ -71,5 +71,13 @@
    }
   ]
  },
- "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read"
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "status": "retired from the design 2026-11-22 (client decision: dining pendant is now the iGuzzini Libera RP65)",
+ "cri": {
+  "page": 92,
+  "page_rf": 92,
+  "page_rg": 99,
+  "ldt_and_product_name": 90,
+  "note": "the product page prints 'CRI 92 - Rf 92 - Rg 99'; the LDT lamp line and the product name say 90. The page is the maker's statement of the product; both exceed the brief's CRI >= 90. Found by LV V10, corrected 2026-11-22"
+ }
 }

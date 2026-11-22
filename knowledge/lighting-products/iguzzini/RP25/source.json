@@ -1,0 +1,52 @@
+{
+ "code": "RP25",
+ "maker": "iguzzini",
+ "name": "Libera System down light module, frameless, L 1140, 48 Vdc PWM, general light Space optic, 18.7 W system, 2058 lm system, 2700 K, CRI 90 (Rf 91), white",
+ "fetched": "2026-11-22",
+ "product_url": "https://www.iguzzini.com/en/rp25/",
+ "file_urls": {
+  "ldt": "https://www.iguzzini.com/globalassets/shared-photometric-media/r/p/2/rp25/73412/rp25-g0_g62f.ldt",
+  "ies": "https://www.iguzzini.com/globalassets/shared-photometric-media/r/p/2/rp25/73412/rp25-g0_g62f.ies"
+ },
+ "retrieval": "robots.txt (Allow: /) read; static GET with a generic client name, 3 s pauses; product page text read in Chrome (Playwright), saved as-is",
+ "datasheet_note": "iGuzzini publishes the datasheet as the product page (text saved); the Specification sheet PDF link is script-generated and was not fetched; the saved PDF (RP65 only) is the installation sheet. Control is EXTERNAL: the 48 V PWM power supply (ON-OFF, DALI or BLE version) is ordered separately, so DALI-2 comes from the chosen supply, not from the module",
+ "files": {
+  "RP25-product-page.txt": {
+   "path": "knowledge/lighting-products/iguzzini/RP25/RP25-product-page.txt",
+   "sha256": "5031e5929549c60d12a136fc46a1a1b061473948b3e5081053562b9ef6af2563"
+  },
+  "RP25.ies": {
+   "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ies",
+   "sha256": "f8cfa1114b19cc3d9fe54b4184ee50780243605b506a32d4b018c1283c925a57"
+  },
+  "RP25.ldt": {
+   "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ldt",
+   "sha256": "19310bec4e8186070b34c34e5b99336eb0c14ed209fec4b98b4a218aa54d20e8"
+  }
+ },
+ "v10": {
+  "v10_status": "pass",
+  "lumens": {
+   "stated": 2058,
+   "independent": 2058.4,
+   "archpipe": 2058.0,
+   "worst_error": 0.0002,
+   "tolerance": 0.02,
+   "status": "pass"
+  },
+  "points": [
+   {
+    "kind": "imax",
+    "distance_m": null,
+    "published": 2110,
+    "engine": 2018.2,
+    "independent": 2018.2,
+    "worst_error": 0.0435,
+    "tolerance": 0.05,
+    "status": "pass",
+    "source": "product page 'Maximum intensity (cd)'"
+   }
+  ]
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read"
+}

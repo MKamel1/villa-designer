@@ -736,6 +736,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
 
     # ---- per-room floor finishes (2 mm over the slab) and false ceilings / coves
     cove_rooms = {f.extra.get("cove_room") for f in VL.design(lay) if f.kind == "COVE" and f.extra.get("cove_room")}
+    one_side = {f.extra["cove_band"]["room"]: f.extra["cove_band"] for f in VL.design(lay) if f.kind == "COVE" and f.extra.get("cove_band")}
     for rid, r in lay["rooms"].items():
         if rid not in FINISH:
             continue
@@ -747,7 +748,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         if rid in UNDER_SOFFIT or rid in ("stair-b",):
             continue
         zc = z + VL.CEILING
-        if rid in cove_rooms:
+        if rid in one_side:
+            # L6d (LV open item): ONE cove side. A lowered band at 2.70 on the named side (the bedroom's ceiling carried into the lobby), an
+            # 80 mm upstand on its room-side edge, the strip in the coffer above the band; the field is the 2.80 slab soffit. The strip is
+            # below the soffit and above the band: the band hides it from below on the bedroom side, the upstand from the lobby.
+            cb = one_side[rid]
+            assert cb["side"] == "y1", "only the y1 (north) side is built"
+            yb = y1 - cb["depth"]
+            mesh("ceiling-" + rid, "ceiling-white", [quad_down(x0, yb, x1, y1, zc),
+                 [[x1, yb, zc], [x0, yb, zc], [x0, yb, zc + 0.08], [x1, yb, zc + 0.08]]], "shell", room=rid,
+                 label="detail: cove band (2.70) with 80 mm upstand, strip in the coffer under the 2.80 soffit", kind="finish-layer", surface=True,
+                 occupied_side=(0, 0, -1))
+        elif rid in cove_rooms:
             b = VL.COVE_BAND
             ring = [quad_down(x0, y0, x1, y0 + b, zc), quad_down(x0, y1 - b, x1, y1, zc),
                     quad_down(x0, y0 + b, x0 + b, y1 - b, zc), quad_down(x1 - b, y0 + b, x1, y1 - b, zc)]

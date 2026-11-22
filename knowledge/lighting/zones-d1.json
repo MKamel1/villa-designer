@@ -102,7 +102,7 @@
    "luminaire_ids": [
     "lum-PEN-LIN-dining-01"
    ],
-   "watts": 4.3,
+   "watts": 4.8,
    "dimming": "dali2"
   },
   {
@@ -772,7 +772,7 @@
     "run-task": 1.0
    },
    "Dinner": {
-    "table-pendant": 0.43,
+    "table-pendant": 0.4,
     "island-pendants": 0.3,
     "*decorative": 0.3,
     "living-ambient": 0.2,
@@ -782,7 +782,7 @@
     "*ambient": 0.4,
     "*decorative": 0.7,
     "*accent": 0.7,
-    "table-pendant": 0.45,
+    "table-pendant": 0.32,
     "island-pendants": 0.4
    },
    "Reading": {

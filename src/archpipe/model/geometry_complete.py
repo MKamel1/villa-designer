@@ -213,15 +213,20 @@ def room_surfaces(els, lay, sp, finish, recs) -> list[DesignElement]:
         elif rid in ("lounge", "living"):
             kind, why = "cove", ("false ceiling at %.0f mm in a %.0f mm perimeter band (bulkhead), slab soffit exposed at %.0f mm in the "
                                  "field (villa_lighting CEILING / COVE_BAND / COVE_FIELD)" % (VL.CEILING * 1000, VL.COVE_BAND * 1000, VL.COVE_FIELD * 1000))
+        elif rid == VL.LOBBY_COVE_ROOM:
+            kind, why = "cove", ("one-sided cove on the bedroom side: false ceiling at %.0f mm in a %.0f mm band (bulkhead) with an 80 mm upstand on its lobby edge, "
+                                 "the LED strip in the coffer above the band, slab soffit exposed at %.0f mm in the field (villa_lighting CEILING / "
+                                 "LOBBY_COVE_DEPTH / COVE_FIELD)" % (VL.CEILING * 1000, VL.LOBBY_COVE_DEPTH * 1000, VL.COVE_FIELD * 1000))
         elif rid == "stair-gf":
             kind, why = "slab-soffit", "slab soffit over the double-height stair void (villa_lighting COVE_FIELD)"
         else:
             kind, why = "flat", "flat false ceiling at villa_lighting CEILING"
         zones = []
         if kind == "cove":
-            fx0, fy0, fx1, fy1 = (v * 1000 for v in (lambda c: (c[0] + VL.COVE_BAND, c[1] + VL.COVE_BAND, c[2] - VL.COVE_BAND, c[3] - VL.COVE_BAND))(
+            b = VL.COVE_BAND if rid != VL.LOBBY_COVE_ROOM else 0.0
+            fx0, fy0, fx1, fy1 = (v * 1000 for v in (lambda c: (c[0] + b, c[1] + b, c[2] - b, c[3] - b - (VL.LOBBY_COVE_DEPTH if rid == VL.LOBBY_COVE_ROOM else 0.0)))(
                 __import__("archpipe.concept.villa_furnish", fromlist=["x"]).clear_rect(lay, rid)))
-            zones = [dict(role="bulkhead band", height_mm=round(VL.CEILING * 1000, 1), width_mm=round(VL.COVE_BAND * 1000, 1)),
+            zones = [dict(role="bulkhead band", height_mm=round(VL.CEILING * 1000, 1), width_mm=round((VL.COVE_BAND if rid != VL.LOBBY_COVE_ROOM else VL.LOBBY_COVE_DEPTH) * 1000, 1)),
                      dict(role="raised field", height_mm=round(VL.COVE_FIELD * 1000, 1), polygon_mm=[[round(fx0, 1), round(fy0, 1)], [round(fx1, 1), round(fy0, 1)], [round(fx1, 1), round(fy1, 1)], [round(fx0, 1), round(fy1, 1)]])]
         out.append(DesignElement(
             id=f"ceiling-{rid}", kind="ceiling", level=r.level, room=rid, host=host[r.level], finish_codes=(ceil_code,),

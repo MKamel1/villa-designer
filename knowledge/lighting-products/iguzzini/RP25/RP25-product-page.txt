@@ -1,0 +1,257 @@
+PRODUCTS
+SERVICES
+INSPIRATION
+CONFIGURATORS
+About us
+Contacts
+Global
+INDOOR
+/
+LINEAR SYSTEMS
+/
+LIBERA
+/
+WALL
+RP25
+.G0
+ White / transparent white
+CERTIFICATION COUNTRY
+Global (CE)
+
+Looking for products in North America or China? Access the dedicated product sections.
+Can't find the required certification for your project country? Click here.
+
+SAVE TO FAVORITES
+DOWNLOADS
+COLOUR
+OPTIONAL COMPONENTS
+TECHNICAL DATA
+PHOTOMETRIC DATA
+ELECTRICAL DATA
+INSTALLATION
+DOWNLOADS
+RP25.G0 WHITE / TRANSPARENT WHITE
+PART OF
+LIBERA SYSTEM - WALL
+LIBERA SYSTEM - CEILING TO FLOOR
+LIBERA SYSTEM - PENDANT
+LIBERA SYSTEM - SPACE LIGHTING MODULES
+DESCRIPTION
+DownLight emission module - Frameless - L= 1140 - 48Vdc (PWM) - General Light - Space Optic – Warm White
+GL - general lighting
+18.7 W system
+2058 lm system
+110.1 lm/W
+2700 K
+CRI 90 - Rf (Colour Fidelity Index) 91 - Rg (Gamut Index) 97
+Control  
+External
+DESIGNED BY
+
+Artec Studio
+
+COLOUR
+SELECTED
+G0
+White / transparent white
+STANDARD
+OPTIONS
+STANDARD
+WHITE / TRANSPARENT WHITE
+G0
+BLACK / TRANSPARENT BLACK
+G1
+BLACK / TRANSPARENT WHITE
+G2
+WHITE / TRANSPARENT BLACK
+M6
+TITANIUM / TRANSPARENT WHITE
+P9
+TITANIUM / TRANSPARENT BLACK
+Q0
+SAPPHIRE BLUE / TRANSPARENT WHITE
+Q1
+SAPPHIRE BLUE / TRANSPARENT BLACK
+Q2
+OPTIONAL COMPONENTS
+SELECTED
+You haven't selected any accessories yet.
+In order to configure the product, select at least one accessory from the list below
+OPTIONS
+LIGHTING ACCESSORIES
+DECORATIVE ACCESSORIES
+MOUNTING ACCESSORIES
+POWER SUPPLY
+WIRING COMPONENTS
+SMART LIGHT CONTROL
+PE26
+
+Strip UpLight for module L=1140
+
+SIZE (MM) 935 - WEIGHT (KG) 0.03
+01
+White
+TECHNICAL DATA
+LAST UPDATE: 06/11/2026
+DESCRIPTION
+Direct emission linear modular lighting system with Warm White CRI90 monochrome LED lamps. General Light (High Output) luminaire with Opti-Diamond Space optic available in a White Cover (Transparent white) or Black Cover (Transparent black) version. Complete with 48Vdc Mid-Power Led circuit and PWM control system. Frameless version with extruded aluminium profile; Modular luminaire that can be positioned freely as it rotates 360° around its own axis (See the instruction sheet for the accessories to be used).
+DIMENSIONS
+General (mm)
+1140x20x27
+TECHNICAL PERFORMANCE
+
+Class III
+
+Protected against penetration of solids larger than 12 mm, not protected against penetration of liquids.
+
+Complies with EN60598-1 and pertinent regulations
+
+PHYSICAL PROPERTIES
+Weight (kg)
+0.63
+Material
+Extruded aluminium
+PRODUCT CERTIFICATION
+VIEW CERTIFICATION COUNTRIES
+CE
+EAC
+ENEC-03
+PEP ECOPASSPORT
+UK CONFORMITY ASSESSED
+PHOTOMETRIC DATA
+DETAILS
+lm system
+2058
+W system
+18.7
+lm source
+2480
+W source
+16
+Luminous efficiency - lm/W (system value)
+110.1
+lm in emergency mode
+-
+Maximum intensity (cd)
+2110
+Total light flux at or above an angle of 90° (Lm)
+0
+Light output ratio (LOR)
+83
+Optic and beam angle
+GL - general lighting
+Adjustability
+fixed
+Light colour quality
+CRI 90 - Rf (Colour Fidelity Index) 91 - Rg (Gamut Index) 97
+Colour temperature
+2700 K
+MacAdam Step
+3
+Lifetime LED 1
+> 50,000h - L90 - B10 (Ta 25°C)
+CHARTS AND POLAR CURVES
+ELECTRICAL DATA
+Operating ambient temperature range (C°)
+from 0°C to 30°C.
+Supply voltage
+48 V DC
+ZVEI code
+LED
+Power Supply
+Electronic Power supply not included
+Mounting options
+Remote
+Control
+External
+LED current (mA)
+77
+INSTALLATION
+DESCRIPTION
+Pendant or surface-mounted using suitable accessories to be ordered separately.
+Wiring
+Connection with quick coupling input and output connectors.
+The module is designed to use suitable Led Strips (Up Light emission) to be ordered separately.
+Power supply unit (48V) to be ordered separately as specified in the instruction sheet. Available in an ON-OFF, DALI and BLE version.
+DOWNLOADS
+DOCUMENTATION
+Specification sheet
+DOWNLOAD
+Specification text
+DOWNLOAD
+Installation instructions
+DOWNLOAD
+PHOTOMETRIC DATA (.IES / .LDT / DIALUX / RELUX)
+LDT
+DOWNLOAD
+IES
+DOWNLOAD
+DIALux Drag&Drop
+DOWNLOAD
+Relux Drag&Drop
+DOWNLOAD
+3D BIM REVIT
+3D BIM Revit
+DOWNLOAD
+2D/3D DRAWINGS (.DWG / .MAX)
+2D
+DOWNLOAD
+CERTIFICATIONS
+CE
+DOWNLOAD
+UKCA
+DOWNLOAD
+ENEC-03
+DOWNLOAD
+EAC
+DOWNLOAD
+PEP-EPD
+DOWNLOAD
+This site is protected by reCAPTCHA.
+Stay connected with our latest innovations. Subscribe to our newsletter for updates on new products, fairs, and initiatives.
+SUBSCRIBE
+
+iGuzzini illuminazione S.p.A 
+
+Via Mariano Guzzini 37
+
+62019 Recanati (Italy)
+
+Share Capital €21.050.000,00 i.v.
+
+VAT N. and R.I. : (IT)00082630435
+
+CCIAA Macerata, R.E.A. 40632
+
+ 
+
+iGuzzini® is a registered trademark of
+iGuzzini Illuminazione S.p.A. All rights reserved.
+
+Contacts & Locations
+Social
+Instagram
+LinkedIn
+Facebook
+YouTube
+Pinterest
+Products
+Indoor
+Outdoor
+Smart control
+iGuzzini Echoes
+About us
+Social Innovation
+History
+Warm Technology
+Responsibility
+Work with us
+PRIVACY
+CERTIFICATIONS
+5 YEAR WARRANTY
+WHISTLEBLOWING
+COOKIE POLICY
+ACCESSIBILITY STATEMENT
+OUR CODES
+KNOWLEDGE BASE (LOGIN REQUIRED)
+DOWNLOADS
