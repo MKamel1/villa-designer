@@ -86,9 +86,10 @@
   "maximum_yaw_rate_basis": "ASSUMED slow camera pan (the earlier clip registered 20); 20 made the whole-villa pace 0.37 m/s on average because most rooms are small and need a 90-180 degree look-in",
   "door_route_gap_m": [
     0.35,
-    0.25
+    0.25,
+    0.18
   ],
-  "door_route_gap_basis": "ASSUMED; 0.35 m keeps a leaf clear of the 0.30 m standing policy, 0.25 m is the fallback and the 0.15 m swept guard still decides at admission",
+  "door_route_gap_basis": "ASSUMED; 0.35 m keeps a leaf clear of the 0.30 m standing policy, 0.25 then 0.18 m are fallbacks (parents dressing door, whose approach is squeezed by the bedside books); the 0.15 m swept guard still decides at admission",
   "low_headroom_rooms_m": {
     "store-ramp": 1.4
   },

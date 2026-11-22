@@ -427,6 +427,19 @@ def _furniture_boxes(scene, margin=.15+.02):
     walls and doors, not here.
     """
     out = {lv: [] for lv in LEVEL_Z}
+    for box in json.loads((ROOT/'knowledge/flythrough/evaluated-obstacles.json').read_text())['boxes']:
+        lo, hi = np.array(box['lo']), np.array(box['hi']); lv = level_at((lo[2]+hi[2])/2)
+        if max(hi[0]-lo[0], hi[1]-lo[1]) <= 6 and lo[2] < LEVEL_Z[lv]+1.8 and hi[2] > LEVEL_Z[lv]+.05:
+            out[lv].append((lo, hi, 0.))
+    from .concept import villa_landscape as LAND
+    for prop in scene.get('props', []):
+        if prop['asset'] not in LAND.PROP_BOUNDS:
+            continue
+        x0, y0, z0, x1, y1, z1 = LAND.prop_world_box(prop['asset'], prop['position'], prop.get('rotation_deg', [0, 0, 0]), prop['scale'])
+        lv = level_at((z0+z1)/2)
+        if z0 < LEVEL_Z[lv]+1.8 and z1 > LEVEL_Z[lv]+.05:
+            # the evaluated bedside books reach 0.08 m beyond prop_world_box (measured): props carry 0.1 m extra
+            out[lv].append((np.array([x0, y0, z0]), np.array([x1, y1, z1]), .1))
     for m in scene['meshes']:
         if m.get('group') not in ('furniture', 'fixture', 'dressing') or not m.get('faces') or m.get('diagnostic'):
             continue
@@ -437,7 +450,7 @@ def _furniture_boxes(scene, margin=.15+.02):
             continue
         lv = level_at((lo[2]+hi[2])/2)
         if lo[2] < LEVEL_Z[lv]+1.8 and hi[2] > LEVEL_Z[lv]+.05:
-            out[lv].append((lo, hi))
+            out[lv].append((lo, hi, 0.))
     return out
 
 
@@ -454,7 +467,12 @@ class VillaMap:
         self.layout, self.spec, self.F = layout, spec, F
         self.boxes = _furniture_boxes(scene) if scene else {lv: [] for lv in LEVEL_Z}
         self.items = items if items is not None else F.layout(layout)
-        self.pieces = {lv: [F.footprint(i) for i in self.items if i['level'] == lv] for lv in LEVEL_Z}
+        # Beds and bedside tables are dressed at assembly (duvet, books) and measured 0.15 m wider than their plan
+        # footprint in the evaluated meshes; the plan pieces carry that overhang.
+        def grown(i):
+            x0, y0, x1, y1 = F.footprint(i); g = .15 if '-bed' in i['id'] else 0.
+            return (x0-g, y0-g, x1+g, y1+g)
+        self.pieces = {lv: [grown(i) for i in self.items if i['level'] == lv] for lv in LEVEL_Z}
         self.rooms = {lv: {n: r for n, r in layout['rooms'].items() if r['level'] == lv} for lv in LEVEL_Z}
         xs = [r['rect'][0] for r in layout['rooms'].values()]+[r['rect'][2] for r in layout['rooms'].values()]
         ys = [r['rect'][1] for r in layout['rooms'].values()]+[r['rect'][3] for r in layout['rooms'].values()]
@@ -499,9 +517,21 @@ class VillaMap:
                             break   # prefer the room that contains the point
         self._policy[lv] = free.copy()
         # actual imported/furniture meshes (chairs pulled out, wall-mounted pieces) beyond their plan footprints
-        for lo, hi in self.boxes[lv]:
+        for lo, hi, extra in self.boxes[lv]:
             i0, j0 = self.cell(lo[0]-.17, lo[1]-.17); i1, j1 = self.cell(hi[0]+.17, hi[1]+.17)
             free[max(i0, 0):i1+1, max(j0, 0):j1+1] = False
+        # a door slot stays open for planning even where a mesh box overlaps it: door_cross then picks the exact
+        # lateral offset that clears the mesh (the slot is only 0.3 m wide, narrower than the 0.1 m grid can resolve)
+        for d in self.spec['doors']:
+            if d['level'] != lv or d.get('garden') or d.get('entrance'):
+                continue
+            h = self.F._door_axis(d) == 'h'
+            for i in range(self.nx):
+                for j in range(self.ny):
+                    x, y = self.xy(i, j)
+                    along, across = (x-d['x'], y-d['y']) if h else (y-d['y'], x-d['x'])
+                    if abs(across) <= .35 and abs(along) <= d['width']/2-.25 and self._policy[lv][i, j]:
+                        free[i, j] = True
         self._free[lv], self._room[lv] = free, room_of
 
     def free(self, lv):
@@ -574,13 +604,50 @@ class VillaMap:
     def line_free(self, lv, a, b, tight=False):
         """True when every sample along the segment has all four surrounding cell centres free (no corner clipping)."""
         free = self._mask(lv, tight); n = max(2, int(math.dist(a, b)/(CELL/2)))
+        pieces = self.pieces[lv]
         for k in np.linspace(0, 1, n):
-            fx = (a[0]+(b[0]-a[0])*k-self.x0)/CELL; fy = (a[1]+(b[1]-a[1])*k-self.y0)/CELL
+            px, py = a[0]+(b[0]-a[0])*k, a[1]+(b[1]-a[1])*k
+            if any(r[0]-.155 < px < r[2]+.155 and r[1]-.155 < py < r[3]+.155 for r in pieces):
+                return False   # exact 0.15 m furniture clearance, not just the grid's
+            if any(w[0]-.305 < px < w[2]+.305 and w[1]-.305 < py < w[3]+.305 and not self._in_slot(lv, px, py)
+                   for w in self._built(lv)):
+                return False   # exact 0.30 m wall/column clearance
+            fx = (px-self.x0)/CELL; fy = (py-self.y0)/CELL
             for i in {int(math.floor(fx)), int(math.ceil(fx))}:
                 for j in {int(math.floor(fy)), int(math.ceil(fy))}:
                     if not (0 <= i < self.nx and 0 <= j < self.ny and free[i, j]):
                         return False
         return True
+
+    def _door_clearance(self, lv, d, h, s, shift):
+        """Smallest horizontal distance from a straight crossing of door d at lateral `shift` to furniture
+        pieces and mesh boxes (metres, 9 if none near)."""
+        rects = list(self.pieces[lv])+[(lo[0]-g, lo[1]-g, hi[0]+g, hi[1]+g) for lo, hi, g in self.boxes[lv]]
+        best = 9.
+        for off in np.arange(-.45, .451, .03):
+            x, y = (d['x']+shift, d['y']+s*off) if h else (d['x']+s*off, d['y']+shift)
+            for r in rects:
+                dx = max(r[0]-x, 0, x-r[2]); dy = max(r[1]-y, 0, y-r[3])
+                best = min(best, math.hypot(dx, dy))
+        return best
+
+    def _built(self, lv):
+        if not hasattr(self, '_built_cache'):
+            self._built_cache = {}
+        if lv not in self._built_cache:
+            self._built_cache[lv] = self.F._walls(self.spec, lv)+self.F._columns()
+        return self._built_cache[lv]
+
+    def _in_slot(self, lv, x, y):
+        """Inside a passage door's policy slot, where the wall clearance does not apply."""
+        for d in self.spec['doors']:
+            if d['level'] != lv or d.get('garden') or d.get('entrance'):
+                continue
+            h = self.F._door_axis(d) == 'h'
+            along, across = (x-d['x'], y-d['y']) if h else (y-d['y'], x-d['x'])
+            if abs(across) <= .35 and abs(along) <= d['width']/2-.25:
+                return True
+        return False
 
     def door_cross(self, lv, polyline):
         """Make every passage-door crossing straight along the door's centre line.
@@ -604,8 +671,11 @@ class VillaMap:
                 if abs(along) > d['width']/2:
                     continue
                 s = 1. if cb > ca else -1.
+                limit = d['width']/2-.25-.01
+                shift = max(np.arange(-limit, limit+1e-9, .01), key=lambda c: (self._door_clearance(lv, d, h, s, c) >= .16,
+                                                                                 -abs(c) if self._door_clearance(lv, d, h, s, c) >= .16 else self._door_clearance(lv, d, h, s, c)))
                 for off in (-.45, 0., .45):
-                    out.append((d['x'], d['y']+s*off) if h else (d['x']+s*off, d['y']))
+                    out.append((d['x']+shift, d['y']+s*off) if h else (d['x']+s*off, d['y']+shift))
                 break
             out.append(q)
         return out
@@ -698,6 +768,8 @@ def plan_villa_route(vm, route=None):
 
     def go(to, to_level, kind='walk'):
         nonlocal pos, lv
+        if kind == 'via' and pos is not None and to_level == lv and vm.line_free(lv, pos, to, 1):
+            nodes.append(dict(x=to[0], y=to[1], level=lv)); pos = tuple(to); return
         if pos is None:
             nodes.append(dict(x=to[0], y=to[1], level=to_level)); pos, lv = tuple(to), to_level; return
         if to_level != lv:
@@ -712,7 +784,10 @@ def plan_villa_route(vm, route=None):
         stations.append(dict(node=len(nodes)-1, hold_s=hold, room=room, kind=kind))
 
     for st in route['stations']:
-        if st.get('room'):
+        if st.get('via'):
+            for p in st['via']:
+                go(p, st['level'], 'via')
+        elif st.get('room'):
             room = st['room']
             level = next(l for l in LEVEL_Z if room in vm.rooms[l])
             at = vm.anchor(level, room)
