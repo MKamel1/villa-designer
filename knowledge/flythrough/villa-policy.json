@@ -88,5 +88,9 @@
     0.35,
     0.25
   ],
-  "door_route_gap_basis": "ASSUMED; 0.35 m keeps a leaf clear of the 0.30 m standing policy, 0.25 m is the fallback and the 0.15 m swept guard still decides at admission"
+  "door_route_gap_basis": "ASSUMED; 0.35 m keeps a leaf clear of the 0.30 m standing policy, 0.25 m is the fallback and the 0.15 m swept guard still decides at admission",
+  "low_headroom_rooms_m": {
+    "store-ramp": 1.4
+  },
+  "low_headroom_basis": "MEASURED from the scene ceiling faces: the store-ramp soffit is 1.45 m above the floor at the west end rising to 1.88 m at its door, so the 1.8 m operator envelope cannot stand there; the sweep height drops to eye height 1.35 m plus 0.05 m. Reported as a finding: the room is not a standing-height room."
 }

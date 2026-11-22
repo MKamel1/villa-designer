@@ -419,6 +419,28 @@ def stair_extent(spec):
     return min(b[0] for b in treads)/1000, max(b[3] for b in treads)/1000
 
 
+def _furniture_boxes(scene, margin=.15+.02):
+    """Plan bounding boxes of furniture/fixture/dressing meshes that reach into the walking envelope.
+
+    margin is the 0.15 m swept clearance plus 0.07 m of grid slack, applied by the caller. Meshes wider than
+    6 m (window frames, door handles: scene-wide bundles) are architecture and are handled by the
+    walls and doors, not here.
+    """
+    out = {lv: [] for lv in LEVEL_Z}
+    for m in scene['meshes']:
+        if m.get('group') not in ('furniture', 'fixture', 'dressing') or not m.get('faces') or m.get('diagnostic'):
+            continue
+        if m['id'].startswith(('detail-stair', 'joinery-understair', 'furn-stair', 'landscape-', 'garden-')):
+            continue
+        pts = np.array([v for face in m['faces'] for v in face]); lo, hi = pts.min(0), pts.max(0)
+        if max(hi[0]-lo[0], hi[1]-lo[1]) > 6:
+            continue
+        lv = level_at((lo[2]+hi[2])/2)
+        if lo[2] < LEVEL_Z[lv]+1.8 and hi[2] > LEVEL_Z[lv]+.05:
+            out[lv].append((lo, hi))
+    return out
+
+
 class VillaMap:
     """Per-level free-space grids built from the production standing-point policy.
 
@@ -427,9 +449,10 @@ class VillaMap:
     opening on GF and the under-stair joinery on B are handled explicitly: neither may be walked.
     """
 
-    def __init__(self, layout, spec, items=None):
+    def __init__(self, layout, spec, items=None, scene=None):
         from .concept import villa_furnish as F
         self.layout, self.spec, self.F = layout, spec, F
+        self.boxes = _furniture_boxes(scene) if scene else {lv: [] for lv in LEVEL_Z}
         self.items = items if items is not None else F.layout(layout)
         self.pieces = {lv: [F.footprint(i) for i in self.items if i['level'] == lv] for lv in LEVEL_Z}
         self.rooms = {lv: {n: r for n, r in layout['rooms'].items() if r['level'] == lv} for lv in LEVEL_Z}
@@ -437,7 +460,7 @@ class VillaMap:
         ys = [r['rect'][1] for r in layout['rooms'].values()]+[r['rect'][3] for r in layout['rooms'].values()]
         self.x0, self.y0 = min(xs)-.5, min(ys)-.5
         self.nx = int((max(xs)+.5-self.x0)/CELL)+1; self.ny = int((max(ys)+.5-self.y0)/CELL)+1
-        self._free = {}; self._room = {}; self._plan = {}
+        self._free = {}; self._room = {}; self._plan = {}; self._policy = {}
         # B: the whole stair-b rectangle lies under the flight (cupboard, low soffit): never walkable
         sb = self.rooms['B']['stair-b']['rect']
         self.blocked = {'B': (sb[0]-.3, sb[1]-.3, sb[2], sb[3]+.3)}
@@ -474,12 +497,22 @@ class VillaMap:
                         free[i, j] = True; room_of[i, j] = name
                         if rx[0] < x < rx[2] and rx[1] < y < rx[3]:
                             break   # prefer the room that contains the point
+        self._policy[lv] = free.copy()
+        # actual imported/furniture meshes (chairs pulled out, wall-mounted pieces) beyond their plan footprints
+        for lo, hi in self.boxes[lv]:
+            i0, j0 = self.cell(lo[0]-.17, lo[1]-.17); i1, j1 = self.cell(hi[0]+.17, hi[1]+.17)
+            free[max(i0, 0):i1+1, max(j0, 0):j1+1] = False
         self._free[lv], self._room[lv] = free, room_of
 
     def free(self, lv):
         if lv not in self._free:
             self._build(lv)
         return self._free[lv]
+
+    def policy_free(self, lv):
+        """The standing-point policy alone, without the furniture-mesh boxes."""
+        self.free(lv)
+        return self._policy[lv]
 
     def room_at(self, lv, x, y):
         """Room whose rectangle contains the point (None outside every room)."""
@@ -499,7 +532,7 @@ class VillaMap:
             free = self.free(lv); core = free.copy()
             for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)):
                 core &= np.roll(np.roll(free, dx, 0), dy, 1)
-            door = np.zeros_like(free)
+            door = np.zeros_like(free); narrow = np.zeros_like(free)
             for d in self.spec['doors']:
                 if d['level'] != lv or d.get('garden') or d.get('entrance'):
                     continue
@@ -510,7 +543,9 @@ class VillaMap:
                         along, across = (x-d['x'], y-d['y']) if h else (y-d['y'], x-d['x'])
                         if abs(across) <= .8 and abs(along) <= d['width']/2+.5:
                             door[i, j] = True
-            self._plan[lv] = core | (free & door)
+                        if abs(across) <= .35 and abs(along) > d['width']/2-.25-.06:
+                            narrow[i, j] = True   # inside the wall: only a slot 0.06 m tighter than the policy slot
+            self._plan[lv] = (core | (free & door)) & ~narrow
         return self._plan[lv]
 
     def comfort(self, lv, radius=3):
@@ -532,25 +567,63 @@ class VillaMap:
             level += nxt; cur = nxt
         return level
 
+    def _mask(self, lv, tight):
+        """tight 0: eroded plan mask; 1: policy plus furniture meshes; 2: policy alone (the tightest rooms)."""
+        return (self.plan_free(lv), self.free(lv), self.policy_free(lv))[int(tight)]
+
     def line_free(self, lv, a, b, tight=False):
-        free = self.free(lv) if tight else self.plan_free(lv); n = max(2, int(math.dist(a, b)/(CELL/2)))
-        for t in np.linspace(0, 1, n):
-            i, j = self.cell(a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t)
-            if not (0 <= i < self.nx and 0 <= j < self.ny and free[i, j]):
-                return False
+        """True when every sample along the segment has all four surrounding cell centres free (no corner clipping)."""
+        free = self._mask(lv, tight); n = max(2, int(math.dist(a, b)/(CELL/2)))
+        for k in np.linspace(0, 1, n):
+            fx = (a[0]+(b[0]-a[0])*k-self.x0)/CELL; fy = (a[1]+(b[1]-a[1])*k-self.y0)/CELL
+            for i in {int(math.floor(fx)), int(math.ceil(fx))}:
+                for j in {int(math.floor(fy)), int(math.ceil(fy))}:
+                    if not (0 <= i < self.nx and 0 <= j < self.ny and free[i, j]):
+                        return False
         return True
 
+    def door_cross(self, lv, polyline):
+        """Make every passage-door crossing straight along the door's centre line.
+
+        Where a segment crosses a door's wall line inside its opening, the segment is replaced by
+        entry (0.45 m before the wall line), door centre, exit (0.45 m after) so the camera never passes the
+        jamb limits at an angle.
+        """
+        out = [polyline[0]]
+        for p, q in zip(polyline, polyline[1:]):
+            for d in self.spec['doors']:
+                if d['level'] != lv or d.get('garden') or d.get('entrance') or d.get('sliding'):
+                    continue
+                h = self.F._door_axis(d) == 'h'
+                ca, cb = (p[1], q[1]) if h else (p[0], q[0])          # coordinate across the wall line
+                line = d['y'] if h else d['x']
+                if (ca-line)*(cb-line) >= 0:
+                    continue
+                k = (line-ca)/(cb-ca)
+                along = (p[0]+(q[0]-p[0])*k-d['x']) if h else (p[1]+(q[1]-p[1])*k-d['y'])
+                if abs(along) > d['width']/2:
+                    continue
+                s = 1. if cb > ca else -1.
+                for off in (-.45, 0., .45):
+                    out.append((d['x'], d['y']+s*off) if h else (d['x']+s*off, d['y']))
+                break
+            out.append(q)
+        return out
+
     def astar(self, lv, a, b):
-        """Plan on the eroded mask; where a room is too tight for that (the guest WC), fall back to the policy mask."""
-        try:
-            return self._astar(lv, a, b, False)
-        except ValueError:
-            return self._astar(lv, a, b, True)
+        """Plan on the eroded mask; where a room is too tight for that, fall back to policy plus furniture
+        meshes, then to the policy alone (guest WC, dressing room)."""
+        for mode in (0, 1, 2):
+            try:
+                return self._astar(lv, a, b, mode)
+            except ValueError:
+                if mode == 2:
+                    raise
 
     def _astar(self, lv, a, b, tight):
         """8-connected A*; cells outside the comfort band cost four times as much, so routes stay mid-room."""
         import heapq
-        free = self.free(lv) if tight else self.plan_free(lv); comfy = self.comfort(lv)
+        free = self._mask(lv, tight); comfy = self.comfort(lv)
         s, g = self.cell(*a), self.cell(*b)
         if not free[s] or not free[g]:
             raise ValueError(f'route endpoint not free on {lv}: {a} -> {b}')
@@ -631,7 +704,7 @@ def plan_villa_route(vm, route=None):
             raise ValueError('level change only through the flight')
         if math.dist(pos, to) < 1e-6:
             return
-        for p in vm.astar(lv, pos, to)[1:]:
+        for p in vm.door_cross(lv, vm.astar(lv, pos, to))[1:]:
             nodes.append(dict(x=p[0], y=p[1], level=lv))
         pos = tuple(to)
 
@@ -786,7 +859,7 @@ def sample_villa_path(vm, nodes, stations, settings=None):
         for k in range(n):
             t = k/n
             P.append((a['x']+(b['x']-a['x'])*t, a['y']+(b['y']-a['y'])*t, za+(zb-za)*t,
-                      bool(a.get('stair') or b.get('stair')), a.get('garden')))
+                      bool(a.get('stair') or b.get('stair')), a.get('garden') or b.get('garden')))
     last = nodes[-1]; P.append((last['x'], last['y'], LEVEL_Z[last['level']], False, None))
     arr = np.array([(p[0], p[1], p[2]) for p in P]); stair = np.array([p[3] for p in P]); garden = [p[4] for p in P]
     seg = np.hypot.reduce(np.diff(arr, axis=0), axis=1) if False else np.sqrt((np.diff(arr, axis=0)**2).sum(1))
@@ -1050,7 +1123,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
             ground = min(previous['ground_m'], frame['ground_m'])+settings['stair_clearance_m']
             height = settings['walking_height_m']-settings['stair_clearance_m']+abs(previous['ground_m']-frame['ground_m'])
         else:
-            ground, height = frame['ground_m'], settings['walking_height_m']
+            ground, height = frame['ground_m'], settings['low_headroom_rooms_m'].get(room, settings['walking_height_m'])
         hits = sorted({h for sw in sweeps for h in sw.findings(a, b, ground_m=ground, clearance_m=settings['obstacle_clearance_m'], height_m=height)})
         row['swept_obstacles'] = hits
         if hits:
