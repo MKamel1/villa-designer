@@ -193,10 +193,90 @@ def standins(scene):
     return out
 
 
+def _pond_s(o, b, pts):
+    """(s, z) of vertices of the pond solid: s from the entry edge across the short side."""
+    x0, y0, x1, y1 = b["rect"]
+    if b["across"] == "y":
+        s = (y1 - pts[:, 1]) if b["entry_max"] else (pts[:, 1] - y0)
+    else:
+        s = (x1 - pts[:, 0]) if b["entry_max"] else (pts[:, 0] - x0)
+    return np.round(s, 4), np.round(pts[:, 2], 4)
+
+
+def pond_section(scene, state="closed", tol=TOL_FOOTPRINT):
+    """The pond cross-section MEASURED from the built vertices against the layout `section`: entry run and slope, shelf width and depth, trench width and depth,
+    freeboard, grille depth under the water, and a flush contrasting lip (top at ground level, different finish from the paving)."""
+    out = []
+    objs = {o.id: o for o in scene.select(state)}
+    for oid, o in objs.items():
+        if o.kind != "pond":
+            continue
+        m = o.meta
+        dec = m.get("declared")
+        if not dec:
+            out.append(F("pond-section", oid, "info", "no section in the layout", "layout `section`"))
+            continue
+        w = objs[oid + "-water"]
+        s, z = _pond_s(w, m, w.parts[0].verts)
+        wl = float(z.max())
+        lv = sorted({round(float(v), 4) for v in z})                      # z levels of the water solid: surface, shelf, trench floor
+        got = {}
+        got["freeboard_mm"] = round((m["ground_z"] - wl) * 1000)
+        shelf_z, floor_z = lv[-2], lv[0]
+        got["shelf_below_water_mm"] = round((wl - shelf_z) * 1000)
+        got["trench_below_water_mm"] = round((wl - floor_z) * 1000)
+        at_shelf = sorted(set(float(v) for v in s[np.isclose(z, shelf_z)]))
+        got["entry_run_m"] = round(at_shelf[0], 4)
+        got["shelf_m"] = round(at_shelf[-1] - at_shelf[0], 4)
+        at_floor = sorted(set(float(v) for v in s[np.isclose(z, floor_z)]))
+        got["trench_m"] = round(at_floor[-1] - at_floor[0], 4)
+        got["slope_run_per_rise"] = round(got["entry_run_m"] / ((wl - shelf_z)), 3)
+        for k, want in (("freeboard_mm", dec["freeboard_mm"]), ("shelf_below_water_mm", dec["shelf_below_water_mm"]), ("trench_below_water_mm", dec["trench_below_water_mm"])):
+            out.append(F("pond-section", "%s %s" % (oid, k), "pass" if abs(got[k] - want) <= tol * 1000 else "fail", "%d mm" % got[k], "%d mm +-%d" % (want, tol * 1000)))
+        for k, want in (("entry_run_m", dec["entry_run_m"]), ("shelf_m", dec["shelf_m"]), ("trench_m", dec["trench_m"])):
+            out.append(F("pond-section", "%s %s" % (oid, k), "pass" if abs(got[k] - want) <= tol else "fail", "%.3f m" % got[k], "%.3f m +-%d mm" % (want, tol * 1000)))
+        want_slope = dec["entry_slope_run_per_rise"]
+        out.append(F("pond-section", oid + " entry slope", "pass" if abs(got["slope_run_per_rise"] - want_slope) <= 0.1 else "fail", "1:%.2f" % got["slope_run_per_rise"], "1:%g" % want_slope))
+        g = objs[oid + "-grille"]
+        gz = max(p.bounds()[5] for p in g.parts)
+        out.append(F("pond-section", oid + " grille", "pass" if abs((wl - gz) - 0.04) <= 0.005 else "fail", "%.0f mm under the surface" % ((wl - gz) * 1000), "40 mm under the surface (rigid, flush rail on the shelf)"))
+        lip = objs[oid + "-lip"]
+        lz = max(p.bounds()[5] for p in lip.parts)
+        paving = {p.material.split("#")[0] for q in scene.select(state) if q.kind == "paving" for p in q.parts}
+        ok = abs(lz - m["ground_z"]) <= 0.002 and lip.parts[0].material not in paving
+        out.append(F("pond-section", oid + " lip", "pass" if ok else "fail", "top %.1f mm from ground, finish %s" % ((lz - m["ground_z"]) * 1000, lip.parts[0].material), "flush (within 2 mm) and a finish unlike the paving"))
+    return out
+
+
+def climber_coverage(scene):
+    """A panel on every wall and screen the layout declares; a structure with none is reported as a layout gap (`warn`), never invented."""
+    sp = scene.spec
+    return [F("climber-coverage", sid, "pass" if sid in sp.get("climbed", []) else "warn", "panel built" if sid in sp.get("climbed", []) else "no climber declared on it", "a climber panel on every wall and screen")
+            for sid in sp.get("structures", [])]
+
+
+def pit_half(scene, state="closed"):
+    """A shared-boundary fire pit builds only OUR side: no pit geometry across the boundary line."""
+    h = scene.spec.get("pit_half")
+    if not h or not scene.spec.get("pit"):
+        return []
+    ax, sg = h
+    cx, cy = scene.spec["pit"]
+    out = []
+    for o in scene.select(state):
+        if o.id.startswith("ld-") and "firepit" in o.id and not o.id.startswith("ld-vis-"):
+            b = o.bounds()
+            line = cy if ax == "y" else cx
+            lo, hi = (b[1], b[4]) if ax == "y" else (b[0], b[3])
+            ok = (lo >= line - 0.002) if sg > 0 else (hi <= line + 0.002)
+            out.append(F("pit-half", o.id, "pass" if ok else "fail", "%.3f..%.3f" % (lo, hi), "wholly on our side of %s=%.3f" % (ax, line)))
+    return out
+
+
 def run_all(scene, state="closed"):
     from . import guard
     scene = guard.production_only(scene)         # the sister-plot garden is excluded from every check (brief 2026-11-22)
-    r = ids(scene) + footprints(scene, state) + plant_footprints(scene) + support(scene, state) + clips(scene, state) + standins(scene)
+    r = ids(scene) + footprints(scene, state) + plant_footprints(scene) + support(scene, state) + clips(scene, state) + standins(scene) + pond_section(scene, state) + climber_coverage(scene) + pit_half(scene, state)
     return r
 
 

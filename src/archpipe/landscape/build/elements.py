@@ -246,11 +246,11 @@ def chair(oid, cx, cy, face, g):
                footprint_mode=None)
 
 
-def chair_spots(center, size, seats):
+def chair_spots(center, size, seats, off=None):
     """[((x, y), (face dx, dy))] of the chairs round a table: long sides first, then the ends."""
     cx, cy = center
     w, d = size
-    off = P.CHAIR["off"]
+    off = P.CHAIR["off"] if off is None else off
     n_long = max(0, (seats - 2) // 2)
     xs = [cx + (k - (n_long - 1) / 2) * (w / max(n_long, 1)) for k in range(n_long)]
     spots = []
@@ -342,7 +342,7 @@ def pond(oid, layout_id, f, g):
                 "%.2f m trench at %.0f mm; 100 mm liner walls and floor ASSUMED construction" % (x1 - x0, y1 - y0, d["freeboard"] * 1000, d["entry_run"] / d["shelf_depth"] if d["shelf_depth"] else 0,
                 d["entry_run"], d["shelf"], d["shelf_depth"] * 1000, W - d["entry_run"] - d["shelf"], d["trench_depth"] * 1000),
                 parts, layout_id=layout_id, footprint=None, footprint_mode=None,
-                meta=dict(water_z=wl, floor_z=fl, across=across, entry_max=entry_max, section=d, W=W, rect=(x0, y0, x1, y1)))
+                meta=dict(water_z=wl, floor_z=fl, across=across, entry_max=entry_max, section=d, W=W, rect=(x0, y0, x1, y1), declared=f.get("section"), ground_z=g))
     lip = Obj(oid + "-lip", "pond-lip", "flush contrasting lip: %d mm wide coping inside the pond rect, top at ground level, overhanging the water edge (layout: flush, contrasting)" % int(lw * 1000), lip_parts, rests_on=(oid,), footprint_mode=None,
               meta=dict(top_z=g, width_m=lw))
     water = Obj(oid + "-water", "water", "pond water surface %d mm below the rim, depth-tinted closed solid" % int(d["freeboard"] * 1000), [ex("water", wp, a0, a1)],
@@ -387,18 +387,24 @@ def _full_poly(cx, cy, r, n=24):
     return Polygon([(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n)) for i in range(n)])
 
 
-def cover_parts(cx, cy, d, ctop, grid_rect, half):
-    """Fire-pit cover that CONTINUES THE PAVER PATTERN: a thin steel plate carrying the same 0.6 x 0.3 running-bond units, on the paving's own grid
-    (`grid_rect` is the paving rect whose grid they belong to), clipped to the disc (or the half disc on our side of the boundary)."""
+def cover_parts(cx, cy, d, ctop, grids, half):
+    """Fire-pit cover that CONTINUES THE PAVER PATTERN: a thin steel plate carrying the same 0.6 x 0.3 running-bond units, each piece on the grid of the paving (or path)
+    rect it lies in (`grids` = [(rect, along)] ordered by overlap), clipped to the disc (or the half disc on our side of the boundary)."""
     p, pv = P.PIT, P.PAVER
     poly = _half_poly(cx, cy, d / 2, *half) if half else _full_poly(cx, cy, d / 2)
     pl = list(poly.exterior.coords)[:-1]
     parts = [prism("paving-joint", pl, ctop - p["cover_t"], ctop - pv["thick"])]
-    parts += units(grid_rect, [], ctop, pv["len"], pv["wid"], "x", "paving-unit", clip=poly)
+    left = poly
+    for rect, along in grids:
+        piece = left.intersection(sbox(*rect))
+        if piece.is_empty or piece.area < 1e-5:
+            continue
+        parts += units(rect, [], ctop, pv["len"], pv["wid"], along, "paving-unit", clip=piece)
+        left = left.difference(sbox(*rect))
     return parts
 
 
-def firepit(oid, layout_id, f, g, half=None, grid_rect=None, tag=""):
+def firepit(oid, layout_id, f, g, half=None, grids=(), tag=""):
     """Flush gas fire pit: liner box below the paving, burner with a flame (open state), flush paver-pattern cover (closed) or the cover set aside (open).
     `half` = (axis, sign): build only that half (the pit straddles the shared boundary; the other half is the neighbour's and is never part of our scene)."""
     p = P.PIT
@@ -431,7 +437,7 @@ def firepit(oid, layout_id, f, g, half=None, grid_rect=None, tag=""):
                   footprint=(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2), footprint_mode="within", meta=dict(cover=f.get("cover"), half=half))
     flame = Obj(oid + "-flame", "flame", "flame shown in the open state: an emissive cone (not simulated fire)", [hc("flame", 0.18, fl + 0.13, fl + 0.13 + p["flame_h"], 0.02, 16)],
                 rests_on=(oid,), footprint_mode=None, state="open")
-    gr = grid_rect or (cx - 1.5, cy - 1.5, cx + 1.5, cy + 1.5)
+    gr = list(grids) or [((cx - 1.5, cy - 1.5, cx + 1.5, cy + 1.5), "x")]
     cov = dict(rests_on=("ground",), layout_id=layout_id)
     closed = Obj(oid + "-cover", "firepit-cover", "flush fire-pit cover, CLOSED: paver-pattern top continuing the paving grid, %.0f mm proud (layout lip %d mm, load rating %s kN), 3 mm gap to the paving%s"
                  % (lip * 1000, int((f.get("cover") or {}).get("lip_mm", 6)), (f.get("cover") or {}).get("load_rating_kN"), "; our half" if half else ""),

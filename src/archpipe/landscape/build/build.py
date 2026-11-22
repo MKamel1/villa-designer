@@ -66,13 +66,14 @@ def pit_half(layout, pitf):
     return (ax, sg)
 
 
-def _grid_rect(paved, pitf, half):
-    """The paving rect whose running-bond grid the fire-pit cover continues: the one that overlaps the pit most."""
+def grids_for(paved, paths, pitf):
+    """[(rect, along)] of the paving and path rects under the pit, largest overlap first: the grids its cover continues."""
     cx, cy = pitf["center"]
     r = pitf["diameter_m"] / 2
     disc = sbox(cx - r, cy - r, cx + r, cy + r)
-    best = max(paved, key=lambda q: sbox(*q).intersection(disc).area, default=None)
-    return best if best and sbox(*best).intersection(disc).area > 1e-6 else None
+    rows = [(q, "x") for q in paved] + [(q, "x" if (q[2] - q[0]) >= (q[3] - q[1]) else "y") for q in paths]
+    rows = [(q, a) for q, a in rows if sbox(*q).intersection(disc).area > 1e-6]
+    return sorted(rows, key=lambda qa: -sbox(*qa[0]).intersection(disc).area)
 
 
 def koi(f, outdoor, g, warns, sched):
@@ -90,13 +91,13 @@ def koi(f, outdoor, g, warns, sched):
     L = f.get("koi_adult_length_cm", 50) / 100.0
     s_mid = d["entry_run"] + d["shelf"] + (W - d["entry_run"] - d["shelf"]) / 2
     zc = wl - 0.5 * d["trench_depth"] * 0.8 - 0.1
+    across, _ = E.pond_axes(f)
     for i in range(n):
         u = (i + 0.5) / n
-        x, y = E.pond_point(f, s_mid + 0.08 * (-1) ** i, u)
-        across, _ = E.pond_axes(f)
-        yaw = (90 if across == "y" else 0) + (180 if i % 2 else 0) + 25 * i
-        o = OD.fish_obj("ld-%s-koi-%d" % (f["id"], i), a, (x, y, zc), L, yaw)
-        o.rests_on = (("ld-" + f["id"]),)
+        x, y = E.pond_point(f, s_mid, u)
+        head = math.radians((0 if across == "y" else 90) + (180 if i % 2 else 0))       # swimming along the pond, alternate directions
+        o = OD.fish_obj("ld-%s-koi-%d" % (f["id"], i), a, (x, y, zc), L, (math.cos(head), math.sin(head)))
+        o.rests_on = ("ld-" + f["id"], "ld-%s-water" % f["id"])
         out.append(o)
         sched.append(dict(id=o.id, species="koi", status="asset", asset=a["id"], grade=a["grade"], licence=a["licence"], length_m=L))
     return out
@@ -178,7 +179,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
             water.append(R(f["rect"])); objs += E.pond("ld-" + f["id"], f["id"], f, g)
             objs += koi(f, outdoor, g, warns, sched)
         elif k == "firepit" and pitf:
-            objs += E.firepit("ld-" + f["id"], f["id"], f, g, half=half, grid_rect=_grid_rect(paved, pitf, half))
+            objs += E.firepit("ld-" + f["id"], f["id"], f, g, half=half, grids=grids_for(paved, path_rects, pitf))
         elif k == "bbq":
             objs.append(E.bbq("ld-" + f["id"], f["id"], f["rect"], g))
         elif k == "herb_bed":
@@ -265,8 +266,12 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
         rb = t.get("root_barrier")
         if rb:
             rr = R(rb["rect"]) if isinstance(rb, dict) and rb.get("rect") else next((b for b in beds_by_rect if b[0] <= t["center"][0] <= b[2] and b[1] <= t["center"][1] <= b[3]), None)
-            objs.append(E.root_barrier("ld-%s-root-barrier" % t["id"], t["id"], t["center"], rr, rb.get("radius_m") if isinstance(rb, dict) else None, g,
-                                       (rb.get("depth_m") if isinstance(rb, dict) else None) or P.ROOT_BARRIER["depth"]))
+            bed_obj = next((o for o in objs if o.kind == "bed" and rr is not None and o.footprint == rr), None)
+            rbo = E.root_barrier("ld-%s-root-barrier" % t["id"], t["id"], t["center"], rr, rb.get("radius_m") if isinstance(rb, dict) else None, g,
+                                 (rb.get("depth_m") if isinstance(rb, dict) else None) or P.ROOT_BARRIER["depth"])
+            if bed_obj:
+                rbo.rests_on = ("ground", bed_obj.id)            # the sheet stands in the bed's soil: it passes through the soil layer by design
+            objs.append(rbo)
     for f in feats:
         if f.get("kind") == "root_barrier":
             objs.append(E.root_barrier("ld-" + f["id"], f["id"], None, R(f["rect"]), None, g, f.get("depth_m") or P.ROOT_BARRIER["depth"]))

@@ -16,7 +16,7 @@ cpu = "--cpu" in argv
 args = dict(zip([a for a in argv if a != "--cpu"][::2], [a for a in argv if a != "--cpu"][1::2]))
 assets = json.load(open(args["--assets"]))
 out = args["--out"]
-RES = 360
+RES = 420
 
 
 def reset():
@@ -36,16 +36,18 @@ def reset():
     w.node_tree.nodes["Background"].inputs[0].default_value = (0.62, 0.72, 0.9, 1)
     sun = bpy.data.objects.new("sun", bpy.data.lights.new("sun", "SUN")); sun.data.energy = 4.0
     sun.rotation_euler = (math.radians(50), 0, math.radians(35)); sc.collection.objects.link(sun)
-    cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); cam.data.sensor_width = 36
+    cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); cam.data.sensor_width = 36; cam.data.clip_end = 1e6; cam.data.clip_start = 0.001
     sc.collection.objects.link(cam); sc.camera = cam
     return sc, cam
 
 
 def bounds(meshes):
+    """World-space AABB from the vertices (bound_box corners over-estimate rotated parts)."""
     lo, hi = Vector((1e9,) * 3), Vector((-1e9,) * 3)
     for o in meshes:
-        for c in o.bound_box:
-            w = o.matrix_world @ Vector(c)
+        m = o.matrix_world
+        for v in o.data.vertices:
+            w = m @ v.co
             lo = Vector(map(min, lo, w)); hi = Vector(map(max, hi, w))
     return lo, hi
 
@@ -85,13 +87,13 @@ for a in assets:
     res[a["id"]] = dict(size_m=size, triangles=tris, n_mesh_objects=len(meshes), textures=len(texs),
                         boundary_edge_share=round(bnd / max(edges, 1), 3), nonmanifold_edge_share=round(nm / max(edges, 1), 3),
                         flat_card=min(size) < 0.02 * max(size), bbox_min_m=[round(x, 3) for x in lo])
-    # stand on z=0, centred; ground plane
+    # stand on z=0, centred; ground plane (sized to the object)
     for o in new:
         if o.parent is None:
             o.location += Vector((-(lo.x + hi.x) / 2, -(lo.y + hi.y) / 2, -lo.z))
     bpy.context.view_layer.update()
     me = bpy.data.meshes.new("g"); g = bpy.data.objects.new("g", me)
-    me.from_pydata([(-30, -30, 0), (30, -30, 0), (30, 30, 0), (-30, 30, 0)], [], [(0, 1, 2, 3)])
+    G = 8 * max(size); me.from_pydata([(-G, -G, 0), (G, -G, 0), (G, G, 0), (-G, G, 0)], [], [(0, 1, 2, 3)])
     gm = bpy.data.materials.new("gm"); gm.use_nodes = True
     gm.node_tree.nodes["Principled BSDF"].inputs[0].default_value = (0.35, 0.33, 0.3, 1); me.materials.append(gm)
     sc.collection.objects.link(g)

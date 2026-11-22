@@ -31,8 +31,8 @@ def build_visualisation(layout, vis_layout, age=P.AGE_YEARS, season="summer", **
         r = pitf["diameter_m"] / 2
         cx, cy = pitf["center"]
         disc = sbox(cx - r, cy - r, cx + r, cy + r)
-        grid = max((R(a["rect"]) for a in vis_layout.get("paved_areas", [])), key=lambda q: sbox(*q).intersection(disc).area, default=None)
-        extra = E.firepit("ld-vis-" + pitf["id"], "vis-" + pitf["id"], pitf, ours.ground_z, half=(ax, -sg), grid_rect=grid)
+        grids = B.grids_for([R(a["rect"]) for a in vis_layout.get("paved_areas", [])], [R(a["rect"]) for a in vis_layout.get("paths", []) if "rect" in a], pitf)
+        extra = E.firepit("ld-vis-" + pitf["id"], "vis-" + pitf["id"], pitf, ours.ground_z, half=(ax, -sg), grids=grids)
     objs = list(ours.objects)
     for o in sis.objects + extra:
         o.meta["visualisation_only"] = True
