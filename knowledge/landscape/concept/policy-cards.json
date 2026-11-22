@@ -1,0 +1,37 @@
+{
+ "LDG-POL-PRIVACY": {
+  "statement": "Remaining overlooking in a seated room at most 30 % of the existing overlooking (25 % for the quiet corner)",
+  "basis": "brief: privacy is critical; no published figure (LDK GAP-OVERLOOK-ABOVE); ours",
+  "status": "policy"
+ },
+ "LDG-POL-SHADE": {
+  "statement": "Dining room: at least 50 % of its cells under cover (pergola or evergreen canopy); evening cells sun-free at least 90 %",
+  "basis": "brief: shade over sun, summer nights; the percentage is the client's (LDK GAP-SHADE-TARGET); ours",
+  "status": "policy"
+ },
+ "LDG-POL-SPREAD": {
+  "statement": "A plant's mature-spread circle may overhang its bed by 0.15 m and must not reach a seat, the door path or the fire-pit clearance",
+  "basis": "mature spread against space (LANDSCAPE-METHOD A2); ours",
+  "status": "policy"
+ },
+ "LDG-POL-TOXIC": {
+  "statement": "No toxic species (LDL toxicity_people toxic or highly_toxic) within 2 m of a seat or a herb bed",
+  "basis": "Time-Saver Standards 550-3 (poisonous plants out of reach); the 2 m is ours",
+  "status": "policy"
+ },
+ "LDG-POL-HYDRO": {
+  "statement": "One water-need class per planting bed, trees in the bed included",
+  "basis": "Time-Saver 750-11 via LS-HYDROZONE; trees added by us",
+  "status": "policy"
+ },
+ "LDG-POL-GEOM": {
+  "statement": "No two elements overlap and all lie inside the zone",
+  "basis": "geometry sanity; ours",
+  "status": "policy"
+ },
+ "LDG-POL-TREEBLDG": {
+  "statement": "NHBC trunk-to-building distance (LS-TREE-BUILDING) is hard here: A2 lists tree-to-foundation distance",
+  "basis": "A2; NHBC 2024 4.2 via LDK",
+  "status": "policy"
+ }
+}
