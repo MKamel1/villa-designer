@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import final as F, final_checks as K, final_fire as FF, final_vis as V, site as S, ty_core as C, ty_run as R
+from . import final as F, final_trees as FT, final_checks as K, final_fire as FF, final_vis as V, site as S, ty_core as C, ty_run as R
 from .ty_core import POOL
 
 OUT = S.ROOT / "knowledge" / "landscape" / "concept" / "final"
@@ -80,6 +80,28 @@ def programme(L, res, metrics, ext):
     return rows
 
 
+BEFORE = {"hard_share": 0.849, "ref": "a6cfe41 (round 2 final, with pergolas)"}
+
+
+def counts(rows):
+    """Plants drawable vs stand-in (rows: the schedule; `count` per bed row)."""
+    d = sum(r["count"] for r in rows if r.get("drawable"))
+    n = sum(r["count"] for r in rows)
+    return {"drawable": d, "stand_in": n - d, "total": n, "species_drawable": len({r["slug"] for r in rows if r.get("drawable")}), "species_total": len({r["slug"] for r in rows})}
+
+
+def before_after(sched, metrics, gdata):
+    import subprocess
+    try:
+        old = json.loads(subprocess.run(["git", "show", "a6cfe41:knowledge/landscape/concept/final/final.json"], capture_output=True, text=True, cwd=S.ROOT, check=True).stdout)
+        b = counts(old["schedule"])
+    except Exception:
+        b = None
+    return {"hard_share": {"before": BEFORE["hard_share"], "after": metrics["hard_share"], "range": PREC["hard"]}, "plant_counts": {"before": b, "after": counts(sched)},
+            "winter_sun_h_21dec_10_15": {k: {"open_sky": v["winter_open_sky_h"], "leaf_off": v["winter_leaf_off_h"], "if_leaf_on": v["winter_if_leaf_on_h"]} for k, v in gdata["season_table"].items()},
+            "summer_sun_h_21jun_10_15": {k: {"open_sky": v["summer_open_sky_h"], "leaf_on": v["summer_leaf_on_h"]} for k, v in gdata["season_table"].items()}}
+
+
 def main(draw=True):
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "plans").mkdir(exist_ok=True)
@@ -112,6 +134,10 @@ def main(draw=True):
            "privacy": gdata.get("privacy_table"), "pond_sun": K.pond_sun(L), "critic_counts": by, "critic_verdict": ver, "critic_findings": [f.to_dict() for f in fs if f.status in ("fail", "warn")],
            "build_checks": bchk, "build_warnings": scene.warnings, "checks": R.compact(res), "schedule": sched, "programme": prog,
            "layout_counts": {k: len(L[k]) for k in C.KEYS}, "visualisation": {"file": "layout-visualisation.json", "excluded_from": "checks, schedules, quantities, critics, programme table"}}
+    rec["trees"] = FT.compare(L)
+    rec["layers"] = FT.layer_table(L)
+    rec["climber_faces"] = FT.climber_faces(L)
+    rec["before_after"] = before_after(sched, metrics, gdata)
     json.dump(L, open(OUT / "layout-final.json", "w"), indent=1)
     json.dump(Vis, open(OUT / "layout-visualisation.json", "w"), indent=1)
     json.dump(rec, open(OUT / "final.json", "w"), indent=1, default=str)

@@ -176,9 +176,9 @@ def pond_feat(fid, rect, entry_side):
 
 
 PAL = {
-    "north_shade": [(["rhapis_excelsa", "fatsia_japonica"], 0.9, 2, "min", None), (["aspidistra_elatior", "farfugium_japonicum"], 0.45, 5, "min", None)],
+    "north_shade": [(["fatsia_japonica", "rhapis_excelsa"], 0.9, 1, "min", None), (["aspidistra_elatior", "farfugium_japonicum"], 0.45, 3, "min", None)],
     "north_edge": [(["acorus_gramineus"], 0.35, 6, "min", None)],
-    "yard_mass": [(["phoenix_roebelenii", "fatsia_japonica"], 0.9, 2, "min", None), (["farfugium_japonicum", "aspidistra_elatior"], 0.45, 5, "min", None)],
+    "yard_mass": [(["fatsia_japonica", "phoenix_roebelenii"], 0.9, 1, "min", None), (["farfugium_japonicum", "aspidistra_elatior"], 0.45, 3, "min", None)],
     "pond_edge": [(["acorus_gramineus"], 0.3, 6, "min", None)],
 }
 TC.PAL.update(PAL)
@@ -200,7 +200,7 @@ def court(kit, zid, pfx):
     for cl in kit.get("climbers", []):                       # climbers on the court or yard fence face (jasmine; the beds here are all medium water)
         bid = f"{pfx}-{cl['bed']}"
         g = next(g for g in f["planting_groups"] if g["id"] == bid)
-        g["plants"] += [entry("jasminum_sambac", at, 0.5, "shrub") for at in cl["at"]]
+        g["plants"] += [dict(entry("jasminum_sambac", at, 0.5, "shrub"), role="climber") for at in cl["at"]]
     if kit.get("pond"):
         f["features"].append(pond_feat(f"{pfx}-pond", kit["pond"], kit["entry_side"]))
     if kit.get("bench"):

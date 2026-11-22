@@ -9,7 +9,7 @@ import json
 
 from ..build import planting as PL
 from . import final as F, site as S
-from .species import POOL
+from .ty_core import POOL
 from .ty_core import A, B
 
 FACTOR = {"high": 1.25, "moderate": 0.75, "low": 0.5}          # NHBC 2024 ch. 4.2 table 3b via LDK LS-TREE-BUILDING
@@ -69,7 +69,7 @@ def compare(L):
         t = picked.get(slug)
         rows.append({"slug": slug, "name": sp.name, "habit": fol, "leaf_evidence": PHENO[slug], "height_m": sp.h_max, "spread_m": [sp.s_min, sp.s_max], "roots": roots, "alkaline": alk, "heat_verdict": sp.verdict, "toxic": sp.toxic,
                      "nhbc_water": water, "nhbc_need_species_height_m": round(FACTOR[water] * sp.h_max, 2) if sp.h_max else None, "graded_best": grade, "drawable": res["drawable"],
-                     "pruned": ({"height_m": t["mature_height_m"], "spread_m": t["mature_spread_m"], "nhbc_need_m": round(FACTOR[water] * t["mature_height_m"], 2), "source_status": t["pruning_source_status"]} if t else None),
+                     "pruned": ({"height_m": t["mature_height_m"], "spread_m": t["mature_spread_m"], "nhbc_need_m": round(FACTOR[water] * t["mature_height_m"], 2), "source_status": t["pruning_source_status"]} if t and t.get("pruned") else None), "placed": bool(t),
                      "decision": PICK[slug]})
     rows += [{"slug": k, "name": k.replace("_", " "), "decision": v, "in_pool": False} for k, v in NOT_IN_POOL.items()]
     return rows
@@ -104,7 +104,7 @@ def layer_table(L):
     for g in L["planting_groups"]:
         for p in g["plants"]:
             r = room_of(*p["at"])
-            ly = layer_of(p["species"], g.get("role", ""))
+            ly = layer_of(p["species"], p.get("role") or g.get("role", ""))
             tab[r][ly]["plants"] += 1
             tab[r][ly]["species"].add(p["species"])
     for t in L["trees"]:
@@ -131,6 +131,6 @@ def climber_faces(L, reach=0.9):
              "east yard fence": box(F.TC.EX0 + 0.2, F.TC.EY0 + F.TC.EW - 0.02, F.TC.EX0 + F.TC.EL, F.TC.EY0 + F.TC.EW), "north court street fence": box(F.TC.NX1 - F.TC.NH, F.TC.NY0 + 0.3, F.TC.NX1 - F.TC.NH + 0.02, F.TC.NY0 + F.TC.NW)}
     out = {}
     for k, face in faces.items():
-        near = sorted({p["species"] for g in L["planting_groups"] for p in g["plants"] if layer_of(p["species"], g.get("role", "")) == "climber" and Point(*p["at"]).distance(face) <= reach})
+        near = sorted({p["species"] for g in L["planting_groups"] for p in g["plants"] if layer_of(p["species"], p.get("role") or g.get("role", "")) == "climber" and Point(*p["at"]).distance(face) <= reach})
         out[k] = near
     return out
