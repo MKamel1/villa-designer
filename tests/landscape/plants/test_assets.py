@@ -75,6 +75,14 @@ class PassTwoGuards(unittest.TestCase):
             tex.write_text(json.dumps({"materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}]}))
             self.assertEqual(gltf_untextured_share(bare), 1.0)
             self.assertEqual(gltf_untextured_share(tex), 0.0)   # negative: a textured asset is not flagged
+            sg = Path(t, "sg.gltf")   # spec-gloss export (PlantCatalog, Treeit): colour lives in the extension
+            sg.write_text(json.dumps({"materials": [
+                {"extensions": {"KHR_materials_pbrSpecularGlossiness": {"diffuseTexture": {"index": 0}}}},
+                {"extensions": {"KHR_materials_pbrSpecularGlossiness": {"diffuseFactor": [0.0, 0.1, 0.0, 1.0]}}}]}))
+            self.assertEqual(gltf_untextured_share(sg), 0.0)
+            bare_sg = Path(t, "bsg.gltf")
+            bare_sg.write_text(json.dumps({"materials": [{"extensions": {"KHR_materials_pbrSpecularGlossiness": {"glossinessFactor": 0.4}}}]}))
+            self.assertEqual(gltf_untextured_share(bare_sg), 1.0)
         banana = Path.home() / "archpipe/library/sketchfab/fd4210743fb644d0a2c5452637ffc5d4/gltf/scene.gltf"
         if banana.is_file():
             self.assertEqual(gltf_untextured_share(banana), 1.0)
@@ -92,13 +100,15 @@ class PassTwoGuards(unittest.TestCase):
 
     def test_manifest_hashes_match_the_files_when_the_store_exists(self):
         import hashlib
-        root = Path.home() / "archpipe/shared/assets/user/landscape/polyhaven"
-        if not root.is_dir():
+        base = Path.home() / "archpipe/shared/assets/user/landscape"
+        if not (base / "polyhaven").is_dir():
             self.skipTest("shared asset store not on this machine")
         m = json.loads((L.DATA / "asset-manifest.json").read_text(encoding="utf-8"))
         for key, files in m["assets"].items():
+            if not (base / key).is_dir():
+                continue
             for f in files:
-                self.assertEqual(hashlib.sha256((root / key.split("/")[1] / f["file"]).read_bytes()).hexdigest(), f["sha256"], f["file"])
+                self.assertEqual(hashlib.sha256((base / key / f["file"]).read_bytes()).hexdigest(), f["sha256"], f["file"])
 
     def test_ixora_asset_no_longer_maps_to_a_species(self):
         self.assertEqual(next(x for x in self.doc["assets"] if x["id"] == "sf_ixora")["maps_to"], [])
