@@ -29,7 +29,8 @@ from collections import Counter, defaultdict
 from contextlib import contextmanager
 
 FIELDS = ("element_ids", "faces_by_element", "element_id_basis")
-BASES = ("declared-stale", "face-tracked", "face-registry", "source-mesh", "declared", "generator-name", "unresolved")
+NONMODEL = "nonmodel-"   # id prefix of a mesh that has no design-model element on purpose (NO_MODEL_ELEMENT says why)
+BASES = ("non-model", "declared-stale", "face-tracked", "face-registry", "source-mesh", "declared", "generator-name", "unresolved")
 DERIVED_FROM_SHELL = ("shell-", "door-open-", "door-leaf-", "finish-layer-")   # made from tracked daylight-shell faces
 TOL = 0.002          # metres: plane / box tolerance when a pass moved a face by its 1 mm backing skin
 
@@ -57,6 +58,12 @@ def trace_adds():
         D.Scene.add = original
 
 
+# villa_env slabs that are the design model's own slabs (same outline and level; the model's polygon is the room/wall
+# footprint, the env slab the CAD outline). The rest of the env slabs (apartment above, roof, sister yard) are context.
+MODEL_SLABS = {"slab-B": "slab-B-floor", "slab-GF": "slab-GF-floor", "slab-GF-front": "slab-gf-terrace"}
+EXTENSION_YARD = "env-yard-ours"   # its faces under the basement extension are that extension's floor slab (slab-B-floor)
+
+
 def _plan(sp, env, columns):
     """Owner of each `Scene.add` call of `villa_daylight.scene(lay)` (no variant), in call order."""
     from ..model import spec_source as SS
@@ -65,7 +72,7 @@ def _plan(sp, env, columns):
     plan += [(e["id"] if e["id"].startswith("beam-") else "ctx-" + e["id"], None)
              for e in env["elements"] if e.get("kind") == "box"]
     plan += [("column-%02d" % i, None) for i in range(len(columns))]
-    plan += [("env-" + sl["id"], None) for sl in env["slabs"]]
+    plan += [(MODEL_SLABS.get(sl["id"], "env-" + sl["id"]), None) for sl in env["slabs"]]
     plan += [("env-share-front-ceiling", None), ("env-share-rear-ceiling", None)]
     plan += [(w.id, i) for i, w in enumerate(walls)]
     plan += [("stair-main", None) for _ in sp["stair"]]
@@ -119,9 +126,17 @@ def shell_owners(shell, calls, sp, lay):
                          "villa_daylight.scene changed; update blender/element_ids._plan" % (len(calls), len(plan)))
     openings = _openings(sp, lay)
     owners = [None] * len(shell.faces)
+    from ..model.geometry_complete import _footprint
+    from shapely.geometry import Point
+    b_slab = _footprint(lay, sp, "B")             # the model's slab-B-floor outline, from the same function
     for (eid, wall_index), (a, b) in zip(plan, calls):
         for i in range(a, b):
             owners[i] = eid
+            if eid == EXTENSION_YARD:
+                f = shell.faces[i]
+                if b_slab.contains(Point(sum(p[0] for p in f.points) / len(f.points),
+                                         sum(p[1] for p in f.points) / len(f.points))):
+                    owners[i] = "slab-B-floor"
             f = shell.faces[i]
             if wall_index is None or f.material not in ("door", "glass"):
                 continue
@@ -216,6 +231,13 @@ def _luminaire(mid, ids):
     return best
 
 
+# ground meshes whose model element is the bed / planting they hold, matched by outline and centre against the model
+# (landscape-accent-bed-north = garden-bed-north-accent exactly; the tree pit is centred on the tree, the espalier bed on the loquat)
+BED_OF = {"landscape-accent-bed-north": "garden-bed-north-accent",
+          "landscape-tree-pit-south": "plant-landscape-tree-south",
+          "landscape-g6-bed-south-espalier": "plant-landscape-g6-loquat-plant"}
+
+
 def resolve_name(mid, ids):
     """Element id a generator-named mesh stands for, or None."""
     if mid.startswith("furn-"):
@@ -253,6 +275,8 @@ def resolve_name(mid, ids):
         found = _longest(mid, ids, prefix, strip) if mid.startswith(strip) else None
         if found:
             return found
+    if mid in BED_OF and BED_OF[mid] in ids:
+        return BED_OF[mid]
     if mid.startswith(("floor-", "ceiling-")):
         room = "room-" + mid.split("-", 1)[1]
         return room if room in ids else None
@@ -334,6 +358,10 @@ def attach(scene, registry, ids, declared_by_mesh=None):
         if declared:
             m["element_ids"] = list(declared)
             m["element_id_basis"] = "declared"
+            if len(declared) > 1 and not m.get("faces_by_element"):
+                # several ids named and no split: the part is shared, every id owns every face (a loader would otherwise
+                # have to guess, and reports such a mesh as unowned)
+                m["faces_by_element"] = {e: list(range(len(faces))) for e in declared}
             fbe = m.get("faces_by_element")
             if fbe and any(i >= len(faces) for v in fbe.values() for i in v):
                 del m["faces_by_element"]               # a pass rebuilt the faces: the indices no longer apply
@@ -347,10 +375,26 @@ def attach(scene, registry, ids, declared_by_mesh=None):
     return scene
 
 
+def tag_non_model(scene):
+    """After `attach`: an unresolved mesh the NO_MODEL_ELEMENT table accounts for gets the explicit id
+    `nonmodel-<class>` (basis `non-model`), so "dressing with no model element" is distinguishable from "lost id".
+    Returns the meshes still unresolved (the caller decides whether that is an error)."""
+    left = []
+    for m in scene["meshes"]:
+        if m.get("element_id_basis") != "unresolved":
+            continue
+        cls = no_model_class(m["id"])
+        if cls is None:
+            left.append(m["id"])
+            continue
+        m["element_ids"], m["element_id_basis"] = [NONMODEL + cls], "non-model"
+    return left
+
+
 # ------------------------------------------------------------------------------------------------ coverage
 def covered_faces(mesh):
     if mesh.get("faces_by_element"):
-        return sum(len(v) for v in mesh["faces_by_element"].values())
+        return len(set().union(*mesh["faces_by_element"].values()))
     return len(mesh["faces"]) if mesh.get("element_ids") else 0
 
 
@@ -365,7 +409,7 @@ def coverage(meshes, model_ids=None):
         if model_ids is not None:
             inside = [e for e in m.get("element_ids", []) if e in model_ids]
             if m.get("faces_by_element"):
-                g["with_model_id"] += sum(len(v) for e, v in m["faces_by_element"].items() if e in model_ids)
+                g["with_model_id"] += len(set().union(*(v for e, v in m["faces_by_element"].items() if e in model_ids)))
             elif inside:
                 g["with_model_id"] += n
     return {k: dict(v) for k, v in out.items()}
@@ -406,8 +450,22 @@ NO_MODEL_ELEMENT = (
 )
 
 
+# class of each no-model mesh: its id is NONMODEL + class, so a check can tell "dressing" from "lost id"
+NO_MODEL_CLASS = {"rug-": "rug", "landscape-g6-": "garden-structure", "landscape-north-": "garden-structure",
+                  "landscape-top-": "garden-structure", "landscape-door-pot-": "garden-structure",
+                  "landscape-trellis-": "garden-structure", "landscape-grass-": "garden-surface",
+                  "landscape-gravel-": "garden-surface", "landscape-tree-pit": "garden-surface",
+                  "landscape-accent-bed": "garden-surface", "landscape-climber-": "garden-planting-dressing",
+                  "garden-uplight-": "garden-uplight", "detail-vent-": "ventilation-fitting",
+                  "detail-curtain-": "curtain-track", "detail-hatch-": "kitchen-hatch", "dress-": "wardrobe-contents"}
+
+
 def no_model_reason(mesh_id):
     return next((why for prefix, why in NO_MODEL_ELEMENT if mesh_id.startswith(prefix)), None)
+
+
+def no_model_class(mesh_id):
+    return next((c for prefix, c in NO_MODEL_CLASS.items() if mesh_id.startswith(prefix)), None)
 
 
 def main(argv=None):
@@ -426,7 +484,7 @@ def main(argv=None):
     table = coverage(scene["meshes"], model_ids)
     unexplained = [m["id"] for m in scene["meshes"] if covered_faces(m) < len(m["faces"]) and not no_model_reason(m["id"])]
     stale = sorted({e for m in scene["meshes"] for e in m.get("element_ids", ())
-                    if e not in model_ids and not e.startswith(("env-", "spec-", "site-"))})
+                    if e not in model_ids and not e.startswith(("env-", "spec-", "site-", NONMODEL))})
     report = dict(coverage=table, unexplained_uncovered_meshes=unexplained, ids_not_in_model_snapshot=stale)
     text = json.dumps(report, indent=2, sort_keys=True)
     print(text)

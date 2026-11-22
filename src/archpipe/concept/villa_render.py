@@ -718,6 +718,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     mesh("finish-stair-stacked-slab-edge", "plaster-warm-white", bridge, "shell", room="stair-b",
          label="Continuous coplanar stacked-wall plaster across slab edge", kind="finish-layer",
          finished_host_id=stair_host.id,
+         # the strip is continuous plaster across the slab edge: it belongs to both walls (every face to each)
          element_ids=sorted({e for e in (id_registry.lookup(f) for f in party_faces) if e}))
     notes.append("ASSUMED exterior finish: our walls, ground-floor perimeter beams, exposed slab/ramp edges and boundary/fence walls use smooth very light grey-green mineral paint, reflectance 0.65. Entrance steps are paved; soffits are painted white. Neighbour and apartment context remains neutral mineral render; all exposed construction faces receive a stated finish.")
     for v in views:
@@ -793,6 +794,22 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
              box_faces(op[2] - GLASS_T / 2, op[1], gz, op[2] + GLASS_T / 2, op[3], gz + 1.1))
     mesh("detail-stair-guard", "glass-guard", guard, "furniture", room="stair-gf",
          label="detail: 1.1 m glass guard at the stair opening, 10 mm closed pane (required; not yet in the Revit model)", kind="glass-pane")
+    # ---- G1 (lane SC): the model's other two guards, built from the spec (stair infill and cupboard follow the stair steel)
+    from ..blender import g1_geometry as G1
+    guards = {g["id"]: g for g in sp.get("guards", [])}
+    for part in (G1.glass_guard(guards["guard-gf-terrace-edge"], box_faces, "detail-guard-gf-terrace-edge", "rail-gf-terrace-edge"),
+                 G1.bar_guard(guards["guard-entrance-steps-patio-edge"], box_faces, "detail-guard-patio-steps-edge",
+                              "rail-patio-steps-edge")):
+        mesh(part.mesh_id, part.material, part.faces, part.group, room=part.room, label=part.label, kind=part.kind,
+             element_ids=part.element_ids)
+    # Luminaire fittings with a visible body on a host (lane SC): the vertical wardrobe strips stand on the wardrobe front
+    # face, 20 x 12 mm, from the luminaire's own record. Geometry only (opal housing, no emission): the light is unchanged.
+    for f in VL.design(lay):
+        if f.kind == "VSTRIP":
+            mesh("detail-vstrip-" + f.id, "opal-strip",
+                 box_faces(f.x - 0.01, f.y, f.z - f.length / 2, f.x + 0.01, f.y + 0.012, f.z + f.length / 2), "fixture",
+                 room=f.room, label="ASSUMED vertical LED strip on the wardrobe front " + f.id, kind="led-strip",
+                 element_ids=["lum-" + f.id])
     # ASSUMED construction details: open risers remain visible between the steel members.
     treads = sorted(([v / 1000.0 for v in b] for b in sp["stair"] if b[5] - b[2] < 300), key=lambda b: b[0])
     rail_near_y = stair_finished_y + SM.RAIL_CLEARANCE_M
@@ -879,6 +896,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                   "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"],
                   kind="handrail", material="oak",
                   mounting=binding(MountItem("detail-stair-wall-handrail"), stair_host, SM.RAIL_CLEARANCE_M, "wall-hung"))
+    # ---- G1 (lane SC): open-riser infill bars and the understair cupboard, clear of the steel members built above
+    wall_side_y, open_side_y = G1.steel_clear_y(meshes)
+    for part in [G1.riser_infill(sp, box_faces, wall_side_y, open_side_y)] + G1.understair_cupboard(sp, box_faces, wall_side_y, open_side_y):
+        if part:
+            mesh(part.mesh_id, part.material, part.faces, part.group, room=part.room, label=part.label, kind=part.kind,
+                 element_ids=part.element_ids)
     # Unconditional validation of this first migrated package. Missing hosts
     # outside this package are also reported by the whole-scene verify guard.
     for member in meshes:
@@ -1056,11 +1079,14 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 label += " " + name + (" dressing" if name in
                          ("vacuum-body", "vacuum-wand", "suitcase", "suitcase-handle", "storage-box",
                           "folded-linens", "tool-case") else "")
+            # the level-access wet zone IS this wet finish (same placement and size as the model's wetzone element)
+            wet = dict(element_ids=["furn-" + f["mark"], "wetzone-" + f["mark"]]) \
+                if f["mark"] == "gwc-shower" and component_names[(mat, name)] == ["wet-floor"] else {}
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
                  label=label, kind=component_kind(f["type"], component_names[(mat, name)],
                                                 fallback=name if name != "body" else f["type"]),
                  assembly_kind=f['type'],
-                 physical_components=component_names[(mat, name)])
+                 physical_components=component_names[(mat, name)], **wet)
     # ---- WP4-A: real furniture models, replacing the procedural stand-in where a checked fit rule allows it.
     # Mapping id -> (asset, footprint (w, d), reference height for the +-5% guard, position, rot, room). The
     # reference height is the piece's own catalogue `h` for a whole item; this codebase's catalogue.py carries no
@@ -2165,8 +2191,31 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     require_clear_probes(scene)
     # Element identity (lane P2): additive fields, attached last so no pass, receipt or appearance record that
     # copies or hashes mesh attributes ever sees them (furniture_stage2 and draped_appearances do).
+    scene['element_contract'] = element_contract(lay, scene)
     EID.attach(scene, id_registry, _live_model_ids(lay, sp, it_all, land_plan, land_props), declared_ids)
+    EID.tag_non_model(scene)
     return scene
+
+
+# Model luminaires that are legitimately light only in this scene (lane SC decision, one reason per class). A check that
+# asks "is every modelled element built?" reads these as intended, not as a lost element.
+LIGHT_ONLY = {
+    "COVE": "concealed LED strip behind the cove fascia, which is built (ceiling-<room> lip); the strip is never visible",
+    "NL": "recessed night-light strip in the skirting line; no visible body",
+    "TOE": "toe-kick LED strip recessed behind the plinth; no visible body",
+    "RAIL": "LED strip inside the wardrobe, under the hanging rail; the wardrobe carcass is solid in the scene",
+    "MIRROR": "model places the bar 47 mm off the wall face with no host; a body would float (open item for the lighting lane)",
+}
+
+
+def element_contract(lay, scene):
+    """Which model elements the scene carries other than as a mesh: imported prop assets (scene['props'], placed from
+    the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY)."""
+    from .sanitary_relocation import input_revision
+    with input_revision(False):
+        light_only = {"lum-" + f.id: dict(kind=f.kind, reason=LIGHT_ONLY[f.kind]) for f in VL.design(lay) if f.kind in LIGHT_ONLY}
+    return dict(light_only=light_only,
+                imported_props={"prop-" + p["id"]: dict(asset=p["asset"], position=p["position"]) for p in scene.get("props", [])})
 
 
 def _live_model_ids(lay, sp, items, land_plan, land_props):
