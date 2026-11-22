@@ -128,36 +128,52 @@ def main(draw=True):
     return rec
 
 
-def stamp(path, text):
+def stamp(path, text, tint=None):
+    """Add a red label band above and below the image (extra canvas, nothing covered). tint = (x0, x1, y0, y1) pixel box to wash with translucent red (the visualisation-only half)."""
     from PIL import Image, ImageDraw, ImageFont
     im = Image.open(path).convert("RGB")
-    d = ImageDraw.Draw(im)
+    if tint:
+        ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
+        ImageDraw.Draw(ov).rectangle([tint[0], tint[2], tint[1], tint[3]], fill=(200, 30, 30, 55))
+        im = Image.alpha_composite(im.convert("RGBA"), ov).convert("RGB")
     try:
         f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", max(18, im.width // 55))
     except OSError:
         f = ImageFont.load_default()
-    w = d.textlength(text, font=f)
     h = f.size + 14
-    d.rectangle([0, 0, im.width, h], fill=(150, 20, 20))
-    d.text(((im.width - w) / 2, 6), text, fill="white", font=f)
-    d.rectangle([0, im.height - h, im.width, im.height], fill=(150, 20, 20))
-    d.text(((im.width - w) / 2, im.height - h + 6), text, fill="white", font=f)
-    im.save(path)
+    out = Image.new("RGB", (im.width, im.height + 2 * h), (150, 20, 20))
+    out.paste(im, (0, h))
+    d = ImageDraw.Draw(out)
+    w = d.textlength(text, font=f)
+    for y in (6, im.height + h + 6):
+        d.text(((im.width - w) / 2, y), text, fill="white", font=f)
+    out.save(path)
 
 
-def draw_all(L, Vis):
+def vis_tint(view, px0=320, pw=960, py0=69):
+    """Pixel box of the sister half (y < west line) in a plan_png of `view` = [x0, y0, x1, y1]: the plot frame is 960 px wide from x 320, top at y 69."""
+    s = pw / (view[3] - view[1])
+    return (px0, px0 + (V.LINE_Y - view[1]) * s, py0, py0 + (view[2] - view[0]) * s)
+
+
+def draw_all(L, Vis, force=False):
     from ..critic import plan_png, massing_png
     P = OUT / "plans"
-    plan_png(L, str(P / "final-south.png"), title="Final design (concept B adapted): south garden and east yard; shared fire pit on the west line", view=[14.6, -31.6, 29.3, -19.8])
-    plan_png(L, str(P / "final-north.png"), title="Final design: north court (quiet room, pond)", view=[-0.9, -29.6, 4.6, -22.8])
+    todo = lambda n: force or not (P / n).exists()          # noqa: E731
+    if todo("final-south.png"):
+        plan_png(L, str(P / "final-south.png"), title="Final design (concept B adapted): south garden and east yard; shared fire pit on the west line", view=[14.6, -31.6, 29.3, -19.8])
+    if todo("final-north.png"):
+        plan_png(L, str(P / "final-north.png"), title="Final design: north court (quiet room, pond)", view=[-0.9, -29.6, 4.6, -22.8])
     M = V.merge_for_view(L, Vis)
-    plan_png(M, str(P / "final-visualisation-plan.png"), title="VISUALISATION ONLY: south garden mirrored onto the sister plot (not our land, not our design); not checked, scheduled or counted", view=[14.6, -40.2, 29.3, -19.8])
-    stamp(str(P / "final-visualisation-plan.png"), V.LABEL.upper())
-    massing_png(L, str(P / "final-massing-south.png"), view=[14.0, -32.0, 30.0, -19.5])
-    massing_png(L, str(P / "final-massing-north.png"), view=[-1.5, -30.5, 6.5, -22.5], azimuth=205, elevation=50)
-    massing_png(L, str(P / "final-massing-east.png"), view=[13.0, -26.0, 24.0, -19.5], azimuth=300, elevation=45)
-    massing_png(M, str(P / "final-visualisation-massing.png"), view=[14.0, -41.0, 30.0, -19.5])
-    stamp(str(P / "final-visualisation-massing.png"), V.LABEL.upper())
+    vv = [14.6, -40.2, 29.3, -19.8]
+    plan_png(M, str(P / "final-visualisation-plan.png"), title="VISUALISATION ONLY: south garden mirrored onto the sister plot (not our land, not our design); not checked, scheduled or counted", view=vv)
+    stamp(str(P / "final-visualisation-plan.png"), V.LABEL.upper(), tint=vis_tint(vv))
+    for name, lay, view, kw in (("final-massing-south.png", L, [14.0, -32.0, 30.0, -19.5], {}), ("final-massing-north.png", L, [-1.5, -30.5, 6.5, -22.5], dict(azimuth=205, elevation=50)),
+                                ("final-massing-east.png", L, [13.0, -26.0, 24.0, -19.5], dict(azimuth=300, elevation=45)), ("final-visualisation-massing.png", M, [14.0, -41.0, 30.0, -19.5], {})):
+        if todo(name):
+            massing_png(lay, str(P / name), view=view, **kw)
+            if "visualisation" in name:
+                stamp(str(P / name), V.LABEL.upper())
 
 
 if __name__ == "__main__":

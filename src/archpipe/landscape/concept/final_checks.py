@@ -146,7 +146,7 @@ def fire_manual_check(L):
     over = []
     for cn in L["canopies"]:
         dh = rbox(cn["rect"]).distance(c)
-        over.append((cn["id"], math.hypot(dh, F.VINE_UNDERSIDE_M if cn.get("roof") == "vine" else cn["height_m"] + S.FLOOR_Z * 0 - 0.0)))
+        over.append((cn["id"], math.hypot(dh, F.VINE_UNDERSIDE_M if cn.get("roof") == "vine" else cn["height_m"] - 0.3)))
     for t in L["trees"]:
         dh = max(0.0, c.distance(Point(*t["center"])) - t["mature_spread_m"] / 2)
         over.append((t["id"], math.hypot(dh, 0.4 * (t.get("mature_height_m") or 3.0))))
