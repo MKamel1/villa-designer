@@ -38,3 +38,13 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - **Sister plot (west line of the south garden): SCREEN IT.** A tall screen along the open west line. Concepts use the screened variant.
 - **Plant assets:** a free Sketchfab account is approved, and the token was saved on 2026-11-22. Botaniq was SKIPPED by the client (2026-11-22). The Xfrog libraries are not approved. Free sources only (Sketchfab CC0/CC-BY, Poly Haven, the existing library). Where no free model of grade B exists, a labelled genus stand-in is used, or the plant is drawn as a planted mass, never as an invented species.
 - **A Pattern Language:** the client will buy it and tell the lead. Until then the 12 patterns without a held equivalent stay unused.
+
+## Concept gate, round 1 (client, 2026-11-22)
+- **Concept:** B (Two rooms) or C (Axial terrace), with the garden connected to the west and south side. The final pick is pending the lead's adapted proposal.
+- **Pond: NORTH COURT only** (low sun, little foot traffic, lush green). Consequences, accepted by being stated:
+  - It is small (17.5 m² usable court; about 2 m², about 2 koi in pass 2).
+  - Only the lounge sees it.
+  - Water lilies need sun to flower, so the planting goes to shade foliage.
+  - LDC's pond-sun criterion reads as a known, accepted condition, not a defect.
+- **Fire pit:** the client wants it placed between the two villas (on the west line with the sister villa), to share with them. Location and screen opening are pending confirmation.
+- **Pergola climbers:** the client asked. Lead recommendation pending confirmation.
