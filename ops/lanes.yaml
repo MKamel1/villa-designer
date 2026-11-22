@@ -283,6 +283,24 @@ lanes:
     - knowledge/*.json.gz
     - docs/lanes/SC2*.md
     - docs/lessons/SC2.md
+  SC3: # south B wall roof slot + wall-top guard; dining pendant body at real size
+    - src/archpipe/model/**
+    - tests/model/**
+    - src/archpipe/concept/revit_spec.py
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/blender/**
+    - src/archpipe/parity/**
+    - tests/parity/**
+    - src/archpipe/documents/samples/**
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - tests/test_mounting*.py
+    - knowledge/c3-part-exemptions.json
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/*.json.gz
+    - docs/lanes/SC3*.md
+    - docs/lessons/SC3.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
