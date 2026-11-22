@@ -325,6 +325,18 @@ lanes:
     - knowledge/landscape/precedents/**
     - docs/lanes/LDP*.md
     - docs/lessons/LDP.md
+  LDC: # landscape: calibrated critics
+    - src/archpipe/landscape/critic/**
+    - tests/landscape/critic/**
+    - knowledge/landscape/critic/**
+    - docs/lanes/LDC*.md
+    - docs/lessons/LDC.md
+  LDG: # landscape: concept generation
+    - src/archpipe/landscape/concept/**
+    - tests/landscape/concept/**
+    - knowledge/landscape/concept/**
+    - docs/lanes/LDG*.md
+    - docs/lessons/LDG.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
