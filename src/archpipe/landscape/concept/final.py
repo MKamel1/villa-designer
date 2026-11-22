@@ -143,7 +143,7 @@ def south(p=PAR):
     bed(f, "s-bed-wall-b", wr2, row(wr2, "x", 1.0, ["justicia_brandegeeana"], 0.7, run=3, how="min") + row(wr2, "x", 0.55, ["rhapis_excelsa"], 1.4, run=1, how="min")
         + row(wr2, "y", 0.2, ["aspidistra_elatior"], 0.45, run=6, how="min") , "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
     w3 = RM(*wall3)
-    bed(f, "s-bed-wall-c", w3, [entry("petrea_volubilis", P(5.55, 3.7 + i * 0.9), 0.5, "shrub") for i in range(3)] + [entry("jasminum_sambac", P(5.55, 4.15 + i * 0.9), 0.5, "shrub") for i in range(2)], "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
+    bed(f, "s-bed-wall-c", w3, [entry("petrea_volubilis", P(5.55, 3.6 + i * 0.7), 0.5, "shrub") for i in range(3)] + [entry("jasminum_sambac", P(5.55, 3.95 + i * 0.7), 0.5, "shrub") for i in range(2)], "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
     pk = RM(*pocket)
     bed(f, "s-bed-pocket", pk, row(pk, "x", 0.55, ["aspidistra_elatior", "farfugium_japonicum"], 0.45, run=3, how="min") , "strip", trace=("D-SHADE-OVER-SUN", "LS-HYDROZONE"))
     f["meta"].update(pit=PIT, opening_a=OPEN_A)

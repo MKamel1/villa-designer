@@ -22,8 +22,8 @@ class Design(unittest.TestCase):
         pit = next(f for f in L0["features"] if f["kind"] == "firepit")
         self.assertAlmostEqual(pit["center"][1], -29.916, 3)
         sup = K.superseded(RES)
-        self.assertEqual(len(sup), 1)                         # LDK 2.0 m floor still reported, never dropped
-        self.assertEqual(sup[0].subject, "s-firepit")
+        self.assertEqual({r.subject for r in sup}, {"s-firepit", "s-bbq"})                         # LDK 2.0 m floor still reported, never dropped; the BBQ is judged by its manual (LDG-BBQ-MANUAL)
+        sup = [r for r in sup if r.subject == "s-firepit"]
         self.assertIn(sup[0], [r for r in RES])
         self.assertNotIn(id(sup[0]), {id(r) for r in K.hard_fails(RES)})
 
@@ -44,9 +44,36 @@ class Design(unittest.TestCase):
         for r in K.pond_section_check(L0):
             self.assertEqual(r.status, "pass", r.message)
 
-    def test_grape_summer_shade_winter_unchanged(self):
-        self.assertLessEqual(GDATA["summer"]["leafed"], 0.5 * GDATA["summer"]["open"])
-        self.assertGreaterEqual(GDATA["winter"]["bare"], 0.8 * GDATA["winter"]["open"])
+    def test_no_pergola_and_shade_trees_instead(self):
+        self.assertEqual(L0["canopies"], [])
+        self.assertTrue({"s-tree-crape", "s-tree-olive", "e-tree-olive"} <= {t["id"] for t in L0["trees"]})
+
+    def test_crape_leaf_on_halves_summer_sun_and_bare_keeps_winter_sun(self):
+        t = GDATA["season_table"]["table"]
+        self.assertLessEqual(t["summer_leaf_on_h"], 0.6 * t["summer_open_sky_h"])
+        self.assertGreaterEqual(t["winter_leaf_off_h"], 0.8 * t["winter_open_sky_h"])
+        self.assertGreaterEqual(max(v["winter_leaf_off_h"] for v in GDATA["season_table"].values()), K.WINTER_SEAT_MIN_H)
+
+    def test_bare_deciduous_crown_is_not_winter_cover_but_the_evergreen_is(self):
+        win = K.crown_cells(L0, "winter")
+        summ = K.crown_cells(L0, "summer")
+        self.assertGreater(len(summ), len(win))
+        crape = next(c for c in K.crowns(L0) if c["id"] == "s-tree-crape")
+        self.assertFalse(crape["evergreen"])
+        self.assertTrue(any(c["evergreen"] for c in K.crowns(L0)))
+
+    def test_hard_share_inside_precedent_range(self):
+        h = R.metrics(L0)["hard_share"]
+        self.assertGreaterEqual(h, 0.52)
+        self.assertLessEqual(h, 0.78)
+
+    def test_layers_every_room_and_climbers_on_every_face(self):
+        from archpipe.landscape.concept import final_trees as FT
+        lt = FT.layer_table(L0)
+        self.assertEqual(lt["south garden"]["missing"], [])
+        self.assertEqual(lt["east yard"]["missing"], [])
+        self.assertEqual(lt["north court"]["missing"], ["canopy"])         # no tree fits the 3.7 m court (NHBC, pond, 1.3 h sun): stated in the report
+        self.assertTrue(all(FT.climber_faces(L0).values()), FT.climber_faces(L0))
 
     def test_wind_summer_evening_runs_west_and_our_seats_are_upwind(self):
         tw, per, mir = K.wind_check(L0)
@@ -91,8 +118,10 @@ class Negatives(unittest.TestCase):
 
     def test_tree_inside_pergola_fails(self):
         L = fresh()
-        L["trees"][0]["center"] = [(L["canopies"][1]["rect"][0] + L["canopies"][1]["rect"][2]) / 2, (L["canopies"][1]["rect"][1] + L["canopies"][1]["rect"][3]) / 2]
+        t = L["trees"][0]
+        L["canopies"].append({"id": "x", "rect": [t["center"][0] - 0.5, t["center"][1] - 0.5, t["center"][0] + 0.5, t["center"][1] + 0.5], "kind": "pergola", "height_m": 2.7, "shade_fraction": 0.6})
         self.assertEqual(K.tree_pergola_check(L).status, "fail")
+        self.assertEqual(K.tree_pergola_check(L0).status, "pass")
 
     def test_plant_inside_solid_fails(self):
         L = fresh()
@@ -128,14 +157,56 @@ class Negatives(unittest.TestCase):
         p["width_m"] = 1.0
         self.assertTrue(any(r.status == "fail" for r in K.pond_section_check(L)))
 
-    def test_vine_with_no_summer_leaf_fails_season_check(self):
-        old = F.GRAPE["summer_density"]
+    def test_crown_with_no_leaf_fails_summer_shade(self):
+        old = F.CROWN["deciduous_on"]
         try:
-            F.GRAPE["summer_density"] = 0.0
-            r, _ = K.grape_check(L0)
-            self.assertEqual(r.status, "fail")
+            F.CROWN["deciduous_on"] = 0.0
+            r, _ = K.season_check(L0)
+            self.assertEqual(next(x for x in r if x.criterion == "LDG-SHADE-SUMMER").status, "fail")
         finally:
-            F.GRAPE["summer_density"] = old
+            F.CROWN["deciduous_on"] = old
+
+    def test_without_the_trees_summer_privacy_fails_at_the_table(self):
+        L = fresh()
+        L["trees"] = [t for t in L["trees"] if t["center"][0] < 20 or t["id"] == "s-tree-punica"]
+        r, _ = K.privacy_checks(L, ROOMS)
+        self.assertTrue(any(x.criterion == "LDG-PRIV" and x.status == "fail" for x in r))
+        r0, _ = K.privacy_checks(L0, ROOMS)
+        self.assertFalse(any(x.criterion == "LDG-PRIV" and x.status == "fail" for x in r0))
+
+    def test_winter_privacy_loss_of_a_bare_crown_is_a_warning_not_hidden(self):
+        r, tab = K.privacy_checks(L0, ROOMS)
+        self.assertTrue(any(x.criterion == "LDG-PRIV-WINTER" and x.status == "warn" for x in r))
+        self.assertGreater(tab["table"]["winter"], tab["table"]["summer"])
+
+    def test_aggressive_roots_near_pond_fail_and_far_pass(self):
+        L = fresh()
+        t = next(t for t in L["trees"] if t["id"] == "e-tree-olive")
+        t["species"] = "ficus_microcarpa"
+        self.assertTrue(any(x.criterion == "LDG-ROOTS" and x.status == "fail" for x in K.tree_site_checks(L)))
+        self.assertTrue(all(x.status == "pass" for x in K.tree_site_checks(L0)))
+
+    def test_pruned_tree_without_a_regime_fails(self):
+        L = fresh()
+        next(t for t in L["trees"] if t.get("pruned"))["pruning"] = ""
+        self.assertTrue(any(x.criterion == "LDG-PRUNE" and x.status == "fail" for x in K.tree_site_checks(L)))
+
+    def test_bbq_under_a_crown_or_against_planting_fails(self):
+        self.assertEqual(K.bbq_manual_check(L0).status, "pass")
+        L = fresh()
+        c = next(t for t in L["trees"] if t["id"] == "s-tree-crape")["crown_center"]
+        bq = next(f for f in L["features"] if f["kind"] == "bbq")
+        bq["rect"] = [c[0] - 0.25, c[1] - 0.25, c[0] + 0.25, c[1] + 0.25]
+        self.assertEqual(K.bbq_manual_check(L).status, "fail")
+
+    def test_winter_seat_floor_fails_when_not_met(self):
+        old = K.WINTER_SEAT_MIN_H
+        try:
+            K.WINTER_SEAT_MIN_H = 9.0
+            r, _ = K.season_check(L0)
+            self.assertEqual(next(x for x in r if x.criterion == "LDG-WINTER-SEAT").status, "fail")
+        finally:
+            K.WINTER_SEAT_MIN_H = old
 
 
 class Visualisation(unittest.TestCase):

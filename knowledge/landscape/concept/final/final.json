@@ -574,7 +574,6 @@
  ],
  "build_checks": {
   "closed": {
-   "clip:fail": 1,
    "footprint:pass": 66,
    "id:pass": 175,
    "plant-footprint:info": 8,
@@ -583,7 +582,6 @@
    "support:pass": 173
   },
   "open": {
-   "clip:fail": 1,
    "footprint:pass": 65,
    "id:pass": 175,
    "plant-footprint:info": 8,
