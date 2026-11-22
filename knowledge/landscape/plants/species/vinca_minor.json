@@ -1,0 +1,273 @@
+{
+ "slug": "vinca_minor",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Vinca minor L.",
+    "family": "Apocynaceae",
+    "common_names": [
+     "lesser periwinkle",
+     "dwarf periwinkle",
+     "creeping myrtle"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Vinca%20minor",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.08,
+    "max": 0.15,
+    "text": "3-6 in as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 0 ft. 3 in. - 0 ft. 6 in. Width: 0 ft. 6 in. - 1 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.46,
+    "text": "6-18 in as stated; forms an indefinitely spreading mat by rooting at the nodes"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 0 ft. 3 in. - 0 ft. 6 in. Width: 0 ft. 6 in. - 1 ft. 6 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "NCSU: rapid growth rate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "prefers full sun, partial shade or dappled sun; tolerates nearly full shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates high heat and nearly full shade but prefers full sun, partial shade, or dappled sunlight and moist soil with good drainage."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "NCSU: moist soil with good drainage; MBG: dry to medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "moist soil with good drainage"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU states tolerates high heat (stated for North Carolina; hardiness listed zones 4-9b, MBG zones 4-8, no desert-heat figure given)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates high heat and nearly full shade"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "PFAF: can tolerate drought; established plants drought tolerant; NCSU Resistance To Challenges: Drought, Dry Soil"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It prefers dry or moist soil and can tolerate drought."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU tag salt tolerant and Resistance To Challenges: Salt; no degree stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#salt tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "4a",
+    "min_temp_c": null,
+    "damage_text": "NCSU zones 4a-9b (upper limit 9b), MBG zones 4-8; PFAF: hardy to UK zone 4, not frost tender. Cold is not the limit here; the warm end of the zone range is"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     4,
+     5
+    ],
+    "colours": [
+     "blue",
+     "lavender"
+    ],
+    "text": "PFAF: April to May; NCSU: spring and summer and intermittently through the year"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "in flower from April to May"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "dark green leathery opposite leaves to 1 in long"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "broadleaf evergreen ground cover"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "spreads rapidly by long trailing rooting stems and swamps smaller plants (spread, not a hardscape-damage figure)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "It spreads rapidly by long trailing and rooting stems once it is established and will swamp out smaller plants"
+   }
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: large quantities of the plant are poisonous"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Large quantities of the plant are poisonous"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=254208"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "NCSU: Maintenance High (becomes weedy and high maintenance); MBG lists Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: High"
+   }
+  }
+ },
+ "notes": "Cool-temperate groundcover (native Europe to Caucasus). Heat class high is NCSU's statement for North Carolina, not a measured desert limit; its listed zones end at 9b (NCSU) and 8 (MBG). Treat as unproven in Cairo summer and trial in shade before specifying.",
+ "invasive_flag": "NCSU: classified as an invasive species by the NC Invasive Plant Council; on many states' most-unwanted lists; MBG: can spread aggressively into adjacent lawns or garden areas. PFAF: Weed Potential Yes."
+}
