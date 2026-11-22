@@ -1,0 +1,200 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-S2-04",
+ "source": "LDP precedent P-S2-04: Claremont front courtyard, Perth (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "paving",
+   "rect": [
+    1.15,
+    0.0,
+    5.06,
+    6.09
+   ],
+   "label": "lounge deck"
+  },
+  {
+   "id": "z2",
+   "use": "other",
+   "surface": "paving",
+   "rect": [
+    3.68,
+    4.48,
+    7.13,
+    6.78
+   ],
+   "label": "entry paving"
+  }
+ ],
+ "paths": [],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b3",
+   "rect": [
+    0.23,
+    0.0,
+    1.84,
+    6.78
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 2,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rect": [
+    1.61,
+    -0.8,
+    4.37,
+    1.26
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 1,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 5,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rect": [
+    0.23,
+    4.71,
+    3.68,
+    7.13
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t6",
+   "species": "Punica granatum",
+   "center": [
+    3.1,
+    -0.46
+   ],
+   "mature_spread_m": 1.4,
+   "form": "small_tree",
+   "mature_height_m": 1.7
+  },
+  {
+   "id": "t7",
+   "species": "Punica granatum",
+   "center": [
+    1.38,
+    6.55
+   ],
+   "mature_spread_m": 1.0,
+   "form": "small_tree",
+   "mature_height_m": 1.2
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   5.06,
+   -0.11,
+   6.21,
+   0.11
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w8",
+   "rect": [
+    5.06,
+    -0.11,
+    5.24,
+    4.6
+   ],
+   "height_m": 3.0
+  },
+  {
+   "id": "w9",
+   "rect": [
+    7.01,
+    4.48,
+    7.2,
+    7.93
+   ],
+   "height_m": 3.0
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [
+  {
+   "id": "d10",
+   "at": [
+    7.13,
+    5.29
+   ],
+   "faces": "+x"
+  },
+  {
+   "id": "d11",
+   "at": [
+    7.13,
+    7.01
+   ],
+   "faces": "+x"
+  }
+ ],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

@@ -1,0 +1,37 @@
+{
+ "item": "no-enclosure",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/no-enclosure.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 1,
+   "evidence": "Dining area is bounded by the building on the left, a wall on the right, and a pergola overhead, but is open on the top and bottom sides. The fire pit area is open on three sides."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large citrus tree in the lower-left corner is the dominant element, with the fire pit and dining pergola positioned as secondary features."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main gravel path leads directly to house doors and dining area; secondary paths connect fire pit, seating, and herb garden. All circulation routes terminate at functional features."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Top right corner shows a distinct mass of four small trees/shrubs. Bottom left shows a large canopy tree with a drift of three shrubs and a cluster of ground cover. The 'herbs' bed is a single mass. Repetition is evident in the grouping strategy."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Top right corner shows canopy trees overlapping shrubs and ground cover. Bottom left shows a large canopy tree with shrubs and ground cover beneath. Multiple planting zones exhibit this vertical layering."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Multiple distinct zones with different floor surfaces: gravel fire pit area, paved dining under pergola, paved standing/BBO area, and separate herb bed."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (dining, fire pit, standing/BBQ, citrus, herbs), defined edges via walls and paving, and structured planting masses (canopy tree, shrub cluster, ground cover) create a cohesive, designed landscape."
+  }
+ }
+}

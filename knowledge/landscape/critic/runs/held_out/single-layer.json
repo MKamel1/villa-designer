@@ -1,0 +1,37 @@
+{
+ "item": "single-layer",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/single-layer.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dining area is enclosed by the building, a wall, and a pergola. The fire pit area is bounded by the building, a wall, and a dense planting bed. The pond court is enclosed by paving and planting."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Fire pit (orange circle, lower left) and dining table (tan circle, lower right) are similar in size and visual weight, creating two competing focal points rather than one clear primary focus."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Paved areas connect the house doors to the fire pit seating, the dining pergola, the standing/BBQ area, and the pond court. All circulation paths terminate at defined functional zones or features."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Planting is organized into distinct, repeated masses: a 2x4 grid of shrubs at the bottom, a 3x3 grid around the pond, and a 2x3 grid of perennials in the bottom right."
+  },
+  "V-LAYERING": {
+   "score": 1,
+   "evidence": "The plan shows only shrubs (medium green circles) and ground cover/perennials (pale green circles). There are no canopy trees or small trees present, resulting in a lack of vertical layering."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a gravel fire pit area, a paved dining area under a pergola, a paved standing/BBQ area, and a separate paved pond court, each with different floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (dining, fire pit, pond, herbs), defined edges via walls and hardscape, and structured planting masses (rows, clusters) create a cohesive, designed landscape."
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "item": "good-08",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden is enclosed by a continuous metal fence with a gate, creating defined edges. The house walls and overhang provide side and overhead enclosure, forming a clear outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Ground cover and low shrubs are present, but no trees or tall canopy layer is visible in the garden bed; planting reads as two layers, not lush and layered."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is horizontally balanced with multiple competing elements: the gable, the central entry, and the right-side windows all draw equal attention. No single dominant focal point organizes the space."
+  }
+ }
+}

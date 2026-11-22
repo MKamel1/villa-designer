@@ -1,0 +1,21 @@
+{
+ "item": "good-29",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo4.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall brick walls on two sides, overhead roof structure, and glass enclosure create a clearly defined, room-like outdoor space with a wooden deck and water feature."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tree with fine foliage, mid-level shrubs/ferns, and low ground cover with white gravel edging create three distinct vertical layers."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is balanced but lacks a single dominant element. The water, the glass doors, the interior dining set, and the tree all compete for attention, creating a distributed rather than centralized focus."
+  }
+ }
+}

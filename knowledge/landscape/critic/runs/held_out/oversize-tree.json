@@ -1,0 +1,37 @@
+{
+ "item": "oversize-tree",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/oversize-tree.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The main seating area (fire pit, jacaranda) is bounded by the building on the left, a dense planting bed on the bottom, and a wall on the right. The dining area is enclosed by a pergola and planting. The standing/BBO area is bounded by the building and a wall."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "Large canopy tree dominates the center, with fire pit and dining table positioned as secondary elements within its spread."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main path leads to house doors and seating; secondary path connects to dining area and fire pit zone."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Bottom left shows a clear drift of three large shrubs and a row of small perennials; top right shows a mass of four small trees/shrubs. Repetition is evident in these groupings."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Large canopy tree (dark green circle) dominates the center, overlapping with multiple small trees (medium green circles) and shrubs (light green circles) along the bottom and right edges, with ground cover visible in the herb bed and underplanting areas."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a paved dining area under a pergola, a gravel standing/BBO area, a lawn seating area with fire pit, and a separate herb bed, each with different floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (lawn, dining, standing/BBO, herbs), defined edges via walls and planting masses, and structured planting layers (canopy, shrubs, ground cover) create a cohesive, designed landscape."
+  }
+ }
+}

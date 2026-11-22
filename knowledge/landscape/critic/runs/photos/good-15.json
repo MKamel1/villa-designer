@@ -1,0 +1,21 @@
+{
+ "item": "good-15",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-06-dar-it-tarag-naxxar/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "High stone walls on both sides and a solid pink wall with stairs enclose the space, creating a defined, room-like courtyard with clear boundaries."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Planting is minimal: a small ground-level shrub cluster near the stairs and a potted succulent. No trees or distinct shrub layer; reads sparse, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The large pink sculptural staircase dominates the composition, with the dining table and surrounding walls framing it as the central element."
+  }
+ }
+}

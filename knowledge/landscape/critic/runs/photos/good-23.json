@@ -1,0 +1,21 @@
+{
+ "item": "good-23",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N02-tsubo-niwa-extension-kyoto/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall vertical wooden slat walls on both sides and a lattice screen at the far end create defined boundaries, forming a clear enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "The image shows a tree and a shrub, but lacks a distinct ground layer of low plants or groundcover, resulting in only two visible planting layers."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The bonsai tree on the stone pedestal is centrally placed, framed by the corridor, and visually dominant, serving as the clear focal point."
+  }
+ }
+}

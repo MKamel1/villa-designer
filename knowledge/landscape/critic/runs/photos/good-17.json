@@ -1,0 +1,21 @@
+{
+ "item": "good-17",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden features a defined pool edge, structured planting beds, and a large overhanging building volume that creates a sense of enclosure and a defined outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Large trees, dense shrubs, and flowering groundcover (bougainvillea) create distinct vertical layers, reading as lush and layered around the pool."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The cantilevered upper volume dominates the composition, with the pool, planting, and lower level arranged to frame and support it as the singular focal point."
+  }
+ }
+}

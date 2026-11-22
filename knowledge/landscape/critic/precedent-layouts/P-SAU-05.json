@@ -1,0 +1,155 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SAU-05",
+ "source": "LDP precedent P-SAU-05: Courtyard House, Paddington: garden court and green roof (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "paving",
+   "rect": [
+    0.17,
+    0.0,
+    2.38,
+    5.95
+   ],
+   "label": "garden court"
+  },
+  {
+   "id": "z2",
+   "use": "other",
+   "surface": "planting",
+   "rect": [
+    3.74,
+    0.0,
+    5.44,
+    5.95
+   ],
+   "label": "green roof"
+  }
+ ],
+ "paths": [],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b7",
+   "rect": [
+    0.17,
+    0.17,
+    2.38,
+    1.36
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    },
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 2,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rect": [
+    0.17,
+    3.06,
+    0.51,
+    5.78
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t3",
+   "species": "Punica granatum",
+   "center": [
+    1.12,
+    1.46
+   ],
+   "mature_spread_m": 1.8,
+   "form": "small_tree",
+   "mature_height_m": 2.1
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   2.72,
+   -3.4,
+   5.61,
+   5.78
+  ],
+  [
+   0.0,
+   5.95,
+   5.61,
+   10.2
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w4",
+   "rect": [
+    0.0,
+    -3.47,
+    5.61,
+    -3.3
+   ],
+   "height_m": 6.0
+  },
+  {
+   "id": "w5",
+   "rect": [
+    0.0,
+    5.78,
+    5.61,
+    5.95
+   ],
+   "height_m": 6.0
+  },
+  {
+   "id": "w6",
+   "rect": [
+    0.0,
+    -3.47,
+    0.24,
+    5.95
+   ],
+   "height_m": 6.0
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [
+  {
+   "id": "d9",
+   "at": [
+    2.72,
+    3.06
+   ],
+   "faces": "+x"
+  }
+ ],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

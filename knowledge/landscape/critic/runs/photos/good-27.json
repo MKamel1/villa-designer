@@ -1,0 +1,21 @@
+{
+ "item": "good-27",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N10-pb-house-chiang-rai/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall walls on both sides and a rear wall create defined edges, forming a clear enclosed outdoor room around the pool and deck."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Only two isolated potted plants are visible; no trees, shrubs, or ground cover layers are present. The planting is sparse and lacks depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The long, rectangular swimming pool acts as a strong central axis, drawing the eye through the space and organizing the surrounding deck and gravel areas."
+  }
+ }
+}

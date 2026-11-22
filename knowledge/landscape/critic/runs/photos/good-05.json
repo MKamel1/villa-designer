@@ -1,0 +1,21 @@
+{
+ "item": "good-05",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 1,
+   "evidence": "Garden has defined edges via concrete path and plantings, but lacks overhead enclosure or tall side walls; open to sky and surrounding trees, not a fully enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Distinct tree canopy overhead, mid-level shrubs and ornamental grasses, and a dense ground cover layer create clear vertical layering and lushness."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The garden is organized around the modern house structure, which serves as the central visual anchor with the pathway leading directly to it."
+  }
+ }
+}

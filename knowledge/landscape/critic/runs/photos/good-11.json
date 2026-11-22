@@ -1,0 +1,21 @@
+{
+ "item": "good-11",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-02-mv024-limassol/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Defined by a solid stone wall on one side, a large structural column and overhang on the other, creating a clear, enclosed outdoor room with furniture."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Planting consists of a single potted shrub and a small ground-level plant near the patio. No trees or distinct layered structure; reads as sparse, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The space is organized around the covered patio with blue seating and the open view into the living room, creating a clear focal point."
+  }
+ }
+}

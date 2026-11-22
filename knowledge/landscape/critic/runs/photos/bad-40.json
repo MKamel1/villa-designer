@@ -1,0 +1,21 @@
+{
+ "item": "bad-40",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v39-north-garden-hanging-retreat.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The image shows a defined corner with two solid walls meeting, a floor surface, and a glass door/curtain on the right, creating a clear enclosed outdoor room feel."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Only a single potted plant is visible on the left; no trees, shrubs, or ground cover layers are present. The planting is sparse and not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The hanging egg chair is centrally placed and visually dominant, with the plant and window framing it as a secondary element."
+  }
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "item": "path-to-nowhere",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/path-to-nowhere.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 1,
+   "evidence": "Dining area under pergola is bounded by the house on one side and open on the other three; fire pit area is open on two sides; pond court is open on two sides."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Large citrus tree in the foreground, fire pit to its left, dining table under pergola to the right, and pond court in the background all compete as focal points."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main gravel path leads to house doors and seating; secondary paths connect dining, fire pit, and BBQ areas; no dead-end paths visible."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Top right corner shows a distinct mass of four shrubs planted in a tight group. Bottom left shows a large mass of ground cover/perennials under a small tree. These represent clear repeated groups rather than scattered singles."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Top right corner shows a cluster of light green circles (shrubs) overlapping a blue area (pond), with a row of small circles (ground cover) behind them. Bottom left shows a large dark green circle (canopy tree) over a medium green circle (small tree)."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a gravel fire pit area, a paved dining area under a pergola, a paved standing/BBO area, and a separate herbs bed, each with different floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (dining, fire pit, herbs, pond court), defined edges via walls and paving, and structured planting masses (citrus, shrubs, ground cover) create a cohesive, designed landscape."
+  }
+ }
+}

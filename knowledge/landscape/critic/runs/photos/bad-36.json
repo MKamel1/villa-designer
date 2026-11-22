@@ -1,0 +1,21 @@
+{
+ "item": "bad-36",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v27-east-yard-above.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall white walls on both sides and a trellis define clear vertical edges, creating a corridor-like enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Planting includes tall vine on trellis, mid-height shrubs, and low ground plants with flowers, creating visible vertical layering and lushness."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "No single dominant feature; visual interest is distributed across the trellis, multiple potted plants, and shrubs, creating competing points rather than one clear focal point."
+  }
+ }
+}

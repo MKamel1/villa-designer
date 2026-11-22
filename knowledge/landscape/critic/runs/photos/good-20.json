@@ -1,0 +1,21 @@
+{
+ "item": "good-20",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Garden is bounded by a wooden fence on the right, a building wall on the left, and a low stone wall in the center, creating a defined, enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "The image clearly shows a layered planting structure with tall trees, mid-height shrubs, and ground-level foliage, creating a lush and multi-dimensional garden appearance."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The garden lacks a single dominant feature. Visual interest is distributed across the wooden pavilion, the hydrangeas, and the stone wall, creating competing focal points rather than one clear center."
+  }
+ }
+}
