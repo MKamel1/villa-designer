@@ -116,7 +116,7 @@ def main(draw=True):
            "wind": {"toward_west": {k: {"share_of_hours_pct": v[0], "mean_westward_component_ms": v[1], "hours": v[2]} for k, v in tw.items()}, "seat_in_downwind_sector_pct": per, "sister_seat_in_downwind_sector_pct": mir,
                     "note": "downwind sector = fire->seat bearing within +-45 deg of the direction the wind blows toward; station-level (Cairo West AP TMYx), no lee modelling (LDS gap W1)"},
            "fire": {"design_side_clearance_mm": round(F.FIRE_SIDE_M * 1000), "design_overhead_clearance_mm": round(F.FIRE_OVER_M * 1000), "opening_a": F.OPEN_A, "products": FF.PRODUCTS, "rejected": FF.REJECTED, "quotes_verified": FF.quotes_ok()},
-           "privacy": gdata.get("privacy_table"), "critic_counts": by, "critic_verdict": ver, "critic_findings": [f.to_dict() for f in fs if f.status in ("fail", "warn")],
+           "privacy": gdata.get("privacy_table"), "pond_sun": K.pond_sun(L), "critic_counts": by, "critic_verdict": ver, "critic_findings": [f.to_dict() for f in fs if f.status in ("fail", "warn")],
            "build_checks": bchk, "build_warnings": scene.warnings, "checks": R.compact(res), "schedule": sched, "programme": prog,
            "layout_counts": {k: len(L[k]) for k in C.KEYS}, "visualisation": {"file": "layout-visualisation.json", "excluded_from": "checks, schedules, quantities, critics, programme table"}}
     json.dump(L, open(OUT / "layout-final.json", "w"), indent=1)

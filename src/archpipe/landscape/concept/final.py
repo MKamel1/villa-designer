@@ -70,7 +70,7 @@ def south(p=PAR):
         f["zones"].append({"id": zid, "use": use, "rect": RM(*r), "surface": surface, "enclosure_height_m": h,
                            "trace": {"dining": ["U-S-DINE", "LS-DINE-AREA"], "lounge": ["U-S-LOUNGE", "U-S-FIRE", "LS-LOUNGE-AREA"], "quiet": ["U-S-QUIET"],
                                      "standing": ["U-S-STAND", "LS-STAND-AREA"], "other": ["U-S-QUIET"]}[use], **kw})
-    zone("s-dining", "dining", (0.0, 0.7, A, 6.7), "paving", 2.7)                       # 5.71 x 6.0 = 34.3 m2 for 8 seats (needs 27.7)
+    zone("s-dining", "dining", (0.0, 0.7, 4.7, 6.7), "paving", 2.7)                     # 4.7 x 6.0 = 28.2 m2 for 8 seats (needs 27.7); stops short of the rear bench so the bench reads as lounge
     zone("s-lounge", "lounge", (2.0, 4.65, A, 8.5), "paving", 2.7)                      # 3.71 x 3.85 across
     zone("s-quiet", "quiet", (A - 1.6, 7.2, A, 8.6), "paving", 2.7)
     zone("s-gravel-floor", "other", gravel, "gravel", 2.7, label=False)

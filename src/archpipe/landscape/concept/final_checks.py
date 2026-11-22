@@ -61,6 +61,17 @@ def gravel_check(L):
     return _r("LDG-GRAVEL-ZONE", "pass" if not bad else "fail", "zones", "gravel zones coincide with gravel" if not bad else f"gravel zone also paved/planted: {bad}", len(bad), 0, "zones")
 
 
+def zone_check(L):
+    """The critics take the FIRST zone (most specific use first) that contains a point: every seating item and table must be classified into the zone it declares (lesson LDG-8 repeated in round 2)."""
+    bad = []
+    for it in L["seating"] + L["tables"]:
+        c = it["center"] if "center" in it else [(it["rect"][0] + it["rect"][2]) / 2, (it["rect"][1] + it["rect"][3]) / 2]
+        z = next((z for z in L["zones"] if rbox(z["rect"]).contains(Point(*c))), None)
+        if z is None or z["id"] != it["zone"]:
+            bad.append((it["id"], it["zone"], z and z["id"]))
+    return _r("LDG-ZONE-CLASS", "pass" if not bad else "fail", "zones", "every seat and table is classified into its declared zone" if not bad else f"misclassified (item, declared, first containing zone): {bad[:4]}", len(bad), 0, "items")
+
+
 # ---- LDB finding 1-3: tree and pergola, plants in solids, pot ---------------------------------------------------------------------
 def tree_pergola_check(L):
     bad = []
@@ -347,6 +358,16 @@ def pond_section_check(L):
     return out
 
 
+def pond_sun(L):
+    """Mean 21-June direct sun over each pond's rectangle (LDS layer): water lilies (Nymphaea, full sun 6 h) are specified only where the sun need is met."""
+    out = {}
+    for f in L["features"]:
+        if f.get("kind") == "pond":
+            h = S.mean("sun", "sun_hours_summer_solstice", f["rect"])
+            out[f["id"]] = {"sun_21jun_h": None if h is None else round(h, 2), "water_lilies": "no: full-sun species needs 6 h" if (h or 0) < 6 else "possible"}
+    return out
+
+
 # ---- everything ---------------------------------------------------------------------------------------------------------
 HARD_WARN = R.HARD_WARN
 
@@ -360,7 +381,7 @@ def evaluate_all(L, rooms, covers):
     own += prv
     sunr, seen = sun_checks_final(L, leaf_sun(L))
     sun = [sunr]
-    extra = [id_check(L), surface_check(L), gravel_check(L), tree_pergola_check(L), plant_solid_check(L), pot_check(L)] + fire_manual_check(L) + pond_section_check(L)
+    extra = [id_check(L), zone_check(L), surface_check(L), gravel_check(L), tree_pergola_check(L), plant_solid_check(L), pot_check(L)] + fire_manual_check(L) + pond_section_check(L)
     g, gdata = grape_check(L)
     extra.append(g)
     gdata["leaf_level_sun_21jun_h"] = leaf_sun(L)

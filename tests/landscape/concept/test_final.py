@@ -76,6 +76,13 @@ class Negatives(unittest.TestCase):
         L["paved_areas"] = [a for a in L["paved_areas"] if not a["id"].startswith("n-")]
         self.assertEqual(K.surface_check(L).status, "fail")
 
+    def test_dining_zone_swallowing_the_rear_bench_fails(self):
+        L = fresh()
+        z = next(z for z in L["zones"] if z["id"] == "s-dining")
+        z["rect"] = [22.597, -29.216, 28.307, -23.216]          # the round-1 mistake: dining zone over the whole depth
+        self.assertEqual(K.zone_check(L).status, "fail")
+        self.assertEqual(K.zone_check(L0).status, "pass")
+
     def test_gravel_zone_over_paving_fails(self):
         L = fresh()
         z = next(z for z in L["zones"] if z["id"] == "s-dining")

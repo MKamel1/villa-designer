@@ -357,10 +357,20 @@
    "winter_louvres_closed_with_opening": 0.224
   }
  },
+ "pond_sun": {
+  "n-pond": {
+   "sun_21jun_h": 1.69,
+   "water_lilies": "no: full-sun species needs 6 h"
+  },
+  "e-pond": {
+   "sun_21jun_h": 4.45,
+   "water_lilies": "no: full-sun species needs 6 h"
+  }
+ },
  "critic_counts": {
   "landscape-architect": {
-   "pass": 14,
-   "fail": 3,
+   "pass": 13,
+   "fail": 4,
    "warn": 1,
    "not_evaluated": 0
   },
@@ -371,8 +381,8 @@
    "not_evaluated": 3
   },
   "user": {
-   "pass": 18,
-   "fail": 1,
+   "pass": 19,
+   "fail": 0,
    "warn": 0,
    "not_evaluated": 0
   },
@@ -386,7 +396,7 @@
  "critic_verdict": {
   "landscape-architect": "fail",
   "horticulturist": "pass",
-  "user": "fail",
+  "user": "pass",
   "climate": "fail"
  },
  "critic_findings": [
@@ -411,6 +421,18 @@
    "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
    "kind": "computed",
    "subject": "e-quiet",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-ENCLOSURE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "room 's-dining': 37% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
+   "kind": "computed",
+   "subject": "s-dining",
    "calibrated": false,
    "extra": {}
   },
@@ -457,18 +479,6 @@
    "severity": "major",
    "evidence": "2 plants where the LDS sun layer contradicts the species' stated sun class (['vitis_vinifera']); full sun is 6 h+ (RHS via LDK), limit used 3 h",
    "source": "LDL sun class vs LDS sun.json; limits policy",
-   "kind": "computed",
-   "subject": "",
-   "calibrated": false,
-   "extra": {}
-  },
-  {
-   "critic": "user",
-   "criterion": "U-GATHER-GROUPS",
-   "status": "fail",
-   "severity": "major",
-   "evidence": "gathering 10-20: dining seats 11 (>= 4), lounge seats 0 (>= 3): a dining group and a lounge group",
-   "source": "brief garden-brief-2026-11-22 (client decision); group minimums policy",
    "kind": "computed",
    "subject": "",
    "calibrated": false,
@@ -604,10 +614,10 @@
    "criterion": "LS-DINE-AREA",
    "status": "pass",
    "subject": "s-dining",
-   "achieved": 4.28,
+   "achieved": 3.52,
    "required": 3.46,
    "unit": "m2",
-   "message": "dining zone area per seat (34.3 m2 / 8 seats): 4.28 m2 achieved, 3.46 m2 required"
+   "message": "dining zone area per seat (28.2 m2 / 8 seats): 3.52 m2 achieved, 3.46 m2 required"
   },
   {
    "criterion": "LS-DINE-CLEAR",
@@ -1315,10 +1325,10 @@
    "criterion": "LS-ENCLOSURE",
    "status": "pass",
    "subject": "s-dining",
-   "achieved": 0.473,
+   "achieved": 0.574,
    "required": 0.25,
    "unit": "ratio",
-   "message": "enclosure height 2.7 m / room width 5.71 m: 0 ratio achieved, 0 ratio required"
+   "message": "enclosure height 2.7 m / room width 4.70 m: 1 ratio achieved, 0 ratio required"
   },
   {
    "criterion": "LS-ENCLOSURE",
@@ -1863,7 +1873,7 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
    "drawable": false
   },
   {
@@ -1995,7 +2005,7 @@
    "toxic": "non_toxic",
    "mature_h_m": 0.6,
    "mature_spread_m": 0.6,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
    "drawable": false
   },
   {
@@ -2049,7 +2059,7 @@
    "toxic": null,
    "mature_h_m": 1.22,
    "mature_spread_m": 1.22,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
    "drawable": false
   },
   {
@@ -2145,7 +2155,7 @@
   },
   {
    "item": "dining zone area per seat [s-dining]",
-   "achieved": "4.28 m2",
+   "achieved": "3.52 m2",
    "required": "3.46 m2",
    "status": "pass",
    "source": "LS-DINE-AREA"
