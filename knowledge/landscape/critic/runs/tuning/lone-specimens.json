@@ -1,0 +1,37 @@
+{
+ "item": "lone-specimens",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/lone-specimens.png",
+ "rubric": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The dining area is enclosed by the building, a wall, and a pergola. The fire pit area is bounded by the building, a wall, and dense planting. The standing/BBQ area is enclosed by the building and a wall."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Large canopy tree top right, fire pit left, dining table center, and pergola all compete for attention."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Gravel and paved areas connect the house doors directly to the fire pit, dining table, and standing/BBO zone. The path along the left wall leads to the seating area. No paths end at blank edges."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Large green mass in lower left with multiple overlapping circles of similar size; row of pale green circles along bottom edge; cluster of brown squares in upper left area."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "The plan shows a canopy tree (large dark green circle) in the lower left, with smaller shrubs (medium green circles) and ground cover (pale green circles) layered beneath it. A separate small tree is visible in the upper right, also with ground cover. This demonstrates three distinct planting layers"
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a gravel seating/fire pit area, a paved dining area under a pergola, a standing/BBQ paved area, and a separate herbs bed, creating a clear sequence of defined outdoor rooms."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with distinct rooms (dining, fire pit, herbs), defined edges via walls and planting masses, and organized planting zones."
+  }
+ }
+}
