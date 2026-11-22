@@ -98,7 +98,7 @@ def draw(layouts: dict, plans: dict, title: str, path, pond_label: str = "", ext
     axN = fig.add_subplot(gs[1, 1])
     axK = fig.add_subplot(gs[2, 1])
     cov = layouts.get("_cover", [])
-    _zone_axes(axS, layouts["south"], plans["south"], (-30.4, -20.2, 22.2, 28.9), [r for r in cov if r[0] > 20], "SOUTH GARDEN (client south; sister plot open on the left edge)")
+    _zone_axes(axS, layouts["south"], plans["south"], (-30.4, -20.2, 22.2, 28.9), [r for r in cov if r[0] > 20], "SOUTH GARDEN (client south; west line " + ("screened 2.1 m" if "screened" in title else "open to the sister plot") + ", left edge)")
     _zone_axes(axE, layouts["east"], plans["east"], (-24.2, -20.0, 15.2, 23.0), [], "EAST YARD (doors: dining and living on its north side)")
     _zone_axes(axN, layouts["north"], plans["north"], (-29.4, -23.4, -0.6, 4.0), [r for r in cov if r[0] < 5], "NORTH COURT (street fence at top)")
     axE.invert_yaxis() if False else None

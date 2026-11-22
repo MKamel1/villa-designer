@@ -15,7 +15,10 @@ POOL = species.pool()
 
 def test_pool_only_viable_or_conditional():
     assert POOL and all(s.verdict in ("viable", "viable_with_conditions") for s in POOL.values())
-    assert "ixora_coccinea" not in POOL and "nerium_oleander" not in POOL     # not viable / unverified
+    data = json.load(open(OUT.parent / "plants" / "plants.json"))["species"]
+    allowed = {r["slug"] for r in data if r["site_viability"]["verdict"] in ("viable", "viable_with_conditions")}
+    assert set(POOL) == allowed                                  # the pool is exactly what plants.json says (LDL)
+    assert any(r["site_viability"]["verdict"] not in ("viable", "viable_with_conditions") for r in data if r["slug"] not in POOL)
 
 
 def test_eyes_cover_and_screen_reduce_exposure():

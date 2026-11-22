@@ -1,0 +1,344 @@
+{
+ "A-pond-east": {
+  "tally": {
+   "pass": 84,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 15,
+    "fail": 3,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 16,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 18,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 6,
+    "fail": 2,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "fail",
+   "user": "fail",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 9.69,
+   "hard_share": 0.818,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 28.3,
+   "standing_at_1.3m2": 21,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 6,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 4
+   }
+  }
+ },
+ "A-pond-north": {
+  "tally": {
+   "pass": 76,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 15,
+    "fail": 2,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 17,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 18,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 5,
+    "fail": 3,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "fail",
+   "user": "fail",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 9.69,
+   "hard_share": 0.818,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 28.3,
+   "standing_at_1.3m2": 21,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 6,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 2
+   }
+  }
+ },
+ "B-pond-east": {
+  "tally": {
+   "pass": 90,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 12,
+    "fail": 5,
+    "warn": 1,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 17,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 18,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 6,
+    "fail": 2,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "pass",
+   "user": "fail",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 7.63,
+   "hard_share": 0.856,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 23.7,
+   "standing_at_1.3m2": 18,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 13,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 4
+   }
+  }
+ },
+ "B-pond-north": {
+  "tally": {
+   "pass": 89,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 12,
+    "fail": 5,
+    "warn": 1,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 16,
+    "fail": 0,
+    "warn": 3,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 18,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 5,
+    "fail": 3,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "pass",
+   "user": "fail",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 7.63,
+   "hard_share": 0.856,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 23.7,
+   "standing_at_1.3m2": 18,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 13,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 4
+   }
+  }
+ },
+ "C-pond-east": {
+  "tally": {
+   "pass": 102,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 15,
+    "fail": 4,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 17,
+    "fail": 0,
+    "warn": 2,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 19,
+    "fail": 0,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 7,
+    "fail": 1,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "pass",
+   "user": "pass",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 9.28,
+   "hard_share": 0.826,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 25.3,
+   "standing_at_1.3m2": 19,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 5,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 4
+   }
+  }
+ },
+ "C-pond-north": {
+  "tally": {
+   "pass": 93,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 5
+  },
+  "hard_fails": [],
+  "critic_counts": {
+   "landscape-architect": {
+    "pass": 15,
+    "fail": 3,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "horticulturist": {
+    "pass": 18,
+    "fail": 0,
+    "warn": 1,
+    "not_evaluated": 2
+   },
+   "user": {
+    "pass": 19,
+    "fail": 0,
+    "warn": 0,
+    "not_evaluated": 0
+   },
+   "climate": {
+    "pass": 5,
+    "fail": 3,
+    "warn": 0,
+    "not_evaluated": 1
+   }
+  },
+  "critic_verdict": {
+   "landscape-architect": "fail",
+   "horticulturist": "pass",
+   "user": "pass",
+   "climate": "fail"
+  },
+  "metrics": {
+   "south_area_m2": 53.19,
+   "soft_m2": 9.28,
+   "hard_share": 0.826,
+   "canopy_trees": 1,
+   "trees_per_100m2_south": 1.88,
+   "trees_per_100m2_south_plus_yard": 1.34,
+   "free_floor_m2": 25.3,
+   "standing_at_1.3m2": 19,
+   "seats": {
+    "dining": 8,
+    "built_in_and_lounge": 5,
+    "quiet_south": 2,
+    "quiet_yard_or_north": 2
+   }
+  }
+ }
+}
