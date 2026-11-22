@@ -361,8 +361,8 @@ def pond(oid, layout_id, f, g):
     bars.append(slab("grille-steel", sg, W, a1 - gb, a1, gt - gth, gt))
     se = d["entry_run"] + d["shelf"]
     bars.append(slab("grille-steel", se - 0.03, se, a0, a1, wl - d["shelf_depth"], gt - gth))      # rib: the grille rests on the shelf edge
-    grille = Obj(oid + "-grille", "grille", "rigid child-protection grille %d mm below the water surface, bars %d x %d mm at %d mm, resting on a rib on the shelf and on the walls "
-                 "(layout: rigid_grille; bar section/pitch ASSUMED; no published load figure, GAP-POND-GRILLE-LOAD)" % (int(p["grille_top_below_water"] * 1000), int(gb * 1000), int(gth * 1000), int(gp * 1000)),
+    grille = Obj(oid + "-grille", "grille", "rigid child-protection grille %d mm below the water surface, mesh bars %d x %d mm at %d mm pitch (POLICY), resting on a rib on the shelf and on the walls "
+                 "(layout: rigid_grille; bar section and pitch are POLICY, no published aperture or load figure, GAP-POND-GRILLE-LOAD)" % (int(p["grille_top_below_water"] * 1000), int(gb * 1000), int(gth * 1000), int(gp * 1000)),
                  bars, rests_on=(oid, oid + "-water"), footprint_mode=None, meta=dict(top_z=gt, below_water_m=p["grille_top_below_water"], s0=sg))
     return [basin, lip, water, grille]
 

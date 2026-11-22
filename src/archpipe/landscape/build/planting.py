@@ -10,10 +10,12 @@ import functools
 import json
 import math
 import os
+import random
+import zlib
 from pathlib import Path
 
 from . import policy as P
-from .geom import Obj, box, ellipsoid, cyl
+from .geom import Obj, box, ellipsoid, cyl, tube
 
 ROOT = Path(__file__).resolve().parents[4]
 PLANTS = ROOT / "knowledge/landscape/plants"
@@ -31,10 +33,35 @@ def _assets():
     return json.loads((PLANTS / "assets.json").read_text())
 
 
+FAB = STORE / "fab" / "unzipped"
+
+
+def is_fab(asset):
+    return (asset.get("manifest_key") or "").startswith("fab/")
+
+
+def fab_variants(asset):
+    """LOD0 FBX of every variation of a Fab/Megascans plant archive (sorted), else the archive's single FBX; [] when the archive is not unzipped on this machine."""
+    d = FAB / Path(asset["manifest_key"]).name
+    lod0 = sorted(str(f) for f in d.glob("*_LOD0.fbx"))
+    return lod0 or sorted(str(f) for f in d.iterdir() if f.suffix.lower() == ".fbx") if d.is_dir() else []      # a game-asset archive (the olive) has one FBX, no LOD names
+
+
 def gltf_path(asset):
+    """The model file of an asset: glTF (Sketchfab, library) or, for a Fab archive, the hero variation's LOD0 FBX (the key stays `gltf` for the export seam)."""
+    if is_fab(asset):
+        vs = fab_variants(asset)
+        hero = [v for v in vs if "_%s_LOD0" % asset.get("hero_variation", "VarA") in v]
+        return Path((hero or vs or [str(FAB / Path(asset["manifest_key"]).name / "missing.fbx")])[0])
     if asset.get("manifest_key"):
         return STORE / asset["manifest_key"] / "scene.gltf"
     return LIB / asset["id"] / "model.gltf"
+
+
+def pick_variant(asset, oid):
+    """The model file for individual `oid`: a Fab archive carries several variations, each individual takes one (stable by id); others have one file."""
+    vs = fab_variants(asset) if is_fab(asset) else []
+    return vs[zlib.crc32(oid.encode()) % len(vs)] if vs else str(gltf_path(asset))
 
 
 def resolve(slug, assets=None, table=None):
@@ -149,7 +176,7 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
         bounds = (x - w / 2, y - d / 2, base_z, x + w / 2, y + d / 2, base_z + h)
         o = Obj(oid, "plant", "%s: graded %s asset %s (%s, %s), scaled to %.2f m at %s" % (slug, a["grade"], a["id"], a["licence"], a["author"], h,
                 "maturity" if age is None else "%d years" % age), rests_on=support, footprint_mode=None, asset=dict(
-                    asset_id=a["id"], gltf=str(gltf_path(a)), scale=sc, at=[x, y, base_z], bounds=bounds, native_size_m=a["size_m"], grade=a["grade"],
+                    asset_id=a["id"], gltf=pick_variant(a, oid), mode="height", scale=sc, at=[x, y, base_z], bounds=bounds, native_size_m=a["size_m"], grade=a["grade"],
                     licence=a["licence"], author=a["author"], source=a["source"], species_fit=a["species_fit"]),
             meta=dict(species=slug, age=age))
         # crown envelope for clip tests: ellipsoid over the upper 70 % (clear stem below), a coarse model of the real mesh
@@ -247,6 +274,61 @@ def canopy_clumps(cx, cy, base_z, h, spread, stem, mat):
     return parts
 
 
+def tree_parts(oid, x, y, cx, cy, base_z, h, spread, stem, leaf_mat, deciduous, lean_stems=None):
+    """STAND-IN multi-stem shade tree: trunks rise from (x, y), fork at the clear-stem height and carry limbs to a crown of the PRUNED spread and height centred on (cx, cy)
+    (the crape's head leans toward the table). -> (parts, winter_parts): parts = stems + limbs + leaf-cutout clumps (leaf-on, or evergreen); winter_parts = stems, limbs and a twig
+    network (leaf-off), empty for an evergreen. Deterministic per id. Geometry is a generic form, not the species' habit: said so in the label."""
+    rng = random.Random(zlib.crc32(oid.encode()))
+    n_st = lean_stems or (4 if deciduous else 3)
+    R = spread / 2
+    top = base_z + h
+    fork = base_z + stem
+    bark = "trunk-bark"
+    woody, tw = [], []
+    tips = []
+    for k in range(n_st):
+        a = 2 * math.pi * (k + rng.uniform(-0.15, 0.15)) / n_st
+        b0 = (x + 0.09 * math.cos(a), y + 0.09 * math.sin(a), base_z)       # starts at the soil surface: no rigid part sinks into the bed layer
+        fx, fy = x + 0.65 * (cx - x) + 0.12 * math.cos(a), y + 0.65 * (cy - y) + 0.12 * math.sin(a)
+        mid = (x + 0.04 * (cx - x) + 0.10 * math.cos(a), y + 0.04 * (cy - y) + 0.10 * math.sin(a), base_z + 1.15)      # vertical to 1.15 m (above chair backs), then the lean to the fork
+        fk = (fx, fy, fork + rng.uniform(-0.1, 0.15))
+        r0 = 0.055 if deciduous else 0.075
+        woody += [tube(bark, b0, mid, r0, r0 * 0.85, 7), tube(bark, mid, fk, r0 * 0.85, r0 * 0.7, 7)]
+        for j in range(3):
+            aa = a + (j - 1) * 0.9 + rng.uniform(-0.3, 0.3)
+            rr = R * rng.uniform(0.45, 0.8)
+            tz = base_z + stem + (h - stem) * rng.uniform(0.55, 0.92) - 0.35
+            tip = (cx + rr * math.cos(aa), cy + rr * math.sin(aa), min(tz, top - 0.45))
+            mp = ((fk[0] + tip[0]) / 2, (fk[1] + tip[1]) / 2, (fk[2] + tip[2]) / 2 - 0.08)
+            woody += [tube(bark, fk, mp, 0.032, 0.024, 6), tube(bark, mp, tip, 0.024, 0.014, 6)]
+            tips.append(tip)
+    twigs = []
+    for tip in tips:
+        for _ in range(5):
+            ang, up = rng.uniform(0, 2 * math.pi), rng.uniform(0.15, 0.7)
+            L = rng.uniform(0.45, 0.8)
+            e = (tip[0] + L * math.cos(ang) * (1 - up * 0.5), tip[1] + L * math.sin(ang) * (1 - up * 0.5), tip[2] + L * up)
+            e = (cx + max(-R * 0.97, min(R * 0.97, e[0] - cx)), cy + max(-R * 0.97, min(R * 0.97, e[1] - cy)), min(e[2], top - 0.02))
+            twigs.append(tube(bark, tip, e, 0.011, 0.005, 4))
+            for _ in range(2):
+                m = tuple(a + rng.uniform(0.3, 0.7) * (b - a) for a, b in zip(tip, e))
+                a2 = rng.uniform(0, 2 * math.pi)
+                f = (m[0] + 0.3 * math.cos(a2), m[1] + 0.3 * math.sin(a2), min(m[2] + rng.uniform(0.05, 0.25), top - 0.02))
+                twigs.append(tube(bark, m, f, 0.006, 0.003, 4))
+    leaves = []
+    cr = 0.2 * spread                                          # leaf mass radius
+    for tip in tips:
+        for _ in range(2):
+            px = tip[0] + rng.uniform(-0.1, 0.1); py = tip[1] + rng.uniform(-0.1, 0.1); pz = tip[2] + rng.uniform(0.0, 0.25)
+            ch = max(0.3, min(cr * 0.62, (top - pz) * 0.98))
+            pz = min(pz, tip[2] + 0.2)
+            rx = max(0.25, min(cr, R - math.hypot(px - cx, py - cy)))
+            leaves.append(ellipsoid(leaf_mat, px, py, min(pz, top - ch), rx, rx, ch, 12, 8))
+    leaves.append(ellipsoid(leaf_mat, cx, cy, top - 0.3 * (h - stem), R * 0.62, R * 0.62, 0.3 * (h - stem), 14, 8))
+    parts = woody + twigs[: len(twigs) // 3] + leaves if deciduous else woody + leaves
+    return parts, (woody + twigs if deciduous else [])
+
+
 def pruned_tree(oid, slug, t, age, ground_z):
     """A trimmed evergreen shade tree: size is the PRUNED canopy the layout asks for (pruned_*), not the species' natural mature size. -> (Obj, row)"""
     pr = t.get("pruned") or {}
@@ -258,6 +340,9 @@ def pruned_tree(oid, slug, t, age, ground_z):
     h, sp, stem = h_m * frac, s_m * frac, stem_m * frac
     x, y = t["center"]
     r = resolve(slug)
+    decid = f.get("habit") == "deciduous"
+    if r["drawable"] and decid:     # a graded tree asset is one leaf state only (it cannot go bare) and the graded crape is a 2.8 m sparse flowering specimen: a pruned 4 m shade head needs both states
+        r = dict(drawable=False, assets=[], why="graded asset %s exists but is one leaf state only (sparse flowering, 2.8 m): a deciduous shade tree is built with both states" % r["assets"][0]["id"])
     row = dict(id=oid, species=slug, age_years=age, mature_height_m=round(h_m, 3), mature_spread_m=round(s_m, 3), shown_height_m=round(h, 3), shown_spread_m=round(sp, 3),
                size_basis="PRUNED canopy from the layout (natural size not used)", size_fraction=round(frac, 3), pruned=True, clear_stem_m=round(stem, 3))
     if r["drawable"]:
@@ -268,15 +353,23 @@ def pruned_tree(oid, slug, t, age, ground_z):
         w, d = a["size_m"][0] * sxy, a["size_m"][1] * sxy
         bounds = (x - w / 2, y - d / 2, ground_z, x + w / 2, y + d / 2, ground_z + h)
         o = Obj(oid, "plant", "%s pruned shade tree: graded %s asset %s (%s, %s), scaled to the pruned canopy %.1f m wide x %.1f m high" % (slug, a["grade"], a["id"], a["licence"], a["author"], w, h),
-                rests_on=("ground",), footprint_mode=None, asset=dict(asset_id=a["id"], gltf=str(gltf_path(a)), mode="xyz", scale_xyz=[sxy, sxy, sz], at=[x, y, ground_z], bounds=bounds, native_size_m=a["size_m"],
+                rests_on=("ground",), footprint_mode=None, asset=dict(asset_id=a["id"], gltf=pick_variant(a, oid), mode="xyz", scale_xyz=[sxy, sxy, sz], at=[x, y, ground_z], bounds=bounds, native_size_m=a["size_m"],
                 grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"], species_fit=a["species_fit"]), meta=dict(species=slug, age=age, pruned=True))
         c0 = ground_z + max(stem, 0.3 * h)
         o.meta["envelope"] = (x, y, (ground_z + h + c0) / 2, w / 2, d / 2, (ground_z + h - c0) / 2)
-        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit=a["species_fit"], achieved_spread_m=round(max(w, d), 3))
+        row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit=a["species_fit"], achieved_spread_m=round(max(w, d), 3), leaf_states=["evergreen"])    # an asset tree is one leaf state: only evergreens reach here
         return o, row
     col, why = foliage_colour(f.get("foliage_text", ""))
-    parts = canopy_clumps(x, y, ground_z, h, sp, stem, "standin:%.3f,%.3f,%.3f" % col)
-    o = Obj(oid, "plant", "STAND-IN pruned umbrella canopy for %s (no graded asset: %s): trunk and overlapping clumps, %.1f m wide x %.1f m high, clear stem %.1f m" % (slug, r["why"], sp, h, stem), parts,
-            rests_on=("ground",), footprint_mode=None, standin=True, meta=dict(species=slug, age=age, pruned=True, colour=why))
-    row.update(status="standin", reason=r["why"], colour_basis=why)
+    deciduous = f.get("habit") == "deciduous"
+    cc = t.get("crown_center") or t["center"]
+    lean = math.hypot(cc[0] - x, cc[1] - y)
+    if lean > max(t.get("crown_lean_m") or 0.0, 0.5 * s_m) + 0.05:      # a head more than half a spread off its trunk is a layout error (LDG's mirrored layout leaves crown_center unmirrored)
+        row["crown_center_ignored"] = "crown_center is %.2f m from the trunk (declared lean %s m, spread %.1f m): ignored, crown built over the trunk" % (lean, t.get("crown_lean_m"), s_m)
+        cc, lean = (x, y), 0.0
+    cxy = (x + (cc[0] - x) * frac, y + (cc[1] - y) * frac) if lean else (x, y)
+    parts, winter = tree_parts(oid, x, y, cxy[0], cxy[1], ground_z, h, sp, stem, "leafcut:%.3f,%.3f,%.3f:e" % col, deciduous)
+    o = Obj(oid, "plant", "STAND-IN pruned %s shade tree for %s (no graded asset: %s): generic multi-stem trunk, limbs and %s, %.1f m wide x %.1f m high, clear stem %.1f m, crown %.2f m off the trunk" % (
+        "deciduous" if deciduous else "evergreen", slug, r["why"], "leaf-cutout foliage (leaf-on) / bare limbs and twigs (leaf-off)" if deciduous else "leaf-cutout foliage all year", sp, h, stem, lean * frac), parts,
+            rests_on=("ground",), footprint_mode=None, standin=True, winter_parts=winter, meta=dict(species=slug, age=age, pruned=True, colour=why, deciduous=deciduous, crown_center=cxy))
+    row.update(status="standin", reason=r["why"], colour_basis=why, leaf_states=["leaf-on", "leaf-off"] if deciduous else ["evergreen"])
     return o, row

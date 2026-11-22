@@ -10,9 +10,14 @@ import math
 import sys
 import zlib
 
+import os
+
 import bmesh
 import bpy
 from mathutils import Vector
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import fab_blender  # noqa: E402
 
 argv = sys.argv[sys.argv.index("--") + 1:]
 spec = json.load(open(argv[0]))
@@ -49,9 +54,9 @@ SPEC = {  # name: (base colour, roughness, metallic)
     "wall-render": ((0.82, 0.80, 0.75), 0.9, 0), "trellis-timber": ((0.40, 0.28, 0.17), 0.7, 0), "pergola-alu": ((0.09, 0.075, 0.065), 0.35, 0.8),
     "table-timber": ((0.40, 0.26, 0.14), 0.6, 0), "chair-timber": ((0.45, 0.30, 0.17), 0.6, 0), "seat-timber": ((0.40, 0.26, 0.14), 0.6, 0),
     "terracotta": ((0.60, 0.28, 0.16), 0.8, 0), "pond-concrete": ((0.05, 0.06, 0.055), 0.9, 0), "pond-edge": ((0.06, 0.06, 0.065), 0.5, 0),
-    "grille-steel": ((0.18, 0.18, 0.19), 0.4, 0.9), "pit-steel": ((0.10, 0.10, 0.10), 0.5, 0.8), "lava-rock": ((0.05, 0.045, 0.045), 1.0, 0),
+    "grille-steel": ((0.025, 0.025, 0.028), 0.5, 0.6), "pit-steel": ((0.10, 0.10, 0.10), 0.5, 0.8), "lava-rock": ((0.05, 0.045, 0.045), 1.0, 0),
     "burner": ((0.15, 0.15, 0.15), 0.4, 0.9), "bbq-steel": ((0.04, 0.04, 0.04), 0.45, 0.6), "ctx": ((0.80, 0.79, 0.77), 0.95, 0),
-    "ground-far": ((0.50, 0.44, 0.34), 1.0, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
+    "ground-far": ((0.45, 0.42, 0.38), 1.0, 0), "ground-neutral": ((0.36, 0.36, 0.35), 1.0, 0), "ctx-footprint": ((0.40, 0.40, 0.39), 0.9, 0), "ctx-street": ((0.13, 0.13, 0.135), 0.9, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
     "trunk-bark": ((0.20, 0.15, 0.11), 0.95, 0),
 }
 SEASON = spec.get("season", "summer")
@@ -108,9 +113,9 @@ def mat(name):
     m = bpy.data.materials.new(name); m.use_nodes = True
     b = principled(m)
     base = name.split("#")[0]
-    if base.startswith("climber:"):
-        _, col, hab = base.split(":")
-        climber_material(m, tuple(float(x) for x in col.split(",")), SEASON == "winter" and hab == "d")
+    if base.startswith("climber:") or base.startswith("leafcut:"):     # leafcut: = foliage clumps of a stand-in tree (always leafed; a deciduous tree's bare state is its own geometry)
+        kind, col, hab = base.split(":")
+        climber_material(m, tuple(float(x) for x in col.split(",")), kind == "climber" and SEASON == "winter" and hab == "d")
     elif base.startswith("atlas:"):
         _, path, col = base.split(":", 2)
         nt = m.node_tree
@@ -211,9 +216,12 @@ def world_bbox(objs):
 
 
 def _import(gltf):
-    before = set(bpy.data.objects)
-    bpy.ops.import_scene.gltf(filepath=gltf)
-    new = [o for o in bpy.data.objects if o not in before]
+    if gltf.lower().endswith(".fbx"):                 # Fab / Megascans plant: FBX + the archive's own maps (red-channel opacity)
+        new = fab_blender.import_fbx(gltf)
+    else:
+        before = set(bpy.data.objects)
+        bpy.ops.import_scene.gltf(filepath=gltf)
+        new = [o for o in bpy.data.objects if o not in before]
     roots = [o for o in new if o.parent is None]
     e = bpy.data.objects.new("ld-asset-root", None); bpy.context.scene.collection.objects.link(e)
     for o in roots:                                   # one wrapper empty: a non-uniform scale and the yaw act in WORLD axes, whatever rotation the glTF roots carry
@@ -279,7 +287,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
 sc.render.engine = "CYCLES"
 sc.cycles.samples = spec.get("samples", 96); sc.cycles.use_denoising = True
-sc.cycles.max_bounces = 8; sc.cycles.transmission_bounces = 8; sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False; sc.cycles.sample_clamp_indirect = 8.0
+sc.cycles.max_bounces = 8; sc.cycles.transparent_max_bounces = 32; sc.cycles.transmission_bounces = 8; sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False; sc.cycles.sample_clamp_indirect = 8.0
 sc.render.resolution_x, sc.render.resolution_y = spec["size"]
 sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"; sc.view_settings.exposure = spec.get("exposure", -2.0)
 sc.render.image_settings.file_format = "JPEG"; sc.render.image_settings.quality = 90
@@ -305,7 +313,7 @@ for o in spec["objects"]:
     name = o["id"] if not o["state"] else "%s@%s" % (o["id"], o["state"])
     ob = None
     if o.get("parts"):
-        ob = mesh_object(name, o["parts"], smooth=o["kind"] in ("plant", "flame"))
+        ob = mesh_object(name, o["winter_parts"] if (o.get("winter_parts") and SEASON == "winter") else o["parts"], smooth=o["kind"] in ("plant", "flame"))
         objs = [ob]
     elif o.get("asset"):
         objs, rec = place_asset(o["asset"], o["id"])
@@ -318,7 +326,7 @@ for o in spec["objects"]:
     receipt["objects"] += 1
 for c in spec["context"]:
     x0, y0, x1, y1 = c["rect"]
-    ob = mesh_object(c["id"], [dict(material="ctx", verts=[[x0, y0, c["z0"]], [x1, y0, c["z0"]], [x1, y1, c["z0"]], [x0, y1, c["z0"]], [x0, y0, c["z1"]], [x1, y0, c["z1"]], [x1, y1, c["z1"]], [x0, y1, c["z1"]]],
+    ob = mesh_object(c["id"], [dict(material=c.get("material", "ctx"), verts=[[x0, y0, c["z0"]], [x1, y0, c["z0"]], [x1, y1, c["z0"]], [x0, y1, c["z0"]], [x0, y0, c["z1"]], [x1, y0, c["z1"]], [x1, y1, c["z1"]], [x0, y1, c["z1"]]],
                       faces=[[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]])])
     ob["ld_id"] = c["id"]; ob["ld_context"] = True
 # far ground, a little below the surfaces so nothing z-fights; cells over a pond opening are left out (a plane under the rim would bury the pond)
@@ -328,6 +336,13 @@ for x0_, y0_, x1_, y1_ in spec["ground_quads"]:
     gv += [[x0_, y0_, G - 0.06], [x1_, y0_, G - 0.06], [x1_, y1_, G - 0.06], [x0_, y1_, G - 0.06]]
     gf.append([k, k + 1, k + 2, k + 3])
 mesh_object("ctx-ground", [dict(material="ground-far", verts=gv, faces=gf)])
+nv_, nf_ = [], []
+for x0_, y0_, x1_, y1_ in spec.get("neutral_quads", []):
+    k = len(nv_)
+    nv_ += [[x0_, y0_, G - 0.06], [x1_, y0_, G - 0.06], [x1_, y1_, G - 0.06], [x0_, y1_, G - 0.06]]
+    nf_.append([k, k + 1, k + 2, k + 3])
+if nf_:
+    mesh_object("ctx-ground-neutral", [dict(material="ground-neutral", verts=nv_, faces=nf_)])
 
 cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
 cam.data.sensor_width = 36; cam.data.clip_start = 0.05; cam.data.clip_end = 300
@@ -337,7 +352,7 @@ for v in spec["views"]:
             bpy.data.objects[n].hide_render = bool(o["state"]) and o["state"] != v["state"]
     for ob in bpy.data.objects:                       # the house box is hidden from the camera (not from light) in bird's-eye views so the garden is legible
         if ob.get("ld_context") and ob.name.startswith("ctx-building"):
-            ob.visible_camera = ob.visible_shadow = not v.get("hide_house", False)
+            ob.visible_camera = ob.visible_shadow = ob.visible_diffuse = ob.visible_glossy = ob.visible_transmission = not v.get("hide_house", False)      # hidden from ALL rays: a box that only left the camera and shadow rays still blocked the sky light and left the ground under it black
     sc.view_settings.exposure = spec.get("exposure_by_group", {}).get(v.get("group"), spec.get("exposure", -2.0))
     cam.data.lens = v["lens"]
     cam.location = Vector(v["eye"])

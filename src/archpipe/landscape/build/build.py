@@ -13,6 +13,7 @@ from . import elements as E
 from . import planting as PL
 from . import outdoor as OD
 from . import policy as P
+from . import context as CX
 
 R = E.R
 
@@ -135,9 +136,9 @@ def load_layout(path):
     return d
 
 
-def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=False, season="summer", outdoor=None):
+def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=False, season="summer", outdoor=None, site_context=True):
     """`age` = years since planting; None builds the plants at maturity. `pergolas=False`: the client replaced pergolas by pruned shade trees (2026-11-22), so a
-    pergola canopy in the layout is reported and not built. `outdoor` = graded outdoor furniture/koi table (outdoor.load()); None loads the shipped one."""
+    pergola canopy in the layout is reported and not built. `site_context` adds the neighbour/street/fence massing of villa_env (previews of OUR design). `outdoor` = graded outdoor furniture/koi table (outdoor.load()); None loads the shipped one."""
     outdoor = OD.load() if outdoor is None else outdoor
     g = ground_z if ground_z is not None else (layout.get("meta") or {}).get("ground_z", P.GROUND_Z)
     objs, warns, sched = [], [], []
@@ -263,6 +264,8 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
         if o.meta.get("pruned"):
             o.meta["layout_spread"] = None                       # a pruned canopy is held under the layout's mature spread by pruning: no spread assertion
         objs.append(o); sched.append(row)
+        if row.get("crown_center_ignored"):
+            warns.append("%s: %s" % (o.id, row["crown_center_ignored"]))
         rb = t.get("root_barrier")
         if rb:
             rr = R(rb["rect"]) if isinstance(rb, dict) and rb.get("rect") else next((b for b in beds_by_rect if b[0] <= t["center"][0] <= b[2] and b[1] <= t["center"][1] <= b[3]), None)
@@ -313,8 +316,13 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
         if sid not in climbed:
             warns.append("climber coverage: %s (%.1f m) carries no climber in the layout: no panel built, a layout gap" % (sid, h_))
     spec = dict(ponds={f["id"]: list(R(f["rect"])) for f in feats if f.get("kind") == "pond"}, pit=(list(pitf["center"]) if pitf else None), table=(layout.get("tables") or [{}])[0].get("center"), table_w=((layout.get("tables") or [{}])[0].get("size_m") or [2.4])[0], pit_half=half, structures=[sid for _, _, sid in structs], climbed=sorted(climbed), koi=("asset" if outdoor.get("koi") else "none"))
-    ctx = [dict(id="ctx-building-%d" % i, rect=list(R(b)), z0=g, z1=g + P.BUILDING_H,
-                label="context: existing house massing, height ASSUMED %.0f m (footprints carry none)" % P.BUILDING_H) for i, b in enumerate(layout.get("buildings", []))]
+    hh = CX.house_height(g)
+    ctx = [dict(id="ctx-building-%d" % i, rect=list(R(b)), z0=g, z1=g + hh,
+                label="context: our house massing, height %.0f m from villa_env (basement %.1f, roof %.1f)" % (hh, g, g + hh)) for i, b in enumerate(layout.get("buildings", []))]
+    ctx += [dict(id="ctx-footprint-%d" % i, rect=list(R(b)), z0=g, z1=g + 0.03, material="ctx-footprint",
+                 label="context: our house footprint on the ground (the massing above is hidden in the bird's-eye views)") for i, b in enumerate(layout.get("buildings", []))]
+    if site_context:
+        ctx += CX.site_context([R(w["rect"]) for w in layout.get("walls", [])])
     ids = [o.id for o in objs if o.state is None]
     dup = {i for i in ids if ids.count(i) > 1}
     if dup:

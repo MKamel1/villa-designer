@@ -22,6 +22,11 @@ EYE = 1.6          # m above the garden level (assumed: the door sills are at ga
 DOORS = {"living": dict(id="door-B-8", at=(22.597, -26.131), faces=(1, 0)), "dining": dict(id="door-B-6", at=(16.889, -23.591), faces=(0, 1))}
 
 
+class Obj_:                       # a bare list of parts viewed as an object for _mesh_parts
+    def __init__(self, parts):
+        self.parts = parts
+
+
 def _mesh_parts(o):
     out = []
     for i, p in enumerate(o.parts):
@@ -49,18 +54,44 @@ def ground_quads(pond_rects, x=(-60.0, 80.0), y=(-80.0, 40.0)):
     return out
 
 
+BLACK_MAX = 0.06      # a presentation view with more than 6 % pure-black pixels has a hole in the scene (a hidden box that still blocked the sky light: 11.6 % and 25 % black; honest dark views, black liner and chair shadows, measure 0.1-5 %)
+
+
+def black_share(jpg):
+    """Share of pixels that are black (all channels < 8/255) in an image: the QA guard against holes in the scene. The red VISUALISATION band is not black."""
+    from PIL import Image
+    a = np.asarray(Image.open(jpg).convert("RGB"))
+    return float((a.max(axis=2) < 8).mean())
+
+
+def ground_split(pond_rects):
+    """Ground in three parts: OUR yard (beige, as built), the sister yard and everything outside the plot (a neutral labelled grey: the model holds no ground detail there).
+    -> (ours quads, neutral quads); cells over a pond opening are left out in both."""
+    from . import context as CX
+    (x0, y0, x1, y1), ay = CX.ground_plan()
+    inside = lambda r, ya, yb: ya <= (r[1] + r[3]) / 2 <= yb
+    ours = ground_quads([r for r in pond_rects if inside(r, ay, y1)], x=(x0, x1), y=(ay, y1))
+    sis = ground_quads([r for r in pond_rects if inside(r, y0, ay)], x=(x0, x1), y=(y0, ay))
+    X, Y = (-60.0, 80.0), (-80.0, 40.0)
+    ring = [[X[0], Y[0], X[1], y0], [X[0], y1, X[1], Y[1]], [X[0], y0, x0, y1], [x1, y0, X[1], y1]]
+    return ours, sis + ring
+
+
 def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
     objs = []
     for o in scene.objects:
         d = dict(id=o.id, kind=o.kind, label=o.label, state=o.state, standin=o.standin)
         if o.parts:
             d["parts"] = _mesh_parts(o)
+            if o.winter_parts:
+                d["winter_parts"] = _mesh_parts(Obj_(o.winter_parts))
         if o.asset:
             d["asset"] = {k: o.asset[k] for k in ("asset_id", "gltf", "at", "bounds", "grade", "mode", "scale_xyz", "box_m", "length_m", "yaw_deg", "tiles") if k in o.asset}
         objs.append(d)
     ponds = [o.meta for o in scene.objects if o.kind == "pond"]
     wr = [min(m["floor_z"] for m in ponds), max(m["water_z"] for m in ponds)] if ponds else None
-    return dict(ground_quads=ground_quads([list(m['rect']) for m in ponds]), pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
+    gq, nq = ground_split([list(m['rect']) for m in ponds])
+    return dict(ground_quads=gq, neutral_quads=nq, pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
 
 
 def E_pond_trench_xy(r):
@@ -84,6 +115,7 @@ def default_views(scene, tag):
         size_x = sp.get("table_w", 2.4)
         ex = tx + size_x / 2 + 0.9                   # seated at the east end of the table, looking along the table side to the pit and the screen opening
         v.append(dict(name="eye-dining-firepit", group="eye", eye=[ex, ty + 0.4, g + 1.25], target=[px - 0.3, py + 0.3, g + 0.7], lens=26, state="closed"))
+        v.append(dict(name="dining-crown-" + scene.season, group="eye", eye=[tx - 1.9, ty - 1.9, g + EYE], target=[tx + 0.2, ty + 0.2, g + 1.9], lens=20, state="closed"))
         v.append(dict(name="firepit-open", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="open"))
         v.append(dict(name="firepit-closed", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="closed"))
     for pid, r in sorted(sp.get("ponds", {}).items()):
@@ -128,7 +160,7 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     spec["spec_sha"] = hashlib.sha1(json.dumps(spec, sort_keys=True).encode()).hexdigest()
     spec_path = sp / ("%s-%s.spec.json" % (tag, hashlib.sha1(str(out).encode()).hexdigest()[:8]))      # one spec file per (tag, output dir): two scenes with one tag must not share it
     spec_path.write_text(json.dumps(spec))
-    jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text()).encode()).hexdigest()[:10])
+    jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text() + SCRIPT.with_name('fab_blender.py').read_text()).encode()).hexdigest()[:10])
     cmd = [JOBQ, "submit", *(["--gpu"] if gpu else []), "--timeout", str(timeout), "--id", jid, "--", BLENDER, "-b", "--factory-startup", "--python-exit-code", "1",
            "-P", str(SCRIPT), "--", str(spec_path), str(out), tag]
     r = subprocess.run(cmd, capture_output=True, text=True)
@@ -138,6 +170,12 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     if r.returncode != 0 or not rec.exists():
         raise RuntimeError("preview job %s failed (exit %s): %s; log ~/archpipe/queue/jobs/%s/job.log" % (jid, r.returncode, (r.stdout + r.stderr)[-300:], jid))
     receipt = json.loads(rec.read_text())
+    for v in receipt["views"]:
+        v["black_share"] = round(black_share(v["file"]), 4)
+    bad = [(v["name"], v["black_share"]) for v in receipt["views"] if v["black_share"] > BLACK_MAX and v.get("group") != "pond"]      # pond views are dark by design (black liner, deep water)
+    receipt["black_check"] = dict(max=BLACK_MAX, failed=bad)
+    if bad:
+        print("WARNING render QA: black holes in", bad)
     if receipt.get("spec_sha") != spec["spec_sha"]:       # the job rendered some other spec (a shared spec file once let a sister-plot scene render into a production folder)
         raise RuntimeError("receipt %s does not belong to this scene (spec_sha %s != %s): refusing its images" % (rec, receipt.get("spec_sha"), spec["spec_sha"]))
     if scene.visualisation_only:                       # a red band in EVERY image; the receipt says so

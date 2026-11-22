@@ -24,9 +24,11 @@ TABLE = dict(h=0.75, top=0.04, leg=0.06, inset=0.12)           # ASSUMED generic
 CHAIR = dict(seat=0.44, seat_h=0.45, back_h=0.88, off=0.30)    # ASSUMED generic chair, off = table edge to seat centre
 SEAT_TOP = 0.05            # ASSUMED timber seat on the masonry seat wall (seat-wall height from the layout)
 
-POND = dict(edge_lip=0.08, coping_h=0.10, grille_bar=0.02, grille_pitch=0.10, grille_top_below_water=0.04, grille_t=0.03, floor_t=0.10, wall_t=0.10)
+POND = dict(edge_lip=0.08, coping_h=0.10, grille_bar=0.006, grille_pitch=0.05, grille_top_below_water=0.04, grille_t=0.006, floor_t=0.10, wall_t=0.10)
 # POND: section figures (slope 1:4, shelf, trench, freeboard) come from the layout `section`; these are only construction details, ASSUMED:
-# 80 mm contrasting flush lip on a 100 mm coping, 100 mm walls and floor outside the water, grille bars 20 x 30 mm at 100 mm.
+# 80 mm contrasting flush lip on a 100 mm coping, 100 mm walls and floor outside the water. Grille = welded mesh of 6 x 6 mm bars at 50 mm pitch (44 mm clear aperture), dark finish.
+# POLICY, not a standard: the held sources say only 'rigid metal grille' (RoSPA, W-rospa-rigid-grille) and 'strong mesh ... carry a child' (Mid and West Wales FRS, W-pond-mawwfire-grille); neither gives an aperture, wire
+# section or load (GAP-POND-GRILLE-LOAD). 50 mm is ours: fine enough to read as mesh and to stop a hand and a koi net, coarse enough to see the koi through. The supplier certifies the real mesh.
 PIT = dict(cover_base_t=0.006, hole=0.80, liner_t=0.04, depth=0.50, cover_t=0.046, gap=0.003, flame_h=0.35)   # ASSUMED; cover lip from the layout
 POT = dict(h=0.55, r_bottom=0.20, wall=0.03, soil_below_rim=0.05, plant_h=1.8)   # ASSUMED terracotta pot; potted frangipani size is a GAP
 BBQ = dict(bowl_z0=0.55, bowl_z1=0.80)  # ASSUMED portable kettle BBQ on a stand

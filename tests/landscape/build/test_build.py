@@ -39,7 +39,7 @@ class Footprints(unittest.TestCase):
         s = build.build_scene(A)
         for st in ("closed", "open"):
             r = checks.footprints(s, st)
-            self.assertGreater(len(r), 40)
+            self.assertGreater(len(r), 25)
             self.assertEqual(fails(r), [], st)
 
     def test_layout_rects_are_the_built_extents(self):
@@ -65,7 +65,7 @@ class Footprints(unittest.TestCase):
     def test_standin_mature_spread_equals_layout_spread(self):
         s = build.build_scene(A, age=None)
         r = [f for f in checks.plant_footprints(s) if f["status"] != "info"]
-        self.assertGreater(len(r), 40)
+        self.assertGreater(len(r), 25)
         self.assertEqual(fails(r), [])
 
     def test_young_standin_never_wider_than_mature_layout_spread(self):
@@ -113,8 +113,8 @@ class Planting(unittest.TestCase):
         for r in self.s.schedule:
             if r["species"] != "koi":
                 c[r["status"]] = c.get(r["status"], 0) + 1
-        self.assertEqual(c, {"standin": 53, "asset": 2, "omitted": 1})
-        self.assertEqual({r["species"] for r in self.s.schedule if r["status"] == "asset"}, {"punica_granatum", "plumeria_rubra"})
+        self.assertEqual(c, {"standin": 36, "asset": 19, "omitted": 1})      # LDL pass 5 (Fab FBX) made aspidistra, pennisetum, origanum, rhapis drawable
+        self.assertLessEqual({"punica_granatum", "plumeria_rubra", "aspidistra_elatior"}, {r["species"] for r in self.s.schedule if r["status"] == "asset"})
 
     def test_standins_are_labelled_in_object_and_schedule(self):
         r = checks.standins(self.s)
@@ -365,5 +365,6 @@ class Export(unittest.TestCase):
         self.assertTrue(all(m["element_ids"][0].startswith("ld-") and m["element_ids"][0] in m["id"] for m in meshes))
         self.assertEqual(len({m["id"] for m in meshes}), len(meshes))
         self.assertTrue(all(len(f) >= 3 and len(f[0]) == 3 for m in meshes[:5] for f in m["faces"]))
-        self.assertEqual({p["id"] for p in props}, {"ld-tree-0-punica", "ld-pot-0-plumeria-plant"})
+        self.assertLessEqual({"ld-tree-0-punica", "ld-pot-0-plumeria-plant"}, {p["id"] for p in props})
+        self.assertTrue(all(Path(p["gltf"]).exists() for p in props))      # glTF or a Fab FBX, present on this machine
         self.assertNotIn("ld-firepit-cover", [m["id"] for m in export.to_villa_scene(s, "open")[0] if m["ld_state"] == "closed"])
