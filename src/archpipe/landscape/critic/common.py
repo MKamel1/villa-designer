@@ -137,7 +137,7 @@ def plant_positions(layout) -> list[dict]:
                 v = ((y0 if long_x else x0) + cross * (r + .5) / rows)
                 pos = (u, v) if long_x else (v, u)
                 out.append({"species": s, "form": m.get("form"), "at": pos,
-                            "spread": species_info(s, m.get("form"))["draw_spread_m"], "group": g["id"],
+                            "spread": m.get("spread_m") or species_info(s, m.get("form"))["draw_spread_m"], "group": g["id"],
                             "layer": layer_of(s, m.get("form"))})
     return out
 

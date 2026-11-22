@@ -1,0 +1,198 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-S2-20",
+ "source": "LDP precedent P-S2-20: Small London back garden with pergola dining, 1:75 planting plan (scale derived: 1:75 at A3 over the raster width, no scale bar) (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "dining",
+   "surface": "paving",
+   "rect": [
+    4.21,
+    2.11,
+    8.6,
+    6.49
+   ],
+   "label": "dining"
+  }
+ ],
+ "paths": [],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b6",
+   "rect": [
+    0.25,
+    0.21,
+    8.6,
+    2.11
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 12,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rect": [
+    0.25,
+    6.53,
+    8.6,
+    7.54
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 3,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 10,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rect": [
+    0.25,
+    2.11,
+    1.75,
+    6.53
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t9",
+   "species": "Olea europaea",
+   "center": [
+    -0.35,
+    3.51
+   ],
+   "mature_spread_m": 3.5,
+   "form": "large_tree",
+   "mature_height_m": 4.2
+  },
+  {
+   "id": "t10",
+   "species": "Olea europaea",
+   "center": [
+    8.07,
+    6.56
+   ],
+   "mature_spread_m": 3.2,
+   "form": "large_tree",
+   "mature_height_m": 3.8
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   9.12,
+   0.0,
+   13.51,
+   7.79
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w3",
+   "rect": [
+    0.0,
+    -0.07,
+    9.12,
+    0.21
+   ],
+   "height_m": 1.8
+  },
+  {
+   "id": "w4",
+   "rect": [
+    0.0,
+    7.54,
+    9.12,
+    7.79
+   ],
+   "height_m": 1.8
+  },
+  {
+   "id": "w5",
+   "rect": [
+    0.0,
+    -0.07,
+    0.25,
+    7.79
+   ],
+   "height_m": 1.8
+  }
+ ],
+ "screens": [],
+ "canopies": [
+  {
+   "id": "pergola",
+   "kind": "pergola",
+   "canopy": true,
+   "rect": [
+    4.21,
+    2.11,
+    8.6,
+    6.49
+   ],
+   "height_m": 2.5,
+   "shade_fraction": 0.6
+  }
+ ],
+ "doors": [
+  {
+   "id": "d11",
+   "at": [
+    9.12,
+    4.04
+   ],
+   "faces": "+x"
+  }
+ ],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}
