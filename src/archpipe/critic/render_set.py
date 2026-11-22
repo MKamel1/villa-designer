@@ -111,7 +111,7 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
                 raise ValueError(f"{e['id']}: 24 mm cannot hold {e['subjects']} in {room}; split the view")
             z = LZ[lay["rooms"][room]["level"]] + 1.35
         c = {"position": got["position"] + [round(z, 3)], "target": got["target"] + [round(z, 3)],
-             "lens_mm": MIN_INTERIOR_LENS, "sensor_mm": 36, "shift_x": 0.0, "shift_y": 0.0}
+             "lens_mm": MIN_INTERIOR_LENS, "sensor_mm": 36, "shift_x": 0.0, "shift_y": e.get("shift_y", 0.0)}
         c["overrides"] = [{"field": "position", "prior": None, "new": c["position"],
                            "reason": "room chooser positions the camera to include declared subjects"},
                           {"field": "target", "prior": None, "new": c["target"],
