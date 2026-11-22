@@ -2,6 +2,7 @@
 
     critique(layout, vlm=False) -> list[Finding]   # criterion, severity, evidence, source, kind, calibrated flag
     plan_png(layout, path, view=None)              # the common plan renderer (fixed style, STYLE_VERSION)
+    massing_png(layout, path, view=None)           # oblique clay bird's-eye (3D massing) through jobq
     verdict(findings) -> {critic: "fail"|"pass"}   # fail = any blocking/major finding with status fail
 
 Critics work from the design artifact alone (layout + site layers + brief); no generator rationale is an input.
@@ -14,6 +15,7 @@ from pathlib import Path
 
 from .common import Finding, KNOW
 from .plan import plan_png, STYLE_VERSION
+from .massing import massing_png
 
 CRITICS = ("landscape-architect", "horticulturist", "user", "climate")
 

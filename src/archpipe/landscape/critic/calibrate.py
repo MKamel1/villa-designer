@@ -47,6 +47,10 @@ def seeded(defects, make, base_t):
     return rows
 
 
+SITE_CRITICS = ("horticulturist", "user", "climate")
+NOT_CAL = "not calibratable on precedents"      # a precedent has no brief, species or site layers, so these critics cannot be run on one
+
+
 def main():
     base_t = table(run_all(seeds.base()))
     s1 = seeded(seeds.DEFECTS, seeds.make, base_t)
@@ -75,6 +79,7 @@ def main():
                    "recall": None if recall is None else round(recall, 3), "recall_lower95": wilson_lower(sum(rec_all), n_bad),
                    "known_good": {"evaluated": len(ev), "false_fail": ff, "false_fail_rate": None if not ev else round(ff / len(ev), 3), "false_fail_items": [k for k, t in good.items() if t.get(c) == "fail"]},
                    "d1_status": d1_t.get(c), "calibrated": calibrated, "status": status}
+        if not ev and OWNER[c] in SITE_CRITICS: crit[c]["false_fail_status"] = NOT_CAL
     vf = KNOW / "critic/vlm-calibration.json"
     if vf.exists():
         v = json.loads(vf.read_text())
@@ -96,7 +101,7 @@ def main():
         per_critic[who] = {"seeded_defects_targeting": n, "caught_any_target": k, "recall": None if not n else round(k / n, 3), "recall_lower95": wilson_lower(k, n),
                            "heldout": {"n": len(hd), "caught": sum(any(v) for v in hd.values())}, "d1_verdict_fail": verd_bad_d1,
                            "known_good_verdict_fail": sum(gverd) if gverd else None, "known_good_n": len(gverd) or 0,
-                           "false_fail": None if not gverd else round(sum(gverd) / len(gverd), 3)}
+                           "false_fail": NOT_CAL if who in SITE_CRITICS else (None if not gverd else round(sum(gverd) / len(gverd), 3))}
     out = {"schema": "ldc-calibration/1", "prereg": "knowledge/landscape/critic/PREREG.md", "criteria": crit, "critics": per_critic,
            "seeded_set1": s1, "seeded_set2": s2, "base_status": base_t, "precedent_statuses": good,
            "d1": [{"criterion": f.criterion, "status": f.status, "critic": f.critic, "evidence": f.evidence} for f in d1f if f.status in ("fail", "warn")]}

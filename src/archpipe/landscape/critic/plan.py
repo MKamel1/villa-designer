@@ -274,7 +274,10 @@ def plan_png(layout: dict, path: str, title: str | None = None, dpi: int = 100, 
             C.poly(P(sd["rect"]), 6, fc="white", ec="#5a3a1a", lw=1.0)
     if layout.get("seating"):
         r = [sd["rect"] for sd in layout["seating"] if sd.get("rect")]
-        if r: C.label((sum((q[0] + q[2]) / 2 for q in r) / len(r), sum((q[1] + q[3]) / 2 for q in r) / len(r)), f"seating ({sum(sd.get('seats', 1) for sd in layout['seating'])} seats)")
+        if r:
+            mx, my = sum((q[0] + q[2]) / 2 for q in r) / len(r), sum((q[1] + q[3]) / 2 for q in r) / len(r)
+            near = min(r, key=lambda q: ((q[0] + q[2]) / 2 - mx) ** 2 + ((q[1] + q[3]) / 2 - my) ** 2)   # anchor on a real seat, not the centroid
+            C.label(((near[0] + near[2]) / 2, (near[1] + near[3]) / 2), f"seating ({sum(sd.get('seats', 1) for sd in layout['seating'])} seats)")
     for t in layout.get("tables", []):
         c = t["center"]; sz = t.get("size_m")
         if t.get("diameter_m"):

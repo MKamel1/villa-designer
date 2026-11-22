@@ -106,3 +106,20 @@ class PlanStandard(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             self.assertTrue(Path(K.plan_png({"schema": "landscape-layout/1", "zones": []}, str(Path(d) / "e.png"))).exists())
+
+
+class Massing(unittest.TestCase):          # the spec builder is pure; the Blender run is exercised by hand through jobq
+    def test_tree_at_mature_size_and_pergola(self):
+        from archpipe.landscape.critic.massing import build_spec
+        lay = {"zones": [], "trees": [{"id": "t", "species": "Punica granatum", "center": [5, 5], "form": "small_tree", "mature_spread_m": 3.0, "mature_height_m": 3.7}],
+               "canopies": [{"id": "p", "kind": "pergola", "rect": [0, 0, 4, 2], "height_m": 3.0}], "buildings": [[10, 0, 14, 4]]}
+        sp = build_spec(lay)
+        e = [s for s in sp["solids"] if s["kind"] == "ellipsoid"]
+        self.assertEqual(len(e), 1); self.assertAlmostEqual(e[0]["rx"], 1.5)
+        self.assertEqual(sum(1 for s in sp["solids"] if s["kind"] == "box" and s["z1"] == 3.0), 4)       # 4 pergola posts
+        self.assertTrue(any(s["mat"] == "house" for s in sp["solids"]))
+
+    def test_no_planting_no_volumes(self):                      # negative: nothing to model, nothing invented
+        from archpipe.landscape.critic.massing import build_spec
+        sp = build_spec({"zones": [{"id": "z", "rect": [0, 0, 5, 5], "use": "lounge"}]})
+        self.assertFalse([s for s in sp["solids"] if s["kind"] in ("ellipsoid", "cylinder")])

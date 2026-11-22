@@ -1,7 +1,7 @@
 # LDC: landscape critics and their calibration (2026-11-22)
 
 Stage LD-C of `docs/quality/LANDSCAPE-METHOD.md`. Pre-registration: `knowledge/landscape/critic/PREREG.md` (read it for what was seen before scoring).
-Results: `knowledge/landscape/critic/calibration.json` (computed criteria), `vlm-calibration.json`, `runs/` (every VLM reply). Tests: `tests/landscape/critic/` (10).
+Results: `knowledge/landscape/critic/calibration.json` (computed criteria), `vlm-calibration.json`, `runs/` (every VLM reply). Tests: `tests/landscape/critic/` (15).
 
 ## Headline
 **No critic criterion is calibrated under A3** (`calibrated: false` everywhere); nothing here may be used as a gate yet. Why, per critic, is in the table. The computed
@@ -10,18 +10,38 @@ site-independent architect criteria were measured on the precedents and missed (
 
 ## API (for LDG)
 ```python
-from archpipe.landscape.critic import critique, verdict, plan_png
+from archpipe.landscape.critic import critique, verdict, plan_png, massing_png
 findings = critique(layout)            # list[Finding]; critique(layout, vlm=True) adds the advisory VLM composition findings (needs Ollama)
 verdict(findings)                      # {critic: "fail"|"pass"}; fail = any blocking/major finding with status fail
-plan_png(layout, "plan.png", view=[x0, y0, x1, y1])   # fixed style ldc-plan-style/1; view optional (model metres)
+plan_png(layout, "plan.png", view=[x0, y0, x1, y1])   # fixed style ldc-plan-style/2; view optional (model metres)
+massing_png(layout, "massing.png", view=None)            # oblique clay bird's-eye through jobq (GPU lock)
 ```
 `Finding`: `critic, criterion, status (pass|fail|warn|not_evaluated), severity, evidence (achieved vs required), source (rule/card id or "policy"), kind (computed|vlm), subject, calibrated`.
 Critics read the design artifact only (layout + site layers + brief); no generator rationale is an input. Hard LDK rules (`LS-*`) are passed through with their source card ids.
 **Layout extensions** (optional keys, ignored by LDK): `walls[{rect,height_m}]`, `screens[{rect,kind hedge|trellis|wall,height_m,opacity}]`, `canopies[{rect,kind pergola,height_m,shade_fraction}]`,
 `doors[{at,faces,room}]` (default: the LDS openings), path `polyline`/`rect`, plant `at`/`count`/`spread_m`. Seat = a `seating` rect (`seats` along its long side) or a `tables` ring. Zone `use`: dining, lounge, quiet, standing, other.
 
-## Plan renderer (`plan.py`)
-One standard for every garden: client north (street) up, scale bar, north arrow, plants as circles at **mature** spread coloured by layer, hatch per surface, walls black, buildings hatched, doors red diamonds, seats, tables, features, pergola dashed, legend. Width 1600 px.
+## Plan renderer (`plan.py`), standard `ldc-plan-style/2` (2026-11-22; replaces style/1)
+The v1 plans read as furniture diagrams (flat discs for plants, a legend and in-plan text). v2 follows landscape-architecture plan conventions, one style for every layout:
+client north (street) up; trees as circles at **mature** spread with a trunk dot and a cast shadow (down-right on the sheet); shrubs, perennials and ground cover as massed **drift** outlines
+(union of the plants' mature spreads, one hatch per species, code T/S/G + number); paving with its joint pattern in true metres (unit paving in 0.6 x 0.3 m running bond, timber deck boards, gravel stipple, turf ticks);
+water with ripple lines and the child-protection grille outlined; pergola as a dashed overhead outline with beams and posts; furniture in outline; level changes (`steps[{rect,count}]` = treads + fall arrow, `level_changes[{polyline,low}]` = hachured line; none are drawn when the layout has none);
+**all labels outside the drawing** on leaders (two columns); plant key with codes (species, layer, spread actually drawn), symbol key, scale bar and client-north arrow outside the frame. Width 1600 px. Anchor/view: `plan_png(layout, path, view=[x0,y0,x1,y1])`.
+`from_concept.layout_of_package(pk)` turns an LDG concept package (south/north/east layouts + planting plans + `_cover` pergolas) into one layout for `plan_png`, `massing_png` and `critique`.
+
+**Sources, and what they do and do not cover.** Held: *Time-Saver Standards for Landscape Architecture*, 2nd ed. (Harris & Dines, 1998), section 110 "Construction Documents", printed p. **110-8** (read from the scan; the scan's page labels are unreliable, so confirm against the page image): "The scale, date, and north arrow ... are required in all plan drawings"; a planting plan "must accurately show the locations of all proposed plant materials (differentiated graphically from existing plant materials to remain), their names, sizes ..." with a plant list/schedule giving quantity, botanical name, size (height, spread), spacing; typical items include property lines, buildings and overhangs, paved areas, terraces and walls. Figure 110-6 (plan enlargements, p. 110-9/110-10, not re-read for the exact page) lists "material pattern" and "planting" among plan content. Time-Saver **does not specify symbol styles** (tree circle, shadow, drift hatching, joint patterns, line weights): those are drafting convention.
+**Ching: not verified.** The graphic conventions (plan symbols, poché, shadow, hatch, line hierarchy) belong to Ching's *Architectural Graphics*; that book is **not among the held books indexed on this workstation** (`knowledge.py` index empty here; the RAG returned no hits; only *Form, Space and Order* and *Building Construction Illustrated* are referenced in the repo). No Ching page is cited for the v2 symbols. Until the Ching passages are read from the held copy and cited, the symbol choices are **convention, not source-verified**; the two sourced requirements are the north arrow/scale and the differentiated, schedule-keyed planting plan.
+VLM calibration (`vlm-calibration.json`) was scored on style/1 images; it is not re-run (it is demoted and not tuned).
+
+## Massing view (`massing.py`): `massing_png(layout, path, view=None, azimuth=25, elevation=52)`
+Oblique bird's-eye clay render for judging the space, not the finish. Trees = canopy ellipsoids at **mature** spread and height on a trunk (30 % clear stem); drifts = low domes per plant (height capped at 1.2 m); beds, paving, water = slabs; screens, walls, pergola (posts, beams, roof slats), tables, seats, BBQ = boxes; the house = a context box.
+**Assumed, not measured:** the house height (6 m; footprints carry none) and the boundary fence height (4 m, the LDS figure; fences and walls over 2.5 m are drawn see-through so they do not hide the garden). It does not model ground levels (the sunken garden's -3 m is not in the layout). Runs through `jobq submit --gpu` (job id = hash of spec + path; Cycles, 48 samples, ~10 s); `build_spec` is pure and tested, the render was checked by eye.
+
+## What the three plans show (`knowledge/landscape/critic/plans-v2/`)
+* **D1-south-garden.png** (the existing garden): one 7.6 m frangipani circle with its shadow covers about two-thirds of the 6 m wide lounge (the H-SIZE-VS-SPACE fail made visible); four loose seats and a path stub at the house door on artificial turf; the planting is three small beds of mixed shrub drifts against the south wall; no terrace, no gathering floor, no focal element. It reads as a lawn with a tree on it, which is what the critics say.
+* **P-SAU-01.png** (precedent, my coarse re-drawing): paved court with a round pond, two olive/pomegranate trees with shadows in a paved garden court, and planted beds along the edges; the building masses define rooms and the garden is a sequence of enclosed courts. Its trees are at real canopy size and sit in paving, not on turf: the contrast with D1 is legible now.
+* **LDG-concept-O-south-garden.png** (LDG concept O, west screened, pond east): paved gathering floor under three pergola outlines (dining east, lounge west with the flush fire pit between, quiet corner south), a 3 m pomegranate with shadow in the south-west corner, a 2.4 m bougainvillea screen drift on the west edge, ground-cover and jasmine drifts along the south edge, a herb strip on the east fence; the pond (grille dashed) sits in the east yard between a path and the planting. It reads as a designed outdoor room with a real edge; the weak points are visible too: planting is mostly low drifts, one tree, and the lounge seats are outlined chairs clustered on the west.
+* **LDG-concept-O-massing.png**: the same concept in clay, camera from the south-south-east at 52 degrees: the house is a 6 m block on the north; under the louvred pergola roofs the dining and lounge are enclosed overhead; the pomegranate dome reads as the only tree volume; the beds are low masses; the east yard is a narrow slot beside the house with the pond between two bougainvillea masses.
 
 ## Critics and criteria (computed vs VLM)
 | Critic | Computed (from layout + `plants.json` + LDS layers) | VLM (plan image, advisory) |
@@ -73,9 +93,17 @@ All four critics fail it. Blocking/major findings: **user**: 4 fixed seats again
 * North court: only about 9 m2 is open ground (the rest is under the entrance slab) and it is deeply shaded; a pond there fails C-POND-SUN, the yard (3.8-5.5 h) passes.
 
 ## Open items
-* **Professional known-good for the site critics**: needs scaled professional plans with planting schedules (HALS/APLD/RHS) and a brief-equivalent; or LDG's accepted concept as a control. Until then user/climate/horticulture stay recall-only.
+* **Professional known-good for the site critics**: cannot be measured on precedents; `calibration.json` records their false-fail as `not calibratable on precedents` (per criterion `false_fail_status`, per critic `false_fail`). Proposal for a control below.
 * A larger known-bad/known-good set for the architect criteria (now 3 bad, 10 coarse good) and a measured transcription of the precedent plans; today a 30 % false-fail may partly be my drawing.
 * The VLM plan critic needs either a symbol-level plan with legends or a different input (3D perspective renders); the plan image alone did not separate D1 from professional plans.
 * Policy thresholds need the client or a source (privacy eye-point limit, winter hours, drift size, crown density); PRIV_MAX was relaxed to fit the reference scheme.
 * C-PRIVACY approximates screening; verify it with LDS's ray-caster by re-running `analyse.privacy` on a model that contains the proposed screens.
 * H-FISH-TOXIC and several `LS-*` passthroughs report `not_evaluated` until LDL/LDK close their GAPs.
+
+## Proposal: a client-accepted concept as the control for the site critics (not run; nothing tuned)
+Precedents cannot give the user, climate and horticulture critics a false-fail rate because they lack a brief, species and site layers. A concept the **client accepts** at the LD gate is the first design that has all three and a human verdict that it is good.
+1. **Control set.** On acceptance, freeze the accepted package (layout JSON via `from_concept.layout_of_package`, the brief and site-layer versions, the plants.json hash) in `knowledge/landscape/critic/control/`. Add each later client-accepted revision as a further control. One control is n = 1: it can falsify a critic (a blocking/major fail on an accepted design is a candidate false-fail) but cannot calibrate one.
+2. **Reading a fail.** For each blocking/major fail on a control, the client (or the lead on the client's behalf) decides before any code change: (a) the critic is right and the client accepted a flaw knowingly (record as a waiver, not a false-fail), or (b) the critic is wrong (a false-fail, recorded with the measured quantity). Only (b) counts.
+3. **Rate and threshold.** The same rule as before (false-fail <= 10 % over >= 5 evaluated good items) therefore needs about five accepted concepts or distinct accepted sub-areas (south garden, north court, east yard, each accepted separately); until then the site critics stay `calibrated: false` and non-gating, and the table says "control n = k of 5".
+4. **No leakage.** Seeded defects are built from the control, never the reverse; the critics are not changed after seeing the control's verdict except through a logged defect (LEARNINGS guard) and a fresh control, otherwise the control becomes a tuning set like seeded set 1.
+5. **Today's candidate.** LDG's recommended concept O (screened, pond east) has not been accepted; its critique has not been run here and must not be, as a calibration step, before the gate.

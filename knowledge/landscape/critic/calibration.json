@@ -164,7 +164,8 @@
    },
    "d1_status": "not_evaluated",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "C-POND-SUN": {
    "critic": "climate",
@@ -186,7 +187,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "C-PRIVACY": {
    "critic": "climate",
@@ -208,7 +210,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "C-SUMMER-EVENING": {
    "critic": "climate",
@@ -230,7 +233,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "C-SUMMER-SHADE": {
    "critic": "climate",
@@ -252,7 +256,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "C-WINTER-SUN": {
    "critic": "climate",
@@ -274,7 +279,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-BED-CROWDING": {
    "critic": "horticulturist",
@@ -296,7 +302,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-DRIFTS": {
    "critic": "horticulturist",
@@ -318,7 +325,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-FISH-TOXIC": {
    "critic": "horticulturist",
@@ -340,7 +348,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-LAYERS": {
    "critic": "horticulturist",
@@ -362,7 +371,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-REPETITION": {
    "critic": "horticulturist",
@@ -384,7 +394,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-SEASONALITY": {
    "critic": "horticulturist",
@@ -406,7 +417,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-SITE-VIABLE": {
    "critic": "horticulturist",
@@ -428,7 +440,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-SIZE-VS-SPACE": {
    "critic": "horticulturist",
@@ -450,7 +463,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-SPECIES-KNOWN": {
    "critic": "horticulturist",
@@ -472,7 +486,8 @@
    },
    "d1_status": "warn",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-SUN-FIT": {
    "critic": "horticulturist",
@@ -494,7 +509,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "H-TOXIC-PLACEMENT": {
    "critic": "horticulturist",
@@ -516,7 +532,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-BRIEF-FEATURES": {
    "critic": "user",
@@ -538,7 +555,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-CAPACITY": {
    "critic": "user",
@@ -560,7 +578,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-DINE-AREA": {
    "critic": "user",
@@ -582,7 +601,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-DINE-CLEAR": {
    "critic": "user",
@@ -604,7 +624,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-ENCLOSURE": {
    "critic": "landscape-architect",
@@ -648,7 +669,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-HYDROZONE": {
    "critic": "climate",
@@ -670,7 +692,8 @@
    },
    "d1_status": "not_evaluated",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-LOUNGE-AREA": {
    "critic": "user",
@@ -692,7 +715,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-LOUNGE-CLUSTER": {
    "critic": "landscape-architect",
@@ -736,7 +760,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-PATH-SECONDARY": {
    "critic": "user",
@@ -758,7 +783,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-PATH-SERVICE": {
    "critic": "user",
@@ -780,7 +806,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-POND-SHADE": {
    "critic": "climate",
@@ -802,7 +829,8 @@
    },
    "d1_status": null,
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-ROOTZONE": {
    "critic": "horticulturist",
@@ -824,7 +852,8 @@
    },
    "d1_status": "warn",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-SCREEN": {
    "critic": "climate",
@@ -846,7 +875,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-SOIL-DEPTH": {
    "critic": "horticulturist",
@@ -868,7 +898,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-STAND-AREA": {
    "critic": "user",
@@ -890,7 +921,8 @@
    },
    "d1_status": "not_evaluated",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "LS-TREE-BUILDING": {
    "critic": "horticulturist",
@@ -912,7 +944,8 @@
    },
    "d1_status": "warn",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-BBQ": {
    "critic": "user",
@@ -934,7 +967,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-FIRE": {
    "critic": "user",
@@ -956,7 +990,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-GATHER-GROUPS": {
    "critic": "user",
@@ -978,7 +1013,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-GATHER-ROUTE": {
    "critic": "user",
@@ -1000,7 +1036,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-GATHER-SEATS": {
    "critic": "user",
@@ -1022,7 +1059,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-PICKING": {
    "critic": "user",
@@ -1044,7 +1082,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-POND-VIEW": {
    "critic": "user",
@@ -1066,7 +1105,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-QUIET-NORTH": {
    "critic": "user",
@@ -1088,7 +1128,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-QUIET-SOUTH": {
    "critic": "user",
@@ -1110,7 +1151,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-SERVICE": {
    "critic": "user",
@@ -1132,7 +1174,8 @@
    },
    "d1_status": "fail",
    "calibrated": false,
-   "status": "recall-only (no evaluable professional known-good)"
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
   },
   "U-WINTER-STAY": {
    "critic": "user",
@@ -1154,7 +1197,8 @@
    },
    "d1_status": "pass",
    "calibrated": false,
-   "status": "no seeded defect targets it"
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
   },
   "V-ENCLOSURE": {
    "critic": "landscape-architect",
@@ -1310,7 +1354,7 @@
    "d1_verdict_fail": true,
    "known_good_verdict_fail": null,
    "known_good_n": 0,
-   "false_fail": null
+   "false_fail": "not calibratable on precedents"
   },
   "user": {
    "seeded_defects_targeting": 7,
@@ -1324,7 +1368,7 @@
    "d1_verdict_fail": true,
    "known_good_verdict_fail": null,
    "known_good_n": 0,
-   "false_fail": null
+   "false_fail": "not calibratable on precedents"
   },
   "climate": {
    "seeded_defects_targeting": 8,
@@ -1338,7 +1382,7 @@
    "d1_verdict_fail": true,
    "known_good_verdict_fail": null,
    "known_good_n": 0,
-   "false_fail": null
+   "false_fail": "not calibratable on precedents"
   }
  },
  "seeded_set1": [
