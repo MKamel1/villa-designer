@@ -6,7 +6,8 @@ Lane LDK of the landscape programme (docs/quality/LANDSCAPE-METHOD.md, stage LD-
 
 | Path | Content |
 |---|---|
-| `knowledge/landscape/rules/rules.json` | 30 source cards, 24 computed rules, 34 advisory rules, 16 GAPs |
+| `knowledge/landscape/rules/rules.json` | 210 source cards, 41 computed rules, 30 advisory rules, 11 open GAPs (10 closed, recorded in `closed_gaps`), 27 withdrawn Pattern Language rules (`withdrawn`) |
+| `knowledge/landscape/rules/snapshots/` | text snapshot per web card (the verbatim page text fetched 2026-11-22), so the quote guard runs offline |
 | `knowledge/landscape/rules/current-garden-layout.json` | the current D1 garden as a layout (snapshot, generated) |
 | `src/archpipe/landscape/rules/loader.py` | `load()` validates the JSON, builds `archpipe.rules.Rule` objects and `contracts.SourceCard`s |
 | `src/archpipe/landscape/rules/checks.py` | `evaluate(layout)` returns `contracts.CheckResult` records; `summarize()` |
@@ -74,9 +75,42 @@ Metres, model frame (street side = north = -x; south garden = +x). Shapes are `r
 | LS-SCREEN | neighbour boundary 1.8 m (hedge: warn on density) | Metric Handbook 7th ed. 22-18; brief |
 | LS-ROOTZONE | no paving or building inside the mature dripline (warn); turf over it not_evaluated | TS 550-6 |
 
-The 34 advisory rules (`AD-*`) are prompts for the critics: 27 A Pattern Language patterns by number and name,
-plus Time-Saver enclosure, water setting, stair rhythm, step announcement, turf purpose, lush dry planting,
-and Lechner shade-by-compass. They carry no number (the loader raises if one does).
+The 30 advisory rules (`AD-*`) are prompts for the critics; they carry no number (the loader raises if one does). They are: 14 composition
+prompts (`AD-COMP-*`) quoting Ching and Clark & Pause; 6 from public bodies (`AD-EXT-*`: shade placement, overlook by sight-line, pond siting,
+root barriers, hedge setback, lawn in shade); `AD-FIRE-VENT-LID`, `AD-POND-EDGE-LEGIBLE`, `AD-POND-DEPTH-HAZARD`; and the Time-Saver and Lechner prompts.
+
+## Second pass (2026-11-22): rules added, all with a positive and a negative test
+
+| Id | Requirement | Source |
+|---|---|---|
+| LS-PATH-SERVICE | 600 mm wheelbarrow path (fail), 900 mm access path (warn) | Neufert 1980 p.106 Fig. 22 (values read from the rendered figure) |
+| LS-LOUNGE-AREA | 1.8 m2 per lounge seat (warn) | Neufert p.211 cocktail lounge (indoor analogue) |
+| LS-LOUNGE-CLUSTER | lounge zone at least 3.66 m across (warn) | Mitton & Nystuen p.80 |
+| LS-STAND-AREA | 1.3 m2 per standing person; no standing zone reports not_evaluated (warn) | Neufert p.211 (Metric Handbook Table III 0.3 m2 is a crowd maximum, card `...-NOT-COMFORT`, unused) |
+| LS-FIRE-STRUCT | 2 000 mm to structure, fence and planting; 4 572 mm for wood fuel (warn; product instructions govern) | Calgary Fire Dept; International Fire Code 307.4.3 (printed "15 feet (3048 mm)": 15 ft is 4 572 mm, the printed conversion is wrong) |
+| LS-FIRE-OVERHEAD | 2 000 mm clear above the fire (warn) | MAD Design, Solus (1.95 m) manuals |
+| LS-FIRE-COVER | declared flush-cover load rating at least 15 kN (warn) | BS EN 124 Group 1 A15, via a supplier table; the nearest class, **not** a fire-pit standard |
+| LS-FLUSH-LIP / -OPENING | vertical lip 6.4 mm (bevel to 13 mm); openings 13 mm (warn) | ADA Standards 2010 s.303, 302.3 (accessibility standard borrowed for trips) |
+| LS-POND-GUARD | flush pond declares a rigid grille or a 1.1 m fence (violation; client may waive) | RoSPA pond safety; Belfast Trust; no load figure exists |
+| LS-POND-EDGE-SLOPE | shore slope 1:4 or gentler (warn) | Time-Saver 330 s.7.6 (stormwater ponds; out of scale) |
+| LS-POND-EDGE-LIGHT | 4 lx at the edge, 8 lx over age 65 (warn) | IES Handbook Table 33.2 pool deck and steps (analogue) |
+| LS-POND-DEPTH / -STOCK / -SHADE | deepest section 900 mm; 12 in fish per 0.42 m2 (aerated 43 in/m2); 50-75 % plant shade (warn) | Oklahoma State University Extension, Water Gardens 2017 |
+| LS-TREE-BUILDING | trunk to building 1.25 / 0.75 / 0.5 x mature height by water demand, unknown = high (warn) | NHBC Standards 2024 ch. 4.2 Table 3b (UK clay; the site soil test governs) |
+| LS-HEDGE-SPACING | in-row 300-600 mm (warn) | RHS hedge planting guide |
+| LS-HERB-SUN | 6 h midsummer sun on herb and fruit beds (warn); needs the LDS sun study | RHS; Arizona says afternoon shade in a desert |
+
+`LS-FIRE-COVER` was "never a pass" in the first pass; it can now pass at 15 kN. The pass means only "declared at the EN 124 A15 pedestrian class": the
+supplier must certify the rating for a heated cover, and no cover surface-temperature figure exists (GAP-FIRE-COVER-TEMP).
+
+**Web cards.** Each carries `url`, `retrieved` and a `snapshot`. `test_source_quotes.WebSources` checks the quote is in the snapshot and fails closed;
+`LDK_LIVE=1` re-fetches the live pages. The NHBC public edition is 2024 (the current edition sits behind a login). Round-1 and round-2 research outputs were
+produced by research agents, then every quote was machine-checked against its snapshot or PDF page, and 52 of the 71 web quotes were re-fetched live (`LDK_LIVE=1`); 19 were not (NHBC refuses curl and was read through a browser; a few pages are JS-rendered): those rest on their snapshot only.
+
+**Pattern Language.** Withdrawn: the 27 rules are in `withdrawn` with status `unverified — not used`, are not `Rule` objects, and the source card is gone. The
+loader refuses a withdrawn rule that is also active. 15 have a held equivalent in Ching or Clark & Pause (re-grounded as `AD-COMP-*`, listed under
+`regrounded_as`); 12 have none: 105 South Facing Outdoors, 172 Garden Growing Wild, 71 Still Water, 246 Climbing Plants, 177 Vegetable Garden,
+170 Fruit Trees, 125 Stair Seats, 245 Raised Flowers, 247 Paving with Cracks Between the Stones, 168 Connection to the Earth, 104 Site Repair, 60 Accessible Green.
+**Unwin's *Analysing Architecture* is an image-only PDF** (0 characters of text on 207 pages; no OCR on this machine), so it was not used.
 
 ## Decisions
 
@@ -88,34 +122,38 @@ and Lechner shade-by-compass. They carry no number (the loader raises if one doe
 6. **Koi depth is not 450 mm.** Time-Saver's 300-450 mm is a US fountain-pool figure tied to a code reading. It is recorded as a card named `...-depth-NOT-KOI` that no rule uses (a test asserts this), so nobody uses it for koi.
 7. **No new dependency.** shapely, pymupdf (test only) were already installed.
 
-## GAPs (no held source; not filled)
+## GAPs
 
-| Id | Brief item |
+Closed (rule -> figure) are in `closed_gaps` in rules.json and in the hand-back. Open after the second pass:
+
+| Id | What is still missing |
 |---|---|
-| GAP-PATH-SERVICE | service path width |
-| GAP-LOUNGE-AREA | area per person for a lounge group and standing room |
-| GAP-FIRE-SAFETY | fire pit/BBQ distance to combustible facade and planting (product instructions govern) |
-| GAP-FIRE-COVER-LOAD | flush fire pit cover load rating, fall and burn protection |
-| GAP-POND-DEPTH | koi depth and volume (supplier) |
-| GAP-POND-EDGE-SAFETY | flush pond edge visibility, contrast margin, safety shelf, night lighting of the edge |
-| GAP-POND-TREES-SUN | pond distance to trees (leaf fall), sun/shade on the water |
-| GAP-TREE-BUILDING | tree distance to buildings, walls, services; root barriers |
-| GAP-SPACING | planting spacing at maturity |
-| GAP-SHADE-TARGET | shade-tree placement and shade percentage in summer (BR 209 not held) |
-| GAP-SCREEN-PLANT | hedge heights and densities |
-| GAP-OVERLOOK-ABOVE | screening from the apartment above |
-| GAP-HERB-SUN | herb and fruit sun needs (belongs to the plant library) |
-| GAP-LAWN-WIDTH | lawn minimum width and wear |
-| GAP-TS-COMPOSITION | Time-Saver composition (focal points, rhythm, repetition, layering) |
-| GAP-BOOKS-NOT-HELD | A Pattern Language, Site Analysis, BR 209 are not on this machine |
+| GAP-POND-EDGE-SAFETY | a contrast figure, a koi-pond safety-shelf width, a pond-grille load figure |
+| GAP-POND-EDGE-CONTRAST | published luminance-contrast or margin width for a pond edge |
+| GAP-POND-GRILLE-LOAD | a kN or kg figure for a pond grille (RoSPA says "rigid", fire services "a child's weight") |
+| GAP-FIRE-COVER-TEMP | surface temperature and walk-on load of the chosen product's flush cover (supplier certificate) |
+| GAP-POND-TREES-SUN | a distance in metres from trees |
+| GAP-SHADE-TARGET | the percentage target (client); BR 209 not held |
+| GAP-OVERLOOK-ABOVE | no published height; LDS sight-line geometry |
+| GAP-LAWN-WIDTH | minimum width and wear |
+| GAP-SPACING-TREES | per-species spread (LDL) and a spacing principle |
+| GAP-SCREEN-DENSITY | evergreen hedge opacity |
+| GAP-BOOKS-NOT-HELD | Pattern Language, Site Analysis, BR 209; OCR for Unwin |
 
-**Books not held.** On this workstation only the Time-Saver landscape PDF (plus Metric Handbook, Lechner, Time-Saver
+**Books not held (first-pass text, superseded above).** On this workstation only the Time-Saver landscape PDF (plus Metric Handbook, Lechner, Time-Saver
 Interior, Neufert) exists in `~/ai-projects/archpipe-knowledge-data/drop_in/done`. The knowledge index (`~/archpipe-sources/_index`)
 is empty here (0 books) and the `archpipe_books` corpus does not include Pattern Language, Site Analysis or BR 209.
 So the A Pattern Language rules cite number and name only (status `unverified`; no text quoted or paraphrased as from the book),
 and the dry-climate planting guide is the xeriscape section of Time-Saver 550. Re-grade the `AD-APL-*` rules once the book is held.
 
-## Result on the current garden (read-only)
+## Result on the current garden (read-only), second pass
+
+`python -m archpipe.landscape.rules.current_garden`: 6 fail, 1 warn, 13 pass, 15 not evaluated (was 6 / 1). The new rules added: LS-TREE-BUILDING warns (frangipani
+trunk 2.98 m from the facade where 5.7 m = 0.75 x 7.6 m is the NHBC zone, moderate water demand assumed); LS-LOUNGE-AREA and -CLUSTER pass; LS-STAND-AREA is not
+evaluated because the garden has no standing zone; the flush-feature rules, pond rules and LS-HERB-SUN do not run because the garden has none of those features.
+The adapter now passes the palette's mature height; `water_demand` is set to NHBC's default "moderate" (LDL should confirm).
+
+## Result on the current garden (read-only), first pass
 
 `python -m archpipe.landscape.rules.current_garden`: 6 fail, 1 warn.
 

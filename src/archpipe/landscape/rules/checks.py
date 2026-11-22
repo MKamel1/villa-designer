@@ -117,9 +117,22 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
     # --- paths -------------------------------------------------------------------------------
     for p in L.get("paths", []):
         w = p["width_m"] * 1000
+        if p.get("class") == "service":
+            sp = P["LS-PATH-SERVICE"]
+            if w + 1e-9 < sp["min_mm"]:
+                c.add("LS-PATH-SERVICE", "fail", p["id"], f"service path clear width: {w:g} mm achieved, {sp['min_mm']} mm required",
+                      achieved=w, required=sp["min_mm"], unit="mm", elements=[p["id"]])
+            elif w < sp["recommended_mm"]:
+                c.add("LS-PATH-SERVICE", "warn", p["id"], f"service path meets the {sp['min_mm']} mm wheelbarrow width but not the "
+                      f"{sp['recommended_mm']} mm access-path width: {w:g} mm achieved", achieved=w,
+                      required=sp["recommended_mm"], unit="mm", elements=[p["id"]])
+            else:
+                c.add("LS-PATH-SERVICE", "pass", p["id"], f"service path clear width: {w:g} mm achieved, {sp['recommended_mm']} mm recommended",
+                      achieved=w, required=sp["recommended_mm"], unit="mm", elements=[p["id"]])
+            continue
         rule = {"main": "LS-PATH-MAIN", "secondary": "LS-PATH-SECONDARY"}.get(p.get("class"))
         if rule is None:
-            c.skip("LS-PATH-SECONDARY", p["id"], f"path class {p.get('class')!r}: service width is a GAP (GAP-PATH-SERVICE)")
+            c.skip("LS-PATH-SECONDARY", p["id"], f"path class {p.get('class')!r} is not main, secondary or service")
             continue
         c.minimum(rule, p["id"], w, P[rule]["min_width_mm"], "mm", f"{p.get('class')} path clear width", [p["id"]])
 
@@ -179,6 +192,28 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
     c.minimum("LS-CAPACITY", "south garden", total, cap["min_seats"], "seats",
               f"seats in dining and lounge zones (brief {cap['min_seats']}-{cap['max_seats']} people)")
 
+    for z in L.get("zones", []):
+        if z.get("use") == "lounge":
+            n = sum(int(t.get("seats", 0)) for t in L.get("seating", []) if t.get("zone") == z["id"])
+            if n:
+                c.minimum("LS-LOUNGE-AREA", z["id"], round(shape(z).area / n, 2), P["LS-LOUNGE-AREA"]["min_m2_per_seat"], "m2",
+                          f"lounge area per seat ({shape(z).area:.1f} m2 / {n} seats)", [z["id"]])
+            else:
+                c.skip("LS-LOUNGE-AREA", z["id"], "lounge zone with no seats")
+            x0, y0, x1, y1 = shape(z).bounds
+            c.minimum("LS-LOUNGE-CLUSTER", z["id"], round(min(x1 - x0, y1 - y0) * 1000), P["LS-LOUNGE-CLUSTER"]["min_diameter_mm"], "mm",
+                      "shorter side of the lounge zone (a conversation cluster is about 3.66 m across)", [z["id"]])
+    standing = [z for z in L.get("zones", []) if z.get("use") == "standing"]
+    if not standing:
+        c.skip("LS-STAND-AREA", "south garden", "no standing zone in the layout (brief: standing room for 10-20 people)")
+    for z in standing:
+        n = z.get("design_people")
+        if not n:
+            c.skip("LS-STAND-AREA", z["id"], "design_people not stated")
+        else:
+            c.minimum("LS-STAND-AREA", z["id"], round(shape(z).area / n, 2), P["LS-STAND-AREA"]["min_m2_per_person"], "m2",
+                      f"standing area per person ({shape(z).area:.1f} m2 / {n} people)", [z["id"]])
+
     # --- fire pit / BBQ ---------------------------------------------------------------------
     for f in L.get("features", []):
         if f.get("kind") not in _FIRE:
@@ -209,10 +244,21 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
                           "fire pit to nearest seat or table", [f["id"]])
             cover = f.get("cover")
             if cover and cover.get("load_rating_kN") is not None:
-                c.add("LS-FIRE-COVER", "warn", f["id"], f"cover load rating declared as {cover['load_rating_kN']} kN; "
-                      "no required value is held (GAP-FIRE-COVER-LOAD), so adequacy is not assessed", elements=[f["id"]])
+                need = P["LS-FIRE-COVER"]["min_kN"]
+                got = cover["load_rating_kN"]
+                c.add("LS-FIRE-COVER", "pass" if got >= need else "fail", f["id"],
+                      f"flush cover declared load rating: {got:g} kN achieved, {need:g} kN required (BS EN 124 class A15, the "
+                      "nearest published pedestrian-load class; the supplier must certify the rating for a heated cover)",
+                      achieved=got, required=need, unit="kN", elements=[f["id"]])
             elif f.get("flush"):
                 c.skip("LS-FIRE-COVER", f["id"], "flush fire pit with no declared cover load rating")
+            if f.get("flush"):
+                ov = f.get("overhead_clear_m")
+                if ov is None:
+                    c.skip("LS-FIRE-OVERHEAD", f["id"], "overhead_clear_m not stated (clear height above the burner; 99 for open sky)")
+                else:
+                    c.minimum("LS-FIRE-OVERHEAD", f["id"], round(ov * 1000), P["LS-FIRE-OVERHEAD"]["min_mm"], "mm",
+                              "clear height above the fire to any combustible structure, tree or planting", [f["id"]])
         pc = f.get("product_clearance_mm")
         if pc is None:
             c.skip("LS-FIRE-PRODUCT", f["id"], "no product clearance entered (brief: product instructions govern)")
@@ -221,6 +267,27 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
             c.add("LS-FIRE-PRODUCT", "pass" if ok else "fail", f["id"],
                   f"clearance to facade/planting/obstruction: {shown} mm achieved, {pc} mm required (product instructions)",
                   achieved=shown, required=pc, unit="mm", elements=[f["id"]])
+
+    for f in L.get("features", []):
+        if f.get("kind") not in _FIRE or shape(f) is None:
+            continue
+        fp = shape(f)
+        comb = [shape({"rect": r}) for r in L.get("buildings", [])]
+        for key in ("planting_groups", "obstacles"):
+            comb += [shape(it) for it in L.get(key, []) if shape(it) is not None]
+        comb += [Point(*t["center"]).buffer(t.get("mature_spread_m", 0) / 2, 32) for t in L.get("trees", []) if "center" in t]
+        if not comb:
+            c.skip("LS-FIRE-STRUCT", f["id"], "no structures or planting in the layout to measure against")
+            continue
+        d = round(min(fp.distance(o) for o in comb) * 1000)
+        p = P["LS-FIRE-STRUCT"]
+        need = p["min_mm"]
+        why = "house, fence, structure or planting (Calgary Fire Department)"
+        if f.get("fuel") == "wood":
+            need, why = p["wood_mm"], "structure or combustible material for a wood fire (International Fire Code 307.4)"
+        c.add("LS-FIRE-STRUCT", "pass" if d >= need else "fail", f["id"],
+              f"distance to {why}: {d} mm achieved, {need} mm required (the product instructions govern; this is the published floor)",
+              achieved=d, required=need, unit="mm", elements=[f["id"]])
 
     # --- pond -------------------------------------------------------------------------------
     for f in L.get("features", []):
@@ -239,6 +306,87 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
             else:
                 c.minimum("LS-POND-FLUSH-MARGIN", f["id"], m, P["LS-POND-FLUSH-MARGIN"]["min_mm"], "mm",
                           "paving sloped back toward the pond from the clearance", [f["id"]])
+
+    for f in L.get("features", []):
+        if f.get("kind") != "pond":
+            continue
+        if f.get("depth_mm") is None:
+            c.skip("LS-POND-DEPTH", f["id"], "depth_mm (deepest section) not stated")
+        else:
+            c.minimum("LS-POND-DEPTH", f["id"], f["depth_mm"], P["LS-POND-DEPTH"]["min_mm"], "mm", "deepest section of the pond", [f["id"]])
+        area = shape(f).area if shape(f) is not None else None
+        if f.get("koi_count") is None or f.get("koi_adult_length_cm") is None or not area:
+            c.skip("LS-POND-STOCK", f["id"], "koi_count, koi_adult_length_cm or the pond footprint is missing")
+        else:
+            inches = f["koi_count"] * f["koi_adult_length_cm"] / 2.54
+            lim = P["LS-POND-STOCK"]["inches_per_m2_aerated" if f.get("aerated") else "inches_per_m2_unaerated"]
+            got = round(inches / area, 1)
+            c.add("LS-POND-STOCK", "pass" if got <= lim else "fail", f["id"],
+                  f"fish length per m2 of surface: {got} in/m2 achieved, {lim} in/m2 allowed "
+                  f"({'aerated' if f.get('aerated') else 'unaerated'}; the source figure is for 12-inch fish)",
+                  achieved=got, required=lim, unit="in/m2", elements=[f["id"]])
+        sh = f.get("surface_shade_pct")
+        if sh is None:
+            c.skip("LS-POND-SHADE", f["id"], "surface_shade_pct not stated")
+        else:
+            c.within("LS-POND-SHADE", f["id"], sh, P["LS-POND-SHADE"]["min_pct"], P["LS-POND-SHADE"]["max_pct"], "%",
+                     "water surface shaded by plants", [f["id"]])
+
+    # --- flush features: child protection, shore slope, lip, openings, edge lighting --------------
+    for f in L.get("features", []):
+        if f.get("kind") not in ("pond", "firepit") or not f.get("flush"):
+            continue
+        sid = f["id"]
+        if f["kind"] == "pond":
+            prot = f.get("child_protection")
+            G = P["LS-POND-GUARD"]
+            if prot is None:
+                c.add("LS-POND-GUARD", "fail", sid, "flush pond with no child protection declared (RoSPA: rigid grille or a 1.1 m fence; "
+                      "the client may waive it with a reason)", achieved=0, required=1, unit="count", elements=[sid])
+            elif prot == "fence" and (f.get("fence_height_mm") or 0) < G["min_fence_mm"]:
+                c.add("LS-POND-GUARD", "fail", sid, f"fence height: {f.get('fence_height_mm') or 0} mm achieved, {G['min_fence_mm']} mm required",
+                      achieved=f.get("fence_height_mm") or 0, required=G["min_fence_mm"], unit="mm", elements=[sid])
+            elif prot in G["accepted"]:
+                c.add("LS-POND-GUARD", "pass", sid, f"child protection declared: {prot} (no published load figure: GAP-POND-GRILLE-LOAD)",
+                      achieved=1, required=1, unit="count", elements=[sid])
+            else:
+                c.add("LS-POND-GUARD", "fail", sid, f"child protection {prot!r} is not one of {G['accepted']}", achieved=0, required=1,
+                      unit="count", elements=[sid])
+            run = f.get("edge_slope_run_per_rise")
+            if run is None:
+                c.skip("LS-POND-EDGE-SLOPE", sid, "edge_slope_run_per_rise not stated")
+            else:
+                c.minimum("LS-POND-EDGE-SLOPE", sid, run, P["LS-POND-EDGE-SLOPE"]["min_run_per_rise"], "run:rise",
+                          "shore slope as run per unit rise (4 = 1:4)", [sid])
+        cov = f.get("cover") or ({"lip_mm": f["lip_mm"]} if "lip_mm" in f else None)
+        if cov:
+            if cov.get("lip_mm") is not None:
+                v, b = cov["lip_mm"], P["LS-FLUSH-LIP"]
+                if v <= b["max_vertical_mm"]:
+                    c.add("LS-FLUSH-LIP", "pass", sid, f"vertical lip: {v:g} mm achieved, {b['max_vertical_mm']} mm allowed", achieved=v,
+                          required=b["max_vertical_mm"], unit="mm", elements=[sid])
+                elif v <= b["max_bevel_mm"] and cov.get("bevelled"):
+                    c.add("LS-FLUSH-LIP", "pass", sid, f"lip {v:g} mm is bevelled (allowed up to {b['max_bevel_mm']} mm)", achieved=v,
+                          required=b["max_bevel_mm"], unit="mm", elements=[sid])
+                else:
+                    c.add("LS-FLUSH-LIP", "fail", sid, f"lip {v:g} mm: {b['max_vertical_mm']} mm vertical or {b['max_bevel_mm']} mm if bevelled",
+                          achieved=v, required=b["max_vertical_mm"] if v <= b["max_vertical_mm"] or not cov.get("bevelled") else b["max_bevel_mm"],
+                          unit="mm", elements=[sid])
+            else:
+                c.skip("LS-FLUSH-LIP", sid, "cover.lip_mm not stated")
+            if cov.get("max_opening_mm") is not None:
+                ok = cov["max_opening_mm"] <= P["LS-FLUSH-OPENING"]["max_mm"]
+                c.add("LS-FLUSH-OPENING", "pass" if ok else "fail", sid, f"largest opening in the cover: {cov['max_opening_mm']:g} mm achieved, "
+                      f"{P['LS-FLUSH-OPENING']['max_mm']} mm allowed", achieved=cov["max_opening_mm"],
+                      required=P["LS-FLUSH-OPENING"]["max_mm"], unit="mm", elements=[sid])
+            else:
+                c.skip("LS-FLUSH-OPENING", sid, "cover.max_opening_mm not stated")
+        lx = f.get("edge_lux")
+        if lx is None:
+            c.skip("LS-POND-EDGE-LIGHT", sid, "edge_lux not stated (the lighting lane supplies the night level at the edge)")
+        else:
+            c.minimum("LS-POND-EDGE-LIGHT", sid, lx, P["LS-POND-EDGE-LIGHT"]["min_lx"], "lx",
+                      f"horizontal illuminance at the edge (IES recommends {P['LS-POND-EDGE-LIGHT']['recommended_lx']} lx over age 65)", [sid])
 
     # --- soil depth over structure ----------------------------------------------------------
     mins = P["LS-SOIL-DEPTH"]["min_mm"]
@@ -343,6 +491,38 @@ def evaluate(layout: dict, rs: RuleSet | None = None) -> list[CheckResult]:
             if shape(z).intersects(zone):
                 c.skip("LS-ROOTZONE", f"{t['id']}/{z['id']}", "artificial turf over the root zone: its air/water "
                        "permeability is UNVERIFIED")
+    # --- tree distance to buildings (NHBC zone of influence) --------------------------------
+    T = P["LS-TREE-BUILDING"]
+    bs = [shape({"rect": r}) for r in L.get("buildings", [])]
+    for t in L.get("trees", []):
+        h = t.get("mature_height_m")
+        if h is None or "center" not in t or not bs:
+            c.skip("LS-TREE-BUILDING", t["id"], "mature_height_m, the tree position or a building is missing")
+            continue
+        demand = t.get("water_demand") or T["default_water_demand"]
+        need = round(T["factor"][demand] * h, 2)
+        d = round(min(Point(*t["center"]).distance(b) for b in bs), 2)
+        assumed = "" if t.get("water_demand") else " (water demand unknown: NHBC says assume high)"
+        c.add("LS-TREE-BUILDING", "pass" if d >= need else "fail", t["id"],
+              f"trunk to building: {d:g} m achieved, {need:g} m required ({T['factor'][demand]} x {h:g} m mature height, "
+              f"{demand} water demand{assumed}); UK clay guidance, the site soil test governs", achieved=d, required=need,
+              unit="m", elements=[t["id"]])
+
+    # --- hedge spacing, herb and fruit sun -------------------------------------------------
+    for b in L.get("boundary", []):
+        if b.get("kind") == "hedge":
+            if b.get("row_spacing_mm") is None:
+                c.skip("LS-HEDGE-SPACING", b["id"], "row_spacing_mm not stated")
+            else:
+                c.within("LS-HEDGE-SPACING", b["id"], b["row_spacing_mm"], P["LS-HEDGE-SPACING"]["min_mm"],
+                         P["LS-HEDGE-SPACING"]["max_mm"], "mm", "in-row hedge plant spacing", [b["id"]])
+    for f in L.get("features", []):
+        if f.get("kind") in ("herb_bed", "fruit_tree"):
+            hrs = f.get("midsummer_sun_hours")
+            if hrs is None:
+                c.skip("LS-HERB-SUN", f["id"], "midsummer_sun_hours not stated (the LDS sun study supplies it)")
+            else:
+                c.minimum("LS-HERB-SUN", f["id"], hrs, P["LS-HERB-SUN"]["min_hours"], "h", "direct midsummer sun on the bed", [f["id"]])
     return c.out
 
 
