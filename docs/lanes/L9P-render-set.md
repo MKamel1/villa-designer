@@ -64,3 +64,54 @@ Day and dusk: living (v02/v10), lounge (v03/v21), dining (n01/v09), kitchen (n02
 | v42-north-garden-evening | garden placeholder | - | PLACEHOLDER until LDB: north garden at dusk |
 
 Garden views are the existing 10 day views plus the 2 dusk views, unchanged, **placeholders until LDB**.
+
+## 2. Critic gate: L3 calibration extended (frozen-v1, nothing tuned)
+
+Pre-registration: `knowledge/critic/extension-L9P.json` (written before any draft was opened). Labels: `extension-L9P-labels.json`, by the lane agent (an AI) looking at each draft, committed before the critic ran. Scorer: `python -m archpipe.critic.extension`; results `knowledge/critic/extension-L9P-results.json`. The 36 draft images are all held out (never used for tuning). Rubric, prompts, gates (R8/R10/R11 + deterministic six) unchanged.
+
+**Scorer bug found and fixed (disclosed):** `calibrate.load_vlm_dir` globbed `v*.json`, so every new `n*` view was scored "VLM unavailable: fail closed" (a first table showed 29/29 fails, which was an artefact). Fixed to `*.json` with a regression test. The table below is the corrected one.
+
+| measure | new set (n) | Wilson 95 % | pooled with 38 audit views (n) | target |
+|---|---|---|---|---|
+| recall on D+ or worse (must fail) | 10/11 | 0.62-0.98 | 28/29 = 97 % (0.83-0.99) | >= 90 % **met** (point estimate) |
+| false-fail on B- (should pass) | 4/7 = 57 % | 0.25-0.84 | 6/12 = 50 % (0.25-0.75) | <= 10 % **missed** |
+| fail of C-or-worse | 25/29 | 0.69-0.95 | 55/62 | not set |
+| fail of C+/C/C- | 15/18 | 0.61-0.94 | 27/33 | not set |
+
+Misses: the one D+ passed is `n21-family-bath-wc-day` (pan cut off at the bottom edge; nothing in the rubric sees cropping of a subject by the frame). False fails of B- views: v21 (R3 lean from the stair, as before), v34, n04 and n19 (R4 = 1 from window glare in the subject box plus R8/R11 = 1 from the VLM; n19 is a blown globe pendant). Same causes as the L3 failure examples; adding the extension did not move the false-fail rate. **The false-fail target is still missed, with n = 12 good views and a wide interval.** Honest reading: the critic is a high-recall filter, not a one-shot gate; as a gate it will send about half of the good views to human review. Next step if wanted is a v2 rubric (R4 on window-masked subject box, R3 excluding stair bins) scored only on views that did not inform it, e.g. the finals.
+
+Labels are mine, not a human's, and the three B- views the pre-registration counted as good are the lane's own new views; treat as supportive evidence only.
+
+## 3. Draft pass (36 interior views, current production scene, jobq L9P-draft-1..3)
+
+All 36 rendered at draft quality through jobq (GPU OPTIX, 96 samples, 1920x1280) and viewed by me on a contact sheet and individually when graded. Draft artefacts (noise, small fireflies) are excluded. Real defects, with root cause per the photoreal-render skill and the owner who must fix them before finals:
+
+| # | defect | views | root cause | owner / must fix before finals? |
+|---|---|---|---|---|
+| 1 | Marble and oak/walnut grain grossly over-scaled and rust-veined/blotchy | n06 n08 n10 n15 n16 n17 n21 v09 v11 v31 n01 n14 n20 | material texel density / UV scale not per-object metric (R7) | L6d (villa_scene materials). Yes |
+| 2 | Strong blue cast over whole corridor, 60 % blank wall | n10 | sky/ambient bleed through an unshaded opening and no interior fill, plus unlit corridor; exposure group too low for a dusk-lit corridor | L6d/L6b lighting. Yes |
+| 3 | Faceted paper-globe pendants cropped and blown | n02 n03 n19 | low-poly globe asset (R8) and pendant above frame; subject emissive blows out at group exposure | L6d asset swap. Yes (camera tilt/pendant clear is mine, trivial) |
+| 4 | Near-black subject under fixed exposure | v29 v30 v03 v08 n07 n17 n21 | exposure group fixed for bright rooms; dark stores sit under the lock (memory rule: fixed exposure per group) | Lane L6b: per-group light for stores/cinema, not a per-view exposure change. Yes |
+| 5 | Office chairs at a desk instead of cinema seating | v08 | wrong asset bound to the cinema seating intent | L6d/furniture binding. Yes |
+| 6 | Bunk bed is a plain white box frame; wall/desk lamps float as black T shapes (nothing floats) | v06 v13 | lamp mount offset not hosted to the wall; bunk is a placeholder mesh | L6d/LDL assets. Yes (floating lamps are a guard failure) |
+| 7 | Zig-zag cushion pattern reused on every sofa; rigid wedge pillows; melted-plate garments | v02 v10 v33 n01 n04 n13 v05 v31 | cloned dressing asset, no variation; low-poly bedding | L6d dressing. Yes for the hero views |
+| 8 | Windows blown to white massing | n11 n13 n17 v06 v34 | exterior sky/garden brightness vs fixed interior exposure; window glass/curtain not tamed | L6d. Yes for n11 n13 |
+| 9 | Stair stringer / dark panel / marble pier intrudes 10-20 % at frame edge | v03 v21 n07 n18 v34 | camera placement beside a structural element | L9P: adjust cameras in a second pass (small) |
+| 10 | Subject cropped at the frame (WC pan, basin, tub, shower head, sofa) | n21 n17 n15 n16 v02 v05 | camera framing too tight/low at 24 mm in small wet rooms | L9P: reframe, but wet rooms at 24 mm are 2 m deep and may need the camera in the doorway; flag whether 24 mm is achievable |
+| 11 | Sterile blank wall, no backsplash | n09 n05 n02 | kitchen run finishes not modelled | L6d finishes. Not blocking for n05/n09 as secondary views |
+| 12 | Bent wall/ceiling line, empty white shelving | v30 n05 | shelving/under-ramp geometry placeholders; lens distortion not applicable | L6d/LDL. Yes |
+| 13 | Smeared curtain texture | v10 v21 n12 | texture stretched on pleated curtain mesh | L6d materials. Yes |
+
+No floating furniture other than #6 found. No clipping through walls seen other than the piers in #9.
+
+Critic result per view is in section 2 output; it agrees with my grades on 25 of 29 C-or-worse views. The draft set has **no view graded better than B-**, so none is ready as a final: finals need fixes 1, 3, 4, 5, 6, 7, 8, 12, 13 from L6d first.
+
+## 4. GPU-hours estimate for the finals
+
+Measured: one 1024-sample frame ~138 s render (`L9P-final-timing`, v05) plus scene load ~40 s, i.e. ~3 min/view; draft ~20 s. Finals: 36 interior + 12 garden = 48 views ~ 2.4 GPU-h, plus the critic VLM (~30 s/view, 0.4 h). Allowing one re-render of about half the views after the gate and the camera second pass: **~4 GPU-h total** (3-5 h range), plus 0.6 h of exposure measurement per scene change (measured 637 s per run, jobq L9P-measure-exposure-1). Garden views are placeholders and need re-render after LDB.
+
+## Open items
+- L6d to read the render-set (section 1) and fix the material/asset defects above; exposure record must be re-measured after the scene changes.
+- Camera second pass (items 9, 10) after L6d lands.
+- Blind photo test (L9) not started: needs finals.
+- Critic false-fail target missed; v2 rubric proposal above, not run.

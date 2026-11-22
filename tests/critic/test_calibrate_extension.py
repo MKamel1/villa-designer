@@ -48,3 +48,12 @@ def test_score_set_fails_closed_without_vlm(tmp_path):
                                                                   sensor_mm=36), subjects=[])))
     v, rows, notes = X.score_set({"x": dict(grade="B-")}, tmp_path, None, V.load_rubric())
     assert v["x"] == "fail" and any("VLM" in r or "not evaluated" in r for r in notes["x"]["reasons"])
+
+
+def test_load_vlm_dir_reads_n_prefixed_views(tmp_path):
+    """Regression: glob was 'v*.json', so every new-set view (n01...) scored 'VLM unavailable'."""
+    import json
+    from archpipe.critic import calibrate as C
+    for name in ("n01-x", "v02-y"):
+        (tmp_path / f"{name}.json").write_text(json.dumps(dict(view=name, status="ok", scores={"R8": 2})))
+    assert set(C.load_vlm_dir(tmp_path)) == {"n01-x", "v02-y"}

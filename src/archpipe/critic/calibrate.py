@@ -60,7 +60,7 @@ def load_vlm_dir(d: str | Path) -> dict[str, dict]:
     """Load cached VLM results. `d` may be several directories joined by ',' (scores are merged per view)."""
     out: dict[str, dict] = {}
     for one in str(d).split(","):
-        for p in sorted(Path(one).glob("v*.json")):
+        for p in sorted(Path(one).glob("*.json")):
             j = json.loads(p.read_text(encoding="utf-8"))
             if j["view"] in out:
                 out[j["view"]]["scores"].update(j["scores"])
