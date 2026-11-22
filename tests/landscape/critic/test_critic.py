@@ -90,3 +90,19 @@ class Plan(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PlanStandard(unittest.TestCase):
+    def test_sheet_width_and_style(self):
+        import struct, tempfile
+        self.assertEqual(K.STYLE_VERSION, "ldc-plan-style/2")
+        for lay in (seeds.make("capacity-4"), json.loads((KNOW / "critic/d1-layout.json").read_text())):
+            with tempfile.TemporaryDirectory() as d:
+                p = K.plan_png(lay, str(Path(d) / "p.png"))
+                w = struct.unpack(">I", Path(p).read_bytes()[16:20])[0]
+                self.assertEqual(w, 1600)
+
+    def test_empty_layout_draws_without_planting_key(self):      # negative: nothing to key, nothing invented
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            self.assertTrue(Path(K.plan_png({"schema": "landscape-layout/1", "zones": []}, str(Path(d) / "e.png"))).exists())
