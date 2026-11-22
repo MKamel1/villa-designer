@@ -224,9 +224,14 @@ def own_checks(L, rooms, covers, screen_top_z, trees_for_area, south_area=A * B)
         if o.get("rect") and not o["id"].startswith(("fence", "pot")):        # a pot may stand in a border
             items["obs:" + o["id"]] = rbox(o["rect"])
     names = list(items)
-    bad = [(a, b) for i, a in enumerate(names) for b in names[i + 1:] if items[a].intersection(items[b]).area > 5e-3 and {a, b} != {"bed:bed-herb", "feat:herb-bed"}]
+    bad = [(a, b) for i, a in enumerate(names) for b in names[i + 1:] if items[a].intersection(items[b]).area > 5e-3 and not _same_herb(a, b, items)]
     res.append(_r("LDG-GEOM", "pass" if not bad else "fail", "overlaps", "no two elements overlap" if not bad else f"overlaps {bad[:3]}", len(bad), 0, "overlaps"))
     return res
+
+
+def _same_herb(a, b, items):
+    """A herb bed is both a planting group and a `herb_bed` feature on the same rectangle: not an overlap."""
+    return {a.split(":")[0], b.split(":")[0]} == {"bed", "feat"} and "herb" in a + b and items[a].symmetric_difference(items[b]).area < 1e-6
 
 
 def hard(res):
