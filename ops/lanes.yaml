@@ -228,6 +228,45 @@ lanes:
     - knowledge/markup/**
     - docs/lanes/MK*.md
     - docs/lessons/MK.md
+  L6d: # lighting fixes from LV final verification (orientation, glare, pendant, ADJ, grids)
+    - src/archpipe/lightcalc/**
+    - src/archpipe/concept/villa_lighting.py
+    - src/archpipe/fixture_record.py
+    - src/archpipe/luminaires/**
+    - src/archpipe/blender/villa_scene.py
+    - knowledge/lighting/**
+    - knowledge/lighting-products/**
+    - knowledge/exposure-groups.json
+    - tests/lightcalc/**
+    - tests/luminaires/**
+    - tests/test_villa_lighting.py
+    - src/archpipe/model/data/**
+    - tests/model/**
+    - src/archpipe/electrical/**
+    - tests/electrical/**
+    - src/archpipe/exchange/**
+    - tests/exchange/**
+    - tests/drawings2d/**
+    - docs/lanes/L6*.md
+    - docs/lighting-spec/**
+    - docs/lessons/L6d.md
+  SC: # scene completion: guards, G1 infill, cupboard, slabs, element ids on every mesh
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/concept/villa_daylight.py
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/blender/**
+    - src/archpipe/villa_render_contract.py
+    - scripts/villa_render.py
+    - scripts/villa_render_views.py
+    - tests/test_villa_render*.py
+    - tests/test_mounting*.py
+    - tests/test_d1_*.py
+    - tests/approvals/**
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/*.json.gz
+    - docs/lanes/SC*.md
+    - docs/lessons/SC.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
