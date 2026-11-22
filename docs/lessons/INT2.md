@@ -17,3 +17,7 @@
   Use a new id when the command changes.
 * **Old evaluators outlive their scheme**: `villa_lighting.check` (direct-only, no driver dimming) and 3000 K/LSEVO assertions
   were obsolete after L6b/L6c; the Radiance-verified rows are the gate.
+* **A lead approval that moves geometry also invalidates the receipts and the exposure record.** Applying an approved 12 mm marker move
+  changed `meshes`; both freezes bind the whole scene. Order: approval -> baseline-relative receipt refresh -> re-measure exposure
+  (new jobq id; the first failed on a missing ERCO ies dir because `measure-scene/ies` holds only generic files: use the full ies dir) -> rebuild.
+  Guard: the receipt guard and `require_record` fail closed; `section_diff.py` attributes the change.
