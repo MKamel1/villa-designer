@@ -2,7 +2,7 @@
 
 Branch `lane/L6d` from `origin/integ/staging` (L6c + LV + INT2). Every item was diagnosed on data before anything was changed; the numbers below
 are from this lane's runs (`out/L6d*`, reproduced by the commands at the end). LV result: `python -m archpipe.lightverify --design D1 --scene
-<INT2 scene>`: **389 pass / 9 fail / 3 not evaluated** (was 353 / 17 / 29); room-plane rows **verified 35 of 40** (was 8 of 39). Per layer (pass/fail/n.e.): V1 20/0/0, V2 145/0/0 (was 119/0/26), V3 40/0/0, V4 26/0/0, V5 20/0/0 (was 14/6/0), V6 12/1/0, V7 40/0/0 (was 36/3/0), V8 9/0/0, V10 37/8/0, V11 0/0/3, V12 40/0/0. Unverified rows: lounge x2 and dining x2 (LV's V10 does not know A9003138 / QA03), dining x2 and daybed (V6 n/e), dressing room (V6 -40 %, documented); the 9 failures are that dressing row (1) and V10 against the old products (8).
+<INT2 scene>`: **389 pass / 9 fail / 3 not evaluated** (was 353 / 17 / 29); room-plane rows **verified 34 of 40** (was 8 of 39). Per layer (pass/fail/n.e.): V1 20/0/0, V2 145/0/0 (was 119/0/26), V3 40/0/0, V4 26/0/0, V5 20/0/0 (was 14/6/0), V6 12/1/0, V7 40/0/0 (was 36/3/0), V8 9/0/0, V10 37/8/0, V11 0/0/3, V12 40/0/0. Unverified rows: lounge x2 and dining x2 (LV's V10 does not know A9003138 / QA03), dining x2 and daybed (V6 n/e), dressing room (V6 -40 %, documented); the 9 failures are that dressing row (1) and V10 against the old products (8).
 
 ## 1. Cycles throws the wallwasher 90 deg off (LV defect A)
 
