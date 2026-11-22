@@ -71,7 +71,7 @@ class Design(unittest.TestCase):
         from archpipe.landscape.concept import final_trees as FT
         lt = FT.layer_table(L0)
         self.assertEqual(lt["south garden"]["missing"], [])
-        self.assertEqual(lt["east yard"]["missing"], [])
+        self.assertEqual(lt["east yard"]["missing"], ["climber"])         # its south boundary is not a declared wall: no climber claimed
         self.assertEqual(lt["north court"]["missing"], ["canopy"])         # no tree fits the 3.7 m court (NHBC, pond, 1.3 h sun): stated in the report
         self.assertTrue(all(FT.climber_faces(L0).values()), FT.climber_faces(L0))
 

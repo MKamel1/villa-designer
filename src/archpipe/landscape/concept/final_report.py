@@ -95,8 +95,9 @@ def main():
           "## Climbers, layers and drifts", "",
           "Climbers on every screen and wall face (a climber within 0.9 m of the face; the house facade stays clear for the fire items):", ""]
     L += _tbl(["face", "climbers"], [[k, ", ".join(v) or "NONE"] for k, v in d["climber_faces"].items()])
-    L += ["", "Grape (Vitis vinifera, deciduous) stands on the north screen stub: it moved from the pergola to the screen as a climber (the client keeps the fruit); NCSU rates it high flammability, and it stays outside the 1.25 m side clearance of the pit. "
-          "Sambac jasmine, Petrea and Jasminum grandiflorum cover the south stub, the rear wall and the east fence. English ivy is still **not used** (heat tolerance GAP in LDL); creeping fig, star jasmine and bougainvillea climber panels were not yet graded on this branch, so every climber is a labelled stand-in or a genus mass.", "",
+    L += ["", "**East yard: no climber.** Its south boundary is not a declared wall in the layout (the site fragment has `fence-east` from x 22.6 only), so a climber there would be drawn as a free mound (LDB warns) and is not claimed; the yard has a tree, shrubs, perennials and groundcover. Declare the fence, then add climbers (open item).", "",
+          "Grape (Vitis vinifera, deciduous) stands on the north screen stub: it moved from the pergola to the screen as a climber (the client keeps the fruit); NCSU rates it high flammability, and it stays outside the 1.25 m side clearance of the pit. "
+          "Sambac jasmine and Petrea cover the south stub, the rear wall and the south garden's east fence (Jasminum grandiflorum is not in the layout). English ivy is still **not used** (heat tolerance GAP in LDL); creeping fig, star jasmine and bougainvillea climber panels were not yet graded on this branch, so every climber is a labelled stand-in or a genus mass.", "",
           "### Layer table per garden room (plants counted from the layout; classification by LDL layer and height)", ""]
     L += _tbl(["room", "canopy", "understorey", "shrub", "perennial", "groundcover", "climber", "missing"],
               [[r] + [f"{v[k]['plants']} ({len(v[k]['species'])} sp)" for k in ("canopy", "understorey", "shrub", "perennial", "groundcover", "climber")] + [", ".join(v["missing"]) or "none"] for r, v in d["layers"].items()])

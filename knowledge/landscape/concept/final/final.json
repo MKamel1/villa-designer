@@ -387,9 +387,9 @@
    "not_evaluated": 0
   },
   "horticulturist": {
-   "pass": 21,
-   "fail": 3,
-   "warn": 3,
+   "pass": 23,
+   "fail": 2,
+   "warn": 2,
    "not_evaluated": 3
   },
   "user": {
@@ -509,33 +509,6 @@
    "extra": {}
   },
   {
-   "critic": "horticulturist",
-   "criterion": "H-BED-CROWDING",
-   "status": "warn",
-   "severity": "minor",
-   "evidence": "bed e-far: mature crowns 2.9 m2 on 1.8 m2 of bed (limit 1.5 x)",
-   "source": "LDL mature spread; 1.5 overlap is policy",
-   "kind": "computed",
-   "subject": "e-far",
-   "calibrated": false,
-   "extra": {}
-  },
-  {
-   "critic": "horticulturist",
-   "criterion": "H-DRIFTS",
-   "status": "fail",
-   "severity": "major",
-   "evidence": "59% of 94 shrub/ground plants sit in drifts of >= 3 (required 60%); median drift 3; lone single-plant species: 0",
-   "source": "AD-COMP-RHYTHM (qualitative, Ching); threshold is policy",
-   "kind": "computed",
-   "subject": "",
-   "calibrated": false,
-   "extra": {
-    "share": 0.585,
-    "lone": []
-   }
-  },
-  {
    "critic": "user",
    "criterion": "U-GATHER-GROUPS",
    "status": "fail",
@@ -574,20 +547,26 @@
  ],
  "build_checks": {
   "closed": {
-   "footprint:pass": 66,
-   "id:pass": 175,
-   "plant-footprint:info": 8,
-   "plant-footprint:pass": 86,
-   "standin:pass": 99,
-   "support:pass": 173
+   "climber-coverage:pass": 5,
+   "footprint:pass": 62,
+   "id:pass": 180,
+   "pit-half:pass": 2,
+   "plant-footprint:info": 7,
+   "plant-footprint:pass": 66,
+   "pond-section:pass": 18,
+   "standin:pass": 96,
+   "support:pass": 178
   },
   "open": {
-   "footprint:pass": 65,
-   "id:pass": 175,
-   "plant-footprint:info": 8,
-   "plant-footprint:pass": 86,
-   "standin:pass": 99,
-   "support:pass": 174
+   "climber-coverage:pass": 5,
+   "footprint:pass": 61,
+   "id:pass": 180,
+   "pit-half:pass": 3,
+   "plant-footprint:info": 7,
+   "plant-footprint:pass": 66,
+   "pond-section:pass": 18,
+   "standin:pass": 96,
+   "support:pass": 179
   }
  },
  "build_warnings": [],
@@ -1962,46 +1941,6 @@
   }
  ],
  "schedule": [
-  {
-   "zone": "east yard",
-   "bed": "e-divider",
-   "species": "Jasminum sambac (L.) Aiton",
-   "slug": "jasminum_sambac",
-   "count": 1,
-   "layer": "climber",
-   "verdict": "viable_with_conditions",
-   "conditions": [
-    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
-    "heat: moderate tolerance; plant in afternoon shade or verify locally",
-    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
-   ],
-   "water": "medium",
-   "toxic": null,
-   "mature_h_m": 4,
-   "mature_spread_m": 1,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
-   "drawable": false
-  },
-  {
-   "zone": "east yard",
-   "bed": "e-far",
-   "species": "Jasminum sambac (L.) Aiton",
-   "slug": "jasminum_sambac",
-   "count": 2,
-   "layer": "climber",
-   "verdict": "viable_with_conditions",
-   "conditions": [
-    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
-    "heat: moderate tolerance; plant in afternoon shade or verify locally",
-    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
-   ],
-   "water": "medium",
-   "toxic": null,
-   "mature_h_m": 4,
-   "mature_spread_m": 1,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
-   "drawable": false
-  },
   {
    "zone": "east yard",
    "bed": "e-edge",
@@ -3858,12 +3797,12 @@
     ]
    },
    "climber": {
-    "plants": 3,
-    "species": [
-     "jasminum_sambac"
-    ]
+    "plants": 0,
+    "species": []
    },
-   "missing": []
+   "missing": [
+    "climber"
+   ]
   },
   "north court": {
    "canopy": {
@@ -3921,9 +3860,6 @@
    "jasminum_sambac",
    "petrea_volubilis"
   ],
-  "east yard fence": [
-   "jasminum_sambac"
-  ],
   "north court street fence": [
    "jasminum_sambac"
   ]
@@ -3947,8 +3883,8 @@
    },
    "after": {
     "drawable": 9,
-    "stand_in": 90,
-    "total": 99,
+    "stand_in": 87,
+    "total": 96,
     "species_drawable": 5,
     "species_total": 17
    }

@@ -124,11 +124,11 @@ def layer_table(L):
 
 
 def climber_faces(L, reach=0.9):
-    """Every screen and blank wall face of the gardens and whether a climber stands within `reach` of it. Faces: the two screen stubs (garden side), the south (rear) wall, the east fence, and the court/yard fences; the house facade is NOT clad (client brief: facade clear of planting for the fire items)."""
+    """Every screen and blank wall face of the gardens and whether a climber stands within `reach` of it. Faces: the two screen stubs (garden side), the south (rear) wall, the east fence, and the court/yard fences; the house facade is NOT clad (client brief: facade clear of planting for the fire items). The east yard's south boundary is not a declared wall in the layout (site fragment has fence-east from x 22.6 only; the yard fence geometry is unconfirmed), so no climber is claimed there."""
     from shapely.geometry import Point, box
     faces = {"screen N stub": box(S.SX0, S.SY0 + 0.15, S.SX0 + F.OPEN_A[0], S.SY0 + 0.2), "screen S stub": box(S.SX0 + F.OPEN_A[1], S.SY0 + 0.15, S.SX0 + A, S.SY0 + 0.2),
              "south garden rear wall": box(S.SX0 + A - 0.02, S.SY0 + 1.45, S.SX0 + A, S.SY0 + B), "south garden east fence": box(S.SX0 + 1.3, S.SY0 + B - 0.02, S.SX0 + A, S.SY0 + B),
-             "east yard fence": box(F.TC.EX0 + 0.2, F.TC.EY0 + F.TC.EW - 0.02, F.TC.EX0 + F.TC.EL, F.TC.EY0 + F.TC.EW), "north court street fence": box(F.TC.NX1 - F.TC.NH, F.TC.NY0 + 0.3, F.TC.NX1 - F.TC.NH + 0.02, F.TC.NY0 + F.TC.NW)}
+             "north court street fence": box(F.TC.NX1 - F.TC.NH, F.TC.NY0 + 0.3, F.TC.NX1 - F.TC.NH + 0.02, F.TC.NY0 + F.TC.NW)}
     out = {}
     for k, face in faces.items():
         near = sorted({p["species"] for g in L["planting_groups"] for p in g["plants"] if layer_of(p["species"], p.get("role") or g.get("role", "")) == "climber" and Point(*p["at"]).distance(face) <= reach})

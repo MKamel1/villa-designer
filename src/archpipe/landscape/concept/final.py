@@ -44,7 +44,7 @@ def shade_tree(f, tid, slug, at, lean=(0.0, 0.0), spread=None):
     pr = TREE_PRUNING[slug]
     tree(f, tid, slug, at)
     t = f["trees"][-1]
-    t.update(mature_spread_m=spread or pr["spread_m"], crown_center=[round(t["center"][0] + lean[0], 3), round(t["center"][1] + lean[1], 3)], crown_lean_m=round(math.hypot(*lean), 2), mature_height_m=pr["height_m"], pruned=True, crown_underside_m=pr["underside_m"], pruning=pr["regime"], pruning_source=pr["source"], pruning_source_status=pr["source_status"],
+    t.update(mature_spread_m=spread or pr["spread_m"], crown_center=[round(t["center"][0] + lean[0], 3), round(t["center"][1] + lean[1], 3)], crown_lean_m=round(math.hypot(*lean), 2), mature_height_m=pr["height_m"], pruned={"spread_m": spread or pr["spread_m"], "height_m": pr["height_m"], "clear_stem_m": pr["underside_m"]}, crown_underside_m=pr["underside_m"], pruning=pr["regime"], pruning_source=pr["source"], pruning_source_status=pr["source_status"],
              species_mature_spread_m=[POOL[slug].s_min, POOL[slug].s_max], species_mature_height_m=POOL[slug].h_max)
     return t
 
@@ -234,7 +234,6 @@ def east_kit():
                       dict(id="far", rect=ER(0, 1.5, 1.2, EW), role="mass", pal="yard_mass", back="hi"),
                       dict(id="edge", rect=ER(1.5, 2.75, 4.2, EW), role="strip", pal="pond_edge", back="hi")],
                 bench=ER(5.0, 1.35, 5.45, 2.75), quiet=ER(4.8, 1.3, 5.6, EW), pergola=None,
-                climbers=[dict(bed="far", at=[(EX0 + u, EY0 + EW - 0.2) for u in (0.4, 0.9)]), dict(bed="divider", at=[(EX0 + 6.9, EY0 + EW - 0.2)])],
                 paths=[ER(0.2, 0, 4.3, 1.2)], path_class="service", gravel=ER(4.3, 0.5, EL, EW), focal="the pond is the focal point of the quiet room, bench at its end")
 
 

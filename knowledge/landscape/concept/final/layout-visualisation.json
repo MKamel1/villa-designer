@@ -1342,7 +1342,11 @@
     -24.816
    ],
    "crown_lean_m": 1.25,
-   "pruned": true,
+   "pruned": {
+    "spread_m": 4.0,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
    "crown_underside_m": 2.2,
    "pruning": "multi-stem (3-5 stems; the head is trained to lean toward the table, at most 1.3 m off the trunk), clear trunk to 2.2 m; structural thinning every year in January-February while bare; crown held at 4.0 m by cutting back to the previous year's heads, never flat topping; removing suckers at the base twice a year",
    "pruning_source": "UF/IFAS EP399 'What is a crape murder?' (hard pruning/pollarding makes vigorous sprouts and, once started, needs annual pruning; blooms fall with the size of branch removed)",
@@ -1375,7 +1379,11 @@
     -22.516
    ],
    "crown_lean_m": 0.0,
-   "pruned": true,
+   "pruned": {
+    "spread_m": 3.6,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
    "crown_underside_m": 2.2,
    "pruning": "pruned multi-stem umbrella: thin the crown each late winter, hold the spread at 3.6 m",
    "pruning_source": null,
