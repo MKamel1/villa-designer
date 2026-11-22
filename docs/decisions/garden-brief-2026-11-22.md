@@ -70,3 +70,18 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
   - shrubs;
   - perennials and groundcover in drifts;
   - climbers on every screen and wall.
+
+## Client clarification (2026-11-22): the shade trees need NOT be evergreen
+"We don't mind the sun in Dec to Feb." Deciduous or semi-deciduous shade trees are preferred where they leaf out from about March to November: shade in the hot months, sun in winter. This resolves the winter-sun trade-off.
+- **Candidates to compare on data:**
+  - jacaranda (semi-deciduous; graded A asset; flowers);
+  - Delonix regia (graded A; alkaline caveat);
+  - Melia azedarach;
+  - Bauhinia variegata;
+  - mulberry (Morus alba; fruit);
+  - fig (Ficus carica; fruit, no asset);
+  - pomegranate (graded B; fruit; small);
+  - crape myrtle (graded B).
+- **Evergreen olive:** still allowed where year-round screening from overlooking matters more than winter sun.
+- **Pruning to the space:** remains acceptable.
+- **Every pick needs a source** for its leaf-drop and leaf-out months in a Cairo-like climate.
