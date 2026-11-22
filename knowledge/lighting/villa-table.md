@@ -29,13 +29,13 @@
 | lounge | armchair | 200 | Reading | 893 (4.5x) | 0.59 | 201 | 149 | 0.74 | 1.01 | pass | pass |
 | lounge | room-lounge | 100 (min) | Day | 400 (4.0x) | 0.56 | 222 | 125 | 0.56 | 2.22 | pass | n/a |
 | pantry | room-pantry | 50 (min) | Day | 331 (6.6x) | 0.88 | 199 | 179 | 0.90 | 3.98 | pass | n/a |
-| parents-bed | pillow-1 | 200 | Reading | 902 (4.5x) | 0.76 | 203 | 75 | 0.37 | 1.02 | pass | pass |
-| parents-bed | pillow-2 | 200 | Reading | 899 (4.5x) | 0.76 | 202 | 81 | 0.40 | 1.01 | pass | pass |
-| parents-bed | room-parents-bed | 50 (min) | Day | 208 (4.2x) | 0.05 | 210 | 85 | 0.40 | 4.20 | pass | n/a |
+| parents-bed | pillow-1 | 200 | Reading | 902 (4.5x) | 0.76 | 204 | 86 | 0.42 | 1.02 | pass | pass |
+| parents-bed | pillow-2 | 200 | Reading | 899 (4.5x) | 0.76 | 202 | 76 | 0.38 | 1.01 | pass | pass |
+| parents-bed | room-parents-bed | 50 (min) | Day | 208 (4.2x) | 0.05 | 209 | 85 | 0.41 | 4.18 | pass | n/a |
 | parents-dressing | room-parents-dressing | 100 (min) | Day | 355 (3.5x) | 0.60 | 390 | 308 | 0.79 | 3.90 | pass | n/a |
 | parents-ensuite | pe-basin | 300 | Day | 658 (2.2x) | 0.82 | 299 | 266 | 0.89 | 1.00 | pass | pass |
 | parents-ensuite | room-parents-ensuite | 50 (min) | Day | 131 (2.6x) | 0.41 | 118 | 63 | 0.54 | 2.36 | pass | n/a |
-| parents-entry | room-parents-entry | 30 (min) | Day | - | - | 74 | 64 | 0.87 | 2.48 | pass | n/a |
+| parents-entry | room-parents-entry | 30 (min) | Day | - | - | 75 | 61 | 0.82 | 2.49 | pass | n/a |
 | store-ramp | room-store-ramp | 50 (min) | Day | 119 (2.4x) | 0.50 | 180 | 112 | 0.62 | 3.59 | pass | n/a |
 | study-game | room-study-game | 6 (min) | Day | 523 (87.2x) | 0.20 | 306 | 146 | 0.48 | 50.99 | pass | n/a |
 | study-game | study-adult-desk | 400 | Day | 800 (2.0x) | 0.33 | 398 | 304 | 0.76 | 0.99 | pass | pass |

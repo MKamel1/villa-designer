@@ -1550,10 +1550,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 203.06478080696002,
+      "achieved": 204.25742346760003,
       "required": 200,
       "unit": "lx",
-      "message": "Eavg 203 lx vs card 200 lx; allowed 180-220 lx (1.02x of target)",
+      "message": "Eavg 204 lx vs card 200 lx; allowed 180-220 lx (1.02x of target)",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1565,10 +1565,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 203.06478080696002,
+      "achieved": 204.25742346760003,
       "required": 300.0,
       "unit": "lx",
-      "message": "Eavg 203 lx vs cap 300 lx (1.5 x card 200 lx): 1.02 x target",
+      "message": "Eavg 204 lx vs cap 300 lx (1.5 x card 200 lx): 1.02 x target",
       "source_ids": [
         "L6-POLICY-LA2-over-lighting-1.5x"
       ],
@@ -1580,10 +1580,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 0.3687905147313128,
+      "achieved": 0.41863860952874443,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=20 Em 203 Emin 75 Emax 355 lx; U0 0.37; max:avg 1.75; avg:min 2.71",
+      "message": "reported: n=20 Em 204 Emin 86 Emax 352 lx; U0 0.42; max:avg 1.72; avg:min 2.39",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1595,7 +1595,7 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 201.57273178436003,
+      "achieved": 201.84190579096,
       "required": 200,
       "unit": "lx",
       "message": "Eavg 202 lx vs card 200 lx; allowed 180-220 lx (1.01x of target)",
@@ -1610,7 +1610,7 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 201.57273178436003,
+      "achieved": 201.84190579096,
       "required": 300.0,
       "unit": "lx",
       "message": "Eavg 202 lx vs cap 300 lx (1.5 x card 200 lx): 1.01 x target",
@@ -1625,10 +1625,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 0.4001695541036402,
+      "achieved": 0.3777836782485194,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=20 Em 202 Emin 81 Emax 344 lx; U0 0.40; max:avg 1.71; avg:min 2.50",
+      "message": "reported: n=20 Em 202 Emin 76 Emax 350 lx; U0 0.38; max:avg 1.73; avg:min 2.65",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1640,10 +1640,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-bed/Day",
-      "achieved": 210.2412501607869,
+      "achieved": 208.82294336734427,
       "required": 50,
       "unit": "lx",
-      "message": "minimum-gauged task: achieved 210 lx vs card 50 lx minimum",
+      "message": "minimum-gauged task: achieved 209 lx vs card 50 lx minimum",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1655,10 +1655,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-bed/Day",
-      "achieved": 0.404552735825882,
+      "achieved": 0.40591721251092916,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=244 Em 210 Emin 85 Emax 707 lx; U0 0.40; max:avg 3.36; avg:min 2.47",
+      "message": "reported: n=244 Em 209 Emin 85 Emax 711 lx; U0 0.41; max:avg 3.41; avg:min 2.46",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1670,10 +1670,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-entry/Day",
-      "achieved": 74.4310441668,
+      "achieved": 74.73406807580001,
       "required": 30,
       "unit": "lx",
-      "message": "minimum-gauged task: achieved 74 lx vs card 30 lx minimum",
+      "message": "minimum-gauged task: achieved 75 lx vs card 30 lx minimum",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1685,10 +1685,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-entry/Day",
-      "achieved": 0.8662811050655732,
+      "achieved": 0.8206455257031515,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=40 Em 74 Emin 64 Emax 88 lx; U0 0.87; max:avg 1.19; avg:min 1.15",
+      "message": "reported: n=40 Em 75 Emin 61 Emax 91 lx; U0 0.82; max:avg 1.22; avg:min 1.22",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],

@@ -709,7 +709,7 @@
    "luminaire_ids": [
     "lum-COVE-parents-entry-01"
    ],
-   "watts": 4.0,
+   "watts": 8.0,
    "dimming": "dali2"
   },
   {

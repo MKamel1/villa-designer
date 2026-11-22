@@ -19323,7 +19323,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 360.0,
+    "flux_lm": 720.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -19347,7 +19347,7 @@
     ],
     "length_mm": 800.0,
     "illuminance_card": "ies-res-passage-30",
-    "why": "entry lobby cove on the bedroom side, aimed up and into the lobby: a 0.30 m band at 2.70 with a 50 mm upstand, the strip standing on the band 30 mm behind the upstand (z 2.72) under the 2.80 soffit: hidden from the pillows by the band, from the lobby by the upstand (LA4)",
+    "why": "entry lobby cove on the bedroom side, aimed up and into the lobby: a 0.30 m band at 2.70 with a 30 mm upstand, the strip standing on the band 30 mm behind the upstand (z 2.72) in a closed trough under the 2.80 soffit: hidden from the pillows by the band, from the lobby by the upstand (LA4)",
     "emitter_z_scene_mm": 2720.0,
     "size_basis": "authored run length (strip); section not authored",
     "type_id": "type-luminaire---COVE-strip-800-0"
@@ -25878,7 +25878,7 @@
       ]
      }
     ],
-    "basis": "one-sided cove on the bedroom side: false ceiling at 2700 mm in a 300 mm band (bulkhead) with a 50 mm upstand on its lobby edge, the LED strip standing on the band behind it, slab soffit exposed at 2800 mm in the field (villa_lighting CEILING / LOBBY_COVE_DEPTH / COVE_FIELD)",
+    "basis": "one-sided cove on the bedroom side: false ceiling at 2700 mm in a 300 mm band (bulkhead) with a 30 mm upstand on its lobby edge, the LED strip standing on the band behind it in a closed trough, slab soffit exposed at 2800 mm in the field (villa_lighting CEILING / LOBBY_COVE_DEPTH / COVE_FIELD)",
     "sampled_points": 81,
     "unsampled_points": 0,
     "layers": [
@@ -32737,7 +32737,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 360.0,
+     "flux_lm": 720.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
