@@ -137,6 +137,8 @@ def submit(argv):
     sp.add_argument('--host', default='ai-workstation')
     sp.add_argument('--id')
     sp.add_argument('--gpu', action='store_true')
+    sp.add_argument('--vram-mb', type=int, help='VRAM this GPU job needs (default 6000); waits until free + 1 GB margin')
+    sp.add_argument('--exclusive', action='store_true', help='run with no other GPU job (finals, timing measurements)')
     sp.add_argument('--timeout', type=int, default=3600)
     sp.add_argument('--attempts', type=int, default=2)
     sp.add_argument('--cwd')
@@ -148,10 +150,10 @@ def submit(argv):
     if not cmd:
         sp.error('no command after --')
     remote = '$HOME/archpipe/bin/jobq submit --timeout %d --attempts %d' % (a.timeout, a.attempts)
-    for flag, on in (('--gpu', a.gpu), ('--retry', a.retry)):
+    for flag, on in (('--gpu', a.gpu), ('--exclusive', a.exclusive), ('--retry', a.retry)):
         remote += (' ' + flag) if on else ''
-    for flag, val in (('--id', a.id), ('--cwd', a.cwd)):
-        remote += (' %s %s' % (flag, shlex.quote(val))) if val else ''
+    for flag, val in (('--id', a.id), ('--cwd', a.cwd), ('--vram-mb', a.vram_mb)):
+        remote += (' %s %s' % (flag, shlex.quote(str(val)))) if val else ''
     remote += ' -- ' + shlex.join(cmd)
     result = _ssh(a.host, remote)
     if result.returncode:

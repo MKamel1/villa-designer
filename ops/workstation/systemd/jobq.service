@@ -1,8 +1,9 @@
 [Unit]
-Description=jobq: workstation job queue (GPU jobs serialised by ~/archpipe/locks/graphics.lock)
+Description=jobq: workstation job queue (GPU slots = graphics.lock, graphics.lock.1, ...)
 
 [Service]
-ExecStart=%h/archpipe/bin/jobq daemon
+# 4 CPU jobs + 2 GPU jobs at once; keeps 8+ of 32 threads free for lanes' test suites. Edit here, then install_jobq.sh.
+ExecStart=%h/archpipe/bin/jobq --cpu-slots 4 --gpu-slots 2 daemon
 Restart=always
 RestartSec=5
 # Restarting or stopping the daemon must not kill running jobs; they are separate sessions that jobq re-adopts.
