@@ -1,0 +1,231 @@
+{
+ "slug": "farfugium_japonicum",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Farfugium japonicum (L.) Kitam.",
+    "family": "Asteraceae",
+    "common_names": [
+     "leopard plant",
+     "tractor seat plant"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Farfugium%20japonicum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Farfugium japonicum (L.) Kitam.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.9,
+    "text": "1-3 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 1 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "growth rate not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "shade"
+    ],
+    "hours_text": "performs best in shade; leaves burn easily in sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It performs best in shade with leaves burning easily in the sun."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "deep waterings in summer months"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it will do best to receive deep waterings in summer months."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "tolerates drier soils than other members of the genus (relative statement only)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "though this species tolerates drier soils than other members of this genus"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "leaves die back below 20 F (about -6.7 C)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "yellow"
+    ],
+    "text": "yellow blooms in summer lasting through fall (mapped Jun-Nov)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Showy yellow blooms appear in summer, lasting through fall and dying back by winter."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "basal clumps of kidney-shaped spotted leaves; die back below 20 F"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Basal clumps of kidney shaped spotted leaves with long petioles die back at temps below 20 degrees F."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "roots not described",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "toxicity not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Medium"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

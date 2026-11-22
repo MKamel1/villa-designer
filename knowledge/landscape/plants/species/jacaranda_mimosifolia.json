@@ -1,0 +1,282 @@
+{
+ "slug": "jacaranda_mimosifolia",
+ "layers": [
+  "canopy_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Jacaranda mimosifolia D.Don",
+    "family": "Bignoniaceae",
+    "common_names": [
+     "jacaranda",
+     "black poui"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Jacaranda%20mimosifolia",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 7.6,
+    "max": 15.2,
+    "text": "25-50 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 25 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 4.6,
+    "max": 7.6,
+    "text": "15-25 ft (converted); UF Gardening Solutions says 40-60 ft wide in Florida"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 15 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "watered only in drought once established; wet soil gives root rot"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "accessed": "2026-11-22",
+    "locator": "Planting/care",
+    "quote": "In wet soils it is prone to root rot; water it only in drought conditions until it is established"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Heat Humidity"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "very drought tolerant once established"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "accessed": "2026-11-22",
+    "locator": "Overview",
+    "quote": "Once established, jacaranda is very drought tolerant, but not salt tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "prefers pH 6.5-7.5, tolerates 6-8.5 (range includes alkaline); NCSU lists only acid (<6.0)"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a pH in the range 6.5 - 7.5, tolerating 6 - 8.5"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "none",
+    "text": "UF: not salt tolerant. Conflicting: Tropical Plants Database says it tolerates salt-laden winds"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "accessed": "2026-11-22",
+    "locator": "Overview",
+    "quote": "Once established, jacaranda is very drought tolerant, but not salt tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9b",
+    "min_temp_c": -5,
+    "damage_text": "young growth intolerant of frost; older trees sometimes withstand short-lived lows to -5 C. NCSU zones 9b-13b"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Young growth is intolerant of frost, but older trees can sometimes withstand occasional short-lived lows to -5°c"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "lavender",
+     "violet",
+     "purple",
+     "white"
+    ],
+    "text": "blooms spring and summer, usually around May, as early as April or as late as August (Florida)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "accessed": "2026-11-22",
+    "locator": "Overview",
+    "quote": "Jacaranda blooms during the spring and summer, usually around May but sometimes as early as April or as late as August"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "fern-like bipinnately compound leaves; flowers while leafless (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Woody Plant Leaf Characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Deciduous"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "No source states whether roots are invasive or non-invasive (Tropical Plants DB only says deep-rooted).",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Sources consulted state no toxicity-to-people information (silence is not safety).",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia"
+   ]
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "moderate",
+    "fruit": "not_stated",
+    "flower": "moderate",
+    "text": "drops leaves and flowers yearly; \"significant amount of leaf litter\"; NCSU problem list: Messy"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
+    "accessed": "2026-11-22",
+    "locator": "Landscape use",
+    "quote": "it drops both leaves and flowers yearly"
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU Maintenance: Low; also Problems: Messy, Weak Wood"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "toxicity_pets": {
+  "status": "SOURCED",
+  "value": {
+   "text": "tagged non-toxic for dogs and cats (pets only; not people)"
+  },
+  "source": {
+   "source_id": "NCSU",
+   "url": "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
+   "accessed": "2026-11-22",
+   "locator": "Tags",
+   "quote": "non-toxic for dogs"
+  }
+ }
+}

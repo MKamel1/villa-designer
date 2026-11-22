@@ -1,0 +1,255 @@
+{
+ "slug": "nassella_tenuissima",
+ "layers": [
+  "grass"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Nassella tenuissima (Trin.) Barkworth",
+    "family": "Poaceae",
+    "common_names": [
+     "Mexican feather grass",
+     "Texas needle grass"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Nassella%20tenuissima",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Nassella tenuissima (Trin.) Barkworth\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.61,
+    "text": "1-2 ft (converted); RHS to 60 cm"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.61,
+    "text": "1-2 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun 6+ h; partial shade 2-6 h"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "RHS moisture: moist but well-drained or well-drained; NCSU: overly wet soils can cause root rot"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details",
+    "accessed": "2026-11-22",
+    "locator": "Moisture",
+    "quote": "Moist but well–drained or Well–drained"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "NCSU states poor performance in hot HUMID conditions (southeastern US); no statement about hot dry climates"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This plant will not do well in the hot humid conditions of the southeast."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant but may go dormant in the hottest months in drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is drought tolerant but may go dormant during the hottest months in drought conditions."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS: tolerates acid, alkaline or neutral soil; NCSU lists acid and neutral"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid, alkaline, or neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "hardiness zones 7a-10b; RHS H4"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "gold/yellow",
+     "gray/silver",
+     "white"
+    ],
+    "text": "silvery inflorescence from summer to fall; RHS: pale brown feathery panicles in summer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Silvery inflorescence from summer to fall."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "compact upright tuft of thread-like leaves (RHS); turn light brown in winter (NCSU)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details",
+    "accessed": "2026-11-22",
+    "locator": "Foliage",
+    "quote": "Deciduous"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "not mentioned on NCSU or RHS pages; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU notes only that it produces 1000's of seeds; no litter class stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "https://www.rhs.org.uk/plants/202303/nassella-tenuissima/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "NCSU maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nassella_tenuissima/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Medium"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "invasive_flag": "NCSU: readily escapes the garden by producing 1000's of seeds; considered invasive in Australia; problematic in areas of CA"
+}

@@ -1,0 +1,241 @@
+{
+ "slug": "zantedeschia_aethiopica",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Zantedeschia aethiopica (L.) Spreng.",
+    "family": "Araceae",
+    "common_names": [
+     "calla lily",
+     "arum lily"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Zantedeschia%20aethiopica",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Zantedeschia aethiopica (L.) Spreng.\",\"canonicalName\":\"Zantedeschia aethiopica\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.9,
+    "text": "2-3 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They typically grow 2 to 3 feet tall"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits, Width",
+    "quote": "Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade; in hotter climates partial shade is preferred"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Plant in the full sun to partial shade in moist, organically rich soil"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "moist, organically rich soil; survives up to 12 in of water; pond margins"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They can survive in up to 12\" of water, so they work well along pond margins or rain garden."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "hotter climates: partial shade preferred to avoid leaf and flower scorch (class moderate is our reading)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "In hotter climates, partial shade is preferred to avoid leaf and flower scorch"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "deciduous in a prolonged dry season; low drought tolerance inferred, source gives no rating"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "but are deciduous when cold temperatures hit or there is a prolonged dry season."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "NCSU lists acid/neutral/alkaline pH headings without indicating which apply",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "deciduous when cold temperatures hit; survives zone 7 if protected"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They are hardy to zone 8 but can survive in zone 7 if protected"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "June to July, white funnel-shaped spathes"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Callas will bloom from June to July with large showy funnel-shaped white spadix flowers."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "large fleshy heart to arrow-shaped green leaves with wavy margins"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Semi-evergreen Habit/Form: Clumping"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "source says rhizomatous perennial only; nothing on invasiveness or damage",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "ASPCA: insoluble calcium oxalates; oral irritation, burning of mouth, drooling, vomiting (pets). NCSU: medium severity poison characteristics. Class toxic from wording; ASPCA is pets only"
+   },
+   "source": {
+    "source_id": "ASPCA",
+    "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/calla-lily",
+    "accessed": "2026-11-22",
+    "locator": "Toxicity",
+    "quote": "Toxicity: Toxic to Dogs, Toxic to Cats"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/",
+    "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/calla-lily"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "NCSU lists both Low and Medium under Maintenance; no single rating",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/zantedeschia-aethiopica/"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

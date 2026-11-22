@@ -170,18 +170,21 @@ def load_species(directory: Path = DATA / "species") -> dict[str, dict]:
 
 
 def site_viability(rec: dict, climate: dict = SITE_CLIMATE) -> dict:
-    """Derived (never stored by hand): viable / viable_with_conditions / not_viable / unknown + reasons.
+    """Derived (never stored by hand). Per factor: pass / conditional / fail / unknown, then a verdict.
 
-    Frost: hardy to <= the policy floor (0 C) passes; hardy only to 0..typical-year minimum
-    (5.1 C) is conditional; tender above that fails; a GAP is unknown. Heat: class 'low' fails,
-    'moderate' is conditional. Alkaline soil: 'intolerant' is conditional (site soil pH is not
-    tested). All thresholds are our policy and labelled so in docs/lanes/LDL.md.
+    Verdict: any fail -> not_viable; else any conditional -> viable_with_conditions; else any unknown
+    (a GAP in frost, heat or alkaline-soil tolerance) -> unverified; else viable. A GAP is never read as
+    a pass. Frost: hardy to <= the policy floor (0 C) passes; hardy only to 0..typical-year minimum
+    (5.1 C) is conditional; needs warmer than that fails. Heat: class low fails, moderate is conditional.
+    Alkaline soil: intolerant is conditional (site soil pH is untested). All thresholds are our policy
+    (docs/lanes/LDL.md), not a published standard.
     """
-    at, reasons, worst = rec["attributes"], [], 0   # 0 viable 1 conditional 2 not 3 unknown
-    def lvl(n): return max(worst, n)
-    f = at["frost"]
+    at, reasons = rec["attributes"], []
+    f, h, a = at["frost"], at["heat"], at["alkaline_soil"]
+    factors = {}
     if f["status"] != "SOURCED":
-        reasons.append("frost tolerance is a GAP"); worst = lvl(3)
+        factors["frost"] = "unknown"
+        reasons.append("frost tolerance is a GAP")
     else:
         v = f["value"]
         t = v.get("min_temp_c")
@@ -190,24 +193,31 @@ def site_viability(rec: dict, climate: dict = SITE_CLIMATE) -> dict:
             z = v["usda_zone_min"]
             t = round(-1.1 + (int(z[:-1]) - 10) * 5.56 + (2.78 if z[-1] == "b" else 0), 1)
         if t <= climate["frost_floor_policy_c"]:
-            pass
+            factors["frost"] = "pass"
         elif t <= climate["typical_year_min_c"]:
-            reasons.append(f"frost: hardy only to {t} C; typical-year minimum is {climate['typical_year_min_c']} C, floor policy {climate['frost_floor_policy_c']} C"); worst = lvl(1)
+            factors["frost"] = "conditional"
+            reasons.append(f"frost: hardy only to {t} C; typical-year minimum is {climate['typical_year_min_c']} C, floor policy {climate['frost_floor_policy_c']} C")
         else:
-            reasons.append(f"frost: needs >= {t} C but typical-year minimum is {climate['typical_year_min_c']} C"); worst = lvl(2)
-    h = at["heat"]
+            factors["frost"] = "fail"
+            reasons.append(f"frost: needs >= {t} C but typical-year minimum is {climate['typical_year_min_c']} C")
     if h["status"] != "SOURCED":
-        reasons.append("heat tolerance is a GAP"); worst = lvl(3)
+        factors["heat"] = "unknown"; reasons.append("heat tolerance is a GAP")
     elif h["value"]["class"] == "low":
-        reasons.append("heat: low tolerance; 154 days with daily max above 30 C"); worst = lvl(2)
+        factors["heat"] = "fail"; reasons.append("heat: low tolerance; 154 days with daily max above 30 C")
     elif h["value"]["class"] == "moderate":
-        reasons.append("heat: moderate tolerance; plant in afternoon shade or verify locally"); worst = lvl(1)
-    a = at["alkaline_soil"]
+        factors["heat"] = "conditional"; reasons.append("heat: moderate tolerance; plant in afternoon shade or verify locally")
+    else:
+        factors["heat"] = "pass"
     if a["status"] != "SOURCED":
-        reasons.append("alkaline-soil tolerance is a GAP (site soil unmeasured)"); worst = lvl(3)
+        factors["alkaline_soil"] = "unknown"; reasons.append("alkaline-soil tolerance is a GAP (site soil unmeasured)")
     elif a["value"]["class"] == "intolerant":
-        reasons.append("alkaline soil: intolerant; site soil pH not tested"); worst = lvl(1)
-    return {"verdict": ("viable", "viable_with_conditions", "not_viable", "unknown")[worst], "reasons": reasons}
+        factors["alkaline_soil"] = "conditional"; reasons.append("alkaline soil: intolerant; site soil pH not tested")
+    else:
+        factors["alkaline_soil"] = "pass"
+    vals = set(factors.values())
+    verdict = ("not_viable" if "fail" in vals else "viable_with_conditions" if "conditional" in vals
+               else "unverified" if "unknown" in vals else "viable")
+    return {"verdict": verdict, "factors": factors, "reasons": reasons}
 
 
 def build_plants_json(directory: Path = DATA / "species", out: Path = DATA / "plants.json") -> dict:

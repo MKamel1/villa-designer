@@ -1,0 +1,242 @@
+{
+ "slug": "ficus_carica",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ficus carica L.",
+    "family": "Moraceae",
+    "common_names": [
+     "common fig"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ficus%20carica",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Moraceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 9.1,
+    "text": "10-30 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 10 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 9.1,
+    "text": "10-30 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 10 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Plant common fig in full sun to partial shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "well-drained, moist soil; Mulch roots to maintain moisture"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "organically rich, well-drained, moist soil that is neutral to acidic"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement of heat tolerance (only 'south wall ... radiant heat' for cold sites)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "prefers neutral to acidic soil; does not tolerate alkaline soils (page pH field lists acid and neutral only)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it does not tolerate alkaline soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "mulch roots in fall to protect through winter; south-wall siting advised in zone 7"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [],
+    "text": "flowers insignificant, hidden inside the fruit receptacle (spring); not an ornamental bloom"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "The flower is not visible as it blooms inside a hollow receptacles"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "large coarse rough leaves; rounded habit"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Common fig is a woody, deciduous, multi-stemmed, spreading tree or shrub"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "page states suckers/thickets, not a root-behaviour class",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-carica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "Poison Severity: Low; toxic principle furanocoumarins in sap; contact dermatitis; also problem for cats, dogs, horses"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "Poison Symptoms: Phytophotodermatitis from the white, milky sap."
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "moderate",
+    "flower": "not_stated",
+    "text": "fruit drop can be messy (tags: messy, messy fruits); class mapped by us"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Insects, Diseases and Other Plant Problems",
+    "quote": "Fruit drop can be messy."
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium; produces many suckers"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit",
+ "invasive_flag": "NCSU: In Florida and California, it has become invasive.; also tagged weedy (suckers form thickets)"
+}

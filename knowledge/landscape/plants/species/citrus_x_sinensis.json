@@ -1,0 +1,249 @@
+{
+ "slug": "citrus_x_sinensis",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Citrus ×aurantium L.",
+    "family": "Rutaceae",
+    "common_names": [
+     "sweet orange"
+    ],
+    "note": "GBIF backbone treats C. sinensis as a synonym of Citrus ×aurantium; species named in the lane list is the sweet orange"
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Citrus%20sinensis",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "Citrus sinensis (Mill.) Pers. status SYNONYM of accepted Citrus ×aurantium L. (usageKey 8077391)"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 9.1,
+    "text": "8-30 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 8 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 4.6,
+    "text": "8-15 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 8 ft. 0 in. - 15 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "6 or more hours of direct sunlight a day; shade intolerant (tag)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "flourishes when kept moist; do not overwater; wet soils intolerant (tag)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is drought tolerant but flourishes when kept moist. Do not overwater."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant but flourishes when kept moist"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is drought tolerant but flourishes when kept moist."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "prefers pH 5-6 but tolerates neutral or alkaline"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It prefers a pH of 5 - 6 but will tolerate a neutral or alkaline range as well."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "frost tender; USDA zones 9a-11b listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is frost tender"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     12,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "Bloom time listed as Winter and Spring (months mapped by us: Dec-May); fragrant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Clusters of up to six fragrant, creamy white flowers bloom on the ends of the branches."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy green leaves; thorns"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet orange is an evergreen tree in the Rutaceae family"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "root behaviour (only 'dislikes root disturbance'): not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "Vomiting, diarrhea, depression; potential dermatitis. The fruit is edible, skins and plant material can cause problems. Also flagged problem for cats, dogs, horses."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "Poison Severity: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit",
+ "notes": "drought class 'high' follows the brief's mapping of 'drought tolerant'; page also says flourishes when kept moist."
+}

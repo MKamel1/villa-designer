@@ -1,0 +1,240 @@
+{
+ "slug": "ophiopogon_japonicus",
+ "layers": [
+  "groundcover_lawn",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ophiopogon japonicus (Thunb.) Ker Gawl.",
+    "family": "Asparagaceae",
+    "common_names": [
+     "mondo grass",
+     "dwarf lilyturf"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ophiopogon%20japonicus",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Ophiopogon japonicus"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.3,
+    "text": "0.5-1 ft (converted); page: up to 1 foot tall and wide"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 0 ft. 6 in. - 1 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.3,
+    "text": "0.5-1 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 0 ft. 6 in. - 1 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade",
+     "shade",
+     "full_sun"
+    ],
+    "hours_text": "prefers shade; sun tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "This plant prefers shade and moist, well-drained soils. It is sun tolerant"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "prefers shade and moist, well-drained soils"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "highly salt-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "highly salt-tolerant and resists deer and foot traffic"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "zones 6a-10b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "pale lilac",
+     "white",
+     "pink",
+     "purple/lavender"
+    ],
+    "text": "blooms in summer (mapped to Jun-Aug)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Flowers bloom in the summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen, clumping/mounding, mat by stolons"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Broadleaf Evergreen."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "only 'lateral underground stolons'; no damage statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "silent on toxicity",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "ASPCA page (pets only)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low; turf alternative mowed yearly"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

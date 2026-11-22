@@ -1,0 +1,242 @@
+{
+ "slug": "fatsia_japonica",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Fatsia japonica (Thunb.) Decne. & Planch.",
+    "family": "Araliaceae",
+    "common_names": [
+     "fatsia",
+     "Japanese aralia"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Fatsia%20japonica",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Fatsia japonica (Thunb.) Decne. & Planch.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 5.9,
+    "text": "6 ft - 19 ft 6 in converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 6 ft. 0 in. - 19 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 1.8,
+    "text": "4-6 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 4 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "growth rate not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "grows best in moist, well-drained soil; too much moisture causes root rot"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The plant grows best in acidic, moist, well-drained, humus-rich, fertile soils."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates drought once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates drought once established."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "grows best in acidic soil; soil pH attributes list acid, neutral and alkaline"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description / Soil pH",
+    "quote": "The plant grows best in acidic, moist, well-drained, humus-rich, fertile soils."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerant of pollution and salt spray (spray, not soil salinity)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "is tolerant of pollution and salt spray."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7b",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 7b-10b; no frost damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     10,
+     11
+    ],
+    "colours": [
+     "cream white"
+    ],
+    "text": "blooms in autumn (mapped to Oct-Nov)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Fatsia blooms in autumn."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "large palmately-lobed leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Evergreen shrub with large, palmately-lobed leaves"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "roots not described",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "human toxicity not stated (pets: non-toxic tags only)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low; prune any time to shape"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NCSU tags: non-toxic for cats, dogs, horses."
+}

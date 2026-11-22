@@ -1,0 +1,215 @@
+{
+ "slug": "zoysia_japonica",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Zoysia japonica Steud.",
+    "family": "Poaceae",
+    "common_names": [
+     "Japanese lawngrass",
+     "zoysiagrass"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Zoysia%20japonica",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Zoysia japonica"
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "only mowing height (about 2 in) given, not mature height",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "Most zoysiagrass varieties grow very slowly as compared to other grasses."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "dense turf in full sun and partial shade, thins in dense shade"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "The zoysiagrasses form a dense, attractive turf in full sun and partial shade, but often thin out in dense shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "same water as other grasses to remain green (UF/IFAS Gardening Solutions)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "They require about the same amount of water as other grasses to remain green and healthy, but may need less fertilizer."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "cultivar Empire: excellent heat tolerance; zoysia grows best in warm months"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "grows best during the warm (80 to 95 °F) months of spring, summer and early fall"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "cultivar Empire: very good to excellent drought tolerance (cultivar-specific statement)"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "very good to excellent drought tolerance"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "can have good tolerance to shade, salt, traffic; cultivar Compadre extremely tolerant (Clemson)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "can have good tolerance to shade, salt, and traffic"
+   }
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "states cold-tolerant, browns at first frost; no zone or temperature",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "turf; turns brown with first fall frost and dormant in winter"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "Zoysiagrass will turn brown with the first fall frost and remain dormant during the winter."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "rapid spread by stolons/rhizomes, deep thick roots (cultivar Empire); no statement on damage",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "silent on toxicity",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "thatch only (Emerald); no leaf/fruit/flower litter statement",
+   "searched": [
+    "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/lawns/zoysiagrass/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "considered high maintenance turf"
+   },
+   "source": {
+    "source_id": "Clemson-HGIC",
+    "url": "https://hgic.clemson.edu/factsheet/zoysiagrass/",
+    "accessed": "2026-11-22",
+    "locator": "Zoysiagrass",
+    "quote": "A zoysiagrass lawn is considered a high maintenance turf, as is bermudagrass and St. Augustinegrass."
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

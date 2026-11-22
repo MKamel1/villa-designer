@@ -1,0 +1,231 @@
+{
+ "slug": "plumeria_rubra",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Plumeria rubra L.",
+    "family": "Apocynaceae",
+    "common_names": [
+     "frangipani",
+     "plumeria"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Plumeria%20rubra",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Apocynaceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "UF page says only 'range in size from shrubs to small trees' (genus level); no numbers",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no spread given",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "genus-level statement (plumerias)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Introduction",
+    "quote": "they grow fast and often outshine their mature peers in the landscape"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "Plumeria grows best in full sun and well-drained soil."
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no water-need rating",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "best suited to tropical climates; mapped by us from climate suitability, no explicit heat-tolerance wording"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "Plumerias are best suited to tropical climates, USDA Hardiness Zones 10B-11."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "fairly drought-tolerant once established"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "They are fairly drought- and salt-tolerant once they are established in the landscape."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no soil pH statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "fairly salt-tolerant once established"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "They are fairly drought- and salt-tolerant once they are established in the landscape."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10b",
+    "min_temp_c": null,
+    "damage_text": "susceptible to cold damage; some regeneration possible if not killed to ground; heavy damage or death possible in zone 9b"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "Plumerias are best suited to tropical climates, USDA Hardiness Zones 10B-11."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "white",
+     "yellow",
+     "orange",
+     "pink",
+     "red"
+    ],
+    "text": "highly aromatic"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Characteristics",
+    "quote": "Flowers bloom between May and November and range from pure white, to yellow, orange, pink, red, or some combination of these colors."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "leaf loss in winter dormancy (Florida); stems stay green"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Characteristics",
+    "quote": "In Florida, most plumeria tend to be dormant and lose their leaves in the winter months."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "sap contains harmful irritants; not considered particularly poisonous relative to other landscape plants; no recorded deaths. Consideration for pets and children."
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "the sap of these plants contains harmful irritants."
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement (winter leaf drop only)",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance rating (rust is a persistent problem)",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "UF/IFAS page is genus-level (plumerias; links to Plumeria rubra); statements applied to P. rubra on that basis."
+}

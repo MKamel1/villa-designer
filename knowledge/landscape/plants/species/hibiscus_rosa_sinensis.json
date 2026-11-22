@@ -1,0 +1,235 @@
+{
+ "slug": "hibiscus_rosa_sinensis",
+ "layers": [
+  "screen_hedge",
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Hibiscus rosa-sinensis L.",
+    "family": "Malvaceae",
+    "common_names": [
+     "Chinese hibiscus",
+     "hibiscus"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Hibiscus%20rosa-sinensis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Hibiscus rosa-sinensis L.; status ACCEPTED; family Malvaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 3.0,
+    "text": "4-10 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 4 to 10 feet high and 5 to 8 feet wide"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 2.4,
+    "text": "5-8 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 4 to 10 feet high and 5 to 8 feet wide"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Chinese hibiscus has a medium growth rate and requires some maintenance and care."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Plant in a location with full sun to partial shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "roots should be kept moist"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Water",
+    "quote": "The roots should be kept moist."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "page gives humidity/wind/frost needs, no heat statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "page silent on drought",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "page silent on soil pH",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "page silent on salt",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "needs protection from wind and frost; zones 9a-11b"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "appreciates high humidity and needs protection from wind and frost"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "yellow",
+     "pink",
+     "red",
+     "white"
+    ],
+    "text": "large funnel-shaped flowers bloom in summer; bloom time listed spring, summer, fall (seasons mapped to months)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Its large funnel-shaped flowers bloom in summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "tropical evergreen shrub"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This is a tropical, evergreen plant"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "page does not describe root system",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU silent on toxicity; ASPCA page opened covers Hibiscus syriacus only, not this species",
+   "searched": [
+    "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/hibiscus"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU silent on litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium; prune back by about one-half in early spring"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hibiscus-rosa-sinensis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "uses": "flowers listed as edible by NCSU"
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "slug": "ficus_microcarpa",
+ "layers": [
+  "canopy_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ficus microcarpa L.fil.",
+    "family": "Moraceae",
+    "common_names": [
+     "Chinese banyan",
+     "Indian laurel fig"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ficus%20microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 15.2,
+    "text": "2-50 ft (converted); NCSU range spans shrub/houseplant to tree"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 12.2,
+    "text": "2-40 ft (converted); NCSU says 40 ft crown outdoors in Mediterranean climates"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 2 ft. 0 in. - 40 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "A fast-growing species"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day); Partial Shade (2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "prefers a moist fertile soil; NCSU drainage: Good Drainage, Moist; root rot from overwatering"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a moist, fertile soil"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "No heat-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "No drought-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "No soil-pH statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "No salt-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "NCSU hardiness zones 9a-11b; no damage temperature stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "gold/yellow",
+     "green"
+    ],
+    "text": "inverted fig flower inside the fruit-like structure, under 1 inch; season not stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Flower Description",
+    "quote": "Like other Ficus species, the flower is inverted."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "leathery glossy green leaves, dense spreading crown, aerial roots"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Woody Plant Leaf Characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "aerial roots can damage pavement if not properly managed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "the areal roots can damage pavement if not properly managed"
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Sources opened state nothing about toxicity.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "No litter statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "NCSU Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "invasive_flag": "NCSU: considered invasive in many parts of the world; NCSU Problems: Weedy"
+}

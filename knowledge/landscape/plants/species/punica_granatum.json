@@ -1,0 +1,244 @@
+{
+ "slug": "punica_granatum",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Punica granatum L.",
+    "family": "Lythraceae",
+    "common_names": [
+     "pomegranate"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Punica%20granatum",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Lythraceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 3.7,
+    "text": "10-12 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 10 ft. 0 in. - 12 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 3.0,
+    "text": "8-10 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 8 ft. 0 in. - 10 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun (6 or more hours) or partial shade (2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Pomegranate grows in partial shade to full sun."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "good drainage and moisture; no explicit water-need rating, class mapped by us"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates all types of soil as long as there is good drainage and moisture."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "prefers warm, arid regions"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "this plant prefers warm, arid regions"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant; Resistance: Drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The shrub is drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "tolerates all soil types given drainage; Soil pH lists acid, neutral, alkaline (>8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates all types of soil as long as there is good drainage and moisture."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": -12.2,
+    "damage_text": "killed to the ground below 10 F (-12.2 C); USDA zones 8a-10b listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The plant usually survives the winter but will be killed to the ground at temperatures below 10° F."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "orange",
+     "red",
+     "pink",
+     "yellow",
+     "white"
+    ],
+    "text": "early summer to fall (months mapped by us: Jun-Oct); long bloom season tag"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "cluster at the ends of branches in early summer to fall"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "multi-stemmed, oval to rounded habit, coarse texture"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/punica-granatum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Pomegranate is a woody, deciduous, perennial shrub or tree with edible fruit"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no toxicity statement for people",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no Maintenance field on the page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit (juice from fleshy seeds)"
+}

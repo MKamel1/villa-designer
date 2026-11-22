@@ -1,0 +1,242 @@
+{
+ "slug": "callistemon_citrinus",
+ "layers": [
+  "screen_hedge",
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Callistemon citrinus (Curtis) Skeels",
+    "family": "Myrtaceae",
+    "common_names": [
+     "crimson bottlebrush",
+     "lemon bottlebrush"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Callistemon%20citrinus",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Callistemon citrinus (Curtis) Skeels; status ACCEPTED; family Myrtaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 4.6,
+    "text": "10-15 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it can reach 10 to 15 feet high"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 4.6,
+    "text": "similar width to 10-15 ft height (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "10 to 15 feet high with a similar width"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "a moderate growth rate"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "page gives drought tolerance but no water-need wording",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "page gives only cold hardiness, no heat statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "established plants are drought tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "established plants are drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "page lists Acid (<6.0) soil and notes leaf yellowing on alkaline soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Soil / problems",
+    "quote": "Leaf yellowing can occur when the soil is high in alkaline or salt."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "leaf yellowing when soil is high in salt; no salt tolerance claimed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "problems",
+    "quote": "Leaf yellowing can occur when the soil is high in alkaline or salt."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": -6.7,
+    "damage_text": "winter hardy down to 20 or 25 F (-6.7 to -3.9 C); USDA zones 9-10"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Hardiness",
+    "quote": "winter hardy down to 20 or 25 degrees F"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     9,
+     10
+    ],
+    "colours": [
+     "yellow",
+     "red"
+    ],
+    "text": "spring and again in fall (seasons mapped to months)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "The yellow or red flowers occur in long bottle brush-looking clusters in spring and again in fall."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen shrub or small tree"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "a broadleaf evergreen, perennial shrub or small tree"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU silent on roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU tags cats/dogs/horses only (pets); nothing on people",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU silent on litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "notes": "NCSU tags: non-toxic for cats, dogs, horses (pets only). Alkaline-soil chlorosis risk is directly relevant to the untested alkaline site soil."
+ }
+}

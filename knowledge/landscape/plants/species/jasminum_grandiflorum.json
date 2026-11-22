@@ -1,0 +1,191 @@
+{
+ "slug": "jasminum_grandiflorum",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Jasminum grandiflorum L.",
+    "family": "Oleaceae",
+    "common_names": [
+     "Spanish jasmine"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Jasminum%20grandiflorum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Jasminum grandiflorum L.; family Oleaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2,
+    "max": 4,
+    "text": "2-4 m tall (scrambling shrub)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "scrambling deciduous shrub growing to 2–4 m (6 ft 7 in – 13 ft 1 in) tall"
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "sun": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "opposite pinnate leaves with 5-11 leaflets; white flowers in open cymes"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is a scrambling deciduous shrub growing to 2–4 m"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
+    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
+    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
+   ]
+  }
+ }
+}

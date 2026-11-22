@@ -1,0 +1,227 @@
+{
+ "slug": "iris_laevigata",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Iris laevigata Fisch.",
+    "family": "Iridaceae",
+    "common_names": [
+     "rabbit-ear iris",
+     "water iris"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Iris%20laevigata",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Iris laevigata Fisch.\",\"canonicalName\":\"Iris laevigata\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "NCSU page gives no height",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "NCSU page gives no spread",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun for best flowering; tolerates partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "For the best flowering, it needs a location with full sun"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "soils with 2-8 in of standing water"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "soils that are acidic, rich, and have 2\"-8\" of standing water"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "NCSU page states no heat tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU page states no drought tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates some alkalinity; page also says soils acidic"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It will tolerate partial shade and some alkalinity in the soil."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "5a",
+    "min_temp_c": null,
+    "damage_text": "zones 5a-9b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6
+    ],
+    "colours": [
+     "purple",
+     "blue",
+     "violet"
+    ],
+    "text": "late spring to early summer (months 5-6 are our reading); flowers usually blue, purple or violet"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Showy purple flowers 4 inches wide appear in late spring and last through early summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "narrow strap-shaped upright leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Narrow strap-shaped upright leaves with entire margins that are erect."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU page states nothing on roots",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "ASPCA genus Iris (Water Flag): toxic to dogs, cats, horses; salivation, vomiting, diarrhoea, highest in rhizomes. Time-Saver Table 550-3 lists Iris sp. with vomiting & diarrhea. NCSU: low severity poison. Class mild from wording; ASPCA entry is pets only"
+   },
+   "source": {
+    "source_id": "ASPCA",
+    "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/iris",
+    "accessed": "2026-11-22",
+    "locator": "Toxicity",
+    "quote": "Toxicity: Toxic to Dogs, Toxic to Cats, Toxic to Horses"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish; ASPCA covers mammals only",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/iris"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/iris-laevigata/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "low maintenance perennial"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/iris-laevigata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Rabbit-Ear or Water Iris is a low maintenance perennial"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

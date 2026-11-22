@@ -1,0 +1,248 @@
+{
+ "slug": "origanum_majorana",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Origanum majorana L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "sweet marjoram"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Origanum%20majorana",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.6,
+    "text": "0.6 m (2 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Origanum majorana is a PERENNIAL growing to 0.6 m (2ft) by 0.6 m (2ft in) at a fast rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.6,
+    "text": "0.6 m (2 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Origanum majorana is a PERENNIAL growing to 0.6 m (2ft) by 0.6 m (2ft in) at a fast rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "source: fast rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Origanum majorana is a PERENNIAL growing to 0.6 m (2ft) by 0.6 m (2ft in) at a fast rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun (PFAF: can grow in semi-shade or no shade)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Plant Sweet Marjoram in average, dry to medium moisture, well-drained soil in the full sun."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "dry to medium moisture, well-drained"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Plant Sweet Marjoram in average, dry to medium moisture, well-drained soil in the full sun."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "excellent drought and heat tolerance once established; good for hot southern summers"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It has excellent drought and heat tolerance once established,"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "excellent drought tolerance once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It has excellent drought and heat tolerance once established,"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "https://plants.ces.ncsu.edu/plants/origanum-majorana/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "NCSU: tender perennial, may not survive winter north of zone 9 (PFAF lists hardiness 6-9)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet Marjoram is a tender perennial and may not survive a winter north of USDA zone 9"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ],
+    "colours": [],
+    "text": "PFAF: June to September; colour not given by PFAF (NCSU: small white flowers in summer)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in flower from June to September,"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "aromatic edible leaves, small sub-shrub"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/origanum-majorana/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet Marjoram is an edible, herbaceous perennial sub-shrub in the mint family"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "https://plants.ces.ncsu.edu/plants/origanum-majorana/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF Known Hazards: None known. NCSU warns it can be toxic for pets."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Known Hazards None known"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "https://plants.ces.ncsu.edu/plants/origanum-majorana/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Origanum+Majorana",
+    "https://plants.ces.ncsu.edu/plants/origanum-majorana/"
+   ]
+  }
+ },
+ "notes": "NCSU: can be toxic for pets (unspecified)."
+}

@@ -1,0 +1,199 @@
+{
+ "slug": "ceratophyllum_demersum",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ceratophyllum demersum L.",
+    "family": "Ceratophyllaceae",
+    "common_names": [
+     "hornwort",
+     "coontail"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ceratophyllum%20demersum",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Ceratophyllum demersum L.\",\"canonicalName\":\"Ceratophyllum demersum\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1,
+    "max": 3,
+    "text": "stem length 1-3 m, submerged (not an upright height)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "stems that reach lengths of 1–3 m (3–10 ft)"
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "submerged free-floating plant; no spread given",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "source gives no rate",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "sun": {
+   "status": "GAP",
+   "reason": "source silent on light",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "submerged free-floating aquatic; lakes, ponds, quiet streams"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Distribution and habitat",
+    "quote": "grows in lakes, ponds, and quiet streams"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "grows in summer water temperatures of 15-30 C (citation needed on Wikipedia); class is our reading"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Distribution and habitat",
+    "quote": "summer water temperatures of 15–30 °C"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "submerged aquatic; source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "free-floating, no substrate; source silent on water pH",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "source gives no hardiness",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "greenish-brown"
+    ],
+    "text": "inconspicuous 2 mm flowers in leaf axils; months not stated"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The flowers are small, 2 mm long, with eight or more greenish-brown petals"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "whorls of stiff brittle thread-like leaves; habit class is our reading"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Ceratophyllum demersum is a submerged, free-floating aquatic plant"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aquatic",
+    "text": "rootless, free-floating"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ceratophyllum_demersum",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation and uses",
+    "quote": "Though without roots, it may attach itself to the substrate"
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "source silent; silence is not safety",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "source silent on maintenance",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Ceratophyllum_demersum"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for ceratophyllum demersum",
+    "Wikipedia page for ceratophyllum demersum"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "slug": "nelumbo_nucifera",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Nelumbo nucifera Gaertn.",
+    "family": "Nelumbonaceae",
+    "common_names": [
+     "sacred lotus",
+     "lotus"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Nelumbo%20nucifera",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Nelumbo nucifera Gaertn.\",\"canonicalName\":\"Nelumbo nucifera\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It typically grows 3 to 6 feet tall in shallow water"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.2,
+    "text": "3-4 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits, Width",
+    "quote": "Width: 3 ft. 0 in. - 4 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "6 or more hours of direct sunlight a day"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "Frequent standing water; grows in calm water up to 6 feet deep"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Soil Drainage",
+    "quote": "Soil Drainage: Frequent Standing Water"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "NCSU page states no heat tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU page states no drought tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "NCSU page states no soil pH tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "4a",
+    "min_temp_c": null,
+    "damage_text": "Zones 4a-10b listed; when planted in water, make sure the water does not freeze down to the roots"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7
+    ],
+    "colours": [
+     "pink",
+     "white"
+    ],
+    "text": "Cupped, fragrant, pink or white flowers 8-12 in. across, summer (around June and July)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Flowers bloom in the summer (around June and July)"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "rounded parasol-like waxy green leaves held above water on long petioles (NCSU lists 'Broadleaf Evergreen' habit; page elsewhere also lists Annual/Perennial)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "page describes rhizomes rooted in mud but not whether roots are invasive or benign",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page states no toxicity; silence is not safety",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nelumbo-nucifera/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for nelumbo nucifera",
+    "Wikipedia page for nelumbo nucifera"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

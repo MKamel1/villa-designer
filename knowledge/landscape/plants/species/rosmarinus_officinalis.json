@@ -1,0 +1,258 @@
+{
+ "slug": "rosmarinus_officinalis",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Salvia rosmarinus Spenn.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "rosemary"
+    ],
+    "synonym_of_listed_name": "Rosmarinus officinalis",
+    "gbif_match_status": "SYNONYM (Rosmarinus officinalis L.) -> accepted Salvia rosmarinus Spenn."
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/10902460",
+    "accessed": "2026-11-22",
+    "locator": "species record 10902460 (accepted usage of the synonym match)",
+    "quote": "\"scientificName\":\"Salvia rosmarinus Spenn.\",\"taxonomicStatus\":\"ACCEPTED\"",
+    "_raw": true
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 1.5,
+    "text": "1.5 m (5 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Rosmarinus officinalis is an evergreen Shrub growing to 1.5 m (5ft) by 1.5 m (5ft) at a medium rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 1.5,
+    "text": "1.5 m (5 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Rosmarinus officinalis is an evergreen Shrub growing to 1.5 m (5ft) by 1.5 m (5ft) at a medium rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "source: medium rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Rosmarinus officinalis is an evergreen Shrub growing to 1.5 m (5ft) by 1.5 m (5ft) at a medium rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "does best in full sun; tolerates partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Rosemary does best in light, slightly acidic, dry to medium, well-drained soils in full sun. It tolerates drought, partial shade, salt,"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "dry to medium, well-drained soils; low tolerance for wet, humid environments"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Rosemary does best in light, slightly acidic, dry to medium, well-drained soils in full sun."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "neither page states heat tolerance or hot-climate performance (zone range only)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "source: tolerates drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates drought, partial shade, salt, heavy pruning, and most soil types except clay."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "can grow in very alkaline soils (NCSU separately says does best in slightly acidic soil)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils and can grow in very alkaline soils."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "source: tolerates salt"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It tolerates drought, partial shade, salt, heavy pruning, and most soil types except clay."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": -10,
+    "damage_text": "PFAF: hardy down to -10 to -15 C (min_temp_c = warmer figure); USDA hardiness 6-11 (zone 6 recorded as 6a); not frost tender"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "It is hardy down to temperatures between -10°C and -15°C."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "blue"
+    ],
+    "text": "PFAF: in flower March to October; Bloom Color: Blue (NCSU: blue, lavender or white)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in leaf all year, in flower from March to October,"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "aromatic needle-like leaves, rounded shrub (NCSU description)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Shrub growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about root behaviour found",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: oil may cause skin redness; abortifacient reportedly in large quantities. Culinary plant (edible leaves)."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Products containing rosemary oil may cause erythema (redness) of the skin. Caution needed if allergies."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement (NCSU mentions careful tending/pruning only)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
+    "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
+   ]
+  }
+ },
+ "notes": "NCSU tags non-toxic for cats, dogs, horses. Accepted name is Salvia rosmarinus Spenn.; slug kept as listed."
+}

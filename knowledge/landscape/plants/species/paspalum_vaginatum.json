@@ -1,0 +1,201 @@
+{
+ "slug": "paspalum_vaginatum",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Paspalum vaginatum Sw.",
+    "family": "Poaceae",
+    "common_names": [
+     "seashore paspalum"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Paspalum%20vaginatum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Paspalum vaginatum"
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "no mature height (only mowing advice)",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no spread given",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "an aggressive growth habit"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "will tolerate some shade (full sun not explicitly stated)"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "will tolerate some shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "requires moderate amounts of water and fertilizer"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "Seashore paspalum requires moderate amounts of water and fertilizer"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "high tolerance for heat and salt"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "has a high tolerance for heat and salt"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "very salt tolerant warm-season grass"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "Seashore paspalum is a very salt tolerant warm-season grass"
+   }
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "cold hardiness not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "foliage": {
+   "status": "GAP",
+   "reason": "evergreen/dormancy not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "spreads by rhizomes but no statement on root aggressiveness",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "silent on toxicity",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "https://turf.caes.uga.edu/turfgrass-species/warm-season-turfgrass/seashore-paspalum.html"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "moderate maintenance; frequent mowing for low cut"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/seashore.html",
+    "accessed": "2026-11-22",
+    "locator": "Seashore paspalum",
+    "quote": "Moderate maintenance."
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

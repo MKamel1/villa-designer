@@ -1,0 +1,267 @@
+{
+ "slug": "nerium_oleander",
+ "layers": [
+  "screen_hedge",
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Nerium oleander L.",
+    "family": "Apocynaceae",
+    "common_names": [
+     "oleander",
+     "rosebay"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Nerium%20oleander",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Nerium oleander L.; status ACCEPTED; family Apocynaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 5.9,
+    "text": "5-19.5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 5 to 19.5 feet tall and 6 to 10 feet wide."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 3.0,
+    "text": "6-10 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 5 to 19.5 feet tall and 6 to 10 feet wide."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "a rapidly growing, rounded, broadleaf evergreen, woody perennial shrub."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "It prefers full sun to partial shade and well-drained, fertile soil."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "tagged drought tolerant; soil drainage Occasionally Dry; no schedule given"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Tags / Soil Drainage",
+    "quote": "drought tolerant"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tagged heat tolerant; Heat under Resistance To Challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "heat tolerant"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tagged drought tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "page silent on soil pH",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "highly salt-tolerant including salt spray"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This shrub is highly deer and salt-tolerant, including salt spray"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "zones 8a-10b; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Zones",
+    "quote": "8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "white",
+     "dark pink",
+     "salmon",
+     "apricot"
+    ],
+    "text": "late spring to late summer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "They bloom from late spring to late summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf characteristics",
+    "quote": "Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "page does not describe root system",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "highly_toxic",
+    "text": "may be fatal if eaten; all parts poisonous. Also ASPCA: toxic to dogs, cats, horses (cardiac glycosides); Time-Saver Table 550-3 lists Nerium oleander"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Toxicity",
+    "quote": "Highly toxic, may be fatal if eaten!"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "moderate",
+    "flower": "not_stated",
+    "text": "seed heads can lead to litter clean-up; dead-head to prevent them (leaf and flower litter not stated)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Problems",
+    "quote": "can lead to litter clean up, so dead-head flowers to prevent seed heads from forming."
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low; light pruning after flowering"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "notes": "Children present on site: highly toxic. ASPCA https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/oleander opened 2026-11-22."
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "slug": "chlorophytum_comosum",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Chlorophytum comosum (Thunb.) Jacques",
+    "family": "Asparagaceae",
+    "common_names": [
+     "spider plant"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Chlorophytum%20comosum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Chlorophytum comosum"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.46,
+    "text": "1-1.5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 1 ft. 0 in. - 1 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "medium light, tolerates deep shade, intolerant of direct sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "prefers medium light levels yet can tolerate deep shade. It is intolerant of direct sunlight."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "grows best in moist soil; reduce watering in winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "It grows best in moist soil and medium air humidity."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerant of drought and dry soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "it is tolerant of drought and dry soil."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH listed Neutral (6.0-8.0) only"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "Keep temperatures above 45 degrees F (about 7 C)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "flower colour stated (small white) but no flowering months",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "arching, cascading"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf retention",
+    "quote": "Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "ASPCA states pets only; silent on people",
+   "searched": [
+    "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/spider-plant",
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "toxicity_pets": {
+  "text": "Non-Toxic to Dogs, Non-Toxic to Cats (pets only, not people)",
+  "source": {
+   "source_id": "ASPCA",
+   "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/spider-plant",
+   "accessed": "2026-11-22",
+   "locator": "Toxicity",
+   "quote": "Non-Toxic to Dogs, Non-Toxic to Cats"
+  }
+ },
+ "notes": "flowers: small white star-shaped (NCSU)"
+}

@@ -1,0 +1,256 @@
+{
+ "slug": "pennisetum_alopecuroides",
+ "layers": [
+  "grass"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cenchrus alopecuroides (L.) Thunb.",
+    "family": "Poaceae",
+    "common_names": [
+     "Chinese fountain grass",
+     "fountain grass"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Pennisetum%20alopecuroides&kingdom=Plantae&verbose=true",
+    "accessed": "2026-11-22",
+    "locator": "match result: Pennisetum alopecuroides is SYNONYM of Cenchrus alopecuroides (accepted)",
+    "quote": "\"scientificName\":\"Pennisetum alopecuroides (L.) Spreng.\",\"canonicalName\":\"Pennisetum alopecuroides\",\"rank\":\"SPECIES\",\"status\":\"SYNONYM\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 1.22,
+    "text": "clumps 2 to 4 ft tall and wide (converted); NCSU height field 2-6 ft; RHS 1-1.5 m"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "grows in clumps 2 to 4 feet tall and wide"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 1.22,
+    "text": "2 to 4 ft wide (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "grows in clumps 2 to 4 feet tall and wide"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun 6+ h; partial shade 2-6 h; flowers best in full sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "NCSU soil moisture listed Moist and Occasionally Dry, good drainage"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Soil drainage",
+    "quote": "Moist, Occasionally Dry"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought-tolerant once established; RHS marks drought resistance Yes"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "drought-tolerant once established"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS lists acid, alkaline or neutral"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "NCSU: slightly salt-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "slightly salt-tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "hardiness zones 6a through 9b; cut foliage to ground in late winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "USDA Hardiness Zones 6a through 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "cream/tan",
+     "pink",
+     "purple/lavender",
+     "white"
+    ],
+    "text": "spikes from mid-summer to fall, green to reddish-purple to golden brown"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "In mid-summer to fall"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "clumping grass, leaves turn yellow or tan in fall to winter (NCSU); RHS lists evergreen"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf Retention",
+    "quote": "Deciduous"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "toxicity not addressed on NCSU or RHS pages; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "NCSU maintenance: High; cut foliage to the ground in late winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "High"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "GBIF accepted name is Cenchrus alopecuroides; slug kept as listed. Time-Saver Table 550-4 lists Pennisetum setaceum (not this species) as invasive.",
+ "invasive_flag": "NCSU: has escaped gardens and has become problematic in some areas of the country; spreads rapidly by wind-carried seeds"
+}

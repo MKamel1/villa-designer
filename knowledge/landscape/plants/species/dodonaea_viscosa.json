@@ -1,0 +1,269 @@
+{
+ "slug": "dodonaea_viscosa",
+ "layers": [
+  "screen_hedge"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Dodonaea viscosa (L.) Jacq.",
+    "family": "Sapindaceae",
+    "common_names": [
+     "hopbush",
+     "varnish leaf"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Dodonaea%20viscosa",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Dodonaea viscosa (L.) Jacq.; status ACCEPTED; family Sapindaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 4.6,
+    "text": "10-15 ft (converted); commonly 6-10 ft"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Description (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Height: 10 to 15 feet"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 4.6,
+    "text": "6-15 ft (converted)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Description (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Spread: 6 to 15 feet"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Description (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Growth rate: moderate"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "plant grows in full sun"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Culture (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Light requirement: plant grows in full sun"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "exceptionally drought tolerant; resinous leaf coating protects against water loss"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Introduction (FPS181, Gilman et al., rev. 2023)",
+    "quote": "this allows the plants to be exceptionally drought tolerant"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "wide tolerance for soils, winds, and heat"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Text (FPS181, Gilman et al., rev. 2023)",
+    "quote": "It has a wide tolerance for different soils, winds, and heat"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "Drought tolerance: high"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Culture (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Drought tolerance: high"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "Soil tolerances: acidic; alkaline; sand; loam"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Culture (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Soil tolerances: acidic; alkaline; sand; loam"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates salt spray; soil salt tolerance listed unknown"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Text (FPS181, Gilman et al., rev. 2023)",
+    "quote": "will tolerate dry sandy or rocky soils, salt spray, windy areas, and drought conditions"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 9 through 11; no damage text (Wikipedia calls it frost sensitive, not used)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "General Information (FPS181, Gilman et al., rev. 2023)",
+    "quote": "USDA hardiness zones: 9 through 11"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "greenish yellow"
+    ],
+    "text": "blooms spring and fall; greenish yellow, no true petals; showy pink/red fruit"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Introduction (FPS181, Gilman et al., rev. 2023)",
+    "quote": "This shrub blooms in the spring and fall"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "shiny varnished-looking leaves; showy winged pods"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Foliage (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Leaf type and persistence: evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "roots usually not a problem"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Other (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Roots: usually not a problem"
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "UF sheet silent on toxicity",
+   "searched": [
+    "https://edis.ifas.ufl.edu/publication/FP181",
+    "https://en.wikipedia.org/wiki/Dodonaea_viscosa"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "UF sheet describes showy fruit but gives no litter rating",
+   "searched": [
+    "https://edis.ifas.ufl.edu/publication/FP181"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "UF sheet: no maintenance level; only 'no pests or diseases of major concern'",
+   "searched": [
+    "https://edis.ifas.ufl.edu/publication/FP181"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "invasive_flag": {
+   "status": "SOURCED",
+   "value": {
+    "flag": false,
+    "text": "not known to be invasive (UF/IFAS)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://edis.ifas.ufl.edu/publication/FP181",
+    "accessed": "2026-11-22",
+    "locator": "Other (FPS181, Gilman et al., rev. 2023)",
+    "quote": "Invasive potential: not known to be invasive"
+   }
+  }
+ }
+}

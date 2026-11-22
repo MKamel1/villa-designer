@@ -1,0 +1,195 @@
+{
+ "slug": "alpinia_zerumbet",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Alpinia zerumbet (Pers.) B.L.Burtt & R.M.Sm.",
+    "family": "Zingiberaceae",
+    "common_names": [
+     "shell ginger"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Alpinia%20zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Alpinia zerumbet (Pers.) B.L.Burtt & R.M.Sm.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 3.0,
+    "text": "8-10 ft (2.4-3.0 m) tall in tropical climates"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Alpinia_zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "Characteristics",
+    "quote": "grows in upright clumps 8 to 10 ft (2.4 to 3.0 m) tall in tropical climates."
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "spread not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "growth rate not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to part shade; afternoon shade in hot summers recommended"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Alpinia_zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "Best grown in rich medium-wet, to wet well drained soils in full sun to part shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "medium-wet to wet well drained soils"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Alpinia_zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "Best grown in rich medium-wet, to wet well drained soils in full sun to part shade."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "hardiness zone not stated by the page opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "white",
+     "pink"
+    ],
+    "text": "no season stated; yellow lip with red spots/stripes; rarely before second year"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Alpinia_zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Flowers have white or pink perianths with yellow labella with red spots and stripes."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "rhizomatous evergreen tropical perennial"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Alpinia_zerumbet",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "a rhizomatous, evergreen tropical perennial."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

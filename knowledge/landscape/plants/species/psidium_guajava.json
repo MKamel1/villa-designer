@@ -1,0 +1,190 @@
+{
+ "slug": "psidium_guajava",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Psidium guajava L.",
+    "family": "Myrtaceae",
+    "common_names": [
+     "guava"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Psidium%20guajava",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Myrtaceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 6.1,
+    "text": "up to 20 ft unpruned (6.1 m); 8 ft (2.4 m) if pruned annually; min is the pruned height"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/",
+    "accessed": "2026-11-22",
+    "locator": "Characteristics",
+    "quote": "While it can reach as tall as 20 feet, light annual pruning is recommended to keep the tree at eight feet or shorter."
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no spread given",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "no growth-rate statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "Plant the tree in a location with full sun."
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no water-need rating (only: tolerates short flooding; moderately tolerant of drought)",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "only optimum productivity temperature 73-82 F; no heat-tolerance statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately tolerant of drought, windy conditions, and salt"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "It is also moderately tolerant of drought, windy conditions, and salt."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no soil pH statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately tolerant of salt"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "It is also moderately tolerant of drought, windy conditions, and salt."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -3.9,
+    "damage_text": "damage at about 25 F (-3.9 C) or prolonged freeze for mature trees; young trees can die below 28 F (-2.2 C); no USDA zone stated"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/",
+    "accessed": "2026-11-22",
+    "locator": "Planting and Care",
+    "quote": "Mature trees can survive short periods of freezing weather, but damage may occur if the freeze is prolonged or temperatures reach 25."
+   }
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "flower colour (white, 1 inch) stated but no flowering months; fruiting seasons only",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "foliage": {
+   "status": "GAP",
+   "reason": "evergreen/deciduous habit not stated",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "page says roots can extend beyond the drip line; no benign/aggressive statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no toxicity statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance rating (only light annual pruning advised)",
+   "searched": [
+    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit",
+ "invasive_flag": "UF/IFAS: listed as a 'caution' plant for Central and South Florida; page says this does not mean it is invasive",
+ "notes": "Flowers are white and one inch in diameter (UF/IFAS Characteristics); no months stated."
+}

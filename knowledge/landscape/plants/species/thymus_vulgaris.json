@@ -1,0 +1,255 @@
+{
+ "slug": "thymus_vulgaris",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Thymus vulgaris L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "common thyme"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Thymus%20vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.2,
+    "max": 0.2,
+    "text": "0.2 m (8 in) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Thymus vulgaris is an evergreen Shrub growing to 0.2 m (0ft 8in) by 0.3 m (1ft) at a medium rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.3,
+    "text": "0.3 m (1 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Thymus vulgaris is an evergreen Shrub growing to 0.2 m (0ft 8in) by 0.3 m (1ft) at a medium rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "source: medium rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Thymus vulgaris is an evergreen Shrub growing to 0.2 m (0ft 8in) by 0.3 m (1ft) at a medium rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "prefers full sun (NCSU tag: shade intolerant)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "prefers full sun, requires good drainage,"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "performs best in dry, sandy or rocky soils; requires good drainage; wet soils intolerant (tag)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It performs best in dry, sandy, or rocky soils,"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "source: frost and drought-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is frost and drought-tolerant."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "NCSU: requires a neutral to alkaline pH"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "and a neutral to alkaline pH."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU tag: salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#salt tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "5a",
+    "min_temp_c": null,
+    "damage_text": "NCSU: frost tolerant; PFAF USDA hardiness 5-11 (zone 5 recorded as 5a)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is frost and drought-tolerant."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "lavender"
+    ],
+    "text": "PFAF: June to August; Bloom Color: Lavender"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in leaf all year, in flower from June to August."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "low woody broadleaf evergreen aromatic sub-shrub"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Shrub growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: use with caution (oil); no toxicity of the culinary leaf stated. Internal medicinal use contraindicated in pregnancy."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "All essential oils, since they are so concentrated, can be harmful in large doses"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Thymus+Vulgaris",
+    "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU: low-maintenance; trim when leggy"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Common thyme is a low-maintenance plant,"
+   }
+  }
+ },
+ "notes": "NCSU tags non-toxic for cats, dogs, horses."
+}

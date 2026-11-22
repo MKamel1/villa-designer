@@ -1,0 +1,235 @@
+{
+ "slug": "lavandula_dentata",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Lavandula dentata L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "French lavender",
+     "fringed lavender"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Lavandula%20dentata",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.0,
+    "max": 1.0,
+    "text": "PFAF 1 m (3 ft 3 in); Wikipedia says 60 cm"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Lavandula dentata is an evergreen Shrub growing to 1 m (3ft 3in) by 1 m (3ft 3in) at a medium rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.0,
+    "max": 1.0,
+    "text": "1 m (3 ft 3 in) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Lavandula dentata is an evergreen Shrub growing to 1 m (3ft 3in) by 1 m (3ft 3in) at a medium rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "source: medium rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Lavandula dentata is an evergreen Shrub growing to 1 m (3ft 3in) by 1 m (3ft 3in) at a medium rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "dry, sunny conditions (PFAF: cannot grow in the shade)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Lavandula_dentata",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it is particularly associated with dry, sunny, well-drained conditions in"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "dry, well-drained conditions"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Lavandula_dentata",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it is particularly associated with dry, sunny, well-drained conditions in"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no explicit drought-tolerance statement on pages opened (Wikipedia only 'dry conditions')",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "associated with alkaline soil; limestone native habitat"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Lavandula_dentata",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "dry, sunny, well-drained conditions in alkaline soil"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "PFAF says only 'can tolerate maritime exposure'; no salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "Wikipedia: requires some shelter in frost-prone areas; PFAF USDA hardiness 8-11 (zone 8 recorded as 8a)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Lavandula_dentata",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It requires some shelter in frost-prone areas."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8
+    ],
+    "colours": [],
+    "text": "PFAF: July to August; colour not given by PFAF (Wikipedia: purple spikes, first appearing in late spring)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in leaf all year, in flower from July to August."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "gray-green toothed aromatic leaves"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Shrub growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF Known Hazards: None known"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Known Hazards None known"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Lavandula+Dentata",
+    "https://plants.ces.ncsu.edu/plants/lavandula-dentata/"
+   ]
+  }
+ },
+ "notes": "NCSU Plant Toolbox has no page for this species (404); Wikipedia used for sun/water/alkaline/frost."
+}

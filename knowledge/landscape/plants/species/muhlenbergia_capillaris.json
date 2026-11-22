@@ -1,0 +1,250 @@
+{
+ "slug": "muhlenbergia_capillaris",
+ "layers": [
+  "grass"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Muhlenbergia capillaris (Lam.) Trin.",
+    "family": "Poaceae",
+    "common_names": [
+     "muhly grass",
+     "pink muhly",
+     "gulf muhly"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Muhlenbergia%20capillaris",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Muhlenbergia capillaris (Lam.) Trin.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 0.91,
+    "text": "2-3 ft (converted); description says up to 4 ft; UF flower stalks to 5 ft"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.71,
+    "max": 0.91,
+    "text": "2 ft 4 in - 3 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 2 ft. 4 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun 6+ h"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no water-need statement; NCSU lists drainage classes good/moist/occasionally dry/very dry, UF says good drought tolerance once established",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
+   ]
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates heat, humidity, drought and poor soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tolerates heat, humidity, drought, and poor soil"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "UF: good drought tolerance once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tolerates heat, humidity, drought, and poor soil"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH attributes list acid, neutral and alkaline (>8.0); unfussy about soil type if well-drained"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Alkaline (>8.0)"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "highly salt-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "highly salt-tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "5a",
+    "min_temp_c": null,
+    "damage_text": "hardiness zones 5a-9b; UF: cut back to ground in late winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "pink",
+     "purple/lavender"
+    ],
+    "text": "delicate pink flowers in fall, September through November"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Flowers bloom from September through November."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "narrow wiry leaves; UF: slender dark green foliage"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf Retention",
+    "quote": "Deciduous"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on NCSU or UF pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or UF pages; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or UF pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/muhlenbergia_capillaris/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

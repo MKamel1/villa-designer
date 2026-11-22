@@ -1,0 +1,255 @@
+{
+ "slug": "tipuana_tipu",
+ "layers": [
+  "canopy_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Tipuana tipu (Benth.) Kuntze",
+    "family": "Fabaceae",
+    "common_names": [
+     "tipu tree",
+     "pride of Bolivia"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Tipuana%20tipu",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 10,
+    "max": 30,
+    "text": "usually 10 - 30 m; reports up to 40 m"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "usually growing 10 - 30 metres tall"
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "No numeric spread found (only \"light spreading crown\").",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "https://en.wikipedia.org/wiki/Tipuana_tipu"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Uses",
+    "quote": "Its fast growth makes it a valuable species"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Prefers a sunny locations"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a sunny locations"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "prefers 700-900 mm mean annual rainfall, tolerating 600-1,000 mm"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "It prefers a mean annual rainfall of 700 - 900mm, tolerating 600 - 1,000mm"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "best at daytime temperatures 14-28 C, tolerates 8-38 C"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "It grows best in areas where annual daytime temperatures are within the range 14 - 28°c, though can tolerate 8 - 38°c"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "established plants drought resistant"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Established plants are drought resistant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "prefers pH 5.5-7, tolerating 5-7.5 (no alkaline range)"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a pH in the range 5.5 - 7, tolerating 5 - 7.5"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates high salinity soils"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Tolerates soils with a high salinity"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -4,
+    "damage_text": "Wikipedia: withstands conditions from -4 C (25 F); Tropical Plants DB: tolerates occasional temperatures below freezing"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Tipuana_tipu",
+    "accessed": "2026-11-22",
+    "locator": "Physical characteristics",
+    "quote": "from −4 °C (25 °F) to salty soils to drought"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     8,
+     9
+    ],
+    "colours": [
+     "bright yellow"
+    ],
+    "text": "blooms only briefly in \"late summer\" (Wikipedia; hemisphere not stated, northern months assumed)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Tipuana_tipu",
+    "accessed": "2026-11-22",
+    "locator": "Physical characteristics",
+    "quote": "The flowers are bright yellow in color and bloom only briefly in the late summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "light spreading crown; pinnately compound leaves; largely deciduous midwinter to spring depending on site"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "Tipuana tipu is a semi-deciduous tree"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "very aggressive root system; roots lift concrete and asphalt (Wikipedia)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Tipuana_tipu",
+    "accessed": "2026-11-22",
+    "locator": "Invasiveness",
+    "quote": "known for having a very aggressive root system"
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Tropical Plants DB lists Known Hazards \"None known\" only; no toxicity statement, not recorded as non-toxic.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "https://en.wikipedia.org/wiki/Tipuana_tipu"
+   ]
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "not_stated",
+    "flower": "not_stated",
+    "text": "dead leaves and flowers produce litter; Wikipedia: sheds leaves and large helicopter pods midwinter to spring; masses of seed"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "accessed": "2026-11-22",
+    "locator": "Uses",
+    "quote": "its dead leaves and flowers produce litter"
+   }
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "No maintenance level stated.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
+    "https://en.wikipedia.org/wiki/Tipuana_tipu"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "invasive_flag": "Wikipedia: viewed as an invasive weed in some countries; Category 3 invasive in South Africa"
+}

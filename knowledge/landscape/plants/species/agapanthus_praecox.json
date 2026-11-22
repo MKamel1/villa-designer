@@ -1,0 +1,243 @@
+{
+ "slug": "agapanthus_praecox",
+ "layers": [
+  "perennial"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Agapanthus praecox Willd.",
+    "family": "Amaryllidaceae",
+    "common_names": [
+     "African blue lily",
+     "precocious African lily"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Agapanthus%20praecox",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Agapanthus praecox Willd.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.8,
+    "max": 1.5,
+    "text": "RHS: clumps to around 80 cm, flower stems up to about 1.5 m; NCSU height field 1-2 ft"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "to a height of around 80cm (32in)"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.6,
+    "text": "RHS: around 60 cm (24 in); NCSU width 1-2 ft"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "a spread of around 60cm (24in)"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun 6+ h"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "RHS: fertile, moist but well-drained soil"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "fertile, moist but well-drained soil"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages (NCSU lists only 'Poor Soil' under resistance)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS lists acid, alkaline or neutral"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8b",
+    "min_temp_c": null,
+    "damage_text": "RHS: more frost tender than the deciduous agapanthus; H2 (not surviving being frozen)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "blue",
+     "white"
+    ],
+    "text": "flowers appear in mid to late summer; NCSU also lists fall; long bloom season"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "appear in mid to late summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "narrow strap-shaped green leaves forming a clump (RHS)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "form an attractive clump year-long"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU/RHS mention rhizomes and division but state nothing on root behaviour",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "NCSU: Poisonous to Humans, poison severity Low, leaves, contact dermatitis; RHS: all parts harmful if eaten. Pets not addressed."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "accessed": "2026-11-22",
+    "locator": "Poison",
+    "quote": "Poisonous through ingestion and dermatitis."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/agapanthus_praecox/",
+    "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "RHS: no pruning other than removing dead foliage or spent flower heads (NCSU lists Medium)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/625/agapanthus-praecox/details",
+    "accessed": "2026-11-22",
+    "locator": "Pruning",
+    "quote": "No pruning required other than to remove any dead foliage or spent flower heads."
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

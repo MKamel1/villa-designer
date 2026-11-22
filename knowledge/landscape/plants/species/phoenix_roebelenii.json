@@ -1,0 +1,260 @@
+{
+ "slug": "phoenix_roebelenii",
+ "layers": [
+  "palm",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Phoenix roebelenii O'Brien",
+    "family": "Arecaceae",
+    "common_names": [
+     "pygmy date palm"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Phoenix%20roebelenii",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 2.0,
+    "text": "6 ft to 6 ft 5 in (NCSU Dimensions; description: 6.5 ft outdoors; converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 6 ft. 0 in. - 6 ft. 5 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.5,
+    "text": "3-5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 3 ft. 0 in. - 5 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Slow"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun (6 or more hours); Partial Shade (2-6 hours); description advises protection from hot afternoon sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "keep slightly moist in growing season, do not overwater"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Keep the growing medium slightly moist during the growing season but do not overwater"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Heat Humidity"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Heat Humidity"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "NCSU lists acid and neutral (6.0-8.0) only; no alkaline statement.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "No salt-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "NCSU zones 10a-11b; no damage temperature stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5
+    ],
+    "colours": [
+     "cream"
+    ],
+    "text": "cream male and female flowers on separate trees in spring"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Flower Description",
+    "quote": "Cream-colored male and female flowers are found on separate trees (dioecious) in the spring."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "tropical evergreen perennial; pinnate gray-green drooping leaves, spines at leaf bases"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tropical, evergreen perennial"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "No root-behaviour statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU states edible drupes but nothing on toxicity; spines present.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "No source states toxicity to fish or leaf-litter effects in ponds.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "No litter statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "toxicity_pets": {
+  "status": "SOURCED",
+  "value": {
+   "text": "tagged non-toxic for cats, dogs, horses (pets only; not people or fish)"
+  },
+  "source": {
+   "source_id": "NCSU",
+   "url": "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
+   "accessed": "2026-11-22",
+   "locator": "Tags",
+   "quote": "non-toxic for dogs"
+  }
+ }
+}

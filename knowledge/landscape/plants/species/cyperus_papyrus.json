@@ -1,0 +1,242 @@
+{
+ "slug": "cyperus_papyrus",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cyperus papyrus L.",
+    "family": "Cyperaceae",
+    "common_names": [
+     "papyrus",
+     "paper reed"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cyperus%20papyrus",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Cyperus papyrus L.\",\"canonicalName\":\"Cyperus papyrus\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 2.4,
+    "text": "5-8 ft ornamental height (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "As an ornamental, it usually grows 5 to 8 feet tall and 2 to 4 feet wide."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.2,
+    "text": "2-4 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "As an ornamental, it usually grows 5 to 8 feet tall and 2 to 4 feet wide."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Papyrus grows rapidly and can spread quickly, invading other plant areas."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This plant prefers full sun to partial shade and wet, boggy soils."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "consistently moist soil, tolerates standing in up to 6 inches of water; wet boggy soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It does best in a consistently moist soil and can tolerate standing in up to 6 inches of water."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "NCSU page states no heat tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU lists only Wet Soil resistance; no drought statement",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH listed as Neutral (6.0-8.0); alkalinity beyond 8 not stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "In colder climates, the plant should be brought indoors before the first frost."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is winter-hardy in zones 9 to 10."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "greenish-brown"
+    ],
+    "text": "inconspicuous greenish-brown flower clusters July-September"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Clusters of greenish-brown flowers are displayed on the ends of the rays from July to September."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "erect clump of green stems (culms) topped with thread-like rays; dead stems cut back in fall"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Papyrus forms an erect, clump-like habit of green stems or culms"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "thick rhizomes spread along the soil; anchored by numerous woody roots (no statement on damage to structures)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The rhizomes are thick and spread along the soil; however, the plant is anchored by numerous woody roots."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page states no toxicity; silence is not safety",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "annual fall cut-back of dead stems; no maintenance rating given"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-papyrus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "In the fall, the dead stems should be cut back close to the rhizome by using a sharp knife."
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for cyperus papyrus",
+    "Wikipedia page for cyperus papyrus"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

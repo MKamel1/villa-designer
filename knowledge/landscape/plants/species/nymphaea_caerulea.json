@@ -1,0 +1,196 @@
+{
+ "slug": "nymphaea_caerulea",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Nymphaea nouchali Burm.fil.",
+    "family": "Nymphaeaceae",
+    "common_names": [
+     "blue lotus",
+     "Egyptian blue water lily"
+    ],
+    "text": "GBIF: Nymphaea caerulea Andrews is a SYNONYM, acceptedUsageKey 7326947 = Nymphaea nouchali Burm.fil. (ACCEPTED). Wikipedia treats it as Nymphaea nouchali var. caerulea"
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Nymphaea%20caerulea",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Nymphaea caerulea Andrews\",\"canonicalName\":\"Nymphaea caerulea\",\"rank\":\"SPECIES\",\"status\":\"SYNONYM\""
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "no plant height source; only leaf size on Wikipedia",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no spread source",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "sun": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "aquatic herb with tuberous rhizome"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nymphaea_caerulea",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This is an aquatic ( euhydrophyte ) herb with a tuberous rhizome"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "source silent on heat tolerance",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -1,
+    "damage_text": "Wikipedia (Southern Africa cultivation): hardy to -1 C; in colder climates leaves are lost and plants go dormant, rhizomes survive below water"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nymphaea_caerulea",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "and is hardy to -1 °C."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "blue",
+     "white",
+     "mauve",
+     "pink"
+    ],
+    "text": "flowering months not stated by source; usually pale bluish-white to sky-blue or mauve petals with pale yellow centre, 8-12 cm"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nymphaea_caerulea",
+    "accessed": "2026-11-22",
+    "locator": "Generative characteristics",
+    "quote": "The flowers can be blue, white, mauve or pinkish in colour"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "floating, peltate leaves on long petioles, leaf blades 8-35 cm; dormant in cold"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nymphaea_caerulea",
+    "accessed": "2026-11-22",
+    "locator": "Ecology",
+    "quote": "In colder climates, the plants lose their leaves and go dormant during the winter"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "source silent on root behaviour",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "contains psychoactive alkaloids nuciferine and apomorphine; toxicity linked to recreational ingestion/vaping; garden contact not addressed. No pet-toxicity source opened"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nymphaea_caerulea",
+    "accessed": "2026-11-22",
+    "locator": "Uses",
+    "quote": "Modern recreational use, primarily through drinking infusions or vaping , has been associated with toxicity"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "source silent",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Nymphaea_caerulea"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for nymphaea caerulea",
+    "Wikipedia page for nymphaea caerulea"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

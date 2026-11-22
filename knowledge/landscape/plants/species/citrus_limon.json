@@ -1,0 +1,248 @@
+{
+ "slug": "citrus_limon",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Citrus × limon (L.) Osbeck",
+    "family": "Rutaceae",
+    "common_names": [
+     "lemon"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Citrus%20limon",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Rutaceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 6.1,
+    "text": "10-20 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 10 ft. 0 in. - 20 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 4.6,
+    "text": "10-15 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 10 ft. 0 in. - 15 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "requires full sun, protected from the wind; shade intolerant (tag)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "plenty of water during the growing season"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They need plenty of water during the growing season"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "prefers pH 5-6 but tolerates neutral or alkaline"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It prefers a pH of 5 - 6 but will tolerate a neutral or alkaline range as well."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "not cold hardy; frost tender (tag); USDA zones 9a-11b listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is not cold hardy"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "colours": [
+     "white",
+     "purple",
+     "red"
+    ],
+    "text": "Bloom time listed as Spring, Summer, Fall and Winter; buds reddish, flowers white above, purplish below"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Mildly fragrant flowers may be solitary, or there may be two or more."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "thorny twigs"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The lemon is a species of small evergreen trees in the Rutaceae family"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "root behaviour (only 'dislikes root disturbance'): not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "Vomiting, diarrhea, depression; potential dermatitis. The fruit is edible, skins and plant material can cause problems. Also flagged problem for cats, dogs, horses."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "Poison Severity: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low; very little pruning"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/citrus-x-limon/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit"
+}

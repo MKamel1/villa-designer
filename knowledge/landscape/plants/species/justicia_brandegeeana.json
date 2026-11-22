@@ -1,0 +1,242 @@
+{
+ "slug": "justicia_brandegeeana",
+ "layers": [
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Justicia brandegeeana Wassh. & L.B.Sm.",
+    "family": "Acanthaceae",
+    "common_names": [
+     "shrimp plant"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Justicia%20brandegeeana",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Justicia brandegeeana Wassh. & L.B.Sm.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 1.83,
+    "text": "two to six feet (converted from feet)"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/",
+    "accessed": "2026-11-22",
+    "locator": "Shrimp Plant, description",
+    "quote": "can reach two to six feet tall"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.5,
+    "max": 1,
+    "text": "RHS maximum spread 0.5-1 metres"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "accessed": "2026-11-22",
+    "locator": "Ultimate spread",
+    "quote": "0.5-1 metres"
+   }
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "RHS gives only time to maturity (5-10 years); UF says plants spread quickly to a clump after light pruning; no rate class stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "UF: full sun or part shade; RHS: prefers partial shade"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/",
+    "accessed": "2026-11-22",
+    "locator": "Shrimp Plant, light",
+    "quote": "can be planted in full sun or part shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "RHS moisture: moist but well-drained (or well-drained)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "accessed": "2026-11-22",
+    "locator": "Moisture",
+    "quote": "Moist but well-drained"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat-tolerance statement on RHS or UF pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no drought statement on RHS or UF pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS lists acid, alkaline or neutral soil"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid, alkaline, or neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement on RHS or UF pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "RHS rates H1B (min 10-15 C, UK glasshouse scale) but UF says it is killed back by frost and usually returns; no zone or temperature tolerance stated; MBG zone page unreachable (certificate error)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=a522 (fetch failed)"
+   ]
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "UF: white flower inside colourful drooping bracts; blooms year-round in mild climates"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/",
+    "accessed": "2026-11-22",
+    "locator": "Shrimp Plant, flowers",
+    "quote": "blooms year-round in mild climates"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "lax shrub, ovate leaves, compact arching spikes (RHS)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "A lax evergreen shrub to 1m in height"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on RHS or UF pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "RHS and UF pages do not say whether the plant is toxic; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on RHS or UF pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
+    "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "UF recommends light pruning and a little care; RHS: pinch out tips; replace when leggy"
+   },
+   "source": {
+    "source_id": "UF-IFAS",
+    "url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/",
+    "accessed": "2026-11-22",
+    "locator": "Shrimp Plant, care",
+    "quote": "a little care"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

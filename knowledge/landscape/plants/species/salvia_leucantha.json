@@ -1,0 +1,244 @@
+{
+ "slug": "salvia_leucantha",
+ "layers": [
+  "perennial"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Salvia leucantha Cav.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "Mexican bush sage"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Salvia%20leucantha",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Salvia leucantha Cav.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 0.91,
+    "text": "2 to 3 feet (converted); RHS gives 1-1.5 m"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 2 to 3 feet tall and wide."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.61,
+    "max": 0.91,
+    "text": "2 to 3 feet wide (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It grows 2 to 3 feet tall and wide."
+   }
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "NCSU states no growth rate; RHS gives time to maturity only",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun 6+ h; partial shade 2-6 h listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It does best in full sun but tolerates afternoon shade in regions with high summer heat."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "prefers rich, evenly moist, well-drained soil; clays or sands tolerated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This sage prefers rich, evenly moist, well-drained soil but will grow in clays or sands."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "does best in full sun but wants afternoon shade where summer heat is high; heat also listed under resistance to challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tolerates afternoon shade in regions with high summer heat"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates some drought once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Once established, it will tolerate some drought."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH attributes list alkaline (>8.0) and neutral (6.0-8.0); RHS: acid, alkaline or neutral"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH attribute",
+    "quote": "alkaline (>8.0) and neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7b",
+    "min_temp_c": null,
+    "damage_text": "only hardy from the lower Piedmont to the coastal plain; extreme winters may kill it"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "purple/lavender",
+     "white"
+    ],
+    "text": "bloom time listed as fall; flowers do not appear until late summer; white corollas in purple calyces"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "short-lived, white corollas that do not appear until late summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "linear, lance-shaped, gray-green leaves with a soft feel (NCSU); RHS evergreen"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details",
+    "accessed": "2026-11-22",
+    "locator": "Foliage",
+    "quote": "Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU and RHS do not say whether the plant is toxic; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia_leucantha/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

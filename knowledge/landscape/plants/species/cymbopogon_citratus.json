@@ -1,0 +1,229 @@
+{
+ "slug": "cymbopogon_citratus",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cymbopogon citratus (DC.) Stapf",
+    "family": "Poaceae",
+    "common_names": [
+     "lemongrass"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cymbopogon%20citratus",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 1.5,
+    "text": "1.5 m (5 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Cymbopogon citratus is an evergreen Perennial growing to 1.5 m (5ft) by 1.5 m (5ft) at a fast rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 1.5,
+    "text": "1.5 m (5 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Cymbopogon citratus is an evergreen Perennial growing to 1.5 m (5ft) by 1.5 m (5ft) at a fast rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "source: fast rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Cymbopogon citratus is an evergreen Perennial growing to 1.5 m (5ft) by 1.5 m (5ft) at a fast rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "PFAF: cannot grow in the shade (part-shade not stated)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It cannot grow in the shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "NCSU: do not let it dry out; PFAF: prefers dry or moist soil, can tolerate drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "overwinter as a container plant but do not let it dry out."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "PFAF: can tolerate drought"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It prefers dry or moist soil and can tolerate drought."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "can grow in very alkaline soils"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils and can grow in very alkaline soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "PFAF says only 'not maritime exposure'; no explicit salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "PFAF: frost tender; USDA hardiness 10-12 (zone 10 recorded as 10a)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is hardy to UK zone 10 and is frost tender."
+   }
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "PFAF gives no flowering period (flowering is incidental for the culinary grass)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "strongly lemon-scented grass leaves"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Cymbopogon citratus is an evergreen Perennial growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: handling may cause skin irritation or allergy. Culinary herb."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Handling plant may cause skin irritation or allergic reaction"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Cymbopogon+Citratus",
+    "https://plants.ces.ncsu.edu/plants/cymbopogon-citratus/"
+   ]
+  }
+ }
+}

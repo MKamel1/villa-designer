@@ -1,0 +1,246 @@
+{
+ "slug": "thaumatophyllum_bipinnatifidum",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Thaumatophyllum bipinnatifidum (Schott ex Endl.) Sakur., Calazans & Mayo",
+    "family": "Araceae",
+    "common_names": [
+     "tree philodendron",
+     "lacy tree philodendron"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Thaumatophyllum%20bipinnatifidum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Thaumatophyllum bipinnatifidum (Schott ex Endl.) Sakur., Calazans & Mayo; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 3.0,
+    "text": "4-10 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It can grow 4 to 10 feet tall and 6 to 10 feet wide"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 3.0,
+    "text": "6-10 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 6 ft. 0 in. - 10 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "prefers high light, tolerates low light"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "It prefers high light and moderate humidity but tolerates low light conditions."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soil high in organic matter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Grow this plant in moist, well-drained soil high in organic matter."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "none",
+    "text": "does not tolerate drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "they do not tolerate drought"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "none",
+    "text": "does not tolerate salt buildup; flush soil regularly"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It does not tolerate salt buildup, so flush soil regularly"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 9a-11b; no damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "purple/lavender",
+     "red/burgundy",
+     "white"
+    ],
+    "text": "seasonal bloomer, white spadix; rarely blooms as houseplant; no months stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Seasonal bloomer with white flowers with no petals arise on a spadix."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen, glossy deeply lobed leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "only aerial roots described; no statement on damaging roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "low severity; oral irritation, swelling of mouth if ingested; problem for cats and dogs"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous",
+    "quote": "This plant has low severity poison characteristics."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/thaumatophyllum-bipinnatifidum/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "slug": "monstera_deliciosa",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Monstera deliciosa Liebm.",
+    "family": "Araceae",
+    "common_names": [
+     "Swiss cheese plant",
+     "monstera"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Monstera%20deliciosa",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Monstera deliciosa Liebm.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 21,
+    "text": "6-8 ft typical indoors, up to 70 ft; converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It can grow to 70 feet tall, though it stays between 6 to 8 feet in most home environments."
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "spread not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "moderate brightness but not direct sunlight"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "moderate brightness but not direct sunlight"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "water thoroughly, let top quarter to third dry between waterings"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Water this plant thoroughly, then allow the top quarter to one-third part to dry between watering."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH Neutral (6.0-8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 10a-12b; no damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "10a, 10b, 11a, 11b, 12a, 12b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "green",
+     "white"
+    ],
+    "text": "rarely flowers as a house plant; no bloom time stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Rarely flowers as a house plant."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen, climbing"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "roots not described",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "low severity poison characteristics; problem for cats and dogs"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous",
+    "quote": "This plant has low severity poison characteristics."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

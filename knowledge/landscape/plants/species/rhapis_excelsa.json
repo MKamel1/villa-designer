@@ -1,0 +1,236 @@
+{
+ "slug": "rhapis_excelsa",
+ "layers": [
+  "palm",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Rhapis excelsa (Thunb.) A.Henry",
+    "family": "Arecaceae",
+    "common_names": [
+     "lady palm"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Rhapis%20excelsa",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Rhapis excelsa (Thunb.) A.Henry; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 3.7,
+    "text": "4-12 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 4 ft. 0 in. - 12 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 4.6,
+    "text": "6-15 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 6 ft. 0 in. - 15 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Slow"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "shade",
+     "part_shade"
+    ],
+    "hours_text": "deep shade; partial shade (2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "regular watering except winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "needs well-drained potting soil and regular watering except in the winter when watering can be reduced."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "listed under Resistance To Challenges: Drought; no detail"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH attribute lists acid only; no statement on alkaline tolerance",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 9a-11b; no damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5
+    ],
+    "colours": [
+     "gold/yellow"
+    ],
+    "text": "tiny yellow flowers in spring (mapped Mar-May)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Panicles of tiny, yellow bowl-shaped flowers in spring."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen palm"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "only rhizomes mentioned",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "human toxicity not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NCSU tags: non-toxic for cats, dogs, horses."
+}

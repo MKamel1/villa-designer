@@ -1,0 +1,211 @@
+{
+ "slug": "vitis_vinifera",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Vitis vinifera L.",
+    "family": "Vitaceae",
+    "common_names": [
+     "common grape"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Vitis%20vinifera",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Vitis vinifera L.; family Vitaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions: Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH range listed includes acid, neutral and alkaline (>8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Soil pH: Acid (<6.0) Alkaline (>8.0) Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "grow where protected from winter winds and frost"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It should be grown in a location where it is protected from winter winds and frost."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5
+    ],
+    "colours": [
+     "gold/yellow"
+    ],
+    "text": "Spring; tiny non-showy flowers in pendulous clusters"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Flower Bloom Time: Spring"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "large palmately lobed leaves, tendril climber, peeling bark"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Woody Plant Leaf Characteristics: Deciduous"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
+   ]
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "not_stated",
+    "flower": "not_stated",
+    "text": "NCSU Problems: Messy (no part specified)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Landscape: Problems",
+    "quote": "Problems: Frequent Disease Problems Frequent Insect Problems Messy"
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "Maintenance: High"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: High"
+   }
+  }
+ },
+ "uses": "edible fruit, leaves and flowers (NCSU Edibility)",
+ "notes": "NCSU: hot and humid summers negatively affect fruit production (not a heat-class statement, so heat left GAP)"
+}
