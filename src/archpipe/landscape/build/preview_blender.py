@@ -80,6 +80,7 @@ def mat(name):
         b.inputs["Base Color"].default_value = (0.04, 0.10, 0.08, 1); b.inputs["Roughness"].default_value = 0.03
         for k, v in (("Transmission Weight", 0.92), ("IOR", 1.333)):
             b.inputs[k].default_value = v
+        noise_bump(m, 14.0, 0.04, 3)          # a faint ripple so the surface reads as water, not as a flat slab
     elif base == "flame":
         b.inputs["Base Color"].default_value = (1, 0.4, 0.05, 1)
         b.inputs["Emission Color"].default_value = (1.0, 0.35, 0.05, 1); b.inputs["Emission Strength"].default_value = 25.0
@@ -169,7 +170,7 @@ sc.render.engine = "CYCLES"
 sc.cycles.samples = spec.get("samples", 96); sc.cycles.use_denoising = True
 sc.cycles.max_bounces = 8; sc.cycles.transmission_bounces = 8
 sc.render.resolution_x, sc.render.resolution_y = spec["size"]
-sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"; sc.view_settings.exposure = spec.get("exposure", -0.5)
+sc.view_settings.view_transform = "AgX"; sc.view_settings.look = "None"; sc.view_settings.exposure = spec.get("exposure", -2.0)
 sc.render.image_settings.file_format = "JPEG"; sc.render.image_settings.quality = 90
 try:
     if spec.get("device") == "CPU":
@@ -185,7 +186,7 @@ except Exception as e:
 w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
 nt = w.node_tree
 sky = nt.nodes.new("ShaderNodeTexSky"); sky.sky_type = "NISHITA"
-sky.sun_elevation = math.radians(52); sky.sun_rotation = math.radians(210); sky.sun_size = math.radians(0.6); sky.air_density = 1.0; sky.dust_density = 1.5; sky.sun_intensity = spec.get("sun_intensity", 0.45)
+sky.sun_elevation = math.radians(52); sky.sun_rotation = math.radians(210); sky.sun_size = math.radians(0.6); sky.air_density = 1.0; sky.dust_density = 1.5; sky.sun_intensity = spec.get("sun_intensity", 0.4)
 nt.links.new(sky.outputs["Color"], nt.nodes["Background"].inputs["Color"]); nt.nodes["Background"].inputs["Strength"].default_value = 1.0
 
 receipt = dict(tag=TAG, assets=[], views=[], objects=0, note="preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)")

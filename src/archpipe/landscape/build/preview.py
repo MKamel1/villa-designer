@@ -43,11 +43,11 @@ def default_views(scene, tag):
     g = scene.ground_z
     e = g + EYE
     lv, dv = DOORS["living"], DOORS["dining"]
-    v = [dict(name="bird-south-east", eye=[31.5, -33.5, g + 19.0], target=[22.6, -25.3, g + 0.3], lens=30, state="closed", hide_house=True),
+    v = [dict(name="bird-south-east", eye=[29.5, -33.0, g + 15.5], target=[22.3, -25.2, g + 0.3], lens=34, state="closed", hide_house=True),
          dict(name="eye-living-door", eye=[lv["at"][0] + 0.25, lv["at"][1], e], target=[27.5, lv["at"][1] - 0.2, g + 1.0], lens=24, state="closed"),
          dict(name="eye-dining-door", eye=[dv["at"][0], dv["at"][1] + 0.25, e], target=[dv["at"][0] + 1.5, -21.0, g + 0.6], lens=24, state="closed")]
     if scene.age is not None:
-        v += [dict(name="bird-north-court", eye=[-3.0, -33.0, g + 12.0], target=[1.6, -26.5, g + 0.3], lens=35, state="closed", hide_house=True),
+        v += [dict(name="bird-north-court", eye=[10.5, -28.0, g + 9.0], target=[1.8, -26.6, g + 0.2], lens=30, state="closed", hide_house=True),
               dict(name="firepit-closed", eye=[23.0, -23.6, g + 1.5], target=[25.1, -24.5, g], lens=35, state="closed"),
               dict(name="firepit-open", eye=[23.0, -23.6, g + 1.5], target=[25.1, -24.5, g], lens=35, state="open")]
     return v

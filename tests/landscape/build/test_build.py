@@ -359,7 +359,7 @@ class PreviewSpec(unittest.TestCase):
 class BlenderReceipt(unittest.TestCase):
     """Reads the committed receipt of the real Blender run: measured, not assumed."""
     def test_assets_stand_on_the_ground_in_the_render(self):
-        rec = ROOT / "knowledge/landscape/build/previews/age3.receipt.json"
+        rec = ROOT / "knowledge/landscape/build/A-pond-east/previews/age3.receipt.json"
         if not rec.exists():
             self.skipTest("no committed Blender receipt")
         r = json.loads(rec.read_text())
