@@ -805,9 +805,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     # Luminaire fittings with a visible body on a host (lane SC): the vertical wardrobe strips stand on the wardrobe front
     # face, 20 x 12 mm, from the luminaire's own record. Geometry only (opal housing, no emission): the light is unchanged.
     for f in VL.design(lay):
-        if f.kind == "VSTRIP":
+        if f.kind == "VSTRIP" and not _vstrip_unhosted(f):
+            out = 0.012 if f.aim[1] > 0 else -0.012            # stands proud of the face it is aimed away from
             mesh("detail-vstrip-" + f.id, "opal-strip",
-                 box_faces(f.x - 0.01, f.y, f.z - f.length / 2, f.x + 0.01, f.y + 0.012, f.z + f.length / 2), "fixture",
+                 box_faces(f.x - 0.01, min(f.y, f.y + out), f.z - f.length / 2, f.x + 0.01, max(f.y, f.y + out),
+                           f.z + f.length / 2), "fixture",
                  room=f.room, label="ASSUMED vertical LED strip on the wardrobe front " + f.id, kind="led-strip",
                  element_ids=["lum-" + f.id])
     # ASSUMED construction details: open risers remain visible between the steel members.
@@ -2205,7 +2207,18 @@ LIGHT_ONLY = {
     "TOE": "toe-kick LED strip recessed behind the plinth; no visible body",
     "RAIL": "LED strip inside the wardrobe, under the hanging rail; the wardrobe carcass is solid in the scene",
     "MIRROR": "model places the bar 47 mm off the wall face with no host; a body would float (open item for the lighting lane)",
+    "VSTRIP-ext": "the model puts the strip 20 mm behind the wall plane its wardrobe stands against; a body there fails the "
+                  "mounting host guard (finished-face error 32 mm). Position is the lighting lane's (open item)",
 }
+
+
+def _vstrip_unhosted(f):
+    return f.kind == "VSTRIP" and "-ext-" in f.id
+
+
+def _light_only_reason(f):
+    key = "VSTRIP-ext" if _vstrip_unhosted(f) else f.kind
+    return dict(kind=f.kind, reason=LIGHT_ONLY[key]) if key in LIGHT_ONLY else None
 
 
 def element_contract(lay, scene):
@@ -2213,7 +2226,7 @@ def element_contract(lay, scene):
     the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY)."""
     from .sanitary_relocation import input_revision
     with input_revision(False):
-        light_only = {"lum-" + f.id: dict(kind=f.kind, reason=LIGHT_ONLY[f.kind]) for f in VL.design(lay) if f.kind in LIGHT_ONLY}
+        light_only = {"lum-" + f.id: r for f in VL.design(lay) if (r := _light_only_reason(f))}
     return dict(light_only=light_only,
                 imported_props={"prop-" + p["id"]: dict(asset=p["asset"], position=p["position"]) for p in scene.get("props", [])})
 
