@@ -72,7 +72,7 @@ def _nearest_column_shift(w, eid, margin, model):
     return d, cid, g
 
 
-def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, levels=None, host_ids=None, baselines=None):
+def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, levels=None, host_ids=None, baselines=None, contract=None):
     rows = []
     B = baselines or {}
 
@@ -193,12 +193,12 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
         f"{c0['id']} moved 0.1 m (the centre bound is half the smaller side: expected to be missed)")
     rec("N-K10", "K10", "negative", "quiet", base, C.k10_placement(_edit(w, c0["id"], _shift((0.02, 0, 0))), model), f"{c0['id']} moved 20 mm")
     # K09 delete / duplicate
-    base = B.get("K09") or C.k09_identity(w, model)
+    base = B.get("K09") or C.k09_identity(w, model, contract)
     w2 = _copy(w); del w2.elements[c0["id"]]
-    rec("M-K09-del", "K09", "mutation", "catch", base, C.k09_identity(w2, model), f"{c0['id']} deleted")
+    rec("M-K09-del", "K09", "mutation", "catch", base, C.k09_identity(w2, model, contract), f"{c0['id']} deleted")
     e = w.elements[c0["id"]]
     w2 = _copy(w); w2.elements[c0["id"]] = Element(c0["id"], e.parts + e.parts)
-    rec("M-K09-dup", "K09", "mutation", "catch", base, C.k09_identity(w2, model), f"{c0['id']} built twice")
+    rec("M-K09-dup", "K09", "mutation", "catch", base, C.k09_identity(w2, model, contract), f"{c0['id']} built twice")
     # K08 scale
     def k08(wx):
         el = wx.elements[c0["id"]]

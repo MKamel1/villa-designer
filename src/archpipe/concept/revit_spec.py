@@ -801,6 +801,15 @@ def opening_problems(spec):
     return out
 
 
+def _soffit_clear(pk2, x):
+    """Clear height (m) under whatever covers x: the ramp/deck, or beyond the deck's end the extension roof slab,
+    whose soffit is the storey height WALL_H (lane SC2: a wall there stopped at the deck's 2.65 m, 150 mm short of it)."""
+    from . import villa_parking as P
+    if pk2.get("roof_beyond_deck") and x >= pk2["deck"][2] - 1e-6:
+        return WALL_H
+    return P.clear_at(x)
+
+
 def _parking(lay, spec, pk2):
     from . import villa_parking as P
     from .. import villa_env as E
@@ -825,7 +834,7 @@ def _parking(lay, spec, pk2):
             walls.append(w)                            # inside the villa, or on its east face line
             continue
         if abs(w["y0"] - w["y1"]) > 1e-6:              # cross wall (constant x)
-            walls.append(dict(w, height=round(min(WALL_H, P.clear_at(w["x0"] - w["thickness"] / 2)), 3)))
+            walls.append(dict(w, height=round(min(WALL_H, _soffit_clear(pk2, w["x0"] - w["thickness"] / 2)), 3)))
             continue
         a, b = sorted((w["x0"], w["x1"]))
         pts = P.soffit_points(a, b)
@@ -918,11 +927,14 @@ def clearance_problems(lay, walls, doors, infills=()):
         return []
     from . import villa_parking as P
     zb, tol = LEVELS_Z["B"], 0.01
-    soffit = lambda x: zb + P.clear_at(x)                                     # noqa: E731
+    deck_soffit = lambda x: zb + P.clear_at(x)                                # noqa: E731
     out = []
     for w in walls:
         if w["level"] not in ("B", LEVEL_NAME["B"]) or max(w["y0"], w["y1"]) <= V.YE + EXT_T:
             continue
+        # a cross wall is checked against what covers it (deck, or the extension roof beyond the deck); a wall along the
+        # ramp stays on the deck soffit: one piece runs on under the roof (open item: its 150 mm slot, lane SC2 report)
+        soffit = deck_soffit if abs(w["y0"] - w["y1"]) < 1e-6 else (lambda x: zb + _soffit_clear(pk2, x))
         top = w["z_top"] if "z_top" in w else zb + w["height"]
         a, b = sorted((w["x0"], w["x1"]))
         worst = min(soffit(a), soffit(b))

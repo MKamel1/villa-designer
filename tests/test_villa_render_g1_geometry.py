@@ -166,3 +166,15 @@ class ElementIdentity(unittest.TestCase):
         self.assertEqual(EID.MODEL_SLABS["slab-GF-front"], "slab-gf-terrace")
         for ctx in ("slab-APT", "slab-ROOF", "yard-sister"):
             self.assertNotIn(ctx, EID.MODEL_SLABS)
+
+
+class ElementContract(unittest.TestCase):
+    """Lane SC2: the contract names only ids the model holds (RV1 K09 fails an entry that names none)."""
+
+    def test_props_are_listed_under_their_model_id_and_scene_only_ones_apart(self):
+        scene = {"props": [dict(id="a", asset="x.glb", position=[0, 0, 0]), dict(id="landscape-tree", asset="t.glb", position=[1, 1, 0]),
+                           dict(id="landscape-bench", asset="b.glb", position=[2, 2, 0])]}
+        c = VR.element_contract(VR.R.design("D1"), scene, {"prop-a", "plant-landscape-tree"})
+        self.assertEqual(set(c["imported_props"]), {"prop-a", "plant-landscape-tree"})
+        self.assertEqual(set(c["non_model_props"]), {"prop-landscape-bench"})          # negative: not claimed as a model element
+        self.assertTrue(all(k.startswith("lum-") for k in c["light_only"]))

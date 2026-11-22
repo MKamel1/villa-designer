@@ -34,7 +34,7 @@ def run(scene, ifc, model_path=None, prove=False):
     fs += C.k01_stair_structure(world) + C.k02_wall_slab(world) + C.k03_opening_column(world)
     fs += C.k04_door_soffit(world, model) + C.k05_openings(world, model) + C.k06_glazing_to_beam(world, model)
     fs += C.k07_fixture_ceiling(world, model)
-    fs += C.k09_identity(world, model) + C.k10_placement(world, model)
+    fs += C.k09_identity(world, model, raw.get("element_contract")) + C.k10_placement(world, model)
     fs += C.k11_net_area(world, areas) + C.k12_environment(world, env, model) + C.k13_detail_solids(world)
     fs += C.k14_guards(world, model) + C.k15_mounting(world, hosts, host_ids) + C.k16_headroom(world)
     fs += C.k18_datum(world, env["levels"], model)
@@ -53,7 +53,7 @@ def run(scene, ifc, model_path=None, prove=False):
     if prove:
         from . import mutate as M
         report["historic_and_synthetic"] = F.run_all()
-        report["mutations"] = M.run_mutations(world, model, hosts, env, areas, env["levels"], host_ids)
+        report["mutations"] = M.run_mutations(world, model, hosts, env, areas, env["levels"], host_ids, contract=raw.get("element_contract"))
         import tempfile
         with tempfile.TemporaryDirectory() as td:         # K17 mutation: a seeded IFC defect read back through the second kernel
             m = K.mutate_ifc_wall_taller(ifc, Path(td) / "mut.ifc")

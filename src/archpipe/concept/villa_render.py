@@ -37,6 +37,7 @@ from .component_kinds import component_kind
 from .part_exemptions import annotate as annotate_part
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
 from . import stair_mounting as SM
+from ..model import stair_steel as STEEL
 from . import garden_g4e
 from ..blender import element_ids as EID
 from dataclasses import asdict
@@ -832,9 +833,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         xa, ya, za, xb, yb, zb = t
         host = return_host if xa < return_end else stair_host
         bearing = box_faces(xa, SM.finished_y(host), max(za - .12, LZ["B"]),
-                            min(xb, return_end) if host == return_host else xb, ya + .025, za + .025)
+                            min(xb, return_end) if host == return_host else xb, ya + STEEL.BEARING_OVER_M, za + .025)
         if xa < return_end < xb:
-            bearing += box_faces(return_end, stair_finished_y, max(za - .12, LZ["B"]), xb, ya + .025, za + .025)
+            bearing += box_faces(return_end, stair_finished_y, max(za - .12, LZ["B"]), xb, ya + STEEL.BEARING_OVER_M, za + .025)
         if n == len(treads) - 1:
             host = floor_host
         mesh("detail-stair-wall-stringer-%02d" % n, "black-metal",
@@ -862,7 +863,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         if mounting is not None:
             meshes[-1]["mounting"] = mounting
 
-    sloped_member("detail-stair-open-stringer", open_y - 0.055, open_y - 0.025, -0.06, 0.15,
+    sloped_member("detail-stair-open-stringer", open_y - STEEL.OPEN_STRINGER_M[0], open_y - STEEL.OPEN_STRINGER_M[1], -0.06, 0.15,
                   "ASSUMED continuous open-side steel stringer; add to Revit", kind="stair-stringer")
     sloped_member("detail-stair-wall-plate", stair_finished_y + SM.PLATE_CLEARANCE_M,
                   stair_finished_y + SM.PLATE_CLEARANCE_M + SM.PLATE_WIDTH_M, -0.06, 0.15,
@@ -892,7 +893,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
              [[[a[0], y0, a[2] + hi + 0.001], [b[0], y0, b[2] + hi + 0.001],
                [b[0], y1, b[2] + hi + 0.001], [a[0], y1, a[2] + hi + 0.001]]], "fixture", room="stair-b",
              label="ASSUMED visible polished laminated-glass top edge", kind="glass-edge", surface=True, occupied_side=(0,0,1))
-    sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
+    sloped_member("detail-stair-glass-shoe", open_y - STEEL.GLASS_SHOE_M[0], open_y - STEEL.GLASS_SHOE_M[1], -0.04, 0.06,
                   "ASSUMED steel base shoe on open stringer", kind="glass-shoe")
     sloped_member("detail-stair-wall-handrail", rail_near_y, rail_far_y, 0.922, 0.044,
                   "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"],
@@ -2193,8 +2194,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     require_clear_probes(scene)
     # Element identity (lane P2): additive fields, attached last so no pass, receipt or appearance record that
     # copies or hashes mesh attributes ever sees them (furniture_stage2 and draped_appearances do).
-    scene['element_contract'] = element_contract(lay, scene)
-    EID.attach(scene, id_registry, _live_model_ids(lay, sp, it_all, land_plan, land_props), declared_ids)
+    model_ids = _live_model_ids(lay, sp, it_all, land_plan, land_props)
+    scene['element_contract'] = element_contract(lay, scene, model_ids)
+    EID.attach(scene, id_registry, model_ids, declared_ids)
     EID.tag_non_model(scene)
     return scene
 
@@ -2221,14 +2223,20 @@ def _light_only_reason(f):
     return dict(kind=f.kind, reason=LIGHT_ONLY[key]) if key in LIGHT_ONLY else None
 
 
-def element_contract(lay, scene):
+def element_contract(lay, scene, model_ids):
     """Which model elements the scene carries other than as a mesh: imported prop assets (scene['props'], placed from
-    the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY)."""
+    the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY). A prop is listed under the
+    model id it stands for (`prop-<id>`, or `plant-<id>` for landscape plants); one the model does not hold (benches) is
+    `non_model_props`, never an `imported_props` entry naming an element that is not there (RV1 K09 fails that)."""
     from .sanitary_relocation import input_revision
     with input_revision(False):
         light_only = {"lum-" + f.id: r for f in VL.design(lay) if (r := _light_only_reason(f))}
-    return dict(light_only=light_only,
-                imported_props={"prop-" + p["id"]: dict(asset=p["asset"], position=p["position"]) for p in scene.get("props", [])})
+    imported, non_model = {}, {}
+    for p in scene.get("props", []):
+        entry = dict(asset=p["asset"], position=p["position"])
+        mid = next((m for m in ("prop-" + p["id"], "plant-" + p["id"]) if m in model_ids), None)
+        (imported.__setitem__(mid, entry) if mid else non_model.__setitem__("prop-" + p["id"], entry))
+    return dict(light_only=light_only, imported_props=imported, non_model_props=non_model)
 
 
 def _live_model_ids(lay, sp, items, land_plan, land_props):
