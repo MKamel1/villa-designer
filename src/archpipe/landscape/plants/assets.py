@@ -63,6 +63,10 @@ def validate_assets(doc: dict, species_slugs, base: Path = DATA) -> list[str]:
             errs.append(f"{i}: untextured material share {a['untextured_material_share']} renders white; grade must be D")
         if a.get("misnamed_as") and (a.get("species_fit") not in ("look-alike", "none") or a.get("maps_to")):
             errs.append(f"{i}: misnamed as {a['misnamed_as']} so it must be look-alike/none and map to nothing")
+        if "placement_scale" in a:  # authored size x scale must equal the recorded placed height (no silent mis-scale)
+            h, k = a.get("size_m", [0, 0, 0])[2], a["placement_scale"]
+            if not (k > 0 and abs(h * k - a.get("placed_height_m", -1)) <= 0.03 * h * k):
+                errs.append(f"{i}: placed_height_m must equal size_m[2] x placement_scale")
         if a.get("species_fit") == "look-alike" and a.get("maps_to"):
             errs.append(f"{i}: a look-alike cannot be mapped to a species")
     rows = {r["slug"]: r for r in doc.get("species", [])}

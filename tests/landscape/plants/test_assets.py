@@ -116,6 +116,22 @@ class PassTwoGuards(unittest.TestCase):
         a = next(x for x in self.doc["assets"] if x["id"] == "ph_flower_gazania")
         self.assertIn("DRIFT TEST", a["rationale"]); self.assertTrue((L.DATA / a["drift_preview"]).is_file())
 
+    def test_placed_assets_match_sourced_height_and_inconsistent_scale_fails(self):
+        sp = L.load_species()
+        placed = [a for a in self.doc["assets"] if "placement_scale" in a]
+        self.assertGreaterEqual(len(placed), 2)
+        for a in placed:
+            h = sp[a["maps_to"][0]]["attributes"]["height_m"]["value"]
+            self.assertTrue(h["min"] <= a["placed_height_m"] <= h["max"], a["id"])
+        d = copy.deepcopy(self.doc)
+        next(x for x in d["assets"] if x["id"] == "skf3_d0248242")["placement_scale"] = 1.0
+        self.assertTrue(any("placed_height_m" in e for e in validate_assets(d, self.slugs)))
+
+    def test_papyrus_is_drawable_only_after_placement_scale(self):
+        row = next(r for r in self.doc["species"] if r["slug"] == "cyperus_papyrus")
+        self.assertEqual((row["grade"], row["drawable"]), ("B", "drawable"))
+        self.assertIn("placement scale", next(x for x in self.doc["assets"] if x["id"] == "skf3_d0248242")["rationale"])
+
 
 if __name__ == "__main__":
     unittest.main()

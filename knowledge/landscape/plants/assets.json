@@ -1492,17 +1492,19 @@
     2.803
    ],
    "alpha_card_tri_share": 1.0,
-   "preview": "asset-previews/skf3_75882b72.jpg",
+   "preview": "asset-previews/skf3_75882b72_placed.jpg",
    "grade": "B",
    "leaf_type": "leaf_cards",
    "species_fit": "genus",
    "maps_to": [
     "alocasia_macrorrhizos"
    ],
-   "rationale": "Looked at: 2.8 m elephant-ear clump, big heart-shaped veined leaves on petioles, no fishbone, reads as Alocasia at 5 m and 15 m (hand-painted texture, 2k tris). Source says 'Elephant Ear (Alocasia)': genus level.",
+   "rationale": "Looked at: re-rendered at placement scale 0.7135 (2.0 m tall, 4.4 m wide, sourced height 1.5-2.5 m; a clump of several plants). 2.8 m elephant-ear clump, big heart-shaped veined leaves on petioles, no fishbone, reads as Alocasia at 5 m and 15 m (hand-painted texture, 2k tris). Source says 'Elephant Ear (Alocasia)': genus level.",
    "storage": "shared",
    "manifest_key": "sketchfab/75882b72d1374270aeac76c96db2aa4e",
-   "candidate_for": "alocasia_macrorrhizos"
+   "candidate_for": "alocasia_macrorrhizos",
+   "placement_scale": 0.7135,
+   "placed_height_m": 2.0
   },
   {
    "id": "skf3_03947862",
@@ -2617,15 +2619,19 @@
     18.545
    ],
    "alpha_card_tri_share": 0.0,
-   "preview": "asset-previews/skf3_d0248242.jpg",
-   "grade": "C",
+   "preview": "asset-previews/skf3_d0248242_placed.jpg",
+   "grade": "B",
    "leaf_type": "real_leaves",
    "species_fit": "species",
-   "maps_to": [],
-   "rationale": "Looked at: genuine papyrus stalks with thread umbels, but authored 18.5 m tall against the sourced 1.5-2.4 m and only about 8 stalks. Would be B after a 0.1 scale; not applied, so not drawable.",
+   "maps_to": [
+    "cyperus_papyrus"
+   ],
+   "rationale": "Looked at: re-rendered at the placement scale 0.105 ( 1.95 m tall, 0.70 x 0.78 m; sourced height 1.5-2.4 m): genuine papyrus, about 8 slender stalks with thread umbels, reads as papyrus at 5 m; a single clump is thin at 15 m, so place in groups of 3 or more. Earlier C was only the authored 18.5 m size. 330k tris, no cards.",
    "storage": "shared",
    "manifest_key": "sketchfab/d0248242b885491aae74e4d334281226",
-   "candidate_for": "cyperus_papyrus"
+   "candidate_for": "cyperus_papyrus",
+   "placement_scale": 0.105,
+   "placed_height_m": 1.947
   },
   {
    "id": "skf3_a05b5ef5",
@@ -3412,8 +3418,8 @@
   {
    "slug": "cyperus_papyrus",
    "best_asset": "skf3_d0248242",
-   "grade": "C",
-   "drawable": "not drawable yet",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Papyrus (Undertale)",

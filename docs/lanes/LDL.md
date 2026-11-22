@@ -169,3 +169,11 @@ Quote re-check: 870 verified, 77 API-derived, 9 not matched (all older, stitched
 * Result: 6 A, 7 B, 16 C, 54 D. **Drawable species 5 -> 12** (+1 genus stand-in): new are Phoenix roebelenii (A), Punica granatum (B, two assets), Alocasia (B, genus), Rhapis (B, genus), Phoenix dactylifera (B, young palm), Lagerstroemia indica (B, sparse), Nerium oleander (B, a set of ~25 shrubs: extract one).
 * No materials were repaired: the untextured lady palms, livistona and calla have no images or colour in the file, so nothing was invented. Not applied, needs a lead decision: papyrus (18.5 m authored, B if scaled 0.1) and Alocasia macrorrhizos (9.5 m, B if scaled 0.3).
 * Still undrawable, and why: no free model exists under any name searched for Petrea, Justicia, Alpinia, Aspidistra, Origanum, Pennisetum, Pittosporum and Salvia leucantha; Jasminum sambac, Acorus, Rosmarinus, Bougainvillea, Fatsia, Ficus, Olea, Citrus-orange and the fruit trees have only fruit, scans or 1-5 cm cuttings. Paid libraries (Xfrog, Botaniq) remain the route (see `LDL-assets-shortfall.md`).
+
+## Pass 4 (2026-11-22): free sources, procedural prototype, rescales
+
+Full detail in `docs/lanes/LDL-free-sources.md`.
+* Sources checked with licence quotes: Fab/Megascans (engine-agnostic Fab Standard License; **blocked on an Epic account**, 26 free candidates listed in `free-candidates-fab.json`, 4 of the 13 gap species covered: Rosemary, Oregano, Red Fountain Grass, Cast-Iron Plant), BlenderKit (no gap species; account needed), CGTrader, TurboSquid, Smithsonian, Poly Haven, GrabCAD, free add-ons: no other source covers a gap species.
+* Procedural prototype Pittosporum tobira graded **C** (`asset-previews/proto_pittosporum_tobira.jpg`); proposal: about 20-25 working days for the shrub list, expected B for foliage shrubs, C-B for flowering climbers.
+* Papyrus rescaled to 0.105 (1.95 m) and now **B, drawable**; Alocasia placement scale 0.7135 recorded. Drawable species 12 -> 13 (+1 genus stand-in). No new species were graded from new downloads: nothing was downloadable without an account.
+
