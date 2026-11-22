@@ -371,11 +371,20 @@ def _dup_tris(t, q=1000):
 WANT = ("wall", "door", "window", "column", "beam", "slab", "stair", "rail", "furn", "lum", "fixture", "joinery")
 
 
-def k09_identity(w, model):
+def k09_identity(w, model, contract=None):
+    """contract: scene["element_contract"], the scene's own statement of model elements it carries without a mesh
+    (`light_only`: luminaires that are a light source only; `imported_props`: glTF assets placed by Blender). A listed
+    id is not "built 0 times", but only if the model holds it: an entry naming no model element is a finding."""
     out = []
+    contract = contract or {}
+    listed = {i: kind for kind in ("light_only", "imported_props") for i in (contract.get(kind) or {})}
     want = [e for e in model.values() if e["kind"] in ("wall", "door", "window", "column", "beam", "slab", "stair",
                                                          "railing", "furniture", "luminaire", "fixture")]
-    missing = [e["id"] for e in want if e["id"] not in w.elements or not len(w.elements[e["id"]].tris)]
+    unbuilt = [e["id"] for e in want if e["id"] not in w.elements or not len(w.elements[e["id"]].tris)]
+    missing = [i for i in unbuilt if i not in listed]
+    stray = sorted(i for i in listed if i not in model)
+    for i in stray:
+        out.append(_f("K09", i, False, 0, 1, "model element", f"{i} is in scene element_contract.{listed[i]} but the model holds no such element", (i,), "RV1-TOL-SCENE"))
     for i in missing:
         out.append(_f("K09", i, False, 0, 1, "built", f"{i} is in the model and has no surfaces in the scene (built 0 times)", (i,), "RV1-TOL-SCENE"))
     dups = {}
@@ -390,8 +399,12 @@ def k09_identity(w, model):
     extra = sorted(k for k in w.elements if k not in model and w.elements[k].kind not in ("env", "spec", "ctx", "site", "room", "garden", "plant"))
     for i in extra:
         out.append(_ne("K09", i, "scene element id with no design-model element (informational)"))
-    if not missing and not dups:
-        out.append(_f("K09", "model elements", True, len(want), len(want), "elements", f"all {len(want)} modelled elements are built exactly once"))
+    by_contract = [i for i in unbuilt if i in listed]
+    if not missing and not dups and not stray:
+        out.append(_f("K09", "model elements", True, len(want), len(want), "elements",
+                      f"all {len(want)} modelled elements are built exactly once" if not by_contract else
+                      f"all {len(want)} modelled elements: {len(want) - len(by_contract)} built exactly once, {len(by_contract)} carried "
+                      f"by the scene's element_contract (light only or imported asset, no mesh)"))
     return out
 
 

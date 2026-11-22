@@ -133,3 +133,22 @@ def test_k16_headroom_from_the_pitch_line():
         return w
     assert fails(C.k16_headroom(world(8.4)))
     assert not fails(C.k16_headroom(world(9.2)))
+
+
+def test_k09_element_contract_listed_light_only_id_passes_and_unlisted_still_fails():
+    model = {"lum-a": dict(id="lum-a", kind="luminaire"), "lum-b": dict(id="lum-b", kind="luminaire"),
+             "wall-1": dict(id="wall-1", kind="wall")}
+    w = W(wall_1=(0, 0, 0, 1, 1, 1))                          # neither luminaire has a mesh
+    contract = {"light_only": {"lum-a": dict(kind="COVE", reason="concealed")}, "imported_props": {}}
+    got = C.k09_identity(w, model, contract)
+    assert [f.subject for f in fails(got)] == ["lum-b"]       # lum-b is not in the contract: still "built 0 times"
+    assert not fails(C.k09_identity(w, model, {"light_only": {"lum-a": {}, "lum-b": {}}}))       # both listed: quiet
+    assert [f.subject for f in fails(C.k09_identity(w, model))] == ["lum-a", "lum-b"]            # no contract: as before
+
+
+def test_k09_element_contract_entry_naming_no_model_element_fails():
+    model = {"wall-1": dict(id="wall-1", kind="wall")}
+    w = W(wall_1=(0, 0, 0, 1, 1, 1))
+    bad = C.k09_identity(w, model, {"imported_props": {"prop-ghost": dict(asset="x.glb")}})
+    assert [f.subject for f in fails(bad)] == ["prop-ghost"]
+    assert not fails(C.k09_identity(w, model, {"light_only": {}, "imported_props": {}}))
