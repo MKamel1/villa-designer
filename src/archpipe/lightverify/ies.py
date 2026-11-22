@@ -143,6 +143,16 @@ def lumens(d: IesData, dg: float = 0.2, dc: float = 2.0) -> float:
     return tot * math.radians(dg) * math.radians(dc)
 
 
+def lumens_below(d: IesData, gamma_max: float, dg: float = 0.2, dc: float = 2.0) -> float:
+    """Flux emitted below gamma_max (deg from nadir): `lumens` truncated; the rest is at or above it."""
+    nc = int(360 / dc)
+    tot = 0.0
+    for i in range(int(gamma_max / dg)):
+        g = (i + 0.5) * dg
+        tot += math.sin(math.radians(g)) * sum(candela(d, g, (j + 0.5) * dc) for j in range(nc))
+    return tot * math.radians(dg) * math.radians(dc)
+
+
 def beam_angles(d: IesData, level: float = 0.5):
     """Full beam angle (deg) where I falls to `level` x peak, per C plane (0, 90): twice the half-angle off the peak axis."""
     peak = max(candela(d, g * 0.25, c) for g in range(0, 721) for c in (0.0, 90.0, 180.0, 270.0))

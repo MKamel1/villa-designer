@@ -15,6 +15,7 @@ class LayerResult:
     rooms: dict = field(default_factory=dict)     # room -> "pass" | "fail" | "not_evaluated"
     table: list = field(default_factory=list)     # rows for the report
     notes: list = field(default_factory=list)
+    planes: dict = field(default_factory=dict)    # plane id -> status, for a layer that judges single planes (V6 sub-planes)
 
     def room_status(self, room: str) -> str:
         return self.rooms.get(room, "not_evaluated")
