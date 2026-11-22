@@ -1,0 +1,82 @@
+{
+ "version": "v0-preregistered",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "options": {
+  "temperature": 0,
+  "seed": 7,
+  "num_ctx": 8192,
+  "num_predict": 400
+ },
+ "think": false,
+ "image_max_px": 1280,
+ "preamble": "You are a strict but fair landscape architect reviewing a PLAN drawing of a small private garden (about 50-250 square metres). The drawing standard is fixed and identical for every garden, so judge the DESIGN, not the drafting. Plan-up is the street side. Legend: coloured circles are plants drawn at their mature spread (darkest = canopy tree, medium = small tree, lighter = shrub, palest = ground cover/perennial); thick black bars are walls; grey diagonal hatch is building; hatched or dotted flat areas are paving, gravel, lawn; brown squares are seats; round tan disc is a table; dashed rectangle is a pergola; red diamonds are doors of the house. Scoring: 2 = the criterion is clearly met, or the problem is absent or minor; 1 = the problem is clearly visible in a noticeable part of the plan; 0 = the problem is severe and obvious at first glance. Every real garden has small flaws, so do not score down for small ones. If you are not sure, score 2. Describe only what you can see. Reply with JSON only: {\"evidence\": \"<=40 words naming the element and where it is\", \"score\": 0|1|2}.",
+ "criteria": {
+  "V-ENCLOSURE": {
+   "source": "AD-COMP-ENCLOSURE",
+   "prompt": "Does each outdoor room have a defined floor, enclosing edges (walls, buildings, hedges or dense planting) and, where it matters, a canopy (tree or pergola)? 2: every room is bounded on about three sides or more; 1: some room is open on two or more sides; 0: the spaces are open ground with no readable enclosure."
+  },
+  "V-FOCAL": {
+   "source": "AD-COMP-FOCAL",
+   "prompt": "Is there one clear primary focal point (a specimen tree, water, a fire pit, a pergola) with others subordinate? 2: one element clearly leads; 1: several equal competing elements or only a weak one; 0: no focal element at all, or scattered equal objects."
+  },
+  "V-AXIS": {
+   "source": "AD-COMP-AXIS / AD-COMP-PATH",
+   "prompt": "Do paths, axes and lines of travel lead to something worth reaching (a door, a seat, a feature, a room)? 2: every path ends somewhere or there are no stray paths; 1: one path is ambiguous or ends at a blank edge; 0: paths lead nowhere or circulation cannot be read."
+  },
+  "V-RHYTHM": {
+   "source": "AD-COMP-RHYTHM",
+   "prompt": "Does the planting use repetition and rhythm: a few species repeated in masses or drifts, rather than one plant of each kind scattered? 2: clear masses and repeated groups; 1: some repetition but mostly mixed singles; 0: no repetition, a collection of single plants or an even uniform spread."
+  },
+  "V-LAYERING": {
+   "source": "AD-COMP-LAYERING",
+   "prompt": "Does the planting have layered depth: trees over shrubs over ground cover, and spaces within spaces? 2: three layers present and visible; 1: two layers or layers only in one corner; 0: a single layer (only low plants, or only trees) or bare ground."
+  },
+  "V-ROOMS": {
+   "source": "AD-COMP-BASE-PLANE",
+   "prompt": "Are there distinct outdoor rooms or places, each with its own floor surface and use, so the garden is a sequence of spaces rather than one undivided area? 2: two or more distinct places with different floors; 1: one clear place and one vague; 0: one undivided area or no defined place to sit."
+  },
+  "V-OVERALL": {
+   "source": "whole plan",
+   "prompt": "Taken as a whole, does this plan read as a designed landscape (structure, edges, rooms, planting masses) rather than objects placed on flat ground? 2: clearly designed; 1: partly; 0: a scatter of objects with no structure."
+  }
+ },
+ "split_seed": "LDC-2026-11-landscape-critic-v1",
+ "split": {
+  "bad": {
+   "tuning": [
+    "path-to-nowhere",
+    "D1-current",
+    "privacy-exposed",
+    "lone-specimens"
+   ],
+   "held_out": [
+    "oversize-tree",
+    "single-layer",
+    "no-enclosure",
+    "capacity-4"
+   ]
+  },
+  "good": {
+   "tuning": [
+    "P-S2-20",
+    "P-SAU-01",
+    "base",
+    "P-SME-01",
+    "P-SAU-04",
+    "P-SME-08"
+   ],
+   "held_out": [
+    "P-SME-02",
+    "P-S2-04",
+    "P-SAU-02",
+    "P-SAU-05",
+    "P-SME-05"
+   ]
+  }
+ },
+ "photo_criteria": {
+  "P-ENCLOSURE": "Does the garden in this photo read as an enclosed outdoor room (defined edges, overhead or side enclosure)? 2 clearly; 1 partly; 0 open and undefined.",
+  "P-LAYERS": "Does the planting in this photo show layered depth (trees, shrubs, ground layer) with the planting reading as lush and layered? 2 three layers; 1 two layers; 0 one layer or bare.",
+  "P-FOCAL": "Does this photo have one clear focal point that the space is organised around? 2 clear; 1 weak or competing; 0 none."
+ }
+}
