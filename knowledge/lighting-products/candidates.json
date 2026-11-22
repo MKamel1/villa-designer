@@ -2684,7 +2684,7 @@
     "files": {
      "pdf": {
       "path": "knowledge/lighting-products/iguzzini/QA11/QA11-product-page.txt",
-      "sha256": "4b28948f8bc17f85649eaa64bab76ff3afc29dbe91b4b70a8c11cb26600922a2"
+      "sha256": "f55138830f298a8a7ed8c56c30848a76388c25acccb147f4d3011d6c59929293"
      },
      "ldt": {
       "path": "knowledge/lighting-products/iguzzini/QA11/QA11.ldt",
@@ -2706,7 +2706,7 @@
      },
      "QA11-product-page.txt": {
       "path": "knowledge/lighting-products/iguzzini/QA11/QA11-product-page.txt",
-      "sha256": "4b28948f8bc17f85649eaa64bab76ff3afc29dbe91b4b70a8c11cb26600922a2"
+      "sha256": "f55138830f298a8a7ed8c56c30848a76388c25acccb147f4d3011d6c59929293"
      }
     },
     "urls": [
