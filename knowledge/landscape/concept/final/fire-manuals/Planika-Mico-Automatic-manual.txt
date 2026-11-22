@@ -1,0 +1,976 @@
+    USER’S AND INSTALLATION MANUAL
+                                      Mico Automatic
+                  G20/G25 (Natural Gas) G30/G31 (Propane-Butane/Propane)
+
+
+
+
+              Mico Automatic 600, 800                                         Mico Automatic 500
+
+
+
+
+                                             H2
+
+
+H
+                                             H1                                                      D1   D
+
+
+                        D2
+
+
+
+
+                                                                             D1
+                                                                              D
+
+
+                                H [mm]      H1 [mm]    H2 [mm]   D [mm]      D1 [mm]   D2 [mm]
+
+          Mico Automatic 500        285       241        3        500          270       478
+
+          Mico Automatic 600        285       221        3        600          370       578
+
+          Mico Automatic 800        305       221        3        800          570      778
+
+
+
+     Copyright Planika Sp. z o.o.         www.planikafires.com            IG0371#02     05.03.2024
+                IT IS OBLIGATORY TO READ AND KEEP THIS INSTRUCTION MANUAL.
+
+                                                                                                    TABLE OF CONTENTS
+
+1.        INTRODUCTION ......................................................................................................................................................................................................................... 3
+2.        SAFETY INSTRUCTION................................................................................................................................................................................................................ 4
+      2.1. Safety instruction regarding the use of the gas cylinder .......................................................................................................................................................... 5
+3.        INSTALLATION ........................................................................................................................................................................................................................... 6
+      3.1.          Box contents................................................................................................................................................................................................................... 6
+      3.2.          Unboxing and installation............................................................................................................................................................................................... 6
+4.        MONTAGE ................................................................................................................................................................................................................................. 7
+      Cavity has to be made with ventilation grate located on the lowest point as on below scheme. .................................................................................................. 8
+      4.1.          Directions of how to design a cavity for the fireplace .................................................................................................................................................... 8
+      4.2.          Gas cylinder montage ..................................................................................................................................................................................................... 8
+5.        INSTALLATION OF THE GAS LINKAGE ...................................................................................................................................................................................... 10
+      5.1.          Natural gas connection................................................................................................................................................................................................. 10
+      5.2.          Connection and replacement of the gas cylinder (LPG version) ................................................................................................................................... 10
+      5.3.          Pressure regulator replacement (LPG version) ............................................................................................................................................................. 13
+6.        OPERATING INSTRUCTIONS..................................................................................................................................................................................................... 14
+      6.1.          Setting up signal code .................................................................................................................................................................................................. 14
+      6.2.          Replacing the batteries................................................................................................................................................................................................. 15
+      6.3.          Remote control ............................................................................................................................................................................................................ 15
+      6.3.1.             Switch the Fire ON and OFF .................................................................................................................................................................................... 16
+      6.3.2.             Stand-by mode (Pilot flame) ................................................................................................................................................................................... 16
+      6.3.3.             Flame height adjustment ........................................................................................................................................................................................ 17
+      6.3.4.             Flame height directly to minimum position ............................................................................................................................................................ 17
+      6.3.5.             Flame height directly to maximum position ............................................................................................................................................................ 17
+      6.3.6.             Automatic Turn Down To Pilot ................................................................................................................................................................................ 17
+      6.3.7.             Automatic Shut Off ................................................................................................................................................................................................. 18
+      6.4.          Touchpanel ................................................................................................................................................................................................................... 18
+7.        TESTING................................................................................................................................................................................................................................... 19
+      7.1.          Checking for gas leaks .................................................................................................................................................................................................. 19
+      7.2.          Checking the flame appearance ................................................................................................................................................................................... 19
+8.        MAINTENANCE AND UPKEEP .................................................................................................................................................................................................. 19
+      8.1.          Testing and cleaning ..................................................................................................................................................................................................... 19
+9.        TROUBLESHOOTING ................................................................................................................................................................................................................ 20
+10.            SERVICE.............................................................................................................................................................................................................................. 20
+11.            TECHNICAL SPECIFICATION ................................................................................................................................................................................................ 21
+12.            WARRANTY ........................................................................................................................................................................................................................ 21
+13.            MANUFACTURER’S CONTACT DETAILS .............................................................................................................................................................................. 21
+
+
+
+
+                                                                                                                          2
+     1. INTRODUCTION
+The Mico Automatic fireplace is a decorative fuel-effect gas appliances intended only for outdoor use. It is obligatory
+to acquaint oneself with the below installation manual and user’s manual before committing to the installation and
+use of the Mico Automatic fireplace. This manual is to be kept safe for the lifetime of the device.
+The Planika company designs and manufactures gas devices that meet the highest standards of quality, and safety.
+The device has a CE marking, which means that it meets the essential requirements of the Regulation (EU) 2016/426
+relating to Devices burning gas and EN 778: 2010.
+Each gas fireplace produced by Planika is subjected to factory quality control, during which it undergoes rigorous safety
+tests. Materials of the highest quality used for its production guarantee the user a smooth and reliable functioning of
+the device.
+The device is delivered together with the instruction manual and assembly instructions. The assembly instructions
+provide the necessary information to install the device in such a way that it works properly and safely. In addition, you
+can find technical data about the device, information on its maintenance and possible failures that may occur, along
+with their possible causes and how to resolve them.
+WARNING! The device must be installed by the installer who is certified and qualified specialist in gas heating and
+electricity and should have all the qualifications required by local law. Failing to comply with the above condition
+may result in voiding the warranty.
+
+                                                    CE Declaration of conformity
+We hereby declare that both the design and construction of a gas heating device manufactured by Planika Sp. z o.o. (with registered office at
+Bydgoskich Przemysłowców 10 85-862 Bydgoszcz, Poland) meet the essential requirements contained in the Directive and the Ordinance on
+gas appliances.
+Product: Gas device with decorative combustion effect and atmospheric burner,
+Type: Galio
+Regulation: 2016/426/EU
+Standards: PN-EN 778: 2010; PN-EN 437:2019-03; PN-EN 60335-2-102
+
+
+       Model              Galio Fire Pit      GALIO 700-950       GALIO 1000-1150       GALIO 1200-1550      GALIO 1600-2150       GALIO 2200-2500
+        Type               VEGA/400              SIGA/01               SIGA/02              SIGA/03               SIGA/04              SIGA/05
+    Series of type      VEGA/400/W/M          SIGA/01/W/M           SIGA/02/W/M          SIGA/03/W/M           SIGA/04/W/M          SIGA/05/W/M
+
+The notified body: the Oil and Gas Institute - National Research Institute (Lubicz 25 A street, 31-503 Kraków, Unit number: 1450) carried out and
+on 09.10.2018 issued the certificate no. GAR1450CT0048 for the above mentioned devices.
+The company's quality control system guarantees that the mass-produced devices meet the essential requirements of the applicable Directives
+and Regulations as well as the standards contained therein. This Declaration is annulled if any modifications are made to the device without the
+prior written consent of Planika.
+
+
+
+
+Brzoza 10.10.2018                                                                                          Chairman of the Board
+                                                                                                           Jarosław Dąbrowski
+
+
+
+
+                                                                       3
+   2. SAFETY INSTRUCTION
+   •   Read the instructions before use. Keep the instructions for future reference.
+   •   For use outdoors only. The use of this appliance in enclosed areas is DANGEROUS and is PROHIBITED
+   •   The Mico Automatic is not a free-standing device and is destined to be housed.
+   •   The montage of the device must take into account its trouble-free removal in case of service.
+   •   Do not start up the device before it’s placed safely into the prepared housing.
+   •   The Mico Automatic fireplace should be installed and controlled annually according to the below installation
+       manual as well as enforced national and local laws regarding gas safety (installation and use).
+   •   One needs to assess whether the data on the product plaque complies with the local type of gas and pressure.
+   •   Do not change the structure of the device or its sealed elements nor modify the default settings of the Mico
+       Automatic fireplace.
+   •   Do not set any additional imitation blocks nor any glowing coal fragments on the burner or in the combustion
+       chamber.
+   •   A ventilation grid or slot is required at the base of the housing. A device without the grid or slot for ventilation
+       will function incorrectly causing a threat of damaging the unit or causing a fire.
+   •   A CO2 or a powder fire extinguisher needs to be placed near the device.
+   •   During the first ignition the Mico Automatic fireplace needs to be burnt on maximum level for a few hours in
+       order for the elements to acquire correct temperature and for the remains of paint, lacquer and lubricant to
+       evaporate.
+   •   Do not move the device while it’s working.
+   •   The Mico Automatic fireplace was designed for decorative purposes. The surface of the Mico Automatic
+       fireplace (including the optional glass screens) may get hot (up to 100 degrees Celsius).
+WARNING!: Parts of the device that are easy to reach may be very hot. Keep children away from the device.
+   •   Some variants of housing for the device may require installing additional toughened glass screens (provided
+       separately).
+   •   Install the fireplace away from flammable materials.
+   •   When the Mico Automatic fireplace is on it’s not to be exposed to rain.
+   •   When not being used the Mico Automatic is to be protected from atmospheric conditions and the main valve
+       of the gas cylinder needs to be turned off.
+   •   All parts of the Mico Automatic fireplace are made of stain resistant material.
+   •   Never leave a turned on Mico Automatic without supervision.
+   •   The Mico Automatic fireplace needs to be installed in a place inaccessible for children, unauthorized persons
+       or animals for the direct contact with the flame or hot parts of the device to be impossible.
+   •   In case of heavy wind the Mico Automatic fireplace needs to be immediately turned off and one needs to wait
+       until the heavy wind passes.
+   •   In case of noticing any sort of gas leaks the fireplace as well as the main valve of the gas cylinder need to be
+       turned off.
+   •   After use turn off the gas cylinder valve.
+   •   Salty seawater environment accelerates the corrosion process and contributes to fireplace damage
+
+
+
+
+                                                            4
+2.1. Safety instruction regarding the use of the gas cylinder
+•   Use only the type of gas and pressure specified by the manufacturer.
+
+•   The gas cylinders should always be placed in a vertical position – during use and transport.
+
+•   Always store the gas cylinder in an easily accessible place to allow its immediate turn-off.
+
+•   Change the gas cylinder in a amply ventilated area, away from any ignition source (candle, cigarettes, other
+    flame producing appliances).
+•   Do not obstruct the ventilation holes of the cylinder housing.
+•   In the event of gas leakage, the appliance shall not be used or if alight, the gas supply shall be shut off and the
+    appliance shall be investigated and rectified before it is used again.
+•   During the installation process do not allow an open flame or any ignited object to reach the gas cylinder.
+
+•   The gas cylinder should be in a distance not shorter than 1,5 metres away from the Mico Automatic fireplace.
+
+•   Leaks should be found with the use of a cleaning liquid and water. If bubbles form on the surface that means
+    that a there’s an existing leak.
+
+•   Always use a pressure regulator between the gas cylinder and the device. Replace the pressure regulator every
+    5 years. The allowed pressures are: 30mbar, 37mbar (recommended), 50 mbar. Use only regulators complying
+    with the European EN16129 Norm.
+
+•   Use only approved and certified gas connection linkage. Replace the linkage every 2 years.
+
+•   Check the flexible hose at least once per month and each time the cylinder is changed. If it shows signs of
+    cracking, splitting or other deterioration it shall be exchanged for new hose of the same length and of the
+    equivalent quality.
+•   Do not connect the gas cylinder directly to the appliance without regulator.
+•   The tubing or the flexible hose must be changed within the prescribed intervals.
+•   Use only the type of gas and the type of cylinder specified in these instructions
+
+•   The elastic linkage connecting gas to the fireplace is to be led away from sharp edges and hot surfaces. Refrain
+    from bends and twists of the elastic connection on its full length.
+
+•   Remember that the LPG bottle should be stored in a well-ventilated place. LPG gas is heavier than air and its
+    accumulation near the surface may generate an explosive mixture.
+
+•   The housing in which the LPG bottle is (optionally) placed needs to have an appropriate ventilation. The
+    housing needs to have an upper ventilation slot above the top of the bottle (of an area min 1/100 of the area
+    of the base of the housing) and a lower ventilation slot (of an area min 1/50 of the area of the base of the
+    housing).
+
+•   The gas cylinder needs to be shut if the fireplace is not being used.
+
+•   Filling the gas cylinders is to be commissioned to certified gas filling stations.
+
+•   Replacement of empty bottles for full ones is to be conducted only in authorised locations.
+
+
+
+
+                                                         5
+3. INSTALLATION
+    3.1. Box contents
+• 1x complete gas fireplace
+• 1x remote control and 2x AAA Batteries
+• 4x AA Batteries
+• Bag of decorative stones (quantity depend on fireplace length)
+• 1x 4 metre rubber gas linkage – installed (only LPG version)
+• 1x pressure regulator (37mbar) – installed (only LPG version)
+• 1x installation and user’s manual
+• 1x allen spanner
+
+    3.2. Unboxing and installation
+• The contents of the boxes need to be carefully unwrapped from the foam foil.
+• Remove the bags with decorative stones from the burner reservoir and place them away from it.
+• Remove the Styrofoam placed on the unit.
+• Check the completeness of the elements with the contents list.
+• Make sure that the insert nor its elements weren’t damaged during the transportation (if they were, notify the
+   supplier).
+• Install the Mico Automatic fireplace in the prepared housing made according to the specification.
+• The decorative stones are to be scattered evenly around the reservoir to completely cover the burner of the
+   fireplace.
+WARNING! The stones may not cover or be placed inside the device protecting the ignition unit.
+
+
+
+
+                                           Fig. 1 – Decorative stones location
+• In the case of Mico Automatic powered with natural gas, to obtain the optimum image of the flame, cover the
+  burner with a single layer of decorative stones leaving some spaces uncovered of approximately every 10 cm.
+
+
+
+
+                                      Fig. 2 – Decorative stones location on burner
+
+• If all the points were completed according to the instruction the gas cylinder can be now connected.
+• The appliance must be used with decorative stones supplied by the manufacturer. Use without stones is prohibited.
+
+
+                                                           6
+4. MONTAGE
+WARNING! All elements above the fireplace need to be made of non-flammable materials.
+                                                                                  In accordance with fire safety measures
+                                                                                  there should be no flammable objects in
+          Non-flammable materials                                                 direct contact with the device nor within a
+                                                                                  1 metre radius from the fire. Additionally,
+                                                                                  Planika doesn't recommend placing heat-
+                                                                                  sensitive objects above the fireplace as it
+                                                                                  may shorten their lifetime. Planika will not
+                                                                                  be responsible for any damage caused by
+                                                                                  high   temperature      affecting   objects
+                                                                                  installed above the fire.
+
+
+
+
+                                      Ventilation grate or slot with ventilation area
+                                      of minimum 150 cm2 for Mico Automatic 500,
+                                        600 and 300cm2 for Mico Automatic 800
+
+
+•   The dimensions of the housing are to be chosen according to the technical drawings. Ventilation grid or slot –
+    with ventilation area min 150 cm2 for Mico Automatic 500 and 600, 300cm2 for Mico Automatic 800 – needs to
+    be placed on lowest point of cavity. Please note if not possible there has to be additional drainage installed to
+    lead out water from the cavity.
+    •   If a hood is placed above the burner it needs to be made of non-flammable materials and a minimum distance
+        of 60 cm from the surface of the burner needs to be observed.
+WARNING! If the housing is devoid of a diagonal hood above the burner one needs to remember that all surfaces
+inside the housing exposed to contact with hot air need to be made of non-flammable materials.
+    •   It is not permitted to use a device which is not housed in some way.
+
+
+
+
+                                                                   7
+    4.1. Directions of how to design a cavity for the fireplace
+                                                              WARNING
+               Cavity has to be made with ventilation grate located on the lowest point as on below scheme.
+                                  It is required for cooling the device and water drainage.
+
+• When preparing the cavity make sure the surface on which the insert is placed is well-levelled.
+• Bottom surface of the cavity has to be made with min. 5% inclination to lead out water through
+                                                                                                                     H2
+
+                                                                                               H
+                                                                                                                     H1
+
+                                                                                                           D2
+
+
+
+
+                                                                                                                      D1
+                                                                                                                      D
+
+
+
+
+                                                                                                           D1
+                                                                                                           D
+
+
+                                                                  A-A
+                                                                                             Ventilation
+                                                                                                air
+
+
+
+
+                           Surface inclination
+                                min. 5%                                                    Water
+
+
+                                                  Fig. 3 – Cavity measures for units
+
+    4.2. Gas cylinder montage
+WARNING! In case of LPG version it is crucial to manufacture a slot in the side of the housing where the insert is placed
+for the gas linkage and the pressure regulator.
+
+
+
+
+                                                 Fig. 4 – Installation for LPG type unit
+
+The gas linkage attached to the device allows to place the gas cylinder maximally 3 metres away from the connected
+control panel, however it cannot be placed nearer to the device than 1,5 metres.
+
+
+
+                                                                   8
+                                      Fig. 5 – Location of gas cylinder and additional housing
+•     The optional housing for the gas cylinder cannot be airtight and has to be correctly ventilated. The housing needs to
+      have an upper ventilation slot above the top of the bottle (of an area min 1/100 of the area of the base of the housing)
+      and a lower ventilation slot (of an area min 1/50 of the area of the base of the housing). The dimensions of the housing
+      may vary to accommodate different types and dimensions of the gas cylinders however they also have to be sufficient
+      for hassle-free installation of the gas cylinder.
+•     After making sure that the device has been correctly installed acquaint yourself with the attached User’s Manual.
+•     Only after acquainting yourself with the User’s Manual and correctly attaching the gas linkage may you start the device.
+•     If in future a need arises of having to take the insert out of the housing it may only be done when the device is turned
+      off and cooled down and the valve on the gas cylinder is closed.
+•     Keep this instruction manual for the lifetime of the device.
+     4.3. Optional installation
+
+You can optionally finish the housing with any non-flammable material such as stone. To do this, unscrew the flap of the
+control panel assembly using the Allen spanner provided with the product (2 screws on the sides), prepare a holes in the
+finishing material with appropriate size and assemble the flap using non combustible adhesive.
+Ensure that the fireplace is not weighed down by the weight of the finishing material. The finishing material must allow
+the fireplace to be pulled out easily in case of service issues.
+                                                                                                               Finishing material
+                                                                                                                  not supplied
+              Mico 500    Mico 600    Mico 800
+    X [mm]          17       17          17
+    Y [mm]       192         243         343
+
+
+                                                                       3
+
+                                                                                                           4
+                1                          2
+
+
+
+
+                                                    Fig. 6 – Optional installation
+
+
+                                                                   9
+5. INSTALLATION OF THE GAS LINKAGE
+WARNING! The montage and service needs to be conducted by a qualified professional, a company or the gas
+supplier.
+
+Before proceeding with the connection of the gas cylinder to the fireplace all activity regarding the correct placement
+and installation of the Mico Automatic needs to be already performed. Place the gas linkage away from hot or sharp
+edges and make sure it is not twisted.
+
+    5.1. Natural gas connection
+First and foremost, make sure that the connecting device is designed to supply a gas suitable for the type placed in
+the gas installation. All necessary information regarding the desired parameters of the gas are found on the rating
+plate of the device. Before connecting the gas supply, it is necessary to blow them to remove any remaining metal
+filings and other contaminants from inside. Automatic gas control system should be protected from moisture and dust.
+These factors may cause irreparable damage to the individual components. The pipe supplying gas to the fireplace
+should be equipped with a ball valve with a recommended diameter of 1/2 inch. The individual elements of the gas
+installation cannot be sealed using Teflon tape or PTFE tape.
+
+The gas valve on the gas pipe must be installed in accordance with applicable national regulations. Before connecting
+the gas, make sure that the gas pipes and connections have no dirt. Gas connection is finished with external thread
+3/8 ". Regarding gas connection, the following requirements shall apply:
+
+• You must use the gas pipe with the correct dimensions, so there is no pressure loss.
+
+• Ball gas valve should be installed in an easily accessible place and have the necessary CE mark.
+
+    5.2. Connection and replacement of the gas cylinder (LPG version)
+The Mico Automatic is delivered together with an elastic gas linkage which, on one end is connected to the valve of
+the device and on the other end to the 37mbar regulator (in the twist-on version) ready to be connected to the gas
+cylinder. One needs to control the expiry date of both of the regulator as well as the gas linkage and if necessary (for
+instance: broken, cut, scratched linkage) replace the components for new ones according to national standards and
+norms.
+
+The Mico Automatic fireplace can use metal or steel bottles or composite bottles filled with propane-butane gas or
+propane gas. This device features a twist-on regulator with current pressure of 37mbar. It can be replaced into a
+regulator with a quick-release with pressure regulator of 37 mbar.
+WARNING! NEVER use an unstable gas connection or a regulator for other gas pressure.
+Gas cylinders have two types of connectors:
+   •     Twist-on connection: The most important thing is the black seal. Always check if the seal is present and that it
+         hasn't been damaged during the gas cylinder replacement. Some connections have a knob to fasten them in
+         place while others require the use of a wrench. Tighten securely (left thread). Using the tool pay attention not
+         to fasten the connection too tightly as this may damage the seal.
+   •     Quick-release: For this type of connection no tool is required. On/off regulation of gas connection is made
+         through a switch on the regulator or on a special connector. In case of using a connector with a thread regulator
+         of an old type put a special emphasis on checking if the connecting nut has been tightly fastened with the help
+         of wrench.
+
+
+                                                            10
+      Gas cylinder connection
+                Twist-on connection                                             Quick-release
+1. Check if the bottle valve is TURNED OFF turning it    1. Remove the protection tip. Do not use any tools,
+   clockwise                                                leave the tip hanging freely.
+2. Remove the protection tip and store it for later use.
+3. Before making the connection check if the black seal 2. Make sure all the taps on the gas device are closed
+   is not damaged.                                          and if the switch in in the OFF position.
+
+
+
+
+4. Fit the connecting nut to the cylinder with the use of 3. Place the quick-release regulator on the valve and
+   a correct wrench or the connecting knob. (left            press it down hard. If the switch is correctly turned
+   thread) Do not allow the gas cylinder connectors to       off you will hear a characteristic click.
+   be fastened too tightly.
+
+
+
+
+5. When the gas flow is required turn the valve of the 4. To let the gas flow in turn the switch into the ON
+   bottle counter-clockwise.                              position (or into the flame image).
+
+
+
+
+                                           Table 1 – Gas cylinder connection
+
+    • Place the gas cylinder in a correct distance from the fireplace (min 1,5 metres away).
+WARNING! Check the gas connection for leakage. If anything suggests a leak is present (for instance a characteristic
+gas smell) close the gas cylinder valve and under no circumstances turn the device on before removing the leak.
+    • After removing the leak one may open the gas cylinder valve again.
+
+
+
+
+                                                          11
+     Disconnection of the gas cylinder
+              Twist-on connection                                                      Quick-release
+1. Turn off the Mico Automatic – put it into the OFF position. The main and pilot burner need to be turned off.
+2. Turn the bottle valve into the OFF position                  2. Turn the switch into the OFF position.
+   (clockwise).
+
+
+
+
+3. NEVER DO NOT unmount the regulator (or                       3. Take off the quick-release regulator by pressing the
+   connecting nut) when the bottle valve is open.                  switch horizontally and simultaneously pulling the
+4. TAKE OFF the regulator (or the connecting nut) with             whole regulator upwards.
+   the use of a wrench or a connecting knob.
+
+
+
+
+5. REPLACE the linkage closer or cap on the empty or            4. REPLACE the tightening cap on an empty or partially
+    partially full bottle if it’s not being used.                   full bottle if it’s not being used.
+                                              Table 2 – Gas cylinder disconnection
+
+
+
+
+                                                              12
+   5.3. Pressure regulator replacement (LPG version)
+1. You always need to use a pressure regulator between the gas bottle and the device. Replace the pressure
+   regulator every 5 years. Allowed pressures: 30 mbar, 37 mbar (recommended), 50 mbar. Use only the regulators
+   that comply with the EN16129 European Norm.
+2. Turn off the device
+3. Disconnect the regulator from the gas bottle (description above).
+                                          Twist-on connection                        Quick-release
+4. Cut off attached pressure
+   reducer or go to step 4.1. if
+   you have pressure reducer
+   with clamp connection.
+
+
+
+
+5. Replace the regulator to
+   new one with clamp
+   connection by attaching
+   new linkage on the stub of
+   regulator.
+
+6. Move the clamp into the
+    stub
+
+
+
+
+7. Tighten the clamp with
+   screwdriver (philips) or a flat
+   wrench.
+   WARNING! In the event of
+   visible damage on the
+   clamp, replace it for a new
+   one.
+
+
+                                          Twist-on connection                        Quick-release
+4.1. Loosen the metal clamp
+     with the use of a
+     screwdriver (philips) or a
+     flat wrench.
+
+
+
+
+4.2. Move the clamp away from
+     the stub of gas regulator
+     and go to step 5
+
+
+
+
+                                     Table 3 – Pressure regulator replacement
+
+
+
+
+                                                       13
+6. OPERATING INSTRUCTIONS
+The Mico Automatic fireplace has a remotely control valve with a built-in ignition for the pilot flame. The flame height
+of the main burner may be appropriately regulated by Wall Switch (Touch Panel) or remote control.
+
+
+
+
+                                      Fig. 7 - Hand-held transmitter and Wall Switch
+
+    6.1. Setting up signal code
+Warning! You only need to set up the signal code once. It is not necessary when changing the batteries of the hand-
+held transmitter or receiver. The appliance is delivered already configured (remote control is paired with the
+receiver) and ready to work.
+
+In case of lost or damaged of hand-held transmitter the new one has to be programmed and the receiver must first
+learn the hand-held transmitter’s signal code before the first use:
+
+• Press the “RESET” button on the receiver, and keep this pressed until 2 beeps are heard. Release the “RESET”
+   button after the second (somewhat longer) beep. Receiver is located in grey gas box under the insert.
+
+Press, within 20 seconds, the „-“ button (small flame) on the hand-held transmitter, until 2 short beeps are heard.
+
+The signal code has now been set up on the receiver. If, however, a single long beep is heard, this means that setting
+the signal code has failed or that the wiring has been connected incorrectly.
+
+
+
+
+                                             Fig. 8 - Receiver “RESET” button
+
+
+
+
+                                                           14
+     6.2. Replacing the batteries
+ If the batteries are inserted incorrectly, the electronics or drive may be irreparably damaged. Only replace the batteries
+ when the appliance has been completely switched off.
+ NOTE: If the appliance is equipped with a 230 VAC connection, no batteries are present in the receiver or in battery
+ box.
+• The batteries are placed in battery holder located under the flap on top plate of the fireplace.
+
+
+                   1             2                 3
+
+
+
+
+                                               Fig. 9 – Replacing the batteries
+
+• To replace the batteries, open the flap on the top plate of the burner and pull out the cover then pull out battery
+   box and unscrew its cover. WARNING! Remember about proper polarization of the batteries while replacing.
+• After replacing the batteries make the same steps in opposite.
+
+ 6.3. Remote control
+
+ Mico Automatic can be operated by radio remote control. This comprises a hand-held transmitter and a receiver.
+ The receiver is part of the gas control block assembly.
+ • Electrical connections and batteries:
+        o Hand-held transmitter: 2x 1.5V AAA battery
+        o Receiver: 4x1.5V AA battery or 6 VDC
+ WARNING! Without using a mains adapter, battery replacement is recommended at the beginning of each heating
+ season. Old or dead batteries should be removed immediately. If left in the unit the batteries can overheat, leak, and
+ / or explode. Do NOT expose batteries (including during storage) to direct sunlight, excessive heat, fire, moisture, or
+ severe impact. Each of these conditions can cause the batteries to overheat, leak, and / or explode. Batteries must
+ be kept within their recommended temperature limits. Ambient battery temperature range: 32 °F to 131 °F[0 °C to
+ 55 °C].
+ • The hand-held transmitter batteries have a service life of approx. one year. We recommend you use alkaline
+    batteries. Rechargeable batteries are not permitted.
+ • To replace batteries:
+        o Open the cover on the back of the remote control.
+        o Remove the batteries from the battery compartment.
+        o Place two new 1.5V batteries (LR03 or AAA type) as indicated in the battery compartment.
+        o Close the cover
+
+
+
+
+                                                             15
+ 6.3.1. Switch the Fire ON and OFF
+Before operating make sure MANUAL knob on the GV60 valve is in the ON, full counter clockwise position.
+WARNING! When the pilot light is ignited, the motor turns automatically to maximum flame height. If the pilot flame
+goes out for any reason, wait for 5 minutes before attempting to re-light it. If the pilot does not stay lit after several
+tries, turn the main valve knob to OFF.
+                                 1. Open the valve of the gas cylinder (or gas supply valve in the gas pipe).
+                                 2. Press     button until two short beeps confirms the start sequence has begun;
+                                 release button.
+                                 3. Main gas flows once pilot ignition is confirmed.
+                                 4. Handset automatically goes into Manual Mode after main burner ignition.
+                                 5. Press and hold      button to turn OFF the fire.
+
+•    This can take few seconds to ignite to pilot flame especially when you have replaced and installed a new LPG gas
+     cylinder.
+•    If the pilot light does not ignite after 3 ignition attempts close the gas tap and contact the fitter.
+•    Once the pilot light is burning, the main burner must ignite within 10 seconds automatically. If this does not
+     happen, immediately close the gas tap and warn the fitter.
+•    If the main burner ignites with a pop immediately close the gas tap and warn the fitter.
+•    If the appliance is not to be used for some time, please close the gas supply valve in the gas pipe (or valve of the
+     gas cylinder).
+WARNING! If the pilot flame goes out for any reason wait for 5 minutes before attempting to re-light it.
+WARNING!
+• Under conditions of increased humidity (rain, breeze, fog, dew, etc.), there may be some temporary problems
+    with switching on the fireplace. This is a normal phenomenon associated with the dampening of the ignition
+    element.
+• Before switching on the fireplace, wait until the ignition element has dried completely.
+• You can speed up this process by blowing the pilot flame with compressed air to remove the accumulated
+    moisture. The properly fired pilot flame consist of 3 smaller parts.
+
+
+
+
+                                                   Fig. 10 – Ignition elements
+
+6.3.2. Stand-by mode (Pilot flame)
+                                 Press and hold „-“ button to set appliance to pilot flame. Pilot flame remains burning
+
+                                 (standby position).
+
+
+
+
+                                                             16
+  6.3.3.         Flame height adjustment
+After ignition, the burner automatically sets the flames to the maximum height.
+
+                                 •         To decrease flame high, or to set appliance to pilot flame, press and hold „-“
+
+                                 button.
+
+                                 •         To increase flame high press and hold „+“ button.
+
+
+
+
+  6.3.4.         Flame height directly to minimum position
+                                 Pressing the „-“ button twice automatically decreases the flames to the LOW position
+
+
+                                 NOTE: Flame goes to high fire first before going to low fire.
+
+
+
+
+  6.3.5.         Flame height directly to maximum position
+                                 Pressing the „+“ button twice automatically increases the flames to the HIGH position
+
+                                 Press and hold „+“ button to increase the flame level and to turn on the burner from
+
+                                 the stand-by position.
+                                 NOTE: If you turn on the burner by pressing the button, it must ignite within 10 seconds.
+                                 If this does not happen, immediately close the gas tap and warn the fitter.
+
+
+
+6.3.6.     Automatic Turn Down To Pilot
+
+3 Hour No Communication Function
+The valve will turn to pilot flame if there is no communication between handset and receiver for a 3 hour period. The
+fire will continue to function normally when communication is restored.
+
+
+Receiver Overheating
+    •    Powered by mains adapter: The valve turns to pilot flame if the receiver temperature is higher than 176 °F
+         (80 °C). If batteries are installed in the receiver in this configuration the temperature must not exceed 60 °C.
+    •    Powered by batteries and/or connected to the V module: The valve turns to pilot position if the temperature
+         in the receiver is higher than 140 °F (60 °C).
+
+
+NOTE: When the receiver temperature is below 140 °F (60 °C), the main burner can be turned ON manually.
+
+
+
+
+                                                             17
+6.3.7.    Automatic Shut Off
+
+Countdown Timer
+At end of countdown time period, the fire shuts off. The Countdown Timer only works in Manual, Thermostatic, and
+Eco Modes. Maximum countdown time is 9 hours and 50 minutes.
+Low Battery Receiver
+With low battery power in the receiver the system shuts off the fire completely. This will not happen if the power
+supply is interrupted.
+
+
+On-Demand Pilot
+•   This green feature eliminates gas energy consumption during extended appliance inactivity. When the appliance
+    is inactive for an extended period of time the system automatically extinguishes the pilot. This feature helps the
+    consumer realize cost benefits by automatically eliminating energy consumption during non-heating months and
+    limited use.
+•   The programmed length of inactivity to activate the system is specified by the appliance manufacturer and cannot
+    be altered in the field.
+
+6.4. Touchpanel
+
+
+
+
+                                                    Fig. 11– Touchpanel
+To Turn ON Appliance
+
+    •    Press ON-OFF button until two short beeps confirm the start sequence has begun; release button.
+
+    •    Once pilot ignition is confirmed, there is main gas flow.
+Standby Mode (Pilot Flame)
+    •    Press and hold         (small flame) button to set appliance at pilot flame.
+To Turn OFF Appliance
+
+    •    Press ON-OFF button.
+
+Flame Height Adjustment
+
+    •    Press and hold        (large flame) button to increase flame height.
+    •    Press and hold         (small flame) button to decrease flame height or to set appliance at pilot flame.
+
+
+
+                                                            18
+7. TESTING
+
+WARNING! NEVER TURN ON THE DEVICE IF THE CHARACTERISTIC SMELL OF GAS IS PERCEPTIBLE.
+If you smell gas during the operation of the fireplace turn off the device immediately and cut off the gas supply from
+the gas cylinder by shutting its valve.
+
+7.1.      Checking for gas leaks
+
+•      Check if all connections are airtight.
+•      To do that apply all connections with soapy water (or water with another foamy substance) or with a professional
+       spray for leak detection.
+•      If air-bubbles are present that means the connection has a leak.
+•      Remove the leaks in the identified spaces.
+•      Check for leaks once again.
+•      After the inspection dry the inspected connections.
+•      The device may only be used again after all leaks are removed.
+•      If the problem happens again please contact the dealer.
+
+7.2.      Checking the flame appearance
+
+•      Burn the Mico Automatic on max flame height and check the appearance of the flame.
+•      The flame should be linear and evenly placed on the whole length of the main burner.
+•      If visible gaps are present or there are substantial differences in flame height turn off the fireplace and after the
+       device is cooled adjust the placement of decorative stones in such a way for them to be evenly placed on the
+       whole surface of the main burner.
+WARNING! Remember not to cover the cover, which houses the ignition and the pilot flame, with stones!
+•      Turn on the fireplace and check the appearance of the flame once again.
+
+8. MAINTENANCE AND UPKEEP
+
+We recommend cleaning the pilot flame and the main burner unit before the device is started again after its been
+removed from storage during the winter period.
+
+8.1. Testing and cleaning
+
+          Please check and clean if necessary:
+•      The main burner - if necessary, remove broken parts of stones and the existing dust.
+•      Pilot burner and thermo-couple (if necessary, remove the existing sediment). In the event of visible damage
+       contact your dealer.
+•      Igniter - gap between igniter and pilot flame should not be bigger than 5 mm.
+•      Glass screens – check for dirt smudges or possible scratches or cracks. If cracks are present replace the glass
+       screen for a new one. To conduct this contact your dealer.
+•      Gas linkage and pressure regulator (in case their expiry date is invalid replace these ancillaries for new ones).If
+       you encountered problems with the regulator, gas linkage, burner or regulation valves do not try to fix these
+       parts. Contact a sales person, an authorised service or an importer in order to acquire spare parts. To ensure the
+       device is working efficiently use only original spare parts.
+
+
+
+
+                                                              19
+9. TROUBLESHOOTING
+Warning! Montage, upkeep and service need to be conducted by a qualified professional with appropriate
+qualification, an appropriate company or the gas supplier.
+                PROBLEM                                  POSSIBLE CAUSE                                    CORRECTIVE ACTION
+                                        CLOSE THE VALVE ON THE GAS CYLINDER IMMEDIATELY. DO NOT USE THE DEVICE UNTIL LEAKS
+    SMELL OF GAS
+                                        HAVE BEEN REMOVED.
+                                        1. A loose regulator linkage.                      1. Tighten and test it.
+    Leak detected at cylinder,
+                                        2. Leak in the gas linkage, in the regulator or on 2. Report this issue to service.
+    regulator or other connection.
+                                        the gas knobs.
+                                        1. The bottle is empty.                            1. Replace Gas Cylinder.
+                                        2. Igniter linkage is not connected.               2. Connect the igniter linkage.
+                                        3. No ignition spark.                              3. Replace igniter.
+                                        4. The igniter electrode is placed incorrectly     4. Realign electrode and clear any surrounding
+    Burner does not ignite              opposite the igniter.                              debris from area.
+                                        5. Gas nozzles are blocked.                        5. Unmount burner, clean the nozzle.
+                                        6. Gas linkage is twisted.                         6. Straighten the linkage. Keep the linkage away
+                                        7. Pressure regulator link is loose.               from the housing.
+                                                                                           7. Tighten the link. Check for leaks.
+                                        1. Ignitor wire not connected.                     1. Ensure pilot electrode wire is connected.
+                                        2. Electrode misaligned on pilot burner            2. Realign electrode and clear any surrounding
+    Igniter Not Working
+                                        3. Igniter malfunction                             debris from area.
+                                                                                           3. Replace Igniter
+                                        1. The bottle is empty.                            1. Replace Gas Cylinder.
+    Low efficiency, „cracking” sounds
+                                        2. The nozzles of the burner are blocked.          2. Unmount the burner, clean the nozzle.
+    Thumping sounds made by the                                                            Unfasten the bottle valve slowly.
+                                        The cylinder valve has opened rapidly.
+    regulator.
+    A vivid/ bright orange and smoky    Holes blocked in the apparatus producing the       Unmount the burner and clean/ unblock the
+    flame of the burner.                gas and air mixture.                               apparatus’ holes.
+                                                        Table 4 – Troubleshooting
+
+10.         SERVICE
+In case of fireplace issues, please contact our service department with answers on below questions.
+•         Please provide a serial number of the fireplace and invoice number to verify the warranty period
+•         Please provide pictures / video material showing off existing problem
+•         Are you able to hear / see a spark ticking, responsible for ignition of the pilot flame
+•         Are you sure that in the gas connection is no air left, gas cylinder is full and opened
+•         What type of gas are you using for supplying the fireplace
+•         Have you tried to replace the batteries in fireplace (4xAA) and in the remote control (2 AAA)
+•         If the fireplace is freshly installed or was not used for a longer period of time the first burnout (also after gas
+          cylinder replace) might take even up to 10 tries
+
+
+
+
+                                                     Fig. 12– Serial number location
+
+
+
+
+                                                                     20
+11.TECHNICAL SPECIFICATION
+                                                 I3B/P(30); I3P(30);                           I3B/P(50);           I2E(20);
+           Gas category                                                I3B/P(37); I3P(37);
+                                                   I3+(28-30/37)                                I3P(50);            I2H(20);
+             Device type                            A1 Outdoor            A1 Outdoor           A1 Outdoor          A1 Outdoor
+            Reference gas                            G30/G31               G30/G31              G30/G31               G20
+            Net input (Hi)
+                                                  5,1 / 12,6 / 17,3                                              5,6 / 7,9 / 16,4
+   Mico Automatic 500 / 600 / 800
+           Input pressure             mbar               30                    37                   50                  20
+   Gas flow at 15°C and 1013 mbar
+                                      m3/h               -----                -----                -----         0,5 / 0,71 / 1,47
+   Mico Automatic 500 / 600 / 800
+   Gas flow at 15°C and 1013 mbar
+                                       kg/h       0,4 / 0,98 / 1,35     0,4 / 0,98 / 1,35    0,4 / 0,98 / 1,35         -----
+   Mico Automatic 500 / 600 / 800
+
+     Nozzle of the main burner
+                                       mm          1,4 / 2,0 / 2,4       1,4 / 2,0 / 2,4      1,4 / 2,0 / 2,4     1,8 / 2,4 / 3,1
+   Mico Automatic 500 / 600 / 800
+             Pilot unit                            G30-ZP2M-L            G30-ZP2M-L           G30-ZP2M-L          G30-ZP2M-L
+         Gas control valve                         Mertik GV 60          Mertik GV 60         Mertik GV 60        Mertik GV 60
+            Gas linkage                              Ø9mm                  Ø9mm                 Ø9mm              External ⅜”
+
+
+12.     WARRANTY
+Planika Sp. z o.o. grants the Client guarantee of quality for the smooth operation of the goods specified on the sales
+document. The warranty is determined for a given period from the date of purchase (based on the warranty card together
+with the receipt of purchase). The warranty period starts at the moment of purchase of the original product by the first
+end user. Product may consist of several separate parts and different parts may be covered by a different warranty
+periods. The manufacturer gives 2 year warranty from date of purchase an insert for its smooth operation. Fireplace
+sealing is covered by warranty for a period of 1 year from date of purchase of the device. Guarantee does not cover:
+decorative elements and glass. The use of the fireplace insert and operating conditions must be in accordance with the
+user manual. The basis for the free repair covered by warranty is a warranty card. Warranty Card will expire without a
+date, stamps, signatures, as well as the amendments made by unauthorized persons. Customer entitlement under the
+guarantee will expire automatically: after the warranty period. Any damages caused by improper handling, storage, of
+poor maintenance, incompatible with the conditions laid down in the manual and due to other reasons not due to the
+fault of the manufacturer, will void the warranty. In the event of a complaint, always contact your dealer. Supplier will
+contact the company Planika, if it deems it necessary. Factory Warranty is valid for 2 years from the date of purchase.
+Details of the warranty are available on the https://www.planikafires.com/warranty-cards/
+
+13. MANUFACTURER’S CONTACT DETAILS
+Company Name:                       Planika Sp. z o.o.
+Address:                            Bydgoskich Przemysłowców 10
+Telephone:                          + 48 52 364 11 60
+
+
+
+
+                                                                 21
+                                                      SELLER
+Name:
+Address:
+Tel/fax:
+Date of sale:                                                                    Seller’s seal and signature
+                                                      BUYER
+Name:
+Address:
+Tel/fax:
+Date of purchase:
+
+The gas fireplace should be installed by a qualified Installer in accordance with the applicable national building
+regulations and in accordance with the guidelines contained in the Installation and User's Manuals.
+
+
+                I hereby declare that having read the User's Manual and the Guarantee Conditions.
+
+
+
+                                      Date and legible signature of the Buyer
+
+                                                    INSTALLER
+Name:
+Address:
+Tel/fax:
+Date of commissioning:
+I hereby declare that the gas fireplace installed by my Company has
+been installed in accordance with the applicable building regulations
+and in accordance with the guidelines contained in the Installation and
+User's Manuals.
+The installed gas fireplace is ready for safe operation.                        Installer’s seal and signature
+
+
+                                      REGISTER OF APPLIANCE INSPECTIONS
+
+
+
+
+                                                        22
+

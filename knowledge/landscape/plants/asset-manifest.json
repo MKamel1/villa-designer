@@ -2,7 +2,8 @@
  "root": "~/archpipe/shared/assets/user/landscape/polyhaven/<asset>/",
  "note": "binaries are NOT in git; every file is pinned by sha256",
  "licences": {
-  "polyhaven": "CC0 1.0 (https://polyhaven.com/license)"
+  "polyhaven": "CC0 1.0 (https://polyhaven.com/license)",
+  "sketchfab": "CC Attribution or CC0 per the Sketchfab API at download time; CC-BY needs author credit (author and url recorded per asset)"
  },
  "assets": {
   "polyhaven/grass_bermuda_01": [
@@ -750,6 +751,4052 @@
     "file": "jacaranda_tree.bin",
     "sha256": "4310d1e25db8ac63d6d345afc8154a1df7e85b301dfad228be66d85d6c52bbfc",
     "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/jacaranda_tree/jacaranda_tree.bin"
+   }
+  ],
+  "sketchfab/7131d835627f4321914e62795833dcf2": [
+   {
+    "file": "license.txt",
+    "sha256": "26817acca65b2736e54fe04b159cd37523b0f0e73dfd0e633fb3aa58cc72c01b",
+    "url": "https://sketchfab.com/3d-models/200ml-guava-7131d835627f4321914e62795833dcf2"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "00adf5c1d45eebf53038a556f29581b8bea566c4d45103e6998d4af98109114c",
+    "url": "https://sketchfab.com/3d-models/200ml-guava-7131d835627f4321914e62795833dcf2"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "456162debe9f07c101f8c1d01484e965bb0cfecda226312046c90c70c1b54865",
+    "url": "https://sketchfab.com/3d-models/200ml-guava-7131d835627f4321914e62795833dcf2"
+   },
+   {
+    "file": "textures/Material_baseColor.jpeg",
+    "sha256": "5c06233cff1e212b059b8ec0ecb5777e3486b23c106152915046ab63e6ddeac6",
+    "url": "https://sketchfab.com/3d-models/200ml-guava-7131d835627f4321914e62795833dcf2"
+   }
+  ],
+  "sketchfab/f68ae1c354a64ea39e160c4fe881349e": [
+   {
+    "file": "license.txt",
+    "sha256": "2e708fc5a257d83849fccda803f9b0da5686ce35d98bfc53c7c1a91773e7c62a",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5319feb51d018abcd63283b11d7bfde1cf9e70e4fbe12373489717c51fa0bbf7",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "be3181f55d47a7eb6daccf4744c8cd25cf45aa4ae57b30847583f513332a18fb",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   },
+   {
+    "file": "textures/Lemon_PBR_baseColor.jpeg",
+    "sha256": "e5520f8feb1bb35237d7f10633edeb91f8b66fc370fb85a4b9807f930451194f",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   },
+   {
+    "file": "textures/Lemon_PBR_metallicRoughness.png",
+    "sha256": "e958dee2142a65b37adb2adefb319901aa2654e56ea2d2b01dda5d894df61ca9",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   },
+   {
+    "file": "textures/Lemon_PBR_normal.jpeg",
+    "sha256": "23edd51a8cfe68d7a9108384daafbd3e1e46ca3d5cfa6e347bdfb4d6219b6890",
+    "url": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e"
+   }
+  ],
+  "sketchfab/07cc911352904b0c954e0236975839ca": [
+   {
+    "file": "license.txt",
+    "sha256": "eeba96a1b7c74538e380384ab10aad4ea82d87ae72778099444464019cc890a7",
+    "url": "https://sketchfab.com/3d-models/papyrus-07cc911352904b0c954e0236975839ca"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "f6fb55e27b1dab8b3a8f3d8381d74f0c1626138fb12151c5355b5d4243ef3f2a",
+    "url": "https://sketchfab.com/3d-models/papyrus-07cc911352904b0c954e0236975839ca"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "a10f2d6244b443d65e93f8e81eba1611e936cd86aa5526dabf73ea779b9df01b",
+    "url": "https://sketchfab.com/3d-models/papyrus-07cc911352904b0c954e0236975839ca"
+   },
+   {
+    "file": "textures/lambert2SG_baseColor.png",
+    "sha256": "b5c8911a857fee950b277236192c410a7f6af7269a0e9816d15e5dc9e607f4bc",
+    "url": "https://sketchfab.com/3d-models/papyrus-07cc911352904b0c954e0236975839ca"
+   }
+  ],
+  "sketchfab/8c28ce11d21848239482a8eec8854f4b": [
+   {
+    "file": "license.txt",
+    "sha256": "ecfc84b672656fefe82eb314f5dd9ff297e80e80a6896a1b2726496c4f03160b",
+    "url": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "b8634faee8e2a63922881ac4d8c581a4238e29925cac7f853aedaa5d0e0caf71",
+    "url": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "41a4b99f05b2da615196f5d4b415a1e5d0c44361f39bea2c9a640134af839f9a",
+    "url": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b"
+   },
+   {
+    "file": "textures/Material_baseColor.jpeg",
+    "sha256": "0bfd8d379db5b2e95c4f6daa68beec1ef277dd4136b0674a3cc6823a1d5d459e",
+    "url": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b"
+   },
+   {
+    "file": "textures/Material_normal.png",
+    "sha256": "7c091bbfac89dc370aa3a59c8cc3f1232d3e2d24891b2d15c6e46edaa809ff0b",
+    "url": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b"
+   }
+  ],
+  "sketchfab/09127a0699ea4d1c9246227e19ab452b": [
+   {
+    "file": "license.txt",
+    "sha256": "61cfceba9e2aa511273b46f60b6b784ea1b67c0b6991e6777a691b4b3988d429",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "d646d48d26da009260f3b2b0ff93b59467084097e931aa53f38a3e9809aa45d0",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "35693a45b593ddcb12d7507212b2bdf4ad1ee5328fec5545ff449ac361de54b9",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   },
+   {
+    "file": "textures/lambert1_baseColor.png",
+    "sha256": "69e09b95e59834edbe14b998750c5798b505888f8ba8d59da09ca52be5f81a52",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   },
+   {
+    "file": "textures/lambert1_metallicRoughness.png",
+    "sha256": "4d524419306bd8219dcd8faae808054744713af80b1d77a3bb9574e9ab5bd927",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   },
+   {
+    "file": "textures/lambert1_normal.png",
+    "sha256": "8c68971915f216cf3b6c86328279f7d9bf200f5dce9e2981e6bc6ee9d4c2ccc1",
+    "url": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b"
+   }
+  ],
+  "sketchfab/2fa12ba0af5442c9af8f9bead1a7d020": [
+   {
+    "file": "license.txt",
+    "sha256": "fad74d39170905c593943c8c69654ec2d2c7d8bb3c5910461d57dc023dc79fdf",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "cf82d1923c275034239ee8f8380302aee5ff07ddad82721eb31307d7d409efc8",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "7ce30959bbcfa9befdb7ecb9fda1ddb5e4bf175a2dbcd2be704dbcf25c7f46ec",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_0Mat_baseColor.png",
+    "sha256": "2e0f8e223c9cbb56a5cd29bd86d651148af96faa87dc8c1c059b2d663ef0d9b5",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_0Mat_metallicRoughness.png",
+    "sha256": "8c8537aaf49544a9487b8add7ea65faba55a2b7020fad7ba82ba1a5a490a45b9",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_0Mat_normal.png",
+    "sha256": "514e64231aea6f647939a7bfe4f677a1f98ac056655ccf8d73703d81cd9355ec",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_1Mat_baseColor.png",
+    "sha256": "5bcab3658a82a7c526eb8a3a79004de1081c5d06ad316d623da37f7745763600",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_1Mat_metallicRoughness.png",
+    "sha256": "8ebce71c77159b6f571410fcbade76c70d4c5444493c229c8a9c7f8ef602f95d",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_1Mat_normal.png",
+    "sha256": "9b6163d80ec096b9ef782492d0d39443779622af11aeeb28c07736d4a0f8e2ed",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_2Mat_baseColor.png",
+    "sha256": "ff16c67e47031deff1d5665f2570ec40e5013a414ab45d54666fae6833f78226",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_2Mat_metallicRoughness.png",
+    "sha256": "e9e842a5a3ea072a25d1e7a956947d0fb23a46f04f09c93ef3890250efe8cbc1",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   },
+   {
+    "file": "textures/Tree_2Mat_normal.png",
+    "sha256": "e7db31abcbba92297f0dce63a4e7c9e8825a0e2915d8ddd37e5f4e49b39bee58",
+    "url": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020"
+   }
+  ],
+  "sketchfab/1a0f2181bf50435690455e8a55bcbd2f": [
+   {
+    "file": "license.txt",
+    "sha256": "dcd36639bd84a6927f48b7dd48058a971ad85029d53b6da8d0cd6d0f2cc213ad",
+    "url": "https://sketchfab.com/3d-models/the-beauty-of-blue-lotus-a-celebration-of-natur-1a0f2181bf50435690455e8a55bcbd2f"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "9c94af5aa5e80fd7e2c6f801b3ea3fd727e144565946073357226901af3d71c7",
+    "url": "https://sketchfab.com/3d-models/the-beauty-of-blue-lotus-a-celebration-of-natur-1a0f2181bf50435690455e8a55bcbd2f"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "6578e954b9997f2081d5dc1c70f2ff14cfaf992f21df1dc1cf95f79bef1b9a3e",
+    "url": "https://sketchfab.com/3d-models/the-beauty-of-blue-lotus-a-celebration-of-natur-1a0f2181bf50435690455e8a55bcbd2f"
+   },
+   {
+    "file": "textures/SimplygonCastMaterial_baseColor.png",
+    "sha256": "b12d3dd6fe35deac3a46a4d2a155901cdff48ae43d78196d047972f04912ccab",
+    "url": "https://sketchfab.com/3d-models/the-beauty-of-blue-lotus-a-celebration-of-natur-1a0f2181bf50435690455e8a55bcbd2f"
+   }
+  ],
+  "sketchfab/b57fa97a1fba46a5a17137f22de7da59": [
+   {
+    "file": "license.txt",
+    "sha256": "07400137a5c941863fee0f5c284784bb43860d27f8f3564de8c90969eac69ff8",
+    "url": "https://sketchfab.com/3d-models/low-poly-calla-lily-flower-b57fa97a1fba46a5a17137f22de7da59"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "9e3f6d5c25ea0eca754191f19464a08bc5bf849c9781a60fa1d9a3d4c43d210a",
+    "url": "https://sketchfab.com/3d-models/low-poly-calla-lily-flower-b57fa97a1fba46a5a17137f22de7da59"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "4ebd77d5e6d60294f3a5edc593537a346ec5ce21930cc0173858d2bba856d09f",
+    "url": "https://sketchfab.com/3d-models/low-poly-calla-lily-flower-b57fa97a1fba46a5a17137f22de7da59"
+   }
+  ],
+  "sketchfab/9efab7d28c804238a6d4ddbe0e6530f4": [
+   {
+    "file": "license.txt",
+    "sha256": "4267c55a8ba6fb2b3f88acafceb03118ccf6c4ebb3f3237bdbf3a5839e846184",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-9efab7d28c804238a6d4ddbe0e6530f4"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "631fec1d94e2dcba1769bcdf8646f874321b277b775192d50c012ea5f016ef99",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-9efab7d28c804238a6d4ddbe0e6530f4"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "c9e191c4844b79eb18d3bd6b0de1c797fafae5de35c5f371573d7b2ddd414c2b",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-9efab7d28c804238a6d4ddbe0e6530f4"
+   }
+  ],
+  "sketchfab/22c02e4e8e1f4eb4bbb9f4ba061480e0": [
+   {
+    "file": "license.txt",
+    "sha256": "eb3a868e62b22e43f13ad01d72bb4b413a4f9c6d1b6b706311a9e6e8c7c5f5d7",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-22c02e4e8e1f4eb4bbb9f4ba061480e0"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "631fec1d94e2dcba1769bcdf8646f874321b277b775192d50c012ea5f016ef99",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-22c02e4e8e1f4eb4bbb9f4ba061480e0"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "52dc79e55015d5e4d5e56fcee3bee3f8dfb52e4a403cafab1aa24118031e8a44",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-22c02e4e8e1f4eb4bbb9f4ba061480e0"
+   }
+  ],
+  "sketchfab/3d0510cc9b5b4360a6b8b4952d69f77d": [
+   {
+    "file": "license.txt",
+    "sha256": "3ebb254ce82b107d1552aa549532978a644847c4ff8c1b7a479a863d49643d35",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-3d0510cc9b5b4360a6b8b4952d69f77d"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "631fec1d94e2dcba1769bcdf8646f874321b277b775192d50c012ea5f016ef99",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-3d0510cc9b5b4360a6b8b4952d69f77d"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "56b9532fff3b3b6a2195e87ba7f975d9d9c41fc8b9dc83c62089dbec3e314457",
+    "url": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-3d0510cc9b5b4360a6b8b4952d69f77d"
+   }
+  ],
+  "sketchfab/d879c2985526427b96a39733dc2a075c": [
+   {
+    "file": "license.txt",
+    "sha256": "c0f91ebd0cbcd83fc57c6ab368412952f479b36536edcf084bd5c1b432caaf32",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "6263ff03e2814c731b133f43e462f9c1b4315969863c65b77e35702659c7a421",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "96d6a2ecd5315e98b9858985540d8b24a0f658d700fcfe204a7288404895d1bd",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   },
+   {
+    "file": "textures/Lime_PBR_baseColor.jpeg",
+    "sha256": "bbb07a1f924d30b7c5b97ee97c126d7d5c5340a2ba36efbfa1447f1a4551c009",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   },
+   {
+    "file": "textures/Lime_PBR_metallicRoughness.png",
+    "sha256": "0d4fb5b7ebe152c1683346e7de55722fdb500650c44203b778ac7a5cc54feb68",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   },
+   {
+    "file": "textures/Lime_PBR_normal.jpeg",
+    "sha256": "11598df187c2c18a01444954388db6f77bb31f71e396ad3a0846479e5cd2c227",
+    "url": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c"
+   }
+  ],
+  "sketchfab/75882b72d1374270aeac76c96db2aa4e": [
+   {
+    "file": "license.txt",
+    "sha256": "2ec55fd44e60bb999ce5418d42de478631dc12d768f28744d7659003f3e0630f",
+    "url": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "533b038da9fda5ce679988f8aaac7480689b3ddf54da82ca5fb5d9a7b3c8a753",
+    "url": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "abc839a1df71a04140e6eaf4417ec81a0e49c2e2b52a05d1e1dcdf469bf14c18",
+    "url": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e"
+   },
+   {
+    "file": "textures/Leaf_Material_baseColor.png",
+    "sha256": "2a78ecf52811c49b561e97f9d07e10f2d260a50d02fc7419ac5839caa5e83480",
+    "url": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e"
+   },
+   {
+    "file": "textures/Leaf_Material_normal.png",
+    "sha256": "dc83c20962b7b67c27b88e49d5d404fd806a26ad2ebcef5488ca3db5facf4572",
+    "url": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e"
+   }
+  ],
+  "sketchfab/039478621559470a9bc8b80e62d916c4": [
+   {
+    "file": "license.txt",
+    "sha256": "1903dd0ac081e8bc7146a8a41ffd7a02b59116dc3a68503ec4b5e25e73ac8d20",
+    "url": "https://sketchfab.com/3d-models/aloe-vera-039478621559470a9bc8b80e62d916c4"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5b9ec73837aeaed712cce0cf8690659d5c1734898bb9dfb4f8a6024aaec8247f",
+    "url": "https://sketchfab.com/3d-models/aloe-vera-039478621559470a9bc8b80e62d916c4"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "7a21ef790ee695367b472d73ef0c99d6f187c77a1be4d0665a63774314d8b5d5",
+    "url": "https://sketchfab.com/3d-models/aloe-vera-039478621559470a9bc8b80e62d916c4"
+   },
+   {
+    "file": "textures/lambert17_baseColor.png",
+    "sha256": "846911b5472b4fe88b6c8f8f0f6f967f93b7b14e9c5b6ec3cb92fd06d7968e54",
+    "url": "https://sketchfab.com/3d-models/aloe-vera-039478621559470a9bc8b80e62d916c4"
+   }
+  ],
+  "sketchfab/073d68f01af24b62806caec36d3b694a": [
+   {
+    "file": "license.txt",
+    "sha256": "87dd6e64fd9d7634f391769602f628fa03933a756feb4979910a0a8f5cce2369",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "e9bd5926e47e93187c4ef95e551cdc3a9f5cf33f4a0ef236c5df44e103bab236",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "820cf05ff84f6f33dfb2253e1a88f7fa34fbfc377e64a75684b0e39609a35317",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   },
+   {
+    "file": "textures/Material.001_baseColor.png",
+    "sha256": "f6cf9ccf9a6f392242bb39660759a0fd2240c480c9513594a5762e0fe7388e33",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   },
+   {
+    "file": "textures/Material.001_normal.jpeg",
+    "sha256": "f7d3e850801e49117c7a8dcc7dd0ba4e4b7a0cfe319621cf89b70ccc31bdbb80",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   },
+   {
+    "file": "textures/Material.007_baseColor.jpeg",
+    "sha256": "65af172b2cef2e70bd03670341c6b168888b8b8efd23a495440b269f3541354f",
+    "url": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a"
+   }
+  ],
+  "sketchfab/90df513fa91e42d8a2c56801ddac97fd": [
+   {
+    "file": "license.txt",
+    "sha256": "f2ca1d9773a23fa5d5e80c8a73700cb668fd01ad71f067aa6501b7ef2a45d4ee",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "77212d357e173b4b631495cf2261ca27983625bd93b2dd2a132a180875f3da4d",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "11a6736a7628e50aca15cc9a81cf01a57d6a59dbb5b40611e20921214d3ab384",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   },
+   {
+    "file": "textures/SMS_Rolled_Parchment_Material_baseColor.png",
+    "sha256": "f0117a3648994059698f53e0d5659e708645916b26815020ec474a3c4cc2ea3b",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   },
+   {
+    "file": "textures/SMS_Rolled_Parchment_Material_metallicRoughness.png",
+    "sha256": "c085387e580ba5e2dcf5a35d0779e844f0e8cb414c12a051f30dc5d68ec1fceb",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   },
+   {
+    "file": "textures/SMS_Rolled_Parchment_Material_normal.png",
+    "sha256": "e4f7de707be14271186b78cf40cac7371ee7102f29a28c096f6f6201fcfbb497",
+    "url": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd"
+   }
+  ],
+  "sketchfab/0e4979939e094ae493871dc73e12cce6": [
+   {
+    "file": "license.txt",
+    "sha256": "4bcabed0ce16ec4aae78d4a0bbd8d162dfc3351d8662fb894ec1fec0e7d3ae0c",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5e4eb957ec6fcb5a5cc18490a84b5927de024bf2ddcf5f543b340b0030e696fb",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "efedae80d7630c3b127fd349a04e26f571fe8b24f1025691dc90159c2e7e1cb1",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/Monstera_Altas_WB_diff_baseColor.png",
+    "sha256": "88371b270eaef85423ca19cbdddb5ec3e4807a84d7f465ebd00cc014c1ef1f3f",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/Monstera_Altas_WB_diff_metallicRoughness.png",
+    "sha256": "6918455117eb5aef575d0e9b2033a27b09413c2491546579b81122789b1e1d7f",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/Monstera_Altas_WB_diff_normal.png",
+    "sha256": "b98edbf27903cacd2eca617ae2e7a387465d4111b69d3f8627ed7203c706c0d7",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/flowerPot_baseColor.png",
+    "sha256": "7a42969c8aef12de002584539422a023d1c4eb78d56c1fc4e901f9667b0a7758",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/flowerPot_metallicRoughness.png",
+    "sha256": "407e576be00266d9dff1b2870d62f0ba1a2da6a1410113956472ca30cc9ee291",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   },
+   {
+    "file": "textures/flowerPot_normal.png",
+    "sha256": "611e4b416ac2589a72dcc9e39e394554bd6dcb17676662b98f27d48dd2349491",
+    "url": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6"
+   }
+  ],
+  "sketchfab/88ddf7803c31407f9bf293d394dcd26e": [
+   {
+    "file": "license.txt",
+    "sha256": "78516578b9780b4d79a35d11de6bdb8fdfe721ffaf7f5bff3c419d8afe8d223d",
+    "url": "https://sketchfab.com/3d-models/mouth-freshner-spearmint-88ddf7803c31407f9bf293d394dcd26e"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "7398db8bec07b1ffdfb1c9091e514a2eb999262bebeb6d99bc403ebb39e54020",
+    "url": "https://sketchfab.com/3d-models/mouth-freshner-spearmint-88ddf7803c31407f9bf293d394dcd26e"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "0d49f8f6944179f6d6af16ee7c63836ccc013a38fe97d7d36495d5d9850c9e46",
+    "url": "https://sketchfab.com/3d-models/mouth-freshner-spearmint-88ddf7803c31407f9bf293d394dcd26e"
+   },
+   {
+    "file": "textures/standardSurface3_diffuse.png",
+    "sha256": "ca5656fd1f4af6bd6c1a6a251fd0c5be39dc7fda28beb6c82bb03a7affc525b1",
+    "url": "https://sketchfab.com/3d-models/mouth-freshner-spearmint-88ddf7803c31407f9bf293d394dcd26e"
+   }
+  ],
+  "sketchfab/c217a7371013468d84ab481298824987": [
+   {
+    "file": "license.txt",
+    "sha256": "ca87dd745dfbc3b43737ea54ad2ed431531debd05b5677e7d0e24465fc39e055",
+    "url": "https://sketchfab.com/3d-models/santorini-thera-greek-minoan-volcano-island-c217a7371013468d84ab481298824987"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "b1bf27f95d731309144e8cd4e806f8af9cc347e99f8910c275b654e1eaffa729",
+    "url": "https://sketchfab.com/3d-models/santorini-thera-greek-minoan-volcano-island-c217a7371013468d84ab481298824987"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "fb059191db8500d9c1d7f837699f7eee83be352abfce4ebcf60724da1543d856",
+    "url": "https://sketchfab.com/3d-models/santorini-thera-greek-minoan-volcano-island-c217a7371013468d84ab481298824987"
+   },
+   {
+    "file": "textures/rastMat.003_baseColor.png",
+    "sha256": "11290a0921307e90ab010c8dd467fb6ed16d73787193a31595391798a8e5922b",
+    "url": "https://sketchfab.com/3d-models/santorini-thera-greek-minoan-volcano-island-c217a7371013468d84ab481298824987"
+   }
+  ],
+  "sketchfab/e21199e3cb874bc2be8a13588813f9f5": [
+   {
+    "file": "license.txt",
+    "sha256": "5598c35443417d0fba9db70d52fe63f479a2336bddae517901d5f7c36268151f",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "f0ef0dfd6f2bcd52a34526e6e6a415534d09182e309236a49a4aaa7a19434f5a",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "0470f2a6e671471abd0f53b62935da50cc41bcb1c6a9449bdb468ce2c2fe427e",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   },
+   {
+    "file": "textures/SpiderPlant_baseColor.png",
+    "sha256": "fa41d7e2880e2e16e0985ac461001d4303fa460d5f89396da2e60e0c1f402e79",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   },
+   {
+    "file": "textures/SpiderPlant_metallicRoughness.png",
+    "sha256": "272eff7d5b805dda60cfc153235c901c2c3a423d2e8af1969326aedc68081aa8",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   },
+   {
+    "file": "textures/SpiderPlant_normal.png",
+    "sha256": "8df27c6256dedf3d259293adbb4fad5c40054dcc4c237aaff8e14d8e41743621",
+    "url": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5"
+   }
+  ],
+  "sketchfab/11acf710e6c149daa8d6fb8cdc5d087f": [
+   {
+    "file": "license.txt",
+    "sha256": "15332854f828d8071e54fbb8c3f70fa922187c33647b4ea152db90d79f371676",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "d5ac54c6dd82b1feb7794392da8b9f6e61483a2399ad34bf14112c5a351a98f9",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "720460ad9d4e26b8f19350241ca0fa6fecb5c7b1a6eca50c0000d0661e4d7845",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_0Mat_baseColor.png",
+    "sha256": "67600b8b351e24f9d94f4fba857df26683ed3adc08109f70f4c4d25253eb2005",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_0Mat_metallicRoughness.png",
+    "sha256": "65794708c7d64ae257cc0ed77a47c46a456d4cb32d76a21df6cce5e7c3910865",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_0Mat_normal.png",
+    "sha256": "9d82737adbe789eba00c347f0533952691e644e4d1f4503f6c914dbba51e795f",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_1Mat_baseColor.png",
+    "sha256": "66c30e826c44c136d59d43aaf2d2fca781a8ed5b5c4586f38c2a1290bf0a1128",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_1Mat_metallicRoughness.png",
+    "sha256": "4fae6f324a4c574312ec11d6d424eac8909fdfdc52f68d0c0cbd61dc6328954e",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_1Mat_normal.png",
+    "sha256": "21b9eee0cae988a1251642ad50acdf6bfb0163c2cc538e065e7ef83d21665b8e",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_2Mat_baseColor.png",
+    "sha256": "1c638373fa6a8dcdd02f245f638593e22647cb95fe2d1d17b18ee8326c13ee4d",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_2Mat_metallicRoughness.png",
+    "sha256": "d3caadf2bfcd1bc8a59d4d1109175542ee5ea148f4a23448efcaf2a8b24eb6d7",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_2Mat_normal.png",
+    "sha256": "87fd08de7e8de35ad1a85f4affa2eaf5ca90348f5ebb8e2132fabb09dd815a41",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_3Mat_baseColor.png",
+    "sha256": "8d73df37b59b3402ead3e066576555f7841f92074b3fccd3e5297f903e7c971f",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_3Mat_metallicRoughness.png",
+    "sha256": "967a1d20df6f1f20867282df5f67ed38b6167bcacc533f578ddeb4f0be37bc8c",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   },
+   {
+    "file": "textures/Tree_3Mat_normal.png",
+    "sha256": "1dd7c5006f010592f3171cf63a6e4fa676a36d4c57d9a199e254871dfaa25c36",
+    "url": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f"
+   }
+  ],
+  "sketchfab/cbcca629bd5c40969100a429574a6df4": [
+   {
+    "file": "license.txt",
+    "sha256": "8fedcb03d24a89975188084ede57f5d97b70979488e2f1ee0e96767b849e7200",
+    "url": "https://sketchfab.com/3d-models/hornwort-cbcca629bd5c40969100a429574a6df4"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1dfb43e0df8cd6b2994e12f215364c4bab4d4c79efda7f50e7defe95e260f0a2",
+    "url": "https://sketchfab.com/3d-models/hornwort-cbcca629bd5c40969100a429574a6df4"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "2e2e49f0819a3f011bc7ad3543f72fa31e9cac8fe47aaec7bbdba2830d3d1aa5",
+    "url": "https://sketchfab.com/3d-models/hornwort-cbcca629bd5c40969100a429574a6df4"
+   }
+  ],
+  "sketchfab/805e6e8c0dad4860970a1588827a8c5a": [
+   {
+    "file": "license.txt",
+    "sha256": "19e1c17d9d79ef442e139c9f84266b34191834f93806abaec196eb41e01aa5a6",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "862585fa7f6c715eeb73bba72c7f44d8a1e3a4d671b2f159931ddf15672e744f",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "e474d5e1db7435be6bd5837d1d91edcce6c6ff3fb973d3a95f6b9ad018cab680",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_Flw_stalk_baseColor.png",
+    "sha256": "b83790d7e891f5dacf38df6d75896ef5949a311963d0471a08b1e93953c73f0a",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_RS_genitals_baseColor.png",
+    "sha256": "62ea244733bdd688b2f665ef597326b46329f5b40b24bdbc0b96f179eaaa5237",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_RS_genitals_normal.png",
+    "sha256": "85b1af6d1a15bfe5891355d6c30bfe0e2d2291a82f0257500024dc2c6dd9966b",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_bud_baseColor.png",
+    "sha256": "814b9159eda969572f6e69ad4a4f365abb487724f6df928b604ed15e3c7d23c3",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_bud_normal.png",
+    "sha256": "09c9234f027827e912c768787c7752d4efbdd14f9373bc74f5184ae268c673cc",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_petal_01_baseColor.png",
+    "sha256": "5a4ed9ba7ffbb6ef87baf8cae807da9d83228cb0ce61b6bb9743fa2cc353130e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_petal_01_normal.png",
+    "sha256": "cb2831e0ccdf591e500ce8524106eba1149ba4db3bc9c1f80ff27e67b3be3253",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_bark_01_baseColor.png",
+    "sha256": "3f475ff6473120b359b97ebf4256de917542c373c3b3da2b560441aacfe3d8f9",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_bark_01_normal.png",
+    "sha256": "4907cfcc1bd8a127996175a2ec0ab4e17b0491e67fdd4d130760a003aa6ee8c1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_01_baseColor.png",
+    "sha256": "9884463ee80eb2de3e4268a9ca9bed77b4e26447a37587c03ea8bd74ae643d90",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_02_baseColor.png",
+    "sha256": "e87f3361a3194fbd1f5b353bc7ba023135a2f4050561b1f93537f098d04d2fad",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_02_normal.png",
+    "sha256": "a3e552af6b1b4b48ab69515c0e47ce266feb96e9a9aab59ce9bc9cfc826c1f48",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_03_baseColor.png",
+    "sha256": "af0989430fd674ca0aa5b508c7faba9e58e42390d119a07d45349586a3bf8c19",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_04_baseColor.png",
+    "sha256": "16dd2d8b69fb47700dab76ff39337a66b40165536f77aef906ee1cfaa23f070d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_twig_baseColor.png",
+    "sha256": "97a39ffe60325be1e99e16b5a62d66319a44e5122137c165631c1c0554d4aa50",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_rs_twig_normal.png",
+    "sha256": "211ee37615031bd638586bbe3c54e9763c905b49a7135c1fd923cb3344ebfc95",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_sepal_baseColor.png",
+    "sha256": "e9039fddfbc424ea99ac3800efd6da2f5c4f4bae4f5d263b950c6b79e5b04f14",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_sepal_normal.png",
+    "sha256": "c4ac06fb84dad83130c08270a072cb151423a1b20d5d626d58dfabdb8e7b0099",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   },
+   {
+    "file": "textures/Hibiscus_style_baseColor.png",
+    "sha256": "ed32fef169fa87a8e14bf813563b7b4b85557ac566b956a7f91973c05880f9de",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a"
+   }
+  ],
+  "sketchfab/84ddce097c5944ef94980d391abe6269": [
+   {
+    "file": "license.txt",
+    "sha256": "82fbb5f264df5f958a57c3202e6aa35dc33297eccefe1b06a2fb6ad6a259ae3f",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "b426e150725b266f08f007f97c506a0a90e1a2776e605c40d75440e4de0e56da",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "f750338277011936db8cfe89455f0bc6c5b6eaa4d72bbef6df7eb2013635b34f",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_0_baseColor.jpeg",
+    "sha256": "c58a4a3414e34a4ea482aa7ae981d5424d3462bf26f5ed07bccb1abc6556623f",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_0_metallicRoughness.png",
+    "sha256": "7370e0caf00feef50fcdcf5076dae1c3b53e953c188a974552af8c20034b4e51",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_0_normal.jpeg",
+    "sha256": "2ab2099e7f7a9ccea0572ff7d50cf7579659a45f9ea540359f2200ebae506bdc",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_1_baseColor.jpeg",
+    "sha256": "c6cbf315de4d4801b89f5bcc067941763c08885412f5eed6d8b45905fcfde9b3",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_1_metallicRoughness.png",
+    "sha256": "1711cb9925659d03e35510306260c10bbd8ab3ed0765fb1a0d333cf5b3c43155",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_1_normal.png",
+    "sha256": "13314dd7251120a9db224210b9b00132824b6071308c1ee6d81738889fcd684c",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_baseColor.png",
+    "sha256": "4bcf1e34a4c7ed0393ad4f5f7b7f9491b63ad0df4fed30aa23106ae7f9d22f7f",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_metallicRoughness.png",
+    "sha256": "dbc7b6c47aa032148f4d48eb846cfe678e07ec5f71d488162306e7f35e1578e7",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   },
+   {
+    "file": "textures/Plant_normal.png",
+    "sha256": "5e18552cabe74eeec5daddd4c72f8d4270a2c23c1a594d3b8ed33eedca498f79",
+    "url": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269"
+   }
+  ],
+  "sketchfab/73e19eaf6ac741f8895806b36e131351": [
+   {
+    "file": "license.txt",
+    "sha256": "6127c1aa9197f4f8a34dc65df8a98f3512cf69dccb112464577d605bb4640a9b",
+    "url": "https://sketchfab.com/3d-models/herbaceous-potion-73e19eaf6ac741f8895806b36e131351"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "de186bfa934e840d6d0ccef4953eaddfa9b673fc9260a4fd2470a4792759f0ac",
+    "url": "https://sketchfab.com/3d-models/herbaceous-potion-73e19eaf6ac741f8895806b36e131351"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "ffbb0d1dfc4fbeaeecf9b27ffe23e3c3033897c5fd45c2d387aa52bbbf5b2f9f",
+    "url": "https://sketchfab.com/3d-models/herbaceous-potion-73e19eaf6ac741f8895806b36e131351"
+   },
+   {
+    "file": "textures/Material_baseColor.png",
+    "sha256": "1746f4f22da669aab52d371ec6fb8952ebfbba41d0c70c47f2d2c0d2d5ebe036",
+    "url": "https://sketchfab.com/3d-models/herbaceous-potion-73e19eaf6ac741f8895806b36e131351"
+   }
+  ],
+  "sketchfab/4a0a7b3480974f70b659569cfc6614b3": [
+   {
+    "file": "license.txt",
+    "sha256": "c1f67cd55bc8d1edefad43dd8071e3c3c1958bc6a853b7e604c596c39b2acdd9",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "2f39fc9f13ee0c95d93d393435aa47baba0f2c3ee06fe96ebb666300d88cadd7",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "ed82ab0d05bec02cb8be63bea97cf3648bf16c195febf99058ebecd7cb7395f1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_bark_01_baseColor.png",
+    "sha256": "3f475ff6473120b359b97ebf4256de917542c373c3b3da2b560441aacfe3d8f9",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_bark_01_normal.png",
+    "sha256": "4907cfcc1bd8a127996175a2ec0ab4e17b0491e67fdd4d130760a003aa6ee8c1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_01_baseColor.png",
+    "sha256": "9884463ee80eb2de3e4268a9ca9bed77b4e26447a37587c03ea8bd74ae643d90",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_02_baseColor.png",
+    "sha256": "e87f3361a3194fbd1f5b353bc7ba023135a2f4050561b1f93537f098d04d2fad",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_02_normal.png",
+    "sha256": "a3e552af6b1b4b48ab69515c0e47ce266feb96e9a9aab59ce9bc9cfc826c1f48",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_03_baseColor.png",
+    "sha256": "af0989430fd674ca0aa5b508c7faba9e58e42390d119a07d45349586a3bf8c19",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_leaf_04_baseColor.png",
+    "sha256": "16dd2d8b69fb47700dab76ff39337a66b40165536f77aef906ee1cfaa23f070d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_twig_baseColor.png",
+    "sha256": "97a39ffe60325be1e99e16b5a62d66319a44e5122137c165631c1c0554d4aa50",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   },
+   {
+    "file": "textures/Hibiscus_rs_twig_normal.png",
+    "sha256": "211ee37615031bd638586bbe3c54e9763c905b49a7135c1fd923cb3344ebfc95",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3"
+   }
+  ],
+  "sketchfab/98b96bd41a1c4ab7af10c938e280c8c8": [
+   {
+    "file": "license.txt",
+    "sha256": "10dac055332acb268c3f31d935904f37b11d4bf38ddae4eae7484c58bb358306",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5deecf25d1b9461a0b377cfe79b57f8009de7dd33d2d16763fd576dccbee0903",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "0e76ae37daf83e4585a5e163d648cf9a7481126673666a4b3b78cdae04f7fb29",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   },
+   {
+    "file": "textures/textured_0_baseColor.jpeg",
+    "sha256": "1366dda0df0dc1f2545f0b4b67a58c93ef4208c45f8b4fe99459c54929e72d40",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   },
+   {
+    "file": "textures/textured_0_metallicRoughness.png",
+    "sha256": "cb1ae973b88bb8937e818569228f1cf2bd589f487f101ec611d96514c606507b",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   },
+   {
+    "file": "textures/textured_0_normal.png",
+    "sha256": "7ba81f2fb2a06407494391642e069045a3d9a1d3a30562737eac9a1c6114dac6",
+    "url": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8"
+   }
+  ],
+  "sketchfab/33e522407a9944b2b07f5e8facfc0f86": [
+   {
+    "file": "license.txt",
+    "sha256": "2bbf22cd73c33f20a247fb453bf4b5a095fd9d6eca1311e96ff770e998ca5716",
+    "url": "https://sketchfab.com/3d-models/lemongrass-33e522407a9944b2b07f5e8facfc0f86"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "9671fafe015712f507389d1b05d74b57714f865c0e40577627d93937327d6d31",
+    "url": "https://sketchfab.com/3d-models/lemongrass-33e522407a9944b2b07f5e8facfc0f86"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "f512711c2eab025c50456d908dd788038f440893781315a4d984fde9ada42383",
+    "url": "https://sketchfab.com/3d-models/lemongrass-33e522407a9944b2b07f5e8facfc0f86"
+   },
+   {
+    "file": "textures/Material.001_baseColor.png",
+    "sha256": "112ba27e035a0bffd36bc87fb3796fceb5165a66d4ace6d07bc6168c7e01e64f",
+    "url": "https://sketchfab.com/3d-models/lemongrass-33e522407a9944b2b07f5e8facfc0f86"
+   }
+  ],
+  "sketchfab/869827893cfa45e4837fafb0cfa2064c": [
+   {
+    "file": "license.txt",
+    "sha256": "fc308a4c6599733b0d7fac5311c068f0ae8eb5bf0676ca17f963b93ef62211c5",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "80a59dd3eef5f712379ee2965504e8195d96039653aff2efe98dcd09d73efef9",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "e0c62fa1e110a6f82ccebc2b43d1aa861ff3ea394ca3fbd35ebd2f00d1327fc8",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Branch_baseColor.png",
+    "sha256": "ff865fa5d030f907ac137e3d9bbfe615c61ad0f959145a26a1f7681a187699a6",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Branch_metallicRoughness.png",
+    "sha256": "60e1d39c73cbe9dda0ac58d1e77cb27de537e836c6dc3793b0b0b5f67d839bb8",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Branch_normal.png",
+    "sha256": "c082c95d886906b0c43d563d484d611ef0b8eda5b2678281419876cecc50f520",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Dead_Branch_baseColor.png",
+    "sha256": "e4b34f7870da489ecf3cf7aadf2c9dc9b7021b64a4b4d00cdd5028d650e8d9a8",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Dead_Branch_metallicRoughness.png",
+    "sha256": "34a13e4c34758be9c982f834b1dff07d1962fcdf18403c89c0b020d31219fffa",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Dead_Branch_normal.png",
+    "sha256": "c082c95d886906b0c43d563d484d611ef0b8eda5b2678281419876cecc50f520",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Leaf_baseColor.png",
+    "sha256": "0a6abeea502fae856914599b742364088956ded067c7163633dea9ae1dfe65e2",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Leaf_metallicRoughness.png",
+    "sha256": "fcc8bc63e61f83d4905f7b342a1e48656bbfae537193a36cc7ac3bc522da4df9",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Rhapis_Leaf_normal.png",
+    "sha256": "c082c95d886906b0c43d563d484d611ef0b8eda5b2678281419876cecc50f520",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Stalk_baseColor.png",
+    "sha256": "dff2ff2677c5c325d36da7da4acc5249e6245cf6ed0b67855101e260ee7646d5",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Stalk_metallicRoughness.png",
+    "sha256": "8c6d22e22da55d24c513d4284789d77c4e9626d0b5be7f1180406751e32ab63a",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   },
+   {
+    "file": "textures/Stalk_normal.png",
+    "sha256": "c082c95d886906b0c43d563d484d611ef0b8eda5b2678281419876cecc50f520",
+    "url": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c"
+   }
+  ],
+  "sketchfab/98c88fbcda5e49f0a9b8a755023495f8": [
+   {
+    "file": "license.txt",
+    "sha256": "e394214b045eb567bee77dc1baeb5cbee035a980d1630443ec00346aa8f0e964",
+    "url": "https://sketchfab.com/3d-models/mc-powerful-deep-chestnut-bougainvillea-t-pose-98c88fbcda5e49f0a9b8a755023495f8"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "af97f20f0f461751b19ff40962b51907d58e65ad4f2d40e6a4cb47691313c25f",
+    "url": "https://sketchfab.com/3d-models/mc-powerful-deep-chestnut-bougainvillea-t-pose-98c88fbcda5e49f0a9b8a755023495f8"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "4671f05a9c4564c29efcbecf5dce27076345da46a210e3ae23c3072c9e860f53",
+    "url": "https://sketchfab.com/3d-models/mc-powerful-deep-chestnut-bougainvillea-t-pose-98c88fbcda5e49f0a9b8a755023495f8"
+   }
+  ],
+  "sketchfab/fceb7deeae26441c8b394426568c2cab": [
+   {
+    "file": "license.txt",
+    "sha256": "32d9892d537f4d5f6c39dc49c04ad82fd809358a36122afae4c192989d954eeb",
+    "url": "https://sketchfab.com/3d-models/exotic-low-poly-plants-pack-fceb7deeae26441c8b394426568c2cab"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "4abd14ffcf435f50e311ff4b33f83e8248f53dc96e89eb2156c247da2f97f572",
+    "url": "https://sketchfab.com/3d-models/exotic-low-poly-plants-pack-fceb7deeae26441c8b394426568c2cab"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "78bd13ea63033d964538b7656f0b0828db8bcb1c3fcf7b8ebefabb178bfe2017",
+    "url": "https://sketchfab.com/3d-models/exotic-low-poly-plants-pack-fceb7deeae26441c8b394426568c2cab"
+   }
+  ],
+  "sketchfab/fb57d2cf33af44349e11161069ae222c": [
+   {
+    "file": "license.txt",
+    "sha256": "34049bd810caa529f810d95aaec4e216f7773bffc117b6bc0c7c144c7f0b0b63",
+    "url": "https://sketchfab.com/3d-models/yuzu-japanese-orange-polycam-fb57d2cf33af44349e11161069ae222c"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "34ff1de42c68fb04fbf6d63e1e12c3daac233cb16c006620eb9c9e1a6022ba30",
+    "url": "https://sketchfab.com/3d-models/yuzu-japanese-orange-polycam-fb57d2cf33af44349e11161069ae222c"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "89d7496a676b50d2324d1fbc629eff26a098f931a1acbff68bb769aae4521e8b",
+    "url": "https://sketchfab.com/3d-models/yuzu-japanese-orange-polycam-fb57d2cf33af44349e11161069ae222c"
+   },
+   {
+    "file": "textures/textured_0_baseColor.jpeg",
+    "sha256": "ec6bd00009ed038ed192428d935b2498b8da96113a60ef721f50f9b41868dc81",
+    "url": "https://sketchfab.com/3d-models/yuzu-japanese-orange-polycam-fb57d2cf33af44349e11161069ae222c"
+   }
+  ],
+  "sketchfab/ebf5a55ab24e4b9eb3156d37a2ec8aa1": [
+   {
+    "file": "license.txt",
+    "sha256": "b81f9080c6395fffe88c73a322f1706929c0fc5c0aa49d495db3496759dd93e5",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "698e6c6e879d2fc628a79558f7ba42ea05842d17b7906c11462df00950973cc2",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "821965fe18ed99958c5f762aaadd194298384449d987b34228e5e8b47d372488",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Material_diffuse.png",
+    "sha256": "8ce22165bf8d84d6011b4475c49ffdc9c2fb9f9c973968e956a6187d1bfab10b",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Material_normal.png",
+    "sha256": "1d1adc58a8a961887e2a39972a59f1fed77d0a8d006e96c9f11e924a0a6ce397",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Material_specularGlossiness.png",
+    "sha256": "70b6cdce85bc8d5ae995d5032b13de506ab9546db9a1e119a4e093b874c7e1e6",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_bark_diffuse.png",
+    "sha256": "b91e400f0d4b6865880e2cbb9e7d825eaf2b031bdf31d19cbf1f85641ebd4355",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_bark_normal.png",
+    "sha256": "29bfee6b4732050f81a48839346f0abc9068de26c0ee36fd37f57cc9033d16dc",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_leaf_stalk_diffuse.png",
+    "sha256": "83d632ef046b3967cbfb452fbe2ff5bfd721ffe6b023180c073ba9fac2faffcb",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_rub_leaf_01_F1_diffuse.png",
+    "sha256": "73670a9e0071941c52388012966d46f7d4978aef4e9e4be0d865ba06784e36bd",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_rub_leaf_01_F2_diffuse.png",
+    "sha256": "34c4f1ab723748419b4ff36eb51b5cb9f497aa541c535d48b3f6331e7d984b78",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_rub_leaf_01_diffuse.png",
+    "sha256": "e1d4628cebb86581cb95e6731f58f7b80adbaf415dfefaf19caa724efba22572",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   },
+   {
+    "file": "textures/Plumeria_rub_leaf_01_normal.png",
+    "sha256": "a17944511eff32cd8779d7ffd873cacaaeb8934937feafb906a01c9c9b135ec2",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1"
+   }
+  ],
+  "sketchfab/3579fe79be0d46d49de80d5478a4e3cd": [
+   {
+    "file": "license.txt",
+    "sha256": "70ccd34d90b91ca7c2f54a04492f3a85dbefb50ce89a2cf3dc49eb6ffb576bcf",
+    "url": "https://sketchfab.com/3d-models/bougainvillea-3579fe79be0d46d49de80d5478a4e3cd"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "c0152959a04384f340fb4d76c9f39b3114cd61fb362e71984589ea9752714b0c",
+    "url": "https://sketchfab.com/3d-models/bougainvillea-3579fe79be0d46d49de80d5478a4e3cd"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "0e99e54e854205a46ddc9713dda777921d380c1f393e0eaf08f99bb40959377c",
+    "url": "https://sketchfab.com/3d-models/bougainvillea-3579fe79be0d46d49de80d5478a4e3cd"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "0c3573d9d9ea48a2c34b66f49a9f6ae97de68c4e4f2317f79162a42ad5d57dab",
+    "url": "https://sketchfab.com/3d-models/bougainvillea-3579fe79be0d46d49de80d5478a4e3cd"
+   }
+  ],
+  "sketchfab/734c4537ca8547209a54df49f134824a": [
+   {
+    "file": "license.txt",
+    "sha256": "8e1934014237dc35e892572471aa90bb8b288df97f54c8868adb8218d9faecf7",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "39ab7936cb028375963f8099c730719f1a9c703d10c7b6a394bd4260e76954ab",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "2f838a1ef5ca2643ac4a43da16b87f30752d0529cfac54c8b460e2a02be2ee88",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_DatePalm_Leaves_2048_baseColor.png",
+    "sha256": "cb58d955993f82ad6563e6c6e11a1d82b698b45a3d4ca05eb658842bf1eb6e63",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_DatePalm_Leaves_2048_metallicRoughness.png",
+    "sha256": "fc7735f725776c777ab83d2e6de598639025890c8a6d56f44f6a46de18abd444",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_DatePalm_Leaves_2048_normal.png",
+    "sha256": "ed8597c3640813b0dad2c99ede093498044b9a419e21614d2a528ccb0f43825d",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_Small_Vegetation_baseColor.png",
+    "sha256": "7f54efc3e8de17686124f14c9c3964f13bf9e024c2c0bcc5d613863fa82b5053",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_Small_Vegetation_metallicRoughness.png",
+    "sha256": "aca54cd3d1101f6b17aacdbed7606a753def8f915d651ab3bccd7c8b6f68cd16",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   },
+   {
+    "file": "textures/M_Small_Vegetation_normal.png",
+    "sha256": "fa6c44654807827a13b61851cf8ee7ae68ea9efde76ee86b4c3ad407ed88218a",
+    "url": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a"
+   }
+  ],
+  "sketchfab/86de7deaf6cc4324809fc4e005ed9d81": [
+   {
+    "file": "license.txt",
+    "sha256": "e993d215ffea0ca9d528cf3035f11f9d59bd5b8f063457b14aaccad59815072c",
+    "url": "https://sketchfab.com/3d-models/blenderpunica-granatum-86de7deaf6cc4324809fc4e005ed9d81"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "6d3aab12e09d201a76d836b7ff35d41116ad1c24363de498574b44a00184fc8d",
+    "url": "https://sketchfab.com/3d-models/blenderpunica-granatum-86de7deaf6cc4324809fc4e005ed9d81"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "4f2c9b1b7a8e7bad4fee9bd7b503d16cd92d34fa26f8a37f9aaea87f95f49ecb",
+    "url": "https://sketchfab.com/3d-models/blenderpunica-granatum-86de7deaf6cc4324809fc4e005ed9d81"
+   }
+  ],
+  "sketchfab/af07eee6c6af49b39dffcabb10f0db8b": [
+   {
+    "file": "license.txt",
+    "sha256": "52e6b9c8932286893591815130b6215ad2ea40d0c34203566a4b8466af764cd1",
+    "url": "https://sketchfab.com/3d-models/japanese-sweet-flag-geisel-af07eee6c6af49b39dffcabb10f0db8b"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "0cd89fba54c32e7c2a333d7693b93e727cd5306da3e006161a3b402f2ca63d69",
+    "url": "https://sketchfab.com/3d-models/japanese-sweet-flag-geisel-af07eee6c6af49b39dffcabb10f0db8b"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "58a4ceca173779c67e9c5a385044ba97a05182cbbb8cb572d932aebb9314eb14",
+    "url": "https://sketchfab.com/3d-models/japanese-sweet-flag-geisel-af07eee6c6af49b39dffcabb10f0db8b"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "62f4965decda0eab0262c63cc89188e2d32a7e1409732f959dbe7ed14799516b",
+    "url": "https://sketchfab.com/3d-models/japanese-sweet-flag-geisel-af07eee6c6af49b39dffcabb10f0db8b"
+   }
+  ],
+  "sketchfab/f59bab2a81244b869e1ca5aefd4ad94a": [
+   {
+    "file": "license.txt",
+    "sha256": "26f08c49e4e002f597a3da270d62e080d977a9e0986f32fe7288b36a1922f0d7",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "abc2e17c5b884ed908a628e520c97acf743ecb065cc33b57d690419384d7b391",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "d015843b78f01b0e4b7692d3bad5aee77e2d8f0e0d8bb6cabce222af30f2355d",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/LIVISTONA_CHINENSIS_Mat_baseColor.png",
+    "sha256": "0ef328256f91ef8a7932b47a05c3e35f71850f1036f8367977134c65f1778ce5",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/LIVISTONA_CHINENSIS_Mat_metallicRoughness.png",
+    "sha256": "a2e76447b5fe972105bdd1c191dcf7a3adb4221dec1370cde21dd74626a52d9e",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/LIVISTONA_CHINENSIS_Mat_normal.jpeg",
+    "sha256": "6389a0d8fdbc2936eaf499141099ddb27e4a7713d681accc8222a00b9290d9b7",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/PLANTER_BOTTOM_CROSS_Mat_baseColor.jpeg",
+    "sha256": "e78336b9e481f1c213477fca4818885f69052ad6e5d60ff3f87a74dd5c6231bc",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/PLANTER_BOTTOM_CROSS_Mat_metallicRoughness.png",
+    "sha256": "2b6c7ec4fc7ef6f5f68bc2e72751f0d0eea946ec763aa3c47ccf4f6fffd767a5",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/PLANTER_BOTTOM_CROSS_Mat_normal.jpeg",
+    "sha256": "2add7cea1a587c207b8848961c21821d22eb4f34e8a110effbd552335c193313",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   },
+   {
+    "file": "textures/PLANTER_BOTTOM_CROSS_Mat_specularf0.png",
+    "sha256": "60912233bc1a58d8df4cf941554293c9c69c2ac1d17c3619f96c978fd02355c0",
+    "url": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a"
+   }
+  ],
+  "sketchfab/2957a532a6f543c1bc7506af4cb6e75e": [
+   {
+    "file": "license.txt",
+    "sha256": "3c6e0cde51430b0170969e3ac056593359826a1ad0e09d4ca2a907e1c8016b24",
+    "url": "https://sketchfab.com/3d-models/the-flower-of-jasminum-sambac-2957a532a6f543c1bc7506af4cb6e75e"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "ad5461f737d28bcf8f2fc6fdb539d496767eac42f59cbc479797e5a532d9e405",
+    "url": "https://sketchfab.com/3d-models/the-flower-of-jasminum-sambac-2957a532a6f543c1bc7506af4cb6e75e"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "b724ff712802ff8483db2b75b0a2028cd0ebd0b748c462909c2147d8ca78d081",
+    "url": "https://sketchfab.com/3d-models/the-flower-of-jasminum-sambac-2957a532a6f543c1bc7506af4cb6e75e"
+   },
+   {
+    "file": "textures/material0_baseColor.jpeg",
+    "sha256": "a9cee57a7704c05db3fdb7ba21f1994cd1f2c58c2f066e25ecb9acd3bd93c943",
+    "url": "https://sketchfab.com/3d-models/the-flower-of-jasminum-sambac-2957a532a6f543c1bc7506af4cb6e75e"
+   }
+  ],
+  "sketchfab/0a92761615b24e0c90217cb039aa284f": [
+   {
+    "file": "license.txt",
+    "sha256": "e3ace5c1f8d1df7fc3883d46e1134ee283976c6fc32992eebc7b0459e0a0a4ff",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "36b166fdfdf3663409c2557b0765a24ef07edd8a2c6129873bc5a4c2ea04a93d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "a558817a7303d565172f09c699f7acfdefcb6df93cdd504876781b82fa8a9394",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_bark_02_baseColor.png",
+    "sha256": "19bbb11cf365079fa762df65ce9b2f6f6dd27b815ce297e947819cd88410beb8",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_bark_02_normal.png",
+    "sha256": "da50799a569fd580fc8ceb88e25e8aabd3036c955018fa417fb3722c5f5f7f33",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_bark_baseColor.png",
+    "sha256": "b2a3863bb4aa81f0e38187f95823c3e3c86972dc1da2184cdeea9df32f78af85",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_bark_normal.png",
+    "sha256": "d47d220d59ce9c49fb53c4d773e18d212b48e5a5c1c5ebc0e996681bc7e30525",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flower_stalk_baseColor.png",
+    "sha256": "30b82766039e630b903b7b2422169ec359e1cde9185d20ee4b05dc9b8a658cfc",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_05_baseColor.png",
+    "sha256": "0fdff006bf383a514c8aec973aca576c71b62d82afcfbf023bf2c7a66ed96774",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_05_normal.png",
+    "sha256": "931a5c579f59cd8950e6147065475e718e8cc1af1e5e1dbbb2f7df49473ee2fe",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_06_baseColor.png",
+    "sha256": "14ef312b95f23a4e9c0e4ecc9d0b4a3c86be1d1f4d7c5fa2bd6097b39a8ae01d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_06_normal.png",
+    "sha256": "65b20d27e42a4c42fd4a39b1b67c0dc51d48f0e6b5baae3c4685cf2d59245a21",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_07_baseColor.png",
+    "sha256": "6268d6bcecbb705192c4364427798ed649a1a3c7cbbe99d040657ef875702d4a",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_07_normal.png",
+    "sha256": "9ca37fb44992d38fc97c91a0bd574c2ecf7cc8349ee61c31e4f03ea56805f173",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_08_baseColor.png",
+    "sha256": "43c959dc828ec273815c25bba7242080a4087e0d140d1afe5b45eb399abb0ae9",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_flw_08_normal.png",
+    "sha256": "6eeaf321978c3e0711a9472a662e49d33508d9fe6c186aafdc994548eec26796",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_04_baseColor.png",
+    "sha256": "e0639fcf5a1e0756868a7f0a0f8c7de5be0341c4afea67b7f81901f973afb522",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_04_normal.png",
+    "sha256": "953f2318cf4e653c66a9dfd35cf5e817e07a40ff0416f53e895cfa162cb062fd",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_stalk_baseColor.png",
+    "sha256": "dc0f6cd1db85442ffcc12f3f4939d3b916b585dd9c08161e44ec8c04fc0c197f",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_twig_baseColor.png",
+    "sha256": "86a453d1950e9b6c68c90521bef0c5a8084cc1b438bf4f9c3e16cc46b463b1e6",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   },
+   {
+    "file": "textures/Jacaranda_twig_normal.png",
+    "sha256": "13e24db3ed8644b4832816d5bb3e3c7d6d907c450682e35266da78b57feac073",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f"
+   }
+  ],
+  "sketchfab/ced201b1d7484f34b5ae0baa5a94fbb5": [
+   {
+    "file": "license.txt",
+    "sha256": "1e2045bcd6dce065089485ebb8320b26edf64ac1798e032c7653ef2caafb4ee5",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1f206a7d722860cdb32f2e2930de8bd88c8ea0089c1d1cd81026eee31b1f2f71",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "031ef8519293740ebee04b99a7b4d53990bb79067f70f1facfc3f9ce553fa286",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-1_baseColor.jpeg",
+    "sha256": "40f09a7aa332aa082fe898dfa5c3ab092dbf04c5c384e90bf3b20e43686ad5d8",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-1_metallicRoughness.png",
+    "sha256": "750fe66df859485156032ce859d034c033433e2936968c46c116e60280dc77f2",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-1_normal.png",
+    "sha256": "ebd5158d3aa79d6461a537e74367d83908562969d7668cb27ded09cbb9c8da13",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-2_baseColor.jpeg",
+    "sha256": "a92bca7f786d713796fba0950aece4d9a49ee9e4fb24b68423387ce8b8eb3b22",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-2_metallicRoughness.png",
+    "sha256": "f996e99417414e59d4518b1c40c6cdc928240fb49f0a0fe44c22534d5033adf1",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   },
+   {
+    "file": "textures/220914shiliu-2_normal.png",
+    "sha256": "c9f1f97f5d788749ecf709871eb021566d94eadfd757fce0b9bc0214a977fcb5",
+    "url": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5"
+   }
+  ],
+  "sketchfab/71e14714f3984780958dab39567acbab": [
+   {
+    "file": "license.txt",
+    "sha256": "db7426043e86785853239db8e4a5a02a6e04d3d2fc9f35978236762fadcfb90a",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-71e14714f3984780958dab39567acbab"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1a16e3cebe0fb51ba84f3356ce3f9146376131325dce202d5d447bf4ca3aa180",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-71e14714f3984780958dab39567acbab"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "43980ff38ade1fc56eef9faabb769bc06d3050d1bdfca6b47121ecd3e799d13d",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-71e14714f3984780958dab39567acbab"
+   },
+   {
+    "file": "textures/QS1647-E3-W01-1-1_baseColor.jpeg",
+    "sha256": "edc9e0da4df4ea206085b1db387481cd5a656a5bc768111b746be5a36503bfdd",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-71e14714f3984780958dab39567acbab"
+   }
+  ],
+  "sketchfab/db514aa7154742eda8bcc2e3e3438108": [
+   {
+    "file": "license.txt",
+    "sha256": "96d2ca5b44d476f506033a1eedb7b2d05542d6f9e9ce23acf648e0cd785b849f",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "86263805b325c0bb634a90a30ea899d5a4c02dbf82f0b15f3e641106ae6e8654",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "4867e8b3b7dff03931e877797009b0440c08dccd5375f836da7e86dd1600de2c",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   },
+   {
+    "file": "textures/textured_0_baseColor.jpeg",
+    "sha256": "c6aeb6ba1ee0f27facacf36e15b58b0aa561ece2465d171caa43f60366611bec",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   },
+   {
+    "file": "textures/textured_0_metallicRoughness.png",
+    "sha256": "3b206ff135557dc6a5e4f3b2052f07cab5957b1644251c7004a7f72f70fb7f9d",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   },
+   {
+    "file": "textures/textured_0_normal.png",
+    "sha256": "9d55306695500d66a5ab155fadff8b5d25e3c9b2e4be597999a5cc3e0fe0c99b",
+    "url": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108"
+   }
+  ],
+  "sketchfab/a8d8109b32da482ab0988c055b64cbba": [
+   {
+    "file": "license.txt",
+    "sha256": "8338debe42f77dd3ed72c7bdaf588b308ea76f0cb6cd0f491460f737c06a92cb",
+    "url": "https://sketchfab.com/3d-models/crimson-bottlebrush-a8d8109b32da482ab0988c055b64cbba"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "75af1820d869c1f0ae98e2575d3f3dd43a95aadd1a1310ec304237389af3adbb",
+    "url": "https://sketchfab.com/3d-models/crimson-bottlebrush-a8d8109b32da482ab0988c055b64cbba"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "6c85a6b7c87e2df63d70b2101a2fb83dd38a526bebea41e676e4a929364b08d9",
+    "url": "https://sketchfab.com/3d-models/crimson-bottlebrush-a8d8109b32da482ab0988c055b64cbba"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "b59b24f7faf4539daeb7332e0034087f326b06a98a9e5e3c3bd3847568da6d0c",
+    "url": "https://sketchfab.com/3d-models/crimson-bottlebrush-a8d8109b32da482ab0988c055b64cbba"
+   }
+  ],
+  "sketchfab/d3be8fed96eb48be88b47bbe8d2951e1": [
+   {
+    "file": "license.txt",
+    "sha256": "a9776aea44682ab4deb17fd379d526d8b8f50ab8048aeb3bea7b18d5f6af79f3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "66bc0e0d16fef5da5981811b4b5c4236575d7f30255417d7c5945d776014f112",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "49f63d13cd2e79f6788d3c8c668455a522489efb65a651bfb45b8da90e0bd7cb",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/01_mango_baseColor.jpeg",
+    "sha256": "072d78cc60ea8cc55a8288ab89066637d37f2293e0d37563984453e88c7520d8",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/01_mango_normal.png",
+    "sha256": "8c426aa0c61db257be224cd0bc0a20bfbae6b299f2683c7079edb1dd434f8ee5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/02_potato_baseColor.jpeg",
+    "sha256": "10d0f813a13835c35c85cb339928fb69b52fa35cd12d7898582b33406d131f0c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/02_potato_normal.png",
+    "sha256": "3fb0e6b2bc1d6a8fc0aa57f658962b3409947e94a422e4f0ef0c5255bfebfd4c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/03_avocado_baseColor.jpeg",
+    "sha256": "36f082357f1e8d3d91523cef7195fb10da4f47f117c5b2206e570d2910c3983a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/03_avocado_normal.png",
+    "sha256": "289d30a16b1ceb4dd3bfed854c392b6c6aad78a4d2cf56dfd9ce4296d090978c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/04_lemon_baseColor.jpeg",
+    "sha256": "7123a4ff1693304c8986e5456d516b9245de96ce24bba2ec5428a6871cafe44b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/04_lemon_normal.png",
+    "sha256": "f66a91c06452ad5b6cc649992483627292e92b496c29e98c4d2c2ef10597160b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/05_turnip_baseColor.jpeg",
+    "sha256": "3f062d50a628e68e862be59fac3ba0c50c96ec6527564d8b6c8c8507c8e3752e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/05_turnip_normal.png",
+    "sha256": "d7d0196b9be7e8db75a007cf4051231464d58e9f3e4240e6cea2c10186f52ed1",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/06_custard_apple_baseColor.jpeg",
+    "sha256": "882e97f4f63b239f5d0472b5d1663596cb1880edfc82754be0425009229033d0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/06_custard_apple_normal.png",
+    "sha256": "6d7e34d84ac957212a0b2d4d436eecef14828b17191d6c34692652ef3f6241f6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/07_carrot_baseColor.jpeg",
+    "sha256": "431c2b1bd677115a50f2dd4458efe4eb211d03e96c7a97f5998db1bd13046790",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/07_carrot_normal.png",
+    "sha256": "967e9ee6dd8981fa45afe5cc87f8cc2ef6994eceb90271de00002fdd6e2ccb3f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/08_orange_baseColor.jpeg",
+    "sha256": "ba4c624ad8d031660dd0b36f4a94034b138256ebae4a6a42857931a6b3b4d0d7",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/08_orange_normal.png",
+    "sha256": "693af93d67da4b4937da50b929621fd0feb7151c019b35ebb3a6902cad78b641",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/09_pepper_baseColor.jpeg",
+    "sha256": "9d99a5e74d0c6d9f804c693103dcba72f6b2ac43cfc829c9223c3921c9eeebdc",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/09_pepper_normal.png",
+    "sha256": "799c7b925a72dcbfe4939d0fcb62d7f91f9dbfb4901be90ba8c1cbebb8008a22",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/10_zucchini_baseColor.jpeg",
+    "sha256": "2f1eab75577160afc26d8432f74a0b80272f0eb951eb4c756c800fa2967c97fb",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/10_zucchini_normal.png",
+    "sha256": "9b24f88f9555b0d6621b9ddf1afe3118c9e110f5dd6581eaf5c73dfdfb66c70c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/11_lemon_baseColor.jpeg",
+    "sha256": "fef4c8db5d1de08e77cc7d7879ee2c775280f8be799799ed3cfbf907effd108e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/11_lemon_normal.png",
+    "sha256": "ea6b3b596090b3421803a9574366d751124cb3d4a7159d094a49cef4336b94d4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/12_potato_baseColor.jpeg",
+    "sha256": "59ea40df00a21eba862d22757cf8f525827161f8d79b30c52e9f1c54398f02ed",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/12_potato_normal.png",
+    "sha256": "0666ba6b13927a11b93ec1b6a922d2955ff6a8fd848cdea0cec0074259edde28",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/13_fennel_baseColor.jpeg",
+    "sha256": "e33cc54fb569b99a80e1c827efa5d0e57db5a52b2afe19caedd57778531c78c8",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/13_fennel_normal.png",
+    "sha256": "1a4d32e4437dc1e778750f02b8ef4170097096b0a66d61b0036b1c05a3f94e02",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/14_gourd_baseColor.jpeg",
+    "sha256": "cd10617b7475e5cc236eb5192a03f97e856ff9d59e9ec67ce0a7b92961c236dd",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/14_gourd_normal.png",
+    "sha256": "606662fd5a29b9186a399779019f864034e697964e4525cf3891fce857e9b6d0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/15_artichoke_baseColor.jpeg",
+    "sha256": "1e370440f1aa311eff6d144733557b36ceed043ff138e8247d1477b0bf1326f5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/15_artichoke_normal.png",
+    "sha256": "d9b6898ee6a768684b0e9618bde26f33fd8a3d3d1153996067dd484aad724a03",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/17_heirloom_tomato_baseColor.jpeg",
+    "sha256": "5abd1395ca9eb56501e5dca27decefdc0195585dac3ffa031f51d3d4e36c9aa9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/17_heirloom_tomato_normal.png",
+    "sha256": "e79e7910f98358b6a5e269a74d4eebf770241b3dfabbb04ee0429237b6c04919",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/18_kiwi_baseColor.jpeg",
+    "sha256": "e9599cf1374da730131bcb674f5a6ece5a5a26ecd7dc88fb2964f01e276bf231",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/18_kiwi_normal.png",
+    "sha256": "265425af70cda1cb0743854faf9c066d758069385f2cf989d4cd8c2ff4f145b6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/19_onion_baseColor.jpeg",
+    "sha256": "bf4e5d44c7102079945fe022d1e5b954e38cdecfa03854b56779d24ee2ac4829",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/19_onion_normal.png",
+    "sha256": "3fa942569c62ae0ebbeb53e3520bb8672ed6e6d90cde4ed688ca7a9c0f0a2f04",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/20_orange_baseColor.jpeg",
+    "sha256": "13f718468f1d4aabd2d53863c98c22781a29d572c737c103546d7311d4697854",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/20_orange_normal.png",
+    "sha256": "e05bcb01de8a62accf5a00e54890f8ecb4c3313881a99a6e8ca152cad08e771c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/21_napa_cabbage_baseColor.jpeg",
+    "sha256": "401a0102968568fdad9466e86beb1e5755419a74373188bac63d39a858d83d63",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/21_napa_cabbage_normal.png",
+    "sha256": "3bb4d0c79178aff73e03e4c1483bba058fa04db3651ca6ab2bcfd8da1fc01313",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/22_beetroot_baseColor.jpeg",
+    "sha256": "7d25088dfb076a0c6f0181cfd39e3032a0770d3787eeb3568fe5e8fbcd038cb1",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/22_beetroot_normal.png",
+    "sha256": "93e7460b2b0c6963de5d71a72658a588fba62856aea0acece3b460ab58ecc521",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/23_pomegranate_baseColor.jpeg",
+    "sha256": "487c9508121e5c91832742e6218c9653cbb7e28dfceb7b79ec4b6865f55b166f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/23_pomegranate_normal.png",
+    "sha256": "d1c020159397803db99e0d72c3ef3c7c47bf10b7c1f22526b9f829f49c778c88",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/24_pomegranate_baseColor.jpeg",
+    "sha256": "f9e5697fbc105a8c20a5a2a8697d2baa9efbef82d8a1c90cdfd295acc37b5c39",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/24_pomegranate_normal.png",
+    "sha256": "a050c152d546654e6ee8418336e4ba4f3c36d540e2815b8320326b01fe1487f9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/25_grapes_baseColor.jpeg",
+    "sha256": "0056fa6c29191c8a8c4b9cde4f6c2f0b6c8a4aef755844d1e5b633bd246b7590",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/25_grapes_normal.png",
+    "sha256": "1bfe57513f017cd5183aaeae7bd9d007edc2adaee9bcd459e76330af45388a51",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/26_mango_baseColor.jpeg",
+    "sha256": "a27f4c9c1cebfd53f485b4d7d762aeb886e9548b7593f865ef54dcdbf2223063",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/26_mango_normal.png",
+    "sha256": "f78feb9bcfa8cb569f20519e01b38564ff81c7ed63e064d99af252512b6eae17",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/27_lemon_baseColor.jpeg",
+    "sha256": "b0f37e622668c45e4c75255582387b225611bb761580068aad5401e05955daaf",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/27_lemon_normal.png",
+    "sha256": "14ddbf73a293f266154645a7248f6b8ba645a2ad06a69ac55479ddf15a034cd9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/28_potato_baseColor.jpeg",
+    "sha256": "7147bae277a500badd32533f61848d6926a7e465970395962138204474de4257",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/28_potato_normal.png",
+    "sha256": "e6fe009093915d7dd3b2f92030d3152ee8cc5c75620d01cc2af6e2593310fa73",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/29_celery_baseColor.jpeg",
+    "sha256": "fdc9200cde426547f0094bea8bc5b11dc81dd2b21e17c6ec1c791aba0017ca68",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/29_celery_normal.png",
+    "sha256": "95a14eaf2c7a65ccb6dad2a213a90e003b3d1499b0246460931e5f9a0078aed1",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/30_sweet_dumpling_baseColor.jpeg",
+    "sha256": "b65879a5495c59048b2c5d35bfde61b06751a0e26449df91420025c583197647",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/30_sweet_dumpling_normal.png",
+    "sha256": "8cffe34326a23b676e1bbf0b8a3286d0516eca9a58d75bd6cb29a47bded46cc4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/31_pepper_baseColor.jpeg",
+    "sha256": "4cd76e443f880c8c53d2e449932ff55270982f2df76e810f155905d88596e51f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/31_pepper_normal.png",
+    "sha256": "5e9effe2c86405bdd5128f429e8cf0c7b5f8badb182847fe3fb0d1c1a497c222",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/32_pineapple_baseColor.jpeg",
+    "sha256": "644d269ebb7c147554266bee7d1296a6e491923984525d42ff440d665fbd822d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/32_pineapple_normal.png",
+    "sha256": "e9ae7a537563a6409047ca5ebebbe15c2808a956de07f7f7e4fba4469be8298a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/33_mandarin_baseColor.jpeg",
+    "sha256": "dd524bc3eb978729a5f599ed040d83a1d57a61e94292cda1ab15b308a6cdd4fe",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/33_mandarin_normal.png",
+    "sha256": "c59075bbc1370b877912bdcea2ab80bef8c8858c46864e9bd77565b3e4aeafb7",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/34_yellow_sugar_melon_baseColor.jpeg",
+    "sha256": "7e3ff324f9f29bbd91ff65147c6351d826112471fdc321df9f1c1e85e5017640",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/34_yellow_sugar_melon_normal.png",
+    "sha256": "9323a7f8948da3ce4cef4ed3e58d045512b82283f6b0c04ef21fcc822272edc5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/35_garlic_baseColor.jpeg",
+    "sha256": "30214ff95406ce2e73eea6075962e409d010bc518199d3edf6c9df81c2d4b01d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/35_garlic_normal.png",
+    "sha256": "878e8b167e5d0245af40b66852015f83c1a5bcf45e757c59bceac43229a0de80",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/36_pineapple_baseColor.jpeg",
+    "sha256": "70e678d666e7b5fdcec223a294b967ad6032841f4bb81825ed51f4ad96b8a5a0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/36_pineapple_normal.png",
+    "sha256": "263609ef83c464cf97e049c3d580d76e62f4d2d30a04a3a66f9d2eab8f8c5790",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/37_garlic_baseColor.jpeg",
+    "sha256": "4cf9134b38003b7bb1a7bd695b7a5eccc3a8b3f3e83af26b9ae7494acd4f9653",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/37_garlic_normal.png",
+    "sha256": "6aa585adfd2bc0bf2551cf781fd25d2ac3e1077d6560bbd4b043911beca347ee",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/38_garlic_baseColor.jpeg",
+    "sha256": "d38190b4bdf6e856db54d496f13cdadf0f05d1c0cf1ce7075aa10b10ef98bd25",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/38_garlic_normal.png",
+    "sha256": "d670a681d6668433262bc0c80fca626a065417eaa3f1823e673e68a736a58743",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/39_grapefruit_baseColor.jpeg",
+    "sha256": "c78e7c55f179ef01de3e9f2ca512d20cb6d9e6cf50e782c93c15e807194559fc",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/39_grapefruit_normal.png",
+    "sha256": "401882b5c14a64c329ac829614d39bd06f4c0bbcde2b38168c08de58108278d4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/40_kiwano_baseColor.jpeg",
+    "sha256": "ce8e199560d07d64f1146452ded0ade0e9cc9c653fb116c64e7ae87ebce28360",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/40_kiwano_normal.png",
+    "sha256": "26a8da65585b3609fdd5cf83e2a245478c3b2a1857530fa5af27a3f05ff62d21",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/41_papaya_baseColor.jpeg",
+    "sha256": "55f04f1387d354e566be5de7a203f2a3e97ffa0613d884d91724600bd91b1ded",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/41_papaya_normal.png",
+    "sha256": "fef01863f976804dd4250b576774565a9887e6b7658239a629c0deca76eecb16",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/42_potato_baseColor.jpeg",
+    "sha256": "46ba9e9d71c21115a9ab6c7b61de2978aaf43a7cac553b434beadc43a4a7ce78",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/42_potato_normal.png",
+    "sha256": "5669444e5685a0c31d126a9b759e0d9b62c2c9450dfc0da9304b2f6cb2b45f83",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/43_kiwi_baseColor.jpeg",
+    "sha256": "8b2fcacd983b237ff288a3fbbb236422ad9db80d805a647a8d6b0132ca8656e5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/43_kiwi_normal.png",
+    "sha256": "d1d7d4ff0c763477add4f8d6a4683db5fb09089ed1ad6a36dff6cd013a37bd02",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/44_mango_baseColor.jpeg",
+    "sha256": "3b59e9ae5804a0047bded7be1a7f601d3d2563277111fd26923c3f8035ba630f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/44_mango_normal.png",
+    "sha256": "e63432d556a1712b2d1758ae8ceb1e49f1e80a91953901813c872fc7b4dd217b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/45_radish_baseColor.jpeg",
+    "sha256": "9152f2b47b0f08246186d7f9fec937e573c118190919e9895f99a657b130139b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/45_radish_normal.png",
+    "sha256": "406024fc372b6854a2b58c12e441a7d3b91bb1f01c6254ac223f0dc4b364b016",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/46_melon_baseColor.jpeg",
+    "sha256": "1b590e7894805b4015effb1387bae6e190f5c8b55296915ba95bfbe669b86a3f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/46_melon_normal.png",
+    "sha256": "a2f160c34dbdba360b6f4a8aa24bc9da78ff29c9ec2bc28408802a7601a31bd3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/47_kiwano_baseColor.jpeg",
+    "sha256": "7e73751df66a722c8ab03640d5ab80e5592489245a1707d8b3fcf20692b6e193",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/47_kiwano_normal.png",
+    "sha256": "0c6234879b510039611b1de4dd648b64b8a13fd096dd56d580507c73300a8979",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/48_parsnip_baseColor.jpeg",
+    "sha256": "d5ba332061a407ae1d3bacc83a1982eaf2e4df8cb62e5f753ed527d8c22b2713",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/48_parsnip_normal.png",
+    "sha256": "d795de9832fa84f891aaebf312cd8ac92339ae855e67da179a653d828833433d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/49_broccoli_baseColor.jpeg",
+    "sha256": "251441406f7f8131547b403fcabbe94d86f2542dec569170ce1f54b25a0d4ae8",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/49_broccoli_normal.png",
+    "sha256": "ad76a870f8c9b33f3bb838a6356feeea16074ad92b78ed06463c354d8c0332c9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/50_cabbage_baseColor.jpeg",
+    "sha256": "290c27c9302c22d60e80c6d47f0977c08ee7c41f0493e30502162438aaefabd3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/50_cabbage_normal.png",
+    "sha256": "60998cefe1544411e977d439f57ac2ec8b350bb664b50c267a62685bb5a156c3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/51_pomegranate_baseColor.jpeg",
+    "sha256": "67dfee6f361c2f1dd580b2b7c709413ddac70cf182deb06fb828aebe3c05a12c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/51_pomegranate_normal.png",
+    "sha256": "b102e5fb8ee049b5d08e65753834220cd8aab99fa20232048ea7075e6f6c788d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/52_pumpkin_baseColor.jpeg",
+    "sha256": "6bd3232ac38c23502977775da5686176165e6692ff049b84afa6b9adff2717dd",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/52_pumpkin_normal.png",
+    "sha256": "dd5e5e9ddfe791e3611d69a7ad97488569db4b0fa17b9a9d666addb70b4bed89",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/53_potato_baseColor.jpeg",
+    "sha256": "ba075a5ffd8bebe7d6720216fb1680bbcebdaa295ad736cbab5202a4e076bc87",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/53_potato_normal.png",
+    "sha256": "8996dedce584f15aa92cac177ea94cd1576ded8c257de486eb0a778e68c534c9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/54_kiwano_baseColor.jpeg",
+    "sha256": "6de19f222af6722dc438fa57a63a56f20994a2aa42d4cdf991292529c206777f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/54_kiwano_normal.png",
+    "sha256": "1ca02683f1a5048b9b79f5199b0b21ecc8fd0a712637001aee91a0727d18ab81",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/56_pineapple_baseColor.jpeg",
+    "sha256": "7f24952138d7de961335e94b27a34f171df3bd44a7a6bb1e299c82b37d211bf6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/56_pineapple_normal.png",
+    "sha256": "05622470f88476b0b0f5b17c53af1981f559f79e5cf57ecba76e03fa1fa7b074",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/58_orange_baseColor.jpeg",
+    "sha256": "91d65af0bffa1bf3e700f7662141079ceecf2171429cc76e21cc4ea5267f79d5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/58_orange_normal.png",
+    "sha256": "400184def028b82c89b6d009259c852b2ede976d3732b365d2fd2af890c0b6c4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/59_hokaido_pumpkin_baseColor.jpeg",
+    "sha256": "f3cb2a1f2bc95772d5a9b23ecd54cf367cd8aeab7843880762e182ae92fa2f45",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/59_hokaido_pumpkin_normal.png",
+    "sha256": "cf06b1cf3597c1062efb58b5b3cd7eb97d79ef3a603f537b654db9b0d4d7c4be",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/60_pumpkin_baseColor.jpeg",
+    "sha256": "c8c38bf05184ded5d6717fb43b61ffeea81a6787695f60bc955794a0ff0b7309",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/60_pumpkin_normal.png",
+    "sha256": "256101bd567d521f89776291ce5b75bfcb8aa895065a7d110eb3d9e1024c9a13",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/61_kohlrabi_baseColor.jpeg",
+    "sha256": "b820c6a124df0db52c121b1bf7205d85aaca07afe06743be18778af8327f929c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/61_kohlrabi_normal.png",
+    "sha256": "6b084294c96f6980a6b6e08ea73c5053a1ed814063f2b6a1bc0974e57dd9fca0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/63_pineapple_baseColor.jpeg",
+    "sha256": "197e86ac423d882077829cb6e5c3893de9710d13f68de5ebde1713890830f1f4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/63_pineapple_normal.png",
+    "sha256": "94b6d73a17f8ef2dda4fd2023623906401392ff85c30d2237b9e706d6bd76d9a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/64_pineapple_baseColor.jpeg",
+    "sha256": "94e2ce9b11f28086a92a40cc4f7c4ed1f7a6c6c45a7b25fad1a676f13dfad9d5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/64_pineapple_normal.png",
+    "sha256": "0581b261a62fa77b875da3cbe3342a3086bc8ca57bd904746af1274d5242460b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/65_pumpkin_baseColor.jpeg",
+    "sha256": "31b81d437384ffdff3385d6f32767892a17ba070e4f6a5284e23e3a5ac0fcb49",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/65_pumpkin_normal.png",
+    "sha256": "082d25ac853f725c1f00f10b42d00054aa9a62354864e13ccab7d28e8e6e6519",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/66_pumpkin_baseColor.jpeg",
+    "sha256": "a5525642cbf2d416726613b68167940636cc32ffb126202e6d222345f9109d30",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/66_pumpkin_normal.png",
+    "sha256": "4bb793d1bfe2562197db7582e9ccd276476a2c3ec325db78a3f73681c647bd9c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/67_pomegranate_baseColor.jpeg",
+    "sha256": "1cf53ca390688f4c1683e64cfce5cbabd92e6c37629a4688e52f2e020b4df371",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/67_pomegranate_normal.png",
+    "sha256": "f3a113ec3e5b48cb563dbd7a32b47e19f4906555f12b40aa72f553b3275076b6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/68_hokaido_pumpkin_baseColor.jpeg",
+    "sha256": "47d0aa6c7819500c3ab6efe26b3751ba42167efeeda5cfdf5b91e0d9e2c72cb9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/68_hokaido_pumpkin_normal.png",
+    "sha256": "ef36ffb6c6be3a0737ed1b02dfccfa7cb87f55cccc0515738c6d5ce197aaf8d6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/69_broccoli_baseColor.jpeg",
+    "sha256": "2bfae5897fb24731e143e2f17a94e700369444a6766a2afdd65b6a9ba4b82c27",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/69_broccoli_normal.png",
+    "sha256": "a071a930883cffc8faf50431ada77fc2d5ec675ed2d587fa452f6b2ae414e6a0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/70_kiwano_baseColor.jpeg",
+    "sha256": "9c40e4063dc814fb8a23cdd4ac2d959ddd806513f30433dce9670252ad7fa709",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/70_kiwano_normal.png",
+    "sha256": "2954cf79ebf27a8d79a3b583b884d296ac7af2ac3813d57658ac309b16740cda",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/71_peach_baseColor.jpeg",
+    "sha256": "51ec35b7e0391f7d2e9b0a0f80e0ad6c31442cf92ce9dc2757e49c5e5a5ef589",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/71_peach_normal.png",
+    "sha256": "226f56af4d1ccecacacdddfe2dc05edf63632f3114515d85012e6f2b6a70d135",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/72_orange_baseColor.jpeg",
+    "sha256": "c48402aa825583b76bbb5eb94dabcc954316d1ff975bcaeac36d0c9514d3c2d0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/72_orange_normal.png",
+    "sha256": "9319c5e8423ca2ba2a9b9fdc79ea2cffb1ca2699eb9b1792bbcfda52808fbafe",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/73_strawberry_baseColor.jpeg",
+    "sha256": "b76d3b3ce3023304319e9ad713d9087d0dd60b441341f4094653a0ec5aeb5da0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/73_strawberry_normal.png",
+    "sha256": "22c8973778e02b918621b664353cfa40625c86767b23eb8f6b0d7a56bd32fd19",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/74_mandarine_baseColor.jpeg",
+    "sha256": "42cbddb08dc436eeb61411e094225c7afe6d334708507afb0c5a69f6fdfb8000",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/74_mandarine_normal.png",
+    "sha256": "69153121756aa6a99ea01b387f93a0518d3733646083261454b382e19fe03559",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/75_radicchio_baseColor.jpeg",
+    "sha256": "588e3184f5f0775cf13bea55c9e70527f571c88a465102f999bc8e6946dbd677",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/75_radicchio_normal.png",
+    "sha256": "d44ad90e9466d14371d3ea228589179e859c023a92a57c2603004463eb97c9a4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/76_fig_baseColor.jpeg",
+    "sha256": "c766c201aab7b5b4e23e0ca7f4138197d722ec40f0aa45625006ab4af38bb49f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/76_fig_normal.png",
+    "sha256": "c10c4fb37aeef0d5836f65b1cc652b7a62c5c11812ea6931d12354e19b90c192",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/77_turnip_baseColor.jpeg",
+    "sha256": "a5f621080791bb259b53763c6b7ba1f19e2826d058454dc11ba4deb432aee20b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/77_turnip_normal.png",
+    "sha256": "4fe23bb6b40c8675a73683d45b712b94383a2afedaa2f546c8bbe2c17bd19944",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/78_calabaza_baseColor.jpeg",
+    "sha256": "4530565ebbf84fbadd455b8f757f64274db44a0a3a77abdabad6f1bf0bc27b8d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/78_calabaza_normal.png",
+    "sha256": "374ada60c1df7b91d72bdf5de9d378324fa8db6504b979def9c8526560c38f5d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/79_pepper_baseColor.jpeg",
+    "sha256": "b4b80d7bce81d034647b64b6ef1c274bed371e1f4d1cfe4c852091a46215d90b",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/79_pepper_normal.png",
+    "sha256": "2df5c57e7af0e4740c1f5e2f47a775d44280240bce7d69448c73cf5d90a1037e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/80_pineapple_baseColor.jpeg",
+    "sha256": "8868bfe6d70b7aeeec23ba328fcd3d29dac76f9c0880d81bfcf159b28b264607",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/80_pineapple_normal.png",
+    "sha256": "66507ba6bf3bec4b0d480ba07b807dba21b437d1095ab2aafd401636421fe1e0",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple01_lr_baseColor.jpeg",
+    "sha256": "b9b8c67d6d0275f304ccc93981aa60c33edb1395c21fbc70a451fe8b8c8fc7aa",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple01_lr_normal.png",
+    "sha256": "3af991e32a3452efcab0980ef22de49922f6b727b449a1c33d7a51506f276d4f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple02_lr_baseColor.jpeg",
+    "sha256": "8d8b85f3c2abf21e81075e6e04edd2bff722e0e3bd0cb591b2ff19c116aba64a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple02_lr_normal.png",
+    "sha256": "eff2e4a083b60ed456f35dd8585130782e4cf8ad639fc057850bb21ecfa0acdd",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple03_lr_baseColor.jpeg",
+    "sha256": "708344b15f09189a0895cb9c0665e0464efa40c543df77d322716a2f3c544fcd",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple03_lr_normal.png",
+    "sha256": "9f9fe4f10077b5c2f79319717c1de3218d40c3725a03b128ebb5c329413b6893",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple04_lr_baseColor.jpeg",
+    "sha256": "a06fdda13896cdb42ebdf2e1ba04ad9546287c77752bbe1b380105546eec06ab",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple04_lr_normal.png",
+    "sha256": "9821fa985f90cfcd16106480ffcd776aa5a97e03f26c2545ed8cf85306d550a9",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple05_lr_baseColor.jpeg",
+    "sha256": "074b4e94178f0b2cf9359809c61924bd91edc6054df68ad73a9c7d4406890a98",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple05_lr_normal.png",
+    "sha256": "2a12675d312af0b567a4daa57b95b3798d68defa4060c414abfffe3b7c9e9a4e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple06_lr_baseColor.jpeg",
+    "sha256": "4308f8f9ddfaec4714c9bf73eba140c8ee0138c66826b6238c6efd4490b94da2",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple06_lr_normal.png",
+    "sha256": "9d26affb2a62d3d5cc567f6651ce55e071ca78fb00f73f5d8cbc268ba568f7ff",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple08_lr_baseColor.jpeg",
+    "sha256": "3a1f550392200b76d10afc59fd931851c2b7f4f5f8fb3e798b96c4ba36e2e35d",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple08_lr_normal.png",
+    "sha256": "424ebdfe491a82bbb62cd076fedcc00a6a6a7b29476df59fcd032f86d6386321",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple09_lr_baseColor.jpeg",
+    "sha256": "784b0f81715541f1a58cc86f55db04cf4b5988909a72f2e85dcd51e5322cdf63",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple09_lr_normal.png",
+    "sha256": "e162ff63bb386acf9e49306d8c91d0305c794b30e51090a0cc7f226587db38e4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple10_lr_baseColor.jpeg",
+    "sha256": "5cbd24eeb6c0b31eadda9c2158e4d301510025a584eb4ac8a04d7a8a4a30a009",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple10_lr_normal.png",
+    "sha256": "3a31744aabbdbfbe33fdc8df930aab0395bec1e7fcea46cf3ab3e3ed92e827a8",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple11_lr_baseColor.jpeg",
+    "sha256": "07e5f5c81b26fd49f35bdbc1f05e6c942ffe5566ca6f876c43ba6952e488b4ad",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/apple11_lr_normal.png",
+    "sha256": "1ed77a865485cbac4f9a16a0d35b2a50eb25d23e62cb49f6001c16feb494a778",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana01_lr_baseColor.jpeg",
+    "sha256": "91ac036ca1e96fcf88d46bcef2f82c4a11eb1a29ab231e5da881a33a44df01d7",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana01_lr_normal.png",
+    "sha256": "4f9f4e3d5b4373058674c60f6308243aaca94e78f7e63fc1564eed0fafa0c04e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana02_lr_baseColor.jpeg",
+    "sha256": "842321f1e043fe14038dbe6809ae1f55f3c51cf937657bff64a7795a726f5805",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana02_lr_normal.png",
+    "sha256": "eedc89f43f5ae4b8fae91d556c3e2583f963a6b6b0fa05e58b2da11faeb529eb",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana03_lr_baseColor.jpeg",
+    "sha256": "84be278ae34efe0e782cd73116b2127cf93b7f95d7514b882d57a7a680b50e02",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana03_lr_normal.png",
+    "sha256": "557797d93f1e564150a304d634b3a96a1129fe21f16ce02f8f9a7874689a0816",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana04_lr_baseColor.jpeg",
+    "sha256": "f723762c54895c2eff29394fc205943cdf6b37421608ba9c0a2c02fe62dafb67",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana04_lr_normal.png",
+    "sha256": "ea4d23e0a4e4b9eb2d0675b63ad36347e9e26c8033e25048a1c10afb0621bfc4",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana05_lr_baseColor.jpeg",
+    "sha256": "9d50c719738687ddb5553735d05b97174f420b806ef59e367b7b77a1b1d21ca3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana05_lr_normal.png",
+    "sha256": "e757a5e58f443042bfb0d89ca2c9941df66dc66dab36a55b3f1b8a10a39f12f6",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana06_lr_baseColor.jpeg",
+    "sha256": "8db23201b21709cb8f6056b0b23ed189870ca5c7b38e32f0bdf502172fec4aa3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana06_lr_normal.png",
+    "sha256": "ee7d8fd24999d03e906e3188f8ab7c79b53fb17dd2b48d164a10b35cc230b306",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana07_lr_baseColor.jpeg",
+    "sha256": "5881677513c3ed8f1118a19302fb84da725b3aaf6ca3a4c9556b12788c8401a2",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana07_lr_normal.png",
+    "sha256": "110ac6e189bf0d55c36bc0a82d9b79379574020864e756e90d9cc979821e04fa",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana09_lr_baseColor.jpeg",
+    "sha256": "a7f8192f0bdd0cc44f4827c5646f9e06e78d6db3c3d3d2c8c2a5359a83e55fb3",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana09_lr_normal.png",
+    "sha256": "f8d8b1463289890eeba2615bb26951399b01b62f8a20063e383ff751e6cf1a2a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana10_lr_baseColor.jpeg",
+    "sha256": "50dc13b012b823235629fe5ad2583b9256d7c6a2fb48a7ac323c8dca57e75bde",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana10_lr_normal.png",
+    "sha256": "a96f9905cade255a60c73a49a7a23eebd1c9c0ec678ee68aa4321380997cff7e",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana12_lr_baseColor.jpeg",
+    "sha256": "bf87747fc8179b2309fab98bbdc4365fb61cac43ab2e1fdcdcf4b7a115a5590f",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/banana12_lr_normal.png",
+    "sha256": "164ff46c803650f813ab79f50569e0e7ef63e5ce4a8022b2546e9dcbca6796a2",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear01_lr_baseColor.jpeg",
+    "sha256": "eae47c71aba20c85b41c7ef93ef6603ef2062fe90e38a0548ddb1d5094119466",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear01_lr_normal.png",
+    "sha256": "83ac96ac624c073efe0e5021a97024356341a23521421698f1da632ae5daf6da",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear02_lr_baseColor.jpeg",
+    "sha256": "c0ddd87a867985b66fa403404a8c937c3003f6d5c0c925edf6f9d4e1c339b52c",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear02_lr_normal.png",
+    "sha256": "e7186d143b71fd8bb35817da0ce9a539460b825ac096e927a0d457ecd8e8548a",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear03_lr_baseColor.jpeg",
+    "sha256": "1860cea6a399a0d5335fbd6ff5304f352b5b3b2462d2adaa9387e052aa955eb5",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear03_lr_normal.png",
+    "sha256": "f8958a98619c4a8a90e8f68191fad70d4b9f9eadfa0f8b6d91d59c7e106d0976",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear04_lr_baseColor.jpeg",
+    "sha256": "a86d498b1bed10667ac42e49a3b3cd3a81789d4842b4e3b1707972a815354375",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   },
+   {
+    "file": "textures/pear04_lr_normal.png",
+    "sha256": "eae82bafbc2c3aa61534261da8d34ce4bc73e2394e3b6e4a2fa9ac934228aeb1",
+    "url": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1"
+   }
+  ],
+  "sketchfab/46abe3eb9112443baacc443d85a49e98": [
+   {
+    "file": "license.txt",
+    "sha256": "078cbfff73c7212f05157f489577003ce46ae5a0603d693d8976173fc3bf3e9d",
+    "url": "https://sketchfab.com/3d-models/198-yr-cupressus-sempervirens-monumental-tree-46abe3eb9112443baacc443d85a49e98"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "6a5a5a08079a1f4768bab48ab0159317737b61414bfe14f608936e0192a824d7",
+    "url": "https://sketchfab.com/3d-models/198-yr-cupressus-sempervirens-monumental-tree-46abe3eb9112443baacc443d85a49e98"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "717de59e53576913cc8d9f4d11c735bebb854ed0407db3413ec8d2780466ed84",
+    "url": "https://sketchfab.com/3d-models/198-yr-cupressus-sempervirens-monumental-tree-46abe3eb9112443baacc443d85a49e98"
+   },
+   {
+    "file": "textures/Anit_Agac_osm205_Material_u1_v1_baseColor.jpeg",
+    "sha256": "e82623a30c9d3dd8011ce53e80df8cbf96075f1817b1faa5e80f1934d2a0e4f1",
+    "url": "https://sketchfab.com/3d-models/198-yr-cupressus-sempervirens-monumental-tree-46abe3eb9112443baacc443d85a49e98"
+   }
+  ],
+  "sketchfab/2a0dbcdf8f5d48f5ad79987c7a8170ce": [
+   {
+    "file": "license.txt",
+    "sha256": "4d2bd59785898d64eab41e397bbdfabd9f88a5462578ab10c465e0830ae360c0",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "19da3ae0cd7246b8d5c9aaab9f892c1d4b757b42335c0cd2f608824824b42b14",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "9b4836ef4d8ff9d3413a7acca31f2510a37b5d97f6d699cab042f081c130c2ee",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeBark_diffuse.png",
+    "sha256": "78114780d9a7194b58ed8c467c75ff01bea6912ca6882e6e630deb638e54ea52",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeBark_normal.png",
+    "sha256": "0d4babafab69a851055a35a6c42dd3073e60a9ba7f522763a3786a25977ef1c8",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_1_diffuse.png",
+    "sha256": "3b4644366069b2d6c7bc5f72c4aa0653e8ed73fbb5750525cc2e57e1261a83cd",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_1_normal.png",
+    "sha256": "e14cc699449e1a6a14210f472e918c30b736cb5acb52a006ef4c6cc52d1ec324",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_1_specularGlossiness.png",
+    "sha256": "0389fd4c42b2587d6e52e56072f24e832fd231f5e7812f8d247b4ee34b8aa07f",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_2_diffuse.png",
+    "sha256": "d5cadda0c3be3da1263d5e02a65cfda92c7a0beebc8a6afdd6ee59f4b2eefa7e",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_2_normal.png",
+    "sha256": "32eac688f9ebc7bd8fa515ec3c7d1222ea1674ca84e4d253f4f9ffe6ca2a8ebd",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/BanyanTreeLeaves_2_specularGlossiness.png",
+    "sha256": "0621ae61a821777274bdd6ac34c0bd4af1b87966561bf162c136ba90ce804e9b",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Branches_03_diffuse.png",
+    "sha256": "7b97e1a143ab9a77954238b783e0418e7268488fd5f116f555c6b1d694cf0785",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Branches_03_normal.png",
+    "sha256": "ba147bd07f248d463bbb1ea334a0437e111e1380c1a977b3a1e30288b2acd338",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Branches_04_diffuse.png",
+    "sha256": "0deeb8f688d844e37607599b8469f2508d3e8fbf9c839f0422c68ea4ef3d3387",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Branches_04_normal.png",
+    "sha256": "f878519ceb39879baad898f4b2e7704568c1bd83e368a83885fa44409d416f65",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Cap_03_diffuse.png",
+    "sha256": "9a0dd84067f81006dc3cbf4f1e86ee5a3c121c021062c14616768f335dc4a128",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Cap_03_normal.png",
+    "sha256": "6b85beef45e89d7b0b5a593d71c8e001f10fb1d60acc7675f275475a6af4f9b2",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Vines_01_diffuse.png",
+    "sha256": "dfd809870e56570fefda94470281079d30f2177861804ea4ec50b76418ccbc1c",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Vines_01_normal.png",
+    "sha256": "b3558ace628120fef2f5444f80ae0a5a339aedfefebee6cbc5e53ee1ad192b2e",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   },
+   {
+    "file": "textures/Vines_01_specularGlossiness.png",
+    "sha256": "b184ccad309f55c5e6bca115a08c35000dfb475fdd1b7b3d6fb8c144709dda05",
+    "url": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce"
+   }
+  ],
+  "sketchfab/f23b8272cc874b5dae83bfc94dfb935c": [
+   {
+    "file": "license.txt",
+    "sha256": "51a21b8830093575837b3831b8c0b989f473887673b7a7e5007a58e253902d5a",
+    "url": "https://sketchfab.com/3d-models/plumeria-rubra-f23b8272cc874b5dae83bfc94dfb935c"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "c184feb015f88e37794c1c4f41464a133bf6dc113cd8527548d8001494f517b9",
+    "url": "https://sketchfab.com/3d-models/plumeria-rubra-f23b8272cc874b5dae83bfc94dfb935c"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "b16e7e6c9eaaf0b431cfaa8f20fb2b37b1db3b1c9f29b478ac8cc5ada00c133a",
+    "url": "https://sketchfab.com/3d-models/plumeria-rubra-f23b8272cc874b5dae83bfc94dfb935c"
+   },
+   {
+    "file": "textures/material0_baseColor.jpeg",
+    "sha256": "50e53e60745e310aa05134fb1709bf23d54cc4ed9e5f89c6efd047f561e17f37",
+    "url": "https://sketchfab.com/3d-models/plumeria-rubra-f23b8272cc874b5dae83bfc94dfb935c"
+   }
+  ],
+  "sketchfab/13209c1dc419457a836e8a0340b77028": [
+   {
+    "file": "license.txt",
+    "sha256": "e46e78f5181eb27a8fb53bfa7317066a9f9e3670fda7b4a5a150aaf9b42166a2",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "eaecd99053478af0bf7abbe1751bf516dc48b91dd26337e1ad4ffd822893626a",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "fc9a485461808ad0890f41d1c143d73780869f8f71f127b2ba38c94cfaddad25",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.006_baseColor.png",
+    "sha256": "2ef5a5dda27c66463e1c15d79732cbb2d62a98c48a14f52b4c768af1361761f9",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.006_metallicRoughness.png",
+    "sha256": "d92d425f24d4bdeaa874be8a4349bab7f8629516edd453fb149c6395d2482871",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.007_baseColor.jpeg",
+    "sha256": "81f9edabe497a2b68c8e93160f29cb44ebd292a0151ce4bdd5817e15321032ca",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.007_metallicRoughness.png",
+    "sha256": "bc2c250a00bc2e2abc744f665a1ec248128a38ef74b034af1c0d1b582206ee75",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.008_baseColor.jpeg",
+    "sha256": "98706decf1bf9daa54c42ac5a8569d1d67f38f782fa079e89086fae361b06e17",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.008_metallicRoughness.png",
+    "sha256": "8a410d307b9ccaa80b3f5aa787c0237da188c8655992f410119b1d31742ac931",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.009_baseColor.jpeg",
+    "sha256": "5be97e1e4be9c7e5222627af4e9a96d74519cb5681d762c8488e2cefe1247bbd",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.009_metallicRoughness.png",
+    "sha256": "2ced50cea3b9b0ac2b55037504d851beb8e52024430b948a7849096492097017",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.010_baseColor.jpeg",
+    "sha256": "979a35a484c4bd7434999f260416634907f8078db6e4c632f7f95329bae804be",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   },
+   {
+    "file": "textures/material_0.010_metallicRoughness.png",
+    "sha256": "1f612c7cf9669450c2c0899c9eb6df808d92536334a1c51fdc95a03b7d495d56",
+    "url": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028"
+   }
+  ],
+  "sketchfab/1d4afb668a714188935966d3ee9b2e33": [
+   {
+    "file": "license.txt",
+    "sha256": "637ef2b610b4dce77e8676342a508446184a2ee82785ecf03ee7d29f02cb0e63",
+    "url": "https://sketchfab.com/3d-models/fig-ficus-carica-1d4afb668a714188935966d3ee9b2e33"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "ebb60f884e0079cfe861a8116d6402ef22d76f7906e0df9760e36d74ae063e24",
+    "url": "https://sketchfab.com/3d-models/fig-ficus-carica-1d4afb668a714188935966d3ee9b2e33"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "06e2077dc584145e87877e4abc9d764c652d403426b054e45f3d448ce34d6399",
+    "url": "https://sketchfab.com/3d-models/fig-ficus-carica-1d4afb668a714188935966d3ee9b2e33"
+   },
+   {
+    "file": "textures/Feige_Sketchfab.1001_baseColor.jpeg",
+    "sha256": "3b3e37e26e0f6e20ba98cd4b90304a66819a390e5a9aed23a7445304380f3f68",
+    "url": "https://sketchfab.com/3d-models/fig-ficus-carica-1d4afb668a714188935966d3ee9b2e33"
+   }
+  ],
+  "sketchfab/d15b7c7b717646e596076a64aaffa2c9": [
+   {
+    "file": "license.txt",
+    "sha256": "980f69cf04132b644d0e14570bd76ff7e6cfd7d654fdaec18a86020d3554f753",
+    "url": "https://sketchfab.com/3d-models/strelitzia-reginae-d15b7c7b717646e596076a64aaffa2c9"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "e298bc702f2f253f0ccaa2706397ebb3e563faf02106136fb86463d738bd7192",
+    "url": "https://sketchfab.com/3d-models/strelitzia-reginae-d15b7c7b717646e596076a64aaffa2c9"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "ae69ea2c53c0e046335522bd9f94bddfe57eb42ccfb0715f85bd6071c17c1ed9",
+    "url": "https://sketchfab.com/3d-models/strelitzia-reginae-d15b7c7b717646e596076a64aaffa2c9"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "835be15fd82c6cb67e6d80b4d665b64e1e6c47c71931e56e69c33fe7b843a959",
+    "url": "https://sketchfab.com/3d-models/strelitzia-reginae-d15b7c7b717646e596076a64aaffa2c9"
+   }
+  ],
+  "sketchfab/1f98c4259dc747438de86dc47d753c08": [
+   {
+    "file": "license.txt",
+    "sha256": "6c232f9c693c4b473b73fa6b7c8a2d3a53d00e60e14521aba3d38006cc3441f1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "6e7e87a14dd28e4f71cdc730fa6516122dd311884e6f77598843016cc96d0c69",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "44df6e0f3c6f3e4acc671513fd3e90065844fcfa7474f62ec65d1f8318a103f5",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_bark_02_baseColor.png",
+    "sha256": "19bbb11cf365079fa762df65ce9b2f6f6dd27b815ce297e947819cd88410beb8",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_bark_02_normal.png",
+    "sha256": "da50799a569fd580fc8ceb88e25e8aabd3036c955018fa417fb3722c5f5f7f33",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_bark_baseColor.png",
+    "sha256": "b2a3863bb4aa81f0e38187f95823c3e3c86972dc1da2184cdeea9df32f78af85",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_bark_normal.png",
+    "sha256": "d47d220d59ce9c49fb53c4d773e18d212b48e5a5c1c5ebc0e996681bc7e30525",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flower_stalk_baseColor.png",
+    "sha256": "30b82766039e630b903b7b2422169ec359e1cde9185d20ee4b05dc9b8a658cfc",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_05_baseColor.png",
+    "sha256": "0fdff006bf383a514c8aec973aca576c71b62d82afcfbf023bf2c7a66ed96774",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_05_normal.png",
+    "sha256": "931a5c579f59cd8950e6147065475e718e8cc1af1e5e1dbbb2f7df49473ee2fe",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_06_baseColor.png",
+    "sha256": "14ef312b95f23a4e9c0e4ecc9d0b4a3c86be1d1f4d7c5fa2bd6097b39a8ae01d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_06_normal.png",
+    "sha256": "65b20d27e42a4c42fd4a39b1b67c0dc51d48f0e6b5baae3c4685cf2d59245a21",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_07_baseColor.png",
+    "sha256": "6268d6bcecbb705192c4364427798ed649a1a3c7cbbe99d040657ef875702d4a",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_07_normal.png",
+    "sha256": "9ca37fb44992d38fc97c91a0bd574c2ecf7cc8349ee61c31e4f03ea56805f173",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_08_baseColor.png",
+    "sha256": "43c959dc828ec273815c25bba7242080a4087e0d140d1afe5b45eb399abb0ae9",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_flw_08_normal.png",
+    "sha256": "6eeaf321978c3e0711a9472a662e49d33508d9fe6c186aafdc994548eec26796",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_04_baseColor.png",
+    "sha256": "e0639fcf5a1e0756868a7f0a0f8c7de5be0341c4afea67b7f81901f973afb522",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_04_normal.png",
+    "sha256": "953f2318cf4e653c66a9dfd35cf5e817e07a40ff0416f53e895cfa162cb062fd",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_leaf_stalk_baseColor.png",
+    "sha256": "dc0f6cd1db85442ffcc12f3f4939d3b916b585dd9c08161e44ec8c04fc0c197f",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_twig_baseColor.png",
+    "sha256": "86a453d1950e9b6c68c90521bef0c5a8084cc1b438bf4f9c3e16cc46b463b1e6",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   },
+   {
+    "file": "textures/Jacaranda_twig_normal.png",
+    "sha256": "13e24db3ed8644b4832816d5bb3e3c7d6d907c450682e35266da78b57feac073",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08"
+   }
+  ],
+  "sketchfab/a9cb68fdbc1d4f148dad2f72146483a3": [
+   {
+    "file": "license.txt",
+    "sha256": "84553b3681269b690c30840f249720525d460a4090451e44eb47c106ad5b5842",
+    "url": "https://sketchfab.com/3d-models/blenderlagerstroemia-indica-a9cb68fdbc1d4f148dad2f72146483a3"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "8cb2a6207e19daf37a0d94aecda7ba33df2e9e2d735da1c1b5aaf5197077bd78",
+    "url": "https://sketchfab.com/3d-models/blenderlagerstroemia-indica-a9cb68fdbc1d4f148dad2f72146483a3"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "93785e603082a1b9b58230a30488cf2be268805934f698aa243f2e17fddf19b3",
+    "url": "https://sketchfab.com/3d-models/blenderlagerstroemia-indica-a9cb68fdbc1d4f148dad2f72146483a3"
+   }
+  ],
+  "sketchfab/c2b66c5043f4452589e47293ef93e9e1": [
+   {
+    "file": "license.txt",
+    "sha256": "b0d639a6b002228bf84edf61b75562fde59761fd549966b4c5c701a18e75f230",
+    "url": "https://sketchfab.com/3d-models/salvia-guaranitica-c2b66c5043f4452589e47293ef93e9e1"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "286ed696944b358b9bf46708ae403914da1359763507f9ad5d281f8b9c35b84b",
+    "url": "https://sketchfab.com/3d-models/salvia-guaranitica-c2b66c5043f4452589e47293ef93e9e1"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "b2634e8b5d471325b6cf29339721bc411360ea0c7dd1e2c4b6abff1cc9216ff0",
+    "url": "https://sketchfab.com/3d-models/salvia-guaranitica-c2b66c5043f4452589e47293ef93e9e1"
+   }
+  ],
+  "sketchfab/fbb15d006aa94163b9c7255b6d68cede": [
+   {
+    "file": "license.txt",
+    "sha256": "7d8b464ea065a3bee27219c46aa00f2cf675c1619b5c215265b76268e780296d",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "3d982b9fd845d3a8cf24af8ad7074c898960d6236ca7e1e99fc375eed3945278",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "7931e90b49836d5bc545b01d3abca67ccf0177666b9b871574590366e7b7deb2",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/leaf_201106a_02_03_dif_baseColor.png",
+    "sha256": "020b189496c419387a17dde593c9cb0f6923b1b0743d3edc71901edf0108a955",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/leaf__141028_01_dif_baseColor.png",
+    "sha256": "a4b82b05f55e8af19482acaba2f150f7f9f9f7134e977be8df683c0682597f9f",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/leaf__201106b_02_01_dif_baseColor.png",
+    "sha256": "3834d2e9278330b45a0af5fe7e1eabf481217d00ac9b1aa65d8f68129cabf9d5",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/petiole_baseColor.jpeg",
+    "sha256": "3b84d47ccdd81b82693350965a6079e69e58a809a8a595336ef2f8aef5aa2c8a",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/trunk1_baseColor.jpeg",
+    "sha256": "5c8e76814d5113c7769b92e259e11d1f71fada7b4d6c91c57b5fd1a269a6dadd",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   },
+   {
+    "file": "textures/trunk1_normal.png",
+    "sha256": "78cfa1a76ee8001630258153b7822d068b4862d3d70d7700865abca4359a664e",
+    "url": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede"
+   }
+  ],
+  "sketchfab/b36256a5d99941008bb1a95be62bf741": [
+   {
+    "file": "license.txt",
+    "sha256": "74d563c8411aefe559251bbd8396146a512fd43d460c561daf4459c5d7bb00fe",
+    "url": "https://sketchfab.com/3d-models/psidium-guajava-b36256a5d99941008bb1a95be62bf741"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "66b5254449ad1d6cd690338a348467d80eaea88c129438e29904351425fd300e",
+    "url": "https://sketchfab.com/3d-models/psidium-guajava-b36256a5d99941008bb1a95be62bf741"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "163e2c75fff9039849870fcb1c784004f88cb48c24f18d4e29331925925bb155",
+    "url": "https://sketchfab.com/3d-models/psidium-guajava-b36256a5d99941008bb1a95be62bf741"
+   },
+   {
+    "file": "textures/material_baseColor.jpeg",
+    "sha256": "0005aa6753e0df8495d483059f8fab65f0fc83e82b810fbb57c733a10360f7fe",
+    "url": "https://sketchfab.com/3d-models/psidium-guajava-b36256a5d99941008bb1a95be62bf741"
+   }
+  ],
+  "sketchfab/ae20776e4a384a64923ae37df61ea13d": [
+   {
+    "file": "license.txt",
+    "sha256": "b43c01981f740ba911f035c5ebd38ad76c719a5875ca8d6c22d819498d68df5a",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "d5391815957fb2fc2a98ed8fcc0545195ceb957c62edb44bb14df04354a87cf4",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "125edd5f3caa5d34b1a7c63206afc2318e6bbca1e0ca63f8451923be801487aa",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_02_baseColor.png",
+    "sha256": "d6222feb2b7af18a5cdf9d553c55a6a301d9128b948a210c8b79813214e204a1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_02_normal.png",
+    "sha256": "e4f18b4fa797ff597ac851a1386fc00586d37e195346d1c447dffc728bc28aa3",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_03_baseColor.png",
+    "sha256": "728367f97561a98b49bada30b9ce712275acdc674f80a65a5231db50554bb2f0",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_03_normal.png",
+    "sha256": "d980ee804a5443902a60b2c5f323cc7a8819b282c9d90442098f873efe2ef045",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_04_baseColor.png",
+    "sha256": "da63e687e81b38e891742bbd1e2399ce43366a2109a7d6f17fc922126e7f546e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_04_normal.png",
+    "sha256": "2f9c49059e5cd2fde14022c56b556037b09a5b3a47e49cb885e1878e4dc08d38",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_flower_01_baseColor.png",
+    "sha256": "849a8fc62f1f696466a81adc169ad51da07e1ccb7bfbba49e446b40cfa8fbf74",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_flower_01_normal.png",
+    "sha256": "a3cd88ea1a2384b4ddf77259d8743702e6cea5fddb574524c2bbe35758b809ea",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_flower_02_baseColor.png",
+    "sha256": "6b92237b6dabc386568e34de8ebee2a2725dac7d9ccaba0dc2660de841f692fd",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_flower_02_normal.png",
+    "sha256": "ca3d1317028b4ab5b5d3bd011d2719e8b95c0fd49059528a4445348549e3267c",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_leaf_01_baseColor.png",
+    "sha256": "76ac5f4f85deb35b3bf79f283707df7f004457bb9228ed0cc5d5873d1f0361ef",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_leaf_01_normal.png",
+    "sha256": "64d19149961dd7c77d7fcf1eb4338cd3559b99a3fbba8111b734c77141614df8",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_stalk_baseColor.png",
+    "sha256": "121da4ffb6215e186a4734a9d72115ed828cb4e394c19bc109e6b1ebf8912b67",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_trunk_baseColor.png",
+    "sha256": "23f15dffcc5ccb5405c81b1dded659c936fc50736e72828e3c3200471284731e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_trunk_normal.png",
+    "sha256": "41691905fd7cfba3d4fdcc70eb5cb3bd530d5606456818914d017e586799eb8e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_twig_baseColor.png",
+    "sha256": "292f03fdd272abcef23862b56ba08740b7d8cab13be1817228c542913f879c02",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   },
+   {
+    "file": "textures/Delonix_twig_normal.png",
+    "sha256": "a1d2c65eb3e37de1509a7d112f00ae623cf12c0be70836fdc8b93b85aa1b8f5d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d"
+   }
+  ],
+  "sketchfab/5046ae4088714df4b3b2f0c479a40d47": [
+   {
+    "file": "license.txt",
+    "sha256": "79f072e67958cd1791e0a5396575342216e1e62cd299acccbc950fe218df0ea3",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "a50f8918dadc630626338bff0a7bb809aab864a66b17d75d0cabc9482a2241b7",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "94fadb0d22955db4c8e33c6465197348286009bd17ee9e4a9dfb4d02a02f791f",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_02_baseColor.png",
+    "sha256": "d6222feb2b7af18a5cdf9d553c55a6a301d9128b948a210c8b79813214e204a1",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_02_normal.png",
+    "sha256": "e4f18b4fa797ff597ac851a1386fc00586d37e195346d1c447dffc728bc28aa3",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_03_baseColor.png",
+    "sha256": "728367f97561a98b49bada30b9ce712275acdc674f80a65a5231db50554bb2f0",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_03_normal.png",
+    "sha256": "d980ee804a5443902a60b2c5f323cc7a8819b282c9d90442098f873efe2ef045",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_04_baseColor.png",
+    "sha256": "da63e687e81b38e891742bbd1e2399ce43366a2109a7d6f17fc922126e7f546e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix__flower_bud_04_normal.png",
+    "sha256": "2f9c49059e5cd2fde14022c56b556037b09a5b3a47e49cb885e1878e4dc08d38",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_flower_01_baseColor.png",
+    "sha256": "849a8fc62f1f696466a81adc169ad51da07e1ccb7bfbba49e446b40cfa8fbf74",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_flower_01_normal.png",
+    "sha256": "a3cd88ea1a2384b4ddf77259d8743702e6cea5fddb574524c2bbe35758b809ea",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_flower_02_baseColor.png",
+    "sha256": "6b92237b6dabc386568e34de8ebee2a2725dac7d9ccaba0dc2660de841f692fd",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_flower_02_normal.png",
+    "sha256": "ca3d1317028b4ab5b5d3bd011d2719e8b95c0fd49059528a4445348549e3267c",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_leaf_01_baseColor.png",
+    "sha256": "76ac5f4f85deb35b3bf79f283707df7f004457bb9228ed0cc5d5873d1f0361ef",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_leaf_01_normal.png",
+    "sha256": "64d19149961dd7c77d7fcf1eb4338cd3559b99a3fbba8111b734c77141614df8",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_stalk_baseColor.png",
+    "sha256": "121da4ffb6215e186a4734a9d72115ed828cb4e394c19bc109e6b1ebf8912b67",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_trunk_baseColor.png",
+    "sha256": "23f15dffcc5ccb5405c81b1dded659c936fc50736e72828e3c3200471284731e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_trunk_normal.png",
+    "sha256": "41691905fd7cfba3d4fdcc70eb5cb3bd530d5606456818914d017e586799eb8e",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_twig_baseColor.png",
+    "sha256": "292f03fdd272abcef23862b56ba08740b7d8cab13be1817228c542913f879c02",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   },
+   {
+    "file": "textures/Delonix_twig_normal.png",
+    "sha256": "a1d2c65eb3e37de1509a7d112f00ae623cf12c0be70836fdc8b93b85aa1b8f5d",
+    "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47"
+   }
+  ],
+  "sketchfab/34caa6c4e73b44c39ac07db169b70d59": [
+   {
+    "file": "license.txt",
+    "sha256": "4b21034a0f65fc644db8dcac5c421d8ee360d25ec52fb282e7b7b01a4fea527d",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "c20280075ad12ee6a31b702cc7e009b6d5337d870922c740306b48d866b858e3",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "2a96573063227ea05ef7846b0eeef1c82895edb03d6f7ed124a0cdb4328a9527",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   },
+   {
+    "file": "textures/Material_baseColor.png",
+    "sha256": "db9791bbe0db4e04c93d3b0da139228255fc2a38699e9f4ddf199592927b52e5",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   },
+   {
+    "file": "textures/Material_metallicRoughness.png",
+    "sha256": "88967f9e6b475832a437982716c01310f591a7ffac4fd17f2e43e0abc1aa3fa0",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   },
+   {
+    "file": "textures/Material_normal.png",
+    "sha256": "1f67e810528998d31ef9a1986806a846759e9247fc12c0ccd17d0ae65f2d95e3",
+    "url": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59"
+   }
+  ],
+  "sketchfab/a6f5e2c3edc24c1bb25c1ddb3bc803df": [
+   {
+    "file": "license.txt",
+    "sha256": "c99b81bec659ac9ae3354dcd7b66d5046701bbb1641b826265d7307dd0ac28ec",
+    "url": "https://sketchfab.com/3d-models/strelitzia-nicolai-a6f5e2c3edc24c1bb25c1ddb3bc803df"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "0457a45917ec0aaec03112637b7d559190aaccb0ebb7ca42cb65f31fb7abb8d1",
+    "url": "https://sketchfab.com/3d-models/strelitzia-nicolai-a6f5e2c3edc24c1bb25c1ddb3bc803df"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "fce18e7c06242dfc9897f63e12b85a0f109237fdfe931e8fa1e1baa054fb4afa",
+    "url": "https://sketchfab.com/3d-models/strelitzia-nicolai-a6f5e2c3edc24c1bb25c1ddb3bc803df"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "9cdf3edecd1722c753205c2e5e329e7917a2f660532f23ffe2e5e21f64f3c6d8",
+    "url": "https://sketchfab.com/3d-models/strelitzia-nicolai-a6f5e2c3edc24c1bb25c1ddb3bc803df"
+   }
+  ],
+  "sketchfab/d0248242b885491aae74e4d334281226": [
+   {
+    "file": "license.txt",
+    "sha256": "cab8c741e96bc2d028b57f1d6482a5ca1de2cd927314f3ae8b2628440f82399a",
+    "url": "https://sketchfab.com/3d-models/papyrus-plant-d0248242b885491aae74e4d334281226"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "f52993df43962a2be6c188b7b374c8cfc80354b6c4759b15475883095b0aad15",
+    "url": "https://sketchfab.com/3d-models/papyrus-plant-d0248242b885491aae74e4d334281226"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "640f4c314431ad78d441346de26b7af732e315211bc96398d9a0756d1d00eb86",
+    "url": "https://sketchfab.com/3d-models/papyrus-plant-d0248242b885491aae74e4d334281226"
+   }
+  ],
+  "sketchfab/a05b5ef516234888abb8684ff59286d0": [
+   {
+    "file": "license.txt",
+    "sha256": "bedae969c0d5bfac9da4c9b053479bb43b1f72156331b6f8b7ab077ed7f3a391",
+    "url": "https://sketchfab.com/3d-models/phoenix-roebelenii-a05b5ef516234888abb8684ff59286d0"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "59764455be7e28bfa8d761e09efdec86f29b3c8894826adbce116b547911764c",
+    "url": "https://sketchfab.com/3d-models/phoenix-roebelenii-a05b5ef516234888abb8684ff59286d0"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "74e229006988a70945be35cd569b0bc0ca08b5b21d64ed24fa41d6a41442edc2",
+    "url": "https://sketchfab.com/3d-models/phoenix-roebelenii-a05b5ef516234888abb8684ff59286d0"
+   }
+  ],
+  "sketchfab/f03774da06364d339e6d04a0539aaed2": [
+   {
+    "file": "license.txt",
+    "sha256": "3fb58c3c5e7b859cf8e150195e88a250af192485b95450249b113e24a766bae6",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "793560ca8afbccfba99b2845518eeca06ea0a56b1c15ee6f5b676f556e06bbf6",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "8f017793d22fbb8fb2e565817de554a783a6ce015344f66645cd5a360d55bce5",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "textures/blad_g01_baseColor.png",
+    "sha256": "4f00cd4d3115b195a4d398bf0f30d4b5976a1cc8b50e29cb6ae2ad42eb4e9c81",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "textures/blad_gro_baseColor.png",
+    "sha256": "84945a3464bb12ca7271af3e5ac1d7f0fa734493c257cab78a819d029e743223",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "textures/blad_roo_baseColor.png",
+    "sha256": "53c79cb610bc2bc20f5dea9fa60bc7221db9952c4d42e27c9183fa5aa9237e97",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   },
+   {
+    "file": "textures/tak1_baseColor.png",
+    "sha256": "6ee9626da11dcf46218c80638efc054320c6ce8169e505e257e997c9fcace8da",
+    "url": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2"
+   }
+  ],
+  "sketchfab/dc17474a323f4f43b1c0b57e9a42dc45": [
+   {
+    "file": "license.txt",
+    "sha256": "82e4c83d000fa3ab1f93f8093c13522256513e211b308e09450bd37646ccacaa",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1bd9f92ef9d1544e3008b55f729b9ddd120d1e38bce7cdeedb64f40cf7376958",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "1d3adc8bc9b4cf57f580c77b81ff600d0c9254a79a057526aaf406611ec8a534",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   },
+   {
+    "file": "textures/QS1311-W21-flower3_baseColor.jpeg",
+    "sha256": "455710845d5f053d15e78f715a0c327997039ecb01d4ecd431308a00afa09280",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   },
+   {
+    "file": "textures/leaf3_baseColor.jpeg",
+    "sha256": "e119db39fa53107b27973a5e12ea93465ef174d22dd8cc0e36f0365d015d5bd5",
+    "url": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45"
+   }
+  ],
+  "sketchfab/f697f7daf2954899b7a5ed8a56e6722d": [
+   {
+    "file": "license.txt",
+    "sha256": "c3d31f8c378fe179c2df2bc509578e9ac85be040d1372b0c2e6a1f9867170478",
+    "url": "https://sketchfab.com/3d-models/pomegranatepunica-granatum-l-f697f7daf2954899b7a5ed8a56e6722d"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1198e5efdc69601f2ca551cfa6a4da7acf48b554c93a00276901027bc892f871",
+    "url": "https://sketchfab.com/3d-models/pomegranatepunica-granatum-l-f697f7daf2954899b7a5ed8a56e6722d"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "3fcb561a887bac1c254c2ce93d9ee6d42771ef9324315c394b64770ae1f39f76",
+    "url": "https://sketchfab.com/3d-models/pomegranatepunica-granatum-l-f697f7daf2954899b7a5ed8a56e6722d"
+   }
+  ],
+  "sketchfab/110f62eab70e4510acc9eb2c3268c5d8": [
+   {
+    "file": "license.txt",
+    "sha256": "ad6be3954801ac1034f40ee8e43f67cf846c853e43b9f778f3455e0a91946807",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "eb3dfaa9e89790bb78534fe3d362efd469cfa578fd064e1d2331729ae2813f14",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "cf941f834d314d51d6aee21922df1ea9902b759f5bd628eca22a86862a8e4a0f",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8"
+   },
+   {
+    "file": "textures/QS1692-W01-1-1_baseColor.jpeg",
+    "sha256": "97994d868a3ad8f7bc75c7427347d05665e888c11b021b583d13140d77edda5b",
+    "url": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8"
+   }
+  ],
+  "sketchfab/72213356e56a4dd29bd8d1b8f2011219": [
+   {
+    "file": "license.txt",
+    "sha256": "6a22b4f90c311115d896d765bd0e2f4bbe2e52aacb9d401d15545be70f3b3372",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "3be150b6498784567bc3d369cdc82884072c81fa13fc125284277717039beab6",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "96559217e3fbbd4b7d610305ba6c345326e3b9dc96133d4f2971c58af6e2c681",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_0_diffuse.png",
+    "sha256": "dfd176d90011799aef03547f038cd07a9299061d327e99ffdd409f170e6c8e3b",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_0_specularGlossiness.png",
+    "sha256": "cde93457bd217b2f0b25125c8290865e778ffad531592b35a90a8cb1d032da6d",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_1_diffuse.png",
+    "sha256": "f9d947ece858e3895fd06095d1985fe4d9999e9d758c19798f2ba625d7519499",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_1_specularGlossiness.png",
+    "sha256": "13c50e746d09205a6fe913268656c99dcad7f5dbdbb381399911fdd499053154",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_2_diffuse.png",
+    "sha256": "a4b52ad5440ce0191bf467317546f6e31258def4d13cfd94d10535c56c8f8fa6",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_2_specularGlossiness.png",
+    "sha256": "ec86dacd653eba98ed2770d551c08d80678d64783eea40ba3ec2334984e8c3f9",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_3_diffuse.png",
+    "sha256": "4bae59c97818d32ae349b5ae96ad1c151b15d2f328784648b5ce308bfdfe4376",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_3_specularGlossiness.png",
+    "sha256": "9a9bfc7aeed5fad5824b80aa2a5f79ce5765579bff16cb0c201723ad3969ebf5",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_4_diffuse.png",
+    "sha256": "fdb0836d41e045c078ea2b46638b078b43fd5a75ac9ed4fa374b1c7da452907a",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/215_4_specularGlossiness.png",
+    "sha256": "89f71ea15d2e7fb2d2cacf33751ff7524b6b4adab92990324ba1e547c4068f01",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/material_diffuse.png",
+    "sha256": "54d762c88b8b4e7b4ae4783dc451292a815eec4537d17332d950df3cee02b19f",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   },
+   {
+    "file": "textures/material_specularGlossiness.png",
+    "sha256": "7836254d2953c841cdc44a9a47d08f72bbae352c82b4d92f7723e97317843cf9",
+    "url": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219"
+   }
+  ],
+  "sketchfab/d8083a67960b4c9f827bd8aaa321aaec": [
+   {
+    "file": "license.txt",
+    "sha256": "3da420047ec7e0d5a0f88d03f07ca2a9a509d8831159742eff8762aa94d10cb4",
+    "url": "https://sketchfab.com/3d-models/livistona-d8083a67960b4c9f827bd8aaa321aaec"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "ace214fa794eb162d7bbccf76439420f767ddc8df0ed3ece2948faeb353b20ec",
+    "url": "https://sketchfab.com/3d-models/livistona-d8083a67960b4c9f827bd8aaa321aaec"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "19e3617981c8f544e4d8b75019b367bdd69d3ab5e5192c7b9180a73e9c1836d3",
+    "url": "https://sketchfab.com/3d-models/livistona-d8083a67960b4c9f827bd8aaa321aaec"
+   }
+  ],
+  "sketchfab/c8565ce83fe34590a27c83669b1c5ad7": [
+   {
+    "file": "license.txt",
+    "sha256": "2032ae17d80d2ef1a3dc40eb6ba49303646e2d7ee00b866e587a52b1d71f9267",
+    "url": "https://sketchfab.com/3d-models/egyptian-blue-lotus-plate-iii-solar-bloom-c8565ce83fe34590a27c83669b1c5ad7"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "57ddca82b5faaaa9880d04f329667bd6bc00f0a06c2dfc70aeb45ddd22ed4d53",
+    "url": "https://sketchfab.com/3d-models/egyptian-blue-lotus-plate-iii-solar-bloom-c8565ce83fe34590a27c83669b1c5ad7"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "ab09572ca5b7ca19fc116df2672f634680fb4fa395fded49ce589edcd1f8cf05",
+    "url": "https://sketchfab.com/3d-models/egyptian-blue-lotus-plate-iii-solar-bloom-c8565ce83fe34590a27c83669b1c5ad7"
+   }
+  ],
+  "sketchfab/7b6f11dc685349e4859cb4fb403f1c78": [
+   {
+    "file": "license.txt",
+    "sha256": "312e4916df6f28389584fa8cb3ba246c6bf90c361a80a782064041ffea713cf6",
+    "url": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "1ca14287c0e9509fa4e847436e3bd2121a67ffd6f9a42126d88ab4817ac08153",
+    "url": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "539826115026eb5a675134fb163463f0390bfc21bfc23d3f0abf1b2cdc4ef0f3",
+    "url": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78"
+   },
+   {
+    "file": "textures/QS1330-W09-leaf1-3_baseColor.jpeg",
+    "sha256": "b488e66656e2f4504e96d9db5ed18d519f9258b19d310ef42542bc8d3e7c498b",
+    "url": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78"
+   }
+  ],
+  "sketchfab/4b6d1583377443899828f986d7a1ff93": [
+   {
+    "file": "license.txt",
+    "sha256": "7db9e6f8112d7d60f5168e5c3ef864db397a9932161b212a6f864e1048a37257",
+    "url": "https://sketchfab.com/3d-models/calla-lily-floral-arrangement-4b6d1583377443899828f986d7a1ff93"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "f6729e9a9ab3b952aaff838c19f0ac1d273d485b515e06fa0a9fec7cff420f1c",
+    "url": "https://sketchfab.com/3d-models/calla-lily-floral-arrangement-4b6d1583377443899828f986d7a1ff93"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "ad5282374b8e598dce4e280da6fd0b4d0a51105aa8d16cd049e395d9ea398c19",
+    "url": "https://sketchfab.com/3d-models/calla-lily-floral-arrangement-4b6d1583377443899828f986d7a1ff93"
+   }
+  ],
+  "sketchfab/1f6d549a84f642f28804a987502a7680": [
+   {
+    "file": "license.txt",
+    "sha256": "96257ef293438569178bc14c4bdfce3bc636275d852438c90f89ceb7136865d5",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5623ae97278221f1288e265ed0cbf13a2cf43a77f1d2f24bbf1f156409c73aac",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "3cac8c166899c3f1be522d668d6d954ec42eb9f21d94c3496d880a525126fca4",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680"
+   },
+   {
+    "file": "textures/QS1705-E1-W03-1-1_baseColor.jpeg",
+    "sha256": "8dda8eaf0b75bc02e2a30dd5a037709f7fdbf88177c7aabee9a4659738a0b6a6",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680"
+   }
+  ],
+  "sketchfab/73579baad5224296b17ce522e43d6ebc": [
+   {
+    "file": "license.txt",
+    "sha256": "a3d1d0d6a0ffbbcaf172f9af48deb4be863f00373861a92909c6f1166541b71c",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "807ae3665490e4c188835b3b0cf8266e49c1f0d0bc88a691f8f5836ffa17d8fd",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "85abb6417c1ab5b1083c1a18e077ee5c875121abbad7ce426bc571cb6791a01d",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   },
+   {
+    "file": "textures/QS1252-W13-1all-1_tex0_baseColor.jpeg",
+    "sha256": "5fa7b8677b8830bcd962f0ea2508623e058a50ccfddaccb7a309d072743d5034",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   },
+   {
+    "file": "textures/QS1252-W13-1all-1_tex1_baseColor.jpeg",
+    "sha256": "064bf42c58f4b6b3bcd6c759788c753739abb0ffb4aadb7e677bace6a189290b",
+    "url": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc"
+   }
+  ],
+  "sketchfab/19172c1ae9584c49a6e7e614cdaefd82": [
+   {
+    "file": "license.txt",
+    "sha256": "0cb58005fb066e968aca7e93cdce800f56087d2f250f123aba454a12a4043072",
+    "url": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "5a7454005df1ffcdd97c0e90018b9cd97a9a24c818ed99918426d414779bbae7",
+    "url": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "b9507a26ebc727858c5ce9086807de4e485184c92bae5a9abcd4d36655f12a7a",
+    "url": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82"
+   },
+   {
+    "file": "textures/OKINAWA207-W02-1-1_baseColor.jpeg",
+    "sha256": "3085e73fcb26eb4cf0c9a7b70732f944857f035d6d5703bbb546b427f69cc8b5",
+    "url": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82"
+   }
+  ],
+  "sketchfab/817b0b067f8942c1b8976c338d59982e": [
+   {
+    "file": "license.txt",
+    "sha256": "927a77543cb93a149efd2f49cf937699c0bc41c744b1a3f938e913d1703a86c7",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "399db0a1f6999f7dfd640f717018de1b80cf7f6a3ecf53c22acdd96de0b20e1d",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "d619e3189ace3fbfe89da09bc8a2d445f67735a1468b9e1160e32cac0399201b",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   },
+   {
+    "file": "textures/Grass_baseColor.png",
+    "sha256": "76fc12beef352ad516e359c52fe3792553d31b96859db2db88cf5c454f98168d",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   },
+   {
+    "file": "textures/Leaf_baseColor.png",
+    "sha256": "a4c9dab8b626c7a9b0e1ce42a73f0d8f7b8ae35c9cd4bfd66a36822b1f91bb61",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   },
+   {
+    "file": "textures/Stem_baseColor.png",
+    "sha256": "8a28f2e4ca71b4ad2a34ce2afb3d701dad0bc7acab40a05772c95171009840bd",
+    "url": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e"
+   }
+  ],
+  "sketchfab/c969c2a3fd29440a9e7b2ac87bf97cbb": [
+   {
+    "file": "license.txt",
+    "sha256": "d109b695f7d2ccc7e5f8b01af5b89b1de819495041425f92afebd8753f5cc35a",
+    "url": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "62c8acdfe66bda6cbb684badf6ebf8a67e0564e98cc82cd0f379de7605754d57",
+    "url": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "43f0a1565d513f32f1bf341d7fec7995ed392dca3b838829699bb3b23edccac1",
+    "url": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb"
+   },
+   {
+    "file": "textures/material_0_baseColor.jpeg",
+    "sha256": "65000c5d19f34d6cc507544cea6af97404c5e8d5af78a16d96d6b755d67f3d8e",
+    "url": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb"
+   },
+   {
+    "file": "textures/material_1_baseColor.jpeg",
+    "sha256": "672aff95d523a9f8fff8c6e363166a1588d15ccf506831c172ddbcb55b72df4c",
+    "url": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb"
+   }
+  ],
+  "sketchfab/3821ea730a7240f083351e7c09d3627b": [
+   {
+    "file": "license.txt",
+    "sha256": "b99eef896ef16ec02d82396c73c64fa14b5ecafc01ff1e6ecf5b95fd9dcd98f1",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "cf1b6451bfb9eeeb8c8d0f6a44be0a90240f2b3f5251f383f902bb20cb82f7f1",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "179b2d0736e2c92f139249ce39179602c4eed4e522487d4a169c09285b0608a5",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Bark01_su_baseColor.png",
+    "sha256": "4d3da9fcde0c8852b35abe71d07e8df71bab94e1414a958a81ac6d170635a10e",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Bark01_su_metallicRoughness.png",
+    "sha256": "b1a4742ae1c4372ae5c2b0d6aff508f8bc1b31163d8a8971f93b00d265e44ade",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Bark01_su_normal.png",
+    "sha256": "503f64af7ed544d3dd517cd5db2972208cf0c4c886f0f5b35bec4f3a0aa073ab",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Flower01_su_baseColor.png",
+    "sha256": "dceb81153192cadedc82844b1b91ce250da77e0e8e5473a44da0ac8489be9b09",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Flower01_su_metallicRoughness.png",
+    "sha256": "272bc0714bd991e98545f63045a6c3741cbd5826ec5a6ed69030e5152698c06a",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Flower01_su_normal.png",
+    "sha256": "993243408de10025477622c05cd7346919c0134641cf032bdfa5f4f237883a29",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Leaf01_su_baseColor.png",
+    "sha256": "b7f0849deb7ceb0413a7c72cbba77189504a11ca993b9736b6165b4281c7abcb",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Leaf01_su_metallicRoughness.png",
+    "sha256": "22de2226ab848e3603c621ad672f9c0a2e375d1737a8cd1e1225dfa16e3e7cd8",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   },
+   {
+    "file": "textures/BS09_Leaf01_su_normal.png",
+    "sha256": "700405164d2cd440df390d729c6ec75742425e74aa47b90110c21371c0612b9f",
+    "url": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b"
+   }
+  ],
+  "sketchfab/f35eeab5a8b54047811b4e3c5de2a9e3": [
+   {
+    "file": "license.txt",
+    "sha256": "f3c00373f91fbb509245f82b045503613adb84a7cbed755982fe90c2243f544f",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "4bf85d8ffeffe8118362d2f0b97a2a28f40358ae96c647726afa296b3b25525f",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "4c2c521f9306f05d9ae18a82099425bd5c76664e72c3d72dbf0ee4570092e14b",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   },
+   {
+    "file": "textures/QS1496-W07-1-1_baseColor.jpeg",
+    "sha256": "0fd55ca52847ecf6f7ece1c63a672f2f065f09d8a8fd2184695b0c77943573ce",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   },
+   {
+    "file": "textures/QS1496-W07-2-1_baseColor.jpeg",
+    "sha256": "3400c52465183a2301cc397d882591e5be6e46c49b7c414bfb227596f594e07d",
+    "url": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3"
+   }
+  ],
+  "sketchfab/f47dc5165b3f4271a816405d630e4e1d": [
+   {
+    "file": "license.txt",
+    "sha256": "686c8739d55dbdaa90c11a15e98fee233f1bb027b7aa5cb128889accb3e49f75",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "0752353d15e04d71f5b36d18d74c1fd2a38631e036ae922bc65cfb4946ba82ff",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "7d0fd1d4901e3b760a89f67949fbac32f15d315e1d193f58437e64959e0b7dce",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   },
+   {
+    "file": "textures/QS1711-E3-W09-1-1_baseColor.jpeg",
+    "sha256": "6b89d10148641ea07d92ed137b7bb324619a9462a82b3bd65cef4f6cf0460028",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   },
+   {
+    "file": "textures/QS1711-E3-W09-2-1_baseColor.jpeg",
+    "sha256": "bd9598345c7ba9c0eec91acde30b4be972911455d25d510e889517942434591c",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d"
+   }
+  ],
+  "sketchfab/a939174aff804cd0bf77600b7eab0831": [
+   {
+    "file": "license.txt",
+    "sha256": "3864ea6ef47fb8bcbade7d11792ecc4132aa12096b11c98cc1f9087312bcd79e",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "bc14c05a804de1daf03bc799e7bd311666e05e4031b72f6558550409030f140d",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "bf22fbafbfd25d9022b7935fcff574fbc3a272b4a84d8241d19ac4aa7beb3df9",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "textures/QS1310-W16-1all-1_tex0_baseColor.jpeg",
+    "sha256": "6e72d4d29958ac7a922d4a591aa469b3741c379add9c61f653a30c73c5b68a39",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "textures/QS1310-W16-1all-1_tex1_baseColor.jpeg",
+    "sha256": "8d9f951ca2c78f6fff02bced231cf41053a57358bc2b3c480545aa6e70428e6e",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "textures/QS1310-W16-1all-1_tex2_baseColor.jpeg",
+    "sha256": "2020a8c0748c45ac49c008477bb22784a786b30011736b8132eaad3bf5cc9499",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   },
+   {
+    "file": "textures/leaf1_baseColor.jpeg",
+    "sha256": "50fa73f01e85fcbcea3827096950731b42cfe3026d54186251605f106755373e",
+    "url": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831"
+   }
+  ],
+  "sketchfab/d69e1be5895f40e484f0db472a721c2f": [
+   {
+    "file": "license.txt",
+    "sha256": "441b50ffca2b31edb79432a9bf8580fdb604a93f7f7264ae38a7fb417f720df1",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "016a9650640f92eae6278f737b64599c5679932418c0b702bec39be301eff70b",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "a76d5abee4c60e4f795ff663aecee46ab6a4c504f0322ddd92959f5c3551496e",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "textures/flower4_tex0_baseColor.jpeg",
+    "sha256": "58d53d3add72aca525d0b28e2c8e757bda2bf1705583b19c5f1826132d8076ac",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "textures/flower4_tex1_baseColor.jpeg",
+    "sha256": "a0f51c1cd39a751ded6331eab4d1c83db76b8ae24bc8339e8314e106c9097abf",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "textures/fruit1_baseColor.jpeg",
+    "sha256": "57a638f3379ee1e079e09941d8697aff721dfa9a35b33193c44198556cfab8b4",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   },
+   {
+    "file": "textures/laef2_baseColor.jpeg",
+    "sha256": "edde076ac814f1898b40d6de3394af21d77b174898c5fbb9546545ceb49bc089",
+    "url": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f"
+   }
+  ],
+  "sketchfab/33a8895c85704f8cbc3f146bf00b4a01": [
+   {
+    "file": "license.txt",
+    "sha256": "b068a7a62e8bb0df2f2d5b8f001c3ac0c09a92516b2bc90a3d4519f9add464fc",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "15f7a6f4f0246525f89aff095a1105b1c327f4e647e1ab199271cd66374c2149",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "8976c8674fc558f46dfc5a5483d1035a56fdfbd200bfabeb55e0785f29aa62ec",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "textures/MRKT032-W01-files8_tex0_baseColor.jpeg",
+    "sha256": "e0c977674c0e99d223371dd2d62e9a9430ae584c5a694f89ea67bca511071ad5",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "textures/MRKT032-W01-files8_tex1_baseColor.jpeg",
+    "sha256": "0f57e345191ba124680a31f802478fe412ab7bdee3da771b11fb5c9a0d244537",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "textures/MRKT032-W01-files8_tex2_baseColor.jpeg",
+    "sha256": "0d5f3ebaf24fe9bc2b8adfbf11ef2da4a7b8d0bfe1d446c03ab9ec1d03b96076",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01"
+   }
+  ],
+  "sketchfab/52518584d618464ab375f72a8e1631af": [
+   {
+    "file": "license.txt",
+    "sha256": "4c7b8e413d8bb8860e38ca2936369b9b15ceeefb48b18c2ee46b1e6a81bd1d6b",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "scene.bin",
+    "sha256": "eb4f65c80e9263c7f5a8cd46a00ef0cac1097bc022fad484e238b6b55b17e5e5",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "scene.gltf",
+    "sha256": "e79b21dba0423cee366f73b05ae4d732a90edc609953025b618c7ddbd41c61f9",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "textures/Material.001_baseColor.jpeg",
+    "sha256": "804db2ac981b05d940be1c568f75914e13631c2191c8973ef3d1cb96612f1511",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "textures/QS1526-W04-1-1_baseColor.jpeg",
+    "sha256": "59491ae893c77b2150072db8e97515dc822e861bbc60526ebb0c420a62a1e2d7",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "textures/QS1526-W04-2-1_baseColor.jpeg",
+    "sha256": "fc22a5fd5d7a6ea6868a52501e87d7eedb766654d751c24541d84919eb19c3be",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
+   },
+   {
+    "file": "textures/QS1526-W04-3-1_baseColor.jpeg",
+    "sha256": "9ee85d3a47176a6f953e9647ce5406c75e810cb7f6ddfa718c0bff42df605c91",
+    "url": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af"
    }
   ]
  }

@@ -1,0 +1,21 @@
+{
+ "item": "bad-39",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v37-north-garden-lounge.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "White walls on left and back, glass panel on right, and a defined floor plane create a clear enclosed outdoor room with overhead enclosure implied."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Only a single shrub layer is present; no trees or distinct ground cover layer, so planting lacks layered depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The hanging egg chair is the dominant visual element, with the plant and trellis supporting it as secondary features. The composition clearly organizes around this single focal point."
+  }
+ }
+}

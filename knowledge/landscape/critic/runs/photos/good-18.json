@@ -1,0 +1,21 @@
+{
+ "item": "good-18",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo4.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden is framed by thick, textured walls on multiple sides, with an overhead structure creating a defined, enclosed outdoor room effect."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Mature trees form the upper layer, dense shrubs and hedges create a mid layer, and low groundcover is visible near the pool, indicating lush, layered planting."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is fragmented across multiple planes: the pool, the terrace, the windows, and the overhang all compete for attention. No single element dominates or organizes the space."
+  }
+ }
+}

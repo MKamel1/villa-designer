@@ -1,0 +1,21 @@
+{
+ "item": "good-32",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N13-wa-house-bandung/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The garden features a defined koi pond with clean edges, a concrete overhang providing overhead enclosure, and surrounding walls that create a sense of an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Grass lawn (ground layer) and a single tree (tree layer) are present. No shrub layer is visible. Planting is sparse, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The rectangular koi pond in the foreground serves as a distinct visual anchor, with the concrete structure and tree framing it clearly."
+  }
+ }
+}

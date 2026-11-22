@@ -1,0 +1,503 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "held-trees-only",
+ "source": "LDC reference scheme (hand-built; not a professional design)",
+ "frame": "model metres; street side = north = -x; south garden = +x",
+ "buildings": [
+  [
+   3.617,
+   -28.671,
+   22.597,
+   -23.591
+  ],
+  [
+   19.604,
+   -31.311,
+   22.324,
+   -28.671
+  ]
+ ],
+ "walls": [
+  {
+   "id": "fence-street",
+   "rect": [
+    -0.373,
+    -39.48,
+    -0.123,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-east",
+   "rect": [
+    -0.373,
+    -20.601,
+    28.557,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-rear",
+   "rect": [
+    28.307,
+    -39.48,
+    28.557,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-west",
+   "rect": [
+    -0.373,
+    -39.48,
+    28.557,
+    -39.23
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "yard-wall-ne",
+   "rect": [
+    -0.123,
+    -23.841,
+    3.617,
+    -23.591
+   ],
+   "height_m": 1.4
+  }
+ ],
+ "doors": [
+  {
+   "id": "door-B-9",
+   "at": [
+    3.617,
+    -26.156
+   ],
+   "faces": "-x",
+   "room": "lounge",
+   "width_m": 3.71
+  },
+  {
+   "id": "door-GF-17",
+   "at": [
+    8.277,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "study-game",
+   "width_m": 1.8
+  },
+  {
+   "id": "door-B-6",
+   "at": [
+    16.889,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "dining",
+   "width_m": 2.35
+  },
+  {
+   "id": "door-B-7",
+   "at": [
+    20.557,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "living",
+   "width_m": 2.76
+  },
+  {
+   "id": "door-B-8",
+   "at": [
+    22.597,
+    -26.131
+   ],
+   "faces": "+x",
+   "room": "living",
+   "width_m": 2.4
+  }
+ ],
+ "zones": [
+  {
+   "id": "lounge",
+   "use": "lounge",
+   "rect": [
+    22.7,
+    -29.4,
+    26.4,
+    -25.0
+   ],
+   "surface": "gravel"
+  },
+  {
+   "id": "dining",
+   "use": "dining",
+   "rect": [
+    22.7,
+    -25.0,
+    26.4,
+    -20.9
+   ],
+   "surface": "paving"
+  },
+  {
+   "id": "quiet-south",
+   "use": "quiet",
+   "rect": [
+    26.4,
+    -24.8,
+    28.1,
+    -21.9
+   ],
+   "surface": "gravel"
+  },
+  {
+   "id": "yard-standing",
+   "use": "standing",
+   "rect": [
+    18.6,
+    -23.4,
+    22.7,
+    -20.9
+   ],
+   "surface": "paving",
+   "label": "standing / BBQ",
+   "design_people": 7
+  },
+  {
+   "id": "yard-west",
+   "use": "other",
+   "rect": [
+    15.5,
+    -23.4,
+    18.6,
+    -20.9
+   ],
+   "surface": "paving",
+   "label": "pond court"
+  },
+  {
+   "id": "north-court",
+   "use": "quiet",
+   "rect": [
+    -0.1,
+    -28.0,
+    3.6,
+    -24.4
+   ],
+   "surface": "paving"
+  }
+ ],
+ "paths": [
+  {
+   "id": "main-yard-dining",
+   "class": "main",
+   "width_m": 1.2,
+   "polyline": [
+    [
+     20.557,
+     -23.2
+    ],
+    [
+     20.557,
+     -22.3
+    ],
+    [
+     22.7,
+     -22.3
+    ]
+   ]
+  },
+  {
+   "id": "north-approach",
+   "class": "secondary",
+   "width_m": 0.9,
+   "polyline": [
+    [
+     3.0,
+     -26.156
+    ],
+    [
+     2.4,
+     -26.156
+    ]
+   ]
+  },
+  {
+   "id": "service-edge",
+   "class": "service",
+   "width_m": 0.9,
+   "polyline": [
+    [
+     22.7,
+     -21.3
+    ],
+    [
+     18.6,
+     -21.3
+    ]
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "id": "dining-table",
+   "zone": "dining",
+   "center": [
+    24.55,
+    -23.0
+   ],
+   "diameter_m": 1.4,
+   "seats": 4
+  }
+ ],
+ "seating": [
+  {
+   "id": "chair-1",
+   "zone": "lounge",
+   "rect": [
+    23.1,
+    -27.8,
+    23.7,
+    -27.2
+   ],
+   "seats": 1
+  },
+  {
+   "id": "chair-2",
+   "zone": "lounge",
+   "rect": [
+    24.25,
+    -27.3,
+    24.85,
+    -26.7
+   ],
+   "seats": 1
+  },
+  {
+   "id": "chair-3",
+   "zone": "lounge",
+   "rect": [
+    25.4,
+    -27.8,
+    26.0,
+    -27.2
+   ],
+   "seats": 1
+  },
+  {
+   "id": "chair-4",
+   "zone": "lounge",
+   "rect": [
+    22.7,
+    -26.3,
+    23.3,
+    -25.7
+   ],
+   "seats": 1
+  },
+  {
+   "id": "chair-5",
+   "zone": "lounge",
+   "rect": [
+    24.25,
+    -25.9,
+    24.85,
+    -25.3
+   ],
+   "seats": 1
+  },
+  {
+   "id": "chair-6",
+   "zone": "lounge",
+   "rect": [
+    25.8,
+    -26.3,
+    26.4,
+    -25.7
+   ],
+   "seats": 1
+  },
+  {
+   "id": "bench-quiet",
+   "zone": "quiet-south",
+   "rect": [
+    27.2,
+    -23.8,
+    27.8,
+    -22.4
+   ],
+   "seats": 2
+  },
+  {
+   "id": "bench-pond",
+   "zone": "yard-standing",
+   "rect": [
+    18.8,
+    -22.5,
+    19.4,
+    -21.3
+   ],
+   "seats": 2
+  },
+  {
+   "id": "bench-north",
+   "zone": "north-court",
+   "rect": [
+    1.9,
+    -27.0,
+    2.5,
+    -25.6
+   ],
+   "seats": 2
+  }
+ ],
+ "canopies": [
+  {
+   "id": "pergola-dining",
+   "kind": "pergola",
+   "canopy": true,
+   "rect": [
+    22.9,
+    -24.8,
+    26.2,
+    -21.1
+   ],
+   "height_m": 2.5,
+   "shade_fraction": 0.6
+  }
+ ],
+ "screens": [
+  {
+   "id": "hedge-west",
+   "kind": "hedge",
+   "rect": [
+    22.6,
+    -29.9,
+    28.3,
+    -29.5
+   ],
+   "height_m": 2.4,
+   "opacity": 0.9
+  },
+  {
+   "id": "trellis-quiet",
+   "kind": "trellis",
+   "rect": [
+    26.4,
+    -24.9,
+    26.6,
+    -23.3
+   ],
+   "height_m": 1.8,
+   "opacity": 0.8
+  }
+ ],
+ "features": [
+  {
+   "id": "fire",
+   "kind": "firepit",
+   "center": [
+    24.55,
+    -28.7
+   ],
+   "diameter_m": 0.9,
+   "flush": true,
+   "cover": {
+    "load_rating_kN": 15
+   },
+   "product_clearance_mm": 600
+  },
+  {
+   "id": "bbq",
+   "kind": "bbq",
+   "center": [
+    21.6,
+    -21.6
+   ],
+   "diameter_m": 0.6
+  },
+  {
+   "id": "pond",
+   "kind": "pond",
+   "center": [
+    16.8,
+    -21.6
+   ],
+   "diameter_m": 1.2,
+   "flush": true,
+   "edge": "soft",
+   "freeboard_mm": 150,
+   "depth_mm": 900,
+   "volume_m3": 1.0,
+   "margin_slope_back_mm": 600
+  },
+  {
+   "id": "herbs",
+   "kind": "herb_bed",
+   "rect": [
+    26.6,
+    -21.7,
+    28.2,
+    -20.7
+   ]
+  }
+ ],
+ "planting_groups": [],
+ "trees": [
+  {
+   "id": "lemon",
+   "species": "Citrus limon",
+   "center": [
+    27.0,
+    -27.3
+   ],
+   "mature_spread_m": 3.8,
+   "form": "small_tree",
+   "over_structure": false,
+   "mature_height_m": 4.5,
+   "water_demand": "moderate"
+  }
+ ],
+ "boundary": [
+  {
+   "id": "fence-street",
+   "side": "street",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-east",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-rear",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  },
+  {
+   "id": "fence-west",
+   "side": "neighbour",
+   "kind": "wall",
+   "height_m": 4.0
+  }
+ ],
+ "steps": [],
+ "paved_areas": [],
+ "obstacles": [],
+ "seeded_defect": {
+  "id": "trees-only",
+  "what": "Every shrub and ground plant removed, leaving the lemon tree alone.",
+  "expect": [
+   "H-LAYERS"
+  ],
+  "heldout": true
+ }
+}

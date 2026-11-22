@@ -1,0 +1,21 @@
+{
+ "item": "bad-33",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v19-garden-facade.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Garden is bounded by white building walls on multiple sides, with a pergola overhead and defined lawn edges, creating a clear enclosed outdoor room feel."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tree with pink flowers, shrubs in foreground and mid-ground, and green lawn ground cover create three distinct vertical layers."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The flowering tree is centrally placed, framed by the building and lawn, with seating arranged around it, making it the clear focal point."
+  }
+ }
+}

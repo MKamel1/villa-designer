@@ -1,0 +1,276 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SAU-01",
+ "source": "LDP precedent P-SAU-01: Tropic of Preston, Melbourne: courtyard house, planted garden with pond (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "paving",
+   "rect": [
+    0.0,
+    7.88,
+    4.42,
+    21.54
+   ],
+   "label": "pond terrace"
+  },
+  {
+   "id": "z2",
+   "use": "other",
+   "surface": "paving",
+   "rect": [
+    4.42,
+    0.0,
+    9.62,
+    21.35
+   ],
+   "label": "garden court"
+  }
+ ],
+ "paths": [],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b11",
+   "rect": [
+    4.42,
+    0.0,
+    12.12,
+    8.65
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 6,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 2,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 10,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b12",
+   "rect": [
+    0.19,
+    7.88,
+    4.23,
+    14.04
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 8,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b13",
+   "rect": [
+    0.58,
+    20.19,
+    9.42,
+    22.88
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 4,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 6,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b14",
+   "rect": [
+    13.65,
+    20.96,
+    18.27,
+    27.88
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Punica granatum",
+     "form": "small_tree",
+     "count": 2,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 8,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t7",
+   "species": "Olea europaea",
+   "center": [
+    7.5,
+    3.65
+   ],
+   "mature_spread_m": 4.6,
+   "form": "large_tree",
+   "mature_height_m": 5.5
+  },
+  {
+   "id": "t8",
+   "species": "Punica granatum",
+   "center": [
+    8.65,
+    9.81
+   ],
+   "mature_spread_m": 3.8,
+   "form": "small_tree",
+   "mature_height_m": 4.6
+  },
+  {
+   "id": "t9",
+   "species": "Olea europaea",
+   "center": [
+    6.54,
+    16.35
+   ],
+   "mature_spread_m": 5.0,
+   "form": "large_tree",
+   "mature_height_m": 6.0
+  },
+  {
+   "id": "t10",
+   "species": "Punica granatum",
+   "center": [
+    4.23,
+    12.12
+   ],
+   "mature_spread_m": 3.5,
+   "form": "small_tree",
+   "mature_height_m": 4.2
+  }
+ ],
+ "features": [
+  {
+   "id": "f3",
+   "kind": "pond",
+   "center": [
+    2.31,
+    15.19
+   ],
+   "diameter_m": 7.7
+  }
+ ],
+ "buildings": [
+  [
+   12.12,
+   3.27,
+   18.27,
+   12.5
+  ],
+  [
+   11.35,
+   12.5,
+   18.27,
+   20.19
+  ],
+  [
+   0.0,
+   23.27,
+   13.65,
+   28.08
+  ],
+  [
+   0.0,
+   0.0,
+   4.23,
+   7.69
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w4",
+   "rect": [
+    -0.19,
+    0.0,
+    0.12,
+    28.08
+   ],
+   "height_m": 2.4
+  },
+  {
+   "id": "w5",
+   "rect": [
+    18.46,
+    0.0,
+    18.77,
+    28.08
+   ],
+   "height_m": 2.4
+  },
+  {
+   "id": "w6",
+   "rect": [
+    -0.19,
+    0.0,
+    18.77,
+    0.27
+   ],
+   "height_m": 2.4
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [
+  {
+   "id": "d15",
+   "at": [
+    11.35,
+    12.5
+   ],
+   "faces": "+x"
+  }
+ ],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

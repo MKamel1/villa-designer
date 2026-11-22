@@ -1,0 +1,21 @@
+{
+ "item": "good-28",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N11-vertical-oasis-house-singapore/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall brick wall forms a solid backdrop, wooden deck defines the floor, and planters with water feature create clear boundaries, reading as an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Distinct tree layer, shrub layer, and ground cover visible; planting appears lush and vertically layered."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is balanced but lacks a single dominant focal point. The tree, the water feature, and the person with the dog all compete for attention, creating a distributed rather than organized focus."
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "item": "bad-41",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v40-south-garden-espalier.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Two solid walls form a corner, with a visible overhead opening suggesting a roof or skylight, creating a clearly defined enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Tree with pink flowers, shrubs with purple flowers, and ground cover visible. Three distinct layers present, though overall planting appears sparse and not particularly lush."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The vertical trellis and the flowering tree compete for attention, with no single dominant element organizing the space."
+  }
+ }
+}

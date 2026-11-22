@@ -1,0 +1,21 @@
+{
+ "item": "good-06",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-03-garden-project-annandale/photo4.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dense hedges, tall trees, and a fence on the left create strong side and overhead enclosure, forming a defined outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Multiple tree canopies (palm, jacaranda, eucalyptus), dense mid-level shrubs and ornamental grasses, and a continuous ground cover layer create clear vertical layering and lushness throughout the garden."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The carport with the parked car and the house entrance are both prominent, creating competing focal points rather than one clear organizational center."
+  }
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "item": "P-SME-05",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SME-05.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Central paved court is bounded by the building on the north and west, and dense planting on the east and south, creating a fully enclosed room."
+  },
+  "V-FOCAL": {
+   "score": 2,
+   "evidence": "A large blue pond is centrally located in the paved court, significantly larger than the surrounding trees and table, clearly dominating the composition as the primary focal point."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "The central paved court contains a table, seats, and a pond, serving as a clear destination. The surrounding hatched areas connect the street edge to this central feature without dead ends."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Multiple groups of identical circles (canopy trees, shrubs, ground cover) are arranged in distinct masses along the left, right, and bottom edges, demonstrating clear repetition and rhythm."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Planting beds on the left, right, and bottom contain canopy trees, small trees, shrubs, and ground cover/perennials, clearly showing three distinct vertical layers."
+  },
+  "V-ROOMS": {
+   "score": 1,
+   "evidence": "A central paved court with a table, chairs, and a pond is clearly defined, but the surrounding areas are undifferentiated lawn or planting beds with no other distinct floor surfaces or defined uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear structural hierarchy: two flanking planting beds frame the building, a defined central court with paving, pond, and seating, and a distinct lower planting mass create clear rooms and edges."
+  }
+ }
+}

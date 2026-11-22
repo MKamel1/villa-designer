@@ -1,0 +1,21 @@
+{
+ "item": "good-02",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall dark fences on multiple sides, a shed structure, and defined curved edging create a clear enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Garden features tall trees, mid-height shrubs, and low ground cover, creating a lush, multi-layered planting structure with clear vertical depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The garden is organized around the central lawn and the dark shed, with the pool and curved path leading the eye toward them, creating a clear focal point."
+  }
+ }
+}

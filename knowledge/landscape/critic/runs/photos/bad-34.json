@@ -1,0 +1,21 @@
+{
+ "item": "bad-34",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v25-top-garden-gate.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Tall white walls on both sides and a back wall create defined edges, forming a clear enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Only potted shrubs with red flowers and small succulents are present. No trees, no ground cover layer, and no layered structure. Planting is sparse and single-layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The bench at the end of the path serves as a clear focal point, with the potted plants and paving leading the eye toward it."
+  }
+ }
+}

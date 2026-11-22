@@ -1,0 +1,240 @@
+{
+ "slug": "alocasia_macrorrhizos",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Alocasia macrorrhizos (L.) G.Don",
+    "family": "Araceae",
+    "common_names": [
+     "giant taro",
+     "giant elephant ear"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Alocasia%20macrorrhizos",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "scientificName: Alocasia macrorrhizos (L.) G.Don; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 2.5,
+    "text": "RHS max height (NParks: up to 4 m)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Max Height",
+    "quote": "Max Height 1.5-2.5 metres"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.5,
+    "max": 2.5,
+    "text": "RHS max spread"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Max Spread",
+    "quote": "Max Spread 1.5-2.5 metres"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NParks: fast to moderate (recorded as the lower class)"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+    "accessed": "2026-11-22",
+    "locator": "Plant Growth Rate",
+    "quote": "Plant Growth Rate Fast to Moderate"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "shade",
+     "part_shade",
+     "full_sun"
+    ],
+    "hours_text": "bright light with light shade; tolerates shade to full sun"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation",
+    "quote": "This species grows best in bright light with light shade and moist, but well-drained loamy soil. However, it can tolerate shade to full sun, and sandy to clayey soils."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "NParks water preference: lots of water, moderate water"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+    "accessed": "2026-11-22",
+    "locator": "Water Preference",
+    "quote": "Water Preference Lots of Water, Moderate Water"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group D: Requires partial shade all day during summer, full shade in afternoon and wind shelter; no heat tolerance stated in words; class moderate."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Alocasia macrorrhiza (Elephants Ear, Wild Taro), user note: full shade",
+    "quote": "D. Requires partial shade all day during summer, full shade in afternoon and wind shelter"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no source opened states drought tolerance",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "RHS pH: acid, alkaline or neutral"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "pH",
+    "quote": "pH Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no source opened states salt tolerance",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "RHS gives only a UK glasshouse rating code and neither source states a minimum temperature in words",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "pale green"
+    ],
+    "text": "may produce a pale green flower in summer (mapped Jun-Aug)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It may produce a pale green flower in summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "large glossy rosette leaves"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636",
+    "accessed": "2026-11-22",
+    "locator": "Foliar",
+    "quote": "Foliage Retention Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NParks: corm, fibrous roots; nothing on damage to structures",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "RHS: toxic if eaten, skin/eye irritant; NParks: calcium oxalate raphides"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/197177/wd/details",
+    "accessed": "2026-11-22",
+    "locator": "Potentially harmful",
+    "quote": "TOXIC if eaten; skin/eye irritant."
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance rating given",
+   "searched": [
+    "RHS https://www.rhs.org.uk/plants/197177/wd/details",
+    "NParks https://www.nparks.gov.sg/florafaunaweb/flora/1/6/1636"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NParks: in wet, poorly-drained soil the corms are prone to rot; RHS also flags TOXIC to pets. NCSU and UF/IFAS species pages not available."
+}

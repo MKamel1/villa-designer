@@ -1,0 +1,318 @@
+{
+ "checked": "2026-11-22",
+ "note": "Free Quixel Megascans 3D plants (FBX/glTF) that map to concept gaps. NOT downloaded: Fab needs an Epic Games account. Ungraded: previews on the listing were looked at, but the rubric needs our own 5 m/15 m renders of the real file.",
+ "items": {
+  "4d913162-6a96-4733-a08e-e595e3a6905f": {
+   "title": "Rosemary",
+   "url": "https://www.fab.com/listings/4d913162-6a96-4733-a08e-e595e3a6905f",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "rosmarinus_officinalis",
+   "fit": "species (check scan is Rosmarinus)",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "cd05dcad-fae8-41d8-971d-7be8f30c9c20": {
+   "title": "Oregano",
+   "url": "https://www.fab.com/listings/cd05dcad-fae8-41d8-971d-7be8f30c9c20",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "origanum_majorana",
+   "fit": "genus Origanum (O. vulgare, not majorana)",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "a671b417-5ff6-4029-a7a2-edf5b1e19184": {
+   "title": "Aloe Vera",
+   "url": "https://www.fab.com/listings/a671b417-5ff6-4029-a7a2-edf5b1e19184",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "aloe_vera",
+   "fit": "species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "b8248574-2b05-479e-88eb-05fc2a5647be": {
+   "title": "Red Fountain Grass",
+   "url": "https://www.fab.com/listings/b8248574-2b05-479e-88eb-05fc2a5647be",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "pennisetum_alopecuroides",
+   "fit": "genus Pennisetum (setaceum 'Rubrum' type)",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "32d3e637-3cde-43aa-b158-9e1b1eaf37e8": {
+   "title": "Cast - Iron Plant",
+   "url": "https://www.fab.com/listings/32d3e637-3cde-43aa-b158-9e1b1eaf37e8",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "aspidistra_elatior",
+   "fit": "species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "65df339a-ec8a-4a55-86c4-69b2d4517e8d": {
+   "title": "Broadleaf Lady Palm",
+   "url": "https://www.fab.com/listings/65df339a-ec8a-4a55-86c4-69b2d4517e8d",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "rhapis_excelsa",
+   "fit": "species/genus",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "baaece72-6e2b-4fef-a8b9-de5c0f244a43": {
+   "title": "Chinese Fan Palm",
+   "url": "https://www.fab.com/listings/baaece72-6e2b-4fef-a8b9-de5c0f244a43",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "livistona_chinensis",
+   "fit": "species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "44bd49cb-d05e-4788-8eb1-46655de9962a": {
+   "title": "Zamia Palm",
+   "url": "https://www.fab.com/listings/44bd49cb-d05e-4788-8eb1-46655de9962a",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "zamia",
+   "fit": "n/a",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "4fe8dcca-e9db-4fde-bd4e-575e613d7f4f": {
+   "title": "Ginger Lily",
+   "url": "https://www.fab.com/listings/4fe8dcca-e9db-4fde-bd4e-575e613d7f4f",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "alpinia_zerumbet",
+   "fit": "look-alike only (Hedychium?) - not Alpinia",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "8eed0e35-6320-4611-a9a3-d28bd78550eb": {
+   "title": "Carolana Water Lily",
+   "url": "https://www.fab.com/listings/8eed0e35-6320-4611-a9a3-d28bd78550eb",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "nymphaea_caerulea",
+   "fit": "genus",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "96391dd8-2556-47cf-a3ff-de5634adf19d": {
+   "title": "Rembrandt Water Lily",
+   "url": "https://www.fab.com/listings/96391dd8-2556-47cf-a3ff-de5634adf19d",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "nymphaea_caerulea",
+   "fit": "genus",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "1d434ef3-776d-4b85-9582-ea5f44888454": {
+   "title": "Canna Lily",
+   "url": "https://www.fab.com/listings/1d434ef3-776d-4b85-9582-ea5f44888454",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "canna",
+   "fit": "genus",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "a23ad8cc-3b8e-4268-a73f-08874639e432": {
+   "title": "Jungle Ginger",
+   "url": "https://www.fab.com/listings/a23ad8cc-3b8e-4268-a73f-08874639e432",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "alpinia_zerumbet",
+   "fit": "look-alike only - verify genus",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "77c77f1b-b3ee-4682-9579-91237914d15b": {
+   "title": "Taro",
+   "url": "https://www.fab.com/listings/77c77f1b-b3ee-4682-9579-91237914d15b",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "colocasia_esculenta",
+   "fit": "species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "237e6d64-548d-427c-b07b-bd019ee85742": {
+   "title": "Taro",
+   "url": "https://www.fab.com/listings/237e6d64-548d-427c-b07b-bd019ee85742",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "colocasia_esculenta",
+   "fit": "species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "f50d1f4a-d91a-41c2-86ad-10c4ffe7f658": {
+   "title": "Lawn Grass",
+   "url": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "formats": [
+    "texture-set",
+    "gltf",
+    "additional-files"
+   ],
+   "for": "lawn drift",
+   "fit": "generic",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "02ec5024-87b3-4d1d-8488-826e3111815a": {
+   "title": "Lawn Grass",
+   "url": "https://www.fab.com/listings/02ec5024-87b3-4d1d-8488-826e3111815a",
+   "formats": [
+    "texture-set",
+    "gltf",
+    "additional-files"
+   ],
+   "for": "lawn drift",
+   "fit": "generic",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "129f4f6a-a16e-4f6d-823d-9bdca224883d": {
+   "title": "Lawn Grass",
+   "url": "https://www.fab.com/listings/129f4f6a-a16e-4f6d-823d-9bdca224883d",
+   "formats": [
+    "texture-set",
+    "gltf",
+    "additional-files"
+   ],
+   "for": "lawn drift",
+   "fit": "generic",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "789f53c0-2ae6-441c-a4b7-66f4c7e14b08": {
+   "title": "Lawn Grass",
+   "url": "https://www.fab.com/listings/789f53c0-2ae6-441c-a4b7-66f4c7e14b08",
+   "formats": [
+    "texture-set",
+    "gltf",
+    "additional-files"
+   ],
+   "for": "lawn drift",
+   "fit": "generic",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "7c3a681a-2833-4d6e-a749-af3264f024cd": {
+   "title": "Grass Lawn",
+   "url": "https://www.fab.com/listings/7c3a681a-2833-4d6e-a749-af3264f024cd",
+   "formats": [
+    "texture-set",
+    "gltf",
+    "additional-files"
+   ],
+   "for": "lawn drift",
+   "fit": "generic",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "b56971fa-930c-49c8-b687-88eb947b501f": {
+   "title": "Lesser Periwinkle",
+   "url": "https://www.fab.com/listings/b56971fa-930c-49c8-b687-88eb947b501f",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "vinca_minor",
+   "fit": "genus/groundcover",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "3b14e8ce-d4fe-4efa-af61-16335108b36f": {
+   "title": "English Ivy",
+   "url": "https://www.fab.com/listings/3b14e8ce-d4fe-4efa-af61-16335108b36f",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "climber stand-in",
+   "fit": "not a listed species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "03c1d983-769b-408e-b520-8e15b097390c": {
+   "title": "English Ivy",
+   "url": "https://www.fab.com/listings/03c1d983-769b-408e-b520-8e15b097390c",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "climber stand-in",
+   "fit": "not a listed species",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "ace17ad9-84af-4eea-ba72-c207ab1746d7": {
+   "title": "Money Plant",
+   "url": "https://www.fab.com/listings/ace17ad9-84af-4eea-ba72-c207ab1746d7",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "epipremnum",
+   "fit": "n/a",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "4da57ce9-d432-4871-a17c-0b6ea515cb20": {
+   "title": "Sage",
+   "url": "https://www.fab.com/listings/4da57ce9-d432-4871-a17c-0b6ea515cb20",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "salvia_leucantha",
+   "fit": "genus only, S. officinalis",
+   "licence": "Fab Standard License (Personal/Professional)"
+  },
+  "fe0b475e-7281-44ac-8d0e-b475171345dd": {
+   "title": "Common Sage",
+   "url": "https://www.fab.com/listings/fe0b475e-7281-44ac-8d0e-b475171345dd",
+   "formats": [
+    "fbx",
+    "additional-files",
+    "gltf"
+   ],
+   "for": "salvia_leucantha",
+   "fit": "genus only, S. officinalis",
+   "licence": "Fab Standard License (Personal/Professional)"
+  }
+ }
+}

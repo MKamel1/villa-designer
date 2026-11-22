@@ -1,0 +1,2748 @@
+{
+ "design": "B adapted (client decided 2026-11-22)",
+ "hard_fails": [],
+ "tally": {
+  "pass": 123,
+  "fail": 0,
+  "warn": 3,
+  "not_evaluated": 8
+ },
+ "superseded_by_manual": [
+  {
+   "criterion": "LS-FIRE-STRUCT",
+   "subject": "s-firepit",
+   "ldk_message": "distance to house, fence, structure or planting (Calgary Fire Department): 1250 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)",
+   "replaced_by": "LDG-FIRE-MANUAL (side and overhead), manual clearances in final_fire.PRODUCTS"
+  }
+ ],
+ "metrics": {
+  "south_area_m2": 53.19,
+  "soft_m2": 8.04,
+  "hard_share": 0.849,
+  "canopy_trees": 1,
+  "trees_per_100m2_south": 1.88,
+  "trees_per_100m2_south_plus_yard": 1.34,
+  "free_floor_m2": 29.8,
+  "standing_at_1.3m2": 22,
+  "seats": {
+   "dining": 8,
+   "built_in_and_lounge": 3,
+   "quiet_south": 4,
+   "quiet_yard_or_north": 2
+  }
+ },
+ "precedent": {
+  "hard_share": {
+   "achieved": 0.849,
+   "range": [
+    0.52,
+    0.82
+   ],
+   "inside": false
+  },
+  "trees_per_100m2_south": {
+   "achieved": 1.88,
+   "range": [
+    1.56,
+    3.26
+   ],
+   "inside": true
+  }
+ },
+ "table_extension": {
+  "8": {
+   "length_m": 2.4,
+   "clear_mm": 1200,
+   "required_mm": 1200,
+   "status": "pass"
+  },
+  "10": {
+   "length_m": 3.0,
+   "clear_mm": 1200,
+   "required_mm": 1200,
+   "status": "pass"
+  },
+  "12": {
+   "length_m": 3.6,
+   "clear_mm": 900,
+   "required_mm": 1200,
+   "status": "fail"
+  }
+ },
+ "grape": {
+  "summer": {
+   "open": 3.54,
+   "leafed": 0.89
+  },
+  "winter": {
+   "open": 3.54,
+   "bare": 3.54,
+   "louvres_closed": 3.54
+  },
+  "window": "10-15 h local standard time",
+  "leaf_level_sun_21jun_h": 5.58,
+  "privacy_table": {
+   "table": {
+    "limit": 0.3,
+    "today_eye_points": 13.2,
+    "summer": 0.209,
+    "summer_with_opening": 0.579,
+    "winter_louvres_open": 0.603,
+    "winter_louvres_open_with_opening": 0.973,
+    "winter_louvres_closed": 0.209,
+    "winter_louvres_closed_with_opening": 0.579
+   },
+   "s-bench-rear": {
+    "limit": 0.3,
+    "today_eye_points": 20.2,
+    "summer": 0.0,
+    "summer_with_opening": 0.0,
+    "winter_louvres_open": 0.032,
+    "winter_louvres_open_with_opening": 0.032,
+    "winter_louvres_closed": 0.0,
+    "winter_louvres_closed_with_opening": 0.0
+   },
+   "s-bench-quiet": {
+    "limit": 0.25,
+    "today_eye_points": 18.0,
+    "summer": 0.0,
+    "summer_with_opening": 0.0,
+    "winter_louvres_open": 0.0,
+    "winter_louvres_open_with_opening": 0.0,
+    "winter_louvres_closed": 0.0,
+    "winter_louvres_closed_with_opening": 0.0
+   },
+   "n-bench": {
+    "limit": 0.75,
+    "today_eye_points": 9.9,
+    "summer": 0.224,
+    "summer_with_opening": 0.224,
+    "winter_louvres_open": 0.224,
+    "winter_louvres_open_with_opening": 0.224,
+    "winter_louvres_closed": 0.224,
+    "winter_louvres_closed_with_opening": 0.224
+   },
+   "e-bench": {
+    "limit": 0.3,
+    "today_eye_points": 10.7,
+    "summer": 0.224,
+    "summer_with_opening": 0.224,
+    "winter_louvres_open": 0.224,
+    "winter_louvres_open_with_opening": 0.224,
+    "winter_louvres_closed": 0.224,
+    "winter_louvres_closed_with_opening": 0.224
+   }
+  }
+ },
+ "grape_sources": [
+  {
+   "id": "NCSU-vitis-vinifera",
+   "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+   "quote": "It is a woody, deciduous vine",
+   "also": "Leaf Characteristics: Deciduous; Fire Risk Rating: high flammability",
+   "status": "SOURCED (deciduous habit; no calendar dates)"
+  },
+  {
+   "id": "Burkes-ornamental-grape",
+   "url": "https://www.burkesbackyard.com.au/fact-sheets/in-the-garden/flowering-plants-shrubs/ornamental-grape/",
+   "quote": "shade in summer and sun in winter",
+   "status": "SOURCED (qualitative, garden fact sheet; Vitis vinifera purpurea/ornamental grape, Australia)"
+  },
+  {
+   "id": "EKB-dormex-trials",
+   "url": "https://journals.ekb.eg/article_171522.html",
+   "quote": "Thompson Seedless grapevines ... sprayed hydrogen cyanamide on 1, 7 or 14 January",
+   "status": "INFERENCE: a dormancy-breaker is applied to dormant vines, so vines in Egypt are dormant (leafless) in early January; no leaf-fall or leaf-out date was found (GAP)"
+  }
+ ],
+ "wind": {
+  "toward_west": {
+   "all-year": {
+    "share_of_hours_pct": 75.8,
+    "mean_westward_component_ms": 1.6,
+    "hours": 8760
+   },
+   "summer-evening-17-20 (Jun-Aug)": {
+    "share_of_hours_pct": 94.2,
+    "mean_westward_component_ms": 4.37,
+    "hours": 276
+   },
+   "winter-day-10-15 (Dec-Feb)": {
+    "share_of_hours_pct": 61.7,
+    "mean_westward_component_ms": 0.32,
+    "hours": 450
+   }
+  },
+  "seat_in_downwind_sector_pct": {
+   "s-dining-table": {
+    "all-year": 10.8,
+    "summer-evening-17-20 (Jun-Aug)": 2.2,
+    "winter-day-10-15 (Dec-Feb)": 15.6
+   },
+   "s-bench-rear": {
+    "all-year": 13.3,
+    "summer-evening-17-20 (Jun-Aug)": 2.5,
+    "winter-day-10-15 (Dec-Feb)": 24.9
+   },
+   "s-bench-quiet": {
+    "all-year": 13.3,
+    "summer-evening-17-20 (Jun-Aug)": 2.5,
+    "winter-day-10-15 (Dec-Feb)": 24.9
+   },
+   "e-bench": {
+    "all-year": 8.5,
+    "summer-evening-17-20 (Jun-Aug)": 0.7,
+    "winter-day-10-15 (Dec-Feb)": 8.9
+   }
+  },
+  "sister_seat_in_downwind_sector_pct": {
+   "all-year": 54.7,
+   "summer-evening-17-20 (Jun-Aug)": 80.1,
+   "winter-day-10-15 (Dec-Feb)": 31.1
+  },
+  "note": "downwind sector = fire->seat bearing within +-45 deg of the direction the wind blows toward; station-level (Cairo West AP TMYx), no lee modelling (LDS gap W1)"
+ },
+ "fire": {
+  "design_side_clearance_mm": 1250,
+  "design_overhead_clearance_mm": 2000,
+  "opening_a": [
+   1.1,
+   4.5
+  ],
+  "products": [
+   {
+    "id": "PTI-linear-inner",
+    "name": "Pebble Technology (PTI) linear burner, inner mount, 12 V AC, 36 in (0.91 m) class",
+    "maker": "Pebble Technology International (US)",
+    "cert": "CSA/AGA; CSA certificate 2325190; tested to ANSI Z223.1-2010, ANSI Z21.97-2010 (outdoor decorative gas appliances), Z21.42-2010",
+    "egypt": "US/Canada certification only",
+    "manual": "12V-AC-Linear-Burner-Installation-Maintenance-Warranty-Guidelines.pdf (pebbletec.com/wp-content/uploads/2021/11/)",
+    "snapshot": "PTI-inner-mount-linear-burner.txt",
+    "side_mm": 1219,
+    "overhead_mm": 1829,
+    "fuel": "natural gas or propane",
+    "flush": "closest: 'the top of the Burner is 1/2 in - 1 in below the top of wall or cap of built burner cavity' (13-25 mm below the cap); flush with paving is not stated",
+    "cover": "none stated; 'For installation on or over non-combustible floors only'",
+    "vent": "ventilation required, 4-10 openings of 2.5 in by burner length; propane drains through ventilation holes at the sides",
+    "quotes": {
+     "clearance": "Adhere to recommended CSA/AGA clearances: sides 4ft/top 6ft.",
+     "combustibles": "Do not install near any combustibles (side or overhead)",
+     "cert": "The Pebble Technology Fire + Water Elements fire burner assembly is CSA/AGA approved."
+    }
+   },
+   {
+    "id": "Planika-Mico",
+    "name": "Planika Mico Automatic 800 (LPG or natural gas), 800 x 800 mm class",
+    "maker": "Planika (Poland)",
+    "cert": "CE marking under Regulation (EU) 2016/426 (gas appliances), manual cites EN 778; certificate GAR1450CT0048",
+    "egypt": "EU certification only; no Egyptian approval found",
+    "manual": "Manual_Mico_Automatic.pdf (cdn.shopify.com/s/files/1/0729/4186/3197/files/)",
+    "snapshot": "Planika-Mico-Automatic-manual.txt",
+    "side_mm": 1000,
+    "overhead_mm": null,
+    "fuel": "LPG 17.6 kW max (800), natural gas version described",
+    "flush": "'not a free-standing device and is destined to be housed' (a built cavity); flush with paving not stated",
+    "cover": "none stated; 'protected from atmospheric conditions' when not used, main valve off",
+    "vent": "ventilation grid on the lowest point of the cavity, 150 cm2 (500, 600) / 300 cm2 (800); cavity floor 5 % fall to drain",
+    "quotes": {
+     "clearance": "1 metre radius from the fire",
+     "away": "Install the fireplace away from flammable materials",
+     "above": "All elements above the fireplace need to be made of non-flammable materials",
+     "housed": "It is not permitted to use a device which is not housed in some way",
+     "cert": "Regulation (EU) 2016/426"
+    }
+   },
+   {
+    "id": "MAD-ESF",
+    "name": "MAD Design Group ESF gas burner (clearances and installation manual)",
+    "maker": "MAD Design Group (US)",
+    "cert": "not stated in the clearances manual read",
+    "egypt": "unknown",
+    "manual": "ESF_CI-gas.pdf (cdn.shopify.com/s/files/1/0326/3129/2039/files/)",
+    "snapshot": "MAD-ESF-CI-gas-clearances.txt",
+    "side_mm": 610,
+    "overhead_mm": 2000,
+    "fuel": "propane and natural gas",
+    "flush": "not stated; the manual requires ventilation of the underside and that the base never touches flammable material",
+    "cover": "none stated",
+    "vent": "'Adequate and constant ventilation ... including ventilation of the appliance undersides'",
+    "quotes": {
+     "side": "24in (610mm) away from the flame",
+     "overhead": "78.7in (2000mm) away from the flame at all times"
+    }
+   }
+  ],
+  "rejected": [
+   [
+    "Travis Fire Garden linear burner (ANSI Z21.97-2017, CSA 2.41-2017)",
+    "installs in a ventilated block enclosure with a glass wind guard: not flush; side clearance only in a diagram on p. 13 (no text)."
+   ],
+   [
+    "Firegear Outdoors LOF-H/T flat linear pits (manual 90105B)",
+    "'installing fire pits below grade' is listed as outside the design (W-firegear-below-grade-not-supported); a lid is 'highly recommended' with no load rating."
+   ],
+   [
+    "Solus Decor linear (FSD LP)",
+    "free-standing concrete vessel: 'not designed for seating purposes'; says nothing on flush installation (held cards W-solus-*)."
+   ]
+  ],
+  "quotes_verified": {
+   "PTI-linear-inner": {
+    "clearance": true,
+    "combustibles": true,
+    "cert": true
+   },
+   "Planika-Mico": {
+    "clearance": true,
+    "away": true,
+    "above": true,
+    "housed": true,
+    "cert": true
+   },
+   "MAD-ESF": {
+    "side": true,
+    "overhead": true
+   }
+  }
+ },
+ "privacy": {
+  "table": {
+   "limit": 0.3,
+   "today_eye_points": 13.2,
+   "summer": 0.209,
+   "summer_with_opening": 0.579,
+   "winter_louvres_open": 0.603,
+   "winter_louvres_open_with_opening": 0.973,
+   "winter_louvres_closed": 0.209,
+   "winter_louvres_closed_with_opening": 0.579
+  },
+  "s-bench-rear": {
+   "limit": 0.3,
+   "today_eye_points": 20.2,
+   "summer": 0.0,
+   "summer_with_opening": 0.0,
+   "winter_louvres_open": 0.032,
+   "winter_louvres_open_with_opening": 0.032,
+   "winter_louvres_closed": 0.0,
+   "winter_louvres_closed_with_opening": 0.0
+  },
+  "s-bench-quiet": {
+   "limit": 0.25,
+   "today_eye_points": 18.0,
+   "summer": 0.0,
+   "summer_with_opening": 0.0,
+   "winter_louvres_open": 0.0,
+   "winter_louvres_open_with_opening": 0.0,
+   "winter_louvres_closed": 0.0,
+   "winter_louvres_closed_with_opening": 0.0
+  },
+  "n-bench": {
+   "limit": 0.75,
+   "today_eye_points": 9.9,
+   "summer": 0.224,
+   "summer_with_opening": 0.224,
+   "winter_louvres_open": 0.224,
+   "winter_louvres_open_with_opening": 0.224,
+   "winter_louvres_closed": 0.224,
+   "winter_louvres_closed_with_opening": 0.224
+  },
+  "e-bench": {
+   "limit": 0.3,
+   "today_eye_points": 10.7,
+   "summer": 0.224,
+   "summer_with_opening": 0.224,
+   "winter_louvres_open": 0.224,
+   "winter_louvres_open_with_opening": 0.224,
+   "winter_louvres_closed": 0.224,
+   "winter_louvres_closed_with_opening": 0.224
+  }
+ },
+ "pond_sun": {
+  "n-pond": {
+   "sun_21jun_h": 1.69,
+   "water_lilies": "no: full-sun species needs 6 h"
+  },
+  "e-pond": {
+   "sun_21jun_h": 4.45,
+   "water_lilies": "no: full-sun species needs 6 h"
+  }
+ },
+ "critic_counts": {
+  "landscape-architect": {
+   "pass": 13,
+   "fail": 4,
+   "warn": 1,
+   "not_evaluated": 0
+  },
+  "horticulturist": {
+   "pass": 21,
+   "fail": 0,
+   "warn": 2,
+   "not_evaluated": 3
+  },
+  "user": {
+   "pass": 19,
+   "fail": 0,
+   "warn": 0,
+   "not_evaluated": 0
+  },
+  "climate": {
+   "pass": 5,
+   "fail": 2,
+   "warn": 0,
+   "not_evaluated": 2
+  }
+ },
+ "critic_verdict": {
+  "landscape-architect": "fail",
+  "horticulturist": "pass",
+  "user": "pass",
+  "climate": "fail"
+ },
+ "critic_findings": [
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-ENCLOSURE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "room 'n-quiet': 29% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
+   "kind": "computed",
+   "subject": "n-quiet",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-ENCLOSURE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "room 'e-quiet': 0% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
+   "kind": "computed",
+   "subject": "e-quiet",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-ENCLOSURE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "room 's-dining': 37% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
+   "kind": "computed",
+   "subject": "s-dining",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-FOCAL",
+   "status": "fail",
+   "severity": "minor",
+   "evidence": "8 focal elements (['firepit', 'pond', 'pond', 'specimen-tree', 'pergola', 'pergola', 'pergola', 'pergola']); required 1-4 (one primary with restraint)",
+   "source": "AD-COMP-FOCAL (qualitative); count policy",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "landscape-architect",
+   "criterion": "A-ROOMS",
+   "status": "warn",
+   "severity": "minor",
+   "evidence": "5 outdoor rooms with uses/surfaces [\"('dining', 'paving')\", \"('lounge', 'paving')\", \"('quiet', 'paving')\"]; a change of floor marks a room",
+   "source": "AD-COMP-BASE-PLANE (qualitative)",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-BED-CROWDING",
+   "status": "warn",
+   "severity": "minor",
+   "evidence": "bed n-screen: mature crowns 5.1 m2 on 2.7 m2 of bed (limit 1.5 x)",
+   "source": "LDL mature spread; 1.5 overlap is policy",
+   "kind": "computed",
+   "subject": "n-screen",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-SUN-FIT",
+   "status": "warn",
+   "severity": "major",
+   "evidence": "2 plants where the LDS sun layer contradicts the species' stated sun class (['vitis_vinifera']); full sun is 6 h+ (RHS via LDK), limit used 3 h",
+   "source": "LDL sun class vs LDS sun.json; limits policy",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "climate",
+   "criterion": "C-PRIVACY",
+   "status": "fail",
+   "severity": "blocking",
+   "evidence": "6 of 15 south seats overlooked by more than 8 eye points seated (raw LDS median 13.0; residual after layout screens 8.0); brief: privacy is critical",
+   "source": "LDS privacy.json (sight-line geometry); brief; threshold policy (LDS 'fewer than 5 eyes')",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "climate",
+   "criterion": "C-POND-SUN",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "pond cell gets 1.75 h direct sun on 21 Jun (required >= 2.0 h, policy: deep shade drops the planting and the water goes green); LS-POND-SHADE covers the opposite excess",
+   "source": "AD-EXT-POND-SITING (qualitative: sun, cool water); threshold policy",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {}
+  }
+ ],
+ "build_checks": {
+  "closed": {
+   "footprint:pass": 67,
+   "id:pass": 142,
+   "plant-footprint:info": 7,
+   "plant-footprint:pass": 55,
+   "standin:pass": 65,
+   "support:pass": 140
+  },
+  "open": {
+   "footprint:pass": 66,
+   "id:pass": 142,
+   "plant-footprint:info": 7,
+   "plant-footprint:pass": 55,
+   "standin:pass": 65,
+   "support:pass": 141
+  }
+ },
+ "build_warnings": [],
+ "checks": [
+  {
+   "criterion": "LS-BRIEF-FEATURES",
+   "status": "pass",
+   "subject": "firepit",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "brief feature firepit: present"
+  },
+  {
+   "criterion": "LS-BRIEF-FEATURES",
+   "status": "pass",
+   "subject": "bbq",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "brief feature bbq: present"
+  },
+  {
+   "criterion": "LS-BRIEF-FEATURES",
+   "status": "pass",
+   "subject": "pond",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "brief feature pond: present"
+  },
+  {
+   "criterion": "LS-BRIEF-FEATURES",
+   "status": "pass",
+   "subject": "herb_bed",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "brief feature herb_bed: present"
+  },
+  {
+   "criterion": "LS-PATH-MAIN",
+   "status": "pass",
+   "subject": "s-path-door",
+   "achieved": 1200.0,
+   "required": 1200,
+   "unit": "mm",
+   "message": "main path clear width: 1200 mm achieved, 1200 mm required"
+  },
+  {
+   "criterion": "LS-PATH-MAIN",
+   "status": "pass",
+   "subject": "n-path-0",
+   "achieved": 1200.0,
+   "required": 1200,
+   "unit": "mm",
+   "message": "main path clear width: 1200 mm achieved, 1200 mm required"
+  },
+  {
+   "criterion": "LS-PATH-SERVICE",
+   "status": "pass",
+   "subject": "e-path-0",
+   "achieved": 1200.0,
+   "required": 900,
+   "unit": "mm",
+   "message": "service path clear width: 1200 mm achieved, 900 mm recommended"
+  },
+  {
+   "criterion": "LS-SEATWALL",
+   "status": "pass",
+   "subject": "s-seat-wall/height",
+   "achieved": 450,
+   "required": 450,
+   "unit": "mm",
+   "message": "seat wall height: 450 mm achieved, 350-450 mm required"
+  },
+  {
+   "criterion": "LS-SEATWALL",
+   "status": "pass",
+   "subject": "s-seat-wall/width",
+   "achieved": 450,
+   "required": 450,
+   "unit": "mm",
+   "message": "seat wall width: 450 mm achieved, 400-450 mm required"
+  },
+  {
+   "criterion": "LS-DINE-AREA",
+   "status": "pass",
+   "subject": "s-dining",
+   "achieved": 3.52,
+   "required": 3.46,
+   "unit": "m2",
+   "message": "dining zone area per seat (28.2 m2 / 8 seats): 3.52 m2 achieved, 3.46 m2 required"
+  },
+  {
+   "criterion": "LS-DINE-CLEAR",
+   "status": "pass",
+   "subject": "s-dining-table",
+   "achieved": 1200,
+   "required": 1200,
+   "unit": "mm",
+   "message": "clear distance from table edge to nearest obstruction: 1200 mm achieved, 1200 mm required"
+  },
+  {
+   "criterion": "LS-CAPACITY",
+   "status": "pass",
+   "subject": "south garden",
+   "achieved": 11,
+   "required": 10,
+   "unit": "seats",
+   "message": "seats in dining and lounge zones (brief 10-20 people): 11 seats achieved, 10 seats required"
+  },
+  {
+   "criterion": "LS-LOUNGE-AREA",
+   "status": "pass",
+   "subject": "s-lounge",
+   "achieved": 4.76,
+   "required": 1.8,
+   "unit": "m2",
+   "message": "lounge area per seat (14.3 m2 / 3 seats): 4.76 m2 achieved, 1.80 m2 required"
+  },
+  {
+   "criterion": "LS-LOUNGE-CLUSTER",
+   "status": "pass",
+   "subject": "s-lounge",
+   "achieved": 3710,
+   "required": 3658,
+   "unit": "mm",
+   "message": "shorter side of the lounge zone (a conversation cluster is about 3.66 m across): 3710 mm achieved, 3658 mm required"
+  },
+  {
+   "criterion": "LS-STAND-AREA",
+   "status": "pass",
+   "subject": "s-standing",
+   "achieved": 1.41,
+   "required": 1.3,
+   "unit": "m2",
+   "message": "standing area per person (31.0 m2 / 22 people): 1.41 m2 achieved, 1.30 m2 required"
+  },
+  {
+   "criterion": "LS-FIRE-CLEAR",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 1250,
+   "required": 1200,
+   "unit": "mm",
+   "message": "clear ground: 1250 mm achieved, 1200 mm recommended"
+  },
+  {
+   "criterion": "LS-FIRE-SEAT",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 2100,
+   "required": 1500,
+   "unit": "mm",
+   "message": "fire pit to nearest seat or table: 2100 mm achieved, 1500 mm required"
+  },
+  {
+   "criterion": "LS-FIRE-COVER",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 15.0,
+   "required": 15.0,
+   "unit": "kN",
+   "message": "flush cover declared load rating: 15 kN achieved, 15 kN required (BS EN 124 class A15, the nearest published pedestrian-load class; the supplier must certify the rating for a heated cover)"
+  },
+  {
+   "criterion": "LS-FIRE-OVERHEAD",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 99000,
+   "required": 2000,
+   "unit": "mm",
+   "message": "clear height above the fire to any combustible structure, tree or planting: 99000 mm achieved, 2000 mm required"
+  },
+  {
+   "criterion": "LS-FIRE-PRODUCT",
+   "status": "not_evaluated",
+   "subject": "s-firepit",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: no product clearance entered (brief: product instructions govern)"
+  },
+  {
+   "criterion": "LS-FIRE-CLEAR",
+   "status": "pass",
+   "subject": "s-bbq",
+   "achieved": 1200,
+   "required": 1200,
+   "unit": "mm",
+   "message": "clear ground: 1200 mm achieved, 1200 mm recommended"
+  },
+  {
+   "criterion": "LS-FIRE-PRODUCT",
+   "status": "not_evaluated",
+   "subject": "s-bbq",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: no product clearance entered (brief: product instructions govern)"
+  },
+  {
+   "criterion": "LS-FIRE-STRUCT",
+   "status": "warn",
+   "subject": "s-firepit",
+   "achieved": 1250,
+   "required": 2000,
+   "unit": "mm",
+   "message": "distance to house, fence, structure or planting (Calgary Fire Department): 1250 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)"
+  },
+  {
+   "criterion": "LS-FIRE-STRUCT",
+   "status": "pass",
+   "subject": "s-bbq",
+   "achieved": 2000,
+   "required": 2000,
+   "unit": "mm",
+   "message": "distance to house, fence, structure or planting (Calgary Fire Department): 2000 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)"
+  },
+  {
+   "criterion": "LS-POND-FREEBOARD",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 150,
+   "required": 150,
+   "unit": "mm",
+   "message": "soft-edge freeboard: 150 mm achieved, 150 mm required"
+  },
+  {
+   "criterion": "LS-POND-FLUSH-MARGIN",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 600,
+   "required": 600,
+   "unit": "mm",
+   "message": "paving sloped back toward the pond from the clearance: 600 mm achieved, 600 mm required"
+  },
+  {
+   "criterion": "LS-POND-FREEBOARD",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 150,
+   "required": 150,
+   "unit": "mm",
+   "message": "soft-edge freeboard: 150 mm achieved, 150 mm required"
+  },
+  {
+   "criterion": "LS-POND-FLUSH-MARGIN",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 600,
+   "required": 600,
+   "unit": "mm",
+   "message": "paving sloped back toward the pond from the clearance: 600 mm achieved, 600 mm required"
+  },
+  {
+   "criterion": "LS-POND-DEPTH",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 1050,
+   "required": 900,
+   "unit": "mm",
+   "message": "deepest section of the pond: 1050 mm achieved, 900 mm required"
+  },
+  {
+   "criterion": "LS-POND-STOCK",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 19.7,
+   "required": 28.7,
+   "unit": "in/m2",
+   "message": "fish length per m2 of surface: 19.7 in/m2 achieved, 28.7 in/m2 allowed (unaerated; the source figure is for 12-inch fish)"
+  },
+  {
+   "criterion": "LS-POND-SHADE",
+   "status": "not_evaluated",
+   "subject": "n-pond",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: surface_shade_pct not stated"
+  },
+  {
+   "criterion": "LS-POND-DEPTH",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 1050,
+   "required": 900,
+   "unit": "mm",
+   "message": "deepest section of the pond: 1050 mm achieved, 900 mm required"
+  },
+  {
+   "criterion": "LS-POND-STOCK",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 24.6,
+   "required": 28.7,
+   "unit": "in/m2",
+   "message": "fish length per m2 of surface: 24.6 in/m2 achieved, 28.7 in/m2 allowed (unaerated; the source figure is for 12-inch fish)"
+  },
+  {
+   "criterion": "LS-POND-SHADE",
+   "status": "not_evaluated",
+   "subject": "e-pond",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: surface_shade_pct not stated"
+  },
+  {
+   "criterion": "LS-FLUSH-LIP",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 6.0,
+   "required": 6.4,
+   "unit": "mm",
+   "message": "vertical lip: 6 mm achieved, 6.4 mm allowed"
+  },
+  {
+   "criterion": "LS-FLUSH-OPENING",
+   "status": "pass",
+   "subject": "s-firepit",
+   "achieved": 12.0,
+   "required": 13,
+   "unit": "mm",
+   "message": "largest opening in the cover: 12 mm achieved, 13 mm allowed"
+  },
+  {
+   "criterion": "LS-POND-EDGE-LIGHT",
+   "status": "not_evaluated",
+   "subject": "s-firepit",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: edge_lux not stated (the lighting lane supplies the night level at the edge)"
+  },
+  {
+   "criterion": "LS-POND-GUARD",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "child protection declared: rigid_grille (no published load figure: GAP-POND-GRILLE-LOAD)"
+  },
+  {
+   "criterion": "LS-POND-EDGE-SLOPE",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 4,
+   "required": 4,
+   "unit": "run:rise",
+   "message": "shore slope as run per unit rise (4 = 1:4): 4 run:rise achieved, 4 run:rise required"
+  },
+  {
+   "criterion": "LS-POND-EDGE-LIGHT",
+   "status": "not_evaluated",
+   "subject": "n-pond",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: edge_lux not stated (the lighting lane supplies the night level at the edge)"
+  },
+  {
+   "criterion": "LS-POND-GUARD",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 1,
+   "required": 1,
+   "unit": "count",
+   "message": "child protection declared: rigid_grille (no published load figure: GAP-POND-GRILLE-LOAD)"
+  },
+  {
+   "criterion": "LS-POND-EDGE-SLOPE",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 4,
+   "required": 4,
+   "unit": "run:rise",
+   "message": "shore slope as run per unit rise (4 = 1:4): 4 run:rise achieved, 4 run:rise required"
+  },
+  {
+   "criterion": "LS-POND-EDGE-LIGHT",
+   "status": "not_evaluated",
+   "subject": "e-pond",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: edge_lux not stated (the lighting lane supplies the night level at the edge)"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-0",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-1",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-2",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-3",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-4",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-5",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-6",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-7",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-8",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-9",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-10",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-11",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-0",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-1",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-2",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-3",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-4",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-paving-5",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-0",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-1",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-2",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-3",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-4",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-5",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-6",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-7",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-paving-8",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-path-door/cross",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "path cross fall: 1.5 % achieved, 1-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "n-path-0/cross",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "path cross fall: 1.5 % achieved, 1-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "e-path-0/cross",
+   "achieved": 1.5,
+   "required": 4,
+   "unit": "%",
+   "message": "path cross fall: 1.5 % achieved, 1-4 % required"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "not_evaluated",
+   "subject": "s-bed-vine",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: a plant has no water_need"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-mass",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-mass-corner",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-herb",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (low)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-screen-n",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-screen-s",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "n-screen",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "n-edge-far",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (high)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "n-edge-back",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (high)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "e-divider",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "e-far",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "e-edge",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (high)"
+  },
+  {
+   "criterion": "LS-ENCLOSURE",
+   "status": "pass",
+   "subject": "s-quiet",
+   "achieved": 1.929,
+   "required": 0.25,
+   "unit": "ratio",
+   "message": "enclosure height 2.7 m / room width 1.40 m: 2 ratio achieved, 0 ratio required"
+  },
+  {
+   "criterion": "LS-ENCLOSURE",
+   "status": "pass",
+   "subject": "n-quiet",
+   "achieved": 2.105,
+   "required": 0.25,
+   "unit": "ratio",
+   "message": "enclosure height 4 m / room width 1.90 m: 2 ratio achieved, 0 ratio required"
+  },
+  {
+   "criterion": "LS-ENCLOSURE",
+   "status": "pass",
+   "subject": "e-quiet",
+   "achieved": 5.0,
+   "required": 0.25,
+   "unit": "ratio",
+   "message": "enclosure height 4 m / room width 0.80 m: 5 ratio achieved, 0 ratio required"
+  },
+  {
+   "criterion": "LS-ENCLOSURE",
+   "status": "pass",
+   "subject": "s-dining",
+   "achieved": 0.574,
+   "required": 0.25,
+   "unit": "ratio",
+   "message": "enclosure height 2.7 m / room width 4.70 m: 1 ratio achieved, 0 ratio required"
+  },
+  {
+   "criterion": "LS-ENCLOSURE",
+   "status": "pass",
+   "subject": "s-lounge",
+   "achieved": 0.728,
+   "required": 0.25,
+   "unit": "ratio",
+   "message": "enclosure height 2.7 m / room width 3.71 m: 1 ratio achieved, 0 ratio required"
+  },
+  {
+   "criterion": "LS-SCREEN",
+   "status": "pass",
+   "subject": "fence-east",
+   "achieved": 4.0,
+   "required": 1.8,
+   "unit": "m",
+   "message": "boundary height: 4.00 m achieved, 1.80 m required"
+  },
+  {
+   "criterion": "LS-SCREEN",
+   "status": "pass",
+   "subject": "fence-rear",
+   "achieved": 4.0,
+   "required": 1.8,
+   "unit": "m",
+   "message": "boundary height: 4.00 m achieved, 1.80 m required"
+  },
+  {
+   "criterion": "LS-SCREEN",
+   "status": "pass",
+   "subject": "sister-line-screen",
+   "achieved": 2.1,
+   "required": 1.8,
+   "unit": "m",
+   "message": "boundary height: 2.10 m achieved, 1.80 m required"
+  },
+  {
+   "criterion": "LS-ROOTZONE",
+   "status": "pass",
+   "subject": "s-tree-punica",
+   "achieved": 0.0,
+   "required": 0.0,
+   "unit": "m2",
+   "message": "no paving or building inside the mature dripline zone (4.5 m2, spread 2.4 m)"
+  },
+  {
+   "criterion": "LS-TREE-BUILDING",
+   "status": "pass",
+   "subject": "s-tree-punica",
+   "achieved": 3.77,
+   "required": 2.78,
+   "unit": "m",
+   "message": "trunk to building: 3.77 m achieved, 2.78 m required (0.75 x 3.7 m mature height, moderate water demand); UK clay guidance, the site soil test governs"
+  },
+  {
+   "criterion": "LS-HERB-SUN",
+   "status": "pass",
+   "subject": "s-herb-bed",
+   "achieved": 6.5,
+   "required": 6,
+   "unit": "h",
+   "message": "direct midsummer sun on the bed: 6 h achieved, 6 h required"
+  },
+  {
+   "criterion": "LDG-SHADE",
+   "status": "pass",
+   "subject": "table/evening",
+   "achieved": 1.0,
+   "required": 0.9,
+   "unit": "share",
+   "message": "table: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+  },
+  {
+   "criterion": "LDG-SHADE",
+   "status": "pass",
+   "subject": "s-bench-rear/evening",
+   "achieved": 1.0,
+   "required": 0.9,
+   "unit": "share",
+   "message": "s-bench-rear: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+  },
+  {
+   "criterion": "LDG-SHADE",
+   "status": "pass",
+   "subject": "s-bench-quiet/evening",
+   "achieved": 1.0,
+   "required": 0.9,
+   "unit": "share",
+   "message": "s-bench-quiet: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+  },
+  {
+   "criterion": "LDG-SHADE",
+   "status": "pass",
+   "subject": "n-bench/evening",
+   "achieved": 1.0,
+   "required": 0.9,
+   "unit": "share",
+   "message": "n-bench: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+  },
+  {
+   "criterion": "LDG-SHADE",
+   "status": "pass",
+   "subject": "e-bench/evening",
+   "achieved": 1.0,
+   "required": 0.9,
+   "unit": "share",
+   "message": "e-bench: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+  },
+  {
+   "criterion": "LDG-BEDDEPTH",
+   "status": "pass",
+   "subject": "s-bed-mass",
+   "achieved": 1.52,
+   "required": 1.2,
+   "unit": "m",
+   "message": "s-bed-mass: layered border depth 1.52 m against 1.2 m (POLICY: no held source for a border depth)"
+  },
+  {
+   "criterion": "LDG-BEDDEPTH",
+   "status": "pass",
+   "subject": "n-screen",
+   "achieved": 1.2,
+   "required": 1.2,
+   "unit": "m",
+   "message": "n-screen: layered border depth 1.20 m against 1.2 m (POLICY: no held source for a border depth)"
+  },
+  {
+   "criterion": "LDG-BEDDEPTH",
+   "status": "pass",
+   "subject": "e-divider",
+   "achieved": 1.24,
+   "required": 1.2,
+   "unit": "m",
+   "message": "e-divider: layered border depth 1.24 m against 1.2 m (POLICY: no held source for a border depth)"
+  },
+  {
+   "criterion": "LDG-BEDDEPTH",
+   "status": "pass",
+   "subject": "e-far",
+   "achieved": 1.2,
+   "required": 1.2,
+   "unit": "m",
+   "message": "e-far: layered border depth 1.20 m against 1.2 m (POLICY: no held source for a border depth)"
+  },
+  {
+   "criterion": "LDG-TOXIC",
+   "status": "pass",
+   "subject": "site",
+   "achieved": 0,
+   "required": 0,
+   "unit": "plants",
+   "message": "no toxic species within 2 m of a seat, table or herb bed"
+  },
+  {
+   "criterion": "LDG-GEOM",
+   "status": "pass",
+   "subject": "plants-on-paving",
+   "achieved": 0,
+   "required": 0,
+   "unit": "plants",
+   "message": "every plant stands in a bed"
+  },
+  {
+   "criterion": "LDG-GEOM",
+   "status": "pass",
+   "subject": "overlaps",
+   "achieved": 0,
+   "required": 0,
+   "unit": "overlaps",
+   "message": "no two elements overlap"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "table/summer",
+   "achieved": 0.209,
+   "required": 0.3,
+   "unit": "share",
+   "message": "table, summer: 21% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-PRIV-OPENING",
+   "status": "warn",
+   "subject": "table/summer",
+   "achieved": 0.579,
+   "required": 0.3,
+   "unit": "share",
+   "message": "WAIVED by the client's decision (screen opening at the shared fire pit): table summer would be overlooked at 58% of today's through the opening (limit 30%); a closable screen leaf would restore 21%"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "table/winter_louvres_closed",
+   "achieved": 0.209,
+   "required": 0.3,
+   "unit": "share",
+   "message": "table, winter louvres closed: 21% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-PRIV-OPENING",
+   "status": "warn",
+   "subject": "table/winter_louvres_closed",
+   "achieved": 0.579,
+   "required": 0.3,
+   "unit": "share",
+   "message": "WAIVED by the client's decision (screen opening at the shared fire pit): table winter louvres closed would be overlooked at 58% of today's through the opening (limit 30%); a closable screen leaf would restore 21%"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "s-bench-rear/summer",
+   "achieved": 0.0,
+   "required": 0.3,
+   "unit": "share",
+   "message": "s-bench-rear, summer: 0% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "s-bench-rear/winter_louvres_closed",
+   "achieved": 0.0,
+   "required": 0.3,
+   "unit": "share",
+   "message": "s-bench-rear, winter louvres closed: 0% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "s-bench-quiet/summer",
+   "achieved": 0.0,
+   "required": 0.25,
+   "unit": "share",
+   "message": "s-bench-quiet, summer: 0% of today's overlooking remains with the screen unbroken (limit 25%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "s-bench-quiet/winter_louvres_closed",
+   "achieved": 0.0,
+   "required": 0.25,
+   "unit": "share",
+   "message": "s-bench-quiet, winter louvres closed: 0% of today's overlooking remains with the screen unbroken (limit 25%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "n-bench/summer",
+   "achieved": 0.224,
+   "required": 0.75,
+   "unit": "share",
+   "message": "n-bench, summer: 22% of today's overlooking remains with the screen unbroken (limit 75%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "n-bench/winter_louvres_closed",
+   "achieved": 0.224,
+   "required": 0.75,
+   "unit": "share",
+   "message": "n-bench, winter louvres closed: 22% of today's overlooking remains with the screen unbroken (limit 75%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "e-bench/summer",
+   "achieved": 0.224,
+   "required": 0.3,
+   "unit": "share",
+   "message": "e-bench, summer: 22% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-PRIV",
+   "status": "pass",
+   "subject": "e-bench/winter_louvres_closed",
+   "achieved": 0.224,
+   "required": 0.3,
+   "unit": "share",
+   "message": "e-bench, winter louvres closed: 22% of today's overlooking remains with the screen unbroken (limit 30%)"
+  },
+  {
+   "criterion": "LDG-SUNFIT",
+   "status": "pass",
+   "subject": "site",
+   "achieved": 0,
+   "required": 0,
+   "unit": "bed-species",
+   "message": "every plant's sun class is met by its bed's 21-June sun (vine: at leaf level, 2.4 m); part shade 2 h, conditional 75 % of need (POLICY thresholds)"
+  },
+  {
+   "criterion": "LDG-SPREAD",
+   "status": "pass",
+   "subject": "s-tree-punica",
+   "achieved": 0.0,
+   "required": 0,
+   "unit": "m2",
+   "message": "s-tree-punica: canopy radius 1.20 m (sourced minimum spread 2.4 m), 0.00 m2 outside the garden (0.3 m over the fences allowed)"
+  },
+  {
+   "criterion": "LDG-IDS",
+   "status": "pass",
+   "subject": "layout",
+   "achieved": 0,
+   "required": 0,
+   "unit": "duplicates",
+   "message": "every element id is unique across all gardens (74 ids)"
+  },
+  {
+   "criterion": "LDG-ZONE-CLASS",
+   "status": "pass",
+   "subject": "zones",
+   "achieved": 0,
+   "required": 0,
+   "unit": "items",
+   "message": "every seat and table is classified into its declared zone"
+  },
+  {
+   "criterion": "LDG-SURFACE",
+   "status": "pass",
+   "subject": "gardens",
+   "achieved": 0.0,
+   "required": 0.02,
+   "unit": "m2",
+   "message": "area with no declared surface per garden (m2): [('south', 0.0), ('north court', 0.0), ('east yard', 0.0)]"
+  },
+  {
+   "criterion": "LDG-GRAVEL-ZONE",
+   "status": "pass",
+   "subject": "zones",
+   "achieved": 0,
+   "required": 0,
+   "unit": "zones",
+   "message": "gravel zones coincide with gravel"
+  },
+  {
+   "criterion": "LDG-TREE-PERGOLA",
+   "status": "pass",
+   "subject": "trees",
+   "achieved": 0,
+   "required": 0,
+   "unit": "trees",
+   "message": "no tree stands within 1.0 m of a pergola or has its minimum crown inside one"
+  },
+  {
+   "criterion": "LDG-PLANT-SOLID",
+   "status": "pass",
+   "subject": "planting",
+   "achieved": 0,
+   "required": 0,
+   "unit": "plants",
+   "message": "no plant stands inside a bench, table, pot, BBQ, pit or pond"
+  },
+  {
+   "criterion": "LDG-POT",
+   "status": "pass",
+   "subject": "pot",
+   "achieved": 1.37,
+   "required": 1.3,
+   "unit": "m",
+   "message": "pot centre to nearest wall, fence or screen [1.37] m (>= 1.3 m so the 1.8 m crown assumed by the build is not squeezed; POLICY)"
+  },
+  {
+   "criterion": "LDG-FIRE-MANUAL",
+   "status": "pass",
+   "subject": "s-firepit/side",
+   "achieved": 1250,
+   "required": 1250,
+   "unit": "mm",
+   "message": "nearest combustible, structure or planting to the burner envelope: 1250 mm (obstacles:obs-sister-screen-s); manuals state 1250 mm at most (PTI 'sides 4 ft', Planika '1 metre radius', MAD 24 in to fixed furniture, Solus 0.5 m)"
+  },
+  {
+   "criterion": "LDG-FIRE-MANUAL",
+   "status": "pass",
+   "subject": "s-firepit/overhead",
+   "achieved": 2262,
+   "required": 2000,
+   "unit": "mm",
+   "message": "nearest pergola, vine, crown or tall plant above or beside the burner: 2262 mm straight-line (s-bed-screen-n:jasminum_sambac); manuals state 1830-2000 mm overhead (PTI top 6 ft, Solus 1.95 m, MAD 2000 mm). No pergola or climber is over the pit."
+  },
+  {
+   "criterion": "LDG-POND-SECTION",
+   "status": "pass",
+   "subject": "n-pond",
+   "achieved": 1.4,
+   "required": 1.4,
+   "unit": "m",
+   "message": "width 1.4 m holds entry slope 0.6 m (1:4 over 150 mm) + shelf 0.3 m + trench 0.5 m = 1.40 m; trench 900 mm below water; 2 koi at 12 in per 0.42 m2 on 2.8 m2"
+  },
+  {
+   "criterion": "LDG-POND-SECTION",
+   "status": "pass",
+   "subject": "e-pond",
+   "achieved": 1.4,
+   "required": 1.4,
+   "unit": "m",
+   "message": "width 1.4 m holds entry slope 0.6 m (1:4 over 150 mm) + shelf 0.3 m + trench 0.5 m = 1.40 m; trench 900 mm below water; 4 koi at 12 in per 0.42 m2 on 4.48 m2"
+  },
+  {
+   "criterion": "LDG-GRAPE-SEASON",
+   "status": "pass",
+   "subject": "s-pergola-grape",
+   "achieved": 3.54,
+   "required": 3.54,
+   "unit": "h",
+   "message": "table seats, direct sun 10-15 h: 21 Jun 3.54 h open sky, 0.89 h under the leafed vine (density 0.75, POLICY); 21 Dec 3.54 h open sky, 3.54 h under the bare vine (density 0.15, POLICY), 3.54 h with the louvres closed. Pass = summer midday sun at least halved and winter sun at least 80 % kept."
+  }
+ ],
+ "schedule": [
+  {
+   "zone": "east yard",
+   "bed": "e-edge",
+   "species": "Acorus gramineus Aiton",
+   "slug": "acorus_gramineus",
+   "count": 9,
+   "layer": "ground",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "high",
+   "toxic": null,
+   "mature_h_m": 0.3,
+   "mature_spread_m": 0.3,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-divider",
+   "species": "Farfugium japonicum (L.) Kitam.",
+   "slug": "farfugium_japonicum",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.6,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-far",
+   "species": "Farfugium japonicum (L.) Kitam.",
+   "slug": "farfugium_japonicum",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.6,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-divider",
+   "species": "Phoenix roebelenii O'Brien",
+   "slug": "phoenix_roebelenii",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 2.0,
+   "mature_spread_m": 1.5,
+   "status": "DRAWABLE: graded A asset skf3_a05b5ef5",
+   "drawable": true
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-far",
+   "species": "Phoenix roebelenii O'Brien",
+   "slug": "phoenix_roebelenii",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 2.0,
+   "mature_spread_m": 1.5,
+   "status": "DRAWABLE: graded A asset skf3_a05b5ef5",
+   "drawable": true
+  },
+  {
+   "zone": "north court",
+   "bed": "n-edge-far",
+   "species": "Acorus gramineus Aiton",
+   "slug": "acorus_gramineus",
+   "count": 6,
+   "layer": "ground",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "sun conditional at 1.7 h (21 Jun)"
+   ],
+   "water": "high",
+   "toxic": null,
+   "mature_h_m": 0.3,
+   "mature_spread_m": 0.3,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "north court",
+   "bed": "n-edge-back",
+   "species": "Acorus gramineus Aiton",
+   "slug": "acorus_gramineus",
+   "count": 5,
+   "layer": "ground",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "sun conditional at 1.6 h (21 Jun)"
+   ],
+   "water": "high",
+   "toxic": null,
+   "mature_h_m": 0.3,
+   "mature_spread_m": 0.3,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 5,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
+   "species": "Rhapis excelsa (Thunb.) A.Henry",
+   "slug": "rhapis_excelsa",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": "non_toxic",
+   "mature_h_m": 3.7,
+   "mature_spread_m": 4.6,
+   "status": "DRAWABLE: graded B asset skf3_86982789",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "-",
+   "species": "Punica granatum L.",
+   "slug": "punica_granatum",
+   "count": 1,
+   "layer": "canopy/understorey (tree)",
+   "verdict": "viable",
+   "conditions": [
+    "canopy checked at the sourced minimum spread 2.4 m (LDL range 2.4-3.0 m): keep pruned"
+   ],
+   "water": "medium",
+   "toxic": "non_toxic",
+   "mature_h_m": 3.7,
+   "mature_spread_m": 3.0,
+   "status": "DRAWABLE: graded B asset skf3_86de7dea; skf3_f697f7da",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 2,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-n",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 1,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-s",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 1,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "pot",
+   "species": "Plumeria rubra L. (terracotta pot)",
+   "slug": "plumeria_rubra",
+   "count": 1,
+   "layer": "container tree",
+   "verdict": "viable",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "frost: accepted by lead decision (client standing choice; Cairo grows frangipani widely (lead decision 2026-11-22))",
+    "height and spread are a GAP in LDL: not evaluated"
+   ],
+   "water": null,
+   "toxic": "mild",
+   "mature_h_m": null,
+   "mature_spread_m": null,
+   "status": "STAND-IN (frangipani asset exists as a genus fit; pot size is a LDL GAP)",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-herb",
+   "species": "Origanum majorana L.",
+   "slug": "origanum_majorana",
+   "count": 2,
+   "layer": "ground",
+   "verdict": "viable",
+   "conditions": [],
+   "water": "low",
+   "toxic": "non_toxic",
+   "mature_h_m": 0.6,
+   "mature_spread_m": 0.6,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
+   "species": "Justicia brandegeeana Wassh. & L.B.Sm.",
+   "slug": "justicia_brandegeeana",
+   "count": 10,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost tolerance is a GAP",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 1.83,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass-corner",
+   "species": "Justicia brandegeeana Wassh. & L.B.Sm.",
+   "slug": "justicia_brandegeeana",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost tolerance is a GAP",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 1.83,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
+   "species": "Cenchrus alopecuroides (L.) Thunb.",
+   "slug": "pennisetum_alopecuroides",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable",
+   "conditions": [],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 1.22,
+   "mature_spread_m": 1.22,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
+   "species": "Salvia leucantha Cav.",
+   "slug": "salvia_leucantha",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.91,
+   "mature_spread_m": 0.91,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass-corner",
+   "species": "Salvia leucantha Cav.",
+   "slug": "salvia_leucantha",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.91,
+   "mature_spread_m": 0.91,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-vine",
+   "species": "Vitis vinifera L.",
+   "slug": "vitis_vinifera",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable",
+   "conditions": [
+    "sun conditional at 5.6 h (21 Jun)"
+   ],
+   "water": null,
+   "toxic": null,
+   "mature_h_m": null,
+   "mature_spread_m": null,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  }
+ ],
+ "programme": [
+  {
+   "item": "seats, whole design (table + built-in benches)",
+   "achieved": 17,
+   "required": ">= 10 (brief 10-20 people)",
+   "status": "pass",
+   "source": "client brief; LS-CAPACITY"
+  },
+  {
+   "item": "people at an event: seated + standing in the free floor of the south garden",
+   "achieved": "8 + 3 seated south, 22 standing at 1.3 m2",
+   "required": "10-20",
+   "status": "pass",
+   "source": "client brief; LS-STAND-AREA (Neufert p.211)"
+  },
+  {
+   "item": "dining table, 8 seats",
+   "achieved": "8",
+   "required": "8 (brief: dining 8 extending to 10)",
+   "status": "pass",
+   "source": "client decision 2026-11-22"
+  },
+  {
+   "item": "dining table extended to 10 (3.0 m), clear to nearest obstruction",
+   "achieved": "1200 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-DINE-CLEAR (Time-Saver Fig. 210-3)"
+  },
+  {
+   "item": "dining table extended to 12 (3.6 m), clear",
+   "achieved": "900 mm",
+   "required": "1200 mm",
+   "status": "fail (not offered)",
+   "source": "LS-DINE-CLEAR"
+  },
+  {
+   "item": "dining zone area per seat [s-dining]",
+   "achieved": "3.52 m2",
+   "required": "3.46 m2",
+   "status": "pass",
+   "source": "LS-DINE-AREA"
+  },
+  {
+   "item": "table to obstruction [s-dining-table]",
+   "achieved": "1200 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-DINE-CLEAR"
+  },
+  {
+   "item": "lounge area per seat [s-lounge]",
+   "achieved": "4.76 m2",
+   "required": "1.8 m2",
+   "status": "pass",
+   "source": "LS-LOUNGE-AREA"
+  },
+  {
+   "item": "lounge across [s-lounge]",
+   "achieved": "3710 mm",
+   "required": "3658 mm",
+   "status": "pass",
+   "source": "LS-LOUNGE-CLUSTER"
+  },
+  {
+   "item": "standing area per person [s-standing]",
+   "achieved": "1.41 m2",
+   "required": "1.3 m2",
+   "status": "pass",
+   "source": "LS-STAND-AREA"
+  },
+  {
+   "item": "fire pit clear ground [s-firepit]",
+   "achieved": "1250 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-FIRE-CLEAR"
+  },
+  {
+   "item": "fire pit clear ground [s-bbq]",
+   "achieved": "1200 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-FIRE-CLEAR"
+  },
+  {
+   "item": "fire pit to nearest seat or table [s-firepit]",
+   "achieved": "2100 mm",
+   "required": "1500 mm",
+   "status": "pass",
+   "source": "LS-FIRE-SEAT"
+  },
+  {
+   "item": "flush cover load rating (declared, to be certified) [s-firepit]",
+   "achieved": "15.0 kN",
+   "required": "15.0 kN",
+   "status": "pass",
+   "source": "LS-FIRE-COVER"
+  },
+  {
+   "item": "clear above the fire [s-firepit]",
+   "achieved": "99000 mm",
+   "required": "2000 mm",
+   "status": "pass",
+   "source": "LS-FIRE-OVERHEAD"
+  },
+  {
+   "item": "herb bed midsummer sun [s-herb-bed]",
+   "achieved": "6.5 h",
+   "required": "6 h",
+   "status": "pass",
+   "source": "LS-HERB-SUN"
+  },
+  {
+   "item": "tree trunk to building [s-tree-punica]",
+   "achieved": "3.77 m",
+   "required": "2.78 m",
+   "status": "pass",
+   "source": "LS-TREE-BUILDING"
+  },
+  {
+   "item": "paving in the tree dripline [s-tree-punica]",
+   "achieved": "0.0 m2",
+   "required": "0.0 m2",
+   "status": "pass",
+   "source": "LS-ROOTZONE"
+  },
+  {
+   "item": "neighbour screening height [fence-east]",
+   "achieved": "4.0 m",
+   "required": "1.8 m",
+   "status": "pass",
+   "source": "LS-SCREEN"
+  },
+  {
+   "item": "neighbour screening height [fence-rear]",
+   "achieved": "4.0 m",
+   "required": "1.8 m",
+   "status": "pass",
+   "source": "LS-SCREEN"
+  },
+  {
+   "item": "neighbour screening height [sister-line-screen]",
+   "achieved": "2.1 m",
+   "required": "1.8 m",
+   "status": "pass",
+   "source": "LS-SCREEN"
+  },
+  {
+   "item": "main path width [s-path-door]",
+   "achieved": "1200.0 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-PATH-MAIN"
+  },
+  {
+   "item": "main path width [n-path-0]",
+   "achieved": "1200.0 mm",
+   "required": "1200 mm",
+   "status": "pass",
+   "source": "LS-PATH-MAIN"
+  },
+  {
+   "item": "service path width [e-path-0]",
+   "achieved": "1200.0 mm",
+   "required": "900 mm",
+   "status": "pass",
+   "source": "LS-PATH-SERVICE"
+  },
+  {
+   "item": "seat wall [s-seat-wall/height]",
+   "achieved": "450 mm",
+   "required": "450 mm",
+   "status": "pass",
+   "source": "LS-SEATWALL"
+  },
+  {
+   "item": "seat wall [s-seat-wall/width]",
+   "achieved": "450 mm",
+   "required": "450 mm",
+   "status": "pass",
+   "source": "LS-SEATWALL"
+  },
+  {
+   "item": "pond deepest section [n-pond]",
+   "achieved": "1050 mm",
+   "required": "900 mm",
+   "status": "pass",
+   "source": "LS-POND-DEPTH"
+  },
+  {
+   "item": "pond deepest section [e-pond]",
+   "achieved": "1050 mm",
+   "required": "900 mm",
+   "status": "pass",
+   "source": "LS-POND-DEPTH"
+  },
+  {
+   "item": "koi stocking [n-pond]",
+   "achieved": "19.7 in/m2",
+   "required": "28.7 in/m2",
+   "status": "pass",
+   "source": "LS-POND-STOCK"
+  },
+  {
+   "item": "koi stocking [e-pond]",
+   "achieved": "24.6 in/m2",
+   "required": "28.7 in/m2",
+   "status": "pass",
+   "source": "LS-POND-STOCK"
+  },
+  {
+   "item": "pond child guard [n-pond]",
+   "achieved": "1 count",
+   "required": "1 count",
+   "status": "pass",
+   "source": "LS-POND-GUARD"
+  },
+  {
+   "item": "pond child guard [e-pond]",
+   "achieved": "1 count",
+   "required": "1 count",
+   "status": "pass",
+   "source": "LS-POND-GUARD"
+  },
+  {
+   "item": "pond flush margin [n-pond]",
+   "achieved": "600 mm",
+   "required": "600 mm",
+   "status": "pass",
+   "source": "LS-POND-FLUSH-MARGIN"
+  },
+  {
+   "item": "pond flush margin [e-pond]",
+   "achieved": "600 mm",
+   "required": "600 mm",
+   "status": "pass",
+   "source": "LS-POND-FLUSH-MARGIN"
+  },
+  {
+   "item": "pond edge slope [n-pond]",
+   "achieved": "4 run:rise",
+   "required": "4 run:rise",
+   "status": "pass",
+   "source": "LS-POND-EDGE-SLOPE"
+  },
+  {
+   "item": "pond edge slope [e-pond]",
+   "achieved": "4 run:rise",
+   "required": "4 run:rise",
+   "status": "pass",
+   "source": "LS-POND-EDGE-SLOPE"
+  },
+  {
+   "item": "pond freeboard [n-pond]",
+   "achieved": "150 mm",
+   "required": "150 mm",
+   "status": "pass",
+   "source": "LS-POND-FREEBOARD"
+  },
+  {
+   "item": "pond freeboard [e-pond]",
+   "achieved": "150 mm",
+   "required": "150 mm",
+   "status": "pass",
+   "source": "LS-POND-FREEBOARD"
+  },
+  {
+   "item": "one water class per bed [s-bed-vine]",
+   "achieved": "None ",
+   "required": "None ",
+   "status": "not_evaluated",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-mass]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-mass-corner]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-herb]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-screen-n]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-screen-s]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [n-screen]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [n-edge-far]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [n-edge-back]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [e-divider]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [e-far]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [e-edge]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "LDG-SHADE [table/evening]",
+   "achieved": "1.0 share",
+   "required": "0.9 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE [s-bench-rear/evening]",
+   "achieved": "1.0 share",
+   "required": "0.9 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE [s-bench-quiet/evening]",
+   "achieved": "1.0 share",
+   "required": "0.9 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE [n-bench/evening]",
+   "achieved": "1.0 share",
+   "required": "0.9 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE [e-bench/evening]",
+   "achieved": "1.0 share",
+   "required": "0.9 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-BEDDEPTH [s-bed-mass]",
+   "achieved": "1.52 m",
+   "required": "1.2 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-BEDDEPTH [n-screen]",
+   "achieved": "1.2 m",
+   "required": "1.2 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-BEDDEPTH [e-divider]",
+   "achieved": "1.24 m",
+   "required": "1.2 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-BEDDEPTH [e-far]",
+   "achieved": "1.2 m",
+   "required": "1.2 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [table/summer]",
+   "achieved": "0.209 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV-OPENING [table/summer]",
+   "achieved": "0.579 share",
+   "required": "0.3 share",
+   "status": "warn",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [table/winter_louvres_closed]",
+   "achieved": "0.209 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV-OPENING [table/winter_louvres_closed]",
+   "achieved": "0.579 share",
+   "required": "0.3 share",
+   "status": "warn",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [s-bench-rear/summer]",
+   "achieved": "0.0 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [s-bench-rear/winter_louvres_closed]",
+   "achieved": "0.0 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [s-bench-quiet/summer]",
+   "achieved": "0.0 share",
+   "required": "0.25 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [s-bench-quiet/winter_louvres_closed]",
+   "achieved": "0.0 share",
+   "required": "0.25 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [n-bench/summer]",
+   "achieved": "0.224 share",
+   "required": "0.75 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [n-bench/winter_louvres_closed]",
+   "achieved": "0.224 share",
+   "required": "0.75 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [e-bench/summer]",
+   "achieved": "0.224 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRIV [e-bench/winter_louvres_closed]",
+   "achieved": "0.224 share",
+   "required": "0.3 share",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SUNFIT [site]",
+   "achieved": "0 bed-species",
+   "required": "0 bed-species",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SPREAD [s-tree-punica]",
+   "achieved": "0.0 m2",
+   "required": "0 m2",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-IDS [layout]",
+   "achieved": "0 duplicates",
+   "required": "0 duplicates",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-ZONE-CLASS [zones]",
+   "achieved": "0 items",
+   "required": "0 items",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SURFACE [gardens]",
+   "achieved": "0.0 m2",
+   "required": "0.02 m2",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-GRAVEL-ZONE [zones]",
+   "achieved": "0 zones",
+   "required": "0 zones",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-TREE-PERGOLA [trees]",
+   "achieved": "0 trees",
+   "required": "0 trees",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PLANT-SOLID [planting]",
+   "achieved": "0 plants",
+   "required": "0 plants",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-POT [pot]",
+   "achieved": "1.37 m",
+   "required": "1.3 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-FIRE-MANUAL [s-firepit/side]",
+   "achieved": "1250 mm",
+   "required": "1250 mm",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-FIRE-MANUAL [s-firepit/overhead]",
+   "achieved": "2262 mm",
+   "required": "2000 mm",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-POND-SECTION [n-pond]",
+   "achieved": "1.4 m",
+   "required": "1.4 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-POND-SECTION [e-pond]",
+   "achieved": "1.4 m",
+   "required": "1.4 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-GRAPE-SEASON [s-pergola-grape]",
+   "achieved": "3.54 h",
+   "required": "3.54 h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  }
+ ],
+ "layout_counts": {
+  "zones": 7,
+  "paved_areas": 27,
+  "planting_groups": 12,
+  "seating": 4,
+  "tables": 1,
+  "features": 5,
+  "trees": 1,
+  "paths": 3,
+  "obstacles": 5,
+  "boundary": 3,
+  "seatwalls": 1,
+  "canopies": 4,
+  "screens": 2,
+  "walls": 3,
+  "doors": 0,
+  "steps": 0
+ },
+ "visualisation": {
+  "file": "layout-visualisation.json",
+  "excluded_from": "checks, schedules, quantities, critics, programme table"
+ }
+}

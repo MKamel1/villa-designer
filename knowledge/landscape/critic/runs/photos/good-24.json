@@ -1,0 +1,21 @@
+{
+ "item": "good-24",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N02-tsubo-niwa-extension-kyoto/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Defined by wooden slat walls on three sides, a flat roof overhead, and gravel floor with stone and tree; reads as an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "The garden features a prominent pine tree and a large rock, but lacks distinct shrub or ground cover layers. The gravel is bare, and the planting appears sparse rather than lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The bonsai tree is centrally placed under the shelter, framed by the wooden slats and flanked by stones, making it the undeniable focal point of the composition."
+  }
+ }
+}

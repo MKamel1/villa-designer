@@ -1,0 +1,183 @@
+{
+ "schema": "landscape-layout/1",
+ "id": "P-SME-02",
+ "source": "LDP precedent P-SME-02: MV024 Residence, Limassol: lawn court (re-drawn by hand from the scaled plan; see precedents.py)",
+ "stand_in_species": true,
+ "zones": [
+  {
+   "id": "z1",
+   "use": "lounge",
+   "surface": "lawn",
+   "rect": [
+    4.42,
+    0.41,
+    9.57,
+    6.07
+   ],
+   "label": "lawn"
+  },
+  {
+   "id": "z2",
+   "use": "dining",
+   "surface": "paving",
+   "rect": [
+    7.82,
+    7.3,
+    8.64,
+    9.16
+   ],
+   "label": "terrace"
+  }
+ ],
+ "paths": [],
+ "tables": [],
+ "seating": [],
+ "planting_groups": [
+  {
+   "id": "b6",
+   "rect": [
+    4.42,
+    -0.1,
+    10.08,
+    0.51
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 5,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 10,
+     "stand_in": true
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rect": [
+    9.88,
+    0.51,
+    10.49,
+    10.8
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "Pittosporum tobira",
+     "form": "shrub",
+     "count": 6,
+     "stand_in": true
+    },
+    {
+     "species": "Liriope muscari",
+     "form": "ground_cover",
+     "count": 12,
+     "stand_in": true
+    }
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "t3",
+   "species": "Olea europaea",
+   "center": [
+    9.57,
+    4.22
+   ],
+   "mature_spread_m": 2.3,
+   "form": "large_tree",
+   "mature_height_m": 2.7
+  },
+  {
+   "id": "t4",
+   "species": "Punica granatum",
+   "center": [
+    9.57,
+    9.16
+   ],
+   "mature_spread_m": 1.1,
+   "form": "small_tree",
+   "mature_height_m": 1.4
+  },
+  {
+   "id": "t5",
+   "species": "Punica granatum",
+   "center": [
+    8.54,
+    11.42
+   ],
+   "mature_spread_m": 1.1,
+   "form": "small_tree",
+   "mature_height_m": 1.4
+  }
+ ],
+ "features": [],
+ "buildings": [
+  [
+   1.75,
+   1.54,
+   4.42,
+   10.19
+  ],
+  [
+   4.42,
+   6.17,
+   9.16,
+   10.19
+  ]
+ ],
+ "walls": [
+  {
+   "id": "w8",
+   "rect": [
+    0.0,
+    -0.21,
+    10.7,
+    -0.1
+   ],
+   "height_m": 2.5
+  },
+  {
+   "id": "w9",
+   "rect": [
+    10.6,
+    -0.21,
+    10.91,
+    11.83
+   ],
+   "height_m": 2.5
+  },
+  {
+   "id": "w10",
+   "rect": [
+    0.0,
+    11.52,
+    10.91,
+    11.73
+   ],
+   "height_m": 2.5
+  }
+ ],
+ "screens": [],
+ "canopies": [],
+ "doors": [
+  {
+   "id": "d11",
+   "at": [
+    8.54,
+    7.72
+   ],
+   "faces": "+x"
+  }
+ ],
+ "boundary": [],
+ "paved_areas": [],
+ "steps": [],
+ "obstacles": []
+}

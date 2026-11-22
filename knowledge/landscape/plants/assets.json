@@ -94,7 +94,8 @@
    "leaf_type": "real_leaves+fruit",
    "species_fit": "species",
    "maps_to": [
-    "citrus_limon"
+    "citrus_limon",
+    "citrus_x_sinensis"
    ],
    "rationale": "Looked at: dense rounded crown, individual leaves and yellow fruit visible at 5 m, good 15 m silhouette. Skirt of low branches. 279k tris."
   },
@@ -1201,6 +1202,2992 @@
    "rationale": "Looked at: a single pomegranate fruit (about 10 cm), a dot at 5 m. Fruit only, not a tree.",
    "storage": "shared",
    "manifest_key": "polyhaven/food_pomegranate_01"
+  },
+  {
+   "id": "skf3_7131d835",
+   "source": "https://sketchfab.com/3d-models/200ml-guava-7131d835627f4321914e62795833dcf2",
+   "licence": "CC Attribution",
+   "author": "eyes360vr",
+   "title": "200ML guava",
+   "triangles": 596,
+   "size_m": [
+    0.061,
+    0.097,
+    0.195
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_7131d835.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a guava fruit, 2 cm, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/7131d835627f4321914e62795833dcf2",
+   "candidate_for": "psidium_guajava"
+  },
+  {
+   "id": "skf3_f68ae1c3",
+   "source": "https://sketchfab.com/3d-models/lemon-game-ready-2k-pbr-f68ae1c354a64ea39e160c4fe881349e",
+   "licence": "CC Attribution",
+   "author": "meerschaumdigital",
+   "title": "Lemon (Game Ready / 2K PBR)",
+   "triangles": 896,
+   "size_m": [
+    0.096,
+    0.064,
+    0.063
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f68ae1c3.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a lemon fruit, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f68ae1c354a64ea39e160c4fe881349e",
+   "candidate_for": "citrus_limon"
+  },
+  {
+   "id": "skf3_07cc9113",
+   "source": "https://sketchfab.com/3d-models/papyrus-07cc911352904b0c954e0236975839ca",
+   "licence": "CC Attribution",
+   "author": "JackEvans",
+   "title": "Papyrus",
+   "triangles": 926,
+   "size_m": [
+    13.214,
+    1.89,
+    8.891
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_07cc9113.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: papyrus scrolls (paper), not a plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/07cc911352904b0c954e0236975839ca",
+   "candidate_for": "cyperus_papyrus"
+  },
+  {
+   "id": "skf3_8c28ce11",
+   "source": "https://sketchfab.com/3d-models/egyptian-papyrus-column-8c28ce11d21848239482a8eec8854f4b",
+   "licence": "CC Attribution",
+   "author": "MasterMek",
+   "title": "Egyptian papyrus column",
+   "triangles": 1586,
+   "size_m": [
+    4.128,
+    4.128,
+    8.0
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_8c28ce11.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: an Egyptian painted column, not a plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/8c28ce11d21848239482a8eec8854f4b",
+   "candidate_for": "cyperus_papyrus"
+  },
+  {
+   "id": "skf3_09127a06",
+   "source": "https://sketchfab.com/3d-models/alocasia-macrorrhizos-09127a0699ea4d1c9246227e19ab452b",
+   "licence": "CC Attribution",
+   "author": "DJMiddi",
+   "title": "Alocasia macrorrhizos",
+   "triangles": 1707,
+   "size_m": [
+    9.512,
+    9.52,
+    7.628
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_09127a06.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: arrowhead-leaf Alocasia macrorrhizos but authored 9.5 m wide and 7.6 m tall against the sourced 1.5-2.5 m, leaves visibly angular (1.7k tris). Would need a 0.3 scale, a decision not taken here.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/09127a0699ea4d1c9246227e19ab452b",
+   "candidate_for": "alocasia_macrorrhizos"
+  },
+  {
+   "id": "skf3_2fa12ba0",
+   "source": "https://sketchfab.com/3d-models/tropical-plant-monstera-deliciosa-2fa12ba0af5442c9af8f9bead1a7d020",
+   "licence": "CC Attribution",
+   "author": "evolveduk",
+   "title": "Tropical Plant monstera deliciosa",
+   "triangles": 1716,
+   "size_m": [
+    1.305,
+    1.125,
+    1.093
+   ],
+   "alpha_card_tri_share": 0.503,
+   "preview": "asset-previews/skf3_2fa12ba0.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: tiny monstera, about 0.3 m, a dot at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/2fa12ba0af5442c9af8f9bead1a7d020",
+   "candidate_for": "monstera_deliciosa"
+  },
+  {
+   "id": "skf3_1a0f2181",
+   "source": "https://sketchfab.com/3d-models/the-beauty-of-blue-lotus-a-celebration-of-natur-1a0f2181bf50435690455e8a55bcbd2f",
+   "licence": "CC Attribution",
+   "author": "klrxyz",
+   "title": "\"The Beauty of Blue Lotus A Celebration of Natur",
+   "triangles": 1820,
+   "size_m": [
+    0.569,
+    0.628,
+    0.802
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_1a0f2181.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a cartoon rabbit figure; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/1a0f2181bf50435690455e8a55bcbd2f",
+   "candidate_for": "nymphaea_caerulea"
+  },
+  {
+   "id": "skf3_b57fa97a",
+   "source": "https://sketchfab.com/3d-models/low-poly-calla-lily-flower-b57fa97a1fba46a5a17137f22de7da59",
+   "licence": "CC Attribution",
+   "author": "J.A.C.K",
+   "title": "Low Poly Calla Lily Flower",
+   "triangles": 1861,
+   "size_m": [
+    0.22,
+    0.209,
+    0.411
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_b57fa97a.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 3 cm calla flower, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/b57fa97a1fba46a5a17137f22de7da59",
+   "candidate_for": "zantedeschia_aethiopica"
+  },
+  {
+   "id": "skf3_9efab7d2",
+   "source": "https://sketchfab.com/3d-models/lady-palm-tree-9efab7d28c804238a6d4ddbe0e6530f4",
+   "licence": "CC Attribution",
+   "author": "neutralize",
+   "title": "Lady Palm Tree",
+   "triangles": 2040,
+   "size_m": [
+    13.018,
+    12.486,
+    16.276
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_9efab7d2.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: grey untextured lady-palm silhouette (no images, base colour 0.5 grey in the file) with faceted trunk; 2k tris.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/9efab7d28c804238a6d4ddbe0e6530f4",
+   "candidate_for": "rhapis_excelsa"
+  },
+  {
+   "id": "skf3_22c02e4e",
+   "source": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-22c02e4e8e1f4eb4bbb9f4ba061480e0",
+   "licence": "CC Attribution",
+   "author": "ie-niels",
+   "title": "Lady palm tree from Poly by Google",
+   "triangles": 2040,
+   "size_m": [
+    13.018,
+    12.486,
+    16.276
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_22c02e4e.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: same grey untextured Poly-by-Google lady palm; the glTF has no images or colour.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/22c02e4e8e1f4eb4bbb9f4ba061480e0",
+   "candidate_for": "rhapis_excelsa"
+  },
+  {
+   "id": "skf3_3d0510cc",
+   "source": "https://sketchfab.com/3d-models/lady-palm-tree-from-poly-by-google-3d0510cc9b5b4360a6b8b4952d69f77d",
+   "licence": "CC Attribution",
+   "author": "ie-niels",
+   "title": "Lady palm tree from Poly by Google",
+   "triangles": 2040,
+   "size_m": [
+    13.018,
+    12.486,
+    16.276
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_3d0510cc.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: third copy of the grey untextured Poly-by-Google lady palm.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/3d0510cc9b5b4360a6b8b4952d69f77d",
+   "candidate_for": "rhapis_excelsa"
+  },
+  {
+   "id": "skf3_d879c298",
+   "source": "https://sketchfab.com/3d-models/lime-game-ready-2k-pbr-d879c2985526427b96a39733dc2a075c",
+   "licence": "CC Attribution",
+   "author": "meerschaumdigital",
+   "title": "Lime (Game Ready / 2K PBR)",
+   "triangles": 2176,
+   "size_m": [
+    0.048,
+    0.056,
+    0.049
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d879c298.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a lime fruit, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d879c2985526427b96a39733dc2a075c",
+   "candidate_for": "citrus_limon"
+  },
+  {
+   "id": "skf3_75882b72",
+   "source": "https://sketchfab.com/3d-models/elephant-ear-bush-75882b72d1374270aeac76c96db2aa4e",
+   "licence": "CC Attribution",
+   "author": "darkmoral",
+   "title": "Elephant Ear Bush",
+   "triangles": 2268,
+   "size_m": [
+    6.143,
+    6.335,
+    2.803
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/skf3_75882b72_placed.jpg",
+   "grade": "B",
+   "leaf_type": "leaf_cards",
+   "species_fit": "genus",
+   "maps_to": [
+    "alocasia_macrorrhizos"
+   ],
+   "rationale": "Looked at: re-rendered at placement scale 0.7135 (2.0 m tall, 4.4 m wide, sourced height 1.5-2.5 m; a clump of several plants). 2.8 m elephant-ear clump, big heart-shaped veined leaves on petioles, no fishbone, reads as Alocasia at 5 m and 15 m (hand-painted texture, 2k tris). Source says 'Elephant Ear (Alocasia)': genus level.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/75882b72d1374270aeac76c96db2aa4e",
+   "candidate_for": "alocasia_macrorrhizos",
+   "placement_scale": 0.7135,
+   "placed_height_m": 2.0
+  },
+  {
+   "id": "skf3_03947862",
+   "source": "https://sketchfab.com/3d-models/aloe-vera-039478621559470a9bc8b80e62d916c4",
+   "licence": "CC Attribution",
+   "author": "Aiman.Ghani",
+   "title": "Aloe Vera",
+   "triangles": 2880,
+   "size_m": [
+    9.312,
+    9.336,
+    10.23
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_03947862.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: aloe rosette with visibly angular, faceted blades at 5 m (2.9k tris); fine at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/039478621559470a9bc8b80e62d916c4",
+   "candidate_for": "aloe_vera"
+  },
+  {
+   "id": "skf3_073d68f0",
+   "source": "https://sketchfab.com/3d-models/spearmint-mentos-container-with-gum-073d68f01af24b62806caec36d3b694a",
+   "licence": "CC Attribution",
+   "author": "SeuNura",
+   "title": "Spearmint Mentos Container With Gum",
+   "triangles": 4180,
+   "size_m": [
+    2.617,
+    2.0,
+    2.837
+   ],
+   "alpha_card_tri_share": 0.378,
+   "preview": "asset-previews/skf3_073d68f0.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a chewing-gum jar; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/073d68f01af24b62806caec36d3b694a",
+   "candidate_for": "mentha_spicata"
+  },
+  {
+   "id": "skf3_90df513f",
+   "source": "https://sketchfab.com/3d-models/rolled-parchment-90df513fa91e42d8a2c56801ddac97fd",
+   "licence": "CC Attribution",
+   "author": "heledahn",
+   "title": "Rolled Parchment",
+   "triangles": 5104,
+   "size_m": [
+    0.584,
+    0.057,
+    0.035
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_90df513f.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a rolled parchment; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/90df513fa91e42d8a2c56801ddac97fd",
+   "candidate_for": "cyperus_papyrus"
+  },
+  {
+   "id": "skf3_0e497993",
+   "source": "https://sketchfab.com/3d-models/monstera-deliciosa-0e4979939e094ae493871dc73e12cce6",
+   "licence": "CC Attribution",
+   "author": "artfreex",
+   "title": "Monstera Deliciosa",
+   "triangles": 5535,
+   "size_m": [
+    0.843,
+    0.941,
+    1.281
+   ],
+   "alpha_card_tri_share": 0.595,
+   "preview": "asset-previews/skf3_0e497993.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: monstera in an orange pot (pot is part of the model), 0.5 m; small at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/0e4979939e094ae493871dc73e12cce6",
+   "candidate_for": "monstera_deliciosa"
+  },
+  {
+   "id": "skf3_88ddf780",
+   "source": "https://sketchfab.com/3d-models/mouth-freshner-spearmint-88ddf7803c31407f9bf293d394dcd26e",
+   "licence": "CC Attribution",
+   "author": "zeekhan733",
+   "title": "Mouth Freshner Spearmint",
+   "triangles": 6818,
+   "size_m": [
+    0.09,
+    0.035,
+    0.09
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_88ddf780.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a mouth-freshener bottle; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/88ddf7803c31407f9bf293d394dcd26e",
+   "candidate_for": "mentha_spicata"
+  },
+  {
+   "id": "skf3_c217a737",
+   "source": "https://sketchfab.com/3d-models/santorini-thera-greek-minoan-volcano-island-c217a7371013468d84ab481298824987",
+   "licence": "CC Attribution",
+   "author": "arizonaguide",
+   "title": "Santorini - Thera Greek Minoan Volcano Island",
+   "triangles": 8192,
+   "size_m": [
+    41581.75,
+    34243.801,
+    1655.067
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_c217a737.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a volcanic-island terrain scan; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/c217a7371013468d84ab481298824987",
+   "candidate_for": "olea_europaea"
+  },
+  {
+   "id": "skf3_e21199e3",
+   "source": "https://sketchfab.com/3d-models/spider-plant-e21199e3cb874bc2be8a13588813f9f5",
+   "licence": "CC Attribution",
+   "author": "sauti",
+   "title": "Spider Plant",
+   "triangles": 9174,
+   "size_m": [
+    1.737,
+    0.919,
+    1.339
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/skf3_e21199e3.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: two spider plants in hanging pots, tiny; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/e21199e3cb874bc2be8a13588813f9f5",
+   "candidate_for": "chlorophytum_comosum"
+  },
+  {
+   "id": "skf3_11acf710",
+   "source": "https://sketchfab.com/3d-models/date-palm-11acf710e6c149daa8d6fb8cdc5d087f",
+   "licence": "CC Attribution",
+   "author": "evolveduk",
+   "title": "Date Palm",
+   "triangles": 9941,
+   "size_m": [
+    5.459,
+    5.213,
+    7.339
+   ],
+   "alpha_card_tri_share": 0.563,
+   "preview": "asset-previews/skf3_11acf710.jpg",
+   "grade": "B",
+   "leaf_type": "frond_cards",
+   "species_fit": "species",
+   "maps_to": [
+    "phoenix_dactylifera"
+   ],
+   "rationale": "Looked at: tall palm with a feathery crown and textured trunk; reads as a date palm at 5 m (no fishbone seen) and 15 m. 56 % alpha-card triangles. Authored 7.3 m tall against the sourced 15-40 m, so a young palm, not a mature one. Made in Treeit; source calls it 'Date Palm'.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/11acf710e6c149daa8d6fb8cdc5d087f",
+   "candidate_for": "phoenix_dactylifera"
+  },
+  {
+   "id": "skf3_cbcca629",
+   "source": "https://sketchfab.com/3d-models/hornwort-cbcca629bd5c40969100a429574a6df4",
+   "licence": "CC Attribution",
+   "author": "pizzabones",
+   "title": "Hornwort",
+   "triangles": 10568,
+   "size_m": [
+    89.499,
+    93.227,
+    248.747
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_cbcca629.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a handful of giant faceted green polygons (scale and form wrong); not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/cbcca629bd5c40969100a429574a6df4",
+   "candidate_for": "ceratophyllum_demersum"
+  },
+  {
+   "id": "skf3_805e6e8c",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Chinese hibiscus (6/20)",
+   "triangles": 13616,
+   "size_m": [
+    1.128,
+    0.936,
+    1.014
+   ],
+   "alpha_card_tri_share": 0.431,
+   "preview": "asset-previews/skf3_805e6e8c.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: 1 m hibiscus shrub with red flowers, thin and sparse; too small to read as a hedge at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/805e6e8c0dad4860970a1588827a8c5a",
+   "candidate_for": "hibiscus_rosa_sinensis"
+  },
+  {
+   "id": "skf3_84ddce09",
+   "source": "https://sketchfab.com/3d-models/3december-2022-spider-plant-84ddce097c5944ef94980d391abe6269",
+   "licence": "CC Attribution",
+   "author": "SecretImbecile",
+   "title": "3December 2022 - Spider Plant",
+   "triangles": 14364,
+   "size_m": [
+    0.216,
+    0.208,
+    0.228
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_84ddce09.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 5 cm spider-plant, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/84ddce097c5944ef94980d391abe6269",
+   "candidate_for": "chlorophytum_comosum"
+  },
+  {
+   "id": "skf3_73e19eaf",
+   "source": "https://sketchfab.com/3d-models/herbaceous-potion-73e19eaf6ac741f8895806b36e131351",
+   "licence": "CC Attribution",
+   "author": "Wormsnacks",
+   "title": "Herbaceous Potion",
+   "triangles": 15636,
+   "size_m": [
+    297.249,
+    282.7,
+    304.893
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_73e19eaf.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a potion-bottle scene; the camera sits inside it; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/73e19eaf6ac741f8895806b36e131351",
+   "candidate_for": "rosmarinus_officinalis"
+  },
+  {
+   "id": "skf3_4a0a7b34",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-1120-4a0a7b3480974f70b659569cfc6614b3",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Chinese hibiscus (11/20)",
+   "triangles": 18297,
+   "size_m": [
+    1.213,
+    1.07,
+    1.055
+   ],
+   "alpha_card_tri_share": 0.308,
+   "preview": "asset-previews/skf3_4a0a7b34.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: 1 m dense round shrub, no flowers; small at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/4a0a7b3480974f70b659569cfc6614b3",
+   "candidate_for": "hibiscus_rosa_sinensis"
+  },
+  {
+   "id": "skf3_98b96bd4",
+   "source": "https://sketchfab.com/3d-models/potted-aloe-vera-98b96bd41a1c4ab7af10c938e280c8c8",
+   "licence": "CC Attribution",
+   "author": "Jubbies",
+   "title": "Potted Aloe Vera",
+   "triangles": 18845,
+   "size_m": [
+    0.129,
+    0.253,
+    0.265
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_98b96bd4.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a tiny potted aloe, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/98b96bd41a1c4ab7af10c938e280c8c8",
+   "candidate_for": "aloe_vera"
+  },
+  {
+   "id": "skf3_33e52240",
+   "source": "https://sketchfab.com/3d-models/lemongrass-33e522407a9944b2b07f5e8facfc0f86",
+   "licence": "CC Attribution",
+   "author": "kkksenyaaa",
+   "title": "Lemongrass",
+   "triangles": 19984,
+   "size_m": [
+    0.225,
+    0.232,
+    1.998
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_33e52240.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a single lemongrass stalk, not a clump.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/33e522407a9944b2b07f5e8facfc0f86",
+   "candidate_for": "cymbopogon_citratus"
+  },
+  {
+   "id": "skf3_86982789",
+   "source": "https://sketchfab.com/3d-models/rhapis-palm-3d-model-by-wade-connolly-869827893cfa45e4837fafb0cfa2064c",
+   "licence": "CC Attribution",
+   "author": "wadcon",
+   "title": "Rhapis Palm 3D Model by Wade Connolly",
+   "triangles": 20240,
+   "size_m": [
+    1.153,
+    1.216,
+    1.383
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_86982789.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [
+    "rhapis_excelsa"
+   ],
+   "rationale": "Looked at: 1.4 m clump of slender canes with real palmate fronds, reads as a lady palm at 5 m, a small green palm shape at 15 m. Source says only 'Rhapis Palm', so genus level.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/869827893cfa45e4837fafb0cfa2064c",
+   "candidate_for": "rhapis_excelsa"
+  },
+  {
+   "id": "skf3_98c88fbc",
+   "source": "https://sketchfab.com/3d-models/mc-powerful-deep-chestnut-bougainvillea-t-pose-98c88fbcda5e49f0a9b8a755023495f8",
+   "licence": "CC Attribution",
+   "author": "hearthackers787",
+   "title": "Mc-powerful-deep-chestnut-bougainvillea-T-pose",
+   "triangles": 20988,
+   "size_m": [
+    1.902,
+    2.0,
+    2.597
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_98c88fbc.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a white T-pose human mannequin, not a plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/98c88fbcda5e49f0a9b8a755023495f8",
+   "candidate_for": "bougainvillea_glabra",
+   "untextured_material_share": 1.0
+  },
+  {
+   "id": "skf3_fceb7dee",
+   "source": "https://sketchfab.com/3d-models/exotic-low-poly-plants-pack-fceb7deeae26441c8b394426568c2cab",
+   "licence": "CC Attribution",
+   "author": "dicramble",
+   "title": "Exotic Low-Poly Plants Pack",
+   "triangles": 28133,
+   "size_m": [
+    51.676,
+    66.579,
+    38.992
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_fceb7dee.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a low-poly mixed scene with a trunk and pots, not one plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/fceb7deeae26441c8b394426568c2cab",
+   "candidate_for": "strelitzia_reginae"
+  },
+  {
+   "id": "skf3_fb57d2cf",
+   "source": "https://sketchfab.com/3d-models/yuzu-japanese-orange-polycam-fb57d2cf33af44349e11161069ae222c",
+   "licence": "CC Attribution",
+   "author": "rocknrodent",
+   "title": "Yuzu (Japanese) Orange - Polycam",
+   "triangles": 28770,
+   "size_m": [
+    0.058,
+    0.059,
+    0.053
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_fb57d2cf.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a yuzu fruit, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/fb57d2cf33af44349e11161069ae222c",
+   "candidate_for": "citrus_x_sinensis"
+  },
+  {
+   "id": "skf3_ebf5a55a",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-3750-ebf5a55ab24e4b9eb3156d37a2ec8aa1",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Frangipani tree (37/50)",
+   "triangles": 30053,
+   "size_m": [
+    2.625,
+    2.417,
+    1.985
+   ],
+   "alpha_card_tri_share": 0.262,
+   "preview": "asset-previews/skf3_ebf5a55a.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "genus",
+   "maps_to": [
+    "plumeria_rubra"
+   ],
+   "rationale": "Looked at: candelabra branching with broad leaves, reads at both distances; title 'Frangipani tree' so genus-level.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/ebf5a55ab24e4b9eb3156d37a2ec8aa1",
+   "candidate_for": "plumeria_rubra"
+  },
+  {
+   "id": "skf3_3579fe79",
+   "source": "https://sketchfab.com/3d-models/bougainvillea-3579fe79be0d46d49de80d5478a4e3cd",
+   "licence": "CC Attribution",
+   "author": "amn009",
+   "title": "Bougainvillea",
+   "triangles": 36118,
+   "size_m": [
+    5.136,
+    5.895,
+    1.468
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_3579fe79.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a dark photogrammetry blob, no readable plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/3579fe79be0d46d49de80d5478a4e3cd",
+   "candidate_for": "bougainvillea_glabra"
+  },
+  {
+   "id": "skf3_734c4537",
+   "source": "https://sketchfab.com/3d-models/date-palm-and-vegetation-734c4537ca8547209a54df49f134824a",
+   "licence": "CC Attribution",
+   "author": "borsh_and",
+   "title": "Date palm and vegetation",
+   "triangles": 40539,
+   "size_m": [
+    9.958,
+    10.639,
+    5.175
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/skf3_734c4537.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: three stylised young date palms with cartoon trunk rings and ground plants; not realistic at 5 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/734c4537ca8547209a54df49f134824a",
+   "candidate_for": "phoenix_dactylifera"
+  },
+  {
+   "id": "skf3_86de7dea",
+   "source": "https://sketchfab.com/3d-models/blenderpunica-granatum-86de7deaf6cc4324809fc4e005ed9d81",
+   "licence": "CC Attribution",
+   "author": "UESReseach",
+   "title": "Blender石榴(Punica Granatum)",
+   "triangles": 42360,
+   "size_m": [
+    3.983,
+    2.763,
+    2.947
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_86de7dea.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "punica_granatum"
+   ],
+   "rationale": "Looked at: Grove-generated pomegranate in red flower on a thin single stem, 3-4 m (sourced 3.0-3.7 m), real leaves and flowers, reads at 5 m and 15 m. Sparse and single-stemmed, no fruit, generated not scanned. 42k tris.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/86de7deaf6cc4324809fc4e005ed9d81",
+   "candidate_for": "punica_granatum"
+  },
+  {
+   "id": "skf3_af07eee6",
+   "source": "https://sketchfab.com/3d-models/japanese-sweet-flag-geisel-af07eee6c6af49b39dffcabb10f0db8b",
+   "licence": "CC Attribution",
+   "author": "pako2",
+   "title": "japanese sweet flag (geisel)",
+   "triangles": 49999,
+   "size_m": [
+    2.067,
+    3.381,
+    1.467
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_af07eee6.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a photogrammetry scrap of a planter with a few green blades; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/af07eee6c6af49b39dffcabb10f0db8b",
+   "candidate_for": "acorus_gramineus"
+  },
+  {
+   "id": "skf3_f59bab2a",
+   "source": "https://sketchfab.com/3d-models/free-livistona-chinensis-fan-palm-f59bab2a81244b869e1ca5aefd4ad94a",
+   "licence": "CC Attribution",
+   "author": "AllQuad",
+   "title": "[FREE]  Livistona Chinensis - Fan Palm",
+   "triangles": 61856,
+   "size_m": [
+    1.601,
+    1.455,
+    1.529
+   ],
+   "alpha_card_tri_share": 0.878,
+   "preview": "asset-previews/skf3_f59bab2a.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: 1.6 m livistona fan palm with real fronds but a white pot is part of the model; reads at 5 m, small at 15 m. Same file as library skf_f59bab2a.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f59bab2a81244b869e1ca5aefd4ad94a",
+   "candidate_for": "livistona_chinensis"
+  },
+  {
+   "id": "skf3_2957a532",
+   "source": "https://sketchfab.com/3d-models/the-flower-of-jasminum-sambac-2957a532a6f543c1bc7506af4cb6e75e",
+   "licence": "CC Attribution",
+   "author": "zoufuxian",
+   "title": "茉莉花 The Flower of Jasminum sambac",
+   "triangles": 75333,
+   "size_m": [
+    0.148,
+    0.14,
+    0.141
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_2957a532.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 2 cm jasmine flower, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/2957a532a6f543c1bc7506af4cb6e75e",
+   "candidate_for": "jasminum_sambac"
+  },
+  {
+   "id": "skf3_0a927616",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-740-0a92761615b24e0c90217cb039aa284f",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Blue jacaranda (7/40)",
+   "triangles": 78763,
+   "size_m": [
+    4.304,
+    3.995,
+    4.157
+   ],
+   "alpha_card_tri_share": 0.344,
+   "preview": "asset-previews/skf3_0a927616.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaflets+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "jacaranda_mimosifolia"
+   ],
+   "rationale": "Looked at: full blue-flowering crown on a clean trunk at 5 m, even rounded silhouette at 15 m, no flat planes. Second jacaranda of the PlantCatalog series.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/0a92761615b24e0c90217cb039aa284f",
+   "candidate_for": "jacaranda_mimosifolia"
+  },
+  {
+   "id": "skf3_ced201b1",
+   "source": "https://sketchfab.com/3d-models/220914shiliu-punica-granatum-2in1-ced201b1d7484f34b5ae0baa5a94fbb5",
+   "licence": "CC Attribution",
+   "author": "andykwok91011",
+   "title": "220914shiliu-Punica_granatum-2in1",
+   "triangles": 88576,
+   "size_m": [
+    6.319,
+    2.87,
+    3.37
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_ced201b1.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: three pomegranate fruits (scan), no plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/ced201b1d7484f34b5ae0baa5a94fbb5",
+   "candidate_for": "punica_granatum"
+  },
+  {
+   "id": "skf3_71e14714",
+   "source": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-71e14714f3984780958dab39567acbab",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 クスノキ Camphor Tree, Cinnamomum camphora",
+   "triangles": 90232,
+   "size_m": [
+    25.584,
+    25.359,
+    20.778
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_71e14714.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a photogrammetry trunk base with a rope and moss, a ground patch; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/71e14714f3984780958dab39567acbab",
+   "candidate_for": "cinnamomum_camphora"
+  },
+  {
+   "id": "skf3_db514aa7",
+   "source": "https://sketchfab.com/3d-models/fatsia-japonica-db514aa7154742eda8bcc2e3e3438108",
+   "licence": "CC Attribution",
+   "author": "xty021218",
+   "title": "Fatsia Japonica",
+   "triangles": 90846,
+   "size_m": [
+    0.483,
+    0.557,
+    0.568
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_db514aa7.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: 0.3 m potted fatsia, a dot at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/db514aa7154742eda8bcc2e3e3438108",
+   "candidate_for": "fatsia_japonica"
+  },
+  {
+   "id": "skf3_a8d8109b",
+   "source": "https://sketchfab.com/3d-models/crimson-bottlebrush-a8d8109b32da482ab0988c055b64cbba",
+   "licence": "CC Attribution",
+   "author": "yul273",
+   "title": "Crimson Bottlebrush",
+   "triangles": 94210,
+   "size_m": [
+    2.257,
+    2.81,
+    0.835
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_a8d8109b.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a photogrammetry wall and ground scan with a few bottlebrush stems; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/a8d8109b32da482ab0988c055b64cbba",
+   "candidate_for": "callistemon_citrinus"
+  },
+  {
+   "id": "skf3_d3be8fed",
+   "source": "https://sketchfab.com/3d-models/lowpoly-fruits-vegetables-d3be8fed96eb48be88b47bbe8d2951e1",
+   "licence": "CC Attribution",
+   "author": "norgeotloic",
+   "title": "Lowpoly Fruits & Vegetables",
+   "triangles": 99889,
+   "size_m": [
+    1491.301,
+    1079.612,
+    200.127
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d3be8fed.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a heap of fruit (pineapple, kiwi, artichoke), no pomegranate plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d3be8fed96eb48be88b47bbe8d2951e1",
+   "candidate_for": "punica_granatum"
+  },
+  {
+   "id": "skf3_46abe3eb",
+   "source": "https://sketchfab.com/3d-models/198-yr-cupressus-sempervirens-monumental-tree-46abe3eb9112443baacc443d85a49e98",
+   "licence": "CC Attribution",
+   "author": "Scanlife",
+   "title": "198 yr Cupressus Sempervirens - monumental tree",
+   "triangles": 110013,
+   "size_m": [
+    17.775,
+    17.472,
+    22.483
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_46abe3eb.jpg",
+   "grade": "C",
+   "leaf_type": "none",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: photogrammetry trunk of a 198-year-old cypress with a ground patch; no crown in frame.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/46abe3eb9112443baacc443d85a49e98",
+   "candidate_for": "cupressus_sempervirens"
+  },
+  {
+   "id": "skf3_2a0dbcdf",
+   "source": "https://sketchfab.com/3d-models/chinese-banyan-ficus-microcarpa-2a0dbcdf8f5d48f5ad79987c7a8170ce",
+   "licence": "CC Attribution",
+   "author": "Valery.Li",
+   "title": "Chinese Banyan (Ficus Microcarpa)",
+   "triangles": 111392,
+   "size_m": [
+    17.834,
+    17.667,
+    20.276
+   ],
+   "alpha_card_tri_share": 0.277,
+   "preview": "asset-previews/skf3_2a0dbcdf.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: realistic banyan with hanging aerial roots and dark crown, but the tree is taller than the 5 m and 15 m framing so the crown is cut off; not gradeable on this rubric, treated as C.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/2a0dbcdf8f5d48f5ad79987c7a8170ce",
+   "candidate_for": "ficus_microcarpa"
+  },
+  {
+   "id": "skf3_f23b8272",
+   "source": "https://sketchfab.com/3d-models/plumeria-rubra-f23b8272cc874b5dae83bfc94dfb935c",
+   "licence": "CC Attribution",
+   "author": "zoufuxian",
+   "title": "鸡蛋花 Plumeria rubra",
+   "triangles": 112494,
+   "size_m": [
+    0.155,
+    0.154,
+    0.086
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f23b8272.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 1 cm plumeria flower, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f23b8272cc874b5dae83bfc94dfb935c",
+   "candidate_for": "plumeria_rubra"
+  },
+  {
+   "id": "skf3_13209c1d",
+   "source": "https://sketchfab.com/3d-models/ficus-carica-13209c1dc419457a836e8a0340b77028",
+   "licence": "CC Attribution",
+   "author": "andykwok91011",
+   "title": "无花果Ficus carica",
+   "triangles": 124998,
+   "size_m": [
+    0.219,
+    0.181,
+    0.055
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_13209c1d.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: two fig fruits, 3 cm; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/13209c1dc419457a836e8a0340b77028",
+   "candidate_for": "ficus_carica"
+  },
+  {
+   "id": "skf3_1d4afb66",
+   "source": "https://sketchfab.com/3d-models/fig-ficus-carica-1d4afb668a714188935966d3ee9b2e33",
+   "licence": "CC Attribution",
+   "author": "disc3d",
+   "title": "Fig (Ficus carica)",
+   "triangles": 126788,
+   "size_m": [
+    27.928,
+    27.733,
+    32.455
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_1d4afb66.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: two huge fig fruits filling the frame; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/1d4afb668a714188935966d3ee9b2e33",
+   "candidate_for": "ficus_carica"
+  },
+  {
+   "id": "skf3_d15b7c7b",
+   "source": "https://sketchfab.com/3d-models/strelitzia-reginae-d15b7c7b717646e596076a64aaffa2c9",
+   "licence": "CC Attribution",
+   "author": "zit008",
+   "title": "Strelitzia reginae",
+   "triangles": 149805,
+   "size_m": [
+    3.36,
+    7.17,
+    1.179
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d15b7c7b.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a photogrammetry ground scan with a few strelitzia leaves; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d15b7c7b717646e596076a64aaffa2c9",
+   "candidate_for": "strelitzia_reginae"
+  },
+  {
+   "id": "skf3_1f98c425",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-340-1f98c4259dc747438de86dc47d753c08",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Blue jacaranda (3/40)",
+   "triangles": 167201,
+   "size_m": [
+    5.937,
+    5.987,
+    5.812
+   ],
+   "alpha_card_tri_share": 0.339,
+   "preview": "asset-previews/skf3_1f98c425.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaflets+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "jacaranda_mimosifolia"
+   ],
+   "rationale": "Looked at: broad branching jacaranda crown, flowers and fine foliage, no fishbone at 5 m, good 15 m silhouette.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/1f98c4259dc747438de86dc47d753c08",
+   "candidate_for": "jacaranda_mimosifolia"
+  },
+  {
+   "id": "skf3_a9cb68fd",
+   "source": "https://sketchfab.com/3d-models/blenderlagerstroemia-indica-a9cb68fdbc1d4f148dad2f72146483a3",
+   "licence": "CC Attribution",
+   "author": "UESReseach",
+   "title": "Blender紫薇(Lagerstroemia Indica)",
+   "triangles": 175817,
+   "size_m": [
+    1.423,
+    1.534,
+    2.766
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_a9cb68fd.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "lagerstroemia_indica"
+   ],
+   "rationale": "Looked at: Grove-generated crape myrtle, 2.8 m, slender trunk and a sparse purple-pink flower crown; small and thin at 15 m but reads as a flowering tree. Sparse; use as a young specimen.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/a9cb68fdbc1d4f148dad2f72146483a3",
+   "candidate_for": "lagerstroemia_indica"
+  },
+  {
+   "id": "skf3_c2b66c50",
+   "source": "https://sketchfab.com/3d-models/salvia-guaranitica-c2b66c5043f4452589e47293ef93e9e1",
+   "licence": "CC Attribution",
+   "author": "dinda.artist",
+   "title": "Salvia Guaranitica",
+   "triangles": 188264,
+   "size_m": [
+    132.024,
+    76.672,
+    132.916
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_c2b66c50.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: authored 132 m across with flat dark-green colour only; leaves fill the frame; scale and look both wrong (and it is Salvia guaranitica, not leucantha); not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/c2b66c5043f4452589e47293ef93e9e1",
+   "candidate_for": "salvia_leucantha"
+  },
+  {
+   "id": "skf3_fbb15d00",
+   "source": "https://sketchfab.com/3d-models/otafukunanten-std-fbb15d006aa94163b9c7255b6d68cede",
+   "licence": "CC Attribution",
+   "author": "t2cp",
+   "title": "Otafukunanten Std",
+   "triangles": 196128,
+   "size_m": [
+    0.862,
+    0.676,
+    0.719
+   ],
+   "alpha_card_tri_share": 0.575,
+   "preview": "asset-previews/skf3_fbb15d00.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: 0.5 m golden shrub (Otafuku cultivar), small and low; vanishes at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/fbb15d006aa94163b9c7255b6d68cede",
+   "candidate_for": "nandina_domestica"
+  },
+  {
+   "id": "skf3_b36256a5",
+   "source": "https://sketchfab.com/3d-models/psidium-guajava-b36256a5d99941008bb1a95be62bf741",
+   "licence": "CC Attribution",
+   "author": "mjkzz",
+   "title": "Psidium Guajava",
+   "triangles": 200000,
+   "size_m": [
+    1.643,
+    1.379,
+    1.425
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_b36256a5.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: two guava fruits (one halved), 10 cm; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/b36256a5d99941008bb1a95be62bf741",
+   "candidate_for": "psidium_guajava"
+  },
+  {
+   "id": "skf3_ae20776e",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1340-ae20776e4a384a64923ae37df61ea13d",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Royal poinciana (13/40)",
+   "triangles": 242931,
+   "size_m": [
+    9.755,
+    9.061,
+    4.03
+   ],
+   "alpha_card_tri_share": 0.237,
+   "preview": "asset-previews/skf3_ae20776e.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaflets+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "delonix_regia"
+   ],
+   "rationale": "Looked at: wide flat-topped crown with red flower mass and fine foliage, correct umbrella silhouette at both distances, shadow dappled.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/ae20776e4a384a64923ae37df61ea13d",
+   "candidate_for": "delonix_regia"
+  },
+  {
+   "id": "skf3_5046ae40",
+   "source": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1640-5046ae4088714df4b3b2f0c479a40d47",
+   "licence": "CC Attribution",
+   "author": "PlantCatalog",
+   "title": "Realistic HD Royal poinciana (16/40)",
+   "triangles": 266168,
+   "size_m": [
+    7.235,
+    7.059,
+    3.677
+   ],
+   "alpha_card_tri_share": 0.231,
+   "preview": "asset-previews/skf3_5046ae40.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaflets+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "delonix_regia"
+   ],
+   "rationale": "Looked at: umbrella crown, red flowers over fine bipinnate leaves, single sturdy trunk; reads at 5 m and 15 m, no cards visible.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/5046ae4088714df4b3b2f0c479a40d47",
+   "candidate_for": "delonix_regia"
+  },
+  {
+   "id": "skf3_34caa6c4",
+   "source": "https://sketchfab.com/3d-models/cyperus-alternifolus-34caa6c4e73b44c39ac07db169b70d59",
+   "licence": "CC Attribution",
+   "author": "dgred",
+   "title": "Cyperus alternifolus",
+   "triangles": 297342,
+   "size_m": [
+    0.803,
+    0.616,
+    1.117
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_34caa6c4.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: potted 0.5 m umbrella sedge, the pot is part of the model; vanishes at 15 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/34caa6c4e73b44c39ac07db169b70d59",
+   "candidate_for": "cyperus_involucratus"
+  },
+  {
+   "id": "skf3_a6f5e2c3",
+   "source": "https://sketchfab.com/3d-models/strelitzia-nicolai-a6f5e2c3edc24c1bb25c1ddb3bc803df",
+   "licence": "CC Attribution",
+   "author": "zit008",
+   "title": "Strelitzia nicolai",
+   "triangles": 310146,
+   "size_m": [
+    8.687,
+    8.217,
+    4.16
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_a6f5e2c3.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a photogrammetry scene of a ruined wall with strelitzia in front; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/a6f5e2c3edc24c1bb25c1ddb3bc803df",
+   "candidate_for": "strelitzia_nicolai"
+  },
+  {
+   "id": "skf3_d0248242",
+   "source": "https://sketchfab.com/3d-models/papyrus-plant-d0248242b885491aae74e4d334281226",
+   "licence": "CC Attribution",
+   "author": "tguh.permadi",
+   "title": "Papyrus Plant",
+   "triangles": 330544,
+   "size_m": [
+    6.703,
+    7.399,
+    18.545
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d0248242_placed.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [
+    "cyperus_papyrus"
+   ],
+   "rationale": "Looked at: re-rendered at the placement scale 0.105 ( 1.95 m tall, 0.70 x 0.78 m; sourced height 1.5-2.4 m): genuine papyrus, about 8 slender stalks with thread umbels, reads as papyrus at 5 m; a single clump is thin at 15 m, so place in groups of 3 or more. Earlier C was only the authored 18.5 m size. 330k tris, no cards.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d0248242b885491aae74e4d334281226",
+   "candidate_for": "cyperus_papyrus",
+   "placement_scale": 0.105,
+   "placed_height_m": 1.947
+  },
+  {
+   "id": "skf3_a05b5ef5",
+   "source": "https://sketchfab.com/3d-models/phoenix-roebelenii-a05b5ef516234888abb8684ff59286d0",
+   "licence": "CC Attribution",
+   "author": "herve.rey.421",
+   "title": "Phoenix Roebelenii",
+   "triangles": 347645,
+   "size_m": [
+    2.618,
+    2.545,
+    2.601
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_a05b5ef5.jpg",
+   "grade": "A",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [
+    "phoenix_roebelenii"
+   ],
+   "rationale": "Looked at: pygmy date palm, short trunk and a full arching crown of fine real fronds, 2.6 m, no card planes; reads as a dwarf date palm at 5 m and 15 m. Foliage is dark under this sun but not black. Tags name Phoenix roebelenii.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/a05b5ef516234888abb8684ff59286d0",
+   "candidate_for": "phoenix_roebelenii"
+  },
+  {
+   "id": "skf3_f03774da",
+   "source": "https://sketchfab.com/3d-models/heavenly-bamboo-sketchup-f03774da06364d339e6d04a0539aaed2",
+   "licence": "CC Attribution",
+   "author": "malekalmsri",
+   "title": "Heavenly Bamboo Sketchup",
+   "triangles": 354222,
+   "size_m": [
+    3.07,
+    3.823,
+    2.832
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f03774da.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves+fruit",
+   "species_fit": "genus",
+   "maps_to": [],
+   "rationale": "Looked at: nandina shrub with red berries, but stray translucent discs (glass or plastic parts of the SketchUp export) float around it at 5 m; 3 m wide set.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f03774da06364d339e6d04a0539aaed2",
+   "candidate_for": "nandina_domestica"
+  },
+  {
+   "id": "skf3_dc17474a",
+   "source": "https://sketchfab.com/3d-models/cc0-lily-turf-liriope-muscari-dc17474a323f4f43b1c0b57e9a42dc45",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ヤブラン Lily Turf, Liriope muscari",
+   "triangles": 355312,
+   "size_m": [
+    9.138,
+    3.599,
+    9.159
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_dc17474a.jpg",
+   "grade": "C",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "species",
+   "maps_to": [],
+   "rationale": "Looked at: one liriope clump of three blades and two flower spikes, authored 1 m+; real leaves but a single sparse tuft; not tested as a drift.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/dc17474a323f4f43b1c0b57e9a42dc45",
+   "candidate_for": "liriope_muscari"
+  },
+  {
+   "id": "skf3_f697f7da",
+   "source": "https://sketchfab.com/3d-models/pomegranatepunica-granatum-l-f697f7daf2954899b7a5ed8a56e6722d",
+   "licence": "CC Attribution",
+   "author": "UESReseach",
+   "title": "pomegranate（Punica granatum L.）",
+   "triangles": 335240,
+   "size_m": [
+    3.566,
+    3.331,
+    4.533
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f697f7da.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves",
+   "species_fit": "species",
+   "maps_to": [
+    "punica_granatum"
+   ],
+   "rationale": "Looked at: L-system pomegranate, 4.5 m, fine twig crown with real small leaves, no flowers or fruit; airy but reads as a tree at 5 m and 15 m. Author tags it 'noai' (not for AI training; rendering it is not training). 335k tris.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f697f7daf2954899b7a5ed8a56e6722d",
+   "candidate_for": "punica_granatum"
+  },
+  {
+   "id": "skf3_110f62ea",
+   "source": "https://sketchfab.com/3d-models/cc0-camphor-tree-cinnamomum-camphora-110f62eab70e4510acc9eb2c3268c5d8",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 クスノキ Camphor Tree, Cinnamomum camphora",
+   "triangles": 389248,
+   "size_m": [
+    0.215,
+    0.256,
+    0.206
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_110f62ea.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 2 cm camphor leaf, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/110f62eab70e4510acc9eb2c3268c5d8",
+   "candidate_for": "cinnamomum_camphora"
+  },
+  {
+   "id": "skf3_72213356",
+   "source": "https://sketchfab.com/3d-models/hornwort-72213356e56a4dd29bd8d1b8f2011219",
+   "licence": "CC Attribution",
+   "author": "stephenandrewmalcolm",
+   "title": "Hornwort",
+   "triangles": 421514,
+   "size_m": [
+    0.486,
+    0.235,
+    0.441
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_72213356.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 5 cm hornwort sprig, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/72213356e56a4dd29bd8d1b8f2011219",
+   "candidate_for": "ceratophyllum_demersum"
+  },
+  {
+   "id": "skf3_d8083a67",
+   "source": "https://sketchfab.com/3d-models/livistona-d8083a67960b4c9f827bd8aaa321aaec",
+   "licence": "CC Attribution",
+   "author": "andrealves68219",
+   "title": "Livistona",
+   "triangles": 433499,
+   "size_m": [
+    389.603,
+    382.23,
+    989.08
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d8083a67.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: renders white and almost invisible; the glTF has no images and no base colour, so nothing to repair.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d8083a67960b4c9f827bd8aaa321aaec",
+   "candidate_for": "livistona_chinensis",
+   "untextured_material_share": 1.0
+  },
+  {
+   "id": "skf3_c8565ce8",
+   "source": "https://sketchfab.com/3d-models/egyptian-blue-lotus-plate-iii-solar-bloom-c8565ce83fe34590a27c83669b1c5ad7",
+   "licence": "CC Attribution",
+   "author": "consciousfractal",
+   "title": "Egyptian Blue Lotus Plate III — Solar Bloom",
+   "triangles": 452884,
+   "size_m": [
+    6.7,
+    1.854,
+    6.7
+   ],
+   "alpha_card_tri_share": 1.0,
+   "preview": "asset-previews/skf3_c8565ce8.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a blue lotus on a plate, a decorative object; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/c8565ce83fe34590a27c83669b1c5ad7",
+   "candidate_for": "nymphaea_caerulea"
+  },
+  {
+   "id": "skf3_7b6f11dc",
+   "source": "https://sketchfab.com/3d-models/cc0-japanese-aralia-fatsia-japonica-7b6f11dc685349e4859cb4fb403f1c78",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ヤツデ Japanese Aralia, Fatsia japonica",
+   "triangles": 455403,
+   "size_m": [
+    13.648,
+    5.742,
+    20.21
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_7b6f11dc.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: one fatsia leaf stalk (scan), not a plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/7b6f11dc685349e4859cb4fb403f1c78",
+   "candidate_for": "fatsia_japonica"
+  },
+  {
+   "id": "skf3_4b6d1583",
+   "source": "https://sketchfab.com/3d-models/calla-lily-floral-arrangement-4b6d1583377443899828f986d7a1ff93",
+   "licence": "CC Attribution",
+   "author": "khakhlas143",
+   "title": "Calla lily floral arrangement",
+   "triangles": 499448,
+   "size_m": [
+    1.87,
+    1.122,
+    1.785
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_4b6d1583.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: grey untextured calla lilies in a bunch; no images or colour in the file.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/4b6d1583377443899828f986d7a1ff93",
+   "candidate_for": "zantedeschia_aethiopica"
+  },
+  {
+   "id": "skf3_1f6d549a",
+   "source": "https://sketchfab.com/3d-models/cc0-star-jasmine-1f6d549a84f642f28804a987502a7680",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ケテイカカズラ Star Jasmine",
+   "triangles": 545412,
+   "size_m": [
+    0.229,
+    0.085,
+    0.125
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_1f6d549a.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 1 cm star-jasmine flower, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/1f6d549a84f642f28804a987502a7680",
+   "candidate_for": "trachelospermum_jasminoides"
+  },
+  {
+   "id": "skf3_73579baa",
+   "source": "https://sketchfab.com/3d-models/cc0-star-jasmine-73579baad5224296b17ce522e43d6ebc",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ケテイカカズラ Star Jasmine",
+   "triangles": 588517,
+   "size_m": [
+    5.98,
+    3.44,
+    6.384
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_73579baa.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a scanned twig with flowers and a colour chart, 0.2 m.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/73579baad5224296b17ce522e43d6ebc",
+   "candidate_for": "trachelospermum_jasminoides"
+  },
+  {
+   "id": "skf3_19172c1a",
+   "source": "https://sketchfab.com/3d-models/cc0-malayan-banyan-ficus-microcarpa-19172c1ae9584c49a6e7e614cdaefd82",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ガジュマル Malayan Banyan, Ficus microcarpa",
+   "triangles": 609313,
+   "size_m": [
+    0.215,
+    0.365,
+    0.159
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_19172c1a.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 1 cm ficus leaf cluster, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/19172c1ae9584c49a6e7e614cdaefd82",
+   "candidate_for": "ficus_microcarpa"
+  },
+  {
+   "id": "skf3_817b0b06",
+   "source": "https://sketchfab.com/3d-models/lilyturf-817b0b067f8942c1b8976c338d59982e",
+   "licence": "CC Attribution",
+   "author": "tojamerlin",
+   "title": "Lilyturf",
+   "triangles": 637750,
+   "size_m": [
+    125.406,
+    130.023,
+    149.076
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_817b0b06.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: giant dark blades filling the frame, scale wrong; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/817b0b067f8942c1b8976c338d59982e",
+   "candidate_for": "liriope_muscari"
+  },
+  {
+   "id": "skf3_c969c2a3",
+   "source": "https://sketchfab.com/3d-models/salvia-rosmarinus-c969c2a3fd29440a9e7b2ac87bf97cbb",
+   "licence": "CC Attribution",
+   "author": "adyatttt",
+   "title": "Salvia rosmarinus",
+   "triangles": 743256,
+   "size_m": [
+    0.373,
+    0.393,
+    0.44
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_c969c2a3.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a 5 cm rosemary sprig, a dot; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/c969c2a3fd29440a9e7b2ac87bf97cbb",
+   "candidate_for": "rosmarinus_officinalis"
+  },
+  {
+   "id": "skf3_3821ea73",
+   "source": "https://sketchfab.com/3d-models/pink-oleander-shrub-3d-model-3821ea730a7240f083351e7c09d3627b",
+   "licence": "CC Attribution",
+   "author": "misty-wind",
+   "title": "Pink Oleander Shrub 3D Model",
+   "triangles": 807735,
+   "size_m": [
+    13.102,
+    13.659,
+    3.249
+   ],
+   "alpha_card_tri_share": 0.619,
+   "preview": "asset-previews/skf3_3821ea73.jpg",
+   "grade": "B",
+   "leaf_type": "real_leaves+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "nerium_oleander"
+   ],
+   "rationale": "Looked at: a SET of about 25 oleander shrubs over 13 m with real narrow leaves and pink flowers; each shrub reads as oleander at 5 m and the group at 15 m. Alpha-card share 0.62 but no fishbone seen. Extract one shrub before placing; 808k tris for the set.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/3821ea730a7240f083351e7c09d3627b",
+   "candidate_for": "nerium_oleander"
+  },
+  {
+   "id": "skf3_f35eeab5",
+   "source": "https://sketchfab.com/3d-models/cc0-olive-olea-europaea-f35eeab5a8b54047811b4e3c5de2a9e3",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 オリーブ Olive, Olea europaea",
+   "triangles": 986844,
+   "size_m": [
+    0.187,
+    0.188,
+    0.216
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f35eeab5.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: an olive twig, 5 cm; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f35eeab5a8b54047811b4e3c5de2a9e3",
+   "candidate_for": "olea_europaea"
+  },
+  {
+   "id": "skf3_f47dc516",
+   "source": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-f47dc5165b3f4271a816405d630e4e1d",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ビワ Loquat, Eriobotrya japonica",
+   "triangles": 1068514,
+   "size_m": [
+    0.536,
+    0.293,
+    0.301
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_f47dc516.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a loquat twig, 3 cm; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/f47dc5165b3f4271a816405d630e4e1d",
+   "candidate_for": "eriobotrya_japonica"
+  },
+  {
+   "id": "skf3_a939174a",
+   "source": "https://sketchfab.com/3d-models/cc0-crape-myrtle-lagerstroemia-indica-a939174aff804cd0bf77600b7eab0831",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 サルスベリ Crape Myrtle, Lagerstroemia indica",
+   "triangles": 1381409,
+   "size_m": [
+    12.714,
+    5.006,
+    6.61
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_a939174a.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a flower cluster and leaf scan with a colour chart, 0.2 m; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/a939174aff804cd0bf77600b7eab0831",
+   "candidate_for": "lagerstroemia_indica"
+  },
+  {
+   "id": "skf3_d69e1be5",
+   "source": "https://sketchfab.com/3d-models/cc0-indian-lotus-nelumbo-nucifera-d69e1be5895f40e484f0db472a721c2f",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ハス Indian Lotus, Nelumbo nucifera",
+   "triangles": 1495719,
+   "size_m": [
+    28.075,
+    14.152,
+    14.671
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_d69e1be5.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: separate lotus parts (stalks, leaf, flower), scanned, not a plant; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/d69e1be5895f40e484f0db472a721c2f",
+   "candidate_for": "nelumbo_nucifera"
+  },
+  {
+   "id": "skf3_33a8895c",
+   "source": "https://sketchfab.com/3d-models/cc0-muscat-vitis-vinifera-33a8895c85704f8cbc3f146bf00b4a01",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ブドウ 🍇 マスカット Muscat, Vitis vinifera",
+   "triangles": 1595293,
+   "size_m": [
+    7.603,
+    5.112,
+    9.999
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_33a8895c.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a bunch of grapes; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/33a8895c85704f8cbc3f146bf00b4a01",
+   "candidate_for": "vitis_vinifera"
+  },
+  {
+   "id": "skf3_52518584",
+   "source": "https://sketchfab.com/3d-models/cc0-loquat-eriobotrya-japonica-52518584d618464ab375f72a8e1631af",
+   "licence": "CC0",
+   "author": "ffishAsia-and-floraZia",
+   "title": "CC0 ビワ Loquat, Eriobotrya japonica",
+   "triangles": 1618159,
+   "size_m": [
+    0.449,
+    0.088,
+    0.203
+   ],
+   "alpha_card_tri_share": 0.0,
+   "preview": "asset-previews/skf3_52518584.jpg",
+   "grade": "D",
+   "leaf_type": "none",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: a loquat leaf, 3 cm; not usable.",
+   "storage": "shared",
+   "manifest_key": "sketchfab/52518584d618464ab375f72a8e1631af",
+   "candidate_for": "eriobotrya_japonica"
+  },
+  {
+   "id": "fab_aloe_vera_ve4tbbrha_high",
+   "source": "https://www.fab.com/listings/a671b417-5ff6-4029-a7a2-edf5b1e19184",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Aloe Vera (high)",
+   "preview": "asset-previews/fab_aloe_vera_ve4tbbrha_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/aloe_vera_ve4tbbrha_high",
+   "megascans_id": "ve4tbbrha",
+   "quality_variant": "high",
+   "triangles": 123124,
+   "size_m": [
+    1.082,
+    0.805,
+    0.7
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aloe_vera"
+   ],
+   "rationale": "Looked at: scanned Aloe rosettes of thick fleshy lanceolate leaves with real marginal spines, 0.3-0.7 m tall and up to 1.1 m across; reads as an aloe at 5 m. A single plant is a dot at 15 m (C alone); a 3 m x 3 m drift of the six variations reads as an aloe bed at 5 m and as a thin dark band at 15 m, so use groups of 10 or more. No flower spike in any variation. Dark but convincing colour.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 71297,
+   "variation_heights_m": [
+    0.283,
+    0.7
+   ],
+   "render_seconds": {
+    "single_sheet": 4.2,
+    "drift_sheet": 2.7
+   },
+   "candidate_for": "aloe_vera",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_aloe_vera_ve4tbbrha_raw",
+   "source": "https://www.fab.com/listings/a671b417-5ff6-4029-a7a2-edf5b1e19184",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Aloe Vera (raw)",
+   "preview": "asset-previews/fab_aloe_vera_ve4tbbrha_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/aloe_vera_ve4tbbrha_raw",
+   "megascans_id": "ve4tbbrha",
+   "quality_variant": "raw",
+   "triangles": 120085,
+   "size_m": [
+    1.082,
+    0.805,
+    0.7
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aloe_vera"
+   ],
+   "rationale": "Looked at: same six variations as the high archive; LOD0 meshes within 3 % of the high ones (120k vs 123k hero triangles) and 8K instead of 4K maps; pixel-identical at 5 m and 15 m and in the close views. Costs 1.5x the render time for nothing visible; the high archive is preferred.",
+   "texture_res": "8K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 68878,
+   "variation_heights_m": [
+    0.283,
+    0.7
+   ],
+   "render_seconds": {
+    "single_sheet": 6.2,
+    "drift_sheet": 4.0
+   },
+   "candidate_for": "aloe_vera",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_broadleaf_lady_palm_shqke_high",
+   "source": "https://www.fab.com/listings/65df339a-ec8a-4a55-86c4-69b2d4517e8d",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Broadleaf Lady Palm (high)",
+   "preview": "asset-previews/fab_broadleaf_lady_palm_shqke_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/broadleaf_lady_palm_shqke_high",
+   "megascans_id": "shqke",
+   "quality_variant": "high",
+   "triangles": 2435,
+   "size_m": [
+    1.071,
+    1.052,
+    0.966
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rhapis_excelsa"
+   ],
+   "rationale": "Looked at: young multi-cane Rhapis, 0.7-1.4 m, real palmate fans of narrow broad-bladed leaflets on thin canes, only 2.4k triangles; clearly a lady palm at 5 m; small at 15 m (group three or more). Drift of the eight variations reads as a clump planting at 5 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 2040,
+   "variation_heights_m": [
+    0.713,
+    1.36
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "rhapis_excelsa",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_carolana_water_lily_uc2jdibia_high",
+   "source": "https://www.fab.com/listings/8eed0e35-6320-4611-a9a3-d28bd78550eb",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Carolana Water Lily (high)",
+   "preview": "asset-previews/fab_carolana_water_lily_uc2jdibia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/carolana_water_lily_uc2jdibia_high",
+   "megascans_id": "uc2jdibia",
+   "quality_variant": "high",
+   "triangles": 3253,
+   "size_m": [
+    2.003,
+    1.445,
+    1.017
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes+flowers",
+   "species_fit": "genus",
+   "maps_to": [
+    "nymphaea_caerulea"
+   ],
+   "rationale": "Looked at: round floating pads with notched bases and yellow star-shaped flowers on tall stalks and buds; reads as a water-lily patch at 5 m, thin at 15 m. Genus Nymphaea only (asset says 'Nymphaea', a hardy Carolana cultivar): the flower is yellow, not the blue of Nymphaea caerulea/nouchali, and a hardy hybrid says nothing about Cairo heat. Authored with the root plane 0.67 m below the pad plane: set the water line at the pad plane.",
+   "texture_res": "4K",
+   "hero_variation": "VarE",
+   "mean_triangles_lod0": 1957,
+   "variation_heights_m": [
+    0.583,
+    1.035
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "nymphaea_caerulea",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_cast___iron_plant_shdmr_high",
+   "source": "https://www.fab.com/listings/32d3e637-3cde-43aa-b158-9e1b1eaf37e8",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Cast - Iron Plant (high)",
+   "preview": "asset-previews/fab_cast___iron_plant_shdmr_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/cast___iron_plant_shdmr_high",
+   "megascans_id": "shdmr",
+   "quality_variant": "high",
+   "triangles": 1194,
+   "size_m": [
+    0.733,
+    0.825,
+    0.869
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aspidistra_elatior"
+   ],
+   "rationale": "Looked at: Aspidistra clumps with long dark glossy lanceolate leaves on petioles, 0.3-0.9 m, some leaves yellowing at the tips; the right habit and colour at 5 m, small at 15 m. Species from the asset tags ('elatior'; the latin name field holds the genus only). 1k-1.5k triangles per plant; the 33-plant drift reads as an Aspidistra bed.",
+   "texture_res": "4K",
+   "hero_variation": "VarI",
+   "mean_triangles_lod0": 1049,
+   "variation_heights_m": [
+    0.279,
+    0.869
+   ],
+   "render_seconds": {
+    "single_sheet": 3.0,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "aspidistra_elatior",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_chinese_fan_palm_ud4geejja_high",
+   "source": "https://www.fab.com/listings/baaece72-6e2b-4fef-a8b9-de5c0f244a43",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Chinese Fan Palm (high)",
+   "preview": "asset-previews/fab_chinese_fan_palm_ud4geejja_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/chinese_fan_palm_ud4geejja_high",
+   "megascans_id": "ud4geejja",
+   "quality_variant": "high",
+   "triangles": 3971,
+   "size_m": [
+    2.597,
+    2.444,
+    1.532
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "livistona_chinensis"
+   ],
+   "rationale": "Looked at: young Livistona, 1.0-1.5 m tall and 2.6 m wide, with real fan leaves on long petioles; on looks alone a B at 5 m. But the library's sourced mature height is 8-12 m: this scan is a juvenile, the wrong scale for a mature specimen (rubric C: wrong scale), and enlarging it 6x would make 15 cm leaves into 90 cm ones. Fine for a young plant or a container specimen only.",
+   "texture_res": "4K",
+   "hero_variation": "VarB",
+   "mean_triangles_lod0": 3325,
+   "variation_heights_m": [
+    1.006,
+    1.532
+   ],
+   "render_seconds": {
+    "single_sheet": 3.3,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "livistona_chinensis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_common_sage_tgcjdenr_raw",
+   "source": "https://www.fab.com/listings/fe0b475e-7281-44ac-8d0e-b475171345dd",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Common Sage (raw)",
+   "preview": "asset-previews/fab_common_sage_tgcjdenr_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/common_sage_tgcjdenr_raw",
+   "megascans_id": "tgcjdenr",
+   "quality_variant": "raw",
+   "triangles": 16346,
+   "size_m": [
+    0.267,
+    0.294,
+    0.498
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "salvia_officinalis"
+   ],
+   "rationale": "Looked at: a single thin stem with a few narrow dark leaves (0.2-0.5 m); at 5 m it is a wisp, at 15 m nothing. The 150-instance drift is a sparse ragged tangle that does not read as a sage mass. The Sage (ve3gbfoja) scan of the same species is far better.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 6198,
+   "variation_heights_m": [
+    0.018,
+    0.498
+   ],
+   "render_seconds": {
+    "single_sheet": 3.2,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "salvia_officinalis",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_english_ivy_rkeit_raw",
+   "source": "https://www.fab.com/listings/3b14e8ce-d4fe-4efa-af61-16335108b36f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "English Ivy (raw)",
+   "preview": "asset-previews/fab_english_ivy_rkeit_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/english_ivy_rkeit_raw",
+   "megascans_id": "rkEit",
+   "quality_variant": "raw",
+   "triangles": 281516,
+   "size_m": [
+    1.208,
+    0.11,
+    1.029
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "hedera_helix"
+   ],
+   "rationale": "Looked at: a 1.2 m x 1.0 m vertical curtain of real lobed ivy leaves (0.11 m deep, hero 282k triangles), variegated green-yellow; reads as ivy on a wall or trellis at 5 m and 15 m, and the 150-instance drift reads as a dense ivy hedge at 5 m. A panel, not a free-standing plant: use against a wall or trellis. Leaves dark under this sun.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 77251,
+   "variation_heights_m": [
+    0.265,
+    1.029
+   ],
+   "render_seconds": {
+    "single_sheet": 5.2,
+    "drift_sheet": 4.0
+   },
+   "candidate_for": "hedera_helix",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_english_ivy_xfcnebhqx_raw",
+   "source": "https://www.fab.com/listings/03c1d983-769b-408e-b520-8e15b097390c",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "English Ivy (raw)",
+   "preview": "asset-previews/fab_english_ivy_xfcnebhqx_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/english_ivy_xfcnebhqx_raw",
+   "megascans_id": "xfcnebhqx",
+   "quality_variant": "raw",
+   "triangles": 99397,
+   "size_m": [
+    1.746,
+    1.497,
+    0.132
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "hedera_helix"
+   ],
+   "rationale": "Looked at: flat creeping ivy mats 0.13 m high with real lobed leaves; the close view is convincing but the foliage is near-black, the drift is sparse with bare ground and bare vertical sprigs at 5 m, and it vanishes at 15 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 22892,
+   "variation_heights_m": [
+    0.116,
+    0.769
+   ],
+   "render_seconds": {
+    "single_sheet": 3.6,
+    "drift_sheet": 2.2
+   },
+   "candidate_for": "hedera_helix",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_ginger_lily_ud5fffgja_high",
+   "source": "https://www.fab.com/listings/4fe8dcca-e9db-4fde-bd4e-575e613d7f4f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Ginger Lily (high)",
+   "preview": "asset-previews/fab_ginger_lily_ud5fffgja_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/ginger_lily_ud5fffgja_high",
+   "megascans_id": "ud5fffgja",
+   "quality_variant": "high",
+   "triangles": 4080,
+   "size_m": [
+    1.287,
+    1.267,
+    1.699
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "hedychium_coronarium"
+   ],
+   "rationale": "Looked at: leafy reed-like stems 0.9-1.7 m with alternate lance leaves and terminal clusters of white flowers (latin name on the asset: Hedychium coronarium); reads as a ginger lily at 5 m, a small upright plant at 15 m. Only 0.8k-4k triangles. The 12-clump drift reads as a mass of leafy stems.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 2038,
+   "variation_heights_m": [
+    0.879,
+    1.699
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.1
+   },
+   "candidate_for": "hedychium_coronarium",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_grass_lawn_sfklehwa_8k",
+   "source": "https://www.fab.com/listings/7c3a681a-2833-4d6e-a749-af3264f024cd",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Grass Lawn (8k)",
+   "preview": "asset-previews/fab_grass_lawn_sfklehwa_8k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/grass_lawn_sfklehwa_8k",
+   "megascans_id": "sfklehwa",
+   "quality_variant": "8k",
+   "triangles": 524288,
+   "size_m": [
+    2.0,
+    2.0,
+    0.061
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 2 m scan, 6 cm relief, 8K maps; a uniform dry-olive lawn at 5 m, tile (1.5 per side) not noticeable; the close view shows blade structure. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "8K",
+   "render_seconds": {
+    "surface_sheet": 4.8,
+    "drift_sheet": 6.7
+   },
+   "surface_look": "olive-straw turf",
+   "drift_instances": 8
+  },
+  {
+   "id": "fab_jungle_ginger_sgbms_high",
+   "source": "https://www.fab.com/listings/a23ad8cc-3b8e-4268-a73f-08874639e432",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Jungle Ginger (high)",
+   "preview": "asset-previews/fab_jungle_ginger_sgbms_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/jungle_ginger_sgbms_high",
+   "megascans_id": "sgbms",
+   "quality_variant": "high",
+   "triangles": 3216,
+   "size_m": [
+    0.634,
+    0.702,
+    1.884
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "zingiber_officinale"
+   ],
+   "rationale": "Looked at: thin single canes with narrow leaves, 0.7-1.9 m; the asset tags itself 'wilting, dry, dead' and half of its eight variations are brown dead stalks. The hero is one cane at 5 m and a line at 15 m; the drift is a brown dying stand. Species is the asset's own label (Zingiber officinale), not checked against the look.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 1857,
+   "variation_heights_m": [
+    0.076,
+    1.884
+   ],
+   "render_seconds": {
+    "single_sheet": 3.0,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "zingiber_officinale",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_lawn_grass_sbykrep0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbykrep0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbykrep0_4k",
+   "megascans_id": "sbykrep0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.043
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 0.41 m scan with 4.3 cm of relief; tiled over 3 m x 3 m (7.3 tiles per side) it reads as a mown olive-yellow lawn at 5 m with no visible repeat, and a flat tinted rectangle at 15 m. Colour is dry straw, not a green summer lawn. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.7,
+    "drift_sheet": 2.4
+   },
+   "surface_look": "olive-straw turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_sbykrmp0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbykrmp0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbykrmp0_4k",
+   "megascans_id": "sbykrmp0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.049
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: as sbykrep0 (same 0.41 m scan size, 4.9 cm relief) but darker and browner; reads as a worn lawn at 5 m. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.8,
+    "drift_sheet": 2.5
+   },
+   "surface_look": "olive turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_sbyksep0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbyksep0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbyksep0_4k",
+   "megascans_id": "sbyksep0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.045
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: as sbykrep0, slightly greener-grey; a uniform mown lawn at 5 m; no repeat visible. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.8,
+    "drift_sheet": 2.5
+   },
+   "surface_look": "olive turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_tkynejer_8k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (8k)",
+   "preview": "asset-previews/fab_lawn_grass_tkynejer_8k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_tkynejer_8k",
+   "megascans_id": "tkynejer",
+   "quality_variant": "8k",
+   "triangles": 524288,
+   "size_m": [
+    2.0,
+    2.0,
+    0.026
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 2 m scan of a lawn in Brussels (asset tags): green grass with clover, moss, leaf litter and bare patches, real blade structure at 1.2 m; the most natural lawn here at 5 m, green rather than straw. Temperate cool-season grass, so a look-alike for a Cairo lawn. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "8K",
+   "render_seconds": {
+    "surface_sheet": 5.3,
+    "drift_sheet": 7.2
+   },
+   "surface_look": "green turf with clover and moss",
+   "drift_instances": 8
+  },
+  {
+   "id": "fab_lesser_periwinkle_sfsj3_raw",
+   "source": "https://www.fab.com/listings/b56971fa-930c-49c8-b687-88eb947b501f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lesser Periwinkle (raw)",
+   "preview": "asset-previews/fab_lesser_periwinkle_sfsj3_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lesser_periwinkle_sfsj3_raw",
+   "megascans_id": "sfsj3",
+   "quality_variant": "raw",
+   "triangles": 16189,
+   "size_m": [
+    1.369,
+    0.026,
+    2.159
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "vinca_minor"
+   ],
+   "rationale": "Looked at: each variation is a flat 0.02-0.03 m deep vine strip 0.4-1.4 m wide and 0.4-2.2 m tall; the drift stands them on end like a hedge of cards. The sourced height of Vinca minor is 0.08-0.15 m, so the scale is 10x wrong, and the leaves are real but the habit (a trailing groundcover) is not represented.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 7152,
+   "variation_heights_m": [
+    0.441,
+    2.237
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.6
+   },
+   "candidate_for": "vinca_minor",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_money_plant_uchmfdyia_raw",
+   "source": "https://www.fab.com/listings/ace17ad9-84af-4eea-ba72-c207ab1746d7",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Money Plant (raw)",
+   "preview": "asset-previews/fab_money_plant_uchmfdyia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/money_plant_uchmfdyia_raw",
+   "megascans_id": "uchmfdyia",
+   "quality_variant": "raw",
+   "triangles": 8846,
+   "size_m": [
+    0.167,
+    0.327,
+    0.409
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "epipremnum_aureum"
+   ],
+   "rationale": "Looked at: 0.1-0.5 m heart-leaf shoots; the 150-shoot drift is a generic leafy seedling bed, not a pothos vine, and nothing at 15 m. A climbing Epipremnum needs a trailing vine mesh that this scan is not.",
+   "texture_res": "8K",
+   "hero_variation": "VarB",
+   "mean_triangles_lod0": 8305,
+   "variation_heights_m": [
+    0.103,
+    0.527
+   ],
+   "render_seconds": {
+    "single_sheet": 5.2,
+    "drift_sheet": 3.2
+   },
+   "candidate_for": "epipremnum_aureum",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_oregano_umkhceeia_high",
+   "source": "https://www.fab.com/listings/cd05dcad-fae8-41d8-971d-7be8f30c9c20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Oregano (high)",
+   "preview": "asset-previews/fab_oregano_umkhceeia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/oregano_umkhceeia_high",
+   "megascans_id": "umkhceeia",
+   "quality_variant": "high",
+   "triangles": 118532,
+   "size_m": [
+    0.426,
+    0.414,
+    0.407
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "origanum_majorana"
+   ],
+   "rationale": "Looked at: scanned oregano with opposite ovate leaves on woody stems, 0.2-0.4 m mounds; the close view is the best foliage of the set; a single mound is a dot at 15 m, but the 81-instance drift reads as a herb bed at 5 m and as a dark band at 15 m. Latin name on the asset is Origanum vulgare, the library species is O. majorana, so genus level.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 117579,
+   "variation_heights_m": [
+    0.186,
+    0.407
+   ],
+   "render_seconds": {
+    "single_sheet": 4.3,
+    "drift_sheet": 3.4
+   },
+   "candidate_for": "origanum_majorana",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_oregano_umkhceeia_raw",
+   "source": "https://www.fab.com/listings/cd05dcad-fae8-41d8-971d-7be8f30c9c20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Oregano (raw)",
+   "preview": "asset-previews/fab_oregano_umkhceeia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/oregano_umkhceeia_raw",
+   "megascans_id": "umkhceeia",
+   "quality_variant": "raw",
+   "triangles": 300782,
+   "size_m": [
+    0.424,
+    0.412,
+    0.406
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "origanum_majorana"
+   ],
+   "rationale": "Looked at: same variations as the high archive, but LOD0 is 301k triangles for the hero (high 119k) with 8K maps; the sheets are indistinguishable at 5 m and 15 m and in the close views, the render takes 2x as long. High preferred.",
+   "texture_res": "8K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 257037,
+   "variation_heights_m": [
+    0.186,
+    0.406
+   ],
+   "render_seconds": {
+    "single_sheet": 8.6,
+    "drift_sheet": 6.3
+   },
+   "candidate_for": "origanum_majorana",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_red_fountain_grass_slglz_high",
+   "source": "https://www.fab.com/listings/b8248574-2b05-479e-88eb-05fc2a5647be",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Red Fountain Grass (high)",
+   "preview": "asset-previews/fab_red_fountain_grass_slglz_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/red_fountain_grass_slglz_high",
+   "megascans_id": "slglZ",
+   "quality_variant": "high",
+   "triangles": 34328,
+   "size_m": [
+    0.682,
+    0.707,
+    0.832
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "pennisetum_alopecuroides"
+   ],
+   "rationale": "Looked at: arching fine blades 0.4-0.8 m with bottlebrush plumes, dark red-brown (tags: Pennisetum setaceum 'rubrum'); a real fountain-grass silhouette at 5 m, small at 15 m; the drift reads as an ornamental grass bed at 5 m. Genus level: the library species is P. alopecuroides (accepted Cenchrus alopecuroides), the scan is the red-leaved P. setaceum.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 16661,
+   "variation_heights_m": [
+    0.405,
+    0.832
+   ],
+   "render_seconds": {
+    "single_sheet": 3.3,
+    "drift_sheet": 2.3
+   },
+   "candidate_for": "pennisetum_alopecuroides",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_rosemary_vgvoacmia_high",
+   "source": "https://www.fab.com/listings/4d913162-6a96-4733-a08e-e595e3a6905f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Rosemary (high)",
+   "preview": "asset-previews/fab_rosemary_vgvoacmia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/rosemary_vgvoacmia_high",
+   "megascans_id": "vgvoacmia",
+   "quality_variant": "high",
+   "triangles": 45408,
+   "size_m": [
+    0.351,
+    0.367,
+    0.325
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rosmarinus_officinalis"
+   ],
+   "rationale": "Looked at: scanned Salvia rosmarinus (Rosmarinus) sprigs, 0.05-0.42 m, with needle leaves on woody stems; on looks alone the best herb scan (B in a 3 m drift at 5 m: dense dark-green rosemary mass, a band at 15 m). But the library's sourced height is 1.5 m and the scan is 0.35 m: wrong scale for a mature shrub (rubric C), and a 4x enlargement would make 2 cm needles 8 cm. Usable as a low drift or young plants only.",
+   "texture_res": "4K",
+   "hero_variation": "VarG",
+   "mean_triangles_lod0": 39579,
+   "variation_heights_m": [
+    0.046,
+    0.419
+   ],
+   "render_seconds": {
+    "single_sheet": 3.6,
+    "drift_sheet": 3.1
+   },
+   "candidate_for": "rosmarinus_officinalis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_rosemary_vgvoacmia_raw",
+   "source": "https://www.fab.com/listings/4d913162-6a96-4733-a08e-e595e3a6905f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Rosemary (raw)",
+   "preview": "asset-previews/fab_rosemary_vgvoacmia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/rosemary_vgvoacmia_raw",
+   "megascans_id": "vgvoacmia",
+   "quality_variant": "raw",
+   "triangles": 73069,
+   "size_m": [
+    0.349,
+    0.365,
+    0.321
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rosmarinus_officinalis"
+   ],
+   "rationale": "Looked at: same variations as the high archive (hero 73k vs 45k triangles, 8K vs 4K maps); indistinguishable at 5 m, 15 m and close; render time 1.7x. Same scale problem as the high archive (0.35 m vs 1.5 m sourced).",
+   "texture_res": "8K",
+   "hero_variation": "VarG",
+   "mean_triangles_lod0": 62114,
+   "variation_heights_m": [
+    0.044,
+    0.417
+   ],
+   "render_seconds": {
+    "single_sheet": 6.0,
+    "drift_sheet": 4.3
+   },
+   "candidate_for": "rosmarinus_officinalis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_sage_ve3gbfoja_raw",
+   "source": "https://www.fab.com/listings/4da57ce9-d432-4871-a17c-0b6ea515cb20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Sage (raw)",
+   "preview": "asset-previews/fab_sage_ve3gbfoja_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/sage_ve3gbfoja_raw",
+   "megascans_id": "ve3gbfoja",
+   "quality_variant": "raw",
+   "triangles": 106135,
+   "size_m": [
+    0.709,
+    0.892,
+    0.728
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "salvia_officinalis"
+   ],
+   "rationale": "Looked at: lush leafy sage bushes 0.3-0.9 m with soft oblong leaves; a convincing sage at 5 m, a dot alone at 15 m, and the 40-instance drift is a dense sage bed at 5 m. Defect: variation B is a 0.02 m flat leaf fragment that renders as small black blobs on the ground; leave it out. Species from the asset's latin name (Salvia officinalis): a look-alike for Salvia leucantha, not that species.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 63782,
+   "variation_heights_m": [
+    0.019,
+    0.728
+   ],
+   "render_seconds": {
+    "single_sheet": 4.0,
+    "drift_sheet": 3.0
+   },
+   "candidate_for": "salvia_officinalis",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_taro_sjli7_high",
+   "source": "https://www.fab.com/listings/77c77f1b-b3ee-4682-9579-91237914d15b",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Taro (high)",
+   "preview": "asset-previews/fab_taro_sjli7_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/taro_sjli7_high",
+   "megascans_id": "sjli7",
+   "quality_variant": "high",
+   "triangles": 1830,
+   "size_m": [
+    1.295,
+    1.272,
+    1.333
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "colocasia_esculenta"
+   ],
+   "rationale": "Looked at: green-stemmed taro, 1.0-1.3 m, large heart-shaped peltate leaves with visible veins; reads as an elephant-ear at 5 m, small at 15 m; the 7-plant drift is lush with a few yellowing leaves. The asset's latin field says 'Colocasia Caladium', so genus level.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 1370,
+   "variation_heights_m": [
+    0.862,
+    1.333
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "colocasia_esculenta",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_taro_sjlkg_raw",
+   "source": "https://www.fab.com/listings/77c77f1b-b3ee-4682-9579-91237914d15b",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Taro (raw)",
+   "preview": "asset-previews/fab_taro_sjlkg_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/taro_sjlkg_raw",
+   "megascans_id": "sjlkG",
+   "quality_variant": "raw",
+   "triangles": 10338,
+   "size_m": [
+    1.094,
+    1.343,
+    1.159
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "colocasia_esculenta"
+   ],
+   "rationale": "Looked at: red-stemmed taro (latin field 'Colocasia Esculenta'), 1.0-1.4 m, dark green leaves; about a third of the leaves in the drift are scanned dead or dying, brown and curled. The hero is good at 5 m. The green-stemmed sjli7 is lusher; this one has the species-level name.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 8940,
+   "variation_heights_m": [
+    0.886,
+    1.159
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "colocasia_esculenta",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_zamia_palm_ulrtcjsia_high",
+   "source": "https://www.fab.com/listings/44bd49cb-d05e-4788-8eb1-46655de9962a",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Zamia Palm (high)",
+   "preview": "asset-previews/fab_zamia_palm_ulrtcjsia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/zamia_palm_ulrtcjsia_high",
+   "megascans_id": "ulrtcjsia",
+   "quality_variant": "high",
+   "triangles": 52157,
+   "size_m": [
+    1.582,
+    1.457,
+    0.699
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "zamia_furfuracea"
+   ],
+   "rationale": "Looked at: cycad rosettes of dark pinnate leaves with real rounded leaflets (0.4-0.7 m high, to 1.6 m across); reads as a Zamia at 5 m; small at 15 m; the drift of five variations reads as a cycad planting at 5 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarE",
+   "mean_triangles_lod0": 25260,
+   "variation_heights_m": [
+    0.409,
+    0.699
+   ],
+   "render_seconds": {
+    "single_sheet": 3.4,
+    "drift_sheet": 2.1
+   },
+   "candidate_for": "zamia_furfuracea",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
   }
  ],
  "species": [
@@ -1228,9 +4215,9 @@
   },
   {
    "slug": "aloe_vera",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_aloe_vera_ve4tbbrha_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "N031 Aloe Vera_Free version",
@@ -1264,9 +4251,9 @@
   },
   {
    "slug": "aspidistra_elatior",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_cast___iron_plant_shdmr_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -1410,13 +4397,13 @@
    "slug": "citrus_x_sinensis",
    "best_asset": "sf_lemon_tree",
    "grade": "A",
-   "drawable": "drawable_as_genus_standin",
+   "drawable": "drawable",
    "note": "Citrus genus stand-in: lemon tree for orange; fruit colour is wrong and must be relabelled or recoloured. Needs the lead's decision."
   },
   {
    "slug": "cupressus_sempervirens",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_46abe3eb",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -1466,16 +4453,16 @@
   },
   {
    "slug": "cyperus_involucratus",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_34caa6c4",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
   },
   {
    "slug": "cyperus_papyrus",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_d0248242",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Papyrus (Undertale)",
@@ -1538,8 +4525,8 @@
   },
   {
    "slug": "fatsia_japonica",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_db514aa7",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -1589,8 +4576,8 @@
   },
   {
    "slug": "ficus_microcarpa",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_2a0dbcdf",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -1703,9 +4690,9 @@
   },
   {
    "slug": "lagerstroemia_indica",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_a9cb68fd",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "CC0 サルスベリ Crape Myrtle, Lagerstroemia indica",
@@ -1746,8 +4733,8 @@
   },
   {
    "slug": "liriope_muscari",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_dc17474a",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -1790,7 +4777,7 @@
   },
   {
    "slug": "monstera_deliciosa",
-   "best_asset": "skf_1ab9bf84",
+   "best_asset": "skf3_0e497993",
    "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
@@ -1833,8 +4820,8 @@
   },
   {
    "slug": "nandina_domestica",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "skf3_f03774da",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
   },
@@ -1862,9 +4849,9 @@
   },
   {
    "slug": "nerium_oleander",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_3821ea73",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Pink Oleander Shrub 3D Model",
@@ -1877,9 +4864,9 @@
   },
   {
    "slug": "nymphaea_caerulea",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_carolana_water_lily_uc2jdibia_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Blue Lotus",
@@ -1942,9 +4929,9 @@
   },
   {
    "slug": "origanum_majorana",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_oregano_umkhceeia_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -1956,9 +4943,9 @@
   },
   {
    "slug": "pennisetum_alopecuroides",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_red_fountain_grass_slglz_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -1977,9 +4964,9 @@
   },
   {
    "slug": "phoenix_dactylifera",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_11acf710",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Phoenix Dactylifera M",
@@ -2006,9 +4993,9 @@
   },
   {
    "slug": "phoenix_roebelenii",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_a05b5ef5",
+   "grade": "A",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Phoenix Roebelenii",
@@ -2084,9 +5071,9 @@
   },
   {
    "slug": "punica_granatum",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "skf3_86de7dea",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Pomegranate",
@@ -2113,9 +5100,9 @@
   },
   {
    "slug": "rhapis_excelsa",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_broadleaf_lady_palm_shqke_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Lady Palm Tree",
@@ -2142,8 +5129,8 @@
   },
   {
    "slug": "rosmarinus_officinalis",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "fab_rosemary_vgvoacmia_high",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -2292,8 +5279,92 @@
    "grade": null,
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
+  },
+  {
+   "slug": "ravenala_madagascariensis",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "alocasia_macrorrhizos",
+   "best_asset": "skf3_75882b72",
+   "grade": "B",
+   "drawable": "drawable",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "livistona_chinensis",
+   "best_asset": "fab_chinese_fan_palm_ud4geejja_high",
+   "grade": "C",
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "dypsis_lutescens",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "colocasia_esculenta",
+   "best_asset": "fab_taro_sjlkg_raw",
+   "grade": "B",
+   "drawable": "drawable",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "canna_x_generalis",
+   "best_asset": null,
+   "grade": null,
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "epipremnum_aureum",
+   "best_asset": "fab_money_plant_uchmfdyia_raw",
+   "grade": "C",
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "hedera_helix",
+   "best_asset": "fab_english_ivy_rkeit_raw",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "hedychium_coronarium",
+   "best_asset": "fab_ginger_lily_ud5fffgja_high",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "salvia_officinalis",
+   "best_asset": "fab_sage_ve3gbfoja_raw",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "vinca_minor",
+   "best_asset": "fab_lesser_periwinkle_sfsj3_raw",
+   "grade": "C",
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "zamia_furfuracea",
+   "best_asset": "fab_zamia_palm_ulrtcjsia_high",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "zingiber_officinale",
+   "best_asset": "fab_jungle_ginger_sgbms_high",
+   "grade": "C",
+   "drawable": "not drawable yet"
   }
  ],
  "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded.",
- "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json: downloadable CC0/CC-BY models, ungraded; download needs a Sketchfab API token that does not exist on this machine (HTTP 401)"
+ "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json + sketchfab-manifest.json (83 downloaded with the client token, all graded in this table as skf3_*; binaries in ~/archpipe/shared/assets/user/landscape/sketchfab/, outside git)",
+ "fab_source": "knowledge/landscape/plants/fab-manifest.json: 27 Quixel Megascans archives from Fab (Fab Standard License), binaries in ~/archpipe/shared/assets/user/landscape/fab/, outside git"
 }

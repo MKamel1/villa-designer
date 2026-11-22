@@ -1,0 +1,21 @@
+{
+ "item": "good-16",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-07-hs-house-amman/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Dense trees and shrubs on both sides create strong lateral enclosure; the cantilevered structure overhead adds a defined ceiling, forming a clear outdoor room around the pool."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Trees, shrubs, and ground cover are visible on both sides of the pool, creating a lush, layered planting composition with clear vertical depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The cantilevered upper volume and the pool leading to the lit entrance create a single, strong focal axis."
+  }
+ }
+}

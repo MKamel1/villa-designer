@@ -1,0 +1,21 @@
+{
+ "item": "good-10",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-01-domus-maya/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "White walls on three sides, overhead beam, and a defined paved floor create a clear enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 0,
+   "evidence": "Single olive tree in a planter; no shrubs or ground cover layer visible. Planting reads as one layer, not lush or layered."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The courtyard is organized around the central olive tree in its circular concrete planter, with the yellow door and chair supporting rather than competing."
+  }
+ }
+}

@@ -1,0 +1,1929 @@
+{
+ "schema": "ldc-calibration/1",
+ "prereg": "knowledge/landscape/critic/PREREG.md",
+ "criteria": {
+  "A-ENCLOSURE": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 0
+   },
+   "recall": 0.5,
+   "recall_lower95": 0.121,
+   "known_good": {
+    "evaluated": 10,
+    "false_fail": 3,
+    "false_fail_rate": 0.3,
+    "false_fail_items": [
+     "P-SME-08",
+     "P-SAU-02",
+     "P-SAU-04"
+    ]
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "missed A3"
+  },
+  "A-FOCAL": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 10,
+    "false_fail": 2,
+    "false_fail_rate": 0.2,
+    "false_fail_items": [
+     "P-SME-08",
+     "P-SME-02"
+    ]
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "A-HIERARCHY": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 2,
+    "false_fail": 0,
+    "false_fail_rate": 0.0,
+    "false_fail_items": []
+   },
+   "d1_status": "warn",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "A-PATH-TERMINUS": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 2,
+    "false_fail": 2,
+    "false_fail_rate": 1.0,
+    "false_fail_items": [
+     "P-SAU-02",
+     "P-SAU-04"
+    ]
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "missed A3"
+  },
+  "A-ROOMS": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 10,
+    "false_fail": 0,
+    "false_fail_rate": 0.0,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "A-THRESHOLD": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 1,
+    "false_fail": 0,
+    "false_fail_rate": 0.0,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "C-FIRE-WIND": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "not_evaluated",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "C-POND-SUN": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "C-PRIVACY": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 2,
+    "caught": 2
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.526,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "C-SUMMER-EVENING": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "C-SUMMER-SHADE": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "C-WINTER-SUN": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 2,
+    "caught": 2
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.425,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-BED-CROWDING": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-DRIFTS": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.425,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-FISH-TOXIC": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-LAYERS": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.425,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-REPETITION": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-SEASONALITY": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-SITE-VIABLE": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-SIZE-VS-SPACE": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-SPECIES-KNOWN": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "warn",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-SUN-FIT": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "H-TOXIC-PLACEMENT": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.425,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-BRIEF-FEATURES": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-CAPACITY": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-DINE-AREA": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-DINE-CLEAR": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-ENCLOSURE": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "LS-HERB-SUN": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-HYDROZONE": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "not_evaluated",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-LOUNGE-AREA": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-LOUNGE-CLUSTER": {
+   "critic": "landscape-architect",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 8,
+    "false_fail": 0,
+    "false_fail_rate": 0.0,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it"
+  },
+  "LS-PATH-MAIN": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-PATH-SECONDARY": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-PATH-SERVICE": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-POND-SHADE": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": null,
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-ROOTZONE": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "warn",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-SCREEN": {
+   "critic": "climate",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-SOIL-DEPTH": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-STAND-AREA": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "not_evaluated",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "LS-TREE-BUILDING": {
+   "critic": "horticulturist",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "warn",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-BBQ": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-FIRE": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-GATHER-GROUPS": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-GATHER-ROUTE": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-GATHER-SEATS": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-PICKING": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-POND-VIEW": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-QUIET-NORTH": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-QUIET-SOUTH": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 1,
+    "caught": 1
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.425,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-SERVICE": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 1,
+    "caught": 1
+   },
+   "recall": 1.0,
+   "recall_lower95": 0.27,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "fail",
+   "calibrated": false,
+   "status": "recall-only (no evaluable professional known-good)",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "U-WINTER-STAY": {
+   "critic": "user",
+   "seeded_set1": {
+    "n": 0,
+    "caught": 0
+   },
+   "seeded_heldout": {
+    "n": 0,
+    "caught": 0
+   },
+   "recall": null,
+   "recall_lower95": null,
+   "known_good": {
+    "evaluated": 0,
+    "false_fail": 0,
+    "false_fail_rate": null,
+    "false_fail_items": []
+   },
+   "d1_status": "pass",
+   "calibrated": false,
+   "status": "no seeded defect targets it",
+   "false_fail_status": "not calibratable on precedents"
+  },
+  "V-ENCLOSURE": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "3/4",
+    "good_lt2": "3/6",
+    "separation": 0.25,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-FOCAL": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "3/4",
+    "good_lt2": "3/6",
+    "separation": 0.25,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 2,
+    "good_lt2": 2,
+    "good_zero": 2
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-AXIS": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "0/6",
+    "separation": 0.0,
+    "good_zero": false,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-RHYTHM": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-LAYERING": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-ROOMS": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 1,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-OVERALL": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  }
+ },
+ "critics": {
+  "landscape-architect": {
+   "seeded_defects_targeting": 3,
+   "caught_any_target": 2,
+   "recall": 0.667,
+   "recall_lower95": 0.254,
+   "heldout": {
+    "n": 1,
+    "caught": 0
+   },
+   "d1_verdict_fail": true,
+   "known_good_verdict_fail": 3,
+   "known_good_n": 10,
+   "false_fail": 0.3
+  },
+  "horticulturist": {
+   "seeded_defects_targeting": 11,
+   "caught_any_target": 11,
+   "recall": 1.0,
+   "recall_lower95": 0.803,
+   "heldout": {
+    "n": 4,
+    "caught": 4
+   },
+   "d1_verdict_fail": true,
+   "known_good_verdict_fail": null,
+   "known_good_n": 0,
+   "false_fail": "not calibratable on precedents"
+  },
+  "user": {
+   "seeded_defects_targeting": 7,
+   "caught_any_target": 7,
+   "recall": 1.0,
+   "recall_lower95": 0.721,
+   "heldout": {
+    "n": 3,
+    "caught": 3
+   },
+   "d1_verdict_fail": true,
+   "known_good_verdict_fail": null,
+   "known_good_n": 0,
+   "false_fail": "not calibratable on precedents"
+  },
+  "climate": {
+   "seeded_defects_targeting": 8,
+   "caught_any_target": 8,
+   "recall": 1.0,
+   "recall_lower95": 0.747,
+   "heldout": {
+    "n": 2,
+    "caught": 2
+   },
+   "d1_verdict_fail": true,
+   "known_good_verdict_fail": null,
+   "known_good_n": 0,
+   "false_fail": "not calibratable on precedents"
+  }
+ },
+ "seeded_set1": [
+  {
+   "defect": "lone-specimens",
+   "criterion": "H-DRIFTS",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "no-enclosure",
+   "criterion": "A-ENCLOSURE",
+   "critic": "landscape-architect",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "path-to-nowhere",
+   "criterion": "A-PATH-TERMINUS",
+   "critic": "landscape-architect",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "seat-in-summer-sun",
+   "criterion": "C-SUMMER-SHADE",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "pond-deep-shade",
+   "criterion": "C-POND-SUN",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "pond-no-view",
+   "criterion": "U-POND-VIEW",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "fire-upwind",
+   "criterion": "C-FIRE-WIND",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "privacy-exposed",
+   "criterion": "C-PRIVACY",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "toxic-by-herbs",
+   "criterion": "H-TOXIC-PLACEMENT",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "single-layer",
+   "criterion": "H-LAYERS",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "oversize-tree",
+   "criterion": "H-SIZE-VS-SPACE",
+   "critic": "horticulturist",
+   "base_status": null,
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "not-viable-plants",
+   "criterion": "H-SITE-VIABLE",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "sun-misfit",
+   "criterion": "H-SUN-FIT",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "warn",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "capacity-4",
+   "criterion": "U-GATHER-SEATS",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "dining-cut-off",
+   "criterion": "U-GATHER-ROUTE",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "gathering-in-winter-shade",
+   "criterion": "C-WINTER-SUN",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "evergreen-over-lounge",
+   "criterion": "C-WINTER-SUN",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "no-quiet",
+   "criterion": "U-QUIET-SOUTH",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "no-quiet",
+   "criterion": "U-QUIET-NORTH",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "green-only",
+   "criterion": "H-SEASONALITY",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  }
+ ],
+ "seeded_set2": [
+  {
+   "defect": "west-hedge-removed",
+   "criterion": "C-PRIVACY",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "west-hedge-removed",
+   "criterion": "A-ENCLOSURE",
+   "critic": "landscape-architect",
+   "base_status": "pass",
+   "status": "pass",
+   "excluded_base_not_clean": false,
+   "caught": false
+  },
+  {
+   "defect": "trees-only",
+   "criterion": "H-LAYERS",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "drifts-of-two",
+   "criterion": "H-DRIFTS",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "oleander-by-seats",
+   "criterion": "H-TOXIC-PLACEMENT",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "bbq-in-bed",
+   "criterion": "U-BBQ",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "service-narrow",
+   "criterion": "U-SERVICE",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "quiet-beside-dining",
+   "criterion": "U-QUIET-SOUTH",
+   "critic": "user",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "herb-in-shade",
+   "criterion": "LS-HERB-SUN",
+   "critic": "horticulturist",
+   "base_status": "pass",
+   "status": "warn",
+   "excluded_base_not_clean": false,
+   "caught": true
+  },
+  {
+   "defect": "pergola-removed",
+   "criterion": "C-PRIVACY",
+   "critic": "climate",
+   "base_status": "pass",
+   "status": "fail",
+   "excluded_base_not_clean": false,
+   "caught": true
+  }
+ ],
+ "base_status": {
+  "A-ENCLOSURE": "pass",
+  "A-PATH-TERMINUS": "pass",
+  "A-THRESHOLD": "pass",
+  "A-FOCAL": "pass",
+  "A-HIERARCHY": "pass",
+  "A-ROOMS": "pass",
+  "LS-LOUNGE-CLUSTER": "pass",
+  "LS-ENCLOSURE": "not_evaluated",
+  "H-SPECIES-KNOWN": "pass",
+  "H-SITE-VIABLE": "pass",
+  "H-BED-CROWDING": "pass",
+  "H-DRIFTS": "pass",
+  "H-REPETITION": "pass",
+  "H-LAYERS": "pass",
+  "H-SEASONALITY": "pass",
+  "H-SUN-FIT": "pass",
+  "H-TOXIC-PLACEMENT": "pass",
+  "H-FISH-TOXIC": "not_evaluated",
+  "LS-POND-SHADE": "not_evaluated",
+  "LS-HYDROZONE": "not_evaluated",
+  "LS-ROOTZONE": "pass",
+  "LS-TREE-BUILDING": "pass",
+  "LS-HERB-SUN": "pass",
+  "U-GATHER-SEATS": "pass",
+  "U-GATHER-GROUPS": "pass",
+  "U-GATHER-ROUTE": "pass",
+  "U-WINTER-STAY": "pass",
+  "U-QUIET-SOUTH": "pass",
+  "U-QUIET-NORTH": "pass",
+  "U-FIRE": "pass",
+  "U-BBQ": "pass",
+  "U-POND-VIEW": "pass",
+  "U-PICKING": "pass",
+  "U-SERVICE": "pass",
+  "LS-BRIEF-FEATURES": "pass",
+  "LS-PATH-MAIN": "pass",
+  "LS-PATH-SECONDARY": "pass",
+  "LS-PATH-SERVICE": "pass",
+  "LS-DINE-AREA": "pass",
+  "LS-DINE-CLEAR": "pass",
+  "LS-CAPACITY": "pass",
+  "LS-LOUNGE-AREA": "pass",
+  "LS-STAND-AREA": "pass",
+  "C-SUMMER-SHADE": "pass",
+  "C-SUMMER-EVENING": "pass",
+  "C-WINTER-SUN": "pass",
+  "C-PRIVACY": "pass",
+  "C-FIRE-WIND": "pass",
+  "C-POND-SUN": "pass",
+  "LS-SCREEN": "pass"
+ },
+ "precedent_statuses": {
+  "P-SME-01": {
+   "A-ENCLOSURE": "pass",
+   "A-THRESHOLD": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SME-05": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SME-08": {
+   "A-ENCLOSURE": "fail",
+   "A-FOCAL": "fail",
+   "A-ROOMS": "warn",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SAU-02": {
+   "A-ENCLOSURE": "fail",
+   "A-PATH-TERMINUS": "fail",
+   "A-FOCAL": "pass",
+   "A-HIERARCHY": "pass",
+   "A-ROOMS": "pass",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SAU-01": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SAU-04": {
+   "A-ENCLOSURE": "fail",
+   "A-PATH-TERMINUS": "fail",
+   "A-FOCAL": "pass",
+   "A-HIERARCHY": "warn",
+   "A-ROOMS": "pass",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SAU-05": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-LOUNGE-CLUSTER": "warn",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-S2-04": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-S2-20": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "pass",
+   "A-ROOMS": "warn",
+   "LS-ENCLOSURE": "not_evaluated"
+  },
+  "P-SME-02": {
+   "A-ENCLOSURE": "pass",
+   "A-FOCAL": "fail",
+   "A-ROOMS": "pass",
+   "LS-LOUNGE-CLUSTER": "pass",
+   "LS-ENCLOSURE": "not_evaluated"
+  }
+ },
+ "d1": [
+  {
+   "criterion": "A-PATH-TERMINUS",
+   "status": "fail",
+   "critic": "landscape-architect",
+   "evidence": "path 'dining': 1 of 2 ends lead to nothing (no door, paved room, seat, feature or path within reach)"
+  },
+  {
+   "criterion": "A-PATH-TERMINUS",
+   "status": "fail",
+   "critic": "landscape-architect",
+   "evidence": "path 'living-east': 1 of 2 ends lead to nothing (no door, paved room, seat, feature or path within reach)"
+  },
+  {
+   "criterion": "A-PATH-TERMINUS",
+   "status": "fail",
+   "critic": "landscape-architect",
+   "evidence": "path 'living-south': 1 of 2 ends lead to nothing (no door, paved room, seat, feature or path within reach)"
+  },
+  {
+   "criterion": "A-PATH-TERMINUS",
+   "status": "fail",
+   "critic": "landscape-architect",
+   "evidence": "path 'lounge-north': 1 of 2 ends lead to nothing (no door, paved room, seat, feature or path within reach)"
+  },
+  {
+   "criterion": "A-HIERARCHY",
+   "status": "warn",
+   "critic": "landscape-architect",
+   "evidence": "path classes present: ['secondary'] (a graded main / secondary / service hierarchy needs >= 2)"
+  },
+  {
+   "criterion": "H-SPECIES-KNOWN",
+   "status": "warn",
+   "critic": "horticulturist",
+   "evidence": "2 of 10 species not in the plant library: [\"Plectranthus 'Mona Lavender'\", 'Salvia rosmarinus Prostrata Group']"
+  },
+  {
+   "criterion": "H-SIZE-VS-SPACE",
+   "status": "fail",
+   "critic": "horticulturist",
+   "evidence": "Plumeria rubra: mature spread 7.6 m in a space 6.0 m across (limit 0.8 x = 4.8 m)"
+  },
+  {
+   "criterion": "H-SEASONALITY",
+   "status": "fail",
+   "critic": "horticulturist",
+   "evidence": "flowers in 8 of 12 months, winter: False (required >= 8 and winter); 7 of 10 species have month data"
+  },
+  {
+   "criterion": "LS-SOIL-DEPTH",
+   "status": "fail",
+   "critic": "horticulturist",
+   "evidence": "soil depth for ground_cover: 245 mm achieved, 250 mm required (3 of 4 results) [achieved 245 mm vs required 250]"
+  },
+  {
+   "criterion": "LS-ROOTZONE",
+   "status": "warn",
+   "critic": "horticulturist",
+   "evidence": "paving/building covers 2.0 m2 of the 45.3 m2 dripline zone (mature spread 7.6 m) (1 of 3 results) [achieved 1.97 m2 vs required 0.0]"
+  },
+  {
+   "criterion": "LS-TREE-BUILDING",
+   "status": "warn",
+   "critic": "horticulturist",
+   "evidence": "trunk to building: 2.98 m achieved, 5.7 m required (0.75 x 7.6 m mature height, moderate water demand); UK clay guidance, the site soil test governs [achieved 2.98 m vs required 5.7]"
+  },
+  {
+   "criterion": "U-GATHER-SEATS",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "gathering 10-20: 4 fixed seats in the south garden (required >= 10; {'lounge': 4})"
+  },
+  {
+   "criterion": "U-GATHER-GROUPS",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "gathering 10-20: dining seats 0 (>= 4), lounge seats 4 (>= 3): a dining group and a lounge group"
+  },
+  {
+   "criterion": "U-QUIET-SOUTH",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "quiet corner (south): no seat in a quiet-use zone within the south garden"
+  },
+  {
+   "criterion": "U-QUIET-NORTH",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "quiet north garden: 0 seats in the north garden; reachable from the lounge door: False"
+  },
+  {
+   "criterion": "U-FIRE",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "fire pit: no fire pit or heater"
+  },
+  {
+   "criterion": "U-BBQ",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "BBQ: no BBQ stand place"
+  },
+  {
+   "criterion": "U-POND-VIEW",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "pond viewing: no pond"
+  },
+  {
+   "criterion": "U-PICKING",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "herb and fruit picking: no herb bed or fruit tree"
+  },
+  {
+   "criterion": "U-SERVICE",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "service: 0 service paths, widths [] (required >= 0.9 m, LS-PATH-SERVICE)"
+  },
+  {
+   "criterion": "LS-BRIEF-FEATURES",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "brief feature firepit: absent from the layout (4 of 4 results) [achieved 0 count vs required 1]"
+  },
+  {
+   "criterion": "LS-CAPACITY",
+   "status": "fail",
+   "critic": "user",
+   "evidence": "seats in dining and lounge zones (brief 10-20 people): 4 seats achieved, 10 seats required [achieved 4 seats vs required 10]"
+  },
+  {
+   "criterion": "C-PRIVACY",
+   "status": "fail",
+   "critic": "climate",
+   "evidence": "3 of 4 south seats overlooked by more than 8 eye points seated (raw LDS median 13.0; residual after layout screens 10.0); brief: privacy is critical"
+  }
+ ]
+}

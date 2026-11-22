@@ -1,0 +1,21 @@
+{
+ "item": "good-19",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-08-hanging-home-malta/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The garden features a defined edge with a pool and a wall, but lacks overhead enclosure. The side is partially enclosed by a building and trees, creating a semi-enclosed space."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Olive trees form the tree layer, with a continuous grass ground cover beneath. No distinct shrub layer is visible between them, resulting in only two clear planting layers."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The illuminated dining area with pendant lights serves as a clear focal point, drawing the eye and organizing the surrounding garden and pool space."
+  }
+ }
+}
