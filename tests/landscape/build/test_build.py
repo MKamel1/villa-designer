@@ -13,20 +13,7 @@ from archpipe.landscape.build.geom import Obj, box
 
 ROOT = Path(__file__).resolve().parents[3]
 PASS2 = ROOT / "knowledge/landscape/concept/pass2"
-from archpipe.landscape.build import outdoor as _od
-_real_load = _od.load
-
-
-def setUpModule():
-    _od.load = lambda *a, **k: {}      # legacy concept-A tests are written for the labelled geometry; the shipped outdoor assets are tested in test_build2
-
-
-def tearDownModule():
-    _od.load = _real_load
-
-
 A = build.load_layout(PASS2 / "layout-A-pond-east.json")
-AP = A       # pergola tests build concept A with pergolas on: the client replaced pergolas by shade trees, the builder keeps the capability behind pergolas=True
 G = P.GROUND_Z
 
 
@@ -39,7 +26,7 @@ class Footprints(unittest.TestCase):
         s = build.build_scene(A)
         for st in ("closed", "open"):
             r = checks.footprints(s, st)
-            self.assertGreater(len(r), 40)
+            self.assertGreater(len(r), 45)
             self.assertEqual(fails(r), [], st)
 
     def test_layout_rects_are_the_built_extents(self):
@@ -51,7 +38,7 @@ class Footprints(unittest.TestCase):
                 self.assertAlmostEqual(got, want, delta=0.02)
 
     def test_negative_footprint_30mm_off_fails(self):
-        s = build.build_scene(A, pergolas=True)
+        s = build.build_scene(A)
         o = s.by_id("ld-pergola-dining")
         o.footprint = (o.footprint[0] - 0.03, *o.footprint[1:])
         self.assertEqual(len(fails(checks.footprints(s), "footprint")), 1)
@@ -84,7 +71,7 @@ class Ids(unittest.TestCase):
         self.assertTrue(all(o.id.startswith("ld-") for o in s.objects))
 
     def test_every_layout_element_has_a_built_object(self):
-        s = build.build_scene(A, pergolas=True)
+        s = build.build_scene(A)
         built = {o.layout_id or o.meta.get("layout_id") for o in s.objects} | {o.meta.get("also") for o in s.objects}
         want = set()
         for k in ("paved_areas", "paths", "planting_groups", "seating", "tables", "features", "trees", "walls", "screens", "canopies"):
@@ -111,8 +98,7 @@ class Planting(unittest.TestCase):
     def test_concept_a_asset_and_standin_counts(self):
         c = {}
         for r in self.s.schedule:
-            if r["species"] != "koi":
-                c[r["status"]] = c.get(r["status"], 0) + 1
+            c[r["status"]] = c.get(r["status"], 0) + 1
         self.assertEqual(c, {"standin": 53, "asset": 2, "omitted": 1})
         self.assertEqual({r["species"] for r in self.s.schedule if r["status"] == "asset"}, {"punica_granatum", "plumeria_rubra"})
 
@@ -137,7 +123,7 @@ class Planting(unittest.TestCase):
         self.assertEqual(self.s.age, 3)
         m = build.build_scene(A, age=None)
         for a, b in zip(self.s.schedule, m.schedule):
-            if a["status"] in ("asset", "standin") and a["species"] != "koi":
+            if a["status"] != "omitted":
                 self.assertLessEqual(a["shown_height_m"], b["shown_height_m"] + 1e-9)
 
     def test_negative_species_without_asset_is_a_labelled_standin_never_a_lookalike(self):
@@ -179,13 +165,43 @@ class Planting(unittest.TestCase):
         scr = self.s.by_id("ld-sister-screen").bounds()
         for o in c:
             b = o.bounds()
-            self.assertAlmostEqual(b[1], scr[4], delta=P.CLIMBER["lift"] + 0.003)       # the panel stands 20 mm off the screen's garden face
+            self.assertAlmostEqual(b[1], scr[4], delta=0.003)       # the mass starts at the screen's garden face
             self.assertLessEqual(b[5], G + 2.1 + 1e-6)
 
     def test_plant_inside_a_pot_is_omitted_and_reported(self):
         r = [x for x in self.s.schedule if x["status"] == "omitted"]
         self.assertEqual(len(r), 1)
         self.assertIn("pot-0-plumeria", r[0]["reason"])
+
+
+class Water(unittest.TestCase):
+    def setUp(self):
+        self.s = build.build_scene(A)
+        self.f = [f for f in A["features"] if f["kind"] == "pond"][0]
+
+    def test_flush_rim_water_below_it_grille_just_under_the_surface(self):
+        p, w, gr = (self.s.by_id("ld-pond-e" + x) for x in ("", "-water", "-grille"))
+        rim = p.bounds()[5]
+        self.assertAlmostEqual(rim, G, places=6)                       # flush: nothing above the ground
+        self.assertAlmostEqual(w.bounds()[5], G - self.f["freeboard_mm"] / 1000, places=6)
+        top = gr.bounds()[5]
+        self.assertAlmostEqual(top, w.bounds()[5] - P.POND["grille_top_below_water"], places=6)
+        self.assertLess(top, w.bounds()[5])
+
+    def test_safety_shelf_below_water_and_floor_at_depth(self):
+        p = self.s.by_id("ld-pond-e")
+        self.assertAlmostEqual(p.meta["shelf_top"], p.meta["water_z"] - P.POND["shelf_below_water"], places=6)
+        self.assertAlmostEqual(p.meta["floor_z"], G - self.f["depth_mm"] / 1000, places=6)
+
+    def test_grille_covers_the_opening_and_rests_on_the_shelf(self):
+        gr = self.s.by_id("ld-pond-e-grille")
+        p = self.s.by_id("ld-pond-e")
+        self.assertAlmostEqual(gr.bounds()[2], p.meta["shelf_top"], places=6)
+        self.assertEqual(fails(checks.support(self.s), "support"), [])
+
+    def test_edge_slope_gap_is_stated_not_silently_ignored(self):
+        self.assertIn("not modelled", self.s.by_id("ld-pond-e").label)
+        self.assertIn("GAP-POND-EDGE-SAFETY", self.s.by_id("ld-pond-e").label)
 
 
 class FirePit(unittest.TestCase):
@@ -250,13 +266,13 @@ class FloatAndClip(unittest.TestCase):
         self.assertEqual([f for f in fails(checks.clips(s)) if "ld-test-touch" in f["id"]], [])
 
     def test_mature_pomegranate_hits_the_pergola_louvres_and_the_checker_sees_it(self):
-        m = build.build_scene(A, age=None, pergolas=True)
+        m = build.build_scene(A, age=None)
         ids = " ".join(f["id"] for f in fails(checks.clips(m)))
         self.assertIn("ld-pergola-bench x ld-tree-0-punica", ids)
         self.assertIn("ld-pergola-dining x ld-tree-0-punica", ids)
 
     def test_posts_stand_on_ground_and_louvres_are_carried_by_beams(self):
-        s = build.build_scene(A, pergolas=True)
+        s = build.build_scene(A)
         perg = s.by_id("ld-pergola-dining")
         zs = sorted(p.bounds()[2] for p in perg.parts)
         self.assertAlmostEqual(zs[0], G, places=6)
@@ -274,7 +290,7 @@ class Structures(unittest.TestCase):
         self.assertLessEqual(max(b - a for a, b in zip(posts, posts[1:])), 1.5 + P.SCREEN_POST[0])
 
     def test_pergola_heights_from_layout(self):
-        s = build.build_scene(A, pergolas=True)
+        s = build.build_scene(A)
         for c in A["canopies"]:
             self.assertAlmostEqual(s.by_id("ld-" + c["id"]).bounds()[5] - G, c["height_m"], places=6)
 
@@ -329,7 +345,7 @@ class PreviewSpec(unittest.TestCase):
         sp = preview.scene_spec(s, preview.default_views(s, "t"))
         json.dumps(sp)
         self.assertEqual(len(sp["objects"]), len(s.objects))
-        self.assertEqual([v["name"] for v in sp["views"]][:3], ["bird-south-east", "eye-living-door", "eye-dining-firepit"])
+        self.assertEqual([v["name"] for v in sp["views"]][:3], ["bird-south-east", "eye-living-door", "eye-dining-door"])
         self.assertEqual({v["state"] for v in sp["views"]}, {"closed", "open"})
 
     def test_eye_views_are_at_the_lds_doors(self):
