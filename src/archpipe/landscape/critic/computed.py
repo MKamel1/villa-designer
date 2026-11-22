@@ -220,6 +220,11 @@ def _enrich(layout):
             info = species_info(p["species"], p.get("form"))
             if not p.get("water_need") and info["water"] in wmap: p["water_need"] = wmap[info["water"]]
             if not p.get("form") and info["known"]: p["form"] = {"canopy": "large_tree", "understorey": "small_tree", "shrub": "shrub", "ground": "ground_cover"}[layer_of(p["species"], None)]
+    from . import site as SS
+    for f in lay.get("features", []):
+        if f.get("kind") == "herb_bed" and "midsummer_sun_hours" not in f:
+            h = SS.sample("sun.json", "sun_hours_summer_solstice", feature_pt(f))
+            if h is not None: f["midsummer_sun_hours"] = h
     return lay
 
 
