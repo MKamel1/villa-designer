@@ -17,6 +17,11 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - **Maintenance: HIGH** is acceptable (weekly gardener). Lawn, seasonal colour, pots and edibles are all allowed; artificial grass is no longer the default and becomes a choice per area.
 - Standing decisions still apply: shade over sun; any beautiful, shading, site-viable plant (not only Mediterranean); colourful drifts; frangipani; terracotta pots; no pricing yet.
 
+## Addendum (client, 2026-11-22): flush and concealed
+- **Pond**: flush with the ground (no raised walls or kerbs), and set discreetly within the planting rather than as a showpiece.
+- **Fire pit**: flush with the paving, concealed when not in use (a flush cover or lid, so the paving reads as continuous).
+- **Consequence the method must carry**: a flush pond and a flush fire pit are trip, fall and burn hazards. The rules must cover edge visibility (a contrasting edge or margin planting), a safety margin or shelf at the pond edge, night lighting of the edges, and the fire pit cover's load rating and clearances. Each needs its source, or is listed as a GAP.
+
 ## Professional and site items (outside the method)
 - Koi pond: filtration, pump, depth and liner, and fish welfare (a pond supplier sizes the filtration; we give the volume and depth).
 - Retaining walls over about 0.6 m.
