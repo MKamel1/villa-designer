@@ -42,6 +42,7 @@ class Obj:
     standin: bool = False              # generic mass for a species with no drawable asset
     asset: dict | None = None          # drawn from a graded 3D asset (placement spec)
     meta: dict = field(default_factory=dict)
+    winter_parts: list = field(default_factory=list)   # a deciduous plant's leaf-off geometry (stems and twigs); empty = evergreen, one geometry all year
 
     def bounds(self):
         b = np.array([p.bounds() for p in self.parts]) if self.parts else None
@@ -82,6 +83,21 @@ def cyl(material, cx, cy, r, z0, z1, n=24, r_top=None):
     v = np.array([(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n), z0) for i in range(n)] +
                  [(cx + rt * math.cos(2 * math.pi * i / n), cy + rt * math.sin(2 * math.pi * i / n), z1) for i in range(n)], float)
     return Part(material, v, _prism_faces(n), poly=[tuple(p[:2]) for p in v[:n]])
+
+
+def tube(material, p0, p1, r0, r1=None, n=6):
+    """Tapered round stem from p0 to p1 (any direction), n sides. A limb or twig: no envelope, bounds from its vertices."""
+    r1 = r0 if r1 is None else r1
+    a = np.array(p0, float); b = np.array(p1, float)
+    d = b - a
+    L = float(np.linalg.norm(d))
+    d = d / L
+    h = np.array([1.0, 0, 0]) if abs(d[0]) < 0.9 else np.array([0, 1.0, 0])
+    u = np.cross(d, h); u /= np.linalg.norm(u)
+    w = np.cross(d, u)
+    ring = lambda c, r: [c + r * (math.cos(2 * math.pi * i / n) * u + math.sin(2 * math.pi * i / n) * w) for i in range(n)]
+    v = np.array(ring(a, r0) + ring(b, r1), float)
+    return Part(material, v, _prism_faces(n))
 
 
 def slanted_slat(material, s0, s1, pos, z, width, thick, tilt_deg, axis="x"):

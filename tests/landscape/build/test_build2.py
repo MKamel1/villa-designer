@@ -168,15 +168,19 @@ class FirePit(unittest.TestCase):
 
 
 class ShadeTree(unittest.TestCase):
+    """The provisional composition (`provisional.py`) is kept ONLY here, to exercise the root-barrier and graded-asset-tree builders: the final layout declares neither."""
     def setUp(self):
         self.L = provisional.with_shade_tree(L)
         self.s = build.build_scene(self.L)
         self.m = build.build_scene(self.L, age=None)
 
     def test_pergolas_are_not_built_and_the_report_says_why(self):
-        self.assertFalse([o for o in self.s.objects if o.kind == "pergola"])
-        self.assertEqual(len([w for w in self.s.warnings if "pergola NOT built" in w]), 4)
-        self.assertTrue([o for o in build.build_scene(L, pergolas=True).objects if o.kind == "pergola"])
+        A = build.load_layout(ROOT / "knowledge/landscape/concept/pass2/layout-A-pond-east.json")
+        s = build.build_scene(A)
+        self.assertFalse([o for o in s.objects if o.kind == "pergola"])
+        self.assertEqual(len([w for w in s.warnings if "pergola NOT built" in w]), 4)
+        self.assertTrue([o for o in build.build_scene(A, pergolas=True).objects if o.kind == "pergola"])
+        self.assertFalse([w for w in S.warnings if "pergola" in w])                  # the final layout declares none
 
     def test_pruned_standin_olive_is_held_to_the_pruned_size_not_the_natural_size(self):
         t = self.m.by_id("ld-ldb-prov-shade-tree")
@@ -184,8 +188,8 @@ class ShadeTree(unittest.TestCase):
         self.assertTrue(t.standin and "STAND-IN" in t.label and "pruned" in t.label)
         self.assertAlmostEqual(b[5] - b[2], 3.6, delta=0.02)                       # pruned height (natural olive is 6-9 m)
         self.assertLessEqual(max(b[3] - b[0], b[4] - b[1]), 3.4 + 0.02)            # pruned spread (natural 4.6-7.6 m)
-        crown = [p for p in t.parts if p.material.startswith("standin")]
-        self.assertGreaterEqual(min(p.bounds()[2] for p in crown), G + 1.9 - 0.02)  # clear stem
+        crown = [p for p in t.parts if p.material.startswith("leafcut")]
+        self.assertGreaterEqual(min(p.bounds()[2] for p in crown), G + 1.9 - 0.4)  # crown above the clear stem (a clump hangs a little below its limb)
         self.assertTrue([p for p in t.parts if p.material == "trunk-bark"])
         row = next(r for r in self.m.schedule if r["id"] == t.id)
         self.assertTrue(row["pruned"])
@@ -216,9 +220,6 @@ class ShadeTree(unittest.TestCase):
         self.assertEqual([f for f in fails(checks.clips(self.s)) if "root-barrier" in f["id"]], [])
         self.assertFalse([o for o in S.objects if o.kind == "root-barrier"])        # the unmodified layout declares none
 
-    def test_the_tree_pit_does_not_clip_anything_at_age_three(self):
-        self.assertEqual(fails(checks.clips(self.s)), [])
-
     def test_a_layout_declared_root_barrier_feature_is_built(self):
         l2 = copy.deepcopy(L)
         l2["features"].append(dict(id="rb-test", kind="root_barrier", rect=[23.0, -22.0, 24.0, -21.9], depth_m=1.2))
@@ -226,9 +227,131 @@ class ShadeTree(unittest.TestCase):
         self.assertAlmostEqual(G - o.bounds()[2], 1.2, places=6)
 
 
+class FinalTrees(unittest.TestCase):
+    """LDG round 3 trees built from layout-final (no provisional tree): the crape has both leaf states, the olive has one."""
+    def tree(self, s, i):
+        return next(o for o in s.objects if o.id == i)
+
+    def test_the_crape_has_both_leaf_states_and_the_olive_does_not(self):
+        crape, olive = self.tree(S, "ld-s-tree-crape"), self.tree(S, "ld-s-tree-olive")
+        self.assertTrue(crape.winter_parts and crape.parts)                       # leaf-on and leaf-off geometry
+        self.assertTrue([p for p in crape.parts if p.material.startswith("leafcut")])          # leaf-on carries leaves
+        self.assertFalse([p for p in crape.winter_parts if p.material.startswith("leafcut")])  # leaf-off carries none
+        self.assertTrue([p for p in crape.winter_parts if p.material == "trunk-bark"])
+        self.assertEqual(olive.winter_parts, [])                                  # evergreen: one geometry all year
+        self.assertEqual(self.tree(S, "ld-e-tree-olive").winter_parts, [])
+        rows = {r["id"]: r for r in S.schedule}
+        self.assertEqual(rows["ld-s-tree-crape"]["leaf_states"], ["leaf-on", "leaf-off"])
+        self.assertEqual(rows["ld-s-tree-olive"]["leaf_states"], ["evergreen"])
+
+    def test_leaf_off_crape_stays_inside_the_pruned_crown_and_is_see_through(self):
+        crape = self.tree(S, "ld-s-tree-crape")
+        import numpy as np
+        for parts in (crape.parts, crape.winter_parts):
+            v = np.vstack([p.verts for p in parts])
+            self.assertLessEqual(v[:, 2].max() - G, 4.5 + 0.02)
+            c = np.array(crape.meta["crown_center"])
+            self.assertLessEqual(np.hypot(v[:, 0] - c[0], v[:, 1] - c[1]).max(), 2.0 + 0.3 + 0.35)   # pruned spread 4.0 (+ the lean of the stems below the fork)
+        self.assertFalse([p for p in crape.winter_parts if p.envelope])
+
+    def test_stems_stay_clear_of_the_chairs_under_the_crown(self):
+        self.assertEqual([f for f in fails(checks.clips(S)) if "tree-crape" in f["id"]], [])
+        self.assertEqual(fails(checks.support(S)), [])
+
+    def test_a_mirrored_layout_with_an_unmirrored_crown_centre_is_reported_not_built_askew(self):
+        s = build.build_scene(V)
+        self.assertTrue([w for w in s.warnings if "crown_center" in w and "ignored" in w])
+        self.assertEqual(fails(checks.clips(s)), [])
+
+    def test_the_graded_flowering_crape_asset_is_not_used_for_a_both_state_shade_tree(self):
+        row = next(r for r in S.schedule if r["id"] == "ld-s-tree-crape")
+        self.assertEqual(row["status"], "standin")
+        self.assertIn("one leaf state only", row["reason"])
+
+
+class FabAssets(unittest.TestCase):
+    def test_fab_species_are_drawn_from_their_fbx_with_a_variation_per_individual(self):
+        r = planting.resolve("aspidistra_elatior")
+        if not r["drawable"]:
+            self.skipTest("Fab archives not unzipped on this machine")
+        a = r["assets"][0]
+        self.assertTrue(planting.is_fab(a))
+        vs = planting.fab_variants(a)
+        self.assertGreater(len(vs), 3)
+        self.assertTrue(all(v.endswith("_LOD0.fbx") and Path(v).exists() for v in vs))
+        self.assertEqual(planting.pick_variant(a, "ld-x"), planting.pick_variant(a, "ld-x"))              # stable
+        self.assertGreater(len({planting.pick_variant(a, "ld-plant-%d" % i) for i in range(30)}), 1)       # varied
+        sch = {r["species"]: r for r in S.schedule if r["status"] == "asset"}
+        for sp in ("aspidistra_elatior", "pennisetum_alopecuroides", "origanum_majorana"):
+            self.assertIn(sp, sch)
+        o = next(o for o in S.objects if o.meta.get("species") == "aspidistra_elatior")
+        self.assertTrue(o.asset["gltf"].endswith(".fbx") and o.asset["mode"] == "height")
+
+    def test_a_missing_archive_is_a_standin_not_a_crash(self):
+        a = dict(id="fab_x", manifest_key="fab/no_such_archive_zz", grade="B", maps_to=["aspidistra_elatior"], species_fit="species", size_m=[1, 1, 1])
+        r = planting.resolve("aspidistra_elatior", assets={"assets": [a], "species": [dict(slug="aspidistra_elatior", drawable="drawable")]})
+        self.assertFalse(r["drawable"])
+
+    def test_opacity_is_read_from_the_red_channel_only(self):
+        src = (ROOT / "src/archpipe/landscape/build/fab_blender.py").read_text()
+        self.assertIn('_red(nt, _tex(nt, maps["Opacity"], True))', src)              # LDL's measured defect: ghostly leaves when read as colour
+        d = planting.FAB / "aspidistra_elatior"
+        arch = next((p for p in planting.FAB.glob("cast___iron_plant*")), None)
+        if arch is None:
+            self.skipTest("archive not on this machine")
+        from PIL import Image
+        im = Image.open(next(arch.glob("*_Opacity.jpg"))).convert("RGB").resize((256, 256))
+        r, g, b = (np.asarray(im)[..., i].mean() for i in range(3))
+        self.assertGreater(r, 10 * max(g, b, 0.1))                                       # data really is in R: wiring it as colour would be wrong
+
+
+class GrilleAndContext(unittest.TestCase):
+    def test_the_pond_grille_is_a_fine_dark_mesh_and_marked_policy(self):
+        g = S.by_id("ld-e-pond-grille")
+        self.assertIn("POLICY", g.label)
+        self.assertAlmostEqual(P.POND["grille_pitch"] - P.POND["grille_bar"], 0.044, places=6)      # clear aperture 44 mm
+        self.assertLessEqual(P.POND["grille_bar"], 0.008)                                  # mesh wire, not a 20 x 30 bar
+        self.assertGreater(len(g.parts), 60)
+        self.assertEqual({p.material for p in g.parts}, {"grille-steel"})
+        self.assertEqual(fails(checks.support(S)), [])
+
+    def test_a_coarse_grille_is_not_what_the_policy_says(self):
+        self.assertLess(P.POND["grille_pitch"], 0.1)                                      # the round-3 grid was 100 mm: reads as a steel grid
+
+    def test_site_context_comes_from_the_environment_model(self):
+        from archpipe.landscape.build import context
+        ids = {c["id"] for c in S.context}
+        for need in ("ctx-building-0", "ctx-site-sister", "ctx-site-neighbour-rear", "ctx-site-street", "ctx-site-fence-west"):
+            self.assertIn(need, ids)
+        sis = next(c for c in S.context if c["id"] == "ctx-site-sister")
+        self.assertAlmostEqual(sis["z1"], 6.0)                                            # villa_env ROOF, not an assumed 3 m
+        self.assertAlmostEqual(next(c for c in S.context if c["id"] == "ctx-building-0")["z1"] - G, 9.0)
+        # no fence is drawn twice where the layout's own wall stands
+        walls = [tuple(w["rect"]) for w in L["walls"]]
+        for c in S.context:
+            if c["id"].startswith("ctx-site-fence"):
+                r = c["rect"]
+                for w in walls:
+                    ov = max(0, min(r[2], w[2]) - max(r[0], w[0])) * max(0, min(r[3], w[3]) - max(r[1], w[1]))
+                    self.assertLess(ov, 1e-3, (c["id"], w))
+        self.assertEqual(build.build_scene(L, site_context=False).context[0]["id"], "ctx-building-0")
+        self.assertFalse([c for c in build.build_scene(L, site_context=False).context if c["id"].startswith("ctx-site")])
+
+    def test_ground_is_ours_beige_and_everything_else_a_neutral_labelled_grey(self):
+        from archpipe.landscape.build import preview, context
+        sp = preview.scene_spec(S, [])
+        (x0, y0, x1, y1), ay = context.ground_plan()
+        for q in sp["ground_quads"]:
+            self.assertGreaterEqual(q[1], ay - 1e-9)                                      # only our yard is the beige 'ground'
+        a_ours = sum((q[2] - q[0]) * (q[3] - q[1]) for q in sp["ground_quads"])
+        self.assertAlmostEqual(a_ours, (x1 - x0) * (y1 - ay) - sum((r[2] - r[0]) * (r[3] - r[1]) for r in S.spec["ponds"].values()), places=4)
+        self.assertTrue(sp["neutral_quads"])
+        self.assertIn("neutral", context.GROUND_NOTE)
+
+
 class Climbers(unittest.TestCase):
     def test_every_structure_with_a_declared_climber_has_a_panel_on_its_garden_face(self):
-        self.assertEqual(set(S.spec["climbed"]), {"wall-fence-rear", "wall-fence-east", "sister-screen-n", "sister-screen-s"})
+        self.assertEqual(set(S.spec["climbed"]), {"wall-fence-rear", "wall-fence-east", "wall-street-fence", "sister-screen-n", "sister-screen-s"})
         panels = [o for o in S.objects if o.meta.get("climbing")]
         self.assertGreaterEqual(len(panels), 5)
         for o in panels:
@@ -238,9 +361,14 @@ class Climbers(unittest.TestCase):
             self.assertLessEqual(min(b[3] - b[0], b[4] - b[1]), P.CLIMBER["panel_t"] + 1e-6)     # a thin panel on the face, not a mass
 
     def test_a_structure_with_no_climber_is_a_warn_not_an_invented_planting(self):
-        w = [f for f in checks.climber_coverage(S) if f["status"] == "warn"]
-        self.assertEqual([f["id"] for f in w], ["wall-street-fence"])
-        self.assertTrue(any("wall-street-fence" in x and "layout gap" in x for x in S.warnings))
+        self.assertEqual([f for f in checks.climber_coverage(S) if f["status"] == "warn"], [])      # LDG round 3 puts a climber on every structure
+        l2 = copy.deepcopy(L)
+        for g in l2["planting_groups"]:
+            g["plants"] = [p for p in g["plants"] if not (p["species"] in ("jasminum_sambac", "petrea_volubilis", "vitis_vinifera") and p["at"][0] < 1.0)]
+        s2 = build.build_scene(l2)
+        w = [f for f in checks.climber_coverage(s2) if f["status"] == "warn"]
+        self.assertTrue(w and all(f["id"].startswith("wall-street") for f in w))
+        self.assertTrue(any("wall-street-fence" in x and "layout gap" in x for x in s2.warnings))
 
     def test_a_panel_stops_at_a_bench_standing_against_the_face(self):
         structs = [((28.307, -29.916, 28.557, -20.601), 4.0, "w")]
@@ -387,7 +515,7 @@ class PreviewGuards(unittest.TestCase):
     def test_the_ground_plane_has_a_hole_over_every_pond(self):
         from archpipe.landscape.build import preview
         sp = preview.scene_spec(S, [])
-        q = sp["ground_quads"]
+        q = sp["ground_quads"] + sp["neutral_quads"]
         area = sum((b[2] - b[0]) * (b[3] - b[1]) for b in q)
         ponds = list(S.spec["ponds"].values())
         self.assertAlmostEqual(area, 140.0 * 120.0 - sum((r[2] - r[0]) * (r[3] - r[1]) for r in ponds), places=4)

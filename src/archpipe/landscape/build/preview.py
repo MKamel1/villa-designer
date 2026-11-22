@@ -22,6 +22,11 @@ EYE = 1.6          # m above the garden level (assumed: the door sills are at ga
 DOORS = {"living": dict(id="door-B-8", at=(22.597, -26.131), faces=(1, 0)), "dining": dict(id="door-B-6", at=(16.889, -23.591), faces=(0, 1))}
 
 
+class Obj_:                       # a bare list of parts viewed as an object for _mesh_parts
+    def __init__(self, parts):
+        self.parts = parts
+
+
 def _mesh_parts(o):
     out = []
     for i, p in enumerate(o.parts):
@@ -49,18 +54,34 @@ def ground_quads(pond_rects, x=(-60.0, 80.0), y=(-80.0, 40.0)):
     return out
 
 
+def ground_split(pond_rects):
+    """Ground in three parts: OUR yard (beige, as built), the sister yard and everything outside the plot (a neutral labelled grey: the model holds no ground detail there).
+    -> (ours quads, neutral quads); cells over a pond opening are left out in both."""
+    from . import context as CX
+    (x0, y0, x1, y1), ay = CX.ground_plan()
+    inside = lambda r, ya, yb: ya <= (r[1] + r[3]) / 2 <= yb
+    ours = ground_quads([r for r in pond_rects if inside(r, ay, y1)], x=(x0, x1), y=(ay, y1))
+    sis = ground_quads([r for r in pond_rects if inside(r, y0, ay)], x=(x0, x1), y=(y0, ay))
+    X, Y = (-60.0, 80.0), (-80.0, 40.0)
+    ring = [[X[0], Y[0], X[1], y0], [X[0], y1, X[1], Y[1]], [X[0], y0, x0, y1], [x1, y0, X[1], y1]]
+    return ours, sis + ring
+
+
 def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
     objs = []
     for o in scene.objects:
         d = dict(id=o.id, kind=o.kind, label=o.label, state=o.state, standin=o.standin)
         if o.parts:
             d["parts"] = _mesh_parts(o)
+            if o.winter_parts:
+                d["winter_parts"] = _mesh_parts(Obj_(o.winter_parts))
         if o.asset:
             d["asset"] = {k: o.asset[k] for k in ("asset_id", "gltf", "at", "bounds", "grade", "mode", "scale_xyz", "box_m", "length_m", "yaw_deg", "tiles") if k in o.asset}
         objs.append(d)
     ponds = [o.meta for o in scene.objects if o.kind == "pond"]
     wr = [min(m["floor_z"] for m in ponds), max(m["water_z"] for m in ponds)] if ponds else None
-    return dict(ground_quads=ground_quads([list(m['rect']) for m in ponds]), pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
+    gq, nq = ground_split([list(m['rect']) for m in ponds])
+    return dict(ground_quads=gq, neutral_quads=nq, pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
 
 
 def E_pond_trench_xy(r):
@@ -128,7 +149,7 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     spec["spec_sha"] = hashlib.sha1(json.dumps(spec, sort_keys=True).encode()).hexdigest()
     spec_path = sp / ("%s-%s.spec.json" % (tag, hashlib.sha1(str(out).encode()).hexdigest()[:8]))      # one spec file per (tag, output dir): two scenes with one tag must not share it
     spec_path.write_text(json.dumps(spec))
-    jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text()).encode()).hexdigest()[:10])
+    jid = "ldb-%s-%s" % (tag, hashlib.sha1((spec_path.read_text() + SCRIPT.read_text() + SCRIPT.with_name('fab_blender.py').read_text()).encode()).hexdigest()[:10])
     cmd = [JOBQ, "submit", *(["--gpu"] if gpu else []), "--timeout", str(timeout), "--id", jid, "--", BLENDER, "-b", "--factory-startup", "--python-exit-code", "1",
            "-P", str(SCRIPT), "--", str(spec_path), str(out), tag]
     r = subprocess.run(cmd, capture_output=True, text=True)
