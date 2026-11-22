@@ -205,7 +205,7 @@ class FabAssets(unittest.TestCase):
         (luminance) the leaves came out ~20 % opaque and ghostly. Guard: measure the real archive, and require the importer
         to route those maps through red()."""
         import re
-        src = (Path(__file__).resolve().parents[3] / "src/archpipe/landscape/plants/fab_preview.py").read_text(encoding="utf-8")
+        src = (Path(__file__).resolve().parents[3] / "src/archpipe/landscape/plants/megascans_mat.py").read_text(encoding="utf-8")
         for name in ("Opacity", "Roughness", "Gloss", "Displacement"):
             self.assertRegex(src, r"red\(nt, \w+\)", name)
         self.assertNotRegex(src, r'nt\.links\.new\(o\.outputs\["Color"\], mo\.inputs\[0\]\)')      # the pre-fix wiring
