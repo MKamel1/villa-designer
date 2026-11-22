@@ -1,0 +1,201 @@
+{
+ "rubric": "frozen-v0",
+ "gate_selection_tuning": {
+  "V-ENCLOSURE": {
+   "bad_lt2": "3/4",
+   "good_lt2": "3/6",
+   "separation": 0.25,
+   "good_zero": true,
+   "gates": false
+  },
+  "V-FOCAL": {
+   "bad_lt2": "3/4",
+   "good_lt2": "3/6",
+   "separation": 0.25,
+   "good_zero": true,
+   "gates": false
+  },
+  "V-AXIS": {
+   "bad_lt2": "0/4",
+   "good_lt2": "0/6",
+   "separation": 0.0,
+   "good_zero": false,
+   "gates": false
+  },
+  "V-RHYTHM": {
+   "bad_lt2": "0/4",
+   "good_lt2": "1/6",
+   "separation": -0.167,
+   "good_zero": true,
+   "gates": false
+  },
+  "V-LAYERING": {
+   "bad_lt2": "0/4",
+   "good_lt2": "1/6",
+   "separation": -0.167,
+   "good_zero": true,
+   "gates": false
+  },
+  "V-ROOMS": {
+   "bad_lt2": "0/4",
+   "good_lt2": "1/6",
+   "separation": -0.167,
+   "good_zero": true,
+   "gates": false
+  },
+  "V-OVERALL": {
+   "bad_lt2": "0/4",
+   "good_lt2": "1/6",
+   "separation": -0.167,
+   "good_zero": true,
+   "gates": false
+  }
+ },
+ "gating": [],
+ "tuning_verdicts": {
+  "D1-current": [
+   "bad",
+   "n/a"
+  ],
+  "P-S2-20": [
+   "good",
+   "n/a"
+  ],
+  "P-SAU-01": [
+   "good",
+   "n/a"
+  ],
+  "P-SAU-04": [
+   "good",
+   "n/a"
+  ],
+  "P-SME-01": [
+   "good",
+   "n/a"
+  ],
+  "P-SME-08": [
+   "good",
+   "n/a"
+  ],
+  "base": [
+   "good",
+   "n/a"
+  ],
+  "lone-specimens": [
+   "bad",
+   "n/a"
+  ],
+  "path-to-nowhere": [
+   "bad",
+   "n/a"
+  ],
+  "privacy-exposed": [
+   "bad",
+   "n/a"
+  ]
+ },
+ "held_out": {
+  "n_bad": 4,
+  "n_good": 5,
+  "recall": 0.0,
+  "recall_lower95": 0.0,
+  "false_fail": 0.0,
+  "per_criterion": {
+   "V-ENCLOSURE": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "V-FOCAL": {
+    "bad_lt2": 2,
+    "good_lt2": 2,
+    "good_zero": 2
+   },
+   "V-AXIS": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "V-RHYTHM": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "V-LAYERING": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "V-ROOMS": {
+    "bad_lt2": 0,
+    "good_lt2": 1,
+    "good_zero": 0
+   },
+   "V-OVERALL": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   }
+  },
+  "verdicts": {
+   "P-S2-04": [
+    "good",
+    "n/a"
+   ],
+   "P-SAU-02": [
+    "good",
+    "n/a"
+   ],
+   "P-SAU-05": [
+    "good",
+    "n/a"
+   ],
+   "P-SME-02": [
+    "good",
+    "n/a"
+   ],
+   "P-SME-05": [
+    "good",
+    "n/a"
+   ],
+   "capacity-4": [
+    "bad",
+    "n/a"
+   ],
+   "no-enclosure": [
+    "bad",
+    "n/a"
+   ],
+   "oversize-tree": [
+    "bad",
+    "n/a"
+   ],
+   "single-layer": [
+    "bad",
+    "n/a"
+   ]
+  }
+ },
+ "photos": {
+  "n_bad_renders": 9,
+  "n_good_photos": 33,
+  "confound": "photograph vs CG render; D1 grades are for asset defects",
+  "per_criterion": {
+   "P-ENCLOSURE": {
+    "bad_lt2": "1/9",
+    "good_lt2": "5/33",
+    "good_zero": 1
+   },
+   "P-LAYERS": {
+    "bad_lt2": "5/9",
+    "good_lt2": "14/33",
+    "good_zero": 5
+   },
+   "P-FOCAL": {
+    "bad_lt2": "3/9",
+    "good_lt2": "10/33",
+    "good_zero": 0
+   }
+  }
+ }
+}

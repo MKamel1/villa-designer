@@ -1,0 +1,37 @@
+{
+ "item": "capacity-4",
+ "label": "bad",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/capacity-4.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Lounge, dining, and standing/BBQ areas are bounded by the building, walls, and dense planting on three or more sides; dining has a pergola canopy."
+  },
+  "V-FOCAL": {
+   "score": 1,
+   "evidence": "Fire pit in the lounge area, dining table under pergola, and large citrus tree cluster all compete as primary focal points with no clear hierarchy."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Main gravel path leads directly to house doors and connects to lounge, dining, and standing/BBO areas; no dead-end or ambiguous paths visible."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Large mass of citrus/small trees in the bottom-left corner, a distinct group of four trees in the top-right, and a separate block of herbs in the bottom-right."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Top right shows canopy trees over shrubs and ground cover. Bottom left shows a large canopy tree over multiple shrubs and ground cover. Two distinct planting areas demonstrate full vertical layering."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Distinct zones include a gravel lounge with fire pit, a paved dining area under a pergola, a standing/BBO area, and a separate herbs bed, each with different floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear zoning into distinct rooms (lounge, dining, standing/BBQ, pond court), defined edges via walls and planting masses, and structured planting groups (Citrus, herbs, pond court trees)."
+  }
+ }
+}

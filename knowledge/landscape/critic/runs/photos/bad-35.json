@@ -1,0 +1,21 @@
+{
+ "item": "bad-35",
+ "label": "bad",
+ "image": "/home/omar/archpipe/shared/laptop-out/villa/finals-2026-10-15/v26-top-garden-east.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "High white walls on left and right, a back wall, and a glass door frame create clearly defined edges, forming an enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Planting includes a potted shrub with flowers, spiky plants in raised beds, and a grass ground layer, but lacks trees and overall lushness for full layered depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The large potted plant with red flowers in the foreground serves as a clear focal point, drawing the eye and organizing the space around it."
+  }
+ }
+}

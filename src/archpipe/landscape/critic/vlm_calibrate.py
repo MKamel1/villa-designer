@@ -48,6 +48,15 @@ def main():
         per = {c: {"bad_lt2": sum(sc(r, c) is not None and sc(r, c) < 2 for r in bad), "good_lt2": sum(sc(r, c) is not None and sc(r, c) < 2 for r in good), "good_zero": sum(sc(r, c) == 0 for r in good)} for c in crits}
         out["held_out"] = {"n_bad": len(bad), "n_good": len(good), "recall": round(sum(vb) / max(1, len(bad)), 3), "recall_lower95": wilson_lower(sum(vb), len(bad)),
                            "false_fail": round(sum(vg) / max(1, len(good)), 3), "per_criterion": per, "verdicts": {r["item"]: (r["label"], verdict(r, gates) if gates else "n/a") for r in ho}}
+    try:
+        ph = load("photos")
+    except Exception:
+        ph = []
+    if ph:
+        bad = [r for r in ph if r["label"] == "bad"]; good = [r for r in ph if r["label"] == "good"]
+        out["photos"] = {"n_bad_renders": len(bad), "n_good_photos": len(good), "confound": "photograph vs CG render; D1 grades are for asset defects",
+                         "per_criterion": {c: {"bad_lt2": f"{sum(sc(r, c) is not None and sc(r, c) < 2 for r in bad)}/{len(bad)}", "good_lt2": f"{sum(sc(r, c) is not None and sc(r, c) < 2 for r in good)}/{len(good)}",
+                                               "good_zero": sum(sc(r, c) == 0 for r in good)} for c in rub["photo_criteria"]}}
     return out
 
 

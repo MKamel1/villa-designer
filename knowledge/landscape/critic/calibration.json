@@ -1155,6 +1155,132 @@
    "d1_status": "pass",
    "calibrated": false,
    "status": "no seeded defect targets it"
+  },
+  "V-ENCLOSURE": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "3/4",
+    "good_lt2": "3/6",
+    "separation": 0.25,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-FOCAL": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "3/4",
+    "good_lt2": "3/6",
+    "separation": 0.25,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 2,
+    "good_lt2": 2,
+    "good_zero": 2
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-AXIS": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "0/6",
+    "separation": 0.0,
+    "good_zero": false,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-RHYTHM": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-LAYERING": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 1,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-ROOMS": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 1,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
+  },
+  "V-OVERALL": {
+   "critic": "landscape-architect",
+   "kind": "vlm",
+   "tuning": {
+    "bad_lt2": "0/4",
+    "good_lt2": "1/6",
+    "separation": -0.167,
+    "good_zero": true,
+    "gates": false
+   },
+   "held_out": {
+    "bad_lt2": 0,
+    "good_lt2": 0,
+    "good_zero": 0
+   },
+   "calibrated": false,
+   "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)"
   }
  },
  "critics": {

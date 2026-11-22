@@ -1,0 +1,21 @@
+{
+ "item": "good-21",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/north/N01-plan21-small-garden-house/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Wooden slat roof overhead, horizontal fence on one side, building wall on another, and low stone wall define a clear enclosed outdoor room."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "Only young trees and a gravel ground cover are visible; no shrub or distinct groundcover layer, so planting lacks lush layered depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The space is organized around a central seating group with a low table and two chairs, framed by the pergola and flanked by trees and a bench, creating a clear focal point."
+  }
+ }
+}

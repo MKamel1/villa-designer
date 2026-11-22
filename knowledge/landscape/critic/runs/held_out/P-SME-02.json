@@ -1,0 +1,37 @@
+{
+ "item": "P-SME-02",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-SME-02.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Lawn area is bounded by the building on the north, a dense row of shrubs on the west, and a row of shrubs on the south, creating a clearly defined outdoor room."
+  },
+  "V-FOCAL": {
+   "score": 0,
+   "evidence": "No specimen tree, water feature, fire pit, or pergola is present. The plan shows only a lawn, a terrace, and scattered shrubs/small trees with no single dominant element."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "A tan path runs along the bottom edge and up the left side, connecting the lawn area to the terrace and the house door (red diamond)."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Multiple Punicas repeated along the right and bottom edges, a mass of shrubs along the left wall, and a drift of ground cover in the bottom right corner."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Left side shows a vertical stack of canopy/small trees over a row of shrubs and ground cover clusters. Bottom edge shows a similar layered sequence of trees, shrubs, and perennials. Two distinct planting zones with clear vertical layering are visible."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "A large lawn area, a paved terrace with a table and seat adjacent to the house, and a tan paved path along the street side create distinct zones with different floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear structure: building anchors one side, lawn forms a central room, planting masses define edges, terrace creates a distinct zone, and walls enclose the space."
+  }
+ }
+}

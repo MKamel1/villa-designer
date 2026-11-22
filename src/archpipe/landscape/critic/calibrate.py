@@ -75,6 +75,13 @@ def main():
                    "recall": None if recall is None else round(recall, 3), "recall_lower95": wilson_lower(sum(rec_all), n_bad),
                    "known_good": {"evaluated": len(ev), "false_fail": ff, "false_fail_rate": None if not ev else round(ff / len(ev), 3), "false_fail_items": [k for k, t in good.items() if t.get(c) == "fail"]},
                    "d1_status": d1_t.get(c), "calibrated": calibrated, "status": status}
+    vf = KNOW / "critic/vlm-calibration.json"
+    if vf.exists():
+        v = json.loads(vf.read_text())
+        for c, info in v["gate_selection_tuning"].items():
+            ho = v.get("held_out", {}).get("per_criterion", {}).get(c, {})
+            crit[c] = {"critic": "landscape-architect", "kind": "vlm", "tuning": info, "held_out": ho, "calibrated": False,
+                       "status": "demoted to advisory: failed the pre-registered gate rule on the tuning half (no gating criterion)" if not info["gates"] else "gated on tuning; see held-out"}
     per_critic = {}
     for who in ("landscape-architect", "horticulturist", "user", "climate"):
         rows = [r for r in s1 + s2 if r["critic"] == who and not r["excluded_base_not_clean"]]

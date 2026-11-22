@@ -1,0 +1,21 @@
+{
+ "item": "good-03",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-02-garland-garden-new-farm/photo3.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 1,
+   "evidence": "The garden is open to the sky with no overhead structure. While there are defined planting beds and a low wall, the space lacks side enclosure or a sense of being a contained room."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "The image shows a tall tree (plumeria), mid-height shrubs, and a ground layer of ornamental grasses and mulch, creating clear vertical layering and lushness."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The garden lacks a single dominant feature. The large plumeria on the right competes with the ornamental grasses on the left and the house in the background, creating a scattered composition without a clear focal point."
+  }
+ }
+}

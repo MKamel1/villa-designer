@@ -1,0 +1,21 @@
+{
+ "item": "good-12",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SME-05-avli-houses-paralimni/photo2.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "The space is clearly defined by a solid wall on the right, a glass-walled building on the left, and a concrete overhead beam/roof structure, creating a distinct enclosed outdoor room feel."
+  },
+  "P-LAYERS": {
+   "score": 2,
+   "evidence": "Visible layers include a tall tree in the background, a climbing vine on the wall, and low shrubs/ground cover near the pool. Planting appears lush and multi-layered."
+  },
+  "P-FOCAL": {
+   "score": 1,
+   "evidence": "The composition is balanced but lacks a single dominant focal point. The pool, the white lounge chair, the kitchen, and the vine all compete for attention, creating a distributed rather than organized visual hierarchy."
+  }
+ }
+}

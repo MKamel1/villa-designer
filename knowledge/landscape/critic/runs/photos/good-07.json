@@ -1,0 +1,21 @@
+{
+ "item": "good-07",
+ "label": "good",
+ "image": "/home/omar/archpipe/shared/landscape-precedents/south/SAU-04-subiaco-oval-courtyard/photo1.jpg",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "P-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Curved roofline and walls enclose the lawn and tree, creating a defined, room-like space with clear boundaries."
+  },
+  "P-LAYERS": {
+   "score": 1,
+   "evidence": "One prominent tree and a small shrub are present, but there is no visible ground cover layer; the lawn is bare grass, lacking lush, layered planting depth."
+  },
+  "P-FOCAL": {
+   "score": 2,
+   "evidence": "The large central tree is the dominant vertical element, with the curved roofline and lawn framing it as the clear focal point."
+  }
+ }
+}

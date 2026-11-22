@@ -1,0 +1,37 @@
+{
+ "item": "P-S2-04",
+ "label": "good",
+ "image": "/home/omar/archpipe/lanes/LDC/knowledge/landscape/critic/plans/P-S2-04.png",
+ "rubric": "frozen-v0",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "scores": {
+  "V-ENCLOSURE": {
+   "score": 2,
+   "evidence": "Lounge deck is enclosed by dense planting on three sides and a wall on the fourth; entry paving is bounded by walls and planting."
+  },
+  "V-FOCAL": {
+   "score": 0,
+   "evidence": "No specimen tree, water feature, fire pit, or pergola is present. The plan shows only generic canopy trees, shrubs, and paving without a distinct central feature."
+  },
+  "V-AXIS": {
+   "score": 2,
+   "evidence": "Entry paving leads directly to house doors (red diamonds); lounge deck is a destination room; no stray paths."
+  },
+  "V-RHYTHM": {
+   "score": 2,
+   "evidence": "Multiple large canopy trees and shrubs are grouped in dense clusters on the left and top, with repeated rows of ground cover along the edges."
+  },
+  "V-LAYERING": {
+   "score": 2,
+   "evidence": "Plan shows canopy trees (dark green), small trees (medium green), shrubs (light green), and ground/perennials (pale green) overlapping across the entire garden area."
+  },
+  "V-ROOMS": {
+   "score": 2,
+   "evidence": "Lounge deck (grid pattern) with seating and table; entry paving (dotted pattern) leading to house doors; distinct floor surfaces and uses."
+  },
+  "V-OVERALL": {
+   "score": 2,
+   "evidence": "Clear spatial structure with defined rooms (lounge deck, entry paving), strong planting masses forming edges, and distinct zones separated by hardscape."
+  }
+ }
+}
