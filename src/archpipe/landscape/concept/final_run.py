@@ -19,16 +19,9 @@ PREC = R.PREC
 
 
 def critique_seasonal(L):
-    """LDC critics read one shade_fraction per canopy. The grape pergola is run twice: leafed vine on closed louvres (summer values, all findings) and bare vine with the
-    louvres open (winter value 0.15); the winter run replaces C-WINTER-SUN only, so the deciduous vine is not judged as a year-round roof."""
+    """LDC critics read each tree's habit (LDL foliage) and use the leaf-on density for summer windows and the bare density for the winter window: no special handling is needed for deciduous trees."""
     from ..critic import critique, verdict
     fs = critique(L)
-    W = copy.deepcopy(L)
-    for c in W["canopies"]:
-        if c.get("deciduous"):
-            c["shade_fraction"] = c["shade_fraction_winter_open"]
-    fw = [f for f in critique(W) if f.criterion == "C-WINTER-SUN"]
-    fs = [f for f in fs if f.criterion != "C-WINTER-SUN"] + fw
     by = {}
     for f in fs:
         d = by.setdefault(f.critic, {"pass": 0, "fail": 0, "warn": 0, "not_evaluated": 0})
@@ -112,7 +105,7 @@ def main(draw=True):
            "superseded_by_manual": [{"criterion": r.criterion, "subject": r.subject, "ldk_message": r.message, "replaced_by": "LDG-FIRE-MANUAL (side and overhead), manual clearances in final_fire.PRODUCTS"} for r in sup],
            "metrics": metrics, "precedent": {"hard_share": {"achieved": metrics["hard_share"], "range": PREC["hard"], "inside": PREC["hard"][0] <= metrics["hard_share"] <= PREC["hard"][1]},
                                             "trees_per_100m2_south": {"achieved": metrics["trees_per_100m2_south"], "range": PREC["trees"], "inside": PREC["trees"][0] <= metrics["trees_per_100m2_south"] <= PREC["trees"][1]}},
-           "table_extension": ext, "grape": gdata, "grape_sources": K.GRAPE_SRC,
+           "table_extension": ext, "shade": gdata,
            "wind": {"toward_west": {k: {"share_of_hours_pct": v[0], "mean_westward_component_ms": v[1], "hours": v[2]} for k, v in tw.items()}, "seat_in_downwind_sector_pct": per, "sister_seat_in_downwind_sector_pct": mir,
                     "note": "downwind sector = fire->seat bearing within +-45 deg of the direction the wind blows toward; station-level (Cairo West AP TMYx), no lee modelling (LDS gap W1)"},
            "fire": {"design_side_clearance_mm": round(F.FIRE_SIDE_M * 1000), "design_overhead_clearance_mm": round(F.FIRE_OVER_M * 1000), "opening_a": F.OPEN_A, "products": FF.PRODUCTS, "rejected": FF.REJECTED, "quotes_verified": FF.quotes_ok()},
