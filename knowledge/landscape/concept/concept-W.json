@@ -2014,35 +2014,7 @@
    "plan_png": "knowledge/landscape/concept/plans/W-screened-pond-north.png",
    "traceability": {
     "elements": 57,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-west",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-0",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-1",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "screened/east": {
@@ -4141,35 +4113,7 @@
    "plan_png": "knowledge/landscape/concept/plans/W-screened-pond-east.png",
    "traceability": {
     "elements": 63,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-west",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-0",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-1",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "open/north": {
@@ -6163,35 +6107,7 @@
    "plan_png": "knowledge/landscape/concept/plans/W-open-pond-north.png",
    "traceability": {
     "elements": 55,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-south-0",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-1",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-2",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "open/east": {
@@ -8269,35 +8185,7 @@
    "plan_png": "knowledge/landscape/concept/plans/W-open-pond-east.png",
    "traceability": {
     "elements": 61,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-south-0",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-1",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south-2",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   }
  }

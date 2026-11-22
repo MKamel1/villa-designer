@@ -60,7 +60,7 @@ def to_layout(c: dict, plan: dict | None, pool: dict) -> dict:
     for b in c["beds"]:
         sp = plan["beds"].get(b["id"], {}).get("species", [])
         beds.append({"id": b["id"], "rect": M(b["rect"]), "over_structure": False, "plants": planting_entries(sp, pool),
-                     "trace": ["U-S-PRIVACY" if b["role"] in ("screen", "south", "east-edge") else "U-S-HERB" if b["role"] == "herb" else "U-S-QUIET", "LS-HYDROZONE"]})
+                     "trace": ["U-PRIVACY" if b["role"] in ("screen", "south", "east-edge") else "U-S-HERB" if b["role"] == "herb" else "U-S-QUIET", "LS-HYDROZONE"]})
         if b["role"] == "herb":
             sun = S.mean("sun", "sun_hours_summer_solstice", M(b["rect"]))
             feats.append({"id": "herb-bed", "kind": "herb_bed", "rect": M(b["rect"]), "midsummer_sun_hours": round(sun, 2) if sun is not None else None,

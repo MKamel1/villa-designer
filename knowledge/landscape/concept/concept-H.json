@@ -1975,26 +1975,7 @@
    "plan_png": "knowledge/landscape/concept/plans/H-screened-pond-north.png",
    "traceability": {
     "elements": 59,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-west",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "screened/east": {
@@ -4055,26 +4036,7 @@
    "plan_png": "knowledge/landscape/concept/plans/H-screened-pond-east.png",
    "traceability": {
     "elements": 63,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-west",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ],
-     [
-      "south",
-      "planting_groups",
-      "bed-south",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "open/north": {
@@ -5935,17 +5897,7 @@
    "plan_png": "knowledge/landscape/concept/plans/H-open-pond-north.png",
    "traceability": {
     "elements": 52,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-south",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   },
   "open/east": {
@@ -7891,17 +7843,7 @@
    "plan_png": "knowledge/landscape/concept/plans/H-open-pond-east.png",
    "traceability": {
     "elements": 56,
-    "untraced": [
-     [
-      "south",
-      "planting_groups",
-      "bed-south",
-      [
-       "U-S-PRIVACY",
-       "LS-HYDROZONE"
-      ]
-     ]
-    ]
+    "untraced": []
    }
   }
  }
