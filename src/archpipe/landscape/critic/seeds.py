@@ -12,7 +12,7 @@ import copy
 import json
 
 from . import site as S
-from .common import KNOW
+from .common import KNOW, plants_db
 
 OUT = KNOW / "critic/seeded"
 
@@ -174,10 +174,19 @@ def d_oversize_tree(l):
     l["trees"] = [{"id": "jacaranda", "species": "Jacaranda mimosifolia", "center": [24.55, -26.2], "mature_spread_m": 7.6, "form": "large_tree", "over_structure": False, "mature_height_m": 15.2, "water_demand": "moderate"}]
 
 
+def _not_viable_species() -> str:
+    """A species LDL currently marks not_viable (read from plants.json, never hard-coded: LDL reclassifies). Raises if none."""
+    bad = sorted(sl for sl, r in plants_db().items() if r["site_viability"]["verdict"] == "not_viable")
+    if not bad:
+        raise RuntimeError("seed not-viable-plants: plants.json has no not_viable species; the seed cannot be built (do not weaken H-SITE-VIABLE)")
+    return bad[0].replace("_", " ").capitalize()
+
+
 def d_not_viable_plants(l):
-    """The existing palette's Ixora coccinea (needs warmer than the 5.1 C typical-year minimum) as the main drift in the south beds."""
+    """A species LDL marks not viable on this site (frost/heat policy) as the main drift in the south beds."""
+    sp = _not_viable_species()
     for g in l["planting_groups"]:
-        if g["id"] == "bed-rear": g["plants"] = [{"species": "Ixora coccinea", "count": 8, "form": "shrub"}, {"species": "Ophiopogon japonicus", "count": 6, "form": "ground_cover"}]
+        if g["id"] == "bed-rear": g["plants"] = [{"species": sp, "count": 8, "form": "ground_cover"}, {"species": "Ophiopogon japonicus", "count": 6, "form": "ground_cover"}]
 
 
 def d_sun_misfit(l):

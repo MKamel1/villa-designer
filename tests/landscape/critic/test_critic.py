@@ -33,6 +33,11 @@ class Seeded(unittest.TestCase):               # positive tests: every seeded de
             t = st(K.critique(seeds.make(k)))
             for e in expect: self.assertIn(t.get(e), ("fail", "warn"), f"{k}: {e}")
 
+    def test_not_viable_seed_fails_loudly_without_species(self):
+        from unittest import mock
+        with mock.patch.object(seeds, "plants_db", return_value={"a": {"site_viability": {"verdict": "viable"}}}):
+            with self.assertRaises(RuntimeError): seeds._not_viable_species()
+
     def test_set2_report_only(self):                # held-out set: misses are reported in calibration.json, not asserted
         for k in H.HELD: self.assertTrue(H.make(k)["seeded_defect"]["expect"])
 
