@@ -11,7 +11,27 @@ import unittest
 from pathlib import Path
 
 RULES = Path(__file__).resolve().parents[3] / "knowledge/landscape/rules/rules.json"
-BOOKS = Path.home() / "ai-projects/archpipe-knowledge-data/drop_in/done"
+KNOW = Path.home() / "ai-projects/archpipe-knowledge-data/drop_in"
+BOOKS = KNOW / "done"
+BOOK_DIRS = (KNOW / "done", KNOW / "books")  # A Pattern Language was dropped in books/, not yet filed
+
+
+def _pdf(book: str):
+    for d in BOOK_DIRS:
+        hits = glob.glob(str(d / f"*[[]{book}[]]*.pdf"))
+        if hits:
+            return hits[0]
+    return None
+
+
+def _span_text(doc, s) -> str:
+    """Text of the card's page, or of pdf_page..pdf_page_end when the passage runs on."""
+    return "".join(doc[i].get_text() for i in range(s["pdf_page"], s.get("pdf_page_end", s["pdf_page"]) + 1))
+
+
+def apl_quote_on_page(s, doc) -> bool:
+    """Strict: A Pattern Language is one column, so the whole quote must be contiguous on its page(s)."""
+    return _norm(s["quote"]) in _norm(_span_text(doc, s))
 
 
 def _norm(t: str) -> str:
@@ -44,10 +64,12 @@ class SourceQuotes(unittest.TestCase):
         for s in json.loads(RULES.read_text(encoding="utf-8"))["sources"]:
             if s["status"] != "sourced" or not s.get("book"):
                 continue
-            hits = glob.glob(str(BOOKS / f"*[[]{s['book']}[]]*.pdf"))
-            if not hits:
+            hit = _pdf(s["book"])
+            if not hit:
                 continue
-            doc = docs.setdefault(s["book"], pymupdf.open(hits[0]))
+            doc = docs.setdefault(s["book"], pymupdf.open(hit))
+            if s["book"] == "pattern-language":
+                continue  # strict check in PatternLanguageCards
             pg = doc[s["pdf_page"]]
             self.assertTrue(_on_page(s["quote"], pg), f"{s['id']}: quote not found on pdf page {s['pdf_page']}")
             checked += 1
@@ -55,6 +77,46 @@ class SourceQuotes(unittest.TestCase):
             self.skipTest("no held PDFs on this machine")
 
 
+
+class PatternLanguageCards(unittest.TestCase):
+    cards = [s for s in json.loads(RULES.read_text(encoding="utf-8"))["sources"] if s.get("book") == "pattern-language"]
+
+    def setUp(self):
+        try:
+            import pymupdf
+        except ImportError:
+            self.skipTest("pymupdf not installed")
+        hit = _pdf("pattern-language")
+        if not hit:
+            self.skipTest("A Pattern Language PDF not on this machine")
+        self.doc = pymupdf.open(hit)
+
+    def test_every_pattern_card_quote_is_on_its_pdf_page(self):
+        self.assertGreaterEqual(len(self.cards), 58)
+        for s in self.cards:
+            self.assertTrue(apl_quote_on_page(s, self.doc), f"{s['id']}: quote not on pdf page {s['pdf_page']}")
+
+    def test_the_pattern_number_and_name_are_on_the_pattern_s_pages(self):
+        for s in self.cards:
+            lo = s["pdf_page"]
+            # the header sits on the same page or up to 2 pages before the problem; the solution up to 8 pages after
+            text = "".join(self.doc[i].get_text() for i in range(max(0, lo - 8), lo + 1)).lower()
+            name = re.sub(r"\s+", " ", s["pattern_name"].lower())
+            self.assertIn(name, re.sub(r"\s+", " ", text), s["id"])
+
+    def test_therefore_card_starts_after_a_therefore_line(self):
+        for s in self.cards:
+            if s["role"] == "therefore":
+                self.assertIn("Therefore", self.doc[s["therefore_pdf_page"]].get_text(), s["id"])
+                self.assertLessEqual(s["therefore_pdf_page"], s["pdf_page"], s["id"])
+
+    def test_fails_closed(self):
+        s = dict(next(c for c in self.cards if c["id"] == "APL-111-therefore"))
+        self.assertTrue(apl_quote_on_page(s, self.doc))
+        wrong_page = dict(s, pdf_page=s["pdf_page"] + 5)
+        self.assertFalse(apl_quote_on_page(wrong_page, self.doc))
+        self.assertFalse(apl_quote_on_page(dict(s, quote=s["quote"].replace("half-way", "quarter-way")), self.doc))
+        self.assertFalse(apl_quote_on_page(dict(s, quote=s["quote"] + " And plant a palm in every garden."), self.doc))
 
 
 class GuardFailsClosed(unittest.TestCase):

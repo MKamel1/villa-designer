@@ -6,7 +6,7 @@ Lane LDK of the landscape programme (docs/quality/LANDSCAPE-METHOD.md, stage LD-
 
 | Path | Content |
 |---|---|
-| `knowledge/landscape/rules/rules.json` | 210 source cards, 41 computed rules, 30 advisory rules, 11 open GAPs (10 closed, recorded in `closed_gaps`), 27 withdrawn Pattern Language rules (`withdrawn`) |
+| `knowledge/landscape/rules/rules.json` | 210 source cards, 41 computed rules, 44 advisory rules, 11 open GAPs (10 closed, recorded in `closed_gaps`), 44 advisory incl. 14 `AD-APL-*`; 58 Pattern Language cards; `withdrawn` is now empty |
 | `knowledge/landscape/rules/snapshots/` | text snapshot per web card (the verbatim page text fetched 2026-11-22), so the quote guard runs offline |
 | `knowledge/landscape/rules/current-garden-layout.json` | the current D1 garden as a layout (snapshot, generated) |
 | `src/archpipe/landscape/rules/loader.py` | `load()` validates the JSON, builds `archpipe.rules.Rule` objects and `contracts.SourceCard`s |
@@ -106,10 +106,14 @@ supplier must certify the rating for a heated cover, and no cover surface-temper
 `LDK_LIVE=1` re-fetches the live pages. The NHBC public edition is 2024 (the current edition sits behind a login). Round-1 and round-2 research outputs were
 produced by research agents, then every quote was machine-checked against its snapshot or PDF page, and 52 of the 71 web quotes were re-fetched live (`LDK_LIVE=1`); 19 were not (NHBC refuses curl and was read through a browser; a few pages are JS-rendered): those rest on their snapshot only.
 
-**Pattern Language.** Withdrawn: the 27 rules are in `withdrawn` with status `unverified — not used`, are not `Rule` objects, and the source card is gone. The
-loader refuses a withdrawn rule that is also active. 15 have a held equivalent in Ching or Clark & Pause (re-grounded as `AD-COMP-*`, listed under
-`regrounded_as`); 12 have none: 105 South Facing Outdoors, 172 Garden Growing Wild, 71 Still Water, 246 Climbing Plants, 177 Vegetable Garden,
-170 Fruit Trees, 125 Stair Seats, 245 Raised Flowers, 247 Paving with Cracks Between the Stones, 168 Connection to the Earth, 104 Site Repair, 60 Accessible Green.
+**Pattern Language (held since 2026-11-22).** The client bought the book; the PDF is in `drop_in/books/` (not committed, not moved). All 27 first-pass
+numbers and names were checked against its contents and bodies: 0 mismatches. `rules.json` has 58 `APL-n-problem` / `APL-n-therefore` source cards (quote = the text
+layer verbatim, OCR slips included; the test requires the whole quote contiguous on the cited PDF page, `pdf_page` 0-based like other cards, locator gives the 1-based
+viewer page). The PDF is a reflowed copy with **no printed page numbers**, so only PDF pages can be cited. The 12 with no held equivalent are advisory `AD-APL-*`
+rules (105, 172, 71, 246, 177, 170, 125, 245, 247, 168, 104, 60); two more were added (243 Sitting Wall, 244 Canvas Roofs). The 15 re-grounded `AD-COMP-*` rules carry the
+Alexander cards beside the Ching / Clark & Pause cards. `apl_verification` records every pattern, its disposition and any figure. No `AD-APL` rule carries a number
+(loader refuses `measurement`/`params`/`threshold`/`value`/`limit`/`unit`); figures are in the cards only. Not added: 169 Terraced Slope (the garden is not on a slope that needs terracing),
+242 Front Door Bench, 140 Private Terrace on the Street, 238 Filtered Light, 175 Greenhouse (outside the garden brief).
 **Unwin's *Analysing Architecture* is an image-only PDF** (0 characters of text on 207 pages; no OCR on this machine), so it was not used.
 
 ## Decisions
@@ -143,8 +147,7 @@ Closed (rule -> figure) are in `closed_gaps` in rules.json and in the hand-back.
 **Books not held (first-pass text, superseded above).** On this workstation only the Time-Saver landscape PDF (plus Metric Handbook, Lechner, Time-Saver
 Interior, Neufert) exists in `~/ai-projects/archpipe-knowledge-data/drop_in/done`. The knowledge index (`~/archpipe-sources/_index`)
 is empty here (0 books) and the `archpipe_books` corpus does not include Pattern Language, Site Analysis or BR 209.
-So the A Pattern Language rules cite number and name only (status `unverified`; no text quoted or paraphrased as from the book),
-and the dry-climate planting guide is the xeriscape section of Time-Saver 550. Re-grade the `AD-APL-*` rules once the book is held.
+(Superseded: the book is now held; see Pattern Language above.) The dry-climate planting guide is the xeriscape section of Time-Saver 550.
 
 ## Result on the current garden (read-only), second pass
 
