@@ -36,10 +36,8 @@ def build() -> dict:
     inv = json.loads((KNOW / "site/inventory.json").read_text())
     d["walls"] = [{"id": e["id"], "rect": e["rect_m"], "height_m": e["z_m"][1] - e["z_m"][0]}
                   for e in inv["structure"] if e["id"].startswith(("fence-", "yard-wall"))]
-    d["doors"] = [{"id": "door-B-8", "at": [22.597, -26.131], "room": "living", "width_m": 2.4},
-                  {"id": "door-B-6", "at": [16.889, -23.591], "room": "dining", "width_m": 2.35},
-                  {"id": "door-B-7", "at": [20.557, -23.591], "room": "living", "width_m": 2.76},
-                  {"id": "door-B-9", "at": [3.617, -26.156], "room": "lounge", "width_m": 3.71}]
+    from . import site
+    d["doors"] = [{"id": o["id"], "at": list(o["at"]), "faces": o["faces"], "room": o["room"], "width_m": o["width_m"]} for o in site.doors()]
     return d
 
 

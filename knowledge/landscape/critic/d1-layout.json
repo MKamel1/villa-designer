@@ -951,13 +951,24 @@
  ],
  "doors": [
   {
-   "id": "door-B-8",
+   "id": "door-B-9",
    "at": [
-    22.597,
-    -26.131
+    3.617,
+    -26.156
    ],
-   "room": "living",
-   "width_m": 2.4
+   "faces": "-x",
+   "room": "lounge",
+   "width_m": 3.71
+  },
+  {
+   "id": "door-GF-17",
+   "at": [
+    8.277,
+    -23.591
+   ],
+   "faces": "+y",
+   "room": "study-game",
+   "width_m": 1.8
   },
   {
    "id": "door-B-6",
@@ -965,6 +976,7 @@
     16.889,
     -23.591
    ],
+   "faces": "+y",
    "room": "dining",
    "width_m": 2.35
   },
@@ -974,17 +986,19 @@
     20.557,
     -23.591
    ],
+   "faces": "+y",
    "room": "living",
    "width_m": 2.76
   },
   {
-   "id": "door-B-9",
+   "id": "door-B-8",
    "at": [
-    3.617,
-    -26.156
+    22.597,
+    -26.131
    ],
-   "room": "lounge",
-   "width_m": 3.71
+   "faces": "+x",
+   "room": "living",
+   "width_m": 2.4
   }
  ]
 }
