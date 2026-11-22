@@ -266,7 +266,7 @@ class Climbers(unittest.TestCase):
 
 class Visualisation(unittest.TestCase):
     def setUp(self):
-        self.v = visualisation.build_visualisation(L, V)
+        self.v = visualisation.build_visualisation(L, V, outdoor={})
 
     def test_sister_objects_are_tagged_and_ours_are_untouched(self):
         sis = [o for o in self.v.objects if guard.is_vis(o)]

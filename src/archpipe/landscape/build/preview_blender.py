@@ -51,7 +51,7 @@ SPEC = {  # name: (base colour, roughness, metallic)
     "terracotta": ((0.60, 0.28, 0.16), 0.8, 0), "pond-concrete": ((0.05, 0.06, 0.055), 0.9, 0), "pond-edge": ((0.06, 0.06, 0.065), 0.5, 0),
     "grille-steel": ((0.18, 0.18, 0.19), 0.4, 0.9), "pit-steel": ((0.10, 0.10, 0.10), 0.5, 0.8), "lava-rock": ((0.05, 0.045, 0.045), 1.0, 0),
     "burner": ((0.15, 0.15, 0.15), 0.4, 0.9), "bbq-steel": ((0.04, 0.04, 0.04), 0.45, 0.6), "ctx": ((0.80, 0.79, 0.77), 0.95, 0),
-    "ground-far": ((0.50, 0.44, 0.34), 1.0, 0), "pond-liner": ((0.14, 0.17, 0.14), 0.85, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
+    "ground-far": ((0.50, 0.44, 0.34), 1.0, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
     "trunk-bark": ((0.20, 0.15, 0.11), 0.95, 0),
 }
 SEASON = spec.get("season", "summer")
@@ -129,13 +129,33 @@ def mat(name):
     elif base == "ground":
         colour_noise(m, 12.0, (0.40, 0.34, 0.26), (0.52, 0.45, 0.35)); b.inputs["Roughness"].default_value = 1.0; noise_bump(m, 120.0, 0.5)
     elif base == "water":
-        # a closed solid: clear surface (little mirror: IOR 1.33, ripple) + volume absorption, so depth tints it and the liner shows through
-        b.inputs["Base Color"].default_value = (1, 1, 1, 1); b.inputs["Roughness"].default_value = 0.02
-        b.inputs["Transmission Weight"].default_value = 1.0; b.inputs["IOR"].default_value = 1.333
+        # a SURFACE (top face only): mostly transparent, a Fresnel-weighted glossy reflection with a ripple. The depth tint lives in the liner below (pond-liner), so there is no
+        # glass block, no refracted caustic noise and no mirror slab; at a steep view the bottom shows through, at a low view the sky and walls reflect, as real water does.
         nt = m.node_tree
-        ab = nt.nodes.new("ShaderNodeVolumeAbsorption"); ab.inputs["Color"].default_value = (0.35, 0.62, 0.50, 1); ab.inputs["Density"].default_value = 2.2
-        nt.links.new(ab.outputs["Volume"], nt.nodes["Material Output"].inputs["Volume"])
-        noise_bump(m, 9.0, 0.10, 3)           # surface ripple
+        for n in list(nt.nodes):
+            nt.nodes.remove(n)
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        tr = nt.nodes.new("ShaderNodeBsdfTransparent"); tr.inputs["Color"].default_value = (0.80, 0.93, 0.90, 1)
+        gl = nt.nodes.new("ShaderNodeBsdfGlossy"); gl.inputs["Roughness"].default_value = 0.04
+        fr = nt.nodes.new("ShaderNodeFresnel"); fr.inputs["IOR"].default_value = 1.333
+        mx = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(fr.outputs["Fac"], mx.inputs["Fac"]); nt.links.new(tr.outputs["BSDF"], mx.inputs[1]); nt.links.new(gl.outputs["BSDF"], mx.inputs[2])
+        nt.links.new(mx.outputs["Shader"], out.inputs["Surface"])
+        tc = nt.nodes.new("ShaderNodeTexCoord"); w1 = nt.nodes.new("ShaderNodeTexNoise"); w1.inputs["Scale"].default_value = 7.0; w1.inputs["Detail"].default_value = 3.0
+        bm = nt.nodes.new("ShaderNodeBump"); bm.inputs["Strength"].default_value = 0.22; bm.inputs["Distance"].default_value = 0.01
+        nt.links.new(tc.outputs["Object"], w1.inputs["Vector"]); nt.links.new(w1.outputs["Fac"], bm.inputs["Height"])
+        nt.links.new(bm.outputs["Normal"], gl.inputs["Normal"]); nt.links.new(bm.outputs["Normal"], fr.inputs["Normal"])
+    elif base == "pond-liner":
+        # wet liner: lighter on the shelf and entry slope, darker and greener with depth (the depth tint of the water)
+        nt = m.node_tree
+        gp = nt.nodes.new("ShaderNodeNewGeometry"); sp = nt.nodes.new("ShaderNodeSeparateXYZ"); mr = nt.nodes.new("ShaderNodeMapRange"); cr = nt.nodes.new("ShaderNodeValToRGB")
+        lo, hi = (spec.get("water_range") or [G - 1.05, G - 0.15])
+        mr.inputs["From Min"].default_value = lo; mr.inputs["From Max"].default_value = hi
+        cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = (0.015, 0.045, 0.045, 1)
+        cr.color_ramp.elements[1].position = 1.0; cr.color_ramp.elements[1].color = (0.20, 0.34, 0.29, 1)
+        nt.links.new(gp.outputs["Position"], sp.inputs["Vector"]); nt.links.new(sp.outputs["Z"], mr.inputs["Value"]); nt.links.new(mr.outputs["Result"], cr.inputs["Fac"])
+        nt.links.new(cr.outputs["Color"], principled(m).inputs["Base Color"]); principled(m).inputs["Roughness"].default_value = 0.6
+        noise_bump(m, 40.0, 0.3, 4)
     elif base == "flame":
         b.inputs["Base Color"].default_value = (1, 0.4, 0.05, 1)
         b.inputs["Emission Color"].default_value = (1.0, 0.35, 0.05, 1); b.inputs["Emission Strength"].default_value = 25.0
@@ -298,8 +318,19 @@ for c in spec["context"]:
     ob = mesh_object(c["id"], [dict(material="ctx", verts=[[x0, y0, c["z0"]], [x1, y0, c["z0"]], [x1, y1, c["z0"]], [x0, y1, c["z0"]], [x0, y0, c["z1"]], [x1, y0, c["z1"]], [x1, y1, c["z1"]], [x0, y1, c["z1"]]],
                       faces=[[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]])])
     ob["ld_id"] = c["id"]; ob["ld_context"] = True
-# far ground, a little below the surfaces so nothing z-fights
-mesh_object("ctx-ground", [dict(material="ground-far", verts=[[-60, -80, G - 0.06], [80, -80, G - 0.06], [80, 40, G - 0.06], [-60, 40, G - 0.06]], faces=[[0, 1, 2, 3]])])
+# far ground, a little below the surfaces so nothing z-fights; cells over a pond opening are left out (a plane under the rim would bury the pond)
+xs = sorted({-60.0, 80.0, *[r[i] for r in spec.get("pond_rects", []) for i in (0, 2)]})
+ys = sorted({-80.0, 40.0, *[r[i] for r in spec.get("pond_rects", []) for i in (1, 3)]})
+gv, gf = [], []
+for i in range(len(xs) - 1):
+    for j in range(len(ys) - 1):
+        cx_, cy_ = (xs[i] + xs[i + 1]) / 2, (ys[j] + ys[j + 1]) / 2
+        if any(r[0] < cx_ < r[2] and r[1] < cy_ < r[3] for r in spec.get("pond_rects", [])):
+            continue
+        k = len(gv)
+        gv += [[xs[i], ys[j], G - 0.06], [xs[i + 1], ys[j], G - 0.06], [xs[i + 1], ys[j + 1], G - 0.06], [xs[i], ys[j + 1], G - 0.06]]
+        gf.append([k, k + 1, k + 2, k + 3])
+mesh_object("ctx-ground", [dict(material="ground-far", verts=gv, faces=gf)])
 
 cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
 cam.data.sensor_width = 36; cam.data.clip_start = 0.05; cam.data.clip_end = 300

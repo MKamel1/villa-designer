@@ -28,7 +28,11 @@ def _mesh_parts(o):
         m = p.material
         if m == "paving-unit":
             m = "paving-unit#%d" % ((i * 7919) % 3)
-        out.append(dict(material=m, verts=[[round(float(v), 5) for v in r] for r in p.verts], faces=p.faces))
+        faces = p.faces
+        if m == "water":                       # the water solid is kept whole for measurement; only its top face is rendered (a surface, not a glass block)
+            zt = float(p.verts[:, 2].max())
+            faces = [f for f in faces if all(abs(float(p.verts[i, 2]) - zt) < 1e-6 for i in f)]
+        out.append(dict(material=m, verts=[[round(float(v), 5) for v in r] for r in p.verts], faces=faces))
     return out
 
 
@@ -41,7 +45,9 @@ def scene_spec(scene, views, size=(1500, 950), samples=96, device="GPU"):
         if o.asset:
             d["asset"] = {k: o.asset[k] for k in ("asset_id", "gltf", "at", "bounds", "grade", "mode", "scale_xyz", "box_m", "length_m", "yaw_deg", "tiles") if k in o.asset}
         objs.append(d)
-    return dict(ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
+    ponds = [o.meta for o in scene.objects if o.kind == "pond"]
+    wr = [min(m["floor_z"] for m in ponds), max(m["water_z"] for m in ponds)] if ponds else None
+    return dict(pond_rects=[list(m['rect']) for m in ponds], water_range=wr, ground_z=scene.ground_z, age=scene.age, season=scene.season, objects=objs, context=scene.context, views=views, size=list(size), samples=samples, device=device)
 
 
 def default_views(scene, tag):
@@ -64,7 +70,10 @@ def default_views(scene, tag):
             v.append(dict(name="court-north-pond", group="court", eye=[r[2] + 1.6, r[1] - 3.6, g + 3.0], target=[cx, cy, g - 0.2], lens=22, state="closed", hide_house=True))
         else:
             v.append(dict(name="yard-east-pond", group="court", eye=[r[2] + 2.6, r[1] - 1.5, g + 1.9], target=[cx, cy, g - 0.2], lens=24, state="closed"))
-        v.append(dict(name="pond-close-" + pid, group="pond", eye=[cx + 0.2, r[1] - 1.5, g + 1.2], target=[cx, cy, g - 0.35], lens=35, state="closed"))
+        if pid.startswith("n"):
+            v.append(dict(name="pond-close-" + pid, group="pond", eye=[cx + 1.9, cy - 2.2, g + 2.1], target=[cx, cy, g - 0.35], lens=32, state="closed", hide_house=True))
+        else:
+            v.append(dict(name="pond-close-" + pid, group="pond", eye=[r[2] + 2.4, r[1] - 1.1, g + 1.6], target=[cx, cy, g - 0.35], lens=34, state="closed"))
     for o in scene.objects:
         if o.kind == "plant" and o.meta.get("deciduous") and o.meta.get("climbing"):
             b = o.bounds()
@@ -79,7 +88,7 @@ def default_views(scene, tag):
     return v
 
 
-def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True):
+def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, size=(1500, 950)):
     """Write the spec and run Blender through jobq (GPU lock). Returns the receipt (measured asset placement, per-view files)."""
     out = Path(out_dir).resolve()
     if scene.visualisation_only and "visualisation" not in out.parts:
@@ -88,7 +97,7 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True):
         raise guard.VisualisationOnlyError("a scene with visualisation-only objects must be flagged visualisation_only")
     out.mkdir(parents=True, exist_ok=True)
     views = views or default_views(scene, tag)
-    spec = scene_spec(scene, views, samples=samples, device="GPU" if gpu else "CPU")
+    spec = scene_spec(scene, views, size=size, samples=samples, device="GPU" if gpu else "CPU")
     spec["exposure_by_group"] = dict(EXPOSURE)
     sp = Path("/tmp/ldb-specs"); sp.mkdir(exist_ok=True)
     spec_path = sp / ("%s.spec.json" % tag)

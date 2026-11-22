@@ -190,6 +190,11 @@ def _climber_panel(oid, slug, f, cl, s, h, age, base_z, support, row):
     n0, n1 = min(near, far), max(near, far)
     row.update(climbing=True, shown_height_m=round(hh, 3), panel_width_m=round(w, 3), on=cl.get("on"))
     assets = [a for a in climber_panels() if slug in (a.get("maps_to") or [a.get("slug")])]
+    rr = resolve(slug)
+    curtains = [x for x in rr["assets"] if x["size_m"][1] < 0.2 * x["size_m"][0] and x["size_m"][2] > 0.5]     # a graded vertical curtain of leaves (e.g. the English ivy)
+    if not assets and curtains:
+        x = curtains[0]
+        assets = [dict(id=x["id"], gltf=str(gltf_path(x)), tile_m=[x["size_m"][0], x["size_m"][2]], grade=x["grade"], licence=x["licence"], author=x["author"], source=x["source"])]
     if assets and assets[0].get("gltf") and Path(assets[0]["gltf"]).exists():
         a = assets[0]
         tw, th = a["tile_m"][0], a["tile_m"][1]
