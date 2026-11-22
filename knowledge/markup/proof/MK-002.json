@@ -1,0 +1,75 @@
+{
+ "id": "MK-002",
+ "source": {
+  "file": "A-121-plan.pdf",
+  "page": 1,
+  "annotation_id": "fitz-A0",
+  "type": "Text",
+  "hash": "2b798cc01d0fcbb4"
+ },
+ "author": "client",
+ "date": null,
+ "text": "move this light (which one?)",
+ "sheet": "A-121",
+ "sheet_point_mm": {
+  "x": 613.2,
+  "y": 116.1
+ },
+ "model_point": {
+  "x_mm": 19683.5,
+  "y_mm": -26576.0,
+  "level": "GF"
+ },
+ "link_status": "linked",
+ "link_reason": "4 object candidates within 150 mm of the pick; none alone contains it",
+ "tolerance_mm": 150.0,
+ "links": [
+  {
+   "element_id": "lum-WALL-READ-parents-bed-02",
+   "kind": null,
+   "distance_mm": null,
+   "tier": "resolved-by-lead"
+  }
+ ],
+ "alternatives": [
+  {
+   "element_id": "lum-COVE-parents-bed-01",
+   "kind": "luminaire",
+   "distance_mm": 105.0,
+   "tier": "object"
+  },
+  {
+   "element_id": "lum-VSTRIP-parents-dressing-03",
+   "kind": "luminaire",
+   "distance_mm": 115.0,
+   "tier": "object"
+  },
+  {
+   "element_id": "lum-VSTRIP-parents-dressing-04",
+   "kind": "luminaire",
+   "distance_mm": 115.0,
+   "tier": "object"
+  },
+  {
+   "element_id": "lum-WALL-READ-parents-bed-02",
+   "kind": "luminaire",
+   "distance_mm": 118.0,
+   "tier": "object"
+  }
+ ],
+ "frame_verified": {
+  "verified": true,
+  "tags": 30,
+  "inside": 30
+ },
+ "status": "closed",
+ "decision": {
+  "verdict": "accept",
+  "reason": "move the wall light",
+  "date": "2026-11-21"
+ },
+ "closure": {
+  "commit": "1c3017e",
+  "date": "2026-11-21"
+ }
+}

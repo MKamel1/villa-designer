@@ -1,0 +1,36 @@
+{
+ "id": "MK-003",
+ "source": {
+  "file": "A-121-plan.pdf",
+  "page": 1,
+  "annotation_id": "fitz-A1",
+  "type": "Text",
+  "hash": "59880f206381f21c"
+ },
+ "author": "client",
+ "date": null,
+ "text": "what is out here?",
+ "sheet": "A-121",
+ "sheet_point_mm": {
+  "x": 1184.7,
+  "y": 229.7
+ },
+ "model_point": null,
+ "link_status": "miss",
+ "link_reason": "outside the drawn plan (title block, legend or margin)",
+ "tolerance_mm": null,
+ "links": [],
+ "alternatives": [],
+ "frame_verified": {
+  "verified": true,
+  "tags": 30,
+  "inside": 30
+ },
+ "status": "rejected",
+ "decision": {
+  "verdict": "reject",
+  "reason": "no element there",
+  "date": "2026-11-21"
+ },
+ "closure": null
+}
