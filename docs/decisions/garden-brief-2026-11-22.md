@@ -33,3 +33,8 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 
 ## Lead decision (2026-11-22): summer-evening clock
 "Summer nights" is analysed on the local clock in force: Egypt observes summer time (DST, reinstated in 2023). LDS's DST-clock layer is primary and the standard-time layer is kept for reference. The source citation is to be added by the generation lane.
+
+## Client decisions (2026-11-22, later)
+- **Sister plot (west line of the south garden): SCREEN IT.** A tall screen along the open west line. Concepts use the screened variant.
+- **Plant assets:** approved a free Sketchfab account (the client supplies the token) and Botaniq (Blender, about $100; the client buys it). Not approved: the Xfrog libraries.
+- **A Pattern Language:** the client will buy it and tell the lead. Until then the 12 patterns without a held equivalent stay unused.
