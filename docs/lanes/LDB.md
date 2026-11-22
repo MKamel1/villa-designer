@@ -58,7 +58,7 @@ A potted plant is restrained to the clear room round the pot (a pot 0.3 m from a
 114 objects (113 + the second cover state). Individuals: **2 drawn from graded assets** (pomegranate `skf3_f697f7da` grade B, species fit; potted frangipani `sf_frangipani` grade A, genus fit),
 **53 generic stand-ins** (9 species: salvia, justicia, pennisetum, jasminum, petrea, origanum, aspidistra, acorus, alpinia: none has a drawable asset), **1 omitted** (a justicia the layout puts inside the pot).
 Checks (`checks.json`): ids 114/114; footprints 97/97 within 20 mm (both cover states); stand-ins 55/55 labelled; support 225/225 grounded; **clips: 1 real conflict** (below). At maturity: 7 clips (the pomegranate
-through both pergola roofs and the fence, a petrea at the fence, a pergola/salvia touch, the pot/justicia), reported not hidden.
+through both pergola roofs and the fence, a jasminum at the fence, two salvia/justicia touching the dining pergola, the pot/justicia), reported not hidden.
 Blender receipt (`previews/age3.receipt.json`, measured in the render): both assets stand on the ground (base error 0.0 mm) and reach their target height.
 Previews (`previews/`): `age3-bird-south-east`, `age3-bird-north-court`, `age3-eye-living-door`, `age3-eye-dining-door`, `age3-firepit-closed`, `age3-firepit-open`, `mature-*` (3). Cycles 128/96 samples, Nishita
 sky at a fixed 52 degrees, AgX, house box hidden from camera and shadows in the bird's-eye views. **Not exposure-locked, not a production render.**
