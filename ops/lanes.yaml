@@ -337,6 +337,30 @@ lanes:
     - knowledge/landscape/concept/**
     - docs/lanes/LDG*.md
     - docs/lessons/LDG.md
+  LDB: # landscape: build a landscape-layout into a Blender preview scene (not production yet)
+    - src/archpipe/landscape/build/**
+    - tests/landscape/build/**
+    - knowledge/landscape/build/**
+    - docs/lanes/LDB*.md
+    - docs/lessons/LDB.md
+  WT: # whole-villa walkthrough route + preview
+    - src/archpipe/flythrough.py
+    - src/archpipe/blender/walkthrough.py
+    - scripts/flythrough.py
+    - tests/test_flythrough.py
+    - tests/blender_walkthrough_*.py
+    - knowledge/flythrough/**
+    - docs/flythrough-report.md
+    - docs/lanes/WT*.md
+    - docs/lessons/WT.md
+  L9P: # final render set preparation: camera set, critic gate, draft pass
+    - scripts/villa_render_views.py
+    - src/archpipe/critic/**
+    - knowledge/critic/**
+    - tests/critic/**
+    - knowledge/render-set/**
+    - docs/lanes/L9*.md
+    - docs/lessons/L9P.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
