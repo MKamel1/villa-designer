@@ -307,7 +307,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     for rect, h_, sid in structs:
         if sid not in climbed:
             warns.append("climber coverage: %s (%.1f m) carries no climber in the layout: no panel built, a layout gap" % (sid, h_))
-    spec = dict(pit_half=half, structures=[sid for _, _, sid in structs], climbed=sorted(climbed), koi=("asset" if outdoor.get("koi") else "none"))
+    spec = dict(ponds={f["id"]: list(R(f["rect"])) for f in feats if f.get("kind") == "pond"}, pit=(list(pitf["center"]) if pitf else None), table=(layout.get("tables") or [{}])[0].get("center"), pit_half=half, structures=[sid for _, _, sid in structs], climbed=sorted(climbed), koi=("asset" if outdoor.get("koi") else "none"))
     ctx = [dict(id="ctx-building-%d" % i, rect=list(R(b)), z0=g, z1=g + P.BUILDING_H,
                 label="context: existing house massing, height ASSUMED %.0f m (footprints carry none)" % P.BUILDING_H) for i, b in enumerate(layout.get("buildings", []))]
     ids = [o.id for o in objs if o.state is None]

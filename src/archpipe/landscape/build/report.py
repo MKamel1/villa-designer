@@ -9,10 +9,11 @@ import json
 import sys
 from pathlib import Path
 
-from . import build, checks
+from . import build, checks, guard
 
 
 def schedule(scene):
+    guard.refuse(scene, "the schedule")
     rows = scene.schedule
     per = collections.OrderedDict()
     for r in rows:
@@ -25,6 +26,7 @@ def schedule(scene):
 
 
 def element_table(scene):
+    guard.refuse(scene, "the element table")
     return [dict(id=o.id, kind=o.kind, layout_id=o.layout_id or o.meta.get("layout_id"), state=o.state, standin=o.standin, label=o.label) for o in scene.objects]
 
 

@@ -194,6 +194,8 @@ def standins(scene):
 
 
 def run_all(scene, state="closed"):
+    from . import guard
+    scene = guard.production_only(scene)         # the sister-plot garden is excluded from every check (brief 2026-11-22)
     r = ids(scene) + footprints(scene, state) + plant_footprints(scene) + support(scene, state) + clips(scene, state) + standins(scene)
     return r
 
