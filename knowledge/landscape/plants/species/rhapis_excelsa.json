@@ -119,18 +119,32 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "soil pH attribute lists acid only; no statement on alkaline tolerance",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+    "quote": "\"soil_ph_high\":7"
+   }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "salt tolerance not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "SelecTree salt tolerance: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Low\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -183,25 +197,45 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "only rhizomes mentioned",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "human toxicity not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "litter": {
-   "status": "GAP",
-   "reason": "litter not stated",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

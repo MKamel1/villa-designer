@@ -131,11 +131,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "SelecTree salt tolerance: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Low\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -192,29 +199,49 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "page tags non-toxic only for cats, horses and dogs; nothing stated for people",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "toxicity_fish": {
    "status": "NA",
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no leaf/fruit/flower litter statement (only 'capsules persist through winter')",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

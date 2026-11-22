@@ -103,11 +103,18 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "no soil pH statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "SelecTree upper soil pH limit: Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+    "quote": "\"soil_ph_high\":6"
+   }
   },
   "salt": {
    "status": "SOURCED",
@@ -182,11 +189,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "no root statement",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "SOURCED",
@@ -207,11 +221,17 @@
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement (winter leaf drop only)",
-   "searched": [
-    "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Leaves"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+    "quote": "\"litter_type\":[\"Leaves\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",
@@ -227,5 +247,14 @@
    }
   }
  },
- "notes": "UF/IFAS page is genus-level (plumerias; links to Plumeria rubra); statements applied to P. rubra on that basis."
+ "notes": "UF/IFAS page is genus-level (plumerias; links to Plumeria rubra); statements applied to P. rubra on that basis.",
+ "lead_decisions": [
+  {
+   "factor": "frost",
+   "decision": "accepted",
+   "reason": "client standing choice; Cairo grows frangipani widely (lead decision 2026-11-22)",
+   "note": "Hardy only to 1.7 C (UF/IFAS) against a typical-year minimum of 5.1 C: winter cold note, not a waiver. Protect young plants from cold nights; expect leaf drop in winter."
+  }
+ ],
+ "koi_pond_note": "Midwest Pond and Koi Society lists Plumeria (frangipani) among plants to place carefully (Euphorbiaceae list)"
 }

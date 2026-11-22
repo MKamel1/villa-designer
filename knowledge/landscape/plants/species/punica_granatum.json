@@ -139,11 +139,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -202,29 +209,49 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "no toxicity statement for people",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "toxicity_fish": {
    "status": "NA",
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Wet Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+    "quote": "\"litter_type\":[\"Wet Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

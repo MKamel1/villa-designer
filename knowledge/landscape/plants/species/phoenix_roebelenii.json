@@ -126,20 +126,32 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "NCSU lists acid and neutral (6.0-8.0) only; no alkaline statement.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "SelecTree upper soil pH limit: Acidic (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+    "quote": "\"soil_ph_high\":2"
+   }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "No salt-tolerance statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "SelecTree salt tolerance: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Low\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -192,12 +204,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "No root-behaviour statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",

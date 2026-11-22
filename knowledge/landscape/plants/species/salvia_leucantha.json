@@ -209,12 +209,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement on NCSU or RHS pages",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/salvia-leucantha/",
-    "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "AMWUA litter rating: Low"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/mexican-bush-sage",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA plant page",
+    "quote": "\"litter\":\"Low\""
+   }
   },
   "maintenance": {
    "status": "SOURCED",

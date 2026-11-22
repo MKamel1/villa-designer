@@ -131,6 +131,63 @@ class Viability(unittest.TestCase):
         self.assertEqual(L.site_viability(r)["verdict"], "not_viable")
 
 
+LD = {"factor": "frost", "decision": "accepted", "reason": "client choice", "note": "winter cold note"}
+
+
+class LeadDecisionsAndPlacement(unittest.TestCase):
+    def test_lead_decision_accepts_a_conditional_frost(self):
+        r = record(lead_decisions=[LD]); r["attributes"]["frost"] = s({"min_temp_c": 1.7})
+        self.assertEqual(L.validate_species(r), [])
+        v = L.site_viability(r)
+        self.assertEqual(v["verdict"], "viable"); self.assertEqual(v["factors"]["frost"], "accepted")
+        self.assertTrue(any("accepted by lead decision" in x for x in v["reasons"]))
+
+    def test_lead_decision_never_rescues_a_fail(self):
+        r = record(lead_decisions=[LD]); r["attributes"]["frost"] = s({"min_temp_c": 10})
+        self.assertEqual(L.site_viability(r)["verdict"], "not_viable")
+
+    def test_lead_decision_needs_reason_and_note(self):
+        bad = dict(LD); bad.pop("reason")
+        self.assertTrue(any("lead_decisions" in e for e in L.validate_species(record(lead_decisions=[bad]))))
+
+    def test_without_decision_the_same_plant_stays_conditional(self):
+        r = record(); r["attributes"]["frost"] = s({"min_temp_c": 1.7})
+        self.assertEqual(L.site_viability(r)["verdict"], "viable_with_conditions")
+
+    def test_toxic_to_people_gets_a_placement_constraint_and_benign_does_not(self):
+        r = record(); r["attributes"]["toxicity_people"] = s({"class": "highly_toxic"})
+        self.assertTrue(any("seating and edibles" in c for c in L.placement_constraints(r)))
+        self.assertEqual(L.placement_constraints(record()), [])
+
+    def test_pond_species_with_fish_gap_is_kept_from_the_koi_pond(self):
+        r = record(pond_relevant=True); r["attributes"]["toxicity_fish"] = {"status": "GAP", "reason": "r", "searched": ["x"]}
+        self.assertTrue(any("not beside the koi pond until sourced" in c for c in L.placement_constraints(r)))
+        r["attributes"]["toxicity_fish"] = s({"class": "non_toxic"})
+        self.assertEqual(L.placement_constraints(r), [])
+
+
+class PassTwoDecisions(unittest.TestCase):
+    def test_ixora_is_dropped_and_recorded(self):
+        sp = L.load_species()
+        self.assertNotIn("ixora_coccinea", sp)
+        doc = json.loads((L.DATA / "plants.json").read_text(encoding="utf-8"))
+        self.assertEqual([x["slug"] for x in doc["rejected"]], ["ixora_coccinea"])
+
+    def test_frangipani_is_viable_with_a_winter_note_not_a_waiver(self):
+        doc = {x["slug"]: x for x in json.loads((L.DATA / "plants.json").read_text(encoding="utf-8"))["species"]}
+        v = doc["plumeria_rubra"]["site_viability"]
+        self.assertEqual(v["factors"]["frost"], "accepted")
+        self.assertIn("1.7 C", doc["plumeria_rubra"]["lead_decisions"][0]["note"])
+
+    def test_inferred_heat_is_always_flagged_as_inference(self):
+        for slug, r in L.load_species().items():
+            h = r["attributes"]["heat"]
+            if h["status"] == "SOURCED" and h["source"]["source_id"] in ("AMWUA",) or \
+               (h["status"] == "SOURCED" and h["source"]["source_id"] == "SNRPC-2026" and h["value"].get("inferred")):
+                self.assertTrue(h["value"].get("inferred"), slug)
+                self.assertIn("INFERENCE", h["value"]["text"], slug)
+
+
 class Loader(unittest.TestCase):
     def test_loader_rejects_invalid_file_and_slug_mismatch(self):
         with tempfile.TemporaryDirectory() as d:

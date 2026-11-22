@@ -12,7 +12,12 @@ import json
 import re
 import sys
 import time
+import os
+import ssl
+import subprocess
+import tempfile
 import urllib.request
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
 from .library import DATA, load_species
@@ -29,12 +34,29 @@ def norm(t: str, page: bool = False) -> str:
     return re.sub(r"[^a-z0-9]+", "", t.lower())  # letters+digits only: spacing/degree-sign quirks vanish
 
 
+# Missouri Botanical Garden's server omits its intermediate certificate. Verification stays ON: the bundle is the
+# system roots plus the GeoTrust intermediate fetched from the certificate's own AIA URL (see docs/lanes/LDL.md).
+MBG_BUNDLE = Path(os.environ.get("LDL_MBG_BUNDLE", Path.home() / "archpipe/shared/assets/user/landscape/ca-bundle-mbg.pem"))
+
+
+def _ctx(url: str):
+    if "mobot.org" in url or "missouribotanicalgarden.org" in url:
+        return ssl.create_default_context(cafile=str(MBG_BUNDLE)) if MBG_BUNDLE.is_file() else None
+    return None
+
+
 def fetch(url: str) -> str | None:
     for wait in (0, 3, 8):  # polite retry: the extension sites rate-limit parallel clients
         time.sleep(wait)
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=25) as r:
-                return norm(r.read().decode("utf-8", "replace"), page=True)
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60, context=_ctx(url)) as r:
+                raw = r.read()
+            if url.lower().endswith(".pdf"):
+                with tempfile.TemporaryDirectory() as d:
+                    (Path(d) / "x.pdf").write_bytes(raw)
+                    txt = subprocess.run(["pdftotext", str(Path(d) / "x.pdf"), "-"], capture_output=True, text=True).stdout
+                return norm(txt, page=True)
+            return norm(raw.decode("utf-8", "replace"), page=True)
         except Exception:
             pass
     return None

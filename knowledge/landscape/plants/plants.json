@@ -117,11 +117,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG: Plants appreciate some relief from hot summer sun"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=276173",
+      "accessed": "2026-11-22",
+      "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+      "quote": "Plants appreciate some relief from hot summer sun"
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -249,16 +257,19 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "agapanthus_praecox",
@@ -524,7 +535,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "aloe_vera",
@@ -643,12 +655,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no heat statement",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
-      "https://plants.ces.ncsu.edu/plants/aloe-vera/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Aloe vera (L.) Burm.f.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -765,12 +785,18 @@
      "quote_check": "verified"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "sources silent on litter",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
-      "https://plants.ces.ncsu.edu/plants/aloe-vera/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/medicinal-aloe",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -784,16 +810,15 @@
    "notes": "NCSU tags poisonous (pets); also states considered invasive in some counties.",
    "invasive_flag": "NCSU: considered invasive in some counties",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": []
   },
   {
    "slug": "alpinia_zerumbet",
@@ -884,11 +909,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/alpinia-zerumbet/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG: Plants appreciate some afternoon shade in hot summer climates."
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=287609",
+      "accessed": "2026-11-22",
+      "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+      "quote": "Plants appreciate some afternoon shade in hot summer climates."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -996,18 +1029,21 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "unknown",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
      "frost tolerance is a GAP",
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "aspidistra_elatior",
@@ -1115,11 +1151,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class moderate (our sun attribute does not include full sun: shade-tolerant plant listed)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Aspidistra elatior Blume",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -1282,16 +1327,19 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "bambusa_multiplex",
@@ -1561,7 +1609,10 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "bougainvillea_glabra",
@@ -1844,9 +1895,10 @@
      "alkaline_soil": "conditional"
     },
     "reasons": [
-     "alkaline soil: intolerant; site soil pH not tested"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "callistemon_citrinus",
@@ -1946,11 +1998,20 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "page gives only cold hardiness, no heat statement",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Callistemon citrinus (Curtis) Skeels",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -2054,11 +2115,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "NCSU silent on roots",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/callistemon-citrinus",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/callistemon-citrinus (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -2072,11 +2141,18 @@
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "NCSU silent on litter",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Flowers"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/callistemon-citrinus",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/callistemon-citrinus (Cal Poly)",
+      "quote": "\"litter_type\":[\"Flowers\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -2105,14 +2181,14 @@
     "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "conditional"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline soil: intolerant; site soil pH not tested"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "ceratophyllum_demersum",
@@ -2331,7 +2407,10 @@
      "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "chlorophytum_comosum",
@@ -2588,7 +2667,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "cinnamomum_camphora",
@@ -2719,12 +2799,19 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "NCSU lists pH Acid (<6.0) and Neutral (6.0-8.0) only; no alkaline-soil or chlorosis statement.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
-      "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/camphora-officinarum",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/camphora-officinarum (Cal Poly)",
+      "quote": "\"soil_ph_high\":7"
+     },
+     "quote_check": "verified"
     },
     "salt": {
      "status": "SOURCED",
@@ -2863,13 +2950,13 @@
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "citrus_limon",
@@ -3004,11 +3091,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/citrus-limon",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/citrus-limon (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -3075,11 +3170,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "root behaviour (only 'dislikes root disturbance'): not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/citrus-limon",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/citrus-limon (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -3101,11 +3204,18 @@
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/citrus-x-limon/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Wet Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/citrus-limon",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/citrus-limon (Cal Poly)",
+      "quote": "\"litter_type\":[\"Wet Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -3140,7 +3250,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "citrus_x_sinensis",
@@ -3413,7 +3524,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "cupressus_sempervirens",
@@ -3628,30 +3740,52 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "NCSU page does not describe roots",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree root damage potential: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "NCSU page silent on toxicity; Time-Saver Table 550-3 does not list Cupressus",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
-      "held:landscape-timesaver Table 550-3"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "toxicity_fish": {
      "status": "NA",
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "NCSU page silent on litter",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/cupressus-sempervirens",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/cupressus-sempervirens (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -3683,7 +3817,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "cymbopogon_citratus",
@@ -3934,7 +4069,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "cynodon_dactylon",
@@ -4171,7 +4307,8 @@
      "frost tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "cyperus_involucratus",
@@ -4448,7 +4585,10 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "cyperus_papyrus",
@@ -4713,7 +4853,10 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "delonix_regia",
@@ -4853,15 +4996,23 @@
     "salt": {
      "status": "SOURCED",
      "value": {
-      "class": "moderate",
-      "text": "Wikipedia: tolerates drought and salty conditions (no degree stated)"
+      "class": "low",
+      "text": "SelecTree salt tolerance: Low"
      },
      "source": {
-      "source_id": "Wikipedia",
-      "url": "https://en.wikipedia.org/wiki/Delonix_regia",
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/delonix-regia",
       "accessed": "2026-11-22",
-      "locator": "Cultivation: Required conditions",
-      "quote": "can tolerate drought and salty conditions"
+      "locator": "SelecTree tree-detail/delonix-regia (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Low\""
+     },
+     "superseded": {
+      "source_id": "Wikipedia",
+      "value": {
+       "class": "moderate",
+       "text": "Wikipedia: tolerates drought and salty conditions (no degree stated)"
+      },
+      "url": "https://en.wikipedia.org/wiki/Delonix_regia"
      },
      "quote_check": "verified"
     },
@@ -4933,12 +5084,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "No litter statement found.",
-     "searched": [
-      "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
-      "https://en.wikipedia.org/wiki/Delonix_regia"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit, Leaves, Flowers"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/delonix-regia",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/delonix-regia (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\",\"Leaves\",\"Flowers\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -4970,9 +5127,10 @@
     "reasons": [
      "frost tolerance is a GAP",
      "heat tolerance is a GAP",
-     "alkaline soil: intolerant; site soil pH not tested"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "dodonaea_viscosa",
@@ -5210,23 +5368,37 @@
      "quote_check": "page_unavailable"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "UF sheet silent on toxicity",
-     "searched": [
-      "https://edis.ifas.ufl.edu/publication/FP181",
-      "https://en.wikipedia.org/wiki/Dodonaea_viscosa"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/dodonaea-viscosa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/dodonaea-viscosa (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "toxicity_fish": {
      "status": "NA",
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "UF sheet describes showy fruit but gives no litter rating",
-     "searched": [
-      "https://edis.ifas.ufl.edu/publication/FP181"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/dodonaea-viscosa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/dodonaea-viscosa (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -5265,7 +5437,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "eriobotrya_japonica",
@@ -5474,11 +5647,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/eriobotrya-japonica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/eriobotrya-japonica (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -5549,7 +5730,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "farfugium_japonicum",
@@ -5649,11 +5831,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/farfugium-japonicum/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG: leaf wilting may occur in hot summer climates, particularly when the plant is exposed to too much sun"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=277321",
+      "accessed": "2026-11-22",
+      "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+      "quote": "leaf wilting may occur in hot summer climates, particularly when the plant is exposed to too much sun"
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -5792,17 +5982,20 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "fatsia_japonica",
@@ -5902,11 +6095,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/fatsia-japonica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class moderate (our sun attribute does not include full sun: shade-tolerant plant listed)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Fatsia japonica (Thunb.) Decne. & Planch.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -6058,16 +6260,19 @@
    },
    "notes": "NCSU tags: non-toxic for cats, dogs, horses.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "ficus_carica",
@@ -6203,11 +6408,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-carica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-carica (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -6257,11 +6470,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "page states suckers/thickets, not a root-behaviour class",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-carica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-carica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-carica (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -6332,9 +6553,10 @@
     },
     "reasons": [
      "heat tolerance is a GAP",
-     "alkaline soil: intolerant; site soil pH not tested"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "ficus_microcarpa",
@@ -6458,20 +6680,34 @@
      ]
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "No soil-pH statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-      "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+      "quote": "\"soil_ph_high\":7"
+     },
+     "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "No salt-tolerance statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-      "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -6547,12 +6783,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "No litter statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
-      "https://tropical.theferns.info/viewtropical.php?id=Ficus+microcarpa"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-microcarpa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-microcarpa (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -6586,13 +6828,13 @@
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "ficus_pumila",
@@ -6709,11 +6951,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Ficus pumila L.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -6800,11 +7051,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-pumila",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-pumila (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -6814,11 +7073,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-pumila",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/ficus-pumila (Cal Poly)",
+      "quote": "\"litter_type\":[\"Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -6841,14 +7107,14 @@
     "verdict": "unverified",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "gazania_rigens",
@@ -7084,12 +7350,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement on NCSU or RHS pages",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
-      "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/trailing-gazania",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -7127,7 +7399,8 @@
     "reasons": [
      "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "hibiscus_rosa_sinensis",
@@ -7384,7 +7657,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "iris_laevigata",
@@ -7632,262 +7906,10 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
-  },
-  {
-   "slug": "ixora_coccinea",
-   "layers": [
-    "flowering_shrub"
-   ],
-   "pond_relevant": false,
-   "attributes": {
-    "accepted_name": {
-     "status": "SOURCED",
-     "value": {
-      "name": "Ixora coccinea Comm. ex Lam.",
-      "family": "Rubiaceae",
-      "common_names": [
-       "jungle geranium",
-       "ixora"
-      ]
-     },
-     "source": {
-      "source_id": "GBIF",
-      "url": "https://api.gbif.org/v1/species/match?name=Ixora%20coccinea",
-      "accessed": "2026-11-22",
-      "locator": "match result: status ACCEPTED, matchType EXACT",
-      "quote": "scientificName Ixora coccinea Comm. ex Lam.; family Rubiaceae; status ACCEPTED"
-     },
-     "quote_check": "api_derived"
-    },
-    "toxicity_fish": {
-     "status": "NA",
-     "reason": "not pond-relevant"
-    },
-    "egypt_availability": {
-     "status": "POLICY",
-     "value": {
-      "text": "unknown — supplier check"
-     }
-    },
-    "height_m": {
-     "status": "SOURCED",
-     "value": {
-      "min": 1.2,
-      "max": 1.8,
-      "text": "4-6 ft (converted from feet)"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Dimensions: Height",
-      "quote": "Height: 4 ft. 0 in. - 6 ft. 0 in."
-     },
-     "quote_check": "verified"
-    },
-    "spread_m": {
-     "status": "SOURCED",
-     "value": {
-      "min": 0.9,
-      "max": 1.5,
-      "text": "3-5 ft (converted from feet)"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Dimensions: Width",
-      "quote": "Width: 3 ft. 0 in. - 5 ft. 0 in."
-     },
-     "quote_check": "verified"
-    },
-    "growth_rate": {
-     "status": "SOURCED",
-     "value": {
-      "class": "slow"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Growth Rate",
-      "quote": "Growth Rate: Slow"
-     },
-     "quote_check": "verified"
-    },
-    "sun": {
-     "status": "SOURCED",
-     "value": {
-      "classes": [
-       "full_sun"
-      ],
-      "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day)"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Cultural Conditions: Light",
-      "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
-     },
-     "quote_check": "verified"
-    },
-    "water": {
-     "status": "SOURCED",
-     "value": {
-      "hydrozone": "moderate",
-      "text": "moist, well-drained, organically rich soils"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Description",
-      "quote": "The jungle geranium prefers full sun in moist, well-drained, organically rich soils with an acidic pH."
-     },
-     "quote_check": "verified"
-    },
-    "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "drought": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "alkaline_soil": {
-     "status": "SOURCED",
-     "value": {
-      "class": "intolerant",
-      "text": "prefers acidic pH; alkaline soils may cause chlorosis"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Diseases, Insect Pests, and Other Plant Problems",
-      "quote": "Alkaline soils may cause chlorosis."
-     },
-     "quote_check": "verified"
-    },
-    "salt": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "frost": {
-     "status": "SOURCED",
-     "value": {
-      "usda_zone_min": "9a",
-      "min_temp_c": 10,
-      "damage_text": "intolerant of temperatures below 50 F (=10 C, converted); dies back in freezing temperatures"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Description",
-      "quote": "is intolerant of temperatures below 50 degrees Fahrenheit"
-     },
-     "quote_check": "verified"
-    },
-    "flowering": {
-     "status": "SOURCED",
-     "value": {
-      "months": [
-       6,
-       7,
-       8
-      ],
-      "colours": [
-       "red"
-      ],
-      "text": "primarily summer; blooms periodically throughout the year"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Flowers",
-      "quote": "Flower Bloom Time: Summer"
-     },
-     "quote_check": "verified"
-    },
-    "foliage": {
-     "status": "SOURCED",
-     "value": {
-      "habit": "evergreen",
-      "character": "leathery dark green leaves, rounded multi-stemmed habit"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Leaf characteristics",
-      "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
-     },
-     "quote_check": "verified"
-    },
-    "root_behaviour": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "toxicity_people": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "litter": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ixora-coccinea/"
-     ]
-    },
-    "maintenance": {
-     "status": "SOURCED",
-     "value": {
-      "level": "low",
-      "text": "Maintenance: Low"
-     },
-     "source": {
-      "source_id": "NCSU",
-      "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
-      "accessed": "2026-11-22",
-      "locator": "Maintenance",
-      "quote": "Maintenance: Low"
-     },
-     "quote_check": "verified"
-    }
    },
-   "uses": "ripened fruits edible (NCSU)",
-   "site_viability": {
-    "verdict": "not_viable",
-    "factors": {
-     "frost": "fail",
-     "heat": "unknown",
-     "alkaline_soil": "conditional"
-    },
-    "reasons": [
-     "frost: needs >= 10 C but typical-year minimum is 5.1 C",
-     "heat tolerance is a GAP",
-     "alkaline soil: intolerant; site soil pH not tested"
-    ]
-   }
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "jacaranda_mimosifolia",
@@ -8112,13 +8134,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "No source states whether roots are invasive or non-invasive (Tropical Plants DB only says deep-rooted).",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/jacaranda-mimosifolia/",
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/trees/jacaranda/",
-      "https://tropical.theferns.info/viewtropical.php?id=Jacaranda+mimosifolia"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/jacaranda-mimosifolia",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/jacaranda-mimosifolia (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -8193,7 +8221,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "jasminum_grandiflorum",
@@ -8400,7 +8429,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "jasminum_sambac",
@@ -8650,7 +8680,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "justicia_brandegeeana",
@@ -8752,13 +8783,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no heat-tolerance statement on RHS or UF pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/justicia_brandegeeana/ (404)",
-      "https://www.rhs.org.uk/plants/29317/justicia-brandegeeana/details",
-      "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/shrimp-plant/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG: with some protection from hot afternoon sun"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=368990",
+      "accessed": "2026-11-22",
+      "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+      "quote": "with some protection from hot afternoon sun"
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -8903,17 +8940,18 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "unknown",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "pass"
     },
     "reasons": [
      "frost tolerance is a GAP",
-     "heat tolerance is a GAP"
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "lagerstroemia_indica",
@@ -9056,11 +9094,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "low",
+      "text": "SelecTree salt tolerance: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -9120,29 +9166,52 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "page tags non-toxic only for cats, horses and dogs; nothing stated for people",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "toxicity_fish": {
      "status": "NA",
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no leaf/fruit/flower litter statement (only 'capsules persist through winter')",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/lagerstroemia-indica",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/lagerstroemia-indica (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -9177,7 +9246,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "lantana_montevidensis",
@@ -9424,12 +9494,18 @@
      "quote_check": "verified"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement on NCSU or RHS pages (berries are noted only under toxicity)",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
-      "https://www.rhs.org.uk/plants/57691/lantana-montevidensis/details"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/trailing-lantana",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -9459,6 +9535,7 @@
    },
    "notes": "Time-Saver Table 550-4 (printed p.331) lists 'Lantana hybrids' as invasive in Gulf states (U.S.); NCSU: has naturalized and is a weed of disturbed sites where naturalized; seeds easily spread by wildlife.",
    "invasive_flag": true,
+   "koi_pond_note": "Midwest Pond and Koi Society lists Lantana (unripe fruit) among plants to place carefully",
    "site_viability": {
     "verdict": "viable",
     "factors": {
@@ -9467,7 +9544,11 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)",
+    "not beside the koi pond: Midwest Pond and Koi Society lists Lantana (unripe fruit) among plants to place carefully"
+   ]
   },
   {
    "slug": "laurus_nobilis",
@@ -9587,12 +9668,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no heat statement",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-      "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "Rated 4 of 5 stars (3+ = well-adapted to desert heat) in the Las Vegas list"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026, Trees: Laurus nobilis L. rated 4 stars; How to Use the List",
+      "quote": "Trees rated 3 stars and above are recommended trees because they are well-adapted to our desert heat and seasonal drought."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -9618,12 +9706,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "PFAF says only 'not maritime exposure'; no explicit salt statement",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-      "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -9678,12 +9773,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "no statement about roots",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-      "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree root damage potential: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -9701,12 +9803,18 @@
      "quote_check": "verified"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "sources silent on litter (NCSU notes only that female plants produce fleshy black drupes)",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
-      "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/laurus-nobilis",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/laurus-nobilis (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -9719,16 +9827,15 @@
    },
    "notes": "NCSU: used as hedge/topiary or privacy screen; susceptible to laurel wilt, phytophthora, root rot.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": []
   },
   {
    "slug": "lavandula_dentata",
@@ -9985,7 +10092,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "liriope_muscari",
@@ -10094,11 +10202,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/liriope-muscari/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "MBG: Also has good tolerance for heat, humidity and drought."
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282388",
+      "accessed": "2026-11-22",
+      "locator": "Missouri Botanical Garden Plant Finder, Culture / Noteworthy",
+      "quote": "Also has good tolerance for heat, humidity and drought."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -10258,16 +10374,17 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "mentha_spicata",
@@ -10544,7 +10661,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "monstera_deliciosa",
@@ -10796,7 +10914,10 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "muhlenbergia_capillaris",
@@ -11027,12 +11148,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement on NCSU or UF pages",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/muhlenbergia-capillaris/",
-      "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/muhly-grass/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/pink-muhly",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -11068,7 +11195,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "murraya_paniculata",
@@ -11216,13 +11344,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "no source opened mentions salt",
-     "searched": [
-      "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-      "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-      "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -11287,13 +11421,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "no source opened describes roots",
-     "searched": [
-      "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-      "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-      "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -11309,13 +11449,18 @@
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no source opened states litter",
-     "searched": [
-      "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
-      "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
-      "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit, Flowers"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/murraya-paniculata",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/murraya-paniculata (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\",\"Flowers\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -11357,7 +11502,8 @@
      "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "nandina_domestica",
@@ -11458,11 +11604,20 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/nandina-domestica/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Nandina domestica Thunb.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -11633,16 +11788,18 @@
    },
    "notes": "Fruit: bright red berries persist through winter (NCSU).",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)",
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "nassella_tenuissima",
@@ -11921,7 +12078,8 @@
     "reasons": [
      "heat: low tolerance; 154 days with daily max above 30 C"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "nelumbo_nucifera",
@@ -12170,7 +12328,10 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "nerium_oleander",
@@ -12309,11 +12470,19 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "page silent on soil pH",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/nerium-oleander",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/nerium-oleander (Cal Poly)",
+      "quote": "\"soil_ph_high\":7"
+     },
+     "quote_check": "verified"
     },
     "salt": {
      "status": "SOURCED",
@@ -12388,11 +12557,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "page does not describe root system",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/nerium-oleander/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/nerium-oleander",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/nerium-oleander (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -12454,16 +12631,17 @@
     "notes": "Children present on site: highly toxic. ASPCA https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/oleander opened 2026-11-22."
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
      "heat": "pass",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
-    "reasons": [
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
   },
   {
    "slug": "nymphaea_caerulea",
@@ -12677,7 +12855,10 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "ocimum_basilicum",
@@ -12936,7 +13117,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "olea_europaea",
@@ -13089,12 +13271,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "No salt-tolerance statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/olea-europaea/",
-      "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/olea-europaea",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/olea-europaea (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -13150,12 +13339,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "No root-behaviour statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/olea-europaea/",
-      "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree root damage potential: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/olea-europaea",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/olea-europaea (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -13217,7 +13413,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "ophiopogon_japonicus",
@@ -13327,18 +13524,35 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "heat not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Ophiopogon japonicus (Thunb.) Ker Gawl.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
-     "status": "GAP",
-     "reason": "drought not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG lists Drought under Tolerate (class moderate: the source does not grade it)"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282276",
+      "accessed": "2026-11-22",
+      "locator": "Plant Finder, Tolerate",
+      "quote": "Tolerate: Drought"
+     },
+     "quote_check": "verified"
     },
     "alkaline_soil": {
      "status": "GAP",
@@ -13473,14 +13687,16 @@
     "verdict": "unverified",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "origanum_majorana",
@@ -13750,7 +13966,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "paspalum_vaginatum",
@@ -13970,7 +14187,8 @@
      "frost tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "pennisetum_alopecuroides",
@@ -14078,12 +14296,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no heat statement on NCSU or RHS pages",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/cenchrus-alopecuroides/",
-      "https://www.rhs.org.uk/plants/43920/pennisetum-alopecuroides/details"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Cenchrus alopecuroides (L.) Thunb.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -14241,16 +14467,15 @@
    "notes": "GBIF accepted name is Cenchrus alopecuroides; slug kept as listed. Time-Saver Table 550-4 lists Pennisetum setaceum (not this species) as invasive.",
    "invasive_flag": "NCSU: has escaped gardens and has become problematic in some areas of the country; spreads rapidly by wind-carried seeds",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": []
   },
   {
    "slug": "pentas_lanceolata",
@@ -14500,7 +14725,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "petrea_volubilis",
@@ -14772,7 +14998,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "phoenix_dactylifera",
@@ -14970,12 +15197,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "Only rooting depth stated (2-6 m deep); no statement on invasiveness.",
-     "searched": [
-      "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
-      "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree root damage potential: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-dactylifera",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/phoenix-dactylifera (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -14986,12 +15220,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "No litter statement found.",
-     "searched": [
-      "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
-      "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit, Leaves"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-dactylifera",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/phoenix-dactylifera (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\",\"Leaves\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -15021,7 +15261,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "phoenix_roebelenii",
@@ -15159,20 +15400,34 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "NCSU lists acid and neutral (6.0-8.0) only; no alkaline statement.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-      "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "intolerant",
+      "text": "SelecTree upper soil pH limit: Acidic (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+      "quote": "\"soil_ph_high\":2"
+     },
+     "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "No salt-tolerance statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-      "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "low",
+      "text": "SelecTree salt tolerance: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -15228,12 +15483,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "No root-behaviour statement found.",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/phoenix-roebelenii/",
-      "https://tropical.theferns.info/viewtropical.php?id=Phoenix+roebelenii (no record)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/phoenix-roebelenii",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/phoenix-roebelenii (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -15295,16 +15557,19 @@
     }
    },
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
      "heat": "pass",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "conditional"
     },
     "reasons": [
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "phyla_nodiflora",
@@ -15559,7 +15824,8 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "pittosporum_tobira",
@@ -15774,11 +16040,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "NCSU mentions root rot/nematodes only, no root-system description",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/pittosporum-tobira",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/pittosporum-tobira (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "GAP",
@@ -15793,11 +16067,18 @@
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "NCSU silent on litter",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/pittosporum-tobira",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/pittosporum-tobira (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -15830,7 +16111,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "plumbago_auriculata",
@@ -15939,11 +16221,20 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/plumbago-auriculata/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Plumbago auriculata Lam.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -16090,14 +16381,16 @@
     "verdict": "unverified",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
   },
   {
    "slug": "plumeria_rubra",
@@ -16209,11 +16502,19 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "no soil pH statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "SelecTree upper soil pH limit: Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+      "quote": "\"soil_ph_high\":6"
+     },
+     "quote_check": "verified"
     },
     "salt": {
      "status": "SOURCED",
@@ -16292,11 +16593,19 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "no root statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
      "status": "SOURCED",
@@ -16318,11 +16627,18 @@
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement (winter leaf drop only)",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/shrubs/plumeria/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Leaves"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/plumeria-rubra",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/plumeria-rubra (Cal Poly)",
+      "quote": "\"litter_type\":[\"Leaves\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -16339,18 +16655,30 @@
     }
    },
    "notes": "UF/IFAS page is genus-level (plumerias; links to Plumeria rubra); statements applied to P. rubra on that basis.",
+   "lead_decisions": [
+    {
+     "factor": "frost",
+     "decision": "accepted",
+     "reason": "client standing choice; Cairo grows frangipani widely (lead decision 2026-11-22)",
+     "note": "Hardy only to 1.7 C (UF/IFAS) against a typical-year minimum of 5.1 C: winter cold note, not a waiver. Protect young plants from cold nights; expect leaf drop in winter."
+    }
+   ],
+   "koi_pond_note": "Midwest Pond and Koi Society lists Plumeria (frangipani) among plants to place carefully (Euphorbiaceae list)",
    "site_viability": {
-    "verdict": "viable_with_conditions",
+    "verdict": "viable",
     "factors": {
-     "frost": "conditional",
+     "frost": "accepted",
      "heat": "pass",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
      "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "frost: accepted by lead decision (client standing choice; Cairo grows frangipani widely (lead decision 2026-11-22))"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond: Midwest Pond and Koi Society lists Plumeria (frangipani) among plants to place carefully (Euphorbiaceae list)"
+   ]
   },
   {
    "slug": "podranea_ricasoliana",
@@ -16440,13 +16768,20 @@
      ]
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
-      "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
-      "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class moderate (our sun attribute does not include full sun: shade-tolerant plant listed)"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/pink-trumpet-vine",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA Landscape Plants for the Arizona Desert: plant page \"Pink Trumpet Vine\"",
+      "quote": "Podranea ricasoliana"
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "GAP",
@@ -16548,13 +16883,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
-      "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
-      "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Seasonal"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/pink-trumpet-vine",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Seasonal\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -16568,17 +16908,18 @@
    },
    "invasive_flag": "Wikipedia: considered a weed in Australia, New Zealand, and Hawaii; vigorous habit smothers surrounding vegetation",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable_with_conditions",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "conditional",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "pontederia_cordata",
@@ -16850,7 +17191,10 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "psidium_guajava",
@@ -16954,11 +17298,19 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "no soil pH statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree upper soil pH limit: Slightly Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+      "quote": "\"soil_ph_high\":5"
+     },
+     "quote_check": "verified"
     },
     "salt": {
      "status": "SOURCED",
@@ -17006,29 +17358,52 @@
      ]
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "page says roots can extend beyond the drip line; no benign/aggressive statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "no toxicity statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "toxicity_fish": {
      "status": "NA",
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement",
-     "searched": [
-      "https://gardeningsolutions.ifas.ufl.edu/plants/trees-and-shrubs/fruit-trees/guava/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Wet Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/psidium-guajava",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/psidium-guajava (Cal Poly)",
+      "quote": "\"litter_type\":[\"Wet Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -17052,13 +17427,13 @@
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "punica_granatum",
@@ -17210,11 +17585,19 @@
      "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree salt tolerance: Moderate"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Moderate\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -17276,29 +17659,52 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "no toxicity statement for people",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "toxicity_fish": {
      "status": "NA",
      "reason": "not pond-relevant"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/punica-granatum/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Wet Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/punica-granatum",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/punica-granatum (Cal Poly)",
+      "quote": "\"litter_type\":[\"Wet Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -17323,7 +17729,8 @@
      "alkaline_soil": "pass"
     },
     "reasons": []
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "rhapis_excelsa",
@@ -17453,18 +17860,34 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "soil pH attribute lists acid only; no statement on alkaline tolerance",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+      "quote": "\"soil_ph_high\":7"
+     },
+     "quote_check": "verified"
     },
     "salt": {
-     "status": "GAP",
-     "reason": "salt tolerance not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "low",
+      "text": "SelecTree salt tolerance: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+      "quote": "\"salt_tolerance\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "frost": {
      "status": "SOURCED",
@@ -17520,25 +17943,48 @@
      "quote_check": "verified"
     },
     "root_behaviour": {
-     "status": "GAP",
-     "reason": "only rhizomes mentioned",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "human toxicity not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "litter not stated",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "SelecTree litter types: Dry Fruit"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/rhapis-excelsa",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/rhapis-excelsa (Cal Poly)",
+      "quote": "\"litter_type\":[\"Dry Fruit\"]"
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -17576,13 +18022,15 @@
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "rosmarinus_officinalis",
@@ -17703,12 +18151,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "neither page states heat tolerance or hot-climate performance (zone range only)",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
-      "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Salvia rosmarinus Spenn.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -17837,12 +18293,18 @@
      "quote_check": "verified"
     },
     "litter": {
-     "status": "GAP",
-     "reason": "sources silent on litter",
-     "searched": [
-      "https://pfaf.org/user/Plant.aspx?LatinName=Rosmarinus+Officinalis",
-      "https://plants.ces.ncsu.edu/plants/rosmarinus-officinalis/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/trailing-rosemary",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "GAP",
@@ -17855,16 +18317,15 @@
    },
    "notes": "NCSU tags non-toxic for cats, dogs, horses. Accepted name is Salvia rosmarinus Spenn.; slug kept as listed.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "pass"
     },
-    "reasons": [
-     "heat tolerance is a GAP"
-    ]
-   }
+    "reasons": []
+   },
+   "placement_constraints": []
   },
   {
    "slug": "salvia_leucantha",
@@ -18088,12 +18549,18 @@
      ]
     },
     "litter": {
-     "status": "GAP",
-     "reason": "no litter statement on NCSU or RHS pages",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/salvia-leucantha/",
-      "https://www.rhs.org.uk/plants/16345/salvia-leucantha/details"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "text": "AMWUA litter rating: Low"
+     },
+     "source": {
+      "source_id": "AMWUA",
+      "url": "https://www.amwua.org/plants/mexican-bush-sage",
+      "accessed": "2026-11-22",
+      "locator": "AMWUA plant page",
+      "quote": "\"litter\":\"Low\""
+     },
+     "quote_check": "verified"
     },
     "maintenance": {
      "status": "SOURCED",
@@ -18131,7 +18598,8 @@
     "reasons": [
      "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "strelitzia_nicolai",
@@ -18259,11 +18727,19 @@
      "quote_check": "verified"
     },
     "alkaline_soil": {
-     "status": "GAP",
-     "reason": "source says acidic to neutral pH only; silent on alkaline",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "SelecTree upper soil pH limit: Slightly Alkaline (scale 1 very acidic .. 7 very alkaline)"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/strelitzia-nicolai",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/strelitzia-nicolai (Cal Poly)",
+      "quote": "\"soil_ph_high\":5"
+     },
+     "quote_check": "verified"
     },
     "salt": {
      "status": "SOURCED",
@@ -18415,13 +18891,16 @@
     "factors": {
      "frost": "pass",
      "heat": "unknown",
-     "alkaline_soil": "unknown"
+     "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP",
-     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+     "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)",
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "strelitzia_reginae",
@@ -18696,7 +19175,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "thaumatophyllum_bipinnatifidum",
@@ -18967,7 +19447,10 @@
      "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "thymus_vulgaris",
@@ -19247,7 +19730,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "tipuana_tipu",
@@ -19460,25 +19944,40 @@
     "root_behaviour": {
      "status": "SOURCED",
      "value": {
-      "class": "aggressive",
-      "text": "very aggressive root system; roots lift concrete and asphalt (Wikipedia)"
+      "class": "benign",
+      "text": "SelecTree root damage potential: Low"
      },
      "source": {
-      "source_id": "Wikipedia",
-      "url": "https://en.wikipedia.org/wiki/Tipuana_tipu",
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/tipuana-tipu",
       "accessed": "2026-11-22",
-      "locator": "Invasiveness",
-      "quote": "known for having a very aggressive root system"
+      "locator": "SelecTree tree-detail/tipuana-tipu (Cal Poly)",
+      "quote": "\"root_damage_potential\":\"Low\""
+     },
+     "superseded": {
+      "source_id": "Wikipedia",
+      "value": {
+       "class": "aggressive",
+       "text": "very aggressive root system; roots lift concrete and asphalt (Wikipedia)"
+      },
+      "url": "https://en.wikipedia.org/wiki/Tipuana_tipu"
      },
      "quote_check": "verified"
     },
     "toxicity_people": {
-     "status": "GAP",
-     "reason": "Tropical Plants DB lists Known Hazards \"None known\" only; no toxicity statement, not recorded as non-toxic.",
-     "searched": [
-      "https://tropical.theferns.info/viewtropical.php?id=Tipuana+tipu",
-      "https://en.wikipedia.org/wiki/Tipuana_tipu"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "SelecTree health hazard: None Known"
+     },
+     "source": {
+      "source_id": "SelecTree",
+      "url": "https://selectree.calpoly.edu/api/tree/detail/tipuana-tipu",
+      "accessed": "2026-11-22",
+      "locator": "SelecTree tree-detail/tipuana-tipu (Cal Poly)",
+      "quote": "\"health_hazard\":[\"None Known\"]"
+     },
+     "quote_check": "verified"
     },
     "litter": {
      "status": "SOURCED",
@@ -19526,9 +20025,10 @@
     },
     "reasons": [
      "heat: moderate tolerance; plant in afternoon shade or verify locally",
-     "alkaline soil: intolerant; site soil pH not tested"
+     "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "trachelospermum_jasminoides",
@@ -19645,11 +20145,20 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no statement on the pages opened",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "inferred": true,
+      "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+     },
+     "source": {
+      "source_id": "SNRPC-2026",
+      "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+      "accessed": "2026-11-22",
+      "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Trachelospermum jasminoides (Lindl.) Lem.",
+      "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -19791,14 +20300,16 @@
     "verdict": "unverified",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "pass",
      "alkaline_soil": "unknown"
     },
     "reasons": [
-     "heat tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
   },
   {
    "slug": "vitis_vinifera",
@@ -20028,7 +20539,8 @@
     "reasons": [
      "heat tolerance is a GAP"
     ]
-   }
+   },
+   "placement_constraints": []
   },
   {
    "slug": "zantedeschia_aethiopica",
@@ -20293,7 +20805,11 @@
      "heat: moderate tolerance; plant in afternoon shade or verify locally",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)",
+    "not beside the koi pond until sourced (fish toxicity is a GAP)"
+   ]
   },
   {
    "slug": "zoysia_japonica",
@@ -20529,8 +21045,23 @@
      "frost tolerance is a GAP",
      "alkaline-soil tolerance is a GAP (site soil unmeasured)"
     ]
-   }
+   },
+   "placement_constraints": []
   }
  ],
- "rejected": []
+ "rejected": [
+  {
+   "slug": "ixora_coccinea",
+   "name": "Ixora coccinea",
+   "decision": "dropped from the palette (lead decision 2026-11-22)",
+   "reason": "minimum 10 C (intolerant of temperatures below 50 F) against a typical-year site minimum of 5.1 C: not viable",
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "is intolerant of temperatures below 50 degrees Fahrenheit"
+   }
+  }
+ ]
 }

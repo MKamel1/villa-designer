@@ -6,6 +6,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "alkaline_soil": "verified",
   "frost": "verified",
   "flowering": "verified",
@@ -32,18 +33,21 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "toxicity_people": "verified"
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
  "alpinia_zerumbet": {
   "accepted_name": "api_derived",
   "height_m": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "flowering": "verified",
   "foliage": "verified"
  },
@@ -54,6 +58,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
@@ -98,12 +103,15 @@
   "spread_m": "verified",
   "growth_rate": "verified",
   "sun": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "ceratophyllum_demersum": {
@@ -136,6 +144,7 @@
   "sun": "verified",
   "water": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
@@ -152,10 +161,13 @@
   "sun": "verified",
   "water": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "toxicity_people": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "citrus_x_sinensis": {
@@ -187,6 +199,9 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "cymbopogon_citratus": {
@@ -253,7 +268,8 @@
   "salt": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "root_behaviour": "verified"
+  "root_behaviour": "verified",
+  "litter": "verified"
  },
  "dodonaea_viscosa": {
   "accepted_name": "api_derived",
@@ -270,6 +286,8 @@
   "flowering": "page_unavailable",
   "foliage": "page_unavailable",
   "root_behaviour": "page_unavailable",
+  "toxicity_people": "verified",
+  "litter": "verified",
   "invasive_flag": "page_unavailable"
  },
  "eriobotrya_japonica": {
@@ -284,6 +302,7 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "toxicity_people": "verified",
   "litter": "verified",
   "maintenance": "verified"
@@ -294,6 +313,7 @@
   "spread_m": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "frost": "verified",
   "flowering": "verified",
@@ -306,6 +326,7 @@
   "spread_m": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
@@ -322,9 +343,11 @@
   "sun": "verified",
   "water": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "toxicity_people": "verified",
   "litter": "verified",
   "maintenance": "verified"
@@ -336,10 +359,13 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
   "root_behaviour": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "ficus_pumila": {
@@ -349,11 +375,14 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "gazania_rigens": {
@@ -369,6 +398,7 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "hibiscus_rosa_sinensis": {
@@ -395,19 +425,6 @@
   "toxicity_people": "verified",
   "maintenance": "verified"
  },
- "ixora_coccinea": {
-  "accepted_name": "api_derived",
-  "height_m": "verified",
-  "spread_m": "verified",
-  "growth_rate": "verified",
-  "sun": "verified",
-  "water": "verified",
-  "alkaline_soil": "verified",
-  "frost": "verified",
-  "flowering": "verified",
-  "foliage": "verified",
-  "maintenance": "verified"
- },
  "jacaranda_mimosifolia": {
   "accepted_name": "api_derived",
   "height_m": "verified",
@@ -422,6 +439,7 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "litter": "verified",
   "maintenance": "verified"
  },
@@ -446,6 +464,7 @@
   "spread_m": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "alkaline_soil": "quote_not_found",
   "flowering": "verified",
   "foliage": "verified",
@@ -460,9 +479,13 @@
   "water": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "lantana_montevidensis": {
@@ -480,6 +503,7 @@
   "flowering": "verified",
   "foliage": "verified",
   "toxicity_people": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "laurus_nobilis": {
@@ -489,11 +513,15 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "toxicity_people": "verified"
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
  "lavandula_dentata": {
   "accepted_name": "api_derived",
@@ -515,6 +543,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
@@ -565,6 +594,7 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "murraya_paniculata": {
@@ -576,9 +606,12 @@
   "water": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "quote_not_found",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "litter": "verified",
   "invasive_flag": "verified"
  },
  "nandina_domestica": {
@@ -587,6 +620,7 @@
   "spread_m": "verified",
   "growth_rate": "verified",
   "sun": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
@@ -632,10 +666,12 @@
   "water": "verified",
   "heat": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "toxicity_people": "verified",
   "litter": "verified",
   "maintenance": "verified"
@@ -671,9 +707,11 @@
   "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "litter": "verified",
   "maintenance": "verified"
  },
@@ -684,6 +722,8 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
+  "drought": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
@@ -721,6 +761,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",
@@ -766,7 +807,9 @@
   "alkaline_soil": "verified",
   "salt": "verified",
   "frost": "verified",
-  "foliage": "verified"
+  "foliage": "verified",
+  "root_behaviour": "verified",
+  "litter": "verified"
  },
  "phoenix_roebelenii": {
   "accepted_name": "api_derived",
@@ -777,9 +820,12 @@
   "water": "verified",
   "heat": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
   "maintenance": "verified"
  },
  "phyla_nodiflora": {
@@ -808,6 +854,8 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "root_behaviour": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "plumbago_auriculata": {
@@ -816,6 +864,7 @@
   "spread_m": "verified",
   "growth_rate": "verified",
   "sun": "verified",
+  "heat": "verified",
   "drought": "verified",
   "salt": "verified",
   "frost": "verified",
@@ -830,18 +879,23 @@
   "sun": "verified",
   "heat": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
   "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "toxicity_people": "verified"
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
  "podranea_ricasoliana": {
   "accepted_name": "api_derived",
   "height_m": "verified",
+  "heat": "verified",
   "frost": "verified",
   "flowering": "verified",
-  "foliage": "verified"
+  "foliage": "verified",
+  "litter": "verified"
  },
  "pontederia_cordata": {
   "accepted_name": "api_derived",
@@ -863,8 +917,12 @@
   "height_m": "verified",
   "sun": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
   "salt": "verified",
-  "frost": "verified"
+  "frost": "verified",
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
  "punica_granatum": {
   "accepted_name": "api_derived",
@@ -876,24 +934,15 @@
   "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
-  "frost": "verified",
-  "flowering": "verified",
-  "foliage": "verified"
- },
- "rhapis_excelsa": {
-  "accepted_name": "api_derived",
-  "height_m": "verified",
-  "spread_m": "verified",
-  "growth_rate": "verified",
-  "sun": "verified",
-  "water": "verified",
-  "drought": "verified",
+  "salt": "verified",
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "maintenance": "verified"
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
- "rosmarinus_officinalis": {
+ "rhapis_excelsa": {
   "accepted_name": "api_derived",
   "height_m": "verified",
   "spread_m": "verified",
@@ -906,7 +955,27 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
-  "toxicity_people": "verified"
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified",
+  "maintenance": "verified"
+ },
+ "rosmarinus_officinalis": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "drought": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
+  "litter": "verified"
  },
  "salvia_leucantha": {
   "accepted_name": "api_derived",
@@ -920,6 +989,7 @@
   "frost": "verified",
   "flowering": "verified",
   "foliage": "verified",
+  "litter": "verified",
   "maintenance": "verified"
  },
  "strelitzia_nicolai": {
@@ -930,6 +1000,7 @@
   "sun": "verified",
   "water": "verified",
   "drought": "verified",
+  "alkaline_soil": "verified",
   "salt": "quote_not_found",
   "frost": "verified",
   "flowering": "verified",
@@ -998,6 +1069,7 @@
   "flowering": "verified",
   "foliage": "verified",
   "root_behaviour": "verified",
+  "toxicity_people": "verified",
   "litter": "verified"
  },
  "trachelospermum_jasminoides": {
@@ -1007,6 +1079,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "salt": "verified",
   "frost": "verified",

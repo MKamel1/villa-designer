@@ -120,12 +120,18 @@
    }
   },
   "alkaline_soil": {
-   "status": "GAP",
-   "reason": "NCSU lists pH Acid (<6.0) and Neutral (6.0-8.0) only; no alkaline-soil or chlorosis statement.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
-    "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "SelecTree upper soil pH limit: Very Alkaline (scale 1 very acidic .. 7 very alkaline)"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/camphora-officinarum",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/camphora-officinarum (Cal Poly)",
+    "quote": "\"soil_ph_high\":7"
+   }
   },
   "salt": {
    "status": "SOURCED",

@@ -220,23 +220,35 @@
    }
   },
   "toxicity_people": {
-   "status": "GAP",
-   "reason": "UF sheet silent on toxicity",
-   "searched": [
-    "https://edis.ifas.ufl.edu/publication/FP181",
-    "https://en.wikipedia.org/wiki/Dodonaea_viscosa"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "SelecTree health hazard: None Known"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/dodonaea-viscosa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/dodonaea-viscosa (Cal Poly)",
+    "quote": "\"health_hazard\":[\"None Known\"]"
+   }
   },
   "toxicity_fish": {
    "status": "NA",
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "UF sheet describes showy fruit but gives no litter rating",
-   "searched": [
-    "https://edis.ifas.ufl.edu/publication/FP181"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Dry Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/dodonaea-viscosa",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/dodonaea-viscosa (Cal Poly)",
+    "quote": "\"litter_type\":[\"Dry Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "GAP",

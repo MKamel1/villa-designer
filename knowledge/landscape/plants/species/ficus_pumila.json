@@ -107,11 +107,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+   },
+   "source": {
+    "source_id": "SNRPC-2026",
+    "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Ficus pumila L.",
+    "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+   }
   },
   "drought": {
    "status": "SOURCED",
@@ -193,11 +201,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-pumila",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-pumila (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",
@@ -207,11 +222,17 @@
    ]
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Fruit"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/ficus-pumila",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/ficus-pumila (Cal Poly)",
+    "quote": "\"litter_type\":[\"Fruit\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

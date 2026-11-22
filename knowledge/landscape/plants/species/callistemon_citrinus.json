@@ -91,11 +91,19 @@
    ]
   },
   "heat": {
-   "status": "GAP",
-   "reason": "page gives only cold hardiness, no heat statement",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: the source lists this plant as suitable for a hot low-desert landscape but states no heat tolerance in words; class high (our sun attribute includes full sun)"
+   },
+   "source": {
+    "source_id": "SNRPC-2026",
+    "url": "https://files.lasvegasnevada.gov/planning/Sustainability/water-smart-plant-list-2026.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Southern Nevada Regional Plant List June 2026: listed entry for Callistemon citrinus (Curtis) Skeels",
+    "quote": "This list provides a region-wide reference to help homeowners, landscape designers, architects and developers select suitable plants for the Las Vegas area."
+   }
   },
   "drought": {
    "status": "SOURCED",
@@ -193,11 +201,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "NCSU silent on roots",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "SelecTree root damage potential: Low"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/callistemon-citrinus",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/callistemon-citrinus (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Low\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",
@@ -211,11 +226,17 @@
    "reason": "not pond-relevant"
   },
   "litter": {
-   "status": "GAP",
-   "reason": "NCSU silent on litter",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/callistemon-citrinus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "SelecTree litter types: Flowers"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/callistemon-citrinus",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/callistemon-citrinus (Cal Poly)",
+    "quote": "\"litter_type\":[\"Flowers\"]"
+   }
   },
   "maintenance": {
    "status": "SOURCED",

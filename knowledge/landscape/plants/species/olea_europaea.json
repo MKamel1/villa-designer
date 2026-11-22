@@ -140,12 +140,18 @@
    }
   },
   "salt": {
-   "status": "GAP",
-   "reason": "No salt-tolerance statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/olea-europaea/",
-    "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree salt tolerance: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/olea-europaea",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/olea-europaea (Cal Poly)",
+    "quote": "\"salt_tolerance\":\"Moderate\""
+   }
   },
   "frost": {
    "status": "SOURCED",
@@ -198,12 +204,18 @@
    }
   },
   "root_behaviour": {
-   "status": "GAP",
-   "reason": "No root-behaviour statement found.",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/olea-europaea/",
-    "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "SelecTree root damage potential: Moderate"
+   },
+   "source": {
+    "source_id": "SelecTree",
+    "url": "https://selectree.calpoly.edu/api/tree/detail/olea-europaea",
+    "accessed": "2026-11-22",
+    "locator": "SelecTree tree-detail/olea-europaea (Cal Poly)",
+    "quote": "\"root_damage_potential\":\"Moderate\""
+   }
   },
   "toxicity_people": {
    "status": "GAP",

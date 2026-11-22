@@ -1,0 +1,15 @@
+[
+ {
+  "slug": "ixora_coccinea",
+  "name": "Ixora coccinea",
+  "decision": "dropped from the palette (lead decision 2026-11-22)",
+  "reason": "minimum 10 C (intolerant of temperatures below 50 F) against a typical-year site minimum of 5.1 C: not viable",
+  "source": {
+   "source_id": "NCSU",
+   "url": "https://plants.ces.ncsu.edu/plants/ixora-coccinea/",
+   "accessed": "2026-11-22",
+   "locator": "Description",
+   "quote": "is intolerant of temperatures below 50 degrees Fahrenheit"
+  }
+ }
+]

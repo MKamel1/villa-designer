@@ -229,12 +229,17 @@
    }
   },
   "litter": {
-   "status": "GAP",
-   "reason": "no litter statement on NCSU or RHS pages (berries are noted only under toxicity)",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
-    "https://www.rhs.org.uk/plants/57691/lantana-montevidensis/details"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "text": "AMWUA litter rating: Low"
+   },
+   "source": {
+    "source_id": "AMWUA",
+    "url": "https://www.amwua.org/plants/trailing-lantana",
+    "accessed": "2026-11-22",
+    "locator": "AMWUA plant page",
+    "quote": "\"litter\":\"Low\""
+   }
   },
   "maintenance": {
    "status": "SOURCED",
@@ -262,5 +267,6 @@
   }
  },
  "notes": "Time-Saver Table 550-4 (printed p.331) lists 'Lantana hybrids' as invasive in Gulf states (U.S.); NCSU: has naturalized and is a weed of disturbed sites where naturalized; seeds easily spread by wildlife.",
- "invasive_flag": true
+ "invasive_flag": true,
+ "koi_pond_note": "Midwest Pond and Koi Society lists Lantana (unripe fruit) among plants to place carefully"
 }
