@@ -86,6 +86,21 @@ are from this lane's runs (`out/L6d*`, reproduced by the commands at the end). L
 Corridor 0.85 m -> **0.30 m** (LV V7 now 0.28 m actual: halving -0.77 %; was -6.23 %); parents' bedroom 0.43 m -> **0.20 m** (halving +0.17 %; was -3.39 %, a hot spot of the old bed DL: with the DL moved even 0.43 m gives +0.6 %).
 `test_l6d_grids_converge_under_2_percent`. Worst remaining halving change of any plane: 2.41 % (ka-desk-1, bar 3 %). ab 12 -> 24 worst 1.36 % (pillow-2).
 
+## Receipts, exposure record, production scene (last step, after merging `origin/integ/staging` `b577bf5`)
+
+Baseline-relative procedure (RA2/INT2b): old = `origin/integ/staging` tree (worktree), new = this branch, both exported with receipts bypassed (`refresh_furniture_integ5.py export`). **The old tree reproduces all 8 stored
+section digests** (`section_diff.py`: `receipt_component` true for every section). Differences (everything else identical: layout, specification, furniture, architecture, models, props):
+
+| section | change | cause (all this lane's fixes; no change from lanes already on staging) |
+|---|---|---|
+| meshes | removed `fix-/lens-DL-parents-entry-01` | the entry-lobby downlight replaced by a cove (LA4) |
+| meshes | changed `fix-/lens-DL-parents-bed-04`, `fix-/lens-DL-kids-b-01` | those downlights moved out of the 45 deg cone over the pillows (LA4) |
+| meshes | changed `fix-ADJ-parents-bed-05` | the ADJ product A9000028 -> A9003138 (housing/trim from its file) |
+| materials | changed `led-lin-2700` | the table pendant's emissive diffuser: 3558 lm over the Jilly's diffuser -> the QA03's lumens over its own |
+
+17 baseline-relative reviews (16 individual + joint): all ok, 0 findings (`refresh_furniture_integ5.py review-current`); receipts rewritten with `refresh_receipts.py` (visual approvals retained: none of the sixteen items is in a room whose look changed:
+the pendant, a cove and three downlight trims). Evidence: `out/L6d-rc/section-diff.json`, `out/L6d-rc/review.log` (not committed).
+
 ## Open items
 
 * **LV's V10 is hard-wired to the old products** (ADJ A9000028, Jilly 50674): it reports the new bound files as "DIFFERS" (8 failures); `tests/lightverify/test_v10_erco.py`, `test_v1_design.py` (Jilly samples) and the old Radiance-baseline tests encode L6c.
