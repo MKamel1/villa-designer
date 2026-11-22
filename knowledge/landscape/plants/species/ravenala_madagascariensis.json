@@ -1,0 +1,246 @@
+{
+ "slug": "ravenala_madagascariensis",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ravenala madagascariensis Sonn.",
+    "family": "Strelitziaceae",
+    "common_names": [
+     "traveller's palm",
+     "traveller's tree"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ravenala%20madagascariensis",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "scientificName: Ravenala madagascariensis Sonn.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 9.1,
+    "max": 15.2,
+    "text": "30-50 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 30 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 4.6,
+    "max": 7.6,
+    "text": "15-25 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 15 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun (6 or more hours); no shade tolerance stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moderately moist, well-drained loam"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Plant in organically rich, moderately moist, well-drained loam in full sun in an area protected from strong winds."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed or grown outdoors in a hot-desert source (Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List); Exposure Group E: Requires total shade and shelter; no heat tolerance stated in words; class moderate."
+   },
+   "source": {
+    "source_id": "PRDM-2011",
+    "url": "https://www.cip-icu.ca/wp-content/uploads/2023/11/2011-HM-Urban-Design21.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abu Dhabi Urban Planning Council, Public Realm Design Manual (2011), Appendix B Plant List: Ravenala madagascariensis (Traveler's Palm), user note: sheltered from wind and afternoon summer sun",
+    "quote": "E. Requires total shade and shelter"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "hedged: water stored in leaf bases 'may enable' it to withstand dry conditions"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The water that is stored in the leaf bases may enable it to withstand dry conditions."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "Soil pH lists acid, alkaline (>8.0) and neutral"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Soil pH: Acid (<6.0) Alkaline (>8.0) Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": 4.4,
+    "damage_text": "not winter hardy; does not tolerate below 40 F (4.4 C)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is not winter hardy and does not tolerate temperatures below 40 degrees F"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "white flowers in summer and sporadically through the rest of the year (mapped Jun-Aug)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Showy 3-petaled 6 to 12 inch white flowers in cymes rise from boat-shaped spathes similar to bird-of-paradise. Flowers bloom in summer and sporadically throughout the rest of the year."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen; fan of 20-30 banana-like leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU states root suckers/offsets but nothing on root damage to structures",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page carries no poison fields; silence is not safety",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ravenala-madagascariensis/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "Records the NCSU full-sun rating as stated; shade performance in a north courtyard is not evidenced by that page. NCSU: unbranched root suckers must be removed or the tree form is lost."
+}

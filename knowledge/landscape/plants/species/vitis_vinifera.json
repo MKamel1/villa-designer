@@ -77,11 +77,19 @@
    ]
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/vitis-vinifera/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Emirates Natural History Group Bulletin 29 (1986), Common Landscape Plants in the UAE (Arabian Gulf cities)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high."
+   },
+   "source": {
+    "source_id": "ENHG-1986",
+    "url": "https://enhg.org/bulletin/b29/29_23.htm",
+    "accessed": "2026-11-22",
+    "locator": "Emirates Natural History Group Bulletin 29 (1986), Common Landscape Plants in the UAE (Arabian Gulf cities): Introduced Shrubs and Climbers, Vitaceae",
+    "quote": "Vitis vinifera grape vine"
+   }
   },
   "drought": {
    "status": "GAP",

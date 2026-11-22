@@ -98,11 +98,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "NCSU page states no heat tolerance",
-   "searched": [
-    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-papyrus/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Mitt. Bot. Staatssamml. Munchen, Rediscovery of Papyrus in Wadi Natroun (Egypt)); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high. Wild stand in a desert depression, always in marsh water."
+   },
+   "source": {
+    "source_id": "Egypt-papyrus",
+    "url": "https://archive.org/download/biostor-185341/biostor-185341.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Mitt. Bot. Staatssamml. Munchen, Rediscovery of Papyrus in Wadi Natroun (Egypt): Wadi Natroun depression, Egypt",
+    "quote": "a stand consisting of about 20 plants of Cyperus papyrus L. which were growing among other reeds in a fresh water marsh close to Umm Risha lake"
+   }
   },
   "drought": {
    "status": "GAP",

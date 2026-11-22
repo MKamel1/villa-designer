@@ -96,11 +96,19 @@
    }
   },
   "heat": {
-   "status": "GAP",
-   "reason": "heat tolerance stated only for the cultivar 'Carolina Beauty', not the species",
-   "searched": [
-    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019); no exposure group given; class from our sun attribute (full sun); no heat tolerance stated in words; class high."
+   },
+   "source": {
+    "source_id": "CFC-2021",
+    "url": "https://www.plantarchives.org/article/landscape-use-and-aesthetical-value-of-surveyed-woody-ornamental-plants-in-cairo-festival-city-cairo-egypt-in-landscape-gardening.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Lagerstroemia indica L.",
+    "quote": "Lagerstroemia indica L."
+   }
   },
   "drought": {
    "status": "SOURCED",

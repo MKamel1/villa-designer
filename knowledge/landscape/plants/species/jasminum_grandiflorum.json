@@ -84,13 +84,19 @@
    ]
   },
   "heat": {
-   "status": "GAP",
-   "reason": "no statement on the pages opened",
-   "searched": [
-    "https://en.wikipedia.org/wiki/Jasminum_grandiflorum",
-    "https://plants.ces.ncsu.edu/plants/jasminum-grandiflorum/ (404)",
-    "https://www.rhs.org.uk/plants/jasminum/grandiflorum/details (no plant page)"
-   ]
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: listed for outdoor use in a hot-desert source (Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019); no exposure group given; class from our sun attribute (not full sun); no heat tolerance stated in words; class moderate."
+   },
+   "source": {
+    "source_id": "CFC-2021",
+    "url": "https://www.plantarchives.org/article/landscape-use-and-aesthetical-value-of-surveyed-woody-ornamental-plants-in-cairo-festival-city-cairo-egypt-in-landscape-gardening.pdf",
+    "accessed": "2026-11-22",
+    "locator": "Abdelnaby et al., Plant Archives 21(1):104-109 (2021), survey of woody ornamentals in Cairo Festival City gardens, Cairo, 2018-2019: Table: Jasminum grandiflorum L.",
+    "quote": "Jasminum grandiflorum L."
+   }
   },
   "drought": {
    "status": "GAP",
