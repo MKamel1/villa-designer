@@ -76,7 +76,7 @@
     "U-S-STAND",
     "LS-STAND-AREA"
    ],
-   "design_people": 22,
+   "design_people": 19,
    "visualisation_only": true
   },
   {
@@ -86,6 +86,176 @@
     27.297,
     -39.231,
     27.857,
+    -37.116
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-0",
+   "use": "other",
+   "rect": [
+    27.857,
+    -37.216,
+    28.307,
+    -36.816
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-1",
+   "use": "other",
+   "rect": [
+    27.857,
+    -39.231,
+    28.307,
+    -38.416
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-2",
+   "use": "other",
+   "rect": [
+    22.597,
+    -39.231,
+    23.797,
+    -36.916
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-3",
+   "use": "other",
+   "rect": [
+    23.997,
+    -35.416,
+    27.997,
+    -33.616
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-4",
+   "use": "other",
+   "rect": [
+    23.997,
+    -36.066,
+    27.997,
+    -35.416
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-5",
+   "use": "other",
+   "rect": [
+    26.847,
+    -36.816,
+    27.997,
+    -36.066
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-6",
+   "use": "other",
+   "rect": [
+    23.997,
+    -36.816,
+    25.747,
+    -36.066
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-7",
+   "use": "other",
+   "rect": [
+    23.997,
+    -37.116,
+    27.997,
+    -36.816
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-8",
+   "use": "other",
+   "rect": [
+    27.857,
+    -37.516,
+    27.997,
+    -37.116
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-gravel-crown-9",
+   "use": "other",
+   "rect": [
+    23.997,
+    -37.516,
+    24.497,
     -37.116
    ],
    "surface": "gravel",
@@ -132,7 +302,7 @@
    "id": "vis-s-paving-1",
    "rect": [
     23.697,
-    -30.466,
+    -31.366,
     27.097,
     -30.066
    ],
@@ -148,9 +318,9 @@
    "id": "vis-s-paving-2",
    "rect": [
     22.597,
-    -31.716,
-    28.307,
-    -30.466
+    -32.716,
+    26.897,
+    -31.366
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -164,9 +334,9 @@
    "id": "vis-s-paving-3",
    "rect": [
     22.597,
-    -34.416,
-    27.997,
-    -31.716
+    -33.116,
+    27.697,
+    -32.716
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -180,9 +350,9 @@
    "id": "vis-s-paving-4",
    "rect": [
     22.597,
-    -34.616,
-    28.307,
-    -34.416
+    -33.616,
+    27.997,
+    -33.116
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -196,9 +366,9 @@
    "id": "vis-s-paving-5",
    "rect": [
     22.597,
-    -36.816,
-    27.857,
-    -34.616
+    -35.416,
+    23.997,
+    -33.616
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -212,9 +382,9 @@
    "id": "vis-s-paving-6",
    "rect": [
     22.597,
-    -37.116,
-    28.307,
-    -36.816
+    -36.066,
+    23.997,
+    -35.416
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -227,10 +397,10 @@
   {
    "id": "vis-s-paving-7",
    "rect": [
-    27.857,
-    -37.216,
-    28.307,
-    -37.116
+    22.597,
+    -36.816,
+    23.997,
+    -36.066
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -244,9 +414,9 @@
    "id": "vis-s-paving-8",
    "rect": [
     22.597,
-    -37.216,
-    24.497,
-    -37.116
+    -36.916,
+    23.997,
+    -36.816
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -259,10 +429,10 @@
   {
    "id": "vis-s-paving-9",
    "rect": [
-    22.597,
-    -38.631,
-    24.497,
-    -37.216
+    23.797,
+    -37.116,
+    23.997,
+    -36.916
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -275,7 +445,39 @@
   {
    "id": "vis-s-paving-10",
    "rect": [
-    22.597,
+    23.797,
+    -37.516,
+    23.997,
+    -37.116
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-paving-11",
+   "rect": [
+    23.797,
+    -38.631,
+    24.497,
+    -37.516
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-paving-12",
+   "rect": [
+    23.797,
     -39.231,
     23.897,
     -38.631
@@ -289,12 +491,12 @@
    "visualisation_only": true
   },
   {
-   "id": "vis-s-paving-11",
+   "id": "vis-s-paving-13",
    "rect": [
-    27.857,
-    -39.231,
+    27.997,
+    -35.516,
     28.307,
-    -38.416
+    -35.416
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -306,44 +508,6 @@
   }
  ],
  "planting_groups": [
-  {
-   "id": "vis-s-bed-vine",
-   "rect": [
-    27.997,
-    -34.416,
-    28.307,
-    -31.716
-   ],
-   "over_structure": false,
-   "plants": [
-    {
-     "species": "vitis_vinifera",
-     "at": [
-      28.152,
-      -32.316
-     ],
-     "spread_m": 0.3,
-     "form": "shrub",
-     "visualisation_only": true
-    },
-    {
-     "species": "vitis_vinifera",
-     "at": [
-      28.152,
-      -33.516
-     ],
-     "spread_m": 0.3,
-     "form": "shrub",
-     "visualisation_only": true
-    }
-   ],
-   "role": "climber-strip",
-   "trace": [
-    "U-S-DINE",
-    "LS-HYDROZONE"
-   ],
-   "visualisation_only": true
-  },
   {
    "id": "vis-s-bed-mass",
    "rect": [
@@ -377,12 +541,12 @@
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "phoenix_roebelenii",
      "at": [
-      24.847,
+      24.947,
       -38.066
      ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
@@ -390,32 +554,21 @@
     {
      "species": "justicia_brandegeeana",
      "at": [
-      25.547,
+      25.847,
       -38.066
      ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "phoenix_roebelenii",
      "at": [
-      26.247,
+      26.747,
       -38.066
      ],
-     "spread_m": 0.77,
-     "form": "shrub",
-     "water_need": "medium",
-     "visualisation_only": true
-    },
-    {
-     "species": "justicia_brandegeeana",
-     "at": [
-      26.947,
-      -38.066
-     ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
@@ -465,7 +618,7 @@
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       24.747,
       -37.266
@@ -476,7 +629,7 @@
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       25.247,
       -37.266
@@ -487,7 +640,7 @@
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       25.747,
       -37.266
@@ -498,7 +651,7 @@
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       26.247,
       -37.266
@@ -549,51 +702,40 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "justicia_brandegeeana",
+     "species": "jasminum_sambac",
      "at": [
-      25.397,
+      25.497,
       -38.931
      ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "jasminum_sambac",
      "at": [
-      25.997,
+      26.297,
       -38.931
      ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "petrea_volubilis",
      "at": [
-      26.597,
+      27.097,
       -38.931
      ],
-     "spread_m": 0.66,
-     "form": "shrub",
-     "water_need": "medium",
-     "visualisation_only": true
-    },
-    {
-     "species": "salvia_leucantha",
-     "at": [
-      27.197,
-      -38.931
-     ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
     }
    ],
-   "role": "strip",
+   "role": "wall-climber",
    "trace": [
     "U-PRIVACY",
     "LS-HYDROZONE"
@@ -644,19 +786,72 @@
    "id": "vis-s-bed-screen-n",
    "rect": [
     22.597,
-    -30.466,
+    -31.366,
     23.697,
     -30.066
    ],
    "over_structure": false,
    "plants": [
     {
-     "species": "jasminum_sambac",
+     "species": "vitis_vinifera",
      "at": [
-      23.147,
+      22.947,
       -30.266
      ],
-     "spread_m": 0.9,
+     "spread_m": 0.5,
+     "form": "shrub",
+     "visualisation_only": true
+    },
+    {
+     "species": "vitis_vinifera",
+     "at": [
+      23.497,
+      -30.266
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "visualisation_only": true
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      22.897,
+      -30.816
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      23.497,
+      -30.816
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      22.822,
+      -31.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      23.272,
+      -31.216
+     ],
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
@@ -673,7 +868,7 @@
    "id": "vis-s-bed-screen-s",
    "rect": [
     27.097,
-    -30.466,
+    -31.366,
     28.307,
     -30.066
    ],
@@ -682,10 +877,76 @@
     {
      "species": "jasminum_sambac",
      "at": [
-      27.702,
+      27.907,
       -30.266
      ],
-     "spread_m": 0.9,
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      27.357,
+      -30.266
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.397,
+      -30.816
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.997,
+      -30.816
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.322,
+      -31.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.772,
+      -31.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      28.222,
+      -31.216
+     ],
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium",
      "visualisation_only": true
@@ -694,6 +955,276 @@
    "role": "screen-climber",
    "trace": [
     "U-PRIVACY",
+    "LS-HYDROZONE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-bed-wall",
+   "rect": [
+    27.697,
+    -33.116,
+    28.307,
+    -31.366
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      27.997,
+      -31.816
+     ],
+     "spread_m": 0.6,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      27.997,
+      -32.716
+     ],
+     "spread_m": 0.6,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -31.591
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -32.041
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -32.491
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -32.941
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-bed-wall-b",
+   "rect": [
+    26.897,
+    -32.716,
+    27.697,
+    -31.366
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.247,
+      -32.366
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "rhapis_excelsa",
+     "at": [
+      27.597,
+      -31.916
+     ],
+     "spread_m": 1.8,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -31.591
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -32.041
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -32.491
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-bed-wall-c",
+   "rect": [
+    27.997,
+    -35.416,
+    28.307,
+    -33.116
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -33.516
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -34.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -34.916
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      28.147,
+      -33.866
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      28.147,
+      -34.566
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ],
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-bed-pocket",
+   "rect": [
+    25.747,
+    -36.816,
+    26.847,
+    -36.066
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      25.972,
+      -36.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      26.422,
+      -36.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "D-SHADE-OVER-SUN",
     "LS-HYDROZONE"
    ],
    "visualisation_only": true
@@ -707,9 +1238,9 @@
     27.857,
     -36.816,
     28.307,
-    -34.616
+    -35.516
    ],
-   "seats": 3,
+   "seats": 2,
    "built_in": true,
    "trace": [
     "U-S-LOUNGE",
@@ -741,7 +1272,7 @@
    "zone": "vis-s-dining",
    "center": [
     25.297,
-    -32.916
+    -34.416
    ],
    "size_m": [
     2.4,
@@ -762,9 +1293,9 @@
    "kind": "bbq",
    "rect": [
     24.597,
-    -35.066,
+    -32.716,
     25.097,
-    -34.566
+    -32.216
    ],
    "trace": [
     "U-S-BBQ",
@@ -790,6 +1321,80 @@
   }
  ],
  "trees": [
+  {
+   "id": "vis-s-tree-crape",
+   "species": "lagerstroemia_indica",
+   "center": [
+    26.047,
+    -36.016
+   ],
+   "form": "shrub",
+   "over_structure": false,
+   "mature_spread_m": 4.0,
+   "mature_height_m": 4.5,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "moderate",
+   "crown_center": [
+    25.297,
+    -24.816
+   ],
+   "crown_lean_m": 1.25,
+   "pruned": {
+    "spread_m": 4.0,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
+   "crown_underside_m": 2.2,
+   "pruning": "multi-stem (3-5 stems; the head is trained to lean toward the table, at most 1.3 m off the trunk), clear trunk to 2.2 m; structural thinning every year in January-February while bare; crown held at 4.0 m by cutting back to the previous year's heads, never flat topping; removing suckers at the base twice a year",
+   "pruning_source": "UF/IFAS EP399 'What is a crape murder?' (hard pruning/pollarding makes vigorous sprouts and, once started, needs annual pruning; blooms fall with the size of branch removed)",
+   "pruning_source_status": "READ AS SEARCH EXCERPT 2026-11-22 (page itself not fetched); tolerance to a held 3.4 m crown is INFERENCE from 'pollarding keeps a plant at a set height'",
+   "species_mature_spread_m": [
+    1.8,
+    9.1
+   ],
+   "species_mature_height_m": 9.1,
+   "visualisation_only": true
+  },
+  {
+   "id": "vis-s-tree-olive",
+   "species": "olea_europaea",
+   "center": [
+    26.797,
+    -37.316
+   ],
+   "form": "small_tree",
+   "over_structure": false,
+   "mature_spread_m": 3.6,
+   "mature_height_m": 4.5,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "low",
+   "crown_center": [
+    26.797,
+    -22.516
+   ],
+   "crown_lean_m": 0.0,
+   "pruned": {
+    "spread_m": 3.6,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
+   "crown_underside_m": 2.2,
+   "pruning": "pruned multi-stem umbrella: thin the crown each late winter, hold the spread at 3.6 m",
+   "pruning_source": null,
+   "pruning_source_status": "GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)",
+   "species_mature_spread_m": [
+    4.6,
+    7.6
+   ],
+   "species_mature_height_m": 9.1,
+   "visualisation_only": true
+  },
   {
    "id": "vis-s-tree-punica",
    "species": "punica_granatum",
@@ -817,7 +1422,7 @@
    "cross_slope_pct": 1.5,
    "rect": [
     22.597,
-    -39.231,
+    -36.916,
     23.797,
     -32.316
    ],
@@ -856,39 +1461,7 @@
    "visualisation_only": true
   }
  ],
- "canopies": [
-  {
-   "id": "vis-s-pergola-grape",
-   "rect": [
-    23.597,
-    -34.216,
-    28.207,
-    -31.616
-   ],
-   "kind": "pergola",
-   "roof": "vine",
-   "louvred": true,
-   "height_m": 2.7,
-   "shade_fraction": 0.75,
-   "shade_fraction_winter_open": 0.15,
-   "shade_fraction_winter_closed": 0.6,
-   "deciduous": true,
-   "visualisation_only": true
-  },
-  {
-   "id": "vis-s-pergola-rear",
-   "rect": [
-    27.307,
-    -39.131,
-    28.307,
-    -34.416
-   ],
-   "kind": "pergola",
-   "height_m": 2.7,
-   "shade_fraction": 0.6,
-   "visualisation_only": true
-  }
- ],
+ "canopies": [],
  "screens": [],
  "walls": [],
  "doors": [],

@@ -1,5 +1,10 @@
 # LDG: landscape concept generation (2026-11-22)
 
+> **Round 3 (2026-11-22, client change): shade trees instead of pergolas, deciduous preferred, layered planting. Read `knowledge/landscape/concept/final/REPORT.md` (generated).** No pergola remains. South garden: deciduous crape myrtle (pruned 4.0 m head, leaning toward the table) over the dining, pruned evergreen olive over the rear and quiet benches, pomegranate understorey,
+> gravel floors under the crowns, the table moved east to b 4.05-4.95 and the BBQ stand to the west terrace (own manual clearance, `LDG-BBQ-MANUAL`), east yard olive over the bench, grape on the north screen stub, climbers on every screen and wall face, layered beds (`final_trees.layer_table`).
+> Hard share 0.849 -> 0.756; zero hard fails. Code: `final.py` (layout, `TREE_PRUNING`, `CROWN`), `final_checks.py` (`crowns`, `season_check`, `privacy_checks`, `tree_site_checks`, `bbq_manual_check`), `final_trees.py` (candidate comparison, layers, climber faces), report `final_report.py`.
+> Open: Cairo leaf-drop months (GAP), olive pruning source (GAP), trees per 100 m2 above the LDP range, LDB to build trees at the pruned size (`mature_spread_m`, `mature_height_m`, `crown_center`).
+
 > **Round 2 (2026-11-22, client DECIDED) supersedes the three-concept comparison: read `knowledge/landscape/concept/final/REPORT.md` (generated).** The client chose concept B adapted: shared gas fire pit on the west line, west screen with an opening at the pit,
 > grape pergola, both ponds kept, mirrored viewing-only layout of the south garden on the sister plot. Code: `src/archpipe/landscape/concept/final.py` (layout), `final_checks.py` (checks), `final_fire.py` (product shortlist with manual quotes),
 > `final_vis.py` (mirror), `final_run.py` (runner: `PYTHONPATH=src python -m archpipe.landscape.concept.final_run [--no-draw]`), `final_report.py`. Tests: `tests/landscape/concept/test_final.py` (27). Output: `knowledge/landscape/concept/final/`
