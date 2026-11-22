@@ -54,6 +54,16 @@ def ground_quads(pond_rects, x=(-60.0, 80.0), y=(-80.0, 40.0)):
     return out
 
 
+BLACK_MAX = 0.06      # a presentation view with more than 6 % pure-black pixels has a hole in the scene (a hidden box that still blocked the sky light: 11.6 % and 25 % black; honest dark views, black liner and chair shadows, measure 0.1-5 %)
+
+
+def black_share(jpg):
+    """Share of pixels that are black (all channels < 8/255) in an image: the QA guard against holes in the scene. The red VISUALISATION band is not black."""
+    from PIL import Image
+    a = np.asarray(Image.open(jpg).convert("RGB"))
+    return float((a.max(axis=2) < 8).mean())
+
+
 def ground_split(pond_rects):
     """Ground in three parts: OUR yard (beige, as built), the sister yard and everything outside the plot (a neutral labelled grey: the model holds no ground detail there).
     -> (ours quads, neutral quads); cells over a pond opening are left out in both."""
@@ -105,6 +115,7 @@ def default_views(scene, tag):
         size_x = sp.get("table_w", 2.4)
         ex = tx + size_x / 2 + 0.9                   # seated at the east end of the table, looking along the table side to the pit and the screen opening
         v.append(dict(name="eye-dining-firepit", group="eye", eye=[ex, ty + 0.4, g + 1.25], target=[px - 0.3, py + 0.3, g + 0.7], lens=26, state="closed"))
+        v.append(dict(name="dining-crown-" + scene.season, group="eye", eye=[tx - 1.9, ty - 1.9, g + EYE], target=[tx + 0.2, ty + 0.2, g + 1.9], lens=20, state="closed"))
         v.append(dict(name="firepit-open", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="open"))
         v.append(dict(name="firepit-closed", group="eye", eye=[px + 1.9, py + 1.6, g + 1.25], target=[px, py + 0.1, g], lens=34, state="closed"))
     for pid, r in sorted(sp.get("ponds", {}).items()):
@@ -159,6 +170,12 @@ def render(scene, out_dir, tag, views=None, samples=96, timeout=3000, gpu=True, 
     if r.returncode != 0 or not rec.exists():
         raise RuntimeError("preview job %s failed (exit %s): %s; log ~/archpipe/queue/jobs/%s/job.log" % (jid, r.returncode, (r.stdout + r.stderr)[-300:], jid))
     receipt = json.loads(rec.read_text())
+    for v in receipt["views"]:
+        v["black_share"] = round(black_share(v["file"]), 4)
+    bad = [(v["name"], v["black_share"]) for v in receipt["views"] if v["black_share"] > BLACK_MAX and v.get("group") != "pond"]      # pond views are dark by design (black liner, deep water)
+    receipt["black_check"] = dict(max=BLACK_MAX, failed=bad)
+    if bad:
+        print("WARNING render QA: black holes in", bad)
     if receipt.get("spec_sha") != spec["spec_sha"]:       # the job rendered some other spec (a shared spec file once let a sister-plot scene render into a production folder)
         raise RuntimeError("receipt %s does not belong to this scene (spec_sha %s != %s): refusing its images" % (rec, receipt.get("spec_sha"), spec["spec_sha"]))
     if scene.visualisation_only:                       # a red band in EVERY image; the receipt says so

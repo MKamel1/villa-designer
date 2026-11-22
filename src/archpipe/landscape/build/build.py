@@ -319,6 +319,8 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     hh = CX.house_height(g)
     ctx = [dict(id="ctx-building-%d" % i, rect=list(R(b)), z0=g, z1=g + hh,
                 label="context: our house massing, height %.0f m from villa_env (basement %.1f, roof %.1f)" % (hh, g, g + hh)) for i, b in enumerate(layout.get("buildings", []))]
+    ctx += [dict(id="ctx-footprint-%d" % i, rect=list(R(b)), z0=g, z1=g + 0.03, material="ctx-footprint",
+                 label="context: our house footprint on the ground (the massing above is hidden in the bird's-eye views)") for i, b in enumerate(layout.get("buildings", []))]
     if site_context:
         ctx += CX.site_context([R(w["rect"]) for w in layout.get("walls", [])])
     ids = [o.id for o in objs if o.state is None]

@@ -349,6 +349,23 @@ class GrilleAndContext(unittest.TestCase):
         self.assertIn("neutral", context.GROUND_NOTE)
 
 
+class RenderQA(unittest.TestCase):
+    DATA = ROOT / "tests/landscape/build/data"
+
+    def test_the_black_hole_guard_fails_on_the_real_defect_and_passes_the_fixed_render(self):
+        from archpipe.landscape.build import preview
+        bad = preview.black_share(self.DATA / "black-under-hidden-house.jpg")       # the real round-3b bird's-eye: ground under the hidden house box was 11.6 % black
+        ok = preview.black_share(self.DATA / "bird-house-hidden-fixed.jpg")
+        self.assertGreater(bad, preview.BLACK_MAX)
+        self.assertLessEqual(ok, preview.BLACK_MAX)
+
+    def test_a_hidden_house_is_hidden_from_every_ray_type_and_leaves_a_footprint_slab(self):
+        src = (ROOT / "src/archpipe/landscape/build/preview_blender.py").read_text()
+        for ray in ("visible_camera", "visible_shadow", "visible_diffuse", "visible_glossy", "visible_transmission"):
+            self.assertIn(ray, src)
+        self.assertEqual(len([c for c in S.context if c["id"].startswith("ctx-footprint-")]), len(L["buildings"]))
+
+
 class Climbers(unittest.TestCase):
     def test_every_structure_with_a_declared_climber_has_a_panel_on_its_garden_face(self):
         self.assertEqual(set(S.spec["climbed"]), {"wall-fence-rear", "wall-fence-east", "wall-street-fence", "sister-screen-n", "sister-screen-s"})

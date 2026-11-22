@@ -56,7 +56,7 @@ SPEC = {  # name: (base colour, roughness, metallic)
     "terracotta": ((0.60, 0.28, 0.16), 0.8, 0), "pond-concrete": ((0.05, 0.06, 0.055), 0.9, 0), "pond-edge": ((0.06, 0.06, 0.065), 0.5, 0),
     "grille-steel": ((0.025, 0.025, 0.028), 0.5, 0.6), "pit-steel": ((0.10, 0.10, 0.10), 0.5, 0.8), "lava-rock": ((0.05, 0.045, 0.045), 1.0, 0),
     "burner": ((0.15, 0.15, 0.15), 0.4, 0.9), "bbq-steel": ((0.04, 0.04, 0.04), 0.45, 0.6), "ctx": ((0.80, 0.79, 0.77), 0.95, 0),
-    "ground-far": ((0.50, 0.44, 0.34), 1.0, 0), "ground-neutral": ((0.36, 0.36, 0.35), 1.0, 0), "ctx-street": ((0.13, 0.13, 0.135), 0.9, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
+    "ground-far": ((0.45, 0.42, 0.38), 1.0, 0), "ground-neutral": ((0.36, 0.36, 0.35), 1.0, 0), "ctx-footprint": ((0.40, 0.40, 0.39), 0.9, 0), "ctx-street": ((0.13, 0.13, 0.135), 0.9, 0), "root-barrier": ((0.08, 0.08, 0.09), 0.6, 0),
     "trunk-bark": ((0.20, 0.15, 0.11), 0.95, 0),
 }
 SEASON = spec.get("season", "summer")
@@ -352,7 +352,7 @@ for v in spec["views"]:
             bpy.data.objects[n].hide_render = bool(o["state"]) and o["state"] != v["state"]
     for ob in bpy.data.objects:                       # the house box is hidden from the camera (not from light) in bird's-eye views so the garden is legible
         if ob.get("ld_context") and ob.name.startswith("ctx-building"):
-            ob.visible_camera = ob.visible_shadow = not v.get("hide_house", False)
+            ob.visible_camera = ob.visible_shadow = ob.visible_diffuse = ob.visible_glossy = ob.visible_transmission = not v.get("hide_house", False)      # hidden from ALL rays: a box that only left the camera and shadow rays still blocked the sky light and left the ground under it black
     sc.view_settings.exposure = spec.get("exposure_by_group", {}).get(v.get("group"), spec.get("exposure", -2.0))
     cam.data.lens = v["lens"]
     cam.location = Vector(v["eye"])
