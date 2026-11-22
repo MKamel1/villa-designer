@@ -19,8 +19,11 @@ def gltf_untextured_share(path) -> float:
     mats = g.get("materials") or []
     if not mats:
         return 1.0
-    bare = sum(1 for m in mats if "baseColorTexture" not in m.get("pbrMetallicRoughness", {})
-               and "baseColorFactor" not in m.get("pbrMetallicRoughness", {}))
+    def has_colour(m):
+        pbr = m.get("pbrMetallicRoughness", {})
+        sg = (m.get("extensions") or {}).get("KHR_materials_pbrSpecularGlossiness", {})   # PlantCatalog / Treeit exports
+        return any(k in pbr for k in ("baseColorTexture", "baseColorFactor")) or any(k in sg for k in ("diffuseTexture", "diffuseFactor"))
+    bare = sum(1 for m in mats if not has_colour(m))
     return round(bare / len(mats), 3)
 
 
