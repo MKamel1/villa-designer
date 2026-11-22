@@ -1,0 +1,263 @@
+{
+ "slug": "hedera_helix",
+ "layers": [
+  "climber",
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Hedera helix L.",
+    "family": "Araliaceae",
+    "common_names": [
+     "English ivy",
+     "common ivy"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Hedera%20helix",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6.1,
+    "max": 24.5,
+    "text": "20-80.5 ft as stated (NCSU) when climbing; as a ground cover MBG gives 6-9 in; PFAF 15 m"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 20 ft. 0 in. - 80 ft. 6 in. Width: 3 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 15.2,
+    "text": "3-50 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 20 ft. 0 in. - 80 ft. 6 in. Width: 3 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "NCSU: rapid"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "dappled sun, deep shade, full sun and partial shade (MBG: best in part to full shade, will grow in full sun)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Cultural Conditions",
+    "quote": "Light: Dappled Sunlight (Shade through upper canopy all day) Deep shade (Less than 2 hours to no direct sunlight) Full sun (6 or more hours of direct sunlight a day) Partial Shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "MBG Water: Medium; PFAF prefers moist or wet soil, dislikes waterlogged or very dry soil"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Water: Medium"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no source opened states heat tolerance (MBG zone 5-9, NCSU zone 4-13, no heat statement)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU tag drought tolerant and Resistance To Challenges: Drought; PFAF: established plants drought tolerant; MBG: tolerates some drought, best colour in evenly moist soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "PFAF: can grow in very alkaline soils; prefers some lime"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "can grow in very alkaline soils"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Salt listed under Resistance To Challenges; no degree stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Landscape",
+    "quote": "Resistance To Challenges: Drought Heavy Shade Salt"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -25,
+    "damage_text": "PFAF: tolerates about -25 C (variegated forms less hardy); NCSU zones 4a-13b"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "it tolerates temperatures down to about -25°c"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     10,
+     11
+    ],
+    "colours": [
+     "green",
+     "yellow"
+    ],
+    "text": "PFAF: October to November; flowers only on adult shrubby stems; small greenish-yellow umbels"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "in flower from October to November"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy dark green lobed leaves; clinging by aerial roots"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Climber growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "sources conflict on clinging roots: NCSU says vines damage painted surfaces, loose mortar and siding; PFAF says it does not damage the structure of a wall; no benign or aggressive class stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "NCSU Poison Severity Medium; sap causes dermatitis, leaves and berries toxic if eaten; PFAF: poisonous in large doses"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Poisonous to Humans",
+    "quote": "Foliage is more toxic than berries."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "NCSU: Maintenance High; MBG lists Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: High"
+   }
+  }
+ },
+ "notes": "Cool-temperate (Europe). Heat tolerance is a GAP, so the viability verdict stays unverified; do not read the cold hardiness or the NCSU tag as heat evidence. NCSU advises houseplant or patio container only in North Carolina.",
+ "invasive_flag": "NCSU: invasive species in North Carolina; climbs and kills trees and shrubs, smothers ground, nearly impossible to eradicate; MBG: highly invasive in woodlands in some climates."
+}

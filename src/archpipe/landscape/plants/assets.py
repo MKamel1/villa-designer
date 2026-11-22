@@ -8,7 +8,7 @@ from .library import DATA
 
 GRADES = {"A", "B", "C", "D"}
 FITS = {"species", "genus", "look-alike", "none"}
-LICENCES = {"CC0", "CC Attribution"}   # free assets only; anything else is a paid or unclear licence (own table)
+LICENCES = {"CC0", "CC Attribution", "Fab Standard License"}   # free assets only; anything else is a paid or unclear licence (own table)
 DRAWABLE = {"drawable", "drawable_as_genus_standin", "not drawable yet"}
 
 
@@ -27,11 +27,24 @@ def gltf_untextured_share(path) -> float:
     return round(bare / len(mats), 3)
 
 
-def validate_manifest(doc: dict, manifest: dict) -> list[str]:
-    """Every asset stored outside git ('storage': 'shared') must be pinned by sha256 with a url."""
+def validate_manifest(doc: dict, manifest: dict, fab: dict | None = None) -> list[str]:
+    """Every asset stored outside git ('storage': 'shared') must be pinned by sha256 with a url.
+    Fab/Megascans assets (manifest_key 'fab/<archive>') are pinned in fab-manifest.json: zip sha256, every file's sha256,
+    the licence quote and a listing (or the candidate listings when the archive does not name its own)."""
     errs = []
     for a in doc.get("assets", []):
         if a.get("storage") != "shared":
+            continue
+        if a.get("manifest_key", "").startswith("fab/"):
+            ar = (fab or {}).get("archives", {}).get(a["manifest_key"][4:])
+            if not ar:
+                errs.append(f"{a['id']}: fab asset has no fab-manifest entry")
+                continue
+            hexok = lambda h: len(h) == 64 and all(c in "0123456789abcdef" for c in h)
+            if not (hexok(ar.get("zip_sha256", "")) and ar.get("files") and all(hexok(h) for h in ar["files"].values())):
+                errs.append(f"{a['id']}: fab manifest needs 64-hex sha256 for the zip and every file")
+            if not (ar.get("listing_url") or ar.get("listing_candidates")) or "Fab Standard License" not in ar.get("licence", ""):
+                errs.append(f"{a['id']}: fab manifest needs the listing url (or candidates) and the Fab Standard License quote")
             continue
         files = manifest.get("assets", {}).get(a.get("manifest_key", ""), [])
         if not files:
@@ -43,6 +56,8 @@ def validate_manifest(doc: dict, manifest: dict) -> list[str]:
 
 
 def validate_assets(doc: dict, species_slugs, base: Path = DATA) -> list[str]:
+    from .library import load_species
+    sp = load_species(base / "species") if (base / "species").is_dir() else {}
     errs, ids = [], set()
     for a in doc.get("assets", []):
         i = a.get("id", "?")
@@ -67,6 +82,11 @@ def validate_assets(doc: dict, species_slugs, base: Path = DATA) -> list[str]:
             h, k = a.get("size_m", [0, 0, 0])[2], a["placement_scale"]
             if not (k > 0 and abs(h * k - a.get("placed_height_m", -1)) <= 0.03 * h * k):
                 errs.append(f"{i}: placed_height_m must equal size_m[2] x placement_scale")
+        if a.get("variation_heights_m") and a.get("grade") in ("A", "B") and a.get("species_fit") in ("species", "genus") and a.get("maps_to"):
+            rec = sp.get(a["maps_to"][0])      # size rule: a scan under half the sourced minimum height is the wrong scale (grade C)
+            hv = rec["attributes"]["height_m"].get("value") if rec else None
+            if hv and "climber" not in rec["layers"] and a["variation_heights_m"][1] < 0.5 * hv["min"]:
+                errs.append(f"{i}: tallest variation {a['variation_heights_m'][1]} m is under half the sourced minimum height {hv['min']} m of {a['maps_to'][0]}: wrong scale, grade must be C")
         if a.get("species_fit") == "look-alike" and a.get("maps_to"):
             errs.append(f"{i}: a look-alike cannot be mapped to a species")
     rows = {r["slug"]: r for r in doc.get("species", [])}

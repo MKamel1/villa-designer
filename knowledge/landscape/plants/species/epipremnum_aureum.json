@@ -1,0 +1,255 @@
+{
+ "slug": "epipremnum_aureum",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Epipremnum aureum (Linden & André) G.S.Bunting",
+    "family": "Araceae",
+    "common_names": [
+     "money plant",
+     "golden pothos",
+     "devil's ivy"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Epipremnum%20aureum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6.1,
+    "max": 12.2,
+    "text": "20-40 ft as a vine (MBG); NCSU: vines to 40 ft"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Height: 20.00 to 40.00 feet Spread: 3.00 to 6.00 feet"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft as stated (MBG)"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Height: 20.00 to 40.00 feet Spread: 3.00 to 6.00 feet"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "bright indirect light, dappled or deep shade; MBG: protect from afternoon sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Cultural Conditions",
+    "quote": "Light: Dappled Sunlight (Shade through upper canopy all day) Deep shade (Less than 2 hours to no direct sunlight) Partial Shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "MBG Water: Medium; let the medium dry between waterings (NCSU)"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Water: Medium"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no source states heat tolerance; Wikipedia says it lives well at 17-30 C (a preferred range, not a tolerance limit) and MBG says protect from afternoon sun",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "MBG and NCSU list Drought / Dry Soil under tolerates; indoor container plant, no degree stated"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Tolerate: Rabbit, Deer, Drought, Heavy Shade, Dry Soil, Shallow-Rocky Soil"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no soil-pH statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "MBG zone 10-12; a houseplant in colder climates (NCSU, MBG); no frost-damage temperature stated. Frost-tender tropical"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Zone: 10 to 12"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "yellow",
+     "green",
+     "purple"
+    ],
+    "text": "rarely flowers; foliage plant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Flowers",
+    "quote": "Rarely flowers in a spadix surrounded by a spathe."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy heart-shaped leaves variegated yellow or white; clings by aerial roots"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about root behaviour (climbs by aerial roots)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "NCSU Poison Severity Medium; calcium oxalate crystals cause mouth irritation, vomiting; MBG: all parts poisonous if ingested; skin irritation possible"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Poisonous to Humans",
+    "quote": "Poison Severity: Medium"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+    "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+    "PFAF: page present but record empty"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Low"
+   }
+  }
+ },
+ "notes": "Grown as a houseplant and in hanging baskets in all sources opened; none describes outdoor garden use in a hot dry climate. Outdoor use near Cairo would be shaded and sheltered at best.",
+ "invasive_flag": "Wikipedia: can become a highly invasive species when introduced into tropical countries where it is not native (example: Udawattakele sanctuary, Sri Lanka)."
+}

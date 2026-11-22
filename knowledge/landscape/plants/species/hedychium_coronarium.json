@@ -1,0 +1,270 @@
+{
+ "slug": "hedychium_coronarium",
+ "layers": [
+  "perennial",
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Hedychium coronarium J.Koenig",
+    "family": "Zingiberaceae",
+    "common_names": [
+     "white ginger lily",
+     "garland flower",
+     "butterfly ginger"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Hedychium%20coronarium",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 1.8,
+    "text": "4-6 ft as stated (NCSU); PFAF 1.5 m"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 4 ft. 0 in. - 6 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.9,
+    "text": "2-3 ft clump as stated (NCSU); spreads by rhizomes"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 4 ft. 0 in. - 6 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "NCSU: Rapid; PFAF: fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun or partial or dappled shade (PFAF: cannot grow in the shade)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "in full sun or partial or dappled shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "prefers moist or wet soil; NCSU: does not tolerate standing water or continuously wet soil"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It prefers moist or wet soil."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU tag: heat tolerant; Resistance To Challenges: Heat (no temperature limit stated)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#heat tolerant"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no source opened states drought tolerance (sources stress moist or wet soil)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287579",
+    "https://en.wikipedia.org/wiki/Hedychium_coronarium"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU tag salt tolerant and listed under Resistance To Challenges: Salt; no degree stated, so moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#salt tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -2,
+    "damage_text": "PFAF: tolerates about -2 C and is frost tender; NCSU zones 7a-10b with winter mulch below zone 8; MBG zones 8-10, rhizomes lifted in fall; Wikipedia: RHS H3 (hardy to -5 C in mild areas). Foliage dies back or is lost in frost; rhizome is the hardy part"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Plants are not very hardy, they tolerate temperatures down to about -2°c"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "PFAF: August to October; NCSU bloom time summer and fall; some clones pale yellow; fragrant"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in flower from August to October."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "lance-shaped medium green leaves to 2 ft long; evergreen only in warm climates (Wikipedia: deciduous in mild-winter temperate regions)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Plant Type: Herbaceous Perennial"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "spread by underground rhizomes; Wikipedia: difficult to control once established. This is rhizome spread, not a stated hardscape-damage figure"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Hedychium_coronarium",
+    "accessed": "2026-11-22",
+    "locator": "As an invasive species",
+    "quote": "Once established, it is difficult to control due to vegetative reproduction through the underground spread of rhizomes."
+   }
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF Known Hazards: none known; flowers edible; NCSU tags non-toxic for cats, dogs, horses"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Known Hazards None known"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287579",
+    "https://en.wikipedia.org/wiki/Hedychium_coronarium"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ },
+ "notes": "Pond relevance kept false: PFAF says it succeeds in shallow water but NCSU says it does not tolerate standing water or continuously wet soil, and it is a border/container plant in both. Invasive in wet places abroad (see invasive_flag).",
+ "invasive_flag": "Wikipedia: may be invasive in shallow water systems, along streams and waterlogged areas; declared weed in South Africa; classed invasive in Rio de Janeiro; serious invader in Hawaii. PFAF: Weed Potential Yes."
+}
