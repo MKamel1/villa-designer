@@ -267,6 +267,22 @@ lanes:
     - knowledge/*.json.gz
     - docs/lanes/SC*.md
     - docs/lessons/SC.md
+  SC2: # SC follow-ups: cupboard depth in model, wall-B-ext-16 to soffit, K09 reads element_contract
+    - src/archpipe/model/**
+    - tests/model/**
+    - src/archpipe/parity/**
+    - tests/parity/**
+    - knowledge/parity/**
+    - src/archpipe/blender/**
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/documents/samples/**
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/*.json.gz
+    - docs/lanes/SC2*.md
+    - docs/lessons/SC2.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
