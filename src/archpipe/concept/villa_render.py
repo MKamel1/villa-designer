@@ -2194,8 +2194,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     require_clear_probes(scene)
     # Element identity (lane P2): additive fields, attached last so no pass, receipt or appearance record that
     # copies or hashes mesh attributes ever sees them (furniture_stage2 and draped_appearances do).
-    scene['element_contract'] = element_contract(lay, scene)
-    EID.attach(scene, id_registry, _live_model_ids(lay, sp, it_all, land_plan, land_props), declared_ids)
+    model_ids = _live_model_ids(lay, sp, it_all, land_plan, land_props)
+    scene['element_contract'] = element_contract(lay, scene, model_ids)
+    EID.attach(scene, id_registry, model_ids, declared_ids)
     EID.tag_non_model(scene)
     return scene
 
@@ -2222,14 +2223,20 @@ def _light_only_reason(f):
     return dict(kind=f.kind, reason=LIGHT_ONLY[key]) if key in LIGHT_ONLY else None
 
 
-def element_contract(lay, scene):
+def element_contract(lay, scene, model_ids):
     """Which model elements the scene carries other than as a mesh: imported prop assets (scene['props'], placed from
-    the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY)."""
+    the asset library at the stated position) and luminaires that are light only (LIGHT_ONLY). A prop is listed under the
+    model id it stands for (`prop-<id>`, or `plant-<id>` for landscape plants); one the model does not hold (benches) is
+    `non_model_props`, never an `imported_props` entry naming an element that is not there (RV1 K09 fails that)."""
     from .sanitary_relocation import input_revision
     with input_revision(False):
         light_only = {"lum-" + f.id: r for f in VL.design(lay) if (r := _light_only_reason(f))}
-    return dict(light_only=light_only,
-                imported_props={"prop-" + p["id"]: dict(asset=p["asset"], position=p["position"]) for p in scene.get("props", [])})
+    imported, non_model = {}, {}
+    for p in scene.get("props", []):
+        entry = dict(asset=p["asset"], position=p["position"])
+        mid = next((m for m in ("prop-" + p["id"], "plant-" + p["id"]) if m in model_ids), None)
+        (imported.__setitem__(mid, entry) if mid else non_model.__setitem__("prop-" + p["id"], entry))
+    return dict(light_only=light_only, imported_props=imported, non_model_props=non_model)
 
 
 def _live_model_ids(lay, sp, items, land_plan, land_props):
