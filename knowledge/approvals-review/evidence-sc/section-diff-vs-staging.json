@@ -1,0 +1,34 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "meshes": {
+  "changed": false,
+  "receipt_component": false
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": false,
+  "receipt_component": true
+ }
+}
