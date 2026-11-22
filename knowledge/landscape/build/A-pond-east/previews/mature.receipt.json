@@ -1,0 +1,93 @@
+{
+ "tag": "mature",
+ "assets": [
+  {
+   "asset": "skf3_f697f7da",
+   "target_height_m": 3.7,
+   "measured_min": [
+    25.8258,
+    -29.4698,
+    -3.0
+   ],
+   "measured_max": [
+    28.7369,
+    -26.7507,
+    0.7
+   ],
+   "base_z_error_m": 0.0,
+   "height_m": 3.7,
+   "spread_m": 2.9111,
+   "id": "ld-tree-0-punica"
+  },
+  {
+   "asset": "sf_frangipani",
+   "target_height_m": 0.7977766340710233,
+   "measured_min": [
+    27.2378,
+    -22.0078,
+    -2.5
+   ],
+   "measured_max": [
+    28.3574,
+    -20.9886,
+    -1.7022
+   ],
+   "base_z_error_m": 0.0,
+   "height_m": 0.7978,
+   "spread_m": 1.1197,
+   "id": "ld-pot-0-plumeria-plant"
+  }
+ ],
+ "views": [
+  {
+   "name": "bird-south-east",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/mature-bird-south-east.jpg",
+   "state": "closed",
+   "eye": [
+    29.5,
+    -33.0,
+    12.5
+   ],
+   "target": [
+    22.3,
+    -25.2,
+    -2.7
+   ],
+   "lens": 34
+  },
+  {
+   "name": "eye-living-door",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/mature-eye-living-door.jpg",
+   "state": "closed",
+   "eye": [
+    22.847,
+    -26.131,
+    -1.4
+   ],
+   "target": [
+    27.5,
+    -26.331,
+    -2.0
+   ],
+   "lens": 24
+  },
+  {
+   "name": "eye-dining-door",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/mature-eye-dining-door.jpg",
+   "state": "closed",
+   "eye": [
+    16.889,
+    -23.341,
+    -1.4
+   ],
+   "target": [
+    18.389,
+    -21.0,
+    -2.4
+   ],
+   "lens": 24
+  }
+ ],
+ "objects": 114,
+ "note": "preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)"
+}

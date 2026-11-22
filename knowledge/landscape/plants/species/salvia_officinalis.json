@@ -1,0 +1,265 @@
+{
+ "slug": "salvia_officinalis",
+ "layers": [
+  "herb",
+  "perennial"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Salvia officinalis L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "common sage",
+     "garden sage",
+     "culinary sage"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Salvia%20officinalis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.9,
+    "text": "2-3 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: Medium (PFAF medium)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "prefers full sun; NCSU also lists partial shade; PFAF: cannot grow in the shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Common sage prefers full sun and well-drained, medium to dry soils"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "medium to dry soils; intolerant of wet or poorly drained soils; MBG: wet soils can be fatal"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Common sage prefers full sun and well-drained, medium to dry soils"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: PFAF states heat tolerance only in heat zones 8 through 5 on a 1-12 scale where 12 is 210 or more days above 30 C; Cairo has 154 such days, so the stated limit is a poor fit. No direct heat statement in NCSU or MBG"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "The plant is heat tolerant in zones 8 through 5."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU: will tolerate drought and poor soils; tag drought tolerant; MBG tolerates drought, dry soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It will tolerate drought and poor soils."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "PFAF: can grow in very alkaline soils; prefers calcareous soil"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "can grow in very alkaline soils"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "4a",
+    "min_temp_c": null,
+    "damage_text": "NCSU zones 4a-8b; MBG zone 6-9; PFAF hardy to UK zone 5, not frost tender. Winter wet, not cold, is the stated killer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "blue",
+     "lavender",
+     "pink"
+    ],
+    "text": "PFAF: June to August; NCSU: early summer; bluish-lavender to pinkish-lavender"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "in flower from June to August"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "grey-green, fuzzy, aromatic, wrinkled ovate leaves; semi-woody"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Shrub growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: can be toxic when used in excess or for extended periods; widely eaten as a culinary herb"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "The plant can be toxic when used in excess or when taken for extended periods"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium; prune in spring; short-lived, replace after about 4 years (PFAF)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ },
+ "notes": "Mediterranean native, fits dry alkaline soil, but the only heat evidence is the PFAF heat-zone limit (inferred moderate). NCSU and MBG warn about wet soil, root rot and frequent disease, which matters under irrigation. Pet toxicity: NCSU tags non-toxic for cats, dogs, horses."
+}

@@ -1,0 +1,256 @@
+{
+ "slug": "zingiber_officinale",
+ "layers": [
+  "herb",
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Zingiber officinale Roscoe",
+    "family": "Zingiberaceae",
+    "common_names": [
+     "ginger",
+     "common ginger",
+     "Jungle Ginger (Quixel scan label)"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Zingiber%20officinale",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.2,
+    "text": "2-4 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 4 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.9,
+    "text": "2-3 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 4 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: Medium (PFAF says fast)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "NCSU light: partial shade; full sun burns foliage"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Insects, Diseases, and Other Plant Problems",
+    "quote": "Placing plants in full sun can result in the foliage tipped with brown and poor growth."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "MBG Water: Medium to wet; NCSU soil drainage moist, occasionally wet; water regularly once growing"
+   },
+   "source": {
+    "source_id": "MBG",
+    "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577",
+    "accessed": "2026-11-22",
+    "locator": "Quick facts",
+    "quote": "Water: Medium to wet"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "inferred": true,
+    "text": "INFERENCE: PFAF gives a tolerated range of 13-35 C (best 19-29 C), below the 43.9 C Cairo typical-year maximum, so class moderate. NCSU tags it heat tolerant (humid heat; no limit stated)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "but can tolerate 13 - 35°c"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no source opened states drought tolerance; NCSU/MBG want moist soil",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "PFAF: mildly acid, neutral and basic (mildly alkaline) soils; preferred pH 6-7, tolerating 4.3-7.5, so not strongly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": 10,
+    "damage_text": "INTERPRETATION: NCSU says bring potted plants indoors before temperatures drop below 50 F (10 C) and tags it frost tender; NCSU and MBG list zones 9-12 (zone 9a would read as hardy to about -6.7 C, which overstates a frost-tender tropical). The 10 C figure is the source's stated bring-in temperature, used as the conservative floor"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "bring the plant inside before the temperatures drop below 50 degrees F."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "cream",
+     "yellow",
+     "green",
+     "purple"
+    ],
+    "text": "NCSU bloom time fall; new clumps do not flower for two years; container plants rarely bloom; grown for the rhizome"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Container plants rarely bloom."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "upright pseudostems with narrow linear green leaves; dormant in cold"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Plant Type: Herb Herbaceous Perennial Houseplant"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "MBG describes a spreading shallow fleshy root system but no benign or aggressive class",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF Known Hazards: none known; rhizomes, leaves and shoots are edible"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Known Hazards None known"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ },
+ "notes": "Tropical rhizome crop; NCSU: thrives in zones 9-12, grow in a container or as an annual in cooler climates, must be brought indoors for winter. Frost value is conservative (see damage_text). Heat statement conflict: NCSU tags heat tolerant, PFAF caps tolerated daytime temperature at 35 C."
+}

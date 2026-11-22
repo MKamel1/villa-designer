@@ -2457,6 +2457,289 @@
    "placement_constraints": []
   },
   {
+   "slug": "canna_x_generalis",
+   "layers": [
+    "perennial",
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Canna × generalis Jinnye",
+      "family": "Cannaceae",
+      "common_names": [
+       "garden canna",
+       "canna lily"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Canna%20x%20generalis",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 1.8,
+      "text": "2-6 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 6 ft. 0 in. Width: 1 ft. 0 in. - 2 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.3,
+      "max": 0.6,
+      "text": "1-2 ft as stated (NCSU); clumping"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 6 ft. 0 in. Width: 1 ft. 0 in. - 2 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "fast",
+      "text": "NCSU: Rapid"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Rapid"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "sunlight to light shade; grows in shade but will not flower well"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Garden Canna prefers sunlight to light shade"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "moist, well-drained soils; some standing water or drought tolerated once established; rhizomes rot in poorly drained soils"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "They grow best in moist, well-drained soils, but they can tolerate some standing water or drought once they are established."
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU: high heat tolerance, prone to wind damage"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "They have a high heat tolerance, but they are prone to wind damage."
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "tolerates some drought once established (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "They grow best in moist, well-drained soils, but they can tolerate some standing water or drought once they are established."
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU: clay, loam, acidic and slightly alkaline soils; soil pH attribute lists acid and neutral"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "soils with high organic matter, in a variety of soils, clay, loam acidic and slightly alkaline"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no salt statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "PFAF: page present but record empty",
+      "MBG: no species page for Canna x generalis",
+      "Wikipedia: only a cultivar list"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "8a",
+      "min_temp_c": null,
+      "damage_text": "NCSU zones 8a-11b; foliage cut down after first frost and rhizomes overwinter in the soil in warmer zones; dig and store rhizomes in colder zones"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [],
+      "colours": [
+       "white",
+       "yellow",
+       "orange",
+       "pink",
+       "red"
+      ],
+      "text": "NCSU bloom time summer; colours vary by cultivar; deadhead to keep flowering through summer"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Spent flowers should be removed to encourage continued flowering through the summer months."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "herbaceous",
+      "character": "large coarse paddle leaves 18-36 in long, green to variegated or bronze"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Garden Canna is a herbaceous perennial in the Cannaceae family"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "no statement about root behaviour (rhizomatous clumps; rot in poorly drained soil)",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "PFAF: page present but record empty",
+      "MBG: no species page for Canna x generalis",
+      "Wikipedia: only a cultivar list"
+     ]
+    },
+    "toxicity_people": {
+     "status": "GAP",
+     "reason": "NCSU tags non-toxic for cats, dogs and horses (pet toxicity, not human toxicity); no human statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "PFAF: page present but record empty",
+      "MBG: no species page for Canna x generalis",
+      "Wikipedia: only a cultivar list"
+     ]
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "PFAF: page present but record empty",
+      "MBG: no species page for Canna x generalis",
+      "Wikipedia: only a cultivar list"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "GBIF accepts Canna x generalis Jinnye as a species-rank name, so the slug and accepted name agree. NCSU: all Canna hybrids are included under this name; pests include aphid-spread aster yellows, Canna mosaic virus, leaf-rolling caterpillars.",
+   "site_viability": {
+    "verdict": "viable",
+    "factors": {
+     "frost": "pass",
+     "heat": "pass",
+     "alkaline_soil": "pass"
+    },
+    "reasons": []
+   },
+   "placement_constraints": []
+  },
+  {
    "slug": "ceratophyllum_demersum",
    "layers": [
     "aquatic_marginal"
@@ -6274,6 +6557,288 @@
    "placement_constraints": []
   },
   {
+   "slug": "epipremnum_aureum",
+   "layers": [
+    "climber"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Epipremnum aureum (Linden & André) G.S.Bunting",
+      "family": "Araceae",
+      "common_names": [
+       "money plant",
+       "golden pothos",
+       "devil's ivy"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Epipremnum%20aureum",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 6.1,
+      "max": 12.2,
+      "text": "20-40 ft as a vine (MBG); NCSU: vines to 40 ft"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Height: 20.00 to 40.00 feet Spread: 3.00 to 6.00 feet"
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.9,
+      "max": 1.8,
+      "text": "3-6 ft as stated (MBG)"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Height: 20.00 to 40.00 feet Spread: 3.00 to 6.00 feet"
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "part_shade",
+       "shade"
+      ],
+      "hours_text": "bright indirect light, dappled or deep shade; MBG: protect from afternoon sun"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Cultural Conditions",
+      "quote": "Light: Dappled Sunlight (Shade through upper canopy all day) Deep shade (Less than 2 hours to no direct sunlight) Partial Shade"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "MBG Water: Medium; let the medium dry between waterings (NCSU)"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Water: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "GAP",
+     "reason": "no source states heat tolerance; Wikipedia says it lives well at 17-30 C (a preferred range, not a tolerance limit) and MBG says protect from afternoon sun",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "MBG and NCSU list Drought / Dry Soil under tolerates; indoor container plant, no degree stated"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Tolerate: Rabbit, Deer, Drought, Heavy Shade, Dry Soil, Shallow-Rocky Soil"
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "GAP",
+     "reason": "no soil-pH statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no salt statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "10a",
+      "min_temp_c": null,
+      "damage_text": "MBG zone 10-12; a houseplant in colder climates (NCSU, MBG); no frost-damage temperature stated. Frost-tender tropical"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Zone: 10 to 12"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [],
+      "colours": [
+       "yellow",
+       "green",
+       "purple"
+      ],
+      "text": "rarely flowers; foliage plant"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Flowers",
+      "quote": "Rarely flowers in a spadix surrounded by a spathe."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "glossy heart-shaped leaves variegated yellow or white; clings by aerial roots"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Leaf Characteristics: Broadleaf Evergreen"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "no statement about root behaviour (climbs by aerial roots)",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "toxic",
+      "text": "NCSU Poison Severity Medium; calcium oxalate crystals cause mouth irritation, vomiting; MBG: all parts poisonous if ingested; skin irritation possible"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Poisonous to Humans",
+      "quote": "Poison Severity: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276360",
+      "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "low",
+      "text": "Maintenance: Low"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Low"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Grown as a houseplant and in hanging baskets in all sources opened; none describes outdoor garden use in a hot dry climate. Outdoor use near Cairo would be shaded and sheltered at best.",
+   "invasive_flag": "Wikipedia: can become a highly invasive species when introduced into tropical countries where it is not native (example: Udawattakele sanctuary, Sri Lanka).",
+   "site_viability": {
+    "verdict": "unverified",
+    "factors": {
+     "frost": "pass",
+     "heat": "unknown",
+     "alkaline_soil": "unknown"
+    },
+    "reasons": [
+     "heat tolerance is a GAP",
+     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+    ]
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
+  },
+  {
    "slug": "eriobotrya_japonica",
    "layers": [
     "small_fruit_tree"
@@ -8248,6 +8813,592 @@
     "reasons": [
      "heat: moderate tolerance; plant in afternoon shade or verify locally"
     ]
+   },
+   "placement_constraints": []
+  },
+  {
+   "slug": "hedera_helix",
+   "layers": [
+    "climber",
+    "groundcover_lawn"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Hedera helix L.",
+      "family": "Araliaceae",
+      "common_names": [
+       "English ivy",
+       "common ivy"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Hedera%20helix",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 6.1,
+      "max": 24.5,
+      "text": "20-80.5 ft as stated (NCSU) when climbing; as a ground cover MBG gives 6-9 in; PFAF 15 m"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 20 ft. 0 in. - 80 ft. 6 in. Width: 3 ft. 0 in. - 50 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.9,
+      "max": 15.2,
+      "text": "3-50 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 20 ft. 0 in. - 80 ft. 6 in. Width: 3 ft. 0 in. - 50 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "fast",
+      "text": "NCSU: rapid"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Rapid"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade",
+       "shade"
+      ],
+      "hours_text": "dappled sun, deep shade, full sun and partial shade (MBG: best in part to full shade, will grow in full sun)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Cultural Conditions",
+      "quote": "Light: Dappled Sunlight (Shade through upper canopy all day) Deep shade (Less than 2 hours to no direct sunlight) Full sun (6 or more hours of direct sunlight a day) Partial Shade"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "MBG Water: Medium; PFAF prefers moist or wet soil, dislikes waterlogged or very dry soil"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Water: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "GAP",
+     "reason": "no source opened states heat tolerance (MBG zone 5-9, NCSU zone 4-13, no heat statement)",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+     ]
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU tag drought tolerant and Resistance To Challenges: Drought; PFAF: established plants drought tolerant; MBG: tolerates some drought, best colour in evenly moist soil"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Tags",
+      "quote": "#drought tolerant"
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "PFAF: can grow in very alkaline soils; prefers some lime"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "can grow in very alkaline soils"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "Salt listed under Resistance To Challenges; no degree stated"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Landscape",
+      "quote": "Resistance To Challenges: Drought Heavy Shade Salt"
+     },
+     "quote_check": "verified"
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": null,
+      "min_temp_c": -25,
+      "damage_text": "PFAF: tolerates about -25 C (variegated forms less hardy); NCSU zones 4a-13b"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation details",
+      "quote": "it tolerates temperatures down to about -25°c"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       10,
+       11
+      ],
+      "colours": [
+       "green",
+       "yellow"
+      ],
+      "text": "PFAF: October to November; flowers only on adult shrubby stems; small greenish-yellow umbels"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "in flower from October to November"
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "glossy dark green lobed leaves; clinging by aerial roots"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "is an evergreen Climber growing to"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "sources conflict on clinging roots: NCSU says vines damage painted surfaces, loose mortar and siding; PFAF says it does not damage the structure of a wall; no benign or aggressive class stated",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "toxic",
+      "text": "NCSU Poison Severity Medium; sap causes dermatitis, leaves and berries toxic if eaten; PFAF: poisonous in large doses"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Poisonous to Humans",
+      "quote": "Foliage is more toxic than berries."
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "high",
+      "text": "NCSU: Maintenance High; MBG lists Low"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: High"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Cool-temperate (Europe). Heat tolerance is a GAP, so the viability verdict stays unverified; do not read the cold hardiness or the NCSU tag as heat evidence. NCSU advises houseplant or patio container only in North Carolina.",
+   "invasive_flag": "NCSU: invasive species in North Carolina; climbs and kills trees and shrubs, smothers ground, nearly impossible to eradicate; MBG: highly invasive in woodlands in some climates.",
+   "site_viability": {
+    "verdict": "unverified",
+    "factors": {
+     "frost": "pass",
+     "heat": "unknown",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "heat tolerance is a GAP"
+    ]
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
+  },
+  {
+   "slug": "hedychium_coronarium",
+   "layers": [
+    "perennial",
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Hedychium coronarium J.Koenig",
+      "family": "Zingiberaceae",
+      "common_names": [
+       "white ginger lily",
+       "garland flower",
+       "butterfly ginger"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Hedychium%20coronarium",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 1.2,
+      "max": 1.8,
+      "text": "4-6 ft as stated (NCSU); PFAF 1.5 m"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 4 ft. 0 in. - 6 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 0.9,
+      "text": "2-3 ft clump as stated (NCSU); spreads by rhizomes"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 4 ft. 0 in. - 6 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "fast",
+      "text": "NCSU: Rapid; PFAF: fast"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Rapid"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "full sun or partial or dappled shade (PFAF: cannot grow in the shade)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "in full sun or partial or dappled shade."
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "high",
+      "text": "prefers moist or wet soil; NCSU: does not tolerate standing water or continuously wet soil"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "It prefers moist or wet soil."
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU tag: heat tolerant; Resistance To Challenges: Heat (no temperature limit stated)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Tags",
+      "quote": "#heat tolerant"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "no source opened states drought tolerance (sources stress moist or wet soil)",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287579",
+      "https://en.wikipedia.org/wiki/Hedychium_coronarium"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "pH range includes mildly alkaline"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU tag salt tolerant and listed under Resistance To Challenges: Salt; no degree stated, so moderate"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Tags",
+      "quote": "#salt tolerant"
+     },
+     "quote_check": "verified"
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": null,
+      "min_temp_c": -2,
+      "damage_text": "PFAF: tolerates about -2 C and is frost tender; NCSU zones 7a-10b with winter mulch below zone 8; MBG zones 8-10, rhizomes lifted in fall; Wikipedia: RHS H3 (hardy to -5 C in mild areas). Foliage dies back or is lost in frost; rhizome is the hardy part"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation details",
+      "quote": "Plants are not very hardy, they tolerate temperatures down to about -2°c"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       8,
+       9,
+       10
+      ],
+      "colours": [
+       "white"
+      ],
+      "text": "PFAF: August to October; NCSU bloom time summer and fall; some clones pale yellow; fragrant"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "It is in flower from August to October."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "herbaceous",
+      "character": "lance-shaped medium green leaves to 2 ft long; evergreen only in warm climates (Wikipedia: deciduous in mild-winter temperate regions)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Plant Type: Herbaceous Perennial"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "SOURCED",
+     "value": {
+      "class": "aggressive",
+      "text": "spread by underground rhizomes; Wikipedia: difficult to control once established. This is rhizome spread, not a stated hardscape-damage figure"
+     },
+     "source": {
+      "source_id": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Hedychium_coronarium",
+      "accessed": "2026-11-22",
+      "locator": "As an invasive species",
+      "quote": "Once established, it is difficult to control due to vegetative reproduction through the underground spread of rhizomes."
+     },
+     "quote_check": "verified"
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "PFAF Known Hazards: none known; flowers edible; NCSU tags non-toxic for cats, dogs, horses"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "accessed": "2026-11-22",
+      "locator": "Known Hazards",
+      "quote": "Known Hazards None known"
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Hedychium+coronarium",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287579",
+      "https://en.wikipedia.org/wiki/Hedychium_coronarium"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/hedychium-coronarium/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Pond relevance kept false: PFAF says it succeeds in shallow water but NCSU says it does not tolerate standing water or continuously wet soil, and it is a border/container plant in both. Invasive in wet places abroad (see invasive_flag).",
+   "invasive_flag": "Wikipedia: may be invasive in shallow water systems, along streams and waterlogged areas; declared weed in South Africa; classed invasive in Rio de Janeiro; serious invader in Hawaii. PFAF: Weed Potential Yes.",
+   "site_viability": {
+    "verdict": "viable",
+    "factors": {
+     "frost": "pass",
+     "heat": "pass",
+     "alkaline_soil": "pass"
+    },
+    "reasons": []
    },
    "placement_constraints": []
   },
@@ -20043,6 +21194,297 @@
    "placement_constraints": []
   },
   {
+   "slug": "salvia_officinalis",
+   "layers": [
+    "herb",
+    "perennial"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Salvia officinalis L.",
+      "family": "Lamiaceae",
+      "common_names": [
+       "common sage",
+       "garden sage",
+       "culinary sage"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Salvia%20officinalis",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.3,
+      "max": 0.6,
+      "text": "1-2 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 0.9,
+      "text": "2-3 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU: Medium (PFAF medium)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "prefers full sun; NCSU also lists partial shade; PFAF: cannot grow in the shade"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Common sage prefers full sun and well-drained, medium to dry soils"
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "low",
+      "text": "medium to dry soils; intolerant of wet or poorly drained soils; MBG: wet soils can be fatal"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Common sage prefers full sun and well-drained, medium to dry soils"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: PFAF states heat tolerance only in heat zones 8 through 5 on a 1-12 scale where 12 is 210 or more days above 30 C; Cairo has 154 such days, so the stated limit is a poor fit. No direct heat statement in NCSU or MBG"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation details",
+      "quote": "The plant is heat tolerant in zones 8 through 5."
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU: will tolerate drought and poor soils; tag drought tolerant; MBG tolerates drought, dry soil"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It will tolerate drought and poor soils."
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "tolerant",
+      "text": "PFAF: can grow in very alkaline soils; prefers calcareous soil"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "can grow in very alkaline soils"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no salt statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "4a",
+      "min_temp_c": null,
+      "damage_text": "NCSU zones 4a-8b; MBG zone 6-9; PFAF hardy to UK zone 5, not frost tender. Winter wet, not cold, is the stated killer"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       6,
+       7,
+       8
+      ],
+      "colours": [
+       "blue",
+       "lavender",
+       "pink"
+      ],
+      "text": "PFAF: June to August; NCSU: early summer; bluish-lavender to pinkish-lavender"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "in flower from June to August"
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "grey-green, fuzzy, aromatic, wrinkled ovate leaves; semi-woody"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "is an evergreen Shrub growing to"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "no statement about roots",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "mild",
+      "text": "PFAF: can be toxic when used in excess or for extended periods; widely eaten as a culinary herb"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "accessed": "2026-11-22",
+      "locator": "Known Hazards",
+      "quote": "The plant can be toxic when used in excess or when taken for extended periods"
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+officinalis",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=250497"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium; prune in spring; short-lived, replace after about 4 years (PFAF)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/salvia-officinalis/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Mediterranean native, fits dry alkaline soil, but the only heat evidence is the PFAF heat-zone limit (inferred moderate). NCSU and MBG warn about wet soil, root rot and frequent disease, which matters under irrigation. Pet toxicity: NCSU tags non-toxic for cats, dogs, horses.",
+   "site_viability": {
+    "verdict": "viable_with_conditions",
+    "factors": {
+     "frost": "pass",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
+   },
+   "placement_constraints": []
+  },
+  {
    "slug": "strelitzia_nicolai",
    "layers": [
     "tropical_foliage"
@@ -21753,6 +23195,305 @@
    ]
   },
   {
+   "slug": "vinca_minor",
+   "layers": [
+    "groundcover_lawn"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Vinca minor L.",
+      "family": "Apocynaceae",
+      "common_names": [
+       "lesser periwinkle",
+       "dwarf periwinkle",
+       "creeping myrtle"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Vinca%20minor",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.08,
+      "max": 0.15,
+      "text": "3-6 in as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 0 ft. 3 in. - 0 ft. 6 in. Width: 0 ft. 6 in. - 1 ft. 6 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.15,
+      "max": 0.46,
+      "text": "6-18 in as stated; forms an indefinitely spreading mat by rooting at the nodes"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 0 ft. 3 in. - 0 ft. 6 in. Width: 0 ft. 6 in. - 1 ft. 6 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "fast",
+      "text": "NCSU: rapid growth rate"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Rapid"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade",
+       "shade"
+      ],
+      "hours_text": "prefers full sun, partial shade or dappled sun; tolerates nearly full shade"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It tolerates high heat and nearly full shade but prefers full sun, partial shade, or dappled sunlight and moist soil with good drainage."
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "moderate",
+      "text": "NCSU: moist soil with good drainage; MBG: dry to medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "moist soil with good drainage"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU states tolerates high heat (stated for North Carolina; hardiness listed zones 4-9b, MBG zones 4-8, no desert-heat figure given)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It tolerates high heat and nearly full shade"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "PFAF: can tolerate drought; established plants drought tolerant; NCSU Resistance To Challenges: Drought, Dry Soil"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "It prefers dry or moist soil and can tolerate drought."
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "pH range includes mildly alkaline"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU tag salt tolerant and Resistance To Challenges: Salt; no degree stated"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Tags",
+      "quote": "#salt tolerant"
+     },
+     "quote_check": "verified"
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "4a",
+      "min_temp_c": null,
+      "damage_text": "NCSU zones 4a-9b (upper limit 9b), MBG zones 4-8; PFAF: hardy to UK zone 4, not frost tender. Cold is not the limit here; the warm end of the zone range is"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [
+       4,
+       5
+      ],
+      "colours": [
+       "blue",
+       "lavender"
+      ],
+      "text": "PFAF: April to May; NCSU: spring and summer and intermittently through the year"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "in flower from April to May"
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "dark green leathery opposite leaves to 1 in long"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "broadleaf evergreen ground cover"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "SOURCED",
+     "value": {
+      "class": "aggressive",
+      "text": "spreads rapidly by long trailing rooting stems and swamps smaller plants (spread, not a hardscape-damage figure)"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation details",
+      "quote": "It spreads rapidly by long trailing and rooting stems once it is established and will swamp out smaller plants"
+     },
+     "quote_check": "verified"
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "mild",
+      "text": "PFAF: large quantities of the plant are poisonous"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "accessed": "2026-11-22",
+      "locator": "Known Hazards",
+      "quote": "Large quantities of the plant are poisonous"
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Vinca+minor",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=254208"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "high",
+      "text": "NCSU: Maintenance High (becomes weedy and high maintenance); MBG lists Low"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/vinca-minor/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: High"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Cool-temperate groundcover (native Europe to Caucasus). Heat class high is NCSU's statement for North Carolina, not a measured desert limit; its listed zones end at 9b (NCSU) and 8 (MBG). Treat as unproven in Cairo summer and trial in shade before specifying.",
+   "invasive_flag": "NCSU: classified as an invasive species by the NC Invasive Plant Council; on many states' most-unwanted lists; MBG: can spread aggressively into adjacent lawns or garden areas. PFAF: Weed Potential Yes.",
+   "site_viability": {
+    "verdict": "viable",
+    "factors": {
+     "frost": "pass",
+     "heat": "pass",
+     "alkaline_soil": "pass"
+    },
+    "reasons": []
+   },
+   "placement_constraints": []
+  },
+  {
    "slug": "vitis_vinifera",
    "layers": [
     "climber"
@@ -21989,6 +23730,288 @@
     "reasons": []
    },
    "placement_constraints": []
+  },
+  {
+   "slug": "zamia_furfuracea",
+   "layers": [
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Zamia furfuracea L.f.",
+      "family": "Zamiaceae",
+      "common_names": [
+       "cardboard palm",
+       "cardboard cycad",
+       "Jamaican sago"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Zamia%20furfuracea",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 1.5,
+      "text": "2-5 ft as stated (NCSU); MBG to 4.25 ft"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 5 ft. 0 in. Width: 5 ft. 0 in. - 8 ft. 6 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 1.5,
+      "max": 2.6,
+      "text": "5-8.5 ft as stated (NCSU); MBG 4-7 ft"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 5 ft. 0 in. Width: 5 ft. 0 in. - 8 ft. 6 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "slow",
+      "text": "NCSU: slow-growing"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Slow"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "full_sun",
+       "part_shade"
+      ],
+      "hours_text": "full sun to partial shade"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "It is easy to grow in well-drained soils in full sun to partial shade."
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "low",
+      "text": "MBG Water: dry to medium; allow soil to dry between waterings (NCSU)"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Water: Dry to medium"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "GAP",
+     "reason": "no source opened states heat tolerance in words",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+      "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "drought": {
+     "status": "SOURCED",
+     "value": {
+      "class": "high",
+      "text": "NCSU: drought- and salt-tolerant; Resistance To Challenges lists Drought, Dry Soil; MBG: some drought"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "They are drought- and salt-tolerant."
+     },
+     "quote_check": "verified"
+    },
+    "alkaline_soil": {
+     "status": "GAP",
+     "reason": "no soil-pH statement (MBG notes a native habitat of limestone sea cliffs, which is not a tolerance statement)",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+      "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "salt": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU: salt-tolerant (no degree); MBG: tolerant of salt spray; Wikipedia: fairly salt-tolerant"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "They are drought- and salt-tolerant."
+     },
+     "quote_check": "verified"
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": "9a",
+      "min_temp_c": null,
+      "damage_text": "NCSU zones 9a-11b and must be brought indoors for winter in NC; MBG: hardy zones 9-11, does not tolerate hard frosts; Wikipedia: protect from extreme cold. No temperature figure stated, so the zone floor is used"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / USDA Plant Hardiness Zone",
+      "quote": "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b"
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [],
+      "colours": [],
+      "text": "no true flowers; cones on separate male and female plants"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Flowers",
+      "quote": "Gymnosperms have no true flowers."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "evergreen",
+      "character": "rosette of stiff, fuzzy, pinnately compound leaves like a palm"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Leaf Characteristics: Broadleaf Evergreen"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "no statement about roots",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+      "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "toxic",
+      "text": "NCSU Poison Severity Medium; seeds contain cycasin; 1-2 seeds can be fatal. Also toxic to cats, dogs, horses"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Poisonous to Humans",
+      "quote": "1-2 seeds can be fatal."
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=279647",
+      "https://en.wikipedia.org/wiki/Zamia_furfuracea",
+      "PFAF: page present but record empty"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "low",
+      "text": "Maintenance: Low"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zamia-furfuracea/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Low"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "A cycad, not a palm; layer set to tropical_foliage. Seeds toxic (placement rule derives from toxicity_people). Wikipedia: Endangered in the wild, illegally collected; supplier check should confirm nursery-propagated stock.",
+   "site_viability": {
+    "verdict": "unverified",
+    "factors": {
+     "frost": "pass",
+     "heat": "unknown",
+     "alkaline_soil": "unknown"
+    },
+    "reasons": [
+     "heat tolerance is a GAP",
+     "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+    ]
+   },
+   "placement_constraints": [
+    "away from seating and edibles (toxic to people per source)"
+   ]
   },
   {
    "slug": "zantedeschia_aethiopica",
@@ -22258,6 +24281,288 @@
     "away from seating and edibles (toxic to people per source)",
     "not beside the koi pond until sourced (fish toxicity is a GAP)"
    ]
+  },
+  {
+   "slug": "zingiber_officinale",
+   "layers": [
+    "herb",
+    "tropical_foliage"
+   ],
+   "pond_relevant": false,
+   "attributes": {
+    "accepted_name": {
+     "status": "SOURCED",
+     "value": {
+      "name": "Zingiber officinale Roscoe",
+      "family": "Zingiberaceae",
+      "common_names": [
+       "ginger",
+       "common ginger",
+       "Jungle Ginger (Quixel scan label)"
+      ]
+     },
+     "source": {
+      "source_id": "GBIF",
+      "url": "https://api.gbif.org/v1/species/match?name=Zingiber%20officinale",
+      "accessed": "2026-11-22",
+      "locator": "match result: status ACCEPTED",
+      "quote": "\"status\":\"ACCEPTED\""
+     },
+     "quote_check": "api_derived"
+    },
+    "toxicity_fish": {
+     "status": "NA",
+     "reason": "not pond-relevant"
+    },
+    "egypt_availability": {
+     "status": "POLICY",
+     "value": {
+      "text": "unknown — supplier check"
+     }
+    },
+    "height_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 1.2,
+      "text": "2-4 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 4 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "spread_m": {
+     "status": "SOURCED",
+     "value": {
+      "min": 0.6,
+      "max": 0.9,
+      "text": "2-3 ft as stated (NCSU)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Dimensions",
+      "quote": "Height: 2 ft. 0 in. - 4 ft. 0 in. Width: 2 ft. 0 in. - 3 ft. 0 in."
+     },
+     "quote_check": "verified"
+    },
+    "growth_rate": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "NCSU: Medium (PFAF says fast)"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Growth Rate: Medium"
+     },
+     "quote_check": "verified"
+    },
+    "sun": {
+     "status": "SOURCED",
+     "value": {
+      "classes": [
+       "part_shade"
+      ],
+      "hours_text": "NCSU light: partial shade; full sun burns foliage"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Insects, Diseases, and Other Plant Problems",
+      "quote": "Placing plants in full sun can result in the foliage tipped with brown and poor growth."
+     },
+     "quote_check": "verified"
+    },
+    "water": {
+     "status": "SOURCED",
+     "value": {
+      "hydrozone": "high",
+      "text": "MBG Water: Medium to wet; NCSU soil drainage moist, occasionally wet; water regularly once growing"
+     },
+     "source": {
+      "source_id": "MBG",
+      "url": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577",
+      "accessed": "2026-11-22",
+      "locator": "Quick facts",
+      "quote": "Water: Medium to wet"
+     },
+     "quote_check": "verified"
+    },
+    "heat": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "inferred": true,
+      "text": "INFERENCE: PFAF gives a tolerated range of 13-35 C (best 19-29 C), below the 43.9 C Cairo typical-year maximum, so class moderate. NCSU tags it heat tolerant (humid heat; no limit stated)"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "accessed": "2026-11-22",
+      "locator": "Cultivation details",
+      "quote": "but can tolerate 13 - 35°c"
+     },
+     "quote_check": "verified"
+    },
+    "drought": {
+     "status": "GAP",
+     "reason": "no source opened states drought tolerance; NCSU/MBG want moist soil",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+     ]
+    },
+    "alkaline_soil": {
+     "status": "SOURCED",
+     "value": {
+      "class": "moderate",
+      "text": "PFAF: mildly acid, neutral and basic (mildly alkaline) soils; preferred pH 6-7, tolerating 4.3-7.5, so not strongly alkaline"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "accessed": "2026-11-22",
+      "locator": "Physical Characteristics",
+      "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils"
+     },
+     "quote_check": "verified"
+    },
+    "salt": {
+     "status": "GAP",
+     "reason": "no salt statement",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+     ]
+    },
+    "frost": {
+     "status": "SOURCED",
+     "value": {
+      "usda_zone_min": null,
+      "min_temp_c": 10,
+      "damage_text": "INTERPRETATION: NCSU says bring potted plants indoors before temperatures drop below 50 F (10 C) and tags it frost tender; NCSU and MBG list zones 9-12 (zone 9a would read as hardy to about -6.7 C, which overstates a frost-tender tropical). The 10 C figure is the source's stated bring-in temperature, used as the conservative floor"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "bring the plant inside before the temperatures drop below 50 degrees F."
+     },
+     "quote_check": "verified"
+    },
+    "flowering": {
+     "status": "SOURCED",
+     "value": {
+      "months": [],
+      "colours": [
+       "cream",
+       "yellow",
+       "green",
+       "purple"
+      ],
+      "text": "NCSU bloom time fall; new clumps do not flower for two years; container plants rarely bloom; grown for the rhizome"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Description",
+      "quote": "Container plants rarely bloom."
+     },
+     "quote_check": "verified"
+    },
+    "foliage": {
+     "status": "SOURCED",
+     "value": {
+      "habit": "herbaceous",
+      "character": "upright pseudostems with narrow linear green leaves; dormant in cold"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Plant Type: Herb Herbaceous Perennial Houseplant"
+     },
+     "quote_check": "verified"
+    },
+    "root_behaviour": {
+     "status": "GAP",
+     "reason": "MBG describes a spreading shallow fleshy root system but no benign or aggressive class",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+     ]
+    },
+    "toxicity_people": {
+     "status": "SOURCED",
+     "value": {
+      "class": "non_toxic",
+      "text": "PFAF Known Hazards: none known; rhizomes, leaves and shoots are edible"
+     },
+     "source": {
+      "source_id": "PFAF",
+      "url": "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "accessed": "2026-11-22",
+      "locator": "Known Hazards",
+      "quote": "Known Hazards None known"
+     },
+     "quote_check": "verified"
+    },
+    "litter": {
+     "status": "GAP",
+     "reason": "no source states litter",
+     "searched": [
+      "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "https://pfaf.org/user/Plant.aspx?LatinName=Zingiber+officinale",
+      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=287577"
+     ]
+    },
+    "maintenance": {
+     "status": "SOURCED",
+     "value": {
+      "level": "moderate",
+      "text": "Maintenance: Medium"
+     },
+     "source": {
+      "source_id": "NCSU",
+      "url": "https://plants.ces.ncsu.edu/plants/zingiber-officinale/",
+      "accessed": "2026-11-22",
+      "locator": "Attributes / Whole Plant Traits",
+      "quote": "Maintenance: Medium"
+     },
+     "quote_check": "verified"
+    }
+   },
+   "notes": "Tropical rhizome crop; NCSU: thrives in zones 9-12, grow in a container or as an annual in cooler climates, must be brought indoors for winter. Frost value is conservative (see damage_text). Heat statement conflict: NCSU tags heat tolerant, PFAF caps tolerated daytime temperature at 35 C.",
+   "site_viability": {
+    "verdict": "not_viable",
+    "factors": {
+     "frost": "fail",
+     "heat": "conditional",
+     "alkaline_soil": "pass"
+    },
+    "reasons": [
+     "frost: needs >= 10 C but typical-year minimum is 5.1 C",
+     "heat: moderate tolerance; plant in afternoon shade or verify locally"
+    ]
+   },
+   "placement_constraints": []
   },
   {
    "slug": "zoysia_japonica",

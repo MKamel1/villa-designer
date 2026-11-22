@@ -1,0 +1,141 @@
+{
+ "tag": "age3",
+ "assets": [
+  {
+   "asset": "skf3_f697f7da",
+   "target_height_m": 1.9656250000000002,
+   "measured_min": [
+    26.5623,
+    -28.8352,
+    -3.0
+   ],
+   "measured_max": [
+    28.1088,
+    -27.3907,
+    -1.0344
+   ],
+   "base_z_error_m": 0.0,
+   "height_m": 1.9656,
+   "spread_m": 1.5465,
+   "id": "ld-tree-0-punica"
+  },
+  {
+   "asset": "sf_frangipani",
+   "target_height_m": 0.7977766340710233,
+   "measured_min": [
+    27.2378,
+    -22.0078,
+    -2.5
+   ],
+   "measured_max": [
+    28.3574,
+    -20.9886,
+    -1.7022
+   ],
+   "base_z_error_m": 0.0,
+   "height_m": 0.7978,
+   "spread_m": 1.1197,
+   "id": "ld-pot-0-plumeria-plant"
+  }
+ ],
+ "views": [
+  {
+   "name": "bird-south-east",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-bird-south-east.jpg",
+   "state": "closed",
+   "eye": [
+    29.5,
+    -33.0,
+    12.5
+   ],
+   "target": [
+    22.3,
+    -25.2,
+    -2.7
+   ],
+   "lens": 34
+  },
+  {
+   "name": "eye-living-door",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-eye-living-door.jpg",
+   "state": "closed",
+   "eye": [
+    22.847,
+    -26.131,
+    -1.4
+   ],
+   "target": [
+    27.5,
+    -26.331,
+    -2.0
+   ],
+   "lens": 24
+  },
+  {
+   "name": "eye-dining-door",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-eye-dining-door.jpg",
+   "state": "closed",
+   "eye": [
+    16.889,
+    -23.341,
+    -1.4
+   ],
+   "target": [
+    18.389,
+    -21.0,
+    -2.4
+   ],
+   "lens": 24
+  },
+  {
+   "name": "bird-north-court",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-bird-north-court.jpg",
+   "state": "closed",
+   "eye": [
+    10.5,
+    -28.0,
+    6.0
+   ],
+   "target": [
+    1.8,
+    -26.6,
+    -2.8
+   ],
+   "lens": 30
+  },
+  {
+   "name": "firepit-closed",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-firepit-closed.jpg",
+   "state": "closed",
+   "eye": [
+    23.0,
+    -23.6,
+    -1.5
+   ],
+   "target": [
+    25.1,
+    -24.5,
+    -3.0
+   ],
+   "lens": 35
+  },
+  {
+   "name": "firepit-open",
+   "file": "/home/omar/archpipe/lanes/LDB/knowledge/landscape/build/A-pond-east/previews/age3-firepit-open.jpg",
+   "state": "open",
+   "eye": [
+    23.0,
+    -23.6,
+    -1.5
+   ],
+   "target": [
+    25.1,
+    -24.5,
+    -3.0
+   ],
+   "lens": 35
+  }
+ ],
+ "objects": 114,
+ "note": "preview scene: Nishita sky at a fixed 52 deg elevation, AgX, not exposure-locked; placeholder site (docs: garden is NOT a production render)"
+}

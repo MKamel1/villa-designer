@@ -1,5 +1,11 @@
 # LDG: landscape concept generation (2026-11-22)
 
+> **Round 2 (2026-11-22, client DECIDED) supersedes the three-concept comparison: read `knowledge/landscape/concept/final/REPORT.md` (generated).** The client chose concept B adapted: shared gas fire pit on the west line, west screen with an opening at the pit,
+> grape pergola, both ponds kept, mirrored viewing-only layout of the south garden on the sister plot. Code: `src/archpipe/landscape/concept/final.py` (layout), `final_checks.py` (checks), `final_fire.py` (product shortlist with manual quotes),
+> `final_vis.py` (mirror), `final_run.py` (runner: `PYTHONPATH=src python -m archpipe.landscape.concept.final_run [--no-draw]`), `final_report.py`. Tests: `tests/landscape/concept/test_final.py` (27). Output: `knowledge/landscape/concept/final/`
+> (`layout-final.json`, `layout-visualisation.json`, `final.json`, `plans/`, `fire-manuals/`, `REPORT.md`, `IMAGES.md`).
+> Result: 0 hard fails; LDB builds the layout with no clip, no ground gap and no warning. Hand-back items for LDB are in REPORT.md and below the pass-2 text.
+
 > **Pass 2 (2026-11-22, typology first) supersedes pass 1 for the concepts shown.** Read `knowledge/landscape/concept/pass2/REPORT.md` (generated; the three concepts, programme tables, schedules, trade-offs, recommendation) and the section below. Pass 1 (random furniture packing) is kept below as the record of what was rejected.
 
 ## Pass 2: typology first, then furniture (what changed and why)
@@ -133,3 +139,11 @@ The east yard cannot hold seats or a herb bed (0.5 m2 at 6 h). Herbs: the east s
 ## Open items
 Merge LDC and re-rank; give each concept its own north court and east yard (the per-concept pick returned the same structure); lounge seats around the pit rather than clustered; heat data to unlock the lush plants; supplier certificates (cover, grille, pond);
 a door from the dirty kitchen if the east pond is chosen; client answers (west line, pond, DST source confirmation).
+
+
+## Round 2 hand-back items for LDB (build lane)
+* **Grape pergola** `s-pergola-grape` (`roof: vine`, `louvred: true`): non-combustible louvred frame with the vine on it; the vine (`vitis_vinifera`, 2 plants at the rear-fence foot, 0.3 m drawn spread) is trained up the fence and along the beams: build the vine as a stand-in mass on the fence face and a leafed/bare state (`shade_fraction` 0.75 / bare 0.15, louvres closed 0.6) if seasonal states are wanted.
+* **Fire pit on the west line** straddles the boundary: build the half on our side only (or the whole pit with the sister half tagged); `our_share` 0.5, `shared_boundary: true`. The screen has an opening (two `screens` segments, `non_combustible_frame: true`); the cover is still a specification (no manual states a rating).
+* **Pond section**: `section` in the pond features (entry slope 1:4 over 150 mm = 0.6 m, shelf 0.3 m at 150 mm below water, trench 0.5 m at 900 mm below water, freeboard 150 mm): the build currently models a 250 mm shelf and no slope.
+* **Visualisation layout** `layout-visualisation.json` (every element `visualisation_only: true`, ids `vis-`): build only in a preview labelled VISUALISATION ONLY; never in schedules, receipts or the production scene.
+* All paths are rectangles; no steps or level changes in this design.

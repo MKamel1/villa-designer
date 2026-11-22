@@ -1492,17 +1492,19 @@
     2.803
    ],
    "alpha_card_tri_share": 1.0,
-   "preview": "asset-previews/skf3_75882b72.jpg",
+   "preview": "asset-previews/skf3_75882b72_placed.jpg",
    "grade": "B",
    "leaf_type": "leaf_cards",
    "species_fit": "genus",
    "maps_to": [
     "alocasia_macrorrhizos"
    ],
-   "rationale": "Looked at: 2.8 m elephant-ear clump, big heart-shaped veined leaves on petioles, no fishbone, reads as Alocasia at 5 m and 15 m (hand-painted texture, 2k tris). Source says 'Elephant Ear (Alocasia)': genus level.",
+   "rationale": "Looked at: re-rendered at placement scale 0.7135 (2.0 m tall, 4.4 m wide, sourced height 1.5-2.5 m; a clump of several plants). 2.8 m elephant-ear clump, big heart-shaped veined leaves on petioles, no fishbone, reads as Alocasia at 5 m and 15 m (hand-painted texture, 2k tris). Source says 'Elephant Ear (Alocasia)': genus level.",
    "storage": "shared",
    "manifest_key": "sketchfab/75882b72d1374270aeac76c96db2aa4e",
-   "candidate_for": "alocasia_macrorrhizos"
+   "candidate_for": "alocasia_macrorrhizos",
+   "placement_scale": 0.7135,
+   "placed_height_m": 2.0
   },
   {
    "id": "skf3_03947862",
@@ -2617,15 +2619,19 @@
     18.545
    ],
    "alpha_card_tri_share": 0.0,
-   "preview": "asset-previews/skf3_d0248242.jpg",
-   "grade": "C",
+   "preview": "asset-previews/skf3_d0248242_placed.jpg",
+   "grade": "B",
    "leaf_type": "real_leaves",
    "species_fit": "species",
-   "maps_to": [],
-   "rationale": "Looked at: genuine papyrus stalks with thread umbels, but authored 18.5 m tall against the sourced 1.5-2.4 m and only about 8 stalks. Would be B after a 0.1 scale; not applied, so not drawable.",
+   "maps_to": [
+    "cyperus_papyrus"
+   ],
+   "rationale": "Looked at: re-rendered at the placement scale 0.105 ( 1.95 m tall, 0.70 x 0.78 m; sourced height 1.5-2.4 m): genuine papyrus, about 8 slender stalks with thread umbels, reads as papyrus at 5 m; a single clump is thin at 15 m, so place in groups of 3 or more. Earlier C was only the authored 18.5 m size. 330k tris, no cards.",
    "storage": "shared",
    "manifest_key": "sketchfab/d0248242b885491aae74e4d334281226",
-   "candidate_for": "cyperus_papyrus"
+   "candidate_for": "cyperus_papyrus",
+   "placement_scale": 0.105,
+   "placed_height_m": 1.947
   },
   {
    "id": "skf3_a05b5ef5",
@@ -3139,6 +3145,1049 @@
    "storage": "shared",
    "manifest_key": "sketchfab/52518584d618464ab375f72a8e1631af",
    "candidate_for": "eriobotrya_japonica"
+  },
+  {
+   "id": "fab_aloe_vera_ve4tbbrha_high",
+   "source": "https://www.fab.com/listings/a671b417-5ff6-4029-a7a2-edf5b1e19184",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Aloe Vera (high)",
+   "preview": "asset-previews/fab_aloe_vera_ve4tbbrha_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/aloe_vera_ve4tbbrha_high",
+   "megascans_id": "ve4tbbrha",
+   "quality_variant": "high",
+   "triangles": 123124,
+   "size_m": [
+    1.082,
+    0.805,
+    0.7
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aloe_vera"
+   ],
+   "rationale": "Looked at: scanned Aloe rosettes of thick fleshy lanceolate leaves with real marginal spines, 0.3-0.7 m tall and up to 1.1 m across; reads as an aloe at 5 m. A single plant is a dot at 15 m (C alone); a 3 m x 3 m drift of the six variations reads as an aloe bed at 5 m and as a thin dark band at 15 m, so use groups of 10 or more. No flower spike in any variation. Dark but convincing colour.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 71297,
+   "variation_heights_m": [
+    0.283,
+    0.7
+   ],
+   "render_seconds": {
+    "single_sheet": 4.2,
+    "drift_sheet": 2.7
+   },
+   "candidate_for": "aloe_vera",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_aloe_vera_ve4tbbrha_raw",
+   "source": "https://www.fab.com/listings/a671b417-5ff6-4029-a7a2-edf5b1e19184",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Aloe Vera (raw)",
+   "preview": "asset-previews/fab_aloe_vera_ve4tbbrha_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/aloe_vera_ve4tbbrha_raw",
+   "megascans_id": "ve4tbbrha",
+   "quality_variant": "raw",
+   "triangles": 120085,
+   "size_m": [
+    1.082,
+    0.805,
+    0.7
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aloe_vera"
+   ],
+   "rationale": "Looked at: same six variations as the high archive; LOD0 meshes within 3 % of the high ones (120k vs 123k hero triangles) and 8K instead of 4K maps; pixel-identical at 5 m and 15 m and in the close views. Costs 1.5x the render time for nothing visible; the high archive is preferred.",
+   "texture_res": "8K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 68878,
+   "variation_heights_m": [
+    0.283,
+    0.7
+   ],
+   "render_seconds": {
+    "single_sheet": 6.2,
+    "drift_sheet": 4.0
+   },
+   "candidate_for": "aloe_vera",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_broadleaf_lady_palm_shqke_high",
+   "source": "https://www.fab.com/listings/65df339a-ec8a-4a55-86c4-69b2d4517e8d",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Broadleaf Lady Palm (high)",
+   "preview": "asset-previews/fab_broadleaf_lady_palm_shqke_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/broadleaf_lady_palm_shqke_high",
+   "megascans_id": "shqke",
+   "quality_variant": "high",
+   "triangles": 2435,
+   "size_m": [
+    1.071,
+    1.052,
+    0.966
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rhapis_excelsa"
+   ],
+   "rationale": "Looked at: young multi-cane Rhapis, 0.7-1.4 m, real palmate fans of narrow broad-bladed leaflets on thin canes, only 2.4k triangles; clearly a lady palm at 5 m; small at 15 m (group three or more). Drift of the eight variations reads as a clump planting at 5 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 2040,
+   "variation_heights_m": [
+    0.713,
+    1.36
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "rhapis_excelsa",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_carolana_water_lily_uc2jdibia_high",
+   "source": "https://www.fab.com/listings/8eed0e35-6320-4611-a9a3-d28bd78550eb",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Carolana Water Lily (high)",
+   "preview": "asset-previews/fab_carolana_water_lily_uc2jdibia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/carolana_water_lily_uc2jdibia_high",
+   "megascans_id": "uc2jdibia",
+   "quality_variant": "high",
+   "triangles": 3253,
+   "size_m": [
+    2.003,
+    1.445,
+    1.017
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes+flowers",
+   "species_fit": "genus",
+   "maps_to": [
+    "nymphaea_caerulea"
+   ],
+   "rationale": "Looked at: round floating pads with notched bases and yellow star-shaped flowers on tall stalks and buds; reads as a water-lily patch at 5 m, thin at 15 m. Genus Nymphaea only (asset says 'Nymphaea', a hardy Carolana cultivar): the flower is yellow, not the blue of Nymphaea caerulea/nouchali, and a hardy hybrid says nothing about Cairo heat. Authored with the root plane 0.67 m below the pad plane: set the water line at the pad plane.",
+   "texture_res": "4K",
+   "hero_variation": "VarE",
+   "mean_triangles_lod0": 1957,
+   "variation_heights_m": [
+    0.583,
+    1.035
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "nymphaea_caerulea",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_cast___iron_plant_shdmr_high",
+   "source": "https://www.fab.com/listings/32d3e637-3cde-43aa-b158-9e1b1eaf37e8",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Cast - Iron Plant (high)",
+   "preview": "asset-previews/fab_cast___iron_plant_shdmr_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/cast___iron_plant_shdmr_high",
+   "megascans_id": "shdmr",
+   "quality_variant": "high",
+   "triangles": 1194,
+   "size_m": [
+    0.733,
+    0.825,
+    0.869
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "aspidistra_elatior"
+   ],
+   "rationale": "Looked at: Aspidistra clumps with long dark glossy lanceolate leaves on petioles, 0.3-0.9 m, some leaves yellowing at the tips; the right habit and colour at 5 m, small at 15 m. Species from the asset tags ('elatior'; the latin name field holds the genus only). 1k-1.5k triangles per plant; the 33-plant drift reads as an Aspidistra bed.",
+   "texture_res": "4K",
+   "hero_variation": "VarI",
+   "mean_triangles_lod0": 1049,
+   "variation_heights_m": [
+    0.279,
+    0.869
+   ],
+   "render_seconds": {
+    "single_sheet": 3.0,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "aspidistra_elatior",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_chinese_fan_palm_ud4geejja_high",
+   "source": "https://www.fab.com/listings/baaece72-6e2b-4fef-a8b9-de5c0f244a43",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Chinese Fan Palm (high)",
+   "preview": "asset-previews/fab_chinese_fan_palm_ud4geejja_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/chinese_fan_palm_ud4geejja_high",
+   "megascans_id": "ud4geejja",
+   "quality_variant": "high",
+   "triangles": 3971,
+   "size_m": [
+    2.597,
+    2.444,
+    1.532
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "livistona_chinensis"
+   ],
+   "rationale": "Looked at: young Livistona, 1.0-1.5 m tall and 2.6 m wide, with real fan leaves on long petioles; on looks alone a B at 5 m. But the library's sourced mature height is 8-12 m: this scan is a juvenile, the wrong scale for a mature specimen (rubric C: wrong scale), and enlarging it 6x would make 15 cm leaves into 90 cm ones. Fine for a young plant or a container specimen only.",
+   "texture_res": "4K",
+   "hero_variation": "VarB",
+   "mean_triangles_lod0": 3325,
+   "variation_heights_m": [
+    1.006,
+    1.532
+   ],
+   "render_seconds": {
+    "single_sheet": 3.3,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "livistona_chinensis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_common_sage_tgcjdenr_raw",
+   "source": "https://www.fab.com/listings/fe0b475e-7281-44ac-8d0e-b475171345dd",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Common Sage (raw)",
+   "preview": "asset-previews/fab_common_sage_tgcjdenr_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/common_sage_tgcjdenr_raw",
+   "megascans_id": "tgcjdenr",
+   "quality_variant": "raw",
+   "triangles": 16346,
+   "size_m": [
+    0.267,
+    0.294,
+    0.498
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "salvia_officinalis"
+   ],
+   "rationale": "Looked at: a single thin stem with a few narrow dark leaves (0.2-0.5 m); at 5 m it is a wisp, at 15 m nothing. The 150-instance drift is a sparse ragged tangle that does not read as a sage mass. The Sage (ve3gbfoja) scan of the same species is far better.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 6198,
+   "variation_heights_m": [
+    0.018,
+    0.498
+   ],
+   "render_seconds": {
+    "single_sheet": 3.2,
+    "drift_sheet": 2.0
+   },
+   "candidate_for": "salvia_officinalis",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_english_ivy_rkeit_raw",
+   "source": "https://www.fab.com/listings/3b14e8ce-d4fe-4efa-af61-16335108b36f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "English Ivy (raw)",
+   "preview": "asset-previews/fab_english_ivy_rkeit_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/english_ivy_rkeit_raw",
+   "megascans_id": "rkEit",
+   "quality_variant": "raw",
+   "triangles": 281516,
+   "size_m": [
+    1.208,
+    0.11,
+    1.029
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "hedera_helix"
+   ],
+   "rationale": "Looked at: a 1.2 m x 1.0 m vertical curtain of real lobed ivy leaves (0.11 m deep, hero 282k triangles), variegated green-yellow; reads as ivy on a wall or trellis at 5 m and 15 m, and the 150-instance drift reads as a dense ivy hedge at 5 m. A panel, not a free-standing plant: use against a wall or trellis. Leaves dark under this sun.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 77251,
+   "variation_heights_m": [
+    0.265,
+    1.029
+   ],
+   "render_seconds": {
+    "single_sheet": 5.2,
+    "drift_sheet": 4.0
+   },
+   "candidate_for": "hedera_helix",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_english_ivy_xfcnebhqx_raw",
+   "source": "https://www.fab.com/listings/03c1d983-769b-408e-b520-8e15b097390c",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "English Ivy (raw)",
+   "preview": "asset-previews/fab_english_ivy_xfcnebhqx_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/english_ivy_xfcnebhqx_raw",
+   "megascans_id": "xfcnebhqx",
+   "quality_variant": "raw",
+   "triangles": 99397,
+   "size_m": [
+    1.746,
+    1.497,
+    0.132
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "hedera_helix"
+   ],
+   "rationale": "Looked at: flat creeping ivy mats 0.13 m high with real lobed leaves; the close view is convincing but the foliage is near-black, the drift is sparse with bare ground and bare vertical sprigs at 5 m, and it vanishes at 15 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 22892,
+   "variation_heights_m": [
+    0.116,
+    0.769
+   ],
+   "render_seconds": {
+    "single_sheet": 3.6,
+    "drift_sheet": 2.2
+   },
+   "candidate_for": "hedera_helix",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_ginger_lily_ud5fffgja_high",
+   "source": "https://www.fab.com/listings/4fe8dcca-e9db-4fde-bd4e-575e613d7f4f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Ginger Lily (high)",
+   "preview": "asset-previews/fab_ginger_lily_ud5fffgja_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/ginger_lily_ud5fffgja_high",
+   "megascans_id": "ud5fffgja",
+   "quality_variant": "high",
+   "triangles": 4080,
+   "size_m": [
+    1.287,
+    1.267,
+    1.699
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes+flowers",
+   "species_fit": "species",
+   "maps_to": [
+    "hedychium_coronarium"
+   ],
+   "rationale": "Looked at: leafy reed-like stems 0.9-1.7 m with alternate lance leaves and terminal clusters of white flowers (latin name on the asset: Hedychium coronarium); reads as a ginger lily at 5 m, a small upright plant at 15 m. Only 0.8k-4k triangles. The 12-clump drift reads as a mass of leafy stems.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 2038,
+   "variation_heights_m": [
+    0.879,
+    1.699
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.1
+   },
+   "candidate_for": "hedychium_coronarium",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_grass_lawn_sfklehwa_8k",
+   "source": "https://www.fab.com/listings/7c3a681a-2833-4d6e-a749-af3264f024cd",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Grass Lawn (8k)",
+   "preview": "asset-previews/fab_grass_lawn_sfklehwa_8k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/grass_lawn_sfklehwa_8k",
+   "megascans_id": "sfklehwa",
+   "quality_variant": "8k",
+   "triangles": 524288,
+   "size_m": [
+    2.0,
+    2.0,
+    0.061
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 2 m scan, 6 cm relief, 8K maps; a uniform dry-olive lawn at 5 m, tile (1.5 per side) not noticeable; the close view shows blade structure. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "8K",
+   "render_seconds": {
+    "surface_sheet": 4.8,
+    "drift_sheet": 6.7
+   },
+   "surface_look": "olive-straw turf",
+   "drift_instances": 8
+  },
+  {
+   "id": "fab_jungle_ginger_sgbms_high",
+   "source": "https://www.fab.com/listings/a23ad8cc-3b8e-4268-a73f-08874639e432",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Jungle Ginger (high)",
+   "preview": "asset-previews/fab_jungle_ginger_sgbms_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/jungle_ginger_sgbms_high",
+   "megascans_id": "sgbms",
+   "quality_variant": "high",
+   "triangles": 3216,
+   "size_m": [
+    0.634,
+    0.702,
+    1.884
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "zingiber_officinale"
+   ],
+   "rationale": "Looked at: thin single canes with narrow leaves, 0.7-1.9 m; the asset tags itself 'wilting, dry, dead' and half of its eight variations are brown dead stalks. The hero is one cane at 5 m and a line at 15 m; the drift is a brown dying stand. Species is the asset's own label (Zingiber officinale), not checked against the look.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 1857,
+   "variation_heights_m": [
+    0.076,
+    1.884
+   ],
+   "render_seconds": {
+    "single_sheet": 3.0,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "zingiber_officinale",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_lawn_grass_sbykrep0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbykrep0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbykrep0_4k",
+   "megascans_id": "sbykrep0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.043
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 0.41 m scan with 4.3 cm of relief; tiled over 3 m x 3 m (7.3 tiles per side) it reads as a mown olive-yellow lawn at 5 m with no visible repeat, and a flat tinted rectangle at 15 m. Colour is dry straw, not a green summer lawn. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.7,
+    "drift_sheet": 2.4
+   },
+   "surface_look": "olive-straw turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_sbykrmp0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbykrmp0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbykrmp0_4k",
+   "megascans_id": "sbykrmp0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.049
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: as sbykrep0 (same 0.41 m scan size, 4.9 cm relief) but darker and browner; reads as a worn lawn at 5 m. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.8,
+    "drift_sheet": 2.5
+   },
+   "surface_look": "olive turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_sbyksep0_4k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (4k)",
+   "preview": "asset-previews/fab_lawn_grass_sbyksep0_4k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_sbyksep0_4k",
+   "megascans_id": "sbyksep0",
+   "quality_variant": "4k",
+   "triangles": 149058,
+   "size_m": [
+    0.41,
+    0.41,
+    0.045
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: as sbykrep0, slightly greener-grey; a uniform mown lawn at 5 m; no repeat visible. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "4K",
+   "render_seconds": {
+    "surface_sheet": 1.8,
+    "drift_sheet": 2.5
+   },
+   "surface_look": "olive turf",
+   "drift_instances": 188
+  },
+  {
+   "id": "fab_lawn_grass_tkynejer_8k",
+   "source": "https://www.fab.com/listings/f50d1f4a-d91a-41c2-86ad-10c4ffe7f658",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lawn Grass (8k)",
+   "preview": "asset-previews/fab_lawn_grass_tkynejer_8k.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lawn_grass_tkynejer_8k",
+   "megascans_id": "tkynejer",
+   "quality_variant": "8k",
+   "triangles": 524288,
+   "size_m": [
+    2.0,
+    2.0,
+    0.026
+   ],
+   "alpha_card_tri_share": 0.0,
+   "grade": "B",
+   "use": "surface",
+   "leaf_type": "surface_material",
+   "species_fit": "none",
+   "maps_to": [],
+   "rationale": "Looked at: 2 m scan of a lawn in Brussels (asset tags): green grass with clover, moss, leaf litter and bare patches, real blade structure at 1.2 m; the most natural lawn here at 5 m, green rather than straw. Temperate cool-season grass, so a look-alike for a Cairo lawn. DRIFT TEST (instanced, 3 m x 3 m): the scan was turned into a real displaced heightfield patch and instanced with random turn over 3 m x 3 m; it is worse than the continuous surface: square patch edges and drop-offs show at 5 m and bare ground shows between patches. Use the continuous tiled material (with its displacement as bump), not scattered patches.",
+   "texture_res": "8K",
+   "render_seconds": {
+    "surface_sheet": 5.3,
+    "drift_sheet": 7.2
+   },
+   "surface_look": "green turf with clover and moss",
+   "drift_instances": 8
+  },
+  {
+   "id": "fab_lesser_periwinkle_sfsj3_raw",
+   "source": "https://www.fab.com/listings/b56971fa-930c-49c8-b687-88eb947b501f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Lesser Periwinkle (raw)",
+   "preview": "asset-previews/fab_lesser_periwinkle_sfsj3_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/lesser_periwinkle_sfsj3_raw",
+   "megascans_id": "sfsj3",
+   "quality_variant": "raw",
+   "triangles": 16189,
+   "size_m": [
+    1.369,
+    0.026,
+    2.159
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "vinca_minor"
+   ],
+   "rationale": "Looked at: each variation is a flat 0.02-0.03 m deep vine strip 0.4-1.4 m wide and 0.4-2.2 m tall; the drift stands them on end like a hedge of cards. The sourced height of Vinca minor is 0.08-0.15 m, so the scale is 10x wrong, and the leaves are real but the habit (a trailing groundcover) is not represented.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 7152,
+   "variation_heights_m": [
+    0.441,
+    2.237
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 2.6
+   },
+   "candidate_for": "vinca_minor",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_money_plant_uchmfdyia_raw",
+   "source": "https://www.fab.com/listings/ace17ad9-84af-4eea-ba72-c207ab1746d7",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Money Plant (raw)",
+   "preview": "asset-previews/fab_money_plant_uchmfdyia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/money_plant_uchmfdyia_raw",
+   "megascans_id": "uchmfdyia",
+   "quality_variant": "raw",
+   "triangles": 8846,
+   "size_m": [
+    0.167,
+    0.327,
+    0.409
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "epipremnum_aureum"
+   ],
+   "rationale": "Looked at: 0.1-0.5 m heart-leaf shoots; the 150-shoot drift is a generic leafy seedling bed, not a pothos vine, and nothing at 15 m. A climbing Epipremnum needs a trailing vine mesh that this scan is not.",
+   "texture_res": "8K",
+   "hero_variation": "VarB",
+   "mean_triangles_lod0": 8305,
+   "variation_heights_m": [
+    0.103,
+    0.527
+   ],
+   "render_seconds": {
+    "single_sheet": 5.2,
+    "drift_sheet": 3.2
+   },
+   "candidate_for": "epipremnum_aureum",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_oregano_umkhceeia_high",
+   "source": "https://www.fab.com/listings/cd05dcad-fae8-41d8-971d-7be8f30c9c20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Oregano (high)",
+   "preview": "asset-previews/fab_oregano_umkhceeia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/oregano_umkhceeia_high",
+   "megascans_id": "umkhceeia",
+   "quality_variant": "high",
+   "triangles": 118532,
+   "size_m": [
+    0.426,
+    0.414,
+    0.407
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "origanum_majorana"
+   ],
+   "rationale": "Looked at: scanned oregano with opposite ovate leaves on woody stems, 0.2-0.4 m mounds; the close view is the best foliage of the set; a single mound is a dot at 15 m, but the 81-instance drift reads as a herb bed at 5 m and as a dark band at 15 m. Latin name on the asset is Origanum vulgare, the library species is O. majorana, so genus level.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 117579,
+   "variation_heights_m": [
+    0.186,
+    0.407
+   ],
+   "render_seconds": {
+    "single_sheet": 4.3,
+    "drift_sheet": 3.4
+   },
+   "candidate_for": "origanum_majorana",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_oregano_umkhceeia_raw",
+   "source": "https://www.fab.com/listings/cd05dcad-fae8-41d8-971d-7be8f30c9c20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Oregano (raw)",
+   "preview": "asset-previews/fab_oregano_umkhceeia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/oregano_umkhceeia_raw",
+   "megascans_id": "umkhceeia",
+   "quality_variant": "raw",
+   "triangles": 300782,
+   "size_m": [
+    0.424,
+    0.412,
+    0.406
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "origanum_majorana"
+   ],
+   "rationale": "Looked at: same variations as the high archive, but LOD0 is 301k triangles for the hero (high 119k) with 8K maps; the sheets are indistinguishable at 5 m and 15 m and in the close views, the render takes 2x as long. High preferred.",
+   "texture_res": "8K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 257037,
+   "variation_heights_m": [
+    0.186,
+    0.406
+   ],
+   "render_seconds": {
+    "single_sheet": 8.6,
+    "drift_sheet": 6.3
+   },
+   "candidate_for": "origanum_majorana",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_red_fountain_grass_slglz_high",
+   "source": "https://www.fab.com/listings/b8248574-2b05-479e-88eb-05fc2a5647be",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Red Fountain Grass (high)",
+   "preview": "asset-previews/fab_red_fountain_grass_slglz_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/red_fountain_grass_slglz_high",
+   "megascans_id": "slglZ",
+   "quality_variant": "high",
+   "triangles": 34328,
+   "size_m": [
+    0.682,
+    0.707,
+    0.832
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "pennisetum_alopecuroides"
+   ],
+   "rationale": "Looked at: arching fine blades 0.4-0.8 m with bottlebrush plumes, dark red-brown (tags: Pennisetum setaceum 'rubrum'); a real fountain-grass silhouette at 5 m, small at 15 m; the drift reads as an ornamental grass bed at 5 m. Genus level: the library species is P. alopecuroides (accepted Cenchrus alopecuroides), the scan is the red-leaved P. setaceum.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 16661,
+   "variation_heights_m": [
+    0.405,
+    0.832
+   ],
+   "render_seconds": {
+    "single_sheet": 3.3,
+    "drift_sheet": 2.3
+   },
+   "candidate_for": "pennisetum_alopecuroides",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_rosemary_vgvoacmia_high",
+   "source": "https://www.fab.com/listings/4d913162-6a96-4733-a08e-e595e3a6905f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Rosemary (high)",
+   "preview": "asset-previews/fab_rosemary_vgvoacmia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/rosemary_vgvoacmia_high",
+   "megascans_id": "vgvoacmia",
+   "quality_variant": "high",
+   "triangles": 45408,
+   "size_m": [
+    0.351,
+    0.367,
+    0.325
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rosmarinus_officinalis"
+   ],
+   "rationale": "Looked at: scanned Salvia rosmarinus (Rosmarinus) sprigs, 0.05-0.42 m, with needle leaves on woody stems; on looks alone the best herb scan (B in a 3 m drift at 5 m: dense dark-green rosemary mass, a band at 15 m). But the library's sourced height is 1.5 m and the scan is 0.35 m: wrong scale for a mature shrub (rubric C), and a 4x enlargement would make 2 cm needles 8 cm. Usable as a low drift or young plants only.",
+   "texture_res": "4K",
+   "hero_variation": "VarG",
+   "mean_triangles_lod0": 39579,
+   "variation_heights_m": [
+    0.046,
+    0.419
+   ],
+   "render_seconds": {
+    "single_sheet": 3.6,
+    "drift_sheet": 3.1
+   },
+   "candidate_for": "rosmarinus_officinalis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_rosemary_vgvoacmia_raw",
+   "source": "https://www.fab.com/listings/4d913162-6a96-4733-a08e-e595e3a6905f",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Rosemary (raw)",
+   "preview": "asset-previews/fab_rosemary_vgvoacmia_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/rosemary_vgvoacmia_raw",
+   "megascans_id": "vgvoacmia",
+   "quality_variant": "raw",
+   "triangles": 73069,
+   "size_m": [
+    0.349,
+    0.365,
+    0.321
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "C",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "rosmarinus_officinalis"
+   ],
+   "rationale": "Looked at: same variations as the high archive (hero 73k vs 45k triangles, 8K vs 4K maps); indistinguishable at 5 m, 15 m and close; render time 1.7x. Same scale problem as the high archive (0.35 m vs 1.5 m sourced).",
+   "texture_res": "8K",
+   "hero_variation": "VarG",
+   "mean_triangles_lod0": 62114,
+   "variation_heights_m": [
+    0.044,
+    0.417
+   ],
+   "render_seconds": {
+    "single_sheet": 6.0,
+    "drift_sheet": 4.3
+   },
+   "candidate_for": "rosmarinus_officinalis",
+   "grade_if_young_plant_use_accepted": "B",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_sage_ve3gbfoja_raw",
+   "source": "https://www.fab.com/listings/4da57ce9-d432-4871-a17c-0b6ea515cb20",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Sage (raw)",
+   "preview": "asset-previews/fab_sage_ve3gbfoja_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/sage_ve3gbfoja_raw",
+   "megascans_id": "ve3gbfoja",
+   "quality_variant": "raw",
+   "triangles": 106135,
+   "size_m": [
+    0.709,
+    0.892,
+    0.728
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "drift",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "salvia_officinalis"
+   ],
+   "rationale": "Looked at: lush leafy sage bushes 0.3-0.9 m with soft oblong leaves; a convincing sage at 5 m, a dot alone at 15 m, and the 40-instance drift is a dense sage bed at 5 m. Defect: variation B is a 0.02 m flat leaf fragment that renders as small black blobs on the ground; leave it out. Species from the asset's latin name (Salvia officinalis): a look-alike for Salvia leucantha, not that species.",
+   "texture_res": "4K",
+   "hero_variation": "VarA",
+   "mean_triangles_lod0": 63782,
+   "variation_heights_m": [
+    0.019,
+    0.728
+   ],
+   "render_seconds": {
+    "single_sheet": 4.0,
+    "drift_sheet": 3.0
+   },
+   "candidate_for": "salvia_officinalis",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_taro_sjli7_high",
+   "source": "https://www.fab.com/listings/77c77f1b-b3ee-4682-9579-91237914d15b",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Taro (high)",
+   "preview": "asset-previews/fab_taro_sjli7_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/taro_sjli7_high",
+   "megascans_id": "sjli7",
+   "quality_variant": "high",
+   "triangles": 1830,
+   "size_m": [
+    1.295,
+    1.272,
+    1.333
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "genus",
+   "maps_to": [
+    "colocasia_esculenta"
+   ],
+   "rationale": "Looked at: green-stemmed taro, 1.0-1.3 m, large heart-shaped peltate leaves with visible veins; reads as an elephant-ear at 5 m, small at 15 m; the 7-plant drift is lush with a few yellowing leaves. The asset's latin field says 'Colocasia Caladium', so genus level.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 1370,
+   "variation_heights_m": [
+    0.862,
+    1.333
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "colocasia_esculenta",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_taro_sjlkg_raw",
+   "source": "https://www.fab.com/listings/77c77f1b-b3ee-4682-9579-91237914d15b",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Taro (raw)",
+   "preview": "asset-previews/fab_taro_sjlkg_raw.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/taro_sjlkg_raw",
+   "megascans_id": "sjlkG",
+   "quality_variant": "raw",
+   "triangles": 10338,
+   "size_m": [
+    1.094,
+    1.343,
+    1.159
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "colocasia_esculenta"
+   ],
+   "rationale": "Looked at: red-stemmed taro (latin field 'Colocasia Esculenta'), 1.0-1.4 m, dark green leaves; about a third of the leaves in the drift are scanned dead or dying, brown and curled. The hero is good at 5 m. The green-stemmed sjli7 is lusher; this one has the species-level name.",
+   "texture_res": "4K",
+   "hero_variation": "VarC",
+   "mean_triangles_lod0": 8940,
+   "variation_heights_m": [
+    0.886,
+    1.159
+   ],
+   "render_seconds": {
+    "single_sheet": 3.1,
+    "drift_sheet": 1.9
+   },
+   "candidate_for": "colocasia_esculenta",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_zamia_palm_ulrtcjsia_high",
+   "source": "https://www.fab.com/listings/44bd49cb-d05e-4788-8eb1-46655de9962a",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "title": "Zamia Palm (high)",
+   "preview": "asset-previews/fab_zamia_palm_ulrtcjsia_high.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/zamia_palm_ulrtcjsia_high",
+   "megascans_id": "ulrtcjsia",
+   "quality_variant": "high",
+   "triangles": 52157,
+   "size_m": [
+    1.582,
+    1.457,
+    0.699
+   ],
+   "alpha_card_tri_share": 1.0,
+   "grade": "B",
+   "use": "single",
+   "leaf_type": "real_leaf_meshes",
+   "species_fit": "species",
+   "maps_to": [
+    "zamia_furfuracea"
+   ],
+   "rationale": "Looked at: cycad rosettes of dark pinnate leaves with real rounded leaflets (0.4-0.7 m high, to 1.6 m across); reads as a Zamia at 5 m; small at 15 m; the drift of five variations reads as a cycad planting at 5 m.",
+   "texture_res": "4K",
+   "hero_variation": "VarE",
+   "mean_triangles_lod0": 25260,
+   "variation_heights_m": [
+    0.409,
+    0.699
+   ],
+   "render_seconds": {
+    "single_sheet": 3.4,
+    "drift_sheet": 2.1
+   },
+   "candidate_for": "zamia_furfuracea",
+   "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
   }
  ],
  "species": [
@@ -3166,9 +4215,9 @@
   },
   {
    "slug": "aloe_vera",
-   "best_asset": "skf3_03947862",
-   "grade": "C",
-   "drawable": "not drawable yet",
+   "best_asset": "fab_aloe_vera_ve4tbbrha_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "N031 Aloe Vera_Free version",
@@ -3202,9 +4251,9 @@
   },
   {
    "slug": "aspidistra_elatior",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_cast___iron_plant_shdmr_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -3412,8 +4461,8 @@
   {
    "slug": "cyperus_papyrus",
    "best_asset": "skf3_d0248242",
-   "grade": "C",
-   "drawable": "not drawable yet",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Papyrus (Undertale)",
@@ -3815,9 +4864,9 @@
   },
   {
    "slug": "nymphaea_caerulea",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_carolana_water_lily_uc2jdibia_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Blue Lotus",
@@ -3880,9 +4929,9 @@
   },
   {
    "slug": "origanum_majorana",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_oregano_umkhceeia_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -3894,9 +4943,9 @@
   },
   {
    "slug": "pennisetum_alopecuroides",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_red_fountain_grass_slglz_high",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -4051,7 +5100,7 @@
   },
   {
    "slug": "rhapis_excelsa",
-   "best_asset": "skf3_86982789",
+   "best_asset": "fab_broadleaf_lady_palm_shqke_high",
    "grade": "B",
    "drawable": "drawable",
    "free_candidates_to_preview": [
@@ -4080,8 +5129,8 @@
   },
   {
    "slug": "rosmarinus_officinalis",
-   "best_asset": null,
-   "grade": null,
+   "best_asset": "fab_rosemary_vgvoacmia_high",
+   "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": [
     {
@@ -4247,7 +5296,7 @@
   },
   {
    "slug": "livistona_chinensis",
-   "best_asset": "skf3_f59bab2a",
+   "best_asset": "fab_chinese_fan_palm_ud4geejja_high",
    "grade": "C",
    "drawable": "not drawable yet",
    "free_candidates_to_preview": []
@@ -4261,12 +5310,61 @@
   },
   {
    "slug": "colocasia_esculenta",
+   "best_asset": "fab_taro_sjlkg_raw",
+   "grade": "B",
+   "drawable": "drawable",
+   "free_candidates_to_preview": []
+  },
+  {
+   "slug": "canna_x_generalis",
    "best_asset": null,
    "grade": null,
-   "drawable": "not drawable yet",
-   "free_candidates_to_preview": []
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "epipremnum_aureum",
+   "best_asset": "fab_money_plant_uchmfdyia_raw",
+   "grade": "C",
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "hedera_helix",
+   "best_asset": "fab_english_ivy_rkeit_raw",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "hedychium_coronarium",
+   "best_asset": "fab_ginger_lily_ud5fffgja_high",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "salvia_officinalis",
+   "best_asset": "fab_sage_ve3gbfoja_raw",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "vinca_minor",
+   "best_asset": "fab_lesser_periwinkle_sfsj3_raw",
+   "grade": "C",
+   "drawable": "not drawable yet"
+  },
+  {
+   "slug": "zamia_furfuracea",
+   "best_asset": "fab_zamia_palm_ulrtcjsia_high",
+   "grade": "B",
+   "drawable": "drawable"
+  },
+  {
+   "slug": "zingiber_officinale",
+   "best_asset": "fab_jungle_ginger_sgbms_high",
+   "grade": "C",
+   "drawable": "not drawable yet"
   }
  ],
  "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded.",
- "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json + sketchfab-manifest.json (83 downloaded with the client token, all graded in this table as skf3_*; binaries in ~/archpipe/shared/assets/user/landscape/sketchfab/, outside git)"
+ "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json + sketchfab-manifest.json (83 downloaded with the client token, all graded in this table as skf3_*; binaries in ~/archpipe/shared/assets/user/landscape/sketchfab/, outside git)",
+ "fab_source": "knowledge/landscape/plants/fab-manifest.json: 27 Quixel Megascans archives from Fab (Fab Standard License), binaries in ~/archpipe/shared/assets/user/landscape/fab/, outside git"
 }

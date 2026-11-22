@@ -127,6 +127,21 @@
   "litter": "verified",
   "maintenance": "verified"
  },
+ "canna_x_generalis": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "drought": "verified",
+  "alkaline_soil": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "maintenance": "verified"
+ },
  "ceratophyllum_demersum": {
   "accepted_name": "api_derived",
   "height_m": "verified",
@@ -335,6 +350,20 @@
   "toxicity_people": "verified",
   "maintenance": "verified"
  },
+ "epipremnum_aureum": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "drought": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
+  "maintenance": "verified"
+ },
  "eriobotrya_japonica": {
   "accepted_name": "api_derived",
   "height_m": "verified",
@@ -446,6 +475,39 @@
   "flowering": "verified",
   "foliage": "verified",
   "litter": "verified",
+  "maintenance": "verified"
+ },
+ "hedera_helix": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "drought": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
+  "maintenance": "verified"
+ },
+ "hedychium_coronarium": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
   "maintenance": "verified"
  },
  "hibiscus_rosa_sinensis": {
@@ -1074,6 +1136,22 @@
   "litter": "verified",
   "maintenance": "verified"
  },
+ "salvia_officinalis": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "drought": "verified",
+  "alkaline_soil": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
+  "maintenance": "verified"
+ },
  "strelitzia_nicolai": {
   "accepted_name": "api_derived",
   "height_m": "verified",
@@ -1170,6 +1248,24 @@
   "toxicity_people": "verified",
   "maintenance": "verified"
  },
+ "vinca_minor": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "drought": "verified",
+  "alkaline_soil": "verified",
+  "salt": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "root_behaviour": "verified",
+  "toxicity_people": "verified",
+  "maintenance": "verified"
+ },
  "vitis_vinifera": {
   "accepted_name": "api_derived",
   "sun": "verified",
@@ -1179,6 +1275,21 @@
   "flowering": "verified",
   "foliage": "verified",
   "litter": "verified",
+  "maintenance": "verified"
+ },
+ "zamia_furfuracea": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "drought": "verified",
+  "salt": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
   "maintenance": "verified"
  },
  "zantedeschia_aethiopica": {
@@ -1194,6 +1305,21 @@
   "flowering": "verified",
   "foliage": "verified",
   "toxicity_people": "verified"
+ },
+ "zingiber_officinale": {
+  "accepted_name": "api_derived",
+  "height_m": "verified",
+  "spread_m": "verified",
+  "growth_rate": "verified",
+  "sun": "verified",
+  "water": "verified",
+  "heat": "verified",
+  "alkaline_soil": "verified",
+  "frost": "verified",
+  "flowering": "verified",
+  "foliage": "verified",
+  "toxicity_people": "verified",
+  "maintenance": "verified"
  },
  "zoysia_japonica": {
   "accepted_name": "api_derived",

@@ -1,0 +1,7430 @@
+{
+ "age3": [
+  {
+   "check": "id",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "ld-paving-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "ld-paving-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "ld-paving-2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "ld-paving-3",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "ld-paving-4",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "ld-paving-5",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "ld-paving-6",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "ld-paving-0-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "ld-paving-1-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "ld-paving-2-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "ld-paving-0-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "ld-paving-1-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "ld-paving-2-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "ld-paving-3-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "ld-paving-4-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "ld-paving-5-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "ld-paving-6-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "ld-path-door",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "ld-path-n-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "ld-path-e-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "ld-bed-west",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "ld-bed-se",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "ld-bed-herb",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "ld-n-street",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "ld-e-edge",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "ld-e-pondmass",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "ld-firepit",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-flame",
+   "status": "pass",
+   "achieved": "ld-firepit-flame",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "ld-firepit-cover",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "ld-firepit-cover",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "ld-bbq",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "ld-pond-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "ld-pond-e-water",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "ld-pond-e-grille",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "ld-bench-quiet",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "ld-bench-rear",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "ld-bench-n",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "ld-bench-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "ld-dining-table",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-0",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-1",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-2",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-3",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-3",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-4",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-4",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-5",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-5",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-6",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-6",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-7",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-7",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "ld-gravel-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "ld-gravel-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "ld-ground-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "ld-fence-rear",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "ld-fence-east",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "ld-street-fence",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "ld-sister-screen",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "ld-pergola-dining",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "ld-pergola-bench",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "ld-pergola-n",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "ld-pergola-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "ld-pot-0-plumeria",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "ld-tree-0-punica",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-09",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-10",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-11",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-12",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-13",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-14",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-15",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-16",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-17",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-18",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-19",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-herb-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-herb-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-09",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-10",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "ld-pot-0-plumeria-plant",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-tree-0-punica",
+   "status": "info",
+   "achieved": "1.55 m (asset aspect)",
+   "required": "layout mature spread 2.40 m; asset scaled by height, spread follows the asset",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "0.409 m",
+   "required": "<= 0.770 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "0.468 m",
+   "required": "<= 0.880 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "0.638 m",
+   "required": "<= 1.200 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "0.351 m",
+   "required": "<= 0.660 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "0.351 m",
+   "required": "<= 0.660 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "<= 0.660 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "<= 0.660 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "0.200 m",
+   "required": "<= 0.500 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "0.584 m",
+   "required": "<= 1.100 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "0.584 m",
+   "required": "<= 1.100 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "0.234 m",
+   "required": "<= 0.440 m (layout mature spread)",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-7",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-bench x ld-tree-0-punica",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "graded asset skf3_f697f7da",
+   "required": "grade A/B asset of the species or genus",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "graded asset sf_frangipani",
+   "required": "grade A/B asset of the species or genus",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit-flame",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-7",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-bench x ld-tree-0-punica",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  }
+ ],
+ "mature": [
+  {
+   "check": "id",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "ld-paving-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "ld-paving-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "ld-paving-2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "ld-paving-3",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "ld-paving-4",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "ld-paving-5",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "ld-paving-6",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "ld-paving-0-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "ld-paving-1-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "ld-paving-2-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "ld-paving-0-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "ld-paving-1-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "ld-paving-2-r2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "ld-paving-3-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "ld-paving-4-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "ld-paving-5-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "ld-paving-6-r1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "ld-path-door",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "ld-path-n-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "ld-path-e-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "ld-bed-west",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "ld-bed-se",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "ld-bed-herb",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "ld-n-street",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "ld-e-edge",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "ld-e-pondmass",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "ld-firepit",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-flame",
+   "status": "pass",
+   "achieved": "ld-firepit-flame",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "ld-firepit-cover",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "ld-firepit-cover",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "ld-bbq",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "ld-pond-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "ld-pond-e-water",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "ld-pond-e-grille",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "ld-bench-quiet",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "ld-bench-rear",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "ld-bench-n",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "ld-bench-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "ld-dining-table",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-0",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-1",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-2",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-2",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-3",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-3",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-4",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-4",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-5",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-5",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-6",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-6",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-dining-table-chair-7",
+   "status": "pass",
+   "achieved": "ld-dining-table-chair-7",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "ld-gravel-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "ld-gravel-1",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "ld-ground-0",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "ld-fence-rear",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "ld-fence-east",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "ld-street-fence",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "ld-sister-screen",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "ld-pergola-dining",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "ld-pergola-bench",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "ld-pergola-n",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "ld-pergola-e",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "ld-pot-0-plumeria",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "ld-tree-0-punica",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-09",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-10",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-11",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-12",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-13",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-14",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-15",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-16",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-17",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-18",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "ld-plant-bed-west-19",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "ld-plant-bed-se-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "ld-plant-bed-herb-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "ld-plant-bed-herb-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-09",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "ld-plant-n-street-10",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "ld-plant-e-edge-08",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-00",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-01",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-02",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-03",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-04",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-05",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-06",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "ld-plant-e-pondmass-07",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "id",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "ld-pot-0-plumeria-plant",
+   "required": "unique, ld-*prefixed",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "0.0 mm outside",
+   "required": "inside the layout rect (+20 mm)",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "0.0 mm",
+   "required": "<= 20 mm Hausdorff",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "footprint",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "0.0 mm worst edge",
+   "required": "<= 20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-tree-0-punica",
+   "status": "info",
+   "achieved": "2.91 m (asset aspect)",
+   "required": "layout mature spread 2.40 m; asset scaled by height, spread follows the asset",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "0.770 m",
+   "required": "0.770 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "0.880 m",
+   "required": "0.880 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "1.200 m",
+   "required": "1.200 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "0.660 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "0.660 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "0.660 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "0.660 m",
+   "required": "0.660 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "0.500 m",
+   "required": "0.500 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "1.100 m",
+   "required": "1.100 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "1.100 m",
+   "required": "1.100 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "plant-footprint",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "0.440 m",
+   "required": "0.440 m (layout spread) +-20 mm",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-0-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-1-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-2-r2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-3-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-4-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-5-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-paving-6-r1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-door",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-n-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-path-e-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-west",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-se",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bed-herb",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-n-street",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-edge",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-e-pondmass",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-firepit-cover",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bbq",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-water",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pond-e-grille",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-quiet",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-bench-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-2",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-3",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-4",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-5",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-6",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-dining-table-chair-7",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-gravel-1",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-ground-0",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-rear",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-fence-east",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-street-fence",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-sister-screen",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-dining",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-bench",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-n",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pergola-e",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "support",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "grounded",
+   "required": "touches the ground or its support",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-fence-rear x ld-tree-0-punica",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-fence-rear x ld-plant-bed-west-19",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-dining x ld-plant-bed-west-00",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-dining x ld-tree-0-punica",
+   "status": "fail",
+   "achieved": "5 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-dining x ld-plant-bed-west-05",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pergola-bench x ld-tree-0-punica",
+   "status": "fail",
+   "achieved": "13 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "clip",
+   "id": "ld-pot-0-plumeria x ld-plant-bed-se-02",
+   "status": "fail",
+   "achieved": "1 overlapping part pairs",
+   "required": "no rigid object deeper than 5 mm (foliage 50 mm)",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-tree-0-punica",
+   "status": "pass",
+   "achieved": "graded asset skf3_f697f7da",
+   "required": "grade A/B asset of the species or genus",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-09",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-10",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-11",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-12",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-13",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-14",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-15",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-16",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-17",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-18",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-west-19",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-se-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-herb-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-bed-herb-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-09",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-n-street-10",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-edge-08",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-00",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-01",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-02",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-03",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-04",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-05",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-06",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-plant-e-pondmass-07",
+   "status": "pass",
+   "achieved": "labelled STAND-IN",
+   "required": "STAND-IN label + schedule reason",
+   "note": ""
+  },
+  {
+   "check": "standin",
+   "id": "ld-pot-0-plumeria-plant",
+   "status": "pass",
+   "achieved": "graded asset sf_frangipani",
+   "required": "grade A/B asset of the species or genus",
+   "note": ""
+  }
+ ]
+}

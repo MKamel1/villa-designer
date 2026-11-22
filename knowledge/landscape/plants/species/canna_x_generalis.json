@@ -1,0 +1,260 @@
+{
+ "slug": "canna_x_generalis",
+ "layers": [
+  "perennial",
+  "tropical_foliage"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Canna × generalis Jinnye",
+    "family": "Cannaceae",
+    "common_names": [
+     "garden canna",
+     "canna lily"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Canna%20x%20generalis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.8,
+    "text": "2-6 ft as stated (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 6 ft. 0 in. Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft as stated (NCSU); clumping"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Dimensions",
+    "quote": "Height: 2 ft. 0 in. - 6 ft. 0 in. Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "NCSU: Rapid"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "sunlight to light shade; grows in shade but will not flower well"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Garden Canna prefers sunlight to light shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soils; some standing water or drought tolerated once established; rhizomes rot in poorly drained soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They grow best in moist, well-drained soils, but they can tolerate some standing water or drought once they are established."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU: high heat tolerance, prone to wind damage"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They have a high heat tolerance, but they are prone to wind damage."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates some drought once established (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They grow best in moist, well-drained soils, but they can tolerate some standing water or drought once they are established."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: clay, loam, acidic and slightly alkaline soils; soil pH attribute lists acid and neutral"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "soils with high organic matter, in a variety of soils, clay, loam acidic and slightly alkaline"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "PFAF: page present but record empty",
+    "MBG: no species page for Canna x generalis",
+    "Wikipedia: only a cultivar list"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "NCSU zones 8a-11b; foliage cut down after first frost and rhizomes overwinter in the soil in warmer zones; dig and store rhizomes in colder zones"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "white",
+     "yellow",
+     "orange",
+     "pink",
+     "red"
+    ],
+    "text": "NCSU bloom time summer; colours vary by cultivar; deadhead to keep flowering through summer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Spent flowers should be removed to encourage continued flowering through the summer months."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "large coarse paddle leaves 18-36 in long, green to variegated or bronze"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Garden Canna is a herbaceous perennial in the Cannaceae family"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about root behaviour (rhizomatous clumps; rot in poorly drained soil)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "PFAF: page present but record empty",
+    "MBG: no species page for Canna x generalis",
+    "Wikipedia: only a cultivar list"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU tags non-toxic for cats, dogs and horses (pet toxicity, not human toxicity); no human statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "PFAF: page present but record empty",
+    "MBG: no species page for Canna x generalis",
+    "Wikipedia: only a cultivar list"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source states litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "PFAF: page present but record empty",
+    "MBG: no species page for Canna x generalis",
+    "Wikipedia: only a cultivar list"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/canna-x-generalis/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes / Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ },
+ "notes": "GBIF accepts Canna x generalis Jinnye as a species-rank name, so the slug and accepted name agree. NCSU: all Canna hybrids are included under this name; pests include aphid-spread aster yellows, Canna mosaic virus, leaf-rolling caterpillars."
+}
