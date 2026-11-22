@@ -63,6 +63,14 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
         status="policy",
         url_or_path="panel figure (docs/reviews/2026-11/panel-lighting-electrical.md); UNVERIFIED as a standard value"),
     SourceCard(
+        id="L6-POLICY-LA4-bed-lying-looking-up",
+        document="L6 lighting engine policy", edition="2026-11", locator="LA4 (lane L6d)",
+        quote="", value=("a person lying on a bed looks straight up: the same 3,000 cd/m2 cap applies within 45 deg of the vertical "
+                         "above every pillow (eye 0.7 m above the floor on a 0.5 m bed; 1.5 m on the upper bunk berth, "
+                         "ASSUMED from the 1.7 m bunk height); both pillows of a double bed; both ends of a bunk whose head end is not declared"),
+        status="policy",
+        url_or_path="LV finding 5 (docs/lanes/LV-findings.md): the one reclined sightline missed the bed downlight at 89,953 cd/m2; UNVERIFIED as a standard value"),
+    SourceCard(
         id="L6-POLICY-LA9-axis-tolerance-10mm",
         document="L6 lighting engine policy", edition="2026-11", locator="LA9",
         quote="", value="luminaire on a declared axis within 10 mm", status="policy"),

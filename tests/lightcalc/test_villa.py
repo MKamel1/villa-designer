@@ -191,19 +191,48 @@ def test_stale_obstruction_record_fails_loudly(villa):
         VP.blocked_rects(pl.id, pl.z + 0.06, pl.polygon)         # the plane was 60 mm too high (the original basin defect)
 
 
-@pytest.mark.parametrize("cluster, plane", [("GF-parents-dressing", "room-parents-dressing"), ("B-guest-wc", "room-guest-wc"),
-                                            ("B-pantry", "room-pantry"), ("GF-family-bath", "room-family-bath")])
-def test_radiosity_agrees_with_radiance_on_box_rooms(villa, cluster, plane):
-    """Independent transport check (no Radiance code): the published floor-plane mean of every functional zone at 100 %
-    equals a patch radiosity of the same placements. This is what shows the dressing room's lumen-method miss is the
-    closed form's uniform inter-reflection (615 lx), not the engine (378 lx)."""
+def _radiosity_vs_radiance(villa, cluster, plane, points=False):
     from archpipe.lightcalc import radiosity, villa_report as VR
     rows = {r["plane"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "knowledge/lighting/villa-after-rows.json").read_text())}
     pls = [p for p in villa.cluster_placements(cluster) if p.layer not in VR.NIGHT_LAYERS]
+    room = villa.cluster_room(cluster)
     # L6c: 16 x 16 patches per face (was 8): the wide ERCO distributions put much light on the walls, and at 8 patches the
     # radiosity overstated the guest WC / family bath / dressing room by 7-10 % (236 -> 219 lx at 16 for the guest WC, Radiance 215)
-    e = radiosity.floor_mean_lux(villa.cluster_room(cluster), pls, V.MF, 16)
-    assert e == pytest.approx(rows[plane]["full_em"], rel=0.08)      # L6c: 8 % (pantry 7 % low at 16 patches: a 2.9 x 1.0 m room, Radiance 199 lx)
+    if points:
+        from archpipe.lightverify.v5_engines import sample_points      # read-only use of LV's sensor points
+        pts = [xy for _i, xy in sample_points(villa, {plane})[plane][1]]
+        return radiosity.floor_lux_at(room, pls, pts, V.MF, 16), rows[plane]["full_em"]
+    return radiosity.floor_mean_lux(room, pls, V.MF, 16), rows[plane]["full_em"]
+
+
+@pytest.mark.parametrize("cluster, plane", [("GF-parents-dressing", "room-parents-dressing"), ("B-guest-wc", "room-guest-wc"),
+                                            ("GF-family-bath", "room-family-bath")])
+def test_radiosity_agrees_with_radiance_on_box_rooms(villa, cluster, plane):
+    """Independent transport check (no Radiance code): the published floor-plane mean of every functional zone at 100 %
+    equals a patch radiosity of the same placements (16 patches, the honest 6 % bar; the 8 % of L6c was fitted to the pantry).
+    This is what shows the dressing room's lumen-method miss is the closed form's uniform inter-reflection (615 lx), not the
+    engine (378 lx)."""
+    e, radiance = _radiosity_vs_radiance(villa, cluster, plane)
+    assert e == pytest.approx(radiance, rel=0.06)
+
+
+@pytest.mark.xfail(strict=True, reason=(
+    "KNOWN FAILURE, diagnosed (L6d), not an engine error: the pantry's Radiance plane is 8 points inset 0.3-1.4 m from the ends of a "
+    "2.9 x 1.0 m room, while the radiosity averages the whole floor, whose dark ends it includes. Floor mean 16 / 24 / 32 patches "
+    "-7.0 / -8.7 / -9.3 % vs Radiance 199 lx (the gap grows as the patches resolve the ends). At the plane's own 8 points the same "
+    "solver gives 197.0 / 197.8 lx (-1.0 / -0.7 %): see the footprint-matched test below."))
+def test_radiosity_floor_mean_of_the_pantry_is_a_different_footprint(villa):
+    e, radiance = _radiosity_vs_radiance(villa, "B-pantry", "room-pantry")
+    assert e == pytest.approx(radiance, rel=0.06)
+
+
+@pytest.mark.parametrize("cluster, plane", [("B-pantry", "room-pantry"), ("GF-parents-dressing", "room-parents-dressing"),
+                                            ("B-guest-wc", "room-guest-wc"), ("GF-family-bath", "room-family-bath")])
+def test_radiosity_at_the_plane_points_agrees_with_radiance(villa, cluster, plane):
+    """Footprint-matched: the solver's floor field sampled at the Radiance plane's own sensor points, 6 % bar, all four rooms
+    (pantry -1.0 %, guest WC +2.7 %, family bath +1.8 %, dressing +0.6 % at 16 patches)."""
+    e, radiance = _radiosity_vs_radiance(villa, cluster, plane, points=True)
+    assert e == pytest.approx(radiance, rel=0.06)
 
 
 def test_radiosity_negative_a_wrong_reflectance_is_caught(villa):

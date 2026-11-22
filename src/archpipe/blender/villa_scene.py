@@ -676,6 +676,18 @@ def ies_nadir(path):
     return data[13+nv+nh] * data[2] * data[10]
 
 
+def ies_rotation(aim, spin_deg):
+    """Local->world rotation of a Blender IES light that reproduces the engine's frame (lightcalc.direct.Placement.rotation:
+    Rz(azimuth of tilt) Ry(-tilt) Rz(spin)) for ANY aim. Blender's C0 is local +Y where the engine's is +X, hence the fixed
+    Rz(90) (IES_AZIMUTH_OFFSET_DEG) applied first, in the luminaire's own frame. The earlier track-quat + offset was calibrated on
+    straight-down lights only: for a tilted light the track quat's roll differs from the engine's and the pattern turned 90 deg."""
+    aim = Vector(aim).normalized()
+    tilt = math.acos(max(-1.0, min(1.0, -aim.z)))
+    az = math.atan2(aim.y, aim.x) if tilt > 1e-9 else 0.0
+    rz = lambda a: Matrix.Rotation(a, 3, "Z")
+    return rz(az) @ Matrix.Rotation(-tilt, 3, "Y") @ rz(math.radians(spin_deg)) @ rz(math.radians(IES_AZIMUTH_OFFSET_DEG))
+
+
 def add_light(spec, ies_dir):
     kind = spec["type"]
     lamp = bpy.data.lights.new(spec["id"], "POINT" if kind == "ies" else "AREA")
@@ -703,8 +715,7 @@ def add_light(spec, ies_dir):
     obj.location = spec["position"]
     aim = Vector(spec["aim"]).normalized()
     if kind == "ies":
-        obj.rotation_euler = aim.to_track_quat("-Z", "Y").to_euler()
-        obj.rotation_euler.rotate_axis("Z", math.radians(spec["spin_deg"] + IES_AZIMUTH_OFFSET_DEG))
+        obj.rotation_euler = ies_rotation(aim, spec["spin_deg"]).to_euler()
     else:
         length = Vector(spec["length_dir"])
         length = (length - length.dot(aim)*aim).normalized()
