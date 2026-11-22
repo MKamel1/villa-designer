@@ -1,0 +1,268 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": true,
+  "receipt_component": true,
+  "faces_removed": 12,
+  "faces_added": 16,
+  "removed_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   }
+  ],
+  "added_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "landing-gf"
+   }
+  ]
+ },
+ "meshes": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [
+   "fix-DL-kids-a-04",
+   "fix-DL-landing-gf-03",
+   "fix-DL-parents-bed-04",
+   "fix-DL-study-game-05",
+   "lamp-arm-DESK-kids-a-05",
+   "lamp-shade-DESK-kids-a-05",
+   "lens-DL-kids-a-04",
+   "lens-DL-landing-gf-03",
+   "lens-DL-parents-bed-04",
+   "lens-DL-study-game-05",
+   "marker-PATH-landing-gf-01",
+   "marker-PATH-landing-gf-02"
+  ],
+  "removed": [
+   "fix-ADJ-parents-bed-04",
+   "fix-ADJ-parents-bed-08",
+   "fix-DL-landing-gf-01",
+   "fix-DL-parents-bed-06",
+   "fix-DL-parents-bed-07",
+   "fix-DLN-study-game-05",
+   "fix-DLN-study-game-06",
+   "fix-DLN-study-game-07",
+   "lamp-arm-DESK-kids-a-04",
+   "lamp-shade-DESK-kids-a-04",
+   "lens-ADJ-parents-bed-04",
+   "lens-ADJ-parents-bed-08",
+   "lens-DL-landing-gf-01",
+   "lens-DL-parents-bed-06",
+   "lens-DL-parents-bed-07",
+   "lens-DLN-study-game-05",
+   "lens-DLN-study-game-06",
+   "lens-DLN-study-game-07"
+  ],
+  "changed_ids": [
+   "fix-ADJ-parents-bed-05",
+   "fix-DL-cinema-01",
+   "fix-DL-cinema-02",
+   "fix-DL-gallery-end-01",
+   "fix-DL-kids-a-01",
+   "fix-DL-kids-a-02",
+   "fix-DL-kids-b-01",
+   "fix-DL-kids-b-02",
+   "fix-DL-parents-entry-01",
+   "fix-DL-study-game-01",
+   "fix-DL-study-game-02",
+   "fix-DL-study-game-03",
+   "fix-DL-study-game-04",
+   "fix-WW-cinema-03",
+   "fix-WW-cinema-04",
+   "fix-WW-cinema-05",
+   "fix-WW-corridor-01",
+   "fix-WW-corridor-02",
+   "fix-WW-corridor-03",
+   "fix-WW-corridor-04",
+   "fix-WW-corridor-05",
+   "fix-WW-corridor-06",
+   "lens-ADJ-parents-bed-05",
+   "lens-DL-kids-a-01",
+   "lens-DL-kids-a-02",
+   "lens-DL-kids-b-01",
+   "lens-DL-kids-b-02",
+   "lens-DL-study-game-01",
+   "lens-DL-study-game-02",
+   "lens-DL-study-game-03",
+   "lens-DL-study-game-04",
+   "lens-WW-corridor-01",
+   "lens-WW-corridor-02",
+   "lens-WW-corridor-03",
+   "lens-WW-corridor-04",
+   "lens-WW-corridor-05",
+   "lens-WW-corridor-06"
+  ]
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [
+   "opal-sconce-2700",
+   "opal-vsconce-2700"
+  ],
+  "removed": [
+   "opal-sconce-3000",
+   "opal-vsconce-3000"
+  ],
+  "changed_ids": [
+   "led-lin-2700",
+   "opal-VANITY-LIN-guest-wc-03",
+   "opal-VANITY-LIN-parents-ensuite-04",
+   "opal-wall-read-2700",
+   "swing-disc-2700"
+  ]
+ }
+}

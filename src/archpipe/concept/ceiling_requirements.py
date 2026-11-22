@@ -19,6 +19,11 @@ def product_depth(kind, product_record=None):
         return dict(kind=kind, housing_depth_mm=None, source='UNRESOLVED: no selected product record')
     manufacturer, sku, _ = choice
     path = ROOT / 'assets/user/luminaires' / manufacturer / sku / (sku+'.ldt')
+    if not path.exists():
+        # INT2 (L6c): the ERCO products are not in the git-ignored assets/user library; their V10-verified LDTs are in the repo.
+        hits = sorted((ROOT / 'knowledge/lighting-products' / manufacturer / sku).glob(manufacturer + '-' + sku + '-*ldt*.ldt'))
+        if hits:
+            path = hits[0]
     manifest=path.with_name('product.json')
     if product_record is None:
         product_record=json.loads(manifest.read_text(encoding='utf-8')) if manifest.exists() else {}

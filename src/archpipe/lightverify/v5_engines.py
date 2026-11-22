@@ -162,3 +162,58 @@ def run(villa, rad_dir: Path, work: Path = ROOT / "out" / "LV" / "cycles", with_
             for r in CLUSTERS[cl]:                      # the three engines share one closed volume per cluster
                 L.mark(r, status)
     return L
+
+
+# ---------------------------------------------------------------- orientation of asymmetric distributions (found on L6c's ERCO wallwasher)
+ORIENT_L1_TOL = 0.15     # sum|Cycles - analytic| / sum(analytic) over a 5 x 5 floor grid under one light
+ORIENT_SUM_TOL = 0.10
+
+
+def kind_orientation(villa, work: Path = ROOT / "out" / "LV" / "kind", spin_add: float = 0.0, aims: dict | None = None, only: str | None = None) -> list:
+    """One product-bound placement of each kind, moved to the origin with its own aim and spin, in an unlit-wall room so only
+    direct light is read: Cycles (production light constructor) against the analytic engine on 25 floor points.
+    The whole-room V5 can hide an orientation error (it averages a plane); a single asymmetric light cannot.
+    `spin_add` is a seeded error for the negative test; `aims` {kind: aim} replaces the design's aim (to probe the other tilt azimuths)."""
+    import dataclasses
+    from ..lightcalc.direct import direct_illuminance
+    out = []
+    kinds = sorted({p.meta.get("kind") for p in villa.placements if p.meta.get("kind") and not p.meta.get("generic")})
+    for kind in [k for k in kinds if only in (None, k)]:
+        p = next(p for p in villa.placements if p.meta.get("kind") == kind and not p.meta.get("generic"))
+        w = work / (kind + ("-spin%g" % spin_add if spin_add else "") + ("-aim%g_%g" % tuple(aims[kind][:2]) if aims and kind in aims else ""))
+        (w / "ies").mkdir(parents=True, exist_ok=True)
+        (w / "ies" / "p.ies").write_bytes(Path(p.meta["ies_path"]).read_bytes())
+        aim = tuple((aims or {}).get(kind, p.aim))
+        P = dataclasses.replace(p, position=(0.0, 0.0, 2.7), dim=1.0, aim=aim)
+        spec = dict(id="L0", type="ies", cct_k=2700, ies="p.ies", lumens=P.photometry.integrated_flux(), position=[0, 0, 2.7],
+                    aim=list(aim), spin_deg=p.spin_deg + spin_add)
+        pts = [[x, y, 0.0] for x in (-2, -1, 0, 1, 2) for y in (-2, -1, 0, 1, 2)]
+        job = dict(src=str(ROOT / "src"), ies_dir=str(w / "ies"), lights=[spec],
+                   room=dict(polygon=[[-6, -6], [6, -6], [6, 6], [-6, 6]], floor=0.0, ceiling=3.0, rho_floor=0.0, rho_wall=0.0, rho_ceiling=0.0),
+                   points=pts, mf=1.0, samples=64, bounces=1)
+        try:
+            c = [r["direct_lux"] for r in run_cycles(job, w)["readings"]]
+        except Exception as e:
+            out.append(dict(kind=kind, error=str(e)))
+            continue
+        a = [direct_illuminance([P], tuple(q)) for q in pts]
+        out.append(dict(kind=kind, aim=tuple(round(x, 3) for x in aim), spin=p.spin_deg + spin_add, sum_dev=sum(c) / sum(a) - 1,
+                        l1=sum(abs(x - y) for x, y in zip(c, a)) / sum(a)))
+    return out
+
+
+def run_orientation(villa, L: LayerResult) -> None:
+    """Append the per-kind orientation results to V5 layer `L`; a failing kind makes every room that holds one unverified."""
+    res = L.results
+    for r in kind_orientation(villa):
+        if "error" in r:
+            res.append(check("LV5", "not_evaluated", "orientation/" + r["kind"], (), message="Cycles job failed: " + r["error"][-200:]))
+            continue
+        ok = r["l1"] <= ORIENT_L1_TOL and abs(r["sum_dev"]) <= ORIENT_SUM_TOL
+        res.append(check("LV5", "pass" if ok else "fail", "orientation/" + r["kind"], SRC, achieved=round(r["l1"], 3), required=ORIENT_L1_TOL,
+                         message="single %s (aim %s, spin %g) on 25 floor points: Cycles vs analytic total %+.1f %%, pattern error (L1) %.0f %% (bar %.0f %% / %.0f %%)"
+                         % (r["kind"], r["aim"], r["spin"], 100 * r["sum_dev"], 100 * r["l1"], 100 * ORIENT_L1_TOL, 100 * ORIENT_SUM_TOL)))
+        if not ok:
+            for f in villa.fixtures:
+                if f.kind == r["kind"]:
+                    L.mark(f.room, "fail")

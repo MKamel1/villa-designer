@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from archpipe import deliverables as D, model
+from archpipe import deliverables as D, spec_model as model
 
 SPEC = Path(__file__).resolve().parents[1] / "spec" / "apartment.yaml"
 

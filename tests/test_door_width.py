@@ -1,7 +1,7 @@
 """DOOR-01 per UK AD M Vol 1 para 2.20 and Table 2.1: positive and negative cases."""
 import unittest
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 
 WT = (model.WallType("INT", 100.0, (), False, ""), model.WallType("EXT", 300.0, (), True, ""))
 LV = (model.Level("L00", "L00", 0, 3000),)

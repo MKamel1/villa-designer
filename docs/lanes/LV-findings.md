@@ -1,5 +1,7 @@
 # LV findings (independent lighting verification, D1)
 
+> Current state: see **"Final verification (L6c)"** at the end of this file. Everything above it describes the L6b design and is kept as history.
+
 Run: `python -m archpipe.lightverify --design D1` (252 pass / 37 fail / 61 not evaluated; per room x scene table in `LV-report.md`,
 raw in `knowledge/lighting-verify/checks/LV.json`). Radiance results are the LV run of the merged L6b design (`villa_run --tag lv`, ab 6 + 12),
 frozen in `knowledge/lighting-verify/radiance/`.
@@ -106,3 +108,131 @@ Nothing is verified for V11 (DIALux not run) or V9 (declined); V10 data-sheet po
 3. Room-plane grid for the cinema (0.63 m) is too coarse for a +/-3 % direct result; a finer grid or an accepted tolerance (engine/L6b decision).
 4. V10 data-sheet points and V11 DIALux run (client/laptop).
 5. Fresh scene build of the merged design (lane RA) to repeat V3 on the true scene.
+
+
+---
+
+# Final verification (L6c): the ERCO-bound design (2026-11-21)
+
+Command: `python -m archpipe.lightverify --design D1 --scene <scene.json>` (see the top of `LV-report.md`; exit 1 = a failing check, 0 = none; today 1).
+Result: **353 pass / 17 fail / 29 not evaluated**; `out/checks/LV.json`, copy in `knowledge/lighting-verify/checks/LV.json`.
+Merged `origin/integ/aplus` (L6c, `1cf511a`). Radiance: my own full re-run of the L6c design (`villa_run --tag lv3`, ab 12 + 24, all 13 clusters, frozen in
+`knowledge/lighting-verify/radiance/`); it reproduces L6c's frozen zone sums within 1 % (parents' bedroom decorative zone 6 %, a 0.3 lx zone), so it is a
+repeat of the same code, not a second engine; independence comes from the analytic path, Cycles and the lumen method.
+**Scene used for V3: `/home/omar/archpipe/lanes/RA2/out/ra2/prod/scene.json`, sha256 `f7a7fe76418a04ff1fe75b2fdfe8596e095783bb2923155fd303afa35b9ee7b3`** (the newest
+workstation scene, 12:24 today). It is NOT a scene of the L6c lighting (its 125 lights are the LSEVO ones, 83 ids in common with the 132 L6c fixtures): V3 uses only its
+furniture/architecture geometry. A fresh build of the merged design fails (`jobq lv-scene-build-l6c`): `ValueError: support-marker-PATH-landing-gf-02: no real host at authored
+fixing anchor`, the PATH marker INT2 is moving. Re-run V3 on INT2's scene with `--scene`.
+
+## 1. The three failing tests (causes)
+* `test_v1_design.py::test_design_inputs_pass`: **L6c's diagnosis confirmed on the data.** The table pendant is 8 samples of 57.8 lm; V1's instance check compared each
+  with the whole fixture's record (462.5 lm); the 8 samples sum to 462.5 lm = the record. V1 was wrong: `instance_problems` now sums by parent. Tests: the sampled pendant
+  passes (fails on the old code, verified by stash) and a fixture whose samples do not add up (4 of 8 doubled) is still caught.
+* `test_v5_v6_v7.py` (2 tests): they read the frozen Radiance of the L6b design. Regenerated: `ARCHPIPE_L6_LOCAL=1 PATH=~/archpipe/tools/radiance-6.0.1/bin:$PATH PYTHONPATH=src
+  python -m archpipe.lightcalc.villa_run --tag lv3 --out out/LV3` (or `python -m archpipe.lightverify --regen-radiance --freeze`), copied to `knowledge/lighting-verify/radiance/`.
+  With the old files the two tests fail, with the regenerated ones all 6 pass; no tolerance was touched.
+
+## 2. Layers V1-V8, V10, V12 on the L6c design
+| layer | result |
+|---|---|
+| V1 | 20 / 20 kinds; DL integrates 1065.9 lm (bound 1065), PEN-LIN 3557.5 lm (bound 3558). |
+| V2 | 119 pass, 0 fail, **26 n/e**: the L2 snapshot `d1-elements.json` is still stale (6 engine-only, 20 moved fixtures). Regenerating it frees 9 rows outright and removes one blocker from 11 more (lane L2/lead). |
+| V3 | 39 / 39 planes (0 sensors inside/under any object, hosted planes within 5 mm) on the scene above. |
+| V4 | 26 / 26 (engine untouched). |
+| V5 | 14 / 20 (15 clusters + 5 single-light probes). Radiance vs analytic direct within 0.1 % except parents' bedroom +7.5 %. Cycles: see findings A and B. |
+| V6 | 12 / 13: dressing room -40 % (explained in the L6b section, unchanged: 390 lx by Radiance, Cycles, analytic; lumen method 646 lx is a poor estimator at room index 0.43). Parents' bedroom +4 %. |
+| V7 | ab 12 -> 24: 36 / 39 within 3 %. Fails: **pillow-1 +3.21 %** (pillow-2 +2.39 %, room-parents-bed +2.21 %: the least-converged plane, a small directional plane), and direct-light grid halving: **room-corridor -6.23 % (0.85 m grid)**, **room-parents-bed -3.39 % (0.43 m)**. Engine grid pitch, not mine to fix. |
+| V8 | 9 / 9 seeded errors caught (unchanged). |
+| V10 | see 3. |
+| V12 | 20 / 20 headroom, **worst 0.761 (`pe-basin`, ensuite basin) confirmed** (second: dirty-kitchen run 0.756; island pendants 0.70). New: `cards_met` re-reads every average-gauged card from my own Radiance with the commissioned drivers: 20 of 20 within x0.91-1.08 (L6c says 0.91-1.09). |
+
+### 3. V10: every bound ERCO product against its own lab data (`v10_erco.py`, data-sheet numbers parsed by me from the PDFs, not from LP's transcription)
+Bound file = byte-identical ERCO download for DL, DLN, ADJ, WW, DESK; the Jilly's derived file integrates to exactly 2 x the per-module file (1.000). `.ies` vs `.ldt` agree.
+
+| kind | product | lumens: integrated vs data sheet | Imax: file vs data sheet | cone / beam | status |
+|---|---|---|---|---|---|
+| DL | 41321 | 1065.9 vs 1065 (+0.08 %) | 1148 vs 1147 | beam angle 56 deg ok | pass |
+| DLN | 41369 | 904.7 vs 904 (+0.08 %) | 535 vs 535 | 89 deg ok | pass |
+| WW | 41374 | 399.1 vs 399 (+0.01 %) | 479 vs 471 (+1.6 %) | - | pass |
+| PEN-LIN | 50674 (x2 file) | 3557.5 vs 3558 (-0.01 %) | 1054 vs 1055 | 86 deg ok | pass |
+| DESK | 31327 | 233.8 vs 234 (-0.08 %) | 461 vs 454 (+1.6 %) | - | pass |
+| **ADJ** | A9000028 | 300.3 vs 304 (-1.2 %) | 22055 vs 22846 (-3.5 %) | lux on axis 1-5 m -3.4 to -3.5 % (ok); **beam diameter at 50 %: file 0.100/0.199/0.299/0.398/0.498 m vs data sheet 0.08/0.16/0.25/0.33/0.41 (+20 to +25 %); angle 5.7 vs 4.7 deg** | **PARTIAL** |
+
+**Does the ADJ beam discrepancy matter for the armchair reading plane?** The file reaches the published 4.7 deg only at 65 % of its peak, so the published figure is a different
+beam definition or a narrower core than the file; lumens, Imax and axial lux all agree with the file, so the file is internally consistent with three of the four published
+numbers. What if the published beam were literal (everything x 4.7/5.7)? Armchair plane (card 200 lx, ADJ at driver 0.668, direct 147 lx of the 200):
+(A) narrower with Imax kept (flux falls to 204 lm, contradicting the published 304 lm): ADJ direct 88 lx, plane ~141 lx, **driver needed 1.11 > 0.80: not absorbed**;
+(B) narrower with flux kept (peak 32 400 cd, contradicting the published Imax): ADJ direct 130 lx, plane ~183 lx (-8.5 %), **driver 0.76 <= 0.80: absorbed by V12 headroom**.
+Honest reading: for the lab file the reading plane is met; if the published beam is physically right and the file wrong, the armchair could fall to 141-183 lx and case (A) needs a
+second spot. Lounge rows therefore stay **unverified** (V10 partial) until the supplier's actual sample or an ERCO statement of the beam definition closes it. The two accent
+ADJ zones (dining sideboard, parents' bedroom) carry no card and do not block their rooms.
+
+## 4. Judgement: L6c's patch-radiosity change (8 -> 16 patches, bar 6 % -> 8 %)
+**Mostly a legitimate resolution correction; the 8 % bar is partly tuned to the pantry.** Floor mean, 100 % output, vs Radiance (Radiance = L6c's published full-output plane means, `villa-after-rows.json`; my own run reproduces them within 1 %):
+
+| room | Radiance lx | 4 patches | 8 | 12 | **16** | 24 | 32 |
+|---|---|---|---|---|---|---|---|
+| guest WC | 214.6 | +26.9 % | **+9.9 %** | +4.2 % | **+2.0 %** | -0.3 % | |
+| parents' dressing | 390.3 | +32.9 % | **+9.5 %** | +3.5 % | **+0.9 %** | -1.3 % | |
+| family bath | 258.2 | +26.5 % | **+7.1 %** | +1.7 % | **-0.8 %** | -3.3 % | |
+| pantry | 199.1 | +9.0 % | **+9.0 %** (8) | -3.2 % | **-7.0 %** | -8.7 % | -9.3 % |
+
+For the three rooms the error is monotone in the patch size and crosses zero at ~16-24: classic discretisation error of a solver that never converged at 8 patches (it was 6 % only
+for the old narrow distributions). Converged (24), the three agree with Radiance within 3.3 %. L6c's claim and its lesson are supported on evidence, and the 8-patch result was
+the outlier, not the 16. **The pantry is not a resolution story:** it moves *away* from Radiance as the patches get finer (+9.0 -> -9.3 %); the 8 % bar passes it at 16 patches only
+because the curve crosses -7 % there. Part of the gap is the sensor plane: Radiance's plane is inset 0.10 m from the walls of the 2.9 x 1.0 m room, the radiosity averages the full
+floor; restricted to the inset footprint the converged (24) numbers are pantry -5.7 %, guest WC +2.3 %, family bath -1.1 %, dressing +0.6 %. A residual -5.7 % in the narrow room is
+unexplained (candidates: the 2.9:1 patch aspect, the bounding-box idealisation). So: resolution 16 is justified; the **bar 8 % was set to fit the pantry** and is not independently
+defended. Recommended (not mine to edit): footprint-matched comparison at 24 patches and a 6 % bar with the pantry's residual named. Guard in my tests:
+`tests/lightverify/test_radiosity_resolution.py` (the 8-patch error > 6 %, 16 removes more than half, 24 within 3 %, monotone; a wrong wall reflectance is still caught).
+
+## 5. LA4 glare and the lowest dimming levels
+**LA4 (bed-foot DL 23 217 cd/m2).** The old bed-foot position is not in the repo (the intermediate design), so that figure is **unverified**. Independent recomputation for the DL that
+stayed (`DL-parents-bed-04`, ERCO 41321, opening 76 mm, I(39.4 deg) = 315 cd): **L = 315 / (pi/4 * 0.076^2 * cos 39.4) = 89 953 cd/m2** (engine 89 877 at its dim 0.999), 30x the cap
+of 3000. The check passes ("none in view") only because this DL is **53.7 deg** from the policy sightline (45 deg cone). The sightline set has one reclined view (toward the foot, 17 deg up);
+for a person lying on the pillow end looking straight up, the DL is **39.4 deg** off the axis, inside the cone, at ~90 000 cd/m2 at Day (x1.0) and ~36 000 at Evening (x0.40). So LA4 is
+satisfied by the choice of sightline, not by luminance. **Design finding (not fixed): add a "lying, looking up" sightline; the DL's cut-off (data sheet 40 deg) is exceeded at 39.4 deg by 0.6 deg.**
+Reproduce: `luminance_toward(<placement DL-parents-bed-04>, (20.33, -26.191, 0.7))`.
+
+**Output fraction (scene level x driver) below 15 % per zone** (131 zone-scene pairs; DALI `1 %-100 %` CCR printed on every ERCO data sheet used; flicker data printed "TLA SVM <= 0.1 / 0.4,
+PstLM <= 1", the level at which it was measured is not stated; **driver datasheet minimum: 1 % (printed); flicker below 100 %: unknown**):
+| zone | scene | output |
+|---|---|---|
+| Z-B-DINING-TABLE-PENDANT (Jilly) | Evening | **3.9 %** (lowest; was not mentioned) |
+| same | Dinner | 6.1 % |
+| same | Day | 13.0 % |
+| Z-B-KITCHEN-ISLAND-PENDANTS (generic globe) | Reading | 14 % |
+| night/orientation zones at level 0.10 (NL, TOE, STEP, PATH generics; `Z-B-LOUNGE-ROUTE-NIGHT` = ERCO DL) | Night / Film | 10 % |
+The table pendant is the only bound product that works near the floor of its range (3.9 % is 3.9 x the 1 % minimum; the Jilly is CCR, so no PWM flicker by construction, but the
+datasheet does not give SVM at that level). The generic night strips' driver floor is unknown (no datasheet). Recommendation: a smaller pendant (the supplier row already asks 700-1800 lm).
+
+## 6. New defects (reproduced, not fixed)
+A. **Production Cycles throws the ERCO wallwasher 90 deg away from the engine and Radiance.** Reproduce: `PYTHONPATH=src python -c "from archpipe.lightcalc.villa import Villa; from archpipe.lightverify import v5_engines as V; print([r for r in V.kind_orientation(Villa()) if r['kind']=='WW'])"`
+(one WW at its design aim (0,-0.25,-1), spin 0, 25 floor points, Cycles with the production `add_light` vs the analytic path): total **+35.6 %**, pattern error **153 %**; with +90 deg of
+extra spin **-7.5 % / 8 %**; +180 -> +34 % / 151 %; +270 -> +72 % / 253 %. Same for aims (+-0.25, 0, -1). The engine (and Radiance, which agrees with it) has the WW's C0 throw toward the
+direction of the aim tilt; `villa_scene.add_light` (`to_track_quat("-Z","Y")` then `spin + IES_AZIMUTH_OFFSET_DEG`) is calibrated for straight-down lights (ADR-0010) and is 90 deg off for a
+tilted aim. Consequences: the 12 WW in the production render wash sideways, and V5's Cycles rows fail where WW sit (corridor direct **+164 %**, ensuite +9 %); every V5-checked number of
+those rooms is by Radiance + analytic only. A guard now exists (`v5_engines.kind_orientation`, 5 single-light probes, tests `test_v5_orientation.py`); it fails on this today.
+B. DESK (Lucy): Cycles reads **7.7 % below** the analytic/Radiance path for a single light (pattern right, L1 8 %), which makes kids' A/B Cycles direct -4.1 / -4.5 % (bar 3 %). Not diagnosed.
+C. Parents' bedroom: analytic direct is +7.5 % over Radiance and entirely from `Z-GF-PARENTS-ENTRY-AMBIENT` (the entry DL, partly hidden by the wall between entry and bedroom: analytic 1577 vs
+Radiance 858 at pillow-1, 152 vs 0 at pillow-2; every other zone within 0.4 %). The analytic path has no occlusion; Radiance (with walls) is right. Cycles direct is a further -4.2 % under Radiance (undiagnosed).
+D. The L2 snapshot is still stale (V2 26 n/e). `knowledge/lighting-verify/dialux/` still holds the L6b package (regenerate with `lightverify.dialux_pack` before V11).
+
+## 7. Rows: verified vs unverified (39 room-plane rows)
+**Verified (8):** family (Day) room-family; family-bath fb-basin + room; guest-wc gwc-basin + room; hall-b; kitchen-island; store-ramp.
+**Unverified (31), by the first failing layer:**
+* V2 n/e only (stale L2 snapshot; every other layer passes): dirty-kitchen x2, kitchen x5 (island-prep, island-seating, cooktop, sink, room), living, pantry = 9
+* V6 n/e only (no lumen-method estimate for an open-plan sub-plane): dining-table, homework-end, daybed = 3 (dressing room: V6 -40 %, explained, = 1)
+* V5 FAIL only (WW orientation in Cycles / ensuite Cycles +9 %): cinema x2, parents-ensuite x2 = 4; corridor V5 + V7 grid = 1
+* V2 n/e + V5 FAIL: kids-a x3, kids-b x2, study-game x3 = 8; parents-bed x3 (V5, V7 pillow-1 / grid) = 3
+* V10 partial (ADJ beam): lounge armchair, room-lounge = 2
+Nothing is verified by V11 (DIALux not run) or V9 (declined).
+
+## 8. What remains open before purchase
+1. **V11 DIALux** (laptop): pending; the package must be regenerated for the L6c fixtures first.
+2. ADJ beam: ERCO to state the beam definition or the supplier's sample to be measured; otherwise a second spot at the armchair. Do not buy the ADJ on the file alone.
+3. Renderer: fix the tilted-aim azimuth of the asymmetric WW (finding A) before any render is used as evidence for wallwash; re-run V5.
+4. L2 snapshot regeneration (frees 9 rows outright); INT2's scene to repeat V3 on the true scene.
+5. Parents' bedroom: LA4 "lying, looking up" sightline against the bed DL (finding in 5); pendant oversizing (3.9 % at Evening).
+6. Pantry radiosity bar (4); V7 grid pitches (corridor 0.85 m, parents' bedroom 0.43 m).
+7. Egypt availability, R9 and cut-out sizes for the ERCO products (the supplier sheet asks).

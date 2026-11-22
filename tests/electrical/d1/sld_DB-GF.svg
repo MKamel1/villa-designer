@@ -43,20 +43,20 @@
 <text x="178" y="446" text-anchor="middle">Split AC 1.5 HP.</text>
 <text x="178" y="460" text-anchor="middle">study-game</text>
 </g>
-<g id="DB-GF/L3">
+<g id="DB-GF/L2">
 <line x1="270" y1="250" x2="270" y2="270" stroke="#8b4513" stroke-width="2"/>
 <rect x="234" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="270" y="283" text-anchor="middle" font-weight="bold">L3 (L1)</text>
+<text x="270" y="283" text-anchor="middle" font-weight="bold">L2 (L1)</text>
 <text x="270" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="270" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="270" y1="314" x2="270" y2="370" stroke="#8b4513" stroke-width="2"/>
 <text x="270" y="384" text-anchor="middle">1.5 mm2</text>
-<text x="270" y="396" text-anchor="middle">31.2 m</text>
-<text x="270" y="408" text-anchor="middle">Ib 0.0 A</text>
-<text x="270" y="420" text-anchor="middle">dV 0.76 %</text>
+<text x="270" y="396" text-anchor="middle">42.4 m</text>
+<text x="270" y="408" text-anchor="middle">Ib 0.7 A</text>
+<text x="270" y="420" text-anchor="middle">dV 1.16 %</text>
 <rect x="230" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="270" y="446" text-anchor="middle">Escape/night ma.</text>
-<text x="270" y="460" text-anchor="middle">corridor,landing-gf</text>
+<text x="270" y="446" text-anchor="middle">Lighting parent.</text>
+<text x="270" y="460" text-anchor="middle">parents-dressing-ext,parents-dressing</text>
 </g>
 <g id="DB-GF/S11">
 <line x1="362" y1="250" x2="362" y2="270" stroke="#8b4513" stroke-width="2"/>
@@ -98,7 +98,7 @@
 <text x="546" y="384" text-anchor="middle">2.5 mm2</text>
 <text x="546" y="396" text-anchor="middle">9.5 m</text>
 <text x="546" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="546" y="420" text-anchor="middle">dV 1.99 %</text>
+<text x="546" y="420" text-anchor="middle">dV 2.00 %</text>
 <rect x="506" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="546" y="446" text-anchor="middle">Sockets kids-a</text>
 <text x="546" y="460" text-anchor="middle">kids-a</text>
@@ -141,117 +141,117 @@
 <text x="822" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="822" y1="314" x2="822" y2="370" stroke="#111" stroke-width="2"/>
 <text x="822" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="822" y="396" text-anchor="middle">109.5 m</text>
+<text x="822" y="396" text-anchor="middle">101.6 m</text>
 <text x="822" y="408" text-anchor="middle">Ib 1.9 A</text>
-<text x="822" y="420" text-anchor="middle">dV 2.47 %</text>
+<text x="822" y="420" text-anchor="middle">dV 2.36 %</text>
 <rect x="782" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="822" y="446" text-anchor="middle">Lighting landin.</text>
 <text x="822" y="460" text-anchor="middle">landing-gf,stair-gf</text>
 </g>
-<g id="DB-GF/L2">
+<g id="DB-GF/S3">
 <line x1="914" y1="250" x2="914" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="878" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="914" y="283" text-anchor="middle" font-weight="bold">L2 (L2)</text>
-<text x="914" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="914" y="283" text-anchor="middle" font-weight="bold">S3 (L2)</text>
+<text x="914" y="295" text-anchor="middle">RCBO 16A B</text>
 <text x="914" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="914" y1="314" x2="914" y2="370" stroke="#111" stroke-width="2"/>
-<text x="914" y="384" text-anchor="middle">1.5 mm2</text>
-<text x="914" y="396" text-anchor="middle">35.2 m</text>
-<text x="914" y="408" text-anchor="middle">Ib 0.5 A</text>
-<text x="914" y="420" text-anchor="middle">dV 1.01 %</text>
+<text x="914" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="914" y="396" text-anchor="middle">22.4 m</text>
+<text x="914" y="408" text-anchor="middle">Ib 16.0 A</text>
+<text x="914" y="420" text-anchor="middle">dV 3.68 %</text>
 <rect x="874" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="914" y="446" text-anchor="middle">Lighting parent.</text>
-<text x="914" y="460" text-anchor="middle">parents-dressing,parents-entry</text>
+<text x="914" y="446" text-anchor="middle">Sockets study-g.</text>
+<text x="914" y="460" text-anchor="middle">study-game,gallery-end</text>
 </g>
-<g id="DB-GF/S3">
+<g id="DB-GF/S6">
 <line x1="1006" y1="250" x2="1006" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="970" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1006" y="283" text-anchor="middle" font-weight="bold">S3 (L2)</text>
+<text x="1006" y="283" text-anchor="middle" font-weight="bold">S6 (L2)</text>
 <text x="1006" y="295" text-anchor="middle">RCBO 16A B</text>
 <text x="1006" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1006" y1="314" x2="1006" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1006" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1006" y="396" text-anchor="middle">22.4 m</text>
+<text x="1006" y="396" text-anchor="middle">23.4 m</text>
 <text x="1006" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="1006" y="420" text-anchor="middle">dV 3.68 %</text>
+<text x="1006" y="420" text-anchor="middle">dV 3.81 %</text>
 <rect x="966" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1006" y="446" text-anchor="middle">Sockets study-g.</text>
-<text x="1006" y="460" text-anchor="middle">study-game,gallery-end</text>
+<text x="1006" y="446" text-anchor="middle">Sockets corridor</text>
+<text x="1006" y="460" text-anchor="middle">corridor</text>
 </g>
-<g id="DB-GF/S6">
+<g id="DB-GF/S9">
 <line x1="1098" y1="250" x2="1098" y2="270" stroke="#111" stroke-width="2"/>
 <rect x="1062" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1098" y="283" text-anchor="middle" font-weight="bold">S6 (L2)</text>
+<text x="1098" y="283" text-anchor="middle" font-weight="bold">S9 (L2)</text>
 <text x="1098" y="295" text-anchor="middle">RCBO 16A B</text>
 <text x="1098" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1098" y1="314" x2="1098" y2="370" stroke="#111" stroke-width="2"/>
 <text x="1098" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1098" y="396" text-anchor="middle">23.4 m</text>
+<text x="1098" y="396" text-anchor="middle">24.3 m</text>
 <text x="1098" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="1098" y="420" text-anchor="middle">dV 3.81 %</text>
+<text x="1098" y="420" text-anchor="middle">dV 3.93 %</text>
 <rect x="1058" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1098" y="446" text-anchor="middle">Sockets corridor</text>
-<text x="1098" y="460" text-anchor="middle">corridor</text>
-</g>
-<g id="DB-GF/S9">
-<line x1="1190" y1="250" x2="1190" y2="270" stroke="#111" stroke-width="2"/>
-<rect x="1154" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1190" y="283" text-anchor="middle" font-weight="bold">S9 (L2)</text>
-<text x="1190" y="295" text-anchor="middle">RCBO 16A B</text>
-<text x="1190" y="307" text-anchor="middle">30 mA Type A</text>
-<line x1="1190" y1="314" x2="1190" y2="370" stroke="#111" stroke-width="2"/>
-<text x="1190" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1190" y="396" text-anchor="middle">24.3 m</text>
-<text x="1190" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="1190" y="420" text-anchor="middle">dV 3.93 %</text>
-<rect x="1150" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1190" y="446" text-anchor="middle">Sockets kids-b .</text>
-<text x="1190" y="460" text-anchor="middle">kids-b,parents-dressing</text>
+<text x="1098" y="446" text-anchor="middle">Sockets kids-b .</text>
+<text x="1098" y="460" text-anchor="middle">kids-b,parents-dressing</text>
 </g>
 <g id="DB-GF/D1">
+<line x1="1190" y1="250" x2="1190" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="1154" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1190" y="283" text-anchor="middle" font-weight="bold">D1 (L3)</text>
+<text x="1190" y="295" text-anchor="middle">RCBO 10A C</text>
+<text x="1190" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1190" y1="314" x2="1190" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1190" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="1190" y="396" text-anchor="middle">10.4 m</text>
+<text x="1190" y="408" text-anchor="middle">Ib 6.1 A</text>
+<text x="1190" y="420" text-anchor="middle">dV 1.27 %</text>
+<rect x="1150" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1190" y="446" text-anchor="middle">Split AC 1.5 HP.</text>
+<text x="1190" y="460" text-anchor="middle">kids-a</text>
+</g>
+<g id="DB-GF/D2">
 <line x1="1282" y1="250" x2="1282" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="1246" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1282" y="283" text-anchor="middle" font-weight="bold">D1 (L3)</text>
+<text x="1282" y="283" text-anchor="middle" font-weight="bold">D2 (L3)</text>
 <text x="1282" y="295" text-anchor="middle">RCBO 10A C</text>
 <text x="1282" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1282" y1="314" x2="1282" y2="370" stroke="#777" stroke-width="2"/>
 <text x="1282" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1282" y="396" text-anchor="middle">10.4 m</text>
+<text x="1282" y="396" text-anchor="middle">14.4 m</text>
 <text x="1282" y="408" text-anchor="middle">Ib 6.1 A</text>
-<text x="1282" y="420" text-anchor="middle">dV 1.27 %</text>
+<text x="1282" y="420" text-anchor="middle">dV 1.47 %</text>
 <rect x="1242" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="1282" y="446" text-anchor="middle">Split AC 1.5 HP.</text>
-<text x="1282" y="460" text-anchor="middle">kids-a</text>
+<text x="1282" y="460" text-anchor="middle">kids-b</text>
 </g>
-<g id="DB-GF/D2">
+<g id="DB-GF/D6">
 <line x1="1374" y1="250" x2="1374" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="1338" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1374" y="283" text-anchor="middle" font-weight="bold">D2 (L3)</text>
-<text x="1374" y="295" text-anchor="middle">RCBO 10A C</text>
+<text x="1374" y="283" text-anchor="middle" font-weight="bold">D6 (L3)</text>
+<text x="1374" y="295" text-anchor="middle">RCBO 10A B</text>
 <text x="1374" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1374" y1="314" x2="1374" y2="370" stroke="#777" stroke-width="2"/>
 <text x="1374" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1374" y="396" text-anchor="middle">14.4 m</text>
-<text x="1374" y="408" text-anchor="middle">Ib 6.1 A</text>
-<text x="1374" y="420" text-anchor="middle">dV 1.47 %</text>
+<text x="1374" y="396" text-anchor="middle">18.4 m</text>
+<text x="1374" y="408" text-anchor="middle">Ib 9.1 A</text>
+<text x="1374" y="420" text-anchor="middle">dV 2.12 %</text>
 <rect x="1334" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1374" y="446" text-anchor="middle">Split AC 1.5 HP.</text>
-<text x="1374" y="460" text-anchor="middle">kids-b</text>
+<text x="1374" y="446" text-anchor="middle">Storage water h.</text>
+<text x="1374" y="460" text-anchor="middle">parents-ensuite</text>
 </g>
-<g id="DB-GF/D6">
+<g id="DB-GF/L3">
 <line x1="1466" y1="250" x2="1466" y2="270" stroke="#777" stroke-width="2"/>
 <rect x="1430" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
-<text x="1466" y="283" text-anchor="middle" font-weight="bold">D6 (L3)</text>
-<text x="1466" y="295" text-anchor="middle">RCBO 10A B</text>
+<text x="1466" y="283" text-anchor="middle" font-weight="bold">L3 (L3)</text>
+<text x="1466" y="295" text-anchor="middle">RCBO 6A B</text>
 <text x="1466" y="307" text-anchor="middle">30 mA Type A</text>
 <line x1="1466" y1="314" x2="1466" y2="370" stroke="#777" stroke-width="2"/>
-<text x="1466" y="384" text-anchor="middle">2.5 mm2</text>
-<text x="1466" y="396" text-anchor="middle">18.4 m</text>
-<text x="1466" y="408" text-anchor="middle">Ib 9.1 A</text>
-<text x="1466" y="420" text-anchor="middle">dV 2.12 %</text>
+<text x="1466" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="1466" y="396" text-anchor="middle">31.2 m</text>
+<text x="1466" y="408" text-anchor="middle">Ib 0.0 A</text>
+<text x="1466" y="420" text-anchor="middle">dV 0.76 %</text>
 <rect x="1426" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
-<text x="1466" y="446" text-anchor="middle">Storage water h.</text>
-<text x="1466" y="460" text-anchor="middle">parents-ensuite</text>
+<text x="1466" y="446" text-anchor="middle">Escape/night ma.</text>
+<text x="1466" y="460" text-anchor="middle">corridor,landing-gf</text>
 </g>
 <g id="DB-GF/S1">
 <line x1="1558" y1="250" x2="1558" y2="270" stroke="#777" stroke-width="2"/>
@@ -263,7 +263,7 @@
 <text x="1558" y="384" text-anchor="middle">2.5 mm2</text>
 <text x="1558" y="396" text-anchor="middle">13.7 m</text>
 <text x="1558" y="408" text-anchor="middle">Ib 16.0 A</text>
-<text x="1558" y="420" text-anchor="middle">dV 2.54 %</text>
+<text x="1558" y="420" text-anchor="middle">dV 2.55 %</text>
 <rect x="1518" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="1558" y="446" text-anchor="middle">Sockets landing.</text>
 <text x="1558" y="460" text-anchor="middle">landing-gf</text>
@@ -313,5 +313,5 @@
 <text x="1834" y="446" text-anchor="middle">Sockets corridor</text>
 <text x="1834" y="460" text-anchor="middle">corridor</text>
 </g>
-<text x="40" y="546">DB-GF demand 27.8 kVA (own diversified loads); installation max demand 77.4 kVA. Generated from the same Design as the board schedule.</text>
+<text x="40" y="546">DB-GF demand 27.9 kVA (own diversified loads); installation max demand 77.5 kVA. Generated from the same Design as the board schedule.</text>
 </svg>

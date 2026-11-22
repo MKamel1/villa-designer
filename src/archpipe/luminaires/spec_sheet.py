@@ -98,7 +98,7 @@ ANSWER_STEPS = [
     "For each tag, answer one of: AVAILABLE (as the reference), EQUIVALENT (name the product), NOT FOUND.",
     "For an EQUIVALENT, send the product's IES or LDT file and its datasheet (PDF). We check it against the performance columns.",
     "If the supplier cannot send an IES/LDT, send the datasheet and the maker's name: we will fetch it, and the answer stays 'unconfirmed'.",
-    "Please state for every product: lumens, CCT, CRI (R9 if known), beam angle, IP, dimming protocol, cut-out size, finish, lead time, price.",
+    "Please state for every product: lumens, CCT, CRI (R9 if known), beam angle, IP, dimming protocol, cut-out size, finish. No prices or lead times at this stage.",
     "Return the same workbook with the answer columns filled, or a list of tags with the product code. Names you cannot find: leave blank.",
     "We reply with ACCEPT, ACCEPT WITH DIMMING CHANGE (the commissioning level of the zone changes; nothing else), or REJECT with the reasons.",
 ]

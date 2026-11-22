@@ -1,0 +1,1058 @@
+{
+ "scene": {
+  "path": "/home/omar/archpipe/lanes/INT2/out/int2/prod/scene.json",
+  "sha256": "045f0487868e3bce8af21d1ed298ec4df4081a8d1fd7657cd1e250eaaeb0b77f"
+ },
+ "ifc": {
+  "path": "/home/omar/archpipe/lanes/INT2/out/exchange/D1/D1-ARCH.ifc",
+  "sha256": "8598f929cd05dc4e2a320f299f8fc4b3df9a5626436c229581cf606917b86b5a",
+  "kernel_failures": []
+ },
+ "historic_and_synthetic": [
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "r3 party-wall flight",
+   "revit_pairs": 33,
+   "caught": 33,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "U-stair in the old bay",
+   "revit_pairs": 13,
+   "caught": 13,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "party-wall flight, corrected",
+   "revit_pairs": 13,
+   "caught": 13,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "U-stair along the party wall",
+   "revit_pairs": 13,
+   "caught": 13,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "party-wall flight (r8, landing 1.2 m)",
+   "revit_pairs": 13,
+   "caught": 13,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D01",
+   "source": "historic",
+   "check": "K01",
+   "option": "U-stair in the street-end bay",
+   "revit_pairs": 13,
+   "caught": 13,
+   "missed": [],
+   "extra": 0,
+   "ok": true,
+   "expect": "fail",
+   "got": "fail"
+  },
+  {
+   "row": "D02",
+   "source": "historic-reconstructed",
+   "check": "K01 exact",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "exact geometry: stair-U-stair along the party wall half landing passes through column-1590377-B: interpenetration 0.2 mm where 0.05 mm is allowed; crossing region x3.",
+   "scene_resolution": "same boxes rounded to 1 mm (scene resolution), 2 mm tolerance: PASS (not seen)"
+  },
+  {
+   "row": "D03",
+   "source": "historic-reconstructed",
+   "check": "K02",
+   "option": "P3",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "n_walls_flagged": 4,
+   "learnings_count": 8,
+   "detail": "wall-B-11 +200 mm; wall-B-12 +795 mm; wall-B-15 +100 mm; wall-B-16 +100 mm"
+  },
+  {
+   "row": "D03-fixed",
+   "source": "control",
+   "check": "K02",
+   "option": "P3",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "row": "D03",
+   "source": "historic-reconstructed",
+   "check": "K02",
+   "option": "P4",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "n_walls_flagged": 6,
+   "learnings_count": 9,
+   "detail": "wall-B-11 +200 mm; wall-B-12 +795 mm; wall-B-15 +100 mm; wall-B-16 +100 mm; wall-B-17 +100 mm; wall-B-18 +150 mm"
+  },
+  {
+   "row": "D03-fixed",
+   "source": "control",
+   "check": "K02",
+   "option": "P4",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "row": "D04",
+   "source": "historic-reconstructed",
+   "check": "K04",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "head at z -0.900, soffit above at z -1.005: clearance -105 mm, 0 mm needed"
+  },
+  {
+   "row": "D04-fixed",
+   "source": "control",
+   "check": "K04",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "row": "D05-asbuilt",
+   "source": "control",
+   "check": "K03",
+   "option": "P3",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "0 box-overlapping pairs tested door/window vs column; none interpenetrates more than 0.05 mm"
+  },
+  {
+   "row": "D05-asbuilt",
+   "source": "control",
+   "check": "K03",
+   "option": "P4",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "0 box-overlapping pairs tested door/window vs column; none interpenetrates more than 0.05 mm"
+  },
+  {
+   "row": "D05",
+   "source": "synthetic",
+   "check": "K03",
+   "option": "entrance over column 1590377",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "door-GF-entrance passes through column-1590377: interpenetration 100.0 mm where 0.05 mm is allowed; crossing region x3.6"
+  },
+  {
+   "row": "D06",
+   "source": "control",
+   "check": "K05 (credit vs built)",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "8 credited windows, 8 built (frozen r7 P3)"
+  },
+  {
+   "row": "D06",
+   "source": "synthetic",
+   "check": "K05 (credit vs built)",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "('kitchen', 15.0, -23.591): built 0 times where exactly 1 is expected"
+  },
+  {
+   "row": "D07",
+   "source": "historic",
+   "check": "K06",
+   "option": "P3",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "glass starts 0 mm above the floor and ends 350 mm below the soffit/beam; 150 mm allowed"
+  },
+  {
+   "row": "D07",
+   "source": "historic",
+   "check": "K06",
+   "option": "P4",
+   "expect": "(info)",
+   "got": "fail",
+   "ok": true,
+   "detail": "glass starts 0 mm above the floor and ends 350 mm below the soffit/beam; 150 mm allowed"
+  },
+  {
+   "row": "D08",
+   "source": "historic",
+   "check": "K07",
+   "subject": "LT-02",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "pendant top +0 mm relative to the ceiling (must not pass it); emitter datum 2.243 vs intended 2.000 m (+243 mm)"
+  },
+  {
+   "row": "D08",
+   "source": "historic",
+   "check": "K07",
+   "subject": "LT-03",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "pendant top +0 mm relative to the ceiling (must not pass it); emitter datum 2.243 vs intended 2.000 m (+243 mm)"
+  },
+  {
+   "row": "D08",
+   "source": "historic",
+   "check": "K07",
+   "subject": "LT-05",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "pendant top +0 mm relative to the ceiling (must not pass it); emitter datum 2.243 vs intended 2.000 m (+243 mm)"
+  },
+  {
+   "row": "D08",
+   "source": "synthetic",
+   "check": "K07",
+   "subject": "LT-01 shade top 2717 vs ceiling 2700 (LEARNINGS l0096)",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "pendant top +17 mm relative to the ceiling (must not pass it); emitter datum 2.250 vs intended 2.250 m (+0 mm)"
+  },
+  {
+   "row": "D09",
+   "source": "historic",
+   "check": "K08",
+   "expect": "fail (families whose bbox does not match their stated size)",
+   "got": "fail",
+   "ok": true,
+   "n_families": 4,
+   "n_flagged": 4,
+   "detail": "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary: built bbox [822, 918, 1645] mm vs stated size [711, 813] mm, worst 2; linear_ceiling_mount_parametric_111_bimlibrary.co_: built bbox [1880, 1219, 1981] mm vs stated size [64, 102, 1829] mm, worst 3020; pendant_cone_16inch_106_bimlibrary.co_: built bbox [1219, 1219, 1465] mm vs stated size [406] mm, worst 200.0 %; refrigerator_4_french_doors_08_bimlibrary.co_: built bbox [1009, 874, 1854] mm vs stated size [914, 711, 1854] mm, worst 41"
+  },
+  {
+   "row": "D10/D11/D12",
+   "source": "control",
+   "check": "K09",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "181 expected ids against the frozen D1F read-back; hatch has Mark=None and is identified by spec_id (kitchen-sink-pass-through); a Mark-keyed post-condition (the historic D10 false negative) would report 'built 0 times'"
+  },
+  {
+   "row": "D10",
+   "source": "historic",
+   "check": "K09 keyed on Mark only (the old post-condition)",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "reproduces the historic false 'built 0 times' when identity is keyed on Mark only; the id-based check above does not have the defect"
+  },
+  {
+   "row": "D11",
+   "source": "synthetic",
+   "check": "K09",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "5 approved details removed from the as-built list: 5 flagged"
+  },
+  {
+   "row": "D12",
+   "source": "synthetic",
+   "check": "K09",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "one furniture item built twice: fb-wc: built 2 times where exactly 1 is expected"
+  },
+  {
+   "row": "D12",
+   "source": "control",
+   "check": "K10 (bbox vs spec)",
+   "expect": "(report)",
+   "got": "pass",
+   "ok": true,
+   "detail": "71 furniture items: 0 differ from the spec envelope by more than 10 mm in plan "
+  },
+  {
+   "row": "D12",
+   "source": "synthetic",
+   "check": "K10 (bbox vs spec)",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "one item displaced 200 mm in x"
+  },
+  {
+   "row": "D13",
+   "source": "control",
+   "check": "K12",
+   "expect": "(report)",
+   "got": "pass",
+   "ok": true,
+   "detail": "frozen env read-back has 27 columns, 7 floors, 81 shapes, 5 levels; K12 is run on the D1 scene against it (see results), and on a perturbed copy in the mutation set"
+  },
+  {
+   "row": "D14",
+   "source": "historic",
+   "check": "K11 (1 % band)",
+   "subject": "flex",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "concept 12.4 vs Revit 12.17 m2: 1.89 %"
+  },
+  {
+   "row": "D14",
+   "source": "historic",
+   "check": "K11 (1 % band)",
+   "subject": "kitchen",
+   "expect": "(below band)",
+   "got": "pass",
+   "ok": true,
+   "detail": "concept 16.6 vs Revit 16.66 m2: 0.36 %"
+  },
+  {
+   "row": "D16",
+   "source": "historic-reconstructed",
+   "check": "K16",
+   "subject": "opening to x 8.537",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "least clearance above the pitch line 1818 mm at x8.537 y-27.946 z-2.118; 2000 mm needed",
+   "learnings": "round-8 opening 1824 mm (x 8.537); corrected opening 2045 mm (x 8.887)"
+  },
+  {
+   "row": "D16",
+   "source": "control",
+   "check": "K16",
+   "subject": "opening to x 8.887",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "least clearance above the pitch line 2045 mm at x8.897 y-27.946 z-2.345; 2000 mm needed",
+   "learnings": "round-8 opening 1824 mm (x 8.537); corrected opening 2045 mm (x 8.887)"
+  },
+  {
+   "row": "D19",
+   "source": "synthetic",
+   "check": "K15",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "plate back is -300.0 mm from host face of panel (normal (np.float64(0.0), np.float64(1.0), np.float64(0.0))); front stands -180 mm proud"
+  },
+  {
+   "row": "D19",
+   "source": "synthetic",
+   "check": "K15",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "plate flush on its host: plate back is +0.0 mm from host face of panel (normal (np.float64(0.0), np.float64(1.0), np.float64(0.0))); front stands 120 mm proud"
+  },
+  {
+   "row": "D21",
+   "source": "synthetic",
+   "check": "K14",
+   "expect": "fail",
+   "got": "fail",
+   "ok": true,
+   "detail": "rail-x: modelled guard (1100 mm, drop 3000.0 mm) has no geometry in the scene"
+  },
+  {
+   "row": "D21",
+   "source": "synthetic",
+   "check": "K14",
+   "expect": "pass",
+   "got": "pass",
+   "ok": true,
+   "detail": "built height 1100 mm, modelled 1100 mm"
+  }
+ ],
+ "mutations": [
+  {
+   "id": "M1",
+   "check": "K02",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": false,
+   "ok": false,
+   "via": [],
+   "detail": "wall-B-ext-07 translated (0,-0.5,0) into the ramp"
+  },
+  {
+   "id": "N-K02",
+   "check": "K02",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "wall moved 0.5 m away from the ramp"
+  },
+  {
+   "id": "M1b",
+   "check": "K02",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "wall-B-int-11 x slab-ramp"
+   ],
+   "detail": "cross wall wall-B-int-11 (top 10 mm under the ramp soffit) raised 0.7 m through the ramp"
+  },
+  {
+   "id": "M2",
+   "check": "K04",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "door-B-cinema-store-ramp"
+   ],
+   "detail": "door-B-cinema-store-ramp head raised 0.30 m (clearance was 112 mm)"
+  },
+  {
+   "id": "N-K04",
+   "check": "K04",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "head raised to leave 5 mm below the soffit"
+  },
+  {
+   "id": "M3",
+   "check": "K05",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "window-GF-kids-a-3"
+   ],
+   "detail": "all surfaces of window-GF-kids-a-3 deleted"
+  },
+  {
+   "id": "M-K05b",
+   "check": "K05",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "window-GF-kids-a-3"
+   ],
+   "detail": "glass width halved"
+  },
+  {
+   "id": "N-K05",
+   "check": "K05",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "glass 3 mm narrower"
+  },
+  {
+   "id": "M4",
+   "check": "K07",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "lum-PEN-GLOBE-kitchen-01"
+   ],
+   "detail": "pendant raised 0.60 m"
+  },
+  {
+   "id": "M-K07b",
+   "check": "K07",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "lum-PEN-GLOBE-kitchen-01"
+   ],
+   "detail": "emitter datum 0.25 m too low"
+  },
+  {
+   "id": "N-K07",
+   "check": "K07",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "pendant 5 mm low"
+  },
+  {
+   "id": "M5",
+   "check": "K01",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "stair-main x column-06"
+   ],
+   "detail": "stair-main shifted [-1.23, 0.0, 0.0] m: 30 mm into column-06 (gap was 1200 mm)"
+  },
+  {
+   "id": "N-K01-touch",
+   "check": "K01",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "stair exactly touching the column"
+  },
+  {
+   "id": "N-K01-gap",
+   "check": "K01",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "stair 5 mm short of the column"
+  },
+  {
+   "id": "M-K03",
+   "check": "K03",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "door-B-dining-yard x column-03"
+   ],
+   "detail": "door-B-dining-yard 50 mm into column-03"
+  },
+  {
+   "id": "N-K03",
+   "check": "K03",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "door 5 mm clear of the column"
+  },
+  {
+   "id": "M6-90",
+   "check": "K10",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-armchair"
+   ],
+   "detail": "furn-lounge-armchair (model rotation 90, carcass 946x794) rotated back to 0"
+  },
+  {
+   "id": "M6-180",
+   "check": "K10",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": false,
+   "ok": false,
+   "via": [],
+   "detail": "furn-k-run (model rotation 180, carcass 2010x600) rotated back to 0"
+  },
+  {
+   "id": "M-K10-move",
+   "check": "K10",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-sofa"
+   ],
+   "detail": "furn-lounge-sofa moved 1.0 m"
+  },
+  {
+   "id": "M-K10-move0.1",
+   "check": "K10",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": false,
+   "ok": false,
+   "via": [],
+   "detail": "furn-lounge-sofa moved 0.1 m (the centre bound is half the smaller side: expected to be missed)"
+  },
+  {
+   "id": "N-K10",
+   "check": "K10",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "furn-lounge-sofa moved 20 mm"
+  },
+  {
+   "id": "M-K09-del",
+   "check": "K09",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-sofa"
+   ],
+   "detail": "furn-lounge-sofa deleted"
+  },
+  {
+   "id": "M-K09-dup",
+   "check": "K09",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-sofa"
+   ],
+   "detail": "furn-lounge-sofa built twice"
+  },
+  {
+   "id": "M-K08-down",
+   "check": "K08",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-sofa"
+   ],
+   "detail": "furn-lounge-sofa scaled 0.85"
+  },
+  {
+   "id": "M-K08-up",
+   "check": "K08",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "furn-lounge-sofa"
+   ],
+   "detail": "furn-lounge-sofa scaled 1.15"
+  },
+  {
+   "id": "N-K08",
+   "check": "K08",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "furn-lounge-sofa scaled 1.002"
+  },
+  {
+   "id": "M-K11",
+   "check": "K11",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "bar-alcove"
+   ],
+   "detail": "floor of bar-alcove shortened by 10 %"
+  },
+  {
+   "id": "N-K11",
+   "check": "K11",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "floor of bar-alcove 0.05 % smaller"
+  },
+  {
+   "id": "M-K12",
+   "check": "K12",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "column 1585908 = column-00"
+   ],
+   "detail": "column-00 moved 20 mm"
+  },
+  {
+   "id": "N-K12",
+   "check": "K12",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "column-00 moved 1 mm"
+  },
+  {
+   "id": "M-K13",
+   "check": "K13",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "rug-extra"
+   ],
+   "detail": "one more mesh without an element id"
+  },
+  {
+   "id": "M-K14",
+   "check": "K14",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "rail-gf-stair-void"
+   ],
+   "detail": "rail-gf-stair-void deleted"
+  },
+  {
+   "id": "M-K15",
+   "check": "K15",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "SWING-bar-alcove-09"
+   ],
+   "detail": "lum-SWING-bar-alcove-09 moved 0.30 m off its host"
+  },
+  {
+   "id": "N-K15",
+   "check": "K15",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "plate 5 mm off"
+  },
+  {
+   "id": "M-K16",
+   "check": "K16",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "stair-main"
+   ],
+   "detail": "a soffit 1.70 m above the pitch line at x7.49"
+  },
+  {
+   "id": "N-K16",
+   "check": "K16",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "a soffit 2.26 m above the pitch line at the sample (2.07 m above the highest pitch point under its 0.6 m width)"
+  },
+  {
+   "id": "M-K18",
+   "check": "K18",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "level B"
+   ],
+   "detail": "every B-level door shifted +0.10 m"
+  },
+  {
+   "id": "N-K18",
+   "check": "K18",
+   "kind": "negative",
+   "expect": "quiet",
+   "caught": false,
+   "ok": true,
+   "via": [],
+   "detail": "every B-level door shifted +5 mm"
+  },
+  {
+   "id": "M-K17",
+   "check": "K17",
+   "kind": "mutation",
+   "expect": "catch",
+   "caught": true,
+   "ok": true,
+   "via": [
+    "wall-B-int-11 x slab-ramp"
+   ],
+   "detail": "IFC wall-B-int-11 extrusion +0.7 m (through the ramp), read back by IfcOpenShell"
+  }
+ ],
+ "scene_vs_ifc": [],
+ "ra2_scene": {
+  "path": "/home/omar/archpipe/lanes/RA2/out/ra2/prod/scene.json",
+  "sha256": "f7a7fe76418a04ff1fe75b2fdfe8596e095783bb2923155fd303afa35b9ee7b3"
+ },
+ "ra2_counts": {
+  "K01": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K02": {
+   "pass": 6,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K03": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K04": {
+   "pass": 18,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K05": {
+   "pass": 25,
+   "fail": 1,
+   "not_evaluated": 0
+  },
+  "K06": {
+   "pass": 0,
+   "fail": 1,
+   "not_evaluated": 0
+  },
+  "K07": {
+   "pass": 53,
+   "fail": 3,
+   "not_evaluated": 0
+  },
+  "K09": {
+   "pass": 0,
+   "fail": 81,
+   "not_evaluated": 33
+  },
+  "K10": {
+   "pass": 49,
+   "fail": 3,
+   "not_evaluated": 0
+  },
+  "K11": {
+   "pass": 12,
+   "fail": 13,
+   "not_evaluated": 2
+  },
+  "K12": {
+   "pass": 90,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K13": {
+   "pass": 0,
+   "fail": 89,
+   "not_evaluated": 0
+  },
+  "K14": {
+   "pass": 1,
+   "fail": 2,
+   "not_evaluated": 0
+  },
+  "K15": {
+   "pass": 2,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K16": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K01": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K02": {
+   "pass": 3,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K03": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K18": {
+   "pass": 2,
+   "fail": 0,
+   "not_evaluated": 0
+  }
+ },
+ "int2_counts": {
+  "K01": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K02": {
+   "pass": 6,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K03": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K04": {
+   "pass": 18,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K05": {
+   "pass": 25,
+   "fail": 1,
+   "not_evaluated": 0
+  },
+  "K06": {
+   "pass": 0,
+   "fail": 1,
+   "not_evaluated": 0
+  },
+  "K07": {
+   "pass": 73,
+   "fail": 3,
+   "not_evaluated": 0
+  },
+  "K09": {
+   "pass": 0,
+   "fail": 55,
+   "not_evaluated": 0
+  },
+  "K10": {
+   "pass": 50,
+   "fail": 2,
+   "not_evaluated": 0
+  },
+  "K11": {
+   "pass": 12,
+   "fail": 13,
+   "not_evaluated": 2
+  },
+  "K12": {
+   "pass": 90,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K13": {
+   "pass": 0,
+   "fail": 89,
+   "not_evaluated": 0
+  },
+  "K14": {
+   "pass": 1,
+   "fail": 2,
+   "not_evaluated": 0
+  },
+  "K15": {
+   "pass": 2,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K16": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K01": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K02": {
+   "pass": 3,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K17-K03": {
+   "pass": 1,
+   "fail": 0,
+   "not_evaluated": 0
+  },
+  "K18": {
+   "pass": 2,
+   "fail": 0,
+   "not_evaluated": 0
+  }
+ }
+}
