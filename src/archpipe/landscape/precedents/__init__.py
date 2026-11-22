@@ -22,12 +22,17 @@ PLAN_METRICS = (
 )
 # Counted/classified from photographs or text; allowed on photo-only gardens (flagged as such).
 QUALITATIVE = ("privacy_approach",)
+# Free-text / flag annotations carried with a pass; never statistics.
+ANNOTATIONS = ("scope", "scale_note", "confidence", "rooms_note", "privacy_note", "has_pond", "pond_area_m2")
 # Shares that must sum to 1 within tolerance when all are given.
 SURFACE = ("hard_share", "soft_share", "water_share")
 LAYERS = ("layer_canopy", "layer_shrub", "layer_ground")
 SUM_TOL = 0.06          # policy: two independent readings of a plan never sum exactly
 SPREAD_LIMIT = 0.25     # policy: metric dropped if median relative A/B disagreement exceeds this
 GARDEN_LIMIT = 0.50     # policy: a garden's value for a metric is excluded if A/B disagree by more than this
+SIZE_BAND = {"south": (30.0, 150.0), "north": (8.0, 60.0)}  # policy: m2, within ~0.5-2.6x D1 south (57) / 0.3-2.4x north (25)
+WIDE_BAND = {"south": (30.0, 250.0), "north": (8.0, 100.0)}  # policy: density metrics only (shares, trees per 100 m2), because
+SIZE_FREE = ("hard_share", "soft_share", "water_share", "trees_per_100m2")  # they do not scale with area to first order
 MIN_N = 6               # policy: fewer usable gardens than this gives no range (GAP)
 
 
@@ -49,7 +54,7 @@ def validate_garden(g: dict) -> list[str]:
     if set(g["passes"]) != {"A", "B"}:
         p.append(f"{g['id']}: needs exactly passes A and B")
         return p
-    known = set(PLAN_METRICS) | set(QUALITATIVE)
+    known = set(PLAN_METRICS) | set(QUALITATIVE) | set(ANNOTATIONS)
     for ps, vals in g["passes"].items():
         for m, v in vals.items():
             if m not in known:
@@ -106,8 +111,18 @@ def quantile(xs: list[float], q: float) -> float:
     return xs[lo] + (xs[hi] - xs[lo]) * (i - lo)
 
 
-def derive(gardens: list[dict]) -> dict:
-    """Per metric: interquartile range of garden means, or a GAP with the reason (spread too large / too few)."""
+def in_band(g: dict, band: tuple[float, float] | None) -> bool:
+    """A garden counts toward ranges only if its measured area (mean of the passes) lies in the size band."""
+    if band is None:
+        return True
+    a = garden_value(g, "area_m2")
+    return a is not None and band[0] <= a <= band[1]
+
+
+def derive(gardens: list[dict], band: tuple[float, float] | None = None) -> dict:
+    """Per metric: interquartile range of garden means over gardens inside the size band, or a GAP with the
+    reason (spread too large / too few)."""
+    gardens = [g for g in gardens if in_band(g, band)]
     out = {}
     for m in PLAN_METRICS:
         sp = spread(gardens, m)
@@ -150,3 +165,28 @@ def position(value: float, rec: dict) -> str:
     if value < rec["q1"]:
         return "below"
     return "above" if value > rec["q3"] else "inside"
+
+
+def build_targets(date: str) -> dict:
+    """Frozen targets: size-dependent metrics use the strict size band; density metrics (SIZE_FREE) use the wide band
+    and are marked `size_matched: false`. Writing and hashing is done by freeze()."""
+    out = {"date": date, "policy": {"spread_limit": SPREAD_LIMIT, "garden_limit": GARDEN_LIMIT, "min_n": MIN_N,
+                                    "size_band_m2": SIZE_BAND, "wide_band_m2_density_only": WIDE_BAND},
+           "sets": {}}
+    for s in SETS:
+        gs = load(s)
+        strict, wide = derive(gs, SIZE_BAND[s]), derive(gs, WIDE_BAND[s])
+        out["sets"][s] = {m: ({**wide[m], "size_matched": False} if m in SIZE_FREE else {**strict[m], "size_matched": True})
+                          for m in PLAN_METRICS}
+    return out
+
+
+def freeze(date: str) -> str:
+    """Write targets.json once. Refuses to overwrite an existing frozen file (no re-freeze path). Returns file sha256."""
+    path = DATA / "targets.json"
+    if path.exists():
+        raise FileExistsError("targets.json is frozen; it must not be regenerated or tuned")
+    t = build_targets(date)
+    t["content_sha256"] = content_sha(t)
+    path.write_text(json.dumps(t, indent=1, sort_keys=True) + "\n")
+    return hashlib.sha256(path.read_bytes()).hexdigest()

@@ -72,3 +72,35 @@ def test_committed_data_valid():
         except FileNotFoundError:
             continue
         assert P.validate_set(gs) == []
+
+def test_size_band_excludes_big_gardens():
+    small = [g(f"s{i}", {"area_m2": 50, "n_rooms": 2}, {"area_m2": 52, "n_rooms": 2}) for i in range(6)]
+    huge = [g(f"h{i}", {"area_m2": 500, "n_rooms": 9}, {"area_m2": 520, "n_rooms": 9}) for i in range(6)]
+    r = P.derive(small + huge, (30, 150))["n_rooms"]
+    assert r["status"] == "range" and r["max"] == 2           # the 500 m2 gardens do not widen the range
+    assert P.derive(huge, (30, 150))["n_rooms"]["status"] == "GAP"
+
+def test_freeze_refuses_to_overwrite(tmp_path, monkeypatch):
+    monkeypatch.setattr(P, "DATA", tmp_path)
+    (tmp_path / "targets.json").write_text("{}")
+    import pytest
+    with pytest.raises(FileExistsError):
+        P.freeze("2026-11-22")             # negative: the generator cannot re-freeze tuned values
+
+def test_density_metrics_use_wide_band_and_say_not_size_matched(tmp_path, monkeypatch):
+    monkeypatch.setattr(P, "DATA", tmp_path)
+    import json as j
+    for s in P.SETS:
+        gs = [g(f"{s}{i}", {"area_m2": 200, "hard_share": .5, "soft_share": .5, "water_share": 0},
+                {"area_m2": 200, "hard_share": .5, "soft_share": .5, "water_share": 0}) for i in range(7)]
+        (tmp_path / f"{s}.json").write_text(j.dumps({"gardens": gs}))
+    t = P.build_targets("2026-11-22")["sets"]["south"]
+    assert t["hard_share"]["status"] == "range" and t["hard_share"]["size_matched"] is False
+    assert t["area_m2"]["status"] == "GAP"     # 200 m2 is outside the strict south band
+
+def test_frozen_targets_match_hash_in_lane_doc():
+    import re
+    from pathlib import Path
+    doc = (Path(__file__).resolve().parents[3] / "docs/lanes/LDP.md").read_text()
+    sha = re.search(r"sha256 = ([0-9a-f]{64})", doc).group(1)
+    assert P.check_frozen(expected_file_sha256=sha) == []

@@ -1,0 +1,283 @@
+{
+ "content_sha256": "078043492214eb78ef6e9011687f59d57b732c1687c1ffd9ba3d8d82105bac68",
+ "date": "2026-11-22",
+ "policy": {
+  "garden_limit": 0.5,
+  "min_n": 6,
+  "size_band_m2": {
+   "north": [
+    8.0,
+    60.0
+   ],
+   "south": [
+    30.0,
+    150.0
+   ]
+  },
+  "spread_limit": 0.25,
+  "wide_band_m2_density_only": {
+   "north": [
+    8.0,
+    100.0
+   ],
+   "south": [
+    30.0,
+    250.0
+   ]
+  }
+ },
+ "sets": {
+  "north": {
+   "area_m2": {
+    "median_rel_spread": 0.167,
+    "n_pairs": 1,
+    "n_usable": 1,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "drift_size_median": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "enclosure_ratio": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "hard_share": {
+    "median_rel_spread": 0.8,
+    "n_pairs": 1,
+    "n_usable": 0,
+    "reason": "A/B spread 0.8 > 0.25",
+    "size_matched": false,
+    "status": "GAP"
+   },
+   "layer_canopy": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "layer_ground": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "layer_shrub": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "n_rooms": {
+    "median_rel_spread": 0.0,
+    "n_pairs": 1,
+    "n_usable": 1,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "path_primary_m": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "path_secondary_m": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "room_area_mean_m2": {
+    "median_rel_spread": 0.167,
+    "n_pairs": 1,
+    "n_usable": 1,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "soft_share": {
+    "median_rel_spread": 0.087,
+    "n_pairs": 1,
+    "n_usable": 1,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": false,
+    "status": "GAP"
+   },
+   "species_per_100m2": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "trees_per_100m2": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": false,
+    "status": "GAP"
+   },
+   "water_share": {
+    "median_rel_spread": 0.468,
+    "n_pairs": 1,
+    "n_usable": 1,
+    "reason": "A/B spread 0.468 > 0.25",
+    "size_matched": false,
+    "status": "GAP"
+   }
+  },
+  "south": {
+   "area_m2": {
+    "median_rel_spread": 0.032,
+    "n_pairs": 5,
+    "n_usable": 5,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "drift_size_median": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "enclosure_ratio": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "hard_share": {
+    "max": 0.92,
+    "median": 0.693,
+    "median_rel_spread": 0.149,
+    "min": 0.275,
+    "n_pairs": 7,
+    "n_usable": 6,
+    "q1": 0.441,
+    "q3": 0.865,
+    "size_matched": false,
+    "status": "range"
+   },
+   "layer_canopy": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "layer_ground": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "layer_shrub": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "n_rooms": {
+    "median_rel_spread": 0.0,
+    "n_pairs": 5,
+    "n_usable": 4,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "path_primary_m": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "path_secondary_m": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "room_area_mean_m2": {
+    "median_rel_spread": 0.185,
+    "n_pairs": 5,
+    "n_usable": 4,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "soft_share": {
+    "median_rel_spread": 0.219,
+    "n_pairs": 7,
+    "n_usable": 5,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": false,
+    "status": "GAP"
+   },
+   "species_per_100m2": {
+    "median_rel_spread": null,
+    "n_pairs": 0,
+    "n_usable": 0,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": true,
+    "status": "GAP"
+   },
+   "trees_per_100m2": {
+    "max": 5.05,
+    "median": 2.225,
+    "median_rel_spread": 0.188,
+    "min": 1.075,
+    "n_pairs": 8,
+    "n_usable": 6,
+    "q1": 1.562,
+    "q3": 3.262,
+    "size_matched": false,
+    "status": "range"
+   },
+   "water_share": {
+    "median_rel_spread": 0.065,
+    "n_pairs": 5,
+    "n_usable": 5,
+    "reason": "fewer than 6 usable gardens",
+    "size_matched": false,
+    "status": "GAP"
+   }
+  }
+ }
+}
