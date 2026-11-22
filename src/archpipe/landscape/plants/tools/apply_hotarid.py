@@ -3,12 +3,12 @@
 Reads knowledge/landscape/plants/evidence/{selectree,amwua,mbg}.json (cached from the live sources) and the
 Southern Nevada Regional Plant List text, and fills attributes that are a GAP or Wikipedia-sourced. A value is
 only written with a quote that is a substring of the cached evidence; quotes are re-checked live by
-`python -m archpipe.landscape.plants.verify_quotes`. Idempotent. Run: PYTHONPATH=src python scripts/ldl_apply_hotarid.py
+`python -m archpipe.landscape.plants.verify_quotes`. Idempotent. Run: PYTHONPATH=src python src/archpipe/landscape/plants/tools/apply_hotarid.py
 """
 import json, re, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[5]
 P = ROOT / "knowledge/landscape/plants"
 EV = P / "evidence"
 TODAY = "2026-11-22"

@@ -104,7 +104,7 @@ PYTHONPATH=src python -m pytest tests/landscape -q
 
 ## Pass 2 (2026-11-22): hot-arid evidence, viability decisions, assets
 
-Full tables: `docs/lanes/LDL-assets-shortfall.md` (free shortfall per species, paid options). Counts from `python scripts/ldl_stats.py`.
+Full tables: `docs/lanes/LDL-assets-shortfall.md` (free shortfall per species, paid options). Counts from `python src/archpipe/landscape/plants/tools/stats.py`.
 
 ### Gaps before -> after (required-attribute slots; 78 species -> 77 after Ixora was dropped)
 
@@ -143,11 +143,11 @@ Quote re-check: 870 verified, 77 API-derived, 9 not matched (all older, stitched
 
 ### Tests
 
-`tests/landscape`: 136 passed (was 112 before pass 2: +24 incl. 8 lead-decision/placement, 3 decision, 7 asset guards); lane suite (landscape, luminaires, compliance, design, model, electrical, lightcalc, lightverify, critic, ops, documents, drawings2d, pipeline, exchange, approvals, parity, markup, villa_render*): 825 passed, 6 skipped. New: lead decisions (positive, never rescues a fail, needs reason), placement constraints, Ixora dropped, frangipani accepted, inferred-heat flag, misnamed asset, untextured asset (positive on the real banana file, negative on a textured one), licence, manifest sha256 (and live hash check when the store exists).
+`tests/landscape`: 136 passed (pass 2 added lead-decision, placement, decision and asset-guard tests); lane suite (landscape, luminaires, compliance, design, model, electrical, lightcalc, lightverify, critic, ops, documents, drawings2d, pipeline, exchange, approvals, parity, markup, villa_render*): 825 passed, 6 skipped. New: lead decisions (positive, never rescues a fail, needs reason), placement constraints, Ixora dropped, frangipani accepted, inferred-heat flag, misnamed asset, untextured asset (positive on the real banana file, negative on a textured one), licence, manifest sha256 (and live hash check when the store exists).
 
 ### Open items (pass 2)
 
-* Sketchfab token; then run `ldl_sketchfab_candidates.py` output through `fetch_sketchfab.py` and the preview jobs (Japanese set, screens, palms, drifts first).
+* Sketchfab token; then run `tools/sketchfab_candidates.py` output through `fetch_sketchfab.py` and the preview jobs (Japanese set, screens, palms, drifts first).
 * 35 heat gaps remain: citrus, hibiscus, fig, delonix, camphor, ficus microcarpa, guava, jasmines, Strelitzia, papyrus, lotus, monstera, bamboo and others. A Gulf source with species tables (Abu Dhabi PRDM PDF, Dubai manual) would close most; the PDFs were not found by search.
 * Fish toxicity needs a vet/aquaculture source per species.
 * Bauhinia, mango, Washingtonia and the other dropped species: **not added** (time went to evidence and assets).

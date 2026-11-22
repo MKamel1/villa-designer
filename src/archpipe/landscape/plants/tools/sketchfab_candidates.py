@@ -4,7 +4,7 @@ Output: knowledge/landscape/plants/sketchfab-candidates.json. Licence labels mus
 import json, time, urllib.parse, urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[5]
 P = ROOT / "knowledge/landscape/plants"
 OK = {"CC0 Public Domain", "CC Attribution"}  # Sketchfab licence labels
 H = {"User-Agent": "Mozilla/5.0"}
