@@ -1,0 +1,246 @@
+{
+ "slug": "aloe_vera",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Aloe vera (L.) Burm.f.",
+    "family": "Asphodelaceae",
+    "common_names": [
+     "aloe",
+     "medicinal aloe"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Aloe%20vera",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.8,
+    "max": 0.8,
+    "text": "0.8 m (2 ft 7 in) as stated; NCSU 2-3 ft"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Aloe vera is an evergreen Perennial growing to 0.8 m (2ft 7in) by 1 m (3ft 3in) at a slow rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.0,
+    "max": 1.0,
+    "text": "1 m (3 ft 3 in) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Aloe vera is an evergreen Perennial growing to 0.8 m (2ft 7in) by 1 m (3ft 3in) at a slow rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow",
+    "text": "source: slow rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Aloe vera is an evergreen Perennial growing to 0.8 m (2ft 7in) by 1 m (3ft 3in) at a slow rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Grow this plant in full sun to partial shade in very well-drained soils suitable for succulents."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "very well-drained succulent soil; allow to dry completely between waterings"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Allow the soil to completely dry between waterings."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "https://plants.ces.ncsu.edu/plants/aloe-vera/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU tag: drought tolerant; recommended for drought-tolerant gardens"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "https://plants.ces.ncsu.edu/plants/aloe-vera/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "NCSU: outdoor perennial in zones 10 and higher (PFAF: USDA hardiness 9-11)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "but it can be an outdoor perennial in zones 10 and higher."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6
+    ],
+    "colours": [
+     "orange",
+     "yellow"
+    ],
+    "text": "PFAF: May to June; Bloom Color: Orange, Yellow"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in leaf all year, in flower from May to June."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "fleshy rosette succulent leaves with serrated margins"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "is an evergreen Perennial growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots (NCSU: spreads by offsets)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "https://plants.ces.ncsu.edu/plants/aloe-vera/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "PFAF: oral use may cause GI cramping, diarrhoea; skin rash with long-term gel use. NCSU tags it poisonous."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Taken by mouth may cause cramping pain in the gastrointestinal tract and diarrhoea (reduce dose)."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "https://plants.ces.ncsu.edu/plants/aloe-vera/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Aloe+Vera",
+    "https://plants.ces.ncsu.edu/plants/aloe-vera/"
+   ]
+  }
+ },
+ "notes": "NCSU tags poisonous (pets); also states considered invasive in some counties.",
+ "invasive_flag": "NCSU: considered invasive in some counties"
+}

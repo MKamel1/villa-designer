@@ -1,0 +1,232 @@
+{
+ "slug": "ficus_pumila",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ficus pumila L.",
+    "family": "Moraceae",
+    "common_names": [
+     "creeping fig"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ficus%20pumila",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Ficus pumila L.; family Moraceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 4.6,
+    "text": "8-15 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Height",
+    "quote": "Height: 8 ft. 0 in. - 15 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Width",
+    "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "prefers partial shade or dappled sunlight but will tolerate full sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "the plant prefers partial shade or dappled sunlight but will tolerate full sun in moist, well-drained soil high in organic matter"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soil high in organic matter; water regularly during the growing season"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "will tolerate full sun in moist, well-drained soil high in organic matter"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is drought, deer, and moderately salt tolerant."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is drought, deer, and moderately salt tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "severe cold kills the climber to the ground"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The creeping fig is not reliably winter hardy in most of North Carolina; severe cold will kill the climber to the ground."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [],
+    "text": "flowers insignificant (minute, enclosed in the fig)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Flower Inflorescence: Insignificant"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "heart-shaped juvenile leaves densely covering structures"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/ficus-pumila/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  }
+ },
+ "notes": "NCSU: climbs by clusters of short roots and can cement itself to porous surfaces; Problems: Problem for Cats/Dogs/Horses; milky sap"
+}

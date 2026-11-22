@@ -1,0 +1,241 @@
+{
+ "slug": "lagerstroemia_indica",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Lagerstroemia indica L.",
+    "family": "Lythraceae",
+    "common_names": [
+     "common crape myrtle"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Lagerstroemia%20indica",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "status ACCEPTED, family Lythraceae, matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 9.1,
+    "text": "6-30 ft, converted; range spans dwarf to tall cultivars"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 6 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 9.1,
+    "text": "6-30 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 6 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "6 or more hours of direct sunlight a day"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soil; tolerates occasionally wet or dry soil once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It requires full sun and moist, well-drained soil, though it will tolerate occasionally wet or dry soil once established"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance stated only for the cultivar 'Carolina Beauty', not the species",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "resists drought; tagged drought tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It resists deer, drought and pollution."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "tagged alkaline soils tolerant; Soil pH lists acid, neutral and alkaline (>8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#alkaline soils tolerant"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "zones 6a-9b listed; no damage description. Deciduous."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "rose",
+     "red",
+     "white",
+     "pink",
+     "purple"
+    ],
+    "text": "rose to red on the species; cultivars white, pink, red or purple"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Flowering occurs from July to September."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "simple glossy leathery leaves, green with red tinges when young, yellow/orange/red autumn colour; exfoliating bark"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Common crape myrtle is a deciduous, erect, multi-trunked, tree or shrub"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "page tags non-toxic only for cats, horses and dogs; nothing stated for people",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no leaf/fruit/flower litter statement (only 'capsules persist through winter')",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lagerstroemia-indica/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "NCSU tags: non-toxic for cats, horses, dogs (people not stated)."
+}

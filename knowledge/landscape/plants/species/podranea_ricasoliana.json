@@ -1,0 +1,211 @@
+{
+ "slug": "podranea_ricasoliana",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Podranea ricasoliana (Tanfani) Sprague",
+    "family": "Bignoniaceae",
+    "common_names": [
+     "pink trumpet vine"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Podranea%20ricasoliana",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Podranea ricasoliana (Tanfani) Sprague; family Bignoniaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 5,
+    "max": 5,
+    "text": "'can reach a height of 5 m' (upper figure only; no minimum stated)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "that can reach a height of 5 m (16 ft)"
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "sun": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -5,
+    "damage_text": "withstands temperatures down to -5 C (23 F)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "accessed": "2026-11-22",
+    "locator": "Weed potential",
+    "quote": "The plant can withstand temperatures down to −5 °C (23 °F)"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "pink"
+    ],
+    "text": "summer to early autumn; pink flowers with reddish stripes, fragrant"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "accessed": "2026-11-22",
+    "locator": "Inflorescence",
+    "quote": "The flowers appear from summer to early autumn."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "woody twining stems, imparipinnate dark green leaves"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "grows as an evergreen, vining shrub with woody and twining stems"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://en.wikipedia.org/wiki/Podranea_ricasoliana",
+    "https://plants.ces.ncsu.edu/plants/podranea-ricasoliana/ (404)",
+    "https://www.rhs.org.uk/plants/podranea/ricasoliana/details (no plant page)"
+   ]
+  }
+ },
+ "invasive_flag": "Wikipedia: considered a weed in Australia, New Zealand, and Hawaii; vigorous habit smothers surrounding vegetation"
+}

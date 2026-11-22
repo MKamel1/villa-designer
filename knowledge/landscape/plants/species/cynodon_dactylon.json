@@ -1,0 +1,216 @@
+{
+ "slug": "cynodon_dactylon",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cynodon dactylon (L.) Pers.",
+    "family": "Poaceae",
+    "common_names": [
+     "bermudagrass"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cynodon%20dactylon",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Cynodon dactylon"
+   }
+  },
+  "height_m": {
+   "status": "GAP",
+   "reason": "page gives no mature height",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "no spread given",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "page gives no growth rate",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "does best in full sun; low tolerance for shade"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "It does best in full sun and high temperatures."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "seeded bermudagrass requires infrequent watering; very water-efficient"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "Seeded bermudagrass requires only moderate levels of nitrogen and infrequent watering."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "does best in high temperatures"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "It does best in full sun and high temperatures."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "can tolerate drought conditions"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "it can tolerate drought conditions and high temperatures."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "high tolerance for salinity"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "Bermudagrass has a high tolerance for salinity."
+   }
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "page states only low cold tolerance and winter browning, no zone or temperature",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "flowering not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "turf; loses colour and goes dormant (brown) in cool months, not stated to drop leaves"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "Bermudagrass loses its color and becomes dormant in most locations during the cooler months of late autumn and winter."
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "spreads by rhizomes and stolons; seeded bermudagrass a troublesome invader of garden areas"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "Seeded bermudagrass can be a troublesome invader of garden areas."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "source silent on toxicity",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "source states a range: low to high maintenance (depends on cultivar)"
+   },
+   "source": {
+    "source_id": "UC-ANR",
+    "url": "https://ipm.ucanr.edu/TOOLS/TURF/TURFSPECIES/bermuda.html",
+    "accessed": "2026-11-22",
+    "locator": "Bermudagrass",
+    "quote": "Low to high maintenance."
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "invasive_flag": {
+  "text": "Table 550-4 lists Cynodon dactylon (common bermudagrass) as invasive/troublesome in Southwestern U.S. and Gulf states",
+  "source": {
+   "source_id": "landscape-timesaver",
+   "url": "held:landscape-timesaver",
+   "accessed": "2026-11-22",
+   "locator": "Table 550-4, printed p.331",
+   "quote": "Cynodon dactylon Common Bermudagrass Southwestern U.S., Gulf states"
+  }
+ }
+}

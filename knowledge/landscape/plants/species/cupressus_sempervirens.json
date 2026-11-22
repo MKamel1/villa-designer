@@ -1,0 +1,247 @@
+{
+ "slug": "cupressus_sempervirens",
+ "layers": [
+  "screen_hedge"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cupressus sempervirens L.",
+    "family": "Cupressaceae",
+    "common_names": [
+     "Italian cypress",
+     "Mediterranean cypress",
+     "common cypress"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cupressus%20sempervirens",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Cupressus sempervirens L.; status ACCEPTED; family Cupressaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 12.2,
+    "max": 21.3,
+    "text": "40-70 ft (converted at 0.3048)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 40 ft. 0 in. - 70 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description/attributes",
+    "quote": "Growth rate listed as Medium; more mature trees experience slower, almost nonexistent growth."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "Highly drought tolerant when mature; young plants need adequate watering until established (hydrozone mapped from drought wording)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Becoming highly drought tolerant as the plant ages, young plants should receive adequate watering until established."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tagged heat tolerant; Heat listed under resistance to challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Tags / Resistance To Challenges",
+    "quote": "heat tolerant"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "highly drought tolerant as plant ages"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Becoming highly drought tolerant as the plant ages"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH list on page includes Acid (<6.0), Neutral (6.0-8.0) and Alkaline (>8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid (<6.0) Neutral (6.0-8.0) Alkaline (>8.0)"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately tolerant of salt"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is moderately tolerant of salt and wind breakage."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 7a-10b; no frost damage description on page"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Zones",
+    "quote": "7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [],
+    "text": "No true flowers; pollen cones in early spring (colour listed green) - ornamentally insignificant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Flower",
+    "quote": "No flowers, pollen cones appear in the early spring."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "tall, narrow columnar evergreen conifer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tall evergreen tree"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU page does not describe roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page silent on toxicity; Time-Saver Table 550-3 does not list Cupressus",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "held:landscape-timesaver Table 550-3"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU page silent on litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "should not be pruned to keep its columnar habit; low maintenance"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cupressus-sempervirens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "To maintain its columnar habit, it should not be pruned, thus making this a low maintenance choice for your garden."
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

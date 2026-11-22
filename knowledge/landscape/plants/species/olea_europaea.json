@@ -1,0 +1,258 @@
+{
+ "slug": "olea_europaea",
+ "layers": [
+  "canopy_tree",
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Olea europaea L.",
+    "family": "Oleaceae",
+    "common_names": [
+     "olive",
+     "common olive"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Olea%20europaea",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6.1,
+    "max": 9.1,
+    "text": "20-30 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 20 ft. 0 in. - 30 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 4.6,
+    "max": 7.6,
+    "text": "15-25 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 15 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Slow"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "drought tolerant once established; too much irrigation or rain gives root rot (UF)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They are drought tolerant once established."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "performs best in hot/dry summers"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Olive performs best in hot/dry summers and mild/wet winters."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They are drought tolerant once established."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU lists acid, neutral and alkaline (>8.0) soil pH as suitable; no preference stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Soil pH: Acid (<6.0) Alkaline (>8.0) Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "No salt-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "NCSU: grown outdoors in zones 8 to 10; no damage temperature stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "NCSU: summer; UF Florida: white flowers April or May"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Flower Description",
+    "quote": "The small white flowers bloom in the summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "leathery grey-green leaves, silvery"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Woody Plant Leaf Characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "No root-behaviour statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Sources opened state nothing about toxicity of the plant (fruit is edible after curing; not a toxicity statement).",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "https://gardeningsolutions.ifas.ufl.edu/plants/edibles/fruits/olives/"
+   ]
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "moderate",
+    "flower": "not_stated",
+    "text": "fruiting trees near hardscapes can be messy"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Fruiting trees planted near hardscapes can be messy."
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "NCSU Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/olea-europaea/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "uses": "edible fruit (olives)"
+}

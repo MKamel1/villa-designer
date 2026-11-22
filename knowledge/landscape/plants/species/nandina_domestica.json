@@ -1,0 +1,261 @@
+{
+ "slug": "nandina_domestica",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Nandina domestica Thunb.",
+    "family": "Berberidaceae",
+    "common_names": [
+     "nandina",
+     "heavenly bamboo"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Nandina%20domestica",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Nandina domestica Thunb.; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 2.4,
+    "text": "3-8 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 3 ft. 0 in. - 8 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.5,
+    "text": "2-5 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 2 ft. 0 in. - 5 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "Full sun, partial shade, dappled sunlight"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "water need not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nandina-domestica/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nandina-domestica/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges: Drought; tagged drought tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "#drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH attributes list acid, neutral and alkaline"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Alkaline (>8.0)"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges: Salt; tagged salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "#salt tolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 6a-9b; no damage description"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "white with yellow anthers, late spring"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "The flowers are white with yellow anthers, measure 5 to 13 mm in diameter, and bloom in late spring."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "bi- to tri-pinnately compound leaves 1-2 ft long"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Leaves are alternate, bi- to tri-pinnately compound, evergreen, and 1-2 feet long."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "roots not described",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nandina-domestica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "all parts toxic to humans, cats, dogs, livestock, horses, birds"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous",
+    "quote": "All parts are toxic to humans, cats, dogs, livestock, horses, and birds such as the Cedar Waxwing."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "only fruit mentioned (red berries persist through winter, no litter class); leaf/flower silent",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nandina-domestica/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "Maintenance: High"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: High"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "invasive_flag": {
+  "value": true,
+  "text": "NCSU: invasive species in North Carolina",
+  "source": {
+   "source_id": "NCSU",
+   "url": "https://plants.ces.ncsu.edu/plants/nandina-domestica/",
+   "accessed": "2026-11-22",
+   "locator": "Invasive",
+   "quote": "This plant is an invasive species in North Carolina"
+  }
+ },
+ "notes": "Fruit: bright red berries persist through winter (NCSU)."
+}

@@ -1,0 +1,260 @@
+{
+ "slug": "bougainvillea_glabra",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Bougainvillea glabra Choisy",
+    "family": "Nyctaginaceae",
+    "common_names": [
+     "bougainvillea",
+     "lesser bougainvillea",
+     "paperflower"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Bougainvillea%20glabra",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Bougainvillea glabra Choisy; family Nyctaginaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 6.1,
+    "text": "10-20 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Height",
+    "quote": "Height: 10 ft. 0 in. - 20 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 3.0,
+    "text": "6-10 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Width",
+    "quote": "Width: 6 ft. 0 in. - 10 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions: Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "watered deeply but allowed to dry out between waterings; best suited to a hot, dry climate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Lesser Bougainvillea is best suited to a hot, dry climate and should be watered deeply but allowed to dry out between waterings."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "listed under Resistance To Challenges: Heat; best suited to a hot, dry climate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Dry Soil Heat Salt Wind"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "Resistance To Challenges: Drought, Dry Soil; 'Once established, they are drought resistant'"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Dry Soil Heat Salt Wind"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "'Chlorosis can be a problem in alkaline soil'; also 'well-drained, acidic soil'"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Diseases, Insect Pests, and Other Plant Problems",
+    "quote": "Chlorosis can be a problem in alkaline soil."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Salt listed as a resistance; no degree stated, so recorded moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Drought Dry Soil Heat Salt Wind"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "frost sensitive, often grown as an annual or container plant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is frost sensitive so it is often grown as an annual or as a container plant."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "pink",
+     "purple",
+     "red",
+     "white"
+    ],
+    "text": "Bloom time Spring-Summer (mapped to Mar-Aug, northern hemisphere); true flower small and white, showy parts are pink/purple/red bracts"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers: Flower Bloom Time",
+    "quote": "Flower Bloom Time: Spring Summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy green or variegated simple leaves, thorny stems"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bougainvillea-glabra/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  }
+ },
+ "notes": "curved thorns (NCSU: Appendage: Thorns; Problems: Spines/Thorns) - relevant with children"
+}

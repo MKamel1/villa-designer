@@ -1,0 +1,229 @@
+{
+ "slug": "phoenix_dactylifera",
+ "layers": [
+  "palm"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Phoenix dactylifera L.",
+    "family": "Arecaceae",
+    "common_names": [
+     "date palm"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Phoenix%20dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 15,
+    "max": 40,
+    "text": "15 - 40 m (Wikipedia: up to 30 m)"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "growing 15 - 40 metres tall"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6,
+    "max": 10,
+    "text": "full crown span 6-10 m"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Phoenix_dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The full span of the crown ranges from 6–10 m"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Phoenix_dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "are slow-growing"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "grow well in full sun, even when small"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Plants grow well in full sun, even when small"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "high",
+    "text": "transpires large quantities of moisture; water supplied from ground water (roots 2-6 m) or irrigation; prefers 200-300 mm rain"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "The tree transpires large quantities of moisture"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "best at daytime temperatures 26-45 C, tolerates 10-52 C"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "It grows best in areas where annual daytime temperatures are within the range 26 - 45°c, but can tolerate 10 - 52°c"
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "No drought-tolerance statement (source says water must come from ground water or irrigation).",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "prefers pH 6.5-8, tolerating 6-8.5 (range includes alkaline)"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a pH in the range 6.5 - 8, tolerating 6 - 8.5"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerant of salty soils, fruit quality may suffer; used to revegetate salt-affected land"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Tolerant of salty soils, though fruit quality might be adversely affected"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": -4,
+    "damage_text": "leaves and young growth severely damaged at -4 C; dormant plant survives to about -15 C"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "the leaves and young growth can be severely damaged at -4°c"
+   }
+  },
+  "flowering": {
+   "status": "GAP",
+   "reason": "No flowering season or colour stated in sources opened.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "single-stemmed palm with terminal crown of 100-120 pinnate leaves 4-7 m long"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "is a single-stemmed, evergreen palm tree"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "Only rooting depth stated (2-6 m deep); no statement on invasiveness.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Sources opened state nothing about toxicity (fruit is edible; leaf spines not assessed).",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "No litter statement found.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "No maintenance level stated.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Phoenix+dactylifera",
+    "https://en.wikipedia.org/wiki/Phoenix_dactylifera"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "notes": "Tropical Plants DB flags Weed Potential Yes."
+}

@@ -1,0 +1,259 @@
+{
+ "slug": "eriobotrya_japonica",
+ "layers": [
+  "small_fruit_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Rhaphiolepis bibas (Lour.) Galasso & Banfi",
+    "family": "Rosaceae",
+    "common_names": [
+     "loquat",
+     "Japanese plum"
+    ],
+    "note": "GBIF treats Eriobotrya japonica as a synonym of Rhaphiolepis bibas"
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Eriobotrya%20japonica",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "Eriobotrya japonica (Thunb.) Lindl. status SYNONYM of accepted Rhaphiolepis bibas (usageKey 10786206)"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 7.6,
+    "text": "10-25 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 10 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 7.6,
+    "text": "10-25 ft, converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 10 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun (6+ h) and partial shade (2-6 h) both listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "no water-need statement (only soil drainage 'Good Drainage, Moist, Occasionally Dry')",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat-tolerance statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates drought; Resistance To Challenges: Drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Easy to grow, tolerates alkaline soil, drought, fireblight can be a problem."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "tolerant",
+    "text": "tolerates alkaline soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Easy to grow, tolerates alkaline soil, drought, fireblight can be a problem."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "is moderately salt tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": -12.2,
+    "damage_text": "tree survives to about 10 F (-12.2 C); blooms or fruit likely will not survive below 28 F (-2.2 C); zones 8a-11b listed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The tree itself can survive in temps down to about 10 degrees F."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     10,
+     11,
+     12,
+     1,
+     2
+    ],
+    "colours": [
+     "white",
+     "whitish-pink"
+    ],
+    "text": "Bloom time listed Fall and Winter (months mapped by us: Oct-Feb); text also says 'Formed in summer'; fragrant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "Flowers are 5-petals small, white to whitish-pink and fragrant."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "leathery toothed leaves, smooth above, downy beneath; coarse texture"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "A tropical evergreen shrub or tree with alternate, simple leaves that are leathery, veiny, and toothed."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "root behaviour: not stated on the NCSU Plant Toolbox page",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "only if large quantities of cracked seed pits are eaten (weakness, vomiting, convulsions); tags non-toxic for cats, horses, dogs"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous to Humans",
+    "quote": "Poison Severity: Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "moderate",
+    "flower": "not_stated",
+    "text": "dropping fruits can be a litter problem where fruit set occurs; class mapped by us"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Insects, Diseases, and Other Plant Problems",
+    "quote": "Dropping fruits can be a litter problem in locations where fruit set occurs."
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "uses": "edible fruit"
+}

@@ -1,0 +1,228 @@
+{
+ "slug": "pentas_lanceolata",
+ "layers": [
+  "perennial"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Pentas lanceolata (Forssk.) Deflers",
+    "family": "Rubiaceae",
+    "common_names": [
+     "Egyptian star flower"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Pentas%20lanceolata",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Pentas lanceolata (Forssk.) Deflers; family Rubiaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Height",
+    "quote": "Height: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.2,
+    "max": 0.6,
+    "text": "9 in-2 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Width",
+    "quote": "Width: 0 ft. 9 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions: Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "water consistently, allow soils to dry between watering"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Once planted, water consistently and allow soils to dry between watering."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "'moderate to high drought tolerance'; recorded at the lower bound"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Egyptian Star Flower has moderate to high drought tolerance"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": null,
+    "damage_text": "north of zone 10 typically grown indoors as a houseplant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "In climates north of USDA zone 10, the plant is typically grown indoors as a houseplant in a sunny room with high humidity."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "pink",
+     "purple",
+     "red",
+     "white"
+    ],
+    "text": "May to September; year-round if grown as annual in warm climates"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers: Flower Description",
+    "quote": "3 inch bloom from May to September"
+   }
+  },
+  "foliage": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pentas-lanceolata/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  }
+ }
+}

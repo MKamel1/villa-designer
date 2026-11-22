@@ -1,0 +1,228 @@
+{
+ "slug": "acorus_gramineus",
+ "layers": [
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Acorus gramineus Aiton",
+    "family": "Acoraceae",
+    "common_names": [
+     "Japanese sweet flag",
+     "grassy-leaved sweet flag"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Acorus%20gramineus",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName: Acorus gramineus Aiton; status: ACCEPTED; matchType: EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.3,
+    "text": "source gives only an upper bound (up to 1 ft = 0.3 m); min set equal to max"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "grows up to 1 foot tall"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.3,
+    "text": "0.5-1 ft converted"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 0 ft. 6 in. - 1 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "in full sun to partial shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "partially submerged or very wet soils; dry soil scorches leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "partially submerged conditions or very wet soils"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "drought tolerance not stated (dry soil can cause leaf scorching)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH attributes list acid and neutral (6.0-8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "salt tolerance not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "6a",
+    "min_temp_c": null,
+    "damage_text": "USDA zones 6a-9b"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6
+    ],
+    "colours": [
+     "gold/yellow",
+     "green"
+    ],
+    "text": "mid-spring/summer (around May to June)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "mid-spring/ summer (around May to June)"
+   }
+  },
+  "foliage": {
+   "status": "GAP",
+   "reason": "evergreen/deciduous habit not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "only 'spreads by rhizomes to form a ground cover'; no statement on damaging roots",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "toxicity not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "litter not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "Maintenance: High"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: High"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/acorus-gramineus/",
+    "koi pond fish toxicity (not stated on pages opened)"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

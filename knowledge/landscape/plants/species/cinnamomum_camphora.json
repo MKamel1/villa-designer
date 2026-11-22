@@ -1,0 +1,255 @@
+{
+ "slug": "cinnamomum_camphora",
+ "layers": [
+  "canopy_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cinnamomum camphora (L.) J.Presl",
+    "family": "Lauraceae",
+    "common_names": [
+     "camphor tree",
+     "camphortree"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cinnamomum%20camphora",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 12.2,
+    "max": 15.2,
+    "text": "40-50 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 40 ft. 0 in. - 50 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 15.2,
+    "max": 21.3,
+    "text": "50-70 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 50 ft. 0 in. - 70 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun (6 or more hours of direct sunlight a day); Partial Shade (2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "NCSU lists Drought and Dry Soil resistance and drought-tolerant garden theme; keep soil from staying wet (root rot); no explicit water-need field"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Diseases Drought Dry Soil Insect Pests Urban Conditions"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "No heat-tolerance statement found.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "NCSU tags drought tolerant, dry soils tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Diseases Drought Dry Soil Insect Pests Urban Conditions"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "NCSU lists pH Acid (<6.0) and Neutral (6.0-8.0) only; no alkaline-soil or chlorosis statement.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "none",
+    "text": "NCSU tags salt intolerant and salt-spray intolerant. Conflicting: Tropical Plants DB says tolerant of saline soils and salt-laden winds"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "#salt intolerant"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9b",
+    "min_temp_c": -5,
+    "damage_text": "mature trees withstand occasional frosts to about -5 C (-10 C another report); young trees often succumb below zero. NCSU zones 9b-11b"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Mature trees can withstand occasional frosts with temperatures falling to about -5°c"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [
+     "green-white",
+     "pale yellow"
+    ],
+    "text": "flowering season not stated; NCSU: green-white to pale yellow fragrant flowers on 3 inch panicles, inflorescence insignificant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Flower Description",
+    "quote": "Green-white to pale yellow fragrant flowers on 3\" long panicles."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy leathery dark green leaves, smell of camphor when crushed"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Woody Plant Leaf Characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "surface roots can be an issue; Tropical Plants DB: shallow root system"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Surface roots can also be an issue when taking location into consideration."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Sources opened state nothing about toxicity.",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "https://tropical.theferns.info/viewtropical.php?id=Cinnamomum+camphora"
+   ]
+  },
+  "litter": {
+   "status": "SOURCED",
+   "value": {
+    "leaf": "not_stated",
+    "fruit": "heavy",
+    "flower": "not_stated",
+    "text": "berries following flowering messy when they fall; NCSU Problems: Messy"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The berries that follow flowering can be quite messy as they fall to the ground."
+   }
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "high",
+    "text": "NCSU Maintenance: High"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Maintenance: High"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "invasive_flag": "NCSU: very weedy and out-competes native species especially in Florida"
+}

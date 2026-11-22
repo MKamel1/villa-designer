@@ -1,0 +1,247 @@
+{
+ "slug": "petrea_volubilis",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Petrea volubilis L.",
+    "family": "Verbenaceae",
+    "common_names": [
+     "queen's wreath",
+     "sandpaper vine"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Petrea%20volubilis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Petrea volubilis L.; family Verbenaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.8,
+    "max": 3.7,
+    "text": "6-12 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Height",
+    "quote": "Height: 6 ft. 0 in. - 12 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.8,
+    "text": "3-6 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Width",
+    "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions: Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "does best in moist, fertile, well-drained soil in full sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Queen's Wreath does best in moist, fertile, well-drained soil sited in full sun."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/petrea-volubilis/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "highly drought and wind tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is highly drought and wind tolerant and moderately tolerant of salt"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/petrea-volubilis/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately tolerant of salt"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is highly drought and wind tolerant and moderately tolerant of salt"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "10a",
+    "min_temp_c": 1.7,
+    "damage_text": "does not tolerate temperatures below 35 F (=1.7 C, converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is a tropical plant and does not tolerate temperatures below 35 degrees F"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "colours": [
+     "purple"
+    ],
+    "text": "flowers throughout the year, mostly late winter to early summer; showy purple calyx lobes"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers: Flower Description",
+    "quote": "Flowers throughout the year mostly from late winter through early summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "dark green, sandpaper-textured oblong-elliptic leaves 4-9 in"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf characteristics",
+    "quote": "It is semi-evergreen and will drop its leaves in colder climates."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/petrea-volubilis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/petrea-volubilis/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/petrea-volubilis/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ }
+}

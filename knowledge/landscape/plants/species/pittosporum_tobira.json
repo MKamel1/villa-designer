@@ -1,0 +1,249 @@
+{
+ "slug": "pittosporum_tobira",
+ "layers": [
+  "screen_hedge"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Pittosporum tobira (Murray) Aiton fil.",
+    "family": "Pittosporaceae",
+    "common_names": [
+     "Japanese pittosporum",
+     "mock orange",
+     "Australian laurel"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Pittosporum%20tobira",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Pittosporum tobira (Murray) Aiton fil.; status ACCEPTED; family Pittosporaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.4,
+    "max": 4.0,
+    "text": "8-13 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 8 ft. 0 in. - 13 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 2.4,
+    "text": "4-8 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 4 ft. 0 in. - 8 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "fast growing evergreen shrub."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "full sun to heavy shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Plant in full sun to heavy shade"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "page gives drought tolerance but no water-need wording for hydrozone",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
+   ]
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates drought, heat, and salt spray"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This hardy plant also tolerates drought, heat, and salt spray"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates drought"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This hardy plant also tolerates drought, heat, and salt spray"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "wide range of pH, prefers well-drained soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Soil",
+    "quote": "wide range of pH, but prefers well-drained soils."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates salt spray (soil salt not stated)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This hardy plant also tolerates drought, heat, and salt spray"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "page gives hardy zones 8-10"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Zones",
+    "quote": "grows well in hardy zones 8-10"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     4,
+     5
+    ],
+    "colours": [
+     "white",
+     "yellow"
+    ],
+    "text": "late spring (April-May), white turning yellow after pollination"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Flowers",
+    "quote": "appear in late spring (April-May) starting out white and turning yellow upon pollination."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "evergreen obovate leaves, entire margins; variegated forms exist"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Evergreen, obovate leaves with entire margins"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "NCSU mentions root rot/nematodes only, no root-system description",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU tags only cats/dogs/horses non-toxic (pet statement, not people); Time-Saver Table 550-3 does not list Pittosporum",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "held:landscape-timesaver Table 550-3"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU silent on litter",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "tough, durable shrub that withstands severe pruning; Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "notes": "NCSU tags: non-toxic for cats, dogs, horses (pets only)."
+ }
+}

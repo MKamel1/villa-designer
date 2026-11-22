@@ -1,0 +1,239 @@
+{
+ "slug": "laurus_nobilis",
+ "layers": [
+  "herb",
+  "screen_hedge"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Laurus nobilis L.",
+    "family": "Lauraceae",
+    "common_names": [
+     "bay laurel",
+     "sweet bay"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Laurus%20nobilis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 12,
+    "max": 12,
+    "text": "12 m (39 ft) as stated; NCSU: up to 60 ft in native habitat, much smaller in containers"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Laurus nobilis is an evergreen Tree growing to 12 m (39ft) by 10 m (32ft) at a slow rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 10,
+    "max": 10,
+    "text": "10 m (32 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Laurus nobilis is an evergreen Tree growing to 12 m (39ft) by 10 m (32ft) at a slow rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow",
+    "text": "source: slow rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Laurus nobilis is an evergreen Tree growing to 12 m (39ft) by 10 m (32ft) at a slow rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/laurus-nobilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet bay tolerates a variety of well-drained soil types in full sun to partial shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "PFAF wording: prefers dry or moist soil; NCSU: well-drained soils; susceptible to root rot"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It prefers dry or moist soil."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no drought statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "PFAF says only 'not maritime exposure'; no explicit salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8b",
+    "min_temp_c": null,
+    "damage_text": "NCSU: colder than zone 8b needs frost protection; PFAF USDA hardiness 8-10"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/laurus-nobilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It needs to be brought indoors in the winter in areas colder than zone 8b to prevent frost damage."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     4,
+     5
+    ],
+    "colours": [
+     "yellow"
+    ],
+    "text": "PFAF: April to May; Bloom Color: Yellow; dioecious"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in leaf all year, in flower from April to May."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "aromatic evergreen leaves, fissured dark gray bark; used as hedge, screen or topiary"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/laurus-nobilis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet bay is an evergreen tree or shrub in the laurel family (Lauraceae)"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF Known Hazards: None known"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Known Hazards None known"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter (NCSU notes only that female plants produce fleshy black drupes)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Laurus+Nobilis",
+    "https://plants.ces.ncsu.edu/plants/laurus-nobilis/"
+   ]
+  }
+ },
+ "notes": "NCSU: used as hedge/topiary or privacy screen; susceptible to laurel wilt, phytophthora, root rot."
+}

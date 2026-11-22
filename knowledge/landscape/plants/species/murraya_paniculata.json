@@ -1,0 +1,265 @@
+{
+ "slug": "murraya_paniculata",
+ "layers": [
+  "screen_hedge"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Murraya paniculata (L.) Jacq.",
+    "family": "Rutaceae",
+    "common_names": [
+     "orange jasmine",
+     "orange jessamine"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Murraya%20paniculata",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Murraya paniculata (L.) Jacq.; status ACCEPTED; family Rutaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6.1,
+    "max": 6.1,
+    "text": "to 20 ft tall (single stated figure) (converted); NParks gives 2.5-3.5 m maximum height, 8 m unpruned"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "moderate growth to 20-feet tall with equal spread"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 6.1,
+    "max": 6.1,
+    "text": "equal to height, 20 ft (converted)"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "moderate growth to 20-feet tall with equal spread"
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "moderate growth to 20-feet tall with equal spread"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Partial shade to full sun"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "light",
+    "quote": "Partial shade to full sun."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "needs regular supplemental water throughout the year"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "water",
+    "quote": "orange jessamine needs regular supplemental water applied throughout the year"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no source opened states heat tolerance",
+   "searched": [
+    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
+    "https://plants.ces.ncsu.edu/plants/murraya-paniculata/ (404)"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "UNF: well-drained soil, drought tolerant. Conflicts with ASU which says regular supplemental water is needed; treat as unconfirmed"
+   },
+   "source": {
+    "source_id": "UNF-Botanical-Garden",
+    "url": "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "care",
+    "quote": "well-drained soil, drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "root-zone tolerance lists acidic and alkaline soils"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
+    "accessed": "2026-11-22",
+    "locator": "root-zone tolerance",
+    "quote": "Fertile Loamy Soils, Acidic (low pH) Soils, Alkaline high pH Soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no source opened mentions salt",
+   "searched": [
+    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": 1.7,
+    "damage_text": "ASU: cold tolerant to only 35 F (1.7 C); USDA 9-11"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "hardiness",
+    "quote": "USDA 9-11. It is also cold tolerant to only 35oF."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "NParks: flowers all year, white, fragrant"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
+    "accessed": "2026-11-22",
+    "locator": "flowers",
+    "quote": "Flowers are white, flowers all year round and have a pleasant fragrance."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "compound dark green glossy leaves, 3-7 leaflets"
+   },
+   "source": {
+    "source_id": "NParks",
+    "url": "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239",
+    "accessed": "2026-11-22",
+    "locator": "leaves",
+    "quote": "Leaves are evergreen, alternate, compound (with 3 - 7 leaflets), odd-pinnate."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no source opened describes roots",
+   "searched": [
+    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity",
+   "searched": [
+    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no source opened states litter",
+   "searched": [
+    "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "https://unf.edu/botanical-garden/plants/murraya-paniculata.html",
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "NParks only gives a conditional statement (high if topiary/formal); no general level",
+   "searched": [
+    "https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2239"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "invasive_flag": {
+   "status": "SOURCED",
+   "value": {
+    "flag": true,
+    "text": "ASU: broadly invasive in several tropical/subtropical regions; UNF: exotic pest plant for central and south Florida"
+   },
+   "source": {
+    "source_id": "ASU-Martin",
+    "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/murrayapaniculata.html",
+    "accessed": "2026-11-22",
+    "locator": "invasive",
+    "quote": "Orange jessamine is broadly invasive"
+   }
+  }
+ }
+}

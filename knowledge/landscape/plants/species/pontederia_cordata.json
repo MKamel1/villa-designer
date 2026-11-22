@@ -1,0 +1,250 @@
+{
+ "slug": "pontederia_cordata",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Pontederia cordata L.",
+    "family": "Pontederiaceae",
+    "common_names": [
+     "pickerelweed"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Pontederia%20cordata",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Pontederia cordata L.\",\"canonicalName\":\"Pontederia cordata\",\"rank\":\"SPECIES\",\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 1.2,
+    "text": "2-4 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits, Height",
+    "quote": "Height: 2 ft. 0 in. - 4 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.46,
+    "max": 0.6,
+    "text": "1.5-2 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits, Width",
+    "quote": "Width: 1 ft. 6 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Its preference is for freshwater depth up to 12 inches in full sun in rich loamy soils."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "freshwater depth up to 12 in; water must stay shallower than the leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is very important to maintain water depths greater than saturation, but shallower than the leaves year-round."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "resistant to deer browsing and tolerant of heat"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "is tolerant of heat."
+   }
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "NCSU page states no drought tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/pontederia-cordata/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH Neutral (6.0-8.0); alkalinity beyond 8 not stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/pontederia-cordata/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "3a",
+    "min_temp_c": null,
+    "damage_text": "zones 3a-10b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "3a, 3b, 4a, 4b, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "lavender-blue"
+    ],
+    "text": "bright lavender-blue tubular flowers, May to October"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Flowers from summer through fall (around May to October)."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "deciduous",
+    "character": "glossy, erect, deep green egg- to lance-shaped basal leaves"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Deciduous Habit/Form: Clumping Erect Spreading"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "thick rhizomes spread to form large colonies (pond context; nothing on structures)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The thick rhizomes spread to form large colonies."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page states no toxicity; silence is not safety",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/pontederia-cordata/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/pontederia-cordata/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/pontederia-cordata/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for pontederia cordata",
+    "Wikipedia page for pontederia cordata"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

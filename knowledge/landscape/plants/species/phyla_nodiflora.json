@@ -1,0 +1,232 @@
+{
+ "slug": "phyla_nodiflora",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Phyla nodiflora (L.) Greene",
+    "family": "Verbenaceae",
+    "common_names": [
+     "frogfruit",
+     "turkey tangle"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Phyla%20nodiflora",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Phyla nodiflora"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.08,
+    "max": 0.15,
+    "text": "0 ft 3 in - 0 ft 6 in (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 0 ft. 3 in. - 0 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.6,
+    "text": "1-2 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 1 ft. 0 in. - 2 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun to partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "full sun to partial shade in moist to dry soils"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist to dry soils; tolerates drought and flooding"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "moist to dry soils"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerates drought and flooding"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "tolerates most soil types, including poor-draining and saline soils and both drought and flooding"
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "soil pH not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "tolerates saline soils (stated as tolerance, no degree)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "tolerates most soil types, including poor-draining and saline soils"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "zones 7a-11b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "purple",
+     "white"
+    ],
+    "text": "During summer (mapped to Jun-Aug)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "During summer, tiny purple and white flowers are clustered around a cylindrical spike."
+   }
+  },
+  "foliage": {
+   "status": "GAP",
+   "reason": "leaf retention not stated; habit creeping, spreading",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "only 'creeping stems that root at the nodes'",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "silent on toxicity",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/phyla-nodiflora/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

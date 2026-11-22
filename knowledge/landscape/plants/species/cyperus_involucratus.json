@@ -1,0 +1,253 @@
+{
+ "slug": "cyperus_involucratus",
+ "layers": [
+  "aquatic_marginal"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Cyperus alternifolius subsp. flabelliformis Kük.",
+    "family": "Cyperaceae",
+    "common_names": [
+     "umbrella papyrus",
+     "umbrella plant"
+    ],
+    "text": "GBIF backbone: C. involucratus Rottb. is a SYNONYM (acceptedUsageKey 2714158 = Cyperus alternifolius subsp. flabelliformis, ACCEPTED); plain match for the name returns only genus Cyperus. NCSU and horticulture still use C. involucratus"
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Cyperus%20involucratus&verbose=true",
+    "accessed": "2026-11-22",
+    "locator": "match result",
+    "quote": "\"scientificName\":\"Cyperus involucratus Rottb.\",\"canonicalName\":\"Cyperus involucratus\",\"rank\":\"SPECIES\",\"status\":\"SYNONYM\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 1.8,
+    "text": "4 ft typical, to 6 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Typically reaching heights of 4', under ideal outdoor conditions of a warm, moist environment, they can grow up to 6'."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.9,
+    "text": "2-3 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits, Width",
+    "quote": "Width: 2 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "sun or light shade; protect from strong sun and harsh winds"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This plant does well in sun or light shade; however, it requires protection from strong sun and harsh winds"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "aquatic",
+    "text": "keep soil moist or grow in standing water; roots need to remain wet at all times"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "keep the soil moist or grow in standing water."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "NCSU page states no heat tolerance (only advice to protect from strong sun)",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-involucratus/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "tag '#dry soils intolerant'"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance/tags",
+    "quote": "#dry soils intolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Soil pH Neutral (6.0-8.0); alkalinity beyond 8 not stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Neutral (6.0-8.0)"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "NCSU page states no salt tolerance",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-involucratus/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "tagged '#frost tender'"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Plant Hardiness Zone",
+    "quote": "8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "green",
+     "white"
+    ],
+    "text": "NCSU: Flower Bloom Time 'Fall Summer'; months 6-10 are our reading of summer to fall, not source figures"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Flower",
+    "quote": "Flower Color: Green White"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "leafless stems topped with a spiral of dark green leaves; habit not stated by source, evergreen is an assumption"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Leaves",
+    "quote": "Leafless stem topped with spiral of dark green leaves."
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "spreads by rhizomes and self-seeding"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "it can spread via its rhizomes as well as by its self-seeding tendencies."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU page states no toxicity; silence is not safety",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-involucratus/"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "source silent on litter",
+   "searched": [
+    "NCSU Plant Toolbox https://plants.ces.ncsu.edu/plants/cyperus-involucratus/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium; scapes may flop and need support"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/cyperus-involucratus/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to fish",
+   "searched": [
+    "NCSU Plant Toolbox page for cyperus involucratus",
+    "Wikipedia page for cyperus involucratus"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

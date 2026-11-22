@@ -1,0 +1,253 @@
+{
+ "slug": "mentha_spicata",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Mentha spicata L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "spearmint",
+     "garden mint"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Mentha%20spicata",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.6,
+    "max": 0.6,
+    "text": "0.6 m (2 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Mentha spicata is a PERENNIAL growing to 0.6 m (2ft) by 1 m (3ft 3in) at a fast rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.0,
+    "max": 1.0,
+    "text": "1 m (3 ft 3 in) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Mentha spicata is a PERENNIAL growing to 0.6 m (2ft) by 1 m (3ft 3in) at a fast rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "source: fast rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Mentha spicata is a PERENNIAL growing to 0.6 m (2ft) by 1 m (3ft 3in) at a fast rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "thrives in full sun; does tolerate partial shade (NCSU)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This upright perennial thrives in full sun in organically rich, well-drained, moist soils growing quickly 1 to 2 feet high and wide"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "organically rich, well-drained, moist soils; does not do well in dry soils; found at pond/lake margins in nature"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "but does not do well in dry soils."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "https://plants.ces.ncsu.edu/plants/mentha-spicata/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "does not do well in dry soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "but does not do well in dry soils."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "https://plants.ces.ncsu.edu/plants/mentha-spicata/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "3a",
+    "min_temp_c": null,
+    "damage_text": "PFAF: not frost tender; USDA hardiness 3-9 (zone 3 recorded as 3a)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is hardy to UK zone 3 and is not frost tender."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     7,
+     8,
+     9
+    ],
+    "colours": [
+     "lilac",
+     "pink",
+     "white"
+    ],
+    "text": "NCSU: late summer (months 7-9 is our reading of 'late summer'; PFAF gives August-September)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The small lilac, pink, or white flowers appear in terminal spikes in late summer"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "aromatic bright green leaves; upright to rampant spreading"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Mentha spicata is a PERENNIAL growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "NCSU: spreads rampantly by rhizomes and rooting stems; soil barriers can restrain rhizomatous spread"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Best grown in a container as it spreads rampantly."
+   }
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "non_toxic",
+    "text": "PFAF: no records of toxicity; large quantities of some Mentha, especially the extracted essential oil, can cause abortions, so some caution. Culinary herb."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Although no records of toxicity have been seen for this species,"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "https://plants.ces.ncsu.edu/plants/mentha-spicata/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement (spread control needed per NCSU)",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Mentha+Spicata",
+    "https://plants.ces.ncsu.edu/plants/mentha-spicata/"
+   ]
+  }
+ },
+ "invasive_flag": "NCSU: spreads aggressively / rampantly; contain in container or with soil barriers"
+}

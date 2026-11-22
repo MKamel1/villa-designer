@@ -1,0 +1,237 @@
+{
+ "slug": "ocimum_basilicum",
+ "layers": [
+  "herb"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Ocimum basilicum L.",
+    "family": "Lamiaceae",
+    "common_names": [
+     "sweet basil"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Ocimum%20basilicum",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.5,
+    "max": 0.5,
+    "text": "0.5 m (1 ft 8 in) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Ocimum basilicum is a PERENNIAL growing to 0.5 m (1ft 8in) by 0.3 m (1ft) at a fast rate."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.3,
+    "text": "0.3 m (1 ft) as stated"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Ocimum basilicum is a PERENNIAL growing to 0.5 m (1ft 8in) by 0.3 m (1ft) at a fast rate."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast",
+    "text": "source: fast rate"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Ocimum basilicum is a PERENNIAL growing to 0.5 m (1ft 8in) by 0.3 m (1ft) at a fast rate."
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "prefers full sun (NCSU tags: partial shade tolerant)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet basil prefers full sun and moist, well-drained soils."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "moist, well-drained soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Sweet basil prefers full sun and moist, well-drained soils."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat-tolerance statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no drought statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "pH range includes mildly alkaline"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Suitable pH: mildly acid, neutral and basic (mildly alkaline) soils."
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "PFAF: frost tender; USDA hardiness 9-11 (zone 9 recorded as 9a). NCSU: transplant after the last frost."
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is hardy to UK zone 10 and is frost tender."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     8,
+     9
+    ],
+    "colours": [
+     "purple",
+     "white"
+    ],
+    "text": "PFAF: flower August to September; Bloom Color: Purple, White"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "It is in flower from August to September,"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "herbaceous",
+    "character": "fragrant edible leaves; purple-leaved cultivars used as ornamentals (NCSU)"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Physical Characteristics",
+    "quote": "Ocimum basilicum is a PERENNIAL growing to"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement about roots",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "culinary herb; PFAF cautions on estragole-containing oil"
+   },
+   "source": {
+    "source_id": "PFAF",
+    "url": "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "accessed": "2026-11-22",
+    "locator": "Known Hazards",
+    "quote": "Basil contains estragole a potentially carcinogenic and mutagenic essential oil. Do not take during pregnancy or give basil oil to small infants/children."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "sources silent on litter",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "no maintenance-level statement",
+   "searched": [
+    "https://pfaf.org/user/Plant.aspx?LatinName=Ocimum+Basilicum",
+    "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/"
+   ]
+  }
+ },
+ "notes": "NCSU tags non-toxic for cats and dogs. Treated as annual in cooler climates; PFAF lists perennial."
+}

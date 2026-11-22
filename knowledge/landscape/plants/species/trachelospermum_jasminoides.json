@@ -1,0 +1,245 @@
+{
+ "slug": "trachelospermum_jasminoides",
+ "layers": [
+  "climber"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Trachelospermum jasminoides (Lindl.) Lem.",
+    "family": "Apocynaceae",
+    "common_names": [
+     "star jasmine"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Trachelospermum%20jasminoides",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Trachelospermum jasminoides (Lindl.) Lem.; family Apocynaceae; status ACCEPTED"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 6.1,
+    "text": "3-20 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Height",
+    "quote": "Height: 3 ft. 0 in. - 20 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.9,
+    "max": 1.2,
+    "text": "3-4 ft (converted from feet)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions: Width",
+    "quote": "Width: 3 ft. 0 in. - 4 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions: Light",
+    "quote": "Light: Full sun (6 or more hours of direct sunlight a day) Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "Soil Drainage: Good Drainage, Moist"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions",
+    "quote": "Soil Drainage: Good Drainage Moist"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought-tolerant once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Once established, it is drought-tolerant."
+   }
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Salt listed under Resistance To Challenges; no degree stated"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Resistance To Challenges",
+    "quote": "Resistance To Challenges: Deer Salt"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "in colder climates grown as annual or in containers overwintered indoors"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "In colder climates, grow as an annual or in containers overwintered indoors."
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     5,
+     6,
+     7
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "late spring, sporadically in summer; creamy white, very fragrant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "The abundant creamy white flowers bloom in late spring and sporadically in summer."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy dark green, bronze-red where evergreen; milky latex"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf characteristics",
+    "quote": "Woody Plant Leaf Characteristics: Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "NCSU lists 'Poisonous' as a plant type with no severity or part stated; recorded conservatively as toxic. Sap is milky latex."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Whole Plant Traits",
+    "quote": "Plant Type: Ground Cover Houseplant Perennial Poisonous Vine"
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no statement on the pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Medium"
+   }
+  }
+ },
+ "notes": "ASPCA (https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/star-jasmine, opened): Non-Toxic to Dogs, Cats, Horses. NCSU Design Feature: Screen/Privacy; Landscape Theme: Children's Garden."
+}

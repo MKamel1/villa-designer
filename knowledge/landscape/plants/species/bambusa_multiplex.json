@@ -1,0 +1,246 @@
+{
+ "slug": "bambusa_multiplex",
+ "layers": [
+  "screen_hedge",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Bambusa multiplex (Lour.) Raeusch. ex Schult.f.",
+    "family": "Poaceae",
+    "common_names": [
+     "hedge bamboo",
+     "clumping bamboo",
+     "Chinese dwarf bamboo"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Bambusa%20multiplex",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED, matchType EXACT",
+    "quote": "scientificName Bambusa multiplex (Lour.) Raeusch. ex Schult.f.; status ACCEPTED; family Poaceae"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 3.0,
+    "max": 7.6,
+    "text": "10-25 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 10 ft. 0 in. - 25 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 1.2,
+    "max": 1.8,
+    "text": "4-6 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 4 ft. 0 in. - 6 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Growth Rate: Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "Full sun; Dappled Sunlight (Shade through upper canopy all day)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "GAP",
+   "reason": "page only says to water well in the first growing season; no ongoing water-need class",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/"
+   ]
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "page lists humidity resistance only, no heat statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "page silent on drought",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "page lists only Acid (<6.0) soil as a range, no tolerance statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/"
+   ]
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This plant is moderately salt tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "zones 8a-11b; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Zones",
+    "quote": "8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [],
+    "colours": [],
+    "text": "rarely flowers; inflorescence insignificant; no months or colour given"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Flower",
+    "quote": "Rarely flowers"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "dense clumping evergreen grass (bamboo)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "evergreen grass"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "benign",
+    "text": "clumping, not a running bamboo, not considered invasive"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is not a running bamboo and so is not considered invasive."
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "NCSU silent on toxicity; Time-Saver Table 550-3 does not list bamboo",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "held:landscape-timesaver Table 550-3"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source stating toxicity to fish found; only NCSU page opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "koi pond bamboo leaf litter toxicity (not found)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "NCSU silent on litter (leaf drop into pond unquantified)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "moderate",
+    "text": "Maintenance: Medium"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Attributes",
+    "quote": "Maintenance: Medium"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "invasive_flag": {
+   "status": "SOURCED",
+   "value": {
+    "flag": false,
+    "text": "This species is clumping. Note: Time-Saver Table 550-4 lists 'Bamboo' generally as invasive in many parts of the U.S. (running types; species not specified)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "It is not a running bamboo and so is not considered invasive."
+   }
+  }
+ }
+}

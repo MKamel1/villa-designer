@@ -1,0 +1,260 @@
+{
+ "slug": "aspidistra_elatior",
+ "layers": [
+  "groundcover_lawn",
+  "tropical_foliage"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Aspidistra elatior Blume",
+    "family": "Asparagaceae",
+    "common_names": [
+     "cast iron plant"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Aspidistra%20elatior",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Aspidistra elatior"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.9,
+    "text": "1-3 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "Height",
+    "quote": "Height: 1 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.9,
+    "text": "1-3 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "Width",
+    "quote": "Width: 1 ft. 0 in. - 3 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "slow"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Growth Rate: Slow"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "partial to full shade, intolerant of direct sun"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "prefer partial to full shade and are intolerant of direct sun."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "water regularly spring to autumn, sparingly in winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Water regularly spring to autumn, during droughts, sparingly in winter."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought tolerant, tolerates dry and nutrient-poor soils"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "is drought tolerant, though it can tolerate dry and nutrient-poor soils."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "soil pH conditions listed: acid, neutral, alkaline (>8.0)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "Cultural Conditions",
+    "quote": "Alkaline (>8.0)"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "low",
+    "text": "slightly salt tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "is slightly salt tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "7a",
+    "min_temp_c": null,
+    "damage_text": "zones 7a-11b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6
+    ],
+    "colours": [
+     "brown/copper",
+     "cream/tan",
+     "purple/lavender"
+    ],
+    "text": "blooms very rarely; early summer if it does (mapped to June)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Blooms very rarely, though will bloom in early summer if it does."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "rhizomatous clumps, erect"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "an evergreen, rhizomatous perennial reaching up to 2' in upright clumps."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "spreads by rhizomes; no statement on damage or aggressiveness",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "ASPCA states pets only; silent on people",
+   "searched": [
+    "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/cast-iron-plant",
+    "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "ASPCA page (pets only)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Maintenance: Low"
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "toxicity_pets": {
+  "text": "Non-Toxic to Dogs, Non-Toxic to Cats, Non-Toxic to Horses (pets only, not people)",
+  "source": {
+   "source_id": "ASPCA",
+   "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/cast-iron-plant",
+   "accessed": "2026-11-22",
+   "locator": "Toxicity",
+   "quote": "Non-Toxic to Dogs, Non-Toxic to Cats, Non-Toxic to Horses"
+  }
+ }
+}

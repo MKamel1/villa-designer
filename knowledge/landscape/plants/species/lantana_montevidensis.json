@@ -1,0 +1,266 @@
+{
+ "slug": "lantana_montevidensis",
+ "layers": [
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Lantana montevidensis (Spreng.) Briq.",
+    "family": "Verbenaceae",
+    "common_names": [
+     "trailing lantana",
+     "weeping lantana"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Lantana%20montevidensis",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Lantana montevidensis (Spreng.) Briq.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.46,
+    "text": "1 ft to 1 ft 6 in (converted); RHS gives 0.5-1 m"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Height: 1 ft. 0 in. - 1 ft. 6 in."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.91,
+    "max": 1.52,
+    "text": "3 to 5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Dimensions",
+    "quote": "Width: 3 ft. 0 in. - 5 ft. 0 in."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Rapid"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade"
+    ],
+    "hours_text": "full sun 6+ h; tolerates partial shade"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "medium-moist well-drained soil; also does well in sandy, slightly dry soil"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "medium-moist, well-drained soil"
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tolerant of heat, humidity and salt spray"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "heat, humidity, and salt spray"
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought-tolerant once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "is drought-tolerant once established"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS: acid, alkaline or neutral soil; NCSU lists neutral (6.0-8.0)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/57691/lantana-montevidensis/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "NCSU: tolerant of coastal conditions incl. salt spray (spray, not soil salinity, is what is stated)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "tolerant of coastal conditions, such as heat, humidity, and salt spray"
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "8a",
+    "min_temp_c": null,
+    "damage_text": "hardiness zones 8-10; in zone 8 it dies back to the ground in winter"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "colours": [
+     "light purple",
+     "purplish-pink"
+    ],
+    "text": "blooms present from June until first frost of fall; yellow throats"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "light purple to purplish-pink blooms with yellow throats"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen per NCSU field; leaves have an unpleasant fragrance when crushed (RHS)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Leaf Retention",
+    "quote": "Broadleaf Evergreen"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root-system statement on NCSU or RHS pages (stems root at nodes on soil contact only)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "https://www.rhs.org.uk/plants/57691/lantana-montevidensis/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "toxic",
+    "text": "NCSU poison severity Medium: vomiting, diarrhoea, dilated pupils, labored respiration; leaves and sap skin irritants; also toxic to dogs, cats, horses. RHS: harmful if eaten. Time-Saver Table 550-3 lists Lantana sp. black berries: severe vomiting and diarrhea, can be fatal."
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "This plant is toxic to humans, dogs, cats, and horses if ingested."
+   }
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or RHS pages (berries are noted only under toxicity)",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "https://www.rhs.org.uk/plants/57691/lantana-montevidensis/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU maintenance: Low"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/lantana-montevidensis/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ },
+ "notes": "Time-Saver Table 550-4 (printed p.331) lists 'Lantana hybrids' as invasive in Gulf states (U.S.); NCSU: has naturalized and is a weed of disturbed sites where naturalized; seeds easily spread by wildlife.",
+ "invasive_flag": true
+}

@@ -1,0 +1,257 @@
+{
+ "slug": "liriope_muscari",
+ "layers": [
+  "groundcover_lawn"
+ ],
+ "pond_relevant": true,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Liriope muscari (Decne.) L.H.Bailey",
+    "family": "Asparagaceae",
+    "common_names": [
+     "lilyturf",
+     "big blue lilyturf"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Liriope%20muscari",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "status ACCEPTED, matchType EXACT, canonicalName Liriope muscari"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.46,
+    "text": "1-1.5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "The clumps of leaves measure 1 to 1.5 feet tall and equally as wide."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.3,
+    "max": 0.46,
+    "text": "1-1.5 ft (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "The clumps of leaves measure 1 to 1.5 feet tall and equally as wide."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun",
+     "part_shade",
+     "shade"
+    ],
+    "hours_text": "full sun to partial shade; near-full shade with slower growth"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "in full sun to partial shade."
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "very little supplemental irrigation once established"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "they require very little supplemental irrigation."
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "heat not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/liriope-muscari/"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "drought and deer tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "It is drought and deer tolerant."
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "requires acidic to neutral soil; pH listed <6.0 and 6.0-8.0"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "requires acidic to neutral, well-drained soils."
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "moderately salt-tolerant"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "moderately salt-tolerant."
+   }
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "5a",
+    "min_temp_c": null,
+    "damage_text": "zones 5a-10b listed; no damage text"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     8,
+     9
+    ],
+    "colours": [
+     "purple",
+     "lavender"
+    ],
+    "text": "Blooms late summer from August to September"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Blooms late summer from August to September."
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "broadleaf evergreen herbaceous clumping perennial"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "description",
+    "quote": "Lily turf is a broadleaf evergreen, herbaceous perennial."
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "roots described as fleshy and tuberous; no damage statement",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/liriope-muscari/"
+   ]
+  },
+  "toxicity_people": {
+   "status": "SOURCED",
+   "value": {
+    "class": "mild",
+    "text": "low severity poison characteristics; fruits; no known cases"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "Poisonous",
+    "quote": "This plant has low severity poison characteristics."
+   }
+  },
+  "toxicity_fish": {
+   "status": "GAP",
+   "reason": "no source opened states toxicity to pond fish",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "ASPCA page (pets only)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "not stated",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/liriope-muscari/"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "Maintenance: Low; cut back tops each February"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "To maintain an attractive appearance, cut back tops each February before new growth begins."
+   }
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

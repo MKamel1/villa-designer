@@ -1,0 +1,229 @@
+{
+ "slug": "jasminum_sambac",
+ "layers": [
+  "flowering_shrub"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Jasminum sambac (L.) Aiton",
+    "family": "Oleaceae",
+    "common_names": [
+     "Arabian jasmine",
+     "mohle flower",
+     "zambac"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Jasminum%20sambac",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Jasminum sambac (L.) Aiton\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 2.5,
+    "max": 4,
+    "text": "RHS ultimate height 2.5-4 metres (climbing habit)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Ultimate height",
+    "quote": "2.5-4 metres"
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.5,
+    "max": 1,
+    "text": "RHS ultimate spread"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Ultimate spread",
+    "quote": "0.5-1 metres"
+   }
+  },
+  "growth_rate": {
+   "status": "GAP",
+   "reason": "RHS gives time to maturity 5-10 years only",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "part_shade"
+    ],
+    "hours_text": "RHS: partial shade; shade from hot sun under glass"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Sun",
+    "quote": "Partial shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "moderate",
+    "text": "RHS moisture: moist but well-drained; water sparingly in winter"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Moisture",
+    "quote": "Moist but well–drained"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "no heat statement on pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "drought": {
+   "status": "GAP",
+   "reason": "no drought statement on pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "alkaline_soil": {
+   "status": "GAP",
+   "reason": "RHS lists soil pH Neutral only; no statement on alkaline tolerance",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "no salt statement on pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": null,
+    "min_temp_c": 1,
+    "damage_text": "RHS H2: tolerant of low temperatures, but not surviving being frozen (1 to 5 C); lower figure of the range recorded"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Hardiness",
+    "quote": "H2: tolerant of low temperatures, but not surviving being frozen (1 to 5)"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     6,
+     7,
+     8
+    ],
+    "colours": [
+     "white"
+    ],
+    "text": "white, very fragrant flowers in summer, sporadically at other times"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Flowering",
+    "quote": "white"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "glossy simple leaves; climbing habit (RHS)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "accessed": "2026-11-22",
+    "locator": "Foliage",
+    "quote": "glossy simple leaves"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "RHS page does not state toxicity; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on pages opened",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "RHS gives pruning group 11 and monthly feeding but no maintenance level",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/jasminum_sambac/ (404)",
+    "https://www.rhs.org.uk/plants/58524/jasminum-sambac/details",
+    "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b658 (fetch failed)"
+   ]
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "slug": "gazania_rigens",
+ "layers": [
+  "perennial"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Gazania rigens (L.) Gaertn.",
+    "family": "Asteraceae",
+    "common_names": [
+     "treasure flower",
+     "gazania"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Gazania%20rigens",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "scientificName \"Gazania rigens (L.) Gaertn.\"; status ACCEPTED; matchType EXACT"
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.3,
+    "text": "1/2 to 1 foot (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They will grow 1/2 to 1 foot tall and wide."
+   }
+  },
+  "spread_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 0.15,
+    "max": 0.3,
+    "text": "1/2 to 1 foot wide (converted)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "They will grow 1/2 to 1 foot tall and wide."
+   }
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Growth Rate",
+    "quote": "Medium"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "full sun 6+ h"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Light",
+    "quote": "Full sun (6 or more hours of direct sunlight a day)"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "allow soil to dry between waterings; do not overwater (root rot)"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Allow the soil to dry between waterings."
+   }
+  },
+  "heat": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "in the hottest part of summer in the south it may stop blooming until fall"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "During the hottest part of summer in the south, they may stop blooming until fall."
+   }
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "tagged drought tolerant; drought listed under resistance to challenges"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Tags",
+    "quote": "drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "RHS lists acid, alkaline or neutral (NCSU lists acid and neutral)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/86144/gazania-rigens/details",
+    "accessed": "2026-11-22",
+    "locator": "Soil pH",
+    "quote": "Acid or Alkaline or Neutral"
+   }
+  },
+  "salt": {
+   "status": "GAP",
+   "reason": "not stated on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
+   ]
+  },
+  "frost": {
+   "status": "SOURCED",
+   "value": {
+    "usda_zone_min": "9a",
+    "min_temp_c": null,
+    "damage_text": "RHS H2: tolerant of low temperatures but not surviving being frozen"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "USDA Hardiness Zones",
+    "quote": "9a, 9b, 10a, 10b, 11a, 11b"
+   }
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "colours": [
+     "orange",
+     "yellow"
+    ],
+    "text": "NCSU bloom time spring, summer, fall; may pause in hottest summer; RHS: spring and summer"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "orange to yellow on trailing stems"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "evergreen",
+    "character": "lance-shaped blue-grey foliage, mat-forming (RHS)"
+   },
+   "source": {
+    "source_id": "RHS",
+    "url": "https://www.rhs.org.uk/plants/86144/gazania-rigens/details",
+    "accessed": "2026-11-22",
+    "locator": "Foliage",
+    "quote": "lance-shaped blue-grey foliage"
+   }
+  },
+  "root_behaviour": {
+   "status": "GAP",
+   "reason": "no root statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
+   ]
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "not mentioned on NCSU or RHS pages; silence is not safety",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "no litter statement on NCSU or RHS pages",
+   "searched": [
+    "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "https://www.rhs.org.uk/plants/86144/gazania-rigens/details"
+   ]
+  },
+  "maintenance": {
+   "status": "SOURCED",
+   "value": {
+    "level": "low",
+    "text": "NCSU maintenance: Low; RHS: no pruning, deadhead regularly"
+   },
+   "source": {
+    "source_id": "NCSU",
+    "url": "https://plants.ces.ncsu.edu/plants/gazania-rigens/",
+    "accessed": "2026-11-22",
+    "locator": "Maintenance",
+    "quote": "Low"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  }
+ }
+}

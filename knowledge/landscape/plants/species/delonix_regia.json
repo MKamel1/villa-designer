@@ -1,0 +1,235 @@
+{
+ "slug": "delonix_regia",
+ "layers": [
+  "canopy_tree"
+ ],
+ "pond_relevant": false,
+ "attributes": {
+  "accepted_name": {
+   "status": "SOURCED",
+   "value": {
+    "name": "Delonix regia (Bojer ex Hook.) Raf.",
+    "family": "Fabaceae",
+    "common_names": [
+     "royal poinciana",
+     "flamboyant",
+     "flame tree"
+    ]
+   },
+   "source": {
+    "source_id": "GBIF",
+    "url": "https://api.gbif.org/v1/species/match?name=Delonix%20regia",
+    "accessed": "2026-11-22",
+    "locator": "match result: status ACCEPTED",
+    "quote": "\"status\":\"ACCEPTED\""
+   }
+  },
+  "height_m": {
+   "status": "SOURCED",
+   "value": {
+    "min": 10,
+    "max": 18,
+    "text": "10 - 18 m"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "The tree grows 10 - 18 metres tall"
+   }
+  },
+  "spread_m": {
+   "status": "GAP",
+   "reason": "Sources say the crown is wider than the tree is tall but give no numeric spread.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "growth_rate": {
+   "status": "SOURCED",
+   "value": {
+    "class": "fast"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "Delonix regia is a fast-growing tree"
+   }
+  },
+  "sun": {
+   "status": "SOURCED",
+   "value": {
+    "classes": [
+     "full_sun"
+    ],
+    "hours_text": "demands light; weak and sparse under shade"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "The tree demands light and grows weakly and sparsely under shade"
+   }
+  },
+  "water": {
+   "status": "SOURCED",
+   "value": {
+    "hydrozone": "low",
+    "text": "established plants very drought tolerant; also grows with mean annual rainfall over 700 mm"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Established plants are very drought tolerant"
+   }
+  },
+  "heat": {
+   "status": "GAP",
+   "reason": "No statement of heat tolerance found (only mean annual temperature 14-26 C).",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "drought": {
+   "status": "SOURCED",
+   "value": {
+    "class": "high",
+    "text": "established plants very drought tolerant"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Established plants are very drought tolerant"
+   }
+  },
+  "alkaline_soil": {
+   "status": "SOURCED",
+   "value": {
+    "class": "intolerant",
+    "text": "prefers pH 5.5-6.5, tolerating 4.5-7.5 (no alkaline range); prefers sandy soil"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "Prefers a pH in the range 5.5 - 6.5, tolerating 4.5 - 7.5"
+   }
+  },
+  "salt": {
+   "status": "SOURCED",
+   "value": {
+    "class": "moderate",
+    "text": "Wikipedia: tolerates drought and salty conditions (no degree stated)"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Delonix_regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation: Required conditions",
+    "quote": "can tolerate drought and salty conditions"
+   }
+  },
+  "frost": {
+   "status": "GAP",
+   "reason": "No frost temperature or hardiness zone found in sources opened.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "flowering": {
+   "status": "SOURCED",
+   "value": {
+    "months": [
+     4,
+     5
+    ],
+    "colours": [
+     "orange-red"
+    ],
+    "text": "Flowers start in April, full bloom May (Wikipedia description; also \"orange-red flowers over summer\")"
+   },
+   "source": {
+    "source_id": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Delonix_regia",
+    "accessed": "2026-11-22",
+    "locator": "Description",
+    "quote": "Flowers start to appear in April, reaching full bloom in May"
+   }
+  },
+  "foliage": {
+   "status": "SOURCED",
+   "value": {
+    "habit": "semi_evergreen",
+    "character": "fern-like bipinnate leaves; umbrella-shaped spreading crown"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Summary",
+    "quote": "Usually evergreen, the trees are deciduous in areas where the dry season is long and pronounced"
+   }
+  },
+  "root_behaviour": {
+   "status": "SOURCED",
+   "value": {
+    "class": "aggressive",
+    "text": "shallow roots; surface root system can break sidewalks and walls"
+   },
+   "source": {
+    "source_id": "TropicalPlants",
+    "url": "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "accessed": "2026-11-22",
+    "locator": "Cultivation details",
+    "quote": "The surface root system can become a problem, sometimes breaking sidewalks and walls"
+   }
+  },
+  "toxicity_people": {
+   "status": "GAP",
+   "reason": "Tropical Plants DB lists Known Hazards \"None known\" only; no toxicity statement either way, so not recorded as non-toxic.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "litter": {
+   "status": "GAP",
+   "reason": "No litter statement found.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "maintenance": {
+   "status": "GAP",
+   "reason": "No maintenance level stated.",
+   "searched": [
+    "https://tropical.theferns.info/viewtropical.php?id=Delonix+regia",
+    "https://en.wikipedia.org/wiki/Delonix_regia"
+   ]
+  },
+  "egypt_availability": {
+   "status": "POLICY",
+   "value": {
+    "text": "unknown — supplier check"
+   }
+  },
+  "toxicity_fish": {
+   "status": "NA",
+   "reason": "not pond-relevant"
+  }
+ },
+ "invasive_flag": "Tropical Plants DB: Weed Potential Yes; concerns it might become invasive where cultivated"
+}
