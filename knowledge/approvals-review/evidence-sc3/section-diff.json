@@ -1,0 +1,41 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "infills"
+  ]
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": true,
+  "receipt_component": true,
+  "faces_removed": 0,
+  "faces_added": 46
+ },
+ "meshes": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": false,
+  "receipt_component": true
+ }
+}

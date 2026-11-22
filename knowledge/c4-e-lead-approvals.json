@@ -497,7 +497,7 @@
       "id": "host-face-support-appliance-hood-dirty-canopy",
       "host_id": "support-appliance-hood-dirty-canopy",
       "old": [
-        15.212000000000002,
+        12.777,
         -20.801000000000002,
         -3.0,
         15.412,
@@ -505,7 +505,7 @@
         -0.20000000000000018
       ],
       "new": [
-        15.212000000000002,
+        12.777,
         -20.814000000000004,
         -3.0,
         15.412,
@@ -513,10 +513,10 @@
         -0.20000000000000018
       ],
       "re_review": {
-        "date": "2026-11-21",
-        "review": "docs/lanes/SC2-follow-ups.md",
-        "caused_by": "wall-B-ext-16 raised 2.65 -> 2.80 m to meet the slab-roof-0 soffit (lead decision, lane SC2); host face top z -0.35 -> -0.20, approved 13 mm movement unchanged",
-        "approved_by": "lead (orchestrator) 2026-11-21"
+        "date": "2026-11-22",
+        "review": "docs/lanes/SC3-hand-back.md",
+        "caused_by": "lane SC3 appended an infill closing the 150 mm slot above wall-B-ext-09 (x 12.777..15.412, z -0.35..-0.20, face y -20.801, coplanar with this host face): the host face now spans x 12.777..15.412 (was 15.212..15.412); approved 13 mm movement in y and the face top -0.20 unchanged",
+        "approved_by": "lead (orchestrator) per the SC3 brief; lead to confirm"
       }
     },
     {

@@ -69,6 +69,20 @@
       "shape_sha256": [
         "172e7aed76785205ff7e9830e10ec1954fcc13df053c0d9b8619b625ddcc9128"
       ]
+    },
+    {
+      "code": "c3-retained-lamp-wire-qa03",
+      "kind": "lamp-wire",
+      "reason": "Square 4 x 4 mm suspension envelope for the iGuzzini QA03 Laser pendant (dining table), 938 mm from the top of its true O59 x 250 mm body to the ceiling; circular cable geometry changes the authored section, outside the phase 2c appearance constraint (same envelope as c3-retained-lamp-wire, shorter because the body is now drawn at its real height). Cross-section fidelity remains open.",
+      "evidence": {
+        "product": "iguzzini QA03",
+        "source": "knowledge/lighting-products/iguzzini/QA03/QA03.ldt",
+        "published": "luminaire diameter 59 mm, height 250 mm (LDT header lines 12-14); product page: Diameter \u00f859 mm",
+        "drawn": "lamp-body-PEN-LIN-dining-01 59 x 59 x 250 mm"
+      },
+      "shape_sha256": [
+        "6102b5cf4c2d7cf84d2b761ff2bac26d70ac85091f92567019791ac82c29b41d"
+      ]
     }
   ]
 }

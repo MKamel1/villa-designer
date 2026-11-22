@@ -22,6 +22,7 @@ ZONES = [  # name, cause, (x0, x1, y0, y1)
     ('M-corner-GF-22', 'M wall corner GF (22.124..22.324; wall ends at 22.597)', (21.9, 22.65, -31.4, -28.3)),
     ('M-wall-GF-33-finish', 'M wall GF-33 lengthened: finish faces along the wall', (3.0, 20.0, -28.75, -28.3)),
     ('SC2-wall-B-ext-16', 'SC2 wall-B-ext-16 raised 2.65 -> 2.80 m to the roof soffit (its own footprint x 15.212..15.412, y -23.591..-20.601)', (15.2, 15.42, -23.6, -20.59)),
+    ('SC3-wall-B-ext-09-roof-strip', 'SC3 infill closing the 150 mm slot above wall-B-ext-09 (x 12.777..15.412, y -20.801..-20.601, z -0.35..-0.20) and its finish layers', (12.77, 15.42, -20.85, -20.55)),
     ('M-wall-B-finish', 'M wall B lengthened: finish faces along the wall', (6.5, 17.7, -28.75, -28.3)),
 ]
 

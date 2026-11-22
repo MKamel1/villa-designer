@@ -845,6 +845,20 @@ def _parking(lay, spec, pk2):
                 spec["infills"].append({"what": "wall top up to the ramp soffit", "y0": round(w["y0"] - t, 3),
                                         "y1": round(w["y0"] + t, 3), "profile": [
                                             [s_, round(zb + h0, 3)], [e_, round(zb + h0, 3)], [e_, round(zb + h1, 3)]]})
+    # lane SC3: the piece that runs on past the deck's end sits under the extension roof (soffit WALL_H), above its own
+    # top. Closed with an infill APPENDED here (id spec-ramp-wall-infill-N, last): splitting the wall would renumber every
+    # later wall id (ids are list indices) and a wall has one height, no stepped top.
+    for w in walls:
+        if abs(w["y0"] - w["y1"]) > 1e-6 or max(w["y0"], w["y1"]) <= V.YE + EXT_T or not beyond:
+            continue
+        a, b = sorted((w["x0"], w["x1"]))
+        top, e0 = zb + w["height"], max(a, d1)
+        if b > d1 + 1e-6 and zb + WALL_H - top > 0.005:
+            t = w["thickness"] / 2
+            spec["infills"].append({"what": "wall top up to the extension roof soffit", "y0": round(w["y0"] - t, 3),
+                                    "y1": round(w["y0"] + t, 3), "profile": [
+                                        [e0, round(zb + WALL_H, 3)], [e0, round(top, 3)], [b, round(top, 3)],
+                                        [b, round(zb + WALL_H, 3)]]})
     spec["walls"] = walls
     # doors into the rooms under the ramp: at the wall's high end, leaf sized to the clear height
     ext_ids = {r["id"] for r in lay["rooms"].values() if r.get("ext")}
@@ -917,6 +931,39 @@ def _line(w, off):
     return {"x0": w["c"] + off, "y0": w["a"], "x1": w["c"] + off, "y1": w["b"]}
 
 
+def wall_top_readings(lay, walls, infills=()):
+    """Lane SC3: for EVERY wall (both levels) the top it has, the soffit above it and what closes the difference.
+    Above a B wall in the extension that is the ramp/deck/roof soffit at its high end (a cross wall: at its low face);
+    above any other wall it is the next slab, WALL_H up. An infill ending at the wall's high end closes a gap (the ramp
+    soffit pieces, the roof strip). walls: dicts as for clearance_problems. Each reading: index, level, x0..y1, top_m,
+    soffit_m (storey datum), cover_m (the top that closes the gap), gap_mm (soffit - max(top, cover); 0 = meets it),
+    above_mm (top beyond the soffit)."""
+    pk2, out = lay.get("parking2"), []
+    for i, w in enumerate(walls):
+        lv = "B" if w["level"] in ("B", LEVEL_NAME["B"]) else "GF"
+        zb = LEVELS_Z[lv]
+        top = w["z_top"] if "z_top" in w else zb + w["height"]
+        a, b = sorted((w["x0"], w["x1"]))
+        under = pk2 and lv == "B" and max(w["y0"], w["y1"]) > V.YE + EXT_T
+        soffit = zb + (min(_soffit_clear(pk2, a), _soffit_clear(pk2, b)) if abs(w["y0"] - w["y1"]) > 1e-6 else
+                       _soffit_clear(pk2, b)) if under else zb + WALL_H
+        cover = max([f["profile"][-1][1] for f in infills
+                     if abs((f["y0"] + f["y1"]) / 2 - w["y0"]) < 0.2 and abs(f["profile"][-1][0] - b) < 0.01
+                     and abs(abs(w["y0"] - w["y1"])) < 1e-6] or [top])
+        out.append(dict(index=i, level=lv, x0=w["x0"], y0=w["y0"], x1=w["x1"], y1=w["y1"], top_m=round(top, 3),
+                        soffit_m=round(soffit, 3), cover_m=round(max(top, cover), 3),
+                        gap_mm=round(max(0.0, soffit - max(top, cover)) * 1000),
+                        above_mm=round(max(0.0, top - soffit) * 1000)))
+    return out
+
+
+def wall_top_problems(lay, walls, infills=(), tol_mm=20):
+    """The wall-top guard: every wall's top (or its infill) meets the soffit above it within tol_mm, and none is above."""
+    return ["wall #%d %s (%.2f,%.2f)-(%.2f,%.2f): top %.3f, soffit %.3f: %d mm open, %d mm through"
+            % (r["index"], r["level"], r["x0"], r["y0"], r["x1"], r["y1"], r["top_m"], r["soffit_m"], r["gap_mm"], r["above_mm"])
+            for r in wall_top_readings(lay, walls, infills) if r["gap_mm"] > tol_mm or r["above_mm"] > 10]
+
+
 def clearance_problems(lay, walls, doors, infills=()):
     """Post-condition for the rooms under the ramp and deck (client review r7: walls came through the ramp, a
     2.1 m door opened under a 1.9 m soffit). walls: dicts with level, x0, y0, x1, y1 and z_top (model m) or height;
@@ -927,14 +974,13 @@ def clearance_problems(lay, walls, doors, infills=()):
         return []
     from . import villa_parking as P
     zb, tol = LEVELS_Z["B"], 0.01
-    deck_soffit = lambda x: zb + P.clear_at(x)                                # noqa: E731
     out = []
     for w in walls:
         if w["level"] not in ("B", LEVEL_NAME["B"]) or max(w["y0"], w["y1"]) <= V.YE + EXT_T:
             continue
-        # a cross wall is checked against what covers it (deck, or the extension roof beyond the deck); a wall along the
-        # ramp stays on the deck soffit: one piece runs on under the roof (open item: its 150 mm slot, lane SC2 report)
-        soffit = deck_soffit if abs(w["y0"] - w["y1"]) < 1e-6 else (lambda x: zb + _soffit_clear(pk2, x))
+        # every wall is checked against what covers it: the deck/ramp, or beyond the deck the extension roof (lane SC3:
+        # a wall along the ramp used to keep the deck soffit, which hid the 150 mm slot under the roof)
+        soffit = lambda x: zb + _soffit_clear(pk2, x)                           # noqa: E731
         top = w["z_top"] if "z_top" in w else zb + w["height"]
         a, b = sorted((w["x0"], w["x1"]))
         worst = min(soffit(a), soffit(b))
