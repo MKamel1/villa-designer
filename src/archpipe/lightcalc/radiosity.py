@@ -12,8 +12,8 @@ import numpy as np
 from .direct import direct_illuminance
 
 
-def floor_mean_lux(room, placements, mf: float = 1.0, n: int = 8) -> float:
-    """Mean maintained illuminance on the floor of the bounding box of `room` (a Room), `placements` at their dims."""
+def _floor_field(room, placements, mf: float, n: int):
+    """(centres, E) of the n x n floor patches of the bounding box of `room`: maintained illuminance, direct + inter-reflected."""
     xs, ys = [p[0] for p in room.polygon], [p[1] for p in room.polygon]
     x0, x1, y0, y1, z0, z1 = min(xs), max(xs), min(ys), max(ys), room.floor_z, room.ceiling_z
     faces = [((x0, y0, z0), (x1 - x0, 0, 0), (0, y1 - y0, 0), (0, 0, 1), room.rho_floor),
@@ -39,4 +39,17 @@ def floor_mean_lux(room, placements, mf: float = 1.0, n: int = 8) -> float:
     np.fill_diagonal(F, 0)
     B = np.linalg.solve(np.eye(len(C)) - R[:, None] * F, R * Ed)
     E = Ed + F @ B
-    return float(mf * E[: n * n].mean())
+    return C[: n * n, :2], mf * E[: n * n]
+
+
+def floor_mean_lux(room, placements, mf: float = 1.0, n: int = 8) -> float:
+    """Mean maintained illuminance on the floor of the bounding box of `room` (a Room), `placements` at their dims."""
+    return float(_floor_field(room, placements, mf, n)[1].mean())
+
+
+def floor_lux_at(room, placements, points, mf: float = 1.0, n: int = 24) -> float:
+    """Mean of the floor field at `points` ((x, y) pairs; nearest patch). The footprint-matched comparison with a sensor plane:
+    a plane inset from the walls (the pantry's 8 points are 0.3-1.4 m from its short walls) must not be compared with the mean of
+    the whole floor, which includes the dark ends (the pantry's -7 to -9 % 'divergence' with finer patches was this, not transport)."""
+    C, E = _floor_field(room, placements, mf, n)
+    return float(np.mean([E[np.argmin(((C - np.array(p[:2])) ** 2).sum(1))] for p in points]))

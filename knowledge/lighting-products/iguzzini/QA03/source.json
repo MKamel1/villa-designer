@@ -1,0 +1,75 @@
+{
+ "code": "QA03",
+ "maker": "iguzzini",
+ "name": "Laser pendant, \u00d859 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.iguzzini.com/en/qa03/",
+ "file_urls": {
+  "ldt": "https://www.iguzzini.com/globalassets/shared-photometric-media/q/a/0/qa03/35846/qa03-01_c67b.ldt",
+  "ies": "https://www.iguzzini.com/globalassets/shared-photometric-media/q/a/0/qa03/35846/qa03-01_c67b.ies"
+ },
+ "retrieval": "robots.txt (Allow: /) read; static GET with generic client name, 3 s pauses; product page text read in Chrome",
+ "datasheet_note": "iGuzzini publishes the datasheet as the product page (text saved); the Specification sheet PDF link is script-generated and was not fetched; the saved PDF is the installation sheet",
+ "files": {
+  "QA03.ldt": {
+   "path": "knowledge/lighting-products/iguzzini/QA03/QA03.ldt",
+   "sha256": "e9a847ce07f9b1e8a5f9af6194e9dd3dca0d30de6db5c6edbb9fe0ee07d01a3a"
+  },
+  "QA03.ies": {
+   "path": "knowledge/lighting-products/iguzzini/QA03/QA03.ies",
+   "sha256": "5972b9941bb9966a04d147134f25616dff62947ddd0474c3b06ccdf1d710a8e8"
+  },
+  "QA03-product-page.txt": {
+   "path": "knowledge/lighting-products/iguzzini/QA03/QA03-product-page.txt",
+   "sha256": "b186f5f72a496142669dc77aa4eff6e3d006bc0ae2aa68df72d424b837abe1fd"
+  },
+  "QA03-instruction-sheet.pdf": {
+   "path": "knowledge/lighting-products/iguzzini/QA03/QA03-instruction-sheet.pdf",
+   "sha256": "7436d3355ad7c4e2cb52053a8f3dd7cc3446047205855f9f1806e3c39a31b559"
+  }
+ },
+ "v10": {
+  "v10_status": "pass",
+  "lumens": {
+   "stated": 831.6,
+   "independent": 831.6,
+   "archpipe": 831.3,
+   "worst_error": 0.0003,
+   "tolerance": 0.02,
+   "status": "pass"
+  },
+  "points": [
+   {
+    "kind": "imax",
+    "distance_m": null,
+    "published": 1809,
+    "engine": 1800.7,
+    "independent": 1800.7,
+    "worst_error": 0.0046,
+    "status": "pass",
+    "source": "product page 'Maximum intensity (cd)'"
+   },
+   {
+    "kind": "beam_angle",
+    "distance_m": null,
+    "published": 44,
+    "engine": 43.7,
+    "independent": 43.6776,
+    "worst_error": 0.0073,
+    "status": "pass",
+    "source": "product page 'Optic and beam angle'"
+   },
+   {
+    "kind": "lumens",
+    "distance_m": null,
+    "published": 831.6,
+    "engine": 831.3484,
+    "independent": 831.5972,
+    "worst_error": 0.0003,
+    "status": "pass",
+    "source": "product page 'lm system'"
+   }
+  ]
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read"
+}

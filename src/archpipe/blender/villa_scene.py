@@ -676,6 +676,37 @@ def ies_nadir(path):
     return data[13+nv+nh] * data[2] * data[10]
 
 
+# Blender 4.5's IES import renders a Type-C file with several horizontal planes 8.6 % dimmer than the same candela table written as one
+# rotationally symmetric plane (L6d, measured with LV's V5 single-light probe: one ERCO downlight table written as 1 plane -1.2 % against
+# the analytic path; as 6, 9, 37 planes -8.0, -8.3, -8.6 %, a uniform 0.914 on every point; the ERCO desk lamp (73 planes) -7.7 %, the
+# wallwasher (145 planes) -7.5 %). IES_POINT_POWER was calibrated on single-plane files, so files with 6 or more planes get the inverse.
+IES_MULTIPLANE_GAIN = 1.094
+IES_MULTIPLANE_MIN_PLANES = 6
+
+
+def ies_horizontal_planes(path):
+    """Number of horizontal (C) planes of an LM-63 file."""
+    lines = open(path, encoding="utf-8-sig", errors="replace").read().splitlines()
+    tilt = next(i for i, line in enumerate(lines) if line.upper().startswith("TILT="))
+    return int(float(" ".join(lines[tilt+1:]).replace(",", " ").split()[4]))
+
+
+def ies_plane_gain(path):
+    return IES_MULTIPLANE_GAIN if ies_horizontal_planes(path) >= IES_MULTIPLANE_MIN_PLANES else 1.0
+
+
+def ies_rotation(aim, spin_deg):
+    """Local->world rotation of a Blender IES light that reproduces the engine's frame (lightcalc.direct.Placement.rotation:
+    Rz(azimuth of tilt) Ry(-tilt) Rz(spin)) for ANY aim. Blender's C0 is local +Y where the engine's is +X, hence the fixed
+    Rz(90) (IES_AZIMUTH_OFFSET_DEG) applied first, in the luminaire's own frame. The earlier track-quat + offset was calibrated on
+    straight-down lights only: for a tilted light the track quat's roll differs from the engine's and the pattern turned 90 deg."""
+    aim = Vector(aim).normalized()
+    tilt = math.acos(max(-1.0, min(1.0, -aim.z)))
+    az = math.atan2(aim.y, aim.x) if tilt > 1e-9 else 0.0
+    rz = lambda a: Matrix.Rotation(a, 3, "Z")
+    return rz(az) @ Matrix.Rotation(-tilt, 3, "Y") @ rz(math.radians(spin_deg)) @ rz(math.radians(IES_AZIMUTH_OFFSET_DEG))
+
+
 def add_light(spec, ies_dir):
     kind = spec["type"]
     lamp = bpy.data.lights.new(spec["id"], "POINT" if kind == "ies" else "AREA")
@@ -685,7 +716,7 @@ def add_light(spec, ies_dir):
         if not path.startswith(os.path.abspath(ies_dir) + os.sep) or not os.path.isfile(path):
             raise FileNotFoundError(path)
         flux = ies_flux(path)
-        lamp.energy = IES_POINT_POWER * spec["lumens"] / flux
+        lamp.energy = IES_POINT_POWER * spec["lumens"] / flux * ies_plane_gain(path)
         lamp.shadow_soft_size = 0.001
         lamp.use_nodes = True
         nodes = lamp.node_tree.nodes
@@ -703,8 +734,7 @@ def add_light(spec, ies_dir):
     obj.location = spec["position"]
     aim = Vector(spec["aim"]).normalized()
     if kind == "ies":
-        obj.rotation_euler = aim.to_track_quat("-Z", "Y").to_euler()
-        obj.rotation_euler.rotate_axis("Z", math.radians(spec["spin_deg"] + IES_AZIMUTH_OFFSET_DEG))
+        obj.rotation_euler = ies_rotation(aim, spec["spin_deg"]).to_euler()
     else:
         length = Vector(spec["length_dir"])
         length = (length - length.dot(aim)*aim).normalized()

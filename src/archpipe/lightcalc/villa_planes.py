@@ -53,7 +53,9 @@ ROOM_PLANE_Z = {"lounge": 0.75, "family": 0.75, "living": 0.75, "kitchen": 0.92,
 
 # L6c: LV open item 3: the 0.63 m cinema room grid changed the direct result by 6.35 % when halved; a 0.30 m pitch (and 0.06 m on the
 # 0.7 x 0.5 m daybed plane, 3.07 % at 0.12 m) brings the halving change under the 3 % bar (checked in tests/lightcalc/test_villa.py)
-ROOM_PLANE_SPACING = {"cinema": 0.30}
+# L6d (LV V7, final verification): the corridor's 0.85 m grid changed the direct result by -6.23 % when halved and the parents'
+# bedroom's 0.43 m by -3.39 % (-4.29 % with the DL moved to the foot of the bed): 0.30 m and 0.20 m give -0.77 % and -0.73 %
+ROOM_PLANE_SPACING = {"cinema": 0.30, "corridor": 0.30, "parents-bed": 0.20}
 DAYBED_SPACING = 0.06
 
 
@@ -118,4 +120,9 @@ def build_planes(v, filtered=True):
         lv = G if v.lay["rooms"][room]["level"] == "GF" else B
         add("room-" + room, room, _box(r[0] + 0.1, r[1] + 0.1, r[2] - 0.1, r[3] - 0.1), lv + ROOM_PLANE_Z[room], card,
             "Day", "general illuminance (floor)", gauge="minimum", spacing=ROOM_PLANE_SPACING.get(room))
+    # L6d: the parents' entry lobby (open to the bedroom, no door) lost its downlight to LA4 (lying, looking up): it is measured against
+    # the passage card like the other circulation rooms, so the cove that replaced the downlight is held to it (min 30 lx on the floor)
+    r = v.rc["parents-entry"]
+    add("room-parents-entry", "parents-entry", _box(r[0] + 0.1, r[1] + 0.1, r[2] - 0.1, r[3] - 0.1), G + 0.0, "ies-res-passage-30",
+        "Day", "general illuminance (floor)", gauge="minimum", spacing=0.10)
     return P

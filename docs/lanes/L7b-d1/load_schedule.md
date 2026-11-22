@@ -12,7 +12,7 @@ Supply 220/380 V 50 Hz, TT. Diversity: Whitfield Table 6.2 household column (EL-
 | board | circuits | demand kVA | worst-phase line A |
 |---|---|---|---|
 | MDB | 6 | 12.1 | - |
-| DB-B | 32 | 42.1 | 72.0 |
+| DB-B | 32 | 42.1 | 71.5 |
 | DB-GF | 20 | 27.9 | 48.3 |
 
 ## By category (installation)
@@ -39,4 +39,4 @@ The carded rule (100 % of the largest circuit + 40 % of every other) is applied 
 
 ## Phases (sum of Ib)
 
-L1 208.3 A, L2 207.9 A, L3 207.7 A
+L1 208.3 A, L2 207.7 A, L3 207.9 A

@@ -1,5 +1,8 @@
 # L6c: villa lighting re-bound to manufacturer-verified products, supplier schedule, substitution loop
 
+> **L6d update (2026-11-21):** the ADJ (A9000028, V10 partial) and the Jilly pendant described below were replaced after LV's final verification: ADJ is now ERCO A9003138 (V10 pass), the table pendant iGuzzini QA03 (V10 pass), the bed/entry downlights moved or replaced for LA4, scene levels raised to >= 15 %. See `docs/lanes/L6d-fixes.md`; the tables below are the L6c state.
+
+
 Branch `lane/L6c` (from the merged L6b/LV state, `c33cf26`). Client direction 2026-11-21: the products need not be the ones sold in Egypt, only
 common ones; a spec sheet goes to an Egyptian supplier who confirms or proposes equivalents, and the installer's final list is checked the same way.
 Code: `src/archpipe/luminaires/{schedule,spec_sheet,substitute}.py`, `src/archpipe/lightcalc/{handcalc,radjob,villa,villa_planes,villa_tune_cli}.py`,

@@ -105,8 +105,8 @@
  "provisional_zones": false,
  "phase_loads_a": {
   "L1": 208.3,
-  "L2": 207.9,
-  "L3": 207.7
+  "L2": 207.7,
+  "L3": 207.9
  },
  "checks": {
   "EA1:not_evaluated": 1,
@@ -136,7 +136,7 @@
   "furn-fb-shower: wet-area zone data from the model (tray rim 100.0 mm; head height 2250 mm)",
   "furn-ka-bunk: bed head side is not authored and no short end is within 600 mm of a wall; bedside sockets sit at both ends of the wall it stands along (W)",
   "furn-pe-bath: wet-area zone data from the model (tray rim 550.0 mm; head height 2300 mm)",
-  "luminaire watts: 57 of 132 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
+  "luminaire watts: 58 of 132 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
   "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 68 zones; 16 sized on rated luminaire W above the published commissioned W",
   "boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; meter position and utility cabinet at the street fence are assumptions to confirm",
   "routes: Manhattan distance x 1.15 through all the circuit's load points (nearest-neighbour chain) plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops",
