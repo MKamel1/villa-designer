@@ -253,9 +253,8 @@ def resolve_name(mid, ids):
             return found
         if mid.startswith("detail-stair-glass"):
             return "rail-stair-open-glass"
-        if mid.startswith(("detail-stair-wall-stringer", "detail-stair-wall-plate")):
-            return "stair-main"            # the steel (model: stair-main params.steel.members), not the handrail
-        if mid.startswith(("detail-stair-wall-rail", "detail-stair-wall-handrail")):
+        if mid.startswith(("detail-stair-wall-stringer", "detail-stair-wall-rail", "detail-stair-wall-plate",
+                           "detail-stair-wall-handrail")):
             return "rail-stair-wall-handrail"
         if mid.startswith("detail-stair-guard"):
             return "rail-gf-stair-void"
