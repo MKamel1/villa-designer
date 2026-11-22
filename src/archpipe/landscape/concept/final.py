@@ -203,6 +203,11 @@ def build(pot_at=None):
     for w in fw["walls"]:
         w["id"] = "wall-" + w["id"]                      # walls are built as ld-wall-*; the fire/overlap rules read the obstacles (ids fence-*)
     L = C.assemble(fw, fs, fn, fe, fp)
+    from . import ty_run as R
+    free = R.free_floor(L)                       # the standing zone declares the people the FREE floor holds (not the zone rectangle, which includes furniture)
+    for z in L["zones"]:
+        if z.get("use") == "standing":
+            z["design_people"] = min(int(free / 1.3), int((z["rect"][2] - z["rect"][0]) * (z["rect"][3] - z["rect"][1]) / 1.3))
     L["meta"]["pot"] = list(pot)
     L["meta"]["layout_id"] = "LDG-final-B"
     return L

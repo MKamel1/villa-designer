@@ -1,0 +1,1067 @@
+LINEAR BURNERS INSERTS
+INSTALLATION, MAINTENANCE & WARRANTY GUIDELINES
+
+12VAC AUTOMATED OPERATION SYSTEMS
+
+
+
+
+                       1
+                              FOR YOUR SAFETY – READ BEFORE OPERATING
+        THIS PRODUCT MUST BE INSTALLED AND SERVICED BY AUTHORIZED PERSONNEL, INCLUDING LICENSED
+    CONTRACTORS. FAILURE TO FOLLOW THESE INSTRUCTIONS EXACTLY MAY RESULT IN FIRE, EXPLOSION, PERSONAL
+                       INJURY, DEATH, DAMAGED EQUIPMENT, AND PROPERTY DAMAGE.
+
+WHAT TO DO IF YOU SMELL GAS
+•     Do not store or use any gasoline or other flammable vapors and/or liquids in the vicinity of this or any other
+      burner assembly.
+•     An LP cylinder not connected for use shall not be stored in the vicinity of this or any other appliance.
+•     If you smell gas, immediately shut off gas to the burner assembly.
+•     Extinguish any open flame near the burner assembly.
+•     Do not attempt to manually light any automated electronic burner assembly.
+•     If odor continues, move away from the area and immediately call your gas supplier.
+
+    This manual should remain with the homeowner or parties responsible for the operation of the unit.
+
+             FOR USE WITH NATURAL OR LIQUID PROPANE GAS ONLY
+                          DO NOT USE SOLID FUELS
+
+WARNING AND SAFETY INFORMATION
+CODE REQUIREMENTS
+Installation must be in accordance with all local codes and/or the latest edition of the National Fuel Gas Code,
+ANSI Z223.1 and the latest edition of the National Electrical Code, NFPA 70 (US).
+Installation in Canada must be in accordance with the latest CAN/CGA-B149.1 or.2 and CSA C22.1 Canadian
+Electric Code, part 1.
+Installations must be electrically grounded and bonded in accordance with local codes, or, in the absence of
+local codes, with the National Electrical Code, ANSI/NFPA 70 (US) or in Canada in accordance with the Canadian
+Electric Code, part 1 as applicable.
+
+
+
+
+                                                             2
+SAFETY CODE APPROVAL CERTIFICATION
+LOW VOLTAGE LANDSCAPE AND SWIMMING POOL/SPA AUTOMATIC IGNITION GAS BURNER ASSEMBLY AND
+TRANSFORMER PANEL is approved for use near water’s edge. The Pebble Technology Fire + Water Elements fire
+burner assembly is CSA/AGA approved. It is tested and approved to comply with the nationally recognized
+specification, ANSI Z21.42-2013 Gas-Fired Illuminating Appliances, and to be in compliance with the 2017 NEC
+code.
+
+   12V AUTOMATIC IGNITION DECORATIVE GAS APPLIANCE: CSA 2701 03, 2701 83
+   CSA Certificate: 2325190
+   CGA APPLICAPLE REQUIREMENT: CR97-003
+   Tested to: National Fuel Gas Code ANSI Z223.1-2010, ANSI Z21.97-2010, ANSI Z21.42-2010
+
+
+OPERATING CONDITIONS
+In order to ensure successful and safe operation, the unit should be inspected before each use and at least
+annually by a qualified service person. More frequent cleaning may be required as necessary depending on
+environmental conditions. It is imperative that the transformer panel, pilot hood, burner assembly and circulating
+air passageways of the unit be kept clean and free of debris at all times. System should be fired at least once per
+month to test and ensure proper operation.
+
+This system is not designed to operate in wind conditions exceeding 10MPH.
+
+DO NOT use this unit if any part of the burner assembly has been under water or is soaked heavily. Immediately
+call a licensed contractor to inspect the unit and to replace any part of the burner assembly that has been under
+water.
+
+Should overheating occur or the gas supply fail to shut off, turn off the manual gas control valve to the burner
+assembly.
+
+WARNING:
+THIS APPLIANCE CAN PRODUCE CARBON MONOXIDE WHICH HAS NO ODOR.
+THIS APPLIANCE IS FOR OUTDOOR USE ONLY.
+HOT! DO NOT TOUCH. FIRE RISK/ BURN RISK. SEVERE BURNS MAY RESULT. CLOTHING IGNITION MAY RESULT.
+KEEP CHILDREN AWAY. CAREFULLY SUPERVISE CHILDREN. CLOTHING OR OTHER FLAMMABLE MATERIALS
+SHOULD NOT BE HUNG FROM THE UNIT NOR PLACED ON OR NEAR THE UNIT.
+
+
+
+
+                                                        3
+TABLE OF CONTENTS
+
+WARRANTY .............................................................................................................................................................. 5
+
+SYSTEM REQUIREMENTS .......................................................................................................................................... 6
+Gas Requirements ................................................................................................................................................... 6
+Electrical Requirements ........................................................................................................................................... 7
+Burner Cavity Construction Requirements .............................................................................................................. 7
+Installation Requirements........................................................................................................................................ 8
+
+SYSTEM COMPONENTS ............................................................................................................................................ 9
+12VAC Automated Operation Burner Systems ........................................................................................................ 9
+
+INSTALLATION GUIDE ............................................................................................................................................. 10
+Linear Burner Assembly & Sub-Panel .................................................................................................................... 10
+Linear Burner Component Overview ..................................................................................................................... 11
+Piping and Electrical Diagrams – Natural Gas ........................................................................................................ 12
+Piping and Electrical Diagrams – Propane Gas....................................................................................................... 13
+Equipment Pad & Transformer Panel Wiring......................................................................................................... 14
+Linear Burner - Inner Mount.................................................................................................................................. 15
+Linear Burner – Outer Mount ................................................................................................................................ 16
+Linear Burner – Oversized Burner Cavity ............................................................................................................... 17
+Linear Burner – Commercial Installation .............................................................................................................. 17
+
+
+OPERATION & SAFETY ............................................................................................................................................ 18
+Initial Start-Up Procedures .................................................................................................................................... 18
+Basic System Operation ......................................................................................................................................... 19
+Trouble Shooting ................................................................................................................................................... 20
+
+
+GENERAL CARE & MAINTENANCE .......................................................................................................................... 22
+Linear Burner Fire Features ................................................................................................................................... 22
+Seasonal Care ........................................................................................................................................................ 22
+
+
+             READ THIS INSTRUCTION GUIDE IN ITS ENTIRETY PRIOR TO
+                          COMMENCING INSTALLATION
+
+
+
+
+                                                                                   4
+Fire + Water Elements – Product Warranty
+
+1-Year Limited Residential Warranty
+Pebble Technology International® (PTI) will attempt to repair any unit, when used as intended, which has proven to be defective in
+workmanship or material, preventing the proper operation of the unit when reported within one year of the date of purchase. This
+warranty is for factory defective parts only and does not cover any costs related to removal or install of replacement parts or the
+entire unit. For warranty consideration, contact the original dealer and provide proof of purchase, date of purchase, and the date of
+installation. The dealer will contact PTI to obtain instructions regarding the warranty request. If the unit is deemed defective and
+cannot be repaired, PTI will replace it with a new or refurbished unit. This warranty applies only to residential use of the unit. The
+customer is responsible for shipping costs, which may be reimbursed by PTI should the unit be deemed defective.
+
+IF NECESSARY, THE UNIT MUST BE REMOVED AND REPLACED ONLY BY A LICENSED PROFESSIONAL IN THE PLUMBING AND/OR
+ELECTRICAL TRADE. DO NOT ATTEMPT TO REMOVE AND REPLACE THE UNIT YOURSELF. THIS CAN BE DANGEROUS AND WILL VOID
+YOUR WARRANTY.
+
+PTI will not be responsible for any asserted defect, which has resulted from accidents, chips or cracks caused by mishandling and/or
+impact with other objects or surfaces taking place at any time after buyer takes delivery of the unit, over-heating, freeze/thaw,
+misuse, abuse, repair or alteration. Under no circumstances, will PTI be liable for incidental or consequential damage resulting from
+defective units, improper installation, or improper removal. PTI is not responsible for any injury or mishap related to misuse, abuse
+or lack of judgment in choosing fire display locations.
+
+Cementitious Based Components: Non-structural hairline cracks along with shade/color variation are considered an inherent part
+of any cementitious product, not a manufacturing defect. Hairline cracks can occur at any time during the life of the product due to
+temperature changes and expansion and contraction of concrete. Hairline cracks are defined as cracks that do not threaten the
+integrity or stability of the product, nor prevent the continued and normal use of the product. These hairline cracks are not covered
+by the warranty.
+
+Calcium buildup and efflorescence are naturally occurring byproducts that are deposited on the surface of cementitious products.
+These can usually be cleaned and are typically harmless to the cementitious structure, only presenting a cosmetic issue. The effects
+of these surface deposits are not covered by the warranty.
+
+Metallic Based Components: Improper chemical balance of pool water may cause corrosive conditions to metal water features.
+PTI will not warrant products exposed to such conditions. Additionally, finishes offered (such as powder coating) are affected by
+factors like UV exposure and pool water chemistry and are therefore not encompassed by this warranty. Some components (such
+as brass fittings) may need to be replaced over time, as they will degrade when in contact with a dissimilar metal (i.e. copper). This
+circumstance is naturally occurring and is therefore not covered by the warranty. These components are designed to be replaced
+and this design feature helps to preserve the life and integrity of the copper.
+
+Terms and Conditions: This warranty does not apply to any damages caused by: (1) any failure resulting from unreasonable use or
+abuse, (2) unsatisfactory material choices by you or the installer, (3) accidental damage or element damage such as water or rain, (4)
+improper installation, or (5) damage incurred during shipping and/or delivery of unit. If unit is suspected of being damaged during
+shipment or delivery, buyer must notify PTI within 48 hours of delivery for a damage claim to be filed. Failure to notify PTI within the
+required time-period may result in no damage claim recovery to buyer. PTI is not responsible for the application of local codes
+and/or if the unit is not approved for installation. Please check with your local building department or governing agencies for prior
+approval before purchasing. PTI is not responsible for the actions and omissions, including negligence, of the installer. Installation
+workmanship and any materials used in installation are not covered under this warranty. Variations in handmade products are
+normal and not to be considered a warrantable issue. PTI will not warranty fire products in which a burner unit purchased from
+another supplier has caused damage.
+
+This warranty is your sole warranty and sets forth your exclusive remedy, with respect to a defective fire and water feature. All other
+warranties, expressed or implied, whether of merchantability, fitness for purpose or otherwise, are expressly disclaimed by PTI. PTI
+reserves the right to make changes to the warranty program.
+
+Contact Us
+Pebble Technology International
+8435 N. 90th Street, Suite 6
+Scottsdale, AZ 85258                                              5
+800.937.5058
+fireandwaterinfo@pebbletec.com
+SYSTEM REQUIREMENTS
+IMPORTANT:
+Gas and Electrical should be located INSIDE the end of the trough for INSIDE MOUNT and should be mounted
+OUTSIDE of the trough for OUTSIDE MOUNT: For Outer Mount do not run burner wires in tight space. Do not run
+wires through dirt or encase in concrete or tight fitting conduit. They need to be loose and in open space or they
+will not function properly.
+
+WARNING:
+Improper installation, adjustment, alteration, service or maintenance can cause injury or property damage.
+Read the installation, operation and maintenance instructions thoroughly before installing or servicing this
+equipment. Do not install near any combustibles such as wood structures, fuels, clothing, fabrics, or dry
+vegetation. Do not use this appliance if any part has been under water. Immediately call a qualified service
+technician to inspect the appliance and to replace any part of the control system and gas control which has
+been under water. Leaking LP-gas may cause a fire or explosion if ignited, causing serious bodily injury or death.
+A LP gas regulator should never be installed under the Linear Fire Pit. It should be installed by a gas expert in a
+remote location away from the heat source. Check with your gas supplier to verify required gas flow and
+pressures are available at the location of your installation. In many cases utility companies will install large
+meters at no charge to accommodate larger flows. Propane, as for the purpose of this standard means a
+hydrocarbon product meeting the CGSB Specification CAN/CGSB-3.14. Call manufacturer for set-up on high
+altitude installations.
+
+GAS REQUIREMENTS:
+The required gas pressure and flow should be measured in-line and while flowing, not static, at the Sub-Panel
+connection location.
+Natural Gas: 7” WC (0.25 psi)
+Propane (LP): 11” WC (0.4 psi)
+
+Gas supply line should be 3/4” Schedule 40 black steel gas pipe to the fire feature. A larger diameter main
+supply line may be needed for multiple burner applications. NOTE: Check with your gas supplier to verify gas
+flow and pressure available at the location of your installation. In many cases, utility companies will install larger
+meters at no charge to accommodate larger flows. Please account for any additional gas appliances plumbed off
+the same gas lines and how that may affect the operation of the fire feature.
+
+ GAS FLOW REQUIREMENTS
+ Burner Length                    BTU/ per hour
+ 36” Long Burner                  120,000 BTU/HR
+ 48” Long Burner                  155,000 BTU/HR
+ 60” Long Burner                  190,000 BTU/HR
+ 72” Long Burner                  225,000 BTU/HR
+ 84” Long Burner                  260,000 BTU/HR
+ 96” Long Burner                  295,000 BTU/HR
+ 108” Long Burner                 330,000 BTU/HR
+ 120” Long Burner                 365,000 BTU/HR
+
+
+
+
+                                                          6
+ELECTRICAL REQUIREMENT:
+Each Linear Burner Unit must have its own Transformer Panel
+Transformer panel input voltage: 120VAC / 60Hz
+Transformer output voltage: 12VAC / 60Hz nominal (each unit requires less than 3 amperes)
+Transformer panel power output capacity: 300 Watts transformer panel power output capacity
+Automated burner assembly input voltage: 12VAC / 60Hz nominal
+Use 14 gauge wire to connect transformer panel and Sub-Panel of fire feature.
+
+BURNER CAVITY CONSTUCTION REQUIREMENTS:
+Burner Cavity Depth:
+   • 20” Minimum Cavity Depth Requirement for Subpanel Inner Mount.
+   • 12” Minimum Cavity Depth Requirement for Subpanel Outer Mount.
+
+INNER MOUNT - BURNER CAVITY DIMENSION REQUIREMENTS:
+Ventilation is a requirement and must be built into structure per the dimensions listed in the table below.
+
+                             Optimum Burner Cavity        Burner Support        Required Number of Vent
+ Burner
+           Support Plate      (Inside Dimensions)            Brackets             Openings + Diameter
+ Length
+                                    LxWxD
+   36”        60” x 13”         61” x 13.5” x 20”            L-Brackets                (4) / 2.5” dia.
+
+   48”        72” x 13”         73” x 13.5” x 20”            L-Brackets                (4) / 2.5” dia.
+
+   60”        84” x 13”         86” x 13.5” x 20”            L-Brackets                (6) / 2.5” dia.
+
+   72”        96” x 13”         98” x 13.5” x 20”            L-Brackets                (6) / 2.5” dia.
+
+   84”        108” x 13”       110” x 13.5” x 20”            L-Brackets                (8) / 2.5” dia.
+
+   96”        120” x 13”       123” x 13.5” x 20”            L-Brackets                (8) / 2.5” dia.
+
+  108”        132” x 13”       135” x 13.5” x 20”            L-Brackets               (10) / 2.5” dia.
+
+  120”        144” x 13”       147” x 13.5” x 20”            L-Brackets               (10) / 2.5” dia.
+
+
+INSTALLATION REQUIREMENTS:
+• Installation should be performed by a licensed contractor. All aspects of installation must conform to local
+    codes, or in the absence of local codes, with National Fuel Gas Code ANSI Z223.1.
+• Adhere to recommended CSA/AGA clearances: sides 4ft/top 6ft.
+• Do not install near any combustibles (side or overhead) such as wood structures, fuels, clothing, fabrics or
+    dry vegetation.
+• Install fire features well out of the way of pedestrian traffic. For installation on or over non-combustible
+    floors only.
+• The Transformer Panel and approved manual gas valve shall be located where they can be easily accessible
+    such that the gas can be shut off quickly in case of an emergency.
+• On commercial installations, it is required to install a keyed valve switch and kill switch located in close
+    proximity, in visible sight, of feature or features. The keyed and kill switches are not supplied by PTI.
+• Low voltage wiring (14ga 12VAC) should be installed underground between the Transformer Panel and Sub-
+    Panel. Wire per PTI wiring diagram. 120VAC source into Transformer Panel can come from any 120VAC
+
+                                                         7
+    source, including pool controller or home system. Handheld remote systems or an electrician can wire a
+    decorative switch for on/off operation upstream of the Pebble Technology Transformer Panel.
+•   The gas and electrical site plumbing shall be installed underground.
+•   Maintain good piping practices by keeping pipe length and elbows to a minimum to eliminate unnecessary
+    pressure drop. (Do not use any corrugated flexible gas line other than what is provided by Pebble Technology
+    with the system kit and in the designated locations).
+•   Insides of gas lines must be clean and free form any dirt, debris or contamination.
+•   Gas lines shall be purged of air and all contaminants prior to hook-up and operation of any fire feature.
+•   Note that piping and wiring are different for Natural Gas vs. Propane installations. A safety device called a
+    Propane Adder Valve is required with propane applications. It is to be installed upstream of the Line Burner
+    and serves as a redundant safety valve to minimize potential leakage.
+•   Timed shut-off switches are recommended for both natural gas and propane applications.
+•   Build the structure such that inside dimensions meet requirements shown in the Inner Mount – Burner
+    Cavity Dimension Requirements table on page 7.
+•   Do not use fire brick to line the inside of the Linear Fire Pit Cavity. Fire brick will retain heat and may result
+    in overheating of the electronics.
+•   Natural Gas systems require drainage.
+•   For safety reasons, Propane Systems should not have conventional drainage, but drainage should occur
+    through ventilation holes that are located on the sides of the structure.
+•   Venting (air gap at bottom and end walls of structure is required. Venting is required for safety measures
+    and to keep electrical components from overheating.
+•   Inside Mount Sub-Panel should be mounted on vertical end wall closest to Pilot Assembly on Burner.
+•   Outer Mount Sub-Panel must be installed within 4ft. of Pilot Assembly located at end of Burner Assembly.
+•   Pebble Technology pilot gas hose and electrical wires from Sub-Panel to pilot is 5ft. maximum.
+•   Connect inlet and outlet gas hoses supplied by Pebble Technology. Make sure all connections are tight and
+    do not leak using a leak detection method. Keep hoses and wires away from underside of Support Plate.
+    They must be kept away from hot undersurface of the burner.
+•   Connect ignitor and ground wires at pilot assembly to Sub-Panel.
+•   Mount the support plate using L Brackets. The support plate should be mounted such that the top of the
+    Burner is ½” – 1” below the top of wall or cap of built burner cavity. The support plate should rest on top of
+    the L Brackets mounted to the built burner cavity.
+•   If the inside trough dimensions (width x length) are larger than suggested, the builder will need to support
+    the Burner Assembly with cross member support. The extra gap around the burner will need to be covered
+    with expanded or perforated stainless steel metal such that decorative media does not fall through. Do not
+    use solid metal plates because it will not allow burner cavity to vent properly, which will cause overheating.
+
+IMPORTANT:
+Do not kink or make sharp radius bends on flexible gas hose. Make sure gas hoses are not touching the underside
+of Support Plate.
+
+
+
+
+                                                          8
+SYSTEM COMPONENTS
+Components required for installation. Check to make sure all components are included in the correct
+quantities. This installation guide covers all linear burner length, Inside and Outside Mount, and all automated
+and manual burner assemblies.
+
+LINEAR BURNER INSERTS
+COMPONENTS INCLUDED WITH PURCHASE
+       • 12VAC transformer panel
+       • Automated Operation, Inner Mount Sub-Panel
+       • Automated or Manual burner assembly & support plate
+       • Flexible gas hoses
+       • Propane adder (propane versions only)
+
+COMPONENTS NOT INCLUDED WITH PURCHASE REQUIRED FOR INSTALLATION
+     • Galvanized mounting L-Brackets
+     • Gas line connections 1/2” NPT black steel tube
+     • Gas line connections 1/2” NPT black steel 90° elbow fittings
+     • Gas key switch (valve)
+
+
+
+
+          Transformer Panel                                                Sub-Panel
+
+
+
+
+                              Linear Burner Assembly
+
+
+
+
+       Propane Adder                                     PIPE TRAIN MANIFOLD (built by installers)
+
+                                                        9
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+ASSEMBLY OF LINEAR BURNER
+
+NOTE: The pilot end of the Linear
+Burner must be positioned nearest
+the Sub Panel.
+                                                                 SUPPORT PLATE
+
+
+                                                                                  LINEAR BURNER
+
+                                                                                                    DEFLECTOR
+PILOT MOUNT
+PLATE
+        PILOT
+        COVER
+
+
+
+
+                                                                                                    Z – CLIP WITH
+                                                                                                    1/4 – 20 BOLT
+
+     IMPORTANT: The Sub-Panel must be located close to pilot end of
+     burner to connect 5 feet of wire from Sub-Panel to the pilot on the
+     Linear Burner. Ignitor and ground wires must not be encased in
+     concrete or buried in dirt or enclosed in tight fitting conduit. They
+     must be allowed to hang freely in open air space.
+
+
+                                             11.5”
+
+
+
+
+           Gas outlet
+           To line burner                                                                            4’ maximum
+                                          Pebble Technology                  Gas outlet
+                                                                             To pilot
+      11.5”
+
+
+                                                                                      12 VAC from
+                                                                                      Pebble
+                                                                                      Technology
+                                                                                      Transformer
+                                                                                      Panel
+                   Ground                            Gas inlet
+   Electrical to
+   pilot ignitor
+                                                            10
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+COMPONENT OVERVIEW FOR LINEAR INSERTS 3FT. THRU 5FT.
+
+                                                                                    Pilot Spark Wire
+                                                    Pilot Ground Wire
+                                                                                    Pilot Flex Gas Hose
+Control Relay or         Pebble Technology
+Switch by others.        Transformer Panel
+
+                                                      Pebble Technology
+                                                      Sub-Panel
+                                                                                                 Pebble
+                120 VAC                       Seal electrical conduit
+                                                                                                 Technology
+                                              to keep water out.
+                                                                                                 Line Burner
+                         12VAC                  12VAC
+ Gas Supply
+ Source                                                   Flex Gas Hose by
+                                                          Pebble Technology
+
+
+  Propane Adder
+                                                                                       Flex Gas Hose by
+  (Propane gas applications only)
+                                                                                       Pebble Technology
+                                                                               Hard Pipe by Installers
+
+
+
+
+COMPONENT OVERVIEW FOR LINEAR INSERTS 6FT. THRU 10FT.
+
+                                                                                     Pilot Spark Wire
+                                                    Pilot Ground Wire                Pilot Flex Gas Hose
+ Control Relay or         Pebble Technology
+ Switch by others.        Transformer Panel
+
+                                                       Pebble Technology
+                                                       Sub-Panel
+                                              Seal electrical conduit
+                                                                                                 Pebble
+                  120 VAC                                                                        Technology
+                                              to keep water out.
+                                                                                                 Line Burner
+                          12VAC                 12VAC
+  Gas Supply
+  Source                                                   Flex Gas Hose by
+                                                           Pebble Technology
+
+
+    Propane Adder                                                                      Flex Gas Hose by
+    (Propane gas applications only)
+                                                                                       Pebble Technology
+                                                                               Hard Pipe by installers
+
+
+
+
+                                                             11
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+PIPING AND ELECTRICAL DIAGRAM – INNER MOUNT, NATURAL GAS
+                        Pebble Technology Transformer Panel
+ Control relay or       Note: Transformer Panel can be installed up to 150 ft.
+ switch by others       away from the burner.
+
+
+
+
+              120 VAC
+
+                                        12 VAC to Pebble Technology Sub-Panel
+                                                                                                                     Check in-line
+                                                                                                                     flowing gas
+                                                                                                                     pressure at
+                                                                                                                     Sub-Panel
+ Gas Supply                                                                                                          connection
+                                  Gas Supply to Sub Panel Outside Burner Cavity
+ source
+                                  Nat. Gas 7 W.C. Inches (5”wc min/9”wc max)
+
+
+             Gas line pipe sizing
+             Note: Pipe sizes listed in this document are for reference only. All gas line pipe should be
+             sized based upon distance from the source to the burner, number of elbows and BTU of
+             burner. Use the reference charts from the latest version of the NFPA 54 code book or
+             equivalent sizing charts as your guide.
+
+
+
+PIPING AND ELECTRICAL DIAGRAM – OUTER MOUNT, NATURAL GAS
+                                                            IMPORTANT: The Sub Panel must be located close to pilot end of burner to
+Control relay Pebble Technology Transformer Panel
+                                                            connect 5 feet of wire from Sub-Panel to the pilot on the Linear Burner.
+or switch by Note: Transformer panel can be installed
+                                                            Ignitor and ground wires must not be encased in concrete or buried in dirt or
+others        up to 150 ft. away from the burner.
+                                                            enclosed in tight fitting conduit. They must be allowed to hang freely in open
+                                                            air space.
+
+                                    Sub Panel – Outer Mount
+         120 VAC                    Note: Sub Panel should be located in a weather
+                                    resistant enclosure with good drainage.
+                                  12 VAC to Pebble Technology Sub-Panel
+
+
+                                                                                                        Gas and Electrical
+                                                                                                        to Line Burner
+Gas Supply
+source                       Gas Supply to Sub Panel Outside Burner Cavity                            Check in-line flowing gas
+                             Nat. Gas 7 W.C. Inches (5”wc min/9”wc max)                               pressure at Sub-Panel
+                                                                                                      connection
+
+
+              Gas line pipe sizing
+              Note: Pipe sizes listed in this document are for reference only. All gas line pipe should
+              be sized based upon distance from the source to the burner, number of elbows and
+              BTU of burner. Use the reference charts from the latest version of the NFPA 54 code
+              book or equivalent sizing charts as your guide.
+
+                                                                 12
+ INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+ PIPING AND ELECTRICAL DIAGRAM – INNER MOUNT, PROPANE GAS
+                         Pebble Technology Transformer Panel
+  Control relay or       Note: Transformer Panel can be installed up to 150 ft.
+  switch by others       away from the burner.
+
+
+
+
+               120 VAC
+
+                                         12 VAC to Pebble Technology Sub-Panel
+                                                                                                                      Check in-line
+                                                                                                                      flowing gas
+                      12 VAC                                                                                          pressure at
+                                                                                                                      Sub-Panel
+  Gas Supply                                                                                                          connection
+                                    Gas Supply to Sub Panel Outside Burner Cavity
+  source
+                                    Nat. Gas 11 W.C. Inches (9”wc min/13”wc max)
+
+
+                     Gas line pipe sizing
+Pebble Technology
+Propane Adder
+                     Note: Pipe sizes listed in this document are for reference only. All gas line pipe should be
+                     sized based upon distance from the source to the burner, number of elbows and BTU of
+                     burner. Use the reference charts from the latest version of the NFPA 54 code book or
+                     equivalent sizing charts as your guide.
+
+
+
+ PIPING AND ELECTRICAL DIAGRAM – OUTER MOUNT, PROPANE GAS
+                                                             IMPORTANT: The Sub Panel must be located close to pilot end of burner to
+ Control relay Pebble Technology Transformer Panel
+                                                             connect 5 feet of wire from Sub-Panel to the pilot on the Linear Burner.
+ or switch by Note: Transformer panel can be installed
+                                                             Ignitor and ground wires must not be encased in concrete or buried in dirt or
+ others        up to 150 ft. away from the burner.
+                                                             enclosed in tight fitting conduit. They must be allowed to hang freely in open
+                                                             air space.
+
+                                     Sub Panel – Outer Mount
+          120 VAC                    Note: Sub Panel should be located in a weather
+                                     resistant enclosure with good drainage.
+                                   12 VAC to Pebble Technology Sub-Panel
+
+                12 VAC                                                                                   Gas and Electrical
+                                                                                                         to Line Burner
+ Gas Supply
+ source                        Gas Supply to Sub Panel Outside Burner Cavity                           Check in-line flowing gas
+                               Nat. Gas 11 W.C. Inches (9”wc min/13”wc max)                            pressure at Sub-Panel
+                                                                                                       connection
+                         Gas line pipe sizing
+ Pebble Technology       Note: Pipe sizes listed in this document are for reference only. All gas line pipe should
+ Propane Adder           be sized based upon distance from the source to the burner, number of elbows and
+                         BTU of burner. Use the reference charts from the latest version of the NFPA 54 code
+                         book or equivalent sizing charts as your guide.
+
+
+                                                                  13
+INSTALLATION GUIDE – TRANSFORMER PANEL WIRING
+
+ EQUIPMENT PAD – GAS & ELECTRICAL
+
+
+                         Propane Adder
+                         (Propane gas applications only)                                 Pebble Technology Transformer Panel
+                                                                                         Typically mounted with pool equipment up to 150 feet
+         Manual gas valve                                                                away from burner. Use minimum 14ga wire.
+                                                  12VAC
+ Gas inlet connection.
+ To be regulated per
+systems requirements
+
+                 Pebble Technology
+                 Propane Adder                            120VAC 60Hz to
+                                                           Control Panel
+
+
+                                                                                          3/4” gas piping (underground) to Sub-Panel
+                                                                                           12VAC in conduit (underground) to Sub-Panel
+
+
+
+
+                                                                       TRANSFORMER PANEL WIRING
+                                                                       Diagram illustrates high voltage wiring (120VAC) to the
+                                                                       Pebble Technology Transformer Panel and low voltage
+                                                                       (12VAC )wiring to the Pebble Technology Sub-Panel control.
+                                                                       Wire 120VAC as follows:
+                                                                          • 120 hot (black wire) to L
+                                                                          • Neutral (white wire) to N
+                                                                          • Ground (green wire) to G
+
+                                                                       Wire 12VAC as follows:
+                                                                          • Red wire to Black X1
+                                                                          • White wire to Yellow X2
+                                                                          • Green wire to G (Ground)
+                                                    X1
+
+                                            30a                             30 amp replaceable fuse
+                                                                            (2 spare fuses included)
+                                             X2
+                                                                       Output – 12VAC
+                                                                         To propane         PROPANE ADDER WIRING
+                                                                          gas adder
+                                                                                            (Propane gas applications only)
+                                                                                            Diagram illustrates wiring a propane adder into the
+                                                                                            system. Since propane gas is heavier then air and
+                                                                                            thus can pool on the ground waiting for an ignition
+                                                                                            source, a propane adder is installed to shut off the
+            Input - 120 VAC                                                                 gas supply should a gas leak occur.
+                                    Output - 12VAC
+         from relay or switch
+                                     To Sub-Panel
+         (supplied by others)                                                               Wire propane adder as follows:
+                                                                                               • Red wires to Black X1 and to Yellow X2
+
+
+
+                                                                           14
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+INSTALLATION, SUB-PANEL – INNER MOUNT
+
+
+  NOTE: INSIDE MOUNT requires gas and electrical to be located inside and at the end of trough. Ignitor and ground wires must not
+  be encased in concrete or buried in dirt or enclosed in tight fitting conduit.
+
+
+
+
+                                                                                                      Pebble Technology Linear Burner
+    SIDE VIEW OF BURNER CAVITY – INNER MOUNT                                 Pilot Assembly
+                                                                             near Sub-Panel                                   L-Bracket
+                                                            1/2″ - 1″
+           Multiple vents required.
+           Consult Pebble Technology system
+           requirements for number and size.
+           See chart on page 7
+
+
+
+      Locate gas and               Electrical from 12vac
+      electrical at pilot side     Transformer Panel
+      of burner cavity             Gas supply from source
+
+
+
+
+TOP VIEW OF BURNER CAVITY – INNER MOUNT
+                                        Length – See chart on page 7
+
+ Gas and electrical                      Drains for Natural Gas only
+ conduits
+
+
+
+                                                                                      13.5”
+                                                                                      (inner mount)
+
+
+
+
+                                     Multiple air openings for ventilation
+
+
+                                                  Pebble Technology Linear Burner                                    8”
+           Extension plate used to access
+           sub panel for service. Included
+           with inner mount burner
+           assembly
+                                                                                                                       13.5” (Inner mount)
+
+                                 Pilot Assembly
+
+
+
+                                                                        15
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+INSTALLATION, SUB-PANEL – OUTER MOUNT
+
+
+   NOTE: OUTSIDE MOUNT Sub-Panel must be installed within 4ft of Pilot Assembly located at the end of the Burner Assembly.
+   Pebble Technology pilot gas hose and electrical wires from Sub-Panel to pilot is 5ft maximum. Ignitor and ground wires must not
+   be encased in concrete or buried in dirt or enclosed in tight fitting conduit. They must be allowed to hang freely in open air
+   space.
+
+
+
+      SIDE VIEW OF BURNER CAVITY – OUTER MOUNT
+
+
+
+                                                                                                                            12”optimum
+                                                                                                                           (outer mount)
+
+
+
+Locate gas and
+electrical at sub   Electrical from                                                Side vents
+panel location      Transformer Panel
+                       Gas supply                                              Drains, natural gas only
+                       from source
+
+
+
+      TOP VIEW OF BURNER CAVITY – OUTER MOUNT
+                                                               Length – see chart on page 7
+            Pebble Technology Sub-Panel
+                                                         Pebble Technology Linear Burner
+
+
+
+
+                                                                                                                     10 .5”
+                                                                                                                 (outer mount)
+
+           Conduits for gas and
+           electrical to burner
+
+
+
+       SIDE VIEW OF BURNER CAVITY – OUTER MOUNT                        Pilot Assembly                Pebble Technology
+                                         L-bracket                     near Sub-Panel                Linear Burner             1/2″ - 1″
+
+                      Pebble Technology
+                      Sub-Panel
+
+
+
+
+Locate gas and
+electrical at sub    Electrical from                                                  Side vents
+panel location       Transformer Panel
+                        Gas supply                                              Drains, natural gas only
+                        From source
+
+
+                                                                     16
+INSTALLATION GUIDE – LINEAR BURNER INSERTS
+
+INSTALLATION, OVERSIZED BURNER CAVITY
+
+
+                 Use only Stainless Steel perforated or expanded metal around the burner. Using
+                 solid pieces of metal will result in overheating, and will void warranty.
+
+
+
+
+       Galvanized or Stainless Steel                   Pebble Technology Linear Burner
+       angle iron support bars.
+
+
+
+
+COMMERCIAL INSTALLATION, EQUIPMENT PAD – GAS & ELECTRICAL
+
+
+                     Propane Adder
+                     (Propane gas applications only)                            Pebble Technology Transformer Panel
+                                                                                Typically mounted with pool equipment up to 150 feet
+ Manual gas valve                                                               away from burner. Use minimum 14ga wire.
+                                            12VAC
+ Gas inlet
+ connection.
+ To be
+ regulated per
+ systems
+                    Commercial Safety
+ requirements                                       120VAC 60Hz to
+                    Pipe Train
+                                                     Control Panel
+
+
+                                                                                3/4” gas piping (underground) to Sub-Panel
+                                                                                 12VAC in conduit (underground) to Sub-Panel
+
+
+
+
+                                                                     17
+OPERATION & SAFETY
+INITIAL START UP PROCEDURES
+
+ALL FIRE FEATURES
+WARNING:
+Fire features are for outdoor use only. Use only high quality fire approved decorative media to cover the support
+plate and burner assembly. High temperature rated lava and tumbled lava/ceramic stone are all acceptable media
+for natural gas systems and propane. Fire glass is ONLY acceptable for natural gas systems. PTI offers lava rock and
+fire glass that is approved for fire applications. For optimal performance, 2” – 4” sized lava rock and 1/4” – 1/2”
+fire glass is recommended. Use caution if using other suppliers’ media as pieces may pop or explode when
+exposed to heat.
+
+NOTE: Install decorative media on top of the support plate and burner assembly. Be sure the decorative media is
+not packed too tightly around the pilot box. For proper ventilation and flame sensing, both sides of the pilot box
+must be kept clear of decorative media.
+
+NOTE: DO NOT USE FIRE GLASS WITH PROPANE SYSTEMS. For natural gas systems, use of a mesh screen is
+necessary to maintain fire glass above the support plate. When using lava rock smaller than 1/2”, use of a mesh
+screen is necessary. For proper ventilation and flame sensing, the top of the pilot box needs to be kept clear of
+decorative media.
+
+NOTE: Do not add decorative media until after all testing and flame height adjustments are satisfactorily complete.
+
+LINEAR BURNER – MANUAL OPERATION
+    • Purge air from gas line at fire feature enclosure using the following instructions:
+          o Close manual gas valve
+          o Disconnect gas hose from burner assembly
+          o Open manual gas valve and hold gas hose outside enclosure while purging air
+          o When you smell gas, close manual gas valve and reconnect gas hose to burner assembly
+          o Make certain all gas connections are tight and that there are no leaks using a leak detection
+              method
+    • Test and balance flame height
+          o Open the manual gas valve near the fire feature to turn on the flow of gas
+          o Use stick lighter to ignite gas and light flame
+          o Check flame height and make adjustments at the gas valve to achieve a balanced flame. Flame
+              height should be adjusted to 6” – 10”. Excess flame height can result in overheating of the
+              burner and potentially damage the unit
+          o Do not adjust manual gas valve too low as this can cause the flame to be unstable resulting in
+              possible flame out
+          o To ensure a stable flame, maintain the required gas pressure and flow to the burner assembly
+    • Add decorative media after all testing and adjustments are complete
+
+LINEAR BURNER – AUTOMATED OPERATION
+    • Purge air from gas line fire feature enclosure using the following instructions:
+          o Close manual gas valve
+          o Disconnect gas hose from burner assembly
+          o Disconnect X1 & X2 wires at the transformer panel for the Sub-Panel. For propane gas systems,
+              leave propane adder connected such that it can still energize
+          o Open manual gas valve and hold gas hose outside enclosure while purging air
+          o When you smell gas, close gas valve and reconnect gas hose to burner assembly
+          o Reconnect X1 & X2 wires at the transformer panel for the fire feature
+                                                         18
+            o   Make certain all gas connections are tight and that there are no leaks using a leak detection
+                method
+    •   Spark ignition check:
+            o Close the manual gas valve
+            o Using the control switch, turn on the power to the linear burner assembly
+            o Check that the spark electrode is arcing across to the pilot hood. You should be able to hear and
+                see the electrode spark. If there is no spark, make sure that the Sub-Panel is receiving 12 VAC
+                from the Transformer Panel
+            o Once a spark has been verified, turn off the power to fire feature using the control switch
+    •   Test and balance flame height:
+            o Open manual gas valve
+            o Using the control switch, turn on the power to the fire feature
+            o Check flame height and make adjustments at the red handled manual gas valve located on the
+                Sub-Panel or gas valve provided with the Propane Adder to achieve a balanced flame. Flame
+                height should be adjusted to 6” – 10”. Excess flame height can result in overheating of the
+                burner and potentially damage the unit
+            o Do not adjust manual gas valve too low as this can cause the flame to be unstable resulting in
+                possible flame out
+            o To ensure a stable flame, maintain the required gas pressure and flow to the burner assembly
+    •   Add decorative media after all testing and adjustments are completed successfully
+
+BASIC SYSTEM OPERATION
+Caution: Before turning on a fire feature make sure that the area is clear of people, animals or any objects that are
+combustible. If you smell gas or there are other indications of a gas leak, immediately turn off the manual gas
+valve, leave the area and do not operate the fire feature. Immediately call your utility gas supplier to inspect the
+fire feature.
+
+LINEAR BURNER – MANUAL OPERATION
+    • Any cover must be removed when burner is in operation
+    • Open the manual gas valve near the linear burner assembly to turn on the flow of gas
+    • Use a stick lighter to light flame
+    • Check flame height and make adjustments at the manual gas valve to achieve a balanced flame. Flame
+       height should be adjusted 6” – 10”. Excess flame height can result in overheating of the burner and
+       potentially damage the unit
+    • Do not adjust manual gas valve too low as this can cause the flame to be unstable resulting in possible
+       flame out
+    • To ensure a stable flame, maintain the required gas pressure and flow to the burner assembly
+    • Do not store or use gasoline or other flammable materials in the vicinity of the fire feature
+    • Do not leave flame on while unsupervised
+    • Do not operate in windy or rainy conditions as burner may not operate properly or at all
+    • Linear Burner should be operated only by a responsible adult
+    • Before any inspection of the Linear Burner, always turn off gas and make sure the fire feature is cool
+    • If you experience problems with the fire feature, discontinue use and call a licensed contractor
+    • To turn off the Linear Burner, close the manual gas valve to the fully closed position
+
+
+
+
+                                                         19
+LINEAR BURNER – AUTOMATED OPERATION
+    • Any cover must be removed when burner is in operation
+    • To turn on Linear Burner use the automated control system
+    • Check flame height and make adjustments at the manual gas valve in the Sub-Panel to achieve a
+       balanced flame. Flame height should be adjusted to 6” – 10”. Excess flame height can result in
+       overheating of the burner and potentially damage the unit
+    • Do not adjust manual gas valve too low as this can cause the flame to be unstable resulting in the
+       system cycling on/off because the sensor cannot read the flame properly
+    • To ensure a stable flame, maintain the required gas pressure and flow to the burner assembly
+    • Do not store or use gasoline or other flammable materials in the vicinity of the fire feature
+    • Do not leave flame on while unsupervised
+    • Do not operate in windy or rainy conditions as burner may not operate properly or at all
+    • Linear Burner should be operated only by a responsible adult
+    • Before any inspection of the Linear Burner, always turn off gas and make sure the fire feature is cool
+    • If you experience problems with the fire feature, discontinue use and call a licensed contractor
+    • To turn off Linear Burner, use the automated control system
+
+TROUBLE SHOOTING
+Prior to beginning any trouble shooting procedures, ensure all gas and electrical components of the system are
+off. All procedures should be performed by a licensed contractor.
+
+While trouble shooting the unit, look for signs of heat or water damage to the burner assembly which may be
+caused by improper installation, inadequate ventilation and drainage, or adverse environmental conditions.
+
+No spark at the pilot box
+• Remove decorative media from the pilot box area. Look for small pieces obstructing the pilot box.
+• If there is still no spark, confirm 12VAC output from the transformer panel by measuring the voltage over
+    black X1 to yellow X2 wire leads. At the burner assembly, measure the wire leads at Sub-Panel to verify
+    there is no short in the wire runs.
+• If there is voltage from the transformer panel, but no spark, check for proper wire connection at the pilot
+    assembly. If there is still no spark, the ignition module or pilot assembly may need to be replaced.
+• If there is no voltage from the transformer panel, check the 30AMP fuse on the yellow X2 wire, and replace
+    fuse as needed. Confirm there is 120VAC at the transformer panel over terminals L and N.
+• If 120VAC input to the transformer is confirmed and there is no 12VAC output from the transformer panel,
+    the transformer panel may need to be replaced.
+• If there is no 120VAC to the transformer check main electrical source.
+
+Spark but no pilot light
+• Remove decorative media from the pilot box area. Look for small pieces obstructing the pilot box.
+• The pilot valve may not be opening. Turn on burner assembly and listen for the pilot solenoid to energize
+    and open the valve.
+• If not energizing, the pilot solenoid may need to be repaired or replaced.
+• If the pilot solenoid is energizing, confirm by sound or smell if gas is coming out of the pilot box. If needed,
+    use a lighter to help determine if gas is coming out of the pilot box.
+• If no gas at the pilot box, check that the gas is turned on.
+• Check to make sure the in-line gas filter screen is not clogged in any way.
+• The pilot orifice may be plugged/blocked. If so, remove debris and verify gas flow. If pilot will still not light,
+    the pilot assembly may need to be replaced.
+• If not energizing, the control module may need to be repaired or replaced.
+
+
+                                                         20
+Burner assembly cycles on/off
+
+•   Moisture can be trapped in the decorative media. As a result, steam from the moisture can cause the
+    burner assembly to cycle on and off until all the moisture has dissipated.
+•   If the wind is causing an unstable flame or the flame goes out, build up fire media around pilot assembly
+    such that the pilot box is blocked from the prevailing wind.
+•   If the problem continues, remove decorative media from the pilot box area and burner rail. Retest the
+    flame.
+•   If flame is working properly, reapply the media in a thin layer over burner rail and loosely around the pilot
+    box.
+•   Check gas pressure. If pressure is too low or high, it can result in an unstable flame, which can cause the
+    burner assembly to cycle on and off. Check with gas supplier that the proper regulator is installed.
+•   Check gas flow. If flow is too low or high, it can result in an unstable flame, which can cause the burner
+    assembly to cycle on and off. Regulate gas flow by adjusting the manual gas valve. If problems persist, check
+    with gas supplier that the proper regulator is installed.
+•   Check to make sure the in-line gas filter screen is not clogged in any way.
+•   If burner shuts off after a 30-40 minute period and does not come back on the control module may need to
+    be replaced.
+
+Burner assembly will not turn on
+• Make sure the pool control system switches are functioning properly (batteries, transmitter signal, etc.).
+• Electrical circuit fault: check for loss of power.
+• No gas supply: check that all manual gas valves are in the proper position. If applicable, make sure the
+    propane tank is full and that the propane adder is energized.
+• Unit may overheat due to improper ventilation. Clear ventilation passageways. Check for heat damage,
+    replace parts as needed.
+• Failure of solenoid valve(s) may be indicated by a buzzing noise. Replacement parts may be needed.
+• Excessive weather conditions such as rain, wind, snow and dust may affect operation. Wait for weather
+    conditions to clear. Clear debris and eliminate moisture before attempting to operate the unit again.
+
+Pilot light comes on but not the main burner
+• Confirm that all manual gas valves at Sub-Panel and elsewhere are in the proper position.
+• Check gas pressure. If pressure is too low or high, it can prohibit the main burner from igniting. Check with
+     gas supplier that the proper regulator is installed.
+• Check gas flow. If flow is too low or high, it can prohibit the main burner from igniting. Check with gas
+     supplier that the proper regulator is installed.
+• Check to make sure the in-line gas filter screen is not clogged in any way.
+• Failure of solenoid valve(s) may be indicated by a buzzing noise. Replacement parts may be needed.
+• Remove decorative media from the pilot box area and burner ring. Retest the flame.
+
+Main burner or pilot light does not shut off
+• Make sure the pool control system switches are functioning properly (batteries, transmitter signal, etc.).
+• Remove solenoid coil and clean inside of the solenoid.
+
+For unresolved issues, call service provider. To purchase replacement parts, call PTI at 800-937-5058
+
+
+
+
+                                                       21
+GENERAL CARE & MAINTENANCE
+General care of the unit is required to maintain proper operation and extend the life of the product. Inspect and
+clean the unit on a regular basis. Frequency of use will increase the amount of maintenance needed. System
+should be fired at least once per month to test and ensure proper operation. Over time depending upon use,
+units will require some form of regular maintenance. This may involve items such as pilot assembly cleaning or
+replacement and solenoid cleaning or replacement. Please contact your pool care professional for assistance if
+needed.
+
+LINEAR BURNER FIRE FEATURES
+    • Periodically clean the burner assembly with a wet cloth to remove carbon build-up.
+    • Periodically inspect the underside of the burner assembly for any signs of damage from excessive heat
+       (e.g., melted wires, carbon build up, warped parts, etc.)
+    • Check that all gas connections are tight, clean and sealed.
+    • Keep base of burner cavity and ventilation passageways clear of debris.
+    • The unit should be cycled frequently (especially after rain). The Burner Assembly will not work in snow
+       and ice conditions. Fire Features should be covered or removed for storage in snow and ice conditions.
+    • The unit should not be operated in high wind conditions. High winds can limit the cooling air required
+       for cooling the Burner Assembly.
+    • Gas should be securely shut-off during non-use.
+
+SEASONAL CARE
+
+Seasonal shut down of the Fire + Water Elements product is recommended if there is a part of the year in which
+you do not use your features, or if you live in an area where dust, wind, snow or freezing conditions occur. In
+cold climates, you may need to cover the features to prevent damage from ice and snow. Additionally, summer
+storms can deposit dust and debris on the functional surfaces. Always clean out the features before use to
+prevent any debris from affecting the functionality of the system. Please contact your pool care professional for
+assistance if needed.
+
+
+
+
+PHOENIX 56637-1 352514v1
+
+
+
+                                                       22
+

@@ -1,0 +1,1915 @@
+{
+ "schema": "landscape-layout/1",
+ "frame": "model metres",
+ "buildings": [
+  [
+   3.617,
+   -31.311,
+   22.597,
+   -23.591
+  ],
+  [
+   -0.123,
+   -23.591,
+   15.412,
+   -20.601
+  ]
+ ],
+ "zones": [
+  {
+   "id": "s-quiet",
+   "use": "quiet",
+   "rect": [
+    26.707,
+    -22.716,
+    28.307,
+    -21.316
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ]
+  },
+  {
+   "id": "n-quiet",
+   "use": "quiet",
+   "rect": [
+    0.417,
+    -28.671,
+    2.417,
+    -26.771
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-quiet",
+   "use": "quiet",
+   "rect": [
+    20.212,
+    -22.291,
+    21.012,
+    -20.601
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 4.0,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "s-dining",
+   "use": "dining",
+   "rect": [
+    22.597,
+    -29.216,
+    28.307,
+    -23.216
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-DINE",
+    "LS-DINE-AREA"
+   ]
+  },
+  {
+   "id": "s-lounge",
+   "use": "lounge",
+   "rect": [
+    24.597,
+    -25.266,
+    28.307,
+    -21.416
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-LOUNGE",
+    "U-S-FIRE",
+    "LS-LOUNGE-AREA"
+   ]
+  },
+  {
+   "id": "s-standing",
+   "use": "standing",
+   "rect": [
+    22.597,
+    -29.766,
+    26.997,
+    -22.716
+   ],
+   "surface": "paving",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-STAND",
+    "LS-STAND-AREA"
+   ],
+   "design_people": 22
+  },
+  {
+   "id": "s-gravel-floor",
+   "use": "other",
+   "rect": [
+    27.297,
+    -22.716,
+    27.857,
+    -20.601
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  }
+ ],
+ "paved_areas": [
+  {
+   "id": "s-paving-0",
+   "rect": [
+    22.597,
+    -29.916,
+    28.307,
+    -29.766
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-1",
+   "rect": [
+    23.697,
+    -29.766,
+    27.097,
+    -29.366
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-2",
+   "rect": [
+    22.597,
+    -29.366,
+    28.307,
+    -28.116
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-3",
+   "rect": [
+    22.597,
+    -28.116,
+    27.997,
+    -25.416
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-4",
+   "rect": [
+    22.597,
+    -25.416,
+    28.307,
+    -25.216
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-5",
+   "rect": [
+    22.597,
+    -25.216,
+    27.857,
+    -23.016
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-6",
+   "rect": [
+    22.597,
+    -23.016,
+    28.307,
+    -22.716
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-7",
+   "rect": [
+    27.857,
+    -22.716,
+    28.307,
+    -22.616
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-8",
+   "rect": [
+    22.597,
+    -22.716,
+    24.497,
+    -22.616
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-9",
+   "rect": [
+    22.597,
+    -22.616,
+    24.497,
+    -21.201
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-10",
+   "rect": [
+    22.597,
+    -21.201,
+    23.897,
+    -20.601
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-11",
+   "rect": [
+    27.857,
+    -21.416,
+    28.307,
+    -20.601
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-0",
+   "rect": [
+    2.017,
+    -28.671,
+    3.617,
+    -28.221
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-1",
+   "rect": [
+    -0.123,
+    -28.671,
+    0.617,
+    -28.221
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-2",
+   "rect": [
+    -0.123,
+    -28.221,
+    3.617,
+    -26.771
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-3",
+   "rect": [
+    2.117,
+    -26.771,
+    3.617,
+    -25.571
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-4",
+   "rect": [
+    2.217,
+    -25.571,
+    3.617,
+    -24.171
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "n-paving-5",
+   "rect": [
+    2.217,
+    -24.171,
+    3.617,
+    -23.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-0",
+   "rect": [
+    15.412,
+    -23.591,
+    22.597,
+    -22.241
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-1",
+   "rect": [
+    20.862,
+    -22.241,
+    22.597,
+    -22.091
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-2",
+   "rect": [
+    20.112,
+    -22.241,
+    20.412,
+    -22.091
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-3",
+   "rect": [
+    15.412,
+    -22.241,
+    16.912,
+    -22.091
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-4",
+   "rect": [
+    20.862,
+    -22.091,
+    21.362,
+    -20.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-5",
+   "rect": [
+    20.112,
+    -22.091,
+    20.412,
+    -20.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-6",
+   "rect": [
+    16.612,
+    -22.091,
+    16.912,
+    -20.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-7",
+   "rect": [
+    19.612,
+    -20.841,
+    21.362,
+    -20.601
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "e-paving-8",
+   "rect": [
+    16.612,
+    -20.841,
+    16.912,
+    -20.601
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  }
+ ],
+ "planting_groups": [
+  {
+   "id": "s-bed-vine",
+   "rect": [
+    27.997,
+    -28.116,
+    28.307,
+    -25.416
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "vitis_vinifera",
+     "at": [
+      28.152,
+      -27.516
+     ],
+     "spread_m": 0.3,
+     "form": "shrub"
+    },
+    {
+     "species": "vitis_vinifera",
+     "at": [
+      28.152,
+      -26.316
+     ],
+     "spread_m": 0.3,
+     "form": "shrub"
+    }
+   ],
+   "role": "climber-strip",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-mass",
+   "rect": [
+    24.497,
+    -22.716,
+    27.297,
+    -21.201
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      25.097,
+      -21.316
+     ],
+     "spread_m": 1.2,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      26.297,
+      -21.316
+     ],
+     "spread_m": 1.2,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      24.847,
+      -21.766
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      25.547,
+      -21.766
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      26.247,
+      -21.766
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      26.947,
+      -21.766
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "pennisetum_alopecuroides",
+     "at": [
+      24.847,
+      -22.216
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "pennisetum_alopecuroides",
+     "at": [
+      25.547,
+      -22.216
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "pennisetum_alopecuroides",
+     "at": [
+      26.247,
+      -22.216
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      26.947,
+      -22.216
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      24.747,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      25.247,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      25.747,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      26.247,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      26.747,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.247,
+      -22.566
+     ],
+     "spread_m": 0.55,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "mass",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-mass-corner",
+   "rect": [
+    25.097,
+    -21.201,
+    27.297,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      25.397,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      25.997,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      26.597,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      27.197,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-herb",
+   "rect": [
+    23.897,
+    -21.201,
+    25.097,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "origanum_majorana",
+     "at": [
+      24.197,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "ground_cover",
+     "water_need": "low"
+    },
+    {
+     "species": "origanum_majorana",
+     "at": [
+      24.797,
+      -20.901
+     ],
+     "spread_m": 0.66,
+     "form": "ground_cover",
+     "water_need": "low"
+    }
+   ],
+   "role": "herb",
+   "trace": [
+    "U-S-HERB",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-screen-n",
+   "rect": [
+    22.597,
+    -29.766,
+    23.697,
+    -29.366
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      23.147,
+      -29.566
+     ],
+     "spread_m": 0.9,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "screen-climber",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-screen-s",
+   "rect": [
+    27.097,
+    -29.766,
+    28.307,
+    -29.366
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      27.702,
+      -29.566
+     ],
+     "spread_m": 0.9,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "screen-climber",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "n-screen",
+   "rect": [
+    -0.123,
+    -26.771,
+    2.117,
+    -25.571
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "rhapis_excelsa",
+     "at": [
+      0.327,
+      -26.471
+     ],
+     "spread_m": 1.8,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "rhapis_excelsa",
+     "at": [
+      1.227,
+      -26.471
+     ],
+     "spread_m": 1.8,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      0.102,
+      -25.871
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      0.552,
+      -25.871
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      1.002,
+      -25.871
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      1.452,
+      -25.871
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      1.902,
+      -25.871
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "mass",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "n-edge-far",
+   "rect": [
+    0.217,
+    -24.171,
+    2.217,
+    -23.841
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.392,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.742,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      1.092,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      1.442,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      1.792,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      2.142,
+      -24.006
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "n-edge-back",
+   "rect": [
+    -0.123,
+    -25.571,
+    0.217,
+    -23.841
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.047,
+      -25.396
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.047,
+      -25.046
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.047,
+      -24.696
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.047,
+      -24.346
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      0.047,
+      -23.996
+     ],
+     "spread_m": 0.39,
+     "form": "shrub",
+     "water_need": "high"
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "e-divider",
+   "rect": [
+    21.362,
+    -22.091,
+    22.597,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "phoenix_roebelenii",
+     "at": [
+      22.288,
+      -21.641
+     ],
+     "spread_m": 0.99,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "phoenix_roebelenii",
+     "at": [
+      22.288,
+      -20.741
+     ],
+     "spread_m": 0.99,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      21.671,
+      -21.866
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      21.671,
+      -21.416
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      21.671,
+      -20.966
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "mass",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "e-far",
+   "rect": [
+    15.412,
+    -22.091,
+    16.612,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "phoenix_roebelenii",
+     "at": [
+      16.312,
+      -21.641
+     ],
+     "spread_m": 0.99,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "phoenix_roebelenii",
+     "at": [
+      16.312,
+      -20.741
+     ],
+     "spread_m": 0.99,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      15.712,
+      -21.866
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      15.712,
+      -21.416
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "farfugium_japonicum",
+     "at": [
+      15.712,
+      -20.966
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "mass",
+   "trace": [
+    "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "e-edge",
+   "rect": [
+    16.912,
+    -20.841,
+    19.612,
+    -20.601
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      17.062,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      17.362,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      17.662,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      17.962,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      18.262,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      18.562,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      18.862,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      19.162,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    },
+    {
+     "species": "acorus_gramineus",
+     "at": [
+      19.462,
+      -20.721
+     ],
+     "spread_m": 0.33,
+     "form": "shrub",
+     "water_need": "high"
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "U-POND",
+    "LS-HYDROZONE"
+   ]
+  }
+ ],
+ "seating": [
+  {
+   "id": "s-bench-rear",
+   "zone": "s-lounge",
+   "rect": [
+    27.857,
+    -25.216,
+    28.307,
+    -23.016
+   ],
+   "seats": 3,
+   "built_in": true,
+   "trace": [
+    "U-S-LOUNGE",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "s-bench-quiet",
+   "zone": "s-quiet",
+   "rect": [
+    27.857,
+    -22.616,
+    28.307,
+    -21.416
+   ],
+   "seats": 2,
+   "built_in": true,
+   "trace": [
+    "U-S-QUIET",
+    "LS-FIRE-SEAT"
+   ]
+  },
+  {
+   "id": "n-bench",
+   "zone": "n-quiet",
+   "rect": [
+    0.617,
+    -28.671,
+    2.017,
+    -28.221
+   ],
+   "seats": 2,
+   "built_in": true,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-bench",
+   "zone": "e-quiet",
+   "rect": [
+    20.412,
+    -22.241,
+    20.862,
+    -20.841
+   ],
+   "seats": 2,
+   "built_in": true,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  }
+ ],
+ "tables": [
+  {
+   "id": "s-dining-table",
+   "zone": "s-dining",
+   "center": [
+    25.297,
+    -26.916
+   ],
+   "size_m": [
+    2.4,
+    0.9
+   ],
+   "seats": 8,
+   "extends_to_seats": 10,
+   "trace": [
+    "U-S-DINE",
+    "LS-DINE-CLEAR"
+   ]
+  }
+ ],
+ "features": [
+  {
+   "id": "s-firepit",
+   "kind": "firepit",
+   "center": [
+    25.397000000000002,
+    -29.916
+   ],
+   "diameter_m": 0.9,
+   "flush": true,
+   "fuel": "gas",
+   "shared_boundary": true,
+   "our_share": 0.5,
+   "cover": {
+    "load_rating_kN": 15.0,
+    "lip_mm": 6.0,
+    "bevelled": false,
+    "max_opening_mm": 12.0
+   },
+   "overhead_clear_m": 99,
+   "manual_side_clearance_mm": 1250,
+   "manual_overhead_clearance_mm": 2000,
+   "trace": [
+    "U-S-FIRE",
+    "D-FLUSH",
+    "LS-FIRE-CLEAR",
+    "LS-FIRE-COVER"
+   ]
+  },
+  {
+   "id": "s-bbq",
+   "kind": "bbq",
+   "rect": [
+    24.597,
+    -25.266,
+    25.097,
+    -24.766
+   ],
+   "trace": [
+    "U-S-BBQ",
+    "LS-FIRE-CLEAR"
+   ]
+  },
+  {
+   "id": "s-herb-bed",
+   "kind": "herb_bed",
+   "rect": [
+    23.897,
+    -21.201,
+    25.097,
+    -20.601
+   ],
+   "midsummer_sun_hours": 6.5,
+   "trace": [
+    "U-S-HERB",
+    "LS-HERB-SUN"
+   ]
+  },
+  {
+   "id": "n-pond",
+   "kind": "pond",
+   "rect": [
+    0.217,
+    -25.571,
+    2.217,
+    -24.171
+   ],
+   "flush": true,
+   "edge": "soft",
+   "freeboard_mm": 150,
+   "depth_mm": 1050,
+   "volume_m3": 1.76,
+   "koi_count": 2,
+   "koi_adult_length_cm": 70,
+   "aerated": false,
+   "child_protection": "rigid_grille",
+   "edge_slope_run_per_rise": 4,
+   "margin_slope_back_mm": 600,
+   "area_m2": 2.8,
+   "width_m": 1.4,
+   "section": {
+    "entry_slope_run_per_rise": 4,
+    "entry_drop_mm": 150,
+    "entry_run_m": 0.6,
+    "shelf_m": 0.3,
+    "shelf_below_water_mm": 150,
+    "trench_m": 0.5,
+    "trench_below_water_mm": 900,
+    "freeboard_mm": 150,
+    "far_side": "vertical wall with marginal planting deterrent and the rigid grille",
+    "note": "1:4 applies to the entry margin (waterline to the safety shelf), not to the 900 mm koi trench: a 1:4 slope to 900 mm needs 3.6 m of run per side (LDK GAP-POND-EDGE-SAFETY)",
+    "entry_side": "low v (toward the path and screen planting)",
+    "section_width_m": 1.4
+   },
+   "trace": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN",
+    "LS-POND-EDGE-SLOPE"
+   ]
+  },
+  {
+   "id": "e-pond",
+   "kind": "pond",
+   "rect": [
+    16.912,
+    -22.241,
+    20.112,
+    -20.841
+   ],
+   "flush": true,
+   "edge": "soft",
+   "freeboard_mm": 150,
+   "depth_mm": 1050,
+   "volume_m3": 2.82,
+   "koi_count": 4,
+   "koi_adult_length_cm": 70,
+   "aerated": false,
+   "child_protection": "rigid_grille",
+   "edge_slope_run_per_rise": 4,
+   "margin_slope_back_mm": 600,
+   "area_m2": 4.48,
+   "width_m": 1.4,
+   "section": {
+    "entry_slope_run_per_rise": 4,
+    "entry_drop_mm": 150,
+    "entry_run_m": 0.6,
+    "shelf_m": 0.3,
+    "shelf_below_water_mm": 150,
+    "trench_m": 0.5,
+    "trench_below_water_mm": 900,
+    "freeboard_mm": 150,
+    "far_side": "vertical wall with marginal planting deterrent and the rigid grille",
+    "note": "1:4 applies to the entry margin (waterline to the safety shelf), not to the 900 mm koi trench: a 1:4 slope to 900 mm needs 3.6 m of run per side (LDK GAP-POND-EDGE-SAFETY)",
+    "entry_side": "low v (toward the service path along the house wall)",
+    "section_width_m": 1.4
+   },
+   "trace": [
+    "U-POND",
+    "D-FLUSH",
+    "LS-POND-GUARD",
+    "LS-POND-DEPTH",
+    "LS-POND-STOCK",
+    "LS-POND-FLUSH-MARGIN",
+    "LS-POND-EDGE-SLOPE"
+   ]
+  }
+ ],
+ "trees": [
+  {
+   "id": "s-tree-punica",
+   "species": "punica_granatum",
+   "center": [
+    25.747,
+    -21.516
+   ],
+   "form": "small_tree",
+   "over_structure": false,
+   "mature_spread_m": 2.4,
+   "mature_height_m": 3.7,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "moderate"
+  }
+ ],
+ "paths": [
+  {
+   "id": "s-path-door",
+   "class": "main",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    22.597,
+    -27.516,
+    23.797,
+    -20.601
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  },
+  {
+   "id": "n-path-0",
+   "class": "main",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    2.217,
+    -26.771,
+    3.617,
+    -25.571
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  },
+  {
+   "id": "e-path-0",
+   "class": "service",
+   "width_m": 1.2,
+   "cross_slope_pct": 1.5,
+   "rect": [
+    15.612,
+    -23.591,
+    22.597,
+    -22.391
+   ],
+   "trace": [
+    "U-ACCESS",
+    "LS-PATH-MAIN"
+   ]
+  }
+ ],
+ "obstacles": [
+  {
+   "id": "fence-rear",
+   "rect": [
+    28.307,
+    -29.916,
+    28.557,
+    -20.601
+   ],
+   "trace": [
+    "SITE-FENCE"
+   ]
+  },
+  {
+   "id": "fence-east",
+   "rect": [
+    22.597,
+    -20.601,
+    28.557,
+    -20.351
+   ],
+   "trace": [
+    "SITE-FENCE"
+   ]
+  },
+  {
+   "id": "obs-sister-screen-n",
+   "rect": [
+    22.597,
+    -29.916,
+    23.697,
+    -29.766
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ]
+  },
+  {
+   "id": "obs-sister-screen-s",
+   "rect": [
+    27.097,
+    -29.916,
+    28.307,
+    -29.766
+   ],
+   "trace": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ]
+  },
+  {
+   "id": "pot-0-plumeria",
+   "rect": [
+    23.8,
+    -22.27,
+    24.4,
+    -21.67
+   ],
+   "trace": [
+    "D-FRANGIPANI",
+    "D-TERRACOTTA"
+   ]
+  }
+ ],
+ "boundary": [
+  {
+   "id": "fence-east",
+   "side": "neighbour",
+   "kind": "fence",
+   "height_m": 4.0,
+   "trace": [
+    "LS-SCREEN"
+   ]
+  },
+  {
+   "id": "fence-rear",
+   "side": "neighbour",
+   "kind": "fence",
+   "height_m": 4.0,
+   "trace": [
+    "LS-SCREEN"
+   ]
+  },
+  {
+   "id": "sister-line-screen",
+   "side": "neighbour",
+   "kind": "fence",
+   "height_m": 2.1,
+   "trace": [
+    "U-PRIVACY",
+    "LS-SCREEN"
+   ]
+  }
+ ],
+ "seatwalls": [
+  {
+   "id": "s-seat-wall",
+   "height_mm": 450,
+   "width_mm": 450,
+   "trace": [
+    "LS-SEATWALL"
+   ]
+  }
+ ],
+ "canopies": [
+  {
+   "id": "s-pergola-grape",
+   "rect": [
+    23.597,
+    -28.216,
+    28.207,
+    -25.616
+   ],
+   "kind": "pergola",
+   "roof": "vine",
+   "louvred": true,
+   "height_m": 2.7,
+   "shade_fraction": 0.75,
+   "shade_fraction_winter_open": 0.15,
+   "shade_fraction_winter_closed": 0.6,
+   "deciduous": true
+  },
+  {
+   "id": "s-pergola-rear",
+   "rect": [
+    27.307,
+    -25.416,
+    28.307,
+    -20.701
+   ],
+   "kind": "pergola",
+   "height_m": 2.7,
+   "shade_fraction": 0.6
+  },
+  {
+   "id": "n-pergola",
+   "rect": [
+    0.417,
+    -28.671,
+    2.417,
+    -27.071
+   ],
+   "kind": "pergola",
+   "height_m": 2.6,
+   "shade_fraction": 0.6
+  },
+  {
+   "id": "e-pergola",
+   "rect": [
+    19.712,
+    -22.391,
+    21.312,
+    -20.601
+   ],
+   "kind": "pergola",
+   "height_m": 2.6,
+   "shade_fraction": 0.6
+  }
+ ],
+ "screens": [
+  {
+   "id": "sister-screen-n",
+   "rect": [
+    22.597,
+    -29.916,
+    23.697,
+    -29.766
+   ],
+   "kind": "trellis",
+   "height_m": 2.1,
+   "opacity": 0.9,
+   "non_combustible_frame": true
+  },
+  {
+   "id": "sister-screen-s",
+   "rect": [
+    27.097,
+    -29.916,
+    28.307,
+    -29.766
+   ],
+   "kind": "trellis",
+   "height_m": 2.1,
+   "opacity": 0.9,
+   "non_combustible_frame": true
+  }
+ ],
+ "walls": [
+  {
+   "id": "wall-fence-rear",
+   "rect": [
+    28.307,
+    -29.916,
+    28.557,
+    -20.601
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "wall-fence-east",
+   "rect": [
+    22.597,
+    -20.601,
+    28.557,
+    -20.351
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "wall-street-fence",
+   "rect": [
+    -0.373,
+    -29.916,
+    -0.123,
+    -23.591
+   ],
+   "height_m": 4.0
+  }
+ ],
+ "doors": [],
+ "steps": [],
+ "meta": {
+  "pit": [
+   2.8,
+   0.0
+  ],
+  "opening_a": [
+   1.1,
+   4.5
+  ],
+  "focal-n": "the pond past the planted screen, from the lounge door",
+  "focal-e": "the pond is the focal point of the quiet room, bench at its end",
+  "pot": [
+   24.1,
+   -21.97
+  ],
+  "layout_id": "LDG-final-B"
+ }
+}
