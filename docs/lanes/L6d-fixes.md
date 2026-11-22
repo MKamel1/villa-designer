@@ -108,6 +108,21 @@ build passed the receipt guard unchanged (SC's changes are outside every receipt
 scene sha256 `5968c5b8c580fcc93fdb27f0e8f70e4dbd9d8e2562236391d44fd72fc6a8dd77`, ids-stripped sha256 `d6e66841555083529fa5a0b278a96345c1dd162d33331f142605019a96e61773`,
 producer source hash `8273ba79af3be2119625c60809c8774ce6fa1b34afb015f3e86e2461ca6aa96e`.
 
+## Receipts, exposure record, production scene (after merging `origin/integ/aplus`, SC2)
+
+Merge conflicts: only `knowledge/exposure-groups.json`, `knowledge/furniture-stage2.json.gz`, `knowledge/parents-bed.json.gz` (their version taken, then regenerated below). Code merged without conflict (SC2's `d1-elements.json`, `revit_spec.py`, `parity/*` kept alongside this lane's changes).
+
+Receipts (RA2 procedure; old = `origin/integ/aplus` worktree, new = this branch, both exported with receipts bypassed): the old tree reproduces all 8 stored section digests. Changed sections, all this lane's:
+meshes (removed `fix-/lens-DL-parents-entry-01`; changed `fix-/lens-DL-parents-bed-04`, `fix-/lens-DL-kids-b-01`, `fix-ADJ-parents-bed-05`) and materials (`led-lin-2700`): the same four causes as before (LA4 entry cove, LA4 downlight moves, ADJ A9003138, QA03 pendant diffuser).
+**No section changed because of SC2** beyond what the stored receipts already hold (layout, specification, furniture, architecture, models, props identical). 17 baseline-relative reviews all ok, 0 findings. Evidence `out/L6d-rc2/` (not committed).
+
+Exposure: re-measured (jobq `L6d-measure-exposure-3`, copied unedited). Changes against SC2's record are the L6d lights plus SC2 geometry reading through: lamp fractions move <= 0.01 in every view (largest v33 0.0197->0.0247, v29 0.4726->0.4722, v23 0.848->0.854);
+no group flips its side of the 0.5 threshold. Production scene (`benchmark_scene_build.py --write-scene`, receipts and record active, no bypass, jobq `L6d-prod9`, clean checkout at `875781b`): scene.json sha256 `a32842521bab9896bc03b155ef12d2b6f798ab137f0a89b1255abc9c4be9bd19`, ids stripped
+`0165935f48b5de45a39a1594281fdf143acf4b77f99f2ae08b4a81475ef6c3d4`, **1,221 meshes** (SC2 1,223 minus the entry-lobby downlight's two), **113 lights** (4 ADJ on `erco/A9003138.ies`), source hash `4fcb8572777f8913de5739239faa33c9e62e90e3fca09f840f99f31435ece1e9`.
+
+`lightverify --design D1 --scene` on it: 401 results, 389 pass / 9 fail / 3 n/e; **35 of 40 rows verified**. The 9 fails: 8 are LV10 on the old products (ADJ A9000028 bound-file + beam dia 1-5 m + beam angle; Jilly 50674 bound-file), the cause of the 4 LV tests pinned to old products;
+1 is the documented LV6 miss `GF-parents-dressing` (engine 390 lx vs lumen method 646 lx, room index 0.43). Nothing else fails. LV owns `docs/lanes/LV-report.md`; the regenerated copy is not committed.
+
 ## Open items
 
 * **LV's V10 is hard-wired to the old products** (ADJ A9000028, Jilly 50674): it reports the new bound files as "DIFFERS" (8 failures); `tests/lightverify`: 51 pass, 4 fail by design (`test_v10_erco.py` x2: ADJ partial / Jilly points; `test_v1_design.py` x2: the Jilly's 8 samples), all four encode the L6c products and are LV's to update; the orientation and radiance-baseline tests pass.
