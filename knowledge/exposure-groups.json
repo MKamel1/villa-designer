@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6",
-  "transport_sha256": "3f6b09a4a0dd24d6da3870756c9c842927f9e156296bf586683e12e0526b68d8",
+  "transport_sha256": "ab2e6ffed809ea1b138775e49acc925a45f0abc9abcdf8864965a3e453bc0d9e",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -27,11 +27,11 @@
   },
   "measurements": {
     "v01-kitchen-garden": {
-      "lamp_luminance_sum": 349358.7498933612,
-      "daylight_luminance_sum": 1398788.9623579101,
+      "lamp_luminance_sum": 357025.35123179824,
+      "daylight_luminance_sum": 1405027.2402140843,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.19984509743942383,
+      "lamp_fraction": 0.20261900976453542,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -66,7 +66,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -171,12 +171,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -406,12 +406,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -560,11 +555,11 @@
       "group": "day"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 42868.49196279668,
-      "daylight_luminance_sum": 2554492.483566272,
+      "lamp_luminance_sum": 46114.27054671167,
+      "daylight_luminance_sum": 2557495.1932922867,
       "sky_luminance_sum": null,
-      "metered_pixels": 13408,
-      "lamp_fraction": 0.016504633882883604,
+      "metered_pixels": 13407,
+      "lamp_fraction": 0.017711669583009043,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -599,7 +594,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -704,12 +699,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -939,12 +934,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -1049,11 +1039,11 @@
       "group": "day"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 141422.56655557908,
-      "daylight_luminance_sum": 448903.4826468644,
+      "lamp_luminance_sum": 135844.68161237202,
+      "daylight_luminance_sum": 446171.7128862422,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.23956687452069447,
+      "lamp_fraction": 0.23340353106272416,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1088,7 +1078,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -1193,12 +1183,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -1428,12 +1418,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -1538,11 +1523,11 @@
       "group": "day"
     },
     "v04-study-deck": {
-      "lamp_luminance_sum": 0.6859552381623274,
-      "daylight_luminance_sum": 5415408.094548747,
+      "lamp_luminance_sum": 0.6859552388410866,
+      "daylight_luminance_sum": 5415408.094780559,
       "sky_luminance_sum": null,
       "metered_pixels": 13361,
-      "lamp_fraction": 1.266673054547304e-07,
+      "lamp_fraction": 1.2666730557464677e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -1615,11 +1600,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 75950.51671719464,
-      "daylight_luminance_sum": 60.46673173566344,
+      "lamp_luminance_sum": 77168.14530872543,
+      "daylight_luminance_sum": 60.09372715059598,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9992045000736467,
+      "lamp_fraction": 0.9992218684784113,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1664,7 +1649,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 80.24000000000001,
+          "flux_lm": 106.4,
           "cct_k": 2700
         },
         {
@@ -1769,12 +1754,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 121.60000000000001,
+          "flux_lm": 304.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 121.60000000000001,
+          "flux_lm": 304.0,
           "cct_k": 2700
         },
         {
@@ -2059,12 +2044,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 121.60000000000001,
+          "flux_lm": 304.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 319.5,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -2149,7 +2134,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 231.2809446334839,
+          "flux_lm": 246.66156194210052,
           "cct_k": 2700
         },
         {
@@ -2297,11 +2282,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.15836807027986674,
-      "daylight_luminance_sum": 15200552.195196927,
+      "lamp_luminance_sum": 0.15836807015554366,
+      "daylight_luminance_sum": 15200552.20266732,
       "sky_luminance_sum": null,
       "metered_pixels": 13217,
-      "lamp_fraction": 1.0418573391033687e-08,
+      "lamp_fraction": 1.041857337773457e-08,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -2375,11 +2360,11 @@
       "group": "day"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 319.9181813556306,
-      "daylight_luminance_sum": 26565.70422410379,
+      "lamp_luminance_sum": 310.3026527573078,
+      "daylight_luminance_sum": 26582.47695117078,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.011899229131874876,
+      "lamp_fraction": 0.011538511724239302,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2424,7 +2409,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -2529,12 +2514,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -2819,12 +2804,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -2909,7 +2894,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 185.02475570678712,
+          "flux_lm": 197.32924955368043,
           "cct_k": 2700
         },
         {
@@ -3010,7 +2995,7 @@
       "group": "exterior-dusk"
     },
     "v08-cinema": {
-      "lamp_luminance_sum": 73691.0783259792,
+      "lamp_luminance_sum": 71798.3299903678,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -3059,7 +3044,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -3164,12 +3149,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -3454,12 +3439,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -3544,7 +3529,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -3689,11 +3674,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 243648.23994251876,
-      "daylight_luminance_sum": 80.56784666183279,
+      "lamp_luminance_sum": 323633.51400132,
+      "daylight_luminance_sum": 82.55395354254532,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9996694365044795,
+      "lamp_fraction": 0.9997449803648484,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3738,7 +3723,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -3843,12 +3828,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -4133,12 +4118,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 372.75,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -4223,7 +4208,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 231.2809446334839,
+          "flux_lm": 246.66156194210052,
           "cct_k": 2700
         },
         {
@@ -4370,11 +4355,11 @@
       "group": "evening"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 77140.54773287101,
-      "daylight_luminance_sum": 43.9523616349185,
+      "lamp_luminance_sum": 84103.76832823618,
+      "daylight_luminance_sum": 44.170361176937995,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.9994305545597743,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.9994750868308259,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4419,7 +4404,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -4524,12 +4509,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -4814,12 +4799,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 266.25,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -4904,7 +4889,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 231.2809446334839,
+          "flux_lm": 246.66156194210052,
           "cct_k": 2700
         },
         {
@@ -5051,11 +5036,11 @@
       "group": "evening"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 326012.20360676956,
-      "daylight_luminance_sum": 86.47890290469573,
+      "lamp_luminance_sum": 327316.59488643886,
+      "daylight_luminance_sum": 86.72610831630571,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9997348075673316,
+      "lamp_fraction": 0.9997351092589628,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5100,7 +5085,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -5205,12 +5190,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -5495,12 +5480,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -5585,7 +5570,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -5707,7 +5692,7 @@
       "group": "evening"
     },
     "v12-ensuite": {
-      "lamp_luminance_sum": 204350.5457908151,
+      "lamp_luminance_sum": 208640.75632185483,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -5756,7 +5741,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -5861,12 +5846,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -6151,12 +6136,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -6241,7 +6226,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -6432,11 +6417,11 @@
       "group": "evening"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 127140.92001470513,
-      "daylight_luminance_sum": 65.1205088885534,
+      "lamp_luminance_sum": 109966.59437402146,
+      "daylight_luminance_sum": 64.84336177254069,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.9994880706244726,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.9994106833182691,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -6481,7 +6466,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -6586,12 +6571,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -6876,12 +6861,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -6966,7 +6951,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -7111,11 +7096,11 @@
       "group": "evening"
     },
     "v15-family-bath": {
-      "lamp_luminance_sum": 418319.4611099072,
-      "daylight_luminance_sum": 695124.2754902391,
+      "lamp_luminance_sum": 420022.33386062953,
+      "daylight_luminance_sum": 694927.8733779705,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3756987868890691,
+      "lamp_fraction": 0.3767184679044097,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7150,7 +7135,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -7255,12 +7240,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -7530,12 +7515,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -7605,7 +7585,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -7758,11 +7738,11 @@
       "group": "day"
     },
     "v35-family-bath-wc": {
-      "lamp_luminance_sum": 359767.50259734644,
-      "daylight_luminance_sum": 806422.616233414,
+      "lamp_luminance_sum": 360675.14101854013,
+      "daylight_luminance_sum": 806563.0921562397,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3084981571941757,
+      "lamp_fraction": 0.308998738019005,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7797,7 +7777,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -7902,12 +7882,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -8177,12 +8157,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -8252,7 +8227,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -8404,11 +8379,11 @@
       "group": "day"
     },
     "v16-guest-wc": {
-      "lamp_luminance_sum": 369047.66350585694,
-      "daylight_luminance_sum": 12.290906420917217,
+      "lamp_luminance_sum": 368603.48216783773,
+      "daylight_luminance_sum": 12.132504672215996,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999666967215652,
+      "lamp_fraction": 0.9999670862975162,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8453,7 +8428,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -8558,12 +8533,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -8848,12 +8823,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -8938,7 +8913,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -9127,11 +9102,11 @@
       "group": "evening"
     },
     "v17-dirty-kitchen": {
-      "lamp_luminance_sum": 236797.09591016083,
-      "daylight_luminance_sum": 2247317.866981403,
+      "lamp_luminance_sum": 238878.12318009674,
+      "daylight_luminance_sum": 2248592.397100618,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.09532453185440494,
+      "lamp_fraction": 0.09603254439901421,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9166,7 +9141,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -9271,12 +9246,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -9506,12 +9481,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -9660,11 +9630,11 @@
       "group": "day"
     },
     "v18-study-evening": {
-      "lamp_luminance_sum": 127920.55076598114,
-      "daylight_luminance_sum": 1632.0134770334648,
+      "lamp_luminance_sum": 126141.58319870246,
+      "daylight_luminance_sum": 1634.1733661596288,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9874026925937789,
+      "lamp_fraction": 0.9872106148295035,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9709,7 +9679,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -9814,12 +9784,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -10104,12 +10074,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 426.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -10194,7 +10164,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 277.5371335601807,
+          "flux_lm": 295.9938743305206,
           "cct_k": 2700
         },
         {
@@ -10341,12 +10311,12 @@
       "group": "evening"
     },
     "v19-garden-facade": {
-      "lamp_luminance_sum": 0.12790809189477909,
-      "daylight_luminance_sum": 30246159.302984774,
-      "sky_luminance_sum": 5166475.208438825,
+      "lamp_luminance_sum": 0.12790809216417587,
+      "daylight_luminance_sum": 30246241.675887745,
+      "sky_luminance_sum": 5166478.015907647,
       "metered_pixels": 12890,
-      "lamp_fraction": 4.228903579875207e-09,
-      "solar_fraction": 0.8291857436613784,
+      "lamp_fraction": 4.2288920717457094e-09,
+      "solar_fraction": 0.8291861160381339,
       "lamp_population": [],
       "view_input": {
         "id": "v19-garden-facade",
@@ -10394,11 +10364,11 @@
       "group": "exterior-day"
     },
     "v20-kitchen-run": {
-      "lamp_luminance_sum": 502944.41832325223,
-      "daylight_luminance_sum": 423.42374678986874,
+      "lamp_luminance_sum": 513887.1820318992,
+      "daylight_luminance_sum": 423.4468686505999,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9991588184397148,
+      "lamp_fraction": 0.999176670974979,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10443,7 +10413,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -10548,12 +10518,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -10838,12 +10808,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 426.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -10928,7 +10898,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 370.04951141357424,
+          "flux_lm": 394.65849910736085,
           "cct_k": 2700
         },
         {
@@ -11119,11 +11089,11 @@
       "group": "evening"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 146182.9468273936,
-      "daylight_luminance_sum": 25.997253807435495,
+      "lamp_luminance_sum": 145054.92866250686,
+      "daylight_luminance_sum": 25.95959587078204,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998221910843361,
+      "lamp_fraction": 0.9998210681214982,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11168,7 +11138,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 120.35999999999999,
+          "flux_lm": 159.6,
           "cct_k": 2700
         },
         {
@@ -11273,12 +11243,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 182.4,
+          "flux_lm": 456.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 182.4,
+          "flux_lm": 456.0,
           "cct_k": 2700
         },
         {
@@ -11563,12 +11533,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 182.4,
+          "flux_lm": 456.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 319.5,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -11653,7 +11623,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -11800,11 +11770,11 @@
       "group": "evening"
     },
     "v22-parents-day": {
-      "lamp_luminance_sum": 4.990436844925141,
-      "daylight_luminance_sum": 21603071.36106152,
+      "lamp_luminance_sum": 4.990392969555762,
+      "daylight_luminance_sum": 21603307.312176086,
       "sky_luminance_sum": null,
       "metered_pixels": 13407,
-      "lamp_fraction": 2.3100584211836153e-07,
+      "lamp_fraction": 2.3100128812016976e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -11878,11 +11848,11 @@
       "group": "day"
     },
     "v23-gf-gallery": {
-      "lamp_luminance_sum": 277697.72938525287,
-      "daylight_luminance_sum": 49775.544577293746,
+      "lamp_luminance_sum": 332125.4777530705,
+      "daylight_luminance_sum": 56842.67786860597,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.8480012002964656,
+      "lamp_fraction": 0.8538629009931262,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11917,7 +11887,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -12022,12 +11992,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -12257,12 +12227,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 1065.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -12342,11 +12307,11 @@
       "group": "evening"
     },
     "v24-bar-alcove": {
-      "lamp_luminance_sum": 76056.25718784341,
-      "daylight_luminance_sum": 36.63663356554415,
+      "lamp_luminance_sum": 83523.07537541214,
+      "daylight_luminance_sum": 36.7004896541085,
       "sky_luminance_sum": null,
-      "metered_pixels": 13408,
-      "lamp_fraction": 0.9995185275296332,
+      "metered_pixels": 13405,
+      "lamp_fraction": 0.9995607876005631,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12391,7 +12356,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 160.48000000000002,
+          "flux_lm": 212.8,
           "cct_k": 2700
         },
         {
@@ -12496,12 +12461,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 243.20000000000002,
+          "flux_lm": 608.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 243.20000000000002,
+          "flux_lm": 608.0,
           "cct_k": 2700
         },
         {
@@ -12786,12 +12751,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 243.20000000000002,
+          "flux_lm": 608.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 319.5,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -12876,7 +12841,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -13023,12 +12988,12 @@
       "group": "evening"
     },
     "v25-top-garden-gate": {
-      "lamp_luminance_sum": 1.4521757610743597,
-      "daylight_luminance_sum": 59459460.89689654,
-      "sky_luminance_sum": 12595555.66421554,
+      "lamp_luminance_sum": 1.4521757625847564,
+      "daylight_luminance_sum": 59459460.82006198,
+      "sky_luminance_sum": 12595555.679041518,
       "metered_pixels": 13409,
-      "lamp_fraction": 2.4422954794797552e-08,
-      "solar_fraction": 0.7881656598593049,
+      "lamp_fraction": 2.4422954851759442e-08,
+      "solar_fraction": 0.7881656593362228,
       "lamp_population": [],
       "view_input": {
         "id": "v25-top-garden-gate",
@@ -13076,12 +13041,12 @@
       "group": "exterior-day"
     },
     "v26-top-garden-east": {
-      "lamp_luminance_sum": 0.7724960463546434,
-      "daylight_luminance_sum": 43062329.78562424,
-      "sky_luminance_sum": 8177004.087368354,
+      "lamp_luminance_sum": 0.7724960468364884,
+      "daylight_luminance_sum": 43062329.73677861,
+      "sky_luminance_sum": 8177004.060942708,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.7939020864465808e-08,
-      "solar_fraction": 0.8101123620557535,
+      "lamp_fraction": 1.793902089600353e-08,
+      "solar_fraction": 0.8101123624540243,
       "lamp_population": [],
       "view_input": {
         "id": "v26-top-garden-east",
@@ -13129,12 +13094,12 @@
       "group": "exterior-day"
     },
     "v27-east-yard-above": {
-      "lamp_luminance_sum": 0.11379660799086314,
-      "daylight_luminance_sum": 33984136.28606392,
-      "sky_luminance_sum": 2846880.3252276033,
+      "lamp_luminance_sum": 0.11379660800368396,
+      "daylight_luminance_sum": 33984854.36780251,
+      "sky_luminance_sum": 2846926.7439269912,
       "metered_pixels": 13404,
-      "lamp_fraction": 3.3485213998649727e-09,
-      "solar_fraction": 0.9162291399356517,
+      "lamp_fraction": 3.3484506477818943e-09,
+      "solar_fraction": 0.9162295441046765,
       "lamp_population": [],
       "view_input": {
         "id": "v27-east-yard-above",
@@ -13182,12 +13147,12 @@
       "group": "exterior-day"
     },
     "v28-east-yard-below": {
-      "lamp_luminance_sum": 0.1469047798174273,
-      "daylight_luminance_sum": 26475711.146030277,
-      "sky_luminance_sum": 3575498.626992911,
+      "lamp_luminance_sum": 0.14692117837404045,
+      "daylight_luminance_sum": 26476525.281650122,
+      "sky_luminance_sum": 3575579.0394379594,
       "metered_pixels": 13393,
-      "lamp_fraction": 5.548662250922349e-09,
-      "solar_fraction": 0.8649517436086315,
+      "lamp_fraction": 5.5491109953383504e-09,
+      "solar_fraction": 0.8649528591307992,
       "lamp_population": [],
       "view_input": {
         "id": "v28-east-yard-below",
@@ -13235,12 +13200,12 @@
       "group": "exterior-day"
     },
     "v36-north-garden": {
-      "lamp_luminance_sum": 1.5450916404280681,
-      "daylight_luminance_sum": 2465728.452981226,
-      "sky_luminance_sum": 848953.50683927,
+      "lamp_luminance_sum": 1.5450916398412256,
+      "daylight_luminance_sum": 2465744.38991299,
+      "sky_luminance_sum": 848953.5076312968,
       "metered_pixels": 13406,
-      "lamp_fraction": 6.266264520590904e-07,
-      "solar_fraction": 0.6556987020152888,
+      "lamp_fraction": 6.266224017270152e-07,
+      "solar_fraction": 0.6557009270286713,
       "lamp_population": [],
       "view_input": {
         "id": "v36-north-garden",
@@ -13288,12 +13253,12 @@
       "group": "exterior-day"
     },
     "v37-north-garden-lounge": {
-      "lamp_luminance_sum": 2.6605716233162187,
-      "daylight_luminance_sum": 2301057.7745299563,
-      "sky_luminance_sum": 1145177.637288026,
+      "lamp_luminance_sum": 2.6605716230523755,
+      "daylight_luminance_sum": 2301171.395168544,
+      "sky_luminance_sum": 1145202.7927422796,
       "metered_pixels": 13379,
-      "lamp_fraction": 1.156237177750948e-06,
-      "solar_fraction": 0.502325560894726,
+      "lamp_fraction": 1.1561800883404317e-06,
+      "solar_fraction": 0.5023392020487019,
       "lamp_population": [],
       "view_input": {
         "id": "v37-north-garden-lounge",
@@ -13341,12 +13306,12 @@
       "group": "exterior-day"
     },
     "v38-north-garden-floor-bed": {
-      "lamp_luminance_sum": 4.26705686039127,
-      "daylight_luminance_sum": 3148640.147331235,
-      "sky_luminance_sum": 1115933.73657245,
+      "lamp_luminance_sum": 4.267056847519094,
+      "daylight_luminance_sum": 3148706.703251618,
+      "sky_luminance_sum": 1115936.4708052436,
       "metered_pixels": 13329,
-      "lamp_fraction": 1.3552044304820386e-06,
-      "solar_fraction": 0.6455823198728163,
+      "lamp_fraction": 1.3551757807421332e-06,
+      "solar_fraction": 0.6455889430245014,
       "lamp_population": [],
       "view_input": {
         "id": "v38-north-garden-floor-bed",
@@ -13394,12 +13359,12 @@
       "group": "exterior-day"
     },
     "v39-north-garden-hanging-retreat": {
-      "lamp_luminance_sum": 2.407284385406579,
-      "daylight_luminance_sum": 1561090.560543376,
-      "sky_luminance_sum": 797456.6956873907,
+      "lamp_luminance_sum": 2.4072843853224266,
+      "daylight_luminance_sum": 1561160.54651797,
+      "sky_luminance_sum": 797459.0499598134,
       "metered_pixels": 13373,
-      "lamp_fraction": 1.542050624157433e-06,
-      "solar_fraction": 0.4891669222509319,
+      "lamp_fraction": 1.5419814949229131e-06,
+      "solar_fraction": 0.4891883145916831,
       "lamp_population": [],
       "view_input": {
         "id": "v39-north-garden-hanging-retreat",
@@ -13449,11 +13414,11 @@
       "group": "exterior-shade"
     },
     "v29-under-stair-store": {
-      "lamp_luminance_sum": 100538.21558959044,
-      "daylight_luminance_sum": 112327.26346869908,
+      "lamp_luminance_sum": 100413.72019642491,
+      "daylight_luminance_sum": 112340.07426385274,
       "sky_luminance_sum": null,
-      "metered_pixels": 13408,
-      "lamp_fraction": 0.47230869013786775,
+      "metered_pixels": 13409,
+      "lamp_fraction": 0.4719714656613221,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13488,7 +13453,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -13593,12 +13558,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -13828,12 +13793,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -13916,11 +13876,11 @@
       "group": "day"
     },
     "v30-under-ramp-store": {
-      "lamp_luminance_sum": 12656.778058190932,
+      "lamp_luminance_sum": 12668.568938253386,
       "daylight_luminance_sum": 0.04681899608123804,
       "sky_luminance_sum": null,
-      "metered_pixels": 13033,
-      "lamp_fraction": 0.9999963008893198,
+      "metered_pixels": 13030,
+      "lamp_fraction": 0.9999963043321403,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14005,7 +13965,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -14123,10 +14083,10 @@
       "group": "evening"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 155900.2513298674,
+      "lamp_luminance_sum": 158727.97779083558,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13395,
+      "metered_pixels": 13404,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -14172,7 +14132,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -14277,12 +14237,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -14567,12 +14527,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 639.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -14657,7 +14617,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -14803,10 +14763,10 @@
       "group": "evening"
     },
     "v32-dressing-his": {
-      "lamp_luminance_sum": 116576.51535024602,
+      "lamp_luminance_sum": 119614.0423683724,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13223,
+      "metered_pixels": 13372,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -14852,7 +14812,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 200.6,
+          "flux_lm": 266.0,
           "cct_k": 2700
         },
         {
@@ -14957,12 +14917,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
@@ -15247,12 +15207,12 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 304.0,
+          "flux_lm": 760.0,
           "cct_k": 2700
         },
         {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 639.0,
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 360.0,
           "cct_k": 2700
         },
         {
@@ -15337,7 +15297,7 @@
         },
         {
           "id": "lamp-PEN-LIN-dining-01",
-          "flux_lm": 462.5618892669678,
+          "flux_lm": 493.32312388420104,
           "cct_k": 2700
         },
         {
@@ -15462,11 +15422,11 @@
       "group": "evening"
     },
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 49375.02738822989,
-      "daylight_luminance_sum": 2463144.158566785,
+      "lamp_luminance_sum": 62649.80609422487,
+      "daylight_luminance_sum": 2469933.405266948,
       "sky_luminance_sum": null,
       "metered_pixels": 13403,
-      "lamp_fraction": 0.019651602130736495,
+      "lamp_fraction": 0.02473751141252841,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -15501,7 +15461,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -15606,12 +15566,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -15841,12 +15801,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -15927,11 +15882,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 40080.30538309527,
-      "daylight_luminance_sum": 5614357.851169824,
+      "lamp_luminance_sum": 43374.90705561837,
+      "daylight_luminance_sum": 5616215.871938895,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.00708829140462811,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.007663965249325744,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -15966,7 +15921,7 @@
         },
         {
           "id": "ADJ-lounge-09",
-          "flux_lm": 100.3,
+          "flux_lm": 133.0,
           "cct_k": 2700
         },
         {
@@ -16071,12 +16026,12 @@
         },
         {
           "id": "ADJ-dining-side-01",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
           "id": "ADJ-dining-side-02",
-          "flux_lm": 152.0,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -16306,12 +16261,7 @@
         },
         {
           "id": "ADJ-parents-bed-05",
-          "flux_lm": 152.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "DL-parents-entry-01",
-          "flux_lm": 532.5,
+          "flux_lm": 380.0,
           "cct_k": 2700
         },
         {
@@ -16392,12 +16342,12 @@
       "group": "day"
     },
     "v40-south-garden-espalier": {
-      "lamp_luminance_sum": 0.1346543967510021,
-      "daylight_luminance_sum": 19381885.896275863,
-      "sky_luminance_sum": 4315431.063355932,
+      "lamp_luminance_sum": 0.13465439686045194,
+      "daylight_luminance_sum": 19382014.65566147,
+      "sky_luminance_sum": 4315436.4732104875,
       "metered_pixels": 13409,
-      "lamp_fraction": 6.947435174064905e-09,
-      "solar_fraction": 0.7773472051971413,
+      "lamp_fraction": 6.947389026229171e-09,
+      "solar_fraction": 0.777348405215969,
       "lamp_population": [],
       "view_input": {
         "id": "v40-south-garden-espalier",
@@ -16447,12 +16397,12 @@
       "group": "exterior-day"
     },
     "v41-south-garden-terrace": {
-      "lamp_luminance_sum": 0.0678556055469236,
-      "daylight_luminance_sum": 16396711.465297282,
-      "sky_luminance_sum": 6185210.187877379,
+      "lamp_luminance_sum": 0.06785560558966154,
+      "daylight_luminance_sum": 16396690.43150466,
+      "sky_luminance_sum": 6185210.110336376,
       "metered_pixels": 13409,
-      "lamp_fraction": 4.1383667334590106e-09,
-      "solar_fraction": 0.6227773964939233,
+      "lamp_fraction": 4.1383720447921485e-09,
+      "solar_fraction": 0.6227769173191139,
       "lamp_population": [],
       "view_input": {
         "id": "v41-south-garden-terrace",
@@ -16500,11 +16450,11 @@
       "group": "exterior-day"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 83.72764352966452,
-      "daylight_luminance_sum": 5106.336332247624,
+      "lamp_luminance_sum": 84.45626341528512,
+      "daylight_luminance_sum": 5106.447487440893,
       "sky_luminance_sum": null,
       "metered_pixels": 13403,
-      "lamp_fraction": 0.01613229507775481,
+      "lamp_fraction": 0.016270049969883384,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -16566,12 +16516,12 @@
       "group": "exterior-dusk"
     }
   },
-  "measurement_sha256": "e4164da65851573d9205bd13b12f932fa4da5405f072a92a5b8383a4263c5db5",
+  "measurement_sha256": "de162282529f4d87d213e1e7363c1f68c7eb03f45a89083150c0c0e3796fbcb8",
   "white_balance_k": {
     "day": 5500,
     "exterior-day": 5500,
-    "evening": 3000,
     "exterior-shade": 5500,
-    "exterior-dusk": 4300
+    "exterior-dusk": 4300,
+    "evening": 3000
   }
 }

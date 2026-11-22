@@ -102,9 +102,11 @@ section digests** (`section_diff.py`: `receipt_component` true for every section
 the pendant, a cove and three downlight trims). Evidence: `out/L6d-rc/section-diff.json`, `out/L6d-rc/review.log` (not committed).
 
 Exposure record re-measured on the L6d lighting (stale transport hash: the lights changed): jobq `L6d-measure-exposure-1` (GPU lock, `villa_scene.py --measure-exposure-groups` on the measure scene, full ies dir including `erco/A9003138.ies`), the
-measured `exposure-group-measurements.json` copied byte-for-byte to `knowledge/exposure-groups.json`. Production scene rebuilt without bypass (`scripts/benchmark_scene_build.py --write-scene`, receipts and record active): **1,210 meshes** (was 1,212: the
-entry-lobby downlight's trim and lens), 113 lights (4 ADJ on `erco/A9003138.ies`), scene sha256 `d41190a6cc87fa0a9a554bfd3b1e1033238936936e8152a00e415fb03bad0d8f`, ids-stripped sha256 `0a7811f1bafe67701ca462ba9336586f12c7244647c313bf3178f31c0e25043d`,
-producer source hash `8a3180db6b83034e47de02a0421a1e95742a9d4cc604258c7e01a2ab8927ae58`.
+measured `exposure-group-measurements.json` copied byte-for-byte to `knowledge/exposure-groups.json`. **Staging then moved** (SC and MK merged, `06cdd7e`): merged again (only `knowledge/exposure-groups.json` conflicted: their version taken), the production
+build passed the receipt guard unchanged (SC's changes are outside every receipt section, so the receipts above stand), the exposure record was stale again and re-measured (`L6d-measure-exposure-2`, copied unedited). Production scene rebuilt without bypass
+(`scripts/benchmark_scene_build.py --write-scene`, receipts and record active): **1,221 meshes** (SC's additions included; this lane alone removed the entry-lobby downlight's trim and lens), 113 lights (4 ADJ on `erco/A9003138.ies`),
+scene sha256 `5968c5b8c580fcc93fdb27f0e8f70e4dbd9d8e2562236391d44fd72fc6a8dd77`, ids-stripped sha256 `d6e66841555083529fa5a0b278a96345c1dd162d33331f142605019a96e61773`,
+producer source hash `8273ba79af3be2119625c60809c8774ce6fa1b34afb015f3e86e2461ca6aa96e`.
 
 ## Open items
 
