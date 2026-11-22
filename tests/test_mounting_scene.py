@@ -307,7 +307,9 @@ class StairFirstPackage(unittest.TestCase):
         for root in (meshes[0],next(m for m in meshes if 'cinema' in m['id'])):
             mutant=deepcopy(self.scene)
             host=mutant['mounting_hosts'][root['mounting']['host_id']]
-            host['void_depth_m']-=.03
+            # a void 1 mm shallower than this fitting's housing must be caught (was `-= .03`, which only bit while every zone's
+            # void was housing+25 mm; the L6c ADJ housing, 169 mm, makes the lounge void 194 mm)
+            host['void_depth_m']=root['mounting']['housing_depth_m']-.001
             self.assertTrue(any('void' in f for f in scene_findings(mutant) if f.startswith(root['id']+':')))
         with __import__('unittest.mock',fromlist=['patch']).patch.object(VL,'PRODUCT_CHOICE',{**VL.PRODUCT_CHOICE,'DL':('iguzzini','NO-DEPTH-RECORD','missing')}):
             req=requirements([VL.Fixture('custom','DL','new-room','GF',1,1,2.7)])
