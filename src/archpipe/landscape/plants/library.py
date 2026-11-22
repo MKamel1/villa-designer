@@ -225,6 +225,11 @@ def build_plants_json(directory: Path = DATA / "species", out: Path = DATA / "pl
     species = load_species(directory)
     rejected_p = DATA / "rejected.json"
     rejected = json.loads(rejected_p.read_text(encoding="utf-8")) if rejected_p.exists() else []
+    qp = DATA / "quote-verification.json"   # written by verify_quotes; merged in so consumers see it
+    qc = json.loads(qp.read_text(encoding="utf-8")) if qp.exists() else {}
+    for slug, rec in species.items():
+        for a, res in qc.get(slug, {}).items():
+            rec["attributes"][a]["quote_check"] = res
     doc = {
         "schema": "plant-library/1",
         "site_climate": SITE_CLIMATE,

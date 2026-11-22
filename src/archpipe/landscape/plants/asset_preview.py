@@ -15,7 +15,8 @@ import bpy
 from mathutils import Vector
 
 argv = sys.argv[sys.argv.index("--") + 1:]
-args = dict(zip(argv[::2], argv[1::2]))
+flags = [a for a in argv if a == "--cpu"]
+args = dict(zip([a for a in argv if a != "--cpu"][::2], [a for a in argv if a != "--cpu"][1::2]))
 assets = json.load(open(args["--assets"]))
 out = args["--out"]
 RES = 400
@@ -30,6 +31,8 @@ def reset():
     sc.render.resolution_x = sc.render.resolution_y = RES
     sc.render.image_settings.file_format = "PNG"
     try:
+        if "--cpu" in argv:
+            raise RuntimeError("cpu requested")
         prefs = bpy.context.preferences.addons["cycles"].preferences
         prefs.compute_device_type = "CUDA"
         prefs.get_devices()

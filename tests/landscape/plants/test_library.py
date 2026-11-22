@@ -167,6 +167,14 @@ class ShippedData(unittest.TestCase):
             if r["pond_relevant"]:
                 self.assertIn(r["attributes"]["toxicity_fish"]["status"], ("SOURCED", "GAP"), slug)
 
+    def test_every_sourced_attribute_was_rechecked_and_failures_are_few(self):
+        doc = json.loads((L.DATA / "plants.json").read_text(encoding="utf-8"))
+        sourced = [o for r in doc["species"] for o in r["attributes"].values()
+                   if isinstance(o, dict) and o.get("status") == "SOURCED" and o["source"]["url"].startswith("https://")]
+        self.assertTrue(all("quote_check" in o for o in sourced))
+        bad = [o for o in sourced if o["quote_check"] == "quote_not_found"]
+        self.assertLessEqual(len(bad), 0.02 * len(sourced))   # the checker flags stitched quotes; keep them rare
+
     def test_plants_json_matches_species_files(self):
         doc = json.loads((L.DATA / "plants.json").read_text(encoding="utf-8"))
         self.assertEqual([x["slug"] for x in doc["species"]], sorted(self.species))
