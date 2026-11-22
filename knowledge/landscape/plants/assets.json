@@ -4188,6 +4188,123 @@
    },
    "candidate_for": "zamia_furfuracea",
    "rationale_note_alpha": "all leaf triangles carry the asset's Opacity cut-out; geometry is real leaf meshes, not crossed cards"
+  },
+  {
+   "id": "fab_star_jasmine_trellis",
+   "source": "https://www.fab.com/listings/6daae790-468e-4e2a-8394-4c27ed958e1d",
+   "title": "Star Jasmine (atlas-built trellis panel)",
+   "preview": "asset-previews/fab_star_jasmine_trellis.jpg",
+   "manifest_key": "fab/star_jasmine_pjycl2_4k",
+   "megascans_id": "pjycl2",
+   "grade": "B",
+   "species_fit": "species",
+   "maps_to": [
+    "trachelospermum_jasminoides"
+   ],
+   "leaf_type": "atlas_cutouts",
+   "rationale": "Looked at: a 1.2 m x 2.1 m timber-trellis panel (bottom 0.1 m bare) of ~900 real scanned jasmine leaf cut-outs (15 of the atlas's 20; the 5 brown dead leaves dropped by colour) on six vine stems. At 5 m it is a dense, glossy evergreen vine on a trellis; at 15 m a green wall panel with the trellis lost. The leaves come out a little yellow-green and rounder than star jasmine's dark pointed leaves, and there are no flowers, so it reads as 'evergreen twining climber', right for jasmine's use, not as a botanical portrait. Grade holds for the climber use only; it is atlas-built, not a scanned plant.",
+   "candidate_for": "trachelospermum_jasminoides",
+   "size_m": [
+    1.2,
+    0.2,
+    2.1
+   ],
+   "builder": "src/archpipe/landscape/plants/atlas_panel.py",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "storage": "shared",
+   "quality_variant": "4k",
+   "texture_res": "4K",
+   "grade_scope": "climber panel only (atlas-built, not a scanned plant)",
+   "construction": "atlas-built",
+   "use": "climber-panel"
+  },
+  {
+   "id": "fab_creeping_fig_wall",
+   "source": "https://www.fab.com/listings/adf6d6d2-0dc7-4784-a6be-3ee7f8c1828a",
+   "title": "Creeping Fig (atlas-built wall panel)",
+   "preview": "asset-previews/fab_creeping_fig_wall.jpg",
+   "manifest_key": "fab/creeping_fig_ompjv0_4k",
+   "megascans_id": "ompjv0",
+   "grade": "B",
+   "species_fit": "species",
+   "maps_to": [
+    "ficus_pumila"
+   ],
+   "leaf_type": "atlas_cutouts",
+   "rationale": "Looked at: the Megascans tileable scan of a fig-covered wall (0.85 m, repeated 1.4 x 2.5) as a 1.2 m x 2.1 m flat cladding on a plain plaster wall with an irregular noise edge. At 5 m it reads as a dark-green close-pressed climber clinging flat to a wall (creeping fig's habit), with some brown stem and bare patches; the edge is soft. At 15 m a dark green rectangle. It has no depth (a texture on a plane), so it is only for a wall seen face-on; grade holds for the climber use only; atlas-built.",
+   "candidate_for": "ficus_pumila",
+   "size_m": [
+    1.2,
+    0.01,
+    2.1
+   ],
+   "builder": "src/archpipe/landscape/plants/atlas_panel.py",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "storage": "shared",
+   "quality_variant": "4k",
+   "texture_res": "4K",
+   "grade_scope": "climber panel only (atlas-built, not a scanned plant)",
+   "construction": "atlas-built",
+   "use": "climber-panel"
+  },
+  {
+   "id": "fab_bougainvillea_dressing",
+   "source": "https://www.fab.com/listings/134c08c4-471e-4902-ab3a-9d9ab77791cf",
+   "title": "Bougainvillea flower dressing over a climber panel (atlas-built)",
+   "preview": "asset-previews/fab_bougainvillea_dressing.jpg",
+   "manifest_key": "fab/bougainvillea_flower_phfeffeh2_4k",
+   "megascans_id": "phfeffeh2",
+   "grade": "C",
+   "species_fit": "genus",
+   "maps_to": [],
+   "leaf_type": "atlas_cutouts",
+   "rationale": "Looked at: ten real scanned bract/flower cut-outs (0.25 m scan), ~1700 instances in 16 clumps of magenta over the jasmine foliage panel. The colour mass reads as a flowering bougainvillea on a trellis at 5 m and at 15 m, but only the flowers are bougainvillea: the foliage underneath is the jasmine atlas, and the bracts are small and uniform. Not accepted as drawable (the foliage is a stand-in, a look-alike); usable as a flower dressing on a panel that is the right species, e.g. over a real bougainvillea leaf panel if one is built.",
+   "candidate_for": "bougainvillea_glabra",
+   "size_m": [
+    1.2,
+    0.2,
+    2.1
+   ],
+   "builder": "src/archpipe/landscape/plants/atlas_panel.py",
+   "licence": "Fab Standard License",
+   "author": "Quixel (Megascans) via Fab",
+   "storage": "shared",
+   "quality_variant": "4k",
+   "texture_res": "4K",
+   "grade_scope": "climber panel only (atlas-built, not a scanned plant)",
+   "construction": "atlas-built",
+   "use": "climber-panel",
+   "grade_if_foliage_were_the_species": "B"
+  },
+  {
+   "id": "fab_olive_tree_source",
+   "source": "https://www.fab.com/listings/7e103045-81b6-41dd-82a8-5a1d1e276115",
+   "licence": "Fab Standard License",
+   "author": "THGames1984",
+   "title": "Olive Tree for Italian Panorama",
+   "preview": "asset-previews/fab_olive_tree_source.jpg",
+   "storage": "shared",
+   "manifest_key": "fab/olive_tree_source",
+   "quality_variant": "source_fbx",
+   "triangles": 9998,
+   "size_m": [
+    9.82,
+    9.896,
+    7.27
+   ],
+   "grade": "B",
+   "use": "single",
+   "species_fit": "species",
+   "maps_to": [
+    "olea_europaea"
+   ],
+   "leaf_type": "alpha_cards",
+   "texture_res": "PNG maps (Olive D/N/AORM, Tronco D, Olivio N)",
+   "candidate_for": "olea_europaea",
+   "rationale": "Looked at: a game-optimised olive (9,998 triangles, FBX in cm x 0.01 = 9.8 x 9.9 x 7.3 m; listing says about 7 m) with a gnarled, hollowed multi-stem trunk and drooping silver-grey narrow-leaf sprays. At 5 m the trunk and leaf sprays are unmistakably olive; at 15 m and 25 m the open, airy canopy and trunk read as an old olive. The canopy is sparse (cut-out cards, thin at the edges), so it looks bare against a bright sky. Sourced height 6.1-9.1 m (NCSU) vs 7.3 m tall: right scale. LIBRARY ASSET ONLY: the design rejected olive for the south garden on space.",
+   "library_only": "the garden design rejected olive for the south garden on space (docs/decisions/garden-brief-2026-11-22.md)"
   }
  ],
  "species": [
@@ -4605,9 +4722,9 @@
   },
   {
    "slug": "ficus_pumila",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_creeping_fig_wall",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": []
   },
   {
@@ -4893,9 +5010,9 @@
   },
   {
    "slug": "olea_europaea",
-   "best_asset": "sf_olive_old",
-   "grade": "C",
-   "drawable": "not drawable yet",
+   "best_asset": "fab_olive_tree_source",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "Olive tree 200 years old",
@@ -5223,9 +5340,9 @@
   },
   {
    "slug": "trachelospermum_jasminoides",
-   "best_asset": null,
-   "grade": null,
-   "drawable": "not drawable yet",
+   "best_asset": "fab_star_jasmine_trellis",
+   "grade": "B",
+   "drawable": "drawable",
    "free_candidates_to_preview": [
     {
      "name": "CC0 ケテイカカズラ Star Jasmine",
@@ -5366,5 +5483,5 @@
  ],
  "candidates_note": "free_candidates_to_preview come from the public Sketchfab search API (2026-11-22), filtered to CC Attribution / CC0 and downloadable, name contains the genus or common name. They are NOT graded: nobody has opened or previewed them; polycount is the listing's. Licence labels must be rechecked at download. Nothing was bought or downloaded.",
  "sketchfab_candidates": "knowledge/landscape/plants/sketchfab-candidates.json + sketchfab-manifest.json (83 downloaded with the client token, all graded in this table as skf3_*; binaries in ~/archpipe/shared/assets/user/landscape/sketchfab/, outside git)",
- "fab_source": "knowledge/landscape/plants/fab-manifest.json: 27 Quixel Megascans archives from Fab (Fab Standard License), binaries in ~/archpipe/shared/assets/user/landscape/fab/, outside git"
+ "fab_source": "knowledge/landscape/plants/fab-manifest.json: 27 Quixel Megascans archives plus pass 6 (3 atlases, 1 olive) from Fab (Fab Standard License), binaries in ~/archpipe/shared/assets/user/landscape/fab/, outside git"
 }
