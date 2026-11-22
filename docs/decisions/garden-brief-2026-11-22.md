@@ -55,3 +55,18 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - **Climbers:** grape vine on the dining pergola (deciduous: summer shade, winter sun). On the west screen, the lead's recommendation stands (jasmine for scent, or English ivy, which can be rendered). No climber or pergola over the fire pit.
 - **Ponds:** keep BOTH (north court and east yard) in the design for now; the client will remove one later.
 - **Visualisation:** mirror the south garden symmetrically onto the sister plot (west side) FOR VIEWING ONLY. It is not our land and not our design. It must be labelled visualisation-only in every image and excluded from schedules, quantities and checks.
+
+## Client change (2026-11-22): shade trees instead of pergolas; layered planting
+- **Replace the pergolas with trimmed evergreen shade trees** (the client accepts the regular pruning), so the garden gets more planting and less structure.
+- **Lead's tree pick:**
+  - **Olive (Olea europaea), pruned as a multi-stem umbrella canopy** over the dining. Reasons: evergreen; heat- and drought-proof; light shade that still lets some winter sun through; roots tolerable near paving with distance; Mediterranean character. A graded asset exists (the client's Fab download). Pruning holds the spread to the space, which overturns the earlier "spread fits nowhere" rejection; the pruning is part of the maintenance specification.
+  - **Alternatives the lane must compare on data:** clipped Ficus microcarpa 'Nitida' (densest shade, the common Cairo clipped shade tree; aggressive roots, so a root barrier and distance from the house and ponds); carob (Ceratonia siliqua; evergreen, but large); citrus (evergreen with fruit, light shade).
+- **The real trade-off, stated:** an evergreen canopy also shades in WINTER, and the south garden is the only winter-sun area. Keep the winter-day sitting area out from under the canopy. A canopy over the dining also gives the overhead privacy that the pergola's louvres gave.
+- **Fire pit:** no canopy within the product's stated overhead clearance (2.0 m used).
+- **Grape:** moves from the pergola to the west screen or a wall as a climber, if the client still wants fruit; otherwise dropped.
+- **Layered planting is required everywhere:**
+  - canopy (shade trees);
+  - understorey (small trees or palms);
+  - shrubs;
+  - perennials and groundcover in drifts;
+  - climbers on every screen and wall.
