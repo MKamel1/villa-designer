@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from archpipe.exposure_groups import (APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
+from archpipe.exposure_groups import (RULE_SHA256, APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
                                      require_receipts, require_record, rule, white_balances)
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -117,8 +117,16 @@ class ExposureGroups(unittest.TestCase):
             require_receipts(scene, [same_group[0], broken])
 
     def test_actual_gpu_receipts_obey_locks_and_mutations_refuse(self):
+        # These are 2026-10 receipts: made before the 2026-11-22 low-key amendment (assign_groups) and under the
+        # old rule hash. The test is about locks and mutation refusal, so it replays them under classify() alone.
+        import archpipe.exposure_groups as EG
+        from unittest import mock
+        with mock.patch.object(EG, 'assign_groups', lambda views, rows: {v['id']: classify(v, rows[v['id']]) for v in views}):
+            self._receipts_obey_locks()
+
+    def _receipts_obey_locks(self):
         scene, _ = self.real_scene()
-        reports = self.frozen()['reports']
+        reports = [dict(r, exposure_rule_sha256=RULE_SHA256) for r in self.frozen()['reports']]
         declared={ident for ident,row in self.frozen()['measurements'].items() if row['active']}
         self.assertEqual({row['view'] for row in reports},declared)
         self.assertEqual(len(reports),len(declared))
@@ -238,3 +246,30 @@ class ExposureGroups(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class LowKeyAmendment(unittest.TestCase):
+    """RF 2026-11-22: a view >= 3 stops below its own group's median mean luminance leaves for lamp-low-key."""
+    @staticmethod
+    def _rows(lum):
+        return {i: dict(lamp_luminance_sum=v*100., daylight_luminance_sum=0., metered_pixels=100, lamp_fraction=1.)
+                for i, v in lum.items()}
+
+    def test_dark_evening_view_leaves_and_neighbours_stay(self):
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'evening'} for i in 'abcd']
+        g = assign_groups(views, self._rows(dict(a=8., b=9., c=10., d=1.)))     # d is 3.3 stops below median 9
+        self.assertEqual(g, dict(a='evening', b='evening', c='evening', d='lamp-low-key'))
+
+    def test_two_stops_down_stays(self):                                        # negative control: below the threshold
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'evening'} for i in 'abc']
+        g = assign_groups(views, self._rows(dict(a=8., b=8., c=2.)))
+        self.assertEqual(set(g.values()), {'evening'})
+
+    def test_day_group_is_never_split(self):
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'day'} for i in 'abc']
+        rows = self._rows(dict(a=100., b=100., c=1.))
+        for r in rows.values(): r['lamp_fraction'] = 0.1
+        self.assertEqual(set(assign_groups(views, rows).values()), {'day'})

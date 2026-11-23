@@ -2129,7 +2129,7 @@ def render(scene_data, args):
         locked_ev100 = math.log2(math.pi / (2.5 * 2 ** s.view_settings.exposure))
         wb_k = (scene_data['exposure_groups']['white_balance_k'][group]
                 if scene_data.get('exposure_groups') else preset['white_balance_k'])
-        wb_illuminant = "planckian" if group in ("evening", "lamp-dominant") else "daylight"
+        wb_illuminant = "planckian" if group in ("evening", "lamp-dominant", "lamp-low-key") else "daylight"
         wb = photoreal.white_balance(wb_k, illuminant=wb_illuminant)
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
