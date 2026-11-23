@@ -49,6 +49,16 @@ note = dict(reason='fixed-input change by approved G1 (stair overlap/infill/guar
             'the G1 store trim, and (INT2 2026-11-21) the L6b/L6c lighting fixtures + landing PATH marker hosts (all changed meshes are fix-/lens-/lamp-/marker-, 12/16 landing finish faces) and the ERCO recessed housing depth (26 fix-* meshes) and (INT2b) the lead-approved 12 mm finished-face move of marker-PATH-landing-gf-01/02 (meshes section only; evidence-int2/section-diff-approved-markers.json) and (SC2) wall-B-ext-16 raised 2.65 -> 2.80 m to the roof soffit (specification: walls[16].height only; architecture: 81 faces removed and 81 added, all inside the wall own footprint, 0 unexplained; evidence-sc2/) and (SC3) an infill appended to specification.infills closing the 150 mm slot above wall-B-ext-09 (specification: infills only; architecture: 0 faces removed, 46 added, all inside x 12.777..15.412, y -20.814..-20.601, z -0.35..-0.20, 0 unexplained; the dining pendant body/wire change no receipt section; evidence-sc3/); evidence knowledge/approvals-review/2026-11-ra2-b2.md',
             reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')
 fr['refresh_2026_11_21'] = note; br['refresh_2026_11_21'] = note
+if '--rf' in sys.argv:
+    # RF 2026-11-22: a second, separate record; the 2026-11-21 note above is history and is left unchanged.
+    rf = dict(reason='RF interior render fixes. Section diff old (receipt-era tree 06e74dc, reproduces all 8 stored digests) vs new: '
+              'materials changed ids = door-oak, marble-bath, marble-ensuite, marble-white, travertine, walnut, walnut-grain-x, walnut-grain-y '
+              '(tile_m 1.2/1.4/1.0/1.83 -> 0.6/0.7/0.6/0.6, contrast 0.8 on the three cream marbles); meshes changed ids = '
+              'lamp-/bulb-PEN-GLOBE-stair-gf-01..03 (sphere tessellation 16x10 -> 48x28 / 24x14 + smooth_shaded; bounding boxes identical) and '
+              'furn-ka-bunk-0 (material white-paint-joinery -> oak-grain-x, geometry identical). layout, specification, furniture, '
+              'architecture, models, props unchanged. evidence knowledge/approvals-review/evidence-rf/',
+              reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')
+    fr['refresh_2026_11_22_rf'] = rf; br['refresh_2026_11_22_rf'] = rf
 if write:
     save(ROOT / 'knowledge/furniture-stage2.json.gz', fr); save(ROOT / 'knowledge/parents-bed.json.gz', br)
     print('written')

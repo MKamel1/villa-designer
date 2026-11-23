@@ -47,6 +47,11 @@ ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "out" / "villa" / "render-d1"
 
 # ------------------------------------------------------------------ materials (linear rgb; reflectance = target mean)
+# RF defect 1 (L9P draft, 13 views): the scanned slabs/veneers were mapped at the scan's own width (marble 1.2 m,
+# door oak 1.83 m), so rust-coloured vein blotches of 10-20 cm and 45 cm oak cathedrals read as over-scaled. ASSUMED
+# policy, not a published figure: a stone or veneer figure is mapped at <= TEXTURE_FIGURE_MAX_M per image, so the
+# principal figure is a few centimetres to ~15 cm; guard `tests/test_villa_render_texture_scale.py`.
+TEXTURE_FIGURE_MAX_M = {"stone": 0.8, "veneer": 0.8}
 M = {
     **garden_g4e.materials(),
     "plaster-warm-white": dict(kind="principled", base_rgb=[0.80, 0.785, 0.755], reflectance=0.80,
@@ -56,20 +61,20 @@ M = {
     "ceiling-white": dict(kind="principled", base_rgb=[0.86, 0.85, 0.83], reflectance=0.85, roughness=0.95,
                           note="gypsum false ceiling, matt white (0.85)"),
     "travertine": dict(kind="principled", asset="Marble014", base_rgb=[0.66, 0.63, 0.57], reflectance=0.55,
-                       roughness=0.35, tile_m=1.2, note="honed cream stone, large format (ASSUMED; the first "
+                       roughness=0.35, tile_m=0.6, contrast=0.8, note="honed cream stone, large format (ASSUMED; the first "
                                                           "texture read pink)"),
     "oak-floor": dict(kind="principled", asset="oak_wood_planks", base_rgb=[0.45, 0.33, 0.22], reflectance=0.33,
                       roughness=0.5, tile_m=1.20, grain_axis="x",
                       note="light oak engineered planks (ASSUMED); Poly Haven oak_wood_planks, real scan 1.20 m"),
     "marble-ensuite": dict(kind="principled", asset="Marble020", base_rgb=[0.66, 0.60, 0.52], reflectance=0.58,
-                           roughness=0.25, tile_m=1.2, note="warm cream marble, large format (ASSUMED)"),
+                           roughness=0.25, tile_m=0.6, contrast=0.8, note="warm cream marble, large format (ASSUMED)"),
     "marble-bath": dict(kind="principled", asset="Marble014", base_rgb=[0.70, 0.66, 0.58], reflectance=0.62,
-                        roughness=0.3, tile_m=1.2, note="cream marble, large format (ASSUMED)"),
+                        roughness=0.3, tile_m=0.6, contrast=0.8, note="cream marble, large format (ASSUMED)"),
     "marble-wet": dict(kind="principled", asset="Marble014", base_rgb=[0.62, 0.59, 0.53], reflectance=0.55,
                        roughness=0.45, tile_m=0.3,
                        note="ASSUMED smaller-format wet-zone stone look-alike; slip rating and product pending"),
     "marble-white": dict(kind="principled", asset="Marble012", base_rgb=[0.78, 0.78, 0.76], reflectance=0.72,
-                         roughness=0.18, tile_m=1.4, note="white veined stone worktops (ASSUMED)"),
+                         roughness=0.18, tile_m=0.7, note="white veined stone worktops (ASSUMED)"),
     # Client (2026-09-28): "for all the wood in the villa use a more natural texture it looks annoyingly fake". The
     # ambientCG Wood0xx sets above were a repeating printed-looking stripe; replaced with Poly Haven scanned veneers
     # (CC0, ops/workstation/library-manifest.json). tile_m is each asset's own real-world scan size
@@ -80,7 +85,7 @@ M = {
     # machine, so this is a judgement call, not a measured one; check the next render for busy/repeating grain
     # before a client review.
     "walnut": dict(kind="principled", asset="natural_walnut_veneer", base_rgb=[0.20, 0.11, 0.06], reflectance=0.12,
-                   roughness=0.45, tile_m=1.00, grain_axis="z",
+                   roughness=0.45, tile_m=0.60, grain_axis="z",
                    note="walnut veneer joinery (ASSUMED); Poly Haven natural_walnut_veneer, real scan 1.00 m"),
     "oak": dict(kind="principled", asset="white_oak_veneer", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
                 roughness=0.5, tile_m=0.50, grain_axis="z",
@@ -145,7 +150,7 @@ M = {
     "silvered-mirror": dict(kind="principled", base_rgb=[0.91, 0.92, 0.92], reflectance=0.92,
                             roughness=0.035, metallic=1.0, note="ASSUMED silvered glass vanity mirror"),
     "door-oak": dict(kind="principled", asset="oak_veneer_01", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
-                     roughness=0.5, tile_m=1.83, grain_axis="z",
+                     roughness=0.5, tile_m=0.60, grain_axis="z",
                      note="flush oak veneer door, closed (ASSUMED); Poly Haven oak_veneer_01 (medium oak, not the "
                           "paler 'oak' joinery), real scan 1.83 m"),
     "render-exterior": dict(kind="principled", base_rgb=[0.65, 0.65, 0.65], reflectance=0.65,
@@ -1380,7 +1385,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "open timber shelves, upholstered daybed mattress and loose cushions, two ergonomic cinema task "
                  "chairs, microwave drawer in the island, and cleaning-storage doors below the folding counter. "
                  "Book props are labelled dressing; all builder vertices are checked against their authored envelopes.")
-    notes.append("By day the basement rooms are shown with their ambient and accent lights at 50 % (a basement is "
+    notes.append("By day the basement rooms are shown in the lighting design's Day scene (ambient 100 %, accent 50 %; a basement is "
                  "used with lights on by day); bathrooms by day have their lights on; other ground-floor day "
                  "views are daylight only.")
 
@@ -2010,15 +2015,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                            dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(record.flux_lm / area, 1),
                                 cct_k=cct, note="opal diffuse emitter, %d lm (GENERIC)" % f.lumens))
             cz = f.z + r if f.kind not in ("SCONCE", "WALL-READ") else f.z
-            mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r), "fixture", room=f.room,
-                 label="fitting " + f.id, layer=f.layer, kind="light-diffuser")
+            # RF defect 2: a 16x10 faceted sphere with flat normals read as a low-poly paper ball (n02/n03/n19).
+            # Globes get a 48x28 shell and smooth shading; the geometry is still the same r sphere.
+            globe = f.kind == "PEN-GLOBE"
+            mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r, *((48, 28) if globe else (16, 10))), "fixture", room=f.room,
+                 label="fitting " + f.id, layer=f.layer, kind="light-diffuser", **(dict(smooth_shaded=True) if globe else {}))
             if f.kind == "PEN-GLOBE":
                 inner = r * housing["inner_ratio"]
                 ename = "opal-inner-%d" % cct
                 mats[ename] = dict(kind="emissive", base_rgb=[1, 0.96, 0.88],
                                    emission_lm_per_m2=round(record.flux_lm / (4 * math.pi * inner**2), 1), cct_k=cct)
-                mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner), "fixture", room=f.room,
-                     label="lamp inside opal globe", layer=f.layer, kind="light-bulb")
+                mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner, 24, 14), "fixture", room=f.room,
+                     label="lamp inside opal globe", layer=f.layer, kind="light-bulb", smooth_shaded=True)
             if f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
                           lay["rooms"]["parents-bed"]["rect"][1])
@@ -2536,7 +2544,10 @@ def part_material(f, part):
         if "mattress" in part:
             return "bedding-white"
         if room in ("kids-a", "kids-b"):
-            return "white-paint-joinery" if part != "rail" else "white-paint-joinery"
+            # RF defect 5 (v06/v13): the bunk and kids' bed read as a plain white box. The beds-report procedural
+            # fallback is the only bunk that fits the room (both licensed bunk assets fail the fit checks), so it
+            # keeps its geometry and takes the kids' desk wood (oak), grain along the rails.
+            return "oak-grain-x"
         return "oak"
     if t.startswith("sofa") or t in ("armchair", "recliner"):
         if room == "cinema":
@@ -2792,7 +2803,12 @@ def _VIEWS(lay=None, resolve=True):
     # stands and aims (client 2026-09-27: some hand-typed cameras "are looking at the wrong direction and
     # uninformative"). Exteriors and the stair keep authored cameras. `final_only` views are skipped in review drafts
     # (client: "choose their locations, so we can generate them later ... not waste time producing them every time").
-    BASEMENT_DAY = dict(layers=["ambient", "accent"], dimmers={"ambient": 0.5, "accent": 0.5})  # stated in captions
+    # RF defect 3: the day-lit basement views ran ambient at a hand-typed 0.5 while the lighting design's own Day scene
+    # for the basement open plan is ambient 1.0 / accent 0.5 (villa_lighting.SCENES["B-open"]["Day"]); read it, so the
+    # rendered state is the designed one (v03 street lounge was a 0.145 median under the group exposure).
+    _B_DAY = VL.SCENES["B-open"]["Day"]
+    BASEMENT_DAY = dict(layers=["ambient", "accent"],
+                        dimmers={"ambient": _B_DAY["*ambient"], "accent": _B_DAY["*accent"]})  # stated in captions
     I = None                                                   # chosen camera
     v("v01-kitchen-garden", "Kitchen island to the garden", "day", I, I, 24, ["k-island", "dining-table"],
       room="kitchen", **BASEMENT_DAY)
