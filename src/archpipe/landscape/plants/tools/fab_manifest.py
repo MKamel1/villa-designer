@@ -24,6 +24,9 @@ LICENCE_QUOTE = ("Fab Standard License (summary on the EULA page, not legally bi
                  "(Personal and Professional) grant you the same scope of rights.")
 
 
+PASS6 = {"star_jasmine_pjycl2_4k", "creeping_fig_ompjv0_4k", "bougainvillea_flower_phfeffeh2_4k", "olive_tree_source"} | {n + s for n in ("star_jasmine_pjycl2_4k", "creeping_fig_ompjv0_4k", "bougainvillea_flower_phfeffeh2_4k") for s in ("_exr", "_ue_high")}
+
+
 def sha(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -52,6 +55,8 @@ def main():
     L = listings()
     arch = {}
     for d in sorted((FAB / "unzipped").iterdir()):
+        if not (d / ".." / ".." / (d.name + ".zip")).exists() or not next(d.glob("*.json"), None) or d.name in PASS6:
+            continue          # pass-6 archives (atlases, olive, duplicates) are owned by fab_manifest_pass6.py
         js = next(d.glob("*.json"))
         meta = json.loads(js.read_text())
         quality = d.name.rsplit("_", 1)[1]            # high | raw | 4k | 8k

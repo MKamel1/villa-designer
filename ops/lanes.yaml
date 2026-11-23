@@ -361,6 +361,35 @@ lanes:
     - knowledge/render-set/**
     - docs/lanes/L9*.md
     - docs/lessons/L9P.md
+  GI: # garden into the production villa scene (real facade, materials, calibrated light), climber 3D cards, BBQ/benches
+    - src/archpipe/landscape/build/**
+    - tests/landscape/build/**
+    - knowledge/landscape/build/**
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/concept/villa_landscape.py
+    - src/archpipe/blender/**
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - tests/test_mounting*.py
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/*.json.gz
+    - docs/lanes/GI*.md
+    - docs/lessons/GI.md
+  RF: # interior render fixes from the L9P draft pass (materials scale, pendants, dark rooms, assets, windows)
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/concept/villa_daylight.py
+    - src/archpipe/blender/**
+    - knowledge/render-set/**
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - tests/test_mounting*.py
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/*.json.gz
+    - docs/lanes/RF*.md
+    - docs/lessons/RF.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md

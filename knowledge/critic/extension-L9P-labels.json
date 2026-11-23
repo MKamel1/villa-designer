@@ -1,0 +1,187 @@
+{
+ "registered": "labels written after looking at each image at full frame, before the critic was run on any of them",
+ "labeller": "lane agent (AI)",
+ "images": "out/l9p/final-drafts (96 spp, 1920x1280)",
+ "labels": {
+  "v33-basement-north-south": {
+   "grade": "B-",
+   "defects": "sofa and cushion set cloned; blown window glare left",
+   "root_cause": "assets/styling"
+  },
+  "v34-basement-south-north": {
+   "grade": "B-",
+   "defects": "dark wood panel intrudes ~10 % at right; sofa back in foreground; windows blown",
+   "root_cause": "camera/exposure"
+  },
+  "v02-garden-living": {
+   "grade": "C+",
+   "defects": "sofa cropped at the bottom; same zig-zag cushions; coffee table cropped",
+   "root_cause": "camera/styling"
+  },
+  "v10-living-evening": {
+   "grade": "C+",
+   "defects": "blue streak along the curtain hem on the floor; smeared curtain; cropped sofa",
+   "root_cause": "lighting artefact/camera"
+  },
+  "v03-street-lounge": {
+   "grade": "D+",
+   "defects": "room near-black under the lock, exterior fog; stair stringer slices left edge",
+   "root_cause": "exposure policy/camera"
+  },
+  "v21-lounge-evening": {
+   "grade": "B-",
+   "defects": "stair still slices left edge; curtain smeared; plain sofa",
+   "root_cause": "camera/assets"
+  },
+  "v09-dining-evening": {
+   "grade": "C+",
+   "defects": "wood grain grossly over-scaled and salmon on sideboard, panel, chairs",
+   "root_cause": "materials"
+  },
+  "n01-dining-day": {
+   "grade": "C+",
+   "defects": "wood grain over-scaled on table and chairs; zig-zag cushions again",
+   "root_cause": "materials/styling"
+  },
+  "n02-kitchen-island-day": {
+   "grade": "C-",
+   "defects": "faceted paper-globe pendants cropped at top; dim; frame is mostly bare wall and island edge",
+   "root_cause": "assets/camera/exposure"
+  },
+  "n03-kitchen-run-evening": {
+   "grade": "C+",
+   "defects": "blown faceted globe pendants cropped at top-left; good depth otherwise",
+   "root_cause": "assets/exposure"
+  },
+  "n04-library-nook-evening": {
+   "grade": "B-",
+   "defects": "symmetric and legible; sofa back and cushions in the foreground; wall lights read as arms",
+   "root_cause": "styling"
+  },
+  "v08-cinema": {
+   "grade": "D",
+   "defects": "office chairs at a desk instead of cinema seating; wall/ceiling junction bends at upper left; muddy",
+   "root_cause": "subject truth/geometry"
+  },
+  "v29-under-stair-store": {
+   "grade": "F",
+   "defects": "near-black, subject unreadable",
+   "root_cause": "exposure policy"
+  },
+  "v30-under-ramp-store": {
+   "grade": "F",
+   "defects": "near-black, bent ceiling line, shelves are plain blocks",
+   "root_cause": "exposure policy/geometry"
+  },
+  "n05-pantry-evening": {
+   "grade": "D+",
+   "defects": "empty white shelving, white wall, blown, nothing to see",
+   "root_cause": "styling/exposure"
+  },
+  "n06-stair-foot-hall-evening": {
+   "grade": "C",
+   "defects": "two doors and marble piers; blotchy over-scaled marble and oak grain; empty",
+   "root_cause": "materials/styling"
+  },
+  "n07-family-corner-day": {
+   "grade": "C",
+   "defects": "good stair and lounge depth but dim under the lock; marble pier takes right fifth",
+   "root_cause": "exposure/camera"
+  },
+  "n08-guest-wc-evening": {
+   "grade": "D+",
+   "defects": "blotchy over-scaled rust-veined marble; wide jamb takes left quarter",
+   "root_cause": "materials/camera"
+  },
+  "n09-dirty-kitchen-day": {
+   "grade": "C",
+   "defects": "sterile, blank wall without backsplash",
+   "root_cause": "styling"
+  },
+  "v11-stair-void": {
+   "grade": "C+",
+   "defects": "strong stair composition; oak grain over-scaled; black line on left wall",
+   "root_cause": "materials/geometry"
+  },
+  "n10-gf-hall-east-day": {
+   "grade": "D",
+   "defects": "strong blue cast over the whole corridor; door grain over-scaled; 60 % blank wall",
+   "root_cause": "exposure/white balance"
+  },
+  "n18-stair-gallery-day": {
+   "grade": "C",
+   "defects": "soft blotches on the wall; glass guard barely reads; pier takes right edge",
+   "root_cause": "lighting artefact/camera"
+  },
+  "n19-entry-lobby-evening": {
+   "grade": "B-",
+   "defects": "clear kitchen and dining view; blown faceted globe pendant at top",
+   "root_cause": "assets/exposure"
+  },
+  "n20-dining-side-day": {
+   "grade": "B-",
+   "defects": "good dining-living composition; grain over-scaled",
+   "root_cause": "materials"
+  },
+  "n11-study-desks-day": {
+   "grade": "C",
+   "defects": "sofa fills the lower third in front of the desks; windows blown to white massing",
+   "root_cause": "camera/context"
+  },
+  "n12-study-sofa-evening": {
+   "grade": "C",
+   "defects": "same frame at dusk; smeared curtain texture",
+   "root_cause": "camera/curtain"
+  },
+  "v06-kids-room": {
+   "grade": "D+",
+   "defects": "bunk is a white box frame; window clipped white; desk lamp floats as a black T",
+   "root_cause": "assets/exposure"
+  },
+  "v13-kids-b": {
+   "grade": "D+",
+   "defects": "rigid wedge pillows; wall lamp floats as a black T; murky",
+   "root_cause": "assets/lighting"
+  },
+  "n13-parents-day": {
+   "grade": "C+",
+   "defects": "window blown white; rigid wedge pillows; headboard whole and legible",
+   "root_cause": "assets/exposure"
+  },
+  "v05-parents-bedroom": {
+   "grade": "B-",
+   "defects": "best interior mood; bed cropped in the foreground; wedge pillows",
+   "root_cause": "camera/assets"
+  },
+  "v31-dressing-hers": {
+   "grade": "C",
+   "defects": "garments read as melted plates; grain over-scaled",
+   "root_cause": "assets/materials"
+  },
+  "n14-dressing-his-evening": {
+   "grade": "C+",
+   "defects": "folded stacks read well; grain over-scaled; legible joinery",
+   "root_cause": "materials"
+  },
+  "n15-ensuite-bath-evening": {
+   "grade": "C-",
+   "defects": "blotchy over-scaled rust-veined marble; tub cropped at the bottom",
+   "root_cause": "materials/camera"
+  },
+  "n16-ensuite-basin-day": {
+   "grade": "C-",
+   "defects": "same marble; mirror reflects only wall; shower head cropped at top",
+   "root_cause": "materials/camera"
+  },
+  "n17-family-bath-basin-day": {
+   "grade": "D+",
+   "defects": "dim; window clipped white; basin cropped at the bottom edge",
+   "root_cause": "exposure/camera"
+  },
+  "n21-family-bath-wc-day": {
+   "grade": "D+",
+   "defects": "WC pan cut off at the bottom edge; dim; wall plate only",
+   "root_cause": "camera (needs shift_y about -0.24)"
+  }
+ }
+}

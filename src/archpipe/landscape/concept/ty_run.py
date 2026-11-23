@@ -84,12 +84,14 @@ def sun_checks(L):
 def tree_checks(L):
     res = []
     for t in L["trees"]:
-        cx, cy = t["center"]
+        cx, cy = t.get("crown_center") or t["center"]          # the pruned head may lean off the trunk (final.shade_tree)
         if cx < 20:
             continue
         r = t["mature_spread_m"] / 2
         circ = Point(cx, cy).buffer(r, 24)
         allow = box(S.SX0 - 0.0, S.SY0 + 0.0, S.SX0 + A + 0.3, S.SY0 + B + 0.3)
+        if cx < S.SX0:                                   # east yard (x 15.4-22.6, y -23.6..-20.6): its own walls, and the open mouth into the south garden
+            allow = unary_union([box(15.412, -23.591, S.SX0, -20.601 + 0.3), allow])
         out = circ.difference(allow).area
         res.append(C._r("LDG-SPREAD", "pass" if out < 1e-6 else "fail", t["id"], f"{t['id']}: canopy radius {r:.2f} m (sourced minimum spread {t['mature_spread_m']} m), {out:.2f} m2 outside the garden (0.3 m over the fences allowed)", round(out, 2), 0, "m2"))
     return res

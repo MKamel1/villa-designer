@@ -109,7 +109,7 @@
     "U-S-STAND",
     "LS-STAND-AREA"
    ],
-   "design_people": 22
+   "design_people": 19
   },
   {
    "id": "s-gravel-floor",
@@ -126,6 +126,262 @@
     "U-S-QUIET"
    ],
    "label": false
+  },
+  {
+   "id": "s-gravel-crown-0",
+   "use": "other",
+   "rect": [
+    27.857,
+    -23.016,
+    28.307,
+    -22.616
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-1",
+   "use": "other",
+   "rect": [
+    27.857,
+    -21.416,
+    28.307,
+    -20.601
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-2",
+   "use": "other",
+   "rect": [
+    22.597,
+    -22.916,
+    23.797,
+    -20.601
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-3",
+   "use": "other",
+   "rect": [
+    23.997,
+    -26.216,
+    27.997,
+    -24.416
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-4",
+   "use": "other",
+   "rect": [
+    23.997,
+    -24.416,
+    27.997,
+    -23.766
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-5",
+   "use": "other",
+   "rect": [
+    26.847,
+    -23.766,
+    27.997,
+    -23.016
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-6",
+   "use": "other",
+   "rect": [
+    23.997,
+    -23.766,
+    25.747,
+    -23.016
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-7",
+   "use": "other",
+   "rect": [
+    23.997,
+    -23.016,
+    27.997,
+    -22.716
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-8",
+   "use": "other",
+   "rect": [
+    27.857,
+    -22.716,
+    27.997,
+    -22.316
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "s-gravel-crown-9",
+   "use": "other",
+   "rect": [
+    23.997,
+    -22.716,
+    24.497,
+    -22.316
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 2.7,
+   "trace": [
+    "U-S-QUIET"
+   ],
+   "label": false
+  },
+  {
+   "id": "e-gravel-0",
+   "use": "other",
+   "rect": [
+    19.712,
+    -23.091,
+    22.597,
+    -22.241
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-gravel-1",
+   "use": "other",
+   "rect": [
+    20.862,
+    -22.241,
+    22.597,
+    -22.091
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-gravel-2",
+   "use": "other",
+   "rect": [
+    20.112,
+    -22.241,
+    20.412,
+    -22.091
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-gravel-3",
+   "use": "other",
+   "rect": [
+    20.862,
+    -22.091,
+    21.362,
+    -20.841
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-gravel-4",
+   "use": "other",
+   "rect": [
+    20.112,
+    -22.091,
+    20.412,
+    -20.841
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
+  },
+  {
+   "id": "e-gravel-5",
+   "use": "other",
+   "rect": [
+    19.712,
+    -20.841,
+    21.362,
+    -20.601
+   ],
+   "surface": "gravel",
+   "enclosure_height_m": 4.0,
+   "label": false,
+   "trace": [
+    "U-N-QUIET"
+   ]
   }
  ],
  "paved_areas": [
@@ -150,7 +406,7 @@
     23.697,
     -29.766,
     27.097,
-    -29.366
+    -28.466
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -163,9 +419,9 @@
    "id": "s-paving-2",
    "rect": [
     22.597,
-    -29.366,
-    28.307,
-    -28.116
+    -28.466,
+    26.897,
+    -27.116
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -178,9 +434,9 @@
    "id": "s-paving-3",
    "rect": [
     22.597,
-    -28.116,
-    27.997,
-    -25.416
+    -27.116,
+    27.697,
+    -26.716
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -193,9 +449,9 @@
    "id": "s-paving-4",
    "rect": [
     22.597,
-    -25.416,
-    28.307,
-    -25.216
+    -26.716,
+    27.997,
+    -26.216
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -208,9 +464,9 @@
    "id": "s-paving-5",
    "rect": [
     22.597,
-    -25.216,
-    27.857,
-    -23.016
+    -26.216,
+    23.997,
+    -24.416
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -223,9 +479,9 @@
    "id": "s-paving-6",
    "rect": [
     22.597,
-    -23.016,
-    28.307,
-    -22.716
+    -24.416,
+    23.997,
+    -23.766
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -237,10 +493,10 @@
   {
    "id": "s-paving-7",
    "rect": [
-    27.857,
-    -22.716,
-    28.307,
-    -22.616
+    22.597,
+    -23.766,
+    23.997,
+    -23.016
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -253,9 +509,9 @@
    "id": "s-paving-8",
    "rect": [
     22.597,
-    -22.716,
-    24.497,
-    -22.616
+    -23.016,
+    23.997,
+    -22.916
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -267,10 +523,10 @@
   {
    "id": "s-paving-9",
    "rect": [
-    22.597,
-    -22.616,
-    24.497,
-    -21.201
+    23.797,
+    -22.916,
+    23.997,
+    -22.716
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -282,7 +538,37 @@
   {
    "id": "s-paving-10",
    "rect": [
-    22.597,
+    23.797,
+    -22.716,
+    23.997,
+    -22.316
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-11",
+   "rect": [
+    23.797,
+    -22.316,
+    24.497,
+    -21.201
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
+   "id": "s-paving-12",
+   "rect": [
+    23.797,
     -21.201,
     23.897,
     -20.601
@@ -295,12 +581,12 @@
    ]
   },
   {
-   "id": "s-paving-11",
+   "id": "s-paving-13",
    "rect": [
-    27.857,
-    -21.416,
+    27.997,
+    -24.416,
     28.307,
-    -20.601
+    -24.316
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -405,7 +691,7 @@
     15.412,
     -23.591,
     22.597,
-    -22.241
+    -23.091
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -417,10 +703,10 @@
   {
    "id": "e-paving-1",
    "rect": [
-    20.862,
-    -22.241,
-    22.597,
-    -22.091
+    15.412,
+    -23.091,
+    19.712,
+    -22.241
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -431,21 +717,6 @@
   },
   {
    "id": "e-paving-2",
-   "rect": [
-    20.112,
-    -22.241,
-    20.412,
-    -22.091
-   ],
-   "material": "unit-paving",
-   "slope_pct": 1.5,
-   "trace": [
-    "U-S-STAND",
-    "LS-SLOPE"
-   ]
-  },
-  {
-   "id": "e-paving-3",
    "rect": [
     15.412,
     -22.241,
@@ -460,12 +731,27 @@
    ]
   },
   {
+   "id": "e-paving-3",
+   "rect": [
+    16.612,
+    -22.091,
+    16.912,
+    -20.841
+   ],
+   "material": "unit-paving",
+   "slope_pct": 1.5,
+   "trace": [
+    "U-S-STAND",
+    "LS-SLOPE"
+   ]
+  },
+  {
    "id": "e-paving-4",
    "rect": [
-    20.862,
-    -22.091,
-    21.362,
-    -20.841
+    16.612,
+    -20.841,
+    16.912,
+    -20.601
    ],
    "material": "unit-paving",
    "slope_pct": 1.5,
@@ -477,54 +763,9 @@
   {
    "id": "e-paving-5",
    "rect": [
-    20.112,
-    -22.091,
-    20.412,
-    -20.841
-   ],
-   "material": "unit-paving",
-   "slope_pct": 1.5,
-   "trace": [
-    "U-S-STAND",
-    "LS-SLOPE"
-   ]
-  },
-  {
-   "id": "e-paving-6",
-   "rect": [
-    16.612,
-    -22.091,
-    16.912,
-    -20.841
-   ],
-   "material": "unit-paving",
-   "slope_pct": 1.5,
-   "trace": [
-    "U-S-STAND",
-    "LS-SLOPE"
-   ]
-  },
-  {
-   "id": "e-paving-7",
-   "rect": [
     19.612,
     -20.841,
-    21.362,
-    -20.601
-   ],
-   "material": "unit-paving",
-   "slope_pct": 1.5,
-   "trace": [
-    "U-S-STAND",
-    "LS-SLOPE"
-   ]
-  },
-  {
-   "id": "e-paving-8",
-   "rect": [
-    16.612,
-    -20.841,
-    16.912,
+    19.712,
     -20.601
    ],
    "material": "unit-paving",
@@ -536,41 +777,6 @@
   }
  ],
  "planting_groups": [
-  {
-   "id": "s-bed-vine",
-   "rect": [
-    27.997,
-    -28.116,
-    28.307,
-    -25.416
-   ],
-   "over_structure": false,
-   "plants": [
-    {
-     "species": "vitis_vinifera",
-     "at": [
-      28.152,
-      -27.516
-     ],
-     "spread_m": 0.3,
-     "form": "shrub"
-    },
-    {
-     "species": "vitis_vinifera",
-     "at": [
-      28.152,
-      -26.316
-     ],
-     "spread_m": 0.3,
-     "form": "shrub"
-    }
-   ],
-   "role": "climber-strip",
-   "trace": [
-    "U-S-DINE",
-    "LS-HYDROZONE"
-   ]
-  },
   {
    "id": "s-bed-mass",
    "rect": [
@@ -602,42 +808,32 @@
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "phoenix_roebelenii",
      "at": [
-      24.847,
+      24.947,
       -21.766
      ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium"
     },
     {
      "species": "justicia_brandegeeana",
      "at": [
-      25.547,
+      25.847,
       -21.766
      ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "phoenix_roebelenii",
      "at": [
-      26.247,
+      26.747,
       -21.766
      ],
-     "spread_m": 0.77,
-     "form": "shrub",
-     "water_need": "medium"
-    },
-    {
-     "species": "justicia_brandegeeana",
-     "at": [
-      26.947,
-      -21.766
-     ],
-     "spread_m": 0.77,
+     "spread_m": 0.99,
      "form": "shrub",
      "water_need": "medium"
     },
@@ -682,7 +878,7 @@
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       24.747,
       -22.566
@@ -692,7 +888,7 @@
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       25.247,
       -22.566
@@ -702,7 +898,7 @@
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       25.747,
       -22.566
@@ -712,7 +908,7 @@
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "aspidistra_elatior",
      "at": [
       26.247,
       -22.566
@@ -759,47 +955,37 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "justicia_brandegeeana",
+     "species": "jasminum_sambac",
      "at": [
-      25.397,
+      25.497,
       -20.901
      ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "jasminum_sambac",
      "at": [
-      25.997,
+      26.297,
       -20.901
      ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
     },
     {
-     "species": "justicia_brandegeeana",
+     "species": "petrea_volubilis",
      "at": [
-      26.597,
+      27.097,
       -20.901
      ],
-     "spread_m": 0.66,
-     "form": "shrub",
-     "water_need": "medium"
-    },
-    {
-     "species": "salvia_leucantha",
-     "at": [
-      27.197,
-      -20.901
-     ],
-     "spread_m": 0.66,
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
     }
    ],
-   "role": "strip",
+   "role": "wall-climber",
    "trace": [
     "U-PRIVACY",
     "LS-HYDROZONE"
@@ -848,17 +1034,65 @@
     22.597,
     -29.766,
     23.697,
-    -29.366
+    -28.466
    ],
    "over_structure": false,
    "plants": [
     {
-     "species": "jasminum_sambac",
+     "species": "vitis_vinifera",
      "at": [
-      23.147,
+      22.947,
       -29.566
      ],
-     "spread_m": 0.9,
+     "spread_m": 0.5,
+     "form": "shrub"
+    },
+    {
+     "species": "vitis_vinifera",
+     "at": [
+      23.497,
+      -29.566
+     ],
+     "spread_m": 0.5,
+     "form": "shrub"
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      22.897,
+      -29.016
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "salvia_leucantha",
+     "at": [
+      23.497,
+      -29.016
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      22.822,
+      -28.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      23.272,
+      -28.616
+     ],
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
     }
@@ -875,17 +1109,77 @@
     27.097,
     -29.766,
     28.307,
-    -29.366
+    -28.466
    ],
    "over_structure": false,
    "plants": [
     {
      "species": "jasminum_sambac",
      "at": [
-      27.702,
+      27.907,
       -29.566
      ],
-     "spread_m": 0.9,
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      27.357,
+      -29.566
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.397,
+      -29.016
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.997,
+      -29.016
+     ],
+     "spread_m": 0.66,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.322,
+      -28.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.772,
+      -28.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      28.222,
+      -28.616
+     ],
+     "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
     }
@@ -893,6 +1187,254 @@
    "role": "screen-climber",
    "trace": [
     "U-PRIVACY",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-wall",
+   "rect": [
+    27.697,
+    -28.466,
+    28.307,
+    -26.716
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      27.997,
+      -28.016
+     ],
+     "spread_m": 0.6,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      27.997,
+      -27.116
+     ],
+     "spread_m": 0.6,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -28.241
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -27.791
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -27.341
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.847,
+      -26.891
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-wall-b",
+   "rect": [
+    26.897,
+    -28.466,
+    27.697,
+    -27.116
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "justicia_brandegeeana",
+     "at": [
+      27.247,
+      -27.466
+     ],
+     "spread_m": 0.77,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "rhapis_excelsa",
+     "at": [
+      27.597,
+      -27.916
+     ],
+     "spread_m": 1.8,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -28.241
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -27.791
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      27.097,
+      -27.341
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-wall-c",
+   "rect": [
+    27.997,
+    -26.716,
+    28.307,
+    -24.416
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -26.316
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -25.616
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "petrea_volubilis",
+     "at": [
+      28.147,
+      -24.916
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      28.147,
+      -25.966
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      28.147,
+      -25.266
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "wall-climber",
+   "trace": [
+    "U-S-DINE",
+    "LS-HYDROZONE"
+   ]
+  },
+  {
+   "id": "s-bed-pocket",
+   "rect": [
+    25.747,
+    -23.766,
+    26.847,
+    -23.016
+   ],
+   "over_structure": false,
+   "plants": [
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      25.972,
+      -23.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "aspidistra_elatior",
+     "at": [
+      26.422,
+      -23.216
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    }
+   ],
+   "role": "strip",
+   "trace": [
+    "D-SHADE-OVER-SUN",
     "LS-HYDROZONE"
    ]
   },
@@ -907,12 +1449,12 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "rhapis_excelsa",
+     "species": "fatsia_japonica",
      "at": [
       0.327,
       -26.471
      ],
-     "spread_m": 1.8,
+     "spread_m": 1.2,
      "form": "shrub",
      "water_need": "medium"
     },
@@ -957,7 +1499,7 @@
      "water_need": "medium"
     },
     {
-     "species": "aspidistra_elatior",
+     "species": "farfugium_japonicum",
      "at": [
       1.452,
       -25.871
@@ -967,7 +1509,7 @@
      "water_need": "medium"
     },
     {
-     "species": "aspidistra_elatior",
+     "species": "farfugium_japonicum",
      "at": [
       1.902,
       -25.871
@@ -975,6 +1517,39 @@
      "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      0.127,
+      -26.571
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      0.127,
+      -26.071
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      0.127,
+      -25.671
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
     }
    ],
    "role": "mass",
@@ -1138,12 +1713,12 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "phoenix_roebelenii",
+     "species": "fatsia_japonica",
      "at": [
       22.288,
       -21.641
      ],
-     "spread_m": 0.99,
+     "spread_m": 1.2,
      "form": "shrub",
      "water_need": "medium"
     },
@@ -1205,12 +1780,12 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "phoenix_roebelenii",
+     "species": "fatsia_japonica",
      "at": [
       16.312,
       -21.641
      ],
-     "spread_m": 0.99,
+     "spread_m": 1.2,
      "form": "shrub",
      "water_need": "medium"
     },
@@ -1375,11 +1950,11 @@
    "zone": "s-lounge",
    "rect": [
     27.857,
-    -25.216,
+    -24.316,
     28.307,
     -23.016
    ],
-   "seats": 3,
+   "seats": 2,
    "built_in": true,
    "trace": [
     "U-S-LOUNGE",
@@ -1439,7 +2014,7 @@
    "zone": "s-dining",
    "center": [
     25.297,
-    -26.916
+    -25.416
    ],
    "size_m": [
     2.4,
@@ -1487,9 +2062,9 @@
    "kind": "bbq",
    "rect": [
     24.597,
-    -25.266,
+    -27.616,
     25.097,
-    -24.766
+    -27.116
    ],
    "trace": [
     "U-S-BBQ",
@@ -1606,6 +2181,78 @@
  ],
  "trees": [
   {
+   "id": "s-tree-crape",
+   "species": "lagerstroemia_indica",
+   "center": [
+    26.047,
+    -23.816
+   ],
+   "form": "shrub",
+   "over_structure": false,
+   "mature_spread_m": 4.0,
+   "mature_height_m": 4.5,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "moderate",
+   "crown_center": [
+    25.297,
+    -24.816
+   ],
+   "crown_lean_m": 1.25,
+   "pruned": {
+    "spread_m": 4.0,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
+   "crown_underside_m": 2.2,
+   "pruning": "multi-stem (3-5 stems; the head is trained to lean toward the table, at most 1.3 m off the trunk), clear trunk to 2.2 m; structural thinning every year in January-February while bare; crown held at 4.0 m by cutting back to the previous year's heads, never flat topping; removing suckers at the base twice a year",
+   "pruning_source": "UF/IFAS EP399 'What is a crape murder?' (hard pruning/pollarding makes vigorous sprouts and, once started, needs annual pruning; blooms fall with the size of branch removed)",
+   "pruning_source_status": "READ AS SEARCH EXCERPT 2026-11-22 (page itself not fetched); tolerance to a held 3.4 m crown is INFERENCE from 'pollarding keeps a plant at a set height'",
+   "species_mature_spread_m": [
+    1.8,
+    9.1
+   ],
+   "species_mature_height_m": 9.1
+  },
+  {
+   "id": "s-tree-olive",
+   "species": "olea_europaea",
+   "center": [
+    26.797,
+    -22.516
+   ],
+   "form": "small_tree",
+   "over_structure": false,
+   "mature_spread_m": 3.6,
+   "mature_height_m": 4.5,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "low",
+   "crown_center": [
+    26.797,
+    -22.516
+   ],
+   "crown_lean_m": 0.0,
+   "pruned": {
+    "spread_m": 3.6,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
+   "crown_underside_m": 2.2,
+   "pruning": "pruned multi-stem umbrella: thin the crown each late winter, hold the spread at 3.6 m",
+   "pruning_source": null,
+   "pruning_source_status": "GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)",
+   "species_mature_spread_m": [
+    4.6,
+    7.6
+   ],
+   "species_mature_height_m": 9.1
+  },
+  {
    "id": "s-tree-punica",
    "species": "punica_granatum",
    "center": [
@@ -1621,6 +2268,42 @@
     "LS-TREE-BUILDING"
    ],
    "water_demand": "moderate"
+  },
+  {
+   "id": "e-tree-olive",
+   "species": "olea_europaea",
+   "center": [
+    21.662,
+    -21.291
+   ],
+   "form": "small_tree",
+   "over_structure": false,
+   "mature_spread_m": 2.6,
+   "mature_height_m": 4.5,
+   "trace": [
+    "D-SHADE-OVER-SUN",
+    "LS-TREE-BUILDING"
+   ],
+   "water_demand": "low",
+   "crown_center": [
+    20.962,
+    -21.691
+   ],
+   "crown_lean_m": 0.81,
+   "pruned": {
+    "spread_m": 2.6,
+    "height_m": 4.5,
+    "clear_stem_m": 2.2
+   },
+   "crown_underside_m": 2.2,
+   "pruning": "pruned multi-stem umbrella: thin the crown each late winter, hold the spread at 3.6 m",
+   "pruning_source": null,
+   "pruning_source_status": "GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)",
+   "species_mature_spread_m": [
+    4.6,
+    7.6
+   ],
+   "species_mature_height_m": 9.1
   }
  ],
  "paths": [
@@ -1633,7 +2316,7 @@
     22.597,
     -27.516,
     23.797,
-    -20.601
+    -22.916
    ],
    "trace": [
     "U-ACCESS",
@@ -1664,7 +2347,7 @@
    "rect": [
     15.612,
     -23.591,
-    22.597,
+    19.712,
     -22.391
    ],
    "trace": [
@@ -1778,61 +2461,7 @@
    ]
   }
  ],
- "canopies": [
-  {
-   "id": "s-pergola-grape",
-   "rect": [
-    23.597,
-    -28.216,
-    28.207,
-    -25.616
-   ],
-   "kind": "pergola",
-   "roof": "vine",
-   "louvred": true,
-   "height_m": 2.7,
-   "shade_fraction": 0.75,
-   "shade_fraction_winter_open": 0.15,
-   "shade_fraction_winter_closed": 0.6,
-   "deciduous": true
-  },
-  {
-   "id": "s-pergola-rear",
-   "rect": [
-    27.307,
-    -25.416,
-    28.307,
-    -20.701
-   ],
-   "kind": "pergola",
-   "height_m": 2.7,
-   "shade_fraction": 0.6
-  },
-  {
-   "id": "n-pergola",
-   "rect": [
-    0.417,
-    -28.671,
-    2.417,
-    -27.071
-   ],
-   "kind": "pergola",
-   "height_m": 2.6,
-   "shade_fraction": 0.6
-  },
-  {
-   "id": "e-pergola",
-   "rect": [
-    19.712,
-    -22.391,
-    21.312,
-    -20.601
-   ],
-   "kind": "pergola",
-   "height_m": 2.6,
-   "shade_fraction": 0.6
-  }
- ],
+ "canopies": [],
  "screens": [
   {
    "id": "sister-screen-n",
