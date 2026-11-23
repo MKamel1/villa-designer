@@ -1,0 +1,1535 @@
+{
+ "verdicts": {
+  "v33-basement-north-south": "pass",
+  "v34-basement-south-north": "fail",
+  "v02-garden-living": "fail",
+  "v10-living-evening": "fail",
+  "v03-street-lounge": "fail",
+  "v21-lounge-evening": "fail",
+  "v09-dining-evening": "pass",
+  "n01-dining-day": "pass",
+  "n02-kitchen-island-day": "fail",
+  "n03-kitchen-run-evening": "pass",
+  "n04-library-nook-evening": "fail",
+  "v08-cinema": "fail",
+  "v29-under-stair-store": "fail",
+  "v30-under-ramp-store": "fail",
+  "n05-pantry-evening": "fail",
+  "n06-stair-foot-hall-evening": "fail",
+  "n07-family-corner-day": "fail",
+  "n08-guest-wc-evening": "fail",
+  "n09-dirty-kitchen-day": "fail",
+  "v11-stair-void": "fail",
+  "n10-gf-hall-east-day": "fail",
+  "n18-stair-gallery-day": "fail",
+  "n19-entry-lobby-evening": "fail",
+  "n20-dining-side-day": "pass",
+  "n11-study-desks-day": "fail",
+  "n12-study-sofa-evening": "fail",
+  "v06-kids-room": "fail",
+  "v13-kids-b": "fail",
+  "n13-parents-day": "fail",
+  "v05-parents-bedroom": "pass",
+  "v31-dressing-hers": "fail",
+  "n14-dressing-his-evening": "fail",
+  "n15-ensuite-bath-evening": "fail",
+  "n16-ensuite-basin-day": "fail",
+  "n17-family-bath-basin-day": "fail",
+  "n21-family-bath-wc-day": "pass"
+ },
+ "table": {
+  "new": {
+   "by_grade": {
+    "B-": {
+     "pass": 3,
+     "fail": 4
+    },
+    "C+": {
+     "fail": 5,
+     "pass": 3
+    },
+    "C": {
+     "fail": 7
+    },
+    "C-": {
+     "fail": 3
+    },
+    "D+": {
+     "fail": 6,
+     "pass": 1
+    },
+    "D": {
+     "fail": 2
+    },
+    "F": {
+     "fail": 2
+    }
+   },
+   "recall_must_fail": [
+    10,
+    11
+   ],
+   "false_fail_should_pass": [
+    4,
+    7
+   ],
+   "recall_c_or_worse": [
+    25,
+    29
+   ],
+   "recall_seeded_false_passes": [
+    0,
+    0
+   ],
+   "middle_fail": [
+    15,
+    18
+   ]
+  },
+  "new_wilson": {
+   "recall_must_fail": [
+    0.623,
+    0.984
+   ],
+   "false_fail_should_pass": [
+    0.25,
+    0.842
+   ],
+   "recall_c_or_worse": [
+    0.694,
+    0.945
+   ],
+   "middle_fail": [
+    0.608,
+    0.942
+   ]
+  },
+  "pooled_with_audit_held_out": {
+   "recall_must_fail": {
+    "k": 18,
+    "n": 19,
+    "wilson95": [
+     0.754,
+     0.991
+    ]
+   },
+   "false_fail_should_pass": {
+    "k": 5,
+    "n": 9,
+    "wilson95": [
+     0.267,
+     0.811
+    ]
+   },
+   "recall_c_or_worse": {
+    "k": 39,
+    "n": 45,
+    "wilson95": [
+     0.738,
+     0.937
+    ]
+   },
+   "middle_fail": {
+    "k": 21,
+    "n": 26,
+    "wilson95": [
+     0.621,
+     0.915
+    ]
+   }
+  },
+  "pooled_with_all_38": {
+   "recall_must_fail": {
+    "k": 28,
+    "n": 29,
+    "wilson95": [
+     0.828,
+     0.994
+    ]
+   },
+   "false_fail_should_pass": {
+    "k": 6,
+    "n": 12,
+    "wilson95": [
+     0.254,
+     0.746
+    ]
+   },
+   "recall_c_or_worse": {
+    "k": 55,
+    "n": 62,
+    "wilson95": [
+     0.785,
+     0.944
+    ]
+   },
+   "middle_fail": {
+    "k": 27,
+    "n": 33,
+    "wilson95": [
+     0.656,
+     0.914
+    ]
+   }
+  }
+ },
+ "notes": {
+  "v33-basement-north-south": {
+   "zeros": [],
+   "warns": [],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v34-basement-south-north": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R3",
+    "R4"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R3, R4) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v02-garden-living": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v10-living-evening": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v03-street-lounge": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R10, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v21-lounge-evening": {
+   "zeros": [
+    "R11",
+    "R3"
+   ],
+   "warns": [
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R11, R3 (hero view)",
+    "2 WARNs (R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v09-dining-evening": {
+   "zeros": [],
+   "warns": [
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n01-dining-day": {
+   "zeros": [],
+   "warns": [],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n02-kitchen-island-day": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R10, R11) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n03-kitchen-run-evening": {
+   "zeros": [],
+   "warns": [
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n04-library-nook-evening": {
+   "zeros": [],
+   "warns": [
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v08-cinema": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v29-under-stair-store": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v30-under-ramp-store": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [
+    "R12"
+   ],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "3 WARNs (R10, R11, R8) escalate to FAIL",
+    "not evaluated: R12 (fail closed)"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n05-pantry-evening": {
+   "zeros": [
+    "R11"
+   ],
+   "warns": [
+    "R10"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R11 (hero view)"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n06-stair-foot-hall-evening": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n07-family-corner-day": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n08-guest-wc-evening": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R10, R11) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n09-dirty-kitchen-day": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R11, R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v11-stair-void": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n10-gf-hall-east-day": {
+   "zeros": [
+    "R12"
+   ],
+   "warns": [
+    "R10",
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R12 (hero view)",
+    "2 WARNs (R10, R11) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n18-stair-gallery-day": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R10, R11) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n19-entry-lobby-evening": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R11, R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n20-dining-side-day": {
+   "zeros": [],
+   "warns": [
+    "R4"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n11-study-desks-day": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n12-study-sofa-evening": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v06-kids-room": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11",
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "4 WARNs (R10, R11, R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v13-kids-b": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R3",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R11, R3, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n13-parents-day": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v05-parents-bedroom": {
+   "zeros": [],
+   "warns": [
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v31-dressing-hers": {
+   "zeros": [
+    "R3"
+   ],
+   "warns": [
+    "R10",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R3 (hero view)",
+    "2 WARNs (R10, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n14-dressing-his-evening": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R10, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n15-ensuite-bath-evening": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n16-ensuite-basin-day": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n17-family-bath-basin-day": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "n21-family-bath-wc-day": {
+   "zeros": [],
+   "warns": [
+    "R10"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  }
+ },
+ "scores": {
+  "v33-basement-north-south": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v34-basement-south-north": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 1,
+   "R4": 1,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v02-garden-living": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v10-living-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v03-street-lounge": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v21-lounge-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 0,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 0,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v09-dining-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n01-dining-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n02-kitchen-island-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n03-kitchen-run-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n04-library-nook-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v08-cinema": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v29-under-stair-store": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v30-under-ramp-store": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": null,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n05-pantry-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 0,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n06-stair-foot-hall-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n07-family-corner-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n08-guest-wc-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n09-dirty-kitchen-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v11-stair-void": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n10-gf-hall-east-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 0,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n18-stair-gallery-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n19-entry-lobby-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n20-dining-side-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n11-study-desks-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n12-study-sofa-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v06-kids-room": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v13-kids-b": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 1,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n13-parents-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v05-parents-bedroom": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 2,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "v31-dressing-hers": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 0,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n14-dressing-his-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n15-ensuite-bath-evening": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n16-ensuite-basin-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n17-family-bath-basin-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 1,
+   "R11": 1,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  },
+  "n21-family-bath-wc-day": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 2,
+   "R8": 2,
+   "R11": 2,
+   "R5": null,
+   "R7": null,
+   "R9": null,
+   "R13": null,
+   "R6": null
+  }
+ }
+}
