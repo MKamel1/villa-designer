@@ -140,7 +140,7 @@ class Views(unittest.TestCase):
         self.assertEqual(v["subjects"], [])
 
     def test_the_january_twin_of_the_dining_crown_view_shows_the_leaf_off_crape_and_the_october_one_the_leaf_on(self):
-        base = [dict(self.view(), id="v41-south-garden-terrace", state="day", final_only=True)]
+        base = [dict(self.view(), id="v41-south-garden-terrace", state="day", final_only=True, sun={"altitude_deg": 40.07, "azimuth_true_deg": 135.34})]
         ks = {k["id"]: k for k in PR.key_views(base)}
         w, s = ks["gi-dining-crown-winter"], ks["gi-dining-crown-summer"]
         self.assertEqual(w["camera"]["position"], s["camera"]["position"])                   # one camera, two dates
