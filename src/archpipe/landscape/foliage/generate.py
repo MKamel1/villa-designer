@@ -442,7 +442,7 @@ def generate(slug, seed=0, height_m=None, spread_m=None, state="leaf-on", lod=0,
     h0, s0 = default_size(slug)
     H = float(height_m or h0 or 1.0)
     S = float(spread_m or s0 or H)
-    rng = np.random.default_rng([int(seed), abs(hash(slug)) % 1000 if False else sum(map(ord, slug))])
+    rng = np.random.default_rng([int(seed), sum(map(ord, slug))])      # not hash(): a process-random built-in (reproducibility guard)
     keep = (1.0, 0.5, 0.25)[lod]
     reach = spec["leaf_len"] * 0.6 if spec["form"] in ("shrub", "climber", "tree") else 0.0
     fn = FORMS[spec["form"]]
