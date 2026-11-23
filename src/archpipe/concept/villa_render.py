@@ -537,7 +537,7 @@ def require_untracked_inputs():
 GARDEN_SOURCE = "ldb"      # lane GI: the decided garden (landscape/build) is the D1 garden; "legacy" = villa_landscape.build (the G-series garden, kept for its own tests)
 
 
-def garden_ldb(mats, views):
+def garden_ldb(mats, views, shell_meshes):
     """The decided garden in the production scene (lane GI): meshes, props, notes, plan of `landscape.build.production.garden()`; garden materials join `mats`; every garden
     view gets its season (leaf-off for a view dated Dec-Feb) and fire-pit state as hidden meshes, and its subjects re-pointed at the garden objects in frame."""
     from ..landscape.build import production as PRD
@@ -546,6 +546,7 @@ def garden_ldb(mats, views):
         mats.setdefault(name, spec)
     for v in views:
         PRD.prepare_view(v, g)
+    PRD.reveal_ground(shell_meshes, g)       # the shell's own yard floor is cut back under the garden's surfaces and ponds
     return g["meshes"], g["props"], g["notes"], g["plan"]
 
 
@@ -1866,7 +1867,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from ..orientation import record as orientation_record
     sun_study = SunStudy(dict(meshes=meshes, materials=mats))
     if GARDEN_SOURCE == "ldb":
-        land_meshes, land_props, land_notes, land_plan = garden_ldb(mats, views)
+        land_meshes, land_props, land_notes, land_plan = garden_ldb(mats, views, meshes)
     else:
         sun_token = active_study.set(sun_study)
         try:

@@ -136,6 +136,42 @@ class Views(unittest.TestCase):
             self.assertEqual(k["camera"]["position"][2], k["camera"]["target"][2])           # level: framing by lens shift, not by tilting the camera
 
 
+class CamerasAndGround(unittest.TestCase):
+    def cam(self, pos, tgt=(26.0, -25.0, -1.65)):
+        return dict(id="v40-south-garden-espalier", camera=dict(position=list(pos), target=list(tgt), lens_mm=24, sensor_mm=36, shift_x=0.0, shift_y=0.0))
+
+    def test_a_camera_inside_a_garden_solid_is_moved_the_least_distance_and_the_move_is_recorded(self):
+        v = self.cam((22.0, -21.8, -1.65))                         # inside the olive's stand-in in the placeholder set (rendered black)
+        self.assertLess(PR.camera_clearance(v["camera"]["position"], G)[0], PR.CLEAR_M)
+        self.assertTrue(PR.clear_camera(v, G))
+        self.assertGreaterEqual(PR.camera_clearance(v["camera"]["position"], G)[0], PR.CLEAR_M)
+        self.assertEqual(v["camera"]["target"], [26.0, -25.0, -1.65])           # the target is kept
+        (o,) = v["camera"]["overrides"]
+        self.assertEqual(o["field"], "position")
+        self.assertIn("GI:", o["reason"])
+        self.assertLess(((o["new"][0] - o["prior"][0]) ** 2 + (o["new"][1] - o["prior"][1]) ** 2) ** .5, 3.5)
+
+    def test_a_clear_camera_is_untouched(self):
+        v = self.cam((24.5, -22.5, -1.65))
+        before = list(v["camera"]["position"])
+        if PR.camera_clearance(before, G)[0] >= PR.CLEAR_M:
+            self.assertFalse(PR.clear_camera(v, G))
+            self.assertEqual(v["camera"]["position"], before)
+            self.assertNotIn("overrides", v["camera"])
+
+    def test_the_shell_yard_floor_is_cut_back_under_the_garden_and_the_pond_is_open(self):
+        from shapely.geometry import Point, Polygon
+        face = [[-0.37, -29.92, -3.0], [28.56, -29.92, -3.0], [28.56, -20.35, -3.0], [-0.37, -20.35, -3.0]]
+        shell = [dict(id="shell-039-paving", group="shell", material="paving", faces=[face])]
+        self.assertGreater(PR.reveal_ground(shell, G), 50)
+        polys = [Polygon([q[:2] for q in f]) for f in shell[0]["faces"]]
+        covered = lambda x, y: any(p.contains(Point(x, y)) for p in polys)
+        self.assertFalse(covered(1.2, -24.9))                      # the north pond opening is no longer closed over by the floor
+        self.assertFalse(covered(25.3, -25.4))                     # nor the paving under the dining table (the garden's own surface is drawn there)
+        self.assertTrue(covered(10.0, -22.0))                      # but the floor under the house stays
+        self.assertLess(sum(p.area for p in polys), 0.8 * 28.93 * 9.57)
+
+
 class Rules(unittest.TestCase):
     def test_star_jasmine_stays_two_metres_from_seats_and_arabian_jasmine_by_them(self):
         s = build.build_scene(build.load_layout(PR.LAYOUT), age=3)

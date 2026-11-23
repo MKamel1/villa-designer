@@ -51,7 +51,7 @@ TONES = [(0.64, 0.60, 0.55), (0.58, 0.55, 0.51), (0.68, 0.64, 0.58)]
 
 # LDB material name -> (production material name, spec). A name not listed here raises: no part is rendered with a guessed finish.
 FIXED = {
-    "wall-render": ("garden-render", _m(FACADE, 0.9, "white_rough_plaster", 1.2, contrast=1.4, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), CC0 Poly Haven white_rough_plaster texture; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
+    "wall-render": ("garden-render", _m(FACADE, 0.9, "white_rough_plaster", 1.2, contrast=1.1, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), CC0 Poly Haven white_rough_plaster texture; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
     "wall-coping": ("garden-coping", _m(STONE, 0.7, "Travertine009", 0.8, note="stone coping slab (ASSUMED)")),
     "paving-joint": ("garden-joint", _m((0.30, 0.28, 0.25), 0.95, note="paving joint (ASSUMED)")),
     "bed-soil": ("garden-mulch", _m((0.30, 0.19, 0.11), 1.0, "wood_chip_path", 0.7, note="bark mulch over soil, CC0 Poly Haven wood_chip_path", procedural_stone_m=0.04)),
@@ -330,12 +330,56 @@ def subjects_in_frame(view, g, limit=3):
     return [i for _, i in sorted(out)[:limit]]
 
 
+CLEAR_M = 0.6          # a garden camera keeps at least this far from any garden solid (a camera inside a stand-in mass renders black: v40 did)
+
+
+def _box_dist(p, b):
+    d = [max(b[i] - p[i], 0.0, p[i] - b[i + 3]) for i in range(3)]
+    return math.sqrt(sum(x * x for x in d))
+
+
+def camera_clearance(pos, g):
+    """-> (distance to the nearest garden solid, its id) for a camera position; solids = every built object except flat ground surfaces."""
+    best = (1e9, None)
+    for o in g["scene"].objects:
+        if o.state == "open" or o.kind in SURFACE_KINDS or o.kind in ("path", "koi", "water", "grille", "pond"):
+            continue
+        d = _box_dist(pos, o.bounds())
+        if d < best[0]:
+            best = (d, o.id)
+    return best
+
+
+def clear_camera(view, g):
+    """Move a garden camera the least distance (in plan, 0.1 m grid, within 3.5 m) to a spot CLEAR_M from every garden solid, inside the plot and outside the house footprints;
+    the target is kept. Recorded in the camera's `overrides` with the reason. A camera already clear is untouched; none found raises."""
+    cam = view["camera"]
+    pos = list(cam["position"])
+    if camera_clearance(pos, g)[0] >= CLEAR_M:
+        return False
+    (x0, y0, x1, y1), _ = CX.ground_plan()
+    from . import build as _B
+    blds = [_B.R(b) for b in _B.load_layout(LAYOUT)["buildings"]] if pos[2] < -0.5 else []
+    inside = lambda r, p: r[0] - 0.2 <= p[0] <= r[2] + 0.2 and r[1] - 0.2 <= p[1] <= r[3] + 0.2
+    cands = sorted(((dx * 0.1, dy * 0.1) for dx in range(-35, 36) for dy in range(-35, 36)), key=lambda d: d[0] ** 2 + d[1] ** 2)
+    for dx, dy in cands:
+        q = [pos[0] + dx, pos[1] + dy, pos[2]]
+        if x0 + 0.5 < q[0] < x1 - 0.5 and y0 + 0.5 < q[1] < y1 - 0.5 and not any(inside(b, q) for b in blds) and camera_clearance(q, g)[0] >= CLEAR_M:
+            why = camera_clearance(pos, g)
+            cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=q, reason="GI: the authored standing point is %.2f m from %s (inside or touching a garden solid of the decided layout); moved %.2f m, target kept" % (why[0], why[1], math.hypot(dx, dy))))
+            cam["position"] = q
+            return True
+    raise ValueError("%s: no clear standing point within 3.5 m of %s" % (view["id"], pos))
+
+
 def prepare_view(view, g, mesh_ids=()):
     """Hide the other season's and the other state's meshes in this view; for a garden view drop the authored old-garden subject lists and name the garden objects in frame."""
     hid = view_hides(g["meshes"], season_for(view["when"]), view.get("ld_state", "closed"))
     view["hide_meshes"] = list(dict.fromkeys(list(view.get("hide_meshes", [])) + hid))
     if not is_garden_view(view):
         return
+    if view["camera"]["position"][2] < -0.5:
+        clear_camera(view, g)
     first = {}
     for m in g["meshes"]:
         first.setdefault(m["element_ids"][0], m["id"])
@@ -376,3 +420,28 @@ def key_views(base_views, winter=False):
     if winter:
         from ..concept import villa_render as VR   # noqa: F401  (sun for the January date comes from the same function the views use)
     return out
+
+
+def reveal_ground(shell_meshes, g):
+    """The production shell already carries a flat 'paving' yard floor at the garden level (shell-039, both yards). The garden's own surfaces are coplanar with it (z-fighting: the
+    first render showed a second stone pattern through the pavers) and its ponds are closed over by it. Cut that floor back under every flat surface of the garden (paving, paths,
+    gravel, ground, beds) and each pond opening, with the same routine the previous garden used for its soil beds; what remains of the floor is the unspecified yard.
+    Returns the number of garden footprints cut."""
+    from shapely.geometry import box as sbox
+    from shapely.ops import unary_union
+    from ...concept import villa_landscape as LAND
+    z = g["scene"].ground_z
+    cuts = []
+    for o in g["scene"].objects:
+        if o.kind in SURFACE_KINDS:
+            polys = [sbox(*p.bounds()[:2], *p.bounds()[3:5]) if p.poly is None else __import__("shapely.geometry", fromlist=["Polygon"]).Polygon(p.poly) for p in o.parts]
+            geo = unary_union([q.buffer(0) for q in polys])
+        elif o.kind == "pond":
+            geo = sbox(*o.meta["rect"])
+        else:
+            continue
+        for q in (geo.geoms if hasattr(geo, "geoms") else [geo]):
+            if q.area > 1e-6:
+                cuts.append(dict(id="cut-" + o.id, part_kind="soil-bed", faces=[[[x, y, z] for x, y in list(q.exterior.coords)[:-1]]]))
+    LAND.reveal_ground_soil(shell_meshes, cuts)
+    return len(cuts)

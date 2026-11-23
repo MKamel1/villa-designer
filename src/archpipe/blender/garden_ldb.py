@@ -90,19 +90,19 @@ def _look_wall(mat, spec):
         vm.inputs[1].default_value = (1.0, 1.0, 0.08)
         nt.links.new(g.outputs["Position"], vm.inputs[0])
         nt.links.new(vm.outputs[0], streak.inputs["Vector"])
-        w = nt.nodes.new("ShaderNodeMath")                      # darkening weight: foot band 0.50 + stains 0.30 + streaks 0.15
+        w = nt.nodes.new("ShaderNodeMath")                      # darkening weight: foot band 0.50 + stains 0.20 + streaks 0.10
         w.operation = "MULTIPLY_ADD"
         w.inputs[1].default_value = 0.50
         nt.links.new(foot.outputs[0], w.inputs[0])
         w.inputs[2].default_value = 0.0
         w2 = nt.nodes.new("ShaderNodeMath")
         w2.operation = "MULTIPLY_ADD"
-        w2.inputs[1].default_value = 0.30
+        w2.inputs[1].default_value = 0.20
         nt.links.new(stain.outputs["Fac"], w2.inputs[0])
         nt.links.new(w.outputs[0], w2.inputs[2])
         w3 = nt.nodes.new("ShaderNodeMath")
         w3.operation = "MULTIPLY_ADD"
-        w3.inputs[1].default_value = 0.15
+        w3.inputs[1].default_value = 0.10
         nt.links.new(streak.outputs["Fac"], w3.inputs[0])
         nt.links.new(w2.outputs[0], w3.inputs[2])
         m = _mix(nt, "MULTIPLY", src, (0.55, 0.52, 0.47, 1.0))
