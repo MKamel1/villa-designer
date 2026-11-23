@@ -1,13 +1,13 @@
 {
  "s-firepit-edge-ring": {
   "n": 31,
-  "analytic_direct_avg": 18.952270902334632,
-  "radiance_direct_avg": 18.955872740999485,
-  "direct_diff": 0.00019004786726695144,
-  "worst_point_diff": 0.00025305217294343597,
-  "radiance_total_avg": 19.516787136848603,
-  "total_over_direct": 0.02959053394760991,
-  "convergence": 0.00017384829923261513
+  "analytic_direct_avg": 31.39731651510331,
+  "radiance_direct_avg": 31.403391213852647,
+  "direct_diff": 0.00019347827851512456,
+  "worst_point_diff": 0.00025455436814493927,
+  "radiance_total_avg": 32.213922128315616,
+  "total_over_direct": 0.02581029892419484,
+  "convergence": 0.000137396071318463
  },
  "n-pond-edge-ring": {
   "n": 23,
@@ -15,58 +15,38 @@
   "radiance_direct_avg": 14.578925722713045,
   "direct_diff": 0.0001640227894650348,
   "worst_point_diff": 0.00019096668181348915,
-  "radiance_total_avg": 15.409731035128369,
-  "total_over_direct": 0.05698673058749315,
-  "convergence": 5.100213103914619e-05
- },
- "n-pond-water": {
-  "n": 24,
-  "analytic_direct_avg": 12.478534238468987,
-  "radiance_direct_avg": 0.0,
-  "direct_diff": -1.0,
-  "worst_point_diff": 1.0,
-  "radiance_total_avg": 0.0,
-  "total_over_direct": null,
-  "convergence": null
+  "radiance_total_avg": 15.410260352061623,
+  "total_over_direct": 0.057023037579059244,
+  "convergence": 1.1900861800251405e-05
  },
  "e-pond-edge-ring": {
   "n": 48,
-  "analytic_direct_avg": 20.169752393315814,
-  "radiance_direct_avg": 20.172379006657156,
-  "direct_diff": 0.00013022536370899118,
-  "worst_point_diff": 0.0001830282858870152,
-  "radiance_total_avg": 21.37502635570326,
-  "total_over_direct": 0.059618518403268705,
-  "convergence": 0.00017283578973414926
- },
- "e-pond-water": {
-  "n": 38,
-  "analytic_direct_avg": 18.605595131941506,
-  "radiance_direct_avg": 0.0,
-  "direct_diff": -1.0,
-  "worst_point_diff": 1.0,
-  "radiance_total_avg": 4.720483991578948e-20,
-  "total_over_direct": null,
-  "convergence": -1.0
+  "analytic_direct_avg": 20.171862306687547,
+  "radiance_direct_avg": 20.17448685159223,
+  "direct_diff": 0.00013010920185663188,
+  "worst_point_diff": 0.00018302172589580157,
+  "radiance_total_avg": 21.423793140287984,
+  "total_over_direct": 0.06192505900575873,
+  "convergence": 3.5503495364963555e-05
  },
  "s-path-door": {
   "n": 46,
-  "analytic_direct_avg": 13.835552303492918,
-  "radiance_direct_avg": 13.836862565909389,
-  "direct_diff": 9.470257404475824e-05,
-  "worst_point_diff": 0.00021015615294535516,
-  "radiance_total_avg": 14.999370193306957,
-  "total_over_direct": 0.08401526154214323,
-  "convergence": 0.0002092134001618895
+  "analytic_direct_avg": 20.422750563713453,
+  "radiance_direct_avg": 20.42478735155663,
+  "direct_diff": 9.973131860085971e-05,
+  "worst_point_diff": 0.00021494215988281885,
+  "radiance_total_avg": 22.101033023972064,
+  "total_over_direct": 0.08206918601224422,
+  "convergence": -2.3439936561620023e-05
  },
  "s-dining-table": {
   "n": 16,
-  "analytic_direct_avg": 30.162930616466355,
-  "radiance_direct_avg": 30.168061080171793,
-  "direct_diff": 0.00017009168540926822,
-  "worst_point_diff": 0.00025230055810575124,
-  "radiance_total_avg": 31.097436674764772,
-  "total_over_direct": 0.030806606766114575,
-  "convergence": 0.00019002704958581695
+  "analytic_direct_avg": 40.42657326551153,
+  "radiance_direct_avg": 40.43330868384358,
+  "direct_diff": 0.00016660868799855955,
+  "worst_point_diff": 0.00025120960823035303,
+  "radiance_total_avg": 41.7508439972656,
+  "total_over_direct": 0.03258539447573039,
+  "convergence": 0.0003499843545646808
  }
 }
