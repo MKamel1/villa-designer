@@ -334,7 +334,26 @@ def _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why,
         k0 = len(verts)
         verts += quad
         faces.append([k0, k0 + 1, k0 + 2, k0 + 3]); rid.append(ri)
-    V = np.array(verts, float)
+    V = np.array(verts, float).reshape(-1, 4, 3)
+    kd = 1 if axis == "x" else 0
+    # Grounding (the scene's support guard, `render_support.unsupported`): every leaf island must chain, box to box within 10 mm, to a stem (which reaches the ground) or stand within 15 mm
+    # of the wall. A leaf out in the air between stems is pressed back to 12 mm off the face (it hangs on its petiole there); leaves that chain are left where they are.
+    lo_c, hi_c = V.min(axis=1), V.max(axis=1)
+    sb = np.array([p_.bounds() for p_ in stems]) if stems else np.zeros((0, 6))
+    tol = 0.005
+    near = lambda alo, ahi, blo, bhi: np.all((alo[:, None, :] - tol <= bhi[None, :, :]) & (ahi[:, None, :] + tol >= blo[None, :, :]), axis=2)
+    ok = near(lo_c, hi_c, sb[:, :3], sb[:, 3:]).any(axis=1) if len(sb) else np.zeros(len(V), bool)
+    ok |= (np.abs(lo_c[:, kd] - face) * 1.0 if sgn > 0 else np.abs(hi_c[:, kd] - face)) < 0.0145
+    adj = near(lo_c, hi_c, lo_c, hi_c)
+    while True:
+        grow = adj[:, ok].any(axis=1) & ~ok
+        if not grow.any():
+            break
+        ok |= grow
+    for i in np.nonzero(~ok)[0]:
+        dmin = (V[i, :, kd] - face).min() * sgn
+        V[i, :, kd] += sgn * (0.012 - dmin)
+    V = V.reshape(-1, 3)
     k = 1 if axis == "x" else 0                          # the depth axis: a tilted card's corner never goes behind 12 mm off the face (it presses on the wall, it does not pass through it)
     V[:, k] = face + sgn * np.maximum((V[:, k] - face) * sgn, 0.012)
     j = 0 if axis == "x" else 1                          # and never past the ends of the free stretch (a perpendicular wall or a bench stops the panel)

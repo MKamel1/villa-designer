@@ -30,7 +30,7 @@ POND = dict(edge_lip=0.08, coping_h=0.10, grille_bar=0.006, grille_pitch=0.05, g
 # POLICY, not a standard: the held sources say only 'rigid metal grille' (RoSPA, W-rospa-rigid-grille) and 'strong mesh ... carry a child' (Mid and West Wales FRS, W-pond-mawwfire-grille); neither gives an aperture, wire
 # section or load (GAP-POND-GRILLE-LOAD). 50 mm is ours: fine enough to read as mesh and to stop a hand and a koi net, coarse enough to see the koi through. The supplier certifies the real mesh.
 PIT = dict(cover_base_t=0.006, hole=0.80, liner_t=0.04, depth=0.50, cover_t=0.046, gap=0.003, flame_h=0.35)   # ASSUMED; cover lip from the layout
-POT = dict(h=0.55, r_bottom=0.20, wall=0.03, soil_below_rim=0.05, plant_h=1.8)   # ASSUMED terracotta pot; potted frangipani size is a GAP
+POT = dict(h=0.55, r_bottom=0.20, wall=0.03, soil_below_rim=0.0, plant_h=1.8)   # ASSUMED terracotta pot; potted frangipani size is a GAP
 BBQ = dict(bowl_z0=0.55, bowl_z1=0.80, h=0.95)  # ASSUMED portable kettle BBQ on a stand
 
 AGE_YEARS = 3

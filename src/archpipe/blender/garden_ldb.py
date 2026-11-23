@@ -483,7 +483,7 @@ def import_prop(spec):
     anchor.rotation_euler = (0, 0, math.radians(L.get("yaw_deg", 0.0)))
     bpy.context.view_layer.update()
     lo, hi = _world_bbox(new)
-    at = spec["position"]
+    at = L.get("at") or spec["position"]          # a koi's `position` is its support point (the water surface); `ldb.at` is where its centre swims
     if mode == "fish":
         c = (lo + hi) / 2
         d = Vector((at[0] - c.x, at[1] - c.y, at[2] - c.z))

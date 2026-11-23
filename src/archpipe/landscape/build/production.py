@@ -193,15 +193,18 @@ def _object_meshes(o, table, parts, season, tag):
     return out
 
 
-def _prop(o, species):
+def _prop(o, species, water_z=None):
     a = o.asset
     pos = list(a["at"])
+    at = list(pos)
+    if a.get("mode") == "fish" and water_z is not None:       # a koi is carried by the water: the scene's support guard wants a surface under every prop, so the prop's support point is the water surface (its swimming depth stays in `ldb.at`)
+        pos[2] = water_z
     nx, ny, nz = a["native_size_m"]
     mode = a.get("mode", "height")
     scale = {"height": lambda: (a["bounds"][5] - a["bounds"][2]) / nz, "xyz": lambda: list(a["scale_xyz"]), "box": lambda: [a["box_m"][0] / nx, a["box_m"][1] / ny, a["box_m"][2] / nz],
              "fish": lambda: a["length_m"] / max(nx, ny, nz)}[mode]()
     d = dict(id=o.id, asset="ldb-" + a["asset_id"].replace("plant", "flora"), label="dressing: " + o.label, position=pos, rotation_deg=[0, 0, a.get("yaw_deg", 0.0)], scale=scale, zone="lower", element_ids=[o.id],
-             ldb=dict(asset_id=a["asset_id"], native_size_m=list(a["native_size_m"]), gltf=a["gltf"], mode=a.get("mode", "height"), scale_to_height_m=a["bounds"][5] - a["bounds"][2], scale_xyz=a.get("scale_xyz"), box_m=a.get("box_m"),
+             ldb=dict(at=at, asset_id=a["asset_id"], native_size_m=list(a["native_size_m"]), gltf=a["gltf"], mode=a.get("mode", "height"), scale_to_height_m=a["bounds"][5] - a["bounds"][2], scale_xyz=a.get("scale_xyz"), box_m=a.get("box_m"),
                       length_m=a.get("length_m"), yaw_deg=a.get("yaw_deg", 0.0), tiles=a.get("tiles"), kind=o.kind),
              grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"])
     if species:
@@ -245,13 +248,14 @@ def garden(layout_path=LAYOUT, age=3):
     sc = B.build_scene(L, age=age, season="summer", site_context=True)
     guard.refuse(sc, "the production villa scene")
     table, meshes, props, plants = {}, [], [], []
+    water = {o.id: o.meta["water_z"] for o in sc.objects if o.kind == "pond"}
     for o in sc.objects:
         if o.parts:
             meshes += _object_meshes(o, table, o.parts, "summer" if o.winter_parts else None, ("." + o.state) if o.state else "")      # the fire pit cover has two states under one id
             if o.winter_parts:
                 meshes += _object_meshes(o, table, o.winter_parts, "winter", ".winter")
         if o.asset:
-            props.append(_prop(o, o.meta.get("species")))
+            props.append(_prop(o, o.meta.get("species"), water.get(o.rests_on[0]) if o.kind == "koi" else None))
         if o.kind == "plant":
             plants.append(dict(id=o.id, species=o.meta.get("species", ""), standin=o.standin, label=o.label))
     meshes += _fence_meshes(sc, table) + _ground_meshes(sc, table)
