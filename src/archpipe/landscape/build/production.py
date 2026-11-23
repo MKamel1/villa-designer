@@ -481,7 +481,7 @@ def _cut_slab_under_ponds(shell_meshes, ponds, ground_z):
     horizontal face in the band under the finish) still span the pond opening, and their faces are two-sided in the renderer: from above they were a floor 49 mm under the water that hid the
     liner and every koi (found with a ray cast from the pond camera: the first hit under the water was `villa-merged-0000` at z = -3.199). Cut those horizontal faces back at every pond rect.
     Returns the number of faces cut."""
-    from shapely.ops import triangulate
+    import shapely
     from ...concept.garden_render_review import normal
     from shapely.geometry import Polygon
     n = 0
@@ -505,10 +505,9 @@ def _cut_slab_under_ponds(shell_meshes, ponds, ground_z):
             changed = True
             n += 1
             up = normal(face)[2] > 0
-            for tri in triangulate(rest):
-                if rest.covers(tri):
-                    pts = [[x, y, z] for x, y in list(tri.exterior.coords)[:-1]]
-                    faces.append(pts if _ccw(pts) == up else pts[::-1]); materials.append(material)      # wound as the original: counter-clockwise for an up face, clockwise for a down face
+            for tri in shapely.constrained_delaunay_triangles(rest).geoms:       # constrained: a plain Delaunay triangulation plus a `covers` filter drops the triangles that span a concave corner (it lost 15 m2 of a 157 m2 L-shaped slab face)
+                pts = [[x, y, z] for x, y in list(tri.exterior.coords)[:-1]]
+                faces.append(pts if _ccw(pts) == up else pts[::-1]); materials.append(material)      # wound as the original: counter-clockwise for an up face, clockwise for a down face
         if changed:
             m["faces"], m["face_materials"] = faces, materials
             m["label"] = m.get("label", "") + "; slab layers cut back at the garden ponds"

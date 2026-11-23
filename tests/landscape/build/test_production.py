@@ -309,3 +309,15 @@ class KoiDepth(unittest.TestCase):
             water = p["position"][2]
             self.assertLess(top, water - P.POND["grille_top_below_water"] - P.POND["grille_t"], p["id"])
             self.assertGreater(p["ldb"]["at"][2] - 0.43 * L / 2, water - 0.9, p["id"])
+
+
+class PondSlabArea(unittest.TestCase):
+    def test_the_slab_loses_exactly_the_pond_area_even_on_an_L_shaped_face(self):
+        """The first cut (Delaunay + covers filter) lost 22.25 m2 per layer where the ponds are 7.28 m2: it dropped triangles over the concave corner. Area is conserved now."""
+        from shapely.geometry import Polygon, box as sbox
+        L = [[0, 0, -3.2], [10, 0, -3.2], [10, 4, -3.2], [4, 4, -3.2], [4, 10, -3.2], [0, 10, -3.2]]
+        ms = [dict(id="s", group="shell", material="m", faces=[L, L[::-1]], label="")]
+        pond = sbox(1, 1, 3, 2)
+        PR._cut_slab_under_ponds(ms, [pond], -3.0)
+        total = sum(Polygon([p[:2] for p in f]).area for f in ms[0]["faces"])
+        self.assertAlmostEqual(total, 2 * (Polygon([p[:2] for p in L]).area - pond.area), places=6)
