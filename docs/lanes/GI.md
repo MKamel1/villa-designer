@@ -49,15 +49,68 @@ They were drawn in an isolated preview scene (invented context boxes, a preview 
 
 ## Exposure
 
-EXPOSURE_SECTION
+The garden views use the production exposure groups of `knowledge/exposure-group-rule.json` (dominant light: lamps > 0.5 -> lamp-dominant; exterior-day with solar fraction <= 0.5 -> exterior-shade; evening / dusk presets
+preserved), **measured, not set**: the production scene was built with `write(measure_exposure_groups=True)`, the Blender probe run through jobq (`GI-measure-exposure-3`, GPU, `villa_scene.py --views none
+--measure-exposure-groups`, scene with ERCO IES, 46 views), the output copied byte-for-byte to `knowledge/exposure-groups.json`, and `write()` then accepted it (`require_record`). Results for the garden:
+
+| group | members (garden) | locked EV100 | white balance |
+|---|---|---|---|
+| exterior-day | v19 v25 v26 v27 v28 v36 v38 v39 v40 v41, gi-living-door, gi-dining-firepit, gi-dining-crown-summer / -winter (14) | 13.53 | 5500 K |
+| exterior-shade | v37-north-garden-lounge, gi-north-court-pond (solar fraction 0.47 / 0.46 <= 0.5) | 9.49 | 5500 K |
+| exterior-dusk | v07-terrace-dusk, v42-north-garden-evening | 0.61 | 4300 K |
+
+Consequences stated, not tuned: the deep-shade north court views v36 and v39 fall in exterior-day (solar fraction 0.61, 0.66 > 0.5: their sky patch is bright) and render near-black at that lock; the dusk lock is set by the darker
+of its two views, so v07 is over-exposed. `render_qa` on every garden image is run (`tools/gi_qa.py`, the same checks `scripts/villa_render.py` runs); no exposure was changed per view.
 
 ## Previews, critic, honest reading
 
-PREVIEW_SECTION
+Draft = Cycles GPU, 64 samples, 1920 x 1280; the three key views at **256 samples** (jobq `GI-final-draft-1`, `GI-final-key-1`); scene `out/gi/final/scene.json` (production build, receipts and record active). JPEGs (1500 px) and the
+`render_qa` / caption / critic records are in `knowledge/landscape/build/production/{draft,key}/` (PNGs stay in `out/gi/final/`). The L3 critic (`frozen-v1` rubric, Ollama VLM through jobq, `scripts/critic_vlm_batch.py` then
+`critic_run.py --vlm DIR`) was run on every image; **only gi-living-door passes** (R8 asset fidelity warns on it). I looked at every image myself; the reading below is mine, the critic's findings agree.
+
+| view | group | EV100 | spp | render_qa | critic | what I see, honestly |
+|---|---|---|---|---|---|---|
+| `gi-dining-firepit` | exterior-day | 13.53 | 256 | pass | fail (2 WARNs (R10, R8) escalate to FAIL) | Looking along the table to the fire pit and the west screen opening: real facade, sunlit; slab paving with the flush fire-pit cover as a plain disc; leaf-card trellis; BBQ; two big egg stand-ins in the left bed. The white facade fills the upper right (critic R10). |
+| `gi-living-door` | exterior-day | 13.53 | 256 | pass | pass | From the living door: textured pale-green render wall with coping, a dense leaf-card wall (generic stand-in leaves, dark green) and a star-jasmine trellis (yellow-olive real leaf cut-outs), real BBQ, free table and chairs, slab paving, two smooth matte egg stand-ins and a real lady palm. The 4 m wall above the planting is still a large blank plane. |
+| `gi-north-court-pond` | exterior-shade | 9.49 | 256 | pass | fail (score 0 on R12 (hero view); 2 WARNs (R10, R11) escalate to FAIL) | Pond from the lounge side: dark water, fine mesh grille, flush dark lip, mulch bed with steel edging, lady palm (asset), star-jasmine card wall, a row of green sphere stand-ins on the pond edge, a 2 m capsule stand-in cut by the frame. |
+| `gi-dining-crown-summer` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R11, R12, R8 (hero view)) | October: the crape stand-in leaf-on (translucent fuzzy balls on straight limbs), star jasmine and stand-in walls, plumeria in flower at the left edge. |
+| `gi-dining-crown-winter` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R11, R12, R3 (hero view); 2 WARNs (R10, R8) escalate to FAIL) | January, same camera: leaf-off crape (straight pole limbs and twig tufts, a candelabra), lower sun moves the wall shadow, evergreens unchanged. Proves the per-view season; the bare tree itself still reads as a diagram. |
+| `v07-terrace-dusk` | exterior-dusk | 0.61 | 64 | FAIL: colour_cast | fail (score 0 on R12, R3, R4 (hero view); 3 WARNs (R10, R11, R8) escalate to FAIL) | Dusk view from inside the crape crown: washed out, hazy and cold (cast 0.06 against 0.02): the dusk lock is set by the darker north-court view, so this brighter view is over-exposed. |
+| `v19-garden-facade` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R3 (hero view); 4 WARNs (R10, R11, R4, R8) escalate to FAIL) | Camera nudged out of the wall corner; looks through the crape crown (stand-in) at the real facade with its real sliding window. Facade is the production white plaster in direct sun (bright but not clipped at the group exposure). |
+| `v25-top-garden-gate` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R11 (hero view)) | Ground-floor terrace: the decided layout has no planting up here, so the view shows the production terrace floor (small cobble mosaic), parapet and neighbours. Not a garden view any more. |
+| `v26-top-garden-east` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R11 (hero view)) | Same terrace, east end. No garden content. |
+| `v27-east-yard-above` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R10, R11, R3, R4 (hero view)) | East yard: real dark pond with the fine grille, bench, mulch beds, real facade glazing. A 2.3 m dark stand-in capsule (fatsia) fills the left third: the stand-in problem at its worst. |
+| `v28-east-yard-below` | exterior-day | 13.53 | 64 | FAIL: crushed_shadows | fail (score 0 on R10, R4, R8 (hero view)) | East yard from the pond end: wall, pond edge, facade and glazing read well; the same capsule stand-in dominates; 17 % of pixels near black in the shaded wall side (render_qa crushed shadows). |
+| `v36-north-garden` | exterior-day | 13.53 | 64 | FAIL: crushed_shadows | fail (score 0 on R10, R4 (hero view); 2 WARNs (R11, R8) escalate to FAIL) | North court bench and paving in deep shade at the exterior-day lock: mostly black (11 % near black). The court faces a 9 m house wall; low light is real, the group assignment (solar fraction 0.61 > 0.5) is the rule's. |
+| `v37-north-garden-lounge` | exterior-shade | 9.49 | 64 | pass | fail (4 WARNs (R10, R11, R12, R8) escalate to FAIL) | North court through the lounge glass at the exterior-shade lock: balanced. Dark pond with fine grille (reads as a floor grate; no koi visible), mulch bed, star-jasmine card wall, stand-in capsules and spheres along the pond edge, glass reflections. |
+| `v39-north-garden-hanging-retreat` | exterior-day | 13.53 | 64 | FAIL: crushed_shadows | fail (score 0 on R10, R11, R4 (hero view); not evaluated: R12 (fail closed)) | The hanging swing no longer exists; the camera now faces a blank shaded wall (8 % near black). The view has lost its subject. |
+| `v40-south-garden-espalier` | exterior-day | 13.53 | 64 | pass | fail (score 0 on R4 (hero view); 2 WARNs (R10, R8) escalate to FAIL) | Best of the set: potted frangipani (graded asset, real flowers), star jasmine cards on the wall, mulch bed with edging, bench with slat seat. The espalier it was authored for is gone. |
+| `v41-south-garden-terrace` | exterior-day | 13.53 | 64 | pass | fail (2 WARNs (R11, R8) escalate to FAIL) | Dining table and chairs (free assets), crape stand-in (leaf-on), star jasmine and stand-in leaf-card walls, BBQ, paving, coping, real wall and sky. The overall reading is plausible; the leaf walls read as hedges (uniform stand-in leaves), the crown as fuzzy balls. |
+| `v42-north-garden-evening` | exterior-dusk | 0.61 | 64 | FAIL: colour_cast | fail (score 0 on R12 (hero view); 2 WARNs (R10, R11) escalate to FAIL) | Dusk at the exterior-dusk lock: cool blue cast (0.09 against a limit of 0.05), pond grille and card walls visible; no garden lighting of the decided layout exists, so nothing is lit. |
+
+
+What still reads as fake, with its cause:
+* **Stand-in plants** (59 of 101): smooth matte eggs, capsules and spheres. Cause: no graded asset for 11 species; the brief forbids inventing foliage; FG (approved later) is not integrated. Matte and correctly sized now, still unmistakable.
+* **Climber walls**: dense, uniformly coloured oval leaves on a flat plane of stems; no flowers, no wall visible through the leaf mass; star jasmine (the only real-leaf species) olive-yellow. Cause: generic stand-in leaf (ASSUMED
+  size, one shape); layout climber widths from policy; the atlas has only 15 live leaves.
+* **The 4 m walls** remain big blank planes above 1.5-2 m planting; the weathering is only readable in the foot band and in raking light. Cause: the layout fixes 4 m walls and age-3 climbers 1.3-1.9 m; no wall architecture is specified.
+* **Pond**: reads as a dark floor grate; the koi are not visible through the 50 mm grille and the water reflection; the water is a flat surface with a ripple bump. Cause: POLICY grille at 44 mm aperture on a 6 mm bar, camera angles, no caustics.
+* **Crape**: both states exist but the limbs are straight poles and the crown fuzzy translucent balls (candelabra); the olive is the Fab scan (reads fine). Cause: generic stand-in tree (FG would replace it).
+* **Paving**: honed slabs with flush joints read clean and flat; no wear, no edge chips, the flush fire-pit cover is a plain disc. Cause: ASSUMED detail level.
+* **House facade**: the production white plaster blows to near-white in direct sun at the exterior-day lock and fills the upper frame in the dining view (critic R10). Cause: the shell's exterior finish is its interior white (`plaster-warm-white`), not
+  the grey-green exterior paint the boundary walls use (RF / L6d scope).
+* **Placeholder cameras** (v19, v25, v26, v27, v28, v36, v39): authored for the old garden; several now look through a crown, into a stand-in mass, at a terrace with no garden or at a blank wall.
+* **Light**: hard 10:30 sun (40 degrees) from the production sky; north court in shade at that lock; no garden lighting exists for the decided layout (the previous garden's G4d fittings are still in the scene at their old positions).
 
 ## Receipts and scene hashes
 
-RECEIPT_SECTION
+Receipts (`knowledge/furniture-stage2.json.gz`, `parents-bed.json.gz`) were regenerated by the RA method, baseline-relative, in this order: (1) diagnostic exports with the receipts bypassed of the base tree (`20c01e4`, git worktree)
+and of this tree (`scripts/refresh_furniture_integ5.py export`); (2) `knowledge/approvals-review/section_diff.py`: **the old tree reproduces all eight stored section digests**; layout, specification, furniture, meshes, models, props
+**unchanged**; **materials changed: 31 `garden-*` finishes added, 0 removed, 0 changed**; **architecture changed: 253 faces removed / 368 added, every one a finish-layer face of the shell yard floor (paving and stone-substrate at z = -3.0)**,
+cut back under the garden's surfaces and ponds, **0 unexplained**; (3) `review-current`: **16 individual + joint baseline-relative reviews, all ok, 0 relative findings**; (4) `refresh_receipts.py` (now writes a second record `refresh_2026_11_22_GI`
+beside the first). Evidence: `knowledge/approvals-review/evidence-gi/`. Visual approvals are retained (no room look changed).
+
+Production build with every receipt and the exposure record active, no bypass (`VR.write`): HASHES_SECTION
 
 ## Decisions (no human was available)
 
@@ -72,4 +125,14 @@ RECEIPT_SECTION
 
 ## Open items
 
-OPEN_SECTION
+ 1. **FG integration** (generated foliage, client-approved after the brief): would replace the 59 stand-ins and the candelabra crape. Plug-in points exist (per-view season, `import_prop` placement, material hooks); not done by instruction.
+ 2. **Cameras**: re-author the placeholder views for the decided garden (v19, v25-v28, v36, v39 especially); v25/v26/v39 need a decision (no garden up there; the swing is gone).
+ 3. **Exposure of the north court**: v36 / v39 sit in exterior-day (solar fraction just over 0.5) and render near-black; the dusk lock over-exposes v07. A rule question for the lighting lane, not a per-view change.
+ 4. **Garden lighting** of the decided layout (L6): none; the previous garden's G4d fittings remain at their old positions.
+ 5. **Groundcover / planting density** at age 3 is the layout's (LDG): beds show mulch between sparse plants.
+ 6. **Facade finish**: the house exterior is the interior white plaster; boundary walls use the exterior grey-green. One finish should be chosen (RF / L6d).
+ 7. **Design model** (`model/api.py`, not GI's) still derives the garden from `villa_landscape.build`; `LAND.build` -> the decided garden is a one-line change for the lead (the scene already carries `ld-*` ids and `plant-ld-*` model ids via `_live_model_ids`).
+ 8. **Lane guard**: two files outside GI paths were edited (decision 4); `lane_guard GI` lists them.
+ 9. **Tests not green, none caused by GI**: `tests/lightverify/test_v10_erco.py` (3) and `test_v1_design.py::test_bound_pendant_is_one_emitter_at_its_record_flux` (LV pins of the old pendant; fail on the base tree too);
+    `tests/ops/test_jobq.py::...gpu_job_in_submit_order_but_cpu_in_parallel` (fails on the base tree too: the live runner's VRAM gating).
+10. **Interleaving**: RF and LV had not landed in `integ/aplus` at hand-back time; when they do, take their receipt and exposure files, regenerate (this doc's procedure), re-measure exposure with a new jobq id, rebuild.
