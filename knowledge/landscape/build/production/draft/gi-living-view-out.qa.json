@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final4/draft/gi-living-view-out.png",
+  "image": "out/gi3/draft/gi-living-view-out.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -18,13 +18,13 @@
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.61 (min 0.3)",
+      "detail": "median luminance 0.59 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "WARN",
-      "detail": "1st-percentile luminance 0.14 (max 0.1) (exposure locked across the set)",
+      "detail": "1st-percentile luminance 0.13 (max 0.1) (exposure locked across the set)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {

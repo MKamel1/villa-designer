@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final4/draft/v37-north-garden-lounge.png",
+  "image": "out/gi3/draft/v37-north-garden-lounge.png",
   "passed": false,
   "failed": [
     "koi_visible"
@@ -219,7 +219,7 @@
       "check": "koi_visible",
       "status": "FAIL",
       "passed": false,
-      "detail": "21 koi-orange pixels in the koi boxes in frame (need 40 per Mpx of frame)",
+      "detail": "17 koi-orange pixels in the koi boxes in frame (need 40 per Mpx of frame)",
       "lesson": "A floor under the water hid every koi in the first pond renders (2026-11-22): fish in frame must be seen."
     }
   ],

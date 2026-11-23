@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final4/key/gi-living-door.png",
+  "image": "out/gi3/draft/gi-living-door.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -18,7 +18,7 @@
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.43 (min 0.3)",
+      "detail": "median luminance 0.44 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {

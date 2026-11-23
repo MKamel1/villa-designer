@@ -2,7 +2,7 @@
   "view": "gi-dining-firepit",
   "title": "South garden: dining table, fire pit and the screen opening",
   "exposure_group": "exterior-day",
-  "camera_exposure_stops": -12.149517059326172,
+  "camera_exposure_stops": -12.150131225585938,
   "white_balance_k": 5500.0,
   "white_balance_tint": 10.0,
   "white_balance_illuminant": "daylight",
@@ -1232,7 +1232,7 @@
     "Dressing: clothes on the dressing rails, duvets and pillows on the beds (not design).",
     "ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and legs, and the bunk ladder on its open side; product and fixing details require Revit coordination. Rectangular lofted bed pillows are dressing, not specified products.",
     "ASSUMED joinery details: slim walnut frames and clear architectural glass on the library cabinets, open timber shelves, upholstered daybed mattress and loose cushions, two ergonomic cinema task chairs, microwave drawer in the island, and cleaning-storage doors below the folding counter. Book props are labelled dressing; all builder vertices are checked against their authored envelopes.",
-    "By day the basement rooms are shown with their ambient and accent lights at 50 % (a basement is used with lights on by day); bathrooms by day have their lights on; other ground-floor day views are daylight only.",
+    "By day the basement rooms are shown in the lighting design's Day scene (ambient 100 %, accent 50 %; a basement is used with lights on by day); bathrooms by day have their lights on; other ground-floor day views are daylight only.",
     "ASSUMED deck-mounted brass bath mixer and spout, three silvered vanity mirrors, coffee machine bodies with trays, spouts and water tanks, and dirty-kitchen canopy and duct; coordinate with Revit.",
     "ASSUMED kitchen products: two worktop coffee machines, island microwave drawer and dirty-kitchen integrated fridge and oven (cleaning storage moves below the folding counter), island downdraft extractor and dirty-kitchen wall hood. Both run sinks and taps are procedural geometry. Product choices and services go into Revit.",
     "ASSUMED hatch reveals and roll-up shutter housing: shutter raised for all current day views; three 0.4 m sliding panels are stowed inside the 0.4 m west pocket, with an overhead track.",
@@ -1382,7 +1382,7 @@
     {
       "id": "bulb-PEN-GLOBE-kitchen-01",
       "layer": "decorative",
-      "area_m2": 0.08339183215866797,
+      "area_m2": 0.08450909137536655,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -1390,7 +1390,7 @@
     {
       "id": "bulb-PEN-GLOBE-kitchen-02",
       "layer": "decorative",
-      "area_m2": 0.08339174865977839,
+      "area_m2": 0.0845090440234344,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -1398,7 +1398,7 @@
     {
       "id": "bulb-PEN-GLOBE-kitchen-03",
       "layer": "decorative",
-      "area_m2": 0.08339161885669455,
+      "area_m2": 0.08450919442839222,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -1646,7 +1646,7 @@
     {
       "id": "bulb-PEN-GLOBE-stair-gf-01",
       "layer": "decorative",
-      "area_m2": 0.08339186719967984,
+      "area_m2": 0.08450950798942358,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -1654,7 +1654,7 @@
     {
       "id": "bulb-PEN-GLOBE-stair-gf-02",
       "layer": "decorative",
-      "area_m2": 0.08339184381475206,
+      "area_m2": 0.08450939040267258,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -1662,7 +1662,7 @@
     {
       "id": "bulb-PEN-GLOBE-stair-gf-03",
       "layer": "decorative",
-      "area_m2": 0.0833920305740321,
+      "area_m2": 0.08450929943137453,
       "exitance_lm_per_m2": 9353.5,
       "emitted_lumens": 0.0,
       "output_factor": 0.0
@@ -9262,12 +9262,12 @@
   "render_evidence": {
     "exposure_group": "exterior-day",
     "exposure_rule_measurement": {
-      "lamp_luminance_sum": 0.09736873717885057,
-      "daylight_luminance_sum": 62650275.66835661,
-      "sky_luminance_sum": 8178199.507765894,
+      "lamp_luminance_sum": 0.0973820736798912,
+      "daylight_luminance_sum": 62650446.15532657,
+      "sky_luminance_sum": 8178161.930552115,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.554162946432216e-09,
-      "solar_fraction": 0.8694626732201828,
+      "lamp_fraction": 1.5543715887846683e-09,
+      "solar_fraction": 0.8694636282353624,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-firepit",
@@ -9369,9 +9369,9 @@
       "group": "exterior-day"
     },
     "exposure_rule_sha256": "ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09",
-    "exposure_measurement_sha256": "7244d3fd215b9aa12376c7732e054145c8ba530705ef9ed7671088efa708cea3",
+    "exposure_measurement_sha256": "6f59f32abfc609f08150e1b7b20b117c07d557d5fd5d6dcec7a1b032b9441405",
     "white_balance_k": 5500.0,
-    "exposure_stops": -12.149517059326172,
+    "exposure_stops": -12.150131225585938,
     "exposure_state": "exterior-day",
     "metered_over": [
       "gi-firepit-opening",
