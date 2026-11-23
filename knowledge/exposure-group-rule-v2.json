@@ -1,0 +1,45 @@
+{
+  "schema": "dominant-light-rule/2",
+  "decision": "client decision 2026-10-15 (rule 1); amendment proposed by lane GI 2026-11-22 (rule 2), on measured luminance per view, see docs/lanes/GI.md \"Exposure\"",
+  "status": "PRE-REGISTERED before the rule-2 verdicts were measured; the thresholds below were read off the rule-1 measurements of the garden views (knowledge/exposure-groups.json of GI-measure-exposure-3) and are validated on views that did not exist then",
+  "basis": "ASSUMED photographic classification, not a published lighting standard; strict majority defines dominance. Client: shade over sun.",
+  "lamp_fraction_threshold": 0.5,
+  "solar_fraction_threshold": 0.5,
+  "source_probe": {
+    "resolution": [
+      144,
+      96
+    ],
+    "samples": 256,
+    "denoising": false,
+    "seed": 0,
+    "max_bounces": 16,
+    "mask": "same pixel indices for every source; lowest 97% of summed lamps-only plus daylight-only luminance, positive combined values only",
+    "statistic": "sum of linear luminance over fixed mask; lamps/(lamps+daylight); solar=max(0,daylight-sky_only)/daylight, clamped to [0,1]"
+  },
+  "assignment_order": [
+    "Preserve evening exposure preset; exterior-dusk views are exterior-dusk, or exterior-dusk-dim below dusk_split_mean_luminance (rule 2)",
+    "For original day or exterior-day: lamps fraction > 0.5 -> lamp-dominant",
+    "Otherwise original exterior-day and (solar fraction <= 0.5 or mean daylight luminance < shade_mean_luminance) -> exterior-shade",
+    "Otherwise keep original day or exterior-day"
+  ],
+  "exterior_shade_definition": "Exterior daytime subjects represented by the camera meter are predominantly sky-lit, with at most half their daylight luminance attributable to the sun disc. Same scene and camera with only Nishita sun_disc disabled measures sky-only; includes indirect sunlight. No identifiers, compass names or QA outcomes select membership.",
+  "white_balance": {
+    "day": 5500,
+    "exterior-day": 5500,
+    "exterior-shade": 5500,
+    "evening": 3000,
+    "exterior-dusk": 4300,
+    "lamp-dominant": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting",
+    "exterior-dusk-dim": 4300
+  },
+  "exposure": "Unchanged photoreal.camera_meter per view: 24 samples, 15% image scale, top 3% removed, logarithmic average, -0.4 stop bias, unchanged capped highlight priority; upper median across complete group, independent of selected render subset",
+  "cohort": "All authored views, including retired diagnostic members, retain metering participation for compatibility; every active view is assigned automatically. Preserve evening/dusk cohort order and settings.",
+  "freeze": "Save probe values, derived assignments, view inputs and complete transport fingerprint by value. Validate assignment by recomputation, immutable canonical rule equality, measurement digest and live transport/view hashes; any change requires new pre-registered measurement, never a hand membership override.",
+  "qa": "Production render_qa unchanged, every selected view, no exemptions",
+  "supersedes_sha256": "be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6",
+  "shade_mean_luminance": 340.0,
+  "shade_mean_luminance_basis": "An exterior-day view whose mean metered daylight luminance (daylight_luminance_sum / metered_pixels over the pre-registered mask, linear probe units) is below this is exterior-shade, whatever its sun fraction. Rule-1 data (GI-measure-exposure-3, 16 exterior-day-original views): v37 99.7 and gi-north-court-pond 101.6 (sun fraction <= 0.5, exterior-shade under rule 1); v39 135.5, v38 163.4 (retired), v36 178.5 (sun fraction 0.53-0.68: bounced sun lit a small patch of an otherwise sky-lit court), which rule 1 left in exterior-day; then v28 632, v27 758 and everything sunlit 1434-5456. The gap 178.5 -> 632 is 1.8 stops; 340 is its geometric middle, rounded. At the exterior-day lock v36 was 11 % near-black and v39 8 % (render_qa limit 8 %); v28 (632) also failed render_qa (17 % near-black) and stays outside the rule: the gap is too close to call it shade. The threshold is read off the same data, so it is validated on the garden views authored afterwards. ASSUMED photographic classification, not a published standard, like the other thresholds.",
+  "dusk_split_mean_luminance": 0.65,
+  "dusk_split_basis": "An exterior-dusk view whose mean metered (lamps + daylight) luminance is below this takes its own group, exterior-dusk-dim, same 4300 K. Rule-1 data: v07 measures 1.68 and v42 0.25 (2.7 stops apart); one lock for both left v07 over-exposed (colour cast 0.06 against 0.02, washed out). 0.65 is the geometric middle of 0.25 and 1.68, rounded. ASSUMED, as above."
+}

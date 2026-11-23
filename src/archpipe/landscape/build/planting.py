@@ -14,8 +14,10 @@ import random
 import zlib
 from pathlib import Path
 
+import numpy as np
+
 from . import policy as P
-from .geom import Obj, box, ellipsoid, cyl, tube
+from .geom import Obj, Part, box, ellipsoid, cyl, tube
 
 ROOT = Path(__file__).resolve().parents[4]
 PLANTS = ROOT / "knowledge/landscape/plants"
@@ -163,10 +165,18 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
     x, y = at
     row = dict(id=oid, species=slug, age_years=age, mature_height_m=round(h_m, 3), mature_spread_m=round(s_m, 3), shown_height_m=round(h, 3),
                shown_spread_m=round(s, 3), size_basis=basis, size_fraction=round(frac, 3))
+    if climbing is not None and fg_wanted(slug):
+        mat, h, why_h = climber_heights(slug, f, climbing["max_h"], age)
+        row.update(mature_height_m=round(mat, 3), shown_height_m=round(h, 3), size_basis=why_h, size_fraction=round(h / mat, 3))
+        return _fg_climber(oid, slug, f, climbing, s, h, age, base_z, support, row)
     if climbing is not None:
         if basis.startswith("GAP"):          # no sourced height: a climber is taken to cover 80 % of the structure it climbs at maturity (policy)
             h = 0.8 * climbing["max_h"] * frac; row["size_basis"] = "POLICY: 80 % of the structure height at maturity (height not sourced)"
         return _climber_panel(oid, slug, f, climbing, s, h, age, base_z, support, row)
+    if fg_wanted(slug, r["drawable"]):
+        if max_spread:
+            s = min(s, max_spread)
+        return fg_obj(oid, slug, at, base_z, h, s, support, age, row)
     if r["drawable"]:
         a = _best_asset(r["assets"], h_m, f.get("spread"))
         sc = h / a["size_m"][2]
@@ -194,6 +204,96 @@ def plant_objects(oid, slug, plant, at, age, ground_z, base_z=None, support=("gr
     row.update(status="standin", reason=r["why"], colour_basis=why)
     return o, row
 
+
+
+# --- generated foliage (lane FG, client-approved 2026-11-22), placed by lane GI -------------------------------------------------------------------------------------------------
+FG = True       # False = the labelled STAND-IN fallback (egg masses, generic leaf cards) for every species FG generates
+FG_CLIMB_LIFT = 0.06      # POLICY: the nearest leaf or stem of a generated climber stands this far off the wall face (m)
+FG_TOP_CLEAR = 0.15       # POLICY: a climber stops this far below the coping (m)
+FG_SPREAD_CAP = 2.0       # POLICY: a climber on a wall is at most this many times the species' sourced single-plant spread wide (neighbours overlap; one plant does not curtain a wall)
+
+
+def fg_species():
+    from ..foliage.species import SPECS
+    return SPECS
+
+
+def fg_wanted(slug, drawable=False):
+    """A generated plant stands for `slug` when FG has the species and no graded asset of it exists (a graded scan, e.g. aspidistra, stays the asset)."""
+    return FG and slug in fg_species() and not drawable
+
+
+def climber_heights(slug, f, max_h, age):
+    """-> (mature, at age, basis) height of a climber on a structure `max_h` high. The sourced height RANGE is for the species; a climber's height is set by its support, so the
+    sourced upper figure is the one a tall support can use (capped FG_TOP_CLEAR below the coping). No sourced height: 80 % of the structure (the earlier policy). Age: the same
+    size-fraction policy the other plants use (ASSUMED, no growth curve is held)."""
+    hi = (f.get("height") or (None, None))[1]
+    top = max_h - FG_TOP_CLEAR
+    if hi:
+        mat, basis = min(top, hi), "SOURCED upper height %.1f m (%s), capped at the structure" % (hi, f.get("height_source", "plants.json"))
+    else:
+        mat, basis = 0.8 * max_h, "POLICY: 80 %% of the structure height (height not sourced)"
+    return mat, mat * size_fraction(age, f.get("growth"), "climber"), basis
+
+
+def fg_row_fidelity(slug, oid, state="leaf-on"):
+    from ..foliage import generate as G, library as FL
+    sp = G.SPECS[slug]
+    return G.label_of(slug, sp, FL.seed_of(oid), state, set(sp["banks"]))
+
+
+def fg_obj(oid, slug, at, base_z, h, s, support, age, row, yaw=0.0, lean=(0.0, 0.0), clear_stem=None, climbing=None, label="", states=("leaf-on",)):
+    """An Obj with no parts: the generated plant is built inside the Blender job from `asset['fg']` (species, size, state, seed from the element id). `bounds` is the
+    plan/height box the layout checks read; `climbing` = dict(axis, sgn, face, lo, hi, keepouts) for a wall climber."""
+    x, y = at
+    lab = fg_row_fidelity(slug, oid)
+    fg = dict(species=slug, height_m=h, spread_m=s, states=list(states), lean=list(lean), clear_stem=clear_stem, yaw_deg=yaw, label=lab, climbing=climbing)
+    if climbing:
+        a, sg, face, lo, hi = climbing["axis"], climbing["sgn"], climbing["face"], climbing["lo"], climbing["hi"]
+        t = FG_CLIMB_LIFT + 0.35
+        n0, n1 = sorted((face, face + sg * t))
+        bounds = (lo, n0, base_z, hi, n1, base_z + h) if a == "x" else (n0, lo, base_z, n1, hi, base_z + h)
+    else:
+        bounds = (x - s / 2, y - s / 2, base_z, x + s / 2, y + s / 2, base_z + h)
+    o = Obj(oid, "plant", "%s %s" % (label, FG_CAPTION % (lab["caption"], s, h)) if label else FG_CAPTION % (lab["caption"], s, h), rests_on=support, footprint_mode=None,
+            asset=dict(asset_id="fg-" + slug, mode="fg", at=[x, y, base_z], bounds=bounds, native_size_m=[s, s, h], fg=fg, grade="generated", licence="own generator; leaf scans: Fab Standard (client download), see knowledge/landscape/foliage/assets_manifest.json",
+                       author="lane FG", source="knowledge/landscape/foliage", species_fit=lab["fidelity"], gltf=""),
+            meta=dict(species=slug, age=age, fg=lab, climbing=bool(climbing)))
+    if not climbing:
+        top, c0 = base_z + h, base_z + 0.3 * h
+        o.meta["envelope"] = ((bounds[0] + bounds[3]) / 2, y, (top + c0) / 2, s / 2, s / 2, (top - c0) / 2)
+    row.update(status="generated", fidelity=lab["fidelity"], atlas_used=lab["atlas_used"], atlas_species=lab["atlas_species"], generator_version=lab["generator_version"], seed=lab["seed"],
+               caption=lab["caption"], leaf_len_source=lab["leaf_len_source"], states=list(states))
+    return o, row
+
+
+FG_CAPTION = "GENERATED %s: %.2f m wide x %.2f m high"
+
+
+def _fg_climber(oid, slug, f, cl, s, h, age, base_z, support, row):
+    """A generated climber on a wall or screen: grown in the structure's plane, leaves facing the garden. Width follows height (the earlier policy) but never beyond FG_SPREAD_CAP
+    single-plant spreads (sourced) and never past the free stretch of the structure."""
+    C = P.CLIMBER
+    hh = min(h, cl["max_h"] - FG_TOP_CLEAR)
+    smax = (f.get("spread") or (None, None))[1]
+    w = max(C["min_w"], C["width_per_height"] * hh)
+    if smax:
+        w = min(w, FG_SPREAD_CAP * smax)
+    c = cl["at"][0] if cl["axis"] == "x" else cl["at"][1]
+    w = min(w, cl["span"][1] - cl["span"][0])
+    lo = min(max(cl["span"][0], c - w / 2), cl["span"][1] - w)
+    hi = lo + w
+    ax, sg = cl["axis"], cl["sgn"]
+    yaw = (0.0 if sg > 0 else 180.0) if ax == "x" else (-90.0 if sg > 0 else 90.0)      # the plant's +y (leaf side) -> the structure's garden-side normal
+    u = (lo + hi) / 2
+    at = (u, cl["face"]) if ax == "x" else (cl["face"], u)
+    row.update(climbing=True, shown_height_m=round(hh, 3), panel_width_m=round(w, 3), on=cl.get("on"), sourced_spread_m=smax)
+    keep = [list(k)[:4] for k in cl.get("keepouts", ())]
+    o, row = fg_obj(oid, slug, at, base_z, hh, w, support, age, row, yaw=yaw, label="climber on %s" % cl.get("on"),
+                    climbing=dict(axis=ax, sgn=sg, face=cl["face"], lo=lo, hi=hi, keepouts=keep, lift=FG_CLIMB_LIFT),
+                    states=("leaf-on", "leaf-off") if f.get("habit") == "deciduous" else ("leaf-on",))
+    o.meta.update(habit=f.get("habit"), climbing=True, fg_keepouts=keep)
+    return o, row
 
 
 def climber_panels():
@@ -241,20 +341,145 @@ def _climber_panel(oid, slug, f, cl, s, h, age, base_z, support, row):
         row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit="species")
         return o, row
     col, why = foliage_colour(f.get("foliage_text", ""))
-    atlas = next((a for a in assets if a.get("texture") and Path(a["texture"]).exists()), None)
-    mat = ("atlas:%s:%.3f,%.3f,%.3f" % (atlas["texture"], *col)) if atlas else "climber:%.3f,%.3f,%.3f:%s" % (*col, "d" if f.get("habit") == "deciduous" else "e")
-    z1 = base_z + hh
-    part = box(mat, lo, n0, base_z, hi, n1, z1) if cl["axis"] == "x" else box(mat, n0, lo, base_z, n1, hi, z1)
+    return _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why, age)
+
+
+def leaf_rects():
+    """Star jasmine atlas cut-outs: [(x0, y0, x1, y1) px of the 4096 atlas] of the 15 live leaves (G/R >= 1.0 drops the 5 dead ones, LDL pass 6)."""
+    d = json.loads((ROOT / "knowledge/landscape/build/leaf-rects.json").read_text())["star_jasmine"]
+    return [r[:4] for r in d["rects"] if r[5] >= 1.0], d["scan_m"]
+
+
+STAND_IN_LEAF_M = {"jasminum_sambac": (0.045, 0.06), "petrea_volubilis": (0.05, 0.085), "vitis_vinifera": (0.11, 0.12)}      # ASSUMED generic leaf (w, h) m of a labelled stand-in: not sourced per species
+
+
+def _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why, age):
+    """A climber on a wall or screen as 3D leaf cards (depth off the face) on woody stems, not a textured plane. Star jasmine uses the real leaf cut-outs of the LDL atlas
+    (graded B, climber use only); every other climber species is a labelled STAND-IN card set (generic leaf of ASSUMED size, never another species' atlas).
+    Deterministic per id. A deciduous climber's winter geometry is its stems alone."""
+    C = P.LEAF_CARD
+    rng = random.Random(zlib.crc32(oid.encode()))
+    axis, sgn, face = cl["axis"], cl["sgn"], cl["face"]
+    w = hi - lo
+    atlas = slug == "trachelospermum_jasminoides"
     if atlas:
-        o = Obj(oid, "plant", "%s climber panel: leaf-scan atlas %s (%s, %s) on a plane" % (slug, atlas["id"], atlas["licence"], atlas["author"]), [part], rests_on=support, footprint_mode=None,
-                meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit"), atlas=atlas["id"]))
-        row.update(status="asset", asset=atlas["id"], grade=atlas["grade"], species_fit="species")
-        return o, row
+        rects, scan = leaf_rects()
+        sizes = [((r[2] - r[0]) * scan / 4096, (r[3] - r[1]) * scan / 4096) for r in rects]
+        lmat = "leaf-card:star-jasmine"
+    else:
+        sizes = [STAND_IN_LEAF_M.get(slug, (0.05, 0.07))]
+        lmat = "leaf-card:standin:%.3f,%.3f,%.3f" % col
+
+    def to3(u, d, z):                                    # (along the face, outward depth, height) -> model xyz
+        return (u, face + sgn * d, z) if axis == "x" else (face + sgn * d, u, z)
+    keep = [(r[0], r[1], base_z, r[2], r[3], base_z + 1.0) for r in cl.get("keepouts", ())]
+    nout = np.array([0.0, sgn, 0.0]) if axis == "x" else np.array([sgn, 0.0, 0.0])
+    tang = np.array([1.0, 0.0, 0.0]) if axis == "x" else np.array([0.0, 1.0, 0.0])
+    zup = np.array([0.0, 0.0, 1.0])
+    # --- stems: wavy main stems up the face, side branches off them; the leaves cluster round these
+    stems, pts = [], []
+    n_main = max(2, int(round(w * C["stems_per_m"])))
+    top = base_z + hh
+    for k in range(n_main):
+        u = lo + (k + rng.uniform(0.2, 0.8)) * w / n_main
+        z, d = base_z, rng.uniform(0.03, 0.06)
+        path = [(u, d, z)]
+        reach = top - rng.uniform(0.05, 0.35) * hh
+        while z < reach:
+            z += rng.uniform(0.22, 0.34); u = min(hi - 0.03, max(lo + 0.03, u + rng.uniform(-0.12, 0.12))); d = min(0.09, max(0.025, d + rng.uniform(-0.02, 0.02)))
+            path.append((u, d, min(z, reach)))
+        for i in range(len(path) - 1):
+            r0 = rng.uniform(*C["stem_r"]) * (1.25 - 0.5 * i / max(1, len(path) - 1))
+            stems.append(tube("climber-stem", to3(*path[i]), to3(*path[i + 1]), r0, r0 * 0.85, 5))
+        pts += path
+        for _ in range(int(hh * 2.2)):                  # side branches
+            u0, d0, z0 = path[rng.randrange(len(path))]
+            u1 = min(hi - 0.02, max(lo + 0.02, u0 + rng.uniform(-0.45, 0.45))); z1 = min(top, z0 + rng.uniform(0.05, 0.4)); d1 = rng.uniform(0.03, 0.10)
+            stems.append(tube("climber-stem", to3(u0, d0, z0), to3(u1, d1, z1), 0.0028, 0.0018, 4))
+            pts.append((u1, d1, z1))
+    # --- leaf cards
+    n_cards = int(C["per_m2"] * w * hh * min(1.0, 0.35 + 0.65 * (hh / max(cl["max_h"], 1e-6))))
+    verts, faces, rid = [], [], []
+    for _ in range(n_cards):
+        if rng.random() < 0.8:                           # near a stem: structure, not wallpaper
+            u0, d0, z0 = pts[rng.randrange(len(pts))]
+            u = min(hi - 0.02, max(lo + 0.02, u0 + rng.gauss(0, 0.11))); z = min(top - 0.02, max(base_z + 0.1, z0 + rng.gauss(0, 0.13)))
+        else:
+            u, z = rng.uniform(lo + 0.02, hi - 0.02), rng.uniform(base_z + 0.1, top - 0.02)
+        d = rng.uniform(*C["depth"]) ** 1.0
+        ri = rng.randrange(len(sizes)); lw, lh = sizes[ri]
+        sc = rng.uniform(0.85, 1.2)
+        N = nout + tang * rng.uniform(-0.55, 0.55) + zup * rng.uniform(-0.55, 0.2)       # leaf normal: outward, drooping, turned a little each way
+        N = N / np.linalg.norm(N)
+        roll = rng.uniform(-0.9, 0.9)                    # long axis near vertical (a leaf hangs from its petiole), rolled about the normal
+        b = zup - N * (zup @ N); b = b / np.linalg.norm(b)
+        a = np.cross(b, N)
+        b = math.cos(roll) * b + math.sin(roll) * a; a = np.cross(b, N)
+        c = np.array(to3(u, d, z))
+        hw, hl = lw * sc / 2, lh * sc / 2
+        quad = [c - a * hw - b * hl, c + a * hw - b * hl, c + a * hw + b * hl, c - a * hw + b * hl]
+        kd, ku = (1, 0) if axis == "x" else (0, 1)              # the whole card moves (it stays planar) to stand at least 12 mm off the face and inside the free stretch
+        dmin = min((q[kd] - face) * sgn for q in quad)
+        if dmin < 0.012:
+            quad = [q + nout * (0.012 - dmin) for q in quad]
+        umin, umax = min(q[ku] for q in quad), max(q[ku] for q in quad)
+        if umin < lo + 0.012:
+            quad = [q + tang * (lo + 0.012 - umin) for q in quad]
+        elif umax > hi - 0.012:
+            quad = [q - tang * (umax - hi + 0.012) for q in quad]
+        if any(k[0] - 0.01 < q[0] < k[3] + 0.01 and k[1] - 0.01 < q[1] < k[4] + 0.01 and k[2] < q[2] < k[5] for q in quad for k in keep):
+            continue                                     # a leaf never grows through a bench, table or pot standing against the face
+        k0 = len(verts)
+        verts += quad
+        faces.append([k0, k0 + 1, k0 + 2, k0 + 3]); rid.append(ri)
+    V = np.array(verts, float).reshape(-1, 4, 3)
+    kd = 1 if axis == "x" else 0
+    # Grounding (the scene's support guard, `render_support.unsupported`): every leaf island must chain, box to box within 10 mm, to a stem (which reaches the ground) or stand within 15 mm
+    # of the wall. A leaf out in the air between stems is pressed back to 12 mm off the face (it hangs on its petiole there); leaves that chain are left where they are.
+    lo_c, hi_c = V.min(axis=1), V.max(axis=1)
+    sb = np.array([p_.bounds() for p_ in stems]) if stems else np.zeros((0, 6))
+    tol = 0.005
+    near = lambda alo, ahi, blo, bhi: np.all((alo[:, None, :] - tol <= bhi[None, :, :]) & (ahi[:, None, :] + tol >= blo[None, :, :]), axis=2)
+    ok = near(lo_c, hi_c, sb[:, :3], sb[:, 3:]).any(axis=1) if len(sb) else np.zeros(len(V), bool)
+    ok |= (np.abs(lo_c[:, kd] - face) * 1.0 if sgn > 0 else np.abs(hi_c[:, kd] - face)) < 0.0145
+    adj = near(lo_c, hi_c, lo_c, hi_c)
+    while True:
+        grow = adj[:, ok].any(axis=1) & ~ok
+        if not grow.any():
+            break
+        ok |= grow
+    for i in np.nonzero(~ok)[0]:
+        dmin = (V[i, :, kd] - face).min() * sgn
+        V[i, :, kd] += sgn * (0.012 - dmin)
+    V = V.reshape(-1, 3)
+    k = 1 if axis == "x" else 0                          # the depth axis: a tilted card's corner never goes behind 12 mm off the face (it presses on the wall, it does not pass through it)
+    V[:, k] = face + sgn * np.maximum((V[:, k] - face) * sgn, 0.012)
+    j = 0 if axis == "x" else 1                          # and never past the ends of the free stretch (a perpendicular wall or a bench stops the panel)
+    V[:, j] = np.clip(V[:, j], lo + 0.012, hi - 0.012)
+    leaves = Part(lmat, V, faces, leaf_rects=rid)
+    stem_parts = stems
+    hab = "deciduous" if f.get("habit") == "deciduous" else "evergreen"
+    row.update(climbing=True, shown_height_m=round(hh, 3), panel_width_m=round(w, 3), on=cl.get("on"), leaf_cards=n_cards, stems=len(stems))
     r = resolve(slug)
-    o = Obj(oid, "plant", "STAND-IN procedural leaf-cutout panel for the climber %s (no graded climber asset: %s), %.2f m wide x %.2f m high on %s" % (slug, r["why"], w, hh, cl.get("on")), [part],
-            rests_on=support, footprint_mode=None, standin=True, meta=dict(species=slug, age=age, climbing=True, colour=why, habit=f.get("habit")))
+    if atlas:
+        a_ = next(x for x in climber_panels_all() if slug in (x.get("maps_to") or []))
+        o = Obj(oid, "plant", "%s climber: %d 3D leaf cards (real cut-outs of the graded %s atlas %s, %s, %s) on %d woody stems, depth %.0f-%.0f mm off the face"
+                % (slug, n_cards, a_["grade"], a_["id"], a_["licence"] if "licence" in a_ else "Fab Standard", a_.get("author", "Megascans"), len(stems), C["depth"][0] * 1000, C["depth"][1] * 1000),
+                [*stem_parts, leaves], rests_on=support, footprint_mode=None, winter_parts=([*stem_parts] if hab == "deciduous" else []),
+                meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit"), atlas=a_["id"], cards=True))
+        row.update(status="asset", asset=a_["id"], grade=a_["grade"], species_fit="species", construction="atlas-built leaf cards, climber use only")
+        return o, row
+    o = Obj(oid, "plant", "STAND-IN climber %s: %d generic leaf cards (ASSUMED %.0f x %.0f mm leaf; no graded climber asset: %s) on %d stems, %.2f m wide x %.2f m high on %s"
+            % (slug, n_cards, sizes[0][0] * 1000, sizes[0][1] * 1000, r["why"], len(stems), w, hh, cl.get("on")), [*stem_parts, leaves],
+            rests_on=support, footprint_mode=None, standin=True, winter_parts=([*stem_parts] if hab == "deciduous" else []),
+            meta=dict(species=slug, age=age, climbing=True, colour=why, habit=f.get("habit"), cards=True))
     row.update(status="standin", reason=r["why"], colour_basis=why)
     return o, row
+
+
+def climber_panels_all():
+    """Climber atlas rows of the plant asset table (graded A/B), whose `leaf_type` is `atlas_cutouts`."""
+    return [x for x in _assets()["assets"] if x.get("leaf_type") == "atlas_cutouts" and x.get("grade") in ("A", "B") and x.get("maps_to")]
 
 
 def canopy_clumps(cx, cy, base_z, h, spread, stem, mat):
@@ -345,6 +570,17 @@ def pruned_tree(oid, slug, t, age, ground_z):
         r = dict(drawable=False, assets=[], why="graded asset %s exists but is one leaf state only (sparse flowering, 2.8 m): a deciduous shade tree is built with both states" % r["assets"][0]["id"])
     row = dict(id=oid, species=slug, age_years=age, mature_height_m=round(h_m, 3), mature_spread_m=round(s_m, 3), shown_height_m=round(h, 3), shown_spread_m=round(sp, 3),
                size_basis="PRUNED canopy from the layout (natural size not used)", size_fraction=round(frac, 3), pruned=True, clear_stem_m=round(stem, 3))
+    if fg_wanted(slug):
+        cc = t.get("crown_center") or t["center"]
+        lean = math.hypot(cc[0] - x, cc[1] - y)
+        if lean > max(t.get("crown_lean_m") or 0.0, 0.5 * s_m) + 0.05:
+            cc = (x, y)
+        lv = ((cc[0] - x) * frac, (cc[1] - y) * frac)
+        o, row = fg_obj(oid, slug, (x, y), ground_z, h, sp, ("ground",), age, row, lean=lv, clear_stem=stem, label="pruned shade tree",
+                        states=("leaf-on", "leaf-off") if decid else ("leaf-on",))
+        o.meta.update(pruned=True, deciduous=decid, crown_center=(x + lv[0], y + lv[1]))
+        row.update(leaf_states=list(row["states"]))
+        return o, row
     if r["drawable"]:
         a = _best_asset(r["assets"], h_m, None)
         nz, nxy = a["size_m"][2], max(a["size_m"][:2])

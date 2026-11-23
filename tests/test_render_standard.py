@@ -377,10 +377,11 @@ class RenderStandard(unittest.TestCase):
 
     def test_our_exterior_and_boundary_are_grey_green_context_is_neutral(self):
         finish = SCENE["materials"]["paint-exterior-grey-green"]
-        self.assertAlmostEqual(finish["reflectance"], 0.65)
+        self.assertAlmostEqual(finish["reflectance"], 0.50)      # lane GI 2026-11-22: 0.65 blew to white in direct sun; ASSUMED, <= 0.75
         self.assertNotIn("asset", finish, "painted mineral render must stay smooth")
         self.assertAlmostEqual(sum(a * b for a, b in zip(finish["base_rgb"], (0.2126, 0.7152, 0.0722))),
-                               0.65, delta=0.005)
+                               0.50, delta=0.005)
+        self.assertLessEqual(SCENE["materials"]["render-exterior"]["reflectance"], 0.75)
         self.assertGreater(finish["base_rgb"][1], finish["base_rgb"][0])
         shell = [m for m in SCENE["meshes"] if m["id"].startswith("shell-")]
         boundary = [m for m in shell if m.get("source_id", "").startswith("fence-") or

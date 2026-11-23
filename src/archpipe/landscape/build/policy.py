@@ -29,9 +29,10 @@ POND = dict(edge_lip=0.08, coping_h=0.10, grille_bar=0.006, grille_pitch=0.05, g
 # 80 mm contrasting flush lip on a 100 mm coping, 100 mm walls and floor outside the water. Grille = welded mesh of 6 x 6 mm bars at 50 mm pitch (44 mm clear aperture), dark finish.
 # POLICY, not a standard: the held sources say only 'rigid metal grille' (RoSPA, W-rospa-rigid-grille) and 'strong mesh ... carry a child' (Mid and West Wales FRS, W-pond-mawwfire-grille); neither gives an aperture, wire
 # section or load (GAP-POND-GRILLE-LOAD). 50 mm is ours: fine enough to read as mesh and to stop a hand and a koi net, coarse enough to see the koi through. The supplier certifies the real mesh.
+KOI_CENTRE_BELOW_WATER = 0.20   # POLICY (ours): fish centre depth under the water surface; the grille top is 0.04 m down, so a 0.1 m deep koi clears it by ~0.06 m
 PIT = dict(cover_base_t=0.006, hole=0.80, liner_t=0.04, depth=0.50, cover_t=0.046, gap=0.003, flame_h=0.35)   # ASSUMED; cover lip from the layout
-POT = dict(h=0.55, r_bottom=0.20, wall=0.03, soil_below_rim=0.05, plant_h=1.8)   # ASSUMED terracotta pot; potted frangipani size is a GAP
-BBQ = dict(bowl_z0=0.55, bowl_z1=0.80)  # ASSUMED portable kettle BBQ on a stand
+POT = dict(h=0.55, r_bottom=0.20, wall=0.03, soil_below_rim=0.0, plant_h=1.8)   # ASSUMED terracotta pot; potted frangipani size is a GAP
+BBQ = dict(bowl_z0=0.55, bowl_z1=0.80, h=0.95)  # ASSUMED portable kettle BBQ on a stand
 
 AGE_YEARS = 3
 FRAC_FLOOR = 0.25          # policy: size fraction at planting
@@ -43,3 +44,11 @@ FOLIAGE_DEFAULT = (0.22, 0.42, 0.16)
 ROOT_BARRIER = dict(depth=0.90, t=0.004, clear=0.15, above=0.0)   # ASSUMED: 0.9 m deep 4 mm HDPE-type sheet in a ring, top flush with the ground; no published depth is claimed
 TREE_CLEAR_STEM = 0.35     # ASSUMED: a pruned umbrella canopy is clear of branches below this fraction of its height
 CLIMBER = dict(reach=0.75, panel_t=0.03, lift=0.02, width_per_height=1.0, min_w=0.8)   # ASSUMED leaf panel: 30 mm thick, 20 mm off the face, width ~ height at age
+
+# --- production integration (lane GI) ---
+STAR_JASMINE_MIN_FROM_SEAT = 2.0   # POLICY: client 2026-11-22 puts star jasmine (irritant sap) AWAY from the seats and herbs; Arabian jasmine stays by them. 2.0 m = beyond sitting and arm's reach (ours, not a standard)
+COPING = dict(thick=0.06, overhang=0.04)            # ASSUMED precast/stone cap on a rendered wall: 60 mm thick, 40 mm drip overhang each side
+EDGING = dict(t=0.004, below=0.06, above=0.015)     # ASSUMED 4 mm steel bed edging: 15 mm proud of the ground, 60 mm in
+SEAT_SLAT = dict(w=0.07, gap=0.012, overhang=0.015)   # ASSUMED hardwood seat slats, 70 mm with 12 mm gaps, along the bench
+LEAF_CARD = dict(per_m2=520, depth=(0.015, 0.20), stems_per_m=1.6, stem_r=(0.004, 0.0065))   # ASSUMED leaf-card density (cards per m2 of climbed face), depth off the face, main stems per metre of panel width
+STAR_JASMINE_ATLAS = dict(id="fab_star_jasmine_trellis", folder="star_jasmine_pjycl2_4k", prefix="Star_Jasmine_pjycl2_4K", scan_m=0.79)   # LDL pass 6: Megascans star jasmine, 20 real leaf cut-outs of 4-12 cm

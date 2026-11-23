@@ -1,0 +1,260 @@
+{
+  "image": "out/gi/final4/draft/gi-beds-wall.png",
+  "passed": true,
+  "failed": [],
+  "checks": [
+    {
+      "check": "highlight_clipping",
+      "status": "PASS",
+      "detail": "0.0% of pixels clipped (limit 3%)",
+      "lesson": "Sunlit white bedding blew out to pure white; expose for highlights."
+    },
+    {
+      "check": "highlights_present",
+      "status": "WARN",
+      "detail": "99.5th-percentile luminance 0.78 (min 0.9) (exposure locked across the set)",
+      "lesson": "Nothing reached white, so the image read as a flat, milky render."
+    },
+    {
+      "check": "exposure_midtones",
+      "status": "PASS",
+      "detail": "median luminance 0.35 (min 0.3)",
+      "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
+    },
+    {
+      "check": "shadows_present",
+      "status": "PASS",
+      "detail": "1st-percentile luminance 0.02 (max 0.1)",
+      "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
+    },
+    {
+      "check": "crushed_shadows",
+      "status": "PASS",
+      "detail": "0.4% of pixels near black (limit 8%)",
+      "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
+    },
+    {
+      "check": "colour_cast",
+      "status": "PASS",
+      "detail": "mid-tone cast 0.025 (warm; limit 0.1 warm, 0.05 cool)",
+      "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
+    },
+    {
+      "check": "view_subject:ld-wall-fence-rear",
+      "status": "PASS",
+      "detail": "coverage 0.6372331955543713 screen [0.031384989619255066, 0.12299641221761703, 1.1956346035003662, 1.268003225326538]",
+      "lesson": "The detail view was named for a pendant it never showed."
+    },
+    {
+      "check": "verticals_level",
+      "status": "PASS",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.000",
+      "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
+    },
+    {
+      "check": "finish_matches_name:aspidistra-leaf",
+      "status": "PASS",
+      "detail": "'assumed glossy dark-green aspidistra optical appearance; nc state describes glossy leaves; no measured nursery sample or product' has luminance 0.12 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:black-metal",
+      "status": "PASS",
+      "detail": "'black powder-coat metal' has luminance 0.03 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:top-trough-coating",
+      "status": "PASS",
+      "detail": "'dark bronze, assumed pending client confirmation; assumed authored powder coating, not a manufacturer finish; weathering/loaded weight unverified' has luminance 0.08 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:g6-loquat-leaf",
+      "status": "PASS",
+      "detail": "'assumed leathery dark-green loquat' has luminance 0.06 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:alu-bronze",
+      "status": "PASS",
+      "detail": "'dark bronze anodised aluminium window and door frames (assumed)' has luminance 0.09 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:garden-edging",
+      "status": "PASS",
+      "detail": "'dark steel bed edging (assumed)' has luminance 0.06 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:garden-pond-edge",
+      "status": "PASS",
+      "detail": "'contrasting flush lip (assumed dark)' has luminance 0.10 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "finish_matches_name:garden-grille",
+      "status": "PASS",
+      "detail": "'dark mesh grille (policy mesh size)' has luminance 0.03 (max 0.15)",
+      "lesson": "'Dark bronze' was specified at 0.42 and rendered as pale tan."
+    },
+    {
+      "check": "textile_reflectance:bedding-white",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.78",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:boucle",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.66",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:charcoal-fabric",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.07",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:leather-brown",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.10",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:linen",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.48",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:outdoor-fabric",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.55",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:rug",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.55",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:sage-fabric",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.38",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:taupe-fabric",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.25",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "textile_reflectance:throw-taupe",
+      "status": "PASS",
+      "detail": "stated presentation reflectance 0.28",
+      "lesson": "Ivory bedding rendered grey at the furniture-wide 0.35."
+    },
+    {
+      "check": "soft_goods_simulated:duvet-pb-bed",
+      "status": "PASS",
+      "detail": "cloth simulation completed",
+      "lesson": "Curtains built as a sine extrusion read as corrugated sheet."
+    },
+    {
+      "check": "soft_goods_simulated:throw-pb-bed",
+      "status": "PASS",
+      "detail": "cloth simulation completed",
+      "lesson": "Curtains built as a sine extrusion read as corrugated sheet."
+    },
+    {
+      "check": "soft_goods_simulated:duvet-kb-bed",
+      "status": "PASS",
+      "detail": "cloth simulation completed",
+      "lesson": "Curtains built as a sine extrusion read as corrugated sheet."
+    },
+    {
+      "check": "soft_goods_simulated:duvet-ka-bunk",
+      "status": "PASS",
+      "detail": "cloth simulation completed",
+      "lesson": "Curtains built as a sine extrusion read as corrugated sheet."
+    },
+    {
+      "check": "soft_goods_simulated:duvet-ka-bunk-upper",
+      "status": "PASS",
+      "detail": "cloth simulation completed",
+      "lesson": "Curtains built as a sine extrusion read as corrugated sheet."
+    },
+    {
+      "check": "cloth_plausible:duvet-pb-bed",
+      "status": "PASS",
+      "detail": "duvet covers 82% of the mattress length (min 65%), lowest point 0.09 m (min 0.05)",
+      "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    },
+    {
+      "check": "cloth_plausible:duvet-kb-bed",
+      "status": "PASS",
+      "detail": "duvet covers 72% of the mattress length (min 65%), lowest point 0.06 m (min 0.05)",
+      "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    },
+    {
+      "check": "cloth_plausible:duvet-ka-bunk",
+      "status": "PASS",
+      "detail": "duvet covers 68% of the mattress length (min 65%), lowest point 0.40 m (min 0.05)",
+      "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    },
+    {
+      "check": "cloth_plausible:duvet-ka-bunk-upper",
+      "status": "PASS",
+      "detail": "duvet covers 68% of the mattress length (min 65%), lowest point 1.40 m (min 0.05)",
+      "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    }
+  ],
+  "scope": {
+    "applied": [
+      "highlight_clipping",
+      "highlights_present",
+      "exposure_midtones",
+      "shadows_present",
+      "crushed_shadows",
+      "colour_cast",
+      "view_subject:ld-wall-fence-rear",
+      "verticals_level",
+      "finish_matches_name:aspidistra-leaf",
+      "finish_matches_name:black-metal",
+      "finish_matches_name:top-trough-coating",
+      "finish_matches_name:g6-loquat-leaf",
+      "finish_matches_name:alu-bronze",
+      "finish_matches_name:garden-edging",
+      "finish_matches_name:garden-pond-edge",
+      "finish_matches_name:garden-grille",
+      "textile_reflectance:bedding-white",
+      "textile_reflectance:boucle",
+      "textile_reflectance:charcoal-fabric",
+      "textile_reflectance:leather-brown",
+      "textile_reflectance:linen",
+      "textile_reflectance:outdoor-fabric",
+      "textile_reflectance:rug",
+      "textile_reflectance:sage-fabric",
+      "textile_reflectance:taupe-fabric",
+      "textile_reflectance:throw-taupe",
+      "soft_goods_simulated:duvet-pb-bed",
+      "soft_goods_simulated:throw-pb-bed",
+      "soft_goods_simulated:duvet-kb-bed",
+      "soft_goods_simulated:duvet-ka-bunk",
+      "soft_goods_simulated:duvet-ka-bunk-upper",
+      "cloth_plausible:duvet-pb-bed",
+      "cloth_plausible:duvet-kb-bed",
+      "cloth_plausible:duvet-ka-bunk",
+      "cloth_plausible:duvet-ka-bunk-upper"
+    ],
+    "omitted": {
+      "window_view": "no visible glass pane occupies at least 3% of this view",
+      "glass_passes_daylight": "no visible glass pane occupies at least 3% of this view"
+    }
+  }
+}

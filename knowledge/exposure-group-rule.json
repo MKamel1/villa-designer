@@ -21,8 +21,7 @@
     "Preserve evening and exterior-dusk exposure presets, including day-state gallery already using evening",
     "For original day or exterior-day: lamps fraction > 0.5 -> lamp-dominant",
     "Otherwise original exterior-day and solar fraction <= 0.5 -> exterior-shade",
-    "Otherwise keep original day or exterior-day",
-    "Amendment 2026-11-22 (RF, lead decision): after the steps above, an evening or lamp-dominant view whose mean metered source luminance, (lamp sum + daylight sum) / metered pixels, is at least 3 stops (a factor of 8) below the median of that same quantity over all views of its own assigned group, leaves it for lamp-low-key. One pass, group medians taken before any view moves."
+    "Otherwise keep original day or exterior-day"
   ],
   "exterior_shade_definition": "Exterior daytime subjects represented by the camera meter are predominantly sky-lit, with at most half their daylight luminance attributable to the sun disc. Same scene and camera with only Nishita sun_disc disabled measures sky-only; includes indirect sunlight. No identifiers, compass names or QA outcomes select membership.",
   "white_balance": {
@@ -31,24 +30,10 @@
     "exterior-shade": 5500,
     "evening": 3000,
     "exterior-dusk": 4300,
-    "lamp-dominant": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting",
-    "lamp-low-key": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting"
+    "lamp-dominant": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting"
   },
   "exposure": "Unchanged photoreal.camera_meter per view: 24 samples, 15% image scale, top 3% removed, logarithmic average, -0.4 stop bias, unchanged capped highlight priority; upper median across complete group, independent of selected render subset",
   "cohort": "All authored views, including retired diagnostic members, retain metering participation for compatibility; every active view is assigned automatically. Preserve evening/dusk cohort order and settings.",
   "freeze": "Save probe values, derived assignments, view inputs and complete transport fingerprint by value. Validate assignment by recomputation, immutable canonical rule equality, measurement digest and live transport/view hashes; any change requires new pre-registered measurement, never a hand membership override.",
-  "qa": "Production render_qa unchanged, every selected view, no exemptions",
-  "low_key_amendment": {
-    "decision": "lead decision 2026-11-22 (docs/decisions/interior-presentation-2026-11-22.md): the ramp store gets its own exposure group under a pre-registered rule",
-    "status": "PRE-REGISTERED 2026-11-22, written and committed BEFORE the re-measurement that applies it (jobq RF-measure-exposure-lowkey-1)",
-    "basis": "ASSUMED photographic classification, like the 0.5 thresholds. A group shares one exposure (upper median of its meters); a view far darker than its cohort is metered at the cohort's level and prints near-black. 3 stops is a round figure fixed before measuring; it is not tuned. Honest disclosure: the lead had seen that the store's lamp luminance sum was about 15 times below the other evening view's in the previous record when the METRIC was chosen; the threshold was fixed before this measurement and no identifier selects membership.",
-    "metric": "(lamp_luminance_sum + daylight_luminance_sum) / metered_pixels",
-    "threshold_stops": 3,
-    "applies_to": [
-      "evening",
-      "lamp-dominant"
-    ],
-    "group": "lamp-low-key",
-    "no_hand_override": "membership is computed; a change needs a new pre-registered measurement"
-  }
+  "qa": "Production render_qa unchanged, every selected view, no exemptions"
 }

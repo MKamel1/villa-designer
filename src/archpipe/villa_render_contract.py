@@ -504,16 +504,17 @@ def validate_scene(scene: dict) -> list[str]:
         errors.extend(soil_visibility_findings(scene))
         from .orientation_guard import scene_findings as orientation_findings
         errors.extend(orientation_findings(scene))
-        from .concept.garden_sun import scene_findings as garden_sun_findings
-        errors.extend(garden_sun_findings(scene))
-        from .concept.garden_g6 import scene_findings as g6_findings
-        errors.extend("%s: %s" % f for f in g6_findings(scene))
-        from .concept.villa_landscape import north_garden_scene_violations
-        errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
-        from .concept.garden_swing import scene_findings as swing_findings
-        errors.extend("%s: %s" % f for f in swing_findings(scene))
-        from .concept.garden_g4d import scene_findings as g4d_findings
-        errors.extend(g4d_findings(scene))
+        if scene.get("garden_source") != "ldb":     # lane GI: the G-series sun, G6, north-court, swing and G4d records describe the previous garden; the decided garden is checked by landscape/build/checks
+            from .concept.garden_sun import scene_findings as garden_sun_findings
+            errors.extend(garden_sun_findings(scene))
+            from .concept.garden_g6 import scene_findings as g6_findings
+            errors.extend("%s: %s" % f for f in g6_findings(scene))
+            from .concept.villa_landscape import north_garden_scene_violations
+            errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
+            from .concept.garden_swing import scene_findings as swing_findings
+            errors.extend("%s: %s" % f for f in swing_findings(scene))
+            from .concept.garden_g4d import scene_findings as g4d_findings
+            errors.extend(g4d_findings(scene))
         from .concept.render_views import scene_wall_hosts, wall_sightline_findings
         walls = scene_wall_hosts(scene)
         for view in scene.get("views", []):

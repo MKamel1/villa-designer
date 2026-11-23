@@ -150,3 +150,32 @@ def document_findings(paths=None, *, building_bounds=None, top_bounds=None):
                     if len(names)==1:expected=end
             if names[0]!=expected:errors.append(f'{path}: coordinate table names {names[0]}, expected {expected} at {center}')
     return errors
+
+
+def decided_garden_findings(scene, *, zones=None, tol=.01):
+    """The decided garden names its parts by garden: `ld-n-*` is the north court, `ld-s-*` the south garden.
+    Those are garden codes, not compass sides of each item, so `scene_findings` (landscape-* ids) does not apply.
+    The same orientation rule holds: a name must agree with where the geometry is. Views named for a garden
+    must not name the other one in title or caption, nor show another garden's coded subjects."""
+    from .concept import villa_landscape as L
+    zones=zones or dict(n=L.NORTH_COURT,s=L.SOUTH)
+    words=dict(n='north',s='south')
+    errors=[]
+    rects={}
+    for item in list(scene['meshes'])+list(scene.get('props',[])):
+        m=re.match(r'ld-(n|s)-',item['id'])
+        if not m:continue
+        r=L._rect(item);rects[item['id']]=m[1]
+        z=zones[m[1]]
+        if r[0]<z[0]-tol or r[1]<z[1]-tol or r[2]>z[2]+tol or r[3]>z[3]+tol:
+            errors.append(f"{item['id']}: lies outside the {words[m[1]]} garden {tuple(round(v,3) for v in z)}")
+    for view in scene.get('views',[]):
+        for code,word in words.items():
+            if f'{word}-garden' not in view['id']:continue
+            text=[view.get('title','')]+list(view.get('caption_notes',[]))
+            for t in text:
+                for w in named_sides(re.sub(r'https?://\S+','',t)):
+                    if w!=word:errors.append(f"{view['id']}: names {w} but is a {word}-garden view")
+            for s in view.get('subjects',[]):
+                if rects.get(s) not in (None,code):errors.append(f"{view['id']}: subject {s} belongs to the {words[rects[s]]} garden")
+    return errors

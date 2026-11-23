@@ -1,0 +1,963 @@
+[
+  {
+    "view_id": "gi-beds-mass",
+    "image": "out/gi/final4/critic/in/gi-beds-mass.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 0,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R4"
+      ],
+      "warns": [
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R4 (hero view)"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 59% of frame): clipped 0.0% (limit 1 %), crushed 15.4% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: The top right corner shows a tree branch and leaves that are cut off by the frame edge, but this is a natural framing choice and does not block more than 15% of the image. The main subject (the garden scene) is fully visible. No other composition issues are present.",
+        "R12": "mid-tone cool +0.008 green +0.028 cyan +0.020 warm -0.008 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "No windows, doors, or exterior views are visible in Image 2; the scene is an enclosed courtyard with walls and planting only.",
+        "R7": "The wooden bench tops in the background and the tree trunk in the foreground show a uniform, flat color with no visible wood grain or texture, but this is not a scale error; it is a lack of detail. No textures are present that are incorrectly scaled.",
+        "R8": "The foliage on the flowering tree (left) and the dark shrubs (center) consists of flat, card-like leaf clusters and rigid, spiky shapes, appearing significantly more crude and low-poly than the soft, textured bedding and pillows in the reference.",
+        "R9": "The tree on the left is planted in a pot that is visible at the bottom of the frame. The other plants are in the ground. The benches are on the floor. No floating or intersecting objects are visible.",
+        "R11": "The image shows a dense arrangement of planting beds with various plants, flowers, and trees, consistent with the title 'South planting beds'.",
+        "R13": "Image A exhibits several hallmarks of a 3D render: the lighting is very flat and lacks the dynamic range of a real photo; the textures on the walls an | Both images are clearly computer-generated renders rather than photographs. Image A (the bedroom) exhibits perfect, uniform surfaces on the walls and ",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-beds-wall",
+    "image": "out/gi/final4/critic/in/gi-beds-wall.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 1,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 1,
+      "R10": 2,
+      "R11": 0,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R11"
+      ],
+      "warns": [
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R11 (hero view)",
+        "2 WARNs (R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 85% of frame): clipped 0.0% (limit 1 %), crushed 2.3% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: No objects block the view, the main subject (outdoor dining area) is fully visible, no plain wall exceeds 40%, no seams, bands, haze, or bent lines are present.",
+        "R12": "mid-tone cool -0.043 green +0.037 cyan -0.014 warm +0.043 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background wall is a flat, featureless white slab with no texture, windows, or architectural detail, and the sky is not visible.",
+        "R7": "The wood grain on the dining table and the paver/tile sizes on the patio floor are consistent with real-world scale; no stretched, oversized, or unnatural textures are visible.",
+        "R8": "The foliage on the wall and the tree on the left consists of flat, card-like leaf shapes. The chairs have simple, flat fabric planes, and the grill is a basic geometric dome, all appearing cruder than the reference's soft bedding and detailed wood grain.",
+        "R9": "The black grill in the foreground is floating without any visible support or legs. The chairs and table appear to be properly grounded on the patio surface.",
+        "R11": "The image shows an outdoor patio with a dining table, chairs, a grill, and a large green hedge, which does not match the title 'South east-wall beds and their climbers' or the reference bedroom.",
+        "R13": "Image A exhibits strong indicators of being a computer render: the foliage is overly uniform and dense without natural variation; the lighting is flat | Image B exhibits several hallmarks of a computer render: the foliage is overly uniform and dense without natural variation or imperfections; the light",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-dining-crown-summer",
+    "image": "out/gi/final4/critic/in/gi-dining-crown-summer.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [],
+      "warns": [
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "2 WARNs (R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 95% of frame): clipped 0.0% (limit 1 %), crushed 4.3% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: No objects block the view, the main subject (table and tree) is fully visible, walls are not dominant, and there are no frame seams, bands, haze, or bent lines.",
+        "R12": "mid-tone cool -0.015 green +0.028 cyan +0.003 warm +0.015 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior features a detailed tree, dense ivy wall, flowering shrubs, and a graded blue sky, all appearing textured and believable.",
+        "R7": "The wood grain on the table top and the stone pavers on the floor are appropriately scaled and consistent with real-world material sizes.",
+        "R8": "The tree foliage consists of flat, disc-shaped leaf sprites, and the chairs are simple, flat-panel geometry, both appearing cruder than the reference's smooth surfaces.",
+        "R9": "The dining table legs are firmly planted on the tiled floor, and all chairs are correctly positioned around the table with no visible floating or intersection issues.",
+        "R11": "The scene is fully styled with a dining table, multiple chairs, a large tree, and dense foliage, matching the title's promise of a dining setting under a tree.",
+        "R13": "Image A exhibits several hallmarks of a computer-generated render rather than a photograph. The lighting is overly uniform and lacks the subtle variat | Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and soft with a lack of natural ambient occlusion or harsh sha",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-dining-crown-winter",
+    "image": "out/gi/final4/critic/in/gi-dining-crown-winter.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 2,
+      "R13": 2
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [],
+      "warns": [
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "2 WARNs (R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 95% of frame): clipped 0.0% (limit 1 %), crushed 2.9% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: No objects block the view, the main subject (table and chairs) is fully visible, no plain wall exceeds 40%, no seams, bands, haze, or bent lines are present.",
+        "R12": "mid-tone cool -0.015 green +0.019 cyan -0.001 warm +0.015 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior features a textured leafy hedge, a detailed bare tree, and a graded blue sky, all appearing believable and not flat or blank.",
+        "R7": "The wood grain on the table top and the paver size on the floor are consistent with real-world scale; no oversized grain, veining, or stretched textures are visible.",
+        "R8": "The outdoor dining chairs have flat, card-like backrests and simple geometric frames. The potted plant on the left has a faceted, low-poly terracotta pot. The tree branches are thin, wire-like lines rather than textured 3D geometry.",
+        "R9": "The dining table legs are firmly planted on the tiled floor, and all chairs are correctly positioned around the table with no visible floating or intersection issues.",
+        "R11": "The scene is fully styled with a dining table, chairs, a leafless tree, and lush greenery, matching the title's promise of a January dining setting.",
+        "R13": "Image B exhibits several hallmarks of a computer render: the lighting is overly uniform and soft, lacking the harsh shadows or specific light source d | Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and soft with no harsh shadows or specular highlights; t",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-dining-firepit",
+    "image": "out/gi/final4/critic/in/gi-dining-firepit.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 2,
+      "R5": 0,
+      "R6": null,
+      "R7": 2,
+      "R8": 2,
+      "R9": 2,
+      "R10": 1,
+      "R11": 0,
+      "R12": 2,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R11"
+      ],
+      "warns": [
+        "R10"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R11 (hero view)"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.18 deg over 4 column bins (limit 0.5)",
+        "R4": "subject mask (central 60 % x 60 % fallback, 36% of frame): clipped 0.0% (limit 1 %), crushed 0.1% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: Large plain white wall on the right and back covers well over 40% of the frame; the grill is partially cut off at the right edge.",
+        "R12": "mid-tone cool +0.003 green +0.011 cyan +0.008 warm -0.003 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background walls are flat, untextured white and grey slabs with no architectural detail, and the sky is a plain, ungraded blue slab.",
+        "R7": "The white paving tiles in the foreground and the smaller pavers in the background have a uniform, realistic scale relative to the grill and planters. The wood grain on the lattice screens is also appropriately sized and not stretched or blotchy.",
+        "R8": "The grill dome is a smooth, high-poly sphere. The plants have distinct, non-flat leaf shapes. The trellis is a proper 3D lattice, not a flat card. No crude geometry is visible.",
+        "R9": "The grill, plants, and trellises in Image 2 all appear to be correctly placed on the ground or attached to the walls, with no visible floating or intersection issues.",
+        "R11": "The scene is a bare courtyard with only a grill and plants; it lacks the dining table and fire pit promised in the title, and is far less styled than the reference bedroom.",
+        "R13": "Image A exhibits strong indicators of being a 3D render: the surfaces (walls, paving) are perfectly smooth and uniform without any texture or wear; th | Image B exhibits strong indicators of being a 3D render: the surfaces (walls, tiles) are perfectly clean and uniform, the shadows are extremely sharp ",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-east-yard-bench",
+    "image": "out/gi/final4/critic/in/gi-east-yard-bench.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 0,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R4"
+      ],
+      "warns": [
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R4 (hero view)"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.09 deg over 2 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 52% of frame): clipped 0.0% (limit 1 %), crushed 9.3% (limit 2 %)",
+        "R10": "no solid edge band; 4 full-length hard seam(s) | VLM: The left wall and the large leafy plant occupy a significant portion of the left side, but the main subject (the courtyard) is fully visible and not cut off. No other composition flaws are present.",
+        "R12": "mid-tone cool -0.017 green +0.024 cyan -0.000 warm +0.017 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The courtyard is fully rendered with textured walls, detailed plantings, a water feature, and a graded sky visible through the opening.",
+        "R7": "The pavers on the courtyard floor and the wood grain on the bench top are appropriately scaled and consistent with real-world material sizes; no oversized grain, veining, or smeared textures are visible.",
+        "R8": "The potted plant in the center has flat, card-like foliage. The bench is a simple box shape. The tree on the right has a lollipop-shaped canopy.",
+        "R9": "The bench, potted plants, and water feature all sit flush on the tiled floor and stone base with no visible gaps or intersections.",
+        "R11": "The image shows a bench and a pond edge in a courtyard, matching the title. The space is styled with multiple plants, a potted tree, and a water feature, providing adequate density.",
+        "R13": "Image A exhibits several hallmarks of a 3D render rather than a photograph. The lighting is overly uniform and clean, lacking the subtle variations an | Image B exhibits strong indicators of a 3D render: the lighting is overly uniform and harsh with perfectly sharp shadows; the plant leaves appear repe",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-east-yard-pond",
+    "image": "out/gi/final4/critic/in/gi-east-yard-pond.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 0,
+      "R5": 1,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 1,
+      "R11": 2,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R4"
+      ],
+      "warns": [
+        "R10",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R4 (hero view)",
+        "2 WARNs (R10, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 94% of frame): clipped 0.0% (limit 1 %), crushed 17.3% (limit 2 %)",
+        "R10": "no solid edge band; 17 full-length hard seam(s) | VLM: The top third of the image is a plain, featureless white wall with no texture or detail, covering well over 40% of the frame. The main subject (the koi pond) is also cut off at the bottom edge.",
+        "R12": "mid-tone cool -0.052 green +0.038 cyan -0.020 warm +0.052 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background wall is a flat, featureless white slab with no texture, detail, or believable exterior context.",
+        "R7": "The dark grid tiles in the water feature at the bottom of the frame appear appropriately sized for a pool or water feature, with no visible stretching, smearing, or unnatural scale relative to the surrounding architecture and planters.",
+        "R8": "The foliage in the top-left corner consists of flat, disc-shaped leaves, appearing as a 2D card rather than volumetric 3D geometry.",
+        "R9": "The koi fish are fully submerged in the water and do not intersect with the pool walls or the surface. The plants sit correctly within the planter box. No floating or intersecting objects are visible.",
+        "R11": "The image shows a pond with koi under a grille, a planter with grass, and a tree, matching the title's description of an East yard pond scene.",
+        "R13": "Image A exhibits strong indicators of being a computer render. The shadows cast by the tree leaves are unnaturally sharp and uniform, lacking the soft | Image B exhibits strong, direct sunlight creating sharp, high-contrast shadows and realistic specular highlights on the water surface, which are chara",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-firepit-opening",
+    "image": "out/gi/final4/critic/in/gi-firepit-opening.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 0,
+      "R5": 0,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 0,
+      "R12": 2,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R11",
+        "R4"
+      ],
+      "warns": [
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R11, R4 (hero view)"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.17 deg over 4 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 19% of frame): clipped 0.0% (limit 1 %), crushed 10.8% (limit 2 %)",
+        "R10": "no solid edge band; 2 full-length hard seam(s) | VLM: The composition is open and well-framed. No objects are cut off, no large empty walls, no frame-edge bands, no haze, and no bent lines are visible.",
+        "R12": "mid-tone cool -0.006 green +0.012 cyan +0.001 warm +0.006 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background consists of flat, untextured white and grey walls with no architectural detail, and the sky is a plain, ungraded blue slab.",
+        "R7": "The wooden lattice structures on the left and right have a uniform, clean grid pattern with no visible wood grain or texture anomalies. The paving stones and tiles in the foreground and background appear to be of a consistent, realistic size relative to the surrounding architecture and plants. There",
+        "R8": "The foliage on the left and right sides of the courtyard consists of flat, disc-shaped leaves, appearing as 2D cards rather than volumetric plants.",
+        "R9": "The wooden trellises on the left and right are standing on the ground with no visible gap or intersection. The plants are properly placed in the soil beds. The walls and floor meet cleanly.",
+        "R11": "No fire pit is visible in the courtyard; the space is bare with only two small planters and empty paving, lacking the promised feature and general styling density.",
+        "R13": "Image A exhibits several hallmarks of a 3D render: the lighting is overly uniform and lacks the subtle variations of a real environment; the shadows c | Image B exhibits multiple hallmarks of a 3D render: the lighting is overly uniform and lacks the subtle falloff and ambient occlusion of a real scene;",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-living-door",
+    "image": "out/gi/final4/critic/in/gi-living-door.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 2,
+      "R13": 2
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [],
+      "warns": [
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "2 WARNs (R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.23 deg over 1 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 73% of frame): clipped 0.0% (limit 1 %), crushed 3.4% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: The large tree on the left and the dining table in the foreground occupy significant portions of the frame, but they are intentional compositional elements, not blocking flaws. The main subject (outdoor dining area) is fully visible. No hard seams, dark bands, milky haze, or bent lines are present. ",
+        "R12": "mid-tone cool -0.045 green +0.031 cyan -0.018 warm +0.045 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background features a large, dense green hedge and a tree with detailed leaves, providing a textured and believable exterior context.",
+        "R7": "The wood grain on the long dining table in the foreground is consistent with real timber scale, and the paver size on the patio floor is proportionate to the chairs and table.",
+        "R8": "The foliage on the wall and the tree on the left consists of flat, card-like leaf shapes. The chairs have simple, flat geometry, and the grill is a basic, low-poly model.",
+        "R9": "The chairs, table, and grill are all properly grounded on the patio surface. The plants sit correctly in the soil bed against the wall. No floating or intersecting objects are visible.",
+        "R11": "The scene is a garden with a table, chairs, a grill, and plants, which is consistent with the title 'South garden'.",
+        "R13": "Image A exhibits several characteristics typical of a real photograph, such as natural, irregular lighting, realistic textures on the weathered wood t | Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and soft with no harsh shadows or specular highlights; t",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-living-view-out",
+    "image": "out/gi/final4/critic/in/gi-living-view-out.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 0,
+      "R4": 2,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 1,
+      "R12": 2,
+      "R13": 1
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R3"
+      ],
+      "warns": [
+        "R11",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R3 (hero view)",
+        "2 WARNs (R11, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 2.46 deg over 4 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 34% of frame): clipped 0.0% (limit 1 %), crushed 0.0% (limit 2 %)",
+        "R10": "no solid edge band; 7 full-length hard seam(s) | VLM: Curtains on left and right edges frame the view; they occupy roughly 15% total, not blocking the main subject (outdoor patio). No cut-off subject, no bent lines, no haze, no dark band, no seam through objects.",
+        "R12": "mid-tone cool -0.177 green +0.017 cyan -0.124 warm +0.177 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior visible through the glass doors features a detailed green hedge, a tree, a textured patio, and a detailed grill, all appearing believable and textured.",
+        "R7": "The outdoor pavers visible through the glass doors are large, uniform white tiles with clean grout lines, consistent with real-world large-format porcelain or stone pavers. The wood table top shows a plausible grain scale. No oversized or smeared textures are visible.",
+        "R8": "Outdoor chairs and table are simple flat planes; grill is a basic cylinder; foliage is a flat, uniform green wall with no individual leaf detail.",
+        "R9": "The outdoor chairs and table are properly placed on the tiled floor, and the grill stands on its legs. No objects are floating or intersecting.",
+        "R11": "The interior is nearly empty: only a partial plant and chair edge are visible; no sofa, rug, or decor. The terrace has a table, chairs, and grill, but the room itself lacks the styling density of the reference bedroom.",
+        "R13": "Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and flat, the outdoor foliage has a repetitive, 'pasted- | Image B exhibits characteristics of a high-end architectural visualization or 3D render. The lighting is perfectly even and diffuse, the surfaces (lik",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "gi-north-court-pond",
+    "image": "out/gi/final4/critic/in/gi-north-court-pond.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 0,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 1,
+      "R11": 2,
+      "R12": 0,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R12",
+        "R4"
+      ],
+      "warns": [
+        "R10",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R12, R4 (hero view)",
+        "2 WARNs (R10, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 80% of frame): clipped 0.0% (limit 1 %), crushed 13.2% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: Large plain white wall on the right and back covers over 40% of the frame; no other composition flaws visible.",
+        "R12": "mid-tone cool +0.085 green +0.027 cyan +0.077 warm -0.085 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior scene features detailed, textured foliage, a gravel ground plane, and a koi pond with visible water and fish, creating a believable environment.",
+        "R7": "The gravel texture surrounding the koi pond is uniform and appropriately scaled for a garden bed. The dark grid over the water is consistent in size. No wood, stone, or tile surfaces are present to evaluate for scale errors.",
+        "R8": "The koi fish in the pond is a low-poly, blocky model with flat, faceted surfaces. The foliage on the left also appears somewhat flat and repetitive, resembling card cutouts rather than organic leaves.",
+        "R9": "The koi fish is suspended in the water with no visible support, but this is expected for a fish in a pond. All other objects, including plants and the pool structure, appear properly grounded and intersecting correctly.",
+        "R11": "The koi pond is clearly visible with a fish seen through the water, and the surrounding area is styled with plants and gravel, matching the title's promise.",
+        "R13": "Image A exhibits several hallmarks of a computer-generated render: the lighting is unnaturally flat and diffuse, lacking the dynamic range and specifi | Image B exhibits strong indicators of being a computer render: the koi fish has an unnatural, almost painted texture and appears to be floating in a w",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "v07-terrace-dusk",
+    "image": "out/gi/final4/critic/in/v07-terrace-dusk.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 2,
+      "R6": null,
+      "R7": 1,
+      "R8": 2,
+      "R9": 2,
+      "R10": 2,
+      "R11": 2,
+      "R12": 0,
+      "R13": 2
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R12"
+      ],
+      "warns": [
+        "R4"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R12 (hero view)"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 69% of frame): clipped 1.0% (limit 1 %), crushed 3.9% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: The dining table in the foreground is cut off by the bottom and left frame edges, and the large tree trunk is partially cropped at the bottom, but these are standard framing choices, not blocking or severe flaws.",
+        "R12": "mid-tone cool +0.181 green -0.000 cyan +0.136 warm -0.181 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior courtyard features a large tree, multiple shrubs, climbing vines, and a textured sky, providing a believable and detailed outdoor context.",
+        "R7": "The concrete table surface in the foreground shows a mottled, blotchy pattern with large, irregular grey and white patches that appear smeared and lack the fine, consistent aggregate texture of real concrete. The wood grain on the bench in the background is also somewhat indistinct and lacks clear d",
+        "R8": "The large tree in the center has a dense, organic canopy with individual leaves and branches, not flat discs. The chairs and table have clean, realistic geometry without visible polygon facets or boxy shapes.",
+        "R9": "The dining table, chairs, and potted plants are all properly grounded on the floor. The tree trunk is planted in the ground. No objects are floating or intersecting incorrectly.",
+        "R11": "The image shows a garden with a dining table, chairs, a large tree, and various shrubs, which aligns with the title's promise of a garden setting.",
+        "R13": "Image B exhibits several hallmarks of a computer render: the lighting is overly uniform and soft with no distinct shadows or harsh highlights; the tex | Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and soft with no harsh shadows or specular highlights; t",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "v36-north-garden",
+    "image": "out/gi/final4/critic/in/v36-north-garden.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 2,
+      "R11": 1,
+      "R12": 0,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R12"
+      ],
+      "warns": [
+        "R11",
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R12 (hero view)",
+        "3 WARNs (R11, R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); too few straight vertical edges to measure lean",
+        "R4": "subject mask (subject boxes, 100% of frame): clipped 1.4% (limit 1 %), crushed 4.6% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: The large green plant on the right occupies a significant portion of the frame, but it does not block more than 15% of the image. The main subject (the tiled area and bench) is fully visible. No other composition issues are present.",
+        "R12": "mid-tone cool +0.085 green +0.032 cyan +0.080 warm -0.085 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "No windows, doors, or exterior views are visible in the frame; the scene is an interior with solid walls and furniture.",
+        "R7": "The large floor tiles in the foreground and the small pavers on the raised platform are both proportionally consistent with real-world materials. The wood slat texture on the bench edge is also appropriately scaled.",
+        "R8": "The foliage on the right side of Image 2 consists of flat, disc-shaped leaves arranged in a repetitive, lollipop-like pattern, appearing as crude 2D cards rather than volumetric plants.",
+        "R9": "The wooden bench is properly seated on the tiled floor. The plants are positioned on the ground with no visible floating or intersection issues. All objects appear to have proper contact and support.",
+        "R11": "The scene is a sparse outdoor corner with a tiled floor, a concrete bench, and two plants. It lacks the density of props (bed, wardrobe, chair, lamps) seen in the reference bedroom.",
+        "R13": "Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and lacks natural variation; the textures on the concrete and  | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and bright without natural variation; the plant leaves h",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "v37-north-garden-lounge",
+    "image": "out/gi/final4/critic/in/v37-north-garden-lounge.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 1,
+      "R5": 1,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 1,
+      "R10": 1,
+      "R11": 2,
+      "R12": 0,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R12"
+      ],
+      "warns": [
+        "R10",
+        "R4",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R12 (hero view)",
+        "3 WARNs (R10, R4, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.17 deg over 1 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 52% of frame): clipped 0.0% (limit 1 %), crushed 3.2% (limit 2 %)",
+        "R10": "no solid edge band; no full-length seam | VLM: A dark vertical band is visible along the right edge of the frame, and a large plain white wall occupies the upper right quadrant, covering more than 40% of the image area.",
+        "R12": "mid-tone cool +0.093 green +0.020 cyan +0.080 warm -0.093 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The background wall on the right is a flat, featureless white slab with no texture, detail, or believable exterior context.",
+        "R7": "The light grey floor tiles in the foreground and the dark border tiles around the water feature are uniform in size and proportion, consistent with real-world paver dimensions. No stretched, smeared, or oversized textures are visible.",
+        "R8": "The palm fronds in the planter bed are flat, card-like shapes, and the large leafy plant on the left has a repetitive, low-poly texture rather than natural, varied foliage.",
+        "R9": "The small plant in the foreground is floating above the gravel bed with no visible stem or root connection to the ground. The larger palm plant also appears to be floating slightly above the gravel surface.",
+        "R11": "The scene is a courtyard with a water feature, potted plants, and a green wall. It is not a bare room, and the camera does not show the back of furniture.",
+        "R13": "Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and diffuse with no distinct light source or hard shadow | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and diffuse with no distinct light source or hard shadow",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  },
+  {
+    "view_id": "v42-north-garden-evening",
+    "image": "out/gi/final4/critic/in/v42-north-garden-evening.png",
+    "lens_mm": 24,
+    "camera_height_m": 1.35,
+    "scores": {
+      "R1": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 2,
+      "R5": 2,
+      "R6": null,
+      "R7": 2,
+      "R8": 1,
+      "R9": 2,
+      "R10": 1,
+      "R11": 1,
+      "R12": 0,
+      "R13": 0
+    },
+    "verdict": "fail",
+    "notes": {
+      "zeros": [
+        "R12"
+      ],
+      "warns": [
+        "R10",
+        "R11",
+        "R8"
+      ],
+      "not_evaluated": [],
+      "reasons": [
+        "score 0 on R12 (hero view)",
+        "3 WARNs (R10, R11, R8) escalate to FAIL"
+      ],
+      "gating": [
+        "R1",
+        "R10",
+        "R11",
+        "R12",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "hero": true,
+      "vlm": "ok",
+      "rubric": "frozen-v1",
+      "cloned_assets": {},
+      "messages": {
+        "R1": "24 mm is inside 24-35 mm",
+        "R2": "eye height 1.35 m (limit 1.1-1.6 m)",
+        "R3": "pitch 0.00 deg (limit 0.5); straight vertical-edge lean 0.02 deg over 1 column bins (limit 0.5)",
+        "R4": "subject mask (subject boxes, 21% of frame): clipped 0.0% (limit 1 %), crushed 0.1% (limit 2 %)",
+        "R10": "no solid edge band; 6 full-length hard seam(s) | VLM: A thick, dark vertical band occupies the entire right edge of the frame, from top to bottom, blocking a significant portion of the view and acting as a solid obstruction.",
+        "R12": "mid-tone cool +0.247 green +0.001 cyan +0.186 warm -0.247 (limits: cool 0.03, cyan 0.05, warm cast 0.09; green informational)",
+        "R5": "The exterior courtyard features a detailed, leafy tree, a textured water feature with visible tiles, and varied ground cover, providing a believable and textured context.",
+        "R7": "The small mosaic tiles in the water feature and the large pavers on the ground appear to be at a realistic scale relative to the surrounding plants and architectural elements. The wood grain on the cabinet in the reference is also appropriately scaled.",
+        "R8": "The foliage on the left consists of flat, disc-shaped leaves, and the small plants in the planter are simple, flat spikes, appearing as crude 2D cards rather than volumetric 3D models.",
+        "R9": "The bed, pillows, and headboard are all in correct contact with each other and the floor. The plant sits properly in its pot on the nightstand. No floating or intersecting objects are visible.",
+        "R11": "The scene is a sparse courtyard with a single tree, a small water feature, and a few plants. It lacks the density of props (bed, wardrobe, chair, lamps) seen in the reference bedroom.",
+        "R13": "Image A exhibits several hallmarks of a 3D render: the lighting is unnaturally cool and uniform, the water in the pool is perfectly still with no ripp | Image B exhibits strong indicators of being a computer render: the lighting is unnaturally cool and uniform, the surfaces (walls, tiles) are perfectly",
+        "R6": "texel density needs UV and camera scripts; out of scope for the image critic"
+      }
+    }
+  }
+]

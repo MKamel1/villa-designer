@@ -1,0 +1,72 @@
+{
+ "individual": {
+  "cinema-desk": {
+   "ok": true,
+   "findings": 0
+  },
+  "study-desk": {
+   "ok": true,
+   "findings": 0
+  },
+  "study-adult-desk": {
+   "ok": true,
+   "findings": 0
+  },
+  "ka-desk-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "ka-desk-2": {
+   "ok": true,
+   "findings": 0
+  },
+  "kb-desk": {
+   "ok": true,
+   "findings": 0
+  },
+  "pb-vanity": {
+   "ok": true,
+   "findings": 0
+  },
+  "cinema-desk#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "cinema-desk#chair-2": {
+   "ok": true,
+   "findings": 0
+  },
+  "study-desk#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "study-desk#chair-2": {
+   "ok": true,
+   "findings": 0
+  },
+  "study-adult-desk#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "ka-desk-1#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "ka-desk-2#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "kb-desk#chair-1": {
+   "ok": true,
+   "findings": 0
+  },
+  "pb-bed": {
+   "ok": true,
+   "findings": 0
+  }
+ },
+ "joint": {
+  "ok": true,
+  "findings": 0
+ }
+}

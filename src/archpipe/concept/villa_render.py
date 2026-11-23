@@ -153,10 +153,13 @@ M = {
                      roughness=0.5, tile_m=0.60, grain_axis="z",
                      note="flush oak veneer door, closed (ASSUMED); Poly Haven oak_veneer_01 (medium oak, not the "
                           "paler 'oak' joinery), real scan 1.83 m"),
-    "render-exterior": dict(kind="principled", base_rgb=[0.65, 0.65, 0.65], reflectance=0.65,
-                            roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED)"),
-    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.590, 0.672, 0.605], reflectance=0.65,
-                                       roughness=0.82, note="ASSUMED very light grey with a green cast (G/R 1.14: at 1.06 the tint vanished under the sun in the finals), smooth mineral exterior paint; stated reflectance 0.65; our exterior and boundary walls"),
+    "render-exterior": dict(kind="principled", base_rgb=[0.50, 0.50, 0.50], reflectance=0.50,
+                            roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED; reflectance lowered 0.65 -> 0.50 by lane GI 2026-11-22, see paint-exterior-grey-green)"),
+    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.455, 0.518, 0.470], reflectance=0.50,
+                                       roughness=0.85, note="ASSUMED matte mineral exterior render, very light grey with a green cast (G/R 1.14), stated reflectance 0.50; our exterior and boundary walls. "
+                                       "Lane GI 2026-11-22: the earlier 0.65 blew to white in direct sun at the exterior-day exposure (house facade, garden views). No client exterior finish is held in the spec or "
+                                       "the model; 0.50 is a mid-light render inside the lead's 0.75 bound. NO published exterior-render reflectance could be retrieved on this machine (the book index returned no hits), so the "
+                                       "figure is an ASSUMPTION for the client to confirm, not a cited value"),
     "paving": dict(kind="principled", asset="PavingStones146", base_rgb=[0.62, 0.58, 0.52], reflectance=0.45,
                    roughness=0.8, tile_m=2.0, note="light stone paving (garden terrace, ASSUMED)"),
     "garden-gravel": dict(kind="principled", asset="gravel_ground_01", base_rgb=[0.47, 0.43, 0.36],
@@ -554,6 +557,22 @@ def require_untracked_inputs():
         raise FileNotFoundError(
             "missing " + str(LIBRARY / "library.sqlite") + " (assets/user is git-ignored; copy it from the main "
             "checkout, e.g. cp -r <main>/assets/user " + str(ROOT / "assets") + "/). See docs/lanes/P-pipeline.md")
+
+
+GARDEN_SOURCE = "ldb"      # lane GI: the decided garden (landscape/build) is the D1 garden; "legacy" = villa_landscape.build (the G-series garden, kept for its own tests)
+
+
+def garden_ldb(mats, views, shell_meshes):
+    """The decided garden in the production scene (lane GI): meshes, props, notes, plan of `landscape.build.production.garden()`; garden materials join `mats`; every garden
+    view gets its season (leaf-off for a view dated Dec-Feb) and fire-pit state as hidden meshes, and its subjects re-pointed at the garden objects in frame."""
+    from ..landscape.build import production as PRD
+    g = PRD.garden()
+    for name, spec in g["materials"].items():
+        mats.setdefault(name, spec)
+    for v in views:
+        PRD.prepare_view(v, g)
+    PRD.reveal_ground(shell_meshes, g)       # the shell's own yard floor is cut back under the garden's surfaces and ponds
+    return g["meshes"], g["props"], g["notes"], g["plan"]
 
 
 def build(lay=None, views=None, *, collect_part_failures=False, bed_replacements=()):
@@ -1875,12 +1894,15 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from .garden_sun import SunStudy, active_study, DATES, audit_plants
     from ..orientation import record as orientation_record
     sun_study = SunStudy(dict(meshes=meshes, materials=mats))
-    sun_token = active_study.set(sun_study)
-    try:
-        land_meshes, land_props, land_notes, land_plan = LAND.build(sp, lay)
-    finally:
-        active_study.reset(sun_token)
-    LAND.reveal_ground_soil(meshes,land_meshes)
+    if GARDEN_SOURCE == "ldb":
+        land_meshes, land_props, land_notes, land_plan = garden_ldb(mats, views, meshes)
+    else:
+        sun_token = active_study.set(sun_study)
+        try:
+            land_meshes, land_props, land_notes, land_plan = LAND.build(sp, lay)
+        finally:
+            active_study.reset(sun_token)
+        LAND.reveal_ground_soil(meshes,land_meshes)
     meshes.extend(land_meshes)
     notes.extend(land_notes)
 
@@ -2130,7 +2152,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "washer positions use AAK3EW as a stated substitute; strips, pendants, sconces and markers are "
                  "GENERIC (named in each caption).")
 
-    scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": orientation_record()["true_north"]["model_y_bearing_deg"]},
+    scene = {"schema": "villa-render/1", "id": "D1", "garden_source": GARDEN_SOURCE, "north": {"model_y_bearing_deg": orientation_record()["true_north"]["model_y_bearing_deg"]},
              "garden_g6": land_plan["g6"],
              "garden_zones": {**land_plan["beds"], **land_plan["accent_beds"], **land_plan["paths"]},
              "garden_sun_evidence": {"geometry_sha256": sun_study.geometry_sha256, "dates": list(DATES), "step_hours": 1, "timezone": "UTC+02:00", "plants": land_plan["plant_light_review"]},
@@ -2193,12 +2215,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     garment_failures = garments.contents_findings(dressing_wardrobes, scene['meshes'])
     if garment_failures:
         raise ValueError('Dressing physical contents: ' + '; '.join(garment_failures))
-    final_sun_study=SunStudy(scene)
-    scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
-    scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)
-    scene['garden_g6']['sun_evidence']=garden_g6.wall_sun_evidence(final_sun_study)
-    g6_failures=garden_g6.scene_findings(scene)
-    if g6_failures:raise ValueError('G6 physical garden: '+str(g6_failures))
+    if GARDEN_SOURCE != "ldb":       # the G6 sun study and wall evidence describe the previous garden; the decided garden's sun/shade is LDS's analysis, not this scene's
+        final_sun_study=SunStudy(scene)
+        scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
+        scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)
+        scene['garden_g6']['sun_evidence']=garden_g6.wall_sun_evidence(final_sun_study)
+        g6_failures=garden_g6.scene_findings(scene)
+        if g6_failures:raise ValueError('G6 physical garden: '+str(g6_failures))
     from ..orientation_guard import scene_findings as orientation_findings
     naming_failures=orientation_findings(scene)
     if naming_failures:
@@ -3043,6 +3066,9 @@ def _VIEWS(lay=None, resolve=True):
             garden_view.setdefault("caption_notes", []).append(
                 "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED.")
     V.append(garden_g4d.evening_view())
+    if GARDEN_SOURCE == "ldb":          # lane GI: the key garden views of the decided garden (living door, dining with the fire pit, north court pond)
+        from ..landscape.build import production as PRD
+        V.extend(PRD.key_views(V))
     if not resolve:
         return V
     # The old shared BASEMENT_DAY dictionary made v29's full accent setting leak into six other views, whose
@@ -3143,7 +3169,7 @@ def provenance_inputs(root=None):
     inputs = sorted((root / "src/archpipe").rglob("*.py"))
     inputs += [root / name for name in (
         "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
-        "knowledge/c4-final-approvals.json", "knowledge/exposure-group-rule.json",
+        "knowledge/c4-final-approvals.json", "knowledge/exposure-group-rule.json", "knowledge/exposure-group-rule-v3.json",
         "knowledge/c3-part-exemptions.json",
         "knowledge/imported-legacy-components.json.gz",
         "knowledge/imported-component-policy.json",
