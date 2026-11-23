@@ -90,3 +90,6 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - **Star jasmine (Trachelospermum jasminoides)** goes on the screens and walls AWAY from the seats and the herbs. Its sap irritates, so the placement constraint applies. Graded B as a climber panel.
 - **Arabian jasmine (Jasminum sambac)** stays next to the seating, for scent. It has no 3D model, so it is a labelled stand-in in renders.
 - Grape stays on the north screen stub. Petrea stays a stand-in.
+
+## Client approval (2026-11-22): generated foliage
+The client approved a NEW capability: generate plants from leaf scans (the client's Fab downloads plus CC0 textures) and each species' sourced habit, to replace the egg stand-ins and the crape stand-in tree. Every generated plant is labelled in the schedule and the receipts as "generated": species-faithful where the leaf scan is that species, and form-class otherwise. Free sources only; the client downloads Fab items on request.

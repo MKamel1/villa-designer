@@ -60,6 +60,11 @@ FORM = {"olea_europaea": "small_tree", "punica_granatum": "small_tree", "ficus_c
         "salvia_leucantha": "shrub", "muhlenbergia_capillaris": "ground_cover"}
 
 
+# Client-decided admissions (garden-brief-2026-11-22 "climbers"): LDL leaves these "unverified" only for the unmeasured site soil (alkaline-soil GAP); frost and heat pass.
+# They enter the pool with the GAP carried as a condition, not filled. Placement constraints from LDL (toxic: away from seats and herbs) are enforced by LDG-POL-TOXIC.
+CLIENT_ADMIT = {"trachelospermum_jasminoides": "client decision 2026-11-22 (star jasmine on screens and walls away from seats and herbs)"}
+
+
 @lru_cache(maxsize=1)
 def pool() -> dict[str, Sp]:
     data = json.load(open(PL / "plants.json"))
@@ -67,7 +72,8 @@ def pool() -> dict[str, Sp]:
     out = {}
     for r in data["species"]:
         sv = r["site_viability"]
-        if sv["verdict"] not in ALLOWED:
+        admitted = r["slug"] in CLIENT_ADMIT and sv["verdict"] == "unverified" and set(sv["factors"].values()) <= {"pass", "unknown"} and sv["factors"].get("alkaline_soil") == "unknown"
+        if sv["verdict"] not in ALLOWED and not admitted:
             continue
         h, s = _v(r, "height_m"), _v(r, "spread_m")
         w = _v(r, "water")
@@ -76,7 +82,7 @@ def pool() -> dict[str, Sp]:
         fol = _v(r, "foliage")
         fl = _v(r, "flowering") or {}
         out[r["slug"]] = Sp(
-            r["slug"], _v(r, "accepted_name")["name"], sv["verdict"], list(sv.get("reasons", [])), r["layers"],
+            r["slug"], _v(r, "accepted_name")["name"], "viable_with_conditions" if admitted else sv["verdict"], list(sv.get("reasons", [])) + ([CLIENT_ADMIT[r["slug"]]] if admitted else []), r["layers"],
             FORM.get(r["slug"], "shrub"), h and h["min"], h and h["max"], s and s["min"], s and s["max"],
             WATER_MAP.get(w["hydrozone"]) if w else None, sun["classes"] if sun else [], t["class"] if t else None,
             fol["habit"] if fol else None, assets[r["slug"]]["drawable"], r["pond_relevant"],
