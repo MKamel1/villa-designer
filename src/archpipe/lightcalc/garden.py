@@ -485,6 +485,24 @@ def run(L=None) -> dict:
     return dict(record=rec, results=results)
 
 
+def zones_json() -> dict:
+    """The garden's control zones and scenes in the schema of knowledge/lighting/zones-d1.json (`archpipe-lighting-zones/1`, contracts.LightingZone):
+    layer `exterior`, DALI-2 (the Iku's own), watts at the highest level any scene commands. Kept in its own file: zones-d1.json is generated from the
+    villa model and pinned by the electrical lane's tests."""
+    zones = []
+    for z in ZONES:
+        fs = [f for f in FIXTURES if f.zone == z]
+        top = max(sc["levels"][z] for sc in SCENES.values())
+        zones.append(dict(id="Z-G-" + z.upper(), room="garden", layer="exterior", luminaire_ids=["lum-gl-" + f.id for f in fs],
+                          watts=round(sum(PRODUCTS[f.product]["watts"] for f in fs) * top, 1), dimming="dali2",
+                          product=sorted({PRODUCTS[f.product]["code"] for f in fs}), role=fs[0].role))
+    return {"schema": "archpipe-lighting-zones/1", "design": "D1-garden", "contract": "contracts.LightingZone (v0.1)",
+            "units": {"watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 5 W ASSUMED per uplight)"},
+            "assumptions": ["ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are an ASSUMED generic requirement (no verified product)",
+                            "scene value = fraction of maximum output per zone, linear dimming (stated)"],
+            "zones": zones, "scenes": {"garden": {v["label"]: v["levels"] for v in SCENES.values()}}}
+
+
 def write(out: Path | None = None) -> Path:
     out = Path(out or ROOT / "knowledge/lighting/garden")
     out.mkdir(parents=True, exist_ok=True)
@@ -494,6 +512,7 @@ def write(out: Path | None = None) -> Path:
     rec["products"] = {k: {a: (str(b.relative_to(ROOT)) if isinstance(b, Path) else b) for a, b in v.items()} for k, v in PRODUCTS.items()}
     rec["checks"] = [dict(criterion=c.criterion, status=c.status, subject=c.subject, achieved=c.achieved, required=c.required, unit=c.unit, message=c.message) for c in r["results"]]
     rec["counts"] = {s: sum(1 for c in r["results"] if c.status == s) for s in ("pass", "fail", "warn", "not_evaluated")}
+    (out / "zones-garden.json").write_text(json.dumps(zones_json(), indent=1), encoding="utf-8")
     (out / "garden-lighting.json").write_text(json.dumps(rec, indent=1, default=float), encoding="utf-8")
     return out / "garden-lighting.json"
 

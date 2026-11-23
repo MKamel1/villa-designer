@@ -168,6 +168,20 @@ class Glare(unittest.TestCase):
         self.assertTrue(any(r.status == "fail" for r in gl))
 
 
+class ZonesModel(unittest.TestCase):
+    def test_every_fixture_is_in_exactly_one_dali2_exterior_zone(self):
+        z = g.zones_json()
+        ids = [i for zone in z["zones"] for i in zone["luminaire_ids"]]
+        self.assertEqual(sorted(ids), sorted("lum-gl-" + f.id for f in g.FIXTURES))
+        self.assertEqual({zone["layer"] for zone in z["zones"]}, {"exterior"})
+        self.assertEqual({zone["dimming"] for zone in z["zones"]}, {"dali2"})
+        self.assertEqual(set(z["scenes"]["garden"]), {sc["label"] for sc in g.SCENES.values()})
+
+    def test_negative_a_scene_that_names_an_unknown_zone_is_caught(self):
+        for sc in g.SCENES.values():
+            self.assertEqual(set(sc["levels"]), set(g.ZONES))          # a typo in a zone name would silently switch a zone off
+
+
 class Verification(unittest.TestCase):
     def test_v1_inputs(self):
         rows = {r["product"]: r for r in g.v1_inputs()}
