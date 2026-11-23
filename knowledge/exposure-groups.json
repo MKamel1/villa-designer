@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6",
-  "transport_sha256": "b1ebc1f9edd4f8df8a87142b557d3da7301c7dfd15d4d71c817ef185789677bd",
+  "transport_sha256": "8322654bf3b66e2149036fbcb34aef378df629bdc617864f21d885a81ad34284",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -27,11 +27,11 @@
   },
   "measurements": {
     "v01-kitchen-garden": {
-      "lamp_luminance_sum": 357313.8000939876,
-      "daylight_luminance_sum": 1374355.1043909725,
+      "lamp_luminance_sum": 352917.0943125147,
+      "daylight_luminance_sum": 1050750.9801599402,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.20634071511508795,
+      "lamp_fraction": 0.2514248922026332,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -545,7 +545,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -555,11 +563,11 @@
       "group": "day"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 46056.373821881825,
-      "daylight_luminance_sum": 2556696.0714327465,
+      "lamp_luminance_sum": 45936.7876987692,
+      "daylight_luminance_sum": 3517345.05657699,
       "sky_luminance_sum": null,
-      "metered_pixels": 13407,
-      "lamp_fraction": 0.0176952571520401,
+      "metered_pixels": 13404,
+      "lamp_fraction": 0.012891707618515902,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1029,7 +1037,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -1039,11 +1055,11 @@
       "group": "day"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 135853.1829425828,
-      "daylight_luminance_sum": 444654.3849867151,
+      "lamp_luminance_sum": 134347.66956021264,
+      "daylight_luminance_sum": 285355.0567610987,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.23402482663090593,
+      "lamp_fraction": 0.32010197012006125,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1513,7 +1529,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -1523,11 +1547,11 @@
       "group": "day"
     },
     "v04-study-deck": {
-      "lamp_luminance_sum": 0.6859552352555763,
-      "daylight_luminance_sum": 5415475.853091108,
+      "lamp_luminance_sum": 0.5642934858059827,
+      "daylight_luminance_sum": 5279635.039214016,
       "sky_luminance_sum": null,
-      "metered_pixels": 13361,
-      "lamp_fraction": 1.26665720054319e-07,
+      "metered_pixels": 13360,
+      "lamp_fraction": 1.0688114259838252e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -1590,7 +1614,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -1600,11 +1632,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 86475.70827591897,
-      "daylight_luminance_sum": 59.87579753325726,
+      "lamp_luminance_sum": 86475.71463655744,
+      "daylight_luminance_sum": 60.22803273444296,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9993080788883053,
+      "lamp_fraction": 0.9993040113636409,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2272,7 +2304,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -2282,11 +2322,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.15823763846269134,
-      "daylight_luminance_sum": 15200690.893426063,
+      "lamp_luminance_sum": 0.1489781425991502,
+      "daylight_luminance_sum": 15389002.041126417,
       "sky_luminance_sum": null,
-      "metered_pixels": 13217,
-      "lamp_fraction": 1.0409897676683086e-08,
+      "metered_pixels": 13226,
+      "lamp_fraction": 9.680818857440035e-09,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -2350,7 +2390,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -2360,11 +2408,11 @@
       "group": "day"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 285.3462885412331,
-      "daylight_luminance_sum": 26601.487430776415,
+      "lamp_luminance_sum": 194.10494625551817,
+      "daylight_luminance_sum": 22336.891102395144,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.01061286321476439,
+      "lamp_fraction": 0.008615018432225181,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2959,8 +3007,8 @@
         "exposure": "exterior-dusk",
         "camera": {
           "position": [
-            28.1,
-            -20.81,
+            27.6,
+            -23.91,
             -1.65
           ],
           "target": [
@@ -2971,7 +3019,23 @@
           "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
-          "shift_y": 0.073
+          "shift_y": 0.073,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                28.1,
+                -20.81,
+                -1.65
+              ],
+              "new": [
+                27.6,
+                -23.91,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.05 m from ld-plant-s-bed-mass-corner-02 (inside or touching a garden solid of the decided layout); moved 3.14 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": -2.89,
@@ -2987,6 +3051,16 @@
           "ambient": 0.5,
           "task": 0.4
         },
+        "hide_meshes": [
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
         "resolution": [
           1920,
           1280
@@ -2995,7 +3069,7 @@
       "group": "exterior-dusk"
     },
     "v08-cinema": {
-      "lamp_luminance_sum": 71911.437921674,
+      "lamp_luminance_sum": 71578.76420867513,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -3664,7 +3738,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -3674,11 +3756,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 335203.27662086603,
-      "daylight_luminance_sum": 79.13925725297659,
+      "lamp_luminance_sum": 335629.8214226253,
+      "daylight_luminance_sum": 75.26546159886145,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9997639623985478,
+      "lamp_fraction": 0.9997757988647196,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4345,7 +4427,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -4355,11 +4445,11 @@
       "group": "evening"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 84899.04584588441,
-      "daylight_luminance_sum": 43.408923149110755,
+      "lamp_luminance_sum": 84958.1885302539,
+      "daylight_luminance_sum": 56.102404685094996,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9994889608115619,
+      "lamp_fraction": 0.999340082660596,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5026,7 +5116,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -5036,11 +5134,11 @@
       "group": "evening"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 325867.5377633655,
-      "daylight_luminance_sum": 85.7518037338321,
+      "lamp_luminance_sum": 326674.3933166899,
+      "daylight_luminance_sum": 86.89762500165307,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.99973691996222,
+      "lamp_fraction": 0.9997340638949269,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5682,7 +5780,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -5692,7 +5798,7 @@
       "group": "evening"
     },
     "v12-ensuite": {
-      "lamp_luminance_sum": 206155.2457501796,
+      "lamp_luminance_sum": 206060.1612315678,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -6407,7 +6513,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -6417,11 +6531,11 @@
       "group": "evening"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 109460.95745552379,
-      "daylight_luminance_sum": 64.53486679734425,
+      "lamp_luminance_sum": 110013.68918583982,
+      "daylight_luminance_sum": 63.638660423816155,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
-      "lamp_fraction": 0.9994107776607164,
+      "lamp_fraction": 0.9994218731352863,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7086,7 +7200,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -7096,11 +7218,11 @@
       "group": "evening"
     },
     "v15-family-bath": {
-      "lamp_luminance_sum": 420751.9793751932,
-      "daylight_luminance_sum": 694993.8213988083,
+      "lamp_luminance_sum": 420193.2341878038,
+      "daylight_luminance_sum": 735140.5375048833,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.37710379826956486,
+      "lamp_fraction": 0.36369856441760195,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7728,7 +7850,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -7738,11 +7868,11 @@
       "group": "day"
     },
     "v35-family-bath-wc": {
-      "lamp_luminance_sum": 359495.3327777269,
-      "daylight_luminance_sum": 806490.2428262392,
+      "lamp_luminance_sum": 359933.3127225466,
+      "daylight_luminance_sum": 828785.1829140706,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.30831885084985955,
+      "lamp_fraction": 0.3027910426595866,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8369,7 +8499,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -8379,11 +8517,11 @@
       "group": "day"
     },
     "v16-guest-wc": {
-      "lamp_luminance_sum": 366329.9767500835,
-      "daylight_luminance_sum": 11.752487480896148,
+      "lamp_luminance_sum": 366789.69309616345,
+      "daylight_luminance_sum": 10.808019732688507,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999679193317526,
+      "lamp_fraction": 0.9999705343376036,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9092,7 +9230,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -9102,11 +9248,11 @@
       "group": "evening"
     },
     "v17-dirty-kitchen": {
-      "lamp_luminance_sum": 240490.31062791284,
-      "daylight_luminance_sum": 1999422.2182804213,
+      "lamp_luminance_sum": 240342.72584423487,
+      "daylight_luminance_sum": 1102480.8624619134,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.10736593841238995,
+      "lamp_fraction": 0.1789830979566018,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9620,7 +9766,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -9630,11 +9784,11 @@
       "group": "day"
     },
     "v18-study-evening": {
-      "lamp_luminance_sum": 125932.2157194121,
-      "daylight_luminance_sum": 1633.2308812887563,
+      "lamp_luminance_sum": 125975.74839493886,
+      "daylight_luminance_sum": 1932.3524292343754,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9871969179365553,
+      "lamp_fraction": 0.9848926501387848,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10301,7 +10455,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -10311,12 +10473,12 @@
       "group": "evening"
     },
     "v19-garden-facade": {
-      "lamp_luminance_sum": 0.1279080919996732,
-      "daylight_luminance_sum": 30248347.773768015,
-      "sky_luminance_sum": 5166974.401966814,
-      "metered_pixels": 12890,
-      "lamp_fraction": 4.228597621775754e-09,
-      "solar_fraction": 0.8291815989219841,
+      "lamp_luminance_sum": 0.17191930408309075,
+      "daylight_luminance_sum": 73141518.21286015,
+      "sky_luminance_sum": 5801561.761124748,
+      "metered_pixels": 13406,
+      "lamp_fraction": 2.350502257536763e-09,
+      "solar_fraction": 0.9206803207961757,
       "lamp_population": [],
       "view_input": {
         "id": "v19-garden-facade",
@@ -10324,8 +10486,8 @@
         "exposure": "exterior-day",
         "camera": {
           "position": [
-            28.3,
-            -20.95,
+            27.7,
+            -23.85,
             -1.65
           ],
           "target": [
@@ -10336,7 +10498,23 @@
           "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
-          "shift_y": 0.07452903963658022
+          "shift_y": 0.07452903963658022,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                28.3,
+                -20.95,
+                -1.65
+              ],
+              "new": [
+                27.7,
+                -23.85,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.01 m from ld-wall-fence-rear (inside or touching a garden solid of the decided layout); moved 2.96 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": 40.07,
@@ -10354,7 +10532,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -10364,11 +10550,11 @@
       "group": "exterior-day"
     },
     "v20-kitchen-run": {
-      "lamp_luminance_sum": 513174.91849441995,
-      "daylight_luminance_sum": 398.9539979895076,
+      "lamp_luminance_sum": 516286.4714002312,
+      "daylight_luminance_sum": 371.81681283101096,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.999223180891089,
+      "lamp_fraction": 0.9992803428855908,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11079,7 +11265,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -11089,11 +11283,11 @@
       "group": "evening"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 145405.68524070713,
-      "daylight_luminance_sum": 25.763640800499203,
+      "lamp_luminance_sum": 145266.90529666797,
+      "daylight_luminance_sum": 24.859705636095292,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998228468395342,
+      "lamp_fraction": 0.9998288980408786,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11760,7 +11954,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -11770,11 +11972,11 @@
       "group": "evening"
     },
     "v22-parents-day": {
-      "lamp_luminance_sum": 4.989918562778745,
-      "daylight_luminance_sum": 21600195.500256527,
+      "lamp_luminance_sum": 4.847471388231845,
+      "daylight_luminance_sum": 19582799.40420946,
       "sky_luminance_sum": null,
       "metered_pixels": 13406,
-      "lamp_fraction": 2.3101260402876458e-07,
+      "lamp_fraction": 2.475371415621321e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -11838,7 +12040,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -11848,11 +12058,11 @@
       "group": "day"
     },
     "v23-gf-gallery": {
-      "lamp_luminance_sum": 332125.47796140634,
-      "daylight_luminance_sum": 56842.677878091345,
+      "lamp_luminance_sum": 331719.42656175036,
+      "daylight_luminance_sum": 56157.280400904834,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.8538629010505768,
+      "lamp_fraction": 0.8552187347349227,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12297,7 +12507,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -12307,11 +12525,11 @@
       "group": "evening"
     },
     "v24-bar-alcove": {
-      "lamp_luminance_sum": 83423.49615386261,
-      "daylight_luminance_sum": 36.25617156505186,
+      "lamp_luminance_sum": 83532.7421462491,
+      "daylight_luminance_sum": 47.322722736085126,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
-      "lamp_fraction": 0.999565584960956,
+      "lamp_fraction": 0.9994338037089314,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12978,7 +13196,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -12988,12 +13214,12 @@
       "group": "evening"
     },
     "v25-top-garden-gate": {
-      "lamp_luminance_sum": 1.4524047285366057,
-      "daylight_luminance_sum": 59460339.61884397,
-      "sky_luminance_sum": 12595618.30008419,
+      "lamp_luminance_sum": 1.4417396136660696,
+      "daylight_luminance_sum": 62898919.458152406,
+      "sky_luminance_sum": 13309882.11057703,
       "metered_pixels": 13409,
-      "lamp_fraction": 2.442644462459866e-08,
-      "solar_fraction": 0.7881677370020869,
+      "lamp_fraction": 2.2921531769371654e-08,
+      "solar_fraction": 0.7883925157182979,
       "lamp_population": [],
       "view_input": {
         "id": "v25-top-garden-gate",
@@ -13031,7 +13257,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13041,12 +13275,12 @@
       "group": "exterior-day"
     },
     "v26-top-garden-east": {
-      "lamp_luminance_sum": 0.7724427026278379,
-      "daylight_luminance_sum": 43062796.723837815,
-      "sky_luminance_sum": 8176811.591287755,
+      "lamp_luminance_sum": 0.8721590655450978,
+      "daylight_luminance_sum": 49262288.14612887,
+      "sky_luminance_sum": 9692224.5929059,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.7937587605509287e-08,
-      "solar_fraction": 0.8101188911689657,
+      "lamp_fraction": 1.770439585585073e-08,
+      "solar_fraction": 0.8032526511120346,
       "lamp_population": [],
       "view_input": {
         "id": "v26-top-garden-east",
@@ -13084,7 +13318,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13094,12 +13336,12 @@
       "group": "exterior-day"
     },
     "v27-east-yard-above": {
-      "lamp_luminance_sum": 0.11518172846075536,
-      "daylight_luminance_sum": 34001237.97783578,
-      "sky_luminance_sum": 2850944.033986771,
-      "metered_pixels": 13404,
-      "lamp_fraction": 3.3875745390697718e-09,
-      "solar_fraction": 0.916151757890545,
+      "lamp_luminance_sum": 0.0782640201646333,
+      "daylight_luminance_sum": 10157412.834805697,
+      "sky_luminance_sum": 1887814.627387674,
+      "metered_pixels": 13400,
+      "lamp_fraction": 7.70511357906201e-09,
+      "solar_fraction": 0.8141441469309161,
       "lamp_population": [],
       "view_input": {
         "id": "v27-east-yard-above",
@@ -13137,7 +13379,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13147,12 +13397,12 @@
       "group": "exterior-day"
     },
     "v28-east-yard-below": {
-      "lamp_luminance_sum": 0.14674893897883237,
-      "daylight_luminance_sum": 26479736.55489683,
-      "sky_luminance_sum": 3578201.907727648,
-      "metered_pixels": 13390,
-      "lamp_fraction": 5.5419334652867464e-09,
-      "solar_fraction": 0.8648701847803716,
+      "lamp_luminance_sum": 0.09729228123247217,
+      "daylight_luminance_sum": 8420284.54502867,
+      "sky_luminance_sum": 1520944.6753991558,
+      "metered_pixels": 13324,
+      "lamp_fraction": 1.155451215312535e-08,
+      "solar_fraction": 0.8193713446065048,
       "lamp_population": [],
       "view_input": {
         "id": "v28-east-yard-below",
@@ -13190,7 +13440,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13200,12 +13458,12 @@
       "group": "exterior-day"
     },
     "v36-north-garden": {
-      "lamp_luminance_sum": 1.5450916409105024,
-      "daylight_luminance_sum": 2465761.7265568925,
-      "sky_luminance_sum": 848955.0675569994,
-      "metered_pixels": 13406,
-      "lamp_fraction": 6.266179964135412e-07,
-      "solar_fraction": 0.6557027151433436,
+      "lamp_luminance_sum": 1.63016109637295,
+      "daylight_luminance_sum": 2393059.1794188004,
+      "sky_luminance_sum": 944026.0726012345,
+      "metered_pixels": 13409,
+      "lamp_fraction": 6.812033734567429e-07,
+      "solar_fraction": 0.6055149489322245,
       "lamp_population": [],
       "view_input": {
         "id": "v36-north-garden",
@@ -13213,7 +13471,7 @@
         "exposure": "exterior-day",
         "camera": {
           "position": [
-            1.75,
+            2.15,
             -26.2,
             -1.65
           ],
@@ -13225,7 +13483,23 @@
           "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
-          "shift_y": -0.31
+          "shift_y": -0.31,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                1.75,
+                -26.2,
+                -1.65
+              ],
+              "new": [
+                2.15,
+                -26.2,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.39 m from ld-plant-n-screen-01 (inside or touching a garden solid of the decided layout); moved 0.40 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": 40.07,
@@ -13243,7 +13517,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13253,12 +13535,12 @@
       "group": "exterior-day"
     },
     "v37-north-garden-lounge": {
-      "lamp_luminance_sum": 2.6605716241954114,
-      "daylight_luminance_sum": 2300974.7754401723,
-      "sky_luminance_sum": 1145163.912492273,
-      "metered_pixels": 13379,
-      "lamp_fraction": 1.156278885031957e-06,
-      "solar_fraction": 0.5023135739185993,
+      "lamp_luminance_sum": 1.4759460955352584,
+      "daylight_luminance_sum": 1334486.573119516,
+      "sky_luminance_sum": 682266.633480635,
+      "metered_pixels": 13387,
+      "lamp_fraction": 1.1060017334502873e-06,
+      "solar_fraction": 0.48874222699314374,
       "lamp_population": [],
       "view_input": {
         "id": "v37-north-garden-lounge",
@@ -13296,22 +13578,30 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
           1280
         ]
       },
-      "group": "exterior-day"
+      "group": "exterior-shade"
     },
     "v38-north-garden-floor-bed": {
-      "lamp_luminance_sum": 4.267056885458787,
-      "daylight_luminance_sum": 3148574.148589686,
-      "sky_luminance_sum": 1115913.294921879,
-      "metered_pixels": 13329,
-      "lamp_fraction": 1.3552328454816433e-06,
-      "solar_fraction": 0.6455813831090113,
+      "lamp_luminance_sum": 2.575172015146611,
+      "daylight_luminance_sum": 2178867.4434669693,
+      "sky_luminance_sum": 701087.7366896482,
+      "metered_pixels": 13334,
+      "lamp_fraction": 1.1818841845165108e-06,
+      "solar_fraction": 0.6782329559369193,
       "lamp_population": [],
       "view_input": {
         "id": "v38-north-garden-floor-bed",
@@ -13349,7 +13639,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -13359,12 +13657,12 @@
       "group": "exterior-day"
     },
     "v39-north-garden-hanging-retreat": {
-      "lamp_luminance_sum": 2.4072843844993446,
-      "daylight_luminance_sum": 1561025.296247349,
-      "sky_luminance_sum": 797450.1392259971,
-      "metered_pixels": 13373,
-      "lamp_fraction": 1.542115094468218e-06,
-      "solar_fraction": 0.4891497651299823,
+      "lamp_luminance_sum": 2.216552040588087,
+      "daylight_luminance_sum": 1815226.0869179722,
+      "sky_luminance_sum": 849314.8026369398,
+      "metered_pixels": 13401,
+      "lamp_fraction": 1.2210871967734853e-06,
+      "solar_fraction": 0.5321162422919061,
       "lamp_population": [],
       "view_input": {
         "id": "v39-north-garden-hanging-retreat",
@@ -13372,7 +13670,7 @@
         "exposure": "exterior-day",
         "camera": {
           "position": [
-            1.75,
+            2.15,
             -26.2,
             -1.65
           ],
@@ -13386,7 +13684,23 @@
           "shift_x": 0.0,
           "shift_y": -0.27,
           "home_room": null,
-          "reframed": false
+          "reframed": false,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                1.75,
+                -26.2,
+                -1.65
+              ],
+              "new": [
+                2.15,
+                -26.2,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.39 m from ld-plant-n-screen-01 (inside or touching a garden solid of the decided layout); moved 0.40 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": 40.07,
@@ -13404,21 +13718,29 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
           1280
         ]
       },
-      "group": "exterior-shade"
+      "group": "exterior-day"
     },
     "v29-under-stair-store": {
-      "lamp_luminance_sum": 100396.06124919403,
-      "daylight_luminance_sum": 112157.26341509513,
+      "lamp_luminance_sum": 100127.24844447889,
+      "daylight_luminance_sum": 87868.33026060216,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.4723335257529446,
+      "lamp_fraction": 0.5326042725800163,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13866,21 +14188,29 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
           1280
         ]
       },
-      "group": "day"
+      "group": "lamp-dominant"
     },
     "v30-under-ramp-store": {
-      "lamp_luminance_sum": 12651.491202372332,
-      "daylight_luminance_sum": 0.04681899608123803,
+      "lamp_luminance_sum": 12660.981048603744,
+      "daylight_luminance_sum": 0.04394099229325529,
       "sky_luminance_sum": null,
-      "metered_pixels": 13027,
-      "lamp_fraction": 0.9999962993435263,
+      "metered_pixels": 13031,
+      "lamp_fraction": 0.9999965294285156,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14073,7 +14403,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -14083,10 +14421,10 @@
       "group": "evening"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 155964.2257070347,
+      "lamp_luminance_sum": 155965.7304626621,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13388,
+      "metered_pixels": 13387,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -14753,7 +15091,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -14763,7 +15109,7 @@
       "group": "evening"
     },
     "v32-dressing-his": {
-      "lamp_luminance_sum": 116546.67083359743,
+      "lamp_luminance_sum": 116546.7575627471,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13172,
@@ -15412,7 +15758,15 @@
           "curtain-living-02-heavy-open-l",
           "curtain-living-02-heavy-open-r",
           "curtain-lounge-01-heavy-open-l",
-          "curtain-lounge-01-heavy-open-r"
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -15422,11 +15776,11 @@
       "group": "evening"
     },
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 62499.90073129261,
-      "daylight_luminance_sum": 2468675.8200862436,
+      "lamp_luminance_sum": 63044.025256195695,
+      "daylight_luminance_sum": 2897344.982157558,
       "sky_luminance_sum": null,
-      "metered_pixels": 13405,
-      "lamp_fraction": 0.024692043392035214,
+      "metered_pixels": 13404,
+      "lamp_fraction": 0.021295858449113764,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -15872,7 +16226,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -15882,11 +16244,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 43555.221100570016,
-      "daylight_luminance_sum": 5616887.6609896505,
+      "lamp_luminance_sum": 42966.9673247544,
+      "daylight_luminance_sum": 4149938.1927848514,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.00769466665556856,
+      "lamp_fraction": 0.010247540949299985,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -16332,7 +16694,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -16342,12 +16712,12 @@
       "group": "day"
     },
     "v40-south-garden-espalier": {
-      "lamp_luminance_sum": 0.13482792758589898,
-      "daylight_luminance_sum": 19388680.596523087,
-      "sky_luminance_sum": 4316684.432099859,
+      "lamp_luminance_sum": 0.10144273649918539,
+      "daylight_luminance_sum": 19226463.62815384,
+      "sky_luminance_sum": 3499652.898225978,
       "metered_pixels": 13409,
-      "lamp_fraction": 6.9539505783849225e-09,
-      "solar_fraction": 0.7773605887925165,
+      "lamp_fraction": 5.276203566391039e-09,
+      "solar_fraction": 0.817977295985865,
       "lamp_population": [],
       "view_input": {
         "id": "v40-south-garden-espalier",
@@ -16356,7 +16726,7 @@
         "camera": {
           "position": [
             22.0,
-            -21.8,
+            -22.7,
             -1.65
           ],
           "target": [
@@ -16369,7 +16739,23 @@
           "shift_x": 0.0,
           "shift_y": 0.0011362253635164576,
           "home_room": null,
-          "reframed": false
+          "reframed": false,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                22.0,
+                -21.8,
+                -1.65
+              ],
+              "new": [
+                22.0,
+                -22.7,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.00 m from ld-e-tree-olive (inside or touching a garden solid of the decided layout); moved 0.90 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": 40.07,
@@ -16387,7 +16773,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -16397,12 +16791,12 @@
       "group": "exterior-day"
     },
     "v41-south-garden-terrace": {
-      "lamp_luminance_sum": 0.06785560553840037,
-      "daylight_luminance_sum": 16397643.690461125,
-      "sky_luminance_sum": 6185426.844293836,
+      "lamp_luminance_sum": 0.07573742765323598,
+      "daylight_luminance_sum": 23638717.826412264,
+      "sky_luminance_sum": 9135023.475830669,
       "metered_pixels": 13409,
-      "lamp_fraction": 4.138131461965969e-09,
-      "solar_fraction": 0.6227856293833218,
+      "lamp_fraction": 3.2039566598638777e-09,
+      "solar_fraction": 0.6135567274455205,
       "lamp_population": [],
       "view_input": {
         "id": "v41-south-garden-terrace",
@@ -16410,8 +16804,8 @@
         "exposure": "exterior-day",
         "camera": {
           "position": [
-            22.8,
-            -21.6,
+            22.6,
+            -22.6,
             -1.65
           ],
           "target": [
@@ -16422,7 +16816,23 @@
           "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
-          "shift_y": 0.025046575578505634
+          "shift_y": 0.025046575578505634,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                22.8,
+                -21.6,
+                -1.65
+              ],
+              "new": [
+                22.6,
+                -22.6,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.19 m from ld-plant-e-divider-00 (inside or touching a garden solid of the decided layout); moved 1.02 m, target kept"
+            }
+          ]
         },
         "sun": {
           "altitude_deg": 40.07,
@@ -16440,7 +16850,15 @@
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
           "curtain-living-02-heavy-closed",
-          "curtain-lounge-01-heavy-closed"
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
         ],
         "resolution": [
           1920,
@@ -16450,34 +16868,13 @@
       "group": "exterior-day"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 84.45626370521228,
-      "daylight_luminance_sum": 5106.447489308421,
+      "lamp_luminance_sum": 1.2719365521256747,
+      "daylight_luminance_sum": 3395.227402236061,
       "sky_luminance_sum": null,
-      "metered_pixels": 13403,
-      "lamp_fraction": 0.01627005001897412,
+      "metered_pixels": 13394,
+      "lamp_fraction": 0.0003744845575560983,
       "solar_fraction": null,
-      "lamp_population": [
-        {
-          "id": "garden-uplight-north-back-00",
-          "flux_lm": 120.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "garden-uplight-north-back-01",
-          "flux_lm": 120.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "garden-uplight-north-back-02",
-          "flux_lm": 120.0,
-          "cct_k": 2700
-        },
-        {
-          "id": "garden-uplight-north-rhapis-accent",
-          "flux_lm": 120.0,
-          "cct_k": 2700
-        }
-      ],
+      "lamp_population": [],
       "view_input": {
         "id": "v42-north-garden-evening",
         "state": "exterior-dusk",
@@ -16508,20 +16905,393 @@
         "dimmers": {
           "evening-garden": 1.0
         },
+        "hide_meshes": [
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
         "resolution": [
           1920,
           1280
         ]
       },
       "group": "exterior-dusk"
+    },
+    "gi-living-door": {
+      "lamp_luminance_sum": 0.11458868168305779,
+      "daylight_luminance_sum": 25950683.107723977,
+      "sky_luminance_sum": 3165546.715164334,
+      "metered_pixels": 13409,
+      "lamp_fraction": 4.415632555852452e-09,
+      "solar_fraction": 0.8780168251439154,
+      "lamp_population": [],
+      "view_input": {
+        "id": "gi-living-door",
+        "state": "day",
+        "exposure": "exterior-day",
+        "camera": {
+          "position": [
+            22.85,
+            -26.13,
+            -1.65
+          ],
+          "target": [
+            27.5,
+            -26.33,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": 0.02,
+          "home_room": null,
+          "reframed": false
+        },
+        "sun": {
+          "altitude_deg": 40.07,
+          "azimuth_true_deg": 135.34
+        },
+        "layers_on": [],
+        "dimmers": {},
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "exterior-day"
+    },
+    "gi-dining-firepit": {
+      "lamp_luminance_sum": 0.16802785387276306,
+      "daylight_luminance_sum": 71787198.49724658,
+      "sky_luminance_sum": 8465698.453122554,
+      "metered_pixels": 13409,
+      "lamp_fraction": 2.340638122072913e-09,
+      "solar_fraction": 0.882072310518605,
+      "lamp_population": [],
+      "view_input": {
+        "id": "gi-dining-firepit",
+        "state": "day",
+        "exposure": "exterior-day",
+        "camera": {
+          "position": [
+            27.4,
+            -24.8,
+            -1.65
+          ],
+          "target": [
+            25.1,
+            -29.6,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": -0.04,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": [
+                27.4,
+                -25.0,
+                -1.75
+              ],
+              "new": [
+                27.4,
+                -25.0,
+                -1.65
+              ],
+              "reason": "camera eye height follows the standing or seated view intent"
+            },
+            {
+              "field": "target",
+              "prior": [
+                25.1,
+                -29.6,
+                -1.75
+              ],
+              "new": [
+                25.1,
+                -29.6,
+                -1.65
+              ],
+              "reason": "camera target is level with eye height"
+            },
+            {
+              "field": "position",
+              "prior": [
+                27.4,
+                -25.0,
+                -1.65
+              ],
+              "new": [
+                27.4,
+                -24.8,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.55 m from ld-s-dining-table-chair-6 (inside or touching a garden solid of the decided layout); moved 0.20 m, target kept"
+            }
+          ],
+          "home_room": null,
+          "reframed": false
+        },
+        "sun": {
+          "altitude_deg": 40.07,
+          "azimuth_true_deg": 135.34
+        },
+        "layers_on": [],
+        "dimmers": {},
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "exterior-day"
+    },
+    "gi-north-court-pond": {
+      "lamp_luminance_sum": 1.643473581152664,
+      "daylight_luminance_sum": 1361808.3849651397,
+      "sky_luminance_sum": 728842.7936435804,
+      "metered_pixels": 13403,
+      "lamp_fraction": 1.2068302823682852e-06,
+      "solar_fraction": 0.4647978366925405,
+      "lamp_population": [],
+      "view_input": {
+        "id": "gi-north-court-pond",
+        "state": "day",
+        "exposure": "exterior-day",
+        "camera": {
+          "position": [
+            3.3,
+            -27.6,
+            -1.65
+          ],
+          "target": [
+            1.2,
+            -24.9,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": -0.27,
+          "home_room": null,
+          "reframed": false
+        },
+        "sun": {
+          "altitude_deg": 40.07,
+          "azimuth_true_deg": 135.34
+        },
+        "layers_on": [],
+        "dimmers": {},
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "exterior-shade"
+    },
+    "gi-dining-crown-summer": {
+      "lamp_luminance_sum": 0.47798620763801025,
+      "daylight_luminance_sum": 25221511.865729198,
+      "sky_luminance_sum": 9683019.174409043,
+      "metered_pixels": 13409,
+      "lamp_fraction": 1.8951528406547474e-08,
+      "solar_fraction": 0.6160809381309826,
+      "lamp_population": [],
+      "view_input": {
+        "id": "gi-dining-crown-summer",
+        "state": "day",
+        "exposure": "exterior-day",
+        "camera": {
+          "position": [
+            23.4,
+            -27.3,
+            -1.65
+          ],
+          "target": [
+            25.5,
+            -25.2,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": 0.3,
+          "home_room": null,
+          "reframed": false
+        },
+        "sun": {
+          "altitude_deg": 40.07,
+          "azimuth_true_deg": 135.34
+        },
+        "layers_on": [],
+        "dimmers": {},
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "exterior-day"
+    },
+    "gi-dining-crown-winter": {
+      "lamp_luminance_sum": 1.5176092688959997,
+      "daylight_luminance_sum": 28839086.62621865,
+      "sky_luminance_sum": 10041301.567112526,
+      "metered_pixels": 13409,
+      "lamp_fraction": 5.2623344445819286e-08,
+      "solar_fraction": 0.6518162417119128,
+      "lamp_population": [],
+      "view_input": {
+        "id": "gi-dining-crown-winter",
+        "state": "day",
+        "exposure": "exterior-day",
+        "camera": {
+          "position": [
+            23.4,
+            -27.3,
+            -1.65
+          ],
+          "target": [
+            25.5,
+            -25.2,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": 0.3,
+          "home_room": null,
+          "reframed": false
+        },
+        "sun": {
+          "altitude_deg": 33.92,
+          "azimuth_true_deg": 153.01
+        },
+        "layers_on": [],
+        "dimmers": {},
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.garden-bark",
+          "ld-s-tree-crape.garden-leafcut-386b29",
+          "ld-plant-s-bed-screen-n-00.garden-climber-stem",
+          "ld-plant-s-bed-screen-n-00.garden-leaf-standin-386b29",
+          "ld-plant-s-bed-screen-n-01.garden-climber-stem",
+          "ld-plant-s-bed-screen-n-01.garden-leaf-standin-386b29"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "exterior-day"
     }
   },
-  "measurement_sha256": "ce0929101e124f9530ffabc8cd670f3426a760080bf17bc060ca9761660dff31",
+  "measurement_sha256": "89f73ea27b41e5b83b0c1fcb30736028a1973dc6f2aaff0c352ccb292c006ee5",
   "white_balance_k": {
-    "exterior-dusk": 4300,
+    "day": 5500,
     "evening": 3000,
-    "exterior-shade": 5500,
     "exterior-day": 5500,
-    "day": 5500
+    "exterior-shade": 5500,
+    "lamp-dominant": 2700,
+    "exterior-dusk": 4300
   }
 }
