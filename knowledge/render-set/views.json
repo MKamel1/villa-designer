@@ -8,7 +8,8 @@
   "Exposure is the existing per-group lock (knowledge/exposure-groups.json); no view is boosted."
  ],
  "light": {
-  "basement-day": {"layers": ["ambient", "accent"], "dimmers": {"ambient": 0.5, "accent": 0.5}},
+  "basement-day": {"layers": ["ambient", "accent"], "dimmers": {"ambient": 1.0, "accent": 0.5}},
+  "design-evening": {"layers": ["ambient", "accent", "decorative"], "dimmers": {"ambient": 0.4, "accent": 0.7, "decorative": 0.7}},
   "bath-day": {"layers": ["ambient", "task", "accent"], "dimmers": {}}
  },
  "views": [
@@ -28,13 +29,13 @@
   {"id": "v30-under-ramp-store", "reuse": true, "purpose": "Under-ramp store shelving (audit F)", "covers": ["store-ramp"]},
   {"id": "n05-pantry-evening", "level": "B", "camera": {"position": [4.5, -29.25], "target": [6.9, -29.25]}, "subjects": [], "state": "evening", "layers": ["ambient", "task"], "purpose": "Pantry shelving (new: room had no view)", "covers": ["pantry"]},
   {"id": "n07-family-corner-day", "level": "B", "camera": {"position": [12.6, -24.6], "target": [6.0, -25.6]}, "subjects": [], "state": "day", "light": "basement-day", "purpose": "Family / TV corner and lounge from the kitchen edge (new: room had no view)", "covers": ["family", "lounge"]},
-  {"id": "n06-stair-foot-hall-evening", "level": "B", "camera": {"position": [10.45, -28.4], "target": [10.4, -23.8]}, "subjects": [], "state": "evening", "purpose": "Stair-foot hall looking north into the family corner (new: room had no view)", "covers": ["hall-b", "family"]},
+  {"id": "n06-stair-foot-hall-evening", "level": "B", "camera": {"position": [10.45, -28.4], "target": [10.4, -23.8]}, "subjects": [], "state": "evening", "light": "design-evening", "purpose": "Stair-foot hall looking north into the family corner (new: room had no view)", "covers": ["hall-b", "family"]},
   {"id": "n08-guest-wc-evening", "room": "guest-wc", "subjects": ["gwc-wc", "gwc-basin"], "state": "evening", "light": "bath-day", "replaces": "v16-guest-wc", "purpose": "Guest bathroom WC and basin at 24 mm (v16 was 16 mm, D+, 30 % occluding wall)", "covers": ["guest-wc"]},
   {"id": "n09-dirty-kitchen-day", "room": "dirty-kitchen", "subjects": ["dk-run"], "state": "day", "light": "basement-day", "replaces": "v17-dirty-kitchen", "purpose": "Dirty kitchen run at 24 mm (v17 was 16 mm, C)", "covers": ["dirty-kitchen"]},
   {"id": "v11-stair-void", "reuse": true, "purpose": "Stair up through the void (audit C: mostly blank wall; kept for the draft pass to judge)", "covers": ["stair-b", "stair-gf", "hall-b"]},
   {"id": "n10-gf-hall-east-day", "level": "GF", "camera": {"position": [11.8, -28.05], "target": [19.0, -28.05]}, "subjects": [], "state": "day", "layers": ["ambient", "accent"], "replaces": "v23-gf-gallery", "purpose": "Ground-floor hall looking east from the stair gallery to the parents' door (v23 looked west at a blank wall)", "covers": ["corridor", "gallery-end"]},
   {"id": "n18-stair-gallery-day", "level": "GF", "camera": {"position": [11.2, -26.9], "target": [5.6, -28.0]}, "subjects": [], "state": "day", "layers": ["ambient", "accent"], "purpose": "Stair void, landing and gallery from the gallery end (new: GF stair rooms had no 24 mm view)", "covers": ["stair-gf", "landing-gf", "gallery-end"]},
-  {"id": "n19-entry-lobby-evening", "level": "B", "camera": {"position": [14.9, -28.2], "target": [14.9, -24.0]}, "subjects": [], "state": "evening", "purpose": "Entrance lobby looking in from the core door (new: room had no view)", "covers": ["entry-b"]},
+  {"id": "n19-entry-lobby-evening", "level": "B", "camera": {"position": [14.9, -28.2], "target": [14.9, -24.0]}, "subjects": [], "state": "evening", "light": "design-evening", "purpose": "Entrance lobby looking in from the core door (new: room had no view)", "covers": ["entry-b"]},
   {"id": "n20-dining-side-day", "room": "dining", "subjects": ["dining-sideboard"], "state": "day", "light": "basement-day", "purpose": "Dining party side and sideboard (new: room had no view)", "covers": ["dining-side", "dining"]},
   {"id": "n11-study-desks-day", "room": "study-game", "subjects": ["study-desk", "study-adult-desk"], "state": "day", "replaces": "v04-study-deck", "purpose": "Study desks at the windows (v04 stood behind armchairs, C-)", "covers": ["study-game"]},
   {"id": "n12-study-sofa-evening", "room": "study-game", "subjects": ["study-sofa"], "state": "evening", "dimmers": {"ambient": 0.4, "task": 0.6}, "replaces": "v18-study-evening", "purpose": "Study sofa at dusk seen from the front (v18 showed the sofa back, C-)", "covers": ["study-game"]},
