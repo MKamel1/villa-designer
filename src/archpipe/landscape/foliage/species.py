@@ -24,7 +24,7 @@ SPECS = {
         wscale=1.0, arr="opposite", arch=0.35, colour=(58, 100, 38), stems=4, leaf_zone=1.0, node=0.04, branch_p=0.55,
         jitter=0.12, thickness=0.22, leaf_len_source="policy"),
     "petrea_volubilis": dict(form="climber", accepted="Petrea volubilis", banks={"star_jasmine": 0.55, "ginger_lily": 0.45},
-        leaf_len=0.15, len_sd=0.18, wscale=0.8, arr="opposite", arch=0.3, colour=(48, 84, 34), stems=4, leaf_zone=1.0,
+        leaf_len=0.15, len_sd=0.18, wscale=0.8, arr="opposite", arch=0.3, colour=(62, 100, 40), stems=4, leaf_zone=1.0,
         node=0.07, branch_p=0.45, jitter=0.12, thickness=0.30, leaf_len_source="sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)"),
     "vitis_vinifera": dict(form="climber", accepted="Vitis vinifera", banks={"palmate_grape": 1.0}, leaf_len=0.13, len_sd=0.2,
         wscale=1.0, arr="alternate", arch=0.4, colour=(88, 128, 46), stems=3, leaf_zone=1.0, node=0.09, branch_p=0.5,

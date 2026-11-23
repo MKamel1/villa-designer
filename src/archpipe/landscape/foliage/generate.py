@@ -271,11 +271,11 @@ def build_climber(spec, rng, H, S, reach, state, lod_keep):
     for b in g.out:
         pts = b["pts"]; n = len(pts)
         d_all = np.gradient(pts, axis=0)
-        step = max(1, int(round(spec["node"] / 0.06)))
+        step = max(1, int(round(spec["node"] * 1.5 / 0.06)))
         for i in range(2, n, step):
             bd = unit(d_all[i])
             for j in range(2 if spec["arr"] == "opposite" else 1):
-                if rng.random() > lod_keep:
+                if rng.random() > lod_keep * 0.8:
                     continue
                 side = (-1 if j else 1) * (1 if spec["arr"] == "opposite" else rng.choice([-1, 1]))
                 d = unit(np.array([side * rng.uniform(0.2, 0.9), rng.uniform(0.5, 1.0), -rng.uniform(0.0, 0.7)]) + rng.normal(0, 0.1, 3))
@@ -381,7 +381,7 @@ def build_strap(spec, rng, H, S, reach, state, lod_keep):
         out = np.array([math.cos(a), math.sin(a), 0])
         d = np.array([out[0] * math.cos(el), out[1] * math.cos(el), math.sin(el)])
         # length chosen so the arched tip lands near the sourced height and spread
-        L = H * rng.uniform(0.85, 1.35) * 1.15
+        L = H * rng.uniform(0.9, 1.2) * 1.15
         ls.add(out * 0.01, d, unit(np.cross(np.cross(d, UP), d) + UP * 0.1), scale=L / spec["leaf_len"], arch=spec["arch"] * rng.uniform(0.7, 1.2))
     return g, ls
 
