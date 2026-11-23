@@ -197,7 +197,7 @@ def standins(scene):
             good = "STAND-IN" in o.label and r is not None and r["status"] == "standin" and r.get("reason")
             out.append(F("standin", o.id, "pass" if good else "fail", "labelled STAND-IN" if good else "unlabelled generic mass", "STAND-IN label + schedule reason"))
         else:
-            good = o.asset is not None and r is not None and r["status"] == "asset" and r.get("grade") in ("A", "B")
+            good = (o.asset is not None or o.meta.get("atlas")) and r is not None and r["status"] == "asset" and r.get("grade") in ("A", "B")      # a graded atlas-built climber (real leaf cut-outs) counts as a graded asset
             out.append(F("standin", o.id, "pass" if good else "fail", "graded asset %s" % (r or {}).get("asset"), "grade A/B asset of the species or genus"))
     return out
 
