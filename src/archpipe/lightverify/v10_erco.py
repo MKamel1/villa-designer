@@ -118,11 +118,17 @@ def _label_value(text: str, label: str):
     return float(m.group(1)) if m else None
 
 
+def _inline_cri(text: str):
+    """Libera pages print 'CRI 90 - Rf ...' on one line under 'Light colour quality' (QA pages split the label from the value)."""
+    m = re.search(r"Light colour quality\s*\n\s*CRI\s+(\d+)", text)
+    return float(m.group(1)) if m else None
+
+
 def datasheet_iguzzini(text: str) -> dict:
     """What the iGuzzini product page prints (it IS their datasheet): system lm/W, Imax, LOR, flux at/above 90 deg, beam class angle."""
     m = re.search(r"Optic and beam angle\s*\n\s*[A-Z]+\s*-\s*[\w ]+?(\d+(?:\.\d+)?)\s*°", text)
     return {"lumens": _label_value(text, "lm system"), "watts": _label_value(text, "W system"), "imax": [v] if (v := _label_value(text, "Maximum intensity (cd)")) else [],
-            "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"), "cri": _label_value(text, "CRI"),
+            "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"), "cri": _label_value(text, "CRI") or _inline_cri(text),
             "above90": _label_value(text, "Total light flux at or above an angle of 90° (Lm)"), "lamp_lm": _label_value(text, "lm source")}
 
 
