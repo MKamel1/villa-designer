@@ -61,8 +61,12 @@ def _load_prop_bounds():
     docs/LEARNINGS.md 2026-09-28)."""
     path = Path(__file__).resolve().parents[3] / "ops" / "workstation" / "library-manifest.json"
     manifest = json.loads(path.read_text())
-    return {p["id"]: (tuple(p["bounds_m"]["min"]), tuple(p["bounds_m"]["max"]))
-            for p in manifest.get("props", []) if "bounds_m" in p}
+    bounds = {p["id"]: (tuple(p["bounds_m"]["min"]), tuple(p["bounds_m"]["max"]))
+              for p in manifest.get("props", []) if "bounds_m" in p}
+    ldb = path.parents[2] / "knowledge" / "landscape" / "build" / "ldb-prop-bounds.json"      # lane GI: the decided garden's assets (written by landscape.build.production)
+    if ldb.exists():
+        bounds.update({k: (tuple(v[0]), tuple(v[1])) for k, v in json.loads(ldb.read_text()).items()})
+    return bounds
 
 
 PROP_BOUNDS = _load_prop_bounds()

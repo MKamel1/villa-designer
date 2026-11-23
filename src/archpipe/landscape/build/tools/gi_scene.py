@@ -19,7 +19,7 @@ def views():
     from archpipe.landscape.build import production as PRD
     lay = R.design("D1")
     base = VR.VIEWS(lay)
-    return RS.resolve(RS.load(), lay, base) + PRD.key_views(base)
+    return RS.resolve(RS.load(), lay, base) + [v for v in base if v["id"] in PRD.KEY_VIEWS]      # the key views are part of VIEWS(lay) (villa_render appends them)
 
 
 def main(out, dev=False, measure=False, record=None):

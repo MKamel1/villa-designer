@@ -90,6 +90,19 @@ class SceneShape(unittest.TestCase):
         self.assertTrue(atlas and all(len(m["leaf_uv"]) == 15 for m in atlas))             # the 15 live leaves of the atlas, the 5 dead ones dropped
 
 
+class PropBounds(unittest.TestCase):
+    def test_the_committed_bounds_table_is_current_and_places_every_prop_at_its_built_size(self):
+        import json
+        self.assertEqual(json.loads(PR.BOUNDS_FILE.read_text()), PR.prop_bounds(G["props"]))       # python -m archpipe.landscape.build.production rewrites it
+        from archpipe.concept import villa_landscape as LAND
+        for p in G["props"]:
+            self.assertIn(p["asset"], LAND.PROP_BOUNDS, p["id"])                                    # else the geometry-topology review fails closed on the first garden prop
+            x0, y0, z0, x1, y1, z1 = LAND.prop_world_box(p["asset"], p["position"], p["rotation_deg"], p["scale"])
+            self.assertAlmostEqual(z0, p["position"][2], places=6)
+            if p["ldb"]["mode"] == "height":
+                self.assertAlmostEqual(z1 - z0, p["ldb"]["scale_to_height_m"], places=6, msg=p["id"])
+
+
 class Views(unittest.TestCase):
     def view(self, **kw):
         v = dict(id="v41-south-garden-terrace", when="2026-10-15T10:30:00+03:00", resolution=[1920, 1280], subjects=["landscape-g6-pergola"], hide_meshes=["curtain-x"], visibility_targets=["x"],

@@ -208,8 +208,12 @@ def _object_meshes(o, table, parts, season, tag):
 def _prop(o, species):
     a = o.asset
     pos = list(a["at"])
-    d = dict(id=o.id, asset="ldb-" + a["asset_id"].replace("plant", "flora"), label="dressing: " + o.label, position=pos, rotation_deg=[0, 0, a.get("yaw_deg", 0.0)], scale=1.0, zone="lower", element_ids=[o.id],
-             ldb=dict(asset_id=a["asset_id"], gltf=a["gltf"], mode=a.get("mode", "height"), scale_to_height_m=a["bounds"][5] - a["bounds"][2], scale_xyz=a.get("scale_xyz"), box_m=a.get("box_m"),
+    nx, ny, nz = a["native_size_m"]
+    mode = a.get("mode", "height")
+    scale = {"height": lambda: (a["bounds"][5] - a["bounds"][2]) / nz, "xyz": lambda: list(a["scale_xyz"]), "box": lambda: [a["box_m"][0] / nx, a["box_m"][1] / ny, a["box_m"][2] / nz],
+             "fish": lambda: a["length_m"] / max(nx, ny, nz)}[mode]()
+    d = dict(id=o.id, asset="ldb-" + a["asset_id"].replace("plant", "flora"), label="dressing: " + o.label, position=pos, rotation_deg=[0, 0, a.get("yaw_deg", 0.0)], scale=scale, zone="lower", element_ids=[o.id],
+             ldb=dict(asset_id=a["asset_id"], native_size_m=list(a["native_size_m"]), gltf=a["gltf"], mode=a.get("mode", "height"), scale_to_height_m=a["bounds"][5] - a["bounds"][2], scale_xyz=a.get("scale_xyz"), box_m=a.get("box_m"),
                       length_m=a.get("length_m"), yaw_deg=a.get("yaw_deg", 0.0), tiles=a.get("tiles"), kind=o.kind),
              grade=a["grade"], licence=a["licence"], author=a["author"], source=a["source"])
     if species:
@@ -445,3 +449,22 @@ def reveal_ground(shell_meshes, g):
                 cuts.append(dict(id="cut-" + o.id, part_kind="soil-bed", faces=[[[x, y, z] for x, y in list(q.exterior.coords)[:-1]]]))
     LAND.reveal_ground_soil(shell_meshes, cuts)
     return len(cuts)
+
+
+BOUNDS_FILE = ROOT / "knowledge/landscape/build/ldb-prop-bounds.json"
+
+
+def prop_bounds(props):
+    """{asset: [[gx0, gy0, gz0], [gx1, gy1, gz1]]}: each garden asset's native extent in the glTF Y-up frame `villa_landscape.prop_world_box` reads (scene x = gx, y = -gz, z = gy), centred
+    on the placement point, so the geometry-topology review (which takes every prop's box from PROP_BOUNDS x scale) sees the placed size. Native size is measured in Blender's Z-up frame."""
+    out = {}
+    for p in props:
+        nx, ny, nz = p["ldb"]["native_size_m"]
+        out[p["asset"]] = [[-nx / 2, 0.0, -ny / 2], [nx / 2, nz, ny / 2]]
+    return out
+
+
+if __name__ == "__main__":      # python -m archpipe.landscape.build.production  -> rewrite knowledge/landscape/build/ldb-prop-bounds.json
+    import json
+    BOUNDS_FILE.write_text(json.dumps(prop_bounds(garden()["props"]), indent=1, sort_keys=True))
+    print("wrote", BOUNDS_FILE)

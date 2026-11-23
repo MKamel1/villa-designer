@@ -3027,6 +3027,9 @@ def _VIEWS(lay=None, resolve=True):
             garden_view.setdefault("caption_notes", []).append(
                 "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED.")
     V.append(garden_g4d.evening_view())
+    if GARDEN_SOURCE == "ldb":          # lane GI: the key garden views of the decided garden (living door, dining with the fire pit, north court pond)
+        from ..landscape.build import production as PRD
+        V.extend(PRD.key_views(V))
     if not resolve:
         return V
     # The old shared BASEMENT_DAY dictionary made v29's full accent setting leak into six other views, whose
