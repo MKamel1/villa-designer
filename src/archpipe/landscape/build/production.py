@@ -8,7 +8,6 @@ closed / open state (`ld_state`); a view hides the ones it does not show (`view_
 """
 from __future__ import annotations
 
-import colorsys
 import math
 import re
 from pathlib import Path
@@ -144,17 +143,6 @@ def _card_solids(part):
         P = lambda a: [float(x) for x in a]
         out += [[P(q[0]), P(q[1]), P(q[2]), P(q[3])], [P(b[3]), P(b[2]), P(b[1]), P(b[0])],
                 [P(q[0]), P(b[0]), P(b[1]), P(q[1])], [P(q[1]), P(b[1]), P(b[2]), P(q[2])], [P(q[2]), P(b[2]), P(b[3]), P(q[3])], [P(q[3]), P(b[3]), P(b[0]), P(q[0])]]
-    return out
-
-
-def _drop_down(faces):
-    """Faces of a ground slab that point down (its underside) are buried: a ground-only material on them is both invisible and refused by the scene guard."""
-    out = []
-    for f in faces:
-        a, b, c = f[0], f[1], f[2]
-        nz = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
-        if nz >= -1e-12:
-            out.append(f)
     return out
 
 
@@ -377,7 +365,7 @@ def clear_camera(view, g):
     raise ValueError("%s: no clear standing point within 3.5 m of %s" % (view["id"], pos))
 
 
-def prepare_view(view, g, mesh_ids=()):
+def prepare_view(view, g):
     """Hide the other season's and the other state's meshes in this view; for a garden view drop the authored old-garden subject lists and name the garden objects in frame."""
     hid = view_hides(g["meshes"], season_for(view["when"]), view.get("ld_state", "closed"))
     view["hide_meshes"] = list(dict.fromkeys(list(view.get("hide_meshes", [])) + hid))
@@ -407,23 +395,30 @@ KEY_VIEWS = {
     "gi-living-door": dict(title="South garden from the living door", position=[22.85, -26.13, -1.65], target=[27.5, -26.33, -1.65], shift_y=0.02),
     "gi-dining-firepit": dict(title="South garden: dining table, fire pit and the screen opening", position=[27.4, -25.0, -1.75], target=[25.1, -29.6, -1.75], shift_y=-0.04),
     "gi-north-court-pond": dict(title="North court: the koi pond from the lounge side", position=[3.3, -27.6, -1.65], target=[1.2, -24.9, -1.65], shift_y=-0.27),
+    # the same camera twice, October and January: the shade tree's two leaf states (client: sun welcome Dec-Feb)
+    "gi-dining-crown-summer": dict(title="Dining under the crape: leaf-on (October)", position=[23.4, -27.3, -1.65], target=[25.5, -25.2, -1.65], shift_y=0.30),
+    "gi-dining-crown-winter": dict(title="Dining under the crape: leaf-off (January)", position=[23.4, -27.3, -1.65], target=[25.5, -25.2, -1.65], shift_y=0.30, when="2027-01-15T10:30:00+02:00"),
 }
 
 
-def key_views(base_views, winter=False):
-    """The key views as scene views, cloned from a garden view of the production set (state, exposure group, sun, resolution, layers) with their own camera. `winter` adds a
-    January twin of the dining view to show the leaf-off crape."""
+def key_views(base_views):
+    """The key views as scene views, cloned from a garden view of the production set (state, exposure group, sun, resolution, layers) with their own camera; a `when` re-dates the clone and
+    recomputes its sun (that is what picks the season)."""
     import copy
+    import yaml
+    from ...concept.villa_render import sun_for_timestamp
     tpl = next(v for v in base_views if v["id"] == "v41-south-garden-terrace")
+    loc = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))["location"]
     out = []
     for vid, k in KEY_VIEWS.items():
         v = copy.deepcopy(tpl)
         v.update(id=vid, title=k["title"], final_only=False)
         v["camera"] = dict(position=k["position"], target=k["target"], lens_mm=24, sensor_mm=36, shift_x=0.0, shift_y=k["shift_y"])
         v["samples"] = 1024
+        if k.get("when"):
+            v["when"] = k["when"]
+            v["sun"] = sun_for_timestamp(v["when"], loc)
         out.append(v)
-    if winter:
-        from ..concept import villa_render as VR   # noqa: F401  (sun for the January date comes from the same function the views use)
     return out
 
 

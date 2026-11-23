@@ -139,7 +139,21 @@ class Views(unittest.TestCase):
         PR.prepare_view(v, G)
         self.assertEqual(v["subjects"], [])
 
-    def test_the_three_key_views_are_garden_views_with_level_24mm_cameras(self):
+    def test_the_january_twin_of_the_dining_crown_view_shows_the_leaf_off_crape_and_the_october_one_the_leaf_on(self):
+        base = [dict(self.view(), id="v41-south-garden-terrace", state="day", final_only=True)]
+        ks = {k["id"]: k for k in PR.key_views(base)}
+        w, s = ks["gi-dining-crown-winter"], ks["gi-dining-crown-summer"]
+        self.assertEqual(w["camera"]["position"], s["camera"]["position"])                   # one camera, two dates
+        self.assertNotEqual(w["sun"], s["sun"])                                              # the sun follows the date
+        PR.prepare_view(w, G)
+        PR.prepare_view(s, G)
+        crape_summer = {m["id"] for m in G["meshes"] if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "summer"}
+        crape_winter = {m["id"] for m in G["meshes"] if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "winter"}
+        self.assertTrue(crape_summer and crape_winter)
+        self.assertTrue(crape_summer <= set(w["hide_meshes"]) and not crape_winter & set(w["hide_meshes"]))
+        self.assertTrue(crape_winter <= set(s["hide_meshes"]) and not crape_summer & set(s["hide_meshes"]))
+
+    def test_the_key_views_are_garden_views_with_level_24mm_cameras(self):
         base = [dict(self.view(), id="v41-south-garden-terrace", state="day", final_only=True)]
         ks = PR.key_views(base)
         self.assertEqual({k["id"] for k in ks}, set(PR.KEY_VIEWS))
