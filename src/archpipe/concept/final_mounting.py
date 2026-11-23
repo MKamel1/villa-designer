@@ -56,6 +56,8 @@ def apply(scene, lay):
     # frozen proofs. Rebuilt members must be face-authored and automatic.
     for retired in authority.get('retired_rows', []):
         mid = retired['id']
+        if scene.get('garden_source') == 'ldb' and mid.startswith('landscape-'):
+            continue      # lane GI: the previous garden's rows are retired with the garden itself; the decided garden has its own ids (ld-*)
         if retired['disposition'] == 'removed':
             if mid in render_meshes or mid in rows:
                 raise ValueError(mid + ': retired garden assembly restored')

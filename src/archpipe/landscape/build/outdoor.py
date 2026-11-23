@@ -16,7 +16,7 @@ from .geom import Obj
 
 ROOT = Path(__file__).resolve().parents[4]
 TABLE = ROOT / "knowledge/landscape/build/outdoor-assets.json"
-ROLES = ("dining_table", "dining_chair", "bench", "koi")
+ROLES = ("dining_table", "dining_chair", "bench", "koi", "bbq")
 # Our pick among the graded rows (by eye, see docs/lanes/LDB-assets.md): table whose long/short ratio fits 2.4 x 0.9 m, a patio chair, the single koi at metre scale.
 PREFER = ("skf_4febe1ee", "skf_7f558fcd", "skf_3e1b80c3")
 
@@ -97,3 +97,17 @@ def fish_obj(oid, a, pos, length, heading):
     hx, hy = abs(heading[0]) * length + abs(heading[1]) * wid, abs(heading[1]) * length + abs(heading[0]) * wid     # plan extent of the rotated fish box
     return Obj(oid, "koi", "koi, graded %s asset %s (%s, %s), %.2f m long" % (a["grade"], a["id"], a["licence"], a["author"], length), footprint_mode=None,
                asset=_asset_dict(a, (x, y, z), (x - hx / 2, y - hy / 2, z - 0.1, x + hx / 2, y + hy / 2, z + 0.1), mode="fish", length_m=length, yaw_deg=yaw), meta=dict(species="koi"))
+
+
+def bbq_obj(oid, layout_id, rect, g, a):
+    """Portable BBQ from the graded asset (a kettle grill on a tripod with a shelf and wheels), scaled to BBQ['h'] and centred on the layout stand place. None when no asset (then simple geometry)."""
+    if not a:
+        return None
+    x0, y0, x1, y1 = rect
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    h = P.BBQ["h"]
+    sc = h / a["size_m"][2]
+    w, d = a["size_m"][0] * sc, a["size_m"][1] * sc
+    return Obj(oid, "bbq", "portable BBQ: graded %s asset %s (%s, %s), a kettle grill on a wheeled tripod, scaled to %.2f m high" % (a["grade"], a["id"], a["licence"], a["author"], h),
+               rests_on=("ground",), layout_id=layout_id, footprint=tuple(rect), footprint_mode=None,
+               asset=_asset_dict(a, (cx, cy, g), (cx - w / 2, cy - d / 2, g, cx + w / 2, cy + d / 2, g + h), mode="height", yaw_deg=a.get("yaw_deg", 0.0)))

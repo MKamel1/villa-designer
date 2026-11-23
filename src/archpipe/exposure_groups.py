@@ -11,7 +11,9 @@ import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-RULE_SHA256 = 'be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6'
+RULE_SHA256_V1 = 'be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6'      # client decision 2026-10-15: kept for records frozen under it
+RULE_SHA256 = 'ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09'         # rule 2 (lane GI, 2026-11-22): knowledge/exposure-group-rule-v2.json; new records are frozen under it
+RULE_FILES = {RULE_SHA256_V1: 'knowledge/exposure-group-rule.json', RULE_SHA256: 'knowledge/exposure-group-rule-v2.json'}
 VIEW_KEYS = ('id', 'state', 'exposure', 'camera', 'sun', 'layers_on', 'dimmers',
              'hide_meshes', 'resolution', 'max_bounces')
 APPEARANCE_KEYS = ('draped_appearances', 'drape_material_overrides', 'drape_policy_sha256',
@@ -26,9 +28,13 @@ def digest(value):
                                      allow_nan=False).encode()).hexdigest()
 
 
-def rule():
-    path = ROOT / 'knowledge/exposure-group-rule.json'
-    if hashlib.sha256(path.read_bytes()).hexdigest() != RULE_SHA256:
+def rule(sha=None):
+    """The pre-registered rule with this fingerprint (default: the current one). A record keeps the rule it was frozen under."""
+    sha = sha or RULE_SHA256
+    if sha not in RULE_FILES:
+        raise ValueError('Unknown dominant-light rule fingerprint')
+    path = ROOT / RULE_FILES[sha]
+    if hashlib.sha256(path.read_bytes()).hexdigest() != sha:
         raise ValueError('Pre-registered dominant-light rule changed')
     return json.loads(path.read_text())
 
@@ -64,10 +70,16 @@ def measurement(lamps, daylight, sky_only=None):
                                 if sky_sum is not None and day_sum > 0 else None))
 
 
-def classify(view, row):
-    """No view identifier or image-quality verdict participates in assignment."""
-    policy = rule()
+def _mean(row, *keys):
+    return sum(row[k] for k in keys) / row['metered_pixels']      # the mask is fixed, so a sum over it is a mean over a fixed pixel count
+
+
+def classify(view, row, policy=None):
+    """No view identifier or image-quality verdict participates in assignment. Rule 2 adds two measured-luminance clauses (see the rule file)."""
+    policy = policy or rule()
     original = view['exposure']
+    if original == 'exterior-dusk' and 'dusk_split_mean_luminance' in policy:
+        return 'exterior-dusk-dim' if _mean(row, 'lamp_luminance_sum', 'daylight_luminance_sum') < policy['dusk_split_mean_luminance'] else original
     if original in ('evening', 'exterior-dusk'):
         return original
     fraction = row['lamp_fraction']
@@ -80,6 +92,8 @@ def classify(view, row):
         if solar is None or not math.isfinite(solar) or not 0 <= solar <= 1:
             raise ValueError('Exterior daylight requires measured sun fraction')
         if solar <= policy['solar_fraction_threshold']:
+            return 'exterior-shade'
+        if 'shade_mean_luminance' in policy and _mean(row, 'daylight_luminance_sum') < policy['shade_mean_luminance']:
             return 'exterior-shade'
     return original
 
@@ -106,15 +120,17 @@ def lamp_population(scene, view, emissive_sources):
     return population
 
 
-def freeze(scene, rows, runtime):
-    """Bind measured values and automatically derived assignments to live inputs."""
+def freeze(scene, rows, runtime, rule_sha=None):
+    """Bind measured values and automatically derived assignments to live inputs, under the current rule (or the stated one)."""
+    rule_sha = rule_sha or RULE_SHA256
+    policy = rule(rule_sha)
     if set(rows) != {view['id'] for view in scene['views']}:
         raise ValueError('Every authored view requires a source measurement')
     for view in scene['views']:
         row = rows[view['id']]
         row['view_input'] = view_input(view)
-        row['group'] = classify(view, row)
-    record = dict(schema='exposure-groups/1', rule_sha256=RULE_SHA256,
+        row['group'] = classify(view, row, policy)
+    record = dict(schema='exposure-groups/1', rule_sha256=rule_sha,
                   transport_sha256=transport_digest(scene), runtime=runtime, measurements=rows)
     record['measurement_sha256'] = digest(rows)
     record['white_balance_k'] = white_balances(record)
@@ -122,7 +138,7 @@ def freeze(scene, rows, runtime):
 
 
 def white_balances(record):
-    result = {group: rule()['white_balance'][group]
+    result = {group: rule(record.get('rule_sha256', RULE_SHA256))['white_balance'][group]
               for group in {row['group'] for row in record['measurements'].values()}}
     if 'lamp-dominant' in result:
         lamps = [lamp for row in record['measurements'].values() if row['group'] == 'lamp-dominant'
@@ -135,13 +151,14 @@ def white_balances(record):
 
 
 def require_record(scene, record, *, check_transport=True):
-    policy = rule()
+    if record.get('rule_sha256') not in RULE_FILES:
+        raise ValueError('Stale dominant-light rule or transport measurement')
+    policy = rule(record['rule_sha256'])
     if (record.get('schema') != 'exposure-groups/1'
             or record.get('runtime', {}).get('probe') != policy['source_probe']
             or record.get('runtime', {}).get('render_device', {}).get('device') != 'GPU'):
         raise ValueError('Frozen dominant-light source probe settings or GPU evidence differ')
-    if (record.get('rule_sha256') != RULE_SHA256 or
-            (check_transport and record.get('transport_sha256') != transport_digest(scene))):
+    if ((check_transport and record.get('transport_sha256') != transport_digest(scene))):
         raise ValueError('Stale dominant-light rule or transport measurement')
     rows = record['measurements']
     if record.get('measurement_sha256') != digest(rows):
@@ -150,7 +167,7 @@ def require_record(scene, record, *, check_transport=True):
         raise ValueError('Dominant-light view inventory differs')
     for view in scene['views']:
         row = rows[view['id']]
-        if (row['view_input'] != view_input(view) or row['group'] != classify(view, row)
+        if (row['view_input'] != view_input(view) or row['group'] != classify(view, row, policy)
                 or view.get('exposure_group', row['group']) != row['group']):
             raise ValueError('Dominant-light membership differs from measured rule: '+view['id'])
         # Recompute all fractions from frozen source sums too.
@@ -189,7 +206,7 @@ def require_receipts(scene, reports, *, transport_checked=False):
         pair = (report['exposure_stops'], report['white_balance_k'])
         if (report.get('exposure_state') != view['exposure']
                 or report.get('exposure_group') != group or report.get('exposure_rule_measurement') != expected
-                or report.get('exposure_rule_sha256') != RULE_SHA256
+                or report.get('exposure_rule_sha256') != record['rule_sha256']
                 or report.get('exposure_measurement_sha256') != record['measurement_sha256']
                 or report.get('exposure_metered_over') != cohort
                 or report.get('exposure_locked_per_group') is not True

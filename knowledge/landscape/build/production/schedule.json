@@ -1,0 +1,2570 @@
+[
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-n-pond-koi-0",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-n-pond-koi-1",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-e-pond-koi-0",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-e-pond-koi-1",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-e-pond-koi-2",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "asset": "skf_3e1b80c3",
+  "grade": "B",
+  "id": "ld-e-pond-koi-3",
+  "length_m": 0.7,
+  "licence": "CC Attribution",
+  "species": "koi",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated form-class plant standing in for Lagerstroemia indica (leaf scan: Trachelospermum jasminoides; not the species)",
+  "clear_stem_m": 1.54,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-s-tree-crape",
+  "leaf_len_source": "policy",
+  "leaf_states": [
+   "leaf-on",
+   "leaf-off"
+  ],
+  "mature_height_m": 4.5,
+  "mature_spread_m": 4.0,
+  "pruned": true,
+  "seed": 27413,
+  "shown_height_m": 3.15,
+  "shown_spread_m": 2.8,
+  "size_basis": "PRUNED canopy from the layout (natural size not used)",
+  "size_fraction": 0.7,
+  "species": "lagerstroemia_indica",
+  "states": [
+   "leaf-on",
+   "leaf-off"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 1.47,
+  "age_years": 3,
+  "asset": "fab_olive_tree_source",
+  "clear_stem_m": 0.88,
+  "grade": "B",
+  "id": "ld-s-tree-olive",
+  "leaf_states": [
+   "evergreen"
+  ],
+  "mature_height_m": 4.5,
+  "mature_spread_m": 3.6,
+  "pruned": true,
+  "shown_height_m": 1.8,
+  "shown_spread_m": 1.44,
+  "size_basis": "PRUNED canopy from the layout (natural size not used)",
+  "size_fraction": 0.4,
+  "species": "olea_europaea",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 1.546,
+  "age_years": 3,
+  "asset": "skf3_f697f7da",
+  "grade": "B",
+  "id": "ld-s-tree-punica",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 2.4,
+  "shown_height_m": 1.966,
+  "shown_spread_m": 1.275,
+  "size_basis": "layout",
+  "size_fraction": 0.531,
+  "sourced_spread_range_m": [
+   2.4,
+   3.0
+  ],
+  "species": "punica_granatum",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 1.47,
+  "age_years": 3,
+  "asset": "fab_olive_tree_source",
+  "clear_stem_m": 0.88,
+  "grade": "B",
+  "id": "ld-e-tree-olive",
+  "leaf_states": [
+   "evergreen"
+  ],
+  "mature_height_m": 4.5,
+  "mature_spread_m": 2.6,
+  "pruned": true,
+  "shown_height_m": 1.8,
+  "shown_spread_m": 1.04,
+  "size_basis": "PRUNED canopy from the layout (natural size not used)",
+  "size_fraction": 0.4,
+  "species": "olea_europaea",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 1.2,
+  "on": "wall-fence-east",
+  "panel_width_m": 2.0,
+  "seed": 49332,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.637,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 1.2,
+  "on": "wall-fence-east",
+  "panel_width_m": 2.0,
+  "seed": 47586,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.637,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.765,
+  "age_years": 3,
+  "asset": "skf3_a05b5ef5",
+  "grade": "A",
+  "id": "ld-plant-s-bed-mass-02",
+  "mature_height_m": 1.9,
+  "mature_spread_m": 0.99,
+  "shown_height_m": 0.76,
+  "shown_spread_m": 0.396,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.9,
+   1.5
+  ],
+  "species": "phoenix_roebelenii",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.99,
+  "seed": 94350,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.526,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.765,
+  "age_years": 3,
+  "asset": "skf3_a05b5ef5",
+  "grade": "A",
+  "id": "ld-plant-s-bed-mass-04",
+  "mature_height_m": 1.9,
+  "mature_spread_m": 0.99,
+  "shown_height_m": 0.76,
+  "shown_spread_m": 0.396,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.9,
+   1.5
+  ],
+  "species": "phoenix_roebelenii",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.413,
+  "age_years": 3,
+  "asset": "fab_red_fountain_grass_slglz_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-05",
+  "mature_height_m": 0.915,
+  "mature_spread_m": 0.77,
+  "shown_height_m": 0.486,
+  "shown_spread_m": 0.409,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "sourced_spread_range_m": [
+   0.61,
+   1.22
+  ],
+  "species": "pennisetum_alopecuroides",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.413,
+  "age_years": 3,
+  "asset": "fab_red_fountain_grass_slglz_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-06",
+  "mature_height_m": 0.915,
+  "mature_spread_m": 0.77,
+  "shown_height_m": 0.486,
+  "shown_spread_m": 0.409,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "sourced_spread_range_m": [
+   0.61,
+   1.22
+  ],
+  "species": "pennisetum_alopecuroides",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.413,
+  "age_years": 3,
+  "asset": "fab_red_fountain_grass_slglz_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-07",
+  "mature_height_m": 0.915,
+  "mature_spread_m": 0.77,
+  "shown_height_m": 0.486,
+  "shown_spread_m": 0.409,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "sourced_spread_range_m": [
+   0.61,
+   1.22
+  ],
+  "species": "pennisetum_alopecuroides",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Pittosporum undulatum"
+  ],
+  "atlas_used": [
+   "australian_laurel"
+  ],
+  "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-08",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.76,
+  "mature_spread_m": 0.77,
+  "seed": 77606,
+  "shown_height_m": 0.404,
+  "shown_spread_m": 0.409,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "salvia_leucantha",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-09",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.55,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.22,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-10",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.55,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.22,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-11",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.55,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.22,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-mass-12",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.55,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.22,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-13",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.55,
+  "seed": 23631,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.292,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-14",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.55,
+  "seed": 49612,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.292,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-corner-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-east",
+  "panel_width_m": 2.0,
+  "seed": 99445,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-corner-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-east",
+  "panel_width_m": 2.0,
+  "seed": 10467,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-mass-corner-02",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-east",
+  "panel_width_m": 2.59,
+  "seed": 12505,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.627,
+  "age_years": 3,
+  "asset": "fab_oregano_umkhceeia_raw",
+  "grade": "B",
+  "id": "ld-plant-s-bed-herb-00",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.66,
+  "shown_height_m": 0.6,
+  "shown_spread_m": 0.66,
+  "size_basis": "source mid-range",
+  "size_fraction": 1.0,
+  "sourced_spread_range_m": [
+   0.6,
+   0.6
+  ],
+  "species": "origanum_majorana",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.627,
+  "age_years": 3,
+  "asset": "fab_oregano_umkhceeia_raw",
+  "grade": "B",
+  "id": "ld-plant-s-bed-herb-01",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.66,
+  "shown_height_m": 0.6,
+  "shown_spread_m": 0.66,
+  "size_basis": "source mid-range",
+  "size_fraction": 1.0,
+  "sourced_spread_range_m": [
+   0.6,
+   0.6
+  ],
+  "species": "origanum_majorana",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Vitis vinifera"
+  ],
+  "atlas_used": [
+   "grape_vine"
+  ],
+  "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-n-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.68,
+  "mature_spread_m": 0.5,
+  "on": "sister-screen-n",
+  "panel_width_m": 0.893,
+  "seed": 74357,
+  "shown_height_m": 0.893,
+  "shown_spread_m": 0.266,
+  "size_basis": "POLICY: 80 %% of the structure height (height not sourced)",
+  "size_fraction": 0.531,
+  "sourced_spread_m": null,
+  "species": "vitis_vinifera",
+  "states": [
+   "leaf-on",
+   "leaf-off"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Vitis vinifera"
+  ],
+  "atlas_used": [
+   "grape_vine"
+  ],
+  "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-n-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.68,
+  "mature_spread_m": 0.5,
+  "on": "sister-screen-n",
+  "panel_width_m": 0.893,
+  "seed": 11331,
+  "shown_height_m": 0.893,
+  "shown_spread_m": 0.266,
+  "size_basis": "POLICY: 80 %% of the structure height (height not sourced)",
+  "size_fraction": 0.531,
+  "sourced_spread_m": null,
+  "species": "vitis_vinifera",
+  "states": [
+   "leaf-on",
+   "leaf-off"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Pittosporum undulatum"
+  ],
+  "atlas_used": [
+   "australian_laurel"
+  ],
+  "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-n-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.76,
+  "mature_spread_m": 0.66,
+  "seed": 56889,
+  "shown_height_m": 0.404,
+  "shown_spread_m": 0.351,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "salvia_leucantha",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Pittosporum undulatum"
+  ],
+  "atlas_used": [
+   "australian_laurel"
+  ],
+  "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-n-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.76,
+  "mature_spread_m": 0.66,
+  "seed": 13231,
+  "shown_height_m": 0.404,
+  "shown_spread_m": 0.351,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "salvia_leucantha",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-screen-n-04",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-screen-n-05",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-s-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.95,
+  "mature_spread_m": 0.5,
+  "on": "sister-screen-s",
+  "panel_width_m": 1.21,
+  "seed": 97015,
+  "shown_height_m": 1.365,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-s-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.95,
+  "mature_spread_m": 0.5,
+  "on": "sister-screen-s",
+  "panel_width_m": 1.21,
+  "seed": 77889,
+  "shown_height_m": 1.365,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-s-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.66,
+  "seed": 59163,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.351,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-screen-s-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.66,
+  "seed": 33741,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.351,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-screen-s-04",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-screen-s-05",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-screen-s-06",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-00",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.6,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.59,
+  "seed": 74574,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.42,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-01",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.6,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.59,
+  "seed": 84536,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.42,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-02",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-03",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-04",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-05",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-06",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.0,
+  "seed": 33499,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Ficus benjamina"
+  ],
+  "atlas_used": [
+   "weeping_fig"
+  ],
+  "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-b-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 1.22,
+  "mature_spread_m": 0.77,
+  "seed": 27833,
+  "shown_height_m": 0.648,
+  "shown_spread_m": 0.409,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "justicia_brandegeeana",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.862,
+  "age_years": 3,
+  "asset": "skf3_86982789",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-b-01",
+  "mature_height_m": 2.45,
+  "mature_spread_m": 1.8,
+  "shown_height_m": 0.98,
+  "shown_spread_m": 0.72,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   1.8,
+   4.6
+  ],
+  "species": "rhapis_excelsa",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-b-02",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-b-03",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-wall-b-04",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-c-00",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.59,
+  "seed": 82780,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-c-01",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.59,
+  "seed": 13642,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-c-02",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "mature_height_m": 3.7,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.59,
+  "seed": 85104,
+  "shown_height_m": 2.59,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 3.7 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.8,
+  "species": "petrea_volubilis",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-c-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.0,
+  "seed": 93318,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-s-bed-wall-c-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-fence-rear",
+  "panel_width_m": 2.0,
+  "seed": 6661,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-pocket-00",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-s-bed-pocket-01",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+  ],
+  "atlas_used": [
+   "palmate_fatsia"
+  ],
+  "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 1.2,
+  "seed": 92280,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.637,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "fatsia_japonica",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.862,
+  "age_years": 3,
+  "asset": "skf3_86982789",
+  "grade": "B",
+  "id": "ld-plant-n-screen-01",
+  "mature_height_m": 2.45,
+  "mature_spread_m": 1.8,
+  "shown_height_m": 0.98,
+  "shown_spread_m": 0.72,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   1.8,
+   4.6
+  ],
+  "species": "rhapis_excelsa",
+  "species_fit": "genus",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-n-screen-02",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-n-screen-03",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "achieved_spread_m": 0.228,
+  "age_years": 3,
+  "asset": "fab_cast___iron_plant_shdmr_high",
+  "grade": "B",
+  "id": "ld-plant-n-screen-04",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "shown_height_m": 0.24,
+  "shown_spread_m": 0.2,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.3,
+   0.9
+  ],
+  "species": "aspidistra_elatior",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-05",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 43991,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-06",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 97965,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-07",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-street-fence",
+  "panel_width_m": 2.0,
+  "seed": 16027,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-08",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-street-fence",
+  "panel_width_m": 2.4,
+  "seed": 70666,
+  "shown_height_m": 2.695,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-screen-09",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-street-fence",
+  "panel_width_m": 2.4,
+  "seed": 59740,
+  "shown_height_m": 2.695,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 79510,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 23136,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 4154,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 12012,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 75567,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-far-05",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 89305,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-back-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 25429,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-back-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 80035,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-back-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 16089,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-back-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 75631,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-n-edge-back-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.39,
+  "seed": 9676,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.207,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+  ],
+  "atlas_used": [
+   "palmate_fatsia"
+  ],
+  "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 1.2,
+  "seed": 15444,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.637,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "fatsia_japonica",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.765,
+  "age_years": 3,
+  "asset": "skf3_a05b5ef5",
+  "grade": "A",
+  "id": "ld-plant-e-divider-01",
+  "mature_height_m": 1.9,
+  "mature_spread_m": 0.99,
+  "shown_height_m": 0.76,
+  "shown_spread_m": 0.396,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.9,
+   1.5
+  ],
+  "species": "phoenix_roebelenii",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 88504,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 12462,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 89901,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-05",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-yard-south",
+  "panel_width_m": 2.0,
+  "seed": 37467,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Wisteria sinensis"
+  ],
+  "atlas_used": [
+   "chinese_wisteria"
+  ],
+  "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)",
+  "climbing": true,
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-divider-06",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-yard-south",
+  "panel_width_m": 2.0,
+  "seed": 95169,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.266,
+  "size_basis": "SOURCED upper height 4.0 m (plants.json), capped at the structure",
+  "size_fraction": 0.531,
+  "sourced_spread_m": 1,
+  "species": "jasminum_sambac",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+  ],
+  "atlas_used": [
+   "palmate_fatsia"
+  ],
+  "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 1.2,
+  "seed": 66173,
+  "shown_height_m": 2.045,
+  "shown_spread_m": 0.637,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "fatsia_japonica",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 0.765,
+  "age_years": 3,
+  "asset": "skf3_a05b5ef5",
+  "grade": "A",
+  "id": "ld-plant-e-far-01",
+  "mature_height_m": 1.9,
+  "mature_spread_m": 0.99,
+  "shown_height_m": 0.76,
+  "shown_spread_m": 0.396,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.4,
+  "sourced_spread_range_m": [
+   0.9,
+   1.5
+  ],
+  "species": "phoenix_roebelenii",
+  "species_fit": "species",
+  "status": "asset"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 35633,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 89575,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "atlas_used": [
+   "taro"
+  ],
+  "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.6,
+  "mature_spread_m": 0.5,
+  "seed": 73092,
+  "shown_height_m": 0.319,
+  "shown_spread_m": 0.266,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "farfugium_japonicum",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-05",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-yard-south",
+  "panel_width_m": 2.4,
+  "seed": 38002,
+  "shown_height_m": 2.695,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)",
+  "climbing": true,
+  "fidelity": "species",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-far-06",
+  "leaf_len_source": "policy",
+  "mature_height_m": 3.85,
+  "mature_spread_m": 0.5,
+  "on": "wall-yard-south",
+  "panel_width_m": 2.4,
+  "seed": 58920,
+  "shown_height_m": 2.695,
+  "shown_spread_m": 0.35,
+  "size_basis": "SOURCED upper height 6.1 m (plants.json), capped at the structure",
+  "size_fraction": 0.7,
+  "sourced_spread_m": 1.2,
+  "species": "trachelospermum_jasminoides",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-00",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 52772,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-01",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 6514,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-02",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 68328,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-03",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 75518,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-04",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 11773,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-05",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 75275,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-06",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 79121,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-07",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 29767,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "age_years": 3,
+  "atlas_species": [
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
+  ],
+  "atlas_used": [
+   "african_flag"
+  ],
+  "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)",
+  "fidelity": "form-class",
+  "generator_version": "fg-0.1",
+  "id": "ld-plant-e-edge-08",
+  "leaf_len_source": "policy",
+  "mature_height_m": 0.3,
+  "mature_spread_m": 0.33,
+  "seed": 12886,
+  "shown_height_m": 0.159,
+  "shown_spread_m": 0.175,
+  "size_basis": "source mid-range",
+  "size_fraction": 0.531,
+  "species": "acorus_gramineus",
+  "states": [
+   "leaf-on"
+  ],
+  "status": "generated"
+ },
+ {
+  "achieved_spread_m": 1.769,
+  "age_years": 3,
+  "asset": "sf_frangipani",
+  "grade": "A",
+  "id": "ld-pot-0-plumeria-plant",
+  "mature_height_m": 1.8,
+  "mature_spread_m": 1.2,
+  "shown_height_m": 1.26,
+  "shown_spread_m": 0.84,
+  "size_basis": "ASSUMED: potted size is a GAP in LDL, 1.8 m",
+  "size_fraction": 0.7,
+  "sourced_spread_range_m": null,
+  "species": "plumeria_rubra",
+  "species_fit": "genus",
+  "status": "asset"
+ }
+]

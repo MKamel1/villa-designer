@@ -497,6 +497,22 @@
     "flat_card": false,
     "mesh_objects": 4
    }
+  },
+  {
+   "id": "skf_10162879",
+   "role": "bbq",
+   "grade": "B",
+   "title": "Charcoal Grill",
+   "author": "newArteest",
+   "licence": "CC Attribution",
+   "source_url": "https://sketchfab.com/3d-models/charcoal-grill-10162879d1b048c48ee4d21ca9bc0fa7",
+   "gltf": "~/archpipe/shared/assets/user/landscape/outdoor/skf_10162879/scene.gltf",
+   "size_m": [
+    12.861,
+    12.254,
+    23.281
+   ],
+   "note": "GI 2026-11-22: kettle grill on a wheeled tripod with lid handle and lower shelf, 40k triangles, flat colours (black bowl, pale legs). size_m is the glTF's own units (not metres): the build scales by height (0.95 m). Looked at in a Blender preview; fits the brief's portable BBQ (stand place on a hard surface, no outdoor kitchen)."
   }
  ],
  "rejected": [

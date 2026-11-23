@@ -94,7 +94,16 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
     out = []
     for e in data["views"]:
         if e.get("reuse"):
-            out.append(json.loads(json.dumps(base[e["id"]])))
+            v = json.loads(json.dumps(base[e["id"]]))
+            if e.get("camera"):      # a reused view re-aimed for the decided garden: x, y of the standing point and target, keeping the base eye height; recorded in the camera's overrides
+                c = v["camera"]
+                z = c["position"][2]
+                for k in ("position", "target"):
+                    c.setdefault("overrides", []).append({"field": k, "prior": c[k], "new": list(e["camera"][k]) + [z],
+                                                          "reason": "re-aimed for the decided garden (render-set data): " + e["purpose"]})
+                    c[k] = list(e["camera"][k]) + [z]
+                c["shift_y"] = e["camera"].get("shift_y", c.get("shift_y", 0.0))
+            out.append(v)
             continue
         light = data["light"].get(e.get("light"), {})
         state = e["state"]
@@ -111,7 +120,7 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
                 raise ValueError(f"{e['id']}: 24 mm cannot hold {e['subjects']} in {room}; split the view")
             z = LZ[lay["rooms"][room]["level"]] + 1.35
         c = {"position": got["position"] + [round(z, 3)], "target": got["target"] + [round(z, 3)],
-             "lens_mm": MIN_INTERIOR_LENS, "sensor_mm": 36, "shift_x": 0.0, "shift_y": e.get("shift_y", 0.0)}
+             "lens_mm": e.get("lens_mm", MIN_INTERIOR_LENS), "sensor_mm": 36, "shift_x": e.get("shift_x", 0.0), "shift_y": e.get("shift_y", 0.0)}
         c["overrides"] = [{"field": "position", "prior": None, "new": c["position"],
                            "reason": "room chooser positions the camera to include declared subjects"},
                           {"field": "target", "prior": None, "new": c["target"],
@@ -131,9 +140,9 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
             doorway = RV._in_opening(sp, lay["rooms"][room]["level"], x, y, room) or not (x0 < x < x1 and y0 < y < y1)
             fill_defaults(c, {"home_room": room, "reframed": "doorway" if doorway else "chosen"})
         v = {"id": e["id"], "title": e["purpose"].split(" (")[0], "state": state,
-             "when": DAY if state == "day" else DUSK, "camera": c, "resolution": [1920, 1280],
-             "layers_on": layers, "dimmers": dimmers, "exposure": state, "subjects": e["subjects"],
-             "samples": 1024, "room": room, "final_only": True, "seated": False,
+             "when": e.get("when") or (DAY if state == "day" else DUSK), "camera": c, "resolution": [1920, 1280],
+             "layers_on": layers, "dimmers": dimmers, "exposure": e.get("exposure", state), "subjects": e["subjects"],
+             "samples": 1024, "room": room, "final_only": e.get("final_only", True), "seated": False,
              "set_purpose": e["purpose"]}
         if e.get("replaces"):
             v["caption_notes"] = [f"Replaces {e['replaces']} (camera reasons, L9P audit)."]

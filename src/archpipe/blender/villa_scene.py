@@ -420,6 +420,9 @@ def add_material(name, spec, library_root, warnings):
         nt.links.new(height, bump.inputs['Height'])
         nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
         mat['mineral_pattern_scale_m'] = size
+    if spec.get("garden_look"):                 # lane GI: procedural finishes of the decided garden (water, liner, leaf cut-outs, matte stand-ins, weathered render)
+        from archpipe.blender import garden_ldb
+        garden_ldb.apply_look(mat, spec)
     return mat
 
 
@@ -1228,6 +1231,10 @@ def import_props(prop_specs, library_root):
     """Transform each complete asset around one shared origin, then seat it."""
     imported = []
     for spec in prop_specs:
+        if spec.get("ldb"):                      # lane GI: an asset of the decided garden (FBX or glTF outside the library), placed and measured by garden_ldb
+            from archpipe.blender import garden_ldb
+            imported.append(garden_ldb.import_prop(spec))
+            continue
         from archpipe.asset_intake import require_registered_asset
         from pathlib import Path
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
@@ -2019,6 +2026,9 @@ def render(scene_data, args):
     configure_glass(materials, scene_data["materials"])
     render_meshes = rendered_meshes(scene_data) if needs_admission(scene_data) else scene_data['meshes']
     objects = build_meshes(render_meshes, materials, scene_data["materials"], warnings)
+    if scene_data.get("garden_source") == "ldb":
+        from archpipe.blender import garden_ldb
+        garden_ldb.finish_meshes(render_meshes, objects, scene_data["materials"])
     build_climbers(render_meshes, objects, materials, warnings)
     switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
     emissive_sources = []
@@ -2059,6 +2069,9 @@ def render(scene_data, args):
                 if args.views in ("all", "review") else set(args.views.split(",")))
 
     hideable = {m for v in scene_data["views"] for m in v.get("hide_meshes", [])}
+    if scene_data.get("garden_source") == "ldb":        # lane GI: a generated plant's other leaf state is hidden per view like a mesh (its prop id is in hide_meshes)
+        from archpipe.blender import garden_ldb
+        objects.update(garden_ldb.hideable_props(imported_props, hideable))
 
     def setup_view(view):
         for mid in hideable:                     # a door opened for a doorway camera, in that view only
@@ -2190,11 +2203,10 @@ def render(scene_data, args):
                   "white_balance_tint": float(s.view_settings.white_balance_tint),
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
         if scene_data.get('exposure_groups'):
-            from archpipe.exposure_groups import RULE_SHA256
             record = scene_data['exposure_groups']
             report.update(exposure_group=group, exposure_locked_per_group=bool(locked),
                           white_balance_k=float(s.view_settings.white_balance_temperature),
-                          exposure_rule_sha256=RULE_SHA256,
+                          exposure_rule_sha256=record['rule_sha256'],
                           exposure_measurement_sha256=record['measurement_sha256'],
                           exposure_rule_measurement=record['measurements'][view['id']],
                           group_meters={ident: metered[ident] for ident in metered_over[group]})

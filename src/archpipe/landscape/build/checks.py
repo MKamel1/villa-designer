@@ -137,6 +137,14 @@ def _prism_hits(a, b):
     return True
 
 
+def _in_keepout(o, other_bounds, pad=0.04):
+    """True when `o` is a generated climber and the other object's plan box meets one of its keep-out rects (the leaves there are dropped in the Blender build)."""
+    for x0, y0, x1, y1 in o.meta.get("fg_keepouts") or ():
+        if other_bounds[0] < x1 + pad and other_bounds[3] > x0 - pad and other_bounds[1] < y1 + pad and other_bounds[4] > y0 - pad:
+            return True
+    return False
+
+
 def clips(scene, state="closed"):
     """Pairs of different objects whose solids interpenetrate by more than 5 mm (exact for prisms, ellipsoid envelope for plants)."""
     objs = scene.select(state)
@@ -161,6 +169,12 @@ def clips(scene, state="closed"):
             if ka == kb or kb in ok[ka]:
                 continue
             ea, eb = items[a][3], items[b][3]
+            if {objs[ka].kind, objs[kb].kind} == {"edging", "plant"}:        # foliage over a 15 mm edging lip
+                continue
+            if objs[ka].kind == "coping" and objs[kb].kind == "coping":      # two copings meet over a wall corner: one stone cap, not two clashing solids
+                continue
+            if _in_keepout(objs[ka], items[b][1]) or _in_keepout(objs[kb], items[a][1]):      # a generated climber's leaves are removed where a seat, table or pot stands against its wall (garden_ldb._mask_leaves)
+                continue
             if (ea and eb) or (objs[ka].kind == "plant" and objs[kb].kind == "plant"):     # foliage against foliage (masses, climber panels): massing overlap is normal
                 continue
             if ea or eb:
@@ -169,7 +183,12 @@ def clips(scene, state="closed"):
                     continue
             else:
                 pa, pb = items[a][2], items[b][2]
-                if pa is not None and pb is not None and not _prism_hits(pa, pb):
+                if pa is not None and pb is not None and (pa.leaf_rects is not None or pb.leaf_rects is not None):
+                    card, other = (pa, items[b][1]) if pa.leaf_rects is not None else (pb, items[a][1])      # leaf cards: the real card vertices, not the box round all of them
+                    inside = np.all((card.verts > np.array(other[:3]) + TOL_CLIP) & (card.verts < np.array(other[3:]) - TOL_CLIP), axis=1)
+                    if not inside.any():
+                        continue
+                elif pa is not None and pb is not None and not _prism_hits(pa, pb):
                     continue
             found.setdefault((ka, kb), 0)
             found[(ka, kb)] += 1
@@ -187,8 +206,16 @@ def standins(scene):
         if o.standin:
             good = "STAND-IN" in o.label and r is not None and r["status"] == "standin" and r.get("reason")
             out.append(F("standin", o.id, "pass" if good else "fail", "labelled STAND-IN" if good else "unlabelled generic mass", "STAND-IN label + schedule reason"))
+        elif o.meta.get("fg"):            # generated foliage (lane FG): its label must be complete and honest (a form-class plant never claims the species)
+            from ..foliage import library as FL
+            try:
+                FL.validate_label(dict(o.meta["fg"]))
+                good = r is not None and r["status"] == "generated" and r.get("fidelity") == o.meta["fg"]["fidelity"]
+            except FL.LabelError:
+                good = False
+            out.append(F("standin", o.id, "pass" if good else "fail", "generated, %s fidelity" % o.meta["fg"]["fidelity"], "complete FG label + schedule row status generated"))
         else:
-            good = o.asset is not None and r is not None and r["status"] == "asset" and r.get("grade") in ("A", "B")
+            good = (o.asset is not None or o.meta.get("atlas")) and r is not None and r["status"] == "asset" and r.get("grade") in ("A", "B")      # a graded atlas-built climber (real leaf cut-outs) counts as a graded asset
             out.append(F("standin", o.id, "pass" if good else "fail", "graded asset %s" % (r or {}).get("asset"), "grade A/B asset of the species or genus"))
     return out
 

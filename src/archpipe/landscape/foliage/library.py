@@ -37,8 +37,8 @@ def seed_of(oid):
     return zlib.crc32(str(oid).encode()) % 100000
 
 
-def plant_for(slug, oid, height_m=None, spread_m=None, state="leaf-on", lod=0, lean=(0.0, 0.0)):
-    return generate(slug, seed_of(oid), height_m, spread_m, state, lod, lean)
+def plant_for(slug, oid, height_m=None, spread_m=None, state="leaf-on", lod=0, lean=(0.0, 0.0), clear_stem=None):
+    return generate(slug, seed_of(oid), height_m, spread_m, state, lod, lean, clear_stem)
 
 
 def validate_label(label):

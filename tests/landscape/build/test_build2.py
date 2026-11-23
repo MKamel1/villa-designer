@@ -18,7 +18,20 @@ FIN = ROOT / "knowledge/landscape/concept/final"
 L = build.load_layout(FIN / "layout-final.json")
 V = json.loads((FIN / "layout-visualisation.json").read_text())
 G = P.GROUND_Z
-S = build.build_scene(L, outdoor={})          # the shipped outdoor assets are tested in OutdoorAssets; the rest is built with the labelled geometry
+_FG = planting.FG
+planting.FG = False                           # these tests are about the labelled STAND-IN geometry and the LDB leaf-card climbers; the generated foliage of lane FG (planting.FG) is tested in test_production
+try:
+    S = build.build_scene(L, outdoor={})      # the shipped outdoor assets are tested in OutdoorAssets; the rest is built with the labelled geometry
+finally:
+    planting.FG = _FG
+
+
+def setUpModule():
+    planting.FG = False
+
+
+def tearDownModule():
+    planting.FG = _FG
 
 
 def fails(findings, check=None):
@@ -272,10 +285,15 @@ class FinalTrees(unittest.TestCase):
         self.assertEqual([f for f in fails(checks.clips(S)) if "tree-crape" in f["id"]], [])
         self.assertEqual(fails(checks.support(S)), [])
 
-    def test_a_mirrored_layout_with_an_unmirrored_crown_centre_is_reported_not_built_askew(self):
+    def test_the_mirrored_layout_mirrors_its_crown_centre_and_an_unmirrored_one_is_reported_not_built_askew(self):
         s = build.build_scene(V)
-        self.assertTrue([w for w in s.warnings if "crown_center" in w and "ignored" in w])
+        self.assertEqual([w for w in s.warnings if "crown_center" in w and "ignored" in w], [])     # LDG now mirrors crown_center with the trunk
         self.assertEqual(fails(checks.clips(s)), [])
+        bad = copy.deepcopy(V)                                                                       # negative: put the unmirrored crown centre back
+        for t, t0 in zip(bad["trees"], L["trees"]):
+            if t.get("crown_center"):
+                t["crown_center"] = t0["crown_center"]
+        self.assertTrue([w for w in build.build_scene(bad).warnings if "crown_center" in w and "ignored" in w])
 
     def test_the_graded_flowering_crape_asset_is_not_used_for_a_both_state_shade_tree(self):
         row = next(r for r in S.schedule if r["id"] == "ld-s-tree-crape")
@@ -325,9 +343,13 @@ class ClimberLookAlikes(unittest.TestCase):
         panels = [o for o in S.objects if o.meta.get("climbing")]
         self.assertTrue(panels)
         for o in panels:
-            self.assertTrue(o.standin, o.id)
-            self.assertNotIn("fab_star_jasmine_trellis", o.label)
-            self.assertNotIn("fab_creeping_fig_wall", o.label)
+            if o.meta["species"] == "trachelospermum_jasminoides":
+                self.assertFalse(o.standin, o.id)          # the one species the atlas IS: drawn from its real leaf cut-outs
+                self.assertIn("fab_star_jasmine_trellis", o.label)
+            else:
+                self.assertTrue(o.standin, o.id)
+                self.assertNotIn("fab_star_jasmine_trellis", o.label)
+                self.assertNotIn("fab_creeping_fig_wall", o.label)
         self.assertFalse(planting.resolve("jasminum_sambac")["drawable"])
 
 
@@ -394,20 +416,20 @@ class RenderQA(unittest.TestCase):
 
 class Climbers(unittest.TestCase):
     def test_every_structure_with_a_declared_climber_has_a_panel_on_its_garden_face(self):
-        self.assertEqual(set(S.spec["climbed"]), {"wall-fence-rear", "wall-fence-east", "wall-street-fence", "sister-screen-n", "sister-screen-s"})
+        self.assertEqual(set(S.spec["climbed"]), {"wall-fence-rear", "wall-fence-east", "wall-street-fence", "wall-yard-south", "sister-screen-n", "sister-screen-s"})
         panels = [o for o in S.objects if o.meta.get("climbing")]
         self.assertGreaterEqual(len(panels), 5)
         for o in panels:
             b = o.bounds()
             self.assertLess(b[5] - G, 4.0 + 1e-6)
             self.assertGreater(min(b[3] - b[0], b[4] - b[1]), 0.0)
-            self.assertLessEqual(min(b[3] - b[0], b[4] - b[1]), P.CLIMBER["panel_t"] + 1e-6)     # a thin panel on the face, not a mass
+            self.assertLessEqual(min(b[3] - b[0], b[4] - b[1]), P.LEAF_CARD["depth"][1] + 0.10)     # leaf cards stand off the face by at most their depth range plus a leaf, not a mass
 
     def test_a_structure_with_no_climber_is_a_warn_not_an_invented_planting(self):
         self.assertEqual([f for f in checks.climber_coverage(S) if f["status"] == "warn"], [])      # LDG round 3 puts a climber on every structure
         l2 = copy.deepcopy(L)
         for g in l2["planting_groups"]:
-            g["plants"] = [p for p in g["plants"] if not (p["species"] in ("jasminum_sambac", "petrea_volubilis", "vitis_vinifera") and p["at"][0] < 1.0)]
+            g["plants"] = [p for p in g["plants"] if not (p["species"] in ("jasminum_sambac", "petrea_volubilis", "vitis_vinifera", "trachelospermum_jasminoides") and p["at"][0] < 1.0)]
         s2 = build.build_scene(l2)
         w = [f for f in checks.climber_coverage(s2) if f["status"] == "warn"]
         self.assertTrue(w and all(f["id"].startswith("wall-street") for f in w))
@@ -425,11 +447,49 @@ class Climbers(unittest.TestCase):
         self.assertEqual([f for f in fails(checks.clips(S)) if "plant" in f["id"] and "bench" in f["id"]], [])
 
     def test_deciduous_and_evergreen_climbers_are_marked_for_the_seasonal_render(self):
-        mats = {o.meta["species"]: o.parts[0].material for o in S.objects if o.meta.get("climbing") and o.standin}
-        self.assertTrue(any(m.endswith(":d") for m in mats.values()))
-        self.assertTrue(any(m.endswith(":e") for m in mats.values()))
-        self.assertTrue(mats["vitis_vinifera"].endswith(":d"))
+        cl = {o.meta["species"]: o for o in S.objects if o.meta.get("climbing")}
+        self.assertTrue(cl["vitis_vinifera"].winter_parts)                       # the grape has a leaf-off geometry: its stems alone
+        self.assertTrue(all(not p.leaf_rects for p in cl["vitis_vinifera"].winter_parts))
+        self.assertFalse(cl["petrea_volubilis"].winter_parts)                    # evergreen: one geometry all year
         self.assertTrue([o for o in S.objects if o.meta.get("deciduous") and o.meta.get("climbing")])
+
+    def test_climbers_are_three_d_leaf_cards_with_depth_and_stems(self):
+        for o in [o for o in S.objects if o.meta.get("climbing")]:
+            cards = [p for p in o.parts if p.leaf_rects is not None]
+            self.assertEqual(len(cards), 1, o.id)
+            self.assertGreater(len(cards[0].faces), 100, o.id)
+            self.assertGreaterEqual(len([p for p in o.parts if p.material == "climber-stem"]), 8, o.id)
+            # depth: the cards spread through a band off the face, they are not one plane
+            b = o.bounds()
+            self.assertGreater(min(b[3] - b[0], b[4] - b[1]), 0.12, o.id)
+
+    def seats(self):
+        t = L["tables"][0]
+        return [build.R(x["rect"]) for x in L["seating"]] + [build.R(o["rect"]) for o in L["obstacles"] if o["id"].startswith("pot")] + [
+            (t["center"][0] - t["size_m"][0] / 2 - .6, t["center"][1] - t["size_m"][1] / 2 - .6, t["center"][0] + t["size_m"][0] / 2 + .6, t["center"][1] + t["size_m"][1] / 2 + .6)]
+
+    def test_the_layout_puts_star_jasmine_away_from_the_seats_and_arabian_jasmine_by_them(self):
+        by = [o for o in S.objects if o.meta.get("climbing")]
+        star = [o for o in by if o.meta["species"] == "trachelospermum_jasminoides"]
+        sambac = [o for o in by if o.meta["species"] == "jasminum_sambac"]
+        self.assertTrue(star and sambac)
+        near = lambda o: min(build._dist_pt_rect(o.meta["at"], r) for r in self.seats())
+        self.assertTrue(all(near(o) >= P.STAR_JASMINE_MIN_FROM_SEAT for o in star), [(o.id, near(o)) for o in star])
+        self.assertTrue(all(near(o) < P.STAR_JASMINE_MIN_FROM_SEAT + 1.5 for o in sambac))
+        self.assertFalse([o for o in star if "client rule" in o.label])                         # the layout already says it: the build swaps nothing
+
+    def test_a_layout_that_predates_the_decision_gets_the_swap_and_the_rule_can_be_switched_off(self):
+        old = copy.deepcopy(L)
+        for g in old["planting_groups"]:
+            for p in g["plants"]:
+                if p["species"] == "trachelospermum_jasminoides":
+                    p["species"] = "jasminum_sambac"
+        swapped = [o for o in build.build_scene(old).objects if o.meta.get("species") == "trachelospermum_jasminoides"]
+        self.assertTrue(swapped and all("client rule" in o.label for o in swapped))
+        self.assertTrue(all(min(build._dist_pt_rect(o.meta["at"], r) for r in self.seats()) >= P.STAR_JASMINE_MIN_FROM_SEAT for o in swapped))
+        off = build.build_scene(old, star_jasmine=False)
+        self.assertEqual([o for o in off.objects if o.meta.get("species") == "trachelospermum_jasminoides"], [])
+
 
     def test_climber_panel_assets_are_used_only_when_graded(self):
         self.assertEqual(planting.climber_panels(), [r for r in planting.climber_panels() if r["grade"] in "AB"])

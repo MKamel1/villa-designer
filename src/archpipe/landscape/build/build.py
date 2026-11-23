@@ -91,7 +91,7 @@ def koi(f, outdoor, g, warns, sched):
     out = []
     L = f.get("koi_adult_length_cm", 50) / 100.0
     s_mid = d["entry_run"] + d["shelf"] + (W - d["entry_run"] - d["shelf"]) / 2
-    zc = wl - 0.5 * d["trench_depth"] * 0.8 - 0.1
+    zc = wl - P.KOI_CENTRE_BELOW_WATER      # POLICY: koi swim just under the grille (they come up to be fed); the earlier 0.46 m put them below the sight line over the pond's near lip
     across, _ = E.pond_axes(f)
     for i in range(n):
         u = (i + 0.5) / n
@@ -126,7 +126,7 @@ def climb_target(at, structs, g, blockers=(), reach=P.CLIMBER["reach"]):
             lo = max(lo, b)
         elif a >= c:
             hi = min(hi, a)
-    return dict(axis=axis, face=face, sgn=sgn, span=(lo, hi), max_h=h, on=sid, at=at)
+    return dict(axis=axis, face=face, sgn=sgn, span=(lo, hi), max_h=h, on=sid, at=at, keepouts=[tuple(b) for b in blockers])
 
 
 def load_layout(path):
@@ -136,7 +136,7 @@ def load_layout(path):
     return d
 
 
-def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=False, season="summer", outdoor=None, site_context=True):
+def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=False, season="summer", outdoor=None, site_context=True, star_jasmine=True):
     """`age` = years since planting; None builds the plants at maturity. `pergolas=False`: the client replaced pergolas by pruned shade trees (2026-11-22), so a
     pergola canopy in the layout is reported and not built. `site_context` adds the neighbour/street/fence massing of villa_env (previews of OUR design). `outdoor` = graded outdoor furniture/koi table (outdoor.load()); None loads the shipped one."""
     outdoor = OD.load() if outdoor is None else outdoor
@@ -172,6 +172,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     for gr in layout.get("planting_groups", []):
         beds.append(R(gr["rect"]))
         objs.append(E.bed("ld-" + gr["id"], gr["id"], R(gr["rect"]), g, gr.get("role", "bed")))
+        objs.append(E.edging("ld-" + gr["id"] + "-edging", "ld-" + gr["id"], R(gr["rect"]), g))
     # --- features
     water = []
     for f in feats:
@@ -182,7 +183,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
         elif k == "firepit" and pitf:
             objs += E.firepit("ld-" + f["id"], f["id"], f, g, half=half, grids=grids_for(paved, path_rects, pitf))
         elif k == "bbq":
-            objs.append(E.bbq("ld-" + f["id"], f["id"], f["rect"], g))
+            objs.append(OD.bbq_obj("ld-" + f["id"], f["id"], f["rect"], g, outdoor.get("bbq")) or E.bbq("ld-" + f["id"], f["id"], f["rect"], g))
         elif k == "herb_bed":
             if R(f["rect"]) in beds:
                 next(o for o in objs if o.layout_id and o.kind == "bed" and R(f["rect"]) == o.footprint).meta["also"] = f["id"]
@@ -220,6 +221,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     # --- walls, screens, pergolas
     for w in layout.get("walls", []):
         objs.append(E.wall("ld-" + w["id"], w["id"], R(w["rect"]), w["height_m"], g))
+        objs.append(E.coping("ld-" + w["id"] + "-coping", "ld-" + w["id"], R(w["rect"]), w["height_m"], g))
     screens = []
     for s in layout.get("screens", []):
         if s.get("kind") == "trellis":
@@ -254,6 +256,10 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     walls_r = [R(w["rect"]) for w in layout.get("walls", [])] + [sc[0] for sc in screens]
     structs = [(R(w["rect"]), w["height_m"], w["id"]) for w in layout.get("walls", [])] + [(sc[0], sc[1], sc[2][3:]) for sc in screens]
     climbed = set()
+    seat_rects = list(bench_rects) + [(t["center"][0] - t["size_m"][0] / 2 - .6, t["center"][1] - t["size_m"][1] / 2 - .6, t["center"][0] + t["size_m"][0] / 2 + .6, t["center"][1] + t["size_m"][1] / 2 + .6) for t in layout.get("tables", [])] \
+        + [R(o["rect"]) for o in layout.get("obstacles", []) if o["id"].startswith("pot")] + [R(gr["rect"]) for gr in layout.get("planting_groups", []) if gr.get("role") == "herb" or "herb" in gr["id"]]
+    seat_rects = seat_rects or [(1e6, 1e6, 1e6, 1e6)]
+    has_star = any(p["species"] == "trachelospermum_jasminoides" for gr in layout.get("planting_groups", []) for p in gr["plants"])      # a layout that names star jasmine already follows the 2026-11-22 climber decision: it is authoritative
     beds_by_rect = [R(gr["rect"]) for gr in layout.get("planting_groups", [])]
     for t in layout.get("trees", []):
         if t.get("pruned") or t.get("pruned_spread_m") or t.get("canopy"):
@@ -288,6 +294,10 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
                 if clb is None:
                     warns.append("climber %s at %s is more than 0.6 m from any wall or screen: drawn as a mound" % (sp, pl["at"]))
             oid = "ld-plant-%s-%02d" % (gr["id"], i)
+            if star_jasmine and sp == "jasminum_sambac" and clb and not has_star:      # client 2026-11-22: star jasmine on screens and walls AWAY from the seats and herbs; Arabian jasmine stays by them
+                if min(_dist_pt_rect(pl["at"], r) for r in seat_rects) >= P.STAR_JASMINE_MIN_FROM_SEAT:
+                    sp, f = "trachelospermum_jasminoides", PL.species_facts("trachelospermum_jasminoides")
+                    pl = dict(pl, species=sp, swapped_from="jasminum_sambac")
             blocker = next((n for r, n in hard if r[0] <= pl["at"][0] <= r[2] and r[1] <= pl["at"][1] <= r[3]), None)
             if blocker:
                 sched.append(dict(id=oid, species=sp, status="omitted", reason="the layout puts this plant inside %s; not built (layout conflict, reported)" % blocker))
@@ -295,6 +305,9 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
             if clb:
                 climbed.add(clb["on"])
             o, row = PL.plant_objects(oid, sp, pl, pl["at"], age, g, climbing=clb, form=pl.get("form"))
+            if pl.get("swapped_from"):
+                row["swapped_from"] = pl["swapped_from"]
+                o.label += " [client rule 2026-11-22: star jasmine away from seats; the layout names %s here]" % pl["swapped_from"]
             if f.get("habit") == "deciduous":
                 o.meta["deciduous"] = True
             o.meta.update(layout_spread=pl.get("spread_m"), at=pl["at"], layout_id=gr["id"], climbing=bool(clb))

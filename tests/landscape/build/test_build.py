@@ -17,12 +17,17 @@ from archpipe.landscape.build import outdoor as _od
 _real_load = _od.load
 
 
+_FG = planting.FG
+
+
 def setUpModule():
     _od.load = lambda *a, **k: {}      # legacy concept-A tests are written for the labelled geometry; the shipped outdoor assets are tested in test_build2
+    planting.FG = False                # ... and for the labelled STAND-INS: the generated foliage of lane FG (planting.FG) is tested in test_production
 
 
 def tearDownModule():
     _od.load = _real_load
+    planting.FG = _FG
 
 
 A = build.load_layout(PASS2 / "layout-A-pond-east.json")

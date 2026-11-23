@@ -9,11 +9,14 @@ from tempfile import TemporaryDirectory
 import unittest
 import numpy as np
 from archpipe import orientation as O, solar, villa_env as E
-from archpipe.orientation_guard import scene_findings, document_findings, geometry_side
+from archpipe.orientation_guard import scene_findings, document_findings, geometry_side, decided_garden_findings
 from archpipe.concept import villa_render as V,villa_landscape as L
 REBUILT_SHADE_PLANTS={'landscape-north-rhapis-accent','landscape-north-mid-00',
                       'landscape-north-mid-01','landscape-north-mid-02'}
 from archpipe.concept.garden_sun import SunStudy,DATES
+
+
+LEGACY_GARDEN="LEGACY old-garden (G-series) baseline: %s. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; %s"
 
 
 class Orientation(unittest.TestCase):
@@ -36,27 +39,31 @@ class Orientation(unittest.TestCase):
         self.assertEqual(self.before['plan']['beds'].keys(),{'west','north'})
 
     def test_names_generalise_to_translated_geometry_and_mutated_text(self):
+        # The decided garden (ld-n-*, ld-s-*) is checked by decided_garden_findings;
+        # scene_findings only reads the retired landscape-* ids.
+        self.assertEqual(decided_garden_findings(self.scene),[])
+        self.assertTrue(any(m['id'].startswith('ld-n-') for m in self.scene['meshes']))
+        self.assertTrue(any(m['id'].startswith('ld-s-') for m in self.scene['meshes']))
         sibling=copy.deepcopy(self.scene)
         for m in sibling['meshes']:
             m['faces']=[[[p[0]+40,p[1]-13,p[2]] for p in f] for f in m['faces']]
         for p in sibling['props']:p['position'][0]+=40;p['position'][1]-=13
-        for v in sibling['views']:
-            if v.get('camera'):
-                for key in ('position','target'):
-                    if key in v['camera']:v['camera'][key][0]+=40;v['camera'][key][1]-=13
-        sibling['garden_zones']={name:[rect[0]+40,rect[1]-13,rect[2]+40,rect[3]-13] for name,rect in sibling['garden_zones'].items()}
-        bounds=tuple(v/1000 for v in E.BAR);bounds=(bounds[0]+40,bounds[1]-13,bounds[2]+40,bounds[3]-13)
-        top=(L.TOP[0]+40,L.TOP[1]-13,L.TOP[2]+40,L.TOP[3]-13)
-        self.assertEqual(scene_findings(sibling,building_bounds=bounds,top_bounds=top),[])
-        bed=next(m for m in sibling['meshes'] if m['id']=='landscape-bed-north')
-        bed['id']='landscape-bed-w'
-        self.assertIn('expected north',str(scene_findings(sibling,building_bounds=bounds,top_bounds=top)))
+        zones={k:(z[0]+40,z[1]-13,z[2]+40,z[3]-13) for k,z in dict(n=L.NORTH_COURT,s=L.SOUTH).items()}
+        self.assertEqual(decided_garden_findings(sibling,zones=zones),[])
+        self.assertTrue(decided_garden_findings(sibling),'translated geometry must fail against the untranslated zones')
+        moved=copy.deepcopy(self.scene)
+        item=next(m for m in moved['meshes'] if m['id'].startswith('ld-s-'))
+        item['id']='ld-n-'+item['id'][5:]
+        self.assertIn('outside the north garden',str(decided_garden_findings(moved)))
         mutant=copy.deepcopy(self.scene)
         v=next(v for v in mutant['views'] if v['id']=='v36-north-garden')
         v['caption_notes'][0]='West garden with shade foliage'
-        self.assertIn('caption',str(scene_findings(mutant)))
-        v['title']='West garden'
-        self.assertIn('title',str(scene_findings(mutant)))
+        self.assertIn('names west',str(decided_garden_findings(mutant)))
+        v['caption_notes'][0]='North garden';v['title']='South garden'
+        self.assertIn('names south',str(decided_garden_findings(mutant)))
+        v['title']='North garden'
+        v['subjects']=['ld-s-bed-mass']
+        self.assertIn('belongs to the south garden',str(decided_garden_findings(mutant)))
         with TemporaryDirectory() as tmp:
             p=Path(tmp)/'garden.md';p.write_text('<!-- garden-side: -x; name: west -->\nWest court')
             self.assertTrue(document_findings([p]))
@@ -76,8 +83,8 @@ class Orientation(unittest.TestCase):
         open_scene=dict(meshes=[dict(id='ground',group='ground',material='opaque',faces=L._quad(-20,-20,20,20,-3))],materials={'opaque':{'kind':'principled'}})
         from archpipe.concept.garden_sun import scene_findings as sun_findings
         self.assertEqual(sun_findings(open_scene),[])
-        landscape=copy.deepcopy(next(p for p in self.scene['props'] if p.get('species')=='Plumeria rubra'))
-        landscape['id']='renamed-plant'
+        landscape=copy.deepcopy(next(p for p in self.scene['props'] if p.get('species')=='plumeria_rubra'))
+        landscape['id']='landscape-renamed-plant'
         self.assertIn('no recorded garden sun evidence',str(sun_findings(dict(open_scene,props=[landscape]))))
         open_study=SunStudy(open_scene)
         point=(0,0,-2.95);self.assertTrue(open_study.clear(point,(0,1,1)))
@@ -146,6 +153,7 @@ class Orientation(unittest.TestCase):
                     self.assertEqual(new['appearance_seed'],O.appearance_seed(new['id']))
         self.assertEqual(used,set(approved),'stale or mistyped approved transition')
 
+    @unittest.skip(LEGACY_GARDEN%("frozen landscape-* items (landscape-tree-pit-south, landscape-stone-lounge-north-end-0, ...) no longer exist","a frozen-geometry baseline has no decided-garden counterpart; decided geometry is covered by tests/landscape/build/test_production.py"))
     def test_unlisted_appearance_and_geometry_changes_still_fail(self):
         # Mutate actual current items without copying the entire large scene.
         self.assert_rename_snapshot(self.scene)
@@ -166,6 +174,7 @@ class Orientation(unittest.TestCase):
         mutant=dict(self.scene,meshes=[changed if m['id']==source['id'] else m for m in self.scene['meshes']])
         with self.assertRaises(AssertionError):self.assert_rename_snapshot(mutant)
 
+    @unittest.skip(LEGACY_GARDEN%("frozen landscape-* geometry and the old garden_sun_evidence rows (Ixora, east-yard climbers)","sun for the decided garden is the LDS site study, tests/landscape/site/test_site.py; compass naming is test_names_generalise_to_translated_geometry_and_mutated_text"))
     def test_rename_preserves_actual_geometry_and_climber_appearance(self):
         self.assert_rename_snapshot(self.scene)
         from archpipe.concept.garden_sun import scene_findings as sun_findings
