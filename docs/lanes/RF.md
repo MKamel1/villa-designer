@@ -31,10 +31,10 @@ L9P drafts: `~/archpipe/lanes/L9P/out/l9p/final-drafts/`; RF final pass: `out/RF
 
 | scene | file bytes | sha256 | ids stripped sha256 | meshes / views | `source_hash` |
 |---|---|---|---|---|---|
-| production (`villa_render.write`, 41 views) | 633,556,539 | `648ac6368fb8549b1e57b87075e49c450571d45fe07925e2b5c433bc84bac066` | `2a0e6a3a059e96e0ec11bc5ece0292f4b889daba59ef7c078098d0e7495d9e93` | 1,224 / 41 | `e14b08dee2692ae1225ca93ce7446724a7b417627e16c30eae6430aff25623df` |
-| render set (`render_set.write_scene`, 48 views) | 633,609,778 | `e1e2e13a024c5022c7d52f3ea453980dab5c0605b3b75aedc7c094d9ae25ff74` | `9fc64ba371b10b9650e79cba6b62ca4d292e275eb5a6d0f0ddfeed3b7989e21e` | 1,224 / 48 | same |
+| production (`villa_render.write`, 41 views) | 633,556,539 | `bd1f9bf4b9e603eff894e3c36b73549564ccc045ede0a40e3d08e9626d9d4552` | `cda6551224d2fe72ef3867581873205a70933ec3905ff37e83a089df8a452a72` | 1,224 / 41 | `b3342bca1398ff4ab786165ee1f5d88a59bb48dbee6d8445cd7e1229e9452106` |
+| render set (`render_set.write_scene`, 48 views) | 633,609,778 | `bd578c7deaa7ee0d936cdfffb7b963ad09afad2183cd9a5474dbd4232b4cacb6` | `a8fab14204d3cb92a68a285a7d93262ee3d771c90acb93e9a62bc9eb88b50ce0` | 1,224 / 48 | same |
 
-(The ids-stripped hash includes `provenance`, hence the source hash is part of it.)
+(The ids-stripped hash includes `provenance`, hence the source hash is part of it. Rebuilt after merging integ `7aec244` (L8 scene cache): receipts and both records still accepted, hashes above are of that build; before that merge the production hash was `648ac636...` / source `e14b08de...`.)
 
 ## Critic and grades (36 interior views, same method as L9P section 2, frozen rubric, gates R8/R10/R11 + deterministic six)
 
@@ -73,7 +73,7 @@ Still no view better than B-: the finals gate (L9P) is **not** met by this lane;
 
 ## Tests (fresh clone of `lane/RF`, `NO_COLOR=1`, laneP-venv)
 
-See the hand-back; the four `tests/lightverify` failures (`test_v10_erco` x3, `test_v1_design::test_bound_pendant_is_one_emitter_at_its_record_flux`) are LV pins of the old pendant and **fail identically on the L6d base commit `06e74dc`**.
+Fresh clone at `26b9a15` (before the L8 merge): lane suite + `tests/parity tests/markup tests/landscape tests/test_villa_render*.py tests/critic` **1092 passed, 7 skipped, 2 xfailed, 0 failed** (15 min); scene group `tests/test_mounting*.py tests/test_d1_*.py` **76 passed** (27 min); `python -m archpipe.compliance.run_d1` exit 0, no failing gate (regenerated L1 report reverted). An earlier run at the pre-LV-merge tree had 4 `tests/lightverify` failures (LV pins of the old pendant: `test_v10_erco` x3, `test_v1_design::test_bound_pendant_is_one_emitter_at_its_record_flux`), identical on L6d base `06e74dc`; they pass once LV is in integ.
 
 ## Open items
 
