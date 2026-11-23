@@ -102,8 +102,7 @@
     "reflectance": 0.3164,
     "roughness": 0.5,
     "tile_m": 1.2,
-    "note": "LOOK-ALIKE (ambientCG Marble007, CC0) standing for Marazzi Mystone Gris Fleury MLGY; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Marble007, CC0) standing for Marazzi Mystone Gris Fleury MLGY; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.2,
@@ -296,8 +295,7 @@
     "reflectance": 0.3032,
     "roughness": 0.5,
     "tile_m": 1.2,
-    "note": "LOOK-ALIKE (ambientCG Concrete012, CC0) standing for Marazzi Mystone Limestone20 M7SQ; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Concrete012, CC0) standing for Marazzi Mystone Limestone20 M7SQ; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.2,
@@ -387,8 +385,7 @@
     "reflectance": 0.3905,
     "roughness": 0.5,
     "tile_m": 1.2,
-    "note": "LOOK-ALIKE (ambientCG Marble015, CC0) standing for Marazzi Grande Marble Look M0G3; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Marble015, CC0) standing for Marazzi Grande Marble Look M0G3; tile_m 1.2 m from format-long-side; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.2,
@@ -538,7 +535,7 @@
      "parents-bed"
     ],
     "parts": [
-     "head wall behind the bed, solid wall only"
+     "the head wall behind the bed (whole wall face, door openings excepted)"
     ]
    },
    "decided_by": "lead-confirmed",
@@ -649,8 +646,7 @@
     "reflectance": 0.7011,
     "roughness": 0.5,
     "tile_m": 3.27,
-    "note": "LOOK-ALIKE (ambientCG Marble025, CC0) standing for Cosentino Dekton Kraftizen ; tile_m 3.27 m from format-long-side; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Marble025, CC0) standing for Cosentino Dekton Kraftizen ; tile_m 3.27 m from format-long-side; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 3.27,
@@ -823,13 +819,13 @@
   },
   "kitchen-joinery": {
    "palette": "B",
-   "item_id": "B-joinery-timber",
+   "item_id": "B-joinery-light",
    "group": "hard",
    "item": {
-    "id": "B-joinery-timber",
-    "slot": "joinery-timber",
+    "id": "B-joinery-light",
+    "slot": "joinery-light",
     "group": "hard",
-    "use": "TV wall, bookcases (oak-look decor)",
+    "use": "Slats, headboard (light timber)",
     "product": {
      "maker": "EGGER",
      "range": "Feelwood",
@@ -837,12 +833,12 @@
      "colour_code": "H1180 ST37",
      "colour_name": "Natural Halifax Oak",
      "format_mm": null,
-     "finish": "ST37 Feelwood Rift embossed-in-register (from search summary)",
+     "finish": null,
      "lrv": null,
      "lrv_source": null,
      "composition": null,
      "extra": {
-      "note": "decor name read on edging page Q1180 RO"
+      "note": "same decor as joinery-timber; a distinctly lighter decor was not verified"
      }
     },
     "source": {
@@ -860,19 +856,19 @@
     "lookalike": {
      "label": "look-alike-proxy",
      "maker_site": "Poly Haven",
-     "id": "oak_veneer_01",
-     "url": "https://polyhaven.com/a/oak_veneer_01",
+     "id": "white_oak_veneer",
+     "url": "https://polyhaven.com/a/white_oak_veneer",
      "licence": "CC0",
      "on_disk": true,
      "physical_scan_mm": [
-      1830.0000429153442,
-      1830.0000429153442
+      500,
+      500
      ]
     },
     "maintenance": null,
     "missing": [
+     "distinct light decor",
      "lrv",
-     "format_mm",
      "maintenance"
     ]
    },
@@ -893,20 +889,20 @@
    "decided_by": "client",
    "render": {
     "kind": "principled",
-    "asset": "oak_veneer_01",
+    "asset": "white_oak_veneer",
     "base_rgb": [
-     0.3968,
-     0.2232,
-     0.0999
+     0.5271,
+     0.3613,
+     0.1946
     ],
-    "reflectance": 0.2512,
+    "reflectance": 0.3845,
     "roughness": 0.5,
-    "tile_m": 1.83,
-    "note": "LOOK-ALIKE (Poly Haven oak_veneer_01, CC0) standing for EGGER Feelwood H1180 ST37; tile_m 1.8300000429153442 m from lookalike-scan-size; colour from the stated hex (estimate)",
+    "tile_m": 0.5,
+    "note": "LOOK-ALIKE (Poly Haven white_oak_veneer, CC0) standing for EGGER Feelwood H1180 ST37; tile_m 0.5 m from lookalike-scan-size; colour from the stated hex (estimate)",
     "grain_axis": "z"
    },
    "texture_scale": {
-    "tile_m": 1.8300000429153442,
+    "tile_m": 0.5,
     "basis": "lookalike-scan-size"
    }
   },
@@ -1312,8 +1308,7 @@
     "reflectance": 0.0405,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -1398,8 +1393,7 @@
     "reflectance": 0.0616,
     "roughness": 0.5,
     "tile_m": 0.4,
-    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA SANELA 406.360.04; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA SANELA 406.360.04; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.4,
@@ -1484,8 +1478,7 @@
     "reflectance": 0.3405,
     "roughness": 0.5,
     "tile_m": 0.4,
-    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.4,
@@ -1570,8 +1563,7 @@
     "reflectance": 0.0616,
     "roughness": 0.5,
     "tile_m": 0.4,
-    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA SANELA 406.360.04; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA SANELA 406.360.04; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.4,
@@ -1657,8 +1649,7 @@
     "reflectance": 0.0682,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 305.911.24; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 305.911.24; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -1743,8 +1734,7 @@
     "reflectance": 0.2886,
     "roughness": 0.5,
     "tile_m": 0.3,
-    "note": "LOOK-ALIKE (ambientCG Leather035A, CC0) standing for IKEA SANELA 506.359.90; tile_m 0.3 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Leather035A, CC0) standing for IKEA SANELA 506.359.90; tile_m 0.3 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.3,
@@ -1830,8 +1820,7 @@
     "reflectance": 0.0405,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -1916,8 +1905,7 @@
     "reflectance": 0.6123,
     "roughness": 0.5,
     "tile_m": 1.7,
-    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA SANELA 505.908.97; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA SANELA 505.908.97; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.7,
@@ -2003,8 +1991,7 @@
     "reflectance": 0.0682,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 305.911.24; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 305.911.24; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2090,8 +2077,7 @@
     "reflectance": 0.0405,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2176,8 +2162,7 @@
     "reflectance": 0.2886,
     "roughness": 0.5,
     "tile_m": 0.3,
-    "note": "LOOK-ALIKE (ambientCG Leather035A, CC0) standing for IKEA SANELA 506.359.90; tile_m 0.3 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Leather035A, CC0) standing for IKEA SANELA 506.359.90; tile_m 0.3 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.3,
@@ -2262,8 +2247,7 @@
     "reflectance": 0.3405,
     "roughness": 0.5,
     "tile_m": 0.4,
-    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.4,
@@ -2348,8 +2332,7 @@
     "reflectance": 0.6116,
     "roughness": 0.5,
     "tile_m": 1.7,
-    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA SANELA 505.908.97; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA SANELA 505.908.97; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.7,
@@ -2435,8 +2418,7 @@
     "reflectance": 0.0405,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA SANELA 906.360.25; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2521,8 +2503,7 @@
     "reflectance": 0.3405,
     "roughness": 0.5,
     "tile_m": 0.4,
-    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Fabric066, CC0) standing for IKEA LAGERPOPPEL 905.618.07; tile_m 0.4 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.4,
@@ -2609,8 +2590,7 @@
     "reflectance": 0.5342,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2697,8 +2677,7 @@
     "reflectance": 0.5342,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2785,8 +2764,7 @@
     "reflectance": 0.2536,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA HOLMVI 305.135.98; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA HOLMVI 305.135.98; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2873,8 +2851,7 @@
     "reflectance": 0.2536,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA HOLMVI 305.135.98; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA HOLMVI 305.135.98; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -2961,8 +2938,7 @@
     "reflectance": 0.5342,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -3049,8 +3025,7 @@
     "reflectance": 0.4919,
     "roughness": 0.5,
     "tile_m": 0.2713,
-    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (Poly Haven rough_linen, CC0) standing for IKEA MYRULL 905.634.82; tile_m 0.27129998803138733 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 0.27129998803138733,
@@ -3134,8 +3109,7 @@
     "reflectance": 0.5188,
     "roughness": 0.5,
     "tile_m": 1.7,
-    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA BRÖNDEN 705.329.72; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA BRÖNDEN 705.329.72; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.7,
@@ -3220,8 +3194,7 @@
     "reflectance": 0.4903,
     "roughness": 0.5,
     "tile_m": 1.7,
-    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA BRÖNDEN 705.329.72; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA BRÖNDEN 705.329.72; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.7,
@@ -3307,8 +3280,7 @@
     "reflectance": 0.4903,
     "roughness": 0.5,
     "tile_m": 1.7,
-    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA TIDTABELL 605.618.75; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)",
-    "grain_axis": "z"
+    "note": "LOOK-ALIKE (ambientCG Carpet016, CC0) standing for IKEA TIDTABELL 605.618.75; tile_m 1.7 m from lookalike-scan-size; colour from the stated hex (estimate)"
    },
    "texture_scale": {
     "tile_m": 1.7,

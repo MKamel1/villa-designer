@@ -45,7 +45,7 @@ def measured_host(scene, anchor, outward, room, host_id, *, kind="wall", panel=F
             eligible = mesh["group"] == "shell" and mesh["material"] == "ceiling-white"
         else:
             eligible = (mesh["group"] == "shell" and mesh.get("room") == room and
-                        mesh["material"] in ("marble-bath", "plaster-warm-white", "porcelain-tile") and
+                        mesh["material"] in ("marble-bath", "plaster-warm-white", "porcelain-tile", "fin-wall-feature") and
                         not mesh.get("finished_host_id"))
         if not eligible:
             continue

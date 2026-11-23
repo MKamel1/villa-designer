@@ -54,7 +54,8 @@ def folded_throw(cx, cy, theta, u0, v0, z0, w_mm, l_mm, yaw_deg=0.0, thick_mm=70
     return _world(verts, tris, place)
 
 
-def seat_dressing(item_xy, theta, width_m, depth_m, seat_top_m, back_v_m, arm_m, cushions, throw, throw_side=1):
+def seat_dressing(item_xy, theta, width_m, depth_m, seat_top_m, back_v_m, arm_m, cushions, throw, throw_side=1,
+                  alpha0=10.0, throw_v=None, throw_yaw=6.0):
     """[(kind, index, faces)] for one seat. `cushions` is [(w_mm, h_mm)], `throw` (w_mm, l_mm) or None.
 
     Cushions spread over the seat between the arms (outermost against the arms); the throw lies on the end seat.
@@ -66,14 +67,15 @@ def seat_dressing(item_xy, theta, width_m, depth_m, seat_top_m, back_v_m, arm_m,
     for k, (w_mm, h_mm) in enumerate(cushions):
         frac = 0.0 if n == 1 else (k / (n - 1)) * 2 - 1
         u0 = frac * (inner - w_mm / 2000.0)
-        alpha = 10 + 4 * (k % 2)
+        alpha = alpha0 + 4 * (k % 2)
         yaw = (-5, 4, -3)[k % 3]
-        z0 = seat_top_m - 0.01
+        z0 = seat_top_m - 0.04      # sunk 40 mm into the seat cushion so the top stays near the back height
         v0 = back_v_m + 0.05 + 0.02 * (k % 2)
         out.append(("cushion", k, leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha, yaw)))
     if throw:
         fw, fl = throw[0] / 3.0, throw[1] / 3.0
         u0 = throw_side * (inner - fw / 2000.0 - 0.02)
-        out.append(("throw", 0, folded_throw(cx, cy, theta, u0, back_v_m + 0.50 + fl / 2000.0, seat_top_m - 0.01,
-                                              throw[0], throw[1], yaw_deg=6 * throw_side)))
+        tv = back_v_m + 0.50 + fl / 2000.0 if throw_v is None else throw_v
+        out.append(("throw", 0, folded_throw(cx, cy, theta, u0, tv, seat_top_m - 0.01,
+                                              throw[0], throw[1], yaw_deg=(throw_yaw if throw_v is not None else 6) * throw_side)))
     return out

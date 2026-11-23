@@ -26,7 +26,7 @@ class Schedule(unittest.TestCase):
     def test_the_client_mix(self):
         s = self.ch["slots"]
         want = {"worktop": "B-worktop", "backsplash": "B-backsplash", "kitchen-front": "B-kitchen-front",
-                "kitchen-joinery": "B-joinery-timber", "floor-basement": "C-floor-living", "floor-gf": "C-floor-gf",
+                "kitchen-joinery": "B-joinery-light", "floor-basement": "C-floor-living", "floor-gf": "C-floor-gf",
                 "door": "C-door", "floor-wet": "C-floor-wet", "wall-tile-wet": "C-bath-tile",
                 "wall-paint-main": "B-wall-paint", "wall-feature-parents": "C-wall-paint"}
         self.assertEqual({k: s[k]["item_id"] for k in want}, want)

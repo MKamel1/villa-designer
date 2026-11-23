@@ -611,6 +611,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     SOFT = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric", "bedding-white", "outdoor-fabric"} | \
         {n for n in M if n.startswith(("fin-cushion", "fin-throw"))}
 
+    PARENTS_HEAD_Y = F.clear_rect(lay, "parents-bed")[1]      # the bed's head wall (south wall of the room)
     declared_ids = {}     # mesh id -> element ids named at creation; kept out of the mesh dicts until attach(), because
     #                       furniture_stage2 hashes every mesh attribute and the ids must not change its receipt
 
@@ -694,6 +695,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             n = _normal(pts)
             room = _room_at(lay, cx + 0.06 * n[0], cy + 0.06 * n[1], cz)
             mat = FINISH[room][1] if room in FINISH else "paint-exterior-grey-green"
+            # client (2026-11-23): Nile Clay as a feature wall behind the bed ONLY: the parents' bedroom's head wall (the
+            # +y-facing face on the room's clear y0), floor to slab, openings left as the shell has them. Set on the shell
+            # face so the physical plaster finish layers (finish_layers.py) inherit it; a loose overlay sat inside them.
+            if room == "parents-bed" and n[1] > 0.9 and abs(cy - PARENTS_HEAD_Y) < 0.1:
+                mat = "fin-wall-feature"
         # Ground finishes are only eligible on upward/side surfaces. Apply
         # this after semantic classification so context steps cannot bypass it.
         from .garden_render_review import GROUND_ONLY
@@ -852,15 +858,6 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         if not any(a0 <= xa and xa + 0.03 <= a1 for a0, a1 in solid):
             continue
         faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
-    # client (2026-11-23): Nile Clay as a feature wall behind the bed only. A 3 mm finish layer over the SOLID head wall
-    # (not the entry or dressing openings), the width of the room's clear rectangle, floor to the 2.70 m ceiling.
-    ff = []
-    for a0, a1 in solid:
-        xa, xb = max(a0, PB[0]), min(a1, PB[2])
-        if xb - xa > 0.05:
-            ff += box_faces(xa, PB[1], 0.0, xb, PB[1] + 0.003, VL.CEILING)
-    mesh("detail-feature-wall-parents", "fin-wall-feature", ff, "shell", room="parents-bed",
-         label="client feature wall: Nile Clay behind the bed", kind="finish-layer")
     mesh("detail-headboard-slats", "oak", faces, "furniture", room="parents-bed",
          label="detail: oak slatted headboard wall", kind="wall-panel", element_ids=["furn-pb-bed"])
     op = sp["gf_opening"]
@@ -1051,10 +1048,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                         v[2] -= lift
                 mat = GEN_MAT.get(c["material"]["name"], "oak")
                 if part.startswith("pillow") and f["mark"] in ("pb-bed", "kb-bed"):
-                    # client cushion schedule: the parents' bed pillows take its first two cushions (the third,
-                    # a lumbar LAGERPOPPEL, has no support-safe place on the simulated duvet: open item)
-                    mat = ("fin-cushion-parents-bed-1" if part == "pillow_left" else "fin-cushion-parents-bed-2"
-                           ) if f["mark"] == "pb-bed" else "sage-fabric"
+                    # sleeping pillows stay white bedding; the scheduled cushions are separate (see BED_CUSHIONS)
+                    mat = "bedding-white" if f["mark"] == "pb-bed" else "sage-fabric"
                 if mat == "oak" and part == "frame":
                     mat = "oak-grain-x"
                 # Keep pillows separate so their curved edges can be smoothed
@@ -1344,10 +1339,17 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         thr_ = CHOSEN["slots"]["throw-" + k_]["item"]["product"]["format_mm"]
         base_z_ = LZ[lay["rooms"][sofa_["room"]]["level"]]
         daybed_ = sofa_["type"] == "daybed_nook"
+        # a sofa that a library model replaced has its own seat: measured from the model's mesh (sf_minotti_sofa: seat top
+        # 0.48 m, back cushion face 0.06 m in front of the centre at 0.6 m, arms 0.22 m, lean 22 deg); a procedural sofa
+        # uses the builder's own numbers (villa_furniture_detail._sofa)
+        on_model_ = any(m_.get("replaces") == "furn-%s-" % sid_ for m_ in models)
+        geo_ = (dict(seat=0.48, back_v=0.06, arm=0.22, alpha0=22.0, throw_v=0.33, throw_yaw=90.0) if on_model_ else
+                dict(seat=sofa_["h"] if daybed_ else 0.44, back_v=-sofa_["d"] / 2 + (0.0 if daybed_ else 0.27), arm=0.16,
+                     alpha0=16.0, throw_v=None, throw_yaw=6.0))
         parts_ = SD.seat_dressing((sofa_["cx"], sofa_["cy"]), generator_rotation(sofa_["rot"]), sofa_["w"], sofa_["d"],
-                                  base_z_ + (sofa_["h"] if daybed_ else 0.44),
-                                  -sofa_["d"] / 2 + (0.0 if daybed_ else 0.27), 0.16, cush_, (thr_["w"], thr_["l"]),
-                                  throw_side=0 if daybed_ else throw_side_)
+                                  base_z_ + geo_["seat"], geo_["back_v"], geo_["arm"], cush_, (thr_["w"], thr_["l"]),
+                                  throw_side=0 if daybed_ else throw_side_, alpha0=geo_["alpha0"],
+                                  throw_v=geo_["throw_v"], throw_yaw=geo_["throw_yaw"])
         for kind_, i_, faces_ in parts_:
             mat_ = ("fin-cushion-%s-%d" % (k_, i_ + 1)) if kind_ == "cushion" else "fin-throw-" + k_
             mesh("dress-%s-%s-%d" % (kind_, sid_, i_), mat_, faces_, "dressing", room=sofa_["room"],
@@ -1470,6 +1472,17 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         for k, pf in enumerate(pil if bid not in generated else []):
             mesh("dress-pillow-%s-%d" % (bid, k), "bedding-white", pf, "dressing", room=b_["room"],
                  label="dressing: pillow", kind="pillow")
+    # the parents' bed (a library model, simulated duvet): the three scheduled cushions stand in front of the sleeping pillows on
+    # the duvet (rest height = the duvet spec's mattress_top + 0.08), the lumbar one in front. Positions are
+    # measured from the bed item (head at local -y); the duvet's pinned edge is 0.03 m past the pillow front.
+    bed_ = it["pb-bed"]
+    bed_z_ = next(c_ for c_ in cloth if c_["id"] == "duvet-pb-bed")["mattress_top"] + 0.08       # the duvet's rest height
+    for k_, (u_, v_, al_, yaw_) in enumerate(((-0.45, -0.17, 24.0, -6.0), (0.45, -0.17, 24.0, 5.0), (0.0, 0.00, 36.0, 0.0))):
+        fm_ = CHOSEN["slots"]["cushion-parents-bed-%d" % (k_ + 1)]["item"]["product"]["format_mm"]
+        mesh("dress-cushion-pb-bed-%d" % k_, "fin-cushion-parents-bed-%d" % (k_ + 1),
+             SD.leaning_cushion(bed_["cx"], bed_["cy"], generator_rotation(bed_["rot"]), u_, v_, bed_z_ + 0.01,
+                                fm_["w"], fm_["l"], al_, yaw_),
+             "dressing", room=bed_["room"], label="dressing: scheduled cushion on pb-bed", kind="pillow", keep_object=True)
     notes.append("Dressing: clothes on the dressing rails, duvets and pillows on the beds (not design).")
     notes.append("ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and "
                  "legs, and the bunk ladder on its open side; product and fixing details require Revit coordination. "

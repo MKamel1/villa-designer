@@ -25,11 +25,11 @@ HARD = {
     "floor-wet": ("C-floor-wet", ["marble-wet"], dict(rooms=WET, parts=["shower wet-floor"]), "lead-confirmed"),
     "wall-tile-wet": ("C-bath-tile", ["marble-bath", "marble-ensuite"], dict(rooms=WET, parts=["shower walls"]), "lead-confirmed"),
     "wall-paint-main": ("B-wall-paint", ["plaster-warm-white"], dict(rooms=BASEMENT + GF), "lead-confirmed (basement); lead decision (GF, see decisions)"),
-    "wall-feature-parents": ("C-wall-paint", ["fin-wall-feature"], dict(rooms=["parents-bed"], parts=["head wall behind the bed, solid wall only"]), "lead-confirmed"),
+    "wall-feature-parents": ("C-wall-paint", ["fin-wall-feature"], dict(rooms=["parents-bed"], parts=["the head wall behind the bed (whole wall face, door openings excepted)"]), "lead-confirmed"),
     "worktop": ("B-worktop", ["marble-white"], dict(rooms=KITCHEN_ROOMS, parts=["island worktop and waterfall ends", "base-run worktop", "laundry folding counter worktop"]), "client"),
     "backsplash": ("B-backsplash", [], dict(rooms=[]), "client"),
     "kitchen-front": ("B-kitchen-front", ["greige-lacquer"], dict(rooms=KITCHEN_ROOMS, parts=["base-run fronts", "dirty-kitchen tall units"]), "client"),
-    "kitchen-joinery": ("B-joinery-timber", ["fin-kitchen-joinery", "fin-kitchen-joinery-x"], dict(rooms=KITCHEN_ROOMS, parts=["island carcass"]), "client"),
+    "kitchen-joinery": ("B-joinery-light", ["fin-kitchen-joinery", "fin-kitchen-joinery-x"], dict(rooms=KITCHEN_ROOMS, parts=["island carcass"]), "client"),
     "joinery-timber": ("C-joinery-timber", ["walnut", "walnut-grain-x", "walnut-grain-y"], dict(rooms=BASEMENT + GF, parts=["TV wall, sideboards, bookcases, bedside tables, vanities, parents' wardrobes, stair treads and handrail"]), "client (parents' bedroom) / lead-confirmed (rest)"),
     "joinery-light": ("C-joinery-light", ["oak", "oak-grain-x"], dict(rooms=GF, parts=["wardrobes, desks, bed frames, headboard slats"]), "lead-confirmed"),
     "door": ("C-door", ["door-oak"], dict(rooms=BASEMENT + GF, parts=["interior door leaves"]), "lead-confirmed"),
@@ -37,6 +37,7 @@ HARD = {
 NO_GEOMETRY = {"backsplash": "the design model holds no backsplash zone or element (only the K-SPLASH 600 mm clearance target, "
                               "and wall units exist only where a tall wall run is authored): reported, not invented"}
 UNAPPLIED_SOFT = ("open-shelf", "wardrobe-garment")      # chosen C, but the scene has no such dressing assets to colour
+GRAIN_AXIS = dict(palette_scene.GRAIN, **{"fin-kitchen-joinery": "z", "fin-kitchen-joinery-x": "x"})
 SOFT_ROOMS = {"living-sofa": ["living"], "lounge-sofa": ["lounge"], "study-sofa": ["study-game"], "cinema-sofa": ["cinema"],
               "library-daybed": ["bar-alcove"], "parents-bed": ["parents-bed"], "living": ["living"], "lounge": ["lounge"],
               "parents-bedroom": ["parents-bed"]}
@@ -78,7 +79,10 @@ def build(library_root: Path) -> dict:
         if scene:
             spec = palette_scene.item_spec(item, library_root, colours)
             if "asset" in spec:
-                spec["grain_axis"] = palette_scene.GRAIN.get(scene[0], "z")
+                # a grain axis only where the stand-in had one (veneers, planks); stone and tile have none: forcing "z" onto a floor
+                # smeared the Gris Fleury image into stripes (v33 draft, 2026-11-23)
+                if scene[0] in GRAIN_AXIS:
+                    spec["grain_axis"] = GRAIN_AXIS[scene[0]]
             s["render"] = spec
             s["texture_scale"] = (dict(zip(("tile_m", "basis"), finishes.texture_scale_m(item))) if item.get("lookalike")
                                   else dict(tile_m=None, basis="flat colour (painted or laminated, no image)"))
