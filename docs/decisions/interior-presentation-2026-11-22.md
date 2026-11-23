@@ -16,7 +16,7 @@
   - Floor: Havwoods Cantal Smoked Cocoa oak.
   - Joinery: EGGER Brown Halifax Oak.
   - Cushions, throw and rug: C.
-- **Lead proposals pending client confirmation:**
+- **Lead proposals, CONFIRMED by the client 2026-11-23:**
   - **Walls:**
     - Basement open plan: B's Dulux Off White (LRV 89). The kitchen and living share the space, and C's Nile Clay (LRV 27) would darken the lower-ground level.
     - Parents' bedroom: Nile Clay as a feature wall behind the bed only.
