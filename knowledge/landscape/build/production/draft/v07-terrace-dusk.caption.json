@@ -2,7 +2,7 @@
   "view": "v07-terrace-dusk",
   "title": "South garden pergola and retained frangipani at dusk",
   "exposure_group": "exterior-dusk",
-  "camera_exposure_stops": -0.2805475890636444,
+  "camera_exposure_stops": -1.674834132194519,
   "white_balance_k": 4300.0,
   "white_balance_tint": 10.0,
   "white_balance_illuminant": "daylight",
@@ -705,99 +705,6 @@
       "ld-sister-screen-n",
       "ld-sister-screen-s",
       "ld-pot-0-plumeria",
-      "ld-s-tree-crape.garden-bark",
-      "ld-s-tree-crape.garden-leafcut-386b29",
-      "ld-s-tree-crape.winter",
-      "ld-plant-s-bed-mass-00.garden-climber-stem",
-      "ld-plant-s-bed-mass-00.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-mass-01.garden-climber-stem",
-      "ld-plant-s-bed-mass-01.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-mass-03",
-      "ld-plant-s-bed-mass-08",
-      "ld-plant-s-bed-mass-13",
-      "ld-plant-s-bed-mass-14",
-      "ld-plant-s-bed-mass-corner-00.garden-climber-stem",
-      "ld-plant-s-bed-mass-corner-00.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-mass-corner-01.garden-climber-stem",
-      "ld-plant-s-bed-mass-corner-01.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-mass-corner-02.garden-climber-stem",
-      "ld-plant-s-bed-mass-corner-02.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-screen-n-00.garden-climber-stem",
-      "ld-plant-s-bed-screen-n-00.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-screen-n-00.winter",
-      "ld-plant-s-bed-screen-n-01.garden-climber-stem",
-      "ld-plant-s-bed-screen-n-01.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-screen-n-01.winter",
-      "ld-plant-s-bed-screen-n-02",
-      "ld-plant-s-bed-screen-n-03",
-      "ld-plant-s-bed-screen-s-00.garden-climber-stem",
-      "ld-plant-s-bed-screen-s-00.garden-leaf-star-jasmine",
-      "ld-plant-s-bed-screen-s-01.garden-climber-stem",
-      "ld-plant-s-bed-screen-s-01.garden-leaf-star-jasmine",
-      "ld-plant-s-bed-screen-s-02",
-      "ld-plant-s-bed-screen-s-03",
-      "ld-plant-s-bed-wall-00.garden-climber-stem",
-      "ld-plant-s-bed-wall-00.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-wall-01.garden-climber-stem",
-      "ld-plant-s-bed-wall-01.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-wall-06.garden-climber-stem",
-      "ld-plant-s-bed-wall-06.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-wall-b-00",
-      "ld-plant-s-bed-wall-c-00.garden-climber-stem",
-      "ld-plant-s-bed-wall-c-00.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-wall-c-01.garden-climber-stem",
-      "ld-plant-s-bed-wall-c-01.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-wall-c-02.garden-climber-stem",
-      "ld-plant-s-bed-wall-c-02.garden-leaf-standin-1f4c1f",
-      "ld-plant-s-bed-wall-c-03.garden-climber-stem",
-      "ld-plant-s-bed-wall-c-03.garden-leaf-standin-386b29",
-      "ld-plant-s-bed-wall-c-04.garden-climber-stem",
-      "ld-plant-s-bed-wall-c-04.garden-leaf-standin-386b29",
-      "ld-plant-n-screen-00",
-      "ld-plant-n-screen-05",
-      "ld-plant-n-screen-06",
-      "ld-plant-n-screen-07.garden-climber-stem",
-      "ld-plant-n-screen-07.garden-leaf-standin-386b29",
-      "ld-plant-n-screen-08.garden-climber-stem",
-      "ld-plant-n-screen-08.garden-leaf-star-jasmine",
-      "ld-plant-n-screen-09.garden-climber-stem",
-      "ld-plant-n-screen-09.garden-leaf-star-jasmine",
-      "ld-plant-n-edge-far-00",
-      "ld-plant-n-edge-far-01",
-      "ld-plant-n-edge-far-02",
-      "ld-plant-n-edge-far-03",
-      "ld-plant-n-edge-far-04",
-      "ld-plant-n-edge-far-05",
-      "ld-plant-n-edge-back-00",
-      "ld-plant-n-edge-back-01",
-      "ld-plant-n-edge-back-02",
-      "ld-plant-n-edge-back-03",
-      "ld-plant-n-edge-back-04",
-      "ld-plant-e-divider-00",
-      "ld-plant-e-divider-02",
-      "ld-plant-e-divider-03",
-      "ld-plant-e-divider-04",
-      "ld-plant-e-divider-05.garden-climber-stem",
-      "ld-plant-e-divider-05.garden-leaf-standin-386b29",
-      "ld-plant-e-divider-06.garden-climber-stem",
-      "ld-plant-e-divider-06.garden-leaf-standin-386b29",
-      "ld-plant-e-far-00",
-      "ld-plant-e-far-02",
-      "ld-plant-e-far-03",
-      "ld-plant-e-far-04",
-      "ld-plant-e-far-05.garden-climber-stem",
-      "ld-plant-e-far-05.garden-leaf-star-jasmine",
-      "ld-plant-e-far-06.garden-climber-stem",
-      "ld-plant-e-far-06.garden-leaf-star-jasmine",
-      "ld-plant-e-edge-00",
-      "ld-plant-e-edge-01",
-      "ld-plant-e-edge-02",
-      "ld-plant-e-edge-03",
-      "ld-plant-e-edge-04",
-      "ld-plant-e-edge-05",
-      "ld-plant-e-edge-06",
-      "ld-plant-e-edge-07",
-      "ld-plant-e-edge-08",
       "ld-ctx-fence-street",
       "ld-ctx-fence-street-coping",
       "ld-ctx-fence-street-1",
@@ -1435,7 +1342,7 @@
     "ASSUMED bath-fitting bodies and fixing details follow the specified rain heads, hand shower rails, guest bathroom 70 mm flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts remain in the Revit services specification but are omitted from the visible render pending ceiling-void coordination; round ceiling valves and external grilles are shown. the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain service selections, not render claims.",
     "Construction details added for the render: 80 mm skirting, 50 mm aluminium window frames and mullions, 70 mm architraves and lever handles (not yet in the Revit model).",
     "Curtains (client 2026-09-28): sheer linen (rough_linen, transmittance 0.55) + a heavy layer on a ceiling track, every bedroom and living-space window and glazed garden door -- blackout (transmittance 0.02) in bedrooms, dim-out (0.10) in living/dining/study. Kitchens, the dirty kitchen, bathrooms/WC and the stair void have none. By day each side stacks to 0.18 x the opening's width (ASSUMED typical stacking allowance for pleated drapery, not a cited standard): as far beyond the opening as the wall pier allows, the rest overlapping the glazing edge, as a short-pier install does -- for a garden/glazed door this is capped so the two stacks still leave 0.914 m clear to walk through (F.BODY, card mitton-path-of-travel-min); a window carries no such cap. The heavy layer closes across the opening at night; the sheer layer stays open in both states (its job is daytime diffusion, and the closed heavy layer already gives the night blackout/dim-out). ASSUMED: track and stacking dimensions, not a specified product.",
-    "Garden (lane GI): the decided layout LDG-final-B built into the production scene at age 3: 101 plants, 42 drawn from graded assets, 59 labelled STAND-INS (generic masses, climbers as generic leaf cards); house, facade, neighbours and street are the production scene's own.",
+    "Garden (lane GI): the decided layout LDG-final-B built into the production scene at age 3: 101 plants, 36 drawn from graded assets, 65 GENERATED from leaf scans (lane FG: 8 species-fidelity, 57 form-class), 0 labelled STAND-INS (generic masses); house, facade, neighbours and street are the production scene's own.",
     "Photometry: iGuzzini Laser Evo D75 (DL AAK3EW, DLN AAIIA6, ADJ AAHENX; verified LDTs); wall washer positions use AAK3EW as a stated substitute; strips, pendants, sconces and markers are GENERIC (named in each caption).",
     "Selected furniture products use measured native glTF bounds and uniform scale; rejected choices remain PROCEDURAL STAND-INS with recorded reasons. Joinery and sanitaryware remain procedural. Pulls, taps, leg styles, sink and cushion forms are ASSUMED details inside each checked envelope.",
     "Finishes are ASSUMED from the taste profile (no finishes answers yet).",
@@ -2215,12 +2122,12 @@
       "objects": [
         "prop-island-bowl-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.7883990406990051,
-        0.35660088062286377,
-        0.8083378672599792,
-        0.3648933470249176
+        -0.7119967341423035,
+        0.3589261770248413,
+        -0.6444995999336243,
+        0.37647825479507446
       ]
     },
     {
@@ -2231,12 +2138,12 @@
       "objects": [
         "prop-dining-vase-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.7568807005882263,
-        0.330252081155777,
-        0.7738158702850342,
-        0.3711269795894623
+        -0.6357362866401672,
+        0.3095311224460602,
+        -0.5811684131622314,
+        0.38871467113494873
       ]
     },
     {
@@ -2247,12 +2154,12 @@
       "objects": [
         "prop-sideboard-vase-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.6290169358253479,
-        0.34402549266815186,
-        0.6373224258422852,
-        0.3793141841888428
+        -1.5447981357574463,
+        0.26313090324401855,
+        -1.468845009803772,
+        0.387193500995636
       ]
     },
     {
@@ -2282,12 +2189,12 @@
         "prop-lounge-books-018",
         "prop-lounge-books-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8439472913742065,
-        0.34001749753952026,
-        0.8521519303321838,
-        0.3537430763244629
+        -0.7414197325706482,
+        0.3288728594779968,
+        -0.7139933705329895,
+        0.3556208312511444
       ]
     },
     {
@@ -2301,12 +2208,12 @@
         "prop-lounge-plant-002",
         "prop-lounge-plant-003"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8932177424430847,
-        0.3221467137336731,
-        0.9182859659194946,
-        0.3906102180480957
+        -0.6215535402297974,
+        0.3108275532722473,
+        -0.5484567284584045,
+        0.4251844882965088
       ]
     },
     {
@@ -2320,12 +2227,12 @@
         "prop-living-plant-table-002",
         "prop-living-plant-table-003"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.6735707521438599,
-        0.252627432346344,
-        0.6958514451980591,
-        0.2946261167526245
+        -0.5404884219169617,
+        0.1582438051700592,
+        -0.4728728234767914,
+        0.24386784434318542
       ]
     },
     {
@@ -2340,10 +2247,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.8256180882453918,
-        0.09121336042881012,
-        0.9358416199684143,
-        0.2946109175682068
+        -0.06747052818536758,
+        0.1134738102555275,
+        0.08943894505500793,
+        0.3273506760597229
       ]
     },
     {
@@ -2373,12 +2280,12 @@
         "prop-library-books-0-018",
         "prop-library-books-0-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5145577788352966,
-        0.27581241726875305,
-        0.5390945672988892,
-        0.3017277121543884
+        -3.850342273712158,
+        -0.45356371998786926,
+        -3.1012682914733887,
+        -0.14022216200828552
       ]
     },
     {
@@ -2408,12 +2315,12 @@
         "prop-library-books-1-018",
         "prop-library-books-1-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.4961755573749542,
-        0.2705862522125244,
-        0.5224141478538513,
-        0.2978835701942444
+        -4.431747913360596,
+        -0.6288291811943054,
+        -3.429548740386963,
+        -0.22591248154640198
       ]
     },
     {
@@ -2443,12 +2350,12 @@
         "prop-library-books-2-018",
         "prop-library-books-2-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5066949725151062,
-        0.30695751309394836,
-        0.5319535732269287,
-        0.3318418264389038
+        -4.079661846160889,
+        -0.25213682651519775,
+        -3.233957529067993,
+        0.0358470119535923
       ]
     },
     {
@@ -2478,12 +2385,12 @@
         "prop-library-books-3-018",
         "prop-library-books-3-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5145577788352966,
-        0.34473350644111633,
-        0.5390946269035339,
-        0.36736488342285156
+        -3.8503425121307373,
+        0.07440602779388428,
+        -3.1012685298919678,
+        0.27769652009010315
       ]
     },
     {
@@ -2513,12 +2420,12 @@
         "prop-library-books-4-018",
         "prop-library-books-4-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.4961755573749542,
-        0.3426479995250702,
-        0.5224141478538513,
-        0.3663630783557892
+        -4.431748390197754,
+        0.004465720150619745,
+        -3.429548978805542,
+        0.25536462664604187
       ]
     },
     {
@@ -2548,12 +2455,12 @@
         "prop-library-books-5-018",
         "prop-library-books-5-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5066949725151062,
-        0.3807257115840912,
-        0.5319535732269287,
-        0.40261808037757874
+        -4.079662799835205,
+        0.3457764983177185,
+        -3.2339577674865723,
+        0.5232208967208862
       ]
     },
     {
@@ -2583,12 +2490,12 @@
         "prop-library-books-6-018",
         "prop-library-books-6-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5145578384399414,
-        0.4158245623111725,
-        0.5390946269035339,
-        0.4385654926300049
+        -3.8503429889678955,
+        0.5862443447113037,
+        -3.101269006729126,
+        0.7932057976722717
       ]
     },
     {
@@ -2618,12 +2525,12 @@
         "prop-library-books-7-018",
         "prop-library-books-7-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.4961755871772766,
-        0.4169211983680725,
-        0.5224141478538513,
-        0.44075578451156616
+        -4.431748867034912,
+        0.6106896996498108,
+        -3.4295496940612793,
+        0.8666595816612244
       ]
     },
     {
@@ -2653,12 +2560,12 @@
         "prop-library-books-8-018",
         "prop-library-books-8-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.38416773080825806,
-        0.23866143822669983,
-        0.4218364655971527,
-        0.2747579514980316
+        -44.8856086730957,
+        -12.823700904846191,
+        -9.234465599060059,
+        -1.741158127784729
       ]
     },
     {
@@ -2688,12 +2595,12 @@
         "prop-library-books-9-018",
         "prop-library-books-9-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3341718316078186,
-        0.22436657547950745,
-        0.37752217054367065,
-        0.2645977735519409
+        -2263.765625,
+        -726.2899169921875,
+        0.0,
+        0.0
       ]
     },
     {
@@ -2723,12 +2630,12 @@
         "prop-library-books-10-018",
         "prop-library-books-10-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3617452383041382,
-        0.27743133902549744,
-        0.40191832184791565,
-        0.31244921684265137
+        -10668.2275390625,
+        -2296.938232421875,
+        0.0,
+        0.0
       ]
     },
     {
@@ -2758,12 +2665,12 @@
         "prop-library-books-11-018",
         "prop-library-books-11-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.38416776061058044,
-        0.3299083113670349,
-        0.4218364655971527,
-        0.3603362739086151
+        -44.885677337646484,
+        -4.861949920654297,
+        -9.234469413757324,
+        -0.13952648639678955
       ]
     },
     {
@@ -2793,12 +2700,12 @@
         "prop-library-books-12-018",
         "prop-library-books-12-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.334171861410141,
-        0.3242039084434509,
-        0.37752217054367065,
-        0.35768842697143555
+        -2263.9580078125,
+        -289.59783935546875,
+        0.0,
+        0.0
       ]
     },
     {
@@ -2828,12 +2735,12 @@
         "prop-library-books-13-018",
         "prop-library-books-13-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3617452383041382,
-        0.37727123498916626,
-        0.40191832184791565,
-        0.4069010019302368
+        -10672.4443359375,
+        -268.4679870605469,
+        0.0,
+        333.8352355957031
       ]
     },
     {
@@ -2863,12 +2770,12 @@
         "prop-library-books-14-018",
         "prop-library-books-14-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.38416776061058044,
-        0.42351841926574707,
-        0.4218364655971527,
-        0.4541355073451996
+        -44.8857536315918,
+        1.0429527759552002,
+        -9.234472274780273,
+        5.977543354034424
       ]
     },
     {
@@ -2898,12 +2805,12 @@
         "prop-library-books-15-018",
         "prop-library-books-15-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.334171861410141,
-        0.42641690373420715,
-        0.37752217054367065,
-        0.46012651920318604
+        -2264.16015625,
+        0.0,
+        0.0,
+        305.0519714355469
       ]
     },
     {
@@ -2933,12 +2840,12 @@
         "prop-bedside-books-018",
         "prop-bedside-books-019"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5955439209938049,
-        0.7183170914649963,
-        0.6335567235946655,
-        0.7862517237663269
+        -0.6634009480476379,
+        1.1354938745498657,
+        -0.5653553009033203,
+        1.3221101760864258
       ]
     },
     {
@@ -2954,10 +2861,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.8819382786750793,
-        0.738089919090271,
-        0.9468604922294617,
-        0.9509705305099487
+        0.01365653332322836,
+        0.7553105354309082,
+        0.094539113342762,
+        0.9508754014968872
       ]
     },
     {
@@ -2971,12 +2878,12 @@
         "prop-study-plant-002",
         "prop-study-plant-003"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8958715200424194,
-        0.4925311505794525,
-        0.9275768399238586,
-        0.5843419432640076
+        -0.5341499447822571,
+        0.581453263759613,
+        -0.45110443234443665,
+        0.7276448607444763
       ]
     },
     {
@@ -2988,12 +2895,12 @@
         "prop-pillows-lounge-000",
         "prop-pillows-lounge-001"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.7861181497573853,
-        0.34329450130462646,
-        0.8100206851959229,
-        0.36775895953178406
+        -0.9971880912780762,
+        0.3184695243835449,
+        -0.8851043581962585,
+        0.3753547966480255
       ]
     },
     {
@@ -3005,12 +2912,12 @@
         "prop-pillows-living-000",
         "prop-pillows-living-001"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.5761195421218872,
-        0.2749771177768707,
-        0.6328045129776001,
-        0.3382776379585266
+        -1.3222017288208008,
+        0.06366152316331863,
+        -0.9344764351844788,
+        0.28266873955726624
       ]
     },
     {
@@ -3086,12 +2993,12 @@
         "prop-ld-s-bbq-080",
         "prop-ld-s-bbq-082"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.22490771114826202,
-        0.05014653876423836,
-        0.3361528515815735,
-        0.2977249324321747
+        -3.4368770122528076,
+        -2.987562656402588,
+        -1.13189697265625,
+        -0.028957877308130264
       ]
     },
     {
@@ -3112,12 +3019,12 @@
         "measured_min": [
           0.367,
           -24.6407,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           1.067,
           -24.2013,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3127,12 +3034,12 @@
       "objects": [
         "prop-ld-n-pond-koi-0-002"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8966345191001892,
-        0.2971813976764679,
-        0.9111207127571106,
-        0.313109815120697
+        -0.6576591730117798,
+        0.28485023975372314,
+        -0.6091287732124329,
+        0.31254905462265015
       ]
     },
     {
@@ -3153,12 +3060,12 @@
         "measured_min": [
           1.367,
           -24.6407,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           2.067,
           -24.2013,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3168,12 +3075,12 @@
       "objects": [
         "prop-ld-n-pond-koi-1-002"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8957099914550781,
-        0.29355791211128235,
-        0.9107262492179871,
-        0.31020674109458923
+        -0.6486482620239258,
+        0.2802332639694214,
+        -0.5986547470092773,
+        0.30900394916534424
       ]
     },
     {
@@ -3194,12 +3101,12 @@
         "measured_min": [
           16.962,
           -21.3107,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           17.662,
           -20.8713,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3209,12 +3116,12 @@
       "objects": [
         "prop-ld-e-pond-koi-0-002"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.1919552087783813,
-        0.08053800463676453,
-        1.2732133865356445,
-        0.151573047041893
+        0.01659504696726799,
+        0.22463937103748322,
+        0.07573170214891434,
+        0.2670680582523346
       ]
     },
     {
@@ -3235,12 +3142,12 @@
         "measured_min": [
           17.762,
           -21.3107,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           18.462,
           -20.8713,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3250,12 +3157,12 @@
       "objects": [
         "prop-ld-e-pond-koi-1-002"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.2184969186782837,
-        0.04635726287961006,
-        1.3120226860046387,
-        0.12814471125602722
+        0.05178283527493477,
+        0.21705444157123566,
+        0.11256001144647598,
+        0.2614520192146301
       ]
     },
     {
@@ -3276,12 +3183,12 @@
         "measured_min": [
           18.562,
           -21.3107,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           19.262,
           -20.8713,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3291,12 +3198,12 @@
       "objects": [
         "prop-ld-e-pond-koi-2-002"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.2508093118667603,
-        0.0037037136498838663,
-        1.3604519367218018,
-        0.09962236136198044
+        0.08967003226280212,
+        0.20887279510498047,
+        0.15217101573944092,
+        0.255421906709671
       ]
     },
     {
@@ -3317,12 +3224,12 @@
         "measured_min": [
           19.362,
           -21.3107,
-          -3.7606
+          -3.5006
         ],
         "measured_max": [
           20.062,
           -20.8713,
-          -3.4594
+          -3.1994
         ],
         "base_z_error_m": -0.1506,
         "height_m": 0.3011,
@@ -3332,12 +3239,12 @@
       "objects": [
         "prop-ld-e-pond-koi-3-002"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.2910047769546509,
-        -0.051018621772527695,
-        1.4225842952728271,
-        0.06414171308279037
+        0.1305801272392273,
+        0.20002083480358124,
+        0.19489271938800812,
+        0.24893005192279816
       ]
     },
     {
@@ -3375,10 +3282,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.14598000049591064,
-        -0.5082473158836365,
-        0.6869062185287476,
-        0.24093851447105408
+        -0.16611960530281067,
+        -0.5861412286758423,
+        0.5656784772872925,
+        0.23525260388851166
       ]
     },
     {
@@ -3416,10 +3323,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.6491125226020813,
-        -0.12432806193828583,
-        0.8179899454116821,
-        0.2520741820335388
+        0.11155565828084946,
+        -0.038984350860118866,
+        0.2908632755279541,
+        0.29763907194137573
       ]
     },
     {
@@ -3455,12 +3362,12 @@
       "objects": [
         "prop-ld-s-dining-table-chair-1-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3780527412891388,
-        0.00032465156982652843,
-        0.518573522567749,
-        0.27946946024894714
+        -0.4841679632663727,
+        -0.4998835623264313,
+        -0.07611878216266632,
+        0.21521203219890594
       ]
     },
     {
@@ -3498,10 +3405,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.5682303309440613,
-        -0.30324915051460266,
-        0.7887539267539978,
-        0.21764451265335083
+        0.23787347972393036,
+        -0.09974212944507599,
+        0.42279455065727234,
+        0.28484416007995605
       ]
     },
     {
@@ -3539,10 +3446,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.2600553333759308,
-        -0.09446670114994049,
-        0.43417873978614807,
-        0.2583581209182739
+        -0.3709035813808441,
+        -0.7774006128311157,
+        0.09602338075637817,
+        0.1780821979045868
       ]
     },
     {
@@ -3580,10 +3487,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.418947696685791,
-        -0.6727768778800964,
-        0.7364333271980286,
-        0.1604175865650177
+        0.3988371789455414,
+        -0.17881019413471222,
+        0.5865222811698914,
+        0.26919132471084595
       ]
     },
     {
@@ -3621,10 +3528,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.07657182216644287,
-        -0.25009685754776,
-        0.3050329089164734,
-        0.22733372449874878
+        -0.18183231353759766,
+        -1.2928532361984253,
+        0.3543534278869629,
+        0.12498316913843155
       ]
     },
     {
@@ -3662,10 +3569,10 @@
       ],
       "in_frame": true,
       "screen": [
-        -0.13087411224842072,
-        -0.9080532193183899,
-        0.2968391478061676,
-        0.1352854073047638
+        0.4802003800868988,
+        -0.6761216521263123,
+        0.7885681986808777,
+        0.18540418148040771
       ]
     },
     {
@@ -3703,10 +3610,131 @@
       ],
       "in_frame": true,
       "screen": [
-        0.5659896731376648,
-        0.02176268957555294,
-        0.6853896379470825,
-        0.28519225120544434
+        -0.18591931462287903,
+        -0.11188118159770966,
+        0.03762991726398468,
+        0.28039073944091797
+      ]
+    },
+    {
+      "id": "ld-s-tree-crape",
+      "asset": "ldb-flora-fg-lagerstroemia_indica",
+      "label": "dressing: pruned shade tree GENERATED generated form-class plant standing in for Lagerstroemia indica (leaf scan: Trachelospermum jasminoides; not the species): 2.80 m wide x 3.15 m high",
+      "material_qa": {
+        "native": [
+          2.8,
+          2.8,
+          3.15
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          24.1668,
+          -25.772,
+          -3.039
+        ],
+        "measured_max": [
+          26.9889,
+          -23.0263,
+          0.1562
+        ],
+        "base_z_error_m": -0.039,
+        "height_m": 3.1953,
+        "spread_m": 2.8221,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "lagerstroemia_indica",
+          "accepted_name": "Lagerstroemia indica",
+          "generator_version": "fg-0.1",
+          "seed": 27413,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Lagerstroemia indica (leaf scan: Trachelospermum jasminoides; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-s-tree-crape-000",
+        "prop-ld-s-tree-crape-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.12287697196006775,
+        -0.66632080078125,
+        0.7675089240074158,
+        1.9268393516540527
+      ]
+    },
+    {
+      "id": "ld-s-tree-crape.winter",
+      "asset": "ldb-flora-fg-lagerstroemia_indica",
+      "label": "dressing: pruned shade tree GENERATED generated form-class plant standing in for Lagerstroemia indica (leaf scan: Trachelospermum jasminoides; not the species): 2.80 m wide x 3.15 m high",
+      "material_qa": {
+        "native": [
+          2.8,
+          2.8,
+          3.15
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          24.1497,
+          -25.784,
+          -3.0394
+        ],
+        "measured_max": [
+          26.9524,
+          -23.0664,
+          0.1509
+        ],
+        "base_z_error_m": -0.0394,
+        "height_m": 3.1904,
+        "spread_m": 2.8027,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "lagerstroemia_indica",
+          "accepted_name": "Lagerstroemia indica",
+          "generator_version": "fg-0.1",
+          "seed": 27413,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Lagerstroemia indica (leaf scan: Trachelospermum jasminoides; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-s-tree-crape.winter-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.1295623630285263,
+        -0.7259765863418579,
+        0.759971559047699,
+        1.9168610572814941
       ]
     },
     {
@@ -3744,10 +3772,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.0,
-        -7.650552749633789,
-        10.78821086883545,
-        3.071073055267334
+        0.5944817066192627,
+        0.007599724922329187,
+        0.8851668834686279,
+        0.5641454458236694
       ]
     },
     {
@@ -3789,10 +3817,10 @@
       ],
       "in_frame": true,
       "screen": [
-        0.0,
-        -8.423542022705078,
-        10.395788192749023,
-        3.1088552474975586
+        0.4944927990436554,
+        0.14774638414382935,
+        0.7160511016845703,
+        0.5502499341964722
       ]
     },
     {
@@ -3828,12 +3856,134 @@
       "objects": [
         "prop-ld-e-tree-olive-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.2366482019424438,
-        -0.12453742325305939,
-        1.9218261241912842,
-        0.5621930956840515
+        0.16337867081165314,
+        0.21755670011043549,
+        0.3593819737434387,
+        0.49415382742881775
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-00",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-east GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          24.0129,
+          -20.9211,
+          -3.0082
+        ],
+        "measured_max": [
+          26.044,
+          -20.661,
+          -0.9265
+        ],
+        "base_z_error_m": -0.0082,
+        "height_m": 2.0818,
+        "spread_m": 2.0311,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 49332,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-00-000",
+        "prop-ld-plant-s-bed-mass-00-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.4678286910057068,
+        0.19864565134048462,
+        0.6732781529426575,
+        0.5455811023712158
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-01",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-east GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          25.262,
+          -20.9202,
+          -3.0359
+        ],
+        "measured_max": [
+          27.3245,
+          -20.661,
+          -0.9203
+        ],
+        "base_z_error_m": -0.0359,
+        "height_m": 2.1156,
+        "spread_m": 2.0624,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 47586,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-01-000",
+        "prop-ld-plant-s-bed-mass-01-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.5845142006874084,
+        0.17127561569213867,
+        0.8262714743614197,
+        0.5586000680923462
       ]
     },
     {
@@ -3878,12 +4028,73 @@
         "prop-ld-plant-s-bed-mass-02-008",
         "prop-ld-plant-s-bed-mass-02-009"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.7919303178787231,
-        -1.7569689750671387,
-        4.430859088897705,
-        0.011542564257979393
+        0.45996490120887756,
+        0.18258976936340332,
+        0.5766370892524719,
+        0.32675886154174805
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-03",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.53 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.5259,
+          0.5259,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          25.5724,
+          -22.0555,
+          -3.004
+        ],
+        "measured_max": [
+          26.1084,
+          -21.4853,
+          -2.3432
+        ],
+        "base_z_error_m": -0.004,
+        "height_m": 0.6608,
+        "spread_m": 0.5702,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 94350,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-03-000",
+        "prop-ld-plant-s-bed-mass-03-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.5781326293945312,
+        0.15116392076015472,
+        0.6626182198524475,
+        0.30312323570251465
       ]
     },
     {
@@ -3928,12 +4139,12 @@
         "prop-ld-plant-s-bed-mass-04-008",
         "prop-ld-plant-s-bed-mass-04-009"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        0.0,
-        -28.906614303588867,
-        45.744075775146484,
-        0.0
+        0.6822397708892822,
+        0.141230508685112,
+        0.8009843230247498,
+        0.31281778216362
       ]
     },
     {
@@ -3969,12 +4180,12 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-05-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.5697382688522339,
-        -0.7277986407279968,
-        2.1319668292999268,
-        -0.1016702800989151
+        0.4437728226184845,
+        0.15702928602695465,
+        0.5107247829437256,
+        0.27000147104263306
       ]
     },
     {
@@ -4010,12 +4221,12 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-06-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.6777442693710327,
-        -2.1574196815490723,
-        3.7378036975860596,
-        -0.2452499121427536
+        0.5010844469070435,
+        0.13049615919589996,
+        0.6052266955375671,
+        0.2642539441585541
       ]
     },
     {
@@ -4051,12 +4262,73 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-07-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        3.2973389625549316,
-        -34.76091766357422,
-        38.71210479736328,
-        -1.3672765493392944
+        0.6316488981246948,
+        0.12407594174146652,
+        0.6860508322715759,
+        0.25020328164100647
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-08",
+      "asset": "ldb-flora-fg-salvia_leucantha",
+      "label": "dressing: GENERATED generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species): 0.41 m wide x 0.40 m high",
+      "material_qa": {
+        "native": [
+          0.4091,
+          0.4091,
+          0.4037
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          26.7216,
+          -22.4267,
+          -3.0003
+        ],
+        "measured_max": [
+          27.1314,
+          -22.0021,
+          -2.5904
+        ],
+        "base_z_error_m": -0.0003,
+        "height_m": 0.4099,
+        "spread_m": 0.4246,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "salvia_leucantha",
+          "accepted_name": "Salvia leucantha",
+          "generator_version": "fg-0.1",
+          "seed": 77606,
+          "state": "leaf-on",
+          "atlas_used": [
+            "australian_laurel"
+          ],
+          "atlas_species": [
+            "Pittosporum undulatum"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-08-000",
+        "prop-ld-plant-s-bed-mass-08-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.7286776900291443,
+        0.1017211452126503,
+        0.7984689474105835,
+        0.22637979686260223
       ]
     },
     {
@@ -4092,12 +4364,12 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-09-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.4579663276672363,
-        -0.4890027642250061,
-        1.6775315999984741,
-        -0.21671746671199799
+        0.43519654870033264,
+        0.15054845809936523,
+        0.4731197953224182,
+        0.21198761463165283
       ]
     },
     {
@@ -4133,12 +4405,12 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-10-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.622930884361267,
-        -0.9306107759475708,
-        2.139134645462036,
-        -0.3817310631275177
+        0.4900175929069519,
+        0.13917356729507446,
+        0.5437429547309875,
+        0.20828288793563843
       ]
     },
     {
@@ -4174,12 +4446,12 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-11-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.9152017831802368,
-        -1.8625507354736328,
-        2.9982359409332275,
-        -0.7034024596214294
+        0.5547237992286682,
+        0.12583698332309723,
+        0.6088663339614868,
+        0.19899187982082367
       ]
     },
     {
@@ -4215,12 +4487,317 @@
       "objects": [
         "prop-ld-plant-s-bed-mass-12-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        2.624805450439453,
-        -7.257887840270996,
-        7.971884727478027,
-        -1.4843859672546387
+        0.625581681728363,
+        0.11119493097066879,
+        0.6799861788749695,
+        0.18886859714984894
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-13",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.29 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.2922,
+          0.2922,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          26.5363,
+          -22.7241,
+          -3.0024
+        ],
+        "measured_max": [
+          26.9085,
+          -22.3983,
+          -2.349
+        ],
+        "base_z_error_m": -0.0024,
+        "height_m": 0.6533,
+        "spread_m": 0.3722,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 23631,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-13-000",
+        "prop-ld-plant-s-bed-mass-13-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.6921976208686829,
+        0.09562085568904877,
+        0.7596616148948669,
+        0.2680332064628601
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-14",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.29 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.2922,
+          0.2922,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.0819,
+          -22.7238,
+          -3.0001
+        ],
+        "measured_max": [
+          27.4061,
+          -22.3996,
+          -2.3509
+        ],
+        "base_z_error_m": -0.0001,
+        "height_m": 0.6492,
+        "spread_m": 0.3242,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 49612,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-14-000",
+        "prop-ld-plant-s-bed-mass-14-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.7874253392219543,
+        0.06893574446439743,
+        0.8494760394096375,
+        0.25901004672050476
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-corner-00",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-east GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          24.4752,
+          -20.9172,
+          -3.0074
+        ],
+        "measured_max": [
+          26.5211,
+          -20.661,
+          -0.934
+        ],
+        "base_z_error_m": -0.0074,
+        "height_m": 2.0734,
+        "spread_m": 2.0458,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 99445,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-corner-00-000",
+        "prop-ld-plant-s-bed-mass-corner-00-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.5090177059173584,
+        0.19108428061008453,
+        0.7268410921096802,
+        0.5483849048614502
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-corner-01",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-east GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          25.2927,
+          -20.9321,
+          -3.004
+        ],
+        "measured_max": [
+          27.3312,
+          -20.661,
+          -0.9264
+        ],
+        "base_z_error_m": -0.004,
+        "height_m": 2.0776,
+        "spread_m": 2.0385,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 10467,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-corner-01-000",
+        "prop-ld-plant-s-bed-mass-corner-01-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.5872427225112915,
+        0.1764822006225586,
+        0.8272221088409424,
+        0.5578107237815857
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-mass-corner-02",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-east GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          25.7228,
+          -21.0656,
+          -3.0139
+        ],
+        "measured_max": [
+          28.3981,
+          -20.661,
+          -0.4008
+        ],
+        "base_z_error_m": -0.0139,
+        "height_m": 2.6132,
+        "spread_m": 2.6753,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 12505,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-mass-corner-02-000",
+        "prop-ld-plant-s-bed-mass-corner-02-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.6287015080451965,
+        0.1453983336687088,
+        0.9900502562522888,
+        0.6723558306694031
       ]
     },
     {
@@ -4256,12 +4833,12 @@
       "objects": [
         "prop-ld-plant-s-bed-herb-00-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        2.098764419555664,
-        -1.3523426055908203,
-        4.4474778175354,
-        -0.03318241238594055
+        0.4358062446117401,
+        0.21203400194644928,
+        0.5288331508636475,
+        0.32310909032821655
       ]
     },
     {
@@ -4297,12 +4874,376 @@
       "objects": [
         "prop-ld-plant-s-bed-herb-01-000"
       ],
+      "in_frame": true,
+      "screen": [
+        0.47713539004325867,
+        0.19600310921669006,
+        0.5982639789581299,
+        0.31958961486816406
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-00",
+      "asset": "ldb-flora-fg-vitis_vinifera",
+      "label": "dressing: climber on sister-screen-n GENERATED generated Vitis vinifera (leaf scan: Vitis vinifera): 0.89 m wide x 0.89 m high",
+      "material_qa": {
+        "native": [
+          0.8925,
+          0.8925,
+          0.8925
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          22.6331,
+          -29.706,
+          -3.0123
+        ],
+        "measured_max": [
+          23.6071,
+          -29.3155,
+          -2.1035
+        ],
+        "base_z_error_m": -0.0123,
+        "height_m": 0.9088,
+        "spread_m": 0.974,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "vitis_vinifera",
+          "accepted_name": "Vitis vinifera",
+          "generator_version": "fg-0.1",
+          "seed": 74357,
+          "state": "leaf-on",
+          "atlas_used": [
+            "grape_vine"
+          ],
+          "atlas_species": [
+            "Vitis vinifera"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-00-000",
+        "prop-ld-plant-s-bed-screen-n-00-001"
+      ],
       "in_frame": false,
       "screen": [
-        2.3400204181671143,
-        -9.349817276000977,
-        20.477697372436523,
-        -0.14686588943004608
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-00.winter",
+      "asset": "ldb-flora-fg-vitis_vinifera",
+      "label": "dressing: climber on sister-screen-n GENERATED generated Vitis vinifera (leaf scan: Vitis vinifera): 0.89 m wide x 0.89 m high",
+      "material_qa": {
+        "native": [
+          0.8925,
+          0.8925,
+          0.8925
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          22.61,
+          -29.706,
+          -3.0007
+        ],
+        "measured_max": [
+          23.5055,
+          -29.5263,
+          -2.1066
+        ],
+        "base_z_error_m": -0.0007,
+        "height_m": 0.8941,
+        "spread_m": 0.8954,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "vitis_vinifera",
+          "accepted_name": "Vitis vinifera",
+          "generator_version": "fg-0.1",
+          "seed": 74357,
+          "state": "leaf-on",
+          "atlas_used": [
+            "grape_vine"
+          ],
+          "atlas_species": [
+            "Vitis vinifera"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-00.winter-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-01",
+      "asset": "ldb-flora-fg-vitis_vinifera",
+      "label": "dressing: climber on sister-screen-n GENERATED generated Vitis vinifera (leaf scan: Vitis vinifera): 0.89 m wide x 0.89 m high",
+      "material_qa": {
+        "native": [
+          0.8925,
+          0.8925,
+          0.8925
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          22.7405,
+          -29.706,
+          -3.0157
+        ],
+        "measured_max": [
+          23.8734,
+          -29.3485,
+          -2.1061
+        ],
+        "base_z_error_m": -0.0157,
+        "height_m": 0.9096,
+        "spread_m": 1.1328,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "vitis_vinifera",
+          "accepted_name": "Vitis vinifera",
+          "generator_version": "fg-0.1",
+          "seed": 11331,
+          "state": "leaf-on",
+          "atlas_used": [
+            "grape_vine"
+          ],
+          "atlas_species": [
+            "Vitis vinifera"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-01-000",
+        "prop-ld-plant-s-bed-screen-n-01-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-01.winter",
+      "asset": "ldb-flora-fg-vitis_vinifera",
+      "label": "dressing: climber on sister-screen-n GENERATED generated Vitis vinifera (leaf scan: Vitis vinifera): 0.89 m wide x 0.89 m high",
+      "material_qa": {
+        "native": [
+          0.8925,
+          0.8925,
+          0.8925
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          22.8063,
+          -29.706,
+          -3.0008
+        ],
+        "measured_max": [
+          23.6998,
+          -29.5396,
+          -2.1061
+        ],
+        "base_z_error_m": -0.0008,
+        "height_m": 0.8946,
+        "spread_m": 0.8935,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "vitis_vinifera",
+          "accepted_name": "Vitis vinifera",
+          "generator_version": "fg-0.1",
+          "seed": 11331,
+          "state": "leaf-on",
+          "atlas_used": [
+            "grape_vine"
+          ],
+          "atlas_species": [
+            "Vitis vinifera"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Vitis vinifera (leaf scan: Vitis vinifera)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-01.winter-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-02",
+      "asset": "ldb-flora-fg-salvia_leucantha",
+      "label": "dressing: GENERATED generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species): 0.35 m wide x 0.40 m high",
+      "material_qa": {
+        "native": [
+          0.3506,
+          0.3506,
+          0.4037
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          22.7259,
+          -29.2065,
+          -3.0002
+        ],
+        "measured_max": [
+          23.0779,
+          -28.827,
+          -2.5936
+        ],
+        "base_z_error_m": -0.0002,
+        "height_m": 0.4065,
+        "spread_m": 0.3795,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "salvia_leucantha",
+          "accepted_name": "Salvia leucantha",
+          "generator_version": "fg-0.1",
+          "seed": 56889,
+          "state": "leaf-on",
+          "atlas_used": [
+            "australian_laurel"
+          ],
+          "atlas_species": [
+            "Pittosporum undulatum"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-02-000",
+        "prop-ld-plant-s-bed-screen-n-02-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -444.4227600097656,
+        -191.419677734375,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-n-03",
+      "asset": "ldb-flora-fg-salvia_leucantha",
+      "label": "dressing: GENERATED generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species): 0.35 m wide x 0.40 m high",
+      "material_qa": {
+        "native": [
+          0.3506,
+          0.3506,
+          0.4037
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          23.3027,
+          -29.2003,
+          -3.0
+        ],
+        "measured_max": [
+          23.6662,
+          -28.8303,
+          -2.5906
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.4094,
+        "spread_m": 0.3699,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "salvia_leucantha",
+          "accepted_name": "Salvia leucantha",
+          "generator_version": "fg-0.1",
+          "seed": 13231,
+          "state": "leaf-on",
+          "atlas_used": [
+            "australian_laurel"
+          ],
+          "atlas_species": [
+            "Pittosporum undulatum"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Salvia leucantha (leaf scan: Pittosporum undulatum; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-n-03-000",
+        "prop-ld-plant-s-bed-screen-n-03-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4338,12 +5279,12 @@
       "objects": [
         "prop-ld-plant-s-bed-screen-n-04-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3388914167881012,
-        0.17872098088264465,
-        0.3717195391654968,
-        0.22447770833969116
+        -11.858898162841797,
+        -5.055837631225586,
+        -5.354615211486816,
+        -1.6518046855926514
       ]
     },
     {
@@ -4379,12 +5320,256 @@
       "objects": [
         "prop-ld-plant-s-bed-screen-n-05-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.3048165738582611,
-        0.16682647168636322,
-        0.33690008521080017,
-        0.2148149162530899
+        -44.12281799316406,
+        -21.12449073791504,
+        -8.255669593811035,
+        -2.962498664855957
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-s-00",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on sister-screen-s GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 1.21 m wide x 1.36 m high",
+      "material_qa": {
+        "native": [
+          1.21,
+          1.21,
+          1.365
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.0795,
+          -29.706,
+          -3.002
+        ],
+        "measured_max": [
+          28.3343,
+          -29.4643,
+          -1.6254
+        ],
+        "base_z_error_m": -0.002,
+        "height_m": 1.3766,
+        "spread_m": 1.2548,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 97015,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-s-00-000",
+        "prop-ld-plant-s-bed-screen-s-00-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-s-01",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on sister-screen-s GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 1.21 m wide x 1.36 m high",
+      "material_qa": {
+        "native": [
+          1.21,
+          1.21,
+          1.365
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.063,
+          -29.706,
+          -3.0102
+        ],
+        "measured_max": [
+          28.3141,
+          -29.436,
+          -1.6093
+        ],
+        "base_z_error_m": -0.0102,
+        "height_m": 1.4008,
+        "spread_m": 1.2511,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 77889,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-s-01-000",
+        "prop-ld-plant-s-bed-screen-s-01-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-s-02",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.35 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.3506,
+          0.3506,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.2189,
+          -29.1911,
+          -3.0032
+        ],
+        "measured_max": [
+          27.6034,
+          -28.8173,
+          -2.3439
+        ],
+        "base_z_error_m": -0.0032,
+        "height_m": 0.6593,
+        "spread_m": 0.3845,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 59163,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-s-02-000",
+        "prop-ld-plant-s-bed-screen-s-02-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-screen-s-03",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.35 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.3506,
+          0.3506,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.7951,
+          -29.2035,
+          -3.0026
+        ],
+        "measured_max": [
+          28.1786,
+          -28.8108,
+          -2.3461
+        ],
+        "base_z_error_m": -0.0026,
+        "height_m": 0.6565,
+        "spread_m": 0.3927,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 33741,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-screen-s-03-000",
+        "prop-ld-plant-s-bed-screen-s-03-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4422,10 +5607,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.47633612155914307,
-        -0.13072314858436584,
-        -0.38616979122161865,
-        0.005499835126101971
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4463,10 +5648,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.7126157283782959,
-        -0.22045694291591644,
-        -0.5931164026260376,
-        -0.05302054062485695
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4504,10 +5689,132 @@
       ],
       "in_frame": false,
       "screen": [
-        -1.0754284858703613,
-        -0.3555082678794861,
-        -0.8596012592315674,
-        -0.1328604519367218
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-00",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.8093,
+          -29.3734,
+          -3.0121
+        ],
+        "measured_max": [
+          28.247,
+          -26.7024,
+          -0.3879
+        ],
+        "base_z_error_m": -0.0121,
+        "height_m": 2.6242,
+        "spread_m": 2.671,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 74574,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-00-000",
+        "prop-ld-plant-s-bed-wall-00-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -101.28177642822266,
+        34.24956130981445,
+        94.67091369628906
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-01",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.7498,
+          -28.4623,
+          -3.0055
+        ],
+        "measured_max": [
+          28.247,
+          -25.8055,
+          -0.3925
+        ],
+        "base_z_error_m": -0.0055,
+        "height_m": 2.613,
+        "spread_m": 2.6568,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 84536,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-01-000",
+        "prop-ld-plant-s-bed-wall-01-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -1.938464879989624,
+        2.230142831802368,
+        2.7463443279266357
       ]
     },
     {
@@ -4545,10 +5852,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.7740209102630615,
-        -0.2955661714076996,
-        -0.6291232109069824,
-        -0.10277173668146133
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4586,10 +5893,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.8140860795974731,
-        -0.4010418951511383,
-        -0.6495659351348877,
-        -0.16489265859127045
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4627,10 +5934,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.9126588702201843,
-        -0.5915098786354065,
-        -0.6187835931777954,
-        -0.22952191531658173
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4668,10 +5975,132 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.9214487075805664,
-        -0.708131730556488,
-        -0.6667390465736389,
-        -0.33039718866348267
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-06",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          28.0108,
+          -28.629,
+          -3.0098
+        ],
+        "measured_max": [
+          28.247,
+          -26.5524,
+          -0.914
+        ],
+        "base_z_error_m": -0.0098,
+        "height_m": 2.0958,
+        "spread_m": 2.0766,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 33499,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-06-000",
+        "prop-ld-plant-s-bed-wall-06-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -20.63948631286621,
+        10.041691780090332,
+        11.826236724853516
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-b-00",
+      "asset": "ldb-flora-fg-justicia_brandegeeana",
+      "label": "dressing: GENERATED generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species): 0.41 m wide x 0.65 m high",
+      "material_qa": {
+        "native": [
+          0.4091,
+          0.4091,
+          0.6481
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.0363,
+          -27.6817,
+          -3.0034
+        ],
+        "measured_max": [
+          27.524,
+          -27.2225,
+          -2.3463
+        ],
+        "base_z_error_m": -0.0034,
+        "height_m": 0.6571,
+        "spread_m": 0.4876,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "justicia_brandegeeana",
+          "accepted_name": "Justicia brandegeeana",
+          "generator_version": "fg-0.1",
+          "seed": 27833,
+          "state": "leaf-on",
+          "atlas_used": [
+            "weeping_fig"
+          ],
+          "atlas_species": [
+            "Ficus benjamina"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Justicia brandegeeana (leaf scan: Ficus benjamina; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-b-00-000",
+        "prop-ld-plant-s-bed-wall-b-00-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4748,10 +6177,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.7478252649307251,
-        -0.3180887997150421,
-        -0.2736648917198181,
-        0.23625227808952332
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4789,10 +6218,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.3755377531051636,
-        -0.13194796442985535,
-        -0.27945178747177124,
-        0.0070718941278755665
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4830,10 +6259,10 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.3640880882740021,
-        -0.1974194198846817,
-        -0.23255927860736847,
-        -0.024257849901914597
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ]
     },
     {
@@ -4871,10 +6300,315 @@
       ],
       "in_frame": false,
       "screen": [
-        -0.34400004148483276,
-        -0.2586766481399536,
-        -0.22255294024944305,
-        -0.07377293705940247
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-c-00",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.8623,
+          -27.627,
+          -3.0176
+        ],
+        "measured_max": [
+          28.247,
+          -24.9849,
+          -0.4031
+        ],
+        "base_z_error_m": -0.0176,
+        "height_m": 2.6145,
+        "spread_m": 2.6421,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 82780,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-c-00-000",
+        "prop-ld-plant-s-bed-wall-c-00-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -0.5786086916923523,
+        1.4031329154968262,
+        1.3911399841308594
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-c-01",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.7929,
+          -26.9165,
+          -3.0222
+        ],
+        "measured_max": [
+          28.247,
+          -24.2548,
+          -0.3924
+        ],
+        "base_z_error_m": -0.0222,
+        "height_m": 2.6299,
+        "spread_m": 2.6617,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 13642,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-c-01-000",
+        "prop-ld-plant-s-bed-wall-c-01-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -0.24441656470298767,
+        1.2061676979064941,
+        1.0731961727142334
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-c-02",
+      "asset": "ldb-flora-fg-petrea_volubilis",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species): 2.59 m wide x 2.59 m high",
+      "material_qa": {
+        "native": [
+          2.59,
+          2.59,
+          2.59
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.8579,
+          -26.8871,
+          -3.0166
+        ],
+        "measured_max": [
+          28.247,
+          -24.2331,
+          -0.4001
+        ],
+        "base_z_error_m": -0.0166,
+        "height_m": 2.6165,
+        "spread_m": 2.6541,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "petrea_volubilis",
+          "accepted_name": "Petrea volubilis",
+          "generator_version": "fg-0.1",
+          "seed": 85104,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+          "caption": "generated form-class plant standing in for Petrea volubilis (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 1
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-c-02-000",
+        "prop-ld-plant-s-bed-wall-c-02-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -0.23557065427303314,
+        1.195824384689331,
+        1.0562528371810913
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-c-03",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.9598,
+          -27.0006,
+          -3.0069
+        ],
+        "measured_max": [
+          28.247,
+          -24.9717,
+          -0.9257
+        ],
+        "base_z_error_m": -0.0069,
+        "height_m": 2.0812,
+        "spread_m": 2.0289,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 93318,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-c-03-000",
+        "prop-ld-plant-s-bed-wall-c-03-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.0,
+        -0.5450623035430908,
+        1.3596707582473755,
+        0.9427919983863831
+      ]
+    },
+    {
+      "id": "ld-plant-s-bed-wall-c-04",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-fence-rear GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          27.8642,
+          -26.3159,
+          -3.0031
+        ],
+        "measured_max": [
+          28.247,
+          -24.3038,
+          -0.9206
+        ],
+        "base_z_error_m": -0.0031,
+        "height_m": 2.0825,
+        "spread_m": 2.0121,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 6661,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 8
+      },
+      "objects": [
+        "prop-ld-plant-s-bed-wall-c-04-000",
+        "prop-ld-plant-s-bed-wall-c-04-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        1.0349191427230835,
+        -7.108065128326416,
+        5.0938849449157715,
+        4.4857258796691895
       ]
     },
     {
@@ -4910,12 +6644,12 @@
       "objects": [
         "prop-ld-plant-s-bed-pocket-00-000"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.3323315382003784,
-        -1.2040719985961914,
-        1.686926007270813,
-        -0.5834612250328064
+        0.5600057244300842,
+        0.07099290937185287,
+        0.604587733745575,
+        0.15463396906852722
       ]
     },
     {
@@ -4951,12 +6685,74 @@
       "objects": [
         "prop-ld-plant-s-bed-pocket-01-000"
       ],
+      "in_frame": true,
+      "screen": [
+        0.6364278197288513,
+        0.05248166620731354,
+        0.680793285369873,
+        0.14155085384845734
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-00",
+      "asset": "ldb-flora-fg-fatsia_japonica",
+      "label": "dressing: GENERATED generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species): 0.64 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          0.6375,
+          0.6375,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.1756,
+          -26.9468,
+          -3.0005
+        ],
+        "measured_max": [
+          0.7147,
+          -25.9485,
+          -0.929
+        ],
+        "base_z_error_m": -0.0005,
+        "height_m": 2.0715,
+        "spread_m": 0.9983,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "fatsia_japonica",
+          "accepted_name": "Fatsia japonica",
+          "generator_version": "fg-0.1",
+          "seed": 92280,
+          "state": "leaf-on",
+          "atlas_used": [
+            "palmate_fatsia"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-00-000",
+        "prop-ld-plant-n-screen-00-001",
+        "prop-ld-plant-n-screen-00-002"
+      ],
       "in_frame": false,
       "screen": [
-        1.538279414176941,
-        -2.505183696746826,
-        2.311666965484619,
-        -1.0714406967163086
+        -0.9286170601844788,
+        0.3098442256450653,
+        -0.7983971834182739,
+        0.4893653690814972
       ]
     },
     {
@@ -5031,12 +6827,12 @@
         "prop-ld-plant-n-screen-01-080",
         "prop-ld-plant-n-screen-01-082"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8245906829833984,
-        0.33287012577056885,
-        0.8529602885246277,
-        0.3750309646129608
+        -0.9085102677345276,
+        0.3023725748062134,
+        -0.7943952679634094,
+        0.39382174611091614
       ]
     },
     {
@@ -5072,12 +6868,12 @@
       "objects": [
         "prop-ld-plant-n-screen-02-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8542727828025818,
-        0.3345630466938019,
-        0.8618046045303345,
-        0.3450591266155243
+        -0.8043591976165771,
+        0.315239816904068,
+        -0.7767837047576904,
+        0.3368460536003113
       ]
     },
     {
@@ -5113,12 +6909,12 @@
       "objects": [
         "prop-ld-plant-n-screen-03-000"
       ],
-      "in_frame": true,
+      "in_frame": false,
       "screen": [
-        0.8534461855888367,
-        0.3337193727493286,
-        0.8600437641143799,
-        0.3443619906902313
+        -0.8015609383583069,
+        0.3136143386363983,
+        -0.7775411009788513,
+        0.3353760838508606
       ]
     },
     {
@@ -5154,12 +6950,1039 @@
       "objects": [
         "prop-ld-plant-n-screen-04-000"
       ],
+      "in_frame": false,
+      "screen": [
+        -0.7995816469192505,
+        0.311721533536911,
+        -0.766404390335083,
+        0.33458611369132996
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-05",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          1.2262,
+          -26.1014,
+          -3.0
+        ],
+        "measured_max": [
+          1.7151,
+          -25.6454,
+          -2.6618
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3383,
+        "spread_m": 0.4889,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 43991,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-05-000",
+        "prop-ld-plant-n-screen-05-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.8148601651191711,
+        0.31118953227996826,
+        -0.7565964460372925,
+        0.34184104204177856
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-06",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          1.6948,
+          -26.1055,
+          -3.0
+        ],
+        "measured_max": [
+          2.1163,
+          -25.6631,
+          -2.6685
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3315,
+        "spread_m": 0.4424,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 97965,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-06-000",
+        "prop-ld-plant-n-screen-06-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.8133163452148438,
+        0.30934497714042664,
+        -0.7561634182929993,
+        0.3397909700870514
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-07",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-street-fence GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.063,
+          -27.5849,
+          -3.0177
+        ],
+        "measured_max": [
+          0.195,
+          -25.5067,
+          -0.9237
+        ],
+        "base_z_error_m": -0.0177,
+        "height_m": 2.094,
+        "spread_m": 2.0783,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 16027,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-07-000",
+        "prop-ld-plant-n-screen-07-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -1.0213123559951782,
+        0.2988492250442505,
+        -0.750135064125061,
+        0.4919901192188263
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-08",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on wall-street-fence GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 2.40 m wide x 2.69 m high",
+      "material_qa": {
+        "native": [
+          2.4,
+          2.4,
+          2.695
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.063,
+          -27.3319,
+          -3.0018
+        ],
+        "measured_max": [
+          0.2139,
+          -24.868,
+          -0.2898
+        ],
+        "base_z_error_m": -0.0018,
+        "height_m": 2.7121,
+        "spread_m": 2.464,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 70666,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-08-000",
+        "prop-ld-plant-n-screen-08-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.9833964109420776,
+        0.3041001558303833,
+        -0.6820800304412842,
+        0.5479525327682495
+      ]
+    },
+    {
+      "id": "ld-plant-n-screen-09",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on wall-street-fence GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 2.40 m wide x 2.69 m high",
+      "material_qa": {
+        "native": [
+          2.4,
+          2.4,
+          2.695
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.063,
+          -26.9133,
+          -3.0218
+        ],
+        "measured_max": [
+          0.1777,
+          -24.4713,
+          -0.2764
+        ],
+        "base_z_error_m": -0.0218,
+        "height_m": 2.7455,
+        "spread_m": 2.442,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 59740,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-screen-09-000",
+        "prop-ld-plant-n-screen-09-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.9240248203277588,
+        0.30527234077453613,
+        -0.643116295337677,
+        0.5448835492134094
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-00",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          0.3048,
+          -24.1051,
+          -3.0
+        ],
+        "measured_max": [
+          0.4797,
+          -23.9003,
+          -2.8409
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1591,
+        "spread_m": 0.2049,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 79510,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-00-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.6074088215827942,
+        0.3277231752872467,
+        -0.586967945098877,
+        0.34076017141342163
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-01",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          0.6393,
+          -24.1114,
+          -3.0
+        ],
+        "measured_max": [
+          0.8305,
+          -23.9079,
+          -2.8408
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1592,
+        "spread_m": 0.2036,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 23136,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-01-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.6046439409255981,
+        0.32663556933403015,
+        -0.5839556455612183,
+        0.33988311886787415
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-02",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          1.0002,
+          -24.0987,
+          -3.0
+        ],
+        "measured_max": [
+          1.2109,
+          -23.9078,
+          -2.8395
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1605,
+        "spread_m": 0.2106,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 4154,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-02-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.5997626781463623,
+        0.3255588412284851,
+        -0.5798511505126953,
+        0.3390420377254486
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-03",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          1.3435,
+          -24.108,
+          -3.0
+        ],
+        "measured_max": [
+          1.5465,
+          -23.9012,
+          -2.838
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.162,
+        "spread_m": 0.2068,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 12012,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-03-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.5970457792282104,
+        0.32444971799850464,
+        -0.5755386352539062,
+        0.3382807672023773
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-04",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          1.7051,
+          -24.1081,
+          -3.0
+        ],
+        "measured_max": [
+          1.8768,
+          -23.9042,
+          -2.841
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.159,
+        "spread_m": 0.2039,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 75567,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-04-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.5931956768035889,
+        0.3233962655067444,
+        -0.5721039175987244,
+        0.3370654881000519
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-far-05",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          2.0578,
+          -24.1013,
+          -3.0
+        ],
+        "measured_max": [
+          2.2428,
+          -23.8974,
+          -2.8405
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1595,
+        "spread_m": 0.2039,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 89305,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-far-05-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.5886896848678589,
+        0.3222520053386688,
+        -0.5672528147697449,
+        0.3361668288707733
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-back-00",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.0271,
+          -25.4945,
+          -3.0
+        ],
+        "measured_max": [
+          0.1265,
+          -25.29,
+          -2.841
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.159,
+        "spread_m": 0.2046,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 25429,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-back-00-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.7501512169837952,
+        0.31925418972969055,
+        -0.7268822193145752,
+        0.3334999978542328
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-back-01",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.0662,
+          -25.153,
+          -3.0
+        ],
+        "measured_max": [
+          0.139,
+          -24.9728,
+          -2.8409
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1591,
+        "spread_m": 0.2052,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 80035,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-back-01-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.7136642336845398,
+        0.32171741127967834,
+        -0.6933963298797607,
+        0.3356008529663086
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-back-02",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.0413,
+          -24.7811,
+          -3.0
+        ],
+        "measured_max": [
+          0.1695,
+          -24.6062,
+          -2.8401
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1599,
+        "spread_m": 0.2108,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 16089,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-back-02-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.6753835082054138,
+        0.32421958446502686,
+        -0.6562979221343994,
+        0.3377654552459717
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-back-03",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.0551,
+          -24.448,
+          -3.0
+        ],
+        "measured_max": [
+          0.1501,
+          -24.257,
+          -2.84
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.16,
+        "spread_m": 0.2052,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 75631,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-back-03-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.642967164516449,
+        0.3265012800693512,
+        -0.6230117082595825,
+        0.33978745341300964
+      ]
+    },
+    {
+      "id": "ld-plant-n-edge-back-04",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.21 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.2072,
+          0.2072,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          -0.0498,
+          -24.0712,
+          -3.0
+        ],
+        "measured_max": [
+          0.1537,
+          -23.8929,
+          -2.8406
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1594,
+        "spread_m": 0.2035,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 9676,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-n-edge-back-04-000"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.6077911853790283,
+        0.32888737320899963,
+        -0.5896820425987244,
+        0.34170064330101013
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-00",
+      "asset": "ldb-flora-fg-fatsia_japonica",
+      "label": "dressing: GENERATED generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species): 0.64 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          0.6375,
+          0.6375,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          21.8461,
+          -22.0909,
+          -3.0005
+        ],
+        "measured_max": [
+          22.6612,
+          -21.2263,
+          -0.9189
+        ],
+        "base_z_error_m": -0.0005,
+        "height_m": 2.0816,
+        "spread_m": 0.8646,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "fatsia_japonica",
+          "accepted_name": "Fatsia japonica",
+          "generator_version": "fg-0.1",
+          "seed": 15444,
+          "state": "leaf-on",
+          "atlas_used": [
+            "palmate_fatsia"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-00-000",
+        "prop-ld-plant-e-divider-00-001",
+        "prop-ld-plant-e-divider-00-002"
+      ],
       "in_frame": true,
       "screen": [
-        0.8522813320159912,
-        0.3326350152492523,
-        0.8614410161972046,
-        0.34368467330932617
+        0.22280281782150269,
+        0.22791524231433868,
+        0.3428148031234741,
+        0.5398850440979004
       ]
     },
     {
@@ -5204,12 +8027,379 @@
         "prop-ld-plant-e-divider-01-008",
         "prop-ld-plant-e-divider-01-009"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.4664195775985718,
-        -0.11628638207912445,
-        1.9339550733566284,
-        0.21681103110313416
+        0.2722206115722656,
+        0.2414962351322174,
+        0.37125247716903687,
+        0.34852489829063416
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-02",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          21.4522,
+          -22.082,
+          -3.0
+        ],
+        "measured_max": [
+          21.9184,
+          -21.6166,
+          -2.6797
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3203,
+        "spread_m": 0.4662,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 88504,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-02-000",
+        "prop-ld-plant-e-divider-02-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.19556193053722382,
+        0.2315581887960434,
+        0.2632814049720764,
+        0.28400158882141113
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-03",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          21.4191,
+          -21.6792,
+          -3.0
+        ],
+        "measured_max": [
+          21.8426,
+          -21.2086,
+          -2.6665
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3335,
+        "spread_m": 0.4706,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 12462,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-03-000",
+        "prop-ld-plant-e-divider-03-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.2242872565984726,
+        0.24229860305786133,
+        0.2851100265979767,
+        0.2927725911140442
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-04",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          21.4914,
+          -21.2055,
+          -3.0
+        ],
+        "measured_max": [
+          21.8263,
+          -20.7518,
+          -2.6624
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3376,
+        "spread_m": 0.4537,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 89901,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-04-000",
+        "prop-ld-plant-e-divider-04-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.2617293894290924,
+        0.25185906887054443,
+        0.31145498156547546,
+        0.2995625436306
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-05",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-yard-south GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          20.5466,
+          -20.8871,
+          -3.0061
+        ],
+        "measured_max": [
+          22.6013,
+          -20.661,
+          -0.9183
+        ],
+        "base_z_error_m": -0.0061,
+        "height_m": 2.0877,
+        "spread_m": 2.0547,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 37467,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-05-000",
+        "prop-ld-plant-e-divider-05-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.2235890030860901,
+        0.2437318116426468,
+        0.3697505295276642,
+        0.5228037238121033
+      ]
+    },
+    {
+      "id": "ld-plant-e-divider-06",
+      "asset": "ldb-flora-fg-jasminum_sambac",
+      "label": "dressing: climber on wall-yard-south GENERATED generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species): 2.00 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          2.0,
+          2.0,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          20.5369,
+          -20.9551,
+          -3.0002
+        ],
+        "measured_max": [
+          22.6168,
+          -20.661,
+          -0.9397
+        ],
+        "base_z_error_m": -0.0002,
+        "height_m": 2.0605,
+        "spread_m": 2.0798,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "jasminum_sambac",
+          "accepted_name": "Jasminum sambac",
+          "generator_version": "fg-0.1",
+          "seed": 95169,
+          "state": "leaf-on",
+          "atlas_used": [
+            "chinese_wisteria"
+          ],
+          "atlas_species": [
+            "Wisteria sinensis"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Jasminum sambac (leaf scan: Wisteria sinensis; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-divider-06-000",
+        "prop-ld-plant-e-divider-06-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.21866072714328766,
+        0.24286216497421265,
+        0.37085968255996704,
+        0.5208225846290588
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-00",
+      "asset": "ldb-flora-fg-fatsia_japonica",
+      "label": "dressing: GENERATED generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species): 0.64 m wide x 2.05 m high",
+      "material_qa": {
+        "native": [
+          0.6375,
+          0.6375,
+          2.0453
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.8154,
+          -22.0439,
+          -3.0004
+        ],
+        "measured_max": [
+          16.737,
+          -21.1851,
+          -0.9248
+        ],
+        "base_z_error_m": -0.0004,
+        "height_m": 2.0757,
+        "spread_m": 0.9216,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "fatsia_japonica",
+          "accepted_name": "Fatsia japonica",
+          "generator_version": "fg-0.1",
+          "seed": 66173,
+          "state": "leaf-on",
+          "atlas_used": [
+            "palmate_fatsia"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Fatsia japonica (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-00-000",
+        "prop-ld-plant-e-far-00-001",
+        "prop-ld-plant-e-far-00-002"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.09127512574195862,
+        0.28084781765937805,
+        0.015076066367328167,
+        0.5064754486083984
       ]
     },
     {
@@ -5254,12 +8444,857 @@
         "prop-ld-plant-e-far-01-008",
         "prop-ld-plant-e-far-01-009"
       ],
+      "in_frame": true,
+      "screen": [
+        -0.0397970974445343,
+        0.28826847672462463,
+        0.0453713983297348,
+        0.3673349618911743
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-02",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.4134,
+          -22.036,
+          -3.0
+        ],
+        "measured_max": [
+          15.9169,
+          -21.552,
+          -2.6665
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3335,
+        "spread_m": 0.5035,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 35633,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-02-000",
+        "prop-ld-plant-e-far-02-001"
+      ],
       "in_frame": false,
       "screen": [
-        1.1447172164916992,
-        0.22174179553985596,
-        1.2534658908843994,
-        0.3198733627796173
+        -0.10569246858358383,
+        0.2827536165714264,
+        -0.046085961163043976,
+        0.322369784116745
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-03",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.5436,
+          -21.8069,
+          -3.0
+        ],
+        "measured_max": [
+          16.1238,
+          -21.1067,
+          -2.6677
+        ],
+        "base_z_error_m": -0.0,
+        "height_m": 0.3323,
+        "spread_m": 0.7002,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 89575,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-03-000",
+        "prop-ld-plant-e-far-03-001"
+      ],
+      "in_frame": false,
+      "screen": [
+        -0.08119279891252518,
+        0.2873641550540924,
+        -0.003818884724751115,
+        0.3257509171962738
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-04",
+      "asset": "ldb-flora-fg-farfugium_japonicum",
+      "label": "dressing: GENERATED generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species): 0.27 m wide x 0.32 m high",
+      "material_qa": {
+        "native": [
+          0.2656,
+          0.2656,
+          0.3187
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.5301,
+          -21.1547,
+          -3.0001
+        ],
+        "measured_max": [
+          15.8838,
+          -20.7409,
+          -2.6622
+        ],
+        "base_z_error_m": -0.0001,
+        "height_m": 0.3378,
+        "spread_m": 0.4138,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "farfugium_japonicum",
+          "accepted_name": "Farfugium japonicum",
+          "generator_version": "fg-0.1",
+          "seed": 73092,
+          "state": "leaf-on",
+          "atlas_used": [
+            "taro"
+          ],
+          "atlas_species": [
+            "Colocasia esculenta"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Farfugium japonicum (leaf scan: Colocasia esculenta; not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-04-000",
+        "prop-ld-plant-e-far-04-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.03009415790438652,
+        0.2939843535423279,
+        0.013003294356167316,
+        0.32942983508110046
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-05",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on wall-yard-south GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 2.40 m wide x 2.69 m high",
+      "material_qa": {
+        "native": [
+          2.4,
+          2.4,
+          2.695
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.3745,
+          -20.9475,
+          -3.0057
+        ],
+        "measured_max": [
+          17.8284,
+          -20.661,
+          -0.2855
+        ],
+        "base_z_error_m": -0.0057,
+        "height_m": 2.7202,
+        "spread_m": 2.4539,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 38002,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-05-000",
+        "prop-ld-plant-e-far-05-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.02068655751645565,
+        0.2813284695148468,
+        0.09909890592098236,
+        0.5695990920066833
+      ]
+    },
+    {
+      "id": "ld-plant-e-far-06",
+      "asset": "ldb-flora-fg-trachelospermum_jasminoides",
+      "label": "dressing: climber on wall-yard-south GENERATED generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides): 2.40 m wide x 2.69 m high",
+      "material_qa": {
+        "native": [
+          2.4,
+          2.4,
+          2.695
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          15.4027,
+          -20.9138,
+          -3.0071
+        ],
+        "measured_max": [
+          17.8436,
+          -20.661,
+          -0.28
+        ],
+        "base_z_error_m": -0.0071,
+        "height_m": 2.727,
+        "spread_m": 2.4409,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "species",
+          "species": "trachelospermum_jasminoides",
+          "accepted_name": "Trachelospermum jasminoides",
+          "generator_version": "fg-0.1",
+          "seed": 58920,
+          "state": "leaf-on",
+          "atlas_used": [
+            "star_jasmine"
+          ],
+          "atlas_species": [
+            "Trachelospermum jasminoides"
+          ],
+          "fidelity": "species",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated Trachelospermum jasminoides (leaf scan: Trachelospermum jasminoides)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-far-06-000",
+        "prop-ld-plant-e-far-06-001"
+      ],
+      "in_frame": true,
+      "screen": [
+        -0.017236076295375824,
+        0.2815515697002411,
+        0.09978359192609787,
+        0.5698125958442688
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-00",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          16.9877,
+          -20.8721,
+          -3.0
+        ],
+        "measured_max": [
+          17.1564,
+          -20.6989,
+          -2.8406
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1594,
+        "spread_m": 0.1732,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 52772,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-00-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.048134591430425644,
+        0.2870698869228363,
+        0.06718944758176804,
+        0.30612483620643616
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-01",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          17.2735,
+          -20.8625,
+          -3.0
+        ],
+        "measured_max": [
+          17.4525,
+          -20.7095,
+          -2.8404
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1596,
+        "spread_m": 0.179,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 6514,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-01-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.060968831181526184,
+        0.28541627526283264,
+        0.07921398431062698,
+        0.30458587408065796
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-02",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          17.5765,
+          -20.8697,
+          -3.0
+        ],
+        "measured_max": [
+          17.7571,
+          -20.7073,
+          -2.84
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.16,
+        "spread_m": 0.1806,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 68328,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-02-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.07368828356266022,
+        0.28344178199768066,
+        0.09281546622514725,
+        0.30308014154434204
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-03",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          17.8871,
+          -20.8807,
+          -3.0
+        ],
+        "measured_max": [
+          18.0329,
+          -20.7074,
+          -2.8408
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1592,
+        "spread_m": 0.1733,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 75518,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-03-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.08685552328824997,
+        0.281545490026474,
+        0.10528901219367981,
+        0.3013305068016052
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-04",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          18.1706,
+          -20.8753,
+          -3.0
+        ],
+        "measured_max": [
+          18.3437,
+          -20.7134,
+          -2.8406
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1594,
+        "spread_m": 0.173,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 11773,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-04-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.1002846285700798,
+        0.27959921956062317,
+        0.11933393776416779,
+        0.2997311055660248
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-05",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          18.4686,
+          -20.874,
+          -3.0
+        ],
+        "measured_max": [
+          18.6412,
+          -20.7012,
+          -2.8406
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1594,
+        "spread_m": 0.1727,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 75275,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-05-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.11446060240268707,
+        0.2776299715042114,
+        0.13433831930160522,
+        0.29820480942726135
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-06",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          18.7836,
+          -20.8604,
+          -3.0
+        ],
+        "measured_max": [
+          18.9696,
+          -20.7223,
+          -2.8402
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1598,
+        "spread_m": 0.186,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 79121,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-06-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.13068699836730957,
+        0.2755752205848694,
+        0.1490858495235443,
+        0.29616254568099976
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-07",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          19.0876,
+          -20.8675,
+          -3.0
+        ],
+        "measured_max": [
+          19.2585,
+          -20.691,
+          -2.8393
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1607,
+        "spread_m": 0.1765,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 29767,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-07-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.1454087644815445,
+        0.27342596650123596,
+        0.16571637988090515,
+        0.2948574721813202
+      ]
+    },
+    {
+      "id": "ld-plant-e-edge-08",
+      "asset": "ldb-flora-fg-acorus_gramineus",
+      "label": "dressing: GENERATED generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species): 0.18 m wide x 0.16 m high",
+      "material_qa": {
+        "native": [
+          0.1753,
+          0.1753,
+          0.1594
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "measured_min": [
+          19.371,
+          -20.8589,
+          -3.0
+        ],
+        "measured_max": [
+          19.5487,
+          -20.7185,
+          -2.8402
+        ],
+        "base_z_error_m": 0.0,
+        "height_m": 0.1598,
+        "spread_m": 0.1777,
+        "garden_ldb": true,
+        "generated_foliage": {
+          "atlas_match": "none",
+          "species": "acorus_gramineus",
+          "accepted_name": "Acorus gramineus",
+          "generator_version": "fg-0.1",
+          "seed": 12886,
+          "state": "leaf-on",
+          "atlas_used": [
+            "african_flag"
+          ],
+          "atlas_species": [
+            "Hedychium/Canna-type strap (Megascans 'African Flag')"
+          ],
+          "fidelity": "form-class",
+          "construction": "generated",
+          "leaf_len_source": "policy",
+          "caption": "generated form-class plant standing in for Acorus gramineus (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag'); not the species)"
+        },
+        "leaves_dropped_keepout": 0
+      },
+      "objects": [
+        "prop-ld-plant-e-edge-08-000"
+      ],
+      "in_frame": true,
+      "screen": [
+        0.16054032742977142,
+        0.2714526355266571,
+        0.1790098398923874,
+        0.29267358779907227
       ]
     },
     {
@@ -5303,12 +9338,12 @@
         "prop-ld-pot-0-plumeria-plant-009",
         "prop-ld-pot-0-plumeria-plant-010"
       ],
-      "in_frame": false,
+      "in_frame": true,
       "screen": [
-        1.2581032514572144,
-        -0.45441770553588867,
-        4.985025882720947,
-        1.2216395139694214
+        0.3020194470882416,
+        0.26909661293029785,
+        0.5678425431251526,
+        0.5209233164787292
       ]
     }
   ],
@@ -5327,9 +9362,8 @@
     "shadows_present",
     "crushed_shadows",
     "colour_cast",
-    "view_subject:ld-s-tree-crape.garden-bark",
-    "view_subject:ld-sister-screen-n",
-    "view_subject:ld-wall-street-fence",
+    "view_subject:ld-wall-fence-east",
+    "view_subject:ld-wall-yard-south",
     "verticals_level",
     "photometry_bound",
     "finish_matches_name:aspidistra-leaf",
@@ -5363,11 +9397,11 @@
   "render_evidence": {
     "exposure_group": "exterior-dusk",
     "exposure_rule_measurement": {
-      "lamp_luminance_sum": 194.10494625551817,
-      "daylight_luminance_sum": 22336.891102395144,
+      "lamp_luminance_sum": 58.142678995578265,
+      "daylight_luminance_sum": 10505.955225550792,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.008615018432225181,
+      "lamp_fraction": 0.005503799711147694,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5962,19 +9996,19 @@
         "exposure": "exterior-dusk",
         "camera": {
           "position": [
-            27.6,
-            -23.91,
+            27.2,
+            -27.0,
             -1.65
           ],
           "target": [
-            25.6363,
-            -25.1509,
+            24.6,
+            -21.4,
             -1.65
           ],
           "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
-          "shift_y": 0.073,
+          "shift_y": 0.05,
           "overrides": [
             {
               "field": "position",
@@ -5984,11 +10018,39 @@
                 -1.65
               ],
               "new": [
-                27.6,
-                -23.91,
+                27.2,
+                -27.3,
                 -1.65
               ],
-              "reason": "GI: the authored standing point is 0.05 m from ld-plant-s-bed-mass-corner-02 (inside or touching a garden solid of the decided layout); moved 3.14 m, target kept"
+              "reason": "re-aimed for the decided garden (render-set data): South garden at dusk from under the crape (dusk exposure group)"
+            },
+            {
+              "field": "target",
+              "prior": [
+                25.6363,
+                -25.1509,
+                -1.65
+              ],
+              "new": [
+                24.6,
+                -21.4,
+                -1.65
+              ],
+              "reason": "re-aimed for the decided garden (render-set data): South garden at dusk from under the crape (dusk exposure group)"
+            },
+            {
+              "field": "position",
+              "prior": [
+                27.2,
+                -27.3,
+                -1.65
+              ],
+              "new": [
+                27.2,
+                -27.0,
+                -1.65
+              ],
+              "reason": "GI: the authored standing point is 0.41 m from ld-plant-s-bed-wall-b-01 (inside or touching a garden solid of the decided layout); moved 0.30 m, target kept"
             }
           ]
         },
@@ -6023,14 +10085,13 @@
       },
       "group": "exterior-dusk"
     },
-    "exposure_rule_sha256": "be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6",
-    "exposure_measurement_sha256": "89f73ea27b41e5b83b0c1fcb30736028a1973dc6f2aaff0c352ccb292c006ee5",
+    "exposure_rule_sha256": "ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09",
+    "exposure_measurement_sha256": "7244d3fd215b9aa12376c7732e054145c8ba530705ef9ed7671088efa708cea3",
     "white_balance_k": 4300.0,
-    "exposure_stops": -0.2805475890636444,
+    "exposure_stops": -1.674834132194519,
     "exposure_state": "exterior-dusk",
     "metered_over": [
-      "v07-terrace-dusk",
-      "v42-north-garden-evening"
+      "v07-terrace-dusk"
     ],
     "whole_set_lock_verified": true,
     "exposure_evidence": "measured whole-set lock",
@@ -6052,21 +10113,9 @@
     "qa_passed": false,
     "nonpassing_checks": [
       {
-        "check": "highlight_clipping",
-        "status": "WARN",
-        "detail": "9.6% of pixels clipped (limit 3%) (exposure locked across the set)",
-        "lesson": "Sunlit white bedding blew out to pure white; expose for highlights."
-      },
-      {
-        "check": "shadows_present",
-        "status": "WARN",
-        "detail": "1st-percentile luminance 0.27 (max 0.1) (exposure locked across the set)",
-        "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
-      },
-      {
         "check": "colour_cast",
         "status": "FAIL",
-        "detail": "mid-tone cast 0.060 (cool; limit 0.1 warm, 0.02 cool)",
+        "detail": "mid-tone cast 0.074 (cool; limit 0.1 warm, 0.02 cool)",
         "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
       }
     ],

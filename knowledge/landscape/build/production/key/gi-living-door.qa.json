@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/key/gi-living-door.png",
+  "image": "out/gi/final4/key/gi-living-door.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -12,7 +12,7 @@
     {
       "check": "highlights_present",
       "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.73 (min 0.9) (exposure locked across the set)",
+      "detail": "99.5th-percentile luminance 0.80 (min 0.9) (exposure locked across the set)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
@@ -24,37 +24,25 @@
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.03 (max 0.1)",
+      "detail": "1st-percentile luminance 0.01 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "0.2% of pixels near black (limit 8%)",
+      "detail": "0.6% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.021 (warm; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.023 (warm; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
       "check": "view_subject:ld-wall-fence-rear",
       "status": "PASS",
       "detail": "coverage 0.789938594316462 screen [-0.24708124995231628, 0.21109990775585175, 0.9291521906852722, 0.9939051270484924]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-s-tree-crape.garden-bark",
-      "status": "PASS",
-      "detail": "coverage 0.16463401790378934 screen [-0.797459065914154, -0.46225062012672424, 0.4130796790122986, 1.6104451417922974]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-plant-s-bed-screen-s-01.garden-climber-stem",
-      "status": "PASS",
-      "detail": "coverage 0.8422098808562927 screen [0.9083255529403687, 0.16392377018928528, 1.0171754360198975, 0.6386756896972656]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
@@ -235,8 +223,6 @@
       "crushed_shadows",
       "colour_cast",
       "view_subject:ld-wall-fence-rear",
-      "view_subject:ld-s-tree-crape.garden-bark",
-      "view_subject:ld-plant-s-bed-screen-s-01.garden-climber-stem",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",

@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/draft/v42-north-garden-evening.png",
+  "image": "out/gi/final4/draft/v42-north-garden-evening.png",
   "passed": false,
   "failed": [
     "colour_cast"
@@ -14,19 +14,19 @@
     {
       "check": "highlights_present",
       "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.84 (min 0.9; advisory: no direct source)",
+      "detail": "99.5th-percentile luminance 0.86 (min 0.9; advisory: no direct source)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.43 (min 0.3)",
+      "detail": "median luminance 0.46 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.06 (max 0.1)",
+      "detail": "1st-percentile luminance 0.04 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
@@ -38,25 +38,13 @@
     {
       "check": "colour_cast",
       "status": "FAIL",
-      "detail": "mid-tone cast 0.090 (cool; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.101 (cool; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
-    },
-    {
-      "check": "view_subject:ld-plant-n-screen-09.garden-climber-stem",
-      "status": "PASS",
-      "detail": "coverage 0.5870221252401584 screen [-0.20113344490528107, 0.23217937350273132, 0.2858985662460327, 0.9871696829795837]",
-      "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "view_subject:ld-n-pond-lip",
       "status": "PASS",
       "detail": "coverage 0.9219014399294015 screen [0.12977954745292664, -0.03537379205226898, 0.6270796656608582, 0.4175640344619751]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-n-pond-water",
-      "status": "PASS",
-      "detail": "coverage 0.41580945132692015 screen [0.12977954745292664, -0.5376793146133423, 0.6270796656608582, 0.38270413875579834]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
@@ -236,9 +224,7 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-plant-n-screen-09.garden-climber-stem",
       "view_subject:ld-n-pond-lip",
-      "view_subject:ld-n-pond-water",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",

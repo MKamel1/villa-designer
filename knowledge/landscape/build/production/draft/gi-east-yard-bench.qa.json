@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/draft/v19-garden-facade.png",
+  "image": "out/gi/final4/draft/gi-east-yard-bench.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -11,56 +11,56 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.90 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.91 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.48 (min 0.3)",
+      "detail": "median luminance 0.50 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.02 (max 0.1)",
+      "detail": "1st-percentile luminance 0.00 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "0.2% of pixels near black (limit 8%)",
+      "detail": "2.4% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.010 (warm; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.013 (warm; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-s-tree-crape.garden-bark",
+      "check": "view_subject:ld-wall-yard-south",
       "status": "PASS",
-      "detail": "coverage 0.1023625635727984 screen [0.1524566262960434, -2.0615596771240234, 1.6726309061050415, 3.3850643634796143]",
+      "detail": "coverage 0.002682787608312433 screen [-8.425216674804688, -5.24006462097168, 0.4954875409603119, 15.463603973388672]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
-      "check": "view_subject:ld-sister-screen-n",
+      "check": "view_subject:ld-e-pond-lip",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.23706306517124176, 0.18595172464847565, 0.3317357003688812, 0.5005698800086975]",
+      "detail": "coverage 0.188459294661564 screen [-0.23835651576519012, -0.7454493641853333, 0.6022639870643616, 0.2660774290561676]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
-      "check": "view_subject:ld-wall-street-fence",
+      "check": "view_subject:ld-e-pond-water",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.7783153057098389, 0.32854413986206055, 0.978535532951355, 0.5082684755325317]",
+      "detail": "coverage 0.09117708624834582 screen [-0.2383565604686737, -1.6007441282272339, 0.6022639274597168, 0.23341935873031616]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.075",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y -0.040",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
     },
     {
@@ -70,15 +70,9 @@
       "lesson": "Refractive glass blocks shadow rays: no sun entered the room."
     },
     {
-      "check": "window_view:ear-24",
+      "check": "window_view:lear-7",
       "status": "PASS",
-      "detail": "local detail 0.0249 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:ear-25",
-      "status": "PASS",
-      "detail": "local detail 0.0240 (min 0.01), clipped 0% (max 60%)",
+      "detail": "local detail 0.0308 (min 0.01), clipped 0% (max 60%)",
       "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
     },
     {
@@ -242,6 +236,13 @@
       "status": "PASS",
       "detail": "duvet covers 68% of the mattress length (min 65%), lowest point 1.40 m (min 0.05)",
       "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    },
+    {
+      "check": "koi_visible",
+      "status": "PASS",
+      "passed": true,
+      "detail": "138 koi-orange pixels in the koi boxes in frame (need 40 per Mpx of frame)",
+      "lesson": "A floor under the water hid every koi in the first pond renders (2026-11-22): fish in frame must be seen."
     }
   ],
   "scope": {
@@ -252,13 +253,12 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-s-tree-crape.garden-bark",
-      "view_subject:ld-sister-screen-n",
-      "view_subject:ld-wall-street-fence",
+      "view_subject:ld-wall-yard-south",
+      "view_subject:ld-e-pond-lip",
+      "view_subject:ld-e-pond-water",
       "verticals_level",
       "glass_passes_daylight",
-      "window_view:ear-24",
-      "window_view:ear-25",
+      "window_view:lear-7",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",
       "finish_matches_name:top-trough-coating",

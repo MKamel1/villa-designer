@@ -1,7 +1,9 @@
 {
-  "image": "out/gi/final/draft/v41-south-garden-terrace.png",
-  "passed": true,
-  "failed": [],
+  "image": "out/gi/final4/key/gi-east-yard-pond.png",
+  "passed": false,
+  "failed": [
+    "crushed_shadows"
+  ],
   "checks": [
     {
       "check": "highlight_clipping",
@@ -11,56 +13,56 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.72 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.91 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
-      "status": "PASS",
-      "detail": "median luminance 0.43 (min 0.3)",
+      "status": "WARN",
+      "detail": "median luminance 0.18 (min 0.3) (exposure locked across the set)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.03 (max 0.1)",
+      "detail": "1st-percentile luminance 0.00 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
-      "status": "PASS",
-      "detail": "0.1% of pixels near black (limit 8%)",
+      "status": "FAIL",
+      "detail": "10.5% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.011 (cool; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.028 (warm; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-wall-fence-rear",
+      "check": "view_subject:ld-wall-yard-south",
       "status": "PASS",
-      "detail": "coverage 0.20947191819463148 screen [-1.038716435432434, -0.08839664608240128, 0.5654110908508301, 1.594275951385498]",
+      "detail": "coverage 0.1231463644537343 screen [-0.2992091774940491, 0.5672652721405029, 1.7539210319519043, 2.278791904449463]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
-      "check": "view_subject:ld-s-tree-crape.garden-bark",
+      "check": "view_subject:ld-e-pond-lip",
       "status": "PASS",
-      "detail": "coverage 0.601856583659275 screen [0.01395611371845007, -0.28488507866859436, 0.6607016324996948, 1.3766403198242188]",
+      "detail": "coverage 0.13972769594852966 screen [-0.6313127875328064, -0.7804077863693237, 2.17940092086792, 0.5047102570533752]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
-      "check": "view_subject:ld-plant-s-bed-wall-c-02.garden-climber-stem",
+      "check": "view_subject:ld-e-pond-water",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.1548588126897812, 0.20715221762657166, 0.3117276430130005, 0.5404800772666931]",
+      "detail": "coverage 0.06276039727752644 screen [-0.6313130855560303, -2.032055377960205, 2.179401397705078, 0.43523362278938293]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.025",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y -0.420",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
     },
     {
@@ -224,6 +226,13 @@
       "status": "PASS",
       "detail": "duvet covers 68% of the mattress length (min 65%), lowest point 1.40 m (min 0.05)",
       "lesson": "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor."
+    },
+    {
+      "check": "koi_visible",
+      "status": "PASS",
+      "passed": true,
+      "detail": "2987 koi-orange pixels in the koi boxes in frame (need 40 per Mpx of frame)",
+      "lesson": "A floor under the water hid every koi in the first pond renders (2026-11-22): fish in frame must be seen."
     }
   ],
   "scope": {
@@ -234,9 +243,9 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-wall-fence-rear",
-      "view_subject:ld-s-tree-crape.garden-bark",
-      "view_subject:ld-plant-s-bed-wall-c-02.garden-climber-stem",
+      "view_subject:ld-wall-yard-south",
+      "view_subject:ld-e-pond-lip",
+      "view_subject:ld-e-pond-water",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",

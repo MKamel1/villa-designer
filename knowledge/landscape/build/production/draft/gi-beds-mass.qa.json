@@ -1,9 +1,7 @@
 {
-  "image": "out/gi/final/draft/v28-east-yard-below.png",
-  "passed": false,
-  "failed": [
-    "crushed_shadows"
-  ],
+  "image": "out/gi/final4/draft/gi-beds-mass.png",
+  "passed": true,
+  "failed": [],
   "checks": [
     {
       "check": "highlight_clipping",
@@ -14,13 +12,13 @@
     {
       "check": "highlights_present",
       "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.71 (min 0.9) (exposure locked across the set)",
+      "detail": "99.5th-percentile luminance 0.63 (min 0.9) (exposure locked across the set)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "WARN",
-      "detail": "median luminance 0.10 (min 0.3) (exposure locked across the set)",
+      "detail": "median luminance 0.24 (min 0.3) (exposure locked across the set)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
@@ -31,57 +29,27 @@
     },
     {
       "check": "crushed_shadows",
-      "status": "FAIL",
-      "detail": "17.0% of pixels near black (limit 8%)",
+      "status": "PASS",
+      "detail": "3.3% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.015 (warm; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.014 (cool; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-wall-yard-south",
+      "check": "view_subject:ld-wall-fence-east",
       "status": "PASS",
-      "detail": "coverage 0.15902613955921188 screen [-0.29754605889320374, -0.5673441290855408, 0.39595213532447815, 3.022940158843994]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-plant-e-far-05.garden-climber-stem",
-      "status": "PASS",
-      "detail": "coverage 0.4202489127667207 screen [-0.061616070568561554, -0.5061677098274231, 0.29537519812583923, 1.4626696109771729]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-plant-e-far-06.garden-climber-stem",
-      "status": "PASS",
-      "detail": "coverage 0.425567853908722 screen [-0.07778719067573547, -0.5401850938796997, 0.2993663549423218, 1.3249744176864624]",
+      "detail": "coverage 0.11410224401389195 screen [-0.9977924823760986, -0.5487583875656128, 0.5879966616630554, 2.7008814811706543]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y -0.065",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.000",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
-    },
-    {
-      "check": "glass_passes_daylight",
-      "status": "PASS",
-      "detail": "1 architectural glass material(s)",
-      "lesson": "Refractive glass blocks shadow rays: no sun entered the room."
-    },
-    {
-      "check": "window_view:ear-18",
-      "status": "PASS",
-      "detail": "local detail 0.0224 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:ear-19",
-      "status": "PASS",
-      "detail": "local detail 0.0224 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
     },
     {
       "check": "finish_matches_name:aspidistra-leaf",
@@ -254,13 +222,8 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-wall-yard-south",
-      "view_subject:ld-plant-e-far-05.garden-climber-stem",
-      "view_subject:ld-plant-e-far-06.garden-climber-stem",
+      "view_subject:ld-wall-fence-east",
       "verticals_level",
-      "glass_passes_daylight",
-      "window_view:ear-18",
-      "window_view:ear-19",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",
       "finish_matches_name:top-trough-coating",
@@ -289,6 +252,9 @@
       "cloth_plausible:duvet-ka-bunk",
       "cloth_plausible:duvet-ka-bunk-upper"
     ],
-    "omitted": {}
+    "omitted": {
+      "window_view": "no visible glass pane occupies at least 3% of this view",
+      "glass_passes_daylight": "no visible glass pane occupies at least 3% of this view"
+    }
   }
 }

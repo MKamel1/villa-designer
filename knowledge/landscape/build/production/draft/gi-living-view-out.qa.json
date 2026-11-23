@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/draft/v25-top-garden-gate.png",
+  "image": "out/gi/final4/draft/gi-living-view-out.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -11,20 +11,20 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.88 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.94 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.65 (min 0.3)",
+      "detail": "median luminance 0.61 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "WARN",
-      "detail": "1st-percentile luminance 0.11 (max 0.1) (exposure locked across the set)",
+      "detail": "1st-percentile luminance 0.14 (max 0.1) (exposure locked across the set)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
@@ -36,50 +36,20 @@
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.008 (cool; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.073 (warm; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
+    },
+    {
+      "check": "view_subject:ld-wall-fence-rear",
+      "status": "PASS",
+      "detail": "coverage 1.0 screen [0.07393931597471237, 0.344952255487442, 0.7966038584709167, 0.8126802444458008]",
+      "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
       "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.000",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
-    },
-    {
-      "check": "glass_passes_daylight",
-      "status": "PASS",
-      "detail": "1 architectural glass material(s)",
-      "lesson": "Refractive glass blocks shadow rays: no sun entered the room."
-    },
-    {
-      "check": "window_view:ear-43",
-      "status": "PASS",
-      "detail": "local detail 0.0789 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:lear-0",
-      "status": "PASS",
-      "detail": "local detail 0.0128 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:lear-1",
-      "status": "PASS",
-      "detail": "local detail 0.0140 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:lear-0",
-      "status": "PASS",
-      "detail": "local detail 0.0132 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
-    },
-    {
-      "check": "window_view:lear-1",
-      "status": "PASS",
-      "detail": "local detail 0.0145 (min 0.01), clipped 0% (max 60%)",
-      "lesson": "The window showed a void, a white card or a mirror of the room instead of a view."
     },
     {
       "check": "finish_matches_name:aspidistra-leaf",
@@ -252,13 +222,8 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
+      "view_subject:ld-wall-fence-rear",
       "verticals_level",
-      "glass_passes_daylight",
-      "window_view:ear-43",
-      "window_view:lear-0",
-      "window_view:lear-1",
-      "window_view:lear-0",
-      "window_view:lear-1",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",
       "finish_matches_name:top-trough-coating",
@@ -287,6 +252,9 @@
       "cloth_plausible:duvet-ka-bunk",
       "cloth_plausible:duvet-ka-bunk-upper"
     ],
-    "omitted": {}
+    "omitted": {
+      "window_view": "no visible glass pane occupies at least 3% of this view",
+      "glass_passes_daylight": "no visible glass pane occupies at least 3% of this view"
+    }
   }
 }

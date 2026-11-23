@@ -1,9 +1,7 @@
 {
-  "image": "out/gi/final/draft/v39-north-garden-hanging-retreat.png",
-  "passed": false,
-  "failed": [
-    "crushed_shadows"
-  ],
+  "image": "out/gi/final4/draft/gi-firepit-opening.png",
+  "passed": true,
+  "failed": [],
   "checks": [
     {
       "check": "highlight_clipping",
@@ -13,50 +11,44 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.13 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.94 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
-      "status": "WARN",
-      "detail": "median luminance 0.08 (min 0.3) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "median luminance 0.70 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.00 (max 0.1)",
+      "detail": "1st-percentile luminance 0.01 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
-      "status": "FAIL",
-      "detail": "8.3% of pixels near black (limit 8%)",
+      "status": "PASS",
+      "detail": "0.6% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
-      "check": "view_subject:ld-plant-n-edge-far-02",
+      "check": "colour_cast",
       "status": "PASS",
-      "detail": "coverage 0.6576914320406769 screen [-0.039403725415468216, 0.1788550168275833, 0.07570798695087433, 0.3377399444580078]",
-      "lesson": "The detail view was named for a pendant it never showed."
+      "detail": "mid-tone cast 0.006 (warm; limit 0.1 warm, 0.05 cool)",
+      "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-plant-n-edge-far-03",
+      "check": "view_subject:ld-sister-screen-s",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.09728405624628067, 0.20165792107582092, 0.19400347769260406, 0.35357528924942017]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-plant-n-edge-far-04",
-      "status": "PASS",
-      "detail": "coverage 1.0 screen [0.22564849257469177, 0.22307230532169342, 0.3058737814426422, 0.36855053901672363]",
+      "detail": "coverage 0.6298483849802043 screen [-0.1326431781053543, 0.0201000664383173, 0.22570505738258362, 0.8832778334617615]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y -0.270",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y -0.050",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
     },
     {
@@ -229,9 +221,8 @@
       "exposure_midtones",
       "shadows_present",
       "crushed_shadows",
-      "view_subject:ld-plant-n-edge-far-02",
-      "view_subject:ld-plant-n-edge-far-03",
-      "view_subject:ld-plant-n-edge-far-04",
+      "colour_cast",
+      "view_subject:ld-sister-screen-s",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",

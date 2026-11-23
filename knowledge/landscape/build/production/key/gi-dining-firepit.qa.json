@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/key/gi-dining-firepit.png",
+  "image": "out/gi/final4/key/gi-dining-firepit.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -11,50 +11,38 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.90 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.94 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.58 (min 0.3)",
+      "detail": "median luminance 0.71 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.03 (max 0.1)",
+      "detail": "1st-percentile luminance 0.04 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "0.2% of pixels near black (limit 8%)",
+      "detail": "0.3% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.008 (cool; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.006 (cool; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-plant-s-bed-screen-s-01.garden-climber-stem",
+      "check": "view_subject:ld-sister-screen-n",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.046925339847803116, 0.22971317172050476, 0.22688829898834229, 0.7420182228088379]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-plant-s-bed-screen-s-00.garden-climber-stem",
-      "status": "PASS",
-      "detail": "coverage 1.0 screen [0.016974491998553276, 0.22377349436283112, 0.22697211802005768, 0.7329431176185608]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-sister-screen-s",
-      "status": "PASS",
-      "detail": "coverage 1.0 screen [0.01647900976240635, 0.22964291274547577, 0.22915105521678925, 0.7435316443443298]",
+      "detail": "coverage 1.0 screen [0.6366949677467346, 0.2870437502861023, 0.7492715120315552, 0.7116422057151794]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
@@ -234,9 +222,7 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-plant-s-bed-screen-s-01.garden-climber-stem",
-      "view_subject:ld-plant-s-bed-screen-s-00.garden-climber-stem",
-      "view_subject:ld-sister-screen-s",
+      "view_subject:ld-sister-screen-n",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",

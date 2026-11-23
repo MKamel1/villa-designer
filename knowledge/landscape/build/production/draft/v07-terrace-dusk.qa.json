@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/draft/v07-terrace-dusk.png",
+  "image": "out/gi/final4/draft/v07-terrace-dusk.png",
   "passed": false,
   "failed": [
     "colour_cast"
@@ -7,62 +7,56 @@
   "checks": [
     {
       "check": "highlight_clipping",
-      "status": "WARN",
-      "detail": "9.6% of pixels clipped (limit 3%) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "0.1% of pixels clipped (limit 3%)",
       "lesson": "Sunlit white bedding blew out to pure white; expose for highlights."
     },
     {
       "check": "highlights_present",
       "status": "PASS",
-      "detail": "99.5th-percentile luminance 1.00 (min 0.9)",
+      "detail": "99.5th-percentile luminance 0.93 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.83 (min 0.3)",
+      "detail": "median luminance 0.45 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
-      "status": "WARN",
-      "detail": "1st-percentile luminance 0.27 (max 0.1) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "1st-percentile luminance 0.01 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "0.0% of pixels near black (limit 8%)",
+      "detail": "0.5% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "FAIL",
-      "detail": "mid-tone cast 0.060 (cool; limit 0.1 warm, 0.02 cool)",
+      "detail": "mid-tone cast 0.074 (cool; limit 0.1 warm, 0.02 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
-      "check": "view_subject:ld-s-tree-crape.garden-bark",
+      "check": "view_subject:ld-wall-fence-east",
       "status": "PASS",
-      "detail": "coverage 0.08541408257672561 screen [0.0838751494884491, -2.417444944381714, 1.8019165992736816, 3.8255293369293213]",
+      "detail": "coverage 0.9878547261822143 screen [0.36763182282447815, 0.1669975370168686, 1.0077747106552124, 0.9482288956642151]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
-      "check": "view_subject:ld-sister-screen-n",
+      "check": "view_subject:ld-wall-yard-south",
       "status": "PASS",
-      "detail": "coverage 1.0 screen [0.1934717297554016, 0.18047170341014862, 0.29360759258270264, 0.5071825385093689]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-wall-street-fence",
-      "status": "PASS",
-      "detail": "coverage 1.0 screen [0.7422457337379456, 0.3324739933013916, 0.9334770441055298, 0.5072583556175232]",
+      "detail": "coverage 1.0 screen [0.0006931097595952451, 0.25063401460647583, 0.38968566060066223, 0.7774423956871033]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.073",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.050",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
     },
     {
@@ -242,9 +236,8 @@
       "shadows_present",
       "crushed_shadows",
       "colour_cast",
-      "view_subject:ld-s-tree-crape.garden-bark",
-      "view_subject:ld-sister-screen-n",
-      "view_subject:ld-wall-street-fence",
+      "view_subject:ld-wall-fence-east",
+      "view_subject:ld-wall-yard-south",
       "verticals_level",
       "photometry_bound",
       "finish_matches_name:aspidistra-leaf",

@@ -1,5 +1,5 @@
 {
-  "image": "out/gi/final/draft/gi-dining-crown-winter.png",
+  "image": "out/gi/final4/draft/gi-dining-crown-winter.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -11,56 +11,50 @@
     },
     {
       "check": "highlights_present",
-      "status": "WARN",
-      "detail": "99.5th-percentile luminance 0.87 (min 0.9) (exposure locked across the set)",
+      "status": "PASS",
+      "detail": "99.5th-percentile luminance 0.92 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.47 (min 0.3)",
+      "detail": "median luminance 0.50 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
       "check": "shadows_present",
       "status": "PASS",
-      "detail": "1st-percentile luminance 0.08 (max 0.1)",
+      "detail": "1st-percentile luminance 0.01 (max 0.1)",
       "lesson": "Lifted blacks (no true darks anywhere) made the render read milky and flat."
     },
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "0.0% of pixels near black (limit 8%)",
+      "detail": "0.7% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.046 (cool; limit 0.1 warm, 0.05 cool)",
+      "detail": "mid-tone cast 0.011 (warm; limit 0.1 warm, 0.05 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
       "check": "view_subject:ld-wall-fence-rear",
       "status": "PASS",
-      "detail": "coverage 0.09962420165924336 screen [0.3924691677093506, -0.7833409905433655, 2.7683489322662354, 1.7833820581436157]",
+      "detail": "coverage 0.12799465459888856 screen [0.39581385254859924, -0.31659451127052307, 2.4679722785949707, 1.961417317390442]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "view_subject:ld-wall-fence-east",
       "status": "PASS",
-      "detail": "coverage 0.38753049996665856 screen [-0.359927773475647, -0.27381154894828796, 0.4177909791469574, 0.7089614272117615]",
-      "lesson": "The detail view was named for a pendant it never showed."
-    },
-    {
-      "check": "view_subject:ld-s-tree-crape.garden-bark",
-      "status": "PASS",
-      "detail": "coverage 0.5799077757731426 screen [0.1082705482840538, -0.7075885534286499, 0.7484802007675171, 0.9767762422561646]",
+      "detail": "coverage 0.5645114998841331 screen [-0.29972976446151733, 0.12750031054019928, 0.4203487038612366, 1.0297409296035767]",
       "lesson": "The detail view was named for a pendant it never showed."
     },
     {
       "check": "verticals_level",
       "status": "PASS",
-      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.300",
+      "detail": "camera pitch 90.00 deg (level = 90), shift_y 0.050",
       "lesson": "A tilted camera made every wall lean; keep level and use lens shift."
     },
     {
@@ -236,7 +230,6 @@
       "colour_cast",
       "view_subject:ld-wall-fence-rear",
       "view_subject:ld-wall-fence-east",
-      "view_subject:ld-s-tree-crape.garden-bark",
       "verticals_level",
       "finish_matches_name:aspidistra-leaf",
       "finish_matches_name:black-metal",
