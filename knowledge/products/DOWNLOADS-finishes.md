@@ -3,8 +3,8 @@
 **The client needs to download nothing to see the three palettes.** The workstation has internet access, and every
 render look-alike is a CC0 material from ambientCG or Poly Haven, which need no login. L4 fetches them itself:
 
-- ambientCG: `https://ambientcg.com/get?file=<ID>_4K-JPG.zip` (4K JPG; the scene uses the Color, Roughness and Normal maps).
-- Poly Haven: `https://api.polyhaven.com/files/<id>` lists the JPG files; 4K JPG is used.
+- ambientCG: `https://ambientcg.com/get?file=<ID>_2K-JPG.zip` (2K JPG; the scene uses the Color, Roughness and Normal maps).
+- Poly Haven: `https://api.polyhaven.com/files/<id>` lists the JPG files; 2K JPG is used (the scene library is 2K).
 
 The exact ids and URLs, per palette, are in `knowledge/products/finishes/<A|B|C>.json` (field `lookalike.url`),
 and in the final hand-back table.
