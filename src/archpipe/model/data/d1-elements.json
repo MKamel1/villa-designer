@@ -44,7 +44,7 @@
   "door": 18,
   "fixture": 7,
   "floor": 30,
-  "furniture": 81,
+  "furniture": 79,
   "garden": 14,
   "luminaire": 132,
   "plant": 80,
@@ -53,7 +53,7 @@
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 110,
+  "type": 109,
   "wall": 36,
   "window": 8
  },
@@ -20892,62 +20892,6 @@
    }
   },
   {
-   "id": "prop-pillows-lounge",
-   "kind": "furniture",
-   "level": "B",
-   "placement": [
-    6220.0,
-    -26946.0,
-    440.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    1021.6,
-    627.5,
-    450.2
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "throw_pillows_01",
-   "finish_codes": [],
-   "params": {
-    "type": "dressing",
-    "label": "dressing: throw pillows",
-    "scale": 1.0,
-    "plant": false,
-    "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 1.0",
-    "type_id": "type-furniture-dressing-throw_pillows_01-1021_6-627_5-450_2"
-   }
-  },
-  {
-   "id": "prop-pillows-living",
-   "kind": "furniture",
-   "level": "B",
-   "placement": [
-    19850.0,
-    -27239.0,
-    440.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    1021.6,
-    627.5,
-    450.2
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "throw_pillows_01",
-   "finish_codes": [],
-   "params": {
-    "type": "dressing",
-    "label": "dressing: throw pillows",
-    "scale": 1.0,
-    "plant": false,
-    "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 1.0",
-    "type_id": "type-furniture-dressing-throw_pillows_01-1021_6-627_5-450_2"
-   }
-  },
-  {
    "id": "plant-landscape-tree-south",
    "kind": "plant",
    "level": "SITE",
@@ -25008,10 +24952,10 @@
    "room": "family-bath",
    "product_id": "",
    "finish_codes": [
-    "marble-bath"
+    "marble-wet"
    ],
    "params": {
-    "finish_code": "marble-bath",
+    "finish_code": "marble-wet",
     "polygon_mm": [
      [
       11197.0,
@@ -25051,7 +24995,7 @@
     "layers": [
      {
       "function": "finish",
-      "material": "marble-bath",
+      "material": "marble-wet",
       "thickness_mm": null,
       "status": "UNVERIFIED",
       "source": "villa_render.FINISH",
@@ -25506,10 +25450,10 @@
    "room": "parents-ensuite",
    "product_id": "",
    "finish_codes": [
-    "marble-bath"
+    "marble-wet"
    ],
    "params": {
-    "finish_code": "marble-bath",
+    "finish_code": "marble-wet",
     "polygon_mm": [
      [
       19804.0,
@@ -25533,7 +25477,7 @@
     "layers": [
      {
       "function": "finish",
-      "material": "marble-bath",
+      "material": "marble-wet",
       "thickness_mm": null,
       "status": "UNVERIFIED",
       "source": "villa_render.FINISH",
@@ -28152,10 +28096,10 @@
    "room": "guest-wc",
    "product_id": "",
    "finish_codes": [
-    "marble-bath"
+    "marble-wet"
    ],
    "params": {
-    "finish_code": "marble-bath",
+    "finish_code": "marble-wet",
     "polygon_mm": [
      [
       11150.0,
@@ -28179,7 +28123,7 @@
     "layers": [
      {
       "function": "finish",
-      "material": "marble-bath",
+      "material": "marble-wet",
       "thickness_mm": null,
       "status": "UNVERIFIED",
       "source": "villa_render.FINISH",
@@ -33360,46 +33304,6 @@
      340.7,
      367.5,
      783.1
-    ],
-    "basis": "elements of one kind with identical shared parameters, size and product share one type"
-   }
-  },
-  {
-   "id": "type-furniture-dressing-throw_pillows_01-1021_6-627_5-450_2",
-   "kind": "type",
-   "level": "SITE",
-   "placement": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    1021.6,
-    627.5,
-    450.2
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "throw_pillows_01",
-   "finish_codes": [],
-   "params": {
-    "for_kind": "furniture",
-    "shared": {
-     "type": "dressing"
-    },
-    "occurrences": 2,
-    "occurrence_ids": [
-     "prop-pillows-lounge",
-     "prop-pillows-living"
-    ],
-    "key": [
-     "furniture",
-     "dressing",
-     "throw_pillows_01",
-     1021.6,
-     627.5,
-     450.2
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
