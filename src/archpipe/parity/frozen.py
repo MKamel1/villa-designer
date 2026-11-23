@@ -6,6 +6,7 @@ Each `repro_*` returns a dict row for the recall table:
 """
 from __future__ import annotations
 
+from archpipe.units import in_to_mm
 import json
 import re
 from pathlib import Path
@@ -344,11 +345,11 @@ def parse_figures(type_name):
         m = re.search(r"(?:(\d+)'-?)?\s*(\d+(?:\.\d+)?)?\"?", tok)
         ft = re.match(r"\s*(\d+)'(?:-(\d+(?:\.\d+)?)\")?", tok)
         if ft:
-            out.append((int(ft.group(1)) * 12 + float(ft.group(2) or 0)) * 25.4)
+            out.append(in_to_mm(int(ft.group(1)) * 12 + float(ft.group(2) or 0)))
             continue
         inch = re.match(r"\s*(?:Pendant\s*)?(\d+(?:\.\d+)?)\"", tok)
         if inch:
-            out.append(float(inch.group(1)) * 25.4)
+            out.append(in_to_mm(float(inch.group(1))))
     return out
 
 
