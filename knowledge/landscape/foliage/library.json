@@ -5,8 +5,7 @@
    "accepted_name": "Acorus gramineus",
    "form": "strap",
    "banks": [
-    "cast_iron",
-    "ginger_lily"
+    "african_flag"
    ],
    "sourced": {
     "height": [
@@ -103,7 +102,7 @@
    "accepted_name": "Jasminum sambac",
    "form": "climber",
    "banks": [
-    "star_jasmine"
+    "chinese_wisteria"
    ],
    "sourced": {
     "height": [
@@ -128,7 +127,7 @@
    "accepted_name": "Justicia brandegeeana",
    "form": "shrub",
    "banks": [
-    "star_jasmine"
+    "weeping_fig"
    ],
    "sourced": {
     "height": [
@@ -179,8 +178,7 @@
    "accepted_name": "Petrea volubilis",
    "form": "climber",
    "banks": [
-    "star_jasmine",
-    "ginger_lily"
+    "chinese_wisteria"
    ],
    "sourced": {
     "height": [
@@ -201,11 +199,36 @@
    ],
    "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
   },
+  "pittosporum_tobira": {
+   "accepted_name": "Pittosporum tobira",
+   "form": "shrub",
+   "banks": [
+    "australian_laurel"
+   ],
+   "sourced": {
+    "height": [
+     2.4,
+     4.0
+    ],
+    "spread": [
+     1.2,
+     2.4
+    ]
+   },
+   "demo_size_m": [
+    2.4,
+    1.5
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
   "salvia_leucantha": {
    "accepted_name": "Salvia leucantha",
    "form": "shrub",
    "banks": [
-    "ginger_lily"
+    "australian_laurel"
    ],
    "sourced": {
     "height": [
@@ -255,7 +278,7 @@
    "accepted_name": "Vitis vinifera",
    "form": "climber",
    "banks": [
-    "palmate_grape"
+    "grape_vine"
    ],
    "sourced": {
     "height": null,

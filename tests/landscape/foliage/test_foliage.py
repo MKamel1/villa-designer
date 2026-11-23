@@ -94,6 +94,20 @@ class LeafBanks(unittest.TestCase):
         self.assertEqual(G.BANKS["star_jasmine"]["dropped"]["dead_or_white"], 5)
         self.assertEqual(len(G.BANKS["star_jasmine"]["leaves"]), 15)
 
+    def test_sprig_atlas_cards_are_isolated_and_the_cleaned_opacity_is_used(self):
+        """Weeping fig / wisteria are sprig atlases: a card must not show a neighbouring leaf or the twig. The bank points
+        at a cleaned opacity map, and it removes pixels the original has (the twigs), which the original-map bank would not."""
+        from PIL import Image
+        for b in ("weeping_fig", "chinese_wisteria"):
+            m = G.BANKS[b]["maps"]["Opacity"]
+            self.assertIn("generated", m, b)
+            self.assertGreaterEqual(len(G.BANKS[b]["leaves"]), 20, b)
+            self.assertGreater(G.BANKS[b]["dropped"]["not_isolated"], 0, b)
+        from archpipe.landscape.foliage import banks as B
+        clean = np.asarray(Image.open(G.BANKS["weeping_fig"]["maps"]["Opacity"]).split()[0].resize((512, 512))) > 100
+        orig = np.asarray(Image.open(B.maps("weeping_fig")["Opacity"]).split()[0].resize((512, 512))) > 100
+        self.assertLess(clean.sum(), 0.8 * orig.sum())       # twigs and non-isolated leaves are removed, not just relabelled
+
     def test_every_leaf_card_references_a_real_bank_leaf(self):
         for slug in SPECS:
             p = _plant(slug)
@@ -119,9 +133,20 @@ class Labels(unittest.TestCase):
     def test_only_the_species_whose_scan_it_is_is_species_fidelity(self):
         fid = {s: _plant(s).label["fidelity"] for s in SPECS}
         self.assertEqual(fid["trachelospermum_jasminoides"], "species")        # star jasmine scan
+        self.assertEqual(fid["vitis_vinifera"], "species")                     # Common Grape Vine scan (Fab, client download 2026-11-22)
         for s in SPECS:
-            if s != "trachelospermum_jasminoides":
+            if s not in ("trachelospermum_jasminoides", "vitis_vinifera"):
                 self.assertEqual(fid[s], "form-class", s)                      # no scan of that species is held
+
+    def test_pittosporum_on_australian_laurel_is_form_class_recorded_as_genus_match(self):
+        lab = _plant("pittosporum_tobira").label
+        self.assertEqual((lab["fidelity"], lab["atlas_match"]), ("form-class", "genus"))
+        self.assertEqual(lab["atlas_species"], ["Pittosporum undulatum"])
+        self.assertEqual(_plant("justicia_brandegeeana").label["atlas_match"], "none")     # NEGATIVE: a different genus is not a genus match
+        self.assertEqual(_plant("vitis_vinifera").label["atlas_match"], "species")
+        lab = copy.deepcopy(lab); lab["fidelity"] = "species"
+        with self.assertRaises(L.LabelError):
+            L.validate_label(lab)
 
     def test_form_class_plant_claiming_species_fails(self):
         """NEGATIVE: a form-class plant relabelled 'species' must be refused (the honesty guard)."""

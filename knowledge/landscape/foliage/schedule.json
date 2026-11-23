@@ -9,14 +9,12 @@
   ],
   "fidelity": "form-class",
   "caption": "generated form-class plant, stands in for Acorus gramineus",
-  "close_up_caption": "generated form-class plant (leaf scan: Aspidistra elatior, Hedychium coronarium), not the species",
+  "close_up_caption": "generated form-class plant (leaf scan: Hedychium/Canna-type strap (Megascans 'African Flag')), not the species",
   "atlas_used": [
-   "cast_iron",
-   "ginger_lily"
+   "african_flag"
   ],
   "atlas_species": [
-   "Aspidistra elatior",
-   "Hedychium coronarium"
+   "Hedychium/Canna-type strap (Megascans 'African Flag')"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
@@ -61,7 +59,7 @@
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
-  "grade": "B",
+  "grade": "C",
   "sheet": "knowledge/landscape/foliage/sheets/farfugium_japonicum_s1_leaf-on_sheet.jpg"
  },
  {
@@ -89,19 +87,19 @@
  {
   "species": "jasminum_sambac",
   "in_layout": true,
-  "count": 11,
+  "count": 10,
   "layout_spread_m": [
    0.5,
    1.2
   ],
   "fidelity": "form-class",
   "caption": "generated form-class plant, stands in for Jasminum sambac",
-  "close_up_caption": "generated form-class plant (leaf scan: Trachelospermum jasminoides), not the species",
+  "close_up_caption": "generated form-class plant (leaf scan: Wisteria sinensis), not the species",
   "atlas_used": [
-   "star_jasmine"
+   "chinese_wisteria"
   ],
   "atlas_species": [
-   "Trachelospermum jasminoides"
+   "Wisteria sinensis"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
@@ -118,12 +116,12 @@
   ],
   "fidelity": "form-class",
   "caption": "generated form-class plant, stands in for Justicia brandegeeana",
-  "close_up_caption": "generated form-class plant (leaf scan: Trachelospermum jasminoides), not the species",
+  "close_up_caption": "generated form-class plant (leaf scan: Ficus benjamina), not the species",
   "atlas_used": [
-   "star_jasmine"
+   "weeping_fig"
   ],
   "atlas_species": [
-   "Trachelospermum jasminoides"
+   "Ficus benjamina"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
@@ -162,19 +160,36 @@
   ],
   "fidelity": "form-class",
   "caption": "generated form-class plant, stands in for Petrea volubilis",
-  "close_up_caption": "generated form-class plant (leaf scan: Hedychium coronarium, Trachelospermum jasminoides), not the species",
+  "close_up_caption": "generated form-class plant (leaf scan: Wisteria sinensis), not the species",
   "atlas_used": [
-   "ginger_lily",
-   "star_jasmine"
+   "chinese_wisteria"
   ],
   "atlas_species": [
-   "Hedychium coronarium",
-   "Trachelospermum jasminoides"
+   "Wisteria sinensis"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
   "grade": "C",
   "sheet": "knowledge/landscape/foliage/sheets/petrea_volubilis_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "pittosporum_tobira",
+  "in_layout": false,
+  "count": 0,
+  "layout_spread_m": null,
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Pittosporum tobira",
+  "close_up_caption": "generated form-class plant (leaf scan: Pittosporum undulatum), not the species",
+  "atlas_used": [
+   "australian_laurel"
+  ],
+  "atlas_species": [
+   "Pittosporum undulatum"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/pittosporum_tobira_s1_leaf-on_sheet.jpg"
  },
  {
   "species": "salvia_leucantha",
@@ -186,12 +201,12 @@
   ],
   "fidelity": "form-class",
   "caption": "generated form-class plant, stands in for Salvia leucantha",
-  "close_up_caption": "generated form-class plant (leaf scan: Hedychium coronarium), not the species",
+  "close_up_caption": "generated form-class plant (leaf scan: Pittosporum undulatum), not the species",
   "atlas_used": [
-   "ginger_lily"
+   "australian_laurel"
   ],
   "atlas_species": [
-   "Hedychium coronarium"
+   "Pittosporum undulatum"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
@@ -200,9 +215,12 @@
  },
  {
   "species": "trachelospermum_jasminoides",
-  "in_layout": false,
-  "count": 0,
-  "layout_spread_m": null,
+  "in_layout": true,
+  "count": 6,
+  "layout_spread_m": [
+   0.5,
+   0.5
+  ],
   "fidelity": "species",
   "caption": "Trachelospermum jasminoides (generated from a leaf scan of the species)",
   "close_up_caption": "Trachelospermum jasminoides (generated from a leaf scan of the species)",
@@ -225,18 +243,18 @@
    0.5,
    0.5
   ],
-  "fidelity": "form-class",
-  "caption": "generated form-class plant, stands in for Vitis vinifera",
-  "close_up_caption": "generated form-class plant (leaf scan: Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)), not the species",
+  "fidelity": "species",
+  "caption": "Vitis vinifera (generated from a leaf scan of the species)",
+  "close_up_caption": "Vitis vinifera (generated from a leaf scan of the species)",
   "atlas_used": [
-   "palmate_grape"
+   "grape_vine"
   ],
   "atlas_species": [
-   "Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)"
+   "Vitis vinifera"
   ],
   "generator_version": "fg-0.1",
   "leaf_len_source": "policy",
-  "grade": "C",
+  "grade": "B",
   "sheet": "knowledge/landscape/foliage/sheets/vitis_vinifera_s1_leaf-on_sheet.jpg"
  }
 ]

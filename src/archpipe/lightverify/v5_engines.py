@@ -13,6 +13,7 @@ import json
 import math
 import os
 import subprocess
+import time
 from pathlib import Path
 
 from . import ies
@@ -90,7 +91,10 @@ def run_cycles(job: dict, workdir: Path, reuse=True) -> dict:
     op.unlink(missing_ok=True)
     jp.write_text(blob)
     shaf.write_text(sha)
-    jid = "lv-cycles-%s-%s" % (workdir.name, sha)
+    # jobq returns an existing id's OLD job (idempotent submit). The key is content, and the content holds only paths, so a deleted
+    # clone re-created at the same path got the dead clone's finished job and no output files: the id is unique per submission,
+    # the content cache above (job.sha next to out.json) is what makes a re-run cheap.
+    jid = "lv-cycles-%s-%s-%x" % (workdir.name, sha, time.time_ns())
     cmd = [JOBQ, "submit", "--gpu", "--timeout", "3000", "--cwd", str(ROOT), "--id", jid, "--", BLENDER, "-b", "-P",
            str(Path(__file__).with_name("cycles_probe.py")), "--", str(jp), str(op)]
     r = subprocess.run(cmd, capture_output=True, text=True)

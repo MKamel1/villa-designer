@@ -266,7 +266,7 @@ def build_climber(spec, rng, H, S, reach, state, lod_keep):
     for k in range(spec["stems"]):
         x0 = (k / max(1, spec["stems"] - 1) - 0.5) * hw * 1.2
         grow_tree(g, rng, np.array([x0, 0.02, 0.0]), np.array([rng.normal(0, 0.15), 0.05, 1.0]), H * rng.uniform(0.9, 1.1), 0.006, 0, P,
-                  trop=[0.5, 0.3, 0.2], grav=[0.0, -0.1, 0.1])
+                  trop=[0.5, 0.3, 0.2], grav=[0.0, -0.1, 0.1 + spec.get("lax", 0.0)])     # lax: laterals sag and loop (grape, petrea) instead of lying on the trellis
     ls = LeafSet(spec, rng)
     for b in g.out:
         pts = b["pts"]; n = len(pts)
@@ -275,7 +275,7 @@ def build_climber(spec, rng, H, S, reach, state, lod_keep):
         for i in range(2, n, step):
             bd = unit(d_all[i])
             for j in range(2 if spec["arr"] == "opposite" else 1):
-                if rng.random() > lod_keep * 0.8:
+                if rng.random() > lod_keep * spec.get("keep", 0.8):
                     continue
                 side = (-1 if j else 1) * (1 if spec["arr"] == "opposite" else rng.choice([-1, 1]))
                 d = unit(np.array([side * rng.uniform(0.2, 0.9), rng.uniform(0.5, 1.0), -rng.uniform(0.0, 0.7)]) + rng.normal(0, 0.1, 3))
@@ -415,7 +415,9 @@ FORMS = dict(shrub=build_shrub, climber=build_climber, tree=build_tree, basal=bu
 def label_of(slug, spec, seed, state, banks_used):
     sci = BANKS[next(iter(banks_used))]["scientific_name"] if banks_used else None
     species_ok = len(banks_used) == 1 and not any(BANKS[b].get("synthetic_outline") for b in banks_used) and all(BANKS[b]["scientific_name"].split()[:2] == spec["accepted"].split()[:2] for b in banks_used)
+    genus = all(BANKS[b]["scientific_name"].split()[0] == spec["accepted"].split()[0] and not BANKS[b].get("synthetic_outline") for b in banks_used)
     return dict(
+        atlas_match="species" if species_ok else "genus" if genus else "none",     # genus: the scanned plant is the same genus, a different species (form-class)
         species=slug, accepted_name=spec["accepted"], generator_version=VERSION, seed=int(seed), state=state,
         atlas_used=sorted(banks_used), atlas_species=sorted({BANKS[b]["scientific_name"] for b in banks_used}),
         fidelity="species" if species_ok else "form-class",
