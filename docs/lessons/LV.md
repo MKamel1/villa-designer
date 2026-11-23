@@ -16,3 +16,5 @@
 | `run_cycles` cache ignored the renderer | key = job JSON + probe | `renderer_sha()` over `blender/*.py` + probe; test edits a renderer file and expects a new jobq id |
 | V6 n/e for three sub-planes | rooms without a room-* plane had no V6 row | `v6_handcalc.subplanes` judges `v6-subplanes.json` against this lane's Radiance (stale file fails) |
 | QA03 CRI recorded 90, page says 92 | spec read from the product name | V10 `cri` row: overstated fails, understated flagged |
+| A fresh clone at a reused path failed the v5 test (jobq returned the dead clone's job) | job id = hash of content that holds only paths; jobq submit is idempotent on id | id unique per submission; guard `test_run_cycles_job_id.py` with a fake jobq that behaves the same way |
+| V10 had no CRI check for Libera pages | CRI parsed only from the QA layout (label and value on separate lines) | `_inline_cri` reads "CRI nn" under "Light colour quality"; `test_iguzzini_page_is_read_by_label...` covers both layouts |
