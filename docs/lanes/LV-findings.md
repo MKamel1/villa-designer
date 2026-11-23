@@ -260,3 +260,24 @@ V11 DIALux not run (3 n.e.); V9 declined.
   nothing reaches the pillows. But the scene has no upstand mesh (assumed), and the strip sits at z 2.73 *above* the parents' ceiling mesh (2.70-2.701) in the render scene while the engine room's ceiling is 2.74:
   in Cycles the 1 mm ceiling plane is between the strip and the room, so the render may not show the cove light at all. Not rendered here; open item for the render/design lane.
 * Open (not mine): `tests/luminaires/test_erco.py::test_stored_files_match_source_sha` fails on `QA11-product-page.txt` (file sha differs from QA11/source.json) already on origin/lane/L6d.
+
+## Verification of lane L6d, second pass (2026-11-22, RP65 binding, scene a15e7078)
+
+Run: `python -m archpipe.lightverify --design D1 --scene ~/archpipe/lanes/L6d/out/L6d/L6d-final-1609/scene.json` (sha256 a15e7078... checked). 457 pass / 1 fail / 3 n.e.; room-plane rows **verified 39 of 40**
+(the one unverified row is the documented dressing-room V6 miss, -40 %). V10 97/0/0.
+
+* **V10 Libera** (page text and the maker's .ies/.ldt read by this lane's own parsers; no ids in code): RP65 (bound, `IGUZZINI-RP65.ies` byte-identical to the download): lumens 1078.9 vs 1079 (-0.01 %), 9.70 W,
+  CRI record 90 = page 90 (Rf 91), Imax file 982 vs page 998 cd (-1.6 %), LOR 83.0 vs 83 %, flux >= 90 deg 25.9 vs 26 lm, .ies = .ldt. RP25 (alternate, now in `v10-alternates.json`): lumens 2058.2 vs 2058 (+0.01 %), 18.70 W,
+  Imax 2018 vs 2110 cd (**-4.35 %**, inside 5 % but the closest to the bar), LOR 83.0, flux >= 90 deg 0.05 vs 0 lm. L6d's records agree (RP65 982 cd/-1.6 %; RP25 2018 cd/-4.35 %; lumens within 0.02 %). The page prints no
+  beam angle for Libera (the optic row holds the UGR text): no beam-angle row, none invented. Control is external (48 V PWM supply, DALI-2 only via the chosen supply): not a module property, as L6d records it.
+  QA03's CRI 92-vs-90 record is moot (retired).
+* **Entry-lobby cove, from the scene's own meshes** (not L6d's test): strip COVE-parents-entry-01 at (18.977, -26.911, **2.72**; L6d's text says 2.73), 0.8 m. 2592 rays from a grid of eyes over both pillows
+  (x 19.5-21.2, y -26.35..-25.85, z 0.8-1.2) to 9 x 4 points of the strip: **0 visible** as built; control with the band `ceiling-parents-entry` removed: 936 visible, with band and trough removed: 1078. The hiding is done
+  by the 0.30 m band at z 2.70, not by the upstand. The upstand `ceiling-parents-entry-trough` exists (y -26.89, z 2.70-2.80, x 18.477-19.477): it is 100 mm high, a 1 mm slab, not the 80 mm in L6d's text. The strip is
+  below the 2.80 soffit and above the band.
+* **Lobby plane**: not 71 / 57 lx any more: my Radiance (ab 12 -> 24) on the final design reads **74.6 -> 75.3 lx mean, 62.8 lx min** (zones at 100 %, MF not applied; card min 30 lx). Cause: the cove's lumens changed
+  after L6d's note (1190 -> 1250 lm; 71.3 x 1250/1190 = 74.9). L6d's figures are the earlier ones and conservative; the card holds with margin.
+* **v5 orientation test failure in a fresh clone** (cause): `run_cycles` named its jobq job `lv-cycles-<dir>-<sha of job JSON>`; the JSON holds only paths and numbers, so a clone re-created at a path an earlier clone used
+  produced the same id, and jobq's idempotent submit returned the OLD finished job (nothing run, `out.json` gone with the deleted clone): RuntimeError. Reproduced on the pre-fix code: fresh clone at one path passes,
+  a second fresh clone at the same path fails. Fix: unique id per submission (`time_ns` suffix; the `job.sha` + `out.json` content cache still makes a re-run cheap). Verified after the fix: fresh clones at two paths and
+  the same path again, all pass. Guard: `tests/lightverify/test_run_cycles_job_id.py` (a fake jobq with jobq's idempotent behaviour; fails on the old code with the same RuntimeError).

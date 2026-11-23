@@ -260,13 +260,14 @@
    "merged": 0,
    "dead_or_white": 5,
    "holed": 0,
-   "tiny": 0
+   "tiny": 0,
+   "ragged_or_oversize": 0
   }
  },
  "ginger_lily": {
   "mean_rgb": [
-   32.7,
-   47.3,
+   32.9,
+   47.6,
    2.1
   ],
   "scientific_name": "Hedychium coronarium",
@@ -294,22 +295,6 @@
     "fill": 0.96,
     "g_over_r": 1.536,
     "area_px": 301504
-   },
-   {
-    "base_px": [
-     303.6,
-     340.8
-    ],
-    "axis": [
-     0.0333,
-     -0.9994
-    ],
-    "len_px": 273.0,
-    "wid_px": 160.4,
-    "petiole_frac": 0.167,
-    "fill": 0.987,
-    "g_over_r": 1.642,
-    "area_px": 34768
    },
    {
     "base_px": [
@@ -460,7 +445,8 @@
    "merged": 15,
    "dead_or_white": 19,
    "holed": 0,
-   "tiny": 6
+   "tiny": 6,
+   "ragged_or_oversize": 1
   }
  },
  "jungle_ginger": {
@@ -724,7 +710,8 @@
    "merged": 1,
    "dead_or_white": 20,
    "holed": 0,
-   "tiny": 0
+   "tiny": 0,
+   "ragged_or_oversize": 0
   }
  },
  "cast_iron": {
@@ -876,7 +863,8 @@
    "merged": 0,
    "dead_or_white": 4,
    "holed": 0,
-   "tiny": 0
+   "tiny": 0,
+   "ragged_or_oversize": 0
   }
  },
  "taro": {
@@ -1044,7 +1032,2559 @@
    "merged": 0,
    "dead_or_white": 4,
    "holed": 0,
-   "tiny": 0
+   "tiny": 0,
+   "ragged_or_oversize": 0
+  }
+ },
+ "australian_laurel": {
+  "mean_rgb": [
+   81.9,
+   107.2,
+   6.2
+  ],
+  "scientific_name": "Pittosporum undulatum",
+  "atlas": "australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/australian_laurel_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     479.8,
+     775.3
+    ],
+    "axis": [
+     -0.0687,
+     -0.9976
+    ],
+    "len_px": 392.1,
+    "wid_px": 173.2,
+    "petiole_frac": 0.167,
+    "fill": 0.99,
+    "g_over_r": 1.394,
+    "area_px": 51792
+   },
+   {
+    "base_px": [
+     1549.0,
+     717.4
+    ],
+    "axis": [
+     -0.0076,
+     -1.0
+    ],
+    "len_px": 249.5,
+    "wid_px": 84.1,
+    "petiole_frac": 0.292,
+    "fill": 1.043,
+    "g_over_r": 1.507,
+    "area_px": 19616
+   },
+   {
+    "base_px": [
+     1406.8,
+     474.3
+    ],
+    "axis": [
+     -0.1845,
+     0.9828
+    ],
+    "len_px": 250.1,
+    "wid_px": 93.4,
+    "petiole_frac": 0.0,
+    "fill": 0.989,
+    "g_over_r": 1.447,
+    "area_px": 15088
+   },
+   {
+    "base_px": [
+     1708.7,
+     754.1
+    ],
+    "axis": [
+     0.0211,
+     -0.9998
+    ],
+    "len_px": 258.6,
+    "wid_px": 140.2,
+    "petiole_frac": 0.25,
+    "fill": 0.994,
+    "g_over_r": 1.315,
+    "area_px": 29040
+   },
+   {
+    "base_px": [
+     618.7,
+     814.6
+    ],
+    "axis": [
+     0.1921,
+     0.9814
+    ],
+    "len_px": 250.2,
+    "wid_px": 80.8,
+    "petiole_frac": 0.0,
+    "fill": 1.019,
+    "g_over_r": 1.288,
+    "area_px": 16080
+   },
+   {
+    "base_px": [
+     2151.0,
+     1293.3
+    ],
+    "axis": [
+     0.0308,
+     -0.9995
+    ],
+    "len_px": 358.2,
+    "wid_px": 224.3,
+    "petiole_frac": 0.208,
+    "fill": 0.984,
+    "g_over_r": 1.409,
+    "area_px": 63648
+   },
+   {
+    "base_px": [
+     1579.0,
+     1178.9
+    ],
+    "axis": [
+     0.0182,
+     -0.9998
+    ],
+    "len_px": 195.2,
+    "wid_px": 128.1,
+    "petiole_frac": 0.25,
+    "fill": 1.014,
+    "g_over_r": 1.18,
+    "area_px": 20384
+   },
+   {
+    "base_px": [
+     1309.8,
+     1207.3
+    ],
+    "axis": [
+     0.0242,
+     -0.9997
+    ],
+    "len_px": 215.4,
+    "wid_px": 96.3,
+    "petiole_frac": 0.292,
+    "fill": 1.024,
+    "g_over_r": 1.166,
+    "area_px": 18512
+   },
+   {
+    "base_px": [
+     1434.8,
+     1166.5
+    ],
+    "axis": [
+     0.0869,
+     -0.9962
+    ],
+    "len_px": 123.6,
+    "wid_px": 88.7,
+    "petiole_frac": 0.25,
+    "fill": 1.048,
+    "g_over_r": 1.31,
+    "area_px": 9648
+   },
+   {
+    "base_px": [
+     1723.0,
+     1191.8
+    ],
+    "axis": [
+     0.1809,
+     -0.9835
+    ],
+    "len_px": 147.4,
+    "wid_px": 105.9,
+    "petiole_frac": 0.333,
+    "fill": 1.025,
+    "g_over_r": 1.503,
+    "area_px": 12704
+   },
+   {
+    "base_px": [
+     482.0,
+     1969.3
+    ],
+    "axis": [
+     -0.0652,
+     0.9979
+    ],
+    "len_px": 248.9,
+    "wid_px": 148.7,
+    "petiole_frac": 0.0,
+    "fill": 0.997,
+    "g_over_r": 1.425,
+    "area_px": 29024
+   },
+   {
+    "base_px": [
+     623.7,
+     3338.0
+    ],
+    "axis": [
+     -0.9765,
+     0.2155
+    ],
+    "len_px": 357.6,
+    "wid_px": 248.2,
+    "petiole_frac": 0.125,
+    "fill": 0.825,
+    "g_over_r": 1.149,
+    "area_px": 45072
+   }
+  ],
+  "dropped": {
+   "merged": 5,
+   "dead_or_white": 8,
+   "holed": 0,
+   "tiny": 0,
+   "pale": 7,
+   "ragged_or_oversize": 0,
+   "not_isolated": 0
+  }
+ },
+ "weeping_fig": {
+  "mean_rgb": [
+   88.6,
+   107.3,
+   40.5
+  ],
+  "scientific_name": "Ficus benjamina",
+  "atlas": "weeping_fig_pbxka2_4k/Weeping_Fig_pbxkA2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/weeping_fig_pbxka2_4k/Weeping_Fig_pbxkA2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/weeping_fig_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/weeping_fig_pbxka2_4k/Weeping_Fig_pbxkA2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/weeping_fig_pbxka2_4k/Weeping_Fig_pbxkA2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/weeping_fig_pbxka2_4k/Weeping_Fig_pbxkA2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2252.5,
+     332.6
+    ],
+    "axis": [
+     -0.9529,
+     -0.3033
+    ],
+    "len_px": 270.6,
+    "wid_px": 174.5,
+    "petiole_frac": 0.0,
+    "fill": 0.971,
+    "g_over_r": 1.235,
+    "area_px": 33440
+   },
+   {
+    "base_px": [
+     1937.8,
+     175.6
+    ],
+    "axis": [
+     0.2001,
+     0.9798
+    ],
+    "len_px": 107.5,
+    "wid_px": 49.4,
+    "petiole_frac": 0.0,
+    "fill": 1.105,
+    "g_over_r": 1.18,
+    "area_px": 4672
+   },
+   {
+    "base_px": [
+     1769.0,
+     646.9
+    ],
+    "axis": [
+     0.1616,
+     -0.9869
+    ],
+    "len_px": 109.0,
+    "wid_px": 57.2,
+    "petiole_frac": 0.0,
+    "fill": 1.091,
+    "g_over_r": 1.127,
+    "area_px": 5424
+   },
+   {
+    "base_px": [
+     2469.1,
+     1403.7
+    ],
+    "axis": [
+     0.8064,
+     -0.5913
+    ],
+    "len_px": 372.8,
+    "wid_px": 116.1,
+    "petiole_frac": 0.0,
+    "fill": 0.959,
+    "g_over_r": 1.189,
+    "area_px": 30384
+   },
+   {
+    "base_px": [
+     3420.9,
+     1430.3
+    ],
+    "axis": [
+     0.2973,
+     0.9548
+    ],
+    "len_px": 84.6,
+    "wid_px": 190.9,
+    "petiole_frac": 0.583,
+    "fill": 0.959,
+    "g_over_r": 1.153,
+    "area_px": 15024
+   },
+   {
+    "base_px": [
+     3222.9,
+     1553.8
+    ],
+    "axis": [
+     -0.207,
+     -0.9783
+    ],
+    "len_px": 162.6,
+    "wid_px": 82.4,
+    "petiole_frac": 0.042,
+    "fill": 1.037,
+    "g_over_r": 1.286,
+    "area_px": 10768
+   },
+   {
+    "base_px": [
+     2618.6,
+     1398.0
+    ],
+    "axis": [
+     0.8619,
+     0.5072
+    ],
+    "len_px": 175.0,
+    "wid_px": 43.2,
+    "petiole_frac": 0.0,
+    "fill": 1.057,
+    "g_over_r": 1.189,
+    "area_px": 6816
+   },
+   {
+    "base_px": [
+     2127.6,
+     1442.9
+    ],
+    "axis": [
+     -0.7338,
+     0.6794
+    ],
+    "len_px": 161.6,
+    "wid_px": 39.8,
+    "petiole_frac": 0.0,
+    "fill": 1.095,
+    "g_over_r": 1.153,
+    "area_px": 5200
+   },
+   {
+    "base_px": [
+     2865.9,
+     1529.1
+    ],
+    "axis": [
+     0.9938,
+     -0.1108
+    ],
+    "len_px": 233.7,
+    "wid_px": 68.9,
+    "petiole_frac": 0.0,
+    "fill": 1.022,
+    "g_over_r": 1.175,
+    "area_px": 11040
+   },
+   {
+    "base_px": [
+     2636.7,
+     1671.0
+    ],
+    "axis": [
+     -0.0966,
+     -0.9953
+    ],
+    "len_px": 178.4,
+    "wid_px": 99.9,
+    "petiole_frac": 0.042,
+    "fill": 1.009,
+    "g_over_r": 1.151,
+    "area_px": 12032
+   },
+   {
+    "base_px": [
+     2005.8,
+     1571.9
+    ],
+    "axis": [
+     -0.0283,
+     0.9996
+    ],
+    "len_px": 195.5,
+    "wid_px": 60.2,
+    "petiole_frac": 0.0,
+    "fill": 1.053,
+    "g_over_r": 1.325,
+    "area_px": 9184
+   },
+   {
+    "base_px": [
+     1192.6,
+     1642.5
+    ],
+    "axis": [
+     0.9991,
+     0.0418
+    ],
+    "len_px": 167.9,
+    "wid_px": 72.3,
+    "petiole_frac": 0.042,
+    "fill": 1.045,
+    "g_over_r": 1.1,
+    "area_px": 10336
+   },
+   {
+    "base_px": [
+     3136.6,
+     1684.3
+    ],
+    "axis": [
+     0.9268,
+     0.3756
+    ],
+    "len_px": 136.8,
+    "wid_px": 84.7,
+    "petiole_frac": 0.0,
+    "fill": 1.041,
+    "g_over_r": 1.214,
+    "area_px": 9168
+   },
+   {
+    "base_px": [
+     2073.6,
+     1975.7
+    ],
+    "axis": [
+     -0.9105,
+     -0.4135
+    ],
+    "len_px": 272.1,
+    "wid_px": 98.7,
+    "petiole_frac": 0.0,
+    "fill": 0.984,
+    "g_over_r": 1.346,
+    "area_px": 18160
+   },
+   {
+    "base_px": [
+     2285.1,
+     2102.2
+    ],
+    "axis": [
+     -0.9506,
+     -0.3105
+    ],
+    "len_px": 183.3,
+    "wid_px": 75.9,
+    "petiole_frac": 0.042,
+    "fill": 1.028,
+    "g_over_r": 1.3,
+    "area_px": 11008
+   },
+   {
+    "base_px": [
+     1962.8,
+     2403.1
+    ],
+    "axis": [
+     -0.1726,
+     -0.985
+    ],
+    "len_px": 229.3,
+    "wid_px": 209.7,
+    "petiole_frac": 0.167,
+    "fill": 0.961,
+    "g_over_r": 1.407,
+    "area_px": 32896
+   },
+   {
+    "base_px": [
+     1560.1,
+     2324.5
+    ],
+    "axis": [
+     -0.9889,
+     -0.1486
+    ],
+    "len_px": 249.3,
+    "wid_px": 106.4,
+    "petiole_frac": 0.042,
+    "fill": 0.997,
+    "g_over_r": 1.337,
+    "area_px": 21712
+   },
+   {
+    "base_px": [
+     2146.8,
+     2249.7
+    ],
+    "axis": [
+     0.7684,
+     0.6399
+    ],
+    "len_px": 208.8,
+    "wid_px": 99.9,
+    "petiole_frac": 0.042,
+    "fill": 1.02,
+    "g_over_r": 1.321,
+    "area_px": 17568
+   },
+   {
+    "base_px": [
+     1166.8,
+     2284.5
+    ],
+    "axis": [
+     -0.0219,
+     0.9998
+    ],
+    "len_px": 206.5,
+    "wid_px": 124.1,
+    "petiole_frac": 0.083,
+    "fill": 1.008,
+    "g_over_r": 1.206,
+    "area_px": 20416
+   },
+   {
+    "base_px": [
+     750.9,
+     2749.5
+    ],
+    "axis": [
+     -0.8833,
+     0.4689
+    ],
+    "len_px": 189.2,
+    "wid_px": 128.7,
+    "petiole_frac": 0.083,
+    "fill": 1.004,
+    "g_over_r": 1.231,
+    "area_px": 19952
+   },
+   {
+    "base_px": [
+     1391.5,
+     3124.1
+    ],
+    "axis": [
+     -0.2393,
+     -0.9709
+    ],
+    "len_px": 320.1,
+    "wid_px": 136.8,
+    "petiole_frac": 0.0,
+    "fill": 0.966,
+    "g_over_r": 1.179,
+    "area_px": 26976
+   },
+   {
+    "base_px": [
+     746.5,
+     2944.9
+    ],
+    "axis": [
+     0.2887,
+     -0.9574
+    ],
+    "len_px": 155.3,
+    "wid_px": 45.6,
+    "petiole_frac": 0.042,
+    "fill": 1.072,
+    "g_over_r": 1.098,
+    "area_px": 6016
+   },
+   {
+    "base_px": [
+     1165.3,
+     2909.3
+    ],
+    "axis": [
+     0.315,
+     0.9491
+    ],
+    "len_px": 157.7,
+    "wid_px": 105.0,
+    "petiole_frac": 0.333,
+    "fill": 0.975,
+    "g_over_r": 1.155,
+    "area_px": 13920
+   },
+   {
+    "base_px": [
+     821.8,
+     2849.1
+    ],
+    "axis": [
+     -0.0629,
+     0.998
+    ],
+    "len_px": 132.2,
+    "wid_px": 48.4,
+    "petiole_frac": 0.042,
+    "fill": 1.085,
+    "g_over_r": 1.176,
+    "area_px": 5872
+   },
+   {
+    "base_px": [
+     581.7,
+     3082.1
+    ],
+    "axis": [
+     0.3569,
+     -0.9342
+    ],
+    "len_px": 188.9,
+    "wid_px": 134.4,
+    "petiole_frac": 0.042,
+    "fill": 0.902,
+    "g_over_r": 1.198,
+    "area_px": 18192
+   },
+   {
+    "base_px": [
+     520.5,
+     2919.5
+    ],
+    "axis": [
+     -0.7464,
+     0.6655
+    ],
+    "len_px": 145.8,
+    "wid_px": 96.7,
+    "petiole_frac": 0.208,
+    "fill": 0.804,
+    "g_over_r": 1.122,
+    "area_px": 9744
+   },
+   {
+    "base_px": [
+     1660.6,
+     3137.6
+    ],
+    "axis": [
+     -0.4524,
+     -0.8918
+    ],
+    "len_px": 187.8,
+    "wid_px": 78.7,
+    "petiole_frac": 0.042,
+    "fill": 1.028,
+    "g_over_r": 1.209,
+    "area_px": 11744
+   },
+   {
+    "base_px": [
+     2517.5,
+     3019.0
+    ],
+    "axis": [
+     -0.6298,
+     0.7768
+    ],
+    "len_px": 111.8,
+    "wid_px": 43.1,
+    "petiole_frac": 0.0,
+    "fill": 1.12,
+    "g_over_r": 1.165,
+    "area_px": 4192
+   },
+   {
+    "base_px": [
+     2397.1,
+     3037.9
+    ],
+    "axis": [
+     -0.6306,
+     0.7761
+    ],
+    "len_px": 179.9,
+    "wid_px": 51.8,
+    "petiole_frac": 0.0,
+    "fill": 1.053,
+    "g_over_r": 1.196,
+    "area_px": 7824
+   },
+   {
+    "base_px": [
+     1293.1,
+     3406.4
+    ],
+    "axis": [
+     0.1083,
+     -0.9941
+    ],
+    "len_px": 232.3,
+    "wid_px": 196.6,
+    "petiole_frac": 0.0,
+    "fill": 0.844,
+    "g_over_r": 1.133,
+    "area_px": 26704
+   },
+   {
+    "base_px": [
+     2213.2,
+     3459.6
+    ],
+    "axis": [
+     -0.1461,
+     -0.9893
+    ],
+    "len_px": 220.8,
+    "wid_px": 105.2,
+    "petiole_frac": 0.042,
+    "fill": 0.994,
+    "g_over_r": 1.277,
+    "area_px": 19632
+   },
+   {
+    "base_px": [
+     2408.7,
+     3329.6
+    ],
+    "axis": [
+     0.9935,
+     -0.1138
+    ],
+    "len_px": 123.3,
+    "wid_px": 68.9,
+    "petiole_frac": 0.042,
+    "fill": 1.071,
+    "g_over_r": 1.242,
+    "area_px": 7216
+   },
+   {
+    "base_px": [
+     2391.3,
+     3349.1
+    ],
+    "axis": [
+     -0.1721,
+     0.9851
+    ],
+    "len_px": 123.2,
+    "wid_px": 77.6,
+    "petiole_frac": 0.0,
+    "fill": 0.983,
+    "g_over_r": 1.194,
+    "area_px": 6528
+   },
+   {
+    "base_px": [
+     2092.5,
+     3526.5
+    ],
+    "axis": [
+     0.999,
+     -0.0442
+    ],
+    "len_px": 290.7,
+    "wid_px": 68.5,
+    "petiole_frac": 0.0,
+    "fill": 1.019,
+    "g_over_r": 1.17,
+    "area_px": 15024
+   },
+   {
+    "base_px": [
+     2450.8,
+     3641.4
+    ],
+    "axis": [
+     0.7983,
+     0.6022
+    ],
+    "len_px": 148.4,
+    "wid_px": 94.4,
+    "petiole_frac": 0.042,
+    "fill": 1.034,
+    "g_over_r": 1.071,
+    "area_px": 12144
+   }
+  ],
+  "dropped": {
+   "merged": 13,
+   "dead_or_white": 0,
+   "holed": 0,
+   "tiny": 0,
+   "ragged_or_oversize": 0,
+   "not_isolated": 6
+  }
+ },
+ "grape_vine": {
+  "mean_rgb": [
+   55.5,
+   68.9,
+   7.4
+  ],
+  "scientific_name": "Vitis vinifera",
+  "atlas": "common_grape_vine_qhmj12_4k/Common_Grape_Vine_qhmj12_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/common_grape_vine_qhmj12_4k/Common_Grape_Vine_qhmj12_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/grape_vine_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/common_grape_vine_qhmj12_4k/Common_Grape_Vine_qhmj12_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/common_grape_vine_qhmj12_4k/Common_Grape_Vine_qhmj12_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/common_grape_vine_qhmj12_4k/Common_Grape_Vine_qhmj12_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     3439.1,
+     814.0
+    ],
+    "axis": [
+     0.9655,
+     0.2603
+    ],
+    "len_px": 329.8,
+    "wid_px": 245.6,
+    "petiole_frac": 0.0,
+    "fill": 0.945,
+    "g_over_r": 1.317,
+    "area_px": 57056
+   },
+   {
+    "base_px": [
+     3681.0,
+     1195.1
+    ],
+    "axis": [
+     -0.8125,
+     0.5829
+    ],
+    "len_px": 287.8,
+    "wid_px": 276.2,
+    "petiole_frac": 0.042,
+    "fill": 0.929,
+    "g_over_r": 1.268,
+    "area_px": 60128
+   },
+   {
+    "base_px": [
+     3419.4,
+     1688.3
+    ],
+    "axis": [
+     0.9998,
+     0.0175
+    ],
+    "len_px": 332.6,
+    "wid_px": 256.2,
+    "petiole_frac": 0.0,
+    "fill": 0.853,
+    "g_over_r": 1.308,
+    "area_px": 55648
+   },
+   {
+    "base_px": [
+     3433.8,
+     2099.8
+    ],
+    "axis": [
+     0.996,
+     -0.0892
+    ],
+    "len_px": 267.9,
+    "wid_px": 261.8,
+    "petiole_frac": 0.0,
+    "fill": 0.946,
+    "g_over_r": 1.241,
+    "area_px": 53056
+   },
+   {
+    "base_px": [
+     3524.2,
+     2367.2
+    ],
+    "axis": [
+     0.415,
+     0.9098
+    ],
+    "len_px": 230.3,
+    "wid_px": 201.9,
+    "petiole_frac": 0.0,
+    "fill": 0.979,
+    "g_over_r": 1.293,
+    "area_px": 38192
+   },
+   {
+    "base_px": [
+     1224.3,
+     2818.4
+    ],
+    "axis": [
+     -0.2233,
+     -0.9747
+    ],
+    "len_px": 350.9,
+    "wid_px": 301.0,
+    "petiole_frac": 0.0,
+    "fill": 0.93,
+    "g_over_r": 1.317,
+    "area_px": 82336
+   },
+   {
+    "base_px": [
+     3406.3,
+     2941.0
+    ],
+    "axis": [
+     0.9913,
+     -0.1315
+    ],
+    "len_px": 346.2,
+    "wid_px": 279.9,
+    "petiole_frac": 0.0,
+    "fill": 0.945,
+    "g_over_r": 1.186,
+    "area_px": 73216
+   },
+   {
+    "base_px": [
+     2799.3,
+     3546.7
+    ],
+    "axis": [
+     0.5584,
+     -0.8296
+    ],
+    "len_px": 632.3,
+    "wid_px": 364.0,
+    "petiole_frac": 0.0,
+    "fill": 0.829,
+    "g_over_r": 1.161,
+    "area_px": 136496
+   },
+   {
+    "base_px": [
+     1579.7,
+     2968.1
+    ],
+    "axis": [
+     0.7501,
+     0.6613
+    ],
+    "len_px": 213.7,
+    "wid_px": 167.4,
+    "petiole_frac": 0.0,
+    "fill": 0.957,
+    "g_over_r": 1.082,
+    "area_px": 29856
+   },
+   {
+    "base_px": [
+     1448.9,
+     3157.7
+    ],
+    "axis": [
+     -0.9891,
+     0.1472
+    ],
+    "len_px": 410.6,
+    "wid_px": 492.1,
+    "petiole_frac": 0.0,
+    "fill": 0.854,
+    "g_over_r": 1.256,
+    "area_px": 113184
+   },
+   {
+    "base_px": [
+     3704.6,
+     3307.0
+    ],
+    "axis": [
+     -0.9261,
+     0.3773
+    ],
+    "len_px": 332.2,
+    "wid_px": 285.9,
+    "petiole_frac": 0.0,
+    "fill": 0.938,
+    "g_over_r": 1.259,
+    "area_px": 71648
+   },
+   {
+    "base_px": [
+     1540.4,
+     3374.9
+    ],
+    "axis": [
+     0.9998,
+     -0.0216
+    ],
+    "len_px": 227.9,
+    "wid_px": 212.2,
+    "petiole_frac": 0.0,
+    "fill": 0.933,
+    "g_over_r": 1.245,
+    "area_px": 34624
+   }
+  ],
+  "dropped": {
+   "merged": 5,
+   "dead_or_white": 3,
+   "holed": 4,
+   "tiny": 0,
+   "ragged_or_oversize": 0,
+   "not_isolated": 0
+  }
+ },
+ "tree_philodendron": {
+  "mean_rgb": [
+   42.3,
+   57.1,
+   1.4
+  ],
+  "scientific_name": "Thaumatophyllum bipinnatifidum",
+  "atlas": "tree_philodendron_qirh62_4k/Tree_Philodendron_qirh62_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/tree_philodendron_qirh62_4k/Tree_Philodendron_qirh62_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/tree_philodendron_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/tree_philodendron_qirh62_4k/Tree_Philodendron_qirh62_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/tree_philodendron_qirh62_4k/Tree_Philodendron_qirh62_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/tree_philodendron_qirh62_4k/Tree_Philodendron_qirh62_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     3022.1,
+     1722.2
+    ],
+    "axis": [
+     0.0297,
+     -0.9996
+    ],
+    "len_px": 901.7,
+    "wid_px": 456.7,
+    "petiole_frac": 0.125,
+    "fill": 0.833,
+    "g_over_r": 1.379,
+    "area_px": 226416
+   },
+   {
+    "base_px": [
+     1691.1,
+     1039.6
+    ],
+    "axis": [
+     0.0805,
+     0.9968
+    ],
+    "len_px": 907.9,
+    "wid_px": 248.0,
+    "petiole_frac": 0.167,
+    "fill": 0.926,
+    "g_over_r": 1.405,
+    "area_px": 173456
+   },
+   {
+    "base_px": [
+     2873.4,
+     2145.5
+    ],
+    "axis": [
+     0.1269,
+     0.9919
+    ],
+    "len_px": 622.9,
+    "wid_px": 258.0,
+    "petiole_frac": 0.083,
+    "fill": 0.896,
+    "g_over_r": 1.329,
+    "area_px": 126512
+   },
+   {
+    "base_px": [
+     2302.3,
+     2910.4
+    ],
+    "axis": [
+     -0.0356,
+     -0.9994
+    ],
+    "len_px": 774.8,
+    "wid_px": 159.5,
+    "petiole_frac": 0.083,
+    "fill": 0.966,
+    "g_over_r": 1.263,
+    "area_px": 92160
+   },
+   {
+    "base_px": [
+     1074.2,
+     2965.6
+    ],
+    "axis": [
+     0.0197,
+     -0.9998
+    ],
+    "len_px": 714.6,
+    "wid_px": 412.4,
+    "petiole_frac": 0.125,
+    "fill": 0.856,
+    "g_over_r": 1.335,
+    "area_px": 149296
+   },
+   {
+    "base_px": [
+     1753.7,
+     2872.2
+    ],
+    "axis": [
+     -0.0603,
+     -0.9982
+    ],
+    "len_px": 679.2,
+    "wid_px": 197.3,
+    "petiole_frac": 0.0,
+    "fill": 0.928,
+    "g_over_r": 1.354,
+    "area_px": 75408
+   }
+  ],
+  "dropped": {
+   "merged": 1,
+   "dead_or_white": 0,
+   "holed": 1,
+   "tiny": 3,
+   "ragged_or_oversize": 1,
+   "not_isolated": 0
+  }
+ },
+ "elephant_ear": {
+  "mean_rgb": [
+   41.8,
+   66.5,
+   1.6
+  ],
+  "scientific_name": "Alocasia (Megascans 'Elephant Ear')",
+  "atlas": "elephant_ear_qhnhw2_4k/Elephant_Ear_qhnhW2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/elephant_ear_qhnhw2_4k/Elephant_Ear_qhnhW2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/elephant_ear_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/elephant_ear_qhnhw2_4k/Elephant_Ear_qhnhW2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/elephant_ear_qhnhw2_4k/Elephant_Ear_qhnhW2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/elephant_ear_qhnhw2_4k/Elephant_Ear_qhnhW2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2042.2,
+     3676.1
+    ],
+    "axis": [
+     0.0139,
+     -0.9999
+    ],
+    "len_px": 2922.5,
+    "wid_px": 2205.9,
+    "petiole_frac": 0.0,
+    "fill": 0.872,
+    "g_over_r": 1.588,
+    "area_px": 4575568
+   }
+  ],
+  "dropped": {
+   "merged": 0,
+   "dead_or_white": 0,
+   "holed": 0,
+   "tiny": 0,
+   "ragged_or_oversize": 0,
+   "not_isolated": 0
+  }
+ },
+ "african_flag": {
+  "mean_rgb": [
+   83.3,
+   110.0,
+   15.4
+  ],
+  "scientific_name": "Hedychium/Canna-type strap (Megascans 'African Flag')",
+  "atlas": "african_flag_okyefdhh2_4k/African_Flag_okyefdhh2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/african_flag_okyefdhh2_4k/African_Flag_okyefdhh2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/african_flag_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/african_flag_okyefdhh2_4k/African_Flag_okyefdhh2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/african_flag_okyefdhh2_4k/African_Flag_okyefdhh2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/african_flag_okyefdhh2_4k/African_Flag_okyefdhh2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     577.5,
+     3327.9
+    ],
+    "axis": [
+     -0.0022,
+     -1.0
+    ],
+    "len_px": 3147.2,
+    "wid_px": 248.3,
+    "petiole_frac": 0.0,
+    "fill": 0.978,
+    "g_over_r": 1.259,
+    "area_px": 575584
+   },
+   {
+    "base_px": [
+     1397.2,
+     3939.1
+    ],
+    "axis": [
+     -0.0276,
+     -0.9996
+    ],
+    "len_px": 3550.6,
+    "wid_px": 376.9,
+    "petiole_frac": 0.0,
+    "fill": 0.973,
+    "g_over_r": 1.32,
+    "area_px": 1053504
+   },
+   {
+    "base_px": [
+     296.9,
+     2870.7
+    ],
+    "axis": [
+     -0.0381,
+     -0.9993
+    ],
+    "len_px": 2668.5,
+    "wid_px": 197.9,
+    "petiole_frac": 0.0,
+    "fill": 0.963,
+    "g_over_r": 1.292,
+    "area_px": 426208
+   },
+   {
+    "base_px": [
+     925.0,
+     3540.9
+    ],
+    "axis": [
+     -0.0122,
+     -0.9999
+    ],
+    "len_px": 3297.0,
+    "wid_px": 261.7,
+    "petiole_frac": 0.0,
+    "fill": 0.954,
+    "g_over_r": 1.287,
+    "area_px": 672880
+   },
+   {
+    "base_px": [
+     2573.0,
+     3944.7
+    ],
+    "axis": [
+     -0.0066,
+     -1.0
+    ],
+    "len_px": 3684.6,
+    "wid_px": 393.0,
+    "petiole_frac": 0.0,
+    "fill": 0.973,
+    "g_over_r": 1.343,
+    "area_px": 1108656
+   },
+   {
+    "base_px": [
+     3371.1,
+     4015.3
+    ],
+    "axis": [
+     0.0321,
+     -0.9995
+    ],
+    "len_px": 3590.6,
+    "wid_px": 321.1,
+    "petiole_frac": 0.0,
+    "fill": 0.959,
+    "g_over_r": 1.354,
+    "area_px": 835728
+   },
+   {
+    "base_px": [
+     1732.4,
+     3945.3
+    ],
+    "axis": [
+     0.0237,
+     -0.9997
+    ],
+    "len_px": 3681.8,
+    "wid_px": 308.6,
+    "petiole_frac": 0.0,
+    "fill": 0.978,
+    "g_over_r": 1.316,
+    "area_px": 930752
+   },
+   {
+    "base_px": [
+     3051.8,
+     3225.4
+    ],
+    "axis": [
+     -0.028,
+     -0.9996
+    ],
+    "len_px": 2983.9,
+    "wid_px": 330.5,
+    "petiole_frac": 0.0,
+    "fill": 0.975,
+    "g_over_r": 1.38,
+    "area_px": 767136
+   },
+   {
+    "base_px": [
+     3844.3,
+     2096.0
+    ],
+    "axis": [
+     -0.0001,
+     -1.0
+    ],
+    "len_px": 1796.7,
+    "wid_px": 212.0,
+    "petiole_frac": 0.0,
+    "fill": 0.978,
+    "g_over_r": 1.305,
+    "area_px": 303232
+   },
+   {
+    "base_px": [
+     2110.9,
+     2918.7
+    ],
+    "axis": [
+     0.024,
+     -0.9997
+    ],
+    "len_px": 2529.6,
+    "wid_px": 280.0,
+    "petiole_frac": 0.0,
+    "fill": 0.975,
+    "g_over_r": 1.37,
+    "area_px": 565584
+   },
+   {
+    "base_px": [
+     3873.1,
+     2644.6
+    ],
+    "axis": [
+     -0.0705,
+     0.9975
+    ],
+    "len_px": 1208.9,
+    "wid_px": 196.1,
+    "petiole_frac": 0.125,
+    "fill": 0.983,
+    "g_over_r": 1.283,
+    "area_px": 179024
+   }
+  ],
+  "dropped": {
+   "merged": 0,
+   "dead_or_white": 0,
+   "holed": 0,
+   "tiny": 0,
+   "ragged_or_oversize": 4,
+   "not_isolated": 0
+  }
+ },
+ "chinese_wisteria": {
+  "mean_rgb": [
+   50.7,
+   65.7,
+   6.9
+  ],
+  "scientific_name": "Wisteria sinensis",
+  "atlas": "chinese_wisteria_qfgfw2_4k/Chinese_Wisteria_qfgfW2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/chinese_wisteria_qfgfw2_4k/Chinese_Wisteria_qfgfW2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/chinese_wisteria_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/chinese_wisteria_qfgfw2_4k/Chinese_Wisteria_qfgfW2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/chinese_wisteria_qfgfw2_4k/Chinese_Wisteria_qfgfW2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/chinese_wisteria_qfgfw2_4k/Chinese_Wisteria_qfgfW2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2112.6,
+     494.7
+    ],
+    "axis": [
+     0.0431,
+     0.9991
+    ],
+    "len_px": 147.5,
+    "wid_px": 60.1,
+    "petiole_frac": 0.042,
+    "fill": 1.072,
+    "g_over_r": 1.226,
+    "area_px": 7216
+   },
+   {
+    "base_px": [
+     2101.4,
+     730.4
+    ],
+    "axis": [
+     -0.5805,
+     -0.8142
+    ],
+    "len_px": 127.3,
+    "wid_px": 72.1,
+    "petiole_frac": 0.042,
+    "fill": 0.984,
+    "g_over_r": 1.213,
+    "area_px": 6576
+   },
+   {
+    "base_px": [
+     1729.9,
+     809.5
+    ],
+    "axis": [
+     0.0916,
+     -0.9958
+    ],
+    "len_px": 148.0,
+    "wid_px": 60.1,
+    "petiole_frac": 0.042,
+    "fill": 1.079,
+    "g_over_r": 1.258,
+    "area_px": 6992
+   },
+   {
+    "base_px": [
+     2274.9,
+     805.2
+    ],
+    "axis": [
+     0.8622,
+     -0.5065
+    ],
+    "len_px": 104.3,
+    "wid_px": 96.7,
+    "petiole_frac": 0.125,
+    "fill": 1.036,
+    "g_over_r": 1.329,
+    "area_px": 7504
+   },
+   {
+    "base_px": [
+     1878.4,
+     746.1
+    ],
+    "axis": [
+     -0.6899,
+     0.7239
+    ],
+    "len_px": 164.5,
+    "wid_px": 56.6,
+    "petiole_frac": 0.0,
+    "fill": 1.065,
+    "g_over_r": 1.236,
+    "area_px": 7136
+   },
+   {
+    "base_px": [
+     1949.6,
+     822.8
+    ],
+    "axis": [
+     -0.8655,
+     0.5009
+    ],
+    "len_px": 170.7,
+    "wid_px": 52.1,
+    "petiole_frac": 0.0,
+    "fill": 1.057,
+    "g_over_r": 1.222,
+    "area_px": 7296
+   },
+   {
+    "base_px": [
+     1734.7,
+     873.2
+    ],
+    "axis": [
+     -0.9823,
+     0.1873
+    ],
+    "len_px": 157.7,
+    "wid_px": 41.5,
+    "petiole_frac": 0.0,
+    "fill": 1.082,
+    "g_over_r": 1.237,
+    "area_px": 5664
+   },
+   {
+    "base_px": [
+     2336.6,
+     859.8
+    ],
+    "axis": [
+     0.4963,
+     0.8681
+    ],
+    "len_px": 184.5,
+    "wid_px": 93.3,
+    "petiole_frac": 0.042,
+    "fill": 1.014,
+    "g_over_r": 1.306,
+    "area_px": 13472
+   },
+   {
+    "base_px": [
+     1621.1,
+     963.5
+    ],
+    "axis": [
+     0.9474,
+     -0.3202
+    ],
+    "len_px": 161.9,
+    "wid_px": 53.1,
+    "petiole_frac": 0.0,
+    "fill": 1.063,
+    "g_over_r": 1.229,
+    "area_px": 6688
+   },
+   {
+    "base_px": [
+     2003.1,
+     1002.9
+    ],
+    "axis": [
+     -0.9062,
+     -0.4229
+    ],
+    "len_px": 148.0,
+    "wid_px": 128.8,
+    "petiole_frac": 0.083,
+    "fill": 0.95,
+    "g_over_r": 1.25,
+    "area_px": 14176
+   },
+   {
+    "base_px": [
+     1808.5,
+     980.3
+    ],
+    "axis": [
+     -0.912,
+     0.4102
+    ],
+    "len_px": 117.2,
+    "wid_px": 44.7,
+    "petiole_frac": 0.042,
+    "fill": 1.097,
+    "g_over_r": 1.195,
+    "area_px": 4320
+   },
+   {
+    "base_px": [
+     937.3,
+     1053.5
+    ],
+    "axis": [
+     0.1302,
+     0.9915
+    ],
+    "len_px": 298.3,
+    "wid_px": 124.0,
+    "petiole_frac": 0.042,
+    "fill": 0.995,
+    "g_over_r": 1.233,
+    "area_px": 26368
+   },
+   {
+    "base_px": [
+     1866.0,
+     1042.7
+    ],
+    "axis": [
+     -0.5509,
+     0.8346
+    ],
+    "len_px": 123.1,
+    "wid_px": 57.7,
+    "petiole_frac": 0.0,
+    "fill": 1.087,
+    "g_over_r": 1.063,
+    "area_px": 4976
+   },
+   {
+    "base_px": [
+     1913.3,
+     1306.8
+    ],
+    "axis": [
+     0.6526,
+     -0.7577
+    ],
+    "len_px": 148.8,
+    "wid_px": 68.1,
+    "petiole_frac": 0.0,
+    "fill": 1.058,
+    "g_over_r": 1.318,
+    "area_px": 7744
+   },
+   {
+    "base_px": [
+     2588.3,
+     1203.9
+    ],
+    "axis": [
+     -0.4334,
+     0.9012
+    ],
+    "len_px": 231.1,
+    "wid_px": 86.0,
+    "petiole_frac": 0.0,
+    "fill": 1.016,
+    "g_over_r": 1.319,
+    "area_px": 15552
+   },
+   {
+    "base_px": [
+     2184.6,
+     1287.2
+    ],
+    "axis": [
+     -0.2137,
+     0.9769
+    ],
+    "len_px": 118.2,
+    "wid_px": 78.5,
+    "petiole_frac": 0.125,
+    "fill": 1.058,
+    "g_over_r": 1.285,
+    "area_px": 6544
+   },
+   {
+    "base_px": [
+     352.4,
+     1297.5
+    ],
+    "axis": [
+     0.9992,
+     -0.0387
+    ],
+    "len_px": 116.1,
+    "wid_px": 48.1,
+    "petiole_frac": 0.0,
+    "fill": 1.092,
+    "g_over_r": 1.0,
+    "area_px": 4736
+   },
+   {
+    "base_px": [
+     1819.3,
+     1597.4
+    ],
+    "axis": [
+     0.2776,
+     -0.9607
+    ],
+    "len_px": 251.7,
+    "wid_px": 101.1,
+    "petiole_frac": 0.0,
+    "fill": 0.995,
+    "g_over_r": 1.347,
+    "area_px": 19872
+   },
+   {
+    "base_px": [
+     3091.9,
+     1497.3
+    ],
+    "axis": [
+     -0.9394,
+     -0.3429
+    ],
+    "len_px": 193.8,
+    "wid_px": 44.4,
+    "petiole_frac": 0.0,
+    "fill": 1.051,
+    "g_over_r": 1.313,
+    "area_px": 7808
+   },
+   {
+    "base_px": [
+     2144.2,
+     1431.4
+    ],
+    "axis": [
+     -0.6315,
+     0.7754
+    ],
+    "len_px": 177.0,
+    "wid_px": 79.9,
+    "petiole_frac": 0.0,
+    "fill": 1.029,
+    "g_over_r": 1.269,
+    "area_px": 11408
+   },
+   {
+    "base_px": [
+     3098.9,
+     1562.7
+    ],
+    "axis": [
+     -0.9553,
+     -0.2958
+    ],
+    "len_px": 182.3,
+    "wid_px": 45.6,
+    "petiole_frac": 0.0,
+    "fill": 1.06,
+    "g_over_r": 1.329,
+    "area_px": 7168
+   },
+   {
+    "base_px": [
+     1272.2,
+     1529.8
+    ],
+    "axis": [
+     -0.7584,
+     0.6518
+    ],
+    "len_px": 174.2,
+    "wid_px": 59.9,
+    "petiole_frac": 0.125,
+    "fill": 1.041,
+    "g_over_r": 1.304,
+    "area_px": 8448
+   },
+   {
+    "base_px": [
+     1772.8,
+     1569.0
+    ],
+    "axis": [
+     -0.974,
+     0.2264
+    ],
+    "len_px": 177.6,
+    "wid_px": 79.5,
+    "petiole_frac": 0.042,
+    "fill": 1.037,
+    "g_over_r": 1.324,
+    "area_px": 10208
+   },
+   {
+    "base_px": [
+     3256.1,
+     1684.2
+    ],
+    "axis": [
+     -0.6959,
+     -0.7181
+    ],
+    "len_px": 167.3,
+    "wid_px": 70.7,
+    "petiole_frac": 0.0,
+    "fill": 1.045,
+    "g_over_r": 1.316,
+    "area_px": 9712
+   },
+   {
+    "base_px": [
+     2947.8,
+     1586.5
+    ],
+    "axis": [
+     0.9435,
+     0.3313
+    ],
+    "len_px": 151.9,
+    "wid_px": 58.1,
+    "petiole_frac": 0.042,
+    "fill": 1.057,
+    "g_over_r": 1.34,
+    "area_px": 7040
+   },
+   {
+    "base_px": [
+     1986.1,
+     1590.4
+    ],
+    "axis": [
+     -0.4931,
+     0.87
+    ],
+    "len_px": 127.0,
+    "wid_px": 44.7,
+    "petiole_frac": 0.0,
+    "fill": 1.09,
+    "g_over_r": 1.246,
+    "area_px": 4816
+   },
+   {
+    "base_px": [
+     1829.3,
+     1634.2
+    ],
+    "axis": [
+     -0.8986,
+     0.4388
+    ],
+    "len_px": 149.3,
+    "wid_px": 57.3,
+    "petiole_frac": 0.0,
+    "fill": 1.058,
+    "g_over_r": 1.33,
+    "area_px": 7312
+   },
+   {
+    "base_px": [
+     127.2,
+     1698.1
+    ],
+    "axis": [
+     0.9998,
+     0.019
+    ],
+    "len_px": 326.2,
+    "wid_px": 123.9,
+    "petiole_frac": 0.042,
+    "fill": 0.988,
+    "g_over_r": 1.243,
+    "area_px": 30848
+   },
+   {
+    "base_px": [
+     3339.2,
+     1651.4
+    ],
+    "axis": [
+     0.7672,
+     0.6414
+    ],
+    "len_px": 114.7,
+    "wid_px": 36.9,
+    "petiole_frac": 0.0,
+    "fill": 1.137,
+    "g_over_r": 1.286,
+    "area_px": 3664
+   },
+   {
+    "base_px": [
+     2118.1,
+     1698.6
+    ],
+    "axis": [
+     -0.4233,
+     0.906
+    ],
+    "len_px": 171.0,
+    "wid_px": 87.7,
+    "petiole_frac": 0.0,
+    "fill": 1.025,
+    "g_over_r": 1.393,
+    "area_px": 11728
+   },
+   {
+    "base_px": [
+     3079.1,
+     1740.4
+    ],
+    "axis": [
+     -0.9957,
+     -0.093
+    ],
+    "len_px": 106.2,
+    "wid_px": 52.1,
+    "petiole_frac": 0.042,
+    "fill": 1.103,
+    "g_over_r": 1.289,
+    "area_px": 4304
+   },
+   {
+    "base_px": [
+     1618.7,
+     1922.2
+    ],
+    "axis": [
+     0.0628,
+     -0.998
+    ],
+    "len_px": 173.4,
+    "wid_px": 156.4,
+    "petiole_frac": 0.042,
+    "fill": 1.002,
+    "g_over_r": 1.382,
+    "area_px": 21152
+   },
+   {
+    "base_px": [
+     516.1,
+     1727.3
+    ],
+    "axis": [
+     -0.5884,
+     0.8086
+    ],
+    "len_px": 286.1,
+    "wid_px": 96.2,
+    "petiole_frac": 0.0,
+    "fill": 0.985,
+    "g_over_r": 1.254,
+    "area_px": 21392
+   },
+   {
+    "base_px": [
+     1152.5,
+     1752.1
+    ],
+    "axis": [
+     -0.6807,
+     0.7326
+    ],
+    "len_px": 182.2,
+    "wid_px": 85.0,
+    "petiole_frac": 0.0,
+    "fill": 1.028,
+    "g_over_r": 1.312,
+    "area_px": 13152
+   },
+   {
+    "base_px": [
+     2703.3,
+     1772.3
+    ],
+    "axis": [
+     0.6729,
+     0.7397
+    ],
+    "len_px": 153.9,
+    "wid_px": 45.2,
+    "petiole_frac": 0.0,
+    "fill": 1.088,
+    "g_over_r": 1.277,
+    "area_px": 5728
+   },
+   {
+    "base_px": [
+     3277.5,
+     1872.5
+    ],
+    "axis": [
+     -0.9156,
+     0.4022
+    ],
+    "len_px": 215.9,
+    "wid_px": 140.2,
+    "petiole_frac": 0.0,
+    "fill": 0.956,
+    "g_over_r": 1.299,
+    "area_px": 20976
+   },
+   {
+    "base_px": [
+     2975.1,
+     1849.2
+    ],
+    "axis": [
+     -0.7923,
+     0.6102
+    ],
+    "len_px": 167.3,
+    "wid_px": 48.8,
+    "petiole_frac": 0.0,
+    "fill": 1.06,
+    "g_over_r": 1.231,
+    "area_px": 6560
+   },
+   {
+    "base_px": [
+     1623.1,
+     1956.3
+    ],
+    "axis": [
+     -0.0868,
+     0.9962
+    ],
+    "len_px": 150.7,
+    "wid_px": 108.6,
+    "petiole_frac": 0.042,
+    "fill": 0.987,
+    "g_over_r": 1.326,
+    "area_px": 10912
+   },
+   {
+    "base_px": [
+     922.5,
+     2284.8
+    ],
+    "axis": [
+     -0.4397,
+     -0.8981
+    ],
+    "len_px": 332.7,
+    "wid_px": 103.8,
+    "petiole_frac": 0.0,
+    "fill": 0.998,
+    "g_over_r": 1.308,
+    "area_px": 24464
+   },
+   {
+    "base_px": [
+     3236.8,
+     1994.9
+    ],
+    "axis": [
+     0.8215,
+     0.5702
+    ],
+    "len_px": 232.0,
+    "wid_px": 60.0,
+    "petiole_frac": 0.0,
+    "fill": 1.025,
+    "g_over_r": 1.285,
+    "area_px": 11632
+   },
+   {
+    "base_px": [
+     3145.7,
+     2011.1
+    ],
+    "axis": [
+     0.6138,
+     0.7895
+    ],
+    "len_px": 147.6,
+    "wid_px": 74.4,
+    "petiole_frac": 0.0,
+    "fill": 1.048,
+    "g_over_r": 1.31,
+    "area_px": 8512
+   },
+   {
+    "base_px": [
+     1138.2,
+     2331.1
+    ],
+    "axis": [
+     -0.1734,
+     -0.9848
+    ],
+    "len_px": 314.0,
+    "wid_px": 94.8,
+    "petiole_frac": 0.0,
+    "fill": 1.004,
+    "g_over_r": 1.33,
+    "area_px": 24640
+   },
+   {
+    "base_px": [
+     1235.5,
+     2352.8
+    ],
+    "axis": [
+     -0.0322,
+     -0.9995
+    ],
+    "len_px": 257.6,
+    "wid_px": 80.3,
+    "petiole_frac": 0.0,
+    "fill": 1.039,
+    "g_over_r": 1.348,
+    "area_px": 16992
+   },
+   {
+    "base_px": [
+     1611.7,
+     2197.3
+    ],
+    "axis": [
+     0.3945,
+     0.9189
+    ],
+    "len_px": 259.2,
+    "wid_px": 200.1,
+    "petiole_frac": 0.083,
+    "fill": 0.803,
+    "g_over_r": 1.325,
+    "area_px": 33056
+   },
+   {
+    "base_px": [
+     541.4,
+     2237.9
+    ],
+    "axis": [
+     0.9903,
+     0.1393
+    ],
+    "len_px": 308.5,
+    "wid_px": 122.2,
+    "petiole_frac": 0.0,
+    "fill": 1.006,
+    "g_over_r": 1.277,
+    "area_px": 26448
+   },
+   {
+    "base_px": [
+     1434.5,
+     2383.2
+    ],
+    "axis": [
+     -0.6639,
+     -0.7478
+    ],
+    "len_px": 165.3,
+    "wid_px": 127.9,
+    "petiole_frac": 0.208,
+    "fill": 0.966,
+    "g_over_r": 1.385,
+    "area_px": 16640
+   },
+   {
+    "base_px": [
+     696.7,
+     2552.8
+    ],
+    "axis": [
+     0.6966,
+     -0.7175
+    ],
+    "len_px": 325.6,
+    "wid_px": 107.6,
+    "petiole_frac": 0.042,
+    "fill": 1.006,
+    "g_over_r": 1.328,
+    "area_px": 25568
+   },
+   {
+    "base_px": [
+     1044.6,
+     2339.8
+    ],
+    "axis": [
+     -0.64,
+     0.7684
+    ],
+    "len_px": 325.7,
+    "wid_px": 99.4,
+    "petiole_frac": 0.0,
+    "fill": 0.997,
+    "g_over_r": 1.286,
+    "area_px": 24400
+   },
+   {
+    "base_px": [
+     2767.3,
+     2551.0
+    ],
+    "axis": [
+     -0.0177,
+     -0.9998
+    ],
+    "len_px": 189.0,
+    "wid_px": 96.1,
+    "petiole_frac": 0.042,
+    "fill": 1.017,
+    "g_over_r": 1.411,
+    "area_px": 15904
+   },
+   {
+    "base_px": [
+     1780.6,
+     2455.8
+    ],
+    "axis": [
+     -0.0963,
+     0.9954
+    ],
+    "len_px": 120.5,
+    "wid_px": 109.0,
+    "petiole_frac": 0.333,
+    "fill": 0.976,
+    "g_over_r": 1.271,
+    "area_px": 8000
+   },
+   {
+    "base_px": [
+     2679.8,
+     2422.3
+    ],
+    "axis": [
+     -0.2092,
+     0.9779
+    ],
+    "len_px": 100.6,
+    "wid_px": 65.1,
+    "petiole_frac": 0.083,
+    "fill": 1.058,
+    "g_over_r": 1.197,
+    "area_px": 4816
+   },
+   {
+    "base_px": [
+     1455.5,
+     2462.1
+    ],
+    "axis": [
+     0.2421,
+     0.9703
+    ],
+    "len_px": 187.8,
+    "wid_px": 95.1,
+    "petiole_frac": 0.0,
+    "fill": 1.012,
+    "g_over_r": 1.363,
+    "area_px": 13952
+   },
+   {
+    "base_px": [
+     3352.9,
+     2531.8
+    ],
+    "axis": [
+     0.9902,
+     0.1396
+    ],
+    "len_px": 293.0,
+    "wid_px": 97.3,
+    "petiole_frac": 0.042,
+    "fill": 1.009,
+    "g_over_r": 1.339,
+    "area_px": 21424
+   },
+   {
+    "base_px": [
+     2090.3,
+     2698.1
+    ],
+    "axis": [
+     -0.8025,
+     -0.5966
+    ],
+    "len_px": 287.1,
+    "wid_px": 129.6,
+    "petiole_frac": 0.0,
+    "fill": 0.966,
+    "g_over_r": 1.468,
+    "area_px": 28512
+   },
+   {
+    "base_px": [
+     2718.6,
+     2658.5
+    ],
+    "axis": [
+     -0.8659,
+     -0.5001
+    ],
+    "len_px": 116.6,
+    "wid_px": 105.7,
+    "petiole_frac": 0.0,
+    "fill": 1.049,
+    "g_over_r": 1.327,
+    "area_px": 9264
+   },
+   {
+    "base_px": [
+     2775.8,
+     2600.9
+    ],
+    "axis": [
+     -0.0092,
+     1.0
+    ],
+    "len_px": 194.4,
+    "wid_px": 96.1,
+    "petiole_frac": 0.042,
+    "fill": 1.031,
+    "g_over_r": 1.335,
+    "area_px": 13920
+   },
+   {
+    "base_px": [
+     3245.2,
+     2758.6
+    ],
+    "axis": [
+     -0.8802,
+     -0.4746
+    ],
+    "len_px": 301.7,
+    "wid_px": 100.0,
+    "petiole_frac": 0.042,
+    "fill": 0.98,
+    "g_over_r": 1.324,
+    "area_px": 19344
+   },
+   {
+    "base_px": [
+     2875.5,
+     2601.0
+    ],
+    "axis": [
+     0.2131,
+     0.977
+    ],
+    "len_px": 247.8,
+    "wid_px": 106.7,
+    "petiole_frac": 0.0,
+    "fill": 1.012,
+    "g_over_r": 1.322,
+    "area_px": 20048
+   },
+   {
+    "base_px": [
+     1682.1,
+     2788.2
+    ],
+    "axis": [
+     -0.0113,
+     -0.9999
+    ],
+    "len_px": 164.9,
+    "wid_px": 72.0,
+    "petiole_frac": 0.0,
+    "fill": 1.054,
+    "g_over_r": 1.285,
+    "area_px": 10096
+   },
+   {
+    "base_px": [
+     1757.2,
+     2763.7
+    ],
+    "axis": [
+     0.202,
+     -0.9794
+    ],
+    "len_px": 81.2,
+    "wid_px": 65.1,
+    "petiole_frac": 0.042,
+    "fill": 1.12,
+    "g_over_r": 1.325,
+    "area_px": 4240
+   },
+   {
+    "base_px": [
+     1716.0,
+     2820.0
+    ],
+    "axis": [
+     -0.0709,
+     0.9975
+    ],
+    "len_px": 186.3,
+    "wid_px": 112.6,
+    "petiole_frac": 0.042,
+    "fill": 1.016,
+    "g_over_r": 1.342,
+    "area_px": 15616
+   },
+   {
+    "base_px": [
+     1626.4,
+     2831.3
+    ],
+    "axis": [
+     -0.3941,
+     0.9191
+    ],
+    "len_px": 209.9,
+    "wid_px": 80.9,
+    "petiole_frac": 0.0,
+    "fill": 1.022,
+    "g_over_r": 1.349,
+    "area_px": 13168
+   },
+   {
+    "base_px": [
+     2746.9,
+     3016.4
+    ],
+    "axis": [
+     0.3801,
+     0.9249
+    ],
+    "len_px": 163.7,
+    "wid_px": 46.8,
+    "petiole_frac": 0.0,
+    "fill": 1.05,
+    "g_over_r": 1.266,
+    "area_px": 6560
+   },
+   {
+    "base_px": [
+     2820.9,
+     3018.1
+    ],
+    "axis": [
+     0.3555,
+     0.9347
+    ],
+    "len_px": 159.1,
+    "wid_px": 37.9,
+    "petiole_frac": 0.0,
+    "fill": 1.088,
+    "g_over_r": 1.284,
+    "area_px": 4848
+   },
+   {
+    "base_px": [
+     1954.5,
+     3074.7
+    ],
+    "axis": [
+     -0.0965,
+     0.9953
+    ],
+    "len_px": 253.1,
+    "wid_px": 85.2,
+    "petiole_frac": 0.125,
+    "fill": 0.867,
+    "g_over_r": 1.149,
+    "area_px": 12928
+   },
+   {
+    "base_px": [
+     1614.6,
+     3272.1
+    ],
+    "axis": [
+     -0.2986,
+     -0.9544
+    ],
+    "len_px": 161.6,
+    "wid_px": 77.1,
+    "petiole_frac": 0.042,
+    "fill": 1.039,
+    "g_over_r": 1.329,
+    "area_px": 10656
+   },
+   {
+    "base_px": [
+     1731.0,
+     3285.0
+    ],
+    "axis": [
+     0.4898,
+     -0.8719
+    ],
+    "len_px": 159.8,
+    "wid_px": 110.7,
+    "petiole_frac": 0.042,
+    "fill": 0.972,
+    "g_over_r": 1.349,
+    "area_px": 13040
+   },
+   {
+    "base_px": [
+     1003.0,
+     3199.3
+    ],
+    "axis": [
+     0.945,
+     0.327
+    ],
+    "len_px": 264.0,
+    "wid_px": 91.0,
+    "petiole_frac": 0.0,
+    "fill": 1.006,
+    "g_over_r": 1.273,
+    "area_px": 19168
+   },
+   {
+    "base_px": [
+     1710.4,
+     3314.3
+    ],
+    "axis": [
+     -0.4012,
+     0.916
+    ],
+    "len_px": 172.5,
+    "wid_px": 93.0,
+    "petiole_frac": 0.0,
+    "fill": 1.03,
+    "g_over_r": 1.361,
+    "area_px": 12480
+   },
+   {
+    "base_px": [
+     1783.7,
+     3333.6
+    ],
+    "axis": [
+     0.3578,
+     0.9338
+    ],
+    "len_px": 113.9,
+    "wid_px": 43.1,
+    "petiole_frac": 0.0,
+    "fill": 1.1,
+    "g_over_r": 1.322,
+    "area_px": 4176
+   },
+   {
+    "base_px": [
+     1952.4,
+     3592.3
+    ],
+    "axis": [
+     0.9091,
+     0.4166
+    ],
+    "len_px": 98.3,
+    "wid_px": 60.9,
+    "petiole_frac": 0.042,
+    "fill": 1.107,
+    "g_over_r": 1.203,
+    "area_px": 4208
+   }
+  ],
+  "dropped": {
+   "merged": 24,
+   "dead_or_white": 0,
+   "holed": 0,
+   "tiny": 0,
+   "ragged_or_oversize": 1,
+   "not_isolated": 9
   }
  },
  "palmate_fatsia": {
