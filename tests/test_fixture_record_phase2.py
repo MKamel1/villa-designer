@@ -64,6 +64,7 @@ class UnifiedRecord(unittest.TestCase):
         fixture.extra['wall_plate'][0]=3.
         self.assertEqual(dict(record.extra)['wall_plate'],(1.,2.))
 
+    @unittest.skip("LEGACY branch-start (acee29d, 2026-10-08) baseline: every fixture of the pre-L6b layout (ids, positions, kinds) is the expected list; the redesign replaced the fixture list. Retired by the L6b/L6c lighting redesign (docs/lanes/L6b-villa-lighting.md, INT-integration.md); no like-for-like equivalent: the L6 rows (knowledge/lighting/villa-after-rows.json) and tests/test_villa_lighting.py gate the redesigned scheme")
     def test_records_preserve_all_legacy_fixture_inputs(self):
         actual = json.loads(json.dumps([asdict(f) for f in self.fixtures]))
         expected = self.corrected_before_fixtures()
@@ -71,6 +72,7 @@ class UnifiedRecord(unittest.TestCase):
         self.assertEqual([f for f in actual if not f['extra'].get('over_mirror')],
                          [f for f in expected if f['id'] not in retired])
 
+    @unittest.skip("LEGACY branch-start (acee29d, 2026-10-08) baseline: VL.check lux of the redesigned list equals that of the frozen pre-L6b list; the two lists differ by design. Retired by the L6b/L6c lighting redesign (docs/lanes/L6b-villa-lighting.md, INT-integration.md); no like-for-like equivalent: the L6 rows (knowledge/lighting/villa-after-rows.json) and tests/test_villa_lighting.py gate the redesigned scheme")
     def test_lux_reexpression_matches_frozen_real_before(self):
         frozen = [VL.Fixture(**fixture) for fixture in self.corrected_before_fixtures()]
         actual, old = VL.check(self.lay, self.fixtures), VL.check(self.lay, frozen)
@@ -79,6 +81,7 @@ class UnifiedRecord(unittest.TestCase):
         self.assertEqual([r for r in actual['rooms'] if r['room'] not in FR.VANITY_DECISIONS],
                          [r for r in old['rooms'] if r['room'] not in FR.VANITY_DECISIONS])
 
+    @unittest.skip("LEGACY branch-start (acee29d, 2026-10-08) baseline: branch-start flux and CCT per fixture; L6b LA6 set one CCT per layer (2700 K) and L6c drivers rescale flux. Retired by the L6b/L6c lighting redesign (docs/lanes/L6b-villa-lighting.md, INT-integration.md); no like-for-like equivalent: the L6 rows (knowledge/lighting/villa-after-rows.json) and tests/test_villa_lighting.py gate the redesigned scheme")
     def test_all_effective_flux_and_colour_values_match_branch_start(self):
         retired = {fid for ids in FR.VANITY_DECISIONS.values() for fid in ids}
         retained = [f for f in self.fixtures if not f.extra.get('over_mirror')]
@@ -87,8 +90,11 @@ class UnifiedRecord(unittest.TestCase):
         self.assertEqual({f.id:f.record.cct_k for f in retained},
                          {k:v for k,v in BEFORE['effective_cct_k'].items() if k not in retired})
 
-    def test_shell_revit_spec_is_unchanged_and_lighting_uses_records(self):
+    @unittest.skip("LEGACY branch-start (acee29d, 2026-10-08) baseline: RS.build(D1) equals the frozen pre-redesign shell spec. Retired by later authored design changes to the shell (lane D G1 fixes c446276, lane M model completion 71d293a, SC2/SC3 wall B-ext-16 and roof strip); the shell is guarded by tests/model and the INT exchange validation instead")
+    def test_shell_revit_spec_is_unchanged(self):
         self.assertEqual(json.loads(json.dumps(RS.build(self.lay))), BEFORE['spec'])
+
+    def test_lighting_spec_uses_records(self):
         native = RS.lighting_spec(self.lay)
         self.assertEqual(len(native), len(self.fixtures))
         for f, entry in zip(self.fixtures, native):
@@ -185,10 +191,10 @@ class ClientVanityDecision(unittest.TestCase):
         self.assertEqual(len(records),2)
         ids = {m['id'] for m in self.scene['meshes']}
         for f in self.fixtures:
-            self.assertEqual(f.record.cct_k,3000)
+            self.assertEqual(f.record.cct_k,2700)   # L6b LA6: one CCT per layer, 2700 K for every interior layer (was 3000 K at the branch start)
             self.assertEqual(f.extra['decision_source'],'CLIENT DECISION 2026-10-08')
             self.assertIn('ASSUMED',f.record.native_spec()['assumptions'])
-            self.assertEqual(f.record.flux_lm,100*(.4 if f.room=='parents-ensuite' else 1))
+            self.assertEqual(f.record.flux_lm,53.3 if f.room=='parents-ensuite' else 100)   # L6c: the ensuite bar takes its driver from knowledge/lighting/zone-drivers.json (0.7 x 0.761 of 100 lm), no longer the flat 0.4 dimmer
             for retired in f.extra['retired_fixture_ids']:
                 self.assertFalse(any(mid.endswith('-'+retired) for mid in ids))
             mirror = next(m for m in self.scene['meshes'] if m['id']==f.extra['mirror_id'])
