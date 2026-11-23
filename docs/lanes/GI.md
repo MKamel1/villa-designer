@@ -110,7 +110,17 @@ and of this tree (`scripts/refresh_furniture_integ5.py export`); (2) `knowledge/
 cut back under the garden's surfaces and ponds, **0 unexplained**; (3) `review-current`: **16 individual + joint baseline-relative reviews, all ok, 0 relative findings**; (4) `refresh_receipts.py` (now writes a second record `refresh_2026_11_22_GI`
 beside the first). Evidence: `knowledge/approvals-review/evidence-gi/`. Visual approvals are retained (no room look changed).
 
-Production build with every receipt and the exposure record active, no bypass (`VR.write`): HASHES_SECTION
+Production build with every receipt and the exposure record active, no bypass (`VR.write`): | | |
+|---|---|
+| `scene.json` (clean tree, HEAD `e792c538`, `git_dirty` false) | 300,962,796 bytes, sha256 `41288e1c9fdb145c15ccbeca94a248c5f61eb5ccb729a1ff490496d3997c8239` |
+| ids stripped, provenance removed (`json.dumps(without_ids(scene minus provenance), sort_keys=True)`) | sha256 `558894802ba41acb6ec146f291e1db32f8021eb2cd717b2baac3bec0c724218a` (**identical** to the scene the images were rendered from, built on a dirty tree at `9c1a273`) |
+| ids stripped incl. provenance | sha256 `38c7ea8a2bd9a6250799e367b1dc56c8ff25adff48757c19e4d9d876115c033b` |
+| meshes / props / views | 1,298 / 80 / 46 |
+| `source_hash` | `2d3afbaa4ca0c2bc16016eada416071b9cb18638f297e6fba2fcf195589dab8d` (build 83 s, linux) |
+| exposure record | `knowledge/exposure-groups.json`: measurement_sha256 `89f73ea27b41e5b83b0c1fcb30736028a1973dc6f2aaff0c352ccb292c006ee5`, transport_sha256 `8322654bf3b66e2149036fbcb34aef378df629bdc617864f21d885a81ad34284` |
+| receipts | `furniture-stage2` room_context `53ac20c763a7ef0b...`, `parents-bed` `665f87ad0ccb7739...` |
+
+The file hash includes `provenance` and is tied to the build's checkout; the content hash above is not.
 
 ## Decisions (no human was available)
 
