@@ -47,6 +47,8 @@ LAUNCH_GRACE_S = 30
 DEFAULT_VRAM_MB = 6000
 VRAM_MARGIN_MB = 1024
 VRAM_RESERVE_S = 60  # a freshly launched job's VRAM is not on nvidia-smi yet; reserve it this long
+# Dirs put in front of PATH for every job: the service's own PATH lacks them (`blender` died with FileNotFoundError).
+EXTRA_PATH = [Path.home() / "opt" / "blender", Path.home() / "archpipe" / "envs" / "laneP-venv" / "bin"]
 DEFAULT_ROOT = Path(os.environ.get("JOBQ_ROOT", Path.home() / "archpipe" / "queue"))
 DEFAULT_GPU_LOCK = Path(os.environ.get("JOBQ_GPU_LOCK", Path.home() / "archpipe" / "locks" / "graphics.lock"))
 
@@ -350,13 +352,19 @@ class Queue:
 
     def _run_command(self, job_id: str, spec: dict) -> dict:
         env = dict(os.environ, **spec.get("env", {}), JOBQ_JOB_ID=job_id, JOBQ_JOB_DIR=str(self.jobdir(job_id)))
+        env["PATH"] = os.pathsep.join([str(d) for d in EXTRA_PATH if d.is_dir()] + [env.get("PATH", os.defpath)])
         started = now()
         with open(self.jobdir(job_id) / "job.log", "ab") as log:
             log.write(f"--- attempt {self.status(job_id).get('attempt')} {time.strftime('%F %T')} ---\n".encode())
             log.flush()
             kwargs = {"start_new_session": True} if os.name != "nt" else {}
-            child = subprocess.Popen(spec["argv"], cwd=spec.get("cwd"), env=env, stdin=subprocess.DEVNULL,
-                                     stdout=log, stderr=subprocess.STDOUT, **kwargs)
+            try:
+                child = subprocess.Popen(spec["argv"], cwd=spec.get("cwd"), env=env, stdin=subprocess.DEVNULL,
+                                         stdout=log, stderr=subprocess.STDOUT, **kwargs)
+            except OSError as exc:  # missing/unexecutable argv[0] or cwd: a verdict, not a death; retrying cannot help
+                log.write(f"exec failed: {exc!r}\n".encode())
+                return self.set_status(job_id, state="failed", reason=f"exec failed: {exc!r}", exit_code=None,
+                                       finished=now(), seconds=0, runner_pid=None, command_pid=None)
             self.set_status(job_id, state="running", command_pid=child.pid, command_start=proc_start(child.pid),
                             run_started=started)
             timed_out = False

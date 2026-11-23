@@ -9,6 +9,7 @@ RestartSec=5
 # Restarting or stopping the daemon must not kill running jobs; they are separate sessions that jobq re-adopts.
 KillMode=process
 Environment=PYTHONUNBUFFERED=1
+Environment=PATH=%h/opt/blender:%h/archpipe/envs/laneP-venv/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
 
 [Install]
 WantedBy=default.target
