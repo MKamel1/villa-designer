@@ -67,7 +67,7 @@
 | R25 | parents-dressing | GF | dressing (hanging both sides) | dressing | 6.23 | 5.43 | 2700 |
 | R26 | parents-dressing-ext | GF | dressing (taken from the ensuite) | dressing | 0.57 | 0.37 | 2700 |
 | R27 | parents-ensuite | GF | en-suite | ensuite | 6.61 | 5.06 | 2700 |
-| R28 | parents-entry | GF | parents' bedroom (entry) | bedroom | 0.8 | 0.68 | 2700 |
+| R28 | parents-entry | GF | parents' bedroom (entry) | bedroom | 0.8 | 0.68 | 2800 |
 | R29 | stair-gf | GF | stair void + gallery | stair | 8.53 | 7.79 | 2800 |
 | R30 | study-game | GF | study / game room (open to the stair; sliding door to the deck) | study | 15.6 | 13.66 | 2700 |
 

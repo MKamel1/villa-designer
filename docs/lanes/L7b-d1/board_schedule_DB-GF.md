@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | DB-GF/D3 | L1 | Split AC 2 HP AC-PARENTS | RCBO 10 A C 30 mA Type A | 8.59 | 2C+E 2.5 mm2 PVC | 20.5 | 16.1 | 2.19 |
 | 2 | DB-GF/D4 | L1 | Split AC 1.5 HP AC-STUDY | RCBO 10 A C 30 mA Type A | 6.06 | 2C+E 2.5 mm2 PVC | 9.3 | 16.1 | 1.21 |
-| 3 | DB-GF/L2 | L1 | Lighting parents-dressing-ext +3 | RCBO 6 A B 30 mA Type A | 0.7 | 2C+E 1.5 mm2 PVC | 42.4 | 7.0 | 1.14 |
+| 3 | DB-GF/L2 | L1 | Lighting parents-dressing-ext +3 | RCBO 6 A B 30 mA Type A | 0.72 | 2C+E 1.5 mm2 PVC | 42.4 | 7.0 | 1.16 |
 | 4 | DB-GF/S11 | L1 | Sockets parents-bed | RCBO 16 A B 30 mA Type A | 16.0 | 2C+E 2.5 mm2 PVC | 15.7 | 16.1 | 2.81 |
 | 5 | DB-GF/S2 | L1 | Sockets study-game | RCBO 16 A B 30 mA Type A | 16.0 | 2C+E 2.5 mm2 PVC | 18.3 | 16.1 | 3.15 |
 | 6 | DB-GF/S5 | L1 | Sockets kids-a | RCBO 16 A B 30 mA Type A | 16.0 | 2C+E 2.5 mm2 PVC | 9.5 | 16.1 | 2.0 |

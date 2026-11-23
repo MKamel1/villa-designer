@@ -164,6 +164,20 @@ def _generic_text(rec, lm: float, name: str) -> str:
     return generic_ies(lm, beam, name)
 
 
+def _opening_to_pitch(text: str, pitch: float) -> str:
+    """The LM-63 luminous-opening line (`width length height` after the `1 1 watts` line's predecessor) with the width set to `pitch` metres."""
+    import re
+    out, done = [], False
+    for ln in text.splitlines():
+        m = re.match(r"^(\s*\d+\s+-?\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+)(\S+)(\s+\S+\s+\S+\s*)$", ln)
+        if m and not done:
+            ln, done = m.group(1) + "%.3f" % pitch + m.group(3), True
+        out.append(ln)
+    if not done:
+        raise ValueError("no luminous-opening line found in the IES text")
+    return "\n".join(out) + "\n"
+
+
 def fixture_placements(f) -> list[Placement]:
     """Analytic/Radiance sources for one fixture: one point for a spot, 0.3 m samples for a strip, 8 for the pendant."""
     rec = f.record
@@ -181,10 +195,14 @@ def fixture_placements(f) -> list[Placement]:
             # file is the derived x2 file (both 1779 lm modules, 3558 lm); strips: the file is per metre and the fixture's flux
             # is lm/m x length (record_for).
             n = 8 if f.kind == "PEN-LIN" else max(1, int(round(rec.length / PROJECT_EDGE)))
+            # L6d: Radiance builds each sample's luminous opening from the file (RP65: 1.14 m): eight overlapping 1.14 m emitters spread the light
+            # 25-35 % thinner than the analytic sum under the pendant (LV V5: +12.7 % direct). Each sample is one n-th of the line: its opening is
+            # the pitch, not the whole luminaire.
+            text = _opening_to_pitch(Path(prod["ies"]).read_text(encoding="latin-1"), rec.length / n)
             return [Placement("%s#%d" % (f.id, k), pho, tuple(c + a * ((k + 0.5) / n - 0.5) * rec.length
                                                             for c, a in zip((x, y, z), rec.along)),
                               aim=aim, dim=scale / n, zone=zone, layer=layer, watts=watts / n,
-                              meta={"ies_path": prod["ies"], "generic": False, "kind": f.kind, "parent": f.id})
+                              meta={"ies_path": prod["ies"], "ies_text": text, "generic": False, "kind": f.kind, "parent": f.id})
                     for k in range(n)]
         return [Placement(f.id, pho, (x, y, z), aim=aim, dim=scale, zone=zone, layer=layer, watts=watts,
                           meta={"ies_path": prod["ies"], "generic": False, "kind": f.kind})]

@@ -7,11 +7,11 @@ Every row: **or approved equivalent - submit IES/LDT + datasheet**. Reference pr
 | DL | Recessed downlight, wide flood | 52 | ERCO 41321.000 | 1065 lm (905-1224, +/-15 %) | wide flood, 56-57 deg (50 % angle) (57 deg, +/-8.55 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut |
 | ADJ | Adjustable flood-spot accent and reading light | 4 | ERCO A9003138; ERCO 68887 | 760 lm (646-873, +/-15 %) | flood spot 26-29 deg; maker publishes 28.0 deg, its photometric file gives 28.9 deg (V10 pass) (28 deg, +/-4.2 deg) | IP20 / - | DALI-2, 1-100 % CCR (datasheet: SVM <= 0.1, PstLM <= 1) |
 | WW | Recessed wall washer, lens | 12 | ERCO 41374.000 | 399 lm (339-458, +/-15 %) | asymmetric wall-wash distribution; compare the IES/LDT, not a beam angle | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut |
-| PEN-LIN | Pendant downlight over the dining table, direct | 1 | iGuzzini QA03; iGuzzini QA11 | L6d: ONE pendant of 600-900 lm for the 1 | downward wide flood 44 deg, no light above 90 deg (44 deg, +/-6.6 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut; supplier states the lowest level (the maker's page gives none) |
+| PEN-LIN | Decorative linear pendant over the dining table, direct (UGR<19) | 1 | iGuzzini RP65; iGuzzini RP25 | Client decision 2026-11-22: a decorative pendant scaled to the 1 | linear downward emission, luminance control UGR<19 (L <= 3000 cd/m2); compare the IES/LDT, not a beam angle | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via the external 48 V DALI-2 power supply (the module is PWM-controlled: the supply is ordered separately, DALI-2 version); supplier states the lowest level (the maker's page gives none) |
 | DESK | Adjustable desk task lamp, shielded | 5 | ERCO 31327.000 | 234 lm (198-269, +/-15 %) | wide beam, shielded head; compare the IES/LDT | IP20 / - | on-board push dimmer, 1-100 % |
 | PEN-GLOBE-A | Opal glass globe pendant | 3 | none held | 800 lm rated (>= 720, <= 1000) | diffuse, opal glass, near-Lambertian | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut or 0-10 V into a DALI gateway |
 | PEN-GLOBE-B | Opal glass globe pendant | 3 | none held | 564 lm rated (>= 507, <= 705) | diffuse, opal glass, near-Lambertian | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut or 0-10 V into a DALI gateway |
-| COVE | LED strip, cove | 6 (15.9 m total) | iGuzzini ST49 | 449 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, indirect onto the ceiling (120 deg, +/-18 deg) | IP20 (IP65 if the cove can be wet-cleaned) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via a constant-voltage/current driver |
+| COVE | LED strip, cove | 6 (15.9 m total) | iGuzzini ST49 | 472 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, indirect onto the ceiling (120 deg, +/-18 deg) | IP20 (IP65 if the cove can be wet-cleaned) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via a constant-voltage/current driver |
 | BACK | LED strip, cabinet | 12 (11.2 m total) | iGuzzini ST49 | 402 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide (120 deg, +/-18 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut zone |
 | TOE | LED strip, toe-kick / basin glow (night) | 3 (3.9 m total) | iGuzzini ST49 | 148 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, downward (120 deg, +/-18 deg) | IP20 (bathrooms IP44) / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut; dim to 10 % in the Night scene |
 | NL | LED strip, night light | 4 (9.9 m total) | iGuzzini ST49 | 100 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed) | wide, downward (120 deg, +/-18 deg) | IP20 / - | DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut |
@@ -89,25 +89,25 @@ Every row: **or approved equivalent - submit IES/LDT + datasheet**. Reference pr
 - **Commissioned output (zone drivers):** fixed scene levels (not tuned)
 - **Note:** wall-wash mean illuminance table on the datasheet (3 m wall, 0.9-1.2 m offset) must be matched +/-10 %
 
-### PEN-LIN - Pendant downlight over the dining table, direct
+### PEN-LIN - Decorative linear pendant over the dining table, direct (UGR<19)
 
-- **Role / rooms:** Dining table task and decorative light. dining x1
+- **Role / rooms:** Dining table light: the centrepiece, and the task light (cards: Dinner 100 lx, homework end 200 lx). dining x1
 - **Qty:** 1
-- **Reference product (maker, code, URL):** iGuzzini QA03 - Laser pendant O59 Tech, wide flood 44 deg, 12.3 W, 831.6 lm, 2700 K, CRI 90, DALI-2 | https://www.iguzzini.com/en/qa03/ | iGuzzini QA11 - Laser pendant O59 Deco, flood 38 deg, 12.3 W, 766.8 lm, 2700 K, CRI 90, DALI-2 (alternate) | https://www.iguzzini.com/en/qa11/
-- **Reference status:** QA03: V10 pass (maker's lab data reproduced); QA11: V10 pass (maker's lab data reproduced)
-- **Lumens (full output, per fitting) and tolerance:** L6d: ONE pendant of 600-900 lm for the 1.8 m table (the 1.5 m 3558 lm Jilly it replaces ran at 3.9 % of its output in the Evening scene). The scenes need about 140 / 220 / 460 lm (Evening / Dinner / Day): 15 % or more of the rating in every scene and <= 80 % in Day
-- **Beam / distribution:** downward wide flood 44 deg, no light above 90 deg (44 deg, +/-6.6 deg)
+- **Reference product (maker, code, URL):** iGuzzini RP65 - Libera System down light module, frame, L 1140, UGR<19 Space optic, 9.7 W, 1079 lm, 2700 K, CRI 90 (Rf 91), 48 V PWM | https://www.iguzzini.com/en/rp65/ | iGuzzini RP25 - Libera System down light module, frameless, L 1140, general-light Space optic, 18.7 W, 2058 lm, 2700 K, CRI 90 (Rf 91) (alternate, brighter) | https://www.iguzzini.com/en/rp25/
+- **Reference status:** RP65: V10 pass (maker's lab data reproduced); RP25: V10 pass (maker's lab data reproduced)
+- **Lumens (full output, per fitting) and tolerance:** Client decision 2026-11-22: a decorative pendant scaled to the 1.8 m table, 1140 mm = 63 % of its length (policy: <= 2/3). ONE 1079 lm module: the scenes run it at 15.5 % (Evening), 15.2 % (Dinner) and 37 % (Day) of its output (every scene >= 15 %, driver 0.37 <= 0.80); it meets the Dinner 100 lx and homework-end 200 lx cards alone
+- **Beam / distribution:** linear downward emission, luminance control UGR<19 (L <= 3000 cd/m2); compare the IES/LDT, not a beam angle
 - **CCT:** 2700 K +/- 100 K, <= 3 SDCM
 - **CRI / R9:** CRI >= 90; R9 >= 50 if stated
-- **Glare (UGR / cut-off / shielding):** UGR < 10 (maker)
+- **Glare (UGR / cut-off / shielding):** UGR<19, luminance control L<=3000 cd/m2 (maker)
 - **IP / IK:** IP20 / -
-- **Dimming protocol:** DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut; supplier states the lowest level (the maker's page gives none)
+- **Dimming protocol:** DALI-2, 1-100 % constant-current reduction (CCR); no phase-cut via the external 48 V DALI-2 power supply (the module is PWM-controlled: the supply is ordered separately, DALI-2 version); supplier states the lowest level (the maker's page gives none)
 - **Flicker:** TLA SVM <= 0.4 and Pst LM <= 1 (the values printed on the ERCO datasheets); state yours
-- **Cut-out / size:** diameter 59 mm, body 250 mm, hung 0.15 m west of the table centre; suspension kit separate
+- **Cut-out / size:** 1140 x 20 x 27 mm blade (LDT header 1140 x 23 x 28), two suspension wires 0.45 m either side of its centre, centred on the table, 762 mm over it; power supply, suspension and connection accessories ordered separately
 - **Mounting:** suspended, 762 mm over the table
-- **Finish:** white
-- **Commissioned output (zone drivers):** 35-35 % of rated output
-- **Note:** a pendant should not exceed about 2/3 of the table length (policy); a single point pendant lights a pool of about 0.65 m
+- **Finish:** white / transparent white (G0)
+- **Commissioned output (zone drivers):** 37-37 % of rated output
+- **Note:** a pendant should not exceed about 2/3 of the table length (policy); the module sits over the table's centre line along its length
 
 ### DESK - Adjustable desk task lamp, shielded
 
@@ -175,7 +175,7 @@ Every row: **or approved equivalent - submit IES/LDT + datasheet**. Reference pr
 - **Qty:** 6 (15.9 m total)
 - **Reference product (maker, code, URL):** iGuzzini ST49 - Underscore15 ledstrip hi performance, 680 lm/m, 5 W/m, 2700 K | https://www.iguzzini.com/en/st49/
 - **Reference status:** ST49: V10 lumens only
-- **Lumens (full output, per fitting) and tolerance:** 449 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed)
+- **Lumens (full output, per fitting) and tolerance:** 472 lm per metre at full output, -10 / +25 % (strip: sized to the design; supplier's strip may be rated higher and dimmed)
 - **Beam / distribution:** wide, indirect onto the ceiling (120 deg, +/-18 deg)
 - **CCT:** 2700 K +/- 100 K, <= 3 SDCM
 - **CRI / R9:** CRI >= 90; R9 >= 50 if stated

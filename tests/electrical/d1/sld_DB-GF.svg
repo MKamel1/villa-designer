@@ -53,7 +53,7 @@
 <text x="270" y="384" text-anchor="middle">1.5 mm2</text>
 <text x="270" y="396" text-anchor="middle">42.4 m</text>
 <text x="270" y="408" text-anchor="middle">Ib 0.7 A</text>
-<text x="270" y="420" text-anchor="middle">dV 1.14 %</text>
+<text x="270" y="420" text-anchor="middle">dV 1.16 %</text>
 <rect x="230" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="270" y="446" text-anchor="middle">Lighting parent.</text>
 <text x="270" y="460" text-anchor="middle">parents-dressing-ext,parents-dressing</text>

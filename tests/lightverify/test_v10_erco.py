@@ -1,4 +1,4 @@
-"""V10 for the bound products (read from the binding, L6d: ERCO A9003138 + iGuzzini QA03): data-sheet numbers parsed by this lane, against the files the engine loads."""
+"""V10 for the bound products (read from the binding, L6d: ERCO A9003138 + iGuzzini RP65, alternate RP25): data-sheet numbers parsed by this lane, against the files the engine loads."""
 import pytest
 
 from archpipe.lightverify import v10_erco as V
@@ -20,21 +20,22 @@ def test_datasheet_parser_reads_every_row_of_the_cone_table():
 
 
 def test_iguzzini_page_is_read_by_label_not_by_the_description_text():
-    ds = V.datasheet_of("iguzzini", "QA03")
-    assert (ds["lumens"], ds["watts"], ds["imax"], ds["beam_angle"], ds["lor"], ds["above90"]) == (831.6, 12.3, [1809.0], 44.0, 77.0, 0.0)
+    ds = V.datasheet_of("iguzzini", "RP65")
+    assert (ds["lumens"], ds["watts"], ds["imax"], ds["lor"], ds["above90"], ds["cri"]) == (1079.0, 9.7, [998.0], 83.0, 26.0, 90.0)
+    assert V.datasheet_of("iguzzini", "QA11")["cri"] is not None      # the older QA layout (label and value on separate lines) still parses
 
 
 def test_tables_follow_the_binding_not_ids_in_the_code(layer):
     from archpipe.fixture_record import bind_products
     got = {t["kind"]: t["code"] for t in layer.table if t["kind"] != "ALT"}
     assert got == {k: p["code"] for k, p in bind_products().items()}
-    assert "A9003138" in got.values() and "QA03" in got.values()
+    assert {"A9003138", "RP65"} <= set(got.values()) and "QA03" not in got.values()      # the retired pendant is gone
 
 
 def test_every_bound_product_and_alternate_passes_every_point(layer):
     for t in layer.table:
         assert all(s == "pass" for _, s, _ in t["rows"]), (t["kind"], t["code"], [r for r in t["rows"] if r[1] != "pass"])
-    assert {t["code"] for t in layer.table if t["kind"] == "ALT"} == {"68887", "68119", "QA11"}
+    assert {t["code"] for t in layer.table if t["kind"] == "ALT"} == {"68887", "68119", "QA11", "RP25"}
 
 
 def test_a_product_change_in_the_binding_is_verified_without_touching_the_code(monkeypatch):
@@ -48,7 +49,7 @@ def test_a_product_change_in_the_binding_is_verified_without_touching_the_code(m
 
 def test_a_wrong_iguzzini_lumen_figure_is_caught(monkeypatch):
     real = V.datasheet_of
-    monkeypatch.setattr(V, "datasheet_of", lambda mk, c: dict(real(mk, c), lumens=1200.0) if c == "QA03" else real(mk, c))
+    monkeypatch.setattr(V, "datasheet_of", lambda mk, c: dict(real(mk, c), lumens=1200.0) if c == "RP65" else real(mk, c))
     rows = _rows(V.run(), "PEN-LIN")
     assert next(s for n, s, _ in rows if n == "lumens") == "fail"
 
@@ -78,9 +79,11 @@ def test_the_bound_file_must_be_the_download(monkeypatch, tmp_path):
 
 def test_cri_overstated_in_the_record_fails_and_understated_is_flagged(monkeypatch):
     real = V._bound_row
-    monkeypatch.setattr(V, "_bound_row", lambda mk, c: dict(real(mk, c), cri=95.0) if c == "A9003138" else real(mk, c))
+    monkeypatch.setattr(V, "_bound_row", lambda mk, c: dict(real(mk, c), cri=95.0) if c in ("A9003138", "RP65") else real(mk, c))
     rows = V.run().table
-    adj = next(t for t in rows if t["code"] == "A9003138")["rows"]
-    assert next(s for n, s, _ in adj if n == "cri") == "fail"
-    qa = next(t for t in rows if t["code"] == "QA03")["rows"]
-    assert "understates" in next(m for n, _, m in qa if n == "cri")      # the page prints CRI 92, the record says 90
+    for code in ("A9003138", "RP65"):
+        assert next(s for n, s, _ in next(t for t in rows if t["code"] == code)["rows"] if n == "cri") == "fail"
+    monkeypatch.setattr(V, "_bound_row", lambda mk, c: dict(real(mk, c), cri=85.0) if c == "RP65" else real(mk, c))
+    rp = next(t for t in V.run().table if t["code"] == "RP65")["rows"]
+    assert "understates" in next(m for n, _, m in rp if n == "cri")      # record below the page's CRI 90: flagged, not failed
+    assert next(s for n, s, _ in rp if n == "cri") == "pass"

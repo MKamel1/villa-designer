@@ -134,3 +134,12 @@ no group flips its side of the 0.5 threshold. Production scene (`benchmark_scene
 
 Reproduce: `python -m archpipe.lightverify --design D1 --scene <scene.json> [--regen-radiance --freeze]`; `python -m archpipe.lightcalc.villa_run --tag d2 --out out/L6d` (all clusters, ab 12 + 24) then `villa_tune_cli` (dry run: drivers equal the table for the zones this lane changed) and
 `villa_emit`; `python -m archpipe.luminaires.spec_sheet`; `python -m archpipe.exchange.integrate`.
+
+## Final round (2026-11-22, after merging `origin/integ/aplus` again)
+
+* Merge clean. Spec sheet regenerated (no prices); `exchange.integrate` re-run: downstream outputs unchanged except the lighting load (committed); its suite 761 pass, 4 fail (the LV tests that pin QA03/old products, below).
+* Production build first refused (stale exposure transport hash, as designed): exposure record re-measured (max lamp-fraction change 0.0003), then the build passed with receipts and record active, no bypass: scene sha256 `a15e7078d2875995923651c0f2781577852cab539e7c6e142f5177b820f6c08a`, source hash `c1cb03c1b33fed4674cc516d1747f619918c42827e7975336819188872d4673c`. The receipts needed no rewrite (the merge touched no receipt section).
+* `lightverify --design D1 --scene` on it: 450 pass / 1 fail / 3 n/e; **39 of 40 rows verified**; the one fail is the documented LV6 miss `GF-parents-dressing` (-40 %, room index 0.43).
+* Previews re-rendered (jobq, 32 samples) in `knowledge/lighting/previews-l6d/`. Trap met again: **a jobq id that already exists returns the OLD job** (three of my "new" builds were old results); use a unique id per run.
+* Tests pinning the old product (LV's to update): `tests/lightverify/test_v10_erco.py` x3 (`test_tables_follow_the_binding_not_ids_in_the_code`, `test_a_wrong_iguzzini_lumen_figure_is_caught`, `test_cri_overstated_in_the_record_fails_and_understated_is_flagged`), `test_v1_design.py::test_bound_pendant_is_one_emitter_at_its_record_flux`.
+  `test_v5_orientation.py::test_orientation_probe_stays_quiet_for_a_symmetric_downlight` fails only in a fresh clone re-using a clone path: LV's `lv-cycles-DL-*` jobq id is keyed on the job JSON (which holds the path), so a deleted clone's finished job is returned and its exr files are gone. Passes in the lane tree; not a design fault.

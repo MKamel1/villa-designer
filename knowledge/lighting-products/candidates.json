@@ -4,7 +4,7 @@
   {
    "code": "451G",
    "maker": "iguzzini",
-   "name": "Sipario LV \u00d8 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
+   "name": "Sipario LV Ø 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
    "lumens": 1957.5,
    "watts": 19.9,
    "beam_deg": 33.9,
@@ -48,7 +48,7 @@
       "worst_error": 0.004,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "product page 'F - Flood 34\u00b0'"
+      "source": "product page 'F - Flood 34°'"
      },
      {
       "kind": "lumens",
@@ -247,7 +247,7 @@
       "worst_error": 0.0147,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "datasheet p1 cone table header '54.5\u00b0'"
+      "source": "datasheet p1 cone table header '54.5°'"
      }
     ],
     "status": "pass"
@@ -470,7 +470,7 @@
        "worst_error": 0.0179,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 56\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 56°'"
       },
       {
        "kind": "lumens",
@@ -616,7 +616,7 @@
        "worst_error": 0.0315,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 89\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 89°'"
       },
       {
        "kind": "lumens",
@@ -1466,7 +1466,7 @@
        "worst_error": 0.2128,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '4.7\u00b0'"
+       "source": "datasheet p1 cone table header '4.7°'"
       }
      ],
      "status": "fail"
@@ -1675,7 +1675,7 @@
        "worst_error": 0.2,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '5.0\u00b0'"
+       "source": "datasheet p1 cone table header '5.0°'"
       }
      ],
      "status": "fail"
@@ -2421,6 +2421,160 @@
   "SWING": [],
   "PEN-LIN": [
    {
+    "code": "RP65",
+    "maker": "iguzzini",
+    "name": "Libera System down light module, frame, L 1140, 48 Vdc PWM, UGR<19 Space optic, 9.7 W system, 1079 lm system, 2700 K, CRI 90 (Rf 91), white",
+    "exterior": null,
+    "lumens": 1079.0,
+    "watts": 9.7,
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": "DALI-2 via the external 48 V PWM power supply (ordered separately; no minimum level or flicker data on the page)",
+    "flicker": null,
+    "ip": "IP20",
+    "ugr_cutoff": "UGR<19, luminance control L<=3000 cd/m2",
+    "egypt_or_eu": "iGuzzini product page; Egypt distributor not stated",
+    "v10_status": "pass",
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65-product-page.txt",
+      "sha256": "8d70da2f0b80c3ed032b20e0bd38b044f17b5ab03d5f48efbd2369cb3b56dae3"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ldt",
+      "sha256": "f65edbe0a29e6dcf92b22fbde69627f5e67b3d7fdf1feb5445c0eff2a8cc4639"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ies",
+      "sha256": "b25eccf72e26a94fecf592be6429e3c2dd07cb70fc8aece82070d8c2a819bb26"
+     }
+    },
+    "all_files": {
+     "RP65-instruction-sheet.pdf": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65-instruction-sheet.pdf",
+      "sha256": "93fe0733e1dc5ba0bdd80537b551c991bb0de0666c5195d25ebc0446fdd04c0f"
+     },
+     "RP65-product-page.txt": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65-product-page.txt",
+      "sha256": "8d70da2f0b80c3ed032b20e0bd38b044f17b5ab03d5f48efbd2369cb3b56dae3"
+     },
+     "RP65.ies": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ies",
+      "sha256": "b25eccf72e26a94fecf592be6429e3c2dd07cb70fc8aece82070d8c2a819bb26"
+     },
+     "RP65.ldt": {
+      "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ldt",
+      "sha256": "f65edbe0a29e6dcf92b22fbde69627f5e67b3d7fdf1feb5445c0eff2a8cc4639"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/rp65/"
+    ],
+    "notes": [
+     "added by lane L6d (2026-11-22): client decision dining pendant; page CRI 90 (Rf 91, Rg 97), 1140 x 20 x 27 mm module (LDT header 1140 x 23 x 28)"
+    ],
+    "v10": {
+     "v10_status": "pass",
+     "lumens": {
+      "stated": 1079,
+      "independent": 1079.0,
+      "archpipe": 1078.8,
+      "worst_error": 0.0002,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 998,
+       "engine": 982.0,
+       "independent": 982.0,
+       "worst_error": 0.016,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "product page 'Maximum intensity (cd)'"
+      }
+     ]
+    }
+   },
+   {
+    "code": "RP25",
+    "maker": "iguzzini",
+    "name": "Libera System down light module, frameless, L 1140, 48 Vdc PWM, general light Space optic, 18.7 W system, 2058 lm system, 2700 K, CRI 90 (Rf 91), white",
+    "exterior": null,
+    "lumens": 2058.0,
+    "watts": 18.7,
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": "DALI-2 via the external 48 V PWM power supply (ordered separately; no minimum level or flicker data on the page)",
+    "flicker": null,
+    "ip": "IP20",
+    "ugr_cutoff": "general lighting optic (alternate)",
+    "egypt_or_eu": "iGuzzini product page; Egypt distributor not stated",
+    "v10_status": "pass",
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25-product-page.txt",
+      "sha256": "5031e5929549c60d12a136fc46a1a1b061473948b3e5081053562b9ef6af2563"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ldt",
+      "sha256": "19310bec4e8186070b34c34e5b99336eb0c14ed209fec4b98b4a218aa54d20e8"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ies",
+      "sha256": "f8cfa1114b19cc3d9fe54b4184ee50780243605b506a32d4b018c1283c925a57"
+     }
+    },
+    "all_files": {
+     "RP25-product-page.txt": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25-product-page.txt",
+      "sha256": "5031e5929549c60d12a136fc46a1a1b061473948b3e5081053562b9ef6af2563"
+     },
+     "RP25.ies": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ies",
+      "sha256": "f8cfa1114b19cc3d9fe54b4184ee50780243605b506a32d4b018c1283c925a57"
+     },
+     "RP25.ldt": {
+      "path": "knowledge/lighting-products/iguzzini/RP25/RP25.ldt",
+      "sha256": "19310bec4e8186070b34c34e5b99336eb0c14ed209fec4b98b4a218aa54d20e8"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/rp25/"
+    ],
+    "notes": [
+     "added by lane L6d (2026-11-22): client decision dining pendant; page CRI 90 (Rf 91, Rg 97), 1140 x 20 x 27 mm module (LDT header 1140 x 23 x 28)"
+    ],
+    "v10": {
+     "v10_status": "pass",
+     "lumens": {
+      "stated": 2058,
+      "independent": 2058.4,
+      "archpipe": 2058.0,
+      "worst_error": 0.0002,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 2110,
+       "engine": 2018.2,
+       "independent": 2018.2,
+       "worst_error": 0.0435,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "product page 'Maximum intensity (cd)'"
+      }
+     ]
+    }
+   },
+   {
     "code": "50674",
     "maker": "erco",
     "name": "Jilly Pendant downlight 1500 mm, 2 x 11.2 W 2700 K CRI 92, DALI, UGR 19",
@@ -2466,7 +2620,7 @@
        "worst_error": 0.0349,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 86\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 86°'"
       }
      ],
      "status": "pass"
@@ -2527,12 +2681,12 @@
    {
     "code": "QA03",
     "maker": "iguzzini",
-    "name": "Laser pendant, \u00d859 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
+    "name": "Laser pendant, Ø59 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
     "exterior": null,
     "lumens": 831.6,
     "watts": 12.3,
     "cct_k": 2700.0,
-    "cri_ra": 90.0,
+    "cri_ra": 92.0,
     "r9": null,
     "dimming": "DALI-2 (product page: no minimum level stated)",
     "flicker": null,
@@ -2619,13 +2773,15 @@
      "https://www.iguzzini.com/en/qa03/"
     ],
     "notes": [
-     "added by lane L6d (2026-11-21); files and V10 numbers in source.json beside the files"
+     "added by lane L6d (2026-11-21); files and V10 numbers in source.json beside the files",
+     "RETIRED from the design 2026-11-22 (client decision: the single O59 pendant is replaced by the Libera RP65; docs/decisions/dining-pendant-2026-11-22.md)",
+     "CRI corrected 2026-11-22 (LV V10): the product page prints CRI 92 (Rf 92, Rg 99); the record said 90, which is the figure in the product NAME and in the LDT lamp-set line (IRC=1A/90). Both are kept in source.json 'cri'"
     ]
    },
    {
     "code": "QA11",
     "maker": "iguzzini",
-    "name": "Laser pendant, \u00d859 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
+    "name": "Laser pendant, Ø59 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
     "exterior": null,
     "lumens": 766.8,
     "watts": 12.3,

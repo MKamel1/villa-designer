@@ -14,6 +14,7 @@ where Radiance is installed or over ssh on the compute node.
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import math
@@ -164,7 +165,11 @@ class RadJob:
         ies_done: dict[str, str] = {}
         fx_by_zone: dict[str, list[str]] = {}
         for k, p in enumerate(self.placements):
-            key = p.photometry.name + "|" + str(p.meta.get("ies_path") or p.photometry.source or "")
+            # L6d: the key includes the IES TEXT when one is given: two generic strips of one kind (name COVE-part) with different
+            # per-sample flux (entry-lobby cove 240 lm, headboard cove 135 lm) shared the first one's file, so the lobby cove ran at the
+            # headboard's flux in Radiance (doubling its lumens changed nothing).
+            key = (p.photometry.name + "|" + str(p.meta.get("ies_path") or p.photometry.source or "") + "|" +
+                   hashlib.sha1((p.meta.get("ies_text") or "").encode()).hexdigest())
             if key not in ies_done:
                 iesname = f"ies{len(ies_done):02d}"
                 text = p.meta.get("ies_text")

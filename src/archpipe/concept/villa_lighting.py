@@ -42,6 +42,15 @@ VL_DESK_Z = 0.75 + 0.45          # desk lamp head 450 mm over a 750 mm desk
 CEILING = 2.70                 # false ceiling above FFL
 COVE_FIELD = 2.80              # the raised field inside a cove (slab soffit)
 COVE_BAND = 0.40
+# L6d (LV open item): the entry lobby has ONE cove side, on the bedroom side (y1): a 0.30 m lowered band at 2.70 (the bedroom's ceiling carried into
+# the lobby) with a 30 mm upstand on its lobby edge, the strip standing on the band 30 mm behind the upstand (z 2.72, under the 2.80 slab soffit) in a closed trough,
+# aimed into the lobby. The setback matters: a sight line from a pillow crosses the 2.70 plane up to 11 mm in front of the strip.
+LOBBY_COVE_DEPTH = 0.30
+LOBBY_COVE_UPSTAND = 0.03
+LOBBY_COVE_SETBACK = 0.03
+LOBBY_COVE_BACK = 0.02       # the trough's back wall, 20 mm behind the strip: a closed white trough (without it the light is lost in the plenum above the bedroom ceiling)
+LOBBY_COVE_LM_PER_M = 900.0  # the COVE kind's own rating: Cycles measured the built coffer at 11 lx (cove alone, 450 lm/m, open trough), 30 lx lobby minimum needs the closed trough AND 900 lm/m
+LOBBY_COVE_ROOM = "parents-entry"
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
 
@@ -226,6 +235,9 @@ def ceiling_z(level, x=None, room=None, y=None, lay=None, spec=None):
             return base + COVE_FIELD              # slab exposed inside the lower perimeter band
     if level == "GF" and room == "stair-gf":
         return base + COVE_FIELD                  # slab over the double-height stair void
+    if room == LOBBY_COVE_ROOM and y is not None and lay is not None:
+        if y < F.clear_rect(lay, room)[3] - LOBBY_COVE_DEPTH:
+            return base + COVE_FIELD              # lobby field: the slab soffit above the cove band (bedroom side)
     return base + CEILING
 
 
@@ -266,13 +278,13 @@ def design(lay=None):
                            round(z, 3), why=why, card=card, **kw))
         n[room] += count - 1
 
-    def strip(kind, room, a, b, z, aim, why="", card="", level=None):
+    def strip(kind, room, a, b, z, aim, why="", card="", level=None, lm_per_m=450.0):
         """A straight LED strip from a to b (x, y) at height z, emitting along aim."""
         (xa, ya), (xb, yb) = a, b
         L = math.hypot(xb - xa, yb - ya)
         add(kind, room, (xa + xb) / 2, (ya + yb) / 2, z, why, card, level, aim=aim, length=round(L, 3),
             along=((xb - xa) / L, (yb - ya) / L, 0.0),
-            **({"lm": 450.0 * round(L, 3)} if kind == "COVE" else {}))    # L6b: 450 lm/m: a soft wash, not 900
+            **({"lm": lm_per_m * round(L, 3)} if kind == "COVE" else {}))    # L6b: 450 lm/m: a soft wash, not 900
 
     def cove(room, sides, why):
         """Perimeter cove: strips on the band's inner edge along the named sides, stopped 0.3 m short of the end walls
@@ -391,15 +403,16 @@ def design(lay=None):
     strip("TOE", "kitchen", (isl[0] + 0.05, isl[3] - 0.05), (isl[2] - 0.05, isl[3] - 0.05), LEVEL_Z["B"] + 0.05,
           (0, 0.3, -1), why="island plinth glow: night light and the island floats")
     # dining: pendant over the table (task + decorative), two adjustable fills crossing, sideboard accent
-    # L6d: the 1.5 m ERCO Jilly (3558 lm) ran at 3.9 % (Evening) and 6.1 % (Dinner) of its output over this table; replaced by ONE iGuzzini
-    # Laser pendant O59 (832 lm, 44 deg, DALI-2): the scenes need 140 / 220 / 460 lm (Evening / Dinner / Day), i.e. 17 / 26 / 55 % of it. A single
-    # point pendant lights a pool of about 0.65 m, so it hangs 0.15 m toward the homework end (west) of the table centre: from there the 0.6 m
-    # homework-end plane (Day, 200 lx) is reached at a driver of 0.30-0.48 and the table average (Dinner, 100 lx) at 21-23 % of the output.
-    # Table length 1.8 m; pendant 0.059 m (policy: a pendant over a table should not exceed about 2/3 of its length).
+    # Client decision 2026-11-22 (docs/decisions/dining-pendant-2026-11-22.md): the single iGuzzini QA03 (O59 x 250 mm) read as an afterthought
+    # over the 1.8 m table; the table gets a decorative pendant scaled to it. iGuzzini Libera System RP65 (1140 mm slim blade, 1079 lm,
+    # UGR<19, 2700 K, CRI 90): 1.14 m = 63 % of the table length (policy: <= 2/3), centred on the table, 762 mm above it. The 1.5 m ERCO
+    # Jilly (3558 lm) is out of policy and ran at 3.9 % of its output; the QA03 was too small. The task function is in the pendant (it must
+    # meet the cards alone at <= 0.80 driver and every scene >= 15 %; see test_l6d.py), a discreet downlight is added only if it cannot.
     tb = fp["dining-table"]
-    add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2 - 0.15, (tb[1] + tb[3]) / 2,
+    add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2, (tb[1] + tb[3]) / 2,
         z=LEVEL_Z["B"] + it["dining-table"]["h"] + 0.762, extra={"hang_from": ceiling_z("B"), "zone": "table-pendant"},
-        length=0.0, why="pendant over the table (west of centre, over the homework end), 762 mm above it", card="rid-pendant-above-table-762")
+        length=1.14, along=(1.0, 0.0, 0.0) if (tb[2] - tb[0]) >= (tb[3] - tb[1]) else (0.0, 1.0, 0.0),
+        why="decorative linear pendant along the table, 762 mm above it", card="rid-pendant-above-table-762")
     # L6b: the two crossed adjustable fills put ~950 lx on the table centre (9x the 100 lx card; truth probe, variant A):
     # cut. The pendant is the table's light (Dinner dims it, Day lifts the homework end); the sideboard accent stays.
     sb = fp["dining-sideboard"]
@@ -556,8 +569,12 @@ def design(lay=None):
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",
         card="ies-res-vanity-grooming-300")
     PE = rc["parents-entry"]
-    strip("COVE", "parents-entry", (PE[0] + 0.1, PE[3] - 0.10), (PE[2] - 0.1, PE[3] - 0.10), CEILING + 0.03, (0, -0.4, 1),
-          why="entry lobby cove on the bedroom side, aimed up and away from the bed: lights the lobby floor by the ceiling (LA4)", card="ies-res-passage-30")
+    ys = PE[3] - LOBBY_COVE_DEPTH + LOBBY_COVE_SETBACK     # on the band, behind the upstand
+    strip("COVE", "parents-entry", (PE[0] + 0.1, ys), (PE[2] - 0.1, ys), CEILING + 0.02, (0, -0.4, 1),
+          why="entry lobby cove on the bedroom side, aimed up and into the lobby: a 0.30 m band at 2.70 with a 30 mm upstand, the strip standing on the band "
+              "30 mm behind the upstand (z 2.72) in a closed trough under the 2.80 soffit: hidden from the pillows by the band, from the lobby by the upstand (LA4)",
+          card="ies-res-passage-30", lm_per_m=LOBBY_COVE_LM_PER_M)
+    out[-1].extra["cove_band"] = dict(room="parents-entry", side="y1", depth=LOBBY_COVE_DEPTH)
     # L6d LA4: the entry lobby DL (18.98, -26.98) is open to the bed (no door: it is the passage into the bedroom) and 1.2-1.8 m
     # from the pillows, inside the 45 deg cone (122 595 cd/m2). No point of the 1.0 x 0.68 m lobby is 2.0 m from both pillows, so the
     # downlight is replaced by the cove above (generic, hidden behind its upstand: ASSUMED, not an LA4 product check).
@@ -956,11 +973,11 @@ SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
         "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.43, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Dinner": {"table-pendant": 0.41, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
-        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.45, "island-pendants": 0.4},
+        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.42, "island-pendants": 0.4},
         # L6d: every zone in every scene runs at >= 15 % of its output unless it is a night/film orientation level (see test_l6d.py): the table
-        # pendant (driver 0.35) at 0.43 / 0.45 in Dinner / Evening = 15.1 / 15.8 %, the island globes (driver 0.70) at 0.22 in Reading = 15.4 % (was 0.2 = 14 %)
+        # pendant (RP65 since the client decision of 2026-11-22, driver 0.37) at 0.41 / 0.42 in Dinner / Evening = 15.2 / 15.5 %, the island globes (driver 0.70) at 0.22 in Reading = 15.4 % (was 0.2 = 14 %)
         "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2, "island-pendants": 0.22},
         "Film": {"lounge-decorative": 0.15, "*night": 0.1},
         "Night": _NIGHT,

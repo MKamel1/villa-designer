@@ -1,4 +1,6 @@
 """V1 on the real design, plus the negative: a doubled product lumen value must be caught."""
+from pathlib import Path
+
 import pytest
 
 from archpipe.lightcalc.villa import Villa
@@ -39,10 +41,11 @@ def test_wrong_spec_cct_is_caught(villa, monkeypatch):
 
 
 def test_bound_pendant_is_one_emitter_at_its_record_flux(villa):
-    """L6d: the dining pendant is the iGuzzini QA03, one point (the Jilly was 8 samples). Engine flux = 0.35 x 831.3 lm = record."""
+    """L6d: the dining pendant is the iGuzzini Libera RP65 (QA03 retired), read from the binding; instance_problems compares engine flux with the record."""
     f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
     mine = [p for p in villa.placements if (p.meta.get("parent") or p.id) == f.id]
-    assert len(mine) == 1 and mine[0].meta["ies_path"].endswith("IGUZZINI-QA03.ies")
+    from archpipe.fixture_record import bind_products
+    assert mine and all(Path(p.meta["ies_path"]).name == Path(bind_products()["PEN-LIN"]["ies"]).name == "IGUZZINI-RP65.ies" for p in mine)
     assert V1.instance_problems(villa) == {}
 
 

@@ -42,13 +42,14 @@ def test_bound_products_emit_their_own_lumens_at_driver_one(villa):
         pytest.skip("every DL is dimmed")
 
 
-def test_table_pendant_is_one_point_source_of_the_bound_product(villa):
-    """L6d: the 1.5 m Jilly (8 samples along its length, 2 x 1779 lm) was replaced by one O59 pendant (iGuzzini QA03, 831.6 lm): a single point
-    source carrying the commissioned fraction of the rated flux."""
+def test_table_pendant_is_sampled_along_its_length_8_times(villa):
+    """Client decision 2026-11-22: the dining pendant is the 1140 mm iGuzzini Libera RP65 (1079 lm): 8 samples along its length (x), summing to the
+    commissioned fraction of the rated flux (the Jilly of L6c and the QA03 of L6d used the same two paths)."""
     f = next(f for f in villa.fixtures if f.kind == "PEN-LIN")
     ps = V.fixture_placements(f)
-    assert len(ps) == 1
-    assert ps[0].dim * ps[0].photometry.integrated_flux() == pytest.approx(831.6 * f.extra.get("dimmer", 1.0), rel=0.01)
+    assert len(ps) == 8 and f.length == pytest.approx(1.14)
+    assert sum(p.dim * p.photometry.integrated_flux() for p in ps) == pytest.approx(1079.0 * f.extra.get("dimmer", 1.0), rel=0.01)
+    assert max(p.position[0] for p in ps) - min(p.position[0] for p in ps) == pytest.approx(1.14 * 7 / 8, abs=0.01)
 
 
 def test_a_product_strip_is_still_sampled_along_its_length(villa):
@@ -58,7 +59,7 @@ def test_a_product_strip_is_still_sampled_along_its_length(villa):
     long = dataclasses.replace(f, length=1.5, along=(1.0, 0.0, 0.0))
     ps = V.fixture_placements(long)
     assert len(ps) == 8
-    assert sum(p.dim * p.photometry.integrated_flux() for p in ps) == pytest.approx(831.6 * f.extra.get("dimmer", 1.0), rel=0.01)
+    assert sum(p.dim * p.photometry.integrated_flux() for p in ps) == pytest.approx(1079.0 * f.extra.get("dimmer", 1.0), rel=0.01)
 
 
 def test_zone_drivers_respect_v12_and_the_rated_output(villa):

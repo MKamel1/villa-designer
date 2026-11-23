@@ -1,21 +1,21 @@
 {
  "dining-table": {
   "scene": "Dinner",
-  "e_hand": 94.6,
-  "e_direct": 73.2,
-  "e_indirect": 21.3,
-  "radiance": 104.2,
-  "ratio": 1.102,
+  "e_hand": 93.3,
+  "e_direct": 71.8,
+  "e_indirect": 21.5,
+  "radiance": 102.1,
+  "ratio": 1.094,
   "rho": 0.681,
   "within_25_percent": true
  },
  "homework-end": {
   "scene": "Day",
-  "e_hand": 243.1,
-  "e_direct": 148.5,
-  "e_indirect": 94.7,
-  "radiance": 199.2,
-  "ratio": 0.819,
+  "e_hand": 239.6,
+  "e_direct": 144.3,
+  "e_indirect": 95.2,
+  "radiance": 200.8,
+  "ratio": 0.838,
   "rho": 0.681,
   "within_25_percent": true
  },
@@ -24,8 +24,8 @@
   "e_hand": 202.5,
   "e_direct": 182.0,
   "e_indirect": 20.4,
-  "radiance": 199.4,
-  "ratio": 0.985,
+  "radiance": 199.0,
+  "ratio": 0.983,
   "rho": 0.681,
   "within_25_percent": true
  }

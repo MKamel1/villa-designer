@@ -61,8 +61,9 @@ KINDS = {
     "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
                   "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=60,
                   cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
-    "PEN-LIN": dict(what="table pendant downlight O59 x 250 mm, direct (L6d: was a 1.5 m linear pendant of 3558 lm)", mount="pendant", lm=832, beam=44,
-                    cct=2700, cri=90, layer="task", length=0.059),
+    "PEN-LIN": dict(what="dining table pendant: 1140 mm slim linear blade, direct, UGR<19 (client decision 2026-11-22: a decorative pendant "
+                    "scaled to the 1.8 m table, <= 2/3 of its length)", mount="pendant", lm=1079, beam=None,
+                    cct=2700, cri=90, layer="task", length=1.14),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
                    cct=2700, cri=90, layer="task", diameter=0.12),
     "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
@@ -103,8 +104,8 @@ PRODUCT_CHOICE = {
     "ADJ": ("erco", "A9003138", "Optec New spotlight S, flood 28 deg, 760 lm, 2700 K CRI 92, DALI-2 track adapter (V10 pass: "
                                  "published beam 28.0 deg vs 28.9 in the file; L6d replaced the V10-partial narrow spot A9000028)"),
     "WW": ("erco", "41374", "Quintessence lens wallwasher, recessed, 399 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "PEN-LIN": ("iguzzini", "QA03", "Laser pendant O59 Tech, wide flood 44 deg, 832 lm, 2700 K CRI 90, DALI-2 (V10 pass; L6d replaced the 1.5 m "
-                                    "Jilly, 3558 lm, which ran at 3.9 % of its output in the Evening scene)"),
+    "PEN-LIN": ("iguzzini", "RP65", "Libera System down light module, frame, L 1140, UGR<19 Space optic, 1079 lm, 2700 K CRI 90 (Rf 91), 48 V PWM "
+                                    "with an external DALI-2 supply (V10 pass; client decision 2026-11-22 replaced the single QA03 O59)"),
     "DESK": ("erco", "31327", "Lucy task light, wide beam, 234 lm, 2700 K CRI 92, on-board dim (V10 pass)"),
 }
 
@@ -149,10 +150,10 @@ _GEOMETRY = {
     'SWING': dict(arm_length=.30, plate_depth=.012, plate_radius=.05, arm_radius=.018,
                   knuckle_radius=.022, shade_radius=.06, shade_height=.10, shade_tilt=.03,
                   shade_inner_drop=.008, shade_wall=.006, shade_lip=.002, emitter_radius=.055, emitter_z=-.002),
-    # SC3: the QA03 body at its published size: O59 x 250 mm (QA03.ldt header: diameter 59, height 250; page: diameter 59). The
-    # square 59 mm box is the body's envelope (the lamp-housing proxy); the wire runs from its top to the ceiling.
-    'PEN-LIN': dict(half_width=.0295, height=.25, diffuser_end=.004, diffuser_half_width=.025,
-                    diffuser_z=-.001, wire_span=.012, wire_radius=.002),
+    # Libera RP65 at its published size: RP65.ldt header lines 13-15 (length 1140, width 23, height 28 mm; page: 1140 x 20 x 27). The body is the
+    # 1140 x 23 x 28 mm blade; two wires hang it from the ceiling 0.45 m either side of its centre.
+    'PEN-LIN': dict(half_width=.0115, height=.028, diffuser_end=.005, diffuser_half_width=.0095,
+                    diffuser_z=-.001, wire_span=.45, wire_radius=.0015),
     'strip': dict(width=.012, spread=120),
     'wall-marker': dict(width=.10, height=.04, face_offset=.001),
     'globe': dict(inner_ratio=.55, cord_radius=.003, canopy_radius=.05, canopy_depth=.02),

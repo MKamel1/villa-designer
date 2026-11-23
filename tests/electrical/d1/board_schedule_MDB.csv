@@ -5,5 +5,5 @@ way,circuit,phase,description,device,ib_a,in_a,connected_w,cable,method,length_m
 4,MDB/D4,L2,Garden lighting (LV transformer) GARDEN-LIGHT,RCBO 6 A B 30 mA Type A,1.52,6.0,300,2C+E 2.5 mm2 PVC,D2,28.7,24.0,1.0,0.71,5.0,,RA not known,
 5,MDB/S1,L2,Garden sockets site-garden,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 4 mm2 PVC,D2,45.3,33.0,1.0,3.98,5.0,,RA not known,
 6,MDB/D5,L3,Gate intercom station and camera supply ELV-GATE,RCBO 6 A B 30 mA Type A,1.01,6.0,200,2C+E 2.5 mm2 PVC,D2,18.2,24.0,1.0,0.51,5.0,,RA not known,
-7,MDB/F-DB-B,3P,Feeder to DB-B,MCCB 80 A 4P,71.53,80.0,,4C+E 25 mm2 PVC,,10.4,83.5,,0.27,,,,DB-B
+7,MDB/F-DB-B,3P,Feeder to DB-B,MCCB 80 A 4P,71.52,80.0,,4C+E 25 mm2 PVC,,10.4,83.5,,0.27,,,,DB-B
 8,MDB/F-DB-GF,3P,Feeder to DB-GF,MCCB 50 A 4P,48.28,50.0,,4C+E 16 mm2 PVC,,14.9,66.1,,0.4,,,,DB-GF

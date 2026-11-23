@@ -71,17 +71,17 @@
       ]
     },
     {
-      "code": "c3-retained-lamp-wire-qa03",
+      "code": "c3-retained-lamp-wire-rp65",
       "kind": "lamp-wire",
-      "reason": "Square 4 x 4 mm suspension envelope for the iGuzzini QA03 Laser pendant (dining table), 938 mm from the top of its true O59 x 250 mm body to the ceiling; circular cable geometry changes the authored section, outside the phase 2c appearance constraint (same envelope as c3-retained-lamp-wire, shorter because the body is now drawn at its real height). Cross-section fidelity remains open.",
+      "reason": "Square 3 x 3 mm suspension envelope for the iGuzzini Libera RP65 pendant (dining table), two of them 0.45 m either side of the centre of its 1140 mm blade, 2.36 m from the top of the body to the ceiling; circular cable geometry changes the authored section, outside the phase 2c appearance constraint (same envelope as c3-retained-lamp-wire). Cross-section fidelity remains open. Replaces the QA03 record (client decision 2026-11-22).",
       "evidence": {
-        "product": "iguzzini QA03",
-        "source": "knowledge/lighting-products/iguzzini/QA03/QA03.ldt",
-        "published": "luminaire diameter 59 mm, height 250 mm (LDT header lines 12-14); product page: Diameter \u00f859 mm",
-        "drawn": "lamp-body-PEN-LIN-dining-01 59 x 59 x 250 mm"
+        "product": "iguzzini RP65",
+        "source": "knowledge/lighting-products/iguzzini/RP65/RP65.ldt",
+        "published": "luminaire length 1140 mm, width 23 mm, height 28 mm (LDT header lines 13-15); product page: 1140x20x27 mm",
+        "drawn": "lamp-body-PEN-LIN-dining-01 1140 x 23 x 28 mm"
       },
       "shape_sha256": [
-        "6102b5cf4c2d7cf84d2b761ff2bac26d70ac85091f92567019791ac82c29b41d"
+        "b1336cff903717e1099bcf2481bb27a838e94d652b1f467a390191decf938c6f"
       ]
     }
   ]

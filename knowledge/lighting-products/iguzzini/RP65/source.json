@@ -1,0 +1,56 @@
+{
+ "code": "RP65",
+ "maker": "iguzzini",
+ "name": "Libera System down light module, frame, L 1140, 48 Vdc PWM, UGR<19 Space optic, 9.7 W system, 1079 lm system, 2700 K, CRI 90 (Rf 91), white",
+ "fetched": "2026-11-22",
+ "product_url": "https://www.iguzzini.com/en/rp65/",
+ "file_urls": {
+  "ldt": "https://www.iguzzini.com/globalassets/shared-photometric-media/r/p/6/rp65/74312/rp65-g0_g42g.ldt",
+  "ies": "https://www.iguzzini.com/globalassets/shared-photometric-media/r/p/6/rp65/74312/rp65-g0_g42g.ies"
+ },
+ "retrieval": "robots.txt (Allow: /) read; static GET with a generic client name, 3 s pauses; product page text read in Chrome (Playwright), saved as-is",
+ "datasheet_note": "iGuzzini publishes the datasheet as the product page (text saved); the Specification sheet PDF link is script-generated and was not fetched; the saved PDF (RP65 only) is the installation sheet. Control is EXTERNAL: the 48 V PWM power supply (ON-OFF, DALI or BLE version) is ordered separately, so DALI-2 comes from the chosen supply, not from the module",
+ "files": {
+  "RP65-instruction-sheet.pdf": {
+   "path": "knowledge/lighting-products/iguzzini/RP65/RP65-instruction-sheet.pdf",
+   "sha256": "93fe0733e1dc5ba0bdd80537b551c991bb0de0666c5195d25ebc0446fdd04c0f"
+  },
+  "RP65-product-page.txt": {
+   "path": "knowledge/lighting-products/iguzzini/RP65/RP65-product-page.txt",
+   "sha256": "8d70da2f0b80c3ed032b20e0bd38b044f17b5ab03d5f48efbd2369cb3b56dae3"
+  },
+  "RP65.ies": {
+   "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ies",
+   "sha256": "b25eccf72e26a94fecf592be6429e3c2dd07cb70fc8aece82070d8c2a819bb26"
+  },
+  "RP65.ldt": {
+   "path": "knowledge/lighting-products/iguzzini/RP65/RP65.ldt",
+   "sha256": "f65edbe0a29e6dcf92b22fbde69627f5e67b3d7fdf1feb5445c0eff2a8cc4639"
+  }
+ },
+ "v10": {
+  "v10_status": "pass",
+  "lumens": {
+   "stated": 1079,
+   "independent": 1079.0,
+   "archpipe": 1078.8,
+   "worst_error": 0.0002,
+   "tolerance": 0.02,
+   "status": "pass"
+  },
+  "points": [
+   {
+    "kind": "imax",
+    "distance_m": null,
+    "published": 998,
+    "engine": 982.0,
+    "independent": 982.0,
+    "worst_error": 0.016,
+    "tolerance": 0.05,
+    "status": "pass",
+    "source": "product page 'Maximum intensity (cd)'"
+   }
+  ]
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read"
+}
