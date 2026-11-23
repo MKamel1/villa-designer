@@ -483,7 +483,7 @@ def add_mesh_batch(specs, name, material, warnings, materials=None):
 
 def add_mesh_detail(obj, spec):
     """Apply authored edge rounding and smoothing only to a separate object."""
-    if spec.get("mesh_class") == "draped appearance mesh":
+    if spec.get("mesh_class") == "draped appearance mesh" or spec.get("smooth_shaded"):
         for face in obj.data.polygons:
             face.use_smooth = True
     bevel_width = spec.get("bevel_m", 0)
