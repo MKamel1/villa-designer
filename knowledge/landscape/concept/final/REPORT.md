@@ -6,7 +6,7 @@ Client decisions applied: concept B adapted; shared gas fire pit on the west lin
 
 ## The design in one paragraph
 
-South garden (5.71 x 9.32 m): the **social terrace** at the west. The flush gas fire pit (0.9 m envelope) is centred ON the west line; the 2.1 m screen stops 1.25 m from its edge on both sides (grape on the north stub, sambac jasmine on the south stub, each in a 1.3 m deep bed). The BBQ stand place and a standing area sit between pit and table; the dining table (8, extending to 10) moved east to b 4.05-4.95 so that **one deciduous crape myrtle (pruned multi-stem head, 4.0 m, leaning toward the table) is its roof**; the floor under both crowns is permeable gravel (LS-ROOTZONE keeps paving out of every dripline). A built-in bench (2 seats) and a quiet bench (2 seats) run along the rear wall under a pruned **evergreen olive** (year-round overhead privacy where winter sun is small anyway); the pomegranate stays as the understorey fruit tree. A planted edge runs along the south wall (climbers on the wall face), a planted mass closes the east. East yard: the quiet room (bench, flush koi pond) under a smaller pruned olive. North court: the second quiet room (bench niche, planted screen, flush koi pond with shade foliage); no tree fits there (see Layers). Both ponds are kept for now.
+South garden (5.71 x 9.32 m): the **social terrace** at the west. The flush gas fire pit (0.9 m envelope) is centred ON the west line; the 2.1 m screen stops 1.25 m from its edge on both sides (grape on the north stub, star jasmine on the south stub, each in a 1.3 m deep bed). The BBQ stand place and a standing area sit between pit and table; the dining table (8, extending to 10) moved east to b 4.05-4.95 so that **one deciduous crape myrtle (pruned multi-stem head, 4.0 m, leaning toward the table) is its roof**; the floor under both crowns is permeable gravel (LS-ROOTZONE keeps paving out of every dripline). A built-in bench (2 seats) and a quiet bench (2 seats) run along the rear wall under a pruned **evergreen olive** (year-round overhead privacy where winter sun is small anyway); the pomegranate stays as the understorey fruit tree. A planted edge runs along the south wall (climbers on the wall face), a planted mass closes the east. East yard: the quiet room (bench, flush koi pond) under a smaller pruned olive. North court: the second quiet room (bench niche, planted screen, flush koi pond with shade foliage); no tree fits there (see Layers). Both ponds are kept for now.
 
 ## Fire pit on the west line
 
@@ -66,7 +66,7 @@ Client 2026-11-22: remove the pergolas, use trimmed shade trees, evergreen NOT r
 | Punica granatum L. | deciduous | 3.7 m; 2.4-3.0 m | benign; alkaline tolerant | 2.78 m | B | drawable | KEPT as the understorey fruit tree (graded B, deciduous, benign roots); too small to roof a seat (spread 2.4-3.0 m) and NHBC moderate x 3.7 m = 2.8 m cannot fit the east yard (2.3 m to the house wall). |
 | Ficus carica L. | deciduous | 9.1 m; 3.0-9.1 m | benign; alkaline intolerant | 6.82 m | - | stand-in | REJECTED: deciduous and fruiting but not drawable, alkaline soil intolerant (LDL) in a site of unknown soil pH, suckers; wet-fruit litter. |
 | Tipuana tipu (Benth.) Kuntze | semi_evergreen | 30 m; None-None m | benign; alkaline intolerant | 22.5 m | - | stand-in | REJECTED: its leaf-drop window (midwinter to spring) is sourced but leaves the hot early spring bare; large (30 m), invasive flag, alkaline intolerant. |
-| Olea europaea L. | evergreen | 9.1 m; 4.6-7.6 m | moderate; alkaline moderate | 4.55 m (pruned 4.5 m: 2.25 m) | C | stand-in | PICKED where year-round screening matters (quiet bench, east yard bench) and winter sun is already small: evergreen, low water (NHBC 0.5), roots moderate; stand-in asset only (grade C); NO source on umbrella pruning (GAP, stated). |
+| Olea europaea L. | evergreen | 9.1 m; 4.6-7.6 m | moderate; alkaline moderate | 4.55 m (pruned 4.5 m: 2.25 m) | B | drawable | PICKED where year-round screening matters (quiet bench, east yard bench) and winter sun is already small: evergreen, low water (NHBC 0.5), roots moderate; stand-in asset only (grade C); NO source on umbrella pruning (GAP, stated). |
 | Ficus microcarpa L.fil. | evergreen | 15.2 m; 0.6-12.2 m | aggressive; alkaline tolerant | 11.4 m | - | stand-in | REJECTED: densest shade but aggressive roots (LDL): needs 6 m (policy) from a pond or building: no position in the 5.7 m x 9.3 m garden or the courts; invasive flag; ('Nitida' clipping tolerance is well attested in trade sources, not used). |
 | Citrus × limon (L.) Osbeck | evergreen | 6.1 m; 3.0-4.6 m | benign; alkaline moderate | 7.62 m | A | drawable | REJECTED as a shade tree: light shade, 6.1 m, hydrozone high (needs its own bed), thorny; graded A, fine as a fruit tree elsewhere. |
 | melia azedarach | not in the LDL pool | - | - | - | - | - | no LDL record, no graded asset; no Cairo leaf-month source found (street-tree surveys of Greater Cairo exist but the excerpts read give no phenology); not evaluated |
@@ -135,22 +135,22 @@ Climbers on every screen and wall face (a climber within 0.9 m of the face; the 
 | face | climbers |
 |---|---|
 | screen N stub | vitis_vinifera |
-| screen S stub | jasminum_sambac |
+| screen S stub | trachelospermum_jasminoides |
 | south garden rear wall | jasminum_sambac, petrea_volubilis |
 | south garden east fence | jasminum_sambac, petrea_volubilis |
-| north court street fence | jasminum_sambac |
+| east yard south wall | jasminum_sambac, trachelospermum_jasminoides |
+| north court street fence | jasminum_sambac, trachelospermum_jasminoides |
 
-**East yard: no climber.** Its south boundary is not a declared wall in the layout (the site fragment has `fence-east` from x 22.6 only), so a climber there would be drawn as a free mound (LDB warns) and is not claimed; the yard has a tree, shrubs, perennials and groundcover. Declare the fence, then add climbers (open item).
+**East yard: climbers on its south boundary wall.** The wall (`wall-yard-south`, 4.0 m, declared on the client's instruction 2026-11-22) carries star jasmine in the far bed (all of it 2 m or more from the bench) and Arabian jasmine in the divider bed beside the bench; the pond-edge bed is high-water and takes no climber (LS-HYDROZONE). Free-standing plants were set off the wall so no crown clips it.
 
-Grape (Vitis vinifera, deciduous) stands on the north screen stub: it moved from the pergola to the screen as a climber (the client keeps the fruit); NCSU rates it high flammability, and it stays outside the 1.25 m side clearance of the pit. Sambac jasmine and Petrea cover the south stub, the rear wall and the south garden's east fence (Jasminum grandiflorum is not in the layout). English ivy is still **not used** (heat tolerance GAP in LDL); creeping fig, star jasmine and bougainvillea climber panels were not yet graded on this branch, so every climber is a labelled stand-in or a genus mass.
-
+Grape (Vitis vinifera, deciduous) stands on the north screen stub: it moved from the pergola to the screen as a climber (the client keeps the fruit); NCSU rates it high flammability, and it stays outside the 1.25 m side clearance of the pit. **Jasmine rule (client decision 2026-11-22, `final.assign_jasmine`):** every jasmine slot takes its species from its distance to the nearest seat or the herb bed. **Star jasmine** (Trachelospermum jasminoides; LDL constraint 'away from seating and edibles'; climber panel graded B) where that distance is 2 m or more (the LDG-POL-TOXIC figure); **Arabian jasmine** (Jasminum sambac, no 3D model: a labelled stand-in) only where it is less. Petrea stays a stand-in. LDL holds star jasmine outside its viable pool only for the unmeasured site soil (alkaline-soil GAP; frost and heat pass): the client's choice admits it with that GAP carried as a condition (`species.CLIENT_ADMIT`); the soil test stays a professional item. English ivy is still **not used** (heat tolerance GAP in LDL); creeping fig is unverified in LDL, so it is not used.
 ### Layer table per garden room (plants counted from the layout; classification by LDL layer and height)
 
 | room | canopy | understorey | shrub | perennial | groundcover | climber | missing |
 |---|---|---|---|---|---|---|---|
-| south garden | 2 (2 sp) | 5 (4 sp) | 8 (2 sp) | 6 (2 sp) | 20 (2 sp) | 14 (3 sp) | none |
-| east yard | 1 (1 sp) | 2 (1 sp) | 2 (1 sp) | 6 (1 sp) | 9 (1 sp) | 0 (0 sp) | climber |
-| north court | 0 (0 sp) | 1 (1 sp) | 1 (1 sp) | 2 (1 sp) | 14 (2 sp) | 3 (1 sp) | canopy |
+| south garden | 2 (2 sp) | 5 (4 sp) | 8 (2 sp) | 6 (2 sp) | 20 (2 sp) | 15 (4 sp) | none |
+| east yard | 1 (1 sp) | 2 (1 sp) | 2 (1 sp) | 6 (1 sp) | 9 (1 sp) | 4 (2 sp) | none |
+| north court | 0 (0 sp) | 1 (1 sp) | 1 (1 sp) | 2 (1 sp) | 14 (2 sp) | 3 (2 sp) | canopy |
 
 North court has no canopy tree for the reasons above. **Precedent comparison (LDP frozen ranges, south garden):** layer shares are a GAP in LDP (fewer than 6 usable gardens), so there is no layer range to compare against; hard share and trees per 100 m2 have ranges (below). **Advisory pattern rules (qualitative, no score):** AD-COMP-TREE-CANOPY (a shade tree as the roof of a gathering place with a seat beneath: crape over the table, olive over the quiet bench); AD-COMP-LAYERING (foreground, middle, background in layers: the beds above); AD-APL-246 Climbing Plants (climbers on sunny walls and trellises: rear wall, east fence, screen stubs); AD-APL-170 Fruit Trees (a group, not a single tree: only a pomegranate and a grape, a thin answer); AD-EXT-OVERLOOK (canopy does the work a hedge cannot against the apartment above: summer figures above); AD-EXT-SHADE-PLACEMENT (deciduous trees to the east of the use area: the crape stands east of the table); AD-EXT-POND-SITING (no trees over ponds: the east olive's crown reaches the pond end, evergreen with small leaf fall; flagged); AD-EXT-TREE-BARRIER (no root barrier is relied on, only distance); AD-LECH-SHADE (trees chosen by compass side: the sun-path result above).
 
@@ -184,7 +184,7 @@ North court: lush shade foliage (Rhapis, Aspidistra; Acorus on the edges). East 
 | polyline paths not built | all paths are rectangles (LDB builds rects only) | LDB build: 0 warnings |
 | chairs clip at pergola corner posts | no pergola posts remain | LDB `clip` check: 0 fails, closed and open pit |
 
-LDB build of this layout (age 3): {'climber-coverage:pass': 5, 'footprint:pass': 62, 'id:pass': 180, 'pit-half:pass': 2, 'plant-footprint:info': 7, 'plant-footprint:pass': 66, 'pond-section:pass': 18, 'standin:pass': 96, 'support:pass': 178} (closed pit); warnings [].
+LDB build of this layout (age 3): {'climber-coverage:pass': 6, 'footprint:pass': 63, 'id:pass': 186, 'pit-half:pass': 2, 'plant-footprint:info': 33, 'plant-footprint:pass': 40, 'pond-section:pass': 18, 'standin:pass': 101, 'support:pass': 184} (closed pit); warnings [].
 
 ## Programme: achieved versus required
 
@@ -278,7 +278,7 @@ LDB build of this layout (age 3): {'climber-coverage:pass': 5, 'footprint:pass':
 | LDG-PLANT-SOLID [planting] | 0 plants | 0 plants | pass | POLICY / decision (ours) |
 | LDG-POT [pot] | 1.37 m | 1.3 m | pass | POLICY / decision (ours) |
 | LDG-FIRE-MANUAL [s-firepit/side] | 1250 mm | 1250 mm | pass | POLICY / decision (ours) |
-| LDG-FIRE-MANUAL [s-firepit/overhead] | 2193 mm | 2000 mm | pass | POLICY / decision (ours) |
+| LDG-FIRE-MANUAL [s-firepit/overhead] | 2412 mm | 2000 mm | pass | POLICY / decision (ours) |
 | LDG-BBQ-MANUAL [s-bbq] | 670 mm | 650 mm | pass | POLICY / decision (ours) |
 | LDG-POND-SECTION [n-pond] | 1.4 m | 1.4 m | pass | POLICY / decision (ours) |
 | LDG-POND-SECTION [e-pond] | 1.4 m | 1.4 m | pass | POLICY / decision (ours) |
@@ -306,16 +306,19 @@ Precedent ranges (LDP frozen): south hard share **0.849 before -> 0.756 after** 
 
 ## Critic findings (LDC, uncalibrated: not a gate)
 
-Counts {'landscape-architect': {'pass': 14, 'fail': 3, 'warn': 1, 'not_evaluated': 0}, 'horticulturist': {'pass': 23, 'fail': 2, 'warn': 2, 'not_evaluated': 3}, 'user': {'pass': 17, 'fail': 2, 'warn': 0, 'not_evaluated': 0}, 'climate': {'pass': 6, 'fail': 1, 'warn': 0, 'not_evaluated': 2}}; trees carry their habit, so the critics use the leafed density in summer windows and the bare density in the winter window.
+Counts {'landscape-architect': {'pass': 14, 'fail': 3, 'warn': 1, 'not_evaluated': 0}, 'horticulturist': {'pass': 20, 'fail': 3, 'warn': 4, 'not_evaluated': 3}, 'user': {'pass': 17, 'fail': 2, 'warn': 0, 'not_evaluated': 0}, 'climate': {'pass': 6, 'fail': 1, 'warn': 0, 'not_evaluated': 2}}; trees carry their habit, so the critics use the leafed density in summer windows and the bare density in the winter window.
 
 - landscape-architect A-ENCLOSURE (fail, major): room 'n-quiet': 29% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)
-- landscape-architect A-ENCLOSURE (fail, major): room 'e-quiet': 0% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)
+- landscape-architect A-ENCLOSURE (fail, major): room 'e-quiet': 28% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)
 - landscape-architect A-ENCLOSURE (fail, major): room 's-dining': 43% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)
 - landscape-architect A-ROOMS (warn, minor): 5 outdoor rooms with uses/surfaces ["('dining', 'paving')", "('lounge', 'paving')", "('quiet', 'paving')"]; a change of floor marks a room
 - horticulturist H-SIZE-VS-SPACE (fail, major): lagerstroemia_indica: mature spread 4.0 m in a space 4.7 m across (limit 0.8 x = 3.8 m)
 - horticulturist H-SIZE-VS-SPACE (fail, major): olea_europaea: mature spread 3.6 m in a space 1.4 m across (limit 0.8 x = 1.1 m)
 - horticulturist H-BED-CROWDING (warn, minor): bed s-bed-wall-b: mature crowns 3.0 m2 on 1.1 m2 of bed (limit 1.5 x)
 - horticulturist H-BED-CROWDING (warn, minor): bed n-screen: mature crowns 4.7 m2 on 2.7 m2 of bed (limit 1.5 x)
+- horticulturist H-BED-CROWDING (warn, minor): bed e-divider: mature crowns 2.9 m2 on 1.8 m2 of bed (limit 1.5 x)
+- horticulturist H-BED-CROWDING (warn, minor): bed e-far: mature crowns 2.9 m2 on 1.8 m2 of bed (limit 1.5 x)
+- horticulturist H-DRIFTS (fail, major): 54% of 96 shrub/ground plants sit in drifts of >= 3 (required 60%); median drift 2; lone single-plant species: 0
 - user U-GATHER-GROUPS (fail, major): gathering 10-20: dining seats 8 (>= 4), lounge seats 2 (>= 3): a dining group and a lounge group
 - user U-FIRE (fail, major): fire pit: 3 seats 1.5-4.0 m from the fire (required >= 4; 1.5 m is LS-FIRE-SEAT); reachable: True
 - climate C-POND-SUN (fail, major): pond cell gets 1.75 h direct sun on 21 Jun (required >= 2.0 h, policy: deep shade drops the planting and the water goes green); LS-POND-SHADE covers the opposite excess
@@ -326,6 +329,7 @@ Reading them: C-PRIVACY (6 of 15 seats) is the screen opening again (the critic 
 
 | zone | bed | species | count | layer | verdict | status | conditions |
 |---|---|---|---|---|---|---|---|
+| east yard | e-divider | Jasminum sambac (L.) Aiton | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
 | east yard | e-edge | Acorus gramineus Aiton | 9 | ground | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally |
 | east yard | e-divider | Farfugium japonicum (L.) Kitam. | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; alkaline-soil tolerance is a GAP (site soil unmeas |
 | east yard | e-far | Farfugium japonicum (L.) Kitam. | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; alkaline-soil tolerance is a GAP (site soil unmeas |
@@ -333,45 +337,48 @@ Reading them: C-PRIVACY (6 of 15 seats) is the screen opening again (the critic 
 | east yard | e-far | Fatsia japonica (Thunb.) Decne. & Planch. | 1 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally |
 | east yard | e-divider | Phoenix roebelenii O'Brien | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded A asset skf3_a05b5ef5 | alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested) |
 | east yard | e-far | Phoenix roebelenii O'Brien | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded A asset skf3_a05b5ef5 | alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested) |
-| north court | n-screen | Jasminum sambac (L.) Aiton | 3 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
+| east yard | e-far | Trachelospermum jasminoides (Lindl.) Lem. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | alkaline-soil tolerance is a GAP (site soil unmeasured); client decision 2026-11-22 (star jasmine on screens and walls a |
+| north court | n-screen | Jasminum sambac (L.) Aiton | 1 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
 | north court | n-edge-far | Acorus gramineus Aiton | 6 | ground | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; sun conditional at 1.7 h (21 Jun) |
 | north court | n-edge-back | Acorus gramineus Aiton | 5 | ground | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; sun conditional at 1.6 h (21 Jun) |
-| north court | n-screen | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| north court | n-screen | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
 | north court | n-screen | Farfugium japonicum (L.) Kitam. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; alkaline-soil tolerance is a GAP (site soil unmeas |
 | north court | n-screen | Fatsia japonica (Thunb.) Decne. & Planch. | 1 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; sun conditional at 1.7 h (21 Jun) |
-| north court | n-screen | Rhapis excelsa (Thunb.) A.Henry | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset skf3_86982789 | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| other | - | Olea europaea L. | 1 | canopy/understorey (tree) | viable | STAND-IN (generic mass, labelled): not drawable yet | canopy checked at the sourced minimum spread 2.6 m (LDL range 4.6-7.6 m): keep pruned |
+| north court | n-screen | Rhapis excelsa (Thunb.) A.Henry | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_broadleaf_lady_palm_shqke_high; skf3_86982789 | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| north court | n-screen | Trachelospermum jasminoides (Lindl.) Lem. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | alkaline-soil tolerance is a GAP (site soil unmeasured); client decision 2026-11-22 (star jasmine on screens and walls a |
+| other | - | Olea europaea L. | 1 | canopy/understorey (tree) | viable | DRAWABLE: graded B asset fab_olive_tree_source | canopy checked at the sourced minimum spread 2.6 m (LDL range 4.6-7.6 m): keep pruned |
 | south | - | Lagerstroemia indica L. | 1 | canopy/understorey (tree) | viable | DRAWABLE: graded B asset skf3_a9cb68fd | canopy checked at the sourced minimum spread 4.0 m (LDL range 1.8-9.1 m): keep pruned |
-| south | - | Olea europaea L. | 1 | canopy/understorey (tree) | viable | STAND-IN (generic mass, labelled): not drawable yet | canopy checked at the sourced minimum spread 3.6 m (LDL range 4.6-7.6 m): keep pruned |
+| south | - | Olea europaea L. | 1 | canopy/understorey (tree) | viable | DRAWABLE: graded B asset fab_olive_tree_source | canopy checked at the sourced minimum spread 3.6 m (LDL range 4.6-7.6 m): keep pruned |
 | south | - | Punica granatum L. | 1 | canopy/understorey (tree) | viable | DRAWABLE: graded B asset skf3_86de7dea; skf3_f697f7da | canopy checked at the sourced minimum spread 2.4 m (LDL range 2.4-3.0 m): keep pruned |
 | south | s-bed-mass | Jasminum sambac (L.) Aiton | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
 | south | s-bed-mass-corner | Jasminum sambac (L.) Aiton | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
-| south | s-bed-screen-s | Jasminum sambac (L.) Aiton | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
+| south | s-bed-wall | Jasminum sambac (L.) Aiton | 1 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
 | south | s-bed-wall-c | Jasminum sambac (L.) Aiton | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat: moderate tolerance; plant in afternoo |
 | south | s-bed-mass-corner | Petrea volubilis L. | 1 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat tolerance is a GAP; alkaline-soil to |
 | south | s-bed-wall | Petrea volubilis L. | 2 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat tolerance is a GAP; alkaline-soil to |
 | south | s-bed-wall-c | Petrea volubilis L. | 3 | climber | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C; heat tolerance is a GAP; alkaline-soil to |
 | south | pot | Plumeria rubra L. (terracotta pot) | 1 | container tree | viable | STAND-IN (frangipani asset exists as a genus fit; pot size is a LDL GAP) | frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C; frost: accepted by lead decision (client  |
-| south | s-bed-herb | Origanum majorana L. | 2 | ground | viable | STAND-IN (generic mass, labelled): graded asset file missing on this machine | sun conditional at 5.1 h (21 Jun) |
-| south | s-bed-mass | Aspidistra elatior Blume | 4 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-screen-n | Aspidistra elatior Blume | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-screen-s | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-wall | Aspidistra elatior Blume | 4 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-wall-b | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-pocket | Aspidistra elatior Blume | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-herb | Origanum majorana L. | 2 | ground | viable | DRAWABLE: graded B asset fab_oregano_umkhceeia_high; fab_oregano_umkhceeia_raw | sun conditional at 5.1 h (21 Jun) |
+| south | s-bed-mass | Aspidistra elatior Blume | 4 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-screen-n | Aspidistra elatior Blume | 2 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-screen-s | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-wall | Aspidistra elatior Blume | 4 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-wall-b | Aspidistra elatior Blume | 3 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-pocket | Aspidistra elatior Blume | 2 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high | heat: moderate tolerance; plant in afternoon shade or verify locally |
 | south | s-bed-mass | Justicia brandegeeana Wassh. & L.B.Sm. | 3 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost tolerance is a GAP; heat: moderate tolerance; plant in afternoon shade or verify locally; sun conditional at 1.6 h |
 | south | s-bed-screen-s | Justicia brandegeeana Wassh. & L.B.Sm. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost tolerance is a GAP; heat: moderate tolerance; plant in afternoon shade or verify locally |
 | south | s-bed-wall-b | Justicia brandegeeana Wassh. & L.B.Sm. | 1 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | frost tolerance is a GAP; heat: moderate tolerance; plant in afternoon shade or verify locally |
-| south | s-bed-mass | Cenchrus alopecuroides (L.) Thunb. | 3 | shrub/perennial | viable | STAND-IN (generic mass, labelled): graded asset file missing on this machine | sun conditional at 1.6 h (21 Jun) |
+| south | s-bed-mass | Cenchrus alopecuroides (L.) Thunb. | 3 | shrub/perennial | viable | DRAWABLE: graded B asset fab_red_fountain_grass_slglz_high | sun conditional at 1.6 h (21 Jun) |
 | south | s-bed-mass | Phoenix roebelenii O'Brien | 2 | shrub/perennial | viable_with_conditions | DRAWABLE: graded A asset skf3_a05b5ef5 | alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested); sun conditional at 1.6 h  |
-| south | s-bed-wall-b | Rhapis excelsa (Thunb.) A.Henry | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset skf3_86982789 | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-wall-b | Rhapis excelsa (Thunb.) A.Henry | 1 | shrub/perennial | viable_with_conditions | DRAWABLE: graded B asset fab_broadleaf_lady_palm_shqke_high; skf3_86982789 | heat: moderate tolerance; plant in afternoon shade or verify locally |
 | south | s-bed-mass | Salvia leucantha Cav. | 1 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally; sun conditional at 1.6 h (21 Jun) |
 | south | s-bed-screen-n | Salvia leucantha Cav. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): not drawable yet | heat: moderate tolerance; plant in afternoon shade or verify locally |
+| south | s-bed-screen-s | Trachelospermum jasminoides (Lindl.) Lem. | 2 | shrub/perennial | viable_with_conditions | STAND-IN (generic mass, labelled): graded asset file missing on this machine | alkaline-soil tolerance is a GAP (site soil unmeasured); client decision 2026-11-22 (star jasmine on screens and walls a |
 | south | s-bed-screen-n | Vitis vinifera L. | 2 | shrub/perennial | viable | STAND-IN (generic mass, labelled): not drawable yet | sun conditional at 4.5 h (21 Jun) |
 
 Drawable on this machine means a graded A/B glTF file is present; the Fab/Megascans species graded by LDL are not present here as files ("graded asset file missing on this machine"), so only the species counted below draw as plants. Everything else is a labelled generic stand-in.
 
-Plants drawable versus stand-in, before -> after: drawable 8 -> 9, stand-in 57 -> 87; species drawable 4 of 13 -> 5 of 17.
+Plants drawable versus stand-in, before -> after: drawable 8 -> 37, stand-in 57 -> 64; species drawable 4 of 13 -> 9 of 18.
 The olives are stand-ins (grade C asset); the crape myrtle draws when its glTF is present.
 
 ## Images (looked at)

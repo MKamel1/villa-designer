@@ -77,7 +77,7 @@ def compare(L):
 
 # ---- layers -----------------------------------------------------------------------------------------------------------------------
 LAYERS = ("canopy", "understorey", "shrub", "perennial", "groundcover", "climber")
-CLIMBERS = {"vitis_vinifera", "petrea_volubilis", "bougainvillea_glabra", "jasminum_grandiflorum", "podranea_ricasoliana"}
+CLIMBERS = {"vitis_vinifera", "trachelospermum_jasminoides", "petrea_volubilis", "bougainvillea_glabra", "jasminum_grandiflorum", "podranea_ricasoliana"}
 
 
 def layer_of(slug, role=""):
@@ -128,6 +128,7 @@ def climber_faces(L, reach=0.9):
     from shapely.geometry import Point, box
     faces = {"screen N stub": box(S.SX0, S.SY0 + 0.15, S.SX0 + F.OPEN_A[0], S.SY0 + 0.2), "screen S stub": box(S.SX0 + F.OPEN_A[1], S.SY0 + 0.15, S.SX0 + A, S.SY0 + 0.2),
              "south garden rear wall": box(S.SX0 + A - 0.02, S.SY0 + 1.45, S.SX0 + A, S.SY0 + B), "south garden east fence": box(S.SX0 + 1.3, S.SY0 + B - 0.02, S.SX0 + A, S.SY0 + B),
+             "east yard south wall": box(F.TC.EX0, F.TC.EY0 + F.TC.EW - 0.02, S.SX0, F.TC.EY0 + F.TC.EW),
              "north court street fence": box(F.TC.NX1 - F.TC.NH, F.TC.NY0 + 0.3, F.TC.NX1 - F.TC.NH + 0.02, F.TC.NY0 + F.TC.NW)}
     out = {}
     for k, face in faces.items():
