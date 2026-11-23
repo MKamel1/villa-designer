@@ -161,6 +161,10 @@ def clips(scene, state="closed"):
             if ka == kb or kb in ok[ka]:
                 continue
             ea, eb = items[a][3], items[b][3]
+            if {objs[ka].kind, objs[kb].kind} == {"edging", "plant"}:        # foliage over a 15 mm edging lip
+                continue
+            if objs[ka].kind == "coping" and objs[kb].kind == "coping":      # two copings meet over a wall corner: one stone cap, not two clashing solids
+                continue
             if (ea and eb) or (objs[ka].kind == "plant" and objs[kb].kind == "plant"):     # foliage against foliage (masses, climber panels): massing overlap is normal
                 continue
             if ea or eb:
@@ -169,7 +173,12 @@ def clips(scene, state="closed"):
                     continue
             else:
                 pa, pb = items[a][2], items[b][2]
-                if pa is not None and pb is not None and not _prism_hits(pa, pb):
+                if pa is not None and pb is not None and (pa.leaf_rects is not None or pb.leaf_rects is not None):
+                    card, other = (pa, items[b][1]) if pa.leaf_rects is not None else (pb, items[a][1])      # leaf cards: the real card vertices, not the box round all of them
+                    inside = np.all((card.verts > np.array(other[:3]) + TOL_CLIP) & (card.verts < np.array(other[3:]) - TOL_CLIP), axis=1)
+                    if not inside.any():
+                        continue
+                elif pa is not None and pb is not None and not _prism_hits(pa, pb):
                     continue
             found.setdefault((ka, kb), 0)
             found[(ka, kb)] += 1

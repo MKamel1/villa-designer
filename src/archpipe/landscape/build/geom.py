@@ -18,6 +18,7 @@ class Part:
     faces: list                        # list of index lists
     envelope: tuple | None = None      # plants: (cx, cy, cz, rx, ry, rz) ellipsoid used for clip tests
     poly: list | None = None           # plan outline for prisms (exact clip tests)
+    leaf_rects: list | None = None     # leaf cards: per-face index into the leaf atlas cut-out list (UV window), None = not a card part
 
     def bounds(self):
         if self.envelope:

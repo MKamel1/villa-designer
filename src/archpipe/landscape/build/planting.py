@@ -14,8 +14,10 @@ import random
 import zlib
 from pathlib import Path
 
+import numpy as np
+
 from . import policy as P
-from .geom import Obj, box, ellipsoid, cyl, tube
+from .geom import Obj, Part, box, ellipsoid, cyl, tube
 
 ROOT = Path(__file__).resolve().parents[4]
 PLANTS = ROOT / "knowledge/landscape/plants"
@@ -241,20 +243,117 @@ def _climber_panel(oid, slug, f, cl, s, h, age, base_z, support, row):
         row.update(status="asset", asset=a["id"], grade=a["grade"], species_fit="species")
         return o, row
     col, why = foliage_colour(f.get("foliage_text", ""))
-    atlas = next((a for a in assets if a.get("texture") and Path(a["texture"]).exists()), None)
-    mat = ("atlas:%s:%.3f,%.3f,%.3f" % (atlas["texture"], *col)) if atlas else "climber:%.3f,%.3f,%.3f:%s" % (*col, "d" if f.get("habit") == "deciduous" else "e")
-    z1 = base_z + hh
-    part = box(mat, lo, n0, base_z, hi, n1, z1) if cl["axis"] == "x" else box(mat, n0, lo, base_z, n1, hi, z1)
+    return _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why, age)
+
+
+def leaf_rects():
+    """Star jasmine atlas cut-outs: [(x0, y0, x1, y1) px of the 4096 atlas] of the 15 live leaves (G/R >= 1.0 drops the 5 dead ones, LDL pass 6)."""
+    d = json.loads((ROOT / "knowledge/landscape/build/leaf-rects.json").read_text())["star_jasmine"]
+    return [r[:4] for r in d["rects"] if r[5] >= 1.0], d["scan_m"]
+
+
+STAND_IN_LEAF_M = {"jasminum_sambac": (0.045, 0.06), "petrea_volubilis": (0.05, 0.085), "vitis_vinifera": (0.11, 0.12)}      # ASSUMED generic leaf (w, h) m of a labelled stand-in: not sourced per species
+
+
+def _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why, age):
+    """A climber on a wall or screen as 3D leaf cards (depth off the face) on woody stems, not a textured plane. Star jasmine uses the real leaf cut-outs of the LDL atlas
+    (graded B, climber use only); every other climber species is a labelled STAND-IN card set (generic leaf of ASSUMED size, never another species' atlas).
+    Deterministic per id. A deciduous climber's winter geometry is its stems alone."""
+    C = P.LEAF_CARD
+    rng = random.Random(zlib.crc32(oid.encode()))
+    axis, sgn, face = cl["axis"], cl["sgn"], cl["face"]
+    w = hi - lo
+    atlas = slug == "trachelospermum_jasminoides"
     if atlas:
-        o = Obj(oid, "plant", "%s climber panel: leaf-scan atlas %s (%s, %s) on a plane" % (slug, atlas["id"], atlas["licence"], atlas["author"]), [part], rests_on=support, footprint_mode=None,
-                meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit"), atlas=atlas["id"]))
-        row.update(status="asset", asset=atlas["id"], grade=atlas["grade"], species_fit="species")
-        return o, row
+        rects, scan = leaf_rects()
+        sizes = [((r[2] - r[0]) * scan / 4096, (r[3] - r[1]) * scan / 4096) for r in rects]
+        lmat = "leaf-card:star-jasmine"
+    else:
+        sizes = [STAND_IN_LEAF_M.get(slug, (0.05, 0.07))]
+        lmat = "leaf-card:standin:%.3f,%.3f,%.3f" % col
+
+    def to3(u, d, z):                                    # (along the face, outward depth, height) -> model xyz
+        return (u, face + sgn * d, z) if axis == "x" else (face + sgn * d, u, z)
+    keep = [(r[0], r[1], base_z, r[2], r[3], base_z + 1.0) for r in cl.get("keepouts", ())]
+    nout = np.array([0.0, sgn, 0.0]) if axis == "x" else np.array([sgn, 0.0, 0.0])
+    tang = np.array([1.0, 0.0, 0.0]) if axis == "x" else np.array([0.0, 1.0, 0.0])
+    zup = np.array([0.0, 0.0, 1.0])
+    # --- stems: wavy main stems up the face, side branches off them; the leaves cluster round these
+    stems, pts = [], []
+    n_main = max(2, int(round(w * C["stems_per_m"])))
+    top = base_z + hh
+    for k in range(n_main):
+        u = lo + (k + rng.uniform(0.2, 0.8)) * w / n_main
+        z, d = base_z, rng.uniform(0.03, 0.06)
+        path = [(u, d, z)]
+        reach = top - rng.uniform(0.05, 0.35) * hh
+        while z < reach:
+            z += rng.uniform(0.22, 0.34); u = min(hi - 0.03, max(lo + 0.03, u + rng.uniform(-0.12, 0.12))); d = min(0.09, max(0.025, d + rng.uniform(-0.02, 0.02)))
+            path.append((u, d, min(z, reach)))
+        for i in range(len(path) - 1):
+            r0 = rng.uniform(*C["stem_r"]) * (1.25 - 0.5 * i / max(1, len(path) - 1))
+            stems.append(tube("climber-stem", to3(*path[i]), to3(*path[i + 1]), r0, r0 * 0.85, 5))
+        pts += path
+        for _ in range(int(hh * 2.2)):                  # side branches
+            u0, d0, z0 = path[rng.randrange(len(path))]
+            u1 = min(hi - 0.02, max(lo + 0.02, u0 + rng.uniform(-0.45, 0.45))); z1 = min(top, z0 + rng.uniform(0.05, 0.4)); d1 = rng.uniform(0.03, 0.10)
+            stems.append(tube("climber-stem", to3(u0, d0, z0), to3(u1, d1, z1), 0.0028, 0.0018, 4))
+            pts.append((u1, d1, z1))
+    # --- leaf cards
+    n_cards = int(C["per_m2"] * w * hh * min(1.0, 0.35 + 0.65 * (hh / max(cl["max_h"], 1e-6))))
+    verts, faces, rid = [], [], []
+    for _ in range(n_cards):
+        if rng.random() < 0.8:                           # near a stem: structure, not wallpaper
+            u0, d0, z0 = pts[rng.randrange(len(pts))]
+            u = min(hi - 0.02, max(lo + 0.02, u0 + rng.gauss(0, 0.11))); z = min(top - 0.02, max(base_z + 0.1, z0 + rng.gauss(0, 0.13)))
+        else:
+            u, z = rng.uniform(lo + 0.02, hi - 0.02), rng.uniform(base_z + 0.1, top - 0.02)
+        d = rng.uniform(*C["depth"]) ** 1.0
+        ri = rng.randrange(len(sizes)); lw, lh = sizes[ri]
+        sc = rng.uniform(0.85, 1.2)
+        N = nout + tang * rng.uniform(-0.55, 0.55) + zup * rng.uniform(-0.55, 0.2)       # leaf normal: outward, drooping, turned a little each way
+        N = N / np.linalg.norm(N)
+        roll = rng.uniform(-0.9, 0.9)                    # long axis near vertical (a leaf hangs from its petiole), rolled about the normal
+        b = zup - N * (zup @ N); b = b / np.linalg.norm(b)
+        a = np.cross(b, N)
+        b = math.cos(roll) * b + math.sin(roll) * a; a = np.cross(b, N)
+        c = np.array(to3(u, d, z))
+        hw, hl = lw * sc / 2, lh * sc / 2
+        quad = [c - a * hw - b * hl, c + a * hw - b * hl, c + a * hw + b * hl, c - a * hw + b * hl]
+        if any(k[0] - 0.01 < q[0] < k[3] + 0.01 and k[1] - 0.01 < q[1] < k[4] + 0.01 and k[2] < q[2] < k[5] for q in quad for k in keep):
+            continue                                     # a leaf never grows through a bench, table or pot standing against the face
+        k0 = len(verts)
+        verts += quad
+        faces.append([k0, k0 + 1, k0 + 2, k0 + 3]); rid.append(ri)
+    V = np.array(verts, float)
+    k = 1 if axis == "x" else 0                          # the depth axis: a tilted card's corner never goes behind 12 mm off the face (it presses on the wall, it does not pass through it)
+    V[:, k] = face + sgn * np.maximum((V[:, k] - face) * sgn, 0.012)
+    j = 0 if axis == "x" else 1                          # and never past the ends of the free stretch (a perpendicular wall or a bench stops the panel)
+    V[:, j] = np.clip(V[:, j], lo + 0.012, hi - 0.012)
+    leaves = Part(lmat, V, faces, leaf_rects=rid)
+    stem_parts = stems
+    hab = "deciduous" if f.get("habit") == "deciduous" else "evergreen"
+    row.update(climbing=True, shown_height_m=round(hh, 3), panel_width_m=round(w, 3), on=cl.get("on"), leaf_cards=n_cards, stems=len(stems))
     r = resolve(slug)
-    o = Obj(oid, "plant", "STAND-IN procedural leaf-cutout panel for the climber %s (no graded climber asset: %s), %.2f m wide x %.2f m high on %s" % (slug, r["why"], w, hh, cl.get("on")), [part],
-            rests_on=support, footprint_mode=None, standin=True, meta=dict(species=slug, age=age, climbing=True, colour=why, habit=f.get("habit")))
+    if atlas:
+        a_ = next(x for x in climber_panels_all() if slug in (x.get("maps_to") or []))
+        o = Obj(oid, "plant", "%s climber: %d 3D leaf cards (real cut-outs of the graded %s atlas %s, %s, %s) on %d woody stems, depth %.0f-%.0f mm off the face"
+                % (slug, n_cards, a_["grade"], a_["id"], a_["licence"] if "licence" in a_ else "Fab Standard", a_.get("author", "Megascans"), len(stems), C["depth"][0] * 1000, C["depth"][1] * 1000),
+                [*stem_parts, leaves], rests_on=support, footprint_mode=None, winter_parts=([*stem_parts] if hab == "deciduous" else []),
+                meta=dict(species=slug, age=age, climbing=True, habit=f.get("habit"), atlas=a_["id"], cards=True))
+        row.update(status="asset", asset=a_["id"], grade=a_["grade"], species_fit="species", construction="atlas-built leaf cards, climber use only")
+        return o, row
+    o = Obj(oid, "plant", "STAND-IN climber %s: %d generic leaf cards (ASSUMED %.0f x %.0f mm leaf; no graded climber asset: %s) on %d stems, %.2f m wide x %.2f m high on %s"
+            % (slug, n_cards, sizes[0][0] * 1000, sizes[0][1] * 1000, r["why"], len(stems), w, hh, cl.get("on")), [*stem_parts, leaves],
+            rests_on=support, footprint_mode=None, standin=True, winter_parts=([*stem_parts] if hab == "deciduous" else []),
+            meta=dict(species=slug, age=age, climbing=True, colour=why, habit=f.get("habit"), cards=True))
     row.update(status="standin", reason=r["why"], colour_basis=why)
     return o, row
+
+
+def climber_panels_all():
+    """Climber atlas rows of the plant asset table (graded A/B), whose `leaf_type` is `atlas_cutouts`."""
+    return [x for x in _assets()["assets"] if x.get("leaf_type") == "atlas_cutouts" and x.get("grade") in ("A", "B") and x.get("maps_to")]
 
 
 def canopy_clumps(cx, cy, base_z, h, spread, stem, mat):

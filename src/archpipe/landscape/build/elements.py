@@ -204,11 +204,40 @@ def _blade(s0, s1, pos, zc, lv, long_x):
 
 
 def bench(oid, layout_id, rect, g, seats, h):
+    """Built-in seat wall: a rendered plinth under a hardwood slat seat (slats along the long side, gaps between them), so it reads as a bench, not a plank on a box."""
     x0, y0, x1, y1 = rect
     pl = h - P.SEAT_TOP
-    return Obj(oid, "bench", "built-in bench / seat wall, %d seats: masonry plinth + %d mm timber seat (heights from layout seat-wall spec; finish ASSUMED)" % (seats, int(P.SEAT_TOP * 1000)),
-               [box("wall-render", x0, y0, g, x1, y1, g + pl), box("seat-timber", x0, y0, g + pl, x1, y1, g + h)], layout_id=layout_id, footprint=rect,
+    S = P.SEAT_SLAT
+    along_x = (x1 - x0) >= (y1 - y0)
+    lo, hi = (y0, y1) if along_x else (x0, x1)
+    n = max(1, int((hi - lo + S["gap"]) // (S["w"] + S["gap"])))
+    w = ((hi - lo) - S["gap"] * (n - 1)) / n
+    slats = []
+    for i in range(n):
+        a = lo + i * (w + S["gap"])
+        slats.append(box("seat-timber", x0, a, g + pl, x1, a + w, g + h) if along_x else box("seat-timber", a, y0, g + pl, a + w, y1, g + h))
+    return Obj(oid, "bench", "built-in bench / seat wall, %d seats: rendered masonry plinth + %d hardwood slats %d mm with %d mm gaps (heights from layout seat-wall spec; finish ASSUMED)"
+               % (seats, n, round(w * 1000), round(S["gap"] * 1000)), [box("wall-render", x0, y0, g, x1, y1, g + pl), *slats], layout_id=layout_id, footprint=rect,
                meta=dict(seats=seats, height_m=h))
+
+
+def coping(oid, wall_id, rect, h, g):
+    """Wall cap: a stone coping slab over the wall head, overhanging 40 mm each side (ASSUMED), resting on the wall."""
+    C = P.COPING
+    x0, y0, x1, y1 = rect
+    return Obj(oid, "coping", "wall coping, %d mm stone cap with %d mm overhang (ASSUMED detail; the layout gives the wall only)" % (C["thick"] * 1000, C["overhang"] * 1000),
+               [box("wall-coping", x0 - C["overhang"], y0 - C["overhang"], g + h, x1 + C["overhang"], y1 + C["overhang"], g + h + C["thick"])], rests_on=(wall_id,), footprint_mode=None)
+
+
+def edging(oid, bed_id, rect, g):
+    """Steel bed edging round a planting bed: 4 mm strip, 15 mm proud of the ground, set inside the bed rect."""
+    E_ = P.EDGING
+    x0, y0, x1, y1 = rect
+    t = E_["t"]
+    z0, z1 = g - E_["below"], g + E_["above"]
+    parts = [box("bed-edging", x0, y0, z0, x1, y0 + t, z1), box("bed-edging", x0, y1 - t, z0, x1, y1, z1),
+             box("bed-edging", x0, y0 + t, z0, x0 + t, y1 - t, z1), box("bed-edging", x1 - t, y0 + t, z0, x1, y1 - t, z1)]
+    return Obj(oid, "edging", "steel bed edging, %d mm, %d mm proud of the ground (ASSUMED detail)" % (E_["t"] * 1000, E_["above"] * 1000), parts, rests_on=(bed_id,), footprint_mode=None)
 
 
 def _rot(pts, yaw):

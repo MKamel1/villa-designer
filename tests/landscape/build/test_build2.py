@@ -325,9 +325,13 @@ class ClimberLookAlikes(unittest.TestCase):
         panels = [o for o in S.objects if o.meta.get("climbing")]
         self.assertTrue(panels)
         for o in panels:
-            self.assertTrue(o.standin, o.id)
-            self.assertNotIn("fab_star_jasmine_trellis", o.label)
-            self.assertNotIn("fab_creeping_fig_wall", o.label)
+            if o.meta["species"] == "trachelospermum_jasminoides":
+                self.assertFalse(o.standin, o.id)          # the one species the atlas IS: drawn from its real leaf cut-outs
+                self.assertIn("fab_star_jasmine_trellis", o.label)
+            else:
+                self.assertTrue(o.standin, o.id)
+                self.assertNotIn("fab_star_jasmine_trellis", o.label)
+                self.assertNotIn("fab_creeping_fig_wall", o.label)
         self.assertFalse(planting.resolve("jasminum_sambac")["drawable"])
 
 
@@ -401,7 +405,7 @@ class Climbers(unittest.TestCase):
             b = o.bounds()
             self.assertLess(b[5] - G, 4.0 + 1e-6)
             self.assertGreater(min(b[3] - b[0], b[4] - b[1]), 0.0)
-            self.assertLessEqual(min(b[3] - b[0], b[4] - b[1]), P.CLIMBER["panel_t"] + 1e-6)     # a thin panel on the face, not a mass
+            self.assertLessEqual(min(b[3] - b[0], b[4] - b[1]), P.LEAF_CARD["depth"][1] + 0.10)     # leaf cards stand off the face by at most their depth range plus a leaf, not a mass
 
     def test_a_structure_with_no_climber_is_a_warn_not_an_invented_planting(self):
         self.assertEqual([f for f in checks.climber_coverage(S) if f["status"] == "warn"], [])      # LDG round 3 puts a climber on every structure
@@ -425,11 +429,33 @@ class Climbers(unittest.TestCase):
         self.assertEqual([f for f in fails(checks.clips(S)) if "plant" in f["id"] and "bench" in f["id"]], [])
 
     def test_deciduous_and_evergreen_climbers_are_marked_for_the_seasonal_render(self):
-        mats = {o.meta["species"]: o.parts[0].material for o in S.objects if o.meta.get("climbing") and o.standin}
-        self.assertTrue(any(m.endswith(":d") for m in mats.values()))
-        self.assertTrue(any(m.endswith(":e") for m in mats.values()))
-        self.assertTrue(mats["vitis_vinifera"].endswith(":d"))
+        cl = {o.meta["species"]: o for o in S.objects if o.meta.get("climbing")}
+        self.assertTrue(cl["vitis_vinifera"].winter_parts)                       # the grape has a leaf-off geometry: its stems alone
+        self.assertTrue(all(not p.leaf_rects for p in cl["vitis_vinifera"].winter_parts))
+        self.assertFalse(cl["petrea_volubilis"].winter_parts)                    # evergreen: one geometry all year
         self.assertTrue([o for o in S.objects if o.meta.get("deciduous") and o.meta.get("climbing")])
+
+    def test_climbers_are_three_d_leaf_cards_with_depth_and_stems(self):
+        for o in [o for o in S.objects if o.meta.get("climbing")]:
+            cards = [p for p in o.parts if p.leaf_rects is not None]
+            self.assertEqual(len(cards), 1, o.id)
+            self.assertGreater(len(cards[0].faces), 100, o.id)
+            self.assertGreaterEqual(len([p for p in o.parts if p.material == "climber-stem"]), 8, o.id)
+            # depth: the cards spread through a band off the face, they are not one plane
+            b = o.bounds()
+            self.assertGreater(min(b[3] - b[0], b[4] - b[1]), 0.12, o.id)
+
+    def test_star_jasmine_goes_away_from_the_seats_and_arabian_jasmine_stays_by_them(self):
+        by = {o.id: o for o in S.objects if o.meta.get("climbing")}
+        star = [o for o in by.values() if o.meta["species"] == "trachelospermum_jasminoides"]
+        sambac = [o for o in by.values() if o.meta["species"] == "jasminum_sambac"]
+        self.assertTrue(star and sambac)
+        seats = [R_ for R_ in (build.R(s_["rect"]) for s_ in L["seating"])]
+        near = lambda o: min(build._dist_pt_rect(o.meta["at"], r) for r in seats)
+        self.assertTrue(all(near(o) >= 0 for o in star))
+        self.assertTrue(all(o.label.endswith("%s here]" % "jasminum_sambac") or "client rule" in o.label for o in star))
+        s_off = build.build_scene(L, star_jasmine=False)
+        self.assertEqual([o for o in s_off.objects if o.meta.get("species") == "trachelospermum_jasminoides"], [])          # negative: the rule off leaves the layout's species
 
     def test_climber_panel_assets_are_used_only_when_graded(self):
         self.assertEqual(planting.climber_panels(), [r for r in planting.climber_panels() if r["grade"] in "AB"])
