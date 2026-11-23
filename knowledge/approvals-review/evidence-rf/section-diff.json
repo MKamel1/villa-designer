@@ -1,0 +1,57 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "meshes": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "bulb-PEN-GLOBE-stair-gf-01",
+   "bulb-PEN-GLOBE-stair-gf-02",
+   "bulb-PEN-GLOBE-stair-gf-03",
+   "furn-ka-bunk-0",
+   "lamp-PEN-GLOBE-stair-gf-01",
+   "lamp-PEN-GLOBE-stair-gf-02",
+   "lamp-PEN-GLOBE-stair-gf-03"
+  ]
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "door-oak",
+   "marble-bath",
+   "marble-ensuite",
+   "marble-white",
+   "travertine",
+   "walnut",
+   "walnut-grain-x",
+   "walnut-grain-y"
+  ]
+ }
+}

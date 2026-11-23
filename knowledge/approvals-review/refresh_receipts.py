@@ -51,6 +51,17 @@ note = dict(reason='fixed-input change by approved G1 (stair overlap/infill/guar
 fr['refresh_2026_11_21'] = note; br['refresh_2026_11_21'] = note
 if (folder / 'refresh-note.json').exists():      # a later refresh (lane GI) records its own reason under its own key; the earlier record stays
     extra = load(folder / 'refresh-note.json'); k = extra.pop('key'); fr[k] = extra; br[k] = extra
+
+if '--rf' in sys.argv:
+    # RF 2026-11-22: a second, separate record; the 2026-11-21 note above is history and is left unchanged.
+    rf = dict(reason='RF interior render fixes. Section diff old (receipt-era tree 06e74dc, reproduces all 8 stored digests) vs new: '
+              'materials changed ids = door-oak, marble-bath, marble-ensuite, marble-white, travertine, walnut, walnut-grain-x, walnut-grain-y '
+              '(tile_m 1.2/1.4/1.0/1.83 -> 0.6/0.7/0.6/0.6, contrast 0.8 on the three cream marbles); meshes changed ids = '
+              'lamp-/bulb-PEN-GLOBE-stair-gf-01..03 (sphere tessellation 16x10 -> 48x28 / 24x14 + smooth_shaded; bounding boxes identical) and '
+              'furn-ka-bunk-0 (material white-paint-joinery -> oak-grain-x, geometry identical). layout, specification, furniture, '
+              'architecture, models, props unchanged. evidence knowledge/approvals-review/evidence-rf/',
+              reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')
+    fr['refresh_2026_11_22_rf'] = rf; br['refresh_2026_11_22_rf'] = rf
 if write:
     save(ROOT / 'knowledge/furniture-stage2.json.gz', fr); save(ROOT / 'knowledge/parents-bed.json.gz', br)
     print('written')
