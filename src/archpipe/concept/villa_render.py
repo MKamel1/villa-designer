@@ -1385,7 +1385,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "open timber shelves, upholstered daybed mattress and loose cushions, two ergonomic cinema task "
                  "chairs, microwave drawer in the island, and cleaning-storage doors below the folding counter. "
                  "Book props are labelled dressing; all builder vertices are checked against their authored envelopes.")
-    notes.append("By day the basement rooms are shown with their ambient and accent lights at 50 % (a basement is "
+    notes.append("By day the basement rooms are shown in the lighting design's Day scene (ambient 100 %, accent 50 %; a basement is "
                  "used with lights on by day); bathrooms by day have their lights on; other ground-floor day "
                  "views are daylight only.")
 
@@ -2544,7 +2544,10 @@ def part_material(f, part):
         if "mattress" in part:
             return "bedding-white"
         if room in ("kids-a", "kids-b"):
-            return "white-paint-joinery" if part != "rail" else "white-paint-joinery"
+            # RF defect 5 (v06/v13): the bunk and kids' bed read as a plain white box. The beds-report procedural
+            # fallback is the only bunk that fits the room (both licensed bunk assets fail the fit checks), so it
+            # keeps its geometry and takes the kids' desk wood (oak), grain along the rails.
+            return "oak-grain-x"
         return "oak"
     if t.startswith("sofa") or t in ("armchair", "recliner"):
         if room == "cinema":
@@ -2800,7 +2803,12 @@ def _VIEWS(lay=None, resolve=True):
     # stands and aims (client 2026-09-27: some hand-typed cameras "are looking at the wrong direction and
     # uninformative"). Exteriors and the stair keep authored cameras. `final_only` views are skipped in review drafts
     # (client: "choose their locations, so we can generate them later ... not waste time producing them every time").
-    BASEMENT_DAY = dict(layers=["ambient", "accent"], dimmers={"ambient": 0.5, "accent": 0.5})  # stated in captions
+    # RF defect 3: the day-lit basement views ran ambient at a hand-typed 0.5 while the lighting design's own Day scene
+    # for the basement open plan is ambient 1.0 / accent 0.5 (villa_lighting.SCENES["B-open"]["Day"]); read it, so the
+    # rendered state is the designed one (v03 street lounge was a 0.145 median under the group exposure).
+    _B_DAY = VL.SCENES["B-open"]["Day"]
+    BASEMENT_DAY = dict(layers=["ambient", "accent"],
+                        dimmers={"ambient": _B_DAY["*ambient"], "accent": _B_DAY["*accent"]})  # stated in captions
     I = None                                                   # chosen camera
     v("v01-kitchen-garden", "Kitchen island to the garden", "day", I, I, 24, ["k-island", "dining-table"],
       room="kitchen", **BASEMENT_DAY)
