@@ -506,6 +506,23 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
+SHEER_HALF_STATE = "sheer-half"
+DAY_CURTAIN_STATE_STATES = ("day",)        # views of these states declare the half-drawn sheer state (client 2026-11-22)
+
+
+def sheer_half_inner(width, opening_kind):
+    """Distance from the opening centre to the inner edge of each sheer leaf when half drawn (RF, client option b).
+
+    Each leaf covers a quarter of the opening, so the pair covers half of it. A garden door keeps the F.BODY
+    (0.914 m, card mitton-path-of-travel-min) clear gap that the open state already guarantees. The sheer is the
+    design's modelled one, on the design's track; only its position along the track is the declared state."""
+    from . import villa_furnish as F
+    inner = width / 4
+    if opening_kind == "garden-door":
+        inner = max(inner, F.BODY / 2)
+    return round(inner, 3)
+
+
 def curtain_hidden_meshes(curtains, state):
     """Authored curtain visibility shared by still and moving cameras."""
     suffixes = ('-heavy-closed',) if state == 'day' else ('-heavy-open-l', '-heavy-open-r')
@@ -1825,6 +1842,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             bedroom=bedroom, opening_kind=opening_kind,
             sheer_material="curtain-sheer", heavy_material="curtain-heavy" if bedroom else "curtain-heavy-dimout",
             open_stack_m=stack, open_pier_reach_m=pier_reach, closed_overlap_m=0.05,
+            sheer_half_inner_m=sheer_half_inner(width, opening_kind),
             **({"open_clear_width_m": clear_width} if clear_width is not None else {}),
             # Floor-length regardless of sill height: a punched bedroom window's curtain still runs track-to-floor
             # (the norm in bedrooms/living rooms, not a curtain cut to the glass), so track_z/floor_z alone (not
@@ -1860,6 +1878,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "states (its job is daytime diffusion, and the closed heavy layer already gives the night "
                  "blackout/dim-out). ASSUMED: track and stacking dimensions, not a specified product.")
     for v in views:
+        if v["state"] in DAY_CURTAIN_STATE_STATES and curtains:
+            fill_defaults(v, {"curtain_state": SHEER_HALF_STATE})
         if v["state"] == "exterior-dusk":
             continue
         hidden = curtain_hidden_meshes(curtains, v['state'])
@@ -3149,7 +3169,7 @@ def provenance_inputs(root=None):
     inputs = sorted((root / "src/archpipe").rglob("*.py"))
     inputs += [root / name for name in (
         "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
-        "knowledge/c4-final-approvals.json", "knowledge/exposure-group-rule.json",
+        "knowledge/c4-final-approvals.json", "knowledge/exposure-group-rule.json", "knowledge/exposure-group-rule-v3.json",
         "knowledge/c3-part-exemptions.json",
         "knowledge/imported-legacy-components.json.gz",
         "knowledge/imported-component-policy.json",

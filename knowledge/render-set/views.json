@@ -5,7 +5,8 @@
   "A view declares ONE subject cluster so a 24 mm frame can hold it; wide rooms get several views instead of a 16 mm view.",
   "reuse = camera, lighting and caption of the existing definition in villa_render.VIEWS are kept; room = camera chosen by render_views.choose at 24 mm.",
   "covers = rooms the frame is meant to show; render_set.coverage() checks each against the camera's field of view on plan.",
-  "Exposure is the existing per-group lock (knowledge/exposure-groups.json); no view is boosted."
+  "Exposure is the existing per-group lock (knowledge/exposure-groups.json); no view is boosted.",
+  "Lamp-state rule (RF, lead decision 2026-11-22): a view of a windowless space whose only daylight path is an open end (ray probe: 36 of 20 000 rays escape from x 12.5 m of the GF east hall, none from x >= 15 m) is rendered in the design's Evening scene with daylight off, because 2700 K lamps mixed with spill daylight read as a blue cast. tests/test_villa_render_daylight_leak.py holds each such view to <= 10 % daylight."
  ],
  "light": {
   "basement-day": {"layers": ["ambient", "accent"], "dimmers": {"ambient": 1.0, "accent": 0.5}},
@@ -33,7 +34,7 @@
   {"id": "n08-guest-wc-evening", "room": "guest-wc", "subjects": ["gwc-wc", "gwc-basin"], "state": "evening", "light": "bath-day", "replaces": "v16-guest-wc", "purpose": "Guest bathroom WC and basin at 24 mm (v16 was 16 mm, D+, 30 % occluding wall)", "covers": ["guest-wc"]},
   {"id": "n09-dirty-kitchen-day", "room": "dirty-kitchen", "subjects": ["dk-run"], "state": "day", "light": "basement-day", "replaces": "v17-dirty-kitchen", "purpose": "Dirty kitchen run at 24 mm (v17 was 16 mm, C)", "covers": ["dirty-kitchen"]},
   {"id": "v11-stair-void", "reuse": true, "purpose": "Stair up through the void (audit C: mostly blank wall; kept for the draft pass to judge)", "covers": ["stair-b", "stair-gf", "hall-b"]},
-  {"id": "n10-gf-hall-east-day", "level": "GF", "camera": {"position": [11.8, -28.05], "target": [19.0, -28.05]}, "subjects": [], "state": "day", "layers": ["ambient", "accent"], "replaces": "v23-gf-gallery", "purpose": "Ground-floor hall looking east from the stair gallery to the parents' door (v23 looked west at a blank wall)", "covers": ["corridor", "gallery-end"]},
+  {"id": "n10-gf-hall-east-day", "level": "GF", "camera": {"position": [11.8, -28.05], "target": [19.0, -28.05]}, "subjects": [], "state": "evening", "light": "design-evening", "replaces": "v23-gf-gallery", "purpose": "Ground-floor hall looking east from the stair gallery to the parents' door (v23 looked west at a blank wall). Shown in the lighting design's GF-circulation Evening scene: the hall has no window and its only daylight path is the open west end (ray probe), so a day state is 2700 K lamps plus 35 % spill daylight at 5500 K, which reads blue", "covers": ["corridor", "gallery-end"]},
   {"id": "n18-stair-gallery-day", "level": "GF", "camera": {"position": [11.2, -26.9], "target": [5.6, -28.0]}, "subjects": [], "state": "day", "layers": ["ambient", "accent"], "purpose": "Stair void, landing and gallery from the gallery end (new: GF stair rooms had no 24 mm view)", "covers": ["stair-gf", "landing-gf", "gallery-end"]},
   {"id": "n19-entry-lobby-evening", "level": "B", "camera": {"position": [14.9, -28.2], "target": [14.9, -24.0]}, "subjects": [], "state": "evening", "light": "design-evening", "purpose": "Entrance lobby looking in from the core door (new: room had no view)", "covers": ["entry-b"]},
   {"id": "n20-dining-side-day", "room": "dining", "subjects": ["dining-sideboard"], "state": "day", "light": "basement-day", "purpose": "Dining party side and sideboard (new: room had no view)", "covers": ["dining-side", "dining"]},

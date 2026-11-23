@@ -78,9 +78,34 @@ Fresh clone at `26b9a15` (before the L8 merge): lane suite + `tests/parity tests
 ## Open items
 
 1. Zone-level scene levels (island pendants 0.4 in Evening) are not rendered; needs `dimmers` keyed by zone in `villa_render_contract` and `exposure_groups` (not RF files). It is the cause of the clipped globe in n19.
-2. v30 under-ramp store: design change (more light) or its own exposure group.
-3. n10: choose the state / close the hall's west end / mixed-light white balance.
+2. (done in round 2) v30 has its own exposure group.
+3. (done in round 2) n10 is in the evening state; the west end of the hall is still open.
 4. Cushion schedule and a second licensed cushion asset (defect 6); a real bunk asset needs a fit-checked product (defect 5).
 5. Windows by day (defect 7) and the curtain weave (defect 8) are look decisions; kitchen backsplash, shelving, garments (defect 10).
 6. Texture scales are an ASSUMED policy (0.6-0.7 m); a client-approved finish sample would replace it. Marble veins stay rust-brown (texture colour).
 7. Camera items (L9P 9, 10) are not RF's.
+
+## Round 2 (2026-11-22/23): the three decided items (docs/decisions/interior-presentation-2026-11-22.md)
+
+### 1. Windows by day, option (b): half-drawn sheers
+* Design data, not an overlay: every curtain spec carries `sheer_half_inner_m` (each sheer leaf covers a quarter of the opening, the pair half of it; a garden door keeps F.BODY 0.914 m clear; contract-checked). `villa_scene.build_curtains` builds two extra leaves of the **same sheer fabric on the same track** (`<id>-sheer-half-l/r`); every `state == "day"` view declares `curtain_state: "sheer-half"` (a key of the frozen view input), and `setup_view` swaps the stacked sheers for the half-drawn ones. Heavy layer unchanged (open stack by day). Windows without curtains (kitchen, bath, WC) have no spec and are untouched. Views without the declaration (evening, dusk, flythrough) are unchanged (negative control in `tests/test_render_standard.py::test_day_views_declare_the_half_drawn_sheer_state`).
+* Before/after drafts (96 -> 48 spp, 960x640, same scene, `curtain_state` stripped for "before"; left before, right after): `knowledge/render-set/rf/curtains/<view>.jpg`; data `changed-fraction.json` (gain-normalised pixel change >= 1 % of the frame).
+* **Views affected (15):** n01-dining-day, n07-family-corner-day, n11-study-desks-day, n13-parents-day, n17-family-bath-basin-day, n20-dining-side-day, v02-garden-living, v03-street-lounge, v06-kids-room, v19-garden-facade, v28-east-yard-below, v33-basement-north-south, v34-basement-south-north, v37-north-garden-lounge, v39-north-garden-hanging-retreat. The other 11 day views (n02 n09 n16 n18 n21 v25 v26 v27 v36 v40 v41) see no curtain, or under 1 % of the frame, and look as before.
+
+### 2. v30 (ramp store): its own exposure group
+* Rule pre-registered **before** the measurement that applies it (commit `b9a23e3`, `knowledge/exposure-group-rule.json` `low_key_amendment`, new rule hash `428c21b3...`): an evening or lamp-dominant view whose mean metered source luminance `(lamp + daylight sum) / metered pixels` is >= 3 stops (x8) below the median of its own group moves to `lamp-low-key` (lamp-flux-weighted white balance, planckian). Threshold fixed at a round 3 stops, not tuned; the rule file discloses that the metric was chosen after the previous record showed v30's lamp sum about 15x below the other evening view. `exposure_groups.assign_groups` implements it; `tests/test_exposure_groups.py::LowKeyAmendment` has positive and negative controls; the 2026-10 receipt fixture test replays under classify() alone.
+* On the previous measurement the rule selects exactly v30-under-ramp-store (replayed on `tests/fixtures/exposure-groups-real.json`). The new measurement is recorded below.
+
+### Round 2 finish (2026-11-23, after the GPU hold): merge with integ/aplus, rule 3, measurements
+* **Merged `origin/integ/aplus`** (GI: garden in production scene, rule 2; L4). Exposure-rule reconciliation: rule files are now three, each pinned by sha256 in `exposure_groups.RULE_FILES`: v1 (`exposure-group-rule.json`, original, restored byte-for-byte, `be87dd5b`), v2 (GI, `ea3a8c1c`), **v3 (`exposure-group-rule-v3.json`, `7bc36bbd`) = v2 + this lane's low-key amendment**. Order inside v3, stated in its `assignment_order`: rule-2 clauses first (dusk split, shade luminance, inside `classify`), then one low-key pass over the evening/lamp-dominant groups (`assign_groups`). `exterior-dusk-dim` and `exterior-shade` are never touched by the pass (`applies_to` is evening and lamp-dominant only). Records keep the rule they were frozen under (`require_record` uses the record's own rule), so v1/v2 records and receipts still validate. v3 was committed before the measurement that applies it (`82ddcb7`; measurements `RF-r3-measure-prod-1`, `RF-r3-measure-set-1`, on that tree; the old `RF-measure-lowkey-*-b` jobs ran on the pre-merge tree and were not used). `exposure-group-rule-v3.json` is in `provenance_inputs`.
+* **v30 group:** both records (41-view production, 46-view set) select exactly **`v30-under-ramp-store` -> `lamp-low-key`** (mean source luminance 0.9, daylight share 0.0; group white balance 2700 K). Nothing else moves; counts production: evening 15, exterior-day 11, day 9, exterior-shade 5, lamp-dominant 3, exterior-dusk 1, exterior-dusk-dim 1, lamp-low-key 1.
+* **n10:** the view is in the evening state (design Evening scene); its measured daylight share is 0.014 % (lamps 205 923, daylight 28), under the 10 % limit, so the strict xfail in `tests/test_villa_render_daylight_leak.py` is removed. It passes because the view state changed, not because the hall's open west end was closed (that opening is still open).
+* **Receipts:** `furniture-stage2.json.gz` / `parents-bed.json.gz` from integ merged cleanly and the no-bypass production and set builds accept them, so no regeneration was needed (a regeneration would have re-signed unchanged digests).
+* **Scenes, no bypass** (`git_dirty` false, same `source_hash` `2b92a1df51fe761f91d589256f25a2d41384a1afaaad16ab7c7fe0b93c939691`):
+
+| scene | bytes | sha256 | ids-stripped sha256 | meshes / views |
+|---|---|---|---|---|
+| production (`villa_render.write`) | 259,501,387 | `3b092b6bc71cfc3019a397f3c729b205013e050f188c4646d84608b80a793fb4` | `37dec0553ea908e874a2f7e3aa102057f73a477d20a8d389fdb2d1162e04865d` | 1,205 / 41 |
+| render set (`render_set.write_scene`) | 259,541,824 | `d8e1afab740f7a7dcf1b7e1afc8a3ce0d90f4b76e390a133231b051da47682b8` | `216b2ec7375908300c8f311f6d6206c6c3d753ec080d4f78b04accacec639ac6` | 1,205 / 46 |
+
+* **Re-renders** (draft, 96 spp, 1920x1280, GPU through jobq with the scene cache; 17 views = the 15 sheer views + v30 + n10; stored at 960x640): after `knowledge/render-set/rf/redo/<view>.jpg`; before = left half of the earlier `knowledge/render-set/rf/curtains/<view>.jpg` (same views, sheers stacked, previous tree; n10 and v30 before: `before-after/`). Looked at all 17: half-drawn sheers read correctly with the garden visible through them; v30 is no longer near-black (shelves, battens and door readable); n10 is warm, the blue cast is gone. Remaining, not RF's: v39 camera faces a blank wall (GI/L9P camera), v06's window is blown (physical, defect 7), v37's near sheer fills the right edge of the frame.

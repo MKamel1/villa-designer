@@ -1109,6 +1109,10 @@ def build_curtains(curtain_specs, materials):
             panel(spec["id"] + "-sheer-r", half + pier_reach - stack, half + pier_reach, sheer_off, spec["sheer_material"]),
             panel(spec["id"] + "-heavy-open-l", -half - pier_reach, -half - pier_reach + stack, heavy_off, spec["heavy_material"]),
             panel(spec["id"] + "-heavy-open-r", half + pier_reach - stack, half + pier_reach, heavy_off, spec["heavy_material"]),
+            # Half-drawn sheer (day views declare curtain_state "sheer-half"): the same sheer fabric on the same track,
+            # each leaf drawn in from the open stack to `sheer_half_inner_m` from the opening centre.
+            panel(spec["id"] + "-sheer-half-l", -half - pier_reach, -spec["sheer_half_inner_m"], sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-sheer-half-r", spec["sheer_half_inner_m"], half + pier_reach, sheer_off, spec["sheer_material"]),
             panel(spec["id"] + "-heavy-closed", -half - closed_overlap, half + closed_overlap, heavy_off, spec["heavy_material"]),
         ]
         for obj in panels:
@@ -2076,6 +2080,11 @@ def render(scene_data, args):
     def setup_view(view):
         for mid in hideable:                     # a door opened for a doorway camera, in that view only
             objects[mid].hide_render = mid in view.get("hide_meshes", [])
+        half_drawn = view.get("curtain_state") == "sheer-half"     # declared per view; default is the stacked sheer
+        for spec in scene_data.get("curtains", []):
+            for side in ("l", "r"):
+                objects[spec["id"] + "-sheer-" + side].hide_render = half_drawn
+                objects[spec["id"] + "-sheer-half-" + side].hide_render = not half_drawn
         for spec in scene_data["lights"]:
             obj = lights[spec["id"]]
             factor = (view.get("dimmers", {}).get(spec["layer"], 1.0) * spec.get("dimmer", 1.0)) if spec["layer"] in view["layers_on"] else 0
@@ -2142,7 +2151,7 @@ def render(scene_data, args):
         locked_ev100 = math.log2(math.pi / (2.5 * 2 ** s.view_settings.exposure))
         wb_k = (scene_data['exposure_groups']['white_balance_k'][group]
                 if scene_data.get('exposure_groups') else preset['white_balance_k'])
-        wb_illuminant = "planckian" if group in ("evening", "lamp-dominant") else "daylight"
+        wb_illuminant = "planckian" if group in ("evening", "lamp-dominant", "lamp-low-key") else "daylight"
         wb = photoreal.white_balance(wb_k, illuminant=wb_illuminant)
         if not wb:
             current_warnings.append("Blender does not support stated white balance")

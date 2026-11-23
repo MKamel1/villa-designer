@@ -1,0 +1,60 @@
+{
+  "schema": "dominant-light-rule/3",
+  "decision": "client decision 2026-10-15 (rule 1); amendment proposed by lane GI 2026-11-22 (rule 2), on measured luminance per view, see docs/lanes/GI.md \"Exposure\"; low-key amendment (lane RF, lead decision 2026-11-22) carried forward as rule 3",
+  "status": "PRE-REGISTERED 2026-11-23, written and committed BEFORE the re-measurement that applies it (jobq RF-measure-exposure-r3-*). Rule 3 = rule 2 (GI) + the RF low-key amendment, applied in the stated order.",
+  "basis": "ASSUMED photographic classification, not a published lighting standard; strict majority defines dominance. Client: shade over sun.",
+  "lamp_fraction_threshold": 0.5,
+  "solar_fraction_threshold": 0.5,
+  "source_probe": {
+    "resolution": [
+      144,
+      96
+    ],
+    "samples": 256,
+    "denoising": false,
+    "seed": 0,
+    "max_bounces": 16,
+    "mask": "same pixel indices for every source; lowest 97% of summed lamps-only plus daylight-only luminance, positive combined values only",
+    "statistic": "sum of linear luminance over fixed mask; lamps/(lamps+daylight); solar=max(0,daylight-sky_only)/daylight, clamped to [0,1]"
+  },
+  "assignment_order": [
+    "Preserve evening exposure preset; exterior-dusk views are exterior-dusk, or exterior-dusk-dim below dusk_split_mean_luminance (rule 2)",
+    "For original day or exterior-day: lamps fraction > 0.5 -> lamp-dominant",
+    "Otherwise original exterior-day and (solar fraction <= 0.5 or mean daylight luminance < shade_mean_luminance) -> exterior-shade",
+    "Otherwise keep original day or exterior-day",
+    "Amendment 2026-11-22 (RF, lead decision): after the steps above, an evening or lamp-dominant view whose mean metered source luminance, (lamp sum + daylight sum) / metered pixels, is at least 3 stops (a factor of 8) below the median of that same quantity over all views of its own assigned group, leaves it for lamp-low-key. One pass, group medians taken before any view moves. Order: the rule-2 clauses (dusk split, shade luminance) run first inside classify(); the low-key pass then runs once on those assignments. Rule 2 groups exterior-dusk-dim and exterior-shade are never touched by it (applies_to is evening and lamp-dominant only)."
+  ],
+  "exterior_shade_definition": "Exterior daytime subjects represented by the camera meter are predominantly sky-lit, with at most half their daylight luminance attributable to the sun disc. Same scene and camera with only Nishita sun_disc disabled measures sky-only; includes indirect sunlight. No identifiers, compass names or QA outcomes select membership.",
+  "white_balance": {
+    "day": 5500,
+    "exterior-day": 5500,
+    "exterior-shade": 5500,
+    "evening": 3000,
+    "exterior-dusk": 4300,
+    "lamp-dominant": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting",
+    "exterior-dusk-dim": 4300,
+    "lamp-low-key": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting"
+  },
+  "exposure": "Unchanged photoreal.camera_meter per view: 24 samples, 15% image scale, top 3% removed, logarithmic average, -0.4 stop bias, unchanged capped highlight priority; upper median across complete group, independent of selected render subset",
+  "cohort": "All authored views, including retired diagnostic members, retain metering participation for compatibility; every active view is assigned automatically. Preserve evening/dusk cohort order and settings.",
+  "freeze": "Save probe values, derived assignments, view inputs and complete transport fingerprint by value. Validate assignment by recomputation, immutable canonical rule equality, measurement digest and live transport/view hashes; any change requires new pre-registered measurement, never a hand membership override.",
+  "qa": "Production render_qa unchanged, every selected view, no exemptions",
+  "supersedes_sha256": "ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09",
+  "shade_mean_luminance": 340.0,
+  "shade_mean_luminance_basis": "An exterior-day view whose mean metered daylight luminance (daylight_luminance_sum / metered_pixels over the pre-registered mask, linear probe units) is below this is exterior-shade, whatever its sun fraction. Rule-1 data (GI-measure-exposure-3, 16 exterior-day-original views): v37 99.7 and gi-north-court-pond 101.6 (sun fraction <= 0.5, exterior-shade under rule 1); v39 135.5, v38 163.4 (retired), v36 178.5 (sun fraction 0.53-0.68: bounced sun lit a small patch of an otherwise sky-lit court), which rule 1 left in exterior-day; then v28 632, v27 758 and everything sunlit 1434-5456. The gap 178.5 -> 632 is 1.8 stops; 340 is its geometric middle, rounded. At the exterior-day lock v36 was 11 % near-black and v39 8 % (render_qa limit 8 %); v28 (632) also failed render_qa (17 % near-black) and stays outside the rule: the gap is too close to call it shade. The threshold is read off the same data, so it is validated on the garden views authored afterwards. ASSUMED photographic classification, not a published standard, like the other thresholds.",
+  "dusk_split_mean_luminance": 0.65,
+  "dusk_split_basis": "An exterior-dusk view whose mean metered (lamps + daylight) luminance is below this takes its own group, exterior-dusk-dim, same 4300 K. Rule-1 data: v07 measures 1.68 and v42 0.25 (2.7 stops apart); one lock for both left v07 over-exposed (colour cast 0.06 against 0.02, washed out). 0.65 is the geometric middle of 0.25 and 1.68, rounded. ASSUMED, as above.",
+  "low_key_amendment": {
+    "decision": "lead decision 2026-11-22 (docs/decisions/interior-presentation-2026-11-22.md): the ramp store gets its own exposure group under a pre-registered rule",
+    "status": "PRE-REGISTERED 2026-11-22, written and committed BEFORE the re-measurement that applies it (jobq RF-measure-exposure-lowkey-1)",
+    "basis": "ASSUMED photographic classification, like the 0.5 thresholds. A group shares one exposure (upper median of its meters); a view far darker than its cohort is metered at the cohort's level and prints near-black. 3 stops is a round figure fixed before measuring; it is not tuned. Honest disclosure: the lead had seen that the store's lamp luminance sum was about 15 times below the other evening view's in the previous record when the METRIC was chosen; the threshold was fixed before this measurement and no identifier selects membership.",
+    "metric": "(lamp_luminance_sum + daylight_luminance_sum) / metered_pixels",
+    "threshold_stops": 3,
+    "applies_to": [
+      "evening",
+      "lamp-dominant"
+    ],
+    "group": "lamp-low-key",
+    "no_hand_override": "membership is computed; a change needs a new pre-registered measurement"
+  }
+}

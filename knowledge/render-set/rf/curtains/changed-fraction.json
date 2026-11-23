@@ -1,0 +1,126 @@
+{
+ "affected": [
+  "n01-dining-day",
+  "n07-family-corner-day",
+  "n11-study-desks-day",
+  "n13-parents-day",
+  "n17-family-bath-basin-day",
+  "n20-dining-side-day",
+  "v02-garden-living",
+  "v03-street-lounge",
+  "v06-kids-room",
+  "v19-garden-facade",
+  "v28-east-yard-below",
+  "v33-basement-north-south",
+  "v34-basement-south-north",
+  "v37-north-garden-lounge",
+  "v39-north-garden-hanging-retreat"
+ ],
+ "rule": "changed fraction (gain-normalised, |dL|>25/255) >= 1 %",
+ "data": {
+  "n01-dining-day": {
+   "gain": 1.0,
+   "changed": 0.0246
+  },
+  "n02-kitchen-island-day": {
+   "gain": 1.07,
+   "changed": 0.0001
+  },
+  "n07-family-corner-day": {
+   "gain": 1.109,
+   "changed": 0.0149
+  },
+  "n09-dirty-kitchen-day": {
+   "gain": 1.134,
+   "changed": 0.0
+  },
+  "n11-study-desks-day": {
+   "gain": 1.017,
+   "changed": 0.0615
+  },
+  "n13-parents-day": {
+   "gain": 0.975,
+   "changed": 0.0346
+  },
+  "n16-ensuite-basin-day": {
+   "gain": 1.0,
+   "changed": 0.0
+  },
+  "n17-family-bath-basin-day": {
+   "gain": 1.144,
+   "changed": 0.03
+  },
+  "n18-stair-gallery-day": {
+   "gain": 1.053,
+   "changed": 0.0071
+  },
+  "n20-dining-side-day": {
+   "gain": 1.01,
+   "changed": 0.0236
+  },
+  "n21-family-bath-wc-day": {
+   "gain": 1.161,
+   "changed": 0.0
+  },
+  "v02-garden-living": {
+   "gain": 0.987,
+   "changed": 0.038
+  },
+  "v03-street-lounge": {
+   "gain": 1.111,
+   "changed": 0.0434
+  },
+  "v06-kids-room": {
+   "gain": 0.932,
+   "changed": 0.0517
+  },
+  "v19-garden-facade": {
+   "gain": 1.0,
+   "changed": 0.0156
+  },
+  "v25-top-garden-gate": {
+   "gain": 1.0,
+   "changed": 0.0
+  },
+  "v26-top-garden-east": {
+   "gain": 1.0,
+   "changed": 0.0
+  },
+  "v27-east-yard-above": {
+   "gain": 1.0,
+   "changed": 0.0057
+  },
+  "v28-east-yard-below": {
+   "gain": 1.0,
+   "changed": 0.0175
+  },
+  "v33-basement-north-south": {
+   "gain": 0.992,
+   "changed": 0.0391
+  },
+  "v34-basement-south-north": {
+   "gain": 1.0,
+   "changed": 0.0649
+  },
+  "v36-north-garden": {
+   "gain": 1.0,
+   "changed": 0.0
+  },
+  "v37-north-garden-lounge": {
+   "gain": 1.0,
+   "changed": 0.0499
+  },
+  "v39-north-garden-hanging-retreat": {
+   "gain": 0.957,
+   "changed": 0.0543
+  },
+  "v40-south-garden-espalier": {
+   "gain": 1.0,
+   "changed": 0.0
+  },
+  "v41-south-garden-terrace": {
+   "gain": 1.0,
+   "changed": 0.0
+  }
+ }
+}

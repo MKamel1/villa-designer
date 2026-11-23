@@ -12,10 +12,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RULE_SHA256_V1 = 'be87dd5bc2bbefe668524b5f13febf906cf30ca081c5dd7e21326501ebd5efb6'      # client decision 2026-10-15: kept for records frozen under it
-RULE_SHA256 = 'ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09'         # rule 2 (lane GI, 2026-11-22): knowledge/exposure-group-rule-v2.json; new records are frozen under it
-RULE_FILES = {RULE_SHA256_V1: 'knowledge/exposure-group-rule.json', RULE_SHA256: 'knowledge/exposure-group-rule-v2.json'}
+RULE_SHA256_V2 = 'ea3a8c1cc80a72f315d925af829a8318db60219261ba43056a650127ebcb3e09'      # rule 2 (lane GI, 2026-11-22): kept for records frozen under it
+RULE_SHA256 = '7bc36bbd65772659bbce5dcee3efe0c5fca50c22da1ca2aa45ea17acc09cadec'         # rule 3 (2026-11-23) = rule 2 + RF low-key amendment, applied after rule 2's clauses; new records are frozen under it
+RULE_FILES = {RULE_SHA256_V1: 'knowledge/exposure-group-rule.json', RULE_SHA256_V2: 'knowledge/exposure-group-rule-v2.json',
+              RULE_SHA256: 'knowledge/exposure-group-rule-v3.json'}
 VIEW_KEYS = ('id', 'state', 'exposure', 'camera', 'sun', 'layers_on', 'dimmers',
-             'hide_meshes', 'resolution', 'max_bounces')
+             'hide_meshes', 'curtain_state', 'resolution', 'max_bounces')
 APPEARANCE_KEYS = ('draped_appearances', 'drape_material_overrides', 'drape_policy_sha256',
                    'drape_polish_policy_sha256', 'imported_appearances', 'physical_model_meshes',
                    'imported_admission_policy')
@@ -98,6 +100,31 @@ def classify(view, row, policy=None):
     return original
 
 
+def mean_source_luminance(row):
+    return _mean(row, 'lamp_luminance_sum', 'daylight_luminance_sum')
+
+
+def assign_groups(views, rows, policy=None):
+    """classify() per view (rule-2 clauses included), then, if the rule has one, the low-key pass: an evening or
+    lamp-dominant view at least `threshold_stops` below the median mean luminance of its own group leaves for lamp-low-key (one pass)."""
+    policy = policy or rule()
+    base = {view['id']: classify(view, rows[view['id']], policy) for view in views}
+    amend = policy.get('low_key_amendment')
+    if not amend:
+        return base
+    groups = dict(base)
+    factor = 2.**amend['threshold_stops']
+    for name in amend['applies_to']:
+        members = sorted(mean_source_luminance(rows[i]) for i, g in base.items() if g == name)
+        if not members:
+            continue
+        median = members[len(members)//2]
+        for ident, group in base.items():
+            if group == name and mean_source_luminance(rows[ident])*factor <= median:
+                groups[ident] = amend['group']
+    return groups
+
+
 def lamp_population(scene, view, emissive_sources):
     """One active analytic lamp or emissive-only source per view, no lens double count."""
     from .villa_render_contract import emissive_mesh_output_factor
@@ -127,9 +154,9 @@ def freeze(scene, rows, runtime, rule_sha=None):
     if set(rows) != {view['id'] for view in scene['views']}:
         raise ValueError('Every authored view requires a source measurement')
     for view in scene['views']:
-        row = rows[view['id']]
-        row['view_input'] = view_input(view)
-        row['group'] = classify(view, row, policy)
+        rows[view['id']]['view_input'] = view_input(view)
+    for ident, group in assign_groups(scene['views'], rows, policy).items():
+        rows[ident]['group'] = group
     record = dict(schema='exposure-groups/1', rule_sha256=rule_sha,
                   transport_sha256=transport_digest(scene), runtime=runtime, measurements=rows)
     record['measurement_sha256'] = digest(rows)
@@ -140,13 +167,14 @@ def freeze(scene, rows, runtime, rule_sha=None):
 def white_balances(record):
     result = {group: rule(record.get('rule_sha256', RULE_SHA256))['white_balance'][group]
               for group in {row['group'] for row in record['measurements'].values()}}
-    if 'lamp-dominant' in result:
-        lamps = [lamp for row in record['measurements'].values() if row['group'] == 'lamp-dominant'
-                 for lamp in row['lamp_population']]
-        flux = sum(lamp['flux_lm'] for lamp in lamps)
-        if flux <= 0:
-            raise ValueError('Lamp-dominant group lacks authored lamp population')
-        result['lamp-dominant'] = round(sum(lamp['flux_lm']*lamp['cct_k'] for lamp in lamps)/flux)
+    for name in ('lamp-dominant', 'lamp-low-key'):
+        if name in result:
+            lamps = [lamp for row in record['measurements'].values() if row['group'] == name
+                     for lamp in row['lamp_population']]
+            flux = sum(lamp['flux_lm'] for lamp in lamps)
+            if flux <= 0:
+                raise ValueError(name+' group lacks authored lamp population')
+            result[name] = round(sum(lamp['flux_lm']*lamp['cct_k'] for lamp in lamps)/flux)
     return result
 
 
@@ -165,9 +193,10 @@ def require_record(scene, record, *, check_transport=True):
         raise ValueError('Frozen dominant-light measurements edited')
     if set(rows) != {view['id'] for view in scene['views']}:
         raise ValueError('Dominant-light view inventory differs')
+    groups = assign_groups(scene['views'], rows, policy)
     for view in scene['views']:
         row = rows[view['id']]
-        if (row['view_input'] != view_input(view) or row['group'] != classify(view, row, policy)
+        if (row['view_input'] != view_input(view) or row['group'] != groups[view['id']]
                 or view.get('exposure_group', row['group']) != row['group']):
             raise ValueError('Dominant-light membership differs from measured rule: '+view['id'])
         # Recompute all fractions from frozen source sums too.

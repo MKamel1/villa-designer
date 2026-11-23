@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from archpipe.exposure_groups import (RULE_SHA256_V1, APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
+from archpipe.exposure_groups import (RULE_SHA256, RULE_SHA256_V1, RULE_SHA256_V2, APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
                                      require_receipts, require_record, rule, white_balances)
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -119,8 +119,9 @@ class ExposureGroups(unittest.TestCase):
             require_receipts(scene, [same_group[0], broken])
 
     def test_actual_gpu_receipts_obey_locks_and_mutations_refuse(self):
+        # 2026-10 receipts, frozen under rule 1 (kept valid by RULE_FILES), so no later amendment applies.
         scene, _ = self.real_scene()
-        reports = self.frozen()['reports']
+        reports = [dict(r, exposure_rule_sha256=RULE_SHA256_V1) for r in self.frozen()['reports']]
         declared={ident for ident,row in self.frozen()['measurements'].items() if row['active']}
         self.assertEqual({row['view'] for row in reports},declared)
         self.assertEqual(len(reports),len(declared))
@@ -238,8 +239,33 @@ class ExposureGroups(unittest.TestCase):
             self.assertEqual(alone[2][group], all_views[2][group])
 
 
-if __name__ == '__main__':
-    unittest.main()
+
+
+class LowKeyAmendment(unittest.TestCase):
+    """RF 2026-11-22: a view >= 3 stops below its own group's median mean luminance leaves for lamp-low-key."""
+    @staticmethod
+    def _rows(lum):
+        return {i: dict(lamp_luminance_sum=v*100., daylight_luminance_sum=0., metered_pixels=100, lamp_fraction=1.)
+                for i, v in lum.items()}
+
+    def test_dark_evening_view_leaves_and_neighbours_stay(self):
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'evening'} for i in 'abcd']
+        g = assign_groups(views, self._rows(dict(a=8., b=9., c=10., d=1.)))     # d is 3.3 stops below median 9
+        self.assertEqual(g, dict(a='evening', b='evening', c='evening', d='lamp-low-key'))
+
+    def test_two_stops_down_stays(self):                                        # negative control: below the threshold
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'evening'} for i in 'abc']
+        g = assign_groups(views, self._rows(dict(a=8., b=8., c=2.)))
+        self.assertEqual(set(g.values()), {'evening'})
+
+    def test_day_group_is_never_split(self):
+        from archpipe.exposure_groups import assign_groups
+        views = [{'id': i, 'exposure': 'day'} for i in 'abc']
+        rows = self._rows(dict(a=100., b=100., c=1.))
+        for r in rows.values(): r['lamp_fraction'] = 0.1
+        self.assertEqual(set(assign_groups(views, rows).values()), {'day'})
 
 
 class RuleTwo(unittest.TestCase):
@@ -266,4 +292,10 @@ class RuleTwo(unittest.TestCase):
         self.assertEqual(rule()['white_balance']['exterior-dusk-dim'], rule()['white_balance']['exterior-dusk'])
 
     def test_rule_one_records_still_validate_under_their_own_rule(self):
-        self.assertIn('exposure-group-rule-v2', __import__('archpipe.exposure_groups', fromlist=['x']).RULE_FILES[__import__('archpipe.exposure_groups', fromlist=['x']).RULE_SHA256])
+        from archpipe.exposure_groups import RULE_FILES
+        self.assertIn('exposure-group-rule-v2', RULE_FILES[RULE_SHA256_V2])
+        self.assertIn('exposure-group-rule-v3', RULE_FILES[RULE_SHA256])
+
+
+if __name__ == '__main__':
+    unittest.main()
