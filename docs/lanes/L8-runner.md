@@ -56,6 +56,45 @@ dodge the queue**: CPU renders load the 32 threads the test suites need. Submit 
 `--vram-mb 4000` if yours is small). Render **final timing jobs and any timing measurement with `--exclusive`** so
 another job does not skew the number. Tools that `flock graphics.lock` directly still work, but they occupy slot 0 only.
 
+## Scene build cache (stills): build once, render many
+
+A `villa_scene.py` render first BUILDS the scene (hundreds of glTF imports, cloth) on the CPU: minutes, with a GPU
+slot held and idle. `--blend-cache DIR` builds it once and saves a `.blend` that later jobs open instead
+(`src/archpipe/blender/scene_cache.py`).
+
+```
+CACHE=$HOME/archpipe/cache/scene                       # any shared directory
+# 1. build once, as a CPU job (no GPU slot held): exits 0 as soon as the entry exists (or already did)
+jobq submit --id RF-build --cwd $LANE -- env ARCHPIPE_BLEND_CACHE_BUILD_ONLY=1 \
+    blender -b --python-exit-code 1 -P src/archpipe/blender/villa_scene.py -- <the usual args> --views <any one view> --blend-cache $CACHE
+# 2. every render chunk adds the same flag, otherwise unchanged
+jobq submit --gpu --id RF-final-0 -- blender -b ... -P src/archpipe/blender/villa_scene.py -- <usual args> --blend-cache $CACHE
+```
+
+- Step 1 is optional: a render job with `--blend-cache` that finds no entry builds it itself and stores it. The build
+  holds `$CACHE/<key>.lock`, so jobs submitted at the same time wait on the lock, then hit. Start the build job first
+  and submit renders after it, so the waiting happens on a CPU slot and not on a GPU slot.
+- Key = scene.json sha256 + builder source hash (`src/archpipe/blender/*.py` and `src/archpipe/*.py`) + Blender
+  version + library root + IES dir. Edit any of those and the key changes: the old entry is left alone, a new one is
+  built. Use the same `--scene`, `--ies-dir`, `--library-root` text in the build and render jobs. Library assets edited
+  in place at an unchanged path are NOT detected.
+- A hit is verified first (sizes and sha256 of `scene.blend` and `state.pkl`). A bad entry is moved to
+  `$CACHE/_refused/` (never deleted) and the scene is rebuilt, so a corrupt cache costs time, never correctness.
+- Entries are about 1.2 GB for the production scene; prune old key directories by hand when disk matters.
+- Walkthrough chunks: `walkthrough.py` already caches its build as `<root>/assembly/scene.blend` (stage `assembly`)
+  and every later stage opens it, so chunks do not rebuild. Do not add `--blend-cache` to them; the env var
+  `ARCHPIPE_BLEND_CACHE` only affects the `assembly` stage if you want it to reuse a shared build.
+- Measured 2026-11-22 on the production scene (633 MB scene.json, 1.09 GB `.blend` + 96 MB state), one view, 16 spp
+  480x320, GPU shared with other lanes' jobs (so absolute numbers are loose): fresh 252.6 s wall, scene ready after
+  195.5 s, GPU busy (nvidia-smi pmon, our pid) 17 % of wall; cached 119.3 s wall, scene ready after 70.9 s (of which the
+  `.blend` open is 7 s; the rest is parsing scene.json and the receipt), GPU busy 31 %. On CPU, two views: 354 s fresh vs 179 s cached.
+  The one-off build job takes about 230 s. A fresh GPU job showed no GPU context at all for its first ~195-228 s.
+- Cached and fresh renders are not bit-identical, and neither are two fresh renders (denoised 16 spp, metered
+  exposure): mean abs difference per 8-bit pixel was 0.39 / 2.84 (cached vs fresh, two views) against 0.41 / 2.66 (fresh
+  vs fresh). The scene receipt is byte-identical and all structural report fields (object counts, lights, cloth, props)
+  are equal; only noise-driven fields (metered exposure, log-average) differ, as they do between two fresh runs.
+- The cache replaces only the build. Exposure metering, the receipt and the render still run per job.
+
 ## Rules
 
 - Any script of yours that touches the GPU and is not submitted here must itself run under
@@ -65,4 +104,7 @@ another job does not skew the number. Tools that `flock graphics.lock` directly 
 - The service is `systemd --user` `jobq.service`, enabled with linger, so it starts at boot and relaunches jobs that
   died with the machine. Update it with `python scripts/workstation.py install-runner`. Slot counts are in the unit's `ExecStart`
   (`--cpu-slots 4 --gpu-slots 3`). Restarting the daemon never touches running jobs: each runner holds its own flock.
+- Jobs get `~/opt/blender` and the laneP venv `bin` in front of PATH, so `blender` and `python` as argv[0] resolve.
+  A command that cannot be executed (`FileNotFoundError`/`PermissionError`) ends `failed`, reason `exec failed: <error>`,
+  at once, with no retry, and frees its slot.
 - Broken job dirs are moved, never deleted, into `~/archpipe/quarantine/`.

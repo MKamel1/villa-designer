@@ -51,6 +51,41 @@ class JobqTest(unittest.TestCase):
         self.assertIn("hi", (q.jobdir("j1") / "job.log").read_text())
         self.assertEqual([p.name for p in q.jobdir("j1").glob("*.tmp")], [])
 
+    def test_missing_executable_fails_at_once_without_retry_and_frees_slot(self):
+        q = self.queue()
+        q.submit(["no-such-binary-xyz"], job_id="nx", gpu=True, max_attempts=3)
+        q.submit(py("print('next')"), job_id="after", gpu=True)
+        self.run_all(q)
+        st = q.status("nx")
+        self.assertEqual((st["state"], st["attempt"]), ("failed", 1))
+        self.assertTrue(st["reason"].startswith("exec failed: FileNotFoundError"), st["reason"])
+        self.assertEqual(q.status("after")["state"], "done")  # the single GPU slot was released
+
+    def test_non_executable_file_fails_at_once(self):
+        q = self.queue()
+        f = self.root / "plain.txt"
+        f.write_text("x")
+        q.submit([str(f)], job_id="pe", max_attempts=3)
+        self.run_all(q)
+        st = q.status("pe")
+        self.assertEqual((st["state"], st["attempt"]), ("failed", 1))
+        self.assertTrue(st["reason"].startswith("exec failed: "), st["reason"])
+
+    def test_extra_path_dir_is_on_job_path(self):
+        d = self.root / "bin"
+        d.mkdir()
+        exe = d / "mytool"
+        exe.write_text("#!/bin/sh\necho found-it\n")
+        exe.chmod(0o755)
+        old = jobq.EXTRA_PATH
+        jobq.EXTRA_PATH = [d]
+        self.addCleanup(setattr, jobq, "EXTRA_PATH", old)
+        q = self.queue()
+        q.submit(["mytool"], job_id="px")
+        self.run_all(q)
+        self.assertEqual(q.status("px")["state"], "done")
+        self.assertIn("found-it", (q.jobdir("px") / "job.log").read_text())
+
     def test_nonzero_exit_is_final_not_retried(self):
         q = self.queue()
         q.submit(py("raise SystemExit(3)"), job_id="bad", max_attempts=3)
