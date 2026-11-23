@@ -259,6 +259,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
     seat_rects = list(bench_rects) + [(t["center"][0] - t["size_m"][0] / 2 - .6, t["center"][1] - t["size_m"][1] / 2 - .6, t["center"][0] + t["size_m"][0] / 2 + .6, t["center"][1] + t["size_m"][1] / 2 + .6) for t in layout.get("tables", [])] \
         + [R(o["rect"]) for o in layout.get("obstacles", []) if o["id"].startswith("pot")] + [R(gr["rect"]) for gr in layout.get("planting_groups", []) if gr.get("role") == "herb" or "herb" in gr["id"]]
     seat_rects = seat_rects or [(1e6, 1e6, 1e6, 1e6)]
+    has_star = any(p["species"] == "trachelospermum_jasminoides" for gr in layout.get("planting_groups", []) for p in gr["plants"])      # a layout that names star jasmine already follows the 2026-11-22 climber decision: it is authoritative
     beds_by_rect = [R(gr["rect"]) for gr in layout.get("planting_groups", [])]
     for t in layout.get("trees", []):
         if t.get("pruned") or t.get("pruned_spread_m") or t.get("canopy"):
@@ -293,7 +294,7 @@ def build_scene(layout, age=P.AGE_YEARS, ground_z=None, source="", pergolas=Fals
                 if clb is None:
                     warns.append("climber %s at %s is more than 0.6 m from any wall or screen: drawn as a mound" % (sp, pl["at"]))
             oid = "ld-plant-%s-%02d" % (gr["id"], i)
-            if star_jasmine and sp == "jasminum_sambac" and clb:      # client 2026-11-22: star jasmine on screens and walls AWAY from the seats and herbs; Arabian jasmine stays by them
+            if star_jasmine and sp == "jasminum_sambac" and clb and not has_star:      # client 2026-11-22: star jasmine on screens and walls AWAY from the seats and herbs; Arabian jasmine stays by them
                 if min(_dist_pt_rect(pl["at"], r) for r in seat_rects) >= P.STAR_JASMINE_MIN_FROM_SEAT:
                     sp, f = "trachelospermum_jasminoides", PL.species_facts("trachelospermum_jasminoides")
                     pl = dict(pl, species=sp, swapped_from="jasminum_sambac")
