@@ -1,0 +1,58 @@
+{
+ "justicia_brandegeeana": {
+  "grade": "B",
+  "why": "reads as a dense, glossy broadleaf shrub at 5 m and 15 m with stems showing at the base; too tidy and egg-shaped (real Justicia is lax and arching) and no bracts (no scan, not invented)",
+  "sheet": "knowledge/landscape/foliage/sheets/justicia_brandegeeana_s1_leaf-on_sheet.jpg"
+ },
+ "salvia_leucantha": {
+  "grade": "C",
+  "why": "narrow-leaf grey-green bush but the leaf bank (ginger-lily blades) is olive/yellowish and the plant is a dense dome: without the purple spikes (no scan) it is not recognisable as Salvia leucantha; reads as a generic narrow-leaf shrub",
+  "sheet": "knowledge/landscape/foliage/sheets/salvia_leucantha_s1_leaf-on_sheet.jpg"
+ },
+ "acorus_gramineus": {
+  "grade": "B",
+  "why": "reads as a fine arching sedge/Acorus tuft at 5 m and a small grass tuft at 15 m; blades are scan cut-outs, widths squeezed (form-class)",
+  "sheet": "knowledge/landscape/foliage/sheets/acorus_gramineus_s1_leaf-on_sheet.jpg"
+ },
+ "alpinia_zerumbet": {
+  "grade": "B",
+  "why": "upright leafy canes with large lanceolate leaves reads as a ginger-family plant; more upright than the arching real habit; not in the current layout",
+  "sheet": "knowledge/landscape/foliage/sheets/alpinia_zerumbet_s1_leaf-on_sheet.jpg"
+ },
+ "farfugium_japonicum": {
+  "grade": "B",
+  "why": "glossy kidney-shaped leaves on petioles in a basal mound reads as a leopard plant/taro-type; petioles a little straight and leaves unspotted",
+  "sheet": "knowledge/landscape/foliage/sheets/farfugium_japonicum_s1_leaf-on_sheet.jpg"
+ },
+ "fatsia_japonica": {
+  "grade": "B",
+  "why": "palmate, lobed, glossy leaves on stout stems read as a Fatsia at 5 m and 15 m; outline is generated (not scanned), lower third of the stems is bare",
+  "sheet": "knowledge/landscape/foliage/sheets/fatsia_japonica_s1_leaf-on_sheet.jpg"
+ },
+ "jasminum_sambac": {
+  "grade": "B",
+  "why": "glossy dark-green foliage panel on a trellis with trailing shoots, reads as a climber at 5/15 m; uniform (no visible stems), no flowers (no scan)",
+  "sheet": "knowledge/landscape/foliage/sheets/jasminum_sambac_s1_leaf-on_sheet.jpg"
+ },
+ "trachelospermum_jasminoides": {
+  "grade": "B",
+  "why": "glossy ovate leaves on a trellis: the one species-faithful plant (the leaf scan is the species); uniform coverage, no flowers",
+  "sheet": "knowledge/landscape/foliage/sheets/trachelospermum_jasminoides_s1_leaf-on_sheet.jpg"
+ },
+ "petrea_volubilis": {
+  "grade": "C",
+  "why": "large dark leaves read as a leafy climber but not as Petrea: no purple calyces (not scanned, not invented), leaf bank is jasmine/ginger blades (form-class)",
+  "sheet": "knowledge/landscape/foliage/sheets/petrea_volubilis_s1_leaf-on_sheet.jpg"
+ },
+ "vitis_vinifera": {
+  "grade": "C",
+  "why": "lobed leaf shape on a vine panel, but a uniform wall of leaves with yellow translucent edge glow, no tendrils or bunches; outline generated",
+  "sheet": "knowledge/landscape/foliage/sheets/vitis_vinifera_s1_leaf-on_sheet.jpg"
+ },
+ "lagerstroemia_indica": {
+  "grade": "B",
+  "why": "leaf-on and leaf-off states (see both sheets): a 4.5 m x 4.0 m pruned multi-stem tree, 4 stems clear to 2.2 m, forking limbs, round head; reads as a real tree at 5 m and 15 m; leaf-off is the stronger of the two. Mottled CC0 plane bark, glossy leaf cards are jasmine leaves (form-class)",
+  "sheet": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-on_sheet.jpg",
+  "sheet_leaf_off": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-off_sheet.jpg"
+ }
+}

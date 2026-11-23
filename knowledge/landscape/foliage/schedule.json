@@ -1,0 +1,242 @@
+[
+ {
+  "species": "acorus_gramineus",
+  "in_layout": true,
+  "count": 20,
+  "layout_spread_m": [
+   0.33,
+   0.39
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Acorus gramineus",
+  "close_up_caption": "generated form-class plant (leaf scan: Aspidistra elatior, Hedychium coronarium), not the species",
+  "atlas_used": [
+   "cast_iron",
+   "ginger_lily"
+  ],
+  "atlas_species": [
+   "Aspidistra elatior",
+   "Hedychium coronarium"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/acorus_gramineus_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "alpinia_zerumbet",
+  "in_layout": false,
+  "count": 0,
+  "layout_spread_m": null,
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Alpinia zerumbet",
+  "close_up_caption": "generated form-class plant (leaf scan: Hedychium coronarium), not the species",
+  "atlas_used": [
+   "ginger_lily"
+  ],
+  "atlas_species": [
+   "Hedychium coronarium"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/alpinia_zerumbet_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "farfugium_japonicum",
+  "in_layout": true,
+  "count": 8,
+  "layout_spread_m": [
+   0.5,
+   0.5
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Farfugium japonicum",
+  "close_up_caption": "generated form-class plant (leaf scan: Colocasia esculenta), not the species",
+  "atlas_used": [
+   "taro"
+  ],
+  "atlas_species": [
+   "Colocasia esculenta"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/farfugium_japonicum_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "fatsia_japonica",
+  "in_layout": true,
+  "count": 3,
+  "layout_spread_m": [
+   1.2,
+   1.2
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Fatsia japonica",
+  "close_up_caption": "generated form-class plant (leaf scan: Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)), not the species",
+  "atlas_used": [
+   "palmate_fatsia"
+  ],
+  "atlas_species": [
+   "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/fatsia_japonica_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "jasminum_sambac",
+  "in_layout": true,
+  "count": 11,
+  "layout_spread_m": [
+   0.5,
+   1.2
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Jasminum sambac",
+  "close_up_caption": "generated form-class plant (leaf scan: Trachelospermum jasminoides), not the species",
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/jasminum_sambac_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "justicia_brandegeeana",
+  "in_layout": true,
+  "count": 6,
+  "layout_spread_m": [
+   0.55,
+   0.99
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Justicia brandegeeana",
+  "close_up_caption": "generated form-class plant (leaf scan: Trachelospermum jasminoides), not the species",
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/justicia_brandegeeana_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "lagerstroemia_indica",
+  "in_layout": true,
+  "count": 1,
+  "layout_spread_m": [
+   4.0,
+   4.0
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Lagerstroemia indica",
+  "close_up_caption": "generated form-class plant (leaf scan: Trachelospermum jasminoides), not the species",
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "petrea_volubilis",
+  "in_layout": true,
+  "count": 6,
+  "layout_spread_m": [
+   0.5,
+   0.6
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Petrea volubilis",
+  "close_up_caption": "generated form-class plant (leaf scan: Hedychium coronarium, Trachelospermum jasminoides), not the species",
+  "atlas_used": [
+   "ginger_lily",
+   "star_jasmine"
+  ],
+  "atlas_species": [
+   "Hedychium coronarium",
+   "Trachelospermum jasminoides"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "sourced: plants.json foliage 'oblong-elliptic leaves 4-9 in' (NCSU)",
+  "grade": "C",
+  "sheet": "knowledge/landscape/foliage/sheets/petrea_volubilis_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "salvia_leucantha",
+  "in_layout": true,
+  "count": 3,
+  "layout_spread_m": [
+   0.66,
+   0.77
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Salvia leucantha",
+  "close_up_caption": "generated form-class plant (leaf scan: Hedychium coronarium), not the species",
+  "atlas_used": [
+   "ginger_lily"
+  ],
+  "atlas_species": [
+   "Hedychium coronarium"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "C",
+  "sheet": "knowledge/landscape/foliage/sheets/salvia_leucantha_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "trachelospermum_jasminoides",
+  "in_layout": false,
+  "count": 0,
+  "layout_spread_m": null,
+  "fidelity": "species",
+  "caption": "Trachelospermum jasminoides (generated from a leaf scan of the species)",
+  "close_up_caption": "Trachelospermum jasminoides (generated from a leaf scan of the species)",
+  "atlas_used": [
+   "star_jasmine"
+  ],
+  "atlas_species": [
+   "Trachelospermum jasminoides"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "B",
+  "sheet": "knowledge/landscape/foliage/sheets/trachelospermum_jasminoides_s1_leaf-on_sheet.jpg"
+ },
+ {
+  "species": "vitis_vinifera",
+  "in_layout": true,
+  "count": 2,
+  "layout_spread_m": [
+   0.5,
+   0.5
+  ],
+  "fidelity": "form-class",
+  "caption": "generated form-class plant, stands in for Vitis vinifera",
+  "close_up_caption": "generated form-class plant (leaf scan: Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)), not the species",
+  "atlas_used": [
+   "palmate_grape"
+  ],
+  "atlas_species": [
+   "Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)"
+  ],
+  "generator_version": "fg-0.1",
+  "leaf_len_source": "policy",
+  "grade": "C",
+  "sheet": "knowledge/landscape/foliage/sheets/vitis_vinifera_s1_leaf-on_sheet.jpg"
+ }
+]
