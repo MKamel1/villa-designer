@@ -396,6 +396,21 @@ lanes:
     - knowledge/landscape/foliage/**
     - docs/lanes/FG*.md
     - docs/lessons/FG.md
+  HY: # test and verify.py hygiene: the 19 failing legacy modules and verify.py FAILs
+    - tests/**
+    - scripts/verify.py
+    - docs/lanes/HY*.md
+    - docs/lessons/HY.md
+  LG: # garden lighting design for the decided garden (pond edge, paths, dusk scenes)
+    - src/archpipe/lightcalc/**
+    - src/archpipe/luminaires/**
+    - knowledge/lighting/**
+    - knowledge/lighting-products/**
+    - src/archpipe/landscape/build/**
+    - tests/lightcalc/**
+    - tests/luminaires/**
+    - docs/lanes/LG*.md
+    - docs/lessons/LG.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
