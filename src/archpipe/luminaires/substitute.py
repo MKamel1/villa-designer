@@ -212,7 +212,7 @@ def _patched_villa(tag_kind: str, ies_path: Path, rated_lm: float, watts, cct, d
     saved = copy.deepcopy(FR.PRODUCTS.get(tag_kind))
     if ies_path is not None:
         FR.PRODUCTS[tag_kind] = dict(manufacturer="proposed", code="proposed", ies=str(ies_path), lm=float(rated_lm), watts=watts,
-                                     cct=float(cct or 2700), beam=None, what="proposed substitute", substitute=True)
+                                     cct=float(cct or 2700), beam=None, what="proposed substitute", substitute=True)  # falsy-ok: 0 K is not a colour temperature
     old_env = os.environ.get("ARCHPIPE_ZONE_DRIVERS")
     if drivers_path:
         os.environ["ARCHPIPE_ZONE_DRIVERS"] = str(drivers_path)

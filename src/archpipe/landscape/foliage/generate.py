@@ -440,7 +440,7 @@ def generate(slug, seed=0, height_m=None, spread_m=None, state="leaf-on", lod=0,
     if clear_stem is not None:          # lane GI: a tree at an age keeps the layout's clear-stem proportion (the spec's figure is for the full-size tree)
         spec = dict(spec, clear_stem=float(clear_stem))
     h0, s0 = default_size(slug)
-    H = float(height_m or h0 or 1.0)
+    H = float(height_m or h0 or 1.0)  # falsy-ok: a 0 m plant height is not a plant; 1.0 is the stated default
     S = float(spread_m or s0 or H)
     rng = np.random.default_rng([int(seed), sum(map(ord, slug))])      # not hash(): a process-random built-in (reproducibility guard)
     keep = (1.0, 0.5, 0.25)[lod]

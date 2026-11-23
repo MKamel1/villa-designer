@@ -1,6 +1,7 @@
 """Pass-2 asset table update (one-off, reproducible): drop Ixora, add the 20 Poly Haven 1k glTF assets graded from
 their rendered turntable sheets (looked at), flag the misnamed jacaranda and the textureless banana, write the manifest.
 Inputs: sheets + stats from /tmp/ldl (previews rendered by asset_preview.py through jobq); see docs/lanes/LDL.md."""
+from archpipe.safe_io import copy_file
 import json, os, shutil, urllib.request
 P = 'knowledge/landscape/plants/'
 doc = json.load(open(P + 'assets.json'))
@@ -36,13 +37,13 @@ G = {
 op = urllib.request.build_opener(); op.addheaders = [('User-Agent', 'Mozilla/5.0')]
 for k, (g, lt, fit, maps, rat) in G.items():
     a = k[3:]; s = st[k]
-    shutil.copy(f'/tmp/ldl/sheets/{k}.jpg', P + f'asset-previews/{k}.jpg')
+    copy_file(f'/tmp/ldl/sheets/{k}.jpg', P + f'asset-previews/{k}.jpg')
     au = json.load(op.open(f'https://api.polyhaven.com/info/{a}'))['authors']
     doc['assets'].append(dict(id=k, source=f'https://polyhaven.com/a/{a}', licence='CC0', author=', '.join(au),
         title=a.replace('_', ' ').title() + ' (Poly Haven, 1k glTF from shared store)', triangles=s['triangles'], size_m=s['size_m'],
         alpha_card_tri_share=s['alpha_card_tri_share'], preview=f'asset-previews/{k}.jpg', grade=g, leaf_type=lt, species_fit=fit,
         maps_to=maps, rationale=rat, storage='shared', manifest_key='polyhaven/' + a))
-shutil.copy('/tmp/ldl/sheets/ph_flower_gazania_drift.jpg', P + 'asset-previews/ph_flower_gazania_drift.jpg')
+copy_file('/tmp/ldl/sheets/ph_flower_gazania_drift.jpg', P + 'asset-previews/ph_flower_gazania_drift.jpg')
 for a in doc['assets']:
     if a['id'] == 'ph_flower_gazania': a['drift_preview'] = 'asset-previews/ph_flower_gazania_drift.jpg'
     if a['id'] == 'jacaranda_tree':

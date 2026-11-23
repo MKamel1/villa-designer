@@ -8,6 +8,7 @@ Writes board schedules, SLDs, cable schedule, load schedule, device list, ELV li
 """
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import json
 import shutil
 import sys
@@ -59,14 +60,14 @@ def run(out_dir: Path | None = None, docs_dir: Path | None = None, data_dir: Pat
     }
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     cp = contracts.write_results("L7", res, checks_root if checks_root is not None else ROOT / "out" / "checks")
-    shutil.copy(cp, out_dir / "L7.json")
+    copy_file(cp, out_dir / "L7.json")
     for dest, want in ((docs_dir, lambda f: f.endswith(".md")), (data_dir, lambda f: not f.endswith(".md"))):
         if dest:
             dest = Path(dest)
             dest.mkdir(parents=True, exist_ok=True)
             for f in COPY:
                 if want(f) and (out_dir / f).exists():
-                    shutil.copy(out_dir / f, dest / f)
+                    copy_file(out_dir / f, dest / f)
     return {"design": d, "results": res, "layout": lay, "house": h, "summary": summary, "out_dir": out_dir, "checks_path": cp}
 
 
