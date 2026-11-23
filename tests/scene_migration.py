@@ -10,9 +10,15 @@ import json
 from pathlib import Path
 
 
+def _plain(row):
+    # lane P2 attaches element-id fields to every mesh after the integration-6 receipts were frozen
+    from archpipe.blender.element_ids import FIELDS
+    return {k:v for k,v in row.items() if k not in FIELDS}
+
+
 def prior_reviewed_rows(rows):
     record = json.loads(gzip.decompress((Path(__file__).parent/'fixtures/integ6-scene-migration.json.gz').read_bytes()))
-    by_id = {m['id']:m for m in rows}
+    by_id = {m['id']:_plain(m) for m in rows}
     if len(by_id) != len(rows):
         raise ValueError('duplicate scene identifiers')
     for row in record['added']:
