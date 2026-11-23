@@ -51,7 +51,7 @@ TONES = [(0.64, 0.60, 0.55), (0.58, 0.55, 0.51), (0.68, 0.64, 0.58)]
 
 # LDB material name -> (production material name, spec). A name not listed here raises: no part is rendered with a guessed finish.
 FIXED = {
-    "wall-render": ("garden-render", _m(FACADE, 0.9, "white_rough_plaster", 1.2, contrast=1.1, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), CC0 Poly Haven white_rough_plaster texture; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
+    "wall-render": ("garden-render", _m(FACADE, 0.9, "Plaster003", 1.0, contrast=1.6, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), library Plaster003 (ambientCG, CC0) textured render; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
     "wall-coping": ("garden-coping", _m(STONE, 0.7, "Travertine009", 0.8, note="stone coping slab (ASSUMED)")),
     "paving-joint": ("garden-joint", _m((0.30, 0.28, 0.25), 0.95, note="paving joint (ASSUMED)")),
     "bed-soil": ("garden-mulch", _m((0.30, 0.19, 0.11), 1.0, "wood_chip_path", 0.7, note="bark mulch over soil, CC0 Poly Haven wood_chip_path", procedural_stone_m=0.04)),

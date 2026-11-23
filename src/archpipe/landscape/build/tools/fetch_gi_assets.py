@@ -8,8 +8,7 @@ import sys
 import urllib.request
 from pathlib import Path
 
-TEXTURES = {"wood_chip_path": "mulch for the planting beds", "park_dirt": "bare soil / ground between built surfaces",
-            "white_rough_plaster": "boundary-wall render"}
+TEXTURES = {"wood_chip_path": "mulch for the planting beds", "park_dirt": "bare soil / ground between built surfaces"}
 MAPS = {"Diffuse": "Color", "Rough": "Roughness", "nor_gl": "NormalGL"}
 
 
