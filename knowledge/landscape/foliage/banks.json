@@ -1049,11 +1049,11 @@
  },
  "palmate_fatsia": {
   "mean_rgb": [
-   26.2,
-   77.5,
-   19.0
+   25.8,
+   77.1,
+   18.9
   ],
-  "scientific_name": "Fatsia japonica (outline only; surface scanned from Colocasia)",
+  "scientific_name": "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)",
   "atlas": "generated/fatsia",
   "synthetic_outline": true,
   "maps": {
@@ -1084,11 +1084,11 @@
  },
  "palmate_grape": {
   "mean_rgb": [
-   27.1,
-   79.3,
-   19.5
+   26.6,
+   78.8,
+   19.4
   ],
-  "scientific_name": "Vitis vinifera (outline only; surface scanned from Colocasia)",
+  "scientific_name": "Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)",
   "atlas": "generated/grape",
   "synthetic_outline": true,
   "maps": {
@@ -1110,7 +1110,7 @@
     "petiole_frac": 0.0,
     "fill": 1.0,
     "g_over_r": 1.2,
-    "area_px": 281179,
+    "area_px": 281102,
     "size_px": 768
    }
   ],

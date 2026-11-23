@@ -22,6 +22,7 @@ from archpipe.landscape.plants.megascans_mat import red, reset_scene, tex   # no
 BANKS = G.BANKS
 BARK = "/home/omar/archpipe/shared/assets/user/landscape/polyhaven_tex/bark_platanus/bark_platanus_%s_2k.jpg"
 COLS, ROWS = 3, 5
+RGBA = "/home/omar/archpipe/shared/assets/generated/foliage/atlas/rgba_%s.png"
 
 
 # ------------------------------------------------------------------ meshes
@@ -141,6 +142,24 @@ def leaf_material(bank, glossy=0.4):
     return m
 
 
+def leaf_material_export(bank):
+    """glTF-exportable leaf: one RGBA atlas (BaseColor rgb + Opacity as alpha, baked by library.bake_rgba) x vertex colour.
+    glTF has no translucency/red-channel wiring, so the portable glb is plainer than the in-Blender material."""
+    m = bpy.data.materials.new("leafx_" + bank); m.use_nodes = True
+    nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial"); pb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    img = tex(nt, RGBA % bank, False, "RGBA")
+    at = nt.nodes.new("ShaderNodeAttribute"); at.attribute_name = "Col"
+    mul = nt.nodes.new("ShaderNodeMix"); mul.data_type = "RGBA"; mul.blend_type = "MULTIPLY"; mul.inputs[0].default_value = 1.0
+    nt.links.new(img.outputs["Color"], mul.inputs[6]); nt.links.new(at.outputs["Color"], mul.inputs[7])
+    nt.links.new(mul.outputs[2], pb.inputs["Base Color"]); nt.links.new(img.outputs["Alpha"], pb.inputs["Alpha"])
+    pb.inputs["Roughness"].default_value = 0.45
+    nt.links.new(pb.outputs["BSDF"], out.inputs["Surface"])
+    m.blend_method = "BLEND" if hasattr(m, "blend_method") else None
+    m.use_backface_culling = False
+    return m
+
+
 def wood_material(kind):
     m = bpy.data.materials.new("wood_" + kind); m.use_nodes = True
     nt = m.node_tree; pb = nt.nodes["Principled BSDF"]
@@ -155,7 +174,7 @@ def wood_material(kind):
     return m
 
 
-def build_plant(plant, name=None):
+def build_plant(plant, name=None, export=False):
     """-> list of bpy objects (wood + one leaf mesh per atlas), plant base at the origin."""
     objs = []
     form = G.SPECS[plant.species]["form"]
@@ -169,7 +188,7 @@ def build_plant(plant, name=None):
             o = bpy.data.objects.new((name or plant.species) + "_" + kind, me); bpy.context.scene.collection.objects.link(o); objs.append(o)
     for bank in sorted(set(plant.leaves.get("bank", []))):
         me = leaf_mesh(plant, bank)
-        me.materials.append(leaf_material(bank))
+        me.materials.append(leaf_material_export(bank) if export else leaf_material(bank))
         o = bpy.data.objects.new((name or plant.species) + "_leaves_" + bank, me); bpy.context.scene.collection.objects.link(o); objs.append(o)
     for o in objs:
         o["generated_foliage"] = json.dumps(plant.label)
@@ -232,6 +251,14 @@ if __name__ == "__main__":
     for sp in specs:
         plant = G.generate(sp["slug"], sp["seed"], sp["height_m"], sp["spread_m"], sp["state"], sp["lod"])
         tag = "%s_s%d_%s" % (sp["slug"], sp["seed"], sp["state"])
+        if mode == "glb":
+            sc, _ = reset_scene(64, 1)
+            for o in list(bpy.data.objects):
+                bpy.data.objects.remove(o)
+            build_plant(plant, tag, export=True)
+            path = os.path.join(out, tag + ".glb")
+            bpy.ops.export_scene.gltf(filepath=path, export_format="GLB", export_attributes=True, use_selection=False)
+            res.append(dict(tag=tag, glb=path, label=plant.label))
         if mode == "sheet":
             shots = render_sheet(plant, os.path.join(out, tag), G.SPECS[sp["slug"]]["form"] == "climber")
             res.append(dict(tag=tag, shots=shots, label=plant.label, leaves=int(len(plant.leaves["length"])),

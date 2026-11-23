@@ -1,0 +1,274 @@
+{
+ "generator_version": "fg-0.1",
+ "species": {
+  "acorus_gramineus": {
+   "accepted_name": "Acorus gramineus",
+   "form": "strap",
+   "banks": [
+    "cast_iron",
+    "ginger_lily"
+   ],
+   "sourced": {
+    "height": [
+     0.3,
+     0.3
+    ],
+    "spread": [
+     0.15,
+     0.3
+    ]
+   },
+   "demo_size_m": [
+    0.3,
+    0.22499999999999998
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "alpinia_zerumbet": {
+   "accepted_name": "Alpinia zerumbet",
+   "form": "cane",
+   "banks": [
+    "ginger_lily"
+   ],
+   "sourced": {
+    "height": [
+     2.4,
+     3.0
+    ],
+    "spread": null
+   },
+   "demo_size_m": [
+    2.7,
+    1.5
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "farfugium_japonicum": {
+   "accepted_name": "Farfugium japonicum",
+   "form": "basal",
+   "banks": [
+    "taro"
+   ],
+   "sourced": {
+    "height": [
+     0.3,
+     0.9
+    ],
+    "spread": [
+     0.3,
+     0.6
+    ]
+   },
+   "demo_size_m": [
+    0.6,
+    0.44999999999999996
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "fatsia_japonica": {
+   "accepted_name": "Fatsia japonica",
+   "form": "petioled",
+   "banks": [
+    "palmate_fatsia"
+   ],
+   "sourced": {
+    "height": [
+     1.8,
+     5.9
+    ],
+    "spread": [
+     1.2,
+     1.8
+    ]
+   },
+   "demo_size_m": [
+    2.0,
+    1.2
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "jasminum_sambac": {
+   "accepted_name": "Jasminum sambac",
+   "form": "climber",
+   "banks": [
+    "star_jasmine"
+   ],
+   "sourced": {
+    "height": [
+     2.5,
+     4.0
+    ],
+    "spread": [
+     0.5,
+     1.0
+    ]
+   },
+   "demo_size_m": [
+    2.1,
+    1.0
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "justicia_brandegeeana": {
+   "accepted_name": "Justicia brandegeeana",
+   "form": "shrub",
+   "banks": [
+    "star_jasmine"
+   ],
+   "sourced": {
+    "height": [
+     0.61,
+     1.83
+    ],
+    "spread": [
+     0.5,
+     1.0
+    ]
+   },
+   "demo_size_m": [
+    1.22,
+    0.75
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "lagerstroemia_indica": {
+   "accepted_name": "Lagerstroemia indica",
+   "form": "tree",
+   "banks": [
+    "star_jasmine"
+   ],
+   "sourced": {
+    "height": [
+     1.8,
+     9.1
+    ],
+    "spread": [
+     1.8,
+     9.1
+    ]
+   },
+   "demo_size_m": [
+    4.5,
+    4.0
+   ],
+   "states": [
+    "leaf-on",
+    "leaf-off"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "petrea_volubilis": {
+   "accepted_name": "Petrea volubilis",
+   "form": "climber",
+   "banks": [
+    "star_jasmine",
+    "ginger_lily"
+   ],
+   "sourced": {
+    "height": [
+     1.8,
+     3.7
+    ],
+    "spread": [
+     0.9,
+     1.8
+    ]
+   },
+   "demo_size_m": [
+    2.1,
+    1.0
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "salvia_leucantha": {
+   "accepted_name": "Salvia leucantha",
+   "form": "shrub",
+   "banks": [
+    "ginger_lily"
+   ],
+   "sourced": {
+    "height": [
+     0.61,
+     0.91
+    ],
+    "spread": [
+     0.61,
+     0.91
+    ]
+   },
+   "demo_size_m": [
+    0.76,
+    0.76
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "trachelospermum_jasminoides": {
+   "accepted_name": "Trachelospermum jasminoides",
+   "form": "climber",
+   "banks": [
+    "star_jasmine"
+   ],
+   "sourced": {
+    "height": [
+     0.9,
+     6.1
+    ],
+    "spread": [
+     0.9,
+     1.2
+    ]
+   },
+   "demo_size_m": [
+    2.1,
+    1.2
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  },
+  "vitis_vinifera": {
+   "accepted_name": "Vitis vinifera",
+   "form": "climber",
+   "banks": [
+    "palmate_grape"
+   ],
+   "sourced": {
+    "height": null,
+    "spread": null
+   },
+   "demo_size_m": [
+    2.1,
+    1.0
+   ],
+   "states": [
+    "leaf-on"
+   ],
+   "interface": "plant_for(slug, element_id, height_m, spread_m, state) -> Plant; blender_build.build_plant(Plant)"
+  }
+ }
+}

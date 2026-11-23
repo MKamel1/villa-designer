@@ -133,7 +133,7 @@ def synth_palmate(name, sci, lobes, sinus, span_deg, serration, source="taro", n
     ca = np.asarray(crop).astype(float)
     k = 85.0 / max(1.0, float((ca @ [0.2126, 0.7152, 0.0722]).mean()))
     ca[..., 2] = np.maximum(ca[..., 2], ca[..., 1] * 0.25)          # keep some blue so the hue correction has something to scale
-    crop = Image.fromarray(np.clip(ca * k, 0, 190).astype(np.uint8))   # clip: no white flecks
+    crop = Image.fromarray(np.clip(ca * k, 0, 150).astype(np.uint8)).filter(__import__("PIL.ImageFilter", fromlist=["x"]).MedianFilter(5))   # clip + median: no white/yellow flecks
     yy, xx = np.mgrid[0:n, 0:n]
     # polar coords about the leaf centre; angle 0 = up; the blade occupies span_deg either side of up
     px, py = (xx - n / 2) / (n / 2), (n * 0.54 - yy) / (n / 2)
@@ -156,8 +156,8 @@ def synth_palmate(name, sci, lobes, sinus, span_deg, serration, source="taro", n
 
 def build(out=OUT):
     res = {b: extract(b) for b in SOURCES}
-    res["palmate_fatsia"] = synth_palmate("fatsia", "Fatsia japonica (outline only; surface scanned from Colocasia)", 9, 0.62, 165, 0.0)
-    res["palmate_grape"] = synth_palmate("grape", "Vitis vinifera (outline only; surface scanned from Colocasia)", 5, 0.78, 150, 0.03)
+    res["palmate_fatsia"] = synth_palmate("fatsia", "Colocasia esculenta (surface scan only; the Fatsia-like outline is generated, not scanned)", 9, 0.62, 165, 0.0)
+    res["palmate_grape"] = synth_palmate("grape", "Colocasia esculenta (surface scan only; the grape-like outline is generated, not scanned)", 5, 0.78, 150, 0.0)
     out.write_text(json.dumps(res, indent=1))
     for b, r in res.items():
         print(b, len(r["leaves"]), r["dropped"])

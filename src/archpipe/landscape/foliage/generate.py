@@ -287,7 +287,7 @@ def build_climber(spec, rng, H, S, reach, state, lod_keep):
 def build_tree(spec, rng, H, S, reach, state, lod_keep, lean=(0.0, 0.0)):
     """Pruned multi-stem shade tree: 3-5 stems, clear to `clear_stem`, then forking limbs, round-headed crown."""
     cs = spec["clear_stem"]
-    hw = S / 2 - reach * (0.5 if state == "leaf-on" else 0)
+    hw = S / 2 - reach * 0.5      # same skeleton in both states: leaf-off is the leaf-on tree with the leaves removed
     cz = cs + (H - cs) * 0.5
     env = (np.array([lean[0], lean[1], cz]), np.array([hw, hw, (H - cs) * 0.56]), 2.6)
     g = Grower(rng, env, 0.07, seg=0.09)
@@ -414,7 +414,7 @@ FORMS = dict(shrub=build_shrub, climber=build_climber, tree=build_tree, basal=bu
 # --------------------------------------------------------------------------------------------- public
 def label_of(slug, spec, seed, state, banks_used):
     sci = BANKS[next(iter(banks_used))]["scientific_name"] if banks_used else None
-    species_ok = len(banks_used) == 1 and all(BANKS[b]["scientific_name"].split()[:2] == spec["accepted"].split()[:2] for b in banks_used)
+    species_ok = len(banks_used) == 1 and not any(BANKS[b].get("synthetic_outline") for b in banks_used) and all(BANKS[b]["scientific_name"].split()[:2] == spec["accepted"].split()[:2] for b in banks_used)
     return dict(
         species=slug, accepted_name=spec["accepted"], generator_version=VERSION, seed=int(seed), state=state,
         atlas_used=sorted(banks_used), atlas_species=sorted({BANKS[b]["scientific_name"] for b in banks_used}),
@@ -455,8 +455,8 @@ def generate(slug, seed=0, height_m=None, spread_m=None, state="leaf-on", lod=0,
 
 
 def _fit(plant, spec):
-    """Scale positions (not leaf sizes) so the measured bounding box matches the target height and spread; 3 passes."""
-    for _ in range(3):
+    """Scale positions (not leaf sizes) so the measured bounding box matches the target height and spread; 6 passes."""
+    for _ in range(6):
         lo, hi = plant.bbox()
         ext = hi - lo
         spread = max(ext[0], ext[1]) if spec["form"] != "climber" else ext[0]
@@ -466,6 +466,8 @@ def _fit(plant, spec):
             break
         if spec["form"] in ("strap",):       # no skeleton: the blades themselves are the plant
             plant.leaves["length"] = plant.leaves["length"] * fz; plant.leaves["width"] = plant.leaves["width"] * fz
+            d = plant.leaves["dir"].copy(); d[:, :2] *= fx                # too wide -> steeper blades, too narrow -> flatter
+            plant.leaves["dir"] = d / np.linalg.norm(d, axis=1)[:, None]
             continue
         for b in plant.branches:
             b["pts"] = b["pts"] * np.array([fx, fx if spec["form"] != "climber" else 1.0, fz])
