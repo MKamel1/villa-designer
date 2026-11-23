@@ -25,3 +25,7 @@
     - Doors: Durian Smoke Oak.
     - Wet rooms: Marazzi Limestone20 Taupe floor and Grande Marble Look Frappuccino wall.
     - Other soft furnishings: C.
+
+## Applied to the production scene (L4, 2026-11-23)
+
+The chosen mix is scheduled in `knowledge/products/finishes/chosen.json` and drawn in the production scene; decisions the lead took on the way, the renders, the critic and the open items are in `docs/lanes/L4-finishes.md` ("Round 2"). Needing a client yes: GF walls other than the parents' feature wall are B Off White; the en-suite and bathrooms read dark copper-brown; the rug sizes keep the design footprints.
