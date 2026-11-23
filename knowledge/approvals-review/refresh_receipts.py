@@ -49,6 +49,8 @@ note = dict(reason='fixed-input change by approved G1 (stair overlap/infill/guar
             'the G1 store trim, and (INT2 2026-11-21) the L6b/L6c lighting fixtures + landing PATH marker hosts (all changed meshes are fix-/lens-/lamp-/marker-, 12/16 landing finish faces) and the ERCO recessed housing depth (26 fix-* meshes) and (INT2b) the lead-approved 12 mm finished-face move of marker-PATH-landing-gf-01/02 (meshes section only; evidence-int2/section-diff-approved-markers.json) and (SC2) wall-B-ext-16 raised 2.65 -> 2.80 m to the roof soffit (specification: walls[16].height only; architecture: 81 faces removed and 81 added, all inside the wall own footprint, 0 unexplained; evidence-sc2/) and (SC3) an infill appended to specification.infills closing the 150 mm slot above wall-B-ext-09 (specification: infills only; architecture: 0 faces removed, 46 added, all inside x 12.777..15.412, y -20.814..-20.601, z -0.35..-0.20, 0 unexplained; the dining pendant body/wire change no receipt section; evidence-sc3/); evidence knowledge/approvals-review/2026-11-ra2-b2.md',
             reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')
 fr['refresh_2026_11_21'] = note; br['refresh_2026_11_21'] = note
+if (folder / 'refresh-note.json').exists():      # a later refresh (lane GI) records its own reason under its own key; the earlier record stays
+    extra = load(folder / 'refresh-note.json'); k = extra.pop('key'); fr[k] = extra; br[k] = extra
 if write:
     save(ROOT / 'knowledge/furniture-stage2.json.gz', fr); save(ROOT / 'knowledge/parents-bed.json.gz', br)
     print('written')

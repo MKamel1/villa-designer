@@ -1,0 +1,55 @@
+{
+ "old_faces": 7857,
+ "new_faces": 7972,
+ "removed": {
+  "finish-layer|stone-substrate|z=-3.0": {
+   "faces": 201,
+   "bbox": [
+    -0.37,
+    -39.48,
+    -3.0,
+    28.56,
+    -20.35,
+    -3.0
+   ]
+  },
+  "finish-layer|paving|z=-3.0": {
+   "faces": 52,
+   "bbox": [
+    -0.37,
+    -39.48,
+    -3.0,
+    28.56,
+    -20.35,
+    -3.0
+   ]
+  }
+ },
+ "added": {
+  "finish-layer|stone-substrate|z=-3.0": {
+   "faces": 292,
+   "bbox": [
+    -0.37,
+    -39.48,
+    -3.0,
+    28.56,
+    -20.35,
+    -3.0
+   ]
+  },
+  "finish-layer|paving|z=-3.0": {
+   "faces": 76,
+   "bbox": [
+    -0.37,
+    -39.48,
+    -3.0,
+    28.56,
+    -20.35,
+    -3.0
+   ]
+  }
+ },
+ "unexplained": 0,
+ "cause": "lane GI: the garden swap. Every changed architectural face is a finish-layer of the production shell YARD FLOOR at z=-3.0 (materials paving and stone-substrate, plot x -0.4..28.6, y -39.5..-20.4). The decided garden draws its own surfaces on that floor, so the floor is cut back under the garden paving, paths, gravel, ground, beds and the ponds (landscape.build.production.reveal_ground, the routine the previous garden used for its soil beds), and the previous garden stopped cutting where its beds were. No wall, opening, stair, door or room face changed.",
+ "sanity": "the old tree (20c01e4, lane GI base) reproduces all eight stored section digests (section-diff: receipt-matches-old-tree)"
+}
