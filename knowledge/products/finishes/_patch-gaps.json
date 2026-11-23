@@ -1,0 +1,871 @@
+{
+ "items": [
+  {
+   "id": "B-worktop",
+   "slot": "worktop",
+   "group": "hard",
+   "use": "Kitchen worktop and island",
+   "product": {
+    "maker": "Cosentino",
+    "range": "Dekton Kraftizen",
+    "name": "Dekton Nacre",
+    "colour_code": null,
+    "colour_name": "Nacre",
+    "format_mm": {
+     "w": 1470,
+     "l": 3270,
+     "t": null
+    },
+    "finish": "Grip+ or Velvet (both listed)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "thickness_cm_options": [
+      0.8,
+      1.2,
+      2.0
+     ],
+     "format_as_published": "128.74 x 57.87 in (converted to mm: 3270 x 1470)",
+     "description": "cream colour"
+    }
+   },
+   "source": {
+    "url": "https://www.cosentino.com/usa/colors/dekton/nacre/",
+    "quote": "This cream colour ranges from fine microcement to lime plastering and is characterised by subtle details and a degraded texture that give it a high sensory value.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble014",
+    "url": "https://ambientcg.com/view?id=Marble014",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "colour_code",
+    "lrv",
+    "composition",
+    "maintenance"
+   ]
+  },
+  {
+   "id": "B-backsplash",
+   "slot": "backsplash",
+   "group": "hard",
+   "use": "Kitchen backsplash (continuous slab)",
+   "product": {
+    "maker": "Cosentino",
+    "range": "Dekton Kraftizen",
+    "name": "Dekton Nacre",
+    "colour_code": null,
+    "colour_name": "Nacre",
+    "format_mm": {
+     "w": 1470,
+     "l": 3270,
+     "t": null
+    },
+    "finish": "Grip+ or Velvet (both listed)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "thickness_cm_options": [
+      0.8,
+      1.2,
+      2.0
+     ],
+     "format_as_published": "128.74 x 57.87 in (converted to mm: 3270 x 1470)",
+     "description": "cream colour"
+    }
+   },
+   "source": {
+    "url": "https://www.cosentino.com/usa/colors/dekton/nacre/",
+    "quote": "This cream colour ranges from fine microcement to lime plastering and is characterised by subtle details and a degraded texture that give it a high sensory value.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble014",
+    "url": "https://ambientcg.com/view?id=Marble014",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "colour_code",
+    "lrv",
+    "composition",
+    "maintenance"
+   ]
+  },
+  {
+   "id": "B-door",
+   "slot": "door",
+   "group": "hard",
+   "use": "Interior doors",
+   "product": {
+    "maker": "LPD Doors",
+    "range": "Blonde Oak",
+    "name": "Blonde Oak Soho 4P pre-finished internal door",
+    "colour_code": "SOHOAKSOL30",
+    "colour_name": "Blonde Oak",
+    "format_mm": {
+     "w": 762,
+     "l": 1981,
+     "t": 35
+    },
+    "finish": "Pre-finished, light blonde oak finish",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "core": "Solid Engineered",
+     "other_widths_mm": [
+      686,
+      838
+     ],
+     "note": "four-panel design, not flush; a flush blonde-oak door was not found",
+     "codes": "SOHOAKSOL27/30/33"
+    }
+   },
+   "source": {
+    "url": "https://lpddoors.co.uk/products/blonde-oak-soho/",
+    "quote": "Featuring a contemporary four panel design and a light, blonde oak finish, this door adds effortless style to modern interiors while keeping things bright and inviting.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "PaintedWood003",
+    "url": "https://ambientcg.com/view?id=PaintedWood003",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "composition (veneer species/thickness not stated)",
+    "maintenance"
+   ]
+  },
+  {
+   "id": "B-kitchen-front",
+   "slot": "kitchen-front",
+   "group": "hard",
+   "use": "Kitchen cabinet fronts",
+   "product": {
+    "maker": "FENIX",
+    "range": "FENIX NTM",
+    "name": "FENIX 0719 Beige Luxor",
+    "colour_code": "0719",
+    "colour_name": "Beige Luxor",
+    "format_mm": {
+     "w": 1300,
+     "l": 3050,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "sheet_sizes_mm": [
+      "3050x1300",
+      "4200x1300",
+      "4200x1600"
+     ],
+     "thickness_options_mm": [
+      0.7,
+      1.2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ]
+    }
+   },
+   "source": {
+    "url": "https://www.fenixforinteriors.com/en/fenix/beige-luxor",
+    "quote": "Inspired by the mix of granite and limestone which characterises the world’s greatest open-air museum, this colour greatly fits with natural materials.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Plaster007",
+    "url": "https://ambientcg.com/view?id=Plaster007",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "finish (matt not stated on page)",
+    "lrv",
+    "maintenance"
+   ]
+  },
+  {
+   "id": "B-rug-lounge",
+   "slot": "rug-lounge",
+   "group": "soft",
+   "use": "lounge rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "TIDTABELL",
+    "name": "TIDTABELL rug, flatwoven, beige, 200x300 cm",
+    "colour_code": null,
+    "colour_name": "beige",
+    "format_mm": {
+     "w": 2000,
+     "l": 3000,
+     "t": 6
+    },
+    "finish": "flatwoven",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "User surface 100% wool; warp 100% cotton",
+    "extra": {
+     "article_no": "505.618.52",
+     "surface_density_g_m2": 1400
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-50561852/",
+    "quote": "This flatwoven rug in a gentle melange of beige tones adds warmth to your space and comfort under your feet.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-50561852/",
+    "quote": "TIDTABELL rug, flatwoven, beige, 200x300 cm",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "colour_code",
+    "lrv"
+   ]
+  },
+  {
+   "id": "B-rug-parents-bedroom",
+   "slot": "rug-parents-bedroom",
+   "group": "soft",
+   "use": "parents-bedroom rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "TIDTABELL",
+    "name": "TIDTABELL rug, flatwoven, beige, 170x240 cm",
+    "colour_code": null,
+    "colour_name": "beige",
+    "format_mm": {
+     "w": 1700,
+     "l": 2400,
+     "t": null
+    },
+    "finish": "flatwoven",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "User surface 100% wool; warp 100% cotton",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-30555282/",
+    "quote": "This flatwoven rug in a gentle melange of beige tones adds warmth to your space and comfort under your feet.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-30555282/",
+    "quote": "TIDTABELL rug, flatwoven, beige, 170x240 cm",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "colour_code",
+    "lrv",
+    "thickness"
+   ]
+  },
+  {
+   "id": "B-book-3",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf, library/living",
+   "product": {
+    "maker": "Thames & Hudson",
+    "range": null,
+    "name": "Japanese Style at Home",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": {
+     "w": 160,
+     "l": 210,
+     "t": null
+    },
+    "finish": "Flexibound",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9780500294994",
+     "pages": 192,
+     "publication_date": "2019-06-13",
+     "size_cm": "21.0 x 16.0"
+    }
+   },
+   "source": {
+    "url": "https://www.thamesandhudson.com/products/japanese-style-at-home",
+    "quote": "Extent: 192 pp | Format: Flexibound | Publication date: 2019-06-13 | Size: 21.0 x 16.0 cm | ISBN: 9780500294994",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "author",
+    "spine colour"
+   ],
+   "render_hint": "Book spines in warm off-white / grey-beige, approx sRGB #D9D2C5 (estimate)"
+  },
+  {
+   "id": "B-book-4",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf, library/living",
+   "product": {
+    "maker": "Thames & Hudson",
+    "range": null,
+    "name": "The Japanese House Since 1945",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": {
+     "w": 230,
+     "l": 280,
+     "t": null
+    },
+    "finish": "Hardback",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9780500343739",
+     "pages": 400,
+     "publication_date": "2023-10-12",
+     "size_cm": "28.0 x 23.0"
+    }
+   },
+   "source": {
+    "url": "https://thamesandhudson.com/the-japanese-house-since-1945-9780500343739",
+    "quote": "Extent: 400 pp | Format: Hardback | Illustrations: 544 | Publication date: 2023-10-12 | Size: 28.0 x 23.0 cm | ISBN: 9780500343739",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "author",
+    "spine colour"
+   ],
+   "render_hint": "Book spines in warm off-white / grey-beige, approx sRGB #D9D2C5 (estimate)"
+  },
+  {
+   "id": "B-garment-1",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room basics",
+   "product": {
+    "maker": "Uniqlo",
+    "range": "Premium Linen",
+    "name": "Premium Linen Long-Sleeve Shirt (Product ID 482434)",
+    "colour_code": "01",
+    "colour_name": "OFF WHITE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% Linen",
+    "extra": {
+     "care": "Machine wash cold, Dry Clean",
+     "market": "Uniqlo India page"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/in/en/products/E482434-000/01",
+    "quote": "100% premium linen with a unique texture and elegant sheen.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv"
+   ],
+   "render_hint": "Off-white linen, approx #EFE9DC (estimate)"
+  },
+  {
+   "id": "B-garment-2",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room basics",
+   "product": {
+    "maker": "Marks & Spencer",
+    "range": "M&S Sartorial",
+    "name": "Regular Fit Pure Egyptian Cotton Dobby Shirt (T114332M)",
+    "colour_code": null,
+    "colour_name": "Neutral (M&S colour group; swatch name not read; page also lists a BLUE option)",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% egyptian cotton (exclusive of trimmings)",
+    "extra": {
+     "care": "Wash at 40C delicate, do not bleach"
+    }
+   },
+   "source": {
+    "url": "https://www.marksandspencer.com/regular-fit-egyptian-cotton-dobby-shirt/p/clp60916527",
+    "quote": "Made from Egyptian cotton, this regular fit shirt has a dobby weave texture and a classic collar.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "exact colour name for the neutral swatch",
+    "lrv"
+   ],
+   "render_hint": "Pale ecru shirt, approx #EDE8DD (estimate)"
+  },
+  {
+   "id": "C-floor-wet",
+   "slot": "floor-wet",
+   "group": "hard",
+   "use": "Wet rooms floor, slip-resistant 20 mm porcelain",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Limestone20",
+    "name": "MYSTONE LIMESTONE20 TAUPE STRUTTURATO RETTIFICATO",
+    "colour_code": "M7SQ",
+    "colour_name": "Taupe",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 20
+    },
+    "finish": "Strutturato (structured), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "technology": "Tecnico (grip and slip resistance)",
+     "other_sizes": "60x60, 80x80, 120x120",
+     "characteristics": "Frost proof, Resistance deep abrasion"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/mystone-limestone20-collection/",
+    "quote": "In porcelain stoneware, it is available in Sand, Ivory and Taupe, in the 60x60, 60x120, 120x120 and 80x80 sizes. Tecnico technology improves reliability, grip and slip resistance.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Concrete012",
+    "url": "https://ambientcg.com/view?id=Concrete012",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": {
+    "note": "Maker page states Tecnico improves grip and slip resistance; no numeric rating",
+    "url": "https://www.marazzigroup.com/collections/mystone-limestone20-collection/",
+    "quote": "Tecnico technology improves reliability, grip and slip resistance."
+   },
+   "missing": [
+    "slip_rating (no R/DIN 51130/BS 7976 value on maker page; do not claim wet-room compliance)",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-bath-tile",
+   "slot": "bath-tile",
+   "group": "hard",
+   "use": "Bathroom walls and floors, large-format slab",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK FRAPPUCCINO RETTIFICATO LUX",
+    "colour_code": "M0G3",
+    "colour_name": "Frappuccino",
+    "format_mm": {
+     "w": 1200,
+     "l": 1200,
+     "t": null
+    },
+    "finish": "Lux (per product name), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "replaces": "Grigio Carnico (no format/finish on page)"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble018",
+    "url": "https://ambientcg.com/view?id=Marble018",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv",
+    "slip rating (Lux finish: not a floor-safe claim)"
+   ]
+  },
+  {
+   "id": "C-backsplash",
+   "slot": "backsplash",
+   "group": "hard",
+   "use": "Kitchen backsplash, dark veined large-format porcelain",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK ONICE NERO LUX RT",
+    "colour_code": "MEP5",
+    "colour_name": "Onice Nero",
+    "format_mm": {
+     "w": 1200,
+     "l": 2780,
+     "t": null
+    },
+    "finish": "Lux (per product name), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "replaces": "Sahara Noir (not on the maker page)"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble009",
+    "url": "https://ambientcg.com/view?id=Marble009",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-joinery-light",
+   "slot": "joinery-light",
+   "group": "hard",
+   "use": "Slats / headboard, lighter contrast timber",
+   "product": {
+    "maker": "EGGER",
+    "range": "Feelwood",
+    "name": "H1180 ST37 Natural Halifax Oak",
+    "colour_code": "H1180 ST37",
+    "colour_name": "Natural Halifax Oak",
+    "format_mm": {
+     "w": 1300,
+     "l": 2311,
+     "t": null
+    },
+    "finish": "ST37 Feelwood Rift synchronised surface texture",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "format_note": "approx. 2.311 x 1.300 mm per page"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H1180_37?country=GB",
+    "quote": "With its striking cracks and knots, H1180 Natural Halifax Oak answers the demand for nature and authenticity in the living space.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Wood094",
+    "url": "https://ambientcg.com/view?id=Wood094",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-door",
+   "slot": "door",
+   "group": "hard",
+   "use": "Interior doors, smoke oak veneer",
+   "product": {
+    "maker": "Durian",
+    "range": "Craftsman Series",
+    "name": "Trace Smoke Oak Veneer Door, Craftsman Grooving",
+    "colour_code": null,
+    "colour_name": "Smoke Oak",
+    "format_mm": null,
+    "finish": "PU Matt / PU Gloss",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Veneer, Smoke Oak",
+    "extra": {
+     "thickness_mm": 40,
+     "type": "Flush Door",
+     "width_height": "not stated"
+    }
+   },
+   "source": {
+    "url": "https://www.durian.in/product/trace",
+    "quote": "Style | Designer | Finish | PU Matt/ PU Gloss | Material Type | Veneer | Material Name | Smoke Oak | Thickness | 40 mm Flush Door",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": false,
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Indian maker; no Egypt supplier. Local joiners not confirmed to offer smoke oak"
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Wood049",
+    "url": "https://ambientcg.com/view?id=Wood049",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     800,
+     800
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "width x height",
+    "colour_code",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-garment-linen-trouser",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Linen Blend",
+    "name": "Men's Linen Blend Relaxed Trousers (Product ID 470598)",
+    "colour_code": "57",
+    "colour_name": "OLIVE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Body 63% cotton, 35% linen, 2% elastane; pocket lining 65% polyester, 35% cotton",
+    "extra": {
+     "market": "Uniqlo UK page"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/uk/en/products/E463857-000/00",
+    "quote": "Body: 63% Cotton, 35% Linen, 2% Elastane/ Pocket Lining: 65% Polyester, 35% Cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "care (not re-read)"
+   ],
+   "render_hint": "estimate only"
+  },
+  {
+   "id": "C-garment-merino-crew",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Extra Fine Merino",
+    "name": "Men's Extra Fine Merino Crew Neck Long-Sleeve Sweater (Product ID 438783)",
+    "colour_code": "03",
+    "colour_name": "GRAY",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool (merino)",
+    "extra": {
+     "market": "Uniqlo US page; default colour shown on page"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/us/en/products/E429066-000/00",
+    "quote": "Made from internationally recognized 100% 19.5 ultra-fine merino wool, making it smooth to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "care (not re-read)"
+   ],
+   "render_hint": "estimate only"
+  }
+ ]
+}

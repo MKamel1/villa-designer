@@ -1,0 +1,161 @@
+{
+ "note": "Render colours for finishes where the look-alike's own colour is not the product's. ESTIMATES unless the basis says the maker published it. Never a price, never a claim of exact match.",
+ "colours": {
+  "A-wall-paint": {
+   "hex": "#efeae0",
+   "basis": "maker page gives hex #efeae0 (Dulux AU)"
+  },
+  "A-kitchen-front": {
+   "hex": "#d6cab4",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-floor-gf": {
+   "hex": "#7b5639",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-worktop": {
+   "hex": "#d3c4ad",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-garden-paving": {
+   "hex": "#cbbfa6",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-floor-wet": {
+   "hex": "#cdbfa7",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-rug-living": {
+   "hex": "#c0aa84",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-parents-bed": {
+   "hex": "#e4ded0",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-joinery-timber": {
+   "hex": "#6e4830",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-door": {
+   "hex": "#734d36",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-joinery-light": {
+   "hex": "#a07a52",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-bath-tile": {
+   "hex": "#cdbea2",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-floor-living": {
+   "hex": "#c6b9a3",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-floor-gf": {
+   "hex": "#c4a77f",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-floor-wet": {
+   "hex": "#cfc3ad",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-bath-tile": {
+   "hex": "#d4c8b0",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-worktop": {
+   "hex": "#e2d9cb",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-backsplash": {
+   "hex": "#e2d9cb",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-joinery-timber": {
+   "hex": "#a98259",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-joinery-light": {
+   "hex": "#c0a27a",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-door": {
+   "hex": "#b89a72",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-kitchen-front": {
+   "hex": "#cdc0a8",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-wall-paint": {
+   "hex": "#efebe3",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-garden-paving": {
+   "hex": "#d0c4ab",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-cushions-parents-bed": {
+   "hex": "#e6dfcf",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "B-rug-living": {
+   "hex": "#c0aa84",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-floor-living": {
+   "hex": "#a39786",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-floor-gf": {
+   "hex": "#5a4332",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-floor-wet": {
+   "hex": "#a09484",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-bath-tile": {
+   "hex": "#b8a58e",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-joinery-timber": {
+   "hex": "#4b3626",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-joinery-light": {
+   "hex": "#b08e62",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-door": {
+   "hex": "#4a3c32",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-kitchen-front": {
+   "hex": "#6a5d52",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-wall-paint": {
+   "hex": "#8b8074",
+   "basis": "maker page hex #8b8074 (Dulux AU)"
+  },
+  "C-garden-paving": {
+   "hex": "#a89d8c",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-cushion-parents-bed-1": {
+   "hex": "#d8ccb6",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-throw-parents-bed": {
+   "hex": "#bdbab3",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "C-rug-living": {
+   "hex": "#cdbd9f",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  }
+ }
+}
