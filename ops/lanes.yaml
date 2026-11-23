@@ -390,6 +390,12 @@ lanes:
     - knowledge/*.json.gz
     - docs/lanes/RF*.md
     - docs/lessons/RF.md
+  FG: # generated foliage from leaf scans (client-approved capability 2026-11-22)
+    - src/archpipe/landscape/foliage/**
+    - tests/landscape/foliage/**
+    - knowledge/landscape/foliage/**
+    - docs/lanes/FG*.md
+    - docs/lessons/FG.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md

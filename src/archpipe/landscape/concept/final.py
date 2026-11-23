@@ -140,6 +140,7 @@ def south(p=PAR):
     # south wall edge (two beds, 1.2 m clear of the table): climbers on the wall face, understorey palm and perennial / groundcover drifts in front, under the crape
     wr, wr2 = RM(*wall), RM(*wall2)
     bed(f, "s-bed-wall", wr, row(wr, "y", 0.3, ["petrea_volubilis", "jasminum_sambac"], 0.9, run=2, cap=0.6) + row(wr, "y", 0.15, ["aspidistra_elatior"], 0.45, run=8, how="min"), "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
+    f["planting_groups"][-1]["plants"].append(entry(SAMBAC, P(5.4, 2.35), 0.5, "shrub"))        # a jasmine slot between the two Petrea: assign_jasmine makes it star jasmine (2.8 m from the nearest seat)
     bed(f, "s-bed-wall-b", wr2, row(wr2, "x", 1.0, ["justicia_brandegeeana"], 0.7, run=3, how="min") + row(wr2, "x", 0.55, ["rhapis_excelsa"], 1.4, run=1, how="min")
         + row(wr2, "y", 0.2, ["aspidistra_elatior"], 0.45, run=6, how="min") , "wall-climber", trace=("U-S-DINE", "LS-HYDROZONE"))
     w3 = RM(*wall3)
@@ -234,10 +235,29 @@ def east_kit():
                       dict(id="far", rect=ER(0, 1.5, 1.2, EW), role="mass", pal="yard_mass", back="hi"),
                       dict(id="edge", rect=ER(1.5, 2.75, 4.2, EW), role="strip", pal="pond_edge", back="hi")],
                 bench=ER(5.0, 1.35, 5.45, 2.75), quiet=ER(4.8, 1.3, 5.6, EW), pergola=None,
+                climbers=[dict(bed="far", at=[(EX0 + u, EY0 + 2.7) for u in (0.35, 0.95)]),       # the pond-edge bed is high-water: no climber there (LS-HYDROZONE)
+                          dict(bed="divider", at=[(EX0 + u, EY0 + 2.8) for u in (6.7, 7.05)])],       # on the south boundary wall: the slots next to the bench (u 5.0-5.45) become sambac in assign_jasmine
                 paths=[ER(0.2, 0, 4.3, 1.2)], path_class="service", gravel=ER(4.3, 0.5, EL, EW), focal="the pond is the focal point of the quiet room, bench at its end")
 
 
 P_EAST = dict(u=6.25, v=2.3, lean=(-0.7, -0.4), spread=2.6)       # east yard tree: trunk in the divider bed; lean toward the bench
+
+
+STAR, SAMBAC, NEAR_M = "trachelospermum_jasminoides", "jasminum_sambac", 2.0     # NEAR_M = the LDG-POL-TOXIC distance (LDL placement constraint: away from seating and edibles)
+
+
+def assign_jasmine(L):
+    """Client decision 2026-11-22: star jasmine on every screen/wall section NOT within NEAR_M of a seat or the herb bed; Arabian jasmine only on the sections next to seats.
+    Every jasmine slot in the layout (placed as sambac) takes its species from its distance to the nearest seat or herb rect."""
+    from ..critic.computed import feature_pt, seat_points        # the critic's own measure (seat points, plant edge) is the stricter one: use both
+    near = [box(*o["rect"]) for o in L["seating"]] + [box(*o["rect"]) for o in L["features"] if o.get("kind") == "herb_bed"]
+    pts = [s["pt"] for s in seat_points(L)] + [feature_pt(o) for o in L["features"] if o.get("kind") == "herb_bed"]
+    for g in L["planting_groups"]:
+        for pl in g["plants"]:
+            if pl["species"] in (SAMBAC, STAR):
+                pt = Point(*pl["at"])
+                close = any(pt.distance(n) < NEAR_M for n in near) or any(math.dist(pl["at"], q) - pl["spread_m"] / 2 < NEAR_M for q in pts)
+                pl.update(entry(SAMBAC if close else STAR, pl["at"], pl["spread_m"], pl["form"]))
 
 
 def build(pot_at=None, p_e=None):
@@ -245,12 +265,19 @@ def build(pot_at=None, p_e=None):
     fs = south()
     fn = court(north_kit(), "n", "n")
     fe = court(east_kit(), "e", "e")
+    for g in fe["planting_groups"]:               # the yard's south boundary is a wall: free-standing plants keep their crown off it (build-lane clip check); climbers stay on its face
+        for pl in g["plants"]:
+            if pl.get("role") != "climber":
+                pl["at"][1] = min(pl["at"][1], round(TC.EY0 + TC.EW - pl["spread_m"] / 2 - 0.02, 3))
     ex, ey = TC.EX0 + p_e["u"], TC.EY0 + p_e["v"]
     shade_tree(fe, "e-tree-olive", "olea_europaea", (ex, ey), lean=p_e["lean"], spread=p_e["spread"])
     pot = pot_at or POT
     fp = frag()
     _pot(fp, pot)
     fw = C.site_frag()
+    ys = [TC.EX0, TC.EY0 + TC.EW, S.SX0, TC.EY0 + TC.EW + 0.25]                       # the east yard's south boundary, declared (client 2026-11-22): from the yard's west end to the garden's house face
+    fw["walls"].append({"id": "yard-south", "rect": ys, "height_m": 4.0})
+    fw["obstacles"].append({"id": "yard-south", "rect": ys, "trace": ["SITE-FENCE"]})
     for w in fw["walls"]:
         w["id"] = "wall-" + w["id"]                      # walls are built as ld-wall-*; the fire/overlap rules read the obstacles (ids fence-*)
     L = C.assemble(fw, fs, fn, fe, fp)
@@ -259,6 +286,7 @@ def build(pot_at=None, p_e=None):
     for z in L["zones"]:
         if z.get("use") == "standing":
             z["design_people"] = min(int(free / 1.3), int((z["rect"][2] - z["rect"][0]) * (z["rect"][3] - z["rect"][1]) / 1.3))
+    assign_jasmine(L)
     L["meta"]["pot"] = list(pot)
     L["meta"]["layout_id"] = "LDG-final-B"
     return L

@@ -17,7 +17,9 @@ def test_pool_only_viable_or_conditional():
     assert POOL and all(s.verdict in ("viable", "viable_with_conditions") for s in POOL.values())
     data = json.load(open(OUT.parent / "plants" / "plants.json"))["species"]
     allowed = {r["slug"] for r in data if r["site_viability"]["verdict"] in ("viable", "viable_with_conditions")}
-    assert set(POOL) == allowed                                  # the pool is exactly what plants.json says (LDL)
+    from archpipe.landscape.concept.species import CLIENT_ADMIT
+    assert set(POOL) == allowed | set(CLIENT_ADMIT)              # the pool is what plants.json says (LDL) plus the named client admissions
+    assert not set(CLIENT_ADMIT) & allowed                       # an admission is only ever for a species LDL holds out
     assert any(r["site_viability"]["verdict"] not in ("viable", "viable_with_conditions") for r in data if r["slug"] not in POOL)
 
 
