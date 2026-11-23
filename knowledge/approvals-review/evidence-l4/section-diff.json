@@ -13,7 +13,7 @@
  },
  "architecture": {
   "changed": true,
-  "receipt_component": false,
+  "receipt_component": true,
   "faces_removed": 48,
   "faces_added": 48,
   "removed_sample": [
@@ -25,87 +25,7 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-ensuite"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-ensuite"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
     "room": "guest-wc"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-ensuite"
    },
    {
     "part_kind": "finish-layer",
@@ -140,7 +60,92 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
     "room": "guest-wc"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "guest-wc"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "guest-wc"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
    },
    {
     "part_kind": "finish-layer",
@@ -170,31 +175,41 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
     "room": "family-bath"
    },
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-ensuite"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
     "room": "parents-bed"
    },
    {
@@ -215,6 +230,16 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
     "room": "parents-ensuite"
    },
    {
@@ -225,32 +250,7 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "guest-wc"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "guest-wc"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
+    "room": "parents-ensuite"
    },
    {
     "part_kind": "finish-layer",
@@ -262,7 +262,17 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "parents-bed"
+    "room": "guest-wc"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
    },
    {
     "part_kind": "finish-layer",
@@ -302,52 +312,7 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "parents-ensuite"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-ensuite"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
     "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "guest-wc"
    },
    {
     "part_kind": "finish-layer",
@@ -402,22 +367,12 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "family-bath"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
     "room": "parents-bed"
    },
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
     "room": "guest-wc"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
-    "room": "parents-bed"
    },
    {
     "part_kind": "finish-layer",
@@ -442,6 +397,16 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
     "room": "parents-bed"
    },
    {
@@ -453,6 +418,41 @@
     "part_kind": "finish-layer",
     "host": "villa-shell",
     "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "family-bath"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "guest-wc"
    },
    {
     "part_kind": "finish-layer",
@@ -487,23 +487,23 @@
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
-    "room": "guest-wc"
-   },
-   {
-    "part_kind": "finish-layer",
-    "host": "villa-shell",
     "room": "parents-bed"
    },
    {
     "part_kind": "finish-layer",
     "host": "villa-shell",
     "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-bed"
    }
   ]
  },
  "meshes": {
   "changed": true,
-  "receipt_component": false,
+  "receipt_component": true,
   "added": [
    "dress-cushion-cinema-sofa-0",
    "dress-cushion-cinema-sofa-1",
@@ -533,7 +533,7 @@
  },
  "materials": {
   "changed": true,
-  "receipt_component": false,
+  "receipt_component": true,
   "added": [
    "fin-cushion-cinema-sofa-1",
    "fin-cushion-cinema-sofa-2",
