@@ -105,7 +105,7 @@ SCENES = {
     "winter-evening": dict(label="Winter evening around the fire pit (crape leafless: no uplight)", cct_k=2700, dining_target=None,
                            levels={"dining": 0.0, "path-S": 0.10, "pit": 0.20, "pond-N": 0.08, "pond-E": 0.12, "graze": 0.10, "uplight": 0.0}),
 }
-RENDER_SCENE = "summer-night-dining"      # the scene baked into the production render lights (one static level set)
+RENDER_SCENE = "social-gathering"      # the scene baked into the production render lights (one static level set): the dusk views show a gathering, the brightest of the four
 
 
 # ------------------------------------------------------------------ geometry
@@ -536,7 +536,7 @@ def radiance_check(workdir: Path, *, step=3, ab=6, workers=8, plane_ids=None) ->
     L = layout()
     boxes = occluders(L)
     room = Room(((-2.0, -36.0), (31.0, -36.0), (31.0, -17.0), (-2.0, -17.0)), floor_z=G, ceiling_z=G + 60.0, rho_floor=RHO_GROUND, rho_wall=0.0, rho_ceiling=0.0, boxes=tuple(boxes))
-    pls, full = [q for q in planes(L) if plane_ids is None or q.id in plane_ids], placements(None)
+    pls, full = [q for q in planes(L) if q.kind != "water" and (plane_ids is None or q.id in plane_ids)], placements(None)      # the Radiance floor is solid: a water plane sits under it (the pond is a hole in reality)
     if plane_ids is not None:
         full = [f for f in full if f.zone in {q.zone_req for q in pls}]
     sensors, owner = [], []

@@ -385,6 +385,9 @@ def camera_clearance(pos, g):
     return best
 
 
+CLEAR_SEARCH_M = 6        # lane LG: was 3.5 m; v07 and v19 stood in the south-east bed corner (0.00 m from a plant) and found no clear point within 3.5 m: the first dusk render showed a black plant leaf across the frame
+
+
 def clear_camera(view, g):
     """Move a garden camera the least distance (in plan, 0.1 m grid, within 3.5 m) to a spot CLEAR_M from every garden solid, inside the plot and outside the house footprints;
     the target is kept. Recorded in the camera's `overrides` with the reason. A camera already clear is untouched; none found raises."""
@@ -396,7 +399,7 @@ def clear_camera(view, g):
     from . import build as _B
     blds = [_B.R(b) for b in _B.load_layout(LAYOUT)["buildings"]] if pos[2] < -0.5 else []
     inside = lambda r, p: r[0] - 0.2 <= p[0] <= r[2] + 0.2 and r[1] - 0.2 <= p[1] <= r[3] + 0.2
-    cands = sorted(((dx * 0.1, dy * 0.1) for dx in range(-35, 36) for dy in range(-35, 36)), key=lambda d: d[0] ** 2 + d[1] ** 2)
+    cands = sorted(((dx * 0.1, dy * 0.1) for dx in range(-CLEAR_SEARCH_M * 10, CLEAR_SEARCH_M * 10 + 1) for dy in range(-CLEAR_SEARCH_M * 10, CLEAR_SEARCH_M * 10 + 1)), key=lambda d: d[0] ** 2 + d[1] ** 2)
     for dx, dy in cands:
         q = [pos[0] + dx, pos[1] + dy, pos[2]]
         if x0 + 0.5 < q[0] < x1 - 0.5 and y0 + 0.5 < q[1] < y1 - 0.5 and not any(inside(b, q) for b in blds) and camera_clearance(q, g)[0] >= CLEAR_M:
@@ -404,7 +407,7 @@ def clear_camera(view, g):
             cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=q, reason="GI: the authored standing point is %.2f m from %s (inside or touching a garden solid of the decided layout); moved %.2f m, target kept" % (why[0], why[1], math.hypot(dx, dy))))
             cam["position"] = q
             return True
-    cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=pos, reason="%s%s: no clear standing point within 3.5 m (the authored point is %.2f m from %s); camera left where it is" % (NOT_CLEARED, view["id"], camera_clearance(pos, g)[0], camera_clearance(pos, g)[1])))
+    cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=pos, reason="%s%s: no clear standing point within %d m (the authored point is %.2f m from %s); camera left where it is" % (NOT_CLEARED, view["id"], CLEAR_SEARCH_M, camera_clearance(pos, g)[0], camera_clearance(pos, g)[1])))
     return False      # fail closed where it matters: `uncleared()` is asserted over the production view set (tests, gi_scene); the legacy view list of `villa_render.VIEWS` also passes through here and must still build
 
 
