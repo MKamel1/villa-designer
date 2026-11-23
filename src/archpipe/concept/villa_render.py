@@ -61,15 +61,15 @@ M = {
     "ceiling-white": dict(kind="principled", base_rgb=[0.86, 0.85, 0.83], reflectance=0.85, roughness=0.95,
                           note="gypsum false ceiling, matt white (0.85)"),
     "travertine": dict(kind="principled", asset="Marble014", base_rgb=[0.66, 0.63, 0.57], reflectance=0.55,
-                       roughness=0.35, tile_m=0.6, note="honed cream stone, large format (ASSUMED; the first "
+                       roughness=0.35, tile_m=0.6, contrast=0.8, note="honed cream stone, large format (ASSUMED; the first "
                                                           "texture read pink)"),
     "oak-floor": dict(kind="principled", asset="oak_wood_planks", base_rgb=[0.45, 0.33, 0.22], reflectance=0.33,
                       roughness=0.5, tile_m=1.20, grain_axis="x",
                       note="light oak engineered planks (ASSUMED); Poly Haven oak_wood_planks, real scan 1.20 m"),
     "marble-ensuite": dict(kind="principled", asset="Marble020", base_rgb=[0.66, 0.60, 0.52], reflectance=0.58,
-                           roughness=0.25, tile_m=0.6, note="warm cream marble, large format (ASSUMED)"),
+                           roughness=0.25, tile_m=0.6, contrast=0.8, note="warm cream marble, large format (ASSUMED)"),
     "marble-bath": dict(kind="principled", asset="Marble014", base_rgb=[0.70, 0.66, 0.58], reflectance=0.62,
-                        roughness=0.3, tile_m=0.6, note="cream marble, large format (ASSUMED)"),
+                        roughness=0.3, tile_m=0.6, contrast=0.8, note="cream marble, large format (ASSUMED)"),
     "marble-wet": dict(kind="principled", asset="Marble014", base_rgb=[0.62, 0.59, 0.53], reflectance=0.55,
                        roughness=0.45, tile_m=0.3,
                        note="ASSUMED smaller-format wet-zone stone look-alike; slip rating and product pending"),
