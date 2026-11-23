@@ -17,6 +17,8 @@ OPEN_LICENCES = ("CC0", "CC-BY")
 _PRICE_KEY = re.compile(r"price|cost|egp|usd|eur|fee|tariff|quote_amount", re.I)
 # Format-based goods: one look-alike image stands for ONE format unit (tile, slab, board), so the image is
 # mapped at the format's long side. Fabrics and veneers with no format use the look-alike scan's published size.
+# Painted or lacquered surfaces are rendered as a flat colour (LRV + stated colour): no look-alike image, no scale.
+FLAT_SLOTS = ("wall-paint", "kitchen-front")
 FORMAT_SLOTS = ("floor-living", "floor-gf", "floor-wet", "bath-tile", "worktop", "backsplash", "garden-paving")
 
 
@@ -30,6 +32,14 @@ def _keys(obj, path=""):
             yield from _keys(v, f"{path}[{i}]")
 
 
+def _mm(v) -> float | None:
+    """A format side in mm: a number, or a published range such as '1750-2350' (the longest is used)."""
+    if isinstance(v, (int, float)):
+        return float(v) or None
+    nums = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", str(v or ""))]
+    return max(nums) if nums else None
+
+
 def texture_scale_m(item: dict) -> tuple[float, str]:
     """(tile_m, basis): the real-world width in metres that one look-alike image covers.
 
@@ -38,10 +48,13 @@ def texture_scale_m(item: dict) -> tuple[float, str]:
     assumed (this replaces RF's assumed 0.6 m policy).
     """
     fmt = (item.get("product") or {}).get("format_mm") or {}
-    sides = [v for v in (fmt.get("w"), fmt.get("l")) if v]
-    if item.get("slot") in FORMAT_SLOTS and sides:
-        return max(sides) / 1000.0, "format-long-side"
+    sides = [m for m in (_mm(fmt.get("w")), _mm(fmt.get("l"))) if m]
     scan = (item.get("lookalike") or {}).get("physical_scan_mm")
+    scan_mm = (max(scan) if isinstance(scan, (list, tuple)) else scan) if scan else None
+    # A format smaller than the scan (a 100 mm tile on a 2 m scan) would shrink the image to noise: the scan's own
+    # published size is then the true scale and shows several tiles.
+    if item.get("slot") in FORMAT_SLOTS and sides and not (scan_mm and max(sides) < scan_mm / 4):
+        return max(sides) / 1000.0, "format-long-side"
     if scan:
         s = max(scan) if isinstance(scan, (list, tuple)) else scan
         return float(s) / 1000.0, "lookalike-scan-size"
@@ -75,7 +88,7 @@ def item_problems(item: dict) -> list[str]:
             p.append(f"{iid}: look-alike licence {la.get('licence')!r} is not CC0/CC-BY")
         if not la.get("url"):
             p.append(f"{iid}: look-alike url missing")
-    elif item.get("group") == "hard":
+    elif item.get("group") == "hard" and item.get("slot") not in FLAT_SLOTS:
         p.append(f"{iid}: hard finish without a look-alike")
     if item.get("lookalike") is not None:
         try:

@@ -1,0 +1,53 @@
+{
+ "note": "Render colours for finishes where the look-alike's own colour is not the product's. ESTIMATES unless the basis says the maker published it. Never a price, never a claim of exact match.",
+ "colours": {
+  "A-wall-paint": {
+   "hex": "#efeae0",
+   "basis": "maker page gives hex #efeae0 (Dulux AU)"
+  },
+  "A-kitchen-front": {
+   "hex": "#d6cab4",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-floor-gf": {
+   "hex": "#7b5639",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-worktop": {
+   "hex": "#d3c4ad",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-garden-paving": {
+   "hex": "#cbbfa6",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-floor-wet": {
+   "hex": "#cdbfa7",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-rug-living": {
+   "hex": "#c0aa84",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-parents-bed": {
+   "hex": "#e4ded0",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-joinery-timber": {
+   "hex": "#6e4830",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-door": {
+   "hex": "#734d36",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-joinery-light": {
+   "hex": "#a07a52",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  },
+  "A-bath-tile": {
+   "hex": "#cdbea2",
+   "basis": "estimate from the maker's colour name (not a maker-published value)"
+  }
+ }
+}

@@ -41,3 +41,35 @@ def fetch(site: str, mid: str, lib: Path = LIB) -> Path:
         raise ValueError(f"unknown look-alike site {site!r}")
     (dest / "CREDITS.txt").write_text(f"{mid}: {site}, CC0 1.0. {url}\nFetched by L4 (finishes palettes), 2026-11-22.\n")
     return dest
+
+
+def published_scan_mm(site: str, mid: str):
+    """The look-alike's own published scan size in mm [x, y], or None when the source does not publish one.
+    ambientCG: dimensionX/Y (cm, 0 = unknown). Poly Haven: info 'dimensions' (mm)."""
+    if site == "ambientCG":
+        d = json.loads(_get(f"https://ambientcg.com/api/v2/full_json?id={mid}&include=dimensionsData"))
+        a = d["foundAssets"][0]
+        x, y = a.get("dimensionX") or 0, a.get("dimensionY") or 0
+        return [x * 10, y * 10] if x and y else None
+    if site == "Poly Haven":
+        dim = json.loads(_get(f"https://api.polyhaven.com/info/{mid}")).get("dimensions")
+        return list(dim[:2]) if dim else None
+    raise ValueError(site)
+
+
+def enrich_palette(path: Path) -> dict:
+    """Fetch every look-alike of a palette file and write its published scan size back. Returns id -> scan."""
+    pal = json.loads(Path(path).read_text(encoding="utf-8"))
+    seen: dict[str, object] = {}
+    for it in pal["items"]:
+        la = it.get("lookalike")
+        if not la:
+            continue
+        key = (la["maker_site"], la["id"])
+        if key not in seen:
+            fetch(*key)
+            seen[key] = published_scan_mm(*key)
+        la["physical_scan_mm"] = seen[key]
+        la["on_disk"] = True
+    Path(path).write_text(json.dumps(pal, indent=1, ensure_ascii=False), encoding="utf-8")
+    return {k[1]: v for k, v in seen.items()}

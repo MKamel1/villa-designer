@@ -23,9 +23,6 @@ SLOT_TO_MATERIALS = {
     "kitchen-front": ["greige-lacquer"],
     "wall-paint": ["plaster-warm-white"],
     "garden-paving": ["paving"],
-    "rug-living": ["rug"],
-    "throw-parents-bed": ["throw-taupe"],
-    "cushion-parents-bed": ["sage-fabric"],
 }
 GRAIN = {"walnut-grain-x": "x", "walnut-grain-y": "y", "walnut": "z", "oak": "z", "oak-grain-x": "x",
          "door-oak": "z", "oak-floor": "x"}
@@ -49,35 +46,79 @@ def lookalike_mean_linear(folder: Path):
     return [float(x) for x in lin.reshape(-1, 3).mean(0)]
 
 
-def item_spec(item: dict, library_root: Path, base_note: str = "") -> dict:
-    la = item["lookalike"]
+def _hex_lin(h: str):
+    h = h.lstrip("#")
+    return [_srgb_to_lin(int(h[i:i + 2], 16) / 255.0) for i in (0, 2, 4)]
+
+
+def load_colours(root: Path = finishes.PALETTE_DIR) -> dict:
+    """id -> {hex, basis}: the stated product colour where the maker page does not give a render colour. ESTIMATES."""
+    f = root / "render-colours.json"
+    return json.loads(f.read_text())["colours"] if f.exists() else {}
+
+
+def item_spec(item: dict, library_root: Path, colours: dict | None = None) -> dict:
+    colours = load_colours() if colours is None else colours
+    la = item.get("lookalike")
+    p = item["product"]
+    lrv = p.get("lrv")
+    hx = (colours.get(item["id"]) or {}).get("hex")
+    if la is None:                                   # flat finish (paint, lacquer): colour + LRV, no image
+        if not hx:
+            raise ValueError(f"{item['id']}: flat finish needs a render colour in render-colours.json")
+        base = _hex_lin(hx)
+        refl = lrv / 100.0 if lrv is not None else _lum(base)
+        base = [min(1.0, c * refl / max(_lum(base), 1e-9)) for c in base]
+        return dict(kind="principled", base_rgb=[round(c, 4) for c in base], reflectance=round(refl, 4), roughness=0.85,
+                    note=f"flat colour for {p.get('maker')} {p.get('range') or p.get('name')} {p.get('colour_code') or ''} "
+                         f"({'LRV ' + str(lrv) if lrv is not None else 'reflectance estimated from the colour'})")
     tile_m, basis = finishes.texture_scale_m(item)
     folder = Path(library_root) / "materials" / la["id"]
     mean = lookalike_mean_linear(folder)
-    lrv = (item["product"] or {}).get("lrv")
-    refl = lrv / 100.0 if lrv is not None else _lum(mean)
-    k = refl / max(_lum(mean), 1e-9)
-    base = [min(1.0, c * k) for c in mean] if lrv is not None else mean
-    p = item["product"]
+    if hx:
+        base = _hex_lin(hx)
+        refl = lrv / 100.0 if lrv is not None else _lum(base)
+        base = [min(1.0, c * refl / max(_lum(base), 1e-9)) for c in base]
+    else:
+        refl = lrv / 100.0 if lrv is not None else _lum(mean)
+        k = refl / max(_lum(mean), 1e-9)
+        base = [min(1.0, c * k) for c in mean] if lrv is not None else mean
     return dict(kind="principled", asset=la["id"], base_rgb=[round(c, 4) for c in base], reflectance=round(refl, 4),
                 roughness=0.5, tile_m=round(tile_m, 4),
                 note=f"LOOK-ALIKE ({la['maker_site']} {la['id']}, {la['licence']}) standing for {p.get('maker')} "
                      f"{p.get('range') or p.get('name')} {p.get('colour_code') or ''}; tile_m {tile_m} m from {basis}; "
-                     f"colour {'rescaled to maker LRV ' + str(lrv) if lrv is not None else 'the look-alike own mean'}")
+                     f"colour {'from the stated hex (estimate)' if hx else 'the look-alike own mean'}"
+                     f"{', reflectance = maker LRV ' + str(lrv) if lrv is not None else ''}")
+
+
+def scene_names(item: dict) -> list[str]:
+    """Scene material names this item stands in for (only the finishes the production scene actually draws)."""
+    iid, slot = item["id"], item.get("slot", "")
+    if slot in SLOT_TO_MATERIALS:
+        return SLOT_TO_MATERIALS[slot]
+    low = iid.lower()
+    if "rug" in low and "living" in low:
+        return ["rug"]
+    if "throw" in low and "parents" in low:
+        return ["throw-taupe"]
+    if "cushion" in low and "parents" in low:
+        return ["sage-fabric"]
+    return []
 
 
 def palette_materials(pal: dict, library_root: Path) -> dict[str, dict]:
     out: dict[str, dict] = {}
+    colours = load_colours()
     for it in pal["items"]:
-        names = SLOT_TO_MATERIALS.get(it["id"].split("-", 1)[1]) or SLOT_TO_MATERIALS.get(it.get("slot"))
-        if not names or not it.get("lookalike"):
+        names = scene_names(it)
+        if not names:
             continue
-        spec = item_spec(it, library_root)
+        spec = item_spec(it, library_root, colours)
         for n in names:
             s = dict(spec)
-            if n in GRAIN:
+            if n in GRAIN and "asset" in s:
                 s["grain_axis"] = GRAIN[n]
-            out[n] = s
+            out.setdefault(n, s)
     return out
 
 

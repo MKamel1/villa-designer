@@ -23,6 +23,10 @@ def _font(sz, bold=False):
 
 def swatch(item: dict, library_root: Path) -> Image.Image:
     spec = PS.item_spec(item, library_root)
+    if not item.get("lookalike"):                      # flat finish: the stated colour at its LRV
+        lin = np.array(spec["base_rgb"]) * 0 + np.array(spec["base_rgb"])
+        srgb = np.where(lin <= 0.0031308, lin * 12.92, 1.055 * np.power(lin, 1 / 2.4) - 0.055)
+        return Image.new("RGB", (int(WIN_MM * PX_PER_MM),) * 2, tuple(int(round(c * 255)) for c in srgb))
     folder = Path(library_root) / "materials" / item["lookalike"]["id"]
     img = Image.open(sorted(folder.glob("*_Color.jpg"))[0]).convert("RGB")
     a = np.asarray(img, dtype=float) / 255.0
@@ -43,6 +47,12 @@ def swatch(item: dict, library_root: Path) -> Image.Image:
         for j in range(reps):
             big.paste(full, (i * full.width, j * full.height))
     return big.crop((0, 0, win_src, win_src)).resize((size, size), Image.LANCZOS)
+
+
+def _hint_hex(it: dict) -> str:
+    import re
+    m = re.search(r"#[0-9a-fA-F]{6}", it.get("render_hint", ""))
+    return m.group(0) if m else "#bbbbbb"
 
 
 def chip(hexcol: str) -> Image.Image:
@@ -75,14 +85,16 @@ def label_lines(it: dict) -> list[str]:
         ls.append(f"LOOK-ALIKE: {la['maker_site']} {la['id']} ({la['licence']}), not the product")
         ls.append(f"texture 1 image = {tm:.2f} m ({basis})")
     else:
-        ls.append("colour chip: estimate (" + str(it.get("render_hint", "")) + ")")
+        ls.append("flat colour (paint/lacquer), LRV-scaled; chip colour is an estimate" if it.get("slot") in finishes.FLAT_SLOTS
+                  else "colour chip: estimate (" + str(it.get("render_hint", "")) + ")")
     eg = it.get("egypt") or {}
     ls.append("Egypt: " + (eg.get("supplier") or "GAP - " + str(eg.get("gap") or "unknown"))[:70])
     return [l for l in ls if l.strip()]
 
 
 def board(pal: dict, group: str, library_root: Path, out: Path, cols: int = 4) -> Path:
-    items = [i for i in pal["items"] if i.get("group") == group and (i.get("lookalike") or i.get("render_hint"))]
+    items = [i for i in pal["items"] if i.get("group") == group and (i.get("lookalike") or i.get("render_hint")
+                                                                       or i.get("slot") in finishes.FLAT_SLOTS)]
     sw = int(WIN_MM * PX_PER_MM)
     cw, ch = sw + 40, sw + 230
     rows = -(-len(items) // cols)
@@ -95,7 +107,7 @@ def board(pal: dict, group: str, library_root: Path, out: Path, cols: int = 4) -
     for n, it in enumerate(items):
         x, y = 20 + (n % cols) * cw, title_h + (n // cols) * ch
         try:
-            s = swatch(it, library_root) if it.get("lookalike") else chip(it["render_hint"].split("#")[-1].join(["#", ""])[:7] if "#" in it["render_hint"] else "#bbbbbb")
+            s = swatch(it, library_root) if (it.get("lookalike") or it.get("slot") in finishes.FLAT_SLOTS) else chip(_hint_hex(it))
         except Exception as e:  # a missing texture must show, not vanish
             s = Image.new("RGB", (sw, sw), (200, 60, 60)); ImageDraw.Draw(s).text((10, 10), "MISSING " + str(e)[:40], fill=(255, 255, 255))
         im.paste(s, (x, y))

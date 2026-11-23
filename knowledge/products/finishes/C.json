@@ -1,0 +1,2381 @@
+{
+ "palette": "C",
+ "name": "Taupe Stone & Smoked Timber",
+ "character": "A quiet-luxury warm-transitional scheme: taupe limestone-look porcelain, smoked oak and deep clay walls with a dark veined stone worktop. Soft layers in olive, clay, camel and charcoal velvet and wool keep the deeper palette warm for a lower-ground living level.",
+ "items": [
+  {
+   "id": "C-floor-living",
+   "slot": "floor-living",
+   "group": "hard",
+   "use": "Lower-ground living, lounge, hall, kitchen floor",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Gris Fleury",
+    "name": "Gris Fleury Taupe RT 60x120",
+    "colour_code": "MLGY",
+    "colour_name": "Taupe",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 10
+    },
+    "finish": "Naturale/Matt, rectified, through-body coloured porcelain",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "technical": "Ingelivo; Resistenza all'abrasione profonda"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzi.it/en/mystone-gris-fleury",
+    "quote": "GRIS FLEURY TAUPE RT Formato: 60x120cm Codice: MLGY Tecnologia: Gres fine porcellanato colorato in massa",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble007",
+    "url": "https://ambientcg.com/view?id=Marble007",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": {
+    "note": "Durability claim from maker",
+    "url": "https://www.marazzi.it/en/mystone-gris-fleury",
+    "quote": "la tecnologia Tecnico garantisce la resistenza nel tempo"
+   },
+   "missing": [
+    "slip_rating",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-floor-gf",
+   "slot": "floor-gf",
+   "group": "hard",
+   "use": "Ground-floor bedrooms and corridors, smoked oak",
+   "product": {
+    "maker": "Havwoods",
+    "range": "Venture Plank",
+    "name": "Cantal HW7470 (Smoked Cocoa engineered European oak)",
+    "colour_code": "HW7470",
+    "colour_name": "Smoked Cocoa (colour group Cocoa)",
+    "format_mm": {
+     "w": 242,
+     "l": "1750-2350",
+     "t": 15
+    },
+    "finish": "Brushed & Smoked, lacquered, 4mm wear layer",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "grade": "Character",
+     "edge": "2-Sided Bevelled"
+    }
+   },
+   "source": {
+    "url": "https://www.havwoods.com/uk/products/hw7470/",
+    "quote": "Construction Multi-Layered Engineered Species European Oak Product Type Wood Flooring Wear Layer 4mm Process Brushed & Smoked Pattern Plank Finish Lacquered",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Havwoods Egypt dealer found."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "WoodFloor041",
+    "url": "https://ambientcg.com/view?id=WoodFloor041",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1900,
+     1900
+    ]
+   },
+   "maintenance": {
+    "note": "Underfloor heating suitability",
+    "url": "https://www.havwoods.com/uk/products/hw7470/",
+    "quote": "Suitable for floating over underlay Suitable for underfloor heating"
+   },
+   "missing": [
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-floor-wet",
+   "slot": "floor-wet",
+   "group": "hard",
+   "use": "Wet rooms floor, slip-resistant 20 mm porcelain",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Limestone20",
+    "name": "MYSTONE LIMESTONE20 TAUPE STRUTTURATO RETTIFICATO",
+    "colour_code": "M7SQ",
+    "colour_name": "Taupe",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 20
+    },
+    "finish": "Strutturato (structured), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "technology": "Tecnico (grip and slip resistance)",
+     "other_sizes": "60x60, 80x80, 120x120",
+     "characteristics": "Frost proof, Resistance deep abrasion"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/mystone-limestone20-collection/",
+    "quote": "In porcelain stoneware, it is available in Sand, Ivory and Taupe, in the 60x60, 60x120, 120x120 and 80x80 sizes. Tecnico technology improves reliability, grip and slip resistance.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Concrete012",
+    "url": "https://ambientcg.com/view?id=Concrete012",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": {
+    "note": "Maker page states Tecnico improves grip and slip resistance; no numeric rating",
+    "url": "https://www.marazzigroup.com/collections/mystone-limestone20-collection/",
+    "quote": "Tecnico technology improves reliability, grip and slip resistance."
+   },
+   "missing": [
+    "slip_rating (no R/DIN 51130/BS 7976 value on maker page; do not claim wet-room compliance)",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-bath-tile",
+   "slot": "bath-tile",
+   "group": "hard",
+   "use": "Bathroom walls and floors, large-format slab",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK FRAPPUCCINO RETTIFICATO LUX",
+    "colour_code": "M0G3",
+    "colour_name": "Frappuccino",
+    "format_mm": {
+     "w": 1200,
+     "l": 1200,
+     "t": null
+    },
+    "finish": "Lux (per product name), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "replaces": "Grigio Carnico (no format/finish on page)"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble018",
+    "url": "https://ambientcg.com/view?id=Marble018",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv",
+    "slip rating (Lux finish: not a floor-safe claim)"
+   ]
+  },
+  {
+   "id": "C-worktop",
+   "slot": "worktop",
+   "group": "hard",
+   "use": "Kitchen worktop and island, dark veined quartz",
+   "product": {
+    "maker": "Silestone (Cosentino)",
+    "range": "Eternal",
+    "name": "Eternal Marquina",
+    "colour_code": null,
+    "colour_name": "Eternal Marquina",
+    "format_mm": {
+     "w": 1590,
+     "l": 3250,
+     "t": null
+    },
+    "finish": "Polished or Suede",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "94% natural quartz (distributor text)",
+    "extra": {
+     "thickness_options_mm": [
+      12,
+      20,
+      30
+     ],
+     "source_is": "UK fabricator Ivett & Reed (SpecifiedBy); maker page blocked"
+    }
+   },
+   "source": {
+    "url": "https://www.specifiedby.com/ivett-reed/eternal-marquina",
+    "quote": "Type: Engineered QuartzBrand: SilestoneManufactured: SpainGuarantee: 25 yearsFinish: Polished or SuedeFormat: Cut to size from 12mm, 20mm & 30mm slabSlab Size: 3250 x 1590mm",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Cosentino Egypt page found; cosentino.com/en-eg redirects (307); Middle East hub is Cosentino City Dubai. A Cairo Facebook retailer (Daniel's Collection) was seen in a search snippet claiming Silestone; not fetched."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble013",
+    "url": "https://ambientcg.com/view?id=Marble013",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": {
+    "note": "Stain resistance",
+    "url": "https://www.specifiedby.com/ivett-reed/eternal-marquina",
+    "quote": "Silestone is non-porous and highly resistant to stains from coffee, wine, lemon juice, olive oil, vinegar and many other products."
+   },
+   "missing": [
+    "colour_code",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-backsplash",
+   "slot": "backsplash",
+   "group": "hard",
+   "use": "Kitchen backsplash, dark veined large-format porcelain",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK ONICE NERO LUX RT",
+    "colour_code": "MEP5",
+    "colour_name": "Onice Nero",
+    "format_mm": {
+     "w": 1200,
+     "l": 2780,
+     "t": null
+    },
+    "finish": "Lux (per product name), rectified",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "replaces": "Sahara Noir (not on the maker page)"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble009",
+    "url": "https://ambientcg.com/view?id=Marble009",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-joinery-timber",
+   "slot": "joinery-timber",
+   "group": "hard",
+   "use": "TV wall, bookcases, smoked/dark timber decor",
+   "product": {
+    "maker": "EGGER",
+    "range": "Feelwood",
+    "name": "H3180 ST37 Brown Halifax Oak",
+    "colour_code": "H3180 ST37",
+    "colour_name": "Brown Halifax Oak",
+    "format_mm": null,
+    "finish": "ST37 Feelwood Rift synchronised pore",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "note": "Melamine decor; real smoked veneer alternative not verified"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H3180_37?country=GB",
+    "quote": "The dark brown colour of H3180 Brown Halifax Oak meets the trend for dark woodgrain decors and is reminiscent in terms of colour of the colonial style.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Wood051",
+    "url": "https://ambientcg.com/view?id=Wood051",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     800,
+     800
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-joinery-light",
+   "slot": "joinery-light",
+   "group": "hard",
+   "use": "Slats / headboard, lighter contrast timber",
+   "product": {
+    "maker": "EGGER",
+    "range": "Feelwood",
+    "name": "H1180 ST37 Natural Halifax Oak",
+    "colour_code": "H1180 ST37",
+    "colour_name": "Natural Halifax Oak",
+    "format_mm": {
+     "w": 1300,
+     "l": 2311,
+     "t": null
+    },
+    "finish": "ST37 Feelwood Rift synchronised surface texture",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "format_note": "approx. 2.311 x 1.300 mm per page"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H1180_37?country=GB",
+    "quote": "With its striking cracks and knots, H1180 Natural Halifax Oak answers the demand for nature and authenticity in the living space.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "thickness",
+    "lrv"
+   ],
+   "lookalike_note": "Wood094 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-door",
+   "slot": "door",
+   "group": "hard",
+   "use": "Interior doors, smoke oak veneer",
+   "product": {
+    "maker": "Durian",
+    "range": "Craftsman Series",
+    "name": "Trace Smoke Oak Veneer Door, Craftsman Grooving",
+    "colour_code": null,
+    "colour_name": "Smoke Oak",
+    "format_mm": null,
+    "finish": "PU Matt / PU Gloss",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Veneer, Smoke Oak",
+    "extra": {
+     "thickness_mm": 40,
+     "type": "Flush Door",
+     "width_height": "not stated"
+    }
+   },
+   "source": {
+    "url": "https://www.durian.in/product/trace",
+    "quote": "Style | Designer | Finish | PU Matt/ PU Gloss | Material Type | Veneer | Material Name | Smoke Oak | Thickness | 40 mm Flush Door",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Durian Egypt dealer found; Durian is an Indian maker."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Wood049",
+    "url": "https://ambientcg.com/view?id=Wood049",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     800,
+     800
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "width x height",
+    "colour_code",
+    "lrv"
+   ]
+  },
+  {
+   "id": "C-kitchen-front",
+   "slot": "kitchen-front",
+   "group": "hard",
+   "use": "Kitchen cabinet fronts, matt taupe-brown laminate",
+   "product": {
+    "maker": "FENIX",
+    "range": "FENIX NTM",
+    "name": "FENIX 0717 Castoro Ottawa",
+    "colour_code": "0717",
+    "colour_name": "Castoro Ottawa",
+    "format_mm": {
+     "w": 1300,
+     "l": 3050,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "sheet_sizes_mm": [
+      "3050x1300",
+      "4200x1300",
+      "4200x1600"
+     ],
+     "thickness_options_mm": [
+      0.7,
+      1.2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ]
+    }
+   },
+   "source": {
+    "url": "https://www.fenixforinteriors.com/en/fenix/castoro-ottawa",
+    "quote": "This colour is meant to be cosy and relaxing just like contemplating nature in Ottawa during the fall season.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No FENIX Egypt distributor found."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "finish",
+    "lrv"
+   ],
+   "lookalike_note": "flat colour at the maker's LRV (paint/lacquer): no image look-alike"
+  },
+  {
+   "id": "C-wall-paint",
+   "slot": "wall-paint",
+   "group": "hard",
+   "use": "Deep warm taupe-clay feature walls (pale ceiling separate)",
+   "product": {
+    "maker": "Dulux Australia",
+    "range": "Dulux colour specifier",
+    "name": "Nile Clay",
+    "colour_code": "S13B5 (Atlas)",
+    "colour_name": "Nile Clay",
+    "format_mm": null,
+    "finish": null,
+    "lrv": 27,
+    "lrv_source": "https://www.dulux.com.au/specifier/colour/s13/nile-clay/",
+    "composition": null,
+    "extra": {
+     "hex": "#8b8074",
+     "note": "LRV 27 is dark: use on feature walls, not a whole basement; Jotun/Dulux Egypt pages do not publish LRV"
+    }
+   },
+   "source": {
+    "url": "https://www.dulux.com.au/specifier/colour/s13/nile-clay/",
+    "quote": "Neutrals are a beautiful grounding colour.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Items specify Dulux Australia colours; no Dulux (Australia) colour is an Egypt product. Jotun Egypt (jotun.com/eg-en) publishes an interior colour range with a Find Dealer link, but its colour pages carry no LRV. Substitute an Egypt-sold paint and obtain LRV from the maker's TDS or a measured drawdown."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "finish"
+   ],
+   "lookalike_note": "flat colour at the maker's LRV (paint/lacquer): no image look-alike"
+  },
+  {
+   "id": "C-garden-paving",
+   "slot": "garden-paving",
+   "group": "hard",
+   "use": "Garden paving tying to interior floor, 20 mm outdoor porcelain",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Gris Fleury20",
+    "name": "Gris Fleury 20 Grigio RT 60x60",
+    "colour_code": null,
+    "colour_name": "Grigio",
+    "format_mm": {
+     "w": 600,
+     "l": 600,
+     "t": 20
+    },
+    "finish": "Outdoor",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "note": "Taupe 20 mm not seen on page; Grigio is the verified 20 mm colour"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzi.it/en/mystone-gris-fleury",
+    "quote": "La collezione è disponibile anche in 20mm per gli esterni.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "PavingStones151",
+    "url": "https://ambientcg.com/view?id=PavingStones151",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     5400,
+     5400
+    ]
+   },
+   "maintenance": {
+    "note": "20 mm outdoor version",
+    "url": "https://www.marazzi.it/en/mystone-gris-fleury",
+    "quote": "La collezione è disponibile anche in 20mm per gli esterni."
+   },
+   "missing": [
+    "colour_code",
+    "lrv",
+    "taupe_20mm"
+   ]
+  },
+  {
+   "id": "C-cushion-living-sofa-1",
+   "slot": "cushion-living-sofa",
+   "group": "soft",
+   "use": "Living 3-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "906.360.25",
+    "colour_name": "dark brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Leather001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-living-sofa-2",
+   "slot": "cushion-living-sofa",
+   "group": "soft",
+   "use": "Living 3-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "406.360.04",
+    "colour_name": "dark green",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "cotton velvet (composition line not captured)",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+    "quote": "SANELA cushion cover in dark green cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+    "quote": "SANELA cushion cover in dark green cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Fabric066",
+    "url": "https://ambientcg.com/view?id=Fabric066",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     400,
+     400
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-living-sofa-3",
+   "slot": "cushion-living-sofa",
+   "group": "soft",
+   "use": "Living 3-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "LAGERPOPPEL",
+    "name": "LAGERPOPPEL cushion cover",
+    "colour_code": "905.618.07",
+    "colour_name": "light brown",
+    "format_mm": {
+     "w": 400,
+     "l": 580,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Fabric066",
+    "url": "https://ambientcg.com/view?id=Fabric066",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     400,
+     400
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-lounge-sofa-1",
+   "slot": "cushion-lounge-sofa",
+   "group": "soft",
+   "use": "Lounge 4-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "406.360.04",
+    "colour_name": "dark green",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "cotton velvet (composition line not captured)",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+    "quote": "SANELA cushion cover in dark green cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+    "quote": "SANELA cushion cover in dark green cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Fabric066",
+    "url": "https://ambientcg.com/view?id=Fabric066",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     400,
+     400
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-lounge-sofa-2",
+   "slot": "cushion-lounge-sofa",
+   "group": "soft",
+   "use": "Lounge 4-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "305.911.24",
+    "colour_name": "dark grey",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton, cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Fabric030 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-lounge-sofa-3",
+   "slot": "cushion-lounge-sofa",
+   "group": "soft",
+   "use": "Lounge 4-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "506.359.90",
+    "colour_name": "yellow-brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+    "quote": "SANELA cushion cover in yellow-brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+    "quote": "SANELA cushion cover in yellow-brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Leather035A",
+    "url": "https://ambientcg.com/view?id=Leather035A",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     300,
+     300
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-study-sofa-1",
+   "slot": "cushion-study-sofa",
+   "group": "soft",
+   "use": "Study 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "906.360.25",
+    "colour_name": "dark brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Leather001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-study-sofa-2",
+   "slot": "cushion-study-sofa",
+   "group": "soft",
+   "use": "Study 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "505.908.97",
+    "colour_name": "light beige",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton, cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-cinema-sofa-1",
+   "slot": "cushion-cinema-sofa",
+   "group": "soft",
+   "use": "Cinema 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "305.911.24",
+    "colour_name": "dark grey",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton, cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Fabric030 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-cinema-sofa-2",
+   "slot": "cushion-cinema-sofa",
+   "group": "soft",
+   "use": "Cinema 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "906.360.25",
+    "colour_name": "dark brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Leather001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-library-daybed-1",
+   "slot": "cushion-library-daybed",
+   "group": "soft",
+   "use": "Library daybed",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "506.359.90",
+    "colour_name": "yellow-brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+    "quote": "SANELA cushion cover in yellow-brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+    "quote": "SANELA cushion cover in yellow-brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Leather035A",
+    "url": "https://ambientcg.com/view?id=Leather035A",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     300,
+     300
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-library-daybed-2",
+   "slot": "cushion-library-daybed",
+   "group": "soft",
+   "use": "Library daybed",
+   "product": {
+    "maker": "IKEA",
+    "range": "LAGERPOPPEL",
+    "name": "LAGERPOPPEL cushion cover",
+    "colour_code": "905.618.07",
+    "colour_name": "light brown",
+    "format_mm": {
+     "w": 400,
+     "l": 580,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Fabric066",
+    "url": "https://ambientcg.com/view?id=Fabric066",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     400,
+     400
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-parents-bed-1",
+   "slot": "cushion-parents-bed",
+   "group": "soft",
+   "use": "Parents bed",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "505.908.97",
+    "colour_name": "light beige",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton, cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+    "quote": "SANELA cushion cover, made of lush cotton velvet with a soft sheen, comes in both neutral colours that are easy to coordinate and eye-catching colours that stand out.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-cushion-parents-bed-2",
+   "slot": "cushion-parents-bed",
+   "group": "soft",
+   "use": "Parents bed",
+   "product": {
+    "maker": "IKEA",
+    "range": "SANELA",
+    "name": "SANELA cushion cover",
+    "colour_code": "906.360.25",
+    "colour_name": "dark brown",
+    "format_mm": {
+     "w": 500,
+     "l": 500,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton (min. 20% recycled), cotton velvet",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+    "quote": "SANELA cushion cover in dark brown cotton velvet has a subtle sheen, feels soft and lush to the touch.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Leather001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-cushion-parents-bed-3",
+   "slot": "cushion-parents-bed",
+   "group": "soft",
+   "use": "Parents bed",
+   "product": {
+    "maker": "IKEA",
+    "range": "LAGERPOPPEL",
+    "name": "LAGERPOPPEL cushion cover",
+    "colour_code": "905.618.07",
+    "colour_name": "light brown",
+    "format_mm": {
+     "w": 400,
+     "l": 580,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+    "quote": "LAGERPOPPEL cushion cover in light brown has a textured, matte-sheen surface and flange edging that adds style and stability to the cushion.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Fabric066",
+    "url": "https://ambientcg.com/view?id=Fabric066",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     400,
+     400
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ]
+  },
+  {
+   "id": "C-throw-living-sofa",
+   "slot": "throw-living-sofa",
+   "group": "soft",
+   "use": "Living 3-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "MYRULL",
+    "name": "MYRULL throw",
+    "colour_code": "905.634.82",
+    "colour_name": "light grey",
+    "format_mm": {
+     "w": 1300,
+     "l": 1700,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Carpet001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-throw-lounge-sofa",
+   "slot": "throw-lounge-sofa",
+   "group": "soft",
+   "use": "Lounge 4-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "MYRULL",
+    "name": "MYRULL throw",
+    "colour_code": "905.634.82",
+    "colour_name": "light grey",
+    "format_mm": {
+     "w": 1300,
+     "l": 1700,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Carpet001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-throw-study-sofa",
+   "slot": "throw-study-sofa",
+   "group": "soft",
+   "use": "Study 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "HOLMVI",
+    "name": "HOLMVI throw",
+    "colour_code": "305.135.98",
+    "colour_name": "grey",
+    "format_mm": {
+     "w": 1200,
+     "l": 1600,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% polyester (min. 90% recycled)",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+    "quote": "Classic-look throw with playful fringes on the short ends.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+    "quote": "Classic-look throw with playful fringes on the short ends.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Fabric030 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-throw-cinema-sofa",
+   "slot": "throw-cinema-sofa",
+   "group": "soft",
+   "use": "Cinema 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "HOLMVI",
+    "name": "HOLMVI throw",
+    "colour_code": "305.135.98",
+    "colour_name": "grey",
+    "format_mm": {
+     "w": 1200,
+     "l": 1600,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% polyester (min. 90% recycled)",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+    "quote": "Classic-look throw with playful fringes on the short ends.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+    "quote": "Classic-look throw with playful fringes on the short ends.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Fabric030 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-throw-library-daybed",
+   "slot": "throw-library-daybed",
+   "group": "soft",
+   "use": "Library daybed",
+   "product": {
+    "maker": "IKEA",
+    "range": "MYRULL",
+    "name": "MYRULL throw",
+    "colour_code": "905.634.82",
+    "colour_name": "light grey",
+    "format_mm": {
+     "w": 1300,
+     "l": 1700,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Carpet001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-throw-parents-bed",
+   "slot": "throw-parents-bed",
+   "group": "soft",
+   "use": "Parents bed",
+   "product": {
+    "maker": "IKEA",
+    "range": "MYRULL",
+    "name": "MYRULL throw",
+    "colour_code": "905.634.82",
+    "colour_name": "light grey",
+    "format_mm": {
+     "w": 1300,
+     "l": 1700,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool",
+    "extra": {
+     "size_source": "IKEA Egypt listing title/search snippet",
+     "martindale": null
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+    "quote": "MYRULL throw in light grey feels like a warm embracing hug of wool – the brushed surface adds volume and makes it irresistibly soft.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale"
+   ],
+   "lookalike_note": "Carpet001 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "C-rug-living",
+   "slot": "rug-living",
+   "group": "soft",
+   "use": "Living room rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "BRÖNDEN",
+    "name": "BRÖNDEN rug, low pile, handmade",
+    "colour_code": "705.329.72",
+    "colour_name": "beige",
+    "format_mm": {
+     "w": 2000,
+     "l": 3000,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "User surface 100% wool, warp 100% cotton",
+    "extra": {
+     "pile": "low pile, hand-woven",
+     "surface_density_g_m2": 2630
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+    "quote": "User surface: 100% wool Warp: 100% cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+    "quote": "Length 300 cm Width 200 cm",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": []
+  },
+  {
+   "id": "C-rug-lounge",
+   "slot": "rug-lounge",
+   "group": "soft",
+   "use": "Lounge rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "BRÖNDEN",
+    "name": "BRÖNDEN rug, low pile, handmade (170x240 cm size option)",
+    "colour_code": "705.329.72",
+    "colour_name": "beige",
+    "format_mm": {
+     "w": 1700,
+     "l": 2400,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "User surface 100% wool, warp 100% cotton",
+    "extra": {
+     "pile": "low pile, hand-woven",
+     "note": "170x240 listed as size option on same page"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+    "quote": "User surface: 100% wool Warp: 100% cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+    "quote": "Choose size 170x240 cm",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [],
+   "lookalike_note": "Carpet001 publishes no scan size; replaced by Carpet016 (published size) for a true texture scale"
+  },
+  {
+   "id": "C-rug-parents-bedroom",
+   "slot": "rug-parents-bedroom",
+   "group": "soft",
+   "use": "Parents bedroom rug (bedside runners; larger sizes not seen)",
+   "product": {
+    "maker": "IKEA",
+    "range": "TIDTABELL",
+    "name": "TIDTABELL rug, flatwoven",
+    "colour_code": "605.618.75",
+    "colour_name": "beige",
+    "format_mm": {
+     "w": 800,
+     "l": 2000,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "User surface 100% wool, warp 100% cotton",
+    "extra": {
+     "pile": "flatwoven",
+     "sizes_seen": "80x150, 80x200 cm"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-60561875/",
+    "quote": "This flatwoven rug in a gentle melange of beige tones adds warmth to your space and comfort under your feet.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-60561875/",
+    "quote": "This flatwoven rug in a gentle melange of beige tones adds warmth to your space and comfort under your feet.",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "large_size"
+   ]
+  },
+  {
+   "id": "C-object-vase",
+   "slot": "open-shelf-object",
+   "group": "soft",
+   "use": "Open shelf vase",
+   "product": {
+    "maker": "IKEA",
+    "range": "STILREN",
+    "name": "STILREN vase",
+    "colour_code": "406.232.66",
+    "colour_name": "dark grey-beige",
+    "format_mm": null,
+    "finish": "Stoneware, coloured glaze",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "height_mm": 220
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/stilren-vase-dark-grey-beige-40623266",
+    "quote": "Elegant grooves in glazed stoneware create a classic yet lively expression.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/stilren-vase-dark-grey-beige-40623266",
+    "quote": "Elegant grooves in glazed stoneware create a classic yet lively expression.",
+    "gap": null
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm"
+   ],
+   "render_hint": "dark grey-beige glaze, estimate #8a7f74"
+  },
+  {
+   "id": "C-object-bowl-brown",
+   "slot": "open-shelf-object",
+   "group": "soft",
+   "use": "Open shelf bowl",
+   "product": {
+    "maker": "IKEA",
+    "range": "STOCKHOLM 2025",
+    "name": "STOCKHOLM 2025 bowl",
+    "colour_code": "305.924.25",
+    "colour_name": "brown",
+    "format_mm": null,
+    "finish": "Stoneware, coloured glaze",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "diameter_mm": 150,
+     "height_mm": 60
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/stockholm-2025-bowl-brown-30592425",
+    "quote": "Stoneware in a red-brown tone that gives the bowl a rustic expression.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/stockholm-2025-bowl-brown-30592425",
+    "quote": "Stoneware in a red-brown tone that gives the bowl a rustic expression.",
+    "gap": null
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm"
+   ],
+   "render_hint": "red-brown speckled stoneware, estimate #7a4a35"
+  },
+  {
+   "id": "C-object-bowl-beige",
+   "slot": "open-shelf-object",
+   "group": "soft",
+   "use": "Open shelf centrepiece bowl",
+   "product": {
+    "maker": "IKEA",
+    "range": "STOCKHOLM 2025",
+    "name": "STOCKHOLM 2025 serving bowl",
+    "colour_code": "505.924.29",
+    "colour_name": "beige",
+    "format_mm": null,
+    "finish": "Stoneware, coloured glaze",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "diameter_mm": 340
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/stockholm-2025-serving-bowl-beige-50592429/",
+    "quote": "This beautiful beige serving bowl is perfect for serving your favourite salad or just placing in the room as an elegant centrepiece.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/stockholm-2025-serving-bowl-beige-50592429/",
+    "quote": "This beautiful beige serving bowl is perfect for serving your favourite salad or just placing in the room as an elegant centrepiece.",
+    "gap": null
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm"
+   ],
+   "render_hint": "matte beige stoneware, estimate #cbbba4"
+  },
+  {
+   "id": "C-book-wearstler-evocative",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf book",
+   "product": {
+    "maker": "Rizzoli",
+    "range": null,
+    "name": "Kelly Wearstler: Evocative Style",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "978-0-8478-6603-8",
+     "publisher": "Rizzoli",
+     "published": "2019-10-01"
+    }
+   },
+   "source": {
+    "url": "https://www.rizzoliusa.com/book/9780847866038",
+    "quote": "Kelly Wearstler: Evocative Style: Evocative Style - Rizzoli New York Interior Design",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt bookseller page checked; international title"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "colour"
+   ],
+   "render_hint": "book spine/cover, neutral cloth or dust jacket; colour not verified, estimate #b9ad9b"
+  },
+  {
+   "id": "C-book-wearstler-synchronicity",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf book",
+   "product": {
+    "maker": "Rizzoli",
+    "range": null,
+    "name": "Kelly Wearstler: Synchronicity",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9780847873425",
+     "publisher": "Rizzoli",
+     "published": "2023-09-26"
+    }
+   },
+   "source": {
+    "url": "https://www.rizzolibookstore.com/product/kelly-wearstler-synchronicity",
+    "quote": "ISBN 9780847873425 By Kelly Wearstler Publisher Rizzoli International Publications Publication Date September 26, 2023 Binding Hardcover",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt bookseller page checked; international title"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "colour"
+   ],
+   "render_hint": "book spine/cover, neutral cloth or dust jacket; colour not verified, estimate #b9ad9b"
+  },
+  {
+   "id": "C-book-van-duysen-private",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf book",
+   "product": {
+    "maker": "Rizzoli",
+    "range": null,
+    "name": "Vincent Van Duysen: Private",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "978-0-8478-9955-5",
+     "publisher": "Rizzoli",
+     "published": "2024-04-23"
+    }
+   },
+   "source": {
+    "url": "https://www.rizzoliusa.com/book/9780847899555",
+    "quote": "Vincent Van Duysen: Private - Rizzoli New York Architecture",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt bookseller page checked; international title"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "colour"
+   ],
+   "render_hint": "book spine/cover, neutral cloth or dust jacket; colour not verified, estimate #b9ad9b"
+  },
+  {
+   "id": "C-book-loyzaga",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf book",
+   "product": {
+    "maker": "Rizzoli",
+    "range": null,
+    "name": "Jorge Loyzaga: Classical and Harmonic Proportions",
+    "colour_code": null,
+    "colour_name": null,
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "978-0-8478-7367-8",
+     "publisher": "Rizzoli",
+     "published": "2023-09-19"
+    }
+   },
+   "source": {
+    "url": "https://www.rizzoliusa.com/book/9780847873678",
+    "quote": "Jorge Loyzaga: Classical and Harmonic Proportions - Rizzoli New York Interior Design",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt bookseller page checked; international title"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "colour"
+   ],
+   "render_hint": "book spine/cover, neutral cloth or dust jacket; colour not verified, estimate #b9ad9b"
+  },
+  {
+   "id": "C-garment-merino-olive",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Merino",
+    "name": "100% Merino Ribbed Turtleneck Jumper (Women)",
+    "colour_code": "E469426-000 / 56",
+    "colour_name": "Olive",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% merino wool",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/de/en/products/E469426-000/00",
+    "quote": "100% Merino Ribbed Turtleneck Jumper Colour: 56 OLIVE Women",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "care"
+   ],
+   "render_hint": "olive knit, estimate #6b6a3f"
+  },
+  {
+   "id": "C-garment-merino-grey",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Merino",
+    "name": "100% Merino Ribbed Turtleneck Jumper (Women)",
+    "colour_code": "E450514-001 / 06",
+    "colour_name": "Grey",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% merino wool",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/be/en/products/E450514-001/00",
+    "quote": "100% Merino Ribbed Turtleneck Jumper Colour: 06 GREY Women",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "care"
+   ],
+   "render_hint": "mid grey knit, estimate #8c8c8c"
+  },
+  {
+   "id": "C-garment-linen-trouser",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Linen Blend",
+    "name": "Men's Linen Blend Relaxed Trousers (Product ID 470598)",
+    "colour_code": "57",
+    "colour_name": "OLIVE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Body 63% cotton, 35% linen, 2% elastane; pocket lining 65% polyester, 35% cotton",
+    "extra": {
+     "market": "Uniqlo UK page"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/uk/en/products/E463857-000/00",
+    "quote": "Body: 63% Cotton, 35% Linen, 2% Elastane/ Pocket Lining: 65% Polyester, 35% Cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "care (not re-read)"
+   ],
+   "render_hint": "estimate only"
+  },
+  {
+   "id": "C-garment-merino-crew",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room garment",
+   "product": {
+    "maker": "UNIQLO",
+    "range": "Extra Fine Merino",
+    "name": "Men's Extra Fine Merino Crew Neck Long-Sleeve Sweater (Product ID 438783)",
+    "colour_code": "03",
+    "colour_name": "GRAY",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% wool (merino)",
+    "extra": {
+     "market": "Uniqlo US page; default colour shown on page"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/us/en/products/E429066-000/00",
+    "quote": "Made from internationally recognized 100% 19.5 ultra-fine merino wool, making it smooth to the touch.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "to be checked"
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "care (not re-read)"
+   ],
+   "render_hint": "estimate only"
+  }
+ ],
+ "egypt_alternatives": []
+}

@@ -1,0 +1,2280 @@
+{
+ "palette": "A",
+ "name": "Travertine & Walnut",
+ "character": "Warm contemporary: cream travertine-effect stone underfoot, mid-to-dark walnut joinery and warm-white walls, softened by ivory and natural-fibre textiles with brushed brass accents. It is the closest palette to the existing design and the easiest to render with on-disk look-alike materials.",
+ "items": [
+  {
+   "id": "A-floor-living",
+   "slot": "floor-living",
+   "group": "hard",
+   "use": "Lower-ground living, lounge, hall, kitchen floor",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Travertino",
+    "name": "Mystone Travertino Navona RT",
+    "colour_code": "M9EL",
+    "colour_name": "Navona",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 10
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "page_description": "Mystone Travertino reinterprets travertine in material and technical terms.",
+     "egyptian_limestone_option": {
+      "note": "Trade-article option only; no maker/supplier page fetched so not selected as product",
+      "url": "https://litosonline.com/en/article/three-popular-egyptian-limestones-sunny-menia-sinai-pearl-and-galala",
+      "quote": "the polished finish comes out well, but it is the honed finish that remains most common."
+     }
+    }
+   },
+   "source": {
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "MYSTONE TRAVERTINO NAVONA RT Size: 60x120cm Code: M9EL Technology: Colorbody fine porcelain stoneware Technical characteristics: Frost proof Resistance deep abrasion Thickness: MM 10",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Travertine009",
+    "url": "https://ambientcg.com/view?id=Travertine009",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
+   },
+   "maintenance": {
+    "note": "Maker technical characteristics for this tile",
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "Technical characteristics: Frost proof Resistance deep abrasion"
+   },
+   "missing": [
+    "finish",
+    "lrv"
+   ]
+  },
+  {
+   "id": "A-floor-gf",
+   "slot": "floor-gf",
+   "group": "hard",
+   "use": "Ground-floor bedrooms and corridors",
+   "product": {
+    "maker": "Kährs",
+    "range": "Kährs engineered wood (brown floors)",
+    "name": "Pure Walnut Wide",
+    "colour_code": "LTCLRW3010-150",
+    "colour_name": "American Walnut, stained",
+    "format_mm": {
+     "w": 150,
+     "l": 1810,
+     "t": 7
+    },
+    "finish": "Matt Lacquer",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "3-layer veneer, American Walnut; 0.6 mm wear layer (listed as 7/0.6)",
+    "extra": {
+     "grade": "Prime",
+     "pack_m2": 3.258,
+     "underfloor_heating": "Yes",
+     "guide": "Kährs engineered wood guide Aug 2026"
+    }
+   },
+   "source": {
+    "url": "https://a.storyblok.com/f/336347/x/c9fed18ea4/kahrs-engineered-wood-guide-consumer-srp-august-2026-full-digital.pdf",
+    "quote": "PURE WALNUT WIDE LTCLRW3010-150 Plank design, 3-layer veneer, American Walnut, stained, 4 x sided micro bevel, 5G Size 7/0.6 x 150 x 1810 Pack Size (m2) 3.258 Grade Prime Finish Matt Lacquer",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Kahrs Egypt agent found; Nordic Homeworx is Kahrs agent for UAE/Middle East but Egypt is not named in the pages read."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "WoodFloor051",
+    "url": "https://ambientcg.com/view?id=WoodFloor051",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1800,
+     1800
+    ]
+   },
+   "maintenance": {
+    "note": "Maker note on matt finishes (collection text)",
+    "url": "https://a.storyblok.com/f/336347/x/c9fed18ea4/kahrs-engineered-wood-guide-consumer-srp-august-2026-full-digital.pdf",
+    "quote": "Low maintenance scuff free & soft to the touch."
+   },
+   "missing": [
+    "lrv"
+   ]
+  },
+  {
+   "id": "A-floor-wet",
+   "slot": "floor-wet",
+   "group": "hard",
+   "use": "Wet rooms floor (slip-rated)",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Tivoli (listed in Mystone Travertino collection page)",
+    "name": "Mystone Tivoli Beige R10",
+    "colour_code": "MQAY",
+    "colour_name": "Beige",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 9
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "slip_rating_note": "R10 appears only in the maker's product name on the page; no separate test-method statement was read"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "MYSTONE TIVOLI BEIGE R10 Size: 60x120cm Code: MQAY Technology: Colorbody fine porcelain stoneware Technical characteristics: Frost proof Resistance deep abrasion Thickness: MM 09",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Travertine001",
+    "url": "https://ambientcg.com/view?id=Travertine001",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
+   },
+   "maintenance": {
+    "note": "Maker technical characteristics for this tile",
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "Technical characteristics: Frost proof Resistance deep abrasion"
+   },
+   "missing": [
+    "finish",
+    "lrv",
+    "slip_test_method"
+   ],
+   "lookalike_note": "Tiles142 replaced by Travertine001: closer in look to the product (board review 2026-11-22)"
+  },
+  {
+   "id": "A-bath-tile",
+   "slot": "bath-tile",
+   "group": "hard",
+   "use": "Bathroom wall (fluted 3D), shower walls",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Travertino",
+    "name": "Mystone Travertino Navona Struttura 3D Righe",
+    "colour_code": "M9PA",
+    "colour_name": "Navona",
+    "format_mm": {
+     "w": 300,
+     "l": 600,
+     "t": 10
+    },
+    "finish": "Struttura 3D Righe (fluted relief)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "MYSTONE TRAVERTINO NAVONA STRUTTURA 3D RIGHE Size: 30x60cm Code: M9PA Technology: Colorbody fine porcelain stoneware Thickness: MM 10",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Travertine001",
+    "url": "https://ambientcg.com/view?id=Travertine001",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
+   },
+   "maintenance": {
+    "note": "Collection-level durability statement",
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino-collections/",
+    "quote": "StepWise, Tecnico and Sublime Sync enhance depth, durability and continuity between indoors and out."
+   },
+   "missing": [
+    "lrv"
+   ]
+  },
+  {
+   "id": "A-worktop",
+   "slot": "worktop",
+   "group": "hard",
+   "use": "Kitchen worktop and island (island in 3 cm)",
+   "product": {
+    "maker": "Caesarstone",
+    "range": "Quartz (Premium group)",
+    "name": "Nougat",
+    "colour_code": "6600",
+    "colour_name": "Nougat",
+    "format_mm": {
+     "w": 1440,
+     "l": 3050,
+     "t": null
+    },
+    "finish": "Polished (P in catalogue)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Quartz surface",
+    "extra": {
+     "slab_text": "Standard Slab = 120\"x 56.5\" (47.08 sq ft)",
+     "thickness_text": "2 cm and 3 cm depending on the color"
+    }
+   },
+   "source": {
+    "url": "https://studio.caesarstoneus.com/wp-content/uploads/2025/03/Caesarstone-Catalog-April-2025-US-1.pdf",
+    "quote": "6600 6611 9141 Nougat P Himalayan Moon P Ice Snow P",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Caesarstone Egypt distributor found; caesarstone.com where-to-buy page fetched and names no Egypt entry; UAE distributor is Glaze Granite & Marble."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Concrete012",
+    "url": "https://ambientcg.com/view?id=Concrete012",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": {
+    "note": "Maker design/spec page",
+    "url": "https://www.caesarstone.com/design-and-specification/",
+    "quote": "Caesarstone retains its beauty without sealants or waxes."
+   },
+   "missing": [
+    "lrv",
+    "per-colour thickness (page says depending on the color)",
+    "honed availability for this colour"
+   ],
+   "lookalike_note": "Marble014 replaced by Concrete012: closer in look to the product (board review 2026-11-22)"
+  },
+  {
+   "id": "A-backsplash",
+   "slot": "backsplash",
+   "group": "hard",
+   "use": "Kitchen backsplash",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Lume",
+    "name": "Lume Caramel Lux",
+    "colour_code": "MQ7Z",
+    "colour_name": "Caramel",
+    "format_mm": {
+     "w": 100,
+     "l": 100,
+     "t": null
+    },
+    "finish": "Lux (glossy)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Porcelain stoneware",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.marazzitile.co.uk/collections/lume-collections/",
+    "quote": "LUME CARAMEL LUX Size: 10x10cm Code: MQ7Z Technology: Porcelain stoneware Technical characteristics: Frost proof Resistance deep abrasion",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "marble_tiles",
+    "url": "https://polyhaven.com/a/marble_tiles",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     2000,
+     2000
+    ]
+   },
+   "maintenance": {
+    "note": "Maker technical characteristics",
+    "url": "https://www.marazzitile.co.uk/collections/lume-collections/",
+    "quote": "Frost proof Resistance deep abrasion"
+   },
+   "missing": [
+    "lrv",
+    "thickness"
+   ]
+  },
+  {
+   "id": "A-joinery-timber",
+   "slot": "joinery-timber",
+   "group": "hard",
+   "use": "Walnut joinery, TV wall",
+   "product": {
+    "maker": "EGGER",
+    "range": "Decorative boards (EGGER Decorative Collection)",
+    "name": "H3734 ST9 Natural Dijon Walnut",
+    "colour_code": "H3734 ST9",
+    "colour_name": "Natural Dijon Walnut",
+    "format_mm": null,
+    "finish": "ST9 Smoothtouch Matt",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "page_size_text": "(approx. 2.311 x 1.300 mm)",
+     "note": "size text as printed on the page; not interpreted as board format"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H3734_9?country=GB",
+    "quote": "H3734 Natural Dijon Walnut displays the lively character of a walnut with its dark grain lines.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "natural_walnut_veneer",
+    "url": "https://polyhaven.com/a/natural_walnut_veneer",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1000,
+     1000
+    ]
+   },
+   "maintenance": {
+    "note": "Maker cleaning guidance for melamine-faced boards (Cleaf data sheet hosted on egger.com downloads)",
+    "url": "https://downloads.egger.com/static/decorative/Cleaf_Technical_data_sheet_MFC_EN.pdf",
+    "quote": "For cleaning, use only soft cloths and normal household hygiene products."
+   },
+   "missing": [
+    "format_mm",
+    "lrv"
+   ]
+  },
+  {
+   "id": "A-joinery-light",
+   "slot": "joinery-light",
+   "group": "hard",
+   "use": "Light timber slats, headboard",
+   "product": {
+    "maker": "EGGER",
+    "range": "Decorative boards (EGGER Decorative Collection)",
+    "name": "H3303 ST10 Natural Hamilton Oak",
+    "colour_code": "H3303 ST10",
+    "colour_name": "Natural Hamilton Oak",
+    "format_mm": null,
+    "finish": "ST10 Deepskin Rough (per search summary of EGGER page)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "page_size_text": "(approx. 2.311 x 1.300 mm)"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H3303_10?country=GB",
+    "quote": "H3303 Natural Hamilton Oak is an authentic looking oak with striking, dark inclusions and knots in a classic natural colour scheme.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Wood049",
+    "url": "https://ambientcg.com/view?id=Wood049",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     800,
+     800
+    ]
+   },
+   "maintenance": {
+    "note": "Maker cleaning guidance for melamine-faced boards (Cleaf data sheet hosted on egger.com downloads)",
+    "url": "https://downloads.egger.com/static/decorative/Cleaf_Technical_data_sheet_MFC_EN.pdf",
+    "quote": "For cleaning, use only soft cloths and normal household hygiene products."
+   },
+   "missing": [
+    "format_mm",
+    "lrv"
+   ]
+  },
+  {
+   "id": "A-door",
+   "slot": "door",
+   "group": "hard",
+   "use": "Interior door leaf finish (laminate/HPL on door skin)",
+   "product": {
+    "maker": "EGGER",
+    "range": "Decorative boards (EGGER Decorative Collection)",
+    "name": "H3710 ST9 Natural Carini Walnut",
+    "colour_code": "H3710 ST9",
+    "colour_name": "Natural Carini Walnut",
+    "format_mm": null,
+    "finish": "ST9 Smoothtouch Matt",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "note": "EGGER supplies the decor; a door maker is needed to build the leaf"
+    }
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/H3710_9?country=GB",
+    "quote": "H3710 Natural Carini Walnut is a modern version of a classic walnut.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "american_walnut_veneer",
+    "url": "https://polyhaven.com/a/american_walnut_veneer",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1000,
+     1000
+    ]
+   },
+   "maintenance": {
+    "note": "Maker cleaning guidance for melamine-faced boards (Cleaf data sheet hosted on egger.com downloads)",
+    "url": "https://downloads.egger.com/static/decorative/Cleaf_Technical_data_sheet_MFC_EN.pdf",
+    "quote": "For cleaning, use only soft cloths and normal household hygiene products."
+   },
+   "missing": [
+    "format_mm",
+    "lrv",
+    "door manufacturer / range"
+   ]
+  },
+  {
+   "id": "A-kitchen-front",
+   "slot": "kitchen-front",
+   "group": "hard",
+   "use": "Kitchen cabinet fronts",
+   "product": {
+    "maker": "EGGER",
+    "range": "Decorative boards (EGGER Decorative Collection)",
+    "name": "U113 ST9 Cotton Beige",
+    "colour_code": "U113 ST9",
+    "colour_name": "Cotton Beige",
+    "format_mm": null,
+    "finish": "ST9 Smoothtouch Matt",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.egger.com/en/furniture-interior-design/decors/U113_9?country=GB",
+    "quote": "U113 Cotton Beige is a neutral cream decor that is similar to the colour of cotton.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No EGGER-published Egypt dealer page read. A third-party contact database lists 'Elkhalil for EGGER Products' in Cairo; not fetched or verified, so not claimed."
+   },
+   "lookalike": null,
+   "maintenance": {
+    "note": "Maker cleaning guidance for melamine-faced boards (Cleaf data sheet hosted on egger.com downloads)",
+    "url": "https://downloads.egger.com/static/decorative/Cleaf_Technical_data_sheet_MFC_EN.pdf",
+    "quote": "For cleaning, use only soft cloths and normal household hygiene products."
+   },
+   "missing": [
+    "format_mm",
+    "lrv"
+   ],
+   "lookalike_note": "flat colour at the maker's LRV (paint/lacquer): no image look-alike"
+  },
+  {
+   "id": "A-wall-paint",
+   "slot": "wall-paint",
+   "group": "hard",
+   "use": "Walls and ceilings, warm white",
+   "product": {
+    "maker": "Dulux (AkzoNobel) - Australian colour data",
+    "range": "Dulux colour collection (whites and neutrals)",
+    "name": "Antique White U.S.A.",
+    "colour_code": "Atlas SW1H7",
+    "colour_name": "Antique White U.S.A.",
+    "format_mm": null,
+    "finish": null,
+    "lrv": 84,
+    "lrv_source": "https://www.dulux.com.au/colour/whites-and-neutrals/antique-white-usa/",
+    "composition": null,
+    "extra": {
+     "hex_per_maker": "#efeae0",
+     "alternative_checked": "Jotun 1625 Soul: 'A warm golden white.' - LRV not shown on Jotun page"
+    }
+   },
+   "source": {
+    "url": "https://www.dulux.com.au/colour/whites-and-neutrals/antique-white-usa/",
+    "quote": "Its beautiful warmth allows artworks and colour details to sing. LRV (Light Reflection Value)84",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Items specify Dulux Australia colours; no Dulux (Australia) colour is an Egypt product. Jotun Egypt (jotun.com/eg-en) publishes an interior colour range with a Find Dealer link, but its colour pages carry no LRV. Substitute an Egypt-sold paint and obtain LRV from the maker's TDS or a measured drawdown."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "paint product range/sheen",
+    "maintenance note",
+    "Egypt colour availability"
+   ],
+   "lookalike_note": "flat colour at the maker's LRV (paint/lacquer): no image look-alike"
+  },
+  {
+   "id": "A-garden-paving",
+   "slot": "garden-paving",
+   "group": "hard",
+   "use": "Terrace and garden paving tying to interior floor",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Travertino20 (outdoor)",
+    "name": "Travertino20 Navona Strutturato RT",
+    "colour_code": "MN3U",
+    "colour_name": "Navona",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 20
+    },
+    "finish": "Strutturato",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {}
+   },
+   "source": {
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino20-collections/",
+    "quote": "TRAVERTINO20 NAVONA STRUTTURATO RT Size: 60x120cm Code: MN3U Technology: Colorbody fine porcelain stoneware Technical characteristics: Frost proof Resistance deep abrasion Thickness: MM 20",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Travertine009",
+    "url": "https://ambientcg.com/view?id=Travertine009",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
+   },
+   "maintenance": {
+    "note": "Maker technical characteristics",
+    "url": "https://www.marazzitile.co.uk/collections/mystone-travertino20-collections/",
+    "quote": "Technical characteristics: Frost proof Resistance deep abrasion"
+   },
+   "missing": [
+    "lrv",
+    "slip rating"
+   ],
+   "lookalike_note": "PavingStones151 replaced by Travertine009: closer in look to the product (board review 2026-11-22)"
+  },
+  {
+   "id": "A-living-sofa",
+   "slot": "living-sofa",
+   "group": "soft",
+   "use": "Living room 3-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "NÄTNÄVA",
+    "name": "Cushion schedule - primary cushion: NÄTNÄVA cushion cover",
+    "colour_code": "706.175.89",
+    "colour_name": "beige (fuzzy texture per image alt text)",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "sofa": "3-seat",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "NÄTNÄVA",
+       "colour_name": "beige (fuzzy texture per image alt text)",
+       "colour_code": "706.175.89",
+       "composition": "100 % polyester (100% recycled)",
+       "width_cm": "48x48",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/",
+       "quote": "NÄTNÄVA cushion cover, beige, 48x48 cm; 100 % polyester (100% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "curly_teddy_natural",
+        "url": "https://polyhaven.com/a/curly_teddy_natural",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         335.8,
+         330.9
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "GURLI",
+       "colour_name": "unbleached",
+       "colour_code": "805.987.31",
+       "composition": "100% cotton (min. 60% recycled)",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-unbleached-80598731/",
+       "quote": "GURLI Cushion cover, unbleached, 50x50 cm; 100% cotton (min. 60% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-unbleached-80598731/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "DYTÅG",
+       "colour_name": "dark beige",
+       "colour_code": "805.176.88",
+       "composition": "100% linen",
+       "width_cm": "65x65",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/",
+       "quote": "DYTÅG cushion cover, dark beige, 65x65 cm; 100% linen",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "rough_linen",
+        "url": "https://polyhaven.com/a/rough_linen",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         270.71,
+         271.3
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "DAGGKÅPOR",
+      "colour_name": "light beige",
+      "colour_code": "206.245.92",
+      "composition": "100% polyester (min. 90% recycled)",
+      "size_cm": "130x170",
+      "url": "https://www.ikea.com/eg/en/p/daggkapor-throw-light-beige-20624592/",
+      "quote": "DAGGKÅPOR throw, light beige, 130x170 cm; 100% polyester (min. 90% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/daggkapor-throw-light-beige-20624592/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/",
+    "quote": "NÄTNÄVA cushion cover, beige, 48x48 cm; 100 % polyester (100% recycled)",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/",
+    "quote": "NÄTNÄVA cushion cover, beige, 48x48 cm; 100 % polyester (100% recycled)",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "curly_teddy_natural",
+    "url": "https://polyhaven.com/a/curly_teddy_natural",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     335.804452696631,
+     330.90004324913025
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ]
+  },
+  {
+   "id": "A-lounge-sofa",
+   "slot": "lounge-sofa",
+   "group": "soft",
+   "use": "Lounge 4-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "ÅSVEIG",
+    "name": "Cushion schedule - primary cushion: ÅSVEIG cushion cover",
+    "colour_code": "806.264.18",
+    "colour_name": "grey-brown (corduroy per image alt text)",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton",
+    "extra": {
+     "sofa": "4-seat",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "ÅSVEIG",
+       "colour_name": "grey-brown (corduroy per image alt text)",
+       "colour_code": "806.264.18",
+       "composition": "100% cotton",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-grey-brown-80626418/",
+       "quote": "ÅSVEIG cushion cover, grey-brown, 50x50 cm; 100% cotton",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "ribbed_corduroy",
+        "url": "https://polyhaven.com/a/ribbed_corduroy",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         266.4,
+         266.7
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-grey-brown-80626418/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "GURLI",
+       "colour_name": "green",
+       "colour_code": "205.987.48",
+       "composition": "100% cotton (min. 60% recycled)",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-green-20598748/",
+       "quote": "GURLI cushion cover, green, 50x50 cm; 100% cotton (min. 60% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-green-20598748/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "JÄTTEGRAN",
+       "colour_name": "off-white (jacquard-woven per image alt text)",
+       "colour_code": "805.722.41",
+       "composition": "100% cotton",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/",
+       "quote": "JÄTTEGRAN cushion cover, off-white, 50x50 cm; 100% cotton",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "wool_boucle",
+        "url": "https://polyhaven.com/a/wool_boucle",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         314.78,
+         390.1
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "ROSTLÖNN",
+      "colour_name": "yellow-brown",
+      "colour_code": "306.304.27",
+      "composition": "100 % polyester (100% recycled)",
+      "size_cm": "130x170",
+      "url": "https://www.ikea.com/eg/en/p/rostloenn-throw-yellow-brown-30630427/",
+      "quote": "ROSTLÖNN throw, yellow-brown, 130x170 cm; 100 % polyester (100% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/rostloenn-throw-yellow-brown-30630427/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-grey-brown-80626418/",
+    "quote": "ÅSVEIG cushion cover, grey-brown, 50x50 cm; 100% cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-grey-brown-80626418/",
+    "quote": "ÅSVEIG cushion cover, grey-brown, 50x50 cm; 100% cotton",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "ribbed_corduroy",
+    "url": "https://polyhaven.com/a/ribbed_corduroy",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     266.40417517521894,
+     266.69999957084656
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ]
+  },
+  {
+   "id": "A-study-sofa",
+   "slot": "study-sofa",
+   "group": "soft",
+   "use": "Study 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "DYTÅG",
+    "name": "Cushion schedule - primary cushion: DYTÅG cushion cover",
+    "colour_code": "805.176.88",
+    "colour_name": "dark beige",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% linen",
+    "extra": {
+     "sofa": "2-seat",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "DYTÅG",
+       "colour_name": "dark beige",
+       "colour_code": "805.176.88",
+       "composition": "100% linen",
+       "width_cm": "65x65",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/",
+       "quote": "DYTÅG cushion cover, dark beige, 65x65 cm; 100% linen",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "rough_linen",
+        "url": "https://polyhaven.com/a/rough_linen",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         270.71,
+         271.3
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "GURLI",
+       "colour_name": "green",
+       "colour_code": "205.987.48",
+       "composition": "100% cotton (min. 60% recycled)",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-green-20598748/",
+       "quote": "GURLI cushion cover, green, 50x50 cm; 100% cotton (min. 60% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-green-20598748/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "HOLMVI",
+      "colour_name": "beige-yellow",
+      "colour_code": "506.046.82",
+      "composition": "100% polyester (min. 90% recycled)",
+      "size_cm": "120x160",
+      "url": "https://www.ikea.com/eg/en/p/holmvi-throw-beige-yellow-50604682/",
+      "quote": "HOLMVI throw, beige-yellow, 120x160 cm; 100% polyester (min. 90% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/holmvi-throw-beige-yellow-50604682/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/",
+    "quote": "DYTÅG cushion cover, dark beige, 65x65 cm; 100% linen",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/dytag-cushion-cover-dark-beige-80517688/",
+    "quote": "DYTÅG cushion cover, dark beige, 65x65 cm; 100% linen",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "url": "https://polyhaven.com/a/rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ]
+  },
+  {
+   "id": "A-cinema-sofa",
+   "slot": "cinema-sofa",
+   "group": "soft",
+   "use": "Cinema room 2-seat sofa",
+   "product": {
+    "maker": "IKEA",
+    "range": "NÄTNÄVA",
+    "name": "Cushion schedule - primary cushion: NÄTNÄVA cushion cover",
+    "colour_code": "206.397.01",
+    "colour_name": "brown (fuzzy texture per image alt text)",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "sofa": "2-seat",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "NÄTNÄVA",
+       "colour_name": "brown (fuzzy texture per image alt text)",
+       "colour_code": "206.397.01",
+       "composition": "100 % polyester (100% recycled)",
+       "width_cm": "48x48",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-brown-20639701/",
+       "quote": "NÄTNÄVA cushion cover, brown, 48x48 cm; 100 % polyester (100% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "curly_teddy_natural",
+        "url": "https://polyhaven.com/a/curly_teddy_natural",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         335.8,
+         330.9
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-brown-20639701/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "LAGERPOPPEL",
+       "colour_name": "light brown",
+       "colour_code": "905.618.07",
+       "composition": "100 % polyester (100% recycled)",
+       "width_cm": "40x58",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+       "quote": "LAGERPOPPEL cushion cover, light brown, 40x58 cm; 100 % polyester (100% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "knitted_fleece",
+        "url": "https://polyhaven.com/a/knitted_fleece",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         266.36,
+         270.4
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "HORNMAL",
+      "colour_name": "off-white",
+      "colour_code": "205.290.95",
+      "composition": "100% polyester (min. 90% recycled)",
+      "size_cm": "130x170",
+      "url": "https://www.ikea.com/eg/en/p/hornmal-throw-off-white-20529095/",
+      "quote": "HORNMAL throw, off-white, 130x170 cm; 100% polyester (min. 90% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/hornmal-throw-off-white-20529095/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-brown-20639701/",
+    "quote": "NÄTNÄVA cushion cover, brown, 48x48 cm; 100 % polyester (100% recycled)",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-brown-20639701/",
+    "quote": "NÄTNÄVA cushion cover, brown, 48x48 cm; 100 % polyester (100% recycled)",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "curly_teddy_natural",
+    "url": "https://polyhaven.com/a/curly_teddy_natural",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     335.804452696631,
+     330.90004324913025
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ]
+  },
+  {
+   "id": "A-library-daybed",
+   "slot": "library-daybed",
+   "group": "soft",
+   "use": "Library daybed",
+   "product": {
+    "maker": "IKEA",
+    "range": "ÅSVEIG",
+    "name": "Cushion schedule - primary cushion: ÅSVEIG cushion cover",
+    "colour_code": "906.132.60",
+    "colour_name": "light beige",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton",
+    "extra": {
+     "sofa": "daybed",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "ÅSVEIG",
+       "colour_name": "light beige",
+       "colour_code": "906.132.60",
+       "composition": "100% cotton",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/",
+       "quote": "ÅSVEIG cushion cover, light beige, 50x50 cm; 100% cotton",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "GURLI",
+       "colour_name": "unbleached",
+       "colour_code": "805.987.31",
+       "composition": "100% cotton (min. 60% recycled)",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-unbleached-80598731/",
+       "quote": "GURLI Cushion cover, unbleached, 50x50 cm; 100% cotton (min. 60% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/gurli-cushion-cover-unbleached-80598731/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "HOLMVI",
+      "colour_name": "beige-yellow",
+      "colour_code": "506.046.82",
+      "composition": "100% polyester (min. 90% recycled)",
+      "size_cm": "120x160",
+      "url": "https://www.ikea.com/eg/en/p/holmvi-throw-beige-yellow-50604682/",
+      "quote": "HOLMVI throw, beige-yellow, 120x160 cm; 100% polyester (min. 90% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/holmvi-throw-beige-yellow-50604682/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/",
+    "quote": "ÅSVEIG cushion cover, light beige, 50x50 cm; 100% cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/",
+    "quote": "ÅSVEIG cushion cover, light beige, 50x50 cm; 100% cotton",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "rough_linen",
+    "licence": "CC0",
+    "on_disk": true,
+    "url": "https://polyhaven.com/a/rough_linen",
+    "physical_scan_mm": [
+     270.7081392676629,
+     271.29998803138733
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ],
+   "lookalike_note": "Fabric036 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+  },
+  {
+   "id": "A-parents-bed",
+   "slot": "parents-bed",
+   "group": "soft",
+   "use": "Parents' bed: bed cushions plus throw",
+   "product": {
+    "maker": "IKEA",
+    "range": "JÄTTEGRAN",
+    "name": "Cushion schedule - primary cushion: JÄTTEGRAN cushion cover",
+    "colour_code": "805.722.41",
+    "colour_name": "off-white (jacquard-woven per image alt text)",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% cotton",
+    "extra": {
+     "sofa": "bed",
+     "cushions": [
+      {
+       "maker": "IKEA",
+       "fabric_range": "JÄTTEGRAN",
+       "colour_name": "off-white (jacquard-woven per image alt text)",
+       "colour_code": "805.722.41",
+       "composition": "100% cotton",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/",
+       "quote": "JÄTTEGRAN cushion cover, off-white, 50x50 cm; 100% cotton",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "wool_boucle",
+        "url": "https://polyhaven.com/a/wool_boucle",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         314.78,
+         390.1
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "ÅSVEIG",
+       "colour_name": "light beige",
+       "colour_code": "906.132.60",
+       "composition": "100% cotton",
+       "width_cm": "50x50",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/",
+       "quote": "ÅSVEIG cushion cover, light beige, 50x50 cm; 100% cotton",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "ambientCG",
+        "id": "Fabric036",
+        "url": "https://ambientcg.com/view?id=Fabric036",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": null
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/asveig-cushion-cover-light-beige-90613260/"
+       }
+      },
+      {
+       "maker": "IKEA",
+       "fabric_range": "NÄTNÄVA",
+       "colour_name": "beige (fuzzy texture per image alt text)",
+       "colour_code": "706.175.89",
+       "composition": "100 % polyester (100% recycled)",
+       "width_cm": "48x48",
+       "martindale": null,
+       "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/",
+       "quote": "NÄTNÄVA cushion cover, beige, 48x48 cm; 100 % polyester (100% recycled)",
+       "lookalike": {
+        "label": "look-alike-proxy",
+        "maker_site": "Poly Haven",
+        "id": "curly_teddy_natural",
+        "url": "https://polyhaven.com/a/curly_teddy_natural",
+        "licence": "CC0",
+        "on_disk": true,
+        "physical_scan_mm": [
+         335.8,
+         330.9
+        ]
+       },
+       "egypt": {
+        "available": true,
+        "supplier": "IKEA Egypt",
+        "url": "https://www.ikea.com/eg/en/p/naetnaeva-cushion-cover-beige-70617589/"
+       }
+      }
+     ],
+     "throw": {
+      "maker": "IKEA",
+      "range": "DAGGKÅPOR",
+      "colour_name": "light beige",
+      "colour_code": "206.245.92",
+      "composition": "100% polyester (min. 90% recycled)",
+      "size_cm": "130x170",
+      "url": "https://www.ikea.com/eg/en/p/daggkapor-throw-light-beige-20624592/",
+      "quote": "DAGGKÅPOR throw, light beige, 130x170 cm; 100% polyester (min. 90% recycled)",
+      "lookalike": {
+       "label": "look-alike-proxy",
+       "maker_site": "Poly Haven",
+       "id": "knitted_fleece",
+       "url": "https://polyhaven.com/a/knitted_fleece",
+       "licence": "CC0",
+       "on_disk": true,
+       "physical_scan_mm": [
+        266.36,
+        270.4
+       ]
+      },
+      "egypt": {
+       "available": true,
+       "supplier": "IKEA Egypt",
+       "url": "https://www.ikea.com/eg/en/p/daggkapor-throw-light-beige-20624592/"
+      }
+     },
+     "martindale_note": "IKEA Egypt product pages read do not state Martindale rub counts",
+     "palette_gap": "No terracotta, olive-wool or cognac-leather cushion was found in the IKEA Egypt range read; greens/browns used as nearest warm touches"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/",
+    "quote": "JÄTTEGRAN cushion cover, off-white, 50x50 cm; 100% cotton",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/jaettegran-cushion-cover-off-white-80572241/",
+    "quote": "JÄTTEGRAN cushion cover, off-white, 50x50 cm; 100% cotton",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "wool_boucle",
+    "url": "https://polyhaven.com/a/wool_boucle",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     314.78237097288206,
+     390.10000228881836
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "martindale",
+    "cushion fill/insert (sold separately)",
+    "terracotta/cognac accents"
+   ]
+  },
+  {
+   "id": "A-rug-living",
+   "slot": "rug-living",
+   "group": "soft",
+   "use": "Living room rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "LOHALS",
+    "name": "LOHALS rug, flatwoven, natural",
+    "colour_code": null,
+    "colour_name": "natural",
+    "format_mm": {
+     "w": 2000,
+     "l": 3000,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% jute",
+    "extra": {
+     "size_cm": "200x300",
+     "pile": null,
+     "article_number": "002.773.95"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/lohals-rug-flatwoven-natural-00277395/",
+    "quote": "LOHALS rug, flatwoven, natural, 200x300 cm; 100% jute",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/lohals-rug-flatwoven-natural-00277395/",
+    "quote": "LOHALS rug, flatwoven, natural, 200x300 cm; 100% jute",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "Poly Haven",
+    "id": "hessian_230",
+    "url": "https://polyhaven.com/a/hessian_230",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     268.7538661074732,
+     267.1999931335449
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "pile height",
+    "article-number-as-colour-code (article number shown in extra)"
+   ]
+  },
+  {
+   "id": "A-rug-lounge",
+   "slot": "rug-lounge",
+   "group": "soft",
+   "use": "Lounge rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "LOKALTÅG",
+    "name": "LOKALTÅG rug, low pile, beige/grey",
+    "colour_code": null,
+    "colour_name": "beige/grey",
+    "format_mm": {
+     "w": 2000,
+     "l": 3000,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100 % polyester (100% recycled)",
+    "extra": {
+     "size_cm": "200x300",
+     "pile": null,
+     "article_number": "006.232.30"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/lokaltag-rug-low-pile-beige-grey-00623230/",
+    "quote": "LOKALTÅG rug, low pile, beige/grey, 200x300 cm; 100 % polyester (100% recycled)",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/lokaltag-rug-low-pile-beige-grey-00623230/",
+    "quote": "LOKALTÅG rug, low pile, beige/grey, 200x300 cm; 100 % polyester (100% recycled)",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "pile height",
+    "article-number-as-colour-code (article number shown in extra)"
+   ]
+  },
+  {
+   "id": "A-rug-parents",
+   "slot": "rug-parents-bedroom",
+   "group": "soft",
+   "use": "Parents' bedroom rug",
+   "product": {
+    "maker": "IKEA",
+    "range": "KANARIEPALM",
+    "name": "KANARIEPALM rug, low pile, off-white",
+    "colour_code": null,
+    "colour_name": "off-white",
+    "format_mm": {
+     "w": 2000,
+     "l": 3000,
+     "t": null
+    },
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "63% polypropylene, 37% polyester (min. 90% recycled)",
+    "extra": {
+     "size_cm": "200x300",
+     "pile": null,
+     "article_number": "206.359.58"
+    }
+   },
+   "source": {
+    "url": "https://www.ikea.com/eg/en/p/kanariepalm-rug-low-pile-off-white-20635958/",
+    "quote": "KANARIEPALM rug, low pile, off-white, 200x300 cm; 63% polypropylene, 37% polyester (min. 90% recycled)",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": true,
+    "supplier": "IKEA Egypt",
+    "url": "https://www.ikea.com/eg/en/p/kanariepalm-rug-low-pile-off-white-20635958/",
+    "quote": "KANARIEPALM rug, low pile, off-white, 200x300 cm; 63% polypropylene, 37% polyester (min. 90% recycled)",
+    "gap": null
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Carpet016",
+    "url": "https://ambientcg.com/view?id=Carpet016",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": [
+     1700,
+     1700
+    ]
+   },
+   "maintenance": null,
+   "missing": [
+    "pile height",
+    "article-number-as-colour-code (article number shown in extra)"
+   ]
+  },
+  {
+   "id": "A-shelf-book-atlas-interior-design",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf (sparse, 3-5 books)",
+   "product": {
+    "maker": "Phaidon Press",
+    "range": "Phaidon",
+    "name": "Atlas of Interior Design",
+    "colour_code": "9781838663063",
+    "colour_name": null,
+    "format_mm": null,
+    "finish": "Standard Edition (hardback per Phaidon listing - not read; treat as unverified)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9781838663063",
+     "publisher": "Phaidon Press"
+    }
+   },
+   "source": {
+    "url": "https://www.phaidon.com/store/home-and-garden/atlas-of-interior-design-9781838663063/",
+    "quote": "Atlas of Interior Design | Standard Edition | 9781838663063",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Phaidon Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "finish",
+    "authors"
+   ],
+   "render_hint": "warm off-white cover, estimate #E8E0D2"
+  },
+  {
+   "id": "A-shelf-book-atlas-21c-houses",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf (sparse, 3-5 books)",
+   "product": {
+    "maker": "Phaidon Press",
+    "range": "Phaidon",
+    "name": "Atlas of Twenty-First Century Houses",
+    "colour_code": "9781838667658",
+    "colour_name": null,
+    "format_mm": null,
+    "finish": "Standard Edition (hardback per Phaidon listing - not read; treat as unverified)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9781838667658",
+     "publisher": "Phaidon Press"
+    }
+   },
+   "source": {
+    "url": "https://www.phaidon.com/en-us/products/atlas-of-twenty-first-century-houses",
+    "quote": "Atlas of Twenty-First Century Houses | Standard Edition | 9781838667658",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Phaidon Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "finish",
+    "authors"
+   ],
+   "render_hint": "stone grey cover, estimate #B9B2A6"
+  },
+  {
+   "id": "A-shelf-book-shizen",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf (sparse, 3-5 books)",
+   "product": {
+    "maker": "Phaidon Press",
+    "range": "Phaidon",
+    "name": "Shizen: Spaces Shaped by Nature in Japan",
+    "colour_code": "9781837293667",
+    "colour_name": null,
+    "format_mm": null,
+    "finish": "Standard Edition (hardback per Phaidon listing - not read; treat as unverified)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9781837293667",
+     "publisher": "Phaidon Press"
+    }
+   },
+   "source": {
+    "url": "https://www.phaidon.com/en-us/products/shizen-spaces-shaped-by-nature-in-japan",
+    "quote": "Shizen: Spaces Shaped by Nature in Japan | Standard Edition | 9781837293667",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Phaidon Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "finish",
+    "authors"
+   ],
+   "render_hint": "muted green-grey cover, estimate #8F9684"
+  },
+  {
+   "id": "A-shelf-book-japanese-garden",
+   "slot": "open-shelf-book",
+   "group": "soft",
+   "use": "Open shelf (sparse, 3-5 books)",
+   "product": {
+    "maker": "Phaidon Press",
+    "range": "Phaidon",
+    "name": "The Japanese Garden",
+    "colour_code": "9780714874777",
+    "colour_name": null,
+    "format_mm": null,
+    "finish": "Standard Edition (hardback per Phaidon listing - not read; treat as unverified)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {
+     "isbn": "9780714874777",
+     "publisher": "Phaidon Press"
+    }
+   },
+   "source": {
+    "url": "https://www.phaidon.com/store/design/the-japanese-garden-9780714874777/",
+    "quote": "The Japanese Garden | Standard Edition | 9780714874777",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Phaidon Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "finish",
+    "authors"
+   ],
+   "render_hint": "olive/moss cover, estimate #7A7C5A"
+  },
+  {
+   "id": "A-shelf-decor-fountain-vase",
+   "slot": "open-shelf-decor",
+   "group": "soft",
+   "use": "Open shelf decor",
+   "product": {
+    "maker": "Ferm Living",
+    "range": "Ferm Living collection",
+    "name": "Fountain Vase - Large - Off-White",
+    "colour_code": null,
+    "colour_name": "Off-White",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {}
+   },
+   "source": {
+    "url": "https://fermliving.com/products/fountain-vase-off-white",
+    "quote": "The Fountain Vase has a matte exterior while the inside is finished with a clear glaze.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Ferm Living Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "colour_code",
+    "finish"
+   ],
+   "render_hint": "matte off-white ceramic, estimate #EBE5D9"
+  },
+  {
+   "id": "A-shelf-decor-block-candle",
+   "slot": "open-shelf-decor",
+   "group": "soft",
+   "use": "Open shelf decor",
+   "product": {
+    "maker": "Ferm Living",
+    "range": "Ferm Living collection",
+    "name": "Block Candle Holder - Brass",
+    "colour_code": null,
+    "colour_name": "Brass",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {}
+   },
+   "source": {
+    "url": "https://fermliving.com/products/block-candle-holder-brass",
+    "quote": "With its brushed finish, it will add an elegant, sleek touch to your decor.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Ferm Living Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "colour_code",
+    "finish"
+   ],
+   "render_hint": "brushed brass, estimate #B59A5B"
+  },
+  {
+   "id": "A-shelf-decor-balance-candle",
+   "slot": "open-shelf-decor",
+   "group": "soft",
+   "use": "Open shelf decor",
+   "product": {
+    "maker": "Ferm Living",
+    "range": "Ferm Living collection",
+    "name": "Balance Candle Holder - Brass",
+    "colour_code": null,
+    "colour_name": "Brass",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": null,
+    "extra": {}
+   },
+   "source": {
+    "url": "https://fermliving.com/products/balance-candle-holder-brass",
+    "quote": "The geometrical shapes are both sculptural and functional, as the arch may be used as a handle to carry the candle holder.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Ferm Living Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "colour_code",
+    "finish"
+   ],
+   "render_hint": "brass, estimate #B08D57"
+  },
+  {
+   "id": "A-garment-supima-tee",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room wardrobe",
+   "product": {
+    "maker": "Uniqlo",
+    "range": "SUPIMA Cotton",
+    "name": "Unisex SUPIMA Cotton T-Shirt",
+    "colour_code": "31",
+    "colour_name": "BEIGE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% SUPIMA cotton",
+    "extra": {
+     "product_id": "E455365-000"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/us/en/products/E455365-000/00?colorDisplayCode=31",
+    "quote": "Color: 31 BEIGE Made of premium 100% SUPIMA® cotton.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "Egypt availability"
+   ],
+   "render_hint": "beige, estimate #D8C7A8"
+  },
+  {
+   "id": "A-garment-slim-chino",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room wardrobe",
+   "product": {
+    "maker": "Uniqlo",
+    "range": "Chino",
+    "name": "Men's Slim Chino Pants",
+    "colour_code": "32",
+    "colour_name": "BEIGE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "97% Cotton, 3% Spandex",
+    "extra": {
+     "product_id": "E450251-000"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/us/en/products/E450251-000/00?colorDisplayCode=32",
+    "quote": "Color: 32 BEIGE 97% Cotton, 3% Spandex",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "Egypt availability"
+   ],
+   "render_hint": "beige, estimate #CDBB9A"
+  },
+  {
+   "id": "A-garment-linen-shirt",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room wardrobe",
+   "product": {
+    "maker": "Uniqlo",
+    "range": "Premium Linen",
+    "name": "Men's Premium Linen Shirt",
+    "colour_code": "57",
+    "colour_name": "OLIVE",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% linen",
+    "extra": {
+     "product_id": "E444641-000"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/us/en/products/E444641-000/00?colorDisplayCode=57",
+    "quote": "Color: 57 OLIVE 100% premium linen with a unique texture and elegant sheen.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "Egypt availability"
+   ],
+   "render_hint": "olive, estimate #6E6B45"
+  },
+  {
+   "id": "A-garment-merino",
+   "slot": "wardrobe-garment",
+   "group": "soft",
+   "use": "Dressing room wardrobe",
+   "product": {
+    "maker": "Uniqlo",
+    "range": "Merino",
+    "name": "Men's 100% Merino Crew Neck Jumper",
+    "colour_code": "07",
+    "colour_name": "GREY",
+    "format_mm": null,
+    "finish": null,
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "100% Merino wool",
+    "extra": {
+     "product_id": "E450535-000"
+    }
+   },
+   "source": {
+    "url": "https://www.uniqlo.com/se/en/products/E450535-000/00",
+    "quote": "Colour: 07 GREY Made with 19.5 micron extra-fine 100% Merino wool for a smooth touch and glossy sheen.",
+    "fetched": "2026-11-22"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "Uniqlo Egypt availability not checked in this pass."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "format_mm",
+    "Egypt availability"
+   ],
+   "render_hint": "mid grey, estimate #8A8A88"
+  }
+ ],
+ "egypt_alternatives": [
+  {
+   "for_slot": "floor-living (travertine/limestone-look)",
+   "maker": "Ceramica Cleopatra",
+   "range": "Rock (Cemento)",
+   "colour": "Rock Cemento Beige",
+   "format_mm": {
+    "w": 1200,
+    "l": 1200,
+    "t": 8
+   },
+   "source": {
+    "url": "https://www.cleopatraceramics.com/en/ceramic-tiles-collections/Rock/",
+    "quote": "Size 120x120 Rock Cemento Beige 120x120 TECHNICAL FEATURES SIZE 120x120 cm PROFILE Rectified THICKNESS 8 mm Water Absorption Average 0.15 % Surface finish Matt"
+   },
+   "egypt": {
+    "supplier": "Ceramica Cleopatra Group showrooms",
+    "url": "https://www.cleopatraceramics.com/en/showrooms/",
+    "quote": "A network of great and efficient showrooms in Egypt."
+   },
+   "notes": "Cement-look, not travertine; already B-floor-living. A stone alternative is natural Egyptian limestone (see next entry)."
+  },
+  {
+   "for_slot": "floor-living (travertine/limestone-look, natural stone)",
+   "maker": "Egyptian limestone (Galala / Sunny Menia)",
+   "range": "Galala",
+   "colour": "beige/cream",
+   "format_mm": null,
+   "source": {
+    "url": "https://litosonline.com/en/article/three-popular-egyptian-limestones-sunny-menia-sinai-pearl-and-galala",
+    "quote": "The three most popular limestones from Egypt in the international markets are generally considered to be: 1) SUNNY MENIA 2) SINAI PEARL 3) GALALA"
+   },
+   "egypt": {
+    "supplier": "Al Abbas Co. for Marble and Granite (Cairo; directory listing)",
+    "url": "https://madeinegypt.com/listings/marble-stone",
+    "quote": "Supplies all kinds of Egyptian marble including Silvia, Sunny, Galala, Samaha, Felitto, Pearly Yellow (Khatmeya), Sinai Pearl (Terista), Golden Cream, Golden Silvia, and Gold varieties."
+   },
+   "notes": "Directory listing, not a product page; no format/colour spec or LRV read. Request honed samples and slab sizes from supplier."
+  },
+  {
+   "for_slot": "worktop (quartz/stone)",
+   "maker": "Marmonil Egypt",
+   "range": "Egyptian granite/marble",
+   "colour": null,
+   "format_mm": null,
+   "source": {
+    "url": "https://www.stoneworld.com/articles/84497-egyptian-producer-serves-a-worldwide-marketplace",
+    "quote": "based in Nasr City, Cairo, are quarrying, sawing, polishing and processing marble and granite."
+   },
+   "egypt": {
+    "supplier": "Marmonil Egypt, Nasr City, Cairo",
+    "url": "https://www.stoneworld.com/articles/84497-egyptian-producer-serves-a-worldwide-marketplace",
+    "quote": "Marmonil Egypt was established in 1963, and since its debut, it has been one of the leading companies in Egypt working in the marble and granite sector."
+   },
+   "notes": "2007 trade article, not a product page; no named colour. Weak. Egyptian quartz slab makers exist only as unverified directory entries and were not cited."
+  },
+  {
+   "for_slot": "joinery timber (walnut veneer)",
+   "maker": "Al Motaheda Wood (importer/supplier)",
+   "range": "natural and engineered wood",
+   "colour": null,
+   "format_mm": null,
+   "source": {
+    "url": "https://yellowpages.com.eg/en/profile/al-motaheda-wood-for-import-and-export/663650",
+    "quote": "Al Motaheda Wood is a leading importer and supplier of natural and engineered wood in Egypt"
+   },
+   "egypt": {
+    "supplier": "Al Motaheda Wood, El Salam City, Cairo",
+    "url": "https://yellowpages.com.eg/en/profile/al-motaheda-wood-for-import-and-export/663650",
+    "quote": "Al Motaheda Wood is a leading importer and supplier of natural and engineered wood in Egypt"
+   },
+   "notes": "Walnut not named on the page read; ask for walnut veneer stock. Fallback lead only."
+  },
+  {
+   "for_slot": "interior door",
+   "maker": "Egyptian Doors and Metal Industries",
+   "range": "Interior room doors",
+   "colour": null,
+   "format_mm": null,
+   "source": {
+    "url": "https://yellowpages.com.eg/en/profile/egyptian-doors-and-metal-industries/671932",
+    "quote": "Fire-resistant wooden doors - Soundproof doors ... - Interior room doors"
+   },
+   "egypt": {
+    "supplier": "Egyptian Doors and Metal Industries, Abu Sir, El Marg, Cairo",
+    "url": "https://yellowpages.com.eg/en/profile/egyptian-doors-and-metal-industries/671932",
+    "quote": "Interior room doors"
+   },
+   "notes": "Mainly metal/fire doors; no veneer species stated. Weak lead."
+  },
+  {
+   "for_slot": "wall paint with LRV",
+   "maker": "Jotun Egypt",
+   "range": "Interior colours (Fenomastic)",
+   "colour": "11364 Century White ('A golden white.')",
+   "format_mm": null,
+   "source": {
+    "url": "https://www.jotun.com/eg-en/decorative/colours/interior/all-interior-colours/11364-century-white-interior",
+    "quote": "11364 A golden white. Find Product Find Dealer"
+   },
+   "egypt": {
+    "supplier": "Jotun Egypt",
+    "url": "https://www.jotun.com/eg-en/decorative/colours/interior",
+    "quote": null
+   },
+   "notes": "Egypt colour page shows no LRV. Obtain LRV from Jotun TDS or measure."
+  }
+ ]
+}

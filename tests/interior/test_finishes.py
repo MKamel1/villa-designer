@@ -56,6 +56,14 @@ class SyntheticRules(unittest.TestCase):
         it["lookalike"]["physical_scan_mm"] = [1000, 1000]
         self.assertEqual(F.texture_scale_m(it), (1.0, "lookalike-scan-size"))
 
+    def test_range_format_uses_longest_published_side(self):
+        it = good_item(); it["product"]["format_mm"] = {"w": 242, "l": "1750-2350"}
+        self.assertEqual(F.texture_scale_m(it)[0], 2.35)
+
+    def test_small_format_on_large_scan_uses_scan_size(self):
+        it = good_item(); it["product"]["format_mm"] = {"w": 100, "l": 100}; it["lookalike"]["physical_scan_mm"] = [2000, 2000]
+        self.assertEqual(F.texture_scale_m(it), (2.0, "lookalike-scan-size"))
+
     def test_negative_scale_is_never_assumed(self):
         it = good_item(); it["slot"] = "joinery-timber"; it["product"]["format_mm"] = None
         with self.assertRaises(ValueError):
@@ -95,7 +103,7 @@ class RealPalettes(unittest.TestCase):
                     self.assertGreater(tm, 0)
                     if basis == "format-long-side":
                         fmt = it["product"]["format_mm"]
-                        self.assertEqual(tm, max(fmt.get("w") or 0, fmt.get("l") or 0) / 1000)
+                        self.assertEqual(tm, max(F._mm(fmt.get("w")) or 0, F._mm(fmt.get("l")) or 0) / 1000)
 
 
 if __name__ == "__main__":
