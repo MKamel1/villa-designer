@@ -348,6 +348,7 @@ def subjects_in_frame(view, g, limit=3):
     return [i for _, i in sorted(out)[:limit]]
 
 
+NOT_CLEARED = "GI: NOT CLEARED: "
 CLEAR_M = 0.6          # a garden camera keeps at least this far from any garden solid (a camera inside a stand-in mass renders black: v40 did)
 
 
@@ -387,7 +388,13 @@ def clear_camera(view, g):
             cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=q, reason="GI: the authored standing point is %.2f m from %s (inside or touching a garden solid of the decided layout); moved %.2f m, target kept" % (why[0], why[1], math.hypot(dx, dy))))
             cam["position"] = q
             return True
-    raise ValueError("%s: no clear standing point within 3.5 m of %s" % (view["id"], pos))
+    cam.setdefault("overrides", []).append(dict(field="position", prior=pos, new=pos, reason="%s%s: no clear standing point within 3.5 m (the authored point is %.2f m from %s); camera left where it is" % (NOT_CLEARED, view["id"], camera_clearance(pos, g)[0], camera_clearance(pos, g)[1])))
+    return False      # fail closed where it matters: `uncleared()` is asserted over the production view set (tests, gi_scene); the legacy view list of `villa_render.VIEWS` also passes through here and must still build
+
+
+def uncleared(views):
+    """Ids of views whose camera `clear_camera` could not move to a clear standing point."""
+    return [v["id"] for v in views if any(str(o.get("reason", "")).startswith(NOT_CLEARED) for o in v["camera"].get("overrides", []))]
 
 
 def prepare_view(view, g):

@@ -32,6 +32,11 @@ def main(out, dev=False, measure=False, record=None):
             RS.write_scene(out / "scene.json", vs, record, measure=measure)
     else:
         RS.write_scene(out / "scene.json", vs, record, measure=measure)
+    from archpipe.landscape.build import production as PRD
+    import json as _j
+    bad = PRD.uncleared(_j.loads((out / "scene.json").read_text(encoding="utf-8"))["views"])
+    if bad:
+        raise SystemExit("cameras inside a garden solid, not cleared: %s" % bad)
     print("wrote", out / "scene.json")
 
 

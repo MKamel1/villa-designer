@@ -321,3 +321,27 @@ class PondSlabArea(unittest.TestCase):
         PR._cut_slab_under_ponds(ms, [pond], -3.0)
         total = sum(Polygon([p[:2] for p in f]).area for f in ms[0]["faces"])
         self.assertAlmostEqual(total, 2 * (Polygon([p[:2] for p in L]).area - pond.area), places=6)
+
+
+class ProductionCameras(unittest.TestCase):
+    def test_every_view_of_the_production_set_has_a_cleared_camera_and_an_uncleared_one_is_reported(self):
+        """`clear_camera` no longer raises (the legacy `VIEWS` list passes through it too); the production set must still be clean."""
+        from archpipe.concept import villa_r11 as R, villa_render as VR
+        from archpipe.critic import render_set as RS
+        lay = R.design("D1")
+        views = RS.resolve(RS.load(), lay, VR.VIEWS(lay))
+        garden = [v for v in views if PR.is_garden_view(v)]
+        self.assertGreaterEqual(len(garden), 10)
+        for v in garden:
+            if v["camera"]["position"][2] < -0.5:
+                PR.clear_camera(v, G)
+        self.assertEqual(PR.uncleared(garden), [])
+        for v in garden:       # an authored row's exposure defaults to its state ('day', the INTERIOR group): the first measurement put five outdoor garden views in it
+            if v["state"] == "day" and v["id"] != "gi-living-view-out":
+                self.assertEqual(v["exposure"], "exterior-day", v["id"])
+        # negative: a camera with no clear standing point is reported, not silently accepted (clearance and plot faked so no candidate qualifies)
+        bad = dict(id="x", camera=dict(position=[25.3, -25.4, -1.65], target=[26, -25, -1.65], overrides=[]))
+        import unittest.mock as M
+        with M.patch.object(PR, "camera_clearance", return_value=(0.0, "ld-test")), M.patch.object(PR.CX, "ground_plan", return_value=((0, 0, 1, 1), None)):
+            self.assertFalse(PR.clear_camera(bad, G))
+        self.assertEqual(PR.uncleared([bad]), ["x"])

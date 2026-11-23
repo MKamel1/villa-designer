@@ -141,7 +141,7 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
             fill_defaults(c, {"home_room": room, "reframed": "doorway" if doorway else "chosen"})
         v = {"id": e["id"], "title": e["purpose"].split(" (")[0], "state": state,
              "when": e.get("when") or (DAY if state == "day" else DUSK), "camera": c, "resolution": [1920, 1280],
-             "layers_on": layers, "dimmers": dimmers, "exposure": state, "subjects": e["subjects"],
+             "layers_on": layers, "dimmers": dimmers, "exposure": e.get("exposure", state), "subjects": e["subjects"],
              "samples": 1024, "room": room, "final_only": e.get("final_only", True), "seated": False,
              "set_purpose": e["purpose"]}
         if e.get("replaces"):
