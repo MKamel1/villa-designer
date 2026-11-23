@@ -57,12 +57,31 @@ def load_colours(root: Path = finishes.PALETTE_DIR) -> dict:
     return json.loads(f.read_text())["colours"] if f.exists() else {}
 
 
+# Soft-goods colour words -> sRGB hex. OUR ESTIMATES of what the maker's colour name looks like on a sofa; the look-alike
+# image supplies only the weave, never the colour (a linen scan's own mean is sky blue). Longest phrase wins.
+NAME_HEX = {"dark brown": "#4a3426", "dark green": "#3d4a36", "light brown": "#b8987a", "dark grey": "#4a4a48",
+            "yellow-brown": "#b88a4a", "light beige": "#d9ccb4", "light grey-brown": "#b0a698", "light grey": "#c4c1ba",
+            "grey-brown": "#8f8272", "dark beige": "#a89578", "unbleached": "#e6dfcf", "off-white": "#e6e0d2",
+            "natural": "#c0aa84", "brown": "#6b4a35", "grey": "#8a8a88", "beige": "#c9b89a", "olive": "#6b6a3f",
+            "taupe": "#a39786", "green": "#5a6a4a", "white": "#ece8e0", "cream": "#e4dac4"}
+
+
+def name_hex(colour_name: str | None) -> str | None:
+    low = (colour_name or "").lower()
+    for k in sorted(NAME_HEX, key=len, reverse=True):
+        if k in low:
+            return NAME_HEX[k]
+    return None
+
+
 def item_spec(item: dict, library_root: Path, colours: dict | None = None) -> dict:
     colours = load_colours() if colours is None else colours
     la = item.get("lookalike")
     p = item["product"]
     lrv = p.get("lrv")
     hx = (colours.get(item["id"]) or {}).get("hex")
+    if not hx and item.get("group") == "soft":
+        hx = name_hex(p.get("colour_name"))
     if la is None:                                   # flat finish (paint, lacquer): colour + LRV, no image
         if not hx:
             raise ValueError(f"{item['id']}: flat finish needs a render colour in render-colours.json")

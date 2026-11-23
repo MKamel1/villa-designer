@@ -1539,13 +1539,13 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "Poly Haven",
-    "id": "wool_boucle",
-    "url": "https://polyhaven.com/a/wool_boucle",
+    "id": "rough_linen",
+    "url": "https://polyhaven.com/a/rough_linen",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": [
-     314.78237097288206,
-     390.10000228881836
+     270.7081392676629,
+     271.29998803138733
     ]
    },
    "maintenance": null,
@@ -1553,7 +1553,8 @@
     "martindale",
     "cushion fill/insert (sold separately)",
     "terracotta/cognac accents"
-   ]
+   ],
+   "lookalike_note": "wool_boucle scan is a black/white/yellow check, not an off-white jacquard; replaced by rough_linen (weave only; colour from the stated name)"
   },
   {
    "id": "A-rug-living",

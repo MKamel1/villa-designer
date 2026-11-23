@@ -108,3 +108,29 @@ class RealPalettes(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SceneSpec(unittest.TestCase):
+    LIB = Path.home() / "archpipe" / "assets" / "library"
+
+    @unittest.skipUnless(PALETTES and (Path.home() / "archpipe/assets/library/materials").exists(), "needs palettes + library")
+    def test_scene_tile_m_equals_derived_scale_not_the_old_policy(self):
+        from archpipe.interior import palette_scene as PS
+        pal = F.load_palette(PALETTES[0])
+        specs = PS.palette_materials(pal, self.LIB)
+        self.assertIn("travertine", specs)
+        floor = next(i for i in pal["items"] if i["slot"] == "floor-living")
+        self.assertAlmostEqual(specs["travertine"]["tile_m"], F.texture_scale_m(floor)[0], places=3)
+        self.assertNotEqual(specs["travertine"]["tile_m"], 0.6)   # RF's assumed policy value
+
+    def test_soft_colour_comes_from_the_name_not_the_scan(self):
+        from archpipe.interior import palette_scene as PS
+        self.assertEqual(PS.name_hex("dark brown"), "#4a3426")
+        self.assertEqual(PS.name_hex("light grey-brown"), "#b0a698")   # longest phrase wins over "grey"
+        self.assertIsNone(PS.name_hex("zzz"))
+
+    def test_flat_finish_without_colour_refuses(self):
+        from archpipe.interior import palette_scene as PS
+        it = good_item(); it["lookalike"] = None; it["slot"] = "wall-paint"; it["group"] = "hard"
+        with self.assertRaises(ValueError):
+            PS.item_spec(it, self.LIB, colours={})
