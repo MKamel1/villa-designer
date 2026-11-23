@@ -5,7 +5,7 @@
     "dining": 0.165,
     "path-S": 0.1,
     "pit": 0.12,
-    "pond-N": 0.12,
+    "pond-N": 0.08,
     "pond-E": 0.12,
     "graze": 0.25,
     "uplight": 0.3
@@ -20,16 +20,16 @@
     },
     "n-pond-edge-ring": {
      "n": 67,
-     "avg": 21.952,
-     "min": 13.781,
-     "max": 26.231,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
      "u0": 0.628
     },
     "n-pond-water": {
      "n": 70,
-     "avg": 18.791,
-     "min": 11.413,
-     "max": 23.373,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
      "u0": 0.607
     },
     "e-pond-edge-ring": {
@@ -66,15 +66,15 @@
      "east-neighbour": 0.0,
      "rear-neighbour": 0.0,
      "sister-villa-facade": 0.028068569350446607,
-     "street-side": 0.0004713382933385143,
+     "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 7.472119054497236e-05,
      "apartment-above-facade": 0.390458073224569
     },
     "ulr": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -95,10 +95,10 @@
      "UP-3": 0.12201957109981822
     },
     "ulr_raw": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -125,7 +125,7 @@
     "dining": 0.22,
     "path-S": 0.15,
     "pit": 0.2,
-    "pond-N": 0.12,
+    "pond-N": 0.08,
     "pond-E": 0.12,
     "graze": 0.35,
     "uplight": 0.45
@@ -140,16 +140,16 @@
     },
     "n-pond-edge-ring": {
      "n": 67,
-     "avg": 21.952,
-     "min": 13.781,
-     "max": 26.231,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
      "u0": 0.628
     },
     "n-pond-water": {
      "n": 70,
-     "avg": 18.791,
-     "min": 11.413,
-     "max": 23.373,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
      "u0": 0.607
     },
     "e-pond-edge-ring": {
@@ -186,15 +186,15 @@
      "east-neighbour": 0.0,
      "rear-neighbour": 0.0,
      "sister-villa-facade": 0.04653226279638122,
-     "street-side": 0.0004713382933385143,
+     "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 0.00012453531757495394,
      "apartment-above-facade": 0.5856871098368533
     },
     "ulr": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -215,10 +215,10 @@
      "UP-3": 0.122019571099818
     },
     "ulr_raw": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -245,7 +245,7 @@
     "dining": 0.0,
     "path-S": 0.1,
     "pit": 0.1,
-    "pond-N": 0.12,
+    "pond-N": 0.08,
     "pond-E": 0.12,
     "graze": 0.0,
     "uplight": 0.0
@@ -260,16 +260,16 @@
     },
     "n-pond-edge-ring": {
      "n": 67,
-     "avg": 21.952,
-     "min": 13.781,
-     "max": 26.231,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
      "u0": 0.628
     },
     "n-pond-water": {
      "n": 70,
-     "avg": 18.791,
-     "min": 11.413,
-     "max": 23.373,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
      "u0": 0.607
     },
     "e-pond-edge-ring": {
@@ -306,15 +306,15 @@
      "east-neighbour": 0.0,
      "rear-neighbour": 0.0,
      "sister-villa-facade": 0.022613330330487406,
-     "street-side": 0.0004713382933385143,
+     "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 6.226765878747697e-05,
      "apartment-above-facade": 0.0
     },
     "ulr": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -327,10 +327,10 @@
      "PS-3": 1.278159484706269e-05
     },
     "ulr_raw": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -349,7 +349,7 @@
     "dining": 0.0,
     "path-S": 0.1,
     "pit": 0.2,
-    "pond-N": 0.12,
+    "pond-N": 0.08,
     "pond-E": 0.12,
     "graze": 0.1,
     "uplight": 0.0
@@ -364,16 +364,16 @@
     },
     "n-pond-edge-ring": {
      "n": 67,
-     "avg": 21.952,
-     "min": 13.781,
-     "max": 26.231,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
      "u0": 0.628
     },
     "n-pond-water": {
      "n": 70,
-     "avg": 18.791,
-     "min": 11.413,
-     "max": 23.373,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
      "u0": 0.607
     },
     "e-pond-edge-ring": {
@@ -410,15 +410,15 @@
      "east-neighbour": 0.0,
      "rear-neighbour": 0.0,
      "sister-villa-facade": 0.045599689842519504,
-     "street-side": 0.0004713382933385143,
+     "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 0.00012453531757495394,
      "apartment-above-facade": 0.0
     },
     "ulr": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -434,10 +434,10 @@
      "GR-3": 0.0
     },
     "ulr_raw": {
-     "NP-1": 0.00014225265390307748,
-     "NP-2": 0.00014225265390307748,
-     "NP-3": 0.00017604805562720197,
-     "NP-4": 0.0010658093706296147,
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
      "EP-1": 0.0001571806131620164,
      "EP-2": 0.00014225265390307765,
      "EP-3": 0.00014386297077135387,
@@ -909,10 +909,19 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "summer-night-dining/n-pond-edge-ring",
-   "achieved": 13.78,
+   "achieved": 9.19,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 13.8 lx (avg 22.0, max 26.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
   },
   {
    "criterion": "LA11",
@@ -922,6 +931,15 @@
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
   },
   {
    "criterion": "LA11",
@@ -1008,10 +1026,19 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "social-gathering/n-pond-edge-ring",
-   "achieved": 13.78,
+   "achieved": 9.19,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 13.8 lx (avg 22.0, max 26.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
   },
   {
    "criterion": "LA11",
@@ -1021,6 +1048,15 @@
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.7 lx (avg 20.2, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.2 lx (max on water 22.8)"
   },
   {
    "criterion": "LA11",
@@ -1107,10 +1143,19 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "quiet-north-court/n-pond-edge-ring",
-   "achieved": 13.78,
+   "achieved": 9.19,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 13.8 lx (avg 22.0, max 26.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
   },
   {
    "criterion": "LA11",
@@ -1120,6 +1165,15 @@
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.6 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
   },
   {
    "criterion": "LA11",
@@ -1134,10 +1188,10 @@
    "criterion": "LA4",
    "status": "pass",
    "subject": "quiet-north-court/glare",
-   "achieved": 580.0,
+   "achieved": 387.0,
    "required": 3000.0,
    "unit": "cd/m2",
-   "message": "32 seated sightlines; worst source luminance 580 cd/m2 (NP-4) vs cap 3000 cd/m)"
+   "message": "32 seated sightlines; worst source luminance 387 cd/m2 (NP-4) vs cap 3000 cd/m)"
   },
   {
    "criterion": "LA12",
@@ -1152,10 +1206,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "quiet-north-court/garden/I toward neighbours (post-curfew)",
-   "achieved": 8.818400621000134,
+   "achieved": 5.878933747333423,
    "required": 1000.0,
    "unit": "cd",
-   "message": "max intensity toward neighbour points 9 cd (NP-4) vs E3 1000 cd"
+   "message": "max intensity toward neighbour points 6 cd (NP-4) vs E3 1000 cd"
   },
   {
    "criterion": "LA12",
@@ -1179,10 +1233,19 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "winter-evening/n-pond-edge-ring",
-   "achieved": 13.78,
+   "achieved": 9.19,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 13.8 lx (avg 22.0, max 26.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
   },
   {
    "criterion": "LA11",
@@ -1192,6 +1255,15 @@
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
   },
   {
    "criterion": "LA11",
@@ -1206,10 +1278,10 @@
    "criterion": "LA4",
    "status": "pass",
    "subject": "winter-evening/glare",
-   "achieved": 580.0,
+   "achieved": 387.0,
    "required": 3000.0,
    "unit": "cd/m2",
-   "message": "32 seated sightlines; worst source luminance 580 cd/m2 (NP-4) vs cap 3000 cd/m)"
+   "message": "32 seated sightlines; worst source luminance 387 cd/m2 (NP-4) vs cap 3000 cd/m)"
   },
   {
    "criterion": "LA12",
@@ -1276,7 +1348,7 @@
   }
  ],
  "counts": {
-  "pass": 42,
+  "pass": 50,
   "fail": 0,
   "warn": 0,
   "not_evaluated": 0

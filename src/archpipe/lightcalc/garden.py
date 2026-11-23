@@ -97,13 +97,13 @@ ZONES = ["pond-N", "pond-E", "pit", "path-S", "dining", "graze", "uplight"]
 # Scene levels per zone (fraction of maximum output). `safety floor` = lowest level that still meets its plane at the plane's recommended value.
 SCENES = {
     "summer-night-dining": dict(label="Summer-night dining under the crape myrtle", cct_k=2700, dining_target=30.0,
-                                levels={"dining": 0.165, "path-S": 0.10, "pit": 0.12, "pond-N": 0.12, "pond-E": 0.12, "graze": 0.25, "uplight": 0.30}),
+                                levels={"dining": 0.165, "path-S": 0.10, "pit": 0.12, "pond-N": 0.08, "pond-E": 0.12, "graze": 0.25, "uplight": 0.30}),
     "social-gathering": dict(label="Social gathering (10-20 people, standing room)", cct_k=2700, dining_target=40.0,
-                             levels={"dining": 0.22, "path-S": 0.15, "pit": 0.20, "pond-N": 0.12, "pond-E": 0.12, "graze": 0.35, "uplight": 0.45}),
+                             levels={"dining": 0.22, "path-S": 0.15, "pit": 0.20, "pond-N": 0.08, "pond-E": 0.12, "graze": 0.35, "uplight": 0.45}),
     "quiet-north-court": dict(label="Quiet north court (south garden at its safety floor)", cct_k=2700, dining_target=None,
-                              levels={"dining": 0.0, "path-S": 0.10, "pit": 0.10, "pond-N": 0.12, "pond-E": 0.12, "graze": 0.0, "uplight": 0.0}),
+                              levels={"dining": 0.0, "path-S": 0.10, "pit": 0.10, "pond-N": 0.08, "pond-E": 0.12, "graze": 0.0, "uplight": 0.0}),
     "winter-evening": dict(label="Winter evening around the fire pit (crape leafless: no uplight)", cct_k=2700, dining_target=None,
-                           levels={"dining": 0.0, "path-S": 0.10, "pit": 0.20, "pond-N": 0.12, "pond-E": 0.12, "graze": 0.10, "uplight": 0.0}),
+                           levels={"dining": 0.0, "path-S": 0.10, "pit": 0.20, "pond-N": 0.08, "pond-E": 0.12, "graze": 0.10, "uplight": 0.0}),
 }
 RENDER_SCENE = "summer-night-dining"      # the scene baked into the production render lights (one static level set)
 
@@ -302,6 +302,13 @@ def check_plane(pl: Plane, st: dict, level: float, scene: str) -> list[CheckResu
     return out
 
 
+def check_water(ring: Plane, ring_st: dict, water: Plane, water_st: dict, scene: str) -> CheckResult:
+    """Policy: the water is not lit more than the margin (LS-POND-EDGE-LIGHT fix: 'do not flood the water')."""
+    ok = water_st["avg"] <= ring_st["avg"]
+    return _res("LA11", "pass" if ok else "fail", f"{scene}/{water.id}", ["LG-POLICY-pond-water-not-flooded"], achieved=round(water_st["avg"], 2), required=round(ring_st["avg"], 2), unit="lx",
+                message=f"water mean {water_st['avg']:.1f} lx vs margin ring mean {ring_st['avg']:.1f} lx (max on water {water_st['max']:.1f})")
+
+
 def check_dining(pl: Plane, st: dict, target: float, scene: str) -> list[CheckResult]:
     from .checks import check_la1, check_la2
     return [check_la1(f"{scene}/{pl.id}", st["avg"], target), check_la2(f"{scene}/{pl.id}", st["avg"], target),
@@ -448,6 +455,7 @@ def run(L=None) -> dict:
     """All scenes: per-plane achieved vs required, V12, spill; returns a JSON-able record plus `results` (CheckResult list)."""
     L = L or layout()
     boxes, pls_def, results, rec = occluders(L), planes(L), [], {"scenes": {}}
+    PLANES_BY_ID = {q.id: q for q in pls_def}
     for name, sc in SCENES.items():
         pls = placements(sc["levels"])
         scene_rec = {"levels": sc["levels"], "planes": {}}
@@ -455,6 +463,9 @@ def run(L=None) -> dict:
             st = stats(pls, pl, boxes)
             if pl.kind in ("edge", "path"):
                 results += check_plane(pl, st, sc["levels"].get(pl.zone_req, 0.0), name)
+            if pl.kind == "water":
+                ring = PLANES_BY_ID[pl.id.replace("-water", "-edge-ring")]
+                results.append(check_water(ring, stats(pls, ring, boxes), pl, st, name))
             if pl.kind == "table" and sc["dining_target"]:
                 results += check_dining(pl, st, sc["dining_target"], name)
             if st.get("n"):
@@ -496,7 +507,7 @@ RADIANCE_BIN = Path.home() / "archpipe/tools/radiance-6.0.1/bin"
 RHO_GROUND = 0.30          # ASSUMED mid-light paving / gravel; the total-light cross-check only, never a gate
 
 
-def radiance_check(workdir: Path, *, step=3, ab=6, workers=8) -> dict:
+def radiance_check(workdir: Path, *, step=3, ab=6, workers=8, plane_ids=None) -> dict:
     """Same placements, planes and occluders in Radiance (rtrace -I+, ab 0 = direct with shadows; ab N and 2N = total).
     Returns per-plane analytic-vs-Radiance direct, total vs direct and ab N vs 2N, for the scene RENDER_SCENE levels."""
     import os, shutil
@@ -506,7 +517,9 @@ def radiance_check(workdir: Path, *, step=3, ab=6, workers=8) -> dict:
     L = layout()
     boxes = occluders(L)
     room = Room(((-2.0, -36.0), (31.0, -36.0), (31.0, -17.0), (-2.0, -17.0)), floor_z=G, ceiling_z=G + 60.0, rho_floor=RHO_GROUND, rho_wall=0.0, rho_ceiling=0.0, boxes=tuple(boxes))
-    pls, full = planes(L), placements(None)
+    pls, full = [q for q in planes(L) if plane_ids is None or q.id in plane_ids], placements(None)
+    if plane_ids is not None:
+        full = [f for f in full if f.zone in {q.zone_req for q in pls}]
     sensors, owner = [], []
     for pl in pls:
         for pt in pl.points[::step]:
@@ -518,7 +531,7 @@ def radiance_check(workdir: Path, *, step=3, ab=6, workers=8) -> dict:
     for pl in pls:
         idx = [i for i, o in enumerate(owner) if o == pl.id]
         pts = [sensors[i] for i in idx]
-        sel = placements(levels)
+        sel = [q for q in placements(levels) if q.zone in {f.zone for f in full}]      # the same fixtures the job holds
         ana = [MF * eh(sel, (s.x, s.y, s.z, s.nx, s.ny, s.nz), boxes) for s in pts]
         d0 = total_lux(res, levels, ab=0, mf=MF); t1 = total_lux(res, levels, ab=ab, mf=MF); t2 = total_lux(res, levels, ab=2 * ab, mf=MF)
         r0, r1, r2 = ([x[i] for i in idx] for x in (d0, t1, t2))
@@ -529,3 +542,48 @@ def radiance_check(workdir: Path, *, step=3, ab=6, workers=8) -> dict:
                           worst_point_diff=max(abs(a - b) / max(a, 1e-9) for a, b in zip(ana, r0) if a > 0.05 * avg(ana)) if any(a > 0.05 * avg(ana) for a in ana) else 0.0,
                           radiance_total_avg=avg(r1), total_over_direct=avg(r1) / avg(r0) - 1 if avg(r0) else None, convergence=avg(r2) / avg(r1) - 1 if avg(r1) else None)
     return out
+
+
+# ------------------------------------------------------------------ V1 / V2 / V3
+def v1_inputs(lumens_scale: float = 1.0) -> list[dict]:
+    """V1: integrate each bound photometry and compare with the product's stated lumens (2 %). The unverified uplight is reported as such."""
+    rows = []
+    for key, p in PRODUCTS.items():
+        ph = _photometry(key)
+        integ = ph.integrated_flux() if callable(getattr(ph, "integrated_flux", None)) else ph.integrated_flux
+        stated = p["lumens"] * lumens_scale
+        err = integ / stated - 1
+        rows.append(dict(product=key, stated_lm=stated, integrated_lm=round(integ, 1), error=round(err, 4), verified=(key == "iku"),
+                         status=("pass" if abs(err) <= 0.02 else "fail") + ("" if key == "iku" else " (ASSUMED photometry: self-consistency only, not a product check)")))
+    return rows
+
+
+def v2_placement(fixtures=FIXTURES, *, shift=(0, 0, 0), L=None) -> list[str]:
+    """V2: every emitter outside every solid, above the ground, not over a pond, below a 3.6 m mounting limit; every aim point is in the garden."""
+    L = L or layout()
+    boxes, problems = occluders(L), []
+    ponds = [sbox(*f["rect"]) for f in L["features"] if f["kind"] == "pond"]
+    for p in placements(None, fixtures, shift=shift):
+        x, y, z = p.position
+        if z < G + 0.0 - 1e-6 or z > G + 3.6:
+            problems.append(f"{p.id}: emitter height {z - G:.2f} m outside 0-3.6 m")
+        if any(b[0] <= x <= b[3] and b[1] <= y <= b[4] and b[2] <= z <= b[5] for b in boxes):
+            problems.append(f"{p.id}: emitter inside a solid")
+        if any(pd.contains(SPoint(x, y)) for pd in ponds):
+            problems.append(f"{p.id}: emitter over water")
+    return problems
+
+
+def v3_sensors(pls: list[Plane] | None = None, L=None) -> list[str]:
+    """V3: no horizontal floor sensor inside a furniture or plant-pot footprint, none within 50 mm of one, every sensor on the plane's height."""
+    L = L or layout()
+    pls = pls if pls is not None else planes(L)
+    low = [o for o in occluders(L) if o[2] < G + 0.3 and o[5] - o[2] < 3.0]
+    problems = []
+    for pl in pls:
+        for pt in pl.points:
+            for o in low:
+                if o[0] - 0.05 <= pt[0] <= o[3] + 0.05 and o[1] - 0.05 <= pt[1] <= o[4] + 0.05 and pt[2] < o[5] - 0.2 and pl.kind != "table":
+                    problems.append(f"{pl.id}: sensor ({pt[0]:.2f}, {pt[1]:.2f}) inside or within 50 mm of an object")
+                    break
+    return problems

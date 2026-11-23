@@ -1908,6 +1908,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
 
     # ---- lights and fixture bodies
     lights = []
+    if GARDEN_SOURCE == "ldb":      # lane LG: the garden's own lighting design (lightcalc.garden), built by landscape/build/lights.py
+        from ..landscape.build import production as PRD_LG
+        lights.extend(PRD_LG.lights())
     walls_by_level = {lv: F._walls(RS.build(lay), lv) for lv in ("B", "GF")}
     for f in VL.design(lay):
         record = f.record
@@ -3226,7 +3229,10 @@ def write(path=None, views=None, *, measure_exposure_groups=False):
     # only beside this explicitly requested export, never in global OUT.
     for light in scene["lights"]:
         ies = light.get("ies", "")
-        if ies.startswith("generic/"):
+        if ies.startswith("garden/"):      # lane LG: the garden fittings' own IES (the manufacturer's file for the Iku), written beside the scene
+            from archpipe.landscape.build import production as PRD_LG
+            PRD_LG.write_ies(light, path.parent / "ies" / ies)
+        elif ies.startswith("generic/"):
             kind = Path(ies).stem
             target = path.parent / "ies" / ies
             target.parent.mkdir(parents=True, exist_ok=True)

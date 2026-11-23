@@ -278,6 +278,8 @@ def garden(layout_path=LAYOUT, age=3):
         if o.kind == "plant":
             plants.append(dict(id=o.id, species=o.meta.get("species", ""), standin=o.standin, generated=bool(o.meta.get("fg")), fidelity=(o.meta.get("fg") or {}).get("fidelity"), label=o.label))
     meshes += _fence_meshes(sc, table) + _ground_meshes(sc, table)
+    from . import lights as LT          # lane LG: fitting bodies; the lights themselves go to the scene through `lights()`
+    meshes += LT.bodies()
     gen = sum(1 for p in plants if p["generated"])
     drawn = sum(1 for p in plants if not p["standin"]) - gen
     spec_ = sum(1 for p in plants if p["fidelity"] == "species")
@@ -286,6 +288,20 @@ def garden(layout_path=LAYOUT, age=3):
     return dict(meshes=meshes, props=props, notes=notes, materials=table, scene=sc, plants=plants,
                 plan=dict(g6=None, beds={}, accent_beds={}, paths={}, plants=[], plant_light_review=[], layout_id=L["meta"]["layout_id"]),
                 summary=dict(plants=len(plants), drawn=drawn, generated=gen, generated_species_fidelity=spec_, standins=len(plants) - drawn - gen))
+
+
+def lights():
+    """Scene lights of the garden lighting design (lane LG), one per live fitting at the render scene's levels. The scene builder appends them to `scene["lights"]` and, at write time, calls `write_ies`."""
+    from . import lights as LT
+    return LT.lights()
+
+
+def write_ies(light, target):
+    from . import lights as LT
+    LT.write_ies(light, target)
+
+
+DUSK_STATES = ("exterior-dusk",)
 
 
 def view_hides(garden_meshes, season, state="closed"):
@@ -401,6 +417,8 @@ def prepare_view(view, g):
     """Hide the other season's and the other state's meshes in this view; for a garden view drop the authored old-garden subject lists and name the garden objects in frame."""
     hid = view_hides(g["meshes"] + g["props"], season_for(view["when"]), view.get("ld_state", "closed"))
     view["hide_meshes"] = list(dict.fromkeys(list(view.get("hide_meshes", [])) + hid))
+    if view.get("state") in DUSK_STATES and is_garden_view(view) and "evening-garden" not in view.get("layers_on", []):
+        view["layers_on"] = list(view.get("layers_on", [])) + ["evening-garden"]      # lane LG: the garden's lights are on in every garden view at dusk
     if not is_garden_view(view):
         return
     if view["camera"]["position"][2] < -0.5:
@@ -427,6 +445,8 @@ KEY_VIEWS = {
     "gi-living-door": dict(title="South garden from the living door", position=[22.85, -26.13, -1.65], target=[27.5, -26.33, -1.65], shift_y=0.02),
     "gi-dining-firepit": dict(title="South garden: dining table, fire pit and the screen opening", position=[27.4, -25.0, -1.75], target=[25.1, -29.6, -1.75], shift_y=-0.04),
     "gi-north-court-pond": dict(title="North court: the koi pond from the lounge side, standing close so the fish are seen through the water", position=[3.2, -25.0, -1.65], target=[0.4, -25.0, -1.65], shift_y=-0.25),
+    "gi-dining-firepit-dusk": dict(title="South garden at dusk: dining table, fire pit and the screen opening, garden lit", position=[27.4, -25.0, -1.75], target=[25.1, -29.6, -1.75], shift_y=-0.04, tpl="v07-terrace-dusk"),
+    "gi-north-court-pond-dusk": dict(title="North court at dusk: the koi pond from the lounge side, edge lit", position=[3.2, -25.0, -1.65], target=[0.4, -25.0, -1.65], shift_y=-0.25, tpl="v07-terrace-dusk"),
     # the same camera twice, October and January: the shade tree's two leaf states (client: sun welcome Dec-Feb)
     "gi-dining-crown-summer": dict(title="Dining under the crape: leaf-on (October)", position=[23.3, -27.6, -1.65], target=[26.4, -24.4, -1.65], shift_y=0.05),
     "gi-dining-crown-winter": dict(title="Dining under the crape: leaf-off (January)", position=[23.3, -27.6, -1.65], target=[26.4, -24.4, -1.65], shift_y=0.05, when="2027-01-15T10:30:00+02:00"),
@@ -439,11 +459,11 @@ def key_views(base_views):
     import copy
     import yaml
     from ...concept.villa_render import sun_for_timestamp
-    tpl = next(v for v in base_views if v["id"] == "v41-south-garden-terrace")
+    tpls = {v["id"]: v for v in base_views}
     loc = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))["location"]
     out = []
     for vid, k in KEY_VIEWS.items():
-        v = copy.deepcopy(tpl)
+        v = copy.deepcopy(tpls[k.get("tpl", "v41-south-garden-terrace")])
         v.update(id=vid, title=k["title"], final_only=False)
         v["camera"] = dict(position=k["position"], target=k["target"], lens_mm=24, sensor_mm=36, shift_x=0.0, shift_y=k["shift_y"])
         v["samples"] = 1024

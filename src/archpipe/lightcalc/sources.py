@@ -162,6 +162,11 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
         quote="", value="outdoor dining table: average 30 lx (min 15) summer-night scene, 40 lx social scene; no published figure exists; 1.5x cap by L6-POLICY-LA2",
         status="policy", url_or_path="docs/lanes/LG.md"),
     SourceCard(
+        id="LG-POLICY-pond-water-not-flooded",
+        document="LG lane policy (from the text of rule LS-POND-EDGE-LIGHT, fix: 'do not flood the water')", edition="2026-11", locator="knowledge/landscape/rules/rules.json LS-POND-EDGE-LIGHT",
+        quote="", value="mean Eh on the water surface <= mean Eh on the margin ring (the margin is lit, the water is not the brightest thing); no published figure",
+        status="policy", url_or_path="docs/lanes/LG.md"),
+    SourceCard(
         id="LG-OBTRUSIVE-GN01-CIE150-not-held",
         document="ILP GN01 and CIE 150 (not held)", edition="", locator="obtrusive light, environmental zones",
         quote="", value="NOT USED for any number; the E3 limits are SLL Table 3.2 (SLL-T3.2-E3), held. GN01 / CIE 150 must be read before the figures are quoted as theirs",
