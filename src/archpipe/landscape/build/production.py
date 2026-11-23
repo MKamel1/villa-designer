@@ -295,7 +295,8 @@ def garden_view_ids():
 
 
 def is_garden_view(v):
-    return v["id"] in garden_view_ids()
+    """A render-set garden view, a key view, or any view whose authored subjects name the previous garden's meshes (`landscape-*`: those no longer exist)."""
+    return v["id"] in garden_view_ids() or any(str(x).startswith("landscape-") for x in v.get("subjects", []))
 
 
 def _in_frame(cam, p, aspect):
