@@ -132,3 +132,48 @@ Glare (policy 3000 cd/m2 within 45 deg of a level sightline from 8 seated or sta
 * **No phase-cut**: Iku is DALI-2 (datasheet); drivers are in the fitting.
 * **Driver <= 0.80**: met everywhere.
 * **Flush/concealed**: nothing is flush in the ground (no verified product), so the "flush fittings for ambient" aesthetic is met on walls and screens only.
+
+## In the production scene
+
+* `landscape/build/lights.py` + `production.lights()/write_ies()`; one small edit **outside LG's ownership**, in `concept/villa_render.py` (L2's file; `lane_guard` lists it): `lights.extend(PRD.lights())` after the interior lights, and the writer calls `PRD.write_ies` for `garden/...` IES paths (the Iku's own ERCO file, and the ASSUMED uplight's). No other file outside the lane's paths was touched except the two exposure records the shared-file rule requires.
+* 22 lights (19 Iku, 3 uplights) at the `social-gathering` levels (`RENDER_SCENE`: the dusk views show a gathering; layer `evening-garden`, `dimmer` = scene level, `lumens` = rated). 17 black Iku bodies of 76 mm with 30 mm arms to the wall, screen post or fence (arms are ASSUMED accessories, drawn so the scene's support and part guards see a mounted fixture; the two branch-clamped dining fittings and the uplights have no body: nothing in the scene hosts them). Bodies are `dressing` solids; their lens is not emissive (the lit face of a downlight is not drawn).
+* Dusk garden views get the `evening-garden` layer in `prepare_view` (exterior-dusk garden views only; day views and interior dusk views do not: tests with negatives). Two new key views, `gi-dining-firepit-dusk` and `gi-north-court-pond-dusk`, clone `v07-terrace-dusk`.
+* **Camera fix found by the first dusk render**: v07 and v19 stood in the south-east bed corner, 0.00 m from a plant (GI's override said "NOT CLEARED ... camera left where it is"), and a black plant leaf crossed v07's frame. `CLEAR_SEARCH_M` 3.5 -> 6 m: v07 moves to (24.0, -23.41), v19 likewise cleared; `test_no_production_garden_view_is_left_uncleared` with the old 3 m search as its negative.
+* **Mounting guard**: the first bodies floated (PS-3 stood past the end of the facade at y -23.50; the facade ends at y -23.591) and a rectangular arm was refused as a "bare rectangular proxy": found by `tests/test_mounting_finish_layers.py`, fixed (PS-3 moved to y -23.75; arms are octagonal prisms wound outward; `tests/lightcalc/test_garden_scene.py::Winding`).
+
+## Shared-file step (rule: merge integ taking theirs, regenerate baseline-relative, re-measure with a new id, rebuild with no bypass)
+
+* Merged `origin/integ/aplus` (`2058b49`; it carried only decision documents): no conflicts.
+* **Receipts** `furniture-stage2.json.gz` / `parents-bed.json.gz`: the garden lights touch neither section; the no-bypass production and set builds accept the committed receipts, so nothing was regenerated (a regeneration would re-sign unchanged digests; the same finding as RF).
+* **Exposure** re-measured through Blender on the final fittings, new jobq ids: production `LG-final2-measure-2` (48 views; the earlier `-1` died of `System is out of GPU memory` while another job held 18 GB; re-run `--exclusive`), render set `LG-final2-measure-set-1` (46 views); both copied byte-for-byte. Dusk views, lamp fraction / group: v07 0.133 exterior-dusk, v42 0.578 exterior-dusk-dim (was 0.0004: the lamps now carry half its metered luminance), gi-dining-firepit-dusk 0.189 exterior-dusk, gi-north-court-pond-dusk 0.517 exterior-dusk-dim. No other group membership was changed by this lane (see the diff of the two records).
+* **Scenes, no bypass** (committed tree `a36226c`, `git_dirty` false, same `source_hash` `7215cd5c7cbceabc...` for both): production `villa_render.write` 41+ views / 48 in this tree, 259,654,237 bytes, sha256 `4773303696e5d883adb8e04d6b24f338f954182609851022872b2f35e335baf4`, 1,239 meshes; render set `render_set.write_scene` 46 views, 259,670,844 bytes, sha256 `e9c11e6a31fc1d1e2e4e28fd4babdf606fbadaef91cf325609cc0dad4eb6cba2`.
+
+## The four dusk views (final: jobq `LG-final2-render-2`, GPU, 128 spp, 1920 x 1280, scene cache `~/archpipe/cache/scene-lg3`; I looked at every image; copies in `knowledge/lighting/garden/dusk/`)
+
+The group exposure is locked to the sky ("neither exposure nor white balance is compensated"), so the garden lights are small warm pools in a blue-hour scene, not the subject.
+
+* **`gi-north-court-pond-dusk`** (render_qa **pass**, `highlights_present` info only): the koi pond close from the lounge side. The gravel margin on both sides of the pond is a soft warm pink-beige against the blue-grey wall, the star-jasmine on the wall reads green with a little warm light on its lower leaves, the koi are visible through the grille, the water is dark teal. Calm; the fittings are above the frame. This is the one view that reads as "lit garden".
+* **`v42-north-garden-evening`** (render_qa **pass**, was FAIL colour_cast 0.101 before): the pond seen through the lounge door frame (a dark mullion fills the right third; that is GI's camera). Warm margin around the pond and warm paving, warm wash high on the wall, jasmine green. The cool cast now measures inside the limit. Still reads more like late afternoon than night.
+* **`gi-dining-firepit-dusk`** (render_qa **FAIL**: `colour_cast` cool 0.067, limit 0.02; before: no such view): from the east end of the south garden toward the fire-pit opening. Two black Iku on short arms are visible on the screen posts; a faint warm disc of light lies on the paving at the pit cover (the cover circle is visible); the walls and sky are blue-grey. The pit has no flame (the gas flame is not modelled). The lights are too small against the sky for the cast to drop.
+* **`v07-terrace-dusk`** (render_qa **FAIL**: `colour_cast` 0.025 vs 0.02 (before 0.057-0.074), `highlight_clipping` 11.0 % vs 3 % (the sky patch top right, larger because the camera moved): from the dining table toward the rear wall with the crape's branches in front. A warm pool of grazing light on the rear wall above the jasmine, warm light on the crape's stems from the uplight, leaf-dappled light on the table from the two branch downlights, the bar of an Iku on the sister screen. The black leaf of the first render is gone.
+
+Honest limits: three of four are blue hour with small warm accents; two fail `render_qa`. The remaining `colour_cast` is the specified dusk sky (v07's caption: "the dusk cool cast is faithful"); it will not clear with garden lights alone and the fix is a later sky or a different exposure rule, not mine. Uplights show as light on stems and under-leaf, with no visible source (in-ground). No render is a lux measurement.
+
+## Tests
+
+Fresh clone of the pushed `lane/LG` at `a36226c` (jobq, `NO_COLOR=1`, laneP-venv):
+* lane suite (`tests/lightcalc tests/luminaires tests/lightverify tests/landscape tests/critic tests/test_villa_lighting.py tests/test_exposure_groups.py tests/test_villa_render_*.py tests/parity tests/markup`): see the hand-back (job `LG-tests-lane-2`, log below).
+* scene group (`tests/test_mounting*.py tests/test_d1_*.py tests/test_villa_parking.py`): **124 passed, 1 skipped** (`LG-tests-scene-2`).
+* `python -m archpipe.compliance.run_d1` (`LG-run-d1-2`): exit 0, 198 results, **0 failing gates** (the regenerated L1 report was left in the throwaway clone).
+* New tests: `tests/lightcalc/test_garden.py` (33: Cards 2, SafetyPlanes 8, Headroom 4, Dining 3, Spill 5, Glare 2, ZonesModel 2, Verification 8 incl. mutations and hand calculation, RadianceCrossCheck 2 with a negative) and `tests/lightcalc/test_garden_scene.py` (16).
+
+## Open items
+
+1. **Product**: confirm ERCO's 2700 K Iku article and its LDT (3000 K file in use); find a 2700 K / CRI >= 90 / DALI / IP67 narrow in-ground uplight WITH an LDT (V1/V10) and bind it to `up-assumed`; fetch BX67's file if the soffit alternate is wanted. Nothing here is purchasable for the uplights.
+2. **Night 2200 K** is not met (fixed CCT).
+3. **Fixture mounting** (wall arm, branch clamp, post bracket) are not in the architectural model or any product list; the slab edge at 2.4 m, the sister-screen posts and the crape branch at 3.0 m need a designer and an arborist. The sister owner must agree to a fitting on the shared posts (and to the pit light falling on their garden).
+4. **Survey**: neighbour and apartment window positions are assumed heights; the apartment above's windows have no model. Cairo's leaf-drop months (crape) set when the winter scene starts.
+5. **DIALux (V11)** and **Cycles (V5c)** for the garden are not run; no V9.
+6. Merge `zones-garden.json` into the electrical lane's zone list; its 22 drivers and the DALI addresses are not sized.
+7. The water surface is lit at about 85 % of the margin (a downlight cannot be shielded from the water it stands over); an underwater or a low shielded margin product would be better and has none verified.
+8. The dusk views remain blue-hour: the sky/exposure rule, not the lamps, decides the cast.

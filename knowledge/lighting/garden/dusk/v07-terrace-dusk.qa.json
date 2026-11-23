@@ -1,5 +1,5 @@
 {
-  "image": "out/LG/final1/v07-terrace-dusk.png",
+  "image": "out/LG/final2/v07-terrace-dusk.png",
   "passed": false,
   "failed": [
     "colour_cast"
@@ -8,19 +8,19 @@
     {
       "check": "highlight_clipping",
       "status": "WARN",
-      "detail": "11.6% of pixels clipped (limit 3%) (exposure locked across the set)",
+      "detail": "11.0% of pixels clipped (limit 3%) (exposure locked across the set)",
       "lesson": "Sunlit white bedding blew out to pure white; expose for highlights."
     },
     {
       "check": "highlights_present",
       "status": "PASS",
-      "detail": "99.5th-percentile luminance 1.00 (min 0.9)",
+      "detail": "99.5th-percentile luminance 0.99 (min 0.9)",
       "lesson": "Nothing reached white, so the image read as a flat, milky render."
     },
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.33 (min 0.3)",
+      "detail": "median luminance 0.32 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
@@ -32,13 +32,13 @@
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "2.0% of pixels near black (limit 8%)",
+      "detail": "2.1% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "FAIL",
-      "detail": "mid-tone cast 0.028 (cool; limit 0.1 warm, 0.02 cool)",
+      "detail": "mid-tone cast 0.025 (cool; limit 0.1 warm, 0.02 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {

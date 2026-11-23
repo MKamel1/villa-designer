@@ -1,5 +1,5 @@
 {
-  "image": "out/LG/final1/gi-dining-firepit-dusk.png",
+  "image": "out/LG/final2/gi-dining-firepit-dusk.png",
   "passed": false,
   "failed": [
     "colour_cast"
@@ -8,7 +8,7 @@
     {
       "check": "highlight_clipping",
       "status": "PASS",
-      "detail": "2.6% of pixels clipped (limit 3%)",
+      "detail": "1.8% of pixels clipped (limit 3%)",
       "lesson": "Sunlit white bedding blew out to pure white; expose for highlights."
     },
     {
@@ -20,7 +20,7 @@
     {
       "check": "exposure_midtones",
       "status": "PASS",
-      "detail": "median luminance 0.61 (min 0.3)",
+      "detail": "median luminance 0.60 (min 0.3)",
       "lesson": "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median."
     },
     {
@@ -38,7 +38,7 @@
     {
       "check": "colour_cast",
       "status": "FAIL",
-      "detail": "mid-tone cast 0.068 (cool; limit 0.1 warm, 0.02 cool)",
+      "detail": "mid-tone cast 0.067 (cool; limit 0.1 warm, 0.02 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {

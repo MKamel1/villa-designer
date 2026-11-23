@@ -1,5 +1,5 @@
 {
-  "image": "out/LG/final1/gi-north-court-pond-dusk.png",
+  "image": "out/LG/final2/gi-north-court-pond-dusk.png",
   "passed": true,
   "failed": [],
   "checks": [
@@ -30,13 +30,13 @@
     {
       "check": "crushed_shadows",
       "status": "PASS",
-      "detail": "1.7% of pixels near black (limit 8%)",
+      "detail": "1.6% of pixels near black (limit 8%)",
       "lesson": "A room lit by nothing (glass blocking daylight) renders near-black."
     },
     {
       "check": "colour_cast",
       "status": "PASS",
-      "detail": "mid-tone cast 0.012 (warm; limit 0.1 warm, 0.02 cool)",
+      "detail": "mid-tone cast 0.013 (warm; limit 0.1 warm, 0.02 cool)",
       "lesson": "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue."
     },
     {
