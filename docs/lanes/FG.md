@@ -38,20 +38,60 @@ FL.caption(plant.label, close_up=True)   # the ONLY text a caption may use; a fo
 
 ## Labelling (non-negotiable)
 
-Every plant records `generator_version`, `seed`, `atlas_used`, `atlas_species`, `fidelity`, `leaf_len_source`. `fidelity: species` only if the
-single atlas is a scan of that species and its outline is scanned. In the current library **only star jasmine (*Trachelospermum jasminoides*) is
-`species`**; everything else is `form-class`: no scan of that species is held (Arabian jasmine, petrea, justicia, salvia leucantha, acorus, farfugium,
-fatsia, grape, alpinia, crape myrtle). `validate_label` refuses a `species` claim whose atlas is another species or whose outline is generated.
+Every plant records `generator_version`, `seed`, `atlas_used`, `atlas_species`, `atlas_match` (`species` | `genus` | `none`), `fidelity`, `leaf_len_source`.
+`fidelity: species` only if the single atlas is a scan of that species and its outline is scanned. **Species now: star jasmine
+(*Trachelospermum jasminoides*) and grape (*Vitis vinifera*, Common Grape Vine scan, client download 2026-11-22).** Pittosporum tobira is `form-class`
+with `atlas_match: genus` (Australian Laurel = *P. undulatum*). Everything else is form-class (`none`). `validate_label` refuses a `species` claim whose
+atlas is another species or whose outline is generated.
+
+## Client Fab downloads (2026-11-22): manifest, use, rejections
+
+`knowledge/landscape/foliage/assets_manifest.json` (script `knowledge/landscape/foliage/tools/fg_manifest.py`): sha256, listing URL, licence for the 15 Fab zips and the two
+Poly Haven textures. Fab: Personal+Professional, commercial use allowed, no standalone redistribution (zips stay out of git). Poly Haven: CC0.
+Sprig atlases (Weeping Fig, Chinese Wisteria) are cut into single leaves by erosion; a card keeps only its own leaf (cleaned opacity map in
+`generated/`, isolation test, pale/lime leaves dropped for Australian Laurel).
+
+| class | leaf bank | fidelity |
+|---|---|---|
+| grape | Common Grape Vine | species |
+| Pittosporum tobira | Australian Laurel | form-class, genus match |
+| Justicia | Weeping Fig | form-class |
+| Salvia leucantha | Australian Laurel (narrowed) | form-class |
+| Arabian jasmine, Petrea | Chinese Wisteria leaflets | form-class |
+| Acorus | African Flag blades | form-class |
+| Farfugium | Taro (kept) | form-class |
+| Fatsia | generated palmate outline, Taro surface (kept) | form-class |
+
+Tried and not used (sheets rendered, judged by eye): **Spotted Laurel** is *Aucuba* with toothed, yellow-speckled leaves, wrong for Justicia (plain
+green): atlas and the 3D FBX not used. **Tree Philodendron** for Fatsia: narrow pinnatifid leaf, the plant reads as a philodendron. **Elephant Ear** for
+Farfugium: pointed sagittate leaf, worse than Taro. The Spotted Laurel FBX is unused (not needed by any class).
 
 ## Grades (LDL 5 m / 15 m rubric, by eye on `knowledge/landscape/foliage/sheets/`; own rubric, not a standard)
 
-See `grades.json` for the table with sheet paths; summary in the hand-back. Reference photos of the species were NOT fetched in this unattended run: the
-comparison is against the sourced habit text and my knowledge of the plants, which is a weaker check than the rubric asks for (open item).
+`grades.json` has grade_before, grade, why, sheet, reference photo for each class. Every class was compared with a public reference photo
+(Wikimedia Commons, licences CC0 / CC BY / CC BY-SA, recorded in `grades.json`; used for grading only, not committed). Result: vitis C->B, pittosporum
+new B, farfugium B->C (stricter against the reference), petrea C, salvia C, the rest unchanged B.
+Salvia and Petrea stay C because their identity is the flower (purple spikes, violet calyx racemes) and no scan of either exists; nothing was invented.
+
+## Crape myrtle bark
+
+Compared against two reference photos of *Lagerstroemia indica* (pale grey-tan to pinkish, smooth, mottled, flaking in thin plates): Poly Haven
+`bark_platanus` is dark brown and finely cracked (reads as plane/oak); Fab Banyan Bark 4K is pale grey-tan, smoother, mottled. **Banyan Bark chosen**
+(`FG_BARK`, default `banyan` in `blender_build.py`; `platanus` and `sakura` selectable). Both were rendered on the same leaf-off tree.
+(The previous run's bark path used a directory that may not have existed, so the earlier platanus claim was not verified in the render.)
+
+## For lane GI: mulch and soil (not built here)
+
+Planting-bed ground, in `~/archpipe/shared/assets/user/landscape/fab/unzipped/` (glTF + PNG maps, `Textures/T_<id>_4K_{B,N,ORM,H}.png`):
+* `mulch_omsvgjp0_4k_ue_high`: fine bark-chip/gravel mulch (orange and dark chips), scan area 0.74 x 0.74 m, 4096 px. Tile at 0.74 m. Use under shrubs.
+* `soil_mulch_sfwnbgba_4k_ue_high`: dark brown fine soil with fibres, scan area 2 x 2 m, 0.07 m relief, tileable. Use for the finer bed.
+The glTF is a 2-unit plane: set UV tiling from the physical size above, not from the plane. ORM = occlusion/roughness/metal, H = height.
 
 ## Not done / limits
 
-* No flowers: the only flower scan held is bougainvillea, and bougainvillea is not in the layout (petrea's calyces would be an invented flower). Justicia
-  bracts, salvia spikes, fatsia umbels, crape panicles are absent. Flower-card support is not implemented because nothing may use it.
-* Creeping fig is a wall *texture* with no cut-out map, so it cannot be generated; keep the LDL texture wall for it.
-* Colour: leaf colours are stated targets (`colour` in `species.py`, policy) applied to the scan's mean colour, not measured from reference photos.
-* Crape bark: Poly Haven `bark_platanus` (CC0) - mottled smooth bark, not a crape-myrtle scan.
+* No flowers: no scan of the species' flowers is held (bougainvillea is not in the layout). Justicia bracts, salvia spikes, Petrea calyces, Fatsia
+  umbels and crape panicles are absent; flower-card support is not implemented.
+* Grape: no tendrils or bunches (no usable scan cut-outs); lax habit only.
+* Creeping fig is a wall *texture* with no cut-out map; keep the LDL texture wall.
+* Colour: leaf colours are stated targets, not measured from the reference photos; Salvia's drifts yellow.
+* The sheets were rendered on CPU (ARCHPIPE_CPU=1, jobq without `--gpu`) because the GPU queue was occupied.

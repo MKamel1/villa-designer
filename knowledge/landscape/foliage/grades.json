@@ -1,58 +1,87 @@
 {
  "justicia_brandegeeana": {
   "grade": "B",
-  "why": "reads as a dense, glossy broadleaf shrub at 5 m and 15 m with stems showing at the base; too tidy and egg-shaped (real Justicia is lax and arching) and no bracts (no scan, not invented)",
-  "sheet": "knowledge/landscape/foliage/sheets/justicia_brandegeeana_s1_leaf-on_sheet.jpg"
+  "why": "dense glossy shrub from Weeping Fig leaves, reads as a leafy shrub at 5 m and 15 m; still a tidy egg where the real plant is lax and arching, and bracts are absent (no scan)",
+  "sheet": "knowledge/landscape/foliage/sheets/justicia_brandegeeana_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Justicia brandegeeana 2020 Walbrzych kz01' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "salvia_leucantha": {
   "grade": "C",
-  "why": "narrow-leaf grey-green bush but the leaf bank (ginger-lily blades) is olive/yellowish and the plant is a dense dome: without the purple spikes (no scan) it is not recognisable as Salvia leucantha; reads as a generic narrow-leaf shrub",
-  "sheet": "knowledge/landscape/foliage/sheets/salvia_leucantha_s1_leaf-on_sheet.jpg"
+  "why": "narrow-leaf mound but the plant is a round dome of olive-yellow leaves on visible trunks; real S. leucantha is an upright mass of grey-green velvety lance leaves whose identity is the purple spikes (no scan, none invented). The Australian Laurel scan colours drift yellow under the grey-green tint (hue gain clipped, blue channel near zero)",
+  "sheet": "knowledge/landscape/foliage/sheets/salvia_leucantha_s1_leaf-on_sheet.jpg",
+  "grade_before": "C",
+  "reference_photo": "Wikimedia Commons 'Salvia leucantha (Mexican Bush Sage)' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "acorus_gramineus": {
   "grade": "B",
-  "why": "reads as a fine arching sedge/Acorus tuft at 5 m and a small grass tuft at 15 m; blades are scan cut-outs, widths squeezed (form-class)",
-  "sheet": "knowledge/landscape/foliage/sheets/acorus_gramineus_s1_leaf-on_sheet.jpg"
+  "why": "African Flag blades: reads as an ornamental grass clump at 5 m and a small tuft at 15 m; sparser and straighter than the dense, finely arching Acorus fans",
+  "sheet": "knowledge/landscape/foliage/sheets/acorus_gramineus_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Acorus gramineus' (CC BY 2.0); used for grading only, not committed"
  },
  "alpinia_zerumbet": {
   "grade": "B",
-  "why": "upright leafy canes with large lanceolate leaves reads as a ginger-family plant; more upright than the arching real habit; not in the current layout",
-  "sheet": "knowledge/landscape/foliage/sheets/alpinia_zerumbet_s1_leaf-on_sheet.jpg"
+  "why": "unchanged: leafy canes with lanceolate leaves, reads as a ginger; narrower, more upright and less glossy than the reference; not in the layout",
+  "sheet": "knowledge/landscape/foliage/sheets/alpinia_zerumbet_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Alpinia zerumbet - shell ginger' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "farfugium_japonicum": {
-  "grade": "B",
-  "why": "glossy kidney-shaped leaves on petioles in a basal mound reads as a leopard plant/taro-type; petioles a little straight and leaves unspotted",
-  "sheet": "knowledge/landscape/foliage/sheets/farfugium_japonicum_s1_leaf-on_sheet.jpg"
+  "grade": "C",
+  "why": "the Elephant Ear scan (a pointed sagittate Alocasia leaf) was tried and rejected: wrong leaf shape; the Taro bank is kept. Even so a sparse tall plant on bare petioles; the real farfugium is a dense low mound of round to kidney leaves, so it fails the reference comparison (it was B by the sourced-habit-text check)",
+  "sheet": "knowledge/landscape/foliage/sheets/farfugium_japonicum_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Farfugium japonicum kz01' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "fatsia_japonica": {
   "grade": "B",
-  "why": "palmate, lobed, glossy leaves on stout stems read as a Fatsia at 5 m and 15 m; outline is generated (not scanned), lower third of the stems is bare",
-  "sheet": "knowledge/landscape/foliage/sheets/fatsia_japonica_s1_leaf-on_sheet.jpg"
+  "why": "unchanged. The Tree Philodendron leaf was tried (sheet rendered, not kept): its leaf is narrow and pinnatifid, the plant reads as a lanky philodendron, not Fatsia. The generated 9-lobe palmate outline reads as Fatsia; lower stems are bare",
+  "sheet": "knowledge/landscape/foliage/sheets/fatsia_japonica_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Fatsia japonica kz03' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "jasminum_sambac": {
   "grade": "B",
-  "why": "glossy dark-green foliage panel on a trellis with trailing shoots, reads as a climber at 5/15 m; uniform (no visible stems), no flowers (no scan)",
-  "sheet": "knowledge/landscape/foliage/sheets/jasminum_sambac_s1_leaf-on_sheet.jpg"
+  "why": "wisteria leaflets as a dense glossy climber panel with trailing shoots, reads as a climber at 5/15 m; leaves are smaller and more pointed than the broad round leaves of Arabian jasmine, no flowers (no scan)",
+  "sheet": "knowledge/landscape/foliage/sheets/jasminum_sambac_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Jasminum sambac kz01' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "trachelospermum_jasminoides": {
   "grade": "B",
-  "why": "glossy ovate leaves on a trellis: the one species-faithful plant (the leaf scan is the species); uniform coverage, no flowers",
-  "sheet": "knowledge/landscape/foliage/sheets/trachelospermum_jasminoides_s1_leaf-on_sheet.jpg"
+  "why": "unchanged: the species-faithful plant; compact uniform leaf wall, no flowers",
+  "sheet": "knowledge/landscape/foliage/sheets/trachelospermum_jasminoides_s1_leaf-on_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Trachelospermum jasminoides Reunion' (CC0); used for grading only, not committed"
  },
  "petrea_volubilis": {
   "grade": "C",
-  "why": "large dark leaves read as a leafy climber but not as Petrea: no purple calyces (not scanned, not invented), leaf bank is jasmine/ginger blades (form-class)",
-  "sheet": "knowledge/landscape/foliage/sheets/petrea_volubilis_s1_leaf-on_sheet.jpg"
+  "why": "wisteria leaflets on a lax climber: reads as a leafy climber but not as Petrea; the genus is defined by violet-blue calyx racemes at 5 m and 15 m, and no scan of them exists, so none were invented. Leaves are smaller and more pointed than Petrea's rough oblong-elliptic leaves",
+  "sheet": "knowledge/landscape/foliage/sheets/petrea_volubilis_s1_leaf-on_sheet.jpg",
+  "grade_before": "C",
+  "reference_photo": "Wikimedia Commons 'Petrea volubilis bush' (CC BY-SA 3.0); used for grading only, not committed"
  },
  "vitis_vinifera": {
-  "grade": "C",
-  "why": "lobed leaf shape on a vine panel, but a uniform wall of leaves with yellow translucent edge glow, no tendrils or bunches; outline generated",
-  "sheet": "knowledge/landscape/foliage/sheets/vitis_vinifera_s1_leaf-on_sheet.jpg"
+  "grade": "B",
+  "why": "lobed Common Grape Vine scan leaves (species fidelity), a lax vine with open gaps, visible canes and hanging shoots; reads as a grape on a trellis at 5 m, a green mass at 15 m. Compared with the reference the leaves are darker and the habit still too compact; no tendrils or bunches (the atlas holds only tendril-bearing sprigs, not usable tendril or fruit cut-outs, so none were invented)",
+  "sheet": "knowledge/landscape/foliage/sheets/vitis_vinifera_s1_leaf-on_sheet.jpg",
+  "grade_before": "C",
+  "reference_photo": "Wikimedia Commons 'Common grape vine (Vitis vinifera) leaves intertwined with a wire fence' (CC BY-SA 4.0); used for grading only, not committed"
  },
  "lagerstroemia_indica": {
   "grade": "B",
-  "why": "leaf-on and leaf-off states (see both sheets): a 4.5 m x 4.0 m pruned multi-stem tree, 4 stems clear to 2.2 m, forking limbs, round head; reads as a real tree at 5 m and 15 m; leaf-off is the stronger of the two. Mottled CC0 plane bark, glossy leaf cards are jasmine leaves (form-class)",
+  "why": "multi-stem tree with pale grey-tan Banyan Bark; reads as crape myrtle at 5/15 m; leaf-off is stronger; no panicles (no scan), leaves are star-jasmine leaves (form-class)",
   "sheet": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-on_sheet.jpg",
-  "sheet_leaf_off": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-off_sheet.jpg"
+  "sheet_leaf_off": "knowledge/landscape/foliage/sheets/lagerstroemia_indica_s1_leaf-off_sheet.jpg",
+  "grade_before": "B",
+  "reference_photo": "Wikimedia Commons 'Lagerstroemia indica MHNT Jardin des Plantes de Toulouse' (CC BY-SA 4.0); used for grading only, not committed"
+ },
+ "pittosporum_tobira": {
+  "grade": "B",
+  "grade_before": null,
+  "why": "new class: dense glossy mounded shrub from the Australian Laurel scan (genus match, form-class); reads as Pittosporum at 5 m and 15 m; the real plant's leaf whorls are more clustered at the tips and fruit/flowers are absent",
+  "reference_photo": "Wikimedia Commons 'Pittosporum-tobira-Sitia-Crete-Greece' (CC BY-SA 4.0); used for grading only, not committed",
+  "sheet": "knowledge/landscape/foliage/sheets/pittosporum_tobira_s1_leaf-on_sheet.jpg"
  }
 }
