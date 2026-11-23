@@ -36,11 +36,11 @@ Function and beauty per space, with the client's aesthetic (flush/concealed for 
 | EP-3 | pond-E | safety | ERCO Iku B0000184 | 19.80, -23.30, 2.40 | north building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed) |
 | EP-5 | pond-E | safety | ERCO Iku B0000184 | 16.95, -20.78, 2.40 | south wall bracket 0.15 m off the face |
 | EP-6 | pond-E | safety | ERCO Iku B0000184 | 20.20, -20.78, 2.40 | south wall bracket 0.15 m off the face |
-| FP-1 | pit | safety | ERCO Iku B0000184 | 23.80, -29.65, 1.90 | sister-screen post, non-combustible bracket |
-| FP-2 | pit | safety | ERCO Iku B0000184 | 27.00, -29.65, 1.90 | sister-screen post, non-combustible bracket |
+| FP-1 | pit | safety | ERCO Iku B0000184 | 23.80, -29.80, 1.90 | sister-screen post, non-combustible bracket |
+| FP-2 | pit | safety | ERCO Iku B0000184 | 27.00, -29.80, 1.90 | sister-screen post, non-combustible bracket |
 | PS-1 | path-S | safety | ERCO Iku B0000184 | 22.90, -27.30, 2.40 | house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed) |
 | PS-2 | path-S | safety | ERCO Iku B0000184 | 22.90, -25.40, 2.40 | house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed) |
-| PS-3 | path-S | safety | ERCO Iku B0000184 | 22.90, -23.50, 2.40 | house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed) |
+| PS-3 | path-S | safety | ERCO Iku B0000184 | 22.90, -23.75, 2.40 | house facade (its last 0.84 m before the facade ends at y -23.591), 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed) |
 | DN-1 | dining | use | ERCO Iku B0000184 | 25.00, -25.40, 3.00 | crape myrtle lower branch clamp above the table |
 | DN-2 | dining | use | ERCO Iku B0000184 | 25.90, -25.40, 3.00 | crape myrtle lower branch clamp above the table |
 | GR-1 | graze | beauty | ERCO Iku B0000184 | 28.15, -27.50, 3.40 | rear wall bracket 0.15 m off the face |
@@ -70,14 +70,14 @@ Alternates (none priced, none a swap-in without its V10 run):
 ## Achieved versus required (maintained = 0.8 x initial, direct light only, shadows from walls, screens, furniture, benches, BBQ)
 
 Required: `LS-POND-EDGE-LIGHT` 4 lx (recommended 8 lx over 65), SLL T3.5 5 lx and Uo 0.25 for the path, policy 30 lx for the table. Scene levels are fractions of maximum output (linear dimming assumed).
-Dimming need (V12, plane met at its recommended value): fire pit **0.071**, north pond **0.070**, east pond **0.112**, path **0.042** of maximum, against the 0.80 limit.
+Dimming need (V12, plane met at its recommended value): fire pit **0.073**, north pond **0.070**, east pond **0.112**, path **0.043** of maximum, against the 0.80 limit.
 
 | plane | required | summer-night dining | social gathering | quiet north court | winter evening |
 |---|---|---|---|---|---|
 | north pond margin ring (67 pts) min / avg | 4 (8) | 9.2 / 14.6 | 9.2 / 14.6 | 9.2 / 14.6 | 9.2 / 14.6 |
 | east pond margin ring (144 pts) min / avg | 4 (8) | 8.7 / 20.1 | 8.7 / 20.2 | 8.7 / 20.1 | 8.7 / 20.1 |
-| fire-pit surround (our half, 93 pts) min / avg | 4 (8) | 14.5 / 19.0 | 23.9 / 31.5 | 11.4 / 15.4 | 23.0 / 30.8 |
-| main path (138 pts) avg, Uo | 5, 0.25 | 13.8, 0.69 | 20.4, 0.70 | 11.8, 0.73 | 11.9, 0.74 |
+| fire-pit surround (our half, 93 pts) min / avg | 4 (8) | 14.1 / 18.6 | 23.2 / 30.8 | 11.0 / 15.0 | 22.2 / 30.1 |
+| main path (138 pts) avg, Uo | 5, 0.25 | 13.6, 0.68 | 20.1, 0.68 | 11.7, 0.72 | 11.7, 0.73 |
 | dining table (16 pts) avg / min | 30 / 15 (policy) | 30.3 / 18.9 | 40.6 / 25.9 (target 40) | off | off |
 | water surfaces (information) mean | <= margin mean | 12.5 / 18.6 | 12.5 / 18.6 | 12.5 / 18.6 | 12.5 / 18.6 |
 | scene level: pond N / E / pit / path / dining / graze / uplight | | .08 / .12 / .12 / .10 / .165 / .25 / .30 | .08 / .12 / .20 / .15 / .22 / .35 / .45 | .08 / .12 / .10 / .10 / 0 / 0 / 0 | .08 / .12 / .20 / .10 / 0 / .10 / 0 |
@@ -97,7 +97,7 @@ Sensors: east and rear neighbours and the east-yard neighbour at ground-floor (g
 | summer-night dining | 0.39 | apartment-above 0.39 | 181 | 0.122 (UP-3) |
 | social gathering | 0.59 | apartment-above 0.59 | 254 | 0.122 |
 | quiet north court | 0.02 | sister facade | 6 | 0.001 |
-| winter evening | 0.05 | sister facade | 72 | 0.001 |
+| winter evening | 0.03 | sister facade | 72 | 0.001 |
 
 All under the post-curfew limits (2 lx, 1000 cd, 0.15), with no curfew switch-off needed. The ground-floor neighbour windows get **exactly zero**: every boundary is a 4 m wall (the test removes the wall and light arrives). The apartment above sees at most 0.59 lx, from the uplights, **without** the crown stopping any of it (the engine counts no foliage in Ev: conservative).
 All Iku are downlights: ULR 0.005 or less in the installed attitude. The three uplights are ULR 1.0 by definition; the check counts only the flux of rays that miss the opaque (leaf-on) crown ellipsoid: 1.7 %, 1.5 % and 12.2 % (the east-yard olive, the smallest crown, 2.6 m).
