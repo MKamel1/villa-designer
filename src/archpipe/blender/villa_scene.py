@@ -2017,6 +2017,8 @@ def render(scene_data, args):
         from archpipe.task_probe import require_clear_probes
         require_clear_probes(scene_data)
     warnings = []
+    from archpipe.blender import scene_cache  # opt-in via --blend-cache / ARCHPIPE_BLEND_CACHE
+    scene_cache.install(globals(), scene_data, args)
     library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
     from archpipe.drape_appearance import needs_admission, rendered_meshes, render_materials
     render_specs = render_materials(scene_data) if needs_admission(scene_data) else scene_data['materials']
@@ -2234,6 +2236,7 @@ def main():
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
     ap.add_argument("--measure-exposure-groups", action="store_true")
+    ap.add_argument("--blend-cache", help="directory of cached built scenes (src/archpipe/blender/scene_cache.py)")
     args = ap.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
     with open(args.scene, encoding="utf-8") as f:
         from archpipe.blender.element_ids import without_ids
