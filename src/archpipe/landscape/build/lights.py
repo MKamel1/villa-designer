@@ -60,14 +60,52 @@ def _prism(cx, cy, z0, z1, r, n=12):
     return [top, bot] + sides
 
 
+def _bar(axis, t0, t1, u, z, r, n=8):
+    """Octagonal prism along `axis` ('x' or 'y') from t0 to t1, centred at cross-position u (the other horizontal axis) and height z. (The scene's physical-part guard refuses a bare
+    rectangular proxy for anything but its listed box kinds, so the arm is a prism, not a cuboid.)"""
+    ring = [(r * math.cos(2 * math.pi * i / n), r * math.sin(2 * math.pi * i / n)) for i in range(n)]
+    pt = lambda t, k: [t, u + ring[k][0], z + ring[k][1]] if axis == "x" else [u + ring[k][0], t, z + ring[k][1]]
+    end0 = [pt(t0, k) for k in reversed(range(n))]
+    end1 = [pt(t1, k) for k in range(n)]
+    sides = [[pt(t0, k), pt(t0, (k + 1) % n), pt(t1, (k + 1) % n), pt(t1, k)] for k in range(n)]
+    return _outward([end0, end1] + sides)
+
+
+def _outward(faces):
+    """Wind every face so the solid's normals point out (the guard refuses an inward-facing solid): signed volume by the divergence theorem, reverse all faces if negative."""
+    vol = 0.0
+    for f in faces:
+        for i in range(1, len(f) - 1):
+            a, b, c = f[0], f[i], f[i + 1]
+            vol += (a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0])) / 6.0
+    return faces if vol > 0 else [list(reversed(f)) for f in faces]
+
+
+# Host face of every fitting that has a wall, screen-post or fence behind it: (axis, coordinate of the layout's face). The arm runs from the body to that face and
+# ARM_INTO_M beyond it, so it crosses any finish layer and the scene's support guard (`render_support.unsupported`) sees the assembly touch the building.
+# DN-1/DN-2 (crape branch clamps) and the uplights (in-ground) have no host in the scene and no body: a body in the air would be flagged and would be wrong.
+HOSTS = {"NP-1": ("x", 3.617), "NP-2": ("x", 3.617), "NP-4": ("x", 3.617), "NP-3": ("y", -23.591),
+         "EP-1": ("y", -23.591), "EP-2": ("y", -23.591), "EP-3": ("y", -23.591), "EP-5": ("y", -20.601), "EP-6": ("y", -20.601),
+         "PS-1": ("x", 22.597), "PS-2": ("x", 22.597), "PS-3": ("x", 22.597), "GR-1": ("x", 28.307), "GR-2": ("x", 28.307), "GR-3": ("y", -20.601),
+         "FP-1": ("x", 23.697), "FP-2": ("x", 27.097)}
+ARM_INTO_M, ARM_T = 0.03, 0.03      # arm length beyond the face, arm diameter
+
+
 def bodies(scene: str = GD.RENDER_SCENE) -> list[dict]:
-    """One short black cylinder per live Iku at its emitter (the optic faces down/aim; a vertical body is drawn: the tilt of a 60 mm body is below the render's resolution)."""
+    """A short black cylinder per live Iku at its emitter (the optic faces down/aim; a vertical body is drawn: the tilt of a 60 mm body is below the render's resolution) and a
+    30 mm square arm to its host face (the 0.30 m wall arm of the design, ASSUMED accessory)."""
     out = []
     for f, p in zip(GD.FIXTURES, GD.placements(GD.SCENES[scene]["levels"])):
-        if p.dim <= 0 or f.product != "iku":
+        if p.dim <= 0 or f.product != "iku" or f.id not in HOSTS:
             continue
         x, y, z = p.position
-        out.append(dict(id="gl-body-" + f.id, group="dressing", material=BODY_MATERIAL, faces=_prism(x, y, z, z + BODY_H, BODY_D / 2 + 0.006),
-                        label="dressing: ERCO Iku B0000184 body (ASSUMED 60 mm), " + f.mount, part_kind="ld-fixture", surface=False, occupied_side=None, element_ids=["gl-" + f.id],
-                        ld_state=None, ld_standin=False, keep_object=False))
+        base = dict(group="dressing", material=BODY_MATERIAL, surface=False, occupied_side=None, element_ids=["gl-" + f.id], ld_state=None, ld_standin=False, keep_object=False)
+        out.append(dict(id="gl-body-" + f.id, faces=_prism(x, y, z, z + BODY_H, BODY_D / 2 + 0.006), label="dressing: ERCO Iku B0000184 body (ASSUMED 60 mm), " + f.mount,
+                        part_kind="ld-fixture", **base))
+        axis, face = HOSTS[f.id]
+        zc = z + BODY_H / 2
+        c = x if axis == "x" else y
+        end = face + math.copysign(ARM_INTO_M, face - c)
+        box = _bar(axis, c, end, y if axis == "x" else x, zc, ARM_T / 2)
+        out.append(dict(id="gl-arm-" + f.id, faces=box, label="dressing: wall arm of the Iku " + f.id + " (ASSUMED accessory)", part_kind="ld-fixture-arm", **base))
     return out

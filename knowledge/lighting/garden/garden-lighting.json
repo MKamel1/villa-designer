@@ -13,10 +13,10 @@
    "planes": {
     "s-firepit-edge-ring": {
      "n": 93,
-     "avg": 18.992,
-     "min": 14.518,
-     "max": 21.707,
-     "u0": 0.764
+     "avg": 18.578,
+     "min": 14.05,
+     "max": 21.356,
+     "u0": 0.756
     },
     "n-pond-edge-ring": {
      "n": 67,
@@ -34,40 +34,40 @@
     },
     "e-pond-edge-ring": {
      "n": 144,
-     "avg": 20.149,
-     "min": 8.654,
-     "max": 24.293,
-     "u0": 0.43
+     "avg": 20.147,
+     "min": 8.679,
+     "max": 24.292,
+     "u0": 0.431
     },
     "e-pond-water": {
      "n": 112,
      "avg": 18.632,
      "min": 10.742,
-     "max": 22.792,
+     "max": 22.791,
      "u0": 0.577
     },
     "s-path-door": {
      "n": 138,
-     "avg": 13.83,
-     "min": 9.567,
-     "max": 17.449,
-     "u0": 0.692
+     "avg": 13.635,
+     "min": 9.272,
+     "max": 16.864,
+     "u0": 0.68
     },
     "s-dining-table": {
      "n": 48,
-     "avg": 30.278,
-     "min": 18.864,
-     "max": 38.864,
-     "u0": 0.623
+     "avg": 30.257,
+     "min": 18.824,
+     "max": 38.846,
+     "u0": 0.622
     }
    },
    "spill": {
     "ev_max_by_group": {
-     "east-neighbour": 0.0,
-     "rear-neighbour": 0.0,
-     "sister-villa-facade": 0.028068569350446607,
+     "east-neighbour": 4.7095756600679896e-05,
+     "rear-neighbour": 0.00019343077217660453,
+     "sister-villa-facade": 0.02024338403719233,
      "street-side": 0.0003142255288923429,
-     "east-yard-neighbour": 7.472119054497236e-05,
+     "east-yard-neighbour": 7.350857102122515e-05,
      "apartment-above-facade": 0.390458073224569
     },
     "ulr": {
@@ -80,11 +80,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.00033105281272724626,
-     "FP-2": 0.00033105281272724957,
+     "FP-1": 0.0003559346848828268,
+     "FP-2": 0.0003559346848828313,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
      "DN-1": 0.0,
      "DN-2": 0.0,
      "GR-1": 0.0,
@@ -104,11 +104,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.00033105281272724626,
-     "FP-2": 0.00033105281272724957,
+     "FP-1": 0.0003559346848828268,
+     "FP-2": 0.0003559346848828313,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
      "DN-1": 0.0,
      "DN-2": 0.0,
      "GR-1": 0.0,
@@ -133,10 +133,10 @@
    "planes": {
     "s-firepit-edge-ring": {
      "n": 93,
-     "avg": 31.462,
-     "min": 23.941,
-     "max": 35.906,
-     "u0": 0.761
+     "avg": 30.771,
+     "min": 23.175,
+     "max": 35.374,
+     "u0": 0.753
     },
     "n-pond-edge-ring": {
      "n": 67,
@@ -154,40 +154,40 @@
     },
     "e-pond-edge-ring": {
      "n": 144,
-     "avg": 20.152,
-     "min": 8.681,
-     "max": 24.294,
-     "u0": 0.431
+     "avg": 20.148,
+     "min": 8.718,
+     "max": 24.293,
+     "u0": 0.433
     },
     "e-pond-water": {
      "n": 112,
-     "avg": 18.632,
+     "avg": 18.633,
      "min": 10.742,
-     "max": 22.793,
+     "max": 22.791,
      "u0": 0.577
     },
     "s-path-door": {
      "n": 138,
-     "avg": 20.413,
-     "min": 14.199,
-     "max": 25.116,
-     "u0": 0.696
+     "avg": 20.123,
+     "min": 13.757,
+     "max": 24.25,
+     "u0": 0.684
     },
     "s-dining-table": {
      "n": 48,
-     "avg": 40.565,
-     "min": 25.862,
-     "max": 51.883,
-     "u0": 0.638
+     "avg": 40.534,
+     "min": 25.802,
+     "max": 51.854,
+     "u0": 0.637
     }
    },
    "spill": {
     "ev_max_by_group": {
-     "east-neighbour": 0.0,
-     "rear-neighbour": 0.0,
-     "sister-villa-facade": 0.04653226279638122,
+     "east-neighbour": 7.849292766779983e-05,
+     "rear-neighbour": 0.0003223846202943409,
+     "sister-villa-facade": 0.03349028727429076,
      "street-side": 0.0003142255288923429,
-     "east-yard-neighbour": 0.00012453531757495394,
+     "east-yard-neighbour": 0.0001225142850353753,
      "apartment-above-facade": 0.5856871098368533
     },
     "ulr": {
@@ -200,11 +200,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.2781594847062607e-05,
      "PS-2": 1.2781594847062607e-05,
-     "PS-3": 1.2781594847062607e-05,
+     "PS-3": 2.8230966230258797e-05,
      "DN-1": 0.0,
      "DN-2": 0.0,
      "GR-1": 0.0,
@@ -224,11 +224,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.2781594847062607e-05,
      "PS-2": 1.2781594847062607e-05,
-     "PS-3": 1.2781594847062607e-05,
+     "PS-3": 2.8230966230258797e-05,
      "DN-1": 0.0,
      "DN-2": 0.0,
      "GR-1": 0.0,
@@ -253,10 +253,10 @@
    "planes": {
     "s-firepit-edge-ring": {
      "n": 93,
-     "avg": 15.356,
-     "min": 11.443,
-     "max": 17.43,
-     "u0": 0.745
+     "avg": 15.011,
+     "min": 11.0,
+     "max": 17.249,
+     "u0": 0.733
     },
     "n-pond-edge-ring": {
      "n": 67,
@@ -274,41 +274,41 @@
     },
     "e-pond-edge-ring": {
      "n": 144,
-     "avg": 20.149,
-     "min": 8.65,
-     "max": 24.292,
-     "u0": 0.429
+     "avg": 20.146,
+     "min": 8.675,
+     "max": 24.291,
+     "u0": 0.431
     },
     "e-pond-water": {
      "n": 112,
-     "avg": 18.631,
+     "avg": 18.632,
      "min": 10.741,
-     "max": 22.792,
+     "max": 22.791,
      "u0": 0.576
     },
     "s-path-door": {
      "n": 138,
-     "avg": 11.848,
-     "min": 8.67,
-     "max": 13.488,
-     "u0": 0.732
+     "avg": 11.652,
+     "min": 8.375,
+     "max": 13.448,
+     "u0": 0.719
     },
     "s-dining-table": {
      "n": 48,
-     "avg": 0.909,
-     "min": 0.023,
-     "max": 4.988,
-     "u0": 0.026
+     "avg": 0.888,
+     "min": 0.022,
+     "max": 4.933,
+     "u0": 0.025
     }
    },
    "spill": {
     "ev_max_by_group": {
-     "east-neighbour": 0.0,
-     "rear-neighbour": 0.0,
-     "sister-villa-facade": 0.022613330330487406,
+     "east-neighbour": 3.9246463833899915e-05,
+     "rear-neighbour": 0.00016119231014717045,
+     "sister-villa-facade": 0.016092342569442173,
      "street-side": 0.0003142255288923429,
-     "east-yard-neighbour": 6.226765878747697e-05,
-     "apartment-above-facade": 0.0
+     "east-yard-neighbour": 6.125714251768765e-05,
+     "apartment-above-facade": 4.653944590104231e-05
     },
     "ulr": {
      "NP-1": 0.00014225265390307708,
@@ -320,11 +320,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05
+     "PS-3": 2.8230966230258847e-05
     },
     "ulr_raw": {
      "NP-1": 0.00014225265390307708,
@@ -336,11 +336,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05
+     "PS-3": 2.8230966230258847e-05
     }
    }
   },
@@ -357,10 +357,10 @@
    "planes": {
     "s-firepit-edge-ring": {
      "n": 93,
-     "avg": 30.751,
-     "min": 22.972,
-     "max": 34.885,
-     "u0": 0.747
+     "avg": 30.061,
+     "min": 22.231,
+     "max": 34.55,
+     "u0": 0.74
     },
     "n-pond-edge-ring": {
      "n": 67,
@@ -378,41 +378,41 @@
     },
     "e-pond-edge-ring": {
      "n": 144,
-     "avg": 20.149,
-     "min": 8.651,
-     "max": 24.293,
-     "u0": 0.429
+     "avg": 20.146,
+     "min": 8.676,
+     "max": 24.292,
+     "u0": 0.431
     },
     "e-pond-water": {
      "n": 112,
      "avg": 18.632,
      "min": 10.741,
-     "max": 22.792,
+     "max": 22.791,
      "u0": 0.576
     },
     "s-path-door": {
      "n": 138,
-     "avg": 11.894,
-     "min": 8.79,
-     "max": 13.542,
-     "u0": 0.739
+     "avg": 11.705,
+     "min": 8.496,
+     "max": 13.514,
+     "u0": 0.726
     },
     "s-dining-table": {
      "n": 48,
-     "avg": 1.166,
-     "min": 0.357,
-     "max": 5.005,
-     "u0": 0.306
+     "avg": 1.146,
+     "min": 0.355,
+     "max": 4.952,
+     "u0": 0.31
     }
    },
    "spill": {
     "ev_max_by_group": {
-     "east-neighbour": 0.0,
-     "rear-neighbour": 0.0,
-     "sister-villa-facade": 0.045599689842519504,
+     "east-neighbour": 7.849292766779983e-05,
+     "rear-neighbour": 0.0003223846202943409,
+     "sister-villa-facade": 0.03255771432042904,
      "street-side": 0.0003142255288923429,
-     "east-yard-neighbour": 0.00012453531757495394,
-     "apartment-above-facade": 0.0
+     "east-yard-neighbour": 0.0001225142850353753,
+     "apartment-above-facade": 9.307889180208462e-05
     },
     "ulr": {
      "NP-1": 0.00014225265390307708,
@@ -424,11 +424,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0
@@ -443,11 +443,11 @@
      "EP-3": 0.00014386297077135387,
      "EP-5": 7.043509584018462e-05,
      "EP-6": 6.714649454535098e-05,
-     "FP-1": 0.0003310528127272469,
-     "FP-2": 0.0003310528127272502,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
      "PS-1": 1.278159484706269e-05,
      "PS-2": 1.278159484706269e-05,
-     "PS-3": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0
@@ -458,10 +458,10 @@
  "safety_levels": {
   "s-firepit-edge-ring": {
    "zone": "pit",
-   "level_for_target": 0.0710569477853461,
-   "min_at_full": 112.58575338990032,
-   "avg_at_full": 152.01850945268095,
-   "u0": 0.7406055604363433,
+   "level_for_target": 0.07347559699377253,
+   "min_at_full": 108.87968696161863,
+   "avg_at_full": 148.56819216344738,
+   "u0": 0.7328600111242828,
    "n": 93
   },
   "n-pond-edge-ring": {
@@ -482,10 +482,10 @@
   },
   "s-path-door": {
    "zone": "path-S",
-   "level_for_target": 0.0423512542374445,
-   "min_at_full": 86.26799050804986,
-   "avg_at_full": 118.06025795522469,
-   "u0": 0.7307115197119737,
+   "level_for_target": 0.043090834251542705,
+   "min_at_full": 83.31945281715488,
+   "avg_at_full": 116.03395679954824,
+   "u0": 0.7180609462546509,
    "n": 138
   }
  },
@@ -650,7 +650,7 @@
    "product": "iku",
    "pos": [
     23.8,
-    -29.65,
+    -29.8,
     1.9
    ],
    "target": [
@@ -667,7 +667,7 @@
    "product": "iku",
    "pos": [
     27.0,
-    -29.65,
+    -29.8,
     1.9
    ],
    "target": [
@@ -718,15 +718,15 @@
    "product": "iku",
    "pos": [
     22.9,
-    -23.5,
+    -23.75,
     2.4
    ],
    "target": [
     23.25,
-    -23.5,
+    -23.4,
     0
    ],
-   "mount": "house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+   "mount": "house facade (its last 0.84 m before the facade ends at y -23.591), 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
   },
   {
    "id": "DN-1",
@@ -900,10 +900,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "summer-night-dining/s-firepit-edge-ring",
-   "achieved": 14.52,
+   "achieved": 14.05,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 14.5 lx (avg 19.0, max 21.7) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 14.0 lx (avg 18.6, max 21.4) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
   },
   {
    "criterion": "LA11",
@@ -927,7 +927,7 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "summer-night-dining/e-pond-edge-ring",
-   "achieved": 8.65,
+   "achieved": 8.68,
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
@@ -945,16 +945,16 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "summer-night-dining/s-path-door",
-   "achieved": 13.83,
+   "achieved": 13.64,
    "required": 5.0,
    "unit": "lx",
-   "message": "avg 13.8 lx (min 9.6) vs 5 lx; Uo 0.69 vs 0.25; zone level 0.10"
+   "message": "avg 13.6 lx (min 9.3) vs 5 lx; Uo 0.68 vs 0.25; zone level 0.10"
   },
   {
    "criterion": "LA1",
    "status": "pass",
    "subject": "summer-night-dining/s-dining-table",
-   "achieved": 30.277796265737987,
+   "achieved": 30.25702930865044,
    "required": 30.0,
    "unit": "lx",
    "message": "Eavg 30 lx vs card 30 lx; allowed 27-33 lx (1.01x of target)"
@@ -963,7 +963,7 @@
    "criterion": "LA2",
    "status": "pass",
    "subject": "summer-night-dining/s-dining-table",
-   "achieved": 30.277796265737987,
+   "achieved": 30.25702930865044,
    "required": 45.0,
    "unit": "lx",
    "message": "Eavg 30 lx vs cap 45 lx (1.5 x card 30 lx): 1.01 x target"
@@ -972,10 +972,10 @@
    "criterion": "LA3",
    "status": "pass",
    "subject": "summer-night-dining/s-dining-table/min",
-   "achieved": 18.9,
+   "achieved": 18.8,
    "required": 15.0,
    "unit": "lx",
-   "message": "table minimum 18.9 lx vs 15; U0 0.62"
+   "message": "table minimum 18.8 lx vs 15; U0 0.62"
   },
   {
    "criterion": "LA4",
@@ -1017,10 +1017,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "social-gathering/s-firepit-edge-ring",
-   "achieved": 23.94,
+   "achieved": 23.18,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 23.9 lx (avg 31.5, max 35.9) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
+   "message": "min Eh at grade 23.2 lx (avg 30.8, max 35.4) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
   },
   {
    "criterion": "LA11",
@@ -1044,10 +1044,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "social-gathering/e-pond-edge-ring",
-   "achieved": 8.68,
+   "achieved": 8.72,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 8.7 lx (avg 20.2, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
   },
   {
    "criterion": "LA11",
@@ -1056,22 +1056,22 @@
    "achieved": 18.63,
    "required": 20.15,
    "unit": "lx",
-   "message": "water mean 18.6 lx vs margin ring mean 20.2 lx (max on water 22.8)"
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
   },
   {
    "criterion": "LA11",
    "status": "pass",
    "subject": "social-gathering/s-path-door",
-   "achieved": 20.41,
+   "achieved": 20.12,
    "required": 5.0,
    "unit": "lx",
-   "message": "avg 20.4 lx (min 14.2) vs 5 lx; Uo 0.70 vs 0.25; zone level 0.15"
+   "message": "avg 20.1 lx (min 13.8) vs 5 lx; Uo 0.68 vs 0.25; zone level 0.15"
   },
   {
    "criterion": "LA1",
    "status": "pass",
    "subject": "social-gathering/s-dining-table",
-   "achieved": 40.564644186371694,
+   "achieved": 40.53382950694427,
    "required": 40.0,
    "unit": "lx",
    "message": "Eavg 41 lx vs card 40 lx; allowed 36-44 lx (1.01x of target)"
@@ -1080,7 +1080,7 @@
    "criterion": "LA2",
    "status": "pass",
    "subject": "social-gathering/s-dining-table",
-   "achieved": 40.564644186371694,
+   "achieved": 40.53382950694427,
    "required": 60.0,
    "unit": "lx",
    "message": "Eavg 41 lx vs cap 60 lx (1.5 x card 40 lx): 1.01 x target"
@@ -1089,10 +1089,10 @@
    "criterion": "LA3",
    "status": "pass",
    "subject": "social-gathering/s-dining-table/min",
-   "achieved": 25.9,
+   "achieved": 25.8,
    "required": 15.0,
    "unit": "lx",
-   "message": "table minimum 25.9 lx vs 15; U0 0.64"
+   "message": "table minimum 25.8 lx vs 15; U0 0.64"
   },
   {
    "criterion": "LA4",
@@ -1134,10 +1134,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "quiet-north-court/s-firepit-edge-ring",
-   "achieved": 11.44,
+   "achieved": 11.0,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 11.4 lx (avg 15.4, max 17.4) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.10"
+   "message": "min Eh at grade 11.0 lx (avg 15.0, max 17.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.10"
   },
   {
    "criterion": "LA11",
@@ -1161,10 +1161,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "quiet-north-court/e-pond-edge-ring",
-   "achieved": 8.65,
+   "achieved": 8.67,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 8.6 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
   },
   {
    "criterion": "LA11",
@@ -1179,10 +1179,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "quiet-north-court/s-path-door",
-   "achieved": 11.85,
+   "achieved": 11.65,
    "required": 5.0,
    "unit": "lx",
-   "message": "avg 11.8 lx (min 8.7) vs 5 lx; Uo 0.73 vs 0.25; zone level 0.10"
+   "message": "avg 11.7 lx (min 8.4) vs 5 lx; Uo 0.72 vs 0.25; zone level 0.10"
   },
   {
    "criterion": "LA4",
@@ -1197,7 +1197,7 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "quiet-north-court/garden/Ev (post-curfew)",
-   "achieved": 0.022613330330487406,
+   "achieved": 0.016092342569442173,
    "required": 2.0,
    "unit": "lx",
    "message": "max vertical illuminance on the boundary 0.02 lx vs E3 2 lx"
@@ -1224,10 +1224,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "winter-evening/s-firepit-edge-ring",
-   "achieved": 22.97,
+   "achieved": 22.23,
    "required": 4.0,
    "unit": "lx",
-   "message": "min Eh at grade 23.0 lx (avg 30.8, max 34.9) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
+   "message": "min Eh at grade 22.2 lx (avg 30.1, max 34.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
   },
   {
    "criterion": "LA11",
@@ -1251,7 +1251,7 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "winter-evening/e-pond-edge-ring",
-   "achieved": 8.65,
+   "achieved": 8.68,
    "required": 4.0,
    "unit": "lx",
    "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
@@ -1269,10 +1269,10 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "winter-evening/s-path-door",
-   "achieved": 11.89,
+   "achieved": 11.71,
    "required": 5.0,
    "unit": "lx",
-   "message": "avg 11.9 lx (min 8.8) vs 5 lx; Uo 0.74 vs 0.25; zone level 0.10"
+   "message": "avg 11.7 lx (min 8.5) vs 5 lx; Uo 0.73 vs 0.25; zone level 0.10"
   },
   {
    "criterion": "LA4",
@@ -1287,10 +1287,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "winter-evening/garden/Ev (post-curfew)",
-   "achieved": 0.045599689842519504,
+   "achieved": 0.03255771432042904,
    "required": 2.0,
    "unit": "lx",
-   "message": "max vertical illuminance on the boundary 0.05 lx vs E3 2 lx"
+   "message": "max vertical illuminance on the boundary 0.03 lx vs E3 2 lx"
   },
   {
    "criterion": "LA12",
@@ -1314,7 +1314,7 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "s-firepit-edge-ring/V12-headroom",
-   "achieved": 0.071,
+   "achieved": 0.073,
    "required": 0.8,
    "unit": "x max output",
    "message": "minimum level for the plane's recommended value 0.07 of maximum vs 0.8"
@@ -1341,7 +1341,7 @@
    "criterion": "LA11",
    "status": "pass",
    "subject": "s-path-door/V12-headroom",
-   "achieved": 0.042,
+   "achieved": 0.043,
    "required": 0.8,
    "unit": "x max output",
    "message": "minimum level for the plane's recommended value 0.04 of maximum vs 0.8"

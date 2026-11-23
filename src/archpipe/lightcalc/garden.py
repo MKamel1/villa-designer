@@ -74,12 +74,12 @@ FIXTURES = [
     F("EP-5", "pond-E", "safety", "iku", (16.95, -20.78, 2.4), (16.80, -21.50, 0), "south wall bracket 0.15 m off the face"),
     F("EP-6", "pond-E", "safety", "iku", (20.20, -20.78, 2.4), (20.20, -21.50, 0), "south wall bracket 0.15 m off the face"),
     # shared fire pit on the west line, on the two sister-screen end posts (1.9 m)
-    F("FP-1", "pit", "safety", "iku", (23.80, -29.65, 1.9), (24.90, -29.55, 0), "sister-screen post, non-combustible bracket"),
-    F("FP-2", "pit", "safety", "iku", (27.00, -29.65, 1.9), (25.90, -29.55, 0), "sister-screen post, non-combustible bracket"),
+    F("FP-1", "pit", "safety", "iku", (23.80, -29.80, 1.9), (24.90, -29.55, 0), "sister-screen post, non-combustible bracket"),
+    F("FP-2", "pit", "safety", "iku", (27.00, -29.80, 1.9), (25.90, -29.55, 0), "sister-screen post, non-combustible bracket"),
     # main path along the facade (1.2 m), also lights the BBQ stand
     F("PS-1", "path-S", "safety", "iku", (22.90, -27.30, 2.4), (23.25, -27.30, 0), "house facade, " + ARM),
     F("PS-2", "path-S", "safety", "iku", (22.90, -25.40, 2.4), (23.25, -25.40, 0), "house facade, " + ARM),
-    F("PS-3", "path-S", "safety", "iku", (22.90, -23.50, 2.4), (23.25, -23.50, 0), "house facade, " + ARM),
+    F("PS-3", "path-S", "safety", "iku", (22.90, -23.75, 2.4), (23.25, -23.40, 0), "house facade (its last 0.84 m before the facade ends at y -23.591), " + ARM),
     # dining table under the crape myrtle: two downlights clamped to the main stem at 3.0 m (tree-friendly clamp, no screws through bark)
     F("DN-1", "dining", "use", "iku", (25.00, -25.40, 3.0), (25.00, -25.40, 0.75), "crape myrtle lower branch clamp above the table"),
     F("DN-2", "dining", "use", "iku", (25.90, -25.40, 3.0), (25.90, -25.40, 0.75), "crape myrtle lower branch clamp above the table"),

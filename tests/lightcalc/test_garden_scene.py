@@ -30,6 +30,21 @@ class Lights(unittest.TestCase):
         self.assertTrue(up["product"]["generic"])
         self.assertTrue(up["garden_lg"]["status"].startswith("UNVERIFIED"))
 
+    def test_arm_reaches_its_host_face_and_a_body_without_host_is_floating(self):
+        import numpy as np
+        by = {b["id"]: b for b in LT.bodies()}
+        for fid, (axis, face) in LT.HOSTS.items():
+            pts = np.array([p for f in by["gl-arm-" + fid]["faces"] for p in f])
+            i = 0 if axis == "x" else 1
+            self.assertTrue(pts[:, i].min() < face < pts[:, i].max() or abs(pts[:, i].min() - face) < 1e-9 or abs(pts[:, i].max() - face) < 1e-9, fid)   # the arm crosses the face
+            body = np.array([p for f in by["gl-body-" + fid]["faces"] for p in f])
+            self.assertAlmostEqual(body[:, 2].min(), GD.G + [x for x in GD.FIXTURES if x.id == fid][0].pos[2], places=6)    # body sits at the emitter
+        far = dict(LT.HOSTS, **{"NP-1": ("x", 9.0)})                                   # negative: a host face 5.7 m away is not reached by a 0.30 m arm
+        from unittest.mock import patch
+        with patch.object(LT, "HOSTS", far):
+            pts = np.array([p for f in {b["id"]: b for b in LT.bodies()}["gl-arm-NP-1"]["faces"] for p in f])
+        self.assertGreater(pts[:, 0].max() - pts[:, 0].min(), 5.0)                    # it becomes a 5.7 m beam: the sizes would be visibly wrong, i.e. host faces are data, not guesses
+
     def test_negative_a_zone_at_level_zero_has_no_light(self):
         self.assertFalse([l for l in LT.lights("quiet-north-court") if l["garden_lg"]["zone"] in ("dining", "graze", "uplight")])
 
@@ -57,6 +72,10 @@ class Bodies(unittest.TestCase):
         ids = {b["id"] for b in bs}
         self.assertIn("gl-body-NP-1", ids)
         self.assertFalse([i for i in ids if "UP-" in i])
+        self.assertFalse([i for i in ids if "DN-" in i], "branch-clamped fittings have no host in the scene: a body in the air fails the support guard")
+        iku = {f.id for f in GD.FIXTURES if f.product == "iku"}
+        self.assertEqual(iku - set(LT.HOSTS), {"DN-1", "DN-2"})                 # every wall/post-mounted Iku has a host face, only the branch clamps do not
+        self.assertEqual({i[len("gl-arm-"):] for i in ids if i.startswith("gl-arm-")}, set(LT.HOSTS))
         for b in bs:
             edges = {}
             for f in b["faces"]:
@@ -65,6 +84,24 @@ class Bodies(unittest.TestCase):
                     edges[e] = edges.get(e, 0) + 1
             self.assertTrue(all(n == 2 for n in edges.values()), b["id"])      # watertight: every edge shared by exactly two faces
             self.assertTrue(b["label"].startswith("dressing: "))
+
+
+class Winding(unittest.TestCase):
+    def volume(self, faces):
+        v = 0.0
+        for f in faces:
+            for i in range(1, len(f) - 1):
+                a, b, c = f[0], f[i], f[i + 1]
+                v += (a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0])) / 6.0
+        return v
+
+    def test_every_body_and_arm_faces_outward_in_every_direction(self):
+        for b in LT.bodies():
+            self.assertGreater(self.volume(b["faces"]), 0, b["id"])           # PS arms run toward -x, EP arms toward -y: each direction was inward before the fix
+
+    def test_negative_a_reversed_solid_is_detected_as_inward(self):
+        b = LT.bodies()[0]
+        self.assertLess(self.volume([list(reversed(f)) for f in b["faces"]]), 0)
 
 
 class DuskLayer(unittest.TestCase):
