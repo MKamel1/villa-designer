@@ -393,7 +393,7 @@ class ExecutionContextTests(unittest.TestCase):
     def test_requirements_import_names_mapping(self):
         from archpipe.execution_context import requirements_import_names
         mapped = requirements_import_names(ROOT / "requirements.txt")
-        expected = ["ezdxf", "matplotlib", "PIL", "pymupdf", "yaml", "shapely", "ifcopenshell"]
+        expected = ["ezdxf", "matplotlib", "PIL", "pymupdf", "yaml", "shapely", "ifcopenshell", "openpyxl"]   # requirements.txt gained openpyxl for the XLSX take-off (exchange/quantities.py)
         self.assertEqual(mapped, expected)
 
     def test_batch_a_scripts_call_preflight_in_main_and_not_at_module_top_level(self):

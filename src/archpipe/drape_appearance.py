@@ -209,6 +209,13 @@ def _reference_geometry(input_bytes,cache_bytes,polish_inputs):
     return tuple(low),tuple(high)
 
 
+def physical_digest(part):
+    """Digest of the physical part without the element-identity fields that villa_render attaches AFTER the
+    drape binding (lane P2: 'attached last'); hashing them made every reference stale once the build returned."""
+    from .blender.element_ids import FIELDS
+    return digest({k:v for k,v in part.items() if k not in FIELDS})
+
+
 def make_reference(part):
     """Compact render instance; physical and cached mesh values stay bound.
 
@@ -224,7 +231,7 @@ def make_reference(part):
     _source_world_enclosure(template,origin,physical_bounds)
     enclosure=_world_enclosure(template,render_bounds,physical_bounds)
     return dict(id=part['id'],mesh_class='draped appearance mesh',physical_part=False,
-        appearance_reference=True,standin_id=part['id'],standin_sha256=digest(part),
+        appearance_reference=True,standin_id=part['id'],standin_sha256=physical_digest(part),
         input_sha256=digest(data),template_sha256=template_hash,spacing_m=policy()['spacing_m'],
         material=part['material'],label='ASSUMED gravity-draped fabric and colour',
         garment_type=part.get('garment_type'),origin_m=origin,
@@ -268,7 +275,7 @@ def make(part, cache=None):
         appearance_hash=_native_hash([len(f) for f in placed_faces],
             [np.asarray([p for f in placed_faces for p in f],dtype=float)])
     row=dict(id=part['id'],mesh_class='draped appearance mesh',physical_part=False,
-             standin_id=part['id'],standin_sha256=digest(part),input_sha256=key,
+             standin_id=part['id'],standin_sha256=physical_digest(part),input_sha256=key,
              template_sha256=template_hash,spacing_m=policy()['spacing_m'],
              material=part['material'],label='ASSUMED gravity-draped fabric and colour',
              garment_type=part.get('garment_type'),keep_object=True,bevel_m=0,subdivide=0,

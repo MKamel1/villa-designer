@@ -4,6 +4,7 @@ fab_preview.py (looked at), and recompute the species rows. Inputs: /tmp/ldl5/al
 Rule used for size (printed and asserted): a scan whose tallest variation is under half of the species' sourced MINIMUM
 height is the wrong scale for a mature specimen: grade C (rubric: wrong scale), with `grade_if_young_plant_use_accepted`
 recording what it would be on looks alone. No upscaling is applied (a 4x enlarged rosemary would have 8 cm needles)."""
+from archpipe.safe_io import copy_file
 import json, shutil
 from pathlib import Path
 
@@ -88,7 +89,7 @@ new = []
 for stem, ar in fm.items():
     aid = "fab_" + stem
     st = json.loads((RND / f"{aid}.stats.json").read_text())
-    shutil.copy(SHEETS / f"{aid}.jpg", P / "asset-previews" / f"{aid}.jpg")
+    copy_file(SHEETS / f"{aid}.jpg", P / "asset-previews" / f"{aid}.jpg")
     src = ar["listing_url"] or ar["listing_candidates"][0]
     rec = dict(id=aid, source=src, licence="Fab Standard License", author="Quixel (Megascans) via Fab", title=ar["name"] + f" ({ar['quality_variant']})",
                preview=f"asset-previews/{aid}.jpg", storage="shared", manifest_key="fab/" + stem, megascans_id=ar["megascans_id"], quality_variant=ar["quality_variant"])

@@ -1,6 +1,7 @@
 """python -m archpipe.documents [--design D1] [--out out/documents/D1]: write the sheet set, schedules and QA."""
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import argparse
 import json
 from pathlib import Path
@@ -43,7 +44,7 @@ def previews(out: Path, dest: Path) -> list[str]:
     for stem in PREVIEWS:
         f = out / (stem + ".png")
         if f.exists():
-            shutil.copy(f, dest / f.name)
+            copy_file(f, dest / f.name)
             got.append(f.name)
     return got
 

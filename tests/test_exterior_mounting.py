@@ -101,7 +101,7 @@ class ExteriorMounting(unittest.TestCase):
     def test_approval_drift_refuses_and_unapproved_geometry_is_retained(self):
         from archpipe.concept.exterior_mounting import apply_lead_review
         authority=json.loads(Path('knowledge/c4-e-lead-approvals.json').read_text())
-        self.assertEqual(len(authority['rows']),45);self.assertEqual(len(authority['rejected']),14)
+        self.assertEqual(len(authority['rows']),49)   # lead approvals added since the 45: landing PATH markers, hood host row, SC2/SC3;self.assertEqual(len(authority['rejected']),14)
         approved=deepcopy(authority['rows'][0]);approved['new'][0]+=.01
         scene=dict(meshes=[dict(id=approved['id'],faces=[],mounting={})],mounting_movements=[approved],mounting_hosts={})
         with self.assertRaisesRegex(ValueError,'schedule drift'):apply_lead_review(scene)

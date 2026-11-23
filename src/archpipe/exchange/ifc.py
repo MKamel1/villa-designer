@@ -540,7 +540,7 @@ class _B:
         ox, oy = e.placement[0], e.placement[1]
         if p.get("path_mm"):                                             # guard along a 3D path: one panel per edge
             pts = [(float(x), float(y), float(z) + C.DATUM_SHIFT_MM) for x, y, z in p["path_mm"]]
-            thick = float(p.get("thickness_mm") or GLASS_T)
+            thick = float(p.get("thickness_mm") or GLASS_T)  # falsy-ok: 0 mm glass is not a panel
             solids = []
             for (xa, ya, za), (xb, yb, zb) in zip(pts, pts[1:]):
                 Ln = math.hypot(xb - xa, yb - ya)

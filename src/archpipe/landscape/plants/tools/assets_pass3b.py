@@ -1,6 +1,7 @@
 """Pass-3b: record the 83 downloaded Sketchfab plant candidates as graded assets (grades by eye on the 5 m / 15 m sheets
 rendered through jobq: ldl-p3b-0/1), copy sheets, pin files in asset-manifest.json, update the species rows.
 Inputs: /tmp/ldl/p3b/{all.json,o0,o1,sheets}; knowledge/landscape/plants/sketchfab-manifest.json (see docs/lanes/LDL.md)."""
+from archpipe.safe_io import copy_file
 import json, shutil, glob
 from pathlib import Path
 from archpipe.landscape.plants.assets import gltf_untextured_share
@@ -82,7 +83,7 @@ new = []
 for aid, a in allc.items():
     g, lt, fit, maps, why = G[aid[5:]]
     u = uid_of[aid]; m = man[u]; s = st[aid]
-    shutil.copy(f'/tmp/ldl/p3b/sheets/{aid}.jpg', P / 'asset-previews' / f'{aid}.jpg')
+    copy_file(f'/tmp/ldl/p3b/sheets/{aid}.jpg', P / 'asset-previews' / f'{aid}.jpg')
     rec = dict(id=aid, source=m['url'], licence='CC0' if m['licence'].startswith('CC0') else 'CC Attribution', author=m['author'], title=m['name'],
                triangles=s['triangles'], size_m=s['size_m'], alpha_card_tri_share=s['alpha_card_tri_share'], preview=f'asset-previews/{aid}.jpg',
                grade=g, leaf_type=lt, species_fit=fit, maps_to=maps, rationale=why, storage='shared', manifest_key='sketchfab/' + u, candidate_for=m['species'])
