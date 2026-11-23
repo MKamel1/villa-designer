@@ -88,7 +88,7 @@ def label_lines(it: dict) -> list[str]:
         ls.append("flat colour (paint/lacquer), LRV-scaled; chip colour is an estimate" if it.get("slot") in finishes.FLAT_SLOTS
                   else "colour chip: estimate (" + str(it.get("render_hint", "")) + ")")
     eg = it.get("egypt") or {}
-    ls.append("Egypt: " + (eg.get("supplier") or "GAP - " + str(eg.get("gap") or "unknown"))[:70])
+    ls.append("Egypt: " + (eg.get("supplier") or "GAP - " + str(eg.get("gap") or "unknown").split(". ")[0][:80]))
     return [l for l in ls if l.strip()]
 
 

@@ -171,7 +171,8 @@
    "missing": [
     "slip_rating (no R/DIN 51130/BS 7976 value on maker page; do not claim wet-room compliance)",
     "lrv"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Concrete012 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "C-bath-tile",
@@ -212,8 +213,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble018",
-    "url": "https://ambientcg.com/view?id=Marble018",
+    "id": "Marble015",
+    "url": "https://ambientcg.com/view?id=Marble015",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -223,7 +224,8 @@
     "thickness",
     "lrv",
     "slip rating (Lux finish: not a floor-safe claim)"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Marble015 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "C-worktop",
@@ -269,8 +271,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble013",
-    "url": "https://ambientcg.com/view?id=Marble013",
+    "id": "Marble017",
+    "url": "https://ambientcg.com/view?id=Marble017",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -283,7 +285,8 @@
    "missing": [
     "colour_code",
     "lrv"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Marble017 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "C-backsplash",
@@ -324,8 +327,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble009",
-    "url": "https://ambientcg.com/view?id=Marble009",
+    "id": "Marble006",
+    "url": "https://ambientcg.com/view?id=Marble006",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -334,7 +337,8 @@
    "missing": [
     "thickness",
     "lrv"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Marble006 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "C-joinery-timber",
@@ -425,13 +429,13 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "Poly Haven",
-    "id": "rough_linen",
+    "id": "white_oak_veneer",
     "licence": "CC0",
     "on_disk": true,
-    "url": "https://polyhaven.com/a/rough_linen",
+    "url": "https://polyhaven.com/a/white_oak_veneer",
     "physical_scan_mm": [
-     270.7081392676629,
-     271.29998803138733
+     500,
+     500
     ]
    },
    "maintenance": null,
@@ -439,7 +443,7 @@
     "thickness",
     "lrv"
    ],
-   "lookalike_note": "Wood094 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+   "lookalike_note": "look-alike changed to white_oak_veneer after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "C-door",
@@ -630,13 +634,13 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "PavingStones151",
-    "url": "https://ambientcg.com/view?id=PavingStones151",
+    "id": "Travertine009",
+    "url": "https://ambientcg.com/view?id=Travertine009",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": [
-     5400,
-     5400
+     1200,
+     1200
     ]
    },
    "maintenance": {
@@ -648,7 +652,8 @@
     "colour_code",
     "lrv",
     "taupe_20mm"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Travertine009 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "C-cushion-living-sofa-1",

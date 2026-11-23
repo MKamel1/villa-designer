@@ -43,15 +43,12 @@
    },
    "lookalike": {
     "label": "look-alike-proxy",
-    "maker_site": "Poly Haven",
-    "id": "sandstone_cracks",
-    "url": "https://polyhaven.com/a/sandstone_cracks",
+    "maker_site": "ambientCG",
+    "id": "Concrete012",
+    "url": "https://ambientcg.com/view?id=Concrete012",
     "licence": "CC0",
     "on_disk": true,
-    "physical_scan_mm": [
-     2000,
-     2000
-    ]
+    "physical_scan_mm": null
    },
    "maintenance": null,
    "missing": [
@@ -59,7 +56,8 @@
     "lrv",
     "source.quote (page has no descriptive sentence)",
     "maintenance"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Concrete012 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "B-floor-gf",
@@ -172,7 +170,8 @@
     "colour_code",
     "lrv",
     "slip explanation"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Concrete012 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "B-bath-tile",
@@ -211,18 +210,22 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Plaster001",
-    "url": "https://ambientcg.com/view?id=Plaster001",
+    "id": "Travertine009",
+    "url": "https://ambientcg.com/view?id=Travertine009",
     "licence": "CC0",
     "on_disk": true,
-    "physical_scan_mm": null
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
    },
    "maintenance": null,
    "missing": [
     "lrv",
     "finish confirmation",
     "maintenance"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Travertine009 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "B-worktop",
@@ -269,8 +272,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble014",
-    "url": "https://ambientcg.com/view?id=Marble014",
+    "id": "Marble025",
+    "url": "https://ambientcg.com/view?id=Marble025",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -281,7 +284,8 @@
     "lrv",
     "composition",
     "maintenance"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Marble025 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "B-backsplash",
@@ -328,8 +332,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble014",
-    "url": "https://ambientcg.com/view?id=Marble014",
+    "id": "Marble025",
+    "url": "https://ambientcg.com/view?id=Marble025",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -340,7 +344,8 @@
     "lrv",
     "composition",
     "maintenance"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Marble025 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "B-joinery-timber",
@@ -489,13 +494,13 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "Poly Haven",
-    "id": "rough_linen",
+    "id": "white_oak_veneer",
     "licence": "CC0",
     "on_disk": true,
-    "url": "https://polyhaven.com/a/rough_linen",
+    "url": "https://polyhaven.com/a/white_oak_veneer",
     "physical_scan_mm": [
-     270.7081392676629,
-     271.29998803138733
+     500,
+     500
     ]
    },
    "maintenance": null,
@@ -504,7 +509,7 @@
     "composition (veneer species/thickness not stated)",
     "maintenance"
    ],
-   "lookalike_note": "PaintedWood003 publishes no scan size; replaced by rough_linen (published size) for a true texture scale"
+   "lookalike_note": "look-alike changed to white_oak_veneer after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "B-kitchen-front",
@@ -641,11 +646,14 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "PavingStones146",
-    "url": "https://ambientcg.com/view?id=PavingStones146",
+    "id": "Travertine009",
+    "url": "https://ambientcg.com/view?id=Travertine009",
     "licence": "CC0",
     "on_disk": true,
-    "physical_scan_mm": null
+    "physical_scan_mm": [
+     1200,
+     1200
+    ]
    },
    "maintenance": {
     "note": "Maker on grip",
@@ -654,7 +662,8 @@
    },
    "missing": [
     "lrv"
-   ]
+   ],
+   "lookalike_note": "look-alike changed to Travertine009 after board review 2026-11-22 (closer to the product's look and with a published scale where available)"
   },
   {
    "id": "B-cushions-living-sofa",

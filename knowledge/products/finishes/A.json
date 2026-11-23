@@ -281,8 +281,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Concrete012",
-    "url": "https://ambientcg.com/view?id=Concrete012",
+    "id": "Marble015",
+    "url": "https://ambientcg.com/view?id=Marble015",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -297,7 +297,7 @@
     "per-colour thickness (page says depending on the color)",
     "honed availability for this colour"
    ],
-   "lookalike_note": "Marble014 replaced by Concrete012: closer in look to the product (board review 2026-11-22)"
+   "lookalike_note": "look-alike changed to Marble015 after board review 2026-11-22 (closer in pattern to the product)"
   },
   {
    "id": "A-backsplash",
