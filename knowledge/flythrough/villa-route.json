@@ -1,0 +1,261 @@
+{
+ "schema": "flythrough-villa-route/1",
+ "intent": "Whole-villa walk: every room on GF and B, the real flight between them, then the three garden zones as placeholders.",
+ "levels": {
+  "B": -3.0,
+  "GF": 0.0
+ },
+ "stair": {
+  "top": [
+   4.95,
+   -27.946
+  ],
+  "bottom": [
+   9.85,
+   -27.946
+  ],
+  "top_level": "GF",
+  "bottom_level": "B"
+ },
+ "closed_on_route": "interior door leaves are swung open (hinge end/side chosen collision-free); the two entrance leaves and the garden glazing stay closed",
+ "stations": [
+  {
+   "room": "landing-gf",
+   "hold_s": 4,
+   "note": "arrival at the core entrance"
+  },
+  {
+   "room": "study-game",
+   "hold_s": 3
+  },
+  {
+   "room": "stair-gf",
+   "hold_s": 0
+  },
+  {
+   "room": "gallery-end",
+   "hold_s": 0
+  },
+  {
+   "room": "family-bath",
+   "hold_s": 0
+  },
+  {
+   "room": "corridor",
+   "hold_s": 0
+  },
+  {
+   "room": "kids-a",
+   "hold_s": 0
+  },
+  {
+   "room": "kids-b",
+   "hold_s": 0
+  },
+  {
+   "room": "parents-entry",
+   "hold_s": 0
+  },
+  {
+   "room": "parents-bed",
+   "hold_s": 4
+  },
+  {
+   "via": [
+    [
+     20.4,
+     -24.215
+    ],
+    [
+     21.465,
+     -24.25
+    ],
+    [
+     21.465,
+     -25.4
+    ]
+   ],
+   "level": "GF",
+   "note": "the 0.47 m gap between the duvet (x 21.23) and the vanity chair (x 21.70); the dressing door is reached only through it, so the walk is centred in it"
+  },
+  {
+   "room": "parents-dressing",
+   "hold_s": 0
+  },
+  {
+   "room": "parents-dressing-ext",
+   "hold_s": 0
+  },
+  {
+   "room": "parents-ensuite",
+   "hold_s": 0
+  },
+  {
+   "via": [
+    [
+     21.465,
+     -25.4
+    ],
+    [
+     21.465,
+     -24.25
+    ],
+    [
+     20.4,
+     -24.215
+    ],
+    [
+     19.2,
+     -24.215
+    ]
+   ],
+   "level": "GF",
+   "note": "back out through the same gap"
+  },
+  {
+   "stair": "down",
+   "hold_s": 3,
+   "note": "top of the flight, then descend"
+  },
+  {
+   "room": "hall-b",
+   "hold_s": 0
+  },
+  {
+   "room": "family",
+   "hold_s": 0
+  },
+  {
+   "room": "lounge",
+   "hold_s": 4
+  },
+  {
+   "garden": "north-court",
+   "door": [
+    3.617,
+    -26.156
+   ],
+   "outside": [
+    [
+     2.4,
+     -26.15
+    ],
+    [
+     1.2,
+     -25.4
+    ],
+    [
+     1.2,
+     -27.4
+    ],
+    [
+     2.4,
+     -26.15
+    ]
+   ]
+  },
+  {
+   "room": "lounge-nook",
+   "hold_s": 0
+  },
+  {
+   "room": "pantry",
+   "hold_s": 0
+  },
+  {
+   "room": "cinema",
+   "hold_s": 3
+  },
+  {
+   "room": "store-ramp",
+   "hold_s": 0
+  },
+  {
+   "room": "guest-wc",
+   "hold_s": 0
+  },
+  {
+   "room": "kitchen",
+   "hold_s": 3
+  },
+  {
+   "room": "dirty-kitchen",
+   "hold_s": 0
+  },
+  {
+   "room": "kitchen-island",
+   "hold_s": 0
+  },
+  {
+   "room": "entry-b",
+   "hold_s": 2
+  },
+  {
+   "room": "dining-side",
+   "hold_s": 0
+  },
+  {
+   "room": "dining",
+   "hold_s": 4
+  },
+  {
+   "garden": "east-yard",
+   "door": [
+    16.889,
+    -23.591
+   ],
+   "outside": [
+    [
+     16.9,
+     -22.3
+    ],
+    [
+     18.6,
+     -21.6
+    ],
+    [
+     20.4,
+     -22.2
+    ],
+    [
+     16.9,
+     -22.3
+    ]
+   ]
+  },
+  {
+   "room": "living",
+   "hold_s": 4
+  },
+  {
+   "garden": "south-garden",
+   "door": [
+    22.597,
+    -26.131
+   ],
+   "outside": [
+    [
+     24.2,
+     -26.1
+    ],
+    [
+     25.6,
+     -27.4
+    ],
+    [
+     25.6,
+     -25.2
+    ],
+    [
+     24.2,
+     -26.1
+    ]
+   ]
+  },
+  {
+   "room": "bar-alcove",
+   "hold_s": 5,
+   "note": "finish on the library alcove"
+  }
+ ]
+}

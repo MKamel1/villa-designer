@@ -484,6 +484,7 @@
   "growth_rate": "verified",
   "sun": "verified",
   "water": "verified",
+  "heat": "verified",
   "drought": "verified",
   "alkaline_soil": "verified",
   "salt": "verified",

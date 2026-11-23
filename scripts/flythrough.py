@@ -5,6 +5,7 @@ A completed frame is reusable only with matching inputs and its saved bytes.
 """
 from __future__ import annotations
 import argparse
+import contextlib
 import fcntl
 import hashlib
 import json
@@ -16,7 +17,7 @@ import time
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT),str(ROOT/'src'),str(ROOT/'scripts')]
-from archpipe.flythrough import authored_path,policy,digest,require_path_hash,frame_views
+from archpipe.flythrough import authored_path,policy,digest,require_path_hash,frame_views,villa_policy,is_villa_path
 from archpipe.execution_context import Tool,project_context,write_record
 from archpipe.safe_io import save_bytes
 
@@ -35,24 +36,34 @@ def file_hash(path):
 def source_inventory():
     from archpipe.concept.villa_render import provenance_inputs
     files=provenance_inputs()+[ROOT/'knowledge/flythrough-policy.json',ROOT/'knowledge/flythrough-route.json',ROOT/'scripts/flythrough.py',
-                              ROOT/'scripts/villa_render_views.py',ROOT/'scripts/villa_render.py']
+                              ROOT/'scripts/villa_render_views.py',ROOT/'scripts/villa_render.py',
+                              ROOT/'knowledge/flythrough/villa-policy.json',ROOT/'knowledge/flythrough/villa-route.json']
     return {str(p.relative_to(ROOT)):file_hash(p) for p in files}
 
 
-def prepare(out):
+def prepare(out,route='clip'):
     from archpipe.concept import villa_render as V,villa_lighting as L
     project_context(ROOT,Path(__file__).resolve(),'flythrough-prepare',output=out)
     if (out/'manifest.json').exists():
         require_inputs(out)
         print('Reusing unchanged prepared path and scene');return
     out.mkdir(parents=True,exist_ok=True)
-    path=authored_path()
-    save(out/'path.json',path)
     started=time.monotonic()
     before=source_inventory()
     scene=V.build(views=[])
+    if route=='villa':
+        from archpipe.concept import villa_r11 as R,revit_spec as RS
+        from archpipe import flythrough as FT
+        layout=R.design('D1');spec=RS.build(layout);vm=FT.VillaMap(layout,spec,scene=scene)
+        nodes,stations=FT.plan_villa_route(vm);path=FT.sample_villa_path(vm,nodes,stations)
+        # interior door leaves swing open (rotated, never hidden); the report travels with the scene
+        scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'])
+        save(out/'door-states.json',scene['door_states'])
+    else:path=authored_path()
+    save(out/'path.json',path)
     scene['views']=frame_views(path,scene)
     from archpipe.concept.garden_render_review import subject_points
+    scene['route']=route
     for subject in sorted({s for v in scene['views'] for s in v['subjects']}):
         subject_points(subject,scene)
     scene['provenance']=V.source_provenance()
@@ -86,12 +97,12 @@ def require_inputs(out):
     return path
 
 
-def graphics(out,stage,blender,samples=64,frames=None):
+def graphics(out,stage,blender,samples=64,frames=None,segments=None):
     # Admit downstream host imports before starting expensive native work.
     from scripts.villa_render_views import camera_proximity_violations
     from scripts.villa_render import villa_qa_context
     require_inputs(out)
-    if stage=='exposure':
+    if stage=='exposure' and not is_villa_path(require_inputs(out)):
         coverage=json.loads((out/'coverage/summary.json').read_text())
         assembly=json.loads((out/'assembly/assembly.json').read_text())
         if (not coverage.get('passed') or coverage.get('path_sha256')!=require_inputs(out)['sha256']
@@ -109,6 +120,7 @@ def graphics(out,stage,blender,samples=64,frames=None):
     command=[str(blender.resolve()),'-b','-t','8','--python-exit-code','1','-P',
              str(ROOT/'src/archpipe/blender/walkthrough.py'),'--','--root',str(out),'--stage',stage,'--samples',str(samples)]
     if frames:command+=['--frames',frames]
+    if segments:command+=['--segments',segments]
     preflight=list(command)
     preflight[preflight.index('--stage')+1]='preflight'
     preflight+=['--target-stage',stage]
@@ -117,8 +129,9 @@ def graphics(out,stage,blender,samples=64,frames=None):
     environment=dict(os.environ,BLENDER_USER_CONFIG=str(out/'blender-config'),TMPDIR=str(out/'tmp'))
     (out/'tmp').mkdir(exist_ok=True)
     start=time.monotonic()
-    with Path('/home/omar/archpipe/locks/graphics.lock').open('rb') as lock:
-        fcntl.flock(lock,fcntl.LOCK_EX)
+    # Under jobq --gpu the runner already holds graphics.lock; locking again from the child would deadlock.
+    with (contextlib.nullcontext() if os.environ.get('JOBQ_JOB_ID') else Path('/home/omar/archpipe/locks/graphics.lock').open('rb')) as lock:
+        if lock is not None:fcntl.flock(lock,fcntl.LOCK_EX)
         with (directory/(token+'.log')).open('w') as log:
             status=subprocess.run(preflight,cwd=ROOT,env=environment,stdout=log,stderr=subprocess.STDOUT).returncode
             if status==0:status=subprocess.run(command,cwd=ROOT,env=environment,stdout=log,stderr=subprocess.STDOUT).returncode
@@ -132,7 +145,11 @@ def graphics(out,stage,blender,samples=64,frames=None):
         scene=json.loads((out/'scene.json').read_text())
         measured=json.loads((out/'assembly/evaluated-path-meshes.json').read_text())
         layout=R.design('D1')
-        guards=admit_path(require_inputs(out),scene,layout,RS.build(layout),measured)
+        path_=require_inputs(out)
+        if is_villa_path(path_):
+            from archpipe.flythrough import admit_villa_path
+            guards=admit_villa_path(path_,scene,layout,RS.build(layout),measured)
+        else:guards=admit_path(path_,scene,layout,RS.build(layout),measured)
         save(out/'assembly/guards.json',guards)
         save(out/'assembly/admission.json',dict(guards_sha256=digest(guards),
              assembly_sha256=file_hash(out/'assembly/assembly.json'),blend_sha256=file_hash(out/'assembly/scene.blend')))
@@ -182,6 +199,46 @@ def encode(out,stage):
         caption='Real villa model, level B: entrance, island flank, dining, living, south garden threshold. Garden glazing remains closed; no exit is shown.',
         path_sha256=path['sha256']))
     print(target)
+
+
+def encode_villa(out,stage,segments,step):
+    """Encode the rendered frames of the given segments, every `step`th frame, at 24/step fps (real-time pace)."""
+    path=require_inputs(out);directory=out/stage
+    keep=[f['index'] for f in path['frames'] if f['segment'] in segments and f['index']%step==0]
+    link=out/'tmp'/(stage+'-seq');link.mkdir(parents=True,exist_ok=True)
+    for old in link.glob('*.png'):old.unlink()
+    for n,i in enumerate(keep):
+        png=directory/f'frame-{i:04d}.png';record=json.loads(png.with_suffix('.json').read_text())
+        if record['path_sha256']!=path['sha256'] or record['png_sha256']!=file_hash(png):raise ValueError(f'frame {i} incomplete or stale')
+        (link/f'{n:05d}.png').symlink_to(png)
+    fps=24//step;target=directory/'walkthrough.mp4'
+    subprocess.run(['ffmpeg','-y','-framerate',str(fps),'-i',str(link/'%05d.png'),'-c:v','libx264','-threads','8','-preset','slow',
+        '-crf',str(policy()['encode'][stage+'_crf']),'-vf','scale=out_color_matrix=bt709:out_range=tv','-pix_fmt','yuv420p',
+        '-colorspace','bt709','-color_primaries','bt709','-color_trc','iec61966-2-1','-color_range','tv','-movflags','+faststart',str(target)],
+        check=True,capture_output=True)
+    info=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries',
+        'stream=codec_name,width,height,pix_fmt,nb_frames,r_frame_rate,duration','-of','json',str(target)]))
+    save(directory/'video.json',dict(path=str(target),sha256=file_hash(target),stream=info['streams'][0],frames=keep,fps=fps,
+        step=step,segments=segments,path_sha256=path['sha256']))
+    print(target,info['streams'][0])
+
+
+def contact(out,stage,every,columns=6):
+    """Contact sheet of every Nth rendered frame, captioned with frame, time and the room the camera is in."""
+    from PIL import Image,ImageDraw
+    path=require_inputs(out);directory=out/stage
+    rows=[f for f in path['frames'] if f['index']%every==0 and (directory/f"frame-{f['index']:04d}.png").exists()]
+    thumb=(320,180);pad=16
+    sheets=[];per=columns*6
+    for s in range(0,len(rows),per):
+        part=rows[s:s+per];h=(len(part)+columns-1)//columns
+        sheet=Image.new('RGB',(columns*thumb[0],h*(thumb[1]+pad)),'black');draw=ImageDraw.Draw(sheet)
+        for k,f in enumerate(part):
+            with Image.open(directory/f"frame-{f['index']:04d}.png") as im:im=im.convert('RGB').resize(thumb)
+            x,y=(k%columns)*thumb[0],(k//columns)*(thumb[1]+pad)
+            sheet.paste(im,(x,y+pad));draw.text((x+3,y+2),f"{f['index']} {f['seconds']:.0f}s {f['room'] or f['segment']}",fill='white')
+        target=directory/f'contact-{s//per:02d}.jpg';sheet.save(target,quality=88);sheets.append(str(target))
+    print('\n'.join(sheets))
 
 
 def choose_samples(out,blender):
@@ -236,13 +293,14 @@ def temporal(out):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation',choices=['prepare','assembly','coverage','exposure','draft','preview','sampling','reference','final','choose-samples','temporal','qa','encode'])
+    parser.add_argument('operation',choices=['prepare','contact','encode-villa','assembly','coverage','exposure','draft','preview','sampling','reference','final','choose-samples','temporal','qa','encode'])
     parser.add_argument('--out',type=Path,default=ROOT/'out/flythrough')
+    parser.add_argument('--route',choices=['clip','villa'],default='clip')
     parser.add_argument('--blender',type=Path,default=Path('/home/omar/opt/blender/blender'))
-    parser.add_argument('--samples',type=int,default=64)
-    parser.add_argument('--frames');parser.add_argument('--stage',choices=['draft','preview','sampling','reference','final'],default='preview')
+    parser.add_argument('--samples',type=int,default=64);parser.add_argument('--every',type=int,default=1)
+    parser.add_argument('--frames');parser.add_argument('--segments');parser.add_argument('--stage',choices=['draft','preview','sampling','reference','final'],default='preview')
     args=parser.parse_args();out=args.out.resolve()
-    if args.operation=='prepare':prepare(out)
+    if args.operation=='prepare':prepare(out,args.route)
     elif args.operation=='choose-samples':choose_samples(out,args.blender)
     elif args.operation=='temporal':
         result=temporal(out);return 0 if result['passed'] else 1
@@ -250,6 +308,8 @@ def main():
         indices=[int(i) for i in args.frames.split(',')] if args.frames else range(0,720,24)
         result=qa_frames(out,args.stage+('/'+str(args.samples) if args.stage=='sampling' else ''),indices);print(json.dumps(result));return 0 if result['passed'] else 1
     elif args.operation=='encode':encode(out,args.stage)
+    elif args.operation=='encode-villa':encode_villa(out,args.stage,(args.segments or 'interior').split(','),args.every)
+    elif args.operation=='contact':contact(out,args.stage,args.every)
     else:
         samples=args.samples
         if args.operation=='final':
@@ -257,7 +317,11 @@ def main():
             if choice.get('path_sha256')!=require_inputs(out)['sha256'] or choice.get('policy_sha256')!=digest(policy()):
                 raise ValueError('Sample selection binding changed')
             samples=choice['samples']
-        graphics(out,args.operation,args.blender,samples,args.frames)
+        frames=args.frames
+        if not frames and args.every>1:
+            wanted=(args.segments or 'interior,garden-placeholder').split(',')
+            frames=','.join(str(f['index']) for f in require_inputs(out)['frames'] if f['index']%args.every==0 and f['segment'] in wanted)
+        graphics(out,args.operation,args.blender,samples,frames,args.segments)
     return 0
 
 

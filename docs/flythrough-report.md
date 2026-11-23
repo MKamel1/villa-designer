@@ -220,3 +220,10 @@ flythrough-unresolved-subject and flythrough-static-coverage. Real reproductions
 construction controls, proving tests and workflow updates are indexed in
 [LEARNINGS](LEARNINGS.md) and the existing guard registry. Fixed-source fixture
 and botanical photographic limits remain open; final video acceptance is pending.
+
+
+## Whole-villa walkthrough (lane WT, 2026-11-22)
+
+The same guards now run a route through every room on both floors, the real flight and three garden placeholders: 7,507 frames, 312.8 s at 24 fps, 196 m, pace from the cited
+comfortable gait speed. Interior admission 6,193 / 6,193 on the assembled scene; interior doors are swung open, nothing hidden; garden glazing stays closed. Full account, preview
+(480x270, 2,065 frames, contact sheets) and the 25.2 GPU-hour final plan: [lanes/WT.md](lanes/WT.md); lessons: [lessons/WT.md](lessons/WT.md).

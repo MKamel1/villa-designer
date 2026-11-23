@@ -2,9 +2,9 @@
  "design": "B adapted (client decided 2026-11-22)",
  "hard_fails": [],
  "tally": {
-  "pass": 123,
+  "pass": 140,
   "fail": 0,
-  "warn": 3,
+  "warn": 4,
   "not_evaluated": 8
  },
  "superseded_by_manual": [
@@ -13,40 +13,46 @@
    "subject": "s-firepit",
    "ldk_message": "distance to house, fence, structure or planting (Calgary Fire Department): 1250 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)",
    "replaced_by": "LDG-FIRE-MANUAL (side and overhead), manual clearances in final_fire.PRODUCTS"
+  },
+  {
+   "criterion": "LS-FIRE-STRUCT",
+   "subject": "s-bbq",
+   "ldk_message": "distance to house, fence, structure or planting (Calgary Fire Department): 1238 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)",
+   "replaced_by": "LDG-FIRE-MANUAL (side and overhead), manual clearances in final_fire.PRODUCTS"
   }
  ],
  "metrics": {
   "south_area_m2": 53.19,
-  "soft_m2": 8.04,
-  "hard_share": 0.849,
-  "canopy_trees": 1,
-  "trees_per_100m2_south": 1.88,
-  "trees_per_100m2_south_plus_yard": 1.34,
-  "free_floor_m2": 29.8,
-  "standing_at_1.3m2": 22,
+  "soft_m2": 12.97,
+  "hard_share": 0.756,
+  "canopy_trees": 3,
+  "trees_per_100m2_south": 5.64,
+  "trees_per_100m2_south_plus_yard": 4.02,
+  "free_floor_m2": 25.7,
+  "standing_at_1.3m2": 19,
   "seats": {
    "dining": 8,
-   "built_in_and_lounge": 3,
+   "built_in_and_lounge": 2,
    "quiet_south": 4,
    "quiet_yard_or_north": 2
   }
  },
  "precedent": {
   "hard_share": {
-   "achieved": 0.849,
+   "achieved": 0.756,
    "range": [
     0.52,
     0.82
    ],
-   "inside": false
+   "inside": true
   },
   "trees_per_100m2_south": {
-   "achieved": 1.88,
+   "achieved": 5.64,
    "range": [
     1.56,
     3.26
    ],
-   "inside": true
+   "inside": false
   }
  },
  "table_extension": {
@@ -69,92 +75,103 @@
    "status": "fail"
   }
  },
- "grape": {
-  "summer": {
-   "open": 3.54,
-   "leafed": 0.89
-  },
-  "winter": {
-   "open": 3.54,
-   "bare": 3.54,
-   "louvres_closed": 3.54
-  },
-  "window": "10-15 h local standard time",
-  "leaf_level_sun_21jun_h": 5.58,
+ "shade": {
   "privacy_table": {
    "table": {
     "limit": 0.3,
-    "today_eye_points": 13.2,
-    "summer": 0.209,
-    "summer_with_opening": 0.579,
-    "winter_louvres_open": 0.603,
-    "winter_louvres_open_with_opening": 0.973,
-    "winter_louvres_closed": 0.209,
-    "winter_louvres_closed_with_opening": 0.579
+    "today_eye_points": 15.6,
+    "summer": 0.183,
+    "summer_with_opening": 0.508,
+    "winter": 0.652,
+    "winter_with_opening": 0.977,
+    "no_cover": 0.652
    },
    "s-bench-rear": {
     "limit": 0.3,
-    "today_eye_points": 20.2,
-    "summer": 0.0,
-    "summer_with_opening": 0.0,
-    "winter_louvres_open": 0.032,
-    "winter_louvres_open_with_opening": 0.032,
-    "winter_louvres_closed": 0.0,
-    "winter_louvres_closed_with_opening": 0.0
+    "today_eye_points": 20.9,
+    "summer": 0.211,
+    "summer_with_opening": 0.211,
+    "winter": 0.211,
+    "winter_with_opening": 0.211,
+    "no_cover": 0.617
    },
    "s-bench-quiet": {
     "limit": 0.25,
     "today_eye_points": 18.0,
-    "summer": 0.0,
-    "summer_with_opening": 0.0,
-    "winter_louvres_open": 0.0,
-    "winter_louvres_open_with_opening": 0.0,
-    "winter_louvres_closed": 0.0,
-    "winter_louvres_closed_with_opening": 0.0
+    "summer": 0.039,
+    "summer_with_opening": 0.039,
+    "winter": 0.039,
+    "winter_with_opening": 0.039,
+    "no_cover": 0.556
    },
    "n-bench": {
     "limit": 0.75,
     "today_eye_points": 9.9,
-    "summer": 0.224,
-    "summer_with_opening": 0.224,
-    "winter_louvres_open": 0.224,
-    "winter_louvres_open_with_opening": 0.224,
-    "winter_louvres_closed": 0.224,
-    "winter_louvres_closed_with_opening": 0.224
+    "summer": 0.496,
+    "summer_with_opening": 0.496,
+    "winter": 0.496,
+    "winter_with_opening": 0.496,
+    "no_cover": 0.496
    },
    "e-bench": {
     "limit": 0.3,
     "today_eye_points": 10.7,
-    "summer": 0.224,
-    "summer_with_opening": 0.224,
-    "winter_louvres_open": 0.224,
-    "winter_louvres_open_with_opening": 0.224,
-    "winter_louvres_closed": 0.224,
-    "winter_louvres_closed_with_opening": 0.224
+    "summer": 0.051,
+    "summer_with_opening": 0.051,
+    "winter": 0.051,
+    "winter_with_opening": 0.051,
+    "no_cover": 0.82
+   }
+  },
+  "season_table": {
+   "table": {
+    "summer_open_sky_h": 3.62,
+    "summer_leaf_on_h": 1.17,
+    "winter_open_sky_h": 3.12,
+    "winter_leaf_off_h": 3.12,
+    "winter_if_leaf_on_h": 3.12
+   },
+   "s-bench-rear": {
+    "summer_open_sky_h": 3.0,
+    "summer_leaf_on_h": 1.09,
+    "winter_open_sky_h": 1.75,
+    "winter_leaf_off_h": 1.75,
+    "winter_if_leaf_on_h": 1.75
+   },
+   "s-bench-quiet": {
+    "summer_open_sky_h": 3.0,
+    "summer_leaf_on_h": 0.6,
+    "winter_open_sky_h": 1.75,
+    "winter_leaf_off_h": 1.64,
+    "winter_if_leaf_on_h": 1.22
+   },
+   "e-bench": {
+    "summer_open_sky_h": 4.75,
+    "summer_leaf_on_h": 1.35,
+    "winter_open_sky_h": 0.25,
+    "winter_leaf_off_h": 0.25,
+    "winter_if_leaf_on_h": 0.25
+   }
+  },
+  "tree_sun": {
+   "s-tree-crape": {
+    "crown_sun_h_21jun_8_18": 6.0,
+    "fit": "pass"
+   },
+   "s-tree-olive": {
+    "crown_sun_h_21jun_8_18": 7.25,
+    "fit": "pass"
+   },
+   "s-tree-punica": {
+    "crown_sun_h_21jun_8_18": 9.5,
+    "fit": "pass"
+   },
+   "e-tree-olive": {
+    "crown_sun_h_21jun_8_18": 10.0,
+    "fit": "pass"
    }
   }
  },
- "grape_sources": [
-  {
-   "id": "NCSU-vitis-vinifera",
-   "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
-   "quote": "It is a woody, deciduous vine",
-   "also": "Leaf Characteristics: Deciduous; Fire Risk Rating: high flammability",
-   "status": "SOURCED (deciduous habit; no calendar dates)"
-  },
-  {
-   "id": "Burkes-ornamental-grape",
-   "url": "https://www.burkesbackyard.com.au/fact-sheets/in-the-garden/flowering-plants-shrubs/ornamental-grape/",
-   "quote": "shade in summer and sun in winter",
-   "status": "SOURCED (qualitative, garden fact sheet; Vitis vinifera purpurea/ornamental grape, Australia)"
-  },
-  {
-   "id": "EKB-dormex-trials",
-   "url": "https://journals.ekb.eg/article_171522.html",
-   "quote": "Thompson Seedless grapevines ... sprayed hydrogen cyanamide on 1, 7 or 14 January",
-   "status": "INFERENCE: a dormancy-breaker is applied to dormant vines, so vines in Egypt are dormant (leafless) in early January; no leaf-fall or leaf-out date was found (GAP)"
-  }
- ],
  "wind": {
   "toward_west": {
    "all-year": {
@@ -308,53 +325,48 @@
  "privacy": {
   "table": {
    "limit": 0.3,
-   "today_eye_points": 13.2,
-   "summer": 0.209,
-   "summer_with_opening": 0.579,
-   "winter_louvres_open": 0.603,
-   "winter_louvres_open_with_opening": 0.973,
-   "winter_louvres_closed": 0.209,
-   "winter_louvres_closed_with_opening": 0.579
+   "today_eye_points": 15.6,
+   "summer": 0.183,
+   "summer_with_opening": 0.508,
+   "winter": 0.652,
+   "winter_with_opening": 0.977,
+   "no_cover": 0.652
   },
   "s-bench-rear": {
    "limit": 0.3,
-   "today_eye_points": 20.2,
-   "summer": 0.0,
-   "summer_with_opening": 0.0,
-   "winter_louvres_open": 0.032,
-   "winter_louvres_open_with_opening": 0.032,
-   "winter_louvres_closed": 0.0,
-   "winter_louvres_closed_with_opening": 0.0
+   "today_eye_points": 20.9,
+   "summer": 0.211,
+   "summer_with_opening": 0.211,
+   "winter": 0.211,
+   "winter_with_opening": 0.211,
+   "no_cover": 0.617
   },
   "s-bench-quiet": {
    "limit": 0.25,
    "today_eye_points": 18.0,
-   "summer": 0.0,
-   "summer_with_opening": 0.0,
-   "winter_louvres_open": 0.0,
-   "winter_louvres_open_with_opening": 0.0,
-   "winter_louvres_closed": 0.0,
-   "winter_louvres_closed_with_opening": 0.0
+   "summer": 0.039,
+   "summer_with_opening": 0.039,
+   "winter": 0.039,
+   "winter_with_opening": 0.039,
+   "no_cover": 0.556
   },
   "n-bench": {
    "limit": 0.75,
    "today_eye_points": 9.9,
-   "summer": 0.224,
-   "summer_with_opening": 0.224,
-   "winter_louvres_open": 0.224,
-   "winter_louvres_open_with_opening": 0.224,
-   "winter_louvres_closed": 0.224,
-   "winter_louvres_closed_with_opening": 0.224
+   "summer": 0.496,
+   "summer_with_opening": 0.496,
+   "winter": 0.496,
+   "winter_with_opening": 0.496,
+   "no_cover": 0.496
   },
   "e-bench": {
    "limit": 0.3,
    "today_eye_points": 10.7,
-   "summer": 0.224,
-   "summer_with_opening": 0.224,
-   "winter_louvres_open": 0.224,
-   "winter_louvres_open_with_opening": 0.224,
-   "winter_louvres_closed": 0.224,
-   "winter_louvres_closed_with_opening": 0.224
+   "summer": 0.051,
+   "summer_with_opening": 0.051,
+   "winter": 0.051,
+   "winter_with_opening": 0.051,
+   "no_cover": 0.82
   }
  },
  "pond_sun": {
@@ -369,34 +381,34 @@
  },
  "critic_counts": {
   "landscape-architect": {
-   "pass": 13,
-   "fail": 4,
+   "pass": 14,
+   "fail": 3,
    "warn": 1,
    "not_evaluated": 0
   },
   "horticulturist": {
-   "pass": 21,
-   "fail": 0,
+   "pass": 23,
+   "fail": 2,
    "warn": 2,
    "not_evaluated": 3
   },
   "user": {
-   "pass": 19,
-   "fail": 0,
+   "pass": 17,
+   "fail": 2,
    "warn": 0,
    "not_evaluated": 0
   },
   "climate": {
-   "pass": 5,
-   "fail": 2,
+   "pass": 6,
+   "fail": 1,
    "warn": 0,
    "not_evaluated": 2
   }
  },
  "critic_verdict": {
   "landscape-architect": "fail",
-  "horticulturist": "pass",
-  "user": "pass",
+  "horticulturist": "fail",
+  "user": "fail",
   "climate": "fail"
  },
  "critic_findings": [
@@ -429,22 +441,10 @@
    "criterion": "A-ENCLOSURE",
    "status": "fail",
    "severity": "major",
-   "evidence": "room 's-dining': 37% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "evidence": "room 's-dining': 43% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
    "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
    "kind": "computed",
    "subject": "s-dining",
-   "calibrated": false,
-   "extra": {}
-  },
-  {
-   "critic": "landscape-architect",
-   "criterion": "A-FOCAL",
-   "status": "fail",
-   "severity": "minor",
-   "evidence": "8 focal elements (['firepit', 'pond', 'pond', 'specimen-tree', 'pergola', 'pergola', 'pergola', 'pergola']); required 1-4 (one primary with restraint)",
-   "source": "AD-COMP-FOCAL (qualitative); count policy",
-   "kind": "computed",
-   "subject": "",
    "calibrated": false,
    "extra": {}
   },
@@ -462,10 +462,46 @@
   },
   {
    "critic": "horticulturist",
+   "criterion": "H-SIZE-VS-SPACE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "lagerstroemia_indica: mature spread 4.0 m in a space 4.7 m across (limit 0.8 x = 3.8 m)",
+   "source": "LDL mature spread; 0.8 ratio is policy",
+   "kind": "computed",
+   "subject": "s-tree-crape",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-SIZE-VS-SPACE",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "olea_europaea: mature spread 3.6 m in a space 1.4 m across (limit 0.8 x = 1.1 m)",
+   "source": "LDL mature spread; 0.8 ratio is policy",
+   "kind": "computed",
+   "subject": "s-tree-olive",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
    "criterion": "H-BED-CROWDING",
    "status": "warn",
    "severity": "minor",
-   "evidence": "bed n-screen: mature crowns 5.1 m2 on 2.7 m2 of bed (limit 1.5 x)",
+   "evidence": "bed s-bed-wall-b: mature crowns 3.0 m2 on 1.1 m2 of bed (limit 1.5 x)",
+   "source": "LDL mature spread; 1.5 overlap is policy",
+   "kind": "computed",
+   "subject": "s-bed-wall-b",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-BED-CROWDING",
+   "status": "warn",
+   "severity": "minor",
+   "evidence": "bed n-screen: mature crowns 4.7 m2 on 2.7 m2 of bed (limit 1.5 x)",
    "source": "LDL mature spread; 1.5 overlap is policy",
    "kind": "computed",
    "subject": "n-screen",
@@ -473,24 +509,24 @@
    "extra": {}
   },
   {
-   "critic": "horticulturist",
-   "criterion": "H-SUN-FIT",
-   "status": "warn",
+   "critic": "user",
+   "criterion": "U-GATHER-GROUPS",
+   "status": "fail",
    "severity": "major",
-   "evidence": "2 plants where the LDS sun layer contradicts the species' stated sun class (['vitis_vinifera']); full sun is 6 h+ (RHS via LDK), limit used 3 h",
-   "source": "LDL sun class vs LDS sun.json; limits policy",
+   "evidence": "gathering 10-20: dining seats 8 (>= 4), lounge seats 2 (>= 3): a dining group and a lounge group",
+   "source": "brief garden-brief-2026-11-22 (client decision); group minimums policy",
    "kind": "computed",
    "subject": "",
    "calibrated": false,
    "extra": {}
   },
   {
-   "critic": "climate",
-   "criterion": "C-PRIVACY",
+   "critic": "user",
+   "criterion": "U-FIRE",
    "status": "fail",
-   "severity": "blocking",
-   "evidence": "6 of 15 south seats overlooked by more than 8 eye points seated (raw LDS median 13.0; residual after layout screens 8.0); brief: privacy is critical",
-   "source": "LDS privacy.json (sight-line geometry); brief; threshold policy (LDS 'fewer than 5 eyes')",
+   "severity": "major",
+   "evidence": "fire pit: 3 seats 1.5-4.0 m from the fire (required >= 4; 1.5 m is LS-FIRE-SEAT); reachable: True",
+   "source": "brief garden-brief-2026-11-22 (client decision)",
    "kind": "computed",
    "subject": "",
    "calibrated": false,
@@ -511,20 +547,26 @@
  ],
  "build_checks": {
   "closed": {
-   "footprint:pass": 67,
-   "id:pass": 142,
+   "climber-coverage:pass": 5,
+   "footprint:pass": 62,
+   "id:pass": 180,
+   "pit-half:pass": 2,
    "plant-footprint:info": 7,
-   "plant-footprint:pass": 55,
-   "standin:pass": 65,
-   "support:pass": 140
+   "plant-footprint:pass": 66,
+   "pond-section:pass": 18,
+   "standin:pass": 96,
+   "support:pass": 178
   },
   "open": {
-   "footprint:pass": 66,
-   "id:pass": 142,
+   "climber-coverage:pass": 5,
+   "footprint:pass": 61,
+   "id:pass": 180,
+   "pit-half:pass": 3,
    "plant-footprint:info": 7,
-   "plant-footprint:pass": 55,
-   "standin:pass": 65,
-   "support:pass": 141
+   "plant-footprint:pass": 66,
+   "pond-section:pass": 18,
+   "standin:pass": 96,
+   "support:pass": 179
   }
  },
  "build_warnings": [],
@@ -632,19 +674,19 @@
    "criterion": "LS-CAPACITY",
    "status": "pass",
    "subject": "south garden",
-   "achieved": 11,
+   "achieved": 10,
    "required": 10,
    "unit": "seats",
-   "message": "seats in dining and lounge zones (brief 10-20 people): 11 seats achieved, 10 seats required"
+   "message": "seats in dining and lounge zones (brief 10-20 people): 10 seats achieved, 10 seats required"
   },
   {
    "criterion": "LS-LOUNGE-AREA",
    "status": "pass",
    "subject": "s-lounge",
-   "achieved": 4.76,
+   "achieved": 7.14,
    "required": 1.8,
    "unit": "m2",
-   "message": "lounge area per seat (14.3 m2 / 3 seats): 4.76 m2 achieved, 1.80 m2 required"
+   "message": "lounge area per seat (14.3 m2 / 2 seats): 7.14 m2 achieved, 1.80 m2 required"
   },
   {
    "criterion": "LS-LOUNGE-CLUSTER",
@@ -659,10 +701,10 @@
    "criterion": "LS-STAND-AREA",
    "status": "pass",
    "subject": "s-standing",
-   "achieved": 1.41,
+   "achieved": 1.63,
    "required": 1.3,
    "unit": "m2",
-   "message": "standing area per person (31.0 m2 / 22 people): 1.41 m2 achieved, 1.30 m2 required"
+   "message": "standing area per person (31.0 m2 / 19 people): 1.63 m2 achieved, 1.30 m2 required"
   },
   {
    "criterion": "LS-FIRE-CLEAR",
@@ -677,10 +719,10 @@
    "criterion": "LS-FIRE-SEAT",
    "status": "pass",
    "subject": "s-firepit",
-   "achieved": 2100,
+   "achieved": 3600,
    "required": 1500,
    "unit": "mm",
-   "message": "fire pit to nearest seat or table: 2100 mm achieved, 1500 mm required"
+   "message": "fire pit to nearest seat or table: 3600 mm achieved, 1500 mm required"
   },
   {
    "criterion": "LS-FIRE-COVER",
@@ -713,10 +755,10 @@
    "criterion": "LS-FIRE-CLEAR",
    "status": "pass",
    "subject": "s-bbq",
-   "achieved": 1200,
+   "achieved": 1238,
    "required": 1200,
    "unit": "mm",
-   "message": "clear ground: 1200 mm achieved, 1200 mm recommended"
+   "message": "clear ground: 1238 mm achieved, 1200 mm recommended"
   },
   {
    "criterion": "LS-FIRE-PRODUCT",
@@ -738,12 +780,12 @@
   },
   {
    "criterion": "LS-FIRE-STRUCT",
-   "status": "pass",
+   "status": "warn",
    "subject": "s-bbq",
-   "achieved": 2000,
+   "achieved": 1238,
    "required": 2000,
    "unit": "mm",
-   "message": "distance to house, fence, structure or planting (Calgary Fire Department): 2000 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)"
+   "message": "distance to house, fence, structure or planting (Calgary Fire Department): 1238 mm achieved, 2000 mm required (the product instructions govern; this is the published floor)"
   },
   {
    "criterion": "LS-POND-FREEBOARD",
@@ -1027,6 +1069,24 @@
   {
    "criterion": "LS-SLOPE",
    "status": "pass",
+   "subject": "s-paving-12",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
+   "subject": "s-paving-13",
+   "achieved": 1.5,
+   "required": 2,
+   "unit": "%",
+   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
+  },
+  {
+   "criterion": "LS-SLOPE",
+   "status": "pass",
    "subject": "n-paving-0",
    "achieved": 1.5,
    "required": 2,
@@ -1135,33 +1195,6 @@
   {
    "criterion": "LS-SLOPE",
    "status": "pass",
-   "subject": "e-paving-6",
-   "achieved": 1.5,
-   "required": 2,
-   "unit": "%",
-   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
-  },
-  {
-   "criterion": "LS-SLOPE",
-   "status": "pass",
-   "subject": "e-paving-7",
-   "achieved": 1.5,
-   "required": 2,
-   "unit": "%",
-   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
-  },
-  {
-   "criterion": "LS-SLOPE",
-   "status": "pass",
-   "subject": "e-paving-8",
-   "achieved": 1.5,
-   "required": 2,
-   "unit": "%",
-   "message": "fall of unit-paving terrace: 1.5 % achieved, 0.75-2 % required"
-  },
-  {
-   "criterion": "LS-SLOPE",
-   "status": "pass",
    "subject": "s-path-door/cross",
    "achieved": 1.5,
    "required": 2,
@@ -1185,15 +1218,6 @@
    "required": 4,
    "unit": "%",
    "message": "path cross fall: 1.5 % achieved, 1-4 % required"
-  },
-  {
-   "criterion": "LS-HYDROZONE",
-   "status": "not_evaluated",
-   "subject": "s-bed-vine",
-   "achieved": null,
-   "required": null,
-   "unit": "",
-   "message": "not evaluated: a plant has no water_need"
   },
   {
    "criterion": "LS-HYDROZONE",
@@ -1224,8 +1248,17 @@
   },
   {
    "criterion": "LS-HYDROZONE",
-   "status": "pass",
+   "status": "not_evaluated",
    "subject": "s-bed-screen-n",
+   "achieved": null,
+   "required": null,
+   "unit": "",
+   "message": "not evaluated: a plant has no water_need"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-screen-s",
    "achieved": 1,
    "required": 1,
    "unit": "classes",
@@ -1234,7 +1267,34 @@
   {
    "criterion": "LS-HYDROZONE",
    "status": "pass",
-   "subject": "s-bed-screen-s",
+   "subject": "s-bed-wall",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-wall-b",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-wall-c",
+   "achieved": 1,
+   "required": 1,
+   "unit": "classes",
+   "message": "water-need classes in the group: 1 achieved, 1 allowed (medium)"
+  },
+  {
+   "criterion": "LS-HYDROZONE",
+   "status": "pass",
+   "subject": "s-bed-pocket",
    "achieved": 1,
    "required": 1,
    "unit": "classes",
@@ -1369,11 +1429,56 @@
   {
    "criterion": "LS-ROOTZONE",
    "status": "pass",
+   "subject": "s-tree-crape",
+   "achieved": 0.0,
+   "required": 0.0,
+   "unit": "m2",
+   "message": "no paving or building inside the mature dripline zone (12.6 m2, spread 4 m)"
+  },
+  {
+   "criterion": "LS-ROOTZONE",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 0.0,
+   "required": 0.0,
+   "unit": "m2",
+   "message": "no paving or building inside the mature dripline zone (10.2 m2, spread 3.6 m)"
+  },
+  {
+   "criterion": "LS-ROOTZONE",
+   "status": "pass",
    "subject": "s-tree-punica",
    "achieved": 0.0,
    "required": 0.0,
    "unit": "m2",
    "message": "no paving or building inside the mature dripline zone (4.5 m2, spread 2.4 m)"
+  },
+  {
+   "criterion": "LS-ROOTZONE",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 0.0,
+   "required": 0.0,
+   "unit": "m2",
+   "message": "no paving or building inside the mature dripline zone (5.3 m2, spread 2.6 m)"
+  },
+  {
+   "criterion": "LS-TREE-BUILDING",
+   "status": "pass",
+   "subject": "s-tree-crape",
+   "achieved": 3.45,
+   "required": 3.38,
+   "unit": "m",
+   "message": "trunk to building: 3.45 m achieved, 3.38 m required (0.75 x 4.5 m mature height, moderate water demand); UK clay guidance, the site soil test governs"
+  },
+  {
+   "criterion": "LS-TREE-BUILDING",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 4.34,
+   "required": 2.25,
+   "unit": "m",
+   "message": "trunk to building: 4.34 m achieved, 2.25 m required (0.5 x 4.5 m mature height, low water demand); UK clay guidance, the site soil test governs"
   },
   {
    "criterion": "LS-TREE-BUILDING",
@@ -1383,6 +1488,15 @@
    "required": 2.78,
    "unit": "m",
    "message": "trunk to building: 3.77 m achieved, 2.78 m required (0.75 x 3.7 m mature height, moderate water demand); UK clay guidance, the site soil test governs"
+  },
+  {
+   "criterion": "LS-TREE-BUILDING",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 2.3,
+   "required": 2.25,
+   "unit": "m",
+   "message": "trunk to building: 2.3 m achieved, 2.25 m required (0.5 x 4.5 m mature height, low water demand); UK clay guidance, the site soil test governs"
   },
   {
    "criterion": "LS-HERB-SUN",
@@ -1415,10 +1529,10 @@
    "criterion": "LDG-SHADE",
    "status": "pass",
    "subject": "s-bench-quiet/evening",
-   "achieved": 1.0,
+   "achieved": 0.9,
    "required": 0.9,
    "unit": "share",
-   "message": "s-bench-quiet: 100% of cells sun-free 17-20 h (DST clock), 90 % required"
+   "message": "s-bench-quiet: 90% of cells sun-free 17-20 h (DST clock), 90 % required"
   },
   {
    "criterion": "LDG-SHADE",
@@ -1505,109 +1619,64 @@
    "criterion": "LDG-PRIV",
    "status": "pass",
    "subject": "table/summer",
-   "achieved": 0.209,
+   "achieved": 0.183,
    "required": 0.3,
    "unit": "share",
-   "message": "table, summer: 21% of today's overlooking remains with the screen unbroken (limit 30%)"
+   "message": "table, summer (crowns leafed): 18% of today's overlooking remains with the screen unbroken (limit 30%; 65% with no tree)"
+  },
+  {
+   "criterion": "LDG-PRIV-WINTER",
+   "status": "warn",
+   "subject": "table/winter",
+   "achieved": 0.652,
+   "required": 0.3,
+   "unit": "share",
+   "message": "table, winter (deciduous crowns bare): 65% of today's overlooking remains (limit 30%); accepted with the winter sun (client 2026-11-22), shown not hidden"
   },
   {
    "criterion": "LDG-PRIV-OPENING",
    "status": "warn",
    "subject": "table/summer",
-   "achieved": 0.579,
+   "achieved": 0.508,
    "required": 0.3,
    "unit": "share",
-   "message": "WAIVED by the client's decision (screen opening at the shared fire pit): table summer would be overlooked at 58% of today's through the opening (limit 30%); a closable screen leaf would restore 21%"
-  },
-  {
-   "criterion": "LDG-PRIV",
-   "status": "pass",
-   "subject": "table/winter_louvres_closed",
-   "achieved": 0.209,
-   "required": 0.3,
-   "unit": "share",
-   "message": "table, winter louvres closed: 21% of today's overlooking remains with the screen unbroken (limit 30%)"
-  },
-  {
-   "criterion": "LDG-PRIV-OPENING",
-   "status": "warn",
-   "subject": "table/winter_louvres_closed",
-   "achieved": 0.579,
-   "required": 0.3,
-   "unit": "share",
-   "message": "WAIVED by the client's decision (screen opening at the shared fire pit): table winter louvres closed would be overlooked at 58% of today's through the opening (limit 30%); a closable screen leaf would restore 21%"
+   "message": "WAIVED by the client's decision (screen opening at the shared fire pit): table summer would be overlooked at 51% of today's through the opening (limit 30%); a closable screen leaf would restore 18%"
   },
   {
    "criterion": "LDG-PRIV",
    "status": "pass",
    "subject": "s-bench-rear/summer",
-   "achieved": 0.0,
+   "achieved": 0.211,
    "required": 0.3,
    "unit": "share",
-   "message": "s-bench-rear, summer: 0% of today's overlooking remains with the screen unbroken (limit 30%)"
-  },
-  {
-   "criterion": "LDG-PRIV",
-   "status": "pass",
-   "subject": "s-bench-rear/winter_louvres_closed",
-   "achieved": 0.0,
-   "required": 0.3,
-   "unit": "share",
-   "message": "s-bench-rear, winter louvres closed: 0% of today's overlooking remains with the screen unbroken (limit 30%)"
+   "message": "s-bench-rear, summer (crowns leafed): 21% of today's overlooking remains with the screen unbroken (limit 30%; 62% with no tree)"
   },
   {
    "criterion": "LDG-PRIV",
    "status": "pass",
    "subject": "s-bench-quiet/summer",
-   "achieved": 0.0,
+   "achieved": 0.039,
    "required": 0.25,
    "unit": "share",
-   "message": "s-bench-quiet, summer: 0% of today's overlooking remains with the screen unbroken (limit 25%)"
-  },
-  {
-   "criterion": "LDG-PRIV",
-   "status": "pass",
-   "subject": "s-bench-quiet/winter_louvres_closed",
-   "achieved": 0.0,
-   "required": 0.25,
-   "unit": "share",
-   "message": "s-bench-quiet, winter louvres closed: 0% of today's overlooking remains with the screen unbroken (limit 25%)"
+   "message": "s-bench-quiet, summer (crowns leafed): 4% of today's overlooking remains with the screen unbroken (limit 25%; 56% with no tree)"
   },
   {
    "criterion": "LDG-PRIV",
    "status": "pass",
    "subject": "n-bench/summer",
-   "achieved": 0.224,
+   "achieved": 0.496,
    "required": 0.75,
    "unit": "share",
-   "message": "n-bench, summer: 22% of today's overlooking remains with the screen unbroken (limit 75%)"
-  },
-  {
-   "criterion": "LDG-PRIV",
-   "status": "pass",
-   "subject": "n-bench/winter_louvres_closed",
-   "achieved": 0.224,
-   "required": 0.75,
-   "unit": "share",
-   "message": "n-bench, winter louvres closed: 22% of today's overlooking remains with the screen unbroken (limit 75%)"
+   "message": "n-bench, summer (crowns leafed): 50% of today's overlooking remains with the screen unbroken (limit 75%; 50% with no tree)"
   },
   {
    "criterion": "LDG-PRIV",
    "status": "pass",
    "subject": "e-bench/summer",
-   "achieved": 0.224,
+   "achieved": 0.051,
    "required": 0.3,
    "unit": "share",
-   "message": "e-bench, summer: 22% of today's overlooking remains with the screen unbroken (limit 30%)"
-  },
-  {
-   "criterion": "LDG-PRIV",
-   "status": "pass",
-   "subject": "e-bench/winter_louvres_closed",
-   "achieved": 0.224,
-   "required": 0.3,
-   "unit": "share",
-   "message": "e-bench, winter louvres closed: 22% of today's overlooking remains with the screen unbroken (limit 30%)"
+   "message": "e-bench, summer (crowns leafed): 5% of today's overlooking remains with the screen unbroken (limit 30%; 82% with no tree)"
   },
   {
    "criterion": "LDG-SUNFIT",
@@ -1616,7 +1685,25 @@
    "achieved": 0,
    "required": 0,
    "unit": "bed-species",
-   "message": "every plant's sun class is met by its bed's 21-June sun (vine: at leaf level, 2.4 m); part shade 2 h, conditional 75 % of need (POLICY thresholds)"
+   "message": "every plant's sun class is met by its bed's 21-June sun, reduced by the leafed crown over the bed (part shade 2 h, conditional 75 % of need; POLICY thresholds)"
+  },
+  {
+   "criterion": "LDG-SPREAD",
+   "status": "pass",
+   "subject": "s-tree-crape",
+   "achieved": 0.0,
+   "required": 0,
+   "unit": "m2",
+   "message": "s-tree-crape: canopy radius 2.00 m (sourced minimum spread 4.0 m), 0.00 m2 outside the garden (0.3 m over the fences allowed)"
+  },
+  {
+   "criterion": "LDG-SPREAD",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 0.0,
+   "required": 0,
+   "unit": "m2",
+   "message": "s-tree-olive: canopy radius 1.80 m (sourced minimum spread 3.6 m), 0.00 m2 outside the garden (0.3 m over the fences allowed)"
   },
   {
    "criterion": "LDG-SPREAD",
@@ -1628,13 +1715,22 @@
    "message": "s-tree-punica: canopy radius 1.20 m (sourced minimum spread 2.4 m), 0.00 m2 outside the garden (0.3 m over the fences allowed)"
   },
   {
+   "criterion": "LDG-SPREAD",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 0.0,
+   "required": 0,
+   "unit": "m2",
+   "message": "e-tree-olive: canopy radius 1.30 m (sourced minimum spread 2.6 m), 0.00 m2 outside the garden (0.3 m over the fences allowed)"
+  },
+  {
    "criterion": "LDG-IDS",
    "status": "pass",
    "subject": "layout",
    "achieved": 0,
    "required": 0,
    "unit": "duplicates",
-   "message": "every element id is unique across all gardens (74 ids)"
+   "message": "every element id is unique across all gardens (91 ids)"
   },
   {
    "criterion": "LDG-ZONE-CLASS",
@@ -1703,10 +1799,19 @@
    "criterion": "LDG-FIRE-MANUAL",
    "status": "pass",
    "subject": "s-firepit/overhead",
-   "achieved": 2262,
+   "achieved": 2193,
    "required": 2000,
    "unit": "mm",
-   "message": "nearest pergola, vine, crown or tall plant above or beside the burner: 2262 mm straight-line (s-bed-screen-n:jasminum_sambac); manuals state 1830-2000 mm overhead (PTI top 6 ft, Solus 1.95 m, MAD 2000 mm). No pergola or climber is over the pit."
+   "message": "nearest pergola, vine, crown or tall plant above or beside the burner: 2193 mm straight-line (s-bed-screen-s:jasminum_sambac); manuals state 1830-2000 mm overhead (PTI top 6 ft, Solus 1.95 m, MAD 2000 mm). No pergola or climber is over the pit."
+  },
+  {
+   "criterion": "LDG-BBQ-MANUAL",
+   "status": "pass",
+   "subject": "s-bbq",
+   "achieved": 670,
+   "required": 650,
+   "unit": "mm",
+   "message": "BBQ stand: nearest combustible, structure or planting 1238 mm (planting_groups:s-bed-screen-n; manual 610 mm = 24 in, design 650 mm); nearest crown or roof projection 309 mm (crown:s-tree-crape; the manual forbids use beneath overhead combustible construction, design 300 mm outside it)"
   },
   {
    "criterion": "LDG-POND-SECTION",
@@ -1727,13 +1832,112 @@
    "message": "width 1.4 m holds entry slope 0.6 m (1:4 over 150 mm) + shelf 0.3 m + trench 0.5 m = 1.40 m; trench 900 mm below water; 4 koi at 12 in per 0.42 m2 on 4.48 m2"
   },
   {
-   "criterion": "LDG-GRAPE-SEASON",
+   "criterion": "LDG-PRUNE",
    "status": "pass",
-   "subject": "s-pergola-grape",
-   "achieved": 3.54,
-   "required": 3.54,
+   "subject": "s-tree-crape",
+   "achieved": 4.0,
+   "required": null,
+   "unit": "m",
+   "message": "s-tree-crape: pruned crown 4.0 m wide, 4.5 m high (species [1.8, 9.1] m, 9.1 m): regime declared = True; source status: READ AS SEARCH EXCERPT 2026-11-22 (page itself not fetched); tolerance to a held 3.4 m crown is INFERENCE from 'pollarding keeps a plant at a set height'"
+  },
+  {
+   "criterion": "LDG-PRUNE",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 3.6,
+   "required": null,
+   "unit": "m",
+   "message": "s-tree-olive: pruned crown 3.6 m wide, 4.5 m high (species [4.6, 7.6] m, 9.1 m): regime declared = True; source status: GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)"
+  },
+  {
+   "criterion": "LDG-ROOTS",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 6.69,
+   "required": 1.5,
+   "unit": "m",
+   "message": "s-tree-olive (moderate roots): 6.7 m to the nearest pond, 99.0 m to a building; POLICY 1.5 m, or a declared root barrier (a barrier never replaces the NHBC distance)"
+  },
+  {
+   "criterion": "LDG-PRUNE",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 2.6,
+   "required": null,
+   "unit": "m",
+   "message": "e-tree-olive: pruned crown 2.6 m wide, 4.5 m high (species [4.6, 7.6] m, 9.1 m): regime declared = True; source status: GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)"
+  },
+  {
+   "criterion": "LDG-ROOTS",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 1.55,
+   "required": 1.5,
+   "unit": "m",
+   "message": "e-tree-olive (moderate roots): 1.6 m to the nearest pond, 99.0 m to a building; POLICY 1.5 m, or a declared root barrier (a barrier never replaces the NHBC distance)"
+  },
+  {
+   "criterion": "LDG-TREE-SUN",
+   "status": "pass",
+   "subject": "s-tree-crape",
+   "achieved": 6.0,
+   "required": null,
    "unit": "h",
-   "message": "table seats, direct sun 10-15 h: 21 Jun 3.54 h open sky, 0.89 h under the leafed vine (density 0.75, POLICY); 21 Dec 3.54 h open sky, 3.54 h under the bare vine (density 0.15, POLICY), 3.54 h with the louvres closed. Pass = summer midday sun at least halved and winter sun at least 80 % kept."
+   "message": "s-tree-crape (lagerstroemia_indica): 6.0 h direct sun at crown height on 21 Jun 8-18 h (LDS structure only); species sun class ['full_sun']: pass"
+  },
+  {
+   "criterion": "LDG-TREE-SUN",
+   "status": "pass",
+   "subject": "s-tree-olive",
+   "achieved": 7.25,
+   "required": null,
+   "unit": "h",
+   "message": "s-tree-olive (olea_europaea): 7.2 h direct sun at crown height on 21 Jun 8-18 h (LDS structure only); species sun class ['full_sun']: pass"
+  },
+  {
+   "criterion": "LDG-TREE-SUN",
+   "status": "pass",
+   "subject": "s-tree-punica",
+   "achieved": 9.5,
+   "required": null,
+   "unit": "h",
+   "message": "s-tree-punica (punica_granatum): 9.5 h direct sun at crown height on 21 Jun 8-18 h (LDS structure only); species sun class ['full_sun', 'part_shade']: pass"
+  },
+  {
+   "criterion": "LDG-TREE-SUN",
+   "status": "pass",
+   "subject": "e-tree-olive",
+   "achieved": 10.0,
+   "required": null,
+   "unit": "h",
+   "message": "e-tree-olive (olea_europaea): 10.0 h direct sun at crown height on 21 Jun 8-18 h (LDS structure only); species sun class ['full_sun']: pass"
+  },
+  {
+   "criterion": "LDG-SHADE-SUMMER",
+   "status": "pass",
+   "subject": "table",
+   "achieved": 1.17,
+   "required": 2.17,
+   "unit": "h",
+   "message": "table seats, direct sun 10-15 h on 21 Jun: 3.62 h open sky, 1.17 h under the leafed crown (density 0.7, LDC assumption); pass = at most 60 % of open-sky sun"
+  },
+  {
+   "criterion": "LDG-SHADE-WINTER",
+   "status": "pass",
+   "subject": "table",
+   "achieved": 3.12,
+   "required": 2.5,
+   "unit": "h",
+   "message": "table seats, direct sun 10-15 h on 21 Dec: 3.12 h open sky, 3.12 h with the bare crown (density 0.15), 3.12 h if it kept its leaves; pass = at least 80 % of open-sky sun kept"
+  },
+  {
+   "criterion": "LDG-WINTER-SEAT",
+   "status": "pass",
+   "subject": "table",
+   "achieved": 3.12,
+   "required": 2.5,
+   "unit": "h",
+   "message": "best seated place in winter (table): 3.12 h direct sun 10-15 h on 21 Dec with leaf-off crowns (POLICY minimum 2.5 h of the 5 h window)"
   }
  ],
  "schedule": [
@@ -1796,9 +2000,45 @@
   {
    "zone": "east yard",
    "bed": "e-divider",
+   "species": "Fatsia japonica (Thunb.) Decne. & Planch.",
+   "slug": "fatsia_japonica",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 5.9,
+   "mature_spread_m": 1.8,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-far",
+   "species": "Fatsia japonica (Thunb.) Decne. & Planch.",
+   "slug": "fatsia_japonica",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 5.9,
+   "mature_spread_m": 1.8,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
+   "bed": "e-divider",
    "species": "Phoenix roebelenii O'Brien",
    "slug": "phoenix_roebelenii",
-   "count": 2,
+   "count": 1,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1816,7 +2056,7 @@
    "bed": "e-far",
    "species": "Phoenix roebelenii O'Brien",
    "slug": "phoenix_roebelenii",
-   "count": 2,
+   "count": 1,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1828,6 +2068,27 @@
    "mature_spread_m": 1.5,
    "status": "DRAWABLE: graded A asset skf3_a05b5ef5",
    "drawable": true
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 3,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)",
+    "sun conditional at 1.7 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
   },
   {
    "zone": "north court",
@@ -1872,7 +2133,7 @@
    "bed": "n-screen",
    "species": "Aspidistra elatior Blume",
    "slug": "aspidistra_elatior",
-   "count": 5,
+   "count": 3,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1888,9 +2149,47 @@
   {
    "zone": "north court",
    "bed": "n-screen",
+   "species": "Farfugium japonicum (L.) Kitam.",
+   "slug": "farfugium_japonicum",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.6,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
+   "species": "Fatsia japonica (Thunb.) Decne. & Planch.",
+   "slug": "fatsia_japonica",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "sun conditional at 1.7 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 5.9,
+   "mature_spread_m": 1.8,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
    "species": "Rhapis excelsa (Thunb.) A.Henry",
    "slug": "rhapis_excelsa",
-   "count": 2,
+   "count": 1,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1902,6 +2201,60 @@
    "mature_spread_m": 4.6,
    "status": "DRAWABLE: graded B asset skf3_86982789",
    "drawable": true
+  },
+  {
+   "zone": "other",
+   "bed": "-",
+   "species": "Olea europaea L.",
+   "slug": "olea_europaea",
+   "count": 1,
+   "layer": "canopy/understorey (tree)",
+   "verdict": "viable",
+   "conditions": [
+    "canopy checked at the sourced minimum spread 2.6 m (LDL range 4.6-7.6 m): keep pruned"
+   ],
+   "water": "low",
+   "toxic": null,
+   "mature_h_m": 9.1,
+   "mature_spread_m": 7.6,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "-",
+   "species": "Lagerstroemia indica L.",
+   "slug": "lagerstroemia_indica",
+   "count": 1,
+   "layer": "canopy/understorey (tree)",
+   "verdict": "viable",
+   "conditions": [
+    "canopy checked at the sourced minimum spread 4.0 m (LDL range 1.8-9.1 m): keep pruned"
+   ],
+   "water": "medium",
+   "toxic": "non_toxic",
+   "mature_h_m": 9.1,
+   "mature_spread_m": 9.1,
+   "status": "DRAWABLE: graded B asset skf3_a9cb68fd",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "-",
+   "species": "Olea europaea L.",
+   "slug": "olea_europaea",
+   "count": 1,
+   "layer": "canopy/understorey (tree)",
+   "verdict": "viable",
+   "conditions": [
+    "canopy checked at the sourced minimum spread 3.6 m (LDL range 4.6-7.6 m): keep pruned"
+   ],
+   "water": "low",
+   "toxic": null,
+   "mature_h_m": 9.1,
+   "mature_spread_m": 7.6,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
   },
   {
    "zone": "south",
@@ -1932,7 +2285,8 @@
    "conditions": [
     "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
     "heat: moderate tolerance; plant in afternoon shade or verify locally",
-    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)",
+    "sun conditional at 1.6 h (21 Jun)"
    ],
    "water": "medium",
    "toxic": null,
@@ -1943,10 +2297,10 @@
   },
   {
    "zone": "south",
-   "bed": "s-bed-screen-n",
+   "bed": "s-bed-mass-corner",
    "species": "Jasminum sambac (L.) Aiton",
    "slug": "jasminum_sambac",
-   "count": 1,
+   "count": 2,
    "layer": "climber",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1966,7 +2320,7 @@
    "bed": "s-bed-screen-s",
    "species": "Jasminum sambac (L.) Aiton",
    "slug": "jasminum_sambac",
-   "count": 1,
+   "count": 2,
    "layer": "climber",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -1978,6 +2332,86 @@
    "toxic": null,
    "mature_h_m": 4,
    "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall-c",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 2,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass-corner",
+   "species": "Petrea volubilis L.",
+   "slug": "petrea_volubilis",
+   "count": 1,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 3.7,
+   "mature_spread_m": 1.8,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall",
+   "species": "Petrea volubilis L.",
+   "slug": "petrea_volubilis",
+   "count": 2,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 3.7,
+   "mature_spread_m": 1.8,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall-c",
+   "species": "Petrea volubilis L.",
+   "slug": "petrea_volubilis",
+   "count": 3,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1.7 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat tolerance is a GAP",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 3.7,
+   "mature_spread_m": 1.8,
    "status": "STAND-IN (generic mass, labelled): not drawable yet",
    "drawable": false
   },
@@ -2009,7 +2443,9 @@
    "count": 2,
    "layer": "ground",
    "verdict": "viable",
-   "conditions": [],
+   "conditions": [
+    "sun conditional at 5.1 h (21 Jun)"
+   ],
    "water": "low",
    "toxic": "non_toxic",
    "mature_h_m": 0.6,
@@ -2020,9 +2456,137 @@
   {
    "zone": "south",
    "bed": "s-bed-mass",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 4,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-n",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-s",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 4,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall-b",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-pocket",
+   "species": "Aspidistra elatior Blume",
+   "slug": "aspidistra_elatior",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.9,
+   "mature_spread_m": 0.9,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
    "species": "Justicia brandegeeana Wassh. & L.B.Sm.",
    "slug": "justicia_brandegeeana",
-   "count": 10,
+   "count": 3,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost tolerance is a GAP",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "sun conditional at 1.6 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 1.83,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-s",
+   "species": "Justicia brandegeeana Wassh. & L.B.Sm.",
+   "slug": "justicia_brandegeeana",
+   "count": 2,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -2038,10 +2602,10 @@
   },
   {
    "zone": "south",
-   "bed": "s-bed-mass-corner",
+   "bed": "s-bed-wall-b",
    "species": "Justicia brandegeeana Wassh. & L.B.Sm.",
    "slug": "justicia_brandegeeana",
-   "count": 3,
+   "count": 1,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -2063,7 +2627,9 @@
    "count": 3,
    "layer": "shrub/perennial",
    "verdict": "viable",
-   "conditions": [],
+   "conditions": [
+    "sun conditional at 1.6 h (21 Jun)"
+   ],
    "water": "medium",
    "toxic": null,
    "mature_h_m": 1.22,
@@ -2074,9 +2640,65 @@
   {
    "zone": "south",
    "bed": "s-bed-mass",
+   "species": "Phoenix roebelenii O'Brien",
+   "slug": "phoenix_roebelenii",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline soil: intolerant; conditional on soil test (a professional item; site pH not tested)",
+    "sun conditional at 1.6 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 2.0,
+   "mature_spread_m": 1.5,
+   "status": "DRAWABLE: graded A asset skf3_a05b5ef5",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-wall-b",
+   "species": "Rhapis excelsa (Thunb.) A.Henry",
+   "slug": "rhapis_excelsa",
+   "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally"
+   ],
+   "water": "medium",
+   "toxic": "non_toxic",
+   "mature_h_m": 3.7,
+   "mature_spread_m": 4.6,
+   "status": "DRAWABLE: graded B asset skf3_86982789",
+   "drawable": true
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-mass",
    "species": "Salvia leucantha Cav.",
    "slug": "salvia_leucantha",
    "count": 1,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "sun conditional at 1.6 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 0.91,
+   "mature_spread_m": 0.91,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-n",
+   "species": "Salvia leucantha Cav.",
+   "slug": "salvia_leucantha",
+   "count": 2,
    "layer": "shrub/perennial",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -2091,32 +2713,14 @@
   },
   {
    "zone": "south",
-   "bed": "s-bed-mass-corner",
-   "species": "Salvia leucantha Cav.",
-   "slug": "salvia_leucantha",
-   "count": 1,
-   "layer": "shrub/perennial",
-   "verdict": "viable_with_conditions",
-   "conditions": [
-    "heat: moderate tolerance; plant in afternoon shade or verify locally"
-   ],
-   "water": "medium",
-   "toxic": null,
-   "mature_h_m": 0.91,
-   "mature_spread_m": 0.91,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
-   "drawable": false
-  },
-  {
-   "zone": "south",
-   "bed": "s-bed-vine",
+   "bed": "s-bed-screen-n",
    "species": "Vitis vinifera L.",
    "slug": "vitis_vinifera",
    "count": 2,
    "layer": "shrub/perennial",
    "verdict": "viable",
    "conditions": [
-    "sun conditional at 5.6 h (21 Jun)"
+    "sun conditional at 4.5 h (21 Jun)"
    ],
    "water": null,
    "toxic": null,
@@ -2129,14 +2733,14 @@
  "programme": [
   {
    "item": "seats, whole design (table + built-in benches)",
-   "achieved": 17,
+   "achieved": 16,
    "required": ">= 10 (brief 10-20 people)",
    "status": "pass",
    "source": "client brief; LS-CAPACITY"
   },
   {
    "item": "people at an event: seated + standing in the free floor of the south garden",
-   "achieved": "8 + 3 seated south, 22 standing at 1.3 m2",
+   "achieved": "8 + 2 seated south, 19 standing at 1.3 m2",
    "required": "10-20",
    "status": "pass",
    "source": "client brief; LS-STAND-AREA (Neufert p.211)"
@@ -2178,7 +2782,7 @@
   },
   {
    "item": "lounge area per seat [s-lounge]",
-   "achieved": "4.76 m2",
+   "achieved": "7.14 m2",
    "required": "1.8 m2",
    "status": "pass",
    "source": "LS-LOUNGE-AREA"
@@ -2192,7 +2796,7 @@
   },
   {
    "item": "standing area per person [s-standing]",
-   "achieved": "1.41 m2",
+   "achieved": "1.63 m2",
    "required": "1.3 m2",
    "status": "pass",
    "source": "LS-STAND-AREA"
@@ -2206,14 +2810,14 @@
   },
   {
    "item": "fire pit clear ground [s-bbq]",
-   "achieved": "1200 mm",
+   "achieved": "1238 mm",
    "required": "1200 mm",
    "status": "pass",
    "source": "LS-FIRE-CLEAR"
   },
   {
    "item": "fire pit to nearest seat or table [s-firepit]",
-   "achieved": "2100 mm",
+   "achieved": "3600 mm",
    "required": "1500 mm",
    "status": "pass",
    "source": "LS-FIRE-SEAT"
@@ -2240,6 +2844,20 @@
    "source": "LS-HERB-SUN"
   },
   {
+   "item": "tree trunk to building [s-tree-crape]",
+   "achieved": "3.45 m",
+   "required": "3.38 m",
+   "status": "pass",
+   "source": "LS-TREE-BUILDING"
+  },
+  {
+   "item": "tree trunk to building [s-tree-olive]",
+   "achieved": "4.34 m",
+   "required": "2.25 m",
+   "status": "pass",
+   "source": "LS-TREE-BUILDING"
+  },
+  {
    "item": "tree trunk to building [s-tree-punica]",
    "achieved": "3.77 m",
    "required": "2.78 m",
@@ -2247,7 +2865,35 @@
    "source": "LS-TREE-BUILDING"
   },
   {
+   "item": "tree trunk to building [e-tree-olive]",
+   "achieved": "2.3 m",
+   "required": "2.25 m",
+   "status": "pass",
+   "source": "LS-TREE-BUILDING"
+  },
+  {
+   "item": "paving in the tree dripline [s-tree-crape]",
+   "achieved": "0.0 m2",
+   "required": "0.0 m2",
+   "status": "pass",
+   "source": "LS-ROOTZONE"
+  },
+  {
+   "item": "paving in the tree dripline [s-tree-olive]",
+   "achieved": "0.0 m2",
+   "required": "0.0 m2",
+   "status": "pass",
+   "source": "LS-ROOTZONE"
+  },
+  {
    "item": "paving in the tree dripline [s-tree-punica]",
+   "achieved": "0.0 m2",
+   "required": "0.0 m2",
+   "status": "pass",
+   "source": "LS-ROOTZONE"
+  },
+  {
+   "item": "paving in the tree dripline [e-tree-olive]",
    "achieved": "0.0 m2",
    "required": "0.0 m2",
    "status": "pass",
@@ -2394,13 +3040,6 @@
    "source": "LS-POND-FREEBOARD"
   },
   {
-   "item": "one water class per bed [s-bed-vine]",
-   "achieved": "None ",
-   "required": "None ",
-   "status": "not_evaluated",
-   "source": "LS-HYDROZONE"
-  },
-  {
    "item": "one water class per bed [s-bed-mass]",
    "achieved": "1 classes",
    "required": "1 classes",
@@ -2423,13 +3062,41 @@
   },
   {
    "item": "one water class per bed [s-bed-screen-n]",
+   "achieved": "None ",
+   "required": "None ",
+   "status": "not_evaluated",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-screen-s]",
    "achieved": "1 classes",
    "required": "1 classes",
    "status": "pass",
    "source": "LS-HYDROZONE"
   },
   {
-   "item": "one water class per bed [s-bed-screen-s]",
+   "item": "one water class per bed [s-bed-wall]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-wall-b]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-wall-c]",
+   "achieved": "1 classes",
+   "required": "1 classes",
+   "status": "pass",
+   "source": "LS-HYDROZONE"
+  },
+  {
+   "item": "one water class per bed [s-bed-pocket]",
    "achieved": "1 classes",
    "required": "1 classes",
    "status": "pass",
@@ -2493,7 +3160,7 @@
   },
   {
    "item": "LDG-SHADE [s-bench-quiet/evening]",
-   "achieved": "1.0 share",
+   "achieved": "0.9 share",
    "required": "0.9 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
@@ -2542,84 +3209,49 @@
   },
   {
    "item": "LDG-PRIV [table/summer]",
-   "achieved": "0.209 share",
+   "achieved": "0.183 share",
    "required": "0.3 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },
   {
-   "item": "LDG-PRIV-OPENING [table/summer]",
-   "achieved": "0.579 share",
+   "item": "LDG-PRIV-WINTER [table/winter]",
+   "achieved": "0.652 share",
    "required": "0.3 share",
    "status": "warn",
    "source": "POLICY / decision (ours)"
   },
   {
-   "item": "LDG-PRIV [table/winter_louvres_closed]",
-   "achieved": "0.209 share",
-   "required": "0.3 share",
-   "status": "pass",
-   "source": "POLICY / decision (ours)"
-  },
-  {
-   "item": "LDG-PRIV-OPENING [table/winter_louvres_closed]",
-   "achieved": "0.579 share",
+   "item": "LDG-PRIV-OPENING [table/summer]",
+   "achieved": "0.508 share",
    "required": "0.3 share",
    "status": "warn",
    "source": "POLICY / decision (ours)"
   },
   {
    "item": "LDG-PRIV [s-bench-rear/summer]",
-   "achieved": "0.0 share",
-   "required": "0.3 share",
-   "status": "pass",
-   "source": "POLICY / decision (ours)"
-  },
-  {
-   "item": "LDG-PRIV [s-bench-rear/winter_louvres_closed]",
-   "achieved": "0.0 share",
+   "achieved": "0.211 share",
    "required": "0.3 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },
   {
    "item": "LDG-PRIV [s-bench-quiet/summer]",
-   "achieved": "0.0 share",
-   "required": "0.25 share",
-   "status": "pass",
-   "source": "POLICY / decision (ours)"
-  },
-  {
-   "item": "LDG-PRIV [s-bench-quiet/winter_louvres_closed]",
-   "achieved": "0.0 share",
+   "achieved": "0.039 share",
    "required": "0.25 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },
   {
    "item": "LDG-PRIV [n-bench/summer]",
-   "achieved": "0.224 share",
-   "required": "0.75 share",
-   "status": "pass",
-   "source": "POLICY / decision (ours)"
-  },
-  {
-   "item": "LDG-PRIV [n-bench/winter_louvres_closed]",
-   "achieved": "0.224 share",
+   "achieved": "0.496 share",
    "required": "0.75 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },
   {
    "item": "LDG-PRIV [e-bench/summer]",
-   "achieved": "0.224 share",
-   "required": "0.3 share",
-   "status": "pass",
-   "source": "POLICY / decision (ours)"
-  },
-  {
-   "item": "LDG-PRIV [e-bench/winter_louvres_closed]",
-   "achieved": "0.224 share",
+   "achieved": "0.051 share",
    "required": "0.3 share",
    "status": "pass",
    "source": "POLICY / decision (ours)"
@@ -2632,7 +3264,28 @@
    "source": "POLICY / decision (ours)"
   },
   {
+   "item": "LDG-SPREAD [s-tree-crape]",
+   "achieved": "0.0 m2",
+   "required": "0 m2",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SPREAD [s-tree-olive]",
+   "achieved": "0.0 m2",
+   "required": "0 m2",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
    "item": "LDG-SPREAD [s-tree-punica]",
+   "achieved": "0.0 m2",
+   "required": "0 m2",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SPREAD [e-tree-olive]",
    "achieved": "0.0 m2",
    "required": "0 m2",
    "status": "pass",
@@ -2696,8 +3349,15 @@
   },
   {
    "item": "LDG-FIRE-MANUAL [s-firepit/overhead]",
-   "achieved": "2262 mm",
+   "achieved": "2193 mm",
    "required": "2000 mm",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-BBQ-MANUAL [s-bbq]",
+   "achieved": "670 mm",
+   "required": "650 mm",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   },
@@ -2716,26 +3376,103 @@
    "source": "POLICY / decision (ours)"
   },
   {
-   "item": "LDG-GRAPE-SEASON [s-pergola-grape]",
-   "achieved": "3.54 h",
-   "required": "3.54 h",
+   "item": "LDG-PRUNE [s-tree-crape]",
+   "achieved": "4.0 m",
+   "required": "None m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRUNE [s-tree-olive]",
+   "achieved": "3.6 m",
+   "required": "None m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-ROOTS [s-tree-olive]",
+   "achieved": "6.69 m",
+   "required": "1.5 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-PRUNE [e-tree-olive]",
+   "achieved": "2.6 m",
+   "required": "None m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-ROOTS [e-tree-olive]",
+   "achieved": "1.55 m",
+   "required": "1.5 m",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-TREE-SUN [s-tree-crape]",
+   "achieved": "6.0 h",
+   "required": "None h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-TREE-SUN [s-tree-olive]",
+   "achieved": "7.25 h",
+   "required": "None h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-TREE-SUN [s-tree-punica]",
+   "achieved": "9.5 h",
+   "required": "None h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-TREE-SUN [e-tree-olive]",
+   "achieved": "10.0 h",
+   "required": "None h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE-SUMMER [table]",
+   "achieved": "1.17 h",
+   "required": "2.17 h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-SHADE-WINTER [table]",
+   "achieved": "3.12 h",
+   "required": "2.5 h",
+   "status": "pass",
+   "source": "POLICY / decision (ours)"
+  },
+  {
+   "item": "LDG-WINTER-SEAT [table]",
+   "achieved": "3.12 h",
+   "required": "2.5 h",
    "status": "pass",
    "source": "POLICY / decision (ours)"
   }
  ],
  "layout_counts": {
-  "zones": 7,
-  "paved_areas": 27,
-  "planting_groups": 12,
+  "zones": 23,
+  "paved_areas": 26,
+  "planting_groups": 15,
   "seating": 4,
   "tables": 1,
   "features": 5,
-  "trees": 1,
+  "trees": 4,
   "paths": 3,
   "obstacles": 5,
   "boundary": 3,
   "seatwalls": 1,
-  "canopies": 4,
+  "canopies": 0,
   "screens": 2,
   "walls": 3,
   "doors": 0,
@@ -2744,5 +3481,453 @@
  "visualisation": {
   "file": "layout-visualisation.json",
   "excluded_from": "checks, schedules, quantities, critics, programme table"
+ },
+ "trees": [
+  {
+   "slug": "lagerstroemia_indica",
+   "name": "Lagerstroemia indica L.",
+   "habit": "deciduous",
+   "leaf_evidence": "deciduous (LDL: UF/IFAS ST342 'deciduous', autumn colour yellow/orange/red); Cairo leaf-drop and leaf-out months: GAP (no Egypt source found)",
+   "height_m": 9.1,
+   "spread_m": [
+    1.8,
+    9.1
+   ],
+   "roots": "benign",
+   "alkaline": "tolerant",
+   "heat_verdict": "viable",
+   "toxic": "non_toxic",
+   "nhbc_water": "moderate",
+   "nhbc_need_species_height_m": 6.82,
+   "graded_best": "B",
+   "drawable": true,
+   "pruned": {
+    "height_m": 4.5,
+    "spread_m": 4.0,
+    "nhbc_need_m": 3.38,
+    "source_status": "READ AS SEARCH EXCERPT 2026-11-22 (page itself not fetched); tolerance to a held 3.4 m crown is INFERENCE from 'pollarding keeps a plant at a set height'"
+   },
+   "placed": true,
+   "decision": "PICKED over the dining: deciduous, graded B asset, benign roots, high heat, tolerates alkaline soil, non-toxic, summer flowers (Jul-Sep: the summer evenings), pruning regime sourced (UF/IFAS EP399, excerpt). NHBC fits only at the pruned height."
+  },
+  {
+   "slug": "jacaranda_mimosifolia",
+   "name": "Jacaranda mimosifolia D.Don",
+   "habit": "deciduous",
+   "leaf_evidence": "deciduous or semi-deciduous (LDL, NCSU: flowers while leafless); UF/IFAS ST317 excerpt: blooms April-August, sometimes before the new leaves; a Zambian guide gives leaf fall July-August (southern hemisphere: NOT used); Cairo months: GAP",
+   "height_m": 15.2,
+   "spread_m": [
+    4.6,
+    7.6
+   ],
+   "roots": "benign",
+   "alkaline": "moderate",
+   "heat_verdict": "viable",
+   "toxic": null,
+   "nhbc_water": "low",
+   "nhbc_need_species_height_m": 7.6,
+   "graded_best": "A",
+   "drawable": true,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED for these gardens: graded A and deciduous, but 15.2 m mature height needs 7.6 m from the house (low water) and the sourced minimum spread 4.6 m will not fit; no source on holding it at 4.5 m; messy (leaf and flower litter). Fits a larger plot."
+  },
+  {
+   "slug": "delonix_regia",
+   "name": "Delonix regia (Bojer ex Hook.) Raf.",
+   "habit": "semi_evergreen",
+   "leaf_evidence": "semi-evergreen (LDL); Cairo months: GAP",
+   "height_m": 18,
+   "spread_m": [
+    null,
+    null
+   ],
+   "roots": "aggressive",
+   "alkaline": "intolerant",
+   "heat_verdict": "viable_with_conditions",
+   "toxic": null,
+   "nhbc_water": "low",
+   "nhbc_need_species_height_m": 9.0,
+   "graded_best": "A",
+   "drawable": true,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED: graded A, but alkaline soil intolerant (LDL), aggressive shallow roots that lift walls, 18 m."
+  },
+  {
+   "slug": "punica_granatum",
+   "name": "Punica granatum L.",
+   "habit": "deciduous",
+   "leaf_evidence": "deciduous (LDL: NCSU, SelecTree); Cairo months: GAP",
+   "height_m": 3.7,
+   "spread_m": [
+    2.4,
+    3.0
+   ],
+   "roots": "benign",
+   "alkaline": "tolerant",
+   "heat_verdict": "viable",
+   "toxic": "non_toxic",
+   "nhbc_water": "moderate",
+   "nhbc_need_species_height_m": 2.78,
+   "graded_best": "B",
+   "drawable": true,
+   "pruned": null,
+   "placed": true,
+   "decision": "KEPT as the understorey fruit tree (graded B, deciduous, benign roots); too small to roof a seat (spread 2.4-3.0 m) and NHBC moderate x 3.7 m = 2.8 m cannot fit the east yard (2.3 m to the house wall)."
+  },
+  {
+   "slug": "ficus_carica",
+   "name": "Ficus carica L.",
+   "habit": "deciduous",
+   "leaf_evidence": "deciduous (LDL); Cairo months: GAP",
+   "height_m": 9.1,
+   "spread_m": [
+    3.0,
+    9.1
+   ],
+   "roots": "benign",
+   "alkaline": "intolerant",
+   "heat_verdict": "viable_with_conditions",
+   "toxic": "mild",
+   "nhbc_water": "moderate",
+   "nhbc_need_species_height_m": 6.82,
+   "graded_best": null,
+   "drawable": false,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED: deciduous and fruiting but not drawable, alkaline soil intolerant (LDL) in a site of unknown soil pH, suckers; wet-fruit litter."
+  },
+  {
+   "slug": "tipuana_tipu",
+   "name": "Tipuana tipu (Benth.) Kuntze",
+   "habit": "semi_evergreen",
+   "leaf_evidence": "semi-evergreen, 'largely deciduous midwinter to spring depending on site' (LDL, Wikipedia excerpt): the only sourced drop window, and it runs into the hot months",
+   "height_m": 30,
+   "spread_m": [
+    null,
+    null
+   ],
+   "roots": "benign",
+   "alkaline": "intolerant",
+   "heat_verdict": "viable_with_conditions",
+   "toxic": "non_toxic",
+   "nhbc_water": "moderate",
+   "nhbc_need_species_height_m": 22.5,
+   "graded_best": null,
+   "drawable": false,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED: its leaf-drop window (midwinter to spring) is sourced but leaves the hot early spring bare; large (30 m), invasive flag, alkaline intolerant."
+  },
+  {
+   "slug": "olea_europaea",
+   "name": "Olea europaea L.",
+   "habit": "evergreen",
+   "leaf_evidence": "evergreen (LDL, NCSU)",
+   "height_m": 9.1,
+   "spread_m": [
+    4.6,
+    7.6
+   ],
+   "roots": "moderate",
+   "alkaline": "moderate",
+   "heat_verdict": "viable",
+   "toxic": null,
+   "nhbc_water": "low",
+   "nhbc_need_species_height_m": 4.55,
+   "graded_best": "C",
+   "drawable": false,
+   "pruned": {
+    "height_m": 4.5,
+    "spread_m": 2.6,
+    "nhbc_need_m": 2.25,
+    "source_status": "GAP: no source on olive tolerance of an umbrella-held crown was found (search 2026-11-22 returned none)"
+   },
+   "placed": true,
+   "decision": "PICKED where year-round screening matters (quiet bench, east yard bench) and winter sun is already small: evergreen, low water (NHBC 0.5), roots moderate; stand-in asset only (grade C); NO source on umbrella pruning (GAP, stated)."
+  },
+  {
+   "slug": "ficus_microcarpa",
+   "name": "Ficus microcarpa L.fil.",
+   "habit": "evergreen",
+   "leaf_evidence": "evergreen (LDL, NCSU)",
+   "height_m": 15.2,
+   "spread_m": [
+    0.6,
+    12.2
+   ],
+   "roots": "aggressive",
+   "alkaline": "tolerant",
+   "heat_verdict": "viable_with_conditions",
+   "toxic": null,
+   "nhbc_water": "moderate",
+   "nhbc_need_species_height_m": 11.4,
+   "graded_best": null,
+   "drawable": false,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED: densest shade but aggressive roots (LDL): needs 6 m (policy) from a pond or building: no position in the 5.7 m x 9.3 m garden or the courts; invasive flag; ('Nitida' clipping tolerance is well attested in trade sources, not used)."
+  },
+  {
+   "slug": "citrus_limon",
+   "name": "Citrus \u00d7 limon (L.) Osbeck",
+   "habit": "evergreen",
+   "leaf_evidence": "evergreen (LDL)",
+   "height_m": 6.1,
+   "spread_m": [
+    3.0,
+    4.6
+   ],
+   "roots": "benign",
+   "alkaline": "moderate",
+   "heat_verdict": "viable_with_conditions",
+   "toxic": "mild",
+   "nhbc_water": "high",
+   "nhbc_need_species_height_m": 7.62,
+   "graded_best": "A",
+   "drawable": true,
+   "pruned": null,
+   "placed": false,
+   "decision": "REJECTED as a shade tree: light shade, 6.1 m, hydrozone high (needs its own bed), thorny; graded A, fine as a fruit tree elsewhere."
+  },
+  {
+   "slug": "melia_azedarach",
+   "name": "melia azedarach",
+   "decision": "no LDL record, no graded asset; no Cairo leaf-month source found (street-tree surveys of Greater Cairo exist but the excerpts read give no phenology); not evaluated",
+   "in_pool": false
+  },
+  {
+   "slug": "bauhinia_variegata",
+   "name": "bauhinia variegata",
+   "decision": "no LDL record, no graded asset; no leaf-month source found; not evaluated",
+   "in_pool": false
+  },
+  {
+   "slug": "morus_alba",
+   "name": "morus alba",
+   "decision": "no LDL record, no graded asset; fruit stains paving (not tested); no leaf-month source found; not evaluated",
+   "in_pool": false
+  },
+  {
+   "slug": "ceratonia_siliqua",
+   "name": "ceratonia siliqua",
+   "decision": "no LDL record (large evergreen, brief names it); not evaluated",
+   "in_pool": false
+  }
+ ],
+ "layers": {
+  "south garden": {
+   "canopy": {
+    "plants": 2,
+    "species": [
+     "lagerstroemia_indica",
+     "olea_europaea"
+    ]
+   },
+   "understorey": {
+    "plants": 5,
+    "species": [
+     "phoenix_roebelenii",
+     "plumeria_rubra",
+     "punica_granatum",
+     "rhapis_excelsa"
+    ]
+   },
+   "shrub": {
+    "plants": 8,
+    "species": [
+     "jasminum_sambac",
+     "justicia_brandegeeana"
+    ]
+   },
+   "perennial": {
+    "plants": 6,
+    "species": [
+     "pennisetum_alopecuroides",
+     "salvia_leucantha"
+    ]
+   },
+   "groundcover": {
+    "plants": 20,
+    "species": [
+     "aspidistra_elatior",
+     "origanum_majorana"
+    ]
+   },
+   "climber": {
+    "plants": 14,
+    "species": [
+     "jasminum_sambac",
+     "petrea_volubilis",
+     "vitis_vinifera"
+    ]
+   },
+   "missing": []
+  },
+  "east yard": {
+   "canopy": {
+    "plants": 1,
+    "species": [
+     "olea_europaea"
+    ]
+   },
+   "understorey": {
+    "plants": 2,
+    "species": [
+     "phoenix_roebelenii"
+    ]
+   },
+   "shrub": {
+    "plants": 2,
+    "species": [
+     "fatsia_japonica"
+    ]
+   },
+   "perennial": {
+    "plants": 6,
+    "species": [
+     "farfugium_japonicum"
+    ]
+   },
+   "groundcover": {
+    "plants": 9,
+    "species": [
+     "acorus_gramineus"
+    ]
+   },
+   "climber": {
+    "plants": 0,
+    "species": []
+   },
+   "missing": [
+    "climber"
+   ]
+  },
+  "north court": {
+   "canopy": {
+    "plants": 0,
+    "species": []
+   },
+   "understorey": {
+    "plants": 1,
+    "species": [
+     "rhapis_excelsa"
+    ]
+   },
+   "shrub": {
+    "plants": 1,
+    "species": [
+     "fatsia_japonica"
+    ]
+   },
+   "perennial": {
+    "plants": 2,
+    "species": [
+     "farfugium_japonicum"
+    ]
+   },
+   "groundcover": {
+    "plants": 14,
+    "species": [
+     "acorus_gramineus",
+     "aspidistra_elatior"
+    ]
+   },
+   "climber": {
+    "plants": 3,
+    "species": [
+     "jasminum_sambac"
+    ]
+   },
+   "missing": [
+    "canopy"
+   ]
+  }
+ },
+ "climber_faces": {
+  "screen N stub": [
+   "vitis_vinifera"
+  ],
+  "screen S stub": [
+   "jasminum_sambac"
+  ],
+  "south garden rear wall": [
+   "jasminum_sambac",
+   "petrea_volubilis"
+  ],
+  "south garden east fence": [
+   "jasminum_sambac",
+   "petrea_volubilis"
+  ],
+  "north court street fence": [
+   "jasminum_sambac"
+  ]
+ },
+ "before_after": {
+  "hard_share": {
+   "before": 0.849,
+   "after": 0.756,
+   "range": [
+    0.52,
+    0.82
+   ]
+  },
+  "plant_counts": {
+   "before": {
+    "drawable": 8,
+    "stand_in": 57,
+    "total": 65,
+    "species_drawable": 4,
+    "species_total": 13
+   },
+   "after": {
+    "drawable": 9,
+    "stand_in": 87,
+    "total": 96,
+    "species_drawable": 5,
+    "species_total": 17
+   }
+  },
+  "winter_sun_h_21dec_10_15": {
+   "table": {
+    "open_sky": 3.12,
+    "leaf_off": 3.12,
+    "if_leaf_on": 3.12
+   },
+   "s-bench-rear": {
+    "open_sky": 1.75,
+    "leaf_off": 1.75,
+    "if_leaf_on": 1.75
+   },
+   "s-bench-quiet": {
+    "open_sky": 1.75,
+    "leaf_off": 1.64,
+    "if_leaf_on": 1.22
+   },
+   "e-bench": {
+    "open_sky": 0.25,
+    "leaf_off": 0.25,
+    "if_leaf_on": 0.25
+   }
+  },
+  "summer_sun_h_21jun_10_15": {
+   "table": {
+    "open_sky": 3.62,
+    "leaf_on": 1.17
+   },
+   "s-bench-rear": {
+    "open_sky": 3.0,
+    "leaf_on": 1.09
+   },
+   "s-bench-quiet": {
+    "open_sky": 3.0,
+    "leaf_on": 0.6
+   },
+   "e-bench": {
+    "open_sky": 4.75,
+    "leaf_on": 1.35
+   }
+  }
  }
 }

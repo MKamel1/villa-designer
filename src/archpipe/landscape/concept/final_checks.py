@@ -146,7 +146,7 @@ def fire_manual_check(L):
             if it.get("rect"):
                 items[f"{k}:{it['id']}"] = rbox(it["rect"])
     for t in L["trees"]:
-        items["tree:" + t["id"]] = Point(*t["center"]).buffer(t["mature_spread_m"] / 2, 32)
+        items["tree:" + t["id"]] = Point(*(t.get("crown_center") or t["center"])).buffer(t["mature_spread_m"] / 2, 32)
     for cn in L["canopies"]:
         items["canopy:" + cn["id"]] = rbox(cn["rect"])
     d = {k: edge.distance(v) for k, v in items.items()}
@@ -157,10 +157,10 @@ def fire_manual_check(L):
     over = []
     for cn in L["canopies"]:
         dh = rbox(cn["rect"]).distance(c)
-        over.append((cn["id"], math.hypot(dh, F.VINE_UNDERSIDE_M if cn.get("roof") == "vine" else cn["height_m"] - 0.3)))
+        over.append((cn["id"], math.hypot(dh, cn["height_m"] - 0.3)))
     for t in L["trees"]:
-        dh = max(0.0, c.distance(Point(*t["center"])) - t["mature_spread_m"] / 2)
-        over.append((t["id"], math.hypot(dh, 0.4 * (t.get("mature_height_m") or 3.0))))
+        dh = max(0.0, c.distance(Point(*(t.get("crown_center") or t["center"]))) - t["mature_spread_m"] / 2)
+        over.append((t["id"], math.hypot(dh, t.get("crown_underside_m") or 0.4 * (t.get("mature_height_m") or 3.0))))
     for g, p in C.all_plants(L):
         if POOL[p["species"]].h_max and POOL[p["species"]].h_max > 2.0:       # tall climbers and shrubs: crown underside taken as 1/3 of the height
             dh = max(0.0, c.distance(Point(*p["at"])) - p["spread_m"] / 2)
@@ -173,9 +173,42 @@ def fire_manual_check(L):
     return out
 
 
+BBQ_CROWN_M = 0.3      # design margin outside a crown's projection (POLICY)
+BBQ_SIDE_M = 0.65      # design clearance: the manual states 24 in (0.61 m) to combustibles, rounded up to 0.65 m; also never under a crown (nor within 0.65 m of its edge)
+BBQ_MANUAL = {"product": "Weber Q1200 gas grill (small, portable; the product is NOT chosen: the figure is a stand-in for any small gas grill and is re-checked at product choice)",
+              "url": "https://www.manualslib.com/manual/2027886/Weber-Q1200.html?page=2", "status": "SOURCED, read on the ManualsLib page 2 (the Weber PDF is an image without text)",
+              "quotes": ["Keep the grill a minimum of 24 inches away from recreational vehicles and combustible materials like wood, paper, cloth and plastic.",
+                         "Do not use in a garage, building, breezeway, tent, any other enclosed area or beneath overhead combustible construction."]}
+
+
+def bbq_manual_check(L):
+    """Replaces the LDK 2.0 m floor (a wood-fire bylaw figure, 'the product instructions govern') for the small gas BBQ stand: manual figure 24 in (0.61 m) from combustibles, design 1.0 m, and not beneath overhead construction or
+    a tree crown (a crown is treated as combustible overhead at any height, as the pit rule does)."""
+    bq = next(f for f in L["features"] if f["kind"] == "bbq")
+    r = rbox(bq["rect"])
+    items = {f"building-{i}": box(*b) for i, b in enumerate(L["buildings"])}
+    for k in ("planting_groups", "obstacles", "screens", "walls"):
+        for it in L[k]:
+            if it.get("rect"):
+                items[f"{k}:{it['id']}"] = rbox(it["rect"])
+    crowns_ = {"crown:" + t["id"]: Point(*(t.get("crown_center") or t["center"])).buffer(t["mature_spread_m"] / 2, 32) for t in L["trees"]}
+    crowns_.update({"canopy:" + cn["id"]: rbox(cn["rect"]) for cn in L["canopies"]})
+    d = {k: r.distance(v) for k, v in items.items()}
+    nk, nd = min(d.items(), key=lambda kv: kv[1])
+    dc = {k: r.distance(v) for k, v in crowns_.items()}
+    ck, cd = min(dc.items(), key=lambda kv: kv[1]) if dc else ("none", 99.0)
+    ok = nd + 1e-9 >= BBQ_SIDE_M and cd + 1e-9 >= BBQ_CROWN_M
+    return _r("LDG-BBQ-MANUAL", "pass" if ok else "fail", bq["id"], f"BBQ stand: nearest combustible, structure or planting {nd * 1000:.0f} mm ({nk}; manual 610 mm = 24 in, design {BBQ_SIDE_M * 1000:.0f} mm); nearest crown or roof projection {cd * 1000:.0f} mm ({ck}; the manual forbids use beneath overhead combustible construction, design {BBQ_CROWN_M * 1000:.0f} mm outside it)",
+              round(min(nd, cd * BBQ_SIDE_M / BBQ_CROWN_M) * 1000), round(BBQ_SIDE_M * 1000), "mm")
+
+
+def bbq_checks(L):
+    return [bbq_manual_check(L)] if any(f["kind"] == "bbq" for f in L["features"]) else []
+
+
 def superseded(res):
     """LDK LS-FIRE-STRUCT shortfalls on the pit that the manuals replace; the 2.0 m floor is a wood-fire bylaw, the pit is gas. Reported, never dropped silently."""
-    return [r for r in res if r.criterion == "LS-FIRE-STRUCT" and r.subject == "s-firepit" and r.status != "pass"]
+    return [r for r in res if r.criterion == "LS-FIRE-STRUCT" and r.subject in ("s-firepit", "s-bbq") and r.status != "pass"]
 
 
 # ---- wind (decision: summer-evening wind runs toward the west; confirm on data) --------------------------------------------------
@@ -204,79 +237,138 @@ def wind_check(L):
     return tw, per, mir
 
 
-# ---- grape: summer shade, winter bareness -----------------------------------------------------------------------------------
-GRAPE_SRC = [
-    {"id": "NCSU-vitis-vinifera", "url": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/", "quote": "It is a woody, deciduous vine", "also": "Leaf Characteristics: Deciduous; Fire Risk Rating: high flammability",
-     "status": "SOURCED (deciduous habit; no calendar dates)"},
-    {"id": "Burkes-ornamental-grape", "url": "https://www.burkesbackyard.com.au/fact-sheets/in-the-garden/flowering-plants-shrubs/ornamental-grape/", "quote": "shade in summer and sun in winter",
-     "status": "SOURCED (qualitative, garden fact sheet; Vitis vinifera purpurea/ornamental grape, Australia)"},
-    {"id": "EKB-dormex-trials", "url": "https://journals.ekb.eg/article_171522.html", "quote": "Thompson Seedless grapevines ... sprayed hydrogen cyanamide on 1, 7 or 14 January",
-     "status": "INFERENCE: a dormancy-breaker is applied to dormant vines, so vines in Egypt are dormant (leafless) in early January; no leaf-fall or leaf-out date was found (GAP)"},
-]
+# ---- shade trees: leaf-on and leaf-off states ---------------------------------------------------------------------------------
+def habit(slug):
+    return POOL[slug].habit if slug in POOL else None
 
 
-def grape_check(L):
-    """Direct sun at the table seats through the pergola, midday window: 21 Jun 10-15 with the leafed vine, 21 Dec 10-15 with the bare vine. The ray test is the LDS one
-    (analyse.sunlit_matrix, structure only) plus the pergola plane as a screen of density d (POLICY)."""
+def crowns(L):
+    """One record per tree: crown disc at the PRUNED spread, densities from the LDC CROWN assumption (F.CROWN). Evergreen keeps its density all year; deciduous is bare Dec-Feb (client's own months; Cairo months GAP)."""
+    out = []
+    for t in L["trees"]:
+        if t["center"][0] < 20:
+            continue
+        ev = habit(t["species"]) != "deciduous"
+        r = t["mature_spread_m"] / 2
+        out.append({"id": t["id"], "species": t["species"], "c": t.get("crown_center") or t["center"], "r": r, "evergreen": ev, "d_on": F.CROWN["evergreen" if ev else "deciduous_on"], "d_off": F.CROWN["evergreen" if ev else "deciduous_off"],
+                    "z": S.FLOOR_Z + (t.get("crown_underside_m") or 0.4 * t["mature_height_m"]) + 0.3 * (t["mature_height_m"] - (t.get("crown_underside_m") or 0.4 * t["mature_height_m"]))})
+    return out
+
+
+def crown_cells(L, season, st=0.25):
+    """Cover rectangles for the privacy rule: the crown disc as 0.25 m cells whose centre lies inside it. Winter: evergreen crowns only (a bare crown is not cover)."""
+    out = []
+    for c in crowns(L):
+        if season != "summer" and not c["evergreen"]:
+            continue
+        n = int(c["r"] / st) + 1
+        for i in range(-n, n):
+            for j in range(-n, n):
+                x, y = c["c"][0] + (i + .5) * st, c["c"][1] + (j + .5) * st
+                if math.hypot(x - c["c"][0], y - c["c"][1]) <= c["r"]:
+                    out.append([x - st / 2, y - st / 2, x + st / 2, y + st / 2])
+    return out
+
+
+def sun_hours_state(L, pts, day, lo, hi, state):
+    """Direct sun hours at points (x, y, z) between lo and hi hours on `day`: LDS structure rays reduced by the layout's crowns in `state` ('on' or 'off': leaf state), product of (1 - density) over crowns the ray crosses."""
     from ..site import analyse as AN
-    cn = next(c for c in L["canopies"] if c.get("deciduous"))
-    tb = next(t for t in L["tables"])
-    cx, cy = tb["center"]
-    pts = np.array([[cx + dx, cy + dy, S.FLOOR_Z + 1.1] for dx in (-0.9, 0.0, 0.9) for dy in (-0.3, 0.3)])
-    r = cn["rect"]
-    zr = S.FLOOR_Z + cn["height_m"]
-
-    def run(day, lo, hi, d):
-        mids, lit = AN.sunlit_matrix(day, pts)
-        from datetime import datetime, timedelta, timezone
-        from ... import solar, villa_env as E
-        from ...orientation import sun_direction
-        tot0 = tot1 = 0.0
-        w = [(i, m) for i, m in enumerate(mids) if lo * 60 <= m < hi * 60]
-        for i, m in w:
-            when = datetime.fromisoformat(day).replace(tzinfo=timezone.utc) + timedelta(minutes=float(m)) - timedelta(hours=E.TIME_ZONE)
-            s = solar.sun_position(when, E.LATITUDE, E.LONGITUDE)
-            dv = np.array(sun_direction(s.azimuth, s.altitude))
-            for k, p in enumerate(pts):
-                if not lit[i, k]:
-                    continue
-                t = (zr - p[2]) / dv[2]
-                x, y = p[0] + t * dv[0], p[1] + t * dv[1]
-                hit = r[0] <= x <= r[2] and r[1] <= y <= r[3]
-                tot0 += 0.25
-                tot1 += 0.25 * (1 - (d if hit else 0.0))
-        return round(tot0 / len(pts), 2), round(tot1 / len(pts), 2)
-    sb, sa = run("2026-06-21", 10, 15, F.GRAPE["summer_density"])
-    wb, wa = run("2026-12-21", 10, 15, F.GRAPE["winter_density"])           # bare vine, louvres open
-    _, wev = run("2026-12-21", 10, 15, F.GRAPE["winter_closed_density"])    # bare vine, louvres closed (opaque)
-    st = "pass" if (sb > 0 and sa <= 0.5 * sb + 1e-9 and wa >= 0.8 * wb - 1e-9) else "fail"
-    return _r("LDG-GRAPE-SEASON", st, cn["id"],
-              f"table seats, direct sun 10-15 h: 21 Jun {sb} h open sky, {sa} h under the leafed vine (density {F.GRAPE['summer_density']}, POLICY); 21 Dec {wb} h open sky, {wa} h under the bare vine (density {F.GRAPE['winter_density']}, POLICY), "
-              f"{wev} h with the louvres closed. Pass = summer midday sun at least halved and winter sun at least 80 % kept.", wa, wb, "h"), \
-        {"summer": {"open": sb, "leafed": sa}, "winter": {"open": wb, "bare": wa, "louvres_closed": wev}, "window": "10-15 h local standard time"}
+    from datetime import datetime, timedelta, timezone
+    from ... import solar, villa_env as E
+    from ...orientation import sun_direction
+    pts = np.asarray(pts, float)
+    mids, lit = AN.sunlit_matrix(day, pts)
+    cr = crowns(L)
+    tot = np.zeros(len(pts))
+    for i, m in enumerate(mids):
+        if not (lo * 60 <= m < hi * 60):
+            continue
+        when = datetime.fromisoformat(day).replace(tzinfo=timezone.utc) + timedelta(minutes=float(m)) - timedelta(hours=E.TIME_ZONE)
+        sp = solar.sun_position(when, E.LATITUDE, E.LONGITUDE)
+        dv = np.array(sun_direction(sp.azimuth, sp.altitude))
+        for k, p in enumerate(pts):
+            if not lit[i, k] or dv[2] <= 0:
+                continue
+            tr = 1.0
+            for c in cr:
+                t = (c["z"] - p[2]) / dv[2]
+                if t > 0 and math.hypot(p[0] + t * dv[0] - c["c"][0], p[1] + t * dv[1] - c["c"][1]) <= c["r"]:
+                    tr *= 1 - c["d_on" if state == "on" else "d_off"]
+            tot[k] += 0.25 * tr
+    return tot
 
 
-def leaf_sun(L):
-    """Direct sun at the vine's foliage level (pergola underside 2.4 m above the floor) on 21 June: the ground layer under-reads a roof-level canopy."""
-    from ..site import analyse as AN
-    cn = next(c for c in L["canopies"] if c.get("deciduous"))
-    r = cn["rect"]
-    pts = np.array([[x, y, S.FLOOR_Z + F.VINE_UNDERSIDE_M] for x in np.linspace(r[0] + 0.2, r[2] - 0.2, 5) for y in np.linspace(r[1] + 0.2, r[3] - 0.2, 4)])
-    mids, lit = AN.sunlit_matrix("2026-06-21", pts)
-    return round(float(lit.sum(0).mean() * 0.25), 2)
+def seat_points(L):
+    """Seated-eye-level (1.1 m) points: four around the table (chairs), the centre of each south bench."""
+    out = {}
+    for t in L["tables"]:
+        cx, cy = t["center"]
+        w, h = t["size_m"]
+        out["table"] = [(cx - w / 3, cy - h / 2 - 0.3), (cx + w / 3, cy - h / 2 - 0.3), (cx - w / 3, cy + h / 2 + 0.3), (cx + w / 3, cy + h / 2 + 0.3)]
+    for s_ in L["seating"]:
+        if s_["rect"][0] > 20:
+            out[s_["id"]] = [((s_["rect"][0] + s_["rect"][2]) / 2, (s_["rect"][1] + s_["rect"][3]) / 2)]
+    return {k: [(x, y, S.FLOOR_Z + 1.1) for x, y in v] for k, v in out.items()}
 
 
-def sun_checks_final(L, leaf):
-    """R.sun_checks, with the grape judged at foliage level (leaf) instead of at the ground under the vine strip."""
+WINTER_SEAT_MIN_H = 2.5      # POLICY: at least half of the 5 h window 10-15 h on 21 Dec for the best seated place; no held source gives a winter-sun target (GAP-SHADE-TARGET)
+
+
+def season_check(L):
+    """Summer midday (21 Jun 10-15) and winter midday (21 Dec 10-15) direct sun at every south seat, leaf-on and leaf-off, against open sky (structure only). Evening (17-20 DST) is already sun-free from the structure (LDS layer, 0 h at the seats).
+    Checks: summer, leaf-on crowns cut the table's summer midday sun to at most 60 % of open sky; winter, leaf-off keeps at least 80 % of open-sky sun at the table; the best seated place keeps WINTER_SEAT_MIN_H h in winter."""
+    pts = seat_points(L)
+    tab = {}
+    L0 = {**L, "trees": []}
+    for k, ps in pts.items():
+        sb = sun_hours_state(L0, ps, "2026-06-21", 10, 15, "on")
+        sa = sun_hours_state(L, ps, "2026-06-21", 10, 15, "on")
+        wb = sun_hours_state(L0, ps, "2026-12-21", 10, 15, "on")
+        wa = sun_hours_state(L, ps, "2026-12-21", 10, 15, "off")
+        we = sun_hours_state(L, ps, "2026-12-21", 10, 15, "on")           # the same trees if they were evergreen-dense (what a pergola-like roof would do): leaf-on state in winter
+        tab[k] = {"summer_open_sky_h": round(float(sb.mean()), 2), "summer_leaf_on_h": round(float(sa.mean()), 2), "winter_open_sky_h": round(float(wb.mean()), 2), "winter_leaf_off_h": round(float(wa.mean()), 2), "winter_if_leaf_on_h": round(float(we.mean()), 2)}
+    t = tab.get("table")
+    res = []
+    if t:
+        ok_s = t["summer_open_sky_h"] == 0 or t["summer_leaf_on_h"] <= 0.6 * t["summer_open_sky_h"] + 1e-9
+        res.append(_r("LDG-SHADE-SUMMER", "pass" if ok_s else "fail", "table", f"table seats, direct sun 10-15 h on 21 Jun: {t['summer_open_sky_h']} h open sky, {t['summer_leaf_on_h']} h under the leafed crown (density {F.CROWN['deciduous_on']}, LDC assumption); pass = at most 60 % of open-sky sun",
+                      t["summer_leaf_on_h"], round(0.6 * t["summer_open_sky_h"], 2), "h"))
+        ok_w = t["winter_leaf_off_h"] >= 0.8 * t["winter_open_sky_h"] - 1e-9
+        res.append(_r("LDG-SHADE-WINTER", "pass" if ok_w else "fail", "table", f"table seats, direct sun 10-15 h on 21 Dec: {t['winter_open_sky_h']} h open sky, {t['winter_leaf_off_h']} h with the bare crown (density {F.CROWN['deciduous_off']}), {t['winter_if_leaf_on_h']} h if it kept its leaves; pass = at least 80 % of open-sky sun kept",
+                      t["winter_leaf_off_h"], round(0.8 * t["winter_open_sky_h"], 2), "h"))
+    best = max(tab.items(), key=lambda kv: kv[1]["winter_leaf_off_h"])
+    res.append(_r("LDG-WINTER-SEAT", "pass" if best[1]["winter_leaf_off_h"] >= WINTER_SEAT_MIN_H else "fail", best[0], f"best seated place in winter ({best[0]}): {best[1]['winter_leaf_off_h']} h direct sun 10-15 h on 21 Dec with leaf-off crowns (POLICY minimum {WINTER_SEAT_MIN_H} h of the 5 h window)",
+                  best[1]["winter_leaf_off_h"], WINTER_SEAT_MIN_H, "h"))
+    return res, tab
+
+
+def tree_sun_check(L):
+    """A tree's sun need is measured at its crown (the ground under a crown is not where its leaves are): direct sun on 21 Jun 10-17 h at the crown centre, LDS structure only, vs species sun class (policy thresholds as for beds)."""
+    out, rows = [], {}
+    for c in crowns(L):
+        h = sun_hours_state({**L, "trees": []}, [(c["c"][0], c["c"][1], c["z"])], "2026-06-21", 8, 18, "on")[0]
+        res = R.sun_ok(POOL[c["species"]], float(h))
+        rows[c["id"]] = {"crown_sun_h_21jun_8_18": round(float(h), 2), "fit": res}
+        out.append(_r("LDG-TREE-SUN", "pass" if res != "fail" else "fail", c["id"], f"{c['id']} ({c['species']}): {h:.1f} h direct sun at crown height on 21 Jun 8-18 h (LDS structure only); species sun class {POOL[c['species']].sun_classes}: {res}", round(float(h), 2), None, "h"))
+    return out, rows
+
+
+def sun_checks_final(L, leaf=None):
+    """R.sun_checks with bed sun cut by the leafed crown over the bed (fraction of bed area under a crown x density 0.7)."""
+    from shapely.geometry import Point as Pt
+    cr = crowns(L)
     seen = {}
     for g in L["planting_groups"]:
-        june = leaf if any(p["species"] == "vitis_vinifera" for p in g["plants"]) else C.bed_sun(g["rect"])
+        june = C.bed_sun(g["rect"])
+        bx = rbox(g["rect"])
+        if cr and bx.area > 0:
+            f_ = max((bx.intersection(Pt(*c["c"]).buffer(c["r"], 24)).area / bx.area * c["d_on"] for c in cr), default=0.0)
+            june *= 1 - f_
         for p in g["plants"]:
             seen.setdefault((g["id"], p["species"]), (R.sun_ok(POOL[p["species"]], june), june))
     bad = [(k, v) for k, v in seen.items() if v[0] == "fail"]
-    return _r("LDG-SUNFIT", "pass" if not bad else "fail", "site", "every plant's sun class is met by its bed's 21-June sun (vine: at leaf level, 2.4 m); part shade 2 h, conditional 75 % of need (POLICY thresholds)" if not bad
+    return _r("LDG-SUNFIT", "pass" if not bad else "fail", "site", "every plant's sun class is met by its bed's 21-June sun, reduced by the leafed crown over the bed (part shade 2 h, conditional 75 % of need; POLICY thresholds)" if not bad
               else f"sun class not met: {[(k, round(v[1], 1)) for k, v in bad][:4]}", len(bad), 0, "bed-species"), seen
-
 
 
 # ---- privacy with the screen opening honoured (own_checks assumes an unbroken screen) ---------------------------------------------
@@ -318,27 +410,30 @@ def eyes_open(rect, covers, open_x, top_z=S.FLOOR_Z + C.SCREEN_H, posture="seate
     return tot
 
 
-def privacy_checks(L, rooms, covers_summer, covers_winter_open, covers_winter_closed):
-    """Per seated room: remaining share of today's overlooking. HARD: screen unbroken, upper-storey groups cut by covers (summer = leafed vine on closed louvres;
-    winter louvres closed = opaque while closed, LDK GAP-OVERLOOK-ABOVE). The opening the client asked for at the pit lets the sister plot see in: that share is the client's
-    decision (waiver), reported as a warning with its figure, never hidden."""
+def privacy_checks(L, rooms):
+    """Per seated room: remaining share of today's overlooking after cover and the screen. HARD in summer (crowns leafed). In WINTER only evergreen crowns count as cover: a bare crown is not cover, so a deciduous
+    pick costs winter overhead privacy: reported as a WARN with the figure where it exceeds the limit (the client accepted winter sun; the cost is stated, never hidden). The opening the client asked for at
+    the pit lets the sister plot see in: reported as a warning too (waiver), never hidden."""
     ox = (S.SX0 + F.OPEN_A[0], S.SX0 + F.OPEN_A[1])
     top = S.FLOOR_Z + C.SCREEN_H
+    cs, cw = crown_cells(L, "summer"), crown_cells(L, "winter")
     res, tab = [], {}
     for name, (rect, lim) in rooms.items():
         base = S.eyes_total(rect, "seated")
         row = {}
-        for lab, cv in (("summer", covers_summer), ("winter_louvres_open", covers_winter_open), ("winter_louvres_closed", covers_winter_closed)):
+        for lab, cv in (("summer", cs), ("winter", cw)):
             row[lab] = round(S.eyes_total(rect, "seated", cover_rects=cv, screen_top_z=top) / base, 3) if base else 0.0
             row[lab + "_with_opening"] = round(eyes_open(rect, cv, ox) / base, 3) if base else 0.0
+        row["no_cover"] = round(S.eyes_total(rect, "seated", cover_rects=[], screen_top_z=top) / base, 3) if base else 0.0
         tab[name] = {"limit": lim, "today_eye_points": round(base, 1), **row}
-        for lab in ("summer", "winter_louvres_closed"):
-            res.append(_r("LDG-PRIV", "pass" if row[lab] <= lim + 1e-9 else "fail", f"{name}/{lab}",
-                          f"{name}, {lab.replace('_', ' ')}: {row[lab]:.0%} of today's overlooking remains with the screen unbroken (limit {lim:.0%})", row[lab], lim, "share"))
-            w = row[lab + "_with_opening"]
-            if w > lim + 1e-9 and w > row[lab] + 1e-9:
-                res.append(_r("LDG-PRIV-OPENING", "warn", f"{name}/{lab}",
-                              f"WAIVED by the client's decision (screen opening at the shared fire pit): {name} {lab.replace('_', ' ')} would be overlooked at {w:.0%} of today's through the opening (limit {lim:.0%}); a closable screen leaf would restore {row[lab]:.0%}", w, lim, "share"))
+        res.append(_r("LDG-PRIV", "pass" if row["summer"] <= lim + 1e-9 else "fail", f"{name}/summer",
+                      f"{name}, summer (crowns leafed): {row['summer']:.0%} of today's overlooking remains with the screen unbroken (limit {lim:.0%}; {row['no_cover']:.0%} with no tree)", row["summer"], lim, "share"))
+        if row["winter"] > lim + 1e-9:
+            res.append(_r("LDG-PRIV-WINTER", "warn", f"{name}/winter", f"{name}, winter (deciduous crowns bare): {row['winter']:.0%} of today's overlooking remains (limit {lim:.0%}); accepted with the winter sun (client 2026-11-22), shown not hidden", row["winter"], lim, "share"))
+        w = row["summer_with_opening"]
+        if w > lim + 1e-9 and w > row["summer"] + 1e-9:
+            res.append(_r("LDG-PRIV-OPENING", "warn", f"{name}/summer",
+                          f"WAIVED by the client's decision (screen opening at the shared fire pit): {name} summer would be overlooked at {w:.0%} of today's through the opening (limit {lim:.0%}); a closable screen leaf would restore {row['summer']:.0%}", w, lim, "share"))
     return res, tab
 
 
@@ -369,24 +464,49 @@ def pond_sun(L):
 
 
 # ---- everything ---------------------------------------------------------------------------------------------------------
-HARD_WARN = R.HARD_WARN
+HARD_WARN = R.HARD_WARN       # LDG-PRIV-WINTER and LDG-PRIV-OPENING are warnings by the client's decision, not in this list
+
+
+def tree_site_checks(L):
+    """Pruning regime declared for every tree held below its species size; root distance to the ponds and buildings for species with aggressive roots (POLICY; NHBC does not accept a barrier instead of distance: AD-EXT-TREE-BARRIER)."""
+    res = []
+    ponds = [rbox(f["rect"]) for f in L["features"] if f.get("kind") == "pond"]
+    bs = [box(*b) for b in L["buildings"]]
+    for t in L["trees"]:
+        if t.get("pruned"):
+            ok = bool(t.get("pruning"))
+            res.append(_r("LDG-PRUNE", "pass" if ok else "fail", t["id"], f"{t['id']}: pruned crown {t['mature_spread_m']} m wide, {t['mature_height_m']} m high (species {t['species_mature_spread_m']} m, {t['species_mature_height_m']} m): regime declared = {ok}; source status: {t.get('pruning_source_status')}",
+                          t["mature_spread_m"], None, "m"))
+        sp = POOL[t["species"]]
+        root = None
+        try:
+            from ..build import planting as PL
+            root = PL._plants()[t["species"]]["attributes"]["root_behaviour"]["value"]["class"]
+        except Exception:
+            pass
+        if root in ("aggressive", "moderate"):
+            c = Point(*t["center"])
+            dp = min((p.distance(c) for p in ponds), default=99.0)
+            db = min(b.distance(c) for b in bs)
+            need = 6.0 if root == "aggressive" else 1.5           # POLICY: no held figure; aggressive roots 6 m from a pond or building; moderate roots 1.5 m from a pond liner (the building distance is the NHBC rule LS-TREE-BUILDING)
+            db = db if root == "aggressive" else 99.0
+            ok = (dp >= need and db >= need) or bool(t.get("root_barrier"))
+            res.append(_r("LDG-ROOTS", "pass" if ok else "fail", t["id"], f"{t['id']} ({root} roots): {dp:.1f} m to the nearest pond, {db:.1f} m to a building; POLICY {need:g} m, or a declared root barrier (a barrier never replaces the NHBC distance)", round(min(dp, db), 2), need, "m"))
+    return res
 
 
 def evaluate_all(L, rooms, covers):
     res = list(C.ldk(L))
-    own = [r for r in C.own_checks(L, rooms, covers, S.FLOOR_Z + C.SCREEN_H, None) if r.criterion != "LDG-PRIV"]
-    allc = [c["rect"] for c in L["canopies"]]
-    nonvine = [c["rect"] for c in L["canopies"] if not c.get("roof") == "vine"]
-    prv, ptab = privacy_checks(L, rooms, allc, nonvine, allc)
+    cs = crown_cells(L, "summer") + [c["rect"] for c in L["canopies"]]
+    own = [r for r in C.own_checks(L, rooms, cs, S.FLOOR_Z + C.SCREEN_H, None) if r.criterion != "LDG-PRIV"]
+    prv, ptab = privacy_checks(L, rooms)
     own += prv
-    sunr, seen = sun_checks_final(L, leaf_sun(L))
-    sun = [sunr]
-    extra = [id_check(L), zone_check(L), surface_check(L), gravel_check(L), tree_pergola_check(L), plant_solid_check(L), pot_check(L)] + fire_manual_check(L) + pond_section_check(L)
-    g, gdata = grape_check(L)
-    extra.append(g)
-    gdata["leaf_level_sun_21jun_h"] = leaf_sun(L)
-    gdata['privacy_table'] = ptab
-    return res + own + sun + R.tree_checks(L) + extra, seen, gdata
+    sunr, seen = sun_checks_final(L)
+    ts, trows = tree_sun_check(L)
+    sea, stab = season_check(L)
+    extra = [id_check(L), zone_check(L), surface_check(L), gravel_check(L), tree_pergola_check(L), plant_solid_check(L), pot_check(L)] + fire_manual_check(L) + bbq_checks(L) + pond_section_check(L) + tree_site_checks(L) + ts + sea
+    gdata = {"privacy_table": ptab, "season_table": stab, "tree_sun": trows}
+    return res + own + [sunr] + R.tree_checks(L) + extra, seen, gdata
 
 
 def hard_fails(res):
