@@ -36,7 +36,7 @@ ALLOWED_MATERIALS = {
     "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
     # GI decided garden (landscape/build production): each carries a note and its measured look, ASSUMED where stated
     "garden-path-0", "garden-grille", "garden-ground-ours", "garden-ground-neutral", "garden-edging", "garden-pond-liner", "garden-trellis", "garden-water", "garden-lava", "garden-paving-0", "garden-paving-1", "garden-paving-2", "garden-pit-steel", "garden-burner", "garden-pond-edge", "garden-coping", "garden-joint", "garden-gravel-chip", "garden-mulch", "garden-flame", "garden-terracotta", "garden-seat-timber", "garden-render",
-    "opal-sconce-2700",  # L6b LA6: one CCT per layer (was opal-sconce-3000)
+    "opal-sconce-2700", "opal-vsconce-2700",  # L6b LA6: one CCT per layer (was opal-sconce-3000)
     "garment-navy", "garment-charcoal", "garment-stone", "garment-olive",
 }
 
@@ -332,7 +332,7 @@ class RenderStandard(unittest.TestCase):
                             "edge" not in m["id"] and m["id"][-2:].isdigit()))
         self.assertEqual(next(m for m in SCENE["meshes"] if m["id"] == "detail-stair-wall-handrail")["material"], "oak")
 
-    @unittest.skip("LEGACY old-garden (G-series) baseline: calls the previous garden builder villa_landscape.build directly and expects every mesh inside the yard; it now places landscape-north-mid-02 outside the yard that the G1/SC design changes reshaped. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md (the builder is only reachable behind GARDEN_SOURCE=legacy); decided-garden plot setbacks are tests/landscape/build/test_production.py")
+    @unittest.skip("LEGACY old-garden (G-series) baseline: calls the previous garden builder villa_landscape.build directly and expects every mesh inside the yard; it now places landscape-north-mid-02 outside the yard (measured; the cause was not traced because the builder is retired). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md (the builder is only reachable behind GARDEN_SOURCE=legacy); decided-garden plot setbacks are tests/landscape/build/test_production.py")
     def test_wp2b_landscape_plot_support_setbacks_and_routes(self):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))

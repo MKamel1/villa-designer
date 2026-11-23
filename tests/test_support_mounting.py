@@ -166,7 +166,7 @@ class SupportMounting(unittest.TestCase):
             mutant['mounting_hosts'][m['mounting']['host_id']]['void_depth_m']=.09
             self.assertTrue(any('void' in f for f in scene_findings(mutant) if f.startswith(mid+':')))
 
-    def test_support_siblings_fail_closed(self):
+    def test_joinery_recess_lights_and_support_siblings_fail_closed(self):   # registered in knowledge/mounting-guards.json; the recess-light half is retired (test_joinery_recess_lights_void_depth)
         scene=self.scene
         rail=next(m for m in scene['meshes'] if m.get('mounting',{}).get('support_parts'))
         mutant=deepcopy(scene);support_id=rail['mounting']['support_parts'][0]

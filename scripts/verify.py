@@ -66,6 +66,15 @@ def expect(name: str, ok: bool) -> None:
         FAILS.append(name)
 
 
+def retire(name: str, reason: str) -> None:
+    """A check of a retired feature: reported, never silently dropped (not a pass, not a fail)."""
+    print("  SKIP  %s (retired: %s)" % (name, reason))
+
+
+OLD_GARDEN = ("LEGACY old-garden (G-series) check; retired by the client's decided garden, "
+              "docs/decisions/garden-brief-2026-11-22.md, GI lane (garden_source 'ldb')")
+
+
 def write(name: str, obj) -> pathlib.Path:
     p = TMP / name
     p.write_text(yaml.safe_dump(obj), encoding="utf-8")
@@ -218,7 +227,11 @@ def main() -> int:
     expect("client garden compass names agree with geometry", not orientation_findings(scene))
     expect("garden documents use recorded client compass names", not document_findings())
     from archpipe.concept.garden_sun import scene_findings as garden_sun_findings
-    expect("garden sun evidence covers all plants and binds actual enclosure rays", not garden_sun_findings(scene))
+    if scene.get("garden_source") == "ldb":
+        retire("garden sun evidence covers all plants and binds actual enclosure rays",
+               OLD_GARDEN + "; the decided garden's sun/shade is LDS's analysis, not this scene's (villa_render.py)")
+    else:
+        expect("garden sun evidence covers all plants and binds actual enclosure rays", not garden_sun_findings(scene))
     from archpipe.concept.garden_g6 import scene_findings as g6_findings
     expect("G6 pergola bearings, routes, tree circle and wall espalier", not g6_findings(scene))
     garden_registry = json.loads((ROOT / "knowledge/garden-render-guards.json").read_text(encoding="utf-8"))
@@ -277,7 +290,11 @@ def main() -> int:
     from archpipe.concept.garden_render_review import soil_visibility_findings
     expect("ground-bed soil has no competing floor finish", not soil_visibility_findings(scene))
     from archpipe.concept.villa_landscape import north_garden_scene_violations
-    expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
+    if scene.get("garden_source") == "ldb":
+        retire("north garden has only shade landscape in ground-level beds",
+               OLD_GARDEN + "; the decided north court is guarded by tests/landscape/build/test_production.py")
+    else:
+        expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
     from archpipe.concept.garden_swing import scene_findings as swing_findings
     expect("balcony swing support, motion and both view cones", not swing_findings(scene))
     from archpipe.concept.garden_g4d import scene_findings as g4d_findings, fixture_record, material_basis
@@ -285,7 +302,8 @@ def main() -> int:
     expect('G4d material_basis (C7): recorded optical assumptions and chip scale', not material_basis(scene))
     expect('G4d direct lens screening and evening-only layer', not g4d_findings(scene))
     from archpipe.concept import villa_r11
-    garden_views = VR.VIEWS(villa_r11.design("D1"))
+    # the scene's own views: VR.VIEWS(design) alone still names the previous garden's subjects (landscape-tree-south...)
+    garden_views = scene["views"]
     expect("garden view captions agree with measured subjects and camera sides",
            not orientation_findings(dict(scene, views=garden_views)))
     view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]
