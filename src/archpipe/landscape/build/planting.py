@@ -292,7 +292,7 @@ def _fg_climber(oid, slug, f, cl, s, h, age, base_z, support, row):
     o, row = fg_obj(oid, slug, at, base_z, hh, w, support, age, row, yaw=yaw, label="climber on %s" % cl.get("on"),
                     climbing=dict(axis=ax, sgn=sg, face=cl["face"], lo=lo, hi=hi, keepouts=keep, lift=FG_CLIMB_LIFT),
                     states=("leaf-on", "leaf-off") if f.get("habit") == "deciduous" else ("leaf-on",))
-    o.meta.update(habit=f.get("habit"), climbing=True)
+    o.meta.update(habit=f.get("habit"), climbing=True, fg_keepouts=keep)
     return o, row
 
 

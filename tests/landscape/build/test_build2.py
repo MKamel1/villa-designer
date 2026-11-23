@@ -18,7 +18,20 @@ FIN = ROOT / "knowledge/landscape/concept/final"
 L = build.load_layout(FIN / "layout-final.json")
 V = json.loads((FIN / "layout-visualisation.json").read_text())
 G = P.GROUND_Z
-S = build.build_scene(L, outdoor={})          # the shipped outdoor assets are tested in OutdoorAssets; the rest is built with the labelled geometry
+_FG = planting.FG
+planting.FG = False                           # these tests are about the labelled STAND-IN geometry and the LDB leaf-card climbers; the generated foliage of lane FG (planting.FG) is tested in test_production
+try:
+    S = build.build_scene(L, outdoor={})      # the shipped outdoor assets are tested in OutdoorAssets; the rest is built with the labelled geometry
+finally:
+    planting.FG = _FG
+
+
+def setUpModule():
+    planting.FG = False
+
+
+def tearDownModule():
+    planting.FG = _FG
 
 
 def fails(findings, check=None):

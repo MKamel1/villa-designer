@@ -137,6 +137,14 @@ def _prism_hits(a, b):
     return True
 
 
+def _in_keepout(o, other_bounds, pad=0.04):
+    """True when `o` is a generated climber and the other object's plan box meets one of its keep-out rects (the leaves there are dropped in the Blender build)."""
+    for x0, y0, x1, y1 in o.meta.get("fg_keepouts") or ():
+        if other_bounds[0] < x1 + pad and other_bounds[3] > x0 - pad and other_bounds[1] < y1 + pad and other_bounds[4] > y0 - pad:
+            return True
+    return False
+
+
 def clips(scene, state="closed"):
     """Pairs of different objects whose solids interpenetrate by more than 5 mm (exact for prisms, ellipsoid envelope for plants)."""
     objs = scene.select(state)
@@ -164,6 +172,8 @@ def clips(scene, state="closed"):
             if {objs[ka].kind, objs[kb].kind} == {"edging", "plant"}:        # foliage over a 15 mm edging lip
                 continue
             if objs[ka].kind == "coping" and objs[kb].kind == "coping":      # two copings meet over a wall corner: one stone cap, not two clashing solids
+                continue
+            if _in_keepout(objs[ka], items[b][1]) or _in_keepout(objs[kb], items[a][1]):      # a generated climber's leaves are removed where a seat, table or pot stands against its wall (garden_ldb._mask_leaves)
                 continue
             if (ea and eb) or (objs[ka].kind == "plant" and objs[kb].kind == "plant"):     # foliage against foliage (masses, climber panels): massing overlap is normal
                 continue
