@@ -196,6 +196,14 @@ def standins(scene):
         if o.standin:
             good = "STAND-IN" in o.label and r is not None and r["status"] == "standin" and r.get("reason")
             out.append(F("standin", o.id, "pass" if good else "fail", "labelled STAND-IN" if good else "unlabelled generic mass", "STAND-IN label + schedule reason"))
+        elif o.meta.get("fg"):            # generated foliage (lane FG): its label must be complete and honest (a form-class plant never claims the species)
+            from ..foliage import library as FL
+            try:
+                FL.validate_label(dict(o.meta["fg"]))
+                good = r is not None and r["status"] == "generated" and r.get("fidelity") == o.meta["fg"]["fidelity"]
+            except FL.LabelError:
+                good = False
+            out.append(F("standin", o.id, "pass" if good else "fail", "generated, %s fidelity" % o.meta["fg"]["fidelity"], "complete FG label + schedule row status generated"))
         else:
             good = (o.asset is not None or o.meta.get("atlas")) and r is not None and r["status"] == "asset" and r.get("grade") in ("A", "B")      # a graded atlas-built climber (real leaf cut-outs) counts as a graded asset
             out.append(F("standin", o.id, "pass" if good else "fail", "graded asset %s" % (r or {}).get("asset"), "grade A/B asset of the species or genus"))

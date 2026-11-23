@@ -268,6 +268,8 @@ def build_climber(spec, rng, H, S, reach, state, lod_keep):
         grow_tree(g, rng, np.array([x0, 0.02, 0.0]), np.array([rng.normal(0, 0.15), 0.05, 1.0]), H * rng.uniform(0.9, 1.1), 0.006, 0, P,
                   trop=[0.5, 0.3, 0.2], grav=[0.0, -0.1, 0.1 + spec.get("lax", 0.0)])     # lax: laterals sag and loop (grape, petrea) instead of lying on the trellis
     ls = LeafSet(spec, rng)
+    if state == "leaf-off":             # a deciduous climber (grape) in winter: the same stems, no leaves
+        return g, ls
     for b in g.out:
         pts = b["pts"]; n = len(pts)
         d_all = np.gradient(pts, axis=0)
@@ -433,8 +435,10 @@ def default_size(slug):
     return h, s
 
 
-def generate(slug, seed=0, height_m=None, spread_m=None, state="leaf-on", lod=0, lean=(0.0, 0.0)):
+def generate(slug, seed=0, height_m=None, spread_m=None, state="leaf-on", lod=0, lean=(0.0, 0.0), clear_stem=None):
     spec = SPECS[slug]
+    if clear_stem is not None:          # lane GI: a tree at an age keeps the layout's clear-stem proportion (the spec's figure is for the full-size tree)
+        spec = dict(spec, clear_stem=float(clear_stem))
     h0, s0 = default_size(slug)
     H = float(height_m or h0 or 1.0)
     S = float(spread_m or s0 or H)

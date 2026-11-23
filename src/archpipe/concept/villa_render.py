@@ -148,10 +148,13 @@ M = {
                      roughness=0.5, tile_m=1.83, grain_axis="z",
                      note="flush oak veneer door, closed (ASSUMED); Poly Haven oak_veneer_01 (medium oak, not the "
                           "paler 'oak' joinery), real scan 1.83 m"),
-    "render-exterior": dict(kind="principled", base_rgb=[0.65, 0.65, 0.65], reflectance=0.65,
-                            roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED)"),
-    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.590, 0.672, 0.605], reflectance=0.65,
-                                       roughness=0.82, note="ASSUMED very light grey with a green cast (G/R 1.14: at 1.06 the tint vanished under the sun in the finals), smooth mineral exterior paint; stated reflectance 0.65; our exterior and boundary walls"),
+    "render-exterior": dict(kind="principled", base_rgb=[0.50, 0.50, 0.50], reflectance=0.50,
+                            roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED; reflectance lowered 0.65 -> 0.50 by lane GI 2026-11-22, see paint-exterior-grey-green)"),
+    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.455, 0.518, 0.470], reflectance=0.50,
+                                       roughness=0.85, note="ASSUMED matte mineral exterior render, very light grey with a green cast (G/R 1.14), stated reflectance 0.50; our exterior and boundary walls. "
+                                       "Lane GI 2026-11-22: the earlier 0.65 blew to white in direct sun at the exterior-day exposure (house facade, garden views). No client exterior finish is held in the spec or "
+                                       "the model; 0.50 is a mid-light render inside the lead's 0.75 bound. NO published exterior-render reflectance could be retrieved on this machine (the book index returned no hits), so the "
+                                       "figure is an ASSUMPTION for the client to confirm, not a cited value"),
     "paving": dict(kind="principled", asset="PavingStones146", base_rgb=[0.62, 0.58, 0.52], reflectance=0.45,
                    roughness=0.8, tile_m=2.0, note="light stone paving (garden terrace, ASSUMED)"),
     "garden-gravel": dict(kind="principled", asset="gravel_ground_01", base_rgb=[0.47, 0.43, 0.36],

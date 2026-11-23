@@ -91,7 +91,7 @@ def koi(f, outdoor, g, warns, sched):
     out = []
     L = f.get("koi_adult_length_cm", 50) / 100.0
     s_mid = d["entry_run"] + d["shelf"] + (W - d["entry_run"] - d["shelf"]) / 2
-    zc = wl - 0.5 * d["trench_depth"] * 0.8 - 0.1
+    zc = wl - P.KOI_CENTRE_BELOW_WATER      # POLICY: koi swim just under the grille (they come up to be fed); the earlier 0.46 m put them below the sight line over the pond's near lip
     across, _ = E.pond_axes(f)
     for i in range(n):
         u = (i + 0.5) / n

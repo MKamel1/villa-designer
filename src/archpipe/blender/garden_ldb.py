@@ -4,6 +4,7 @@ Three jobs: (1) `apply_look` builds the few procedural finishes a scene material
 cut-outs); (2) `finish_meshes` gives leaf-card solids their UVs, keeps only the top face of the water solid and shades stand-in masses smooth; (3) `import_prop` places a graded asset
 (Fab FBX with the archive's maps, red-channel opacity, or a glTF) by height / xyz / box / fish, seats it on its base point, and measures where it ended up.
 """
+import functools
 import glob
 import math
 import os
@@ -150,7 +151,7 @@ def _look_water(mat, spec):
     """A SURFACE: transparent mixed with a Fresnel-weighted glossy reflection and a ripple bump (the depth tint is the liner's). Top face only (`finish_meshes`)."""
     nt, out = _fresh(mat)
     tr = nt.nodes.new("ShaderNodeBsdfTransparent")
-    tr.inputs["Color"].default_value = (0.80, 0.93, 0.90, 1)
+    tr.inputs["Color"].default_value = (0.72, 0.89, 0.84, 1)
     gl = nt.nodes.new("ShaderNodeBsdfGlossy")
     gl.inputs["Roughness"].default_value = 0.04
     fr = nt.nodes.new("ShaderNodeFresnel")
@@ -165,7 +166,7 @@ def _look_water(mat, spec):
     w1.inputs["Scale"].default_value = 7.0
     w1.inputs["Detail"].default_value = 3.0
     bm = nt.nodes.new("ShaderNodeBump")
-    bm.inputs["Strength"].default_value = 0.22
+    bm.inputs["Strength"].default_value = 0.10
     bm.inputs["Distance"].default_value = 0.01
     nt.links.new(tc.outputs["Object"], w1.inputs["Vector"])
     nt.links.new(w1.outputs["Fac"], bm.inputs["Height"])
@@ -184,7 +185,7 @@ def _look_liner(mat, spec):
     cr.color_ramp.elements[0].position = 0.0
     cr.color_ramp.elements[0].color = (0.015, 0.045, 0.045, 1)
     cr.color_ramp.elements[1].position = 1.0
-    cr.color_ramp.elements[1].color = (0.20, 0.34, 0.29, 1)
+    cr.color_ramp.elements[1].color = (0.075, 0.125, 0.105, 1)
     nt.links.new(gp.outputs["Position"], sp.inputs["Vector"])
     nt.links.new(sp.outputs["Z"], mr.inputs["Value"])
     nt.links.new(mr.outputs["Result"], cr.inputs["Fac"])
@@ -445,10 +446,81 @@ def _world_bbox(objs):
     return lo, hi
 
 
+def _cached_materials():
+    """`build_plant` makes a new material (and loads its 4k maps again) for every plant; sixty-five plants would load the same few atlases sixty-five times. One per bank / bark kind."""
+    from archpipe.landscape.foliage import blender_build as BB
+    if not getattr(BB, "_gi_cached", False):
+        BB.leaf_material = functools.lru_cache(None)(BB.leaf_material)
+        BB.wood_material = functools.lru_cache(None)(BB.wood_material)
+        BB._gi_cached = True
+    return BB
+
+
+def _mask_leaves(plant, M, keepouts, pad=0.04):
+    """Drop the leaves whose base falls inside a keep-out box (a bench, table or pot standing against the wall) after the plant's local frame is placed by `M` (4x4, local -> world)."""
+    import numpy as np
+    L = plant.leaves
+    if not keepouts or not len(L.get("length", ())):
+        return 0
+    w = (np.c_[L["base"], np.ones(len(L["base"]))] @ np.array(M).T)[:, :3]
+    bad = np.zeros(len(w), bool)
+    for x0, y0, x1, y1 in keepouts:
+        bad |= (w[:, 0] > x0 - pad) & (w[:, 0] < x1 + pad) & (w[:, 1] > y0 - pad) & (w[:, 1] < y1 + pad) & (w[:, 2] < 1.2)
+    if bad.any():
+        keep = ~bad
+        for k, v in list(L.items()):
+            L[k] = [e for e, kk in zip(v, keep) if kk] if isinstance(v, list) else v[keep]
+    return int(bad.sum())
+
+
+def _import_fg(spec):
+    """A generated plant of lane FG (`ldb.mode == 'fg'`): grown here from the species, size, leaf state and the element-id seed, parented to an anchor at the layout point, turned about +z.
+    A wall climber grows in the wall's plane facing +y; it is turned so +y is the wall's garden-side normal and pushed off the face until its nearest leaf or stem is `lift` away."""
+    import numpy as np
+    BB = _cached_materials()
+    from archpipe.landscape.foliage import library as FL
+    L = spec["ldb"]
+    F = L["fg"]
+    eid = spec["element_ids"][0]
+    plant = FL.plant_for(F["species"], eid, F["height_m"], F["spread_m"], F["state"], F.get("lod", 0), tuple(F.get("lean") or (0, 0)), F.get("clear_stem"))
+    at = L["at"]
+    th = math.radians(F["yaw_deg"])
+    c, s_ = math.cos(th), math.sin(th)
+    M = [[c, -s_, 0, at[0]], [s_, c, 0, at[1]], [0, 0, 1, at[2]], [0, 0, 0, 1]]
+    cl = F.get("climbing")
+    dropped = _mask_leaves(plant, M, cl["keepouts"], 0.04) if cl else 0
+    new = BB.build_plant(plant, name="fg-" + spec["id"])
+    anchor = bpy.data.objects.new("prop-anchor-" + spec["id"], None)
+    bpy.context.collection.objects.link(anchor)
+    anchor.rotation_euler = (0, 0, th)
+    anchor.location = tuple(at)
+    for o in new:
+        o.parent = anchor
+    bpy.context.view_layer.update()
+    lo, hi = _world_bbox(new)
+    if cl:                                            # nearest point to the wall face along its normal
+        ax, sg, face = cl["axis"], cl["sgn"], cl["face"]
+        k = 1 if ax == "x" else 0
+        near = (lo[k] - face) * sg if sg > 0 else (face - hi[k]) * 1.0
+        push = (cl["lift"] - near) * sg
+        loc = list(anchor.location)
+        loc[k] += push
+        anchor.location = tuple(loc)
+        bpy.context.view_layer.update()
+        lo, hi = _world_bbox(new)
+    for i, o in enumerate(new):
+        o.name = "prop-%s-%03d" % (spec["id"], i)
+    qa = dict(native=[round(F["spread_m"], 4), round(F["spread_m"], 4), round(F["height_m"], 4)], scale=[1.0, 1.0, 1.0], measured_min=[round(x, 4) for x in lo], measured_max=[round(x, 4) for x in hi],
+              base_z_error_m=round(lo.z - at[2], 4), height_m=round(hi.z - lo.z, 4), spread_m=round(max(hi.x - lo.x, hi.y - lo.y), 4), garden_ldb=True, generated_foliage=F["label"], leaves_dropped_keepout=dropped)
+    return {"id": spec["id"], "asset": spec["asset"], "label": spec["label"], "objects": [o for o in new if o.type == "MESH"], "material_qa": qa}
+
+
 def import_prop(spec):
     """Place one graded asset (`spec["ldb"]`): import, scale (height | xyz | box | fish), yaw, seat the base centroid (the mean of the lowest 5 % of vertices: a trunk, stem or leg
     position) on `spec["position"]`. Returns the record `villa_scene.import_props` keeps, with the measured placement."""
     L = spec["ldb"]
+    if L["mode"] == "fg":
+        return _import_fg(spec)
     path = L["gltf"]
     if path.lower().endswith(".fbx"):
         new = fab_blender.import_fbx(path)
@@ -505,3 +577,25 @@ def import_prop(spec):
     qa = dict(native=[round(x, 4) for x in nat], scale=[round(x, 4) for x in sv], measured_min=[round(x, 4) for x in lo], measured_max=[round(x, 4) for x in hi],
               base_z_error_m=round(lo.z - at[2], 4), height_m=round(hi.z - lo.z, 4), spread_m=round(max(hi.x - lo.x, hi.y - lo.y), 4), garden_ldb=True)
     return {"id": spec["id"], "asset": spec["asset"], "label": spec["label"], "objects": meshes, "material_qa": qa}
+
+
+class _Group:
+    """Several objects that hide together: the `hide_render` the per-view loop of `villa_scene` sets on a mesh, set on each of a prop's objects."""
+
+    def __init__(self, objs):
+        self.objs = objs
+
+    @property
+    def hide_render(self):
+        return all(o.hide_render for o in self.objs)
+
+    @hide_render.setter
+    def hide_render(self, v):
+        for o in self.objs:
+            o.hide_render = v
+            o.hide_viewport = v
+
+
+def hideable_props(imported_props, hideable):
+    """{prop id: _Group} for the imported props a view may hide."""
+    return {p["id"]: _Group(p["objects"]) for p in imported_props if p["id"] in hideable}

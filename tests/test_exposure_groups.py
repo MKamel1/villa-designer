@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from archpipe.exposure_groups import (APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
+from archpipe.exposure_groups import (RULE_SHA256_V1, APPEARANCE_KEYS, TRANSPORT_KEYS, classify, digest, freeze, group_for, measurement,
                                      require_receipts, require_record, rule, white_balances)
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class ExposureGroups(unittest.TestCase):
     def test_pre_registered_rule_and_source_mask(self):
         self.assertIn('PRE-REGISTERED', rule()['status'])
+        V1 = rule(RULE_SHA256_V1)
         row = measurement([6.]*100, [4.]*100, [3.]*100)
         self.assertEqual(row['metered_pixels'], 97)
         self.assertEqual(row['lamp_fraction'], .6)
@@ -22,7 +23,8 @@ class ExposureGroups(unittest.TestCase):
         self.assertEqual(classify({'exposure':'exterior-day'}, row), 'exterior-shade')
         self.assertEqual(classify({'exposure':'day'}, row), 'day')
         row['solar_fraction'] = .51
-        self.assertEqual(classify({'exposure':'exterior-day'}, row), 'exterior-day')
+        self.assertEqual(classify({'exposure':'exterior-day'}, row, V1), 'exterior-day')
+        self.assertEqual(classify({'exposure':'exterior-day'}, row), 'exterior-shade')      # rule 2: mean daylight luminance 4 < 340
         row['lamp_fraction'] = .5
         self.assertEqual(classify({'exposure':'day'}, row), 'day')
         with self.assertRaisesRegex(ValueError, 'populations'):
@@ -37,9 +39,9 @@ class ExposureGroups(unittest.TestCase):
         data = self.frozen()
         for ident in ('v15-family-bath', 'v29-under-stair-store', 'v36-north-garden', 'v01-kitchen-garden'):
             row = data['measurements'][ident]
-            self.assertEqual(classify(row['view_input'], row), row['group'])
+            self.assertEqual(classify(row['view_input'], row, rule(RULE_SHA256_V1)), row['group'])
             renamed = dict(row['view_input'], id='other-villa-renamed-camera')
-            self.assertEqual(classify(renamed, row), row['group'])
+            self.assertEqual(classify(renamed, row, rule(RULE_SHA256_V1)), row['group'])
         self.assertEqual(len([row for row in data['measurements'].values() if row['active']]), 38)
 
     def real_scene(self):
@@ -47,7 +49,7 @@ class ExposureGroups(unittest.TestCase):
         # Frozen source values, not a call to today's scene generator.
         scene = dict(data['transport'], views=[row['view_input'] for row in data['measurements'].values()])
         rows = {ident:{k:v for k,v in row.items() if k != 'active'} for ident,row in data['measurements'].items()}
-        record = freeze(scene, rows, data['runtime'])
+        record = freeze(scene, rows, data['runtime'], RULE_SHA256_V1)
         scene['exposure_groups'] = record
         return scene, record
 
@@ -137,7 +139,7 @@ class ExposureGroups(unittest.TestCase):
         rows[new]=rows.pop(old)
         for view in scene['views']:
             if view['id']==old:view['id']=new
-        record=freeze(scene,rows,scene['exposure_groups']['runtime']);scene['exposure_groups']=record
+        record=freeze(scene,rows,scene['exposure_groups']['runtime'],RULE_SHA256_V1);scene['exposure_groups']=record
         sibling=deepcopy(next(row for row in reports if row['view']==old))
         sibling['view']=new
         sibling['exposure_rule_measurement']=record['measurements'][new]
@@ -238,3 +240,30 @@ class ExposureGroups(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class RuleTwo(unittest.TestCase):
+    """Rule 2 (lane GI): measured-luminance clauses. Real rows are the garden measurements the thresholds were read off (knowledge/exposure-groups.json at GI-measure-exposure-3 is not frozen
+    here; the rows below are the values quoted in the rule file)."""
+    @staticmethod
+    def row(day, lamp=0.0, solar=0.7, n=1000):
+        return dict(lamp_luminance_sum=lamp * n, daylight_luminance_sum=day * n, metered_pixels=n, lamp_fraction=lamp / (lamp + day), solar_fraction=solar)
+
+    def test_dim_sunny_court_is_shade_and_a_bright_one_is_not(self):
+        for mean, want in ((178.5, 'exterior-shade'), (135.5, 'exterior-shade'), (339.0, 'exterior-shade'), (341.0, 'exterior-day'), (632.0, 'exterior-day'), (5455.0, 'exterior-day')):
+            self.assertEqual(classify({'exposure': 'exterior-day'}, self.row(mean)), want, mean)
+            self.assertEqual(classify({'exposure': 'exterior-day'}, self.row(mean), rule(RULE_SHA256_V1)), 'exterior-day')       # rule 1 left them all in exterior-day
+
+    def test_the_level_clause_never_touches_other_states_or_lamp_dominance(self):
+        self.assertEqual(classify({'exposure': 'day'}, self.row(10.0)), 'day')
+        self.assertEqual(classify({'exposure': 'evening'}, self.row(0.1)), 'evening')
+        self.assertEqual(classify({'exposure': 'exterior-day'}, self.row(10.0, lamp=50.0)), 'lamp-dominant')
+
+    def test_dusk_splits_by_level_and_keeps_its_white_balance(self):
+        self.assertEqual(classify({'exposure': 'exterior-dusk'}, self.row(1.68 - 0.0)), 'exterior-dusk')       # v07 (1.68)
+        self.assertEqual(classify({'exposure': 'exterior-dusk'}, self.row(0.25)), 'exterior-dusk-dim')          # v42 (0.25)
+        self.assertEqual(classify({'exposure': 'exterior-dusk'}, self.row(0.25), rule(RULE_SHA256_V1)), 'exterior-dusk')
+        self.assertEqual(rule()['white_balance']['exterior-dusk-dim'], rule()['white_balance']['exterior-dusk'])
+
+    def test_rule_one_records_still_validate_under_their_own_rule(self):
+        self.assertIn('exposure-group-rule-v2', __import__('archpipe.exposure_groups', fromlist=['x']).RULE_FILES[__import__('archpipe.exposure_groups', fromlist=['x']).RULE_SHA256])

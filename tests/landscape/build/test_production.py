@@ -8,6 +8,7 @@ from archpipe.landscape.build import build, guard, production as PR
 
 ROOT = Path(__file__).resolve().parents[3]
 G = PR.garden()
+ITEMS = G["meshes"] + G["props"]          # a generated plant's leaf states are props (built in Blender), the fire pit's and fallback plants' are meshes
 
 
 class Seasons(unittest.TestCase):
@@ -16,17 +17,18 @@ class Seasons(unittest.TestCase):
 
     def test_a_deciduous_object_has_both_variants_under_one_element_id_and_an_evergreen_one_variant(self):
         by = {}
-        for m in G["meshes"]:
+        for m in ITEMS:
             by.setdefault(m["element_ids"][0], set()).add(m.get("ld_season"))
         self.assertEqual(by["ld-plant-s-bed-screen-n-00"], {"summer", "winter"})        # the grape
         self.assertEqual(by["ld-plant-s-bed-wall-00"], {None})                          # petrea: evergreen, one geometry
-        winter = [m for m in G["meshes"] if m.get("ld_season") == "winter"]
-        self.assertTrue(winter and all("leaf" not in m["material"] for m in winter))     # leaf-off = stems and limbs only
+        self.assertEqual(by["ld-s-tree-crape"], {"summer", "winter"})                   # the crape: FG's tree in both states
+        winter = [m for m in ITEMS if m.get("ld_season") == "winter"]
+        self.assertTrue(winter and all(m["ldb"]["fg"]["state"] == "leaf-off" for m in winter if "ldb" in m))     # leaf-off = the same skeleton without leaves
 
     def test_a_summer_view_hides_the_winter_meshes_and_the_open_pit_and_a_winter_view_the_reverse(self):
-        s = set(PR.view_hides(G["meshes"], "summer"))
-        w = set(PR.view_hides(G["meshes"], "winter"))
-        ids = {m["id"]: m for m in G["meshes"]}
+        s = set(PR.view_hides(ITEMS, "summer"))
+        w = set(PR.view_hides(ITEMS, "winter"))
+        ids = {m["id"]: m for m in ITEMS}
         self.assertTrue(s and w and not (s & w - {i for i, m in ids.items() if m.get("ld_state") == "open"}))
         self.assertTrue(all(ids[i].get("ld_season") == "winter" or ids[i].get("ld_state") == "open" for i in s))
         self.assertTrue(all(ids[i].get("ld_season") == "summer" or ids[i].get("ld_state") == "open" for i in w))
@@ -54,8 +56,9 @@ class SceneShape(unittest.TestCase):
         for p in G["props"]:
             self.assertNotIn("plant", p["asset"])
             self.assertTrue(p["label"].startswith("dressing: "))
-            self.assertIn(p["ldb"]["mode"], ("height", "xyz", "box", "fish"))
-            self.assertTrue(Path(p["ldb"]["gltf"]).exists(), p["ldb"]["gltf"])
+            self.assertIn(p["ldb"]["mode"], ("height", "xyz", "box", "fish", "fg"))
+            if p["ldb"]["mode"] != "fg":
+                self.assertTrue(Path(p["ldb"]["gltf"]).exists(), p["ldb"]["gltf"])
 
     def test_every_material_is_a_complete_production_finish_and_every_look_exists_in_blender(self):
         looks = set()
@@ -73,21 +76,49 @@ class SceneShape(unittest.TestCase):
         with self.assertRaises(KeyError):
             PR.material("no-such-finish", {})
 
-    def test_standin_masses_are_matte_and_labelled_and_the_count_is_the_plants_without_a_graded_asset(self):
-        stand = [m for m in G["materials"] if m.startswith("garden-standin-")]
-        self.assertTrue(stand and all(G["materials"][m]["garden_look"] == "standin" and G["materials"][m]["roughness"] == 1.0 and G["materials"][m]["specular"] == 0.0 for m in stand))
-        self.assertEqual(G["summary"]["standins"], sum(1 for p in G["plants"] if "STAND-IN" in p["label"]))
-        self.assertEqual(G["summary"]["drawn"] + G["summary"]["standins"], G["summary"]["plants"])
+    def test_every_plant_species_FG_generates_is_a_generated_plant_with_an_honest_label_and_no_standin_remains(self):
+        self.assertEqual(G["summary"]["standins"], 0)
+        self.assertEqual(G["summary"]["generated"], 65)                      # 59 stand-ins + 6 atlas-card star jasmines of the earlier build
+        self.assertEqual(G["summary"]["drawn"] + G["summary"]["generated"], G["summary"]["plants"])
+        self.assertEqual(G["summary"]["generated_species_fidelity"], 8)      # star jasmine 6 + grape 2: the only species whose leaf scan is that species
+        from archpipe.landscape.foliage import library as FL
+        gen = [p for p in G["props"] if p["ldb"]["mode"] == "fg"]
+        self.assertTrue(gen)
+        for p in gen:
+            fg = p["ldb"]["fg"]
+            FL.validate_label(fg["label"])
+            self.assertEqual(p["fidelity"], fg["label"]["fidelity"])
+            self.assertIn(fg["label"]["fidelity"], ("species", "form-class"))
+            self.assertTrue(p["caption"] and (fg["label"]["fidelity"] == "species" or "form-class" in p["caption"]))
+            self.assertEqual(fg["label"]["seed"], FL.seed_of(p["element_ids"][0]))     # seed from the element id: stable across rebuilds
 
-    def test_leaf_cards_are_closed_solids_with_uv_windows_and_the_atlas_is_the_real_cutouts(self):
-        cards = [m for m in G["meshes"] if m.get("leaf_rects") is not None]
-        self.assertTrue(cards)
-        for m in cards:
-            self.assertEqual(len(m["faces"]), 6 * len(m["leaf_rects"]), m["id"])
-            self.assertTrue(all(0 <= r < len(m["leaf_uv"]) for r in m["leaf_rects"]))
-            self.assertTrue(all(0 <= c <= 1 for w in m["leaf_uv"] for c in w))
-        atlas = [m for m in cards if m["leaf_atlas"] == "star-jasmine"]
-        self.assertTrue(atlas and all(len(m["leaf_uv"]) == 15 for m in atlas))             # the 15 live leaves of the atlas, the 5 dead ones dropped
+    def test_the_standin_fallback_still_builds_when_FG_is_switched_off(self):
+        from archpipe.landscape.build import planting as PL
+        PL.FG = False
+        try:
+            g = PR.garden()
+        finally:
+            PL.FG = True
+        self.assertEqual(g["summary"]["standins"], 59)                      # the earlier build's count
+        self.assertTrue([m for m in g["materials"] if m.startswith("garden-standin-")])
+
+    def test_generated_climbers_stand_off_their_wall_face_in_its_plane_and_reach_a_sourced_height(self):
+        from archpipe.landscape.build import planting as PL
+        cl = [p for p in G["props"] if p["ldb"]["mode"] == "fg" and p["ldb"]["fg"]["climbing"]]
+        self.assertEqual(len(cl), 26)                                       # 24 climbers; the two grapes carry a second (leaf-off) prop
+        for p in cl:
+            fg = p["ldb"]["fg"]
+            c = fg["climbing"]
+            self.assertGreaterEqual(c["lift"], PL.FG_CLIMB_LIFT)
+            self.assertLessEqual(fg["height_m"], 4.0 - PL.FG_TOP_CLEAR + 1e-6)         # never above the coping of a 4 m wall
+            self.assertIn(fg["yaw_deg"], (0.0, 180.0, 90.0, -90.0))
+            self.assertLessEqual(fg["spread_m"], c["hi"] - c["lo"] + 1e-6)
+        f = PL.species_facts("trachelospermum_jasminoides")
+        mat, h3, why = PL.climber_heights("trachelospermum_jasminoides", f, 4.0, 3)
+        self.assertAlmostEqual(mat, 3.85)                                    # sourced upper 6.1 m capped 0.15 m under a 4 m coping
+        self.assertLess(h3, mat)                                             # age 3 is shorter than mature
+        self.assertIn("SOURCED", why)
+        self.assertIn("POLICY", PL.climber_heights("vitis_vinifera", PL.species_facts("vitis_vinifera"), 2.1, 3)[2])       # grape: no sourced height, said so
 
 
 class PropBounds(unittest.TestCase):
@@ -124,15 +155,15 @@ class Views(unittest.TestCase):
         PR.prepare_view(w, G)
         o = self.view()
         PR.prepare_view(o, G)
-        self.assertTrue(set(w["hide_meshes"]) & {m["id"] for m in G["meshes"] if m.get("ld_season") == "summer"})
-        self.assertTrue(set(o["hide_meshes"]) & {m["id"] for m in G["meshes"] if m.get("ld_season") == "winter"})
-        self.assertFalse(set(w["hide_meshes"]) & {m["id"] for m in G["meshes"] if m.get("ld_season") == "winter"})
+        self.assertTrue(set(w["hide_meshes"]) & {m["id"] for m in ITEMS if m.get("ld_season") == "summer"})
+        self.assertTrue(set(o["hide_meshes"]) & {m["id"] for m in ITEMS if m.get("ld_season") == "winter"})
+        self.assertFalse(set(w["hide_meshes"]) & {m["id"] for m in ITEMS if m.get("ld_season") == "winter"})
 
     def test_an_interior_view_gets_the_season_hides_but_keeps_its_subjects(self):
         v = self.view(id="v33-basement-north-south", subjects=["living-sofa"])
         PR.prepare_view(v, G)
         self.assertEqual(v["subjects"], ["living-sofa"])
-        self.assertTrue(set(v["hide_meshes"]) & {m["id"] for m in G["meshes"] if m.get("ld_season") == "winter"})
+        self.assertTrue(set(v["hide_meshes"]) & {m["id"] for m in ITEMS if m.get("ld_season") == "winter"})
 
     def test_a_camera_on_the_terrace_has_no_garden_subject(self):
         v = self.view(id="v25-top-garden-gate", camera=dict(position=[4.4, -21.7, 1.35], target=[12.4, -22.0, 1.35], lens_mm=24, sensor_mm=36, shift_x=0.0, shift_y=0.0))
@@ -147,8 +178,8 @@ class Views(unittest.TestCase):
         self.assertNotEqual(w["sun"], s["sun"])                                              # the sun follows the date
         PR.prepare_view(w, G)
         PR.prepare_view(s, G)
-        crape_summer = {m["id"] for m in G["meshes"] if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "summer"}
-        crape_winter = {m["id"] for m in G["meshes"] if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "winter"}
+        crape_summer = {m["id"] for m in ITEMS if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "summer"}
+        crape_winter = {m["id"] for m in ITEMS if m["element_ids"][0] == "ld-s-tree-crape" and m.get("ld_season") == "winter"}
         self.assertTrue(crape_summer and crape_winter)
         self.assertTrue(crape_summer <= set(w["hide_meshes"]) and not crape_winter & set(w["hide_meshes"]))
         self.assertTrue(crape_winter <= set(s["hide_meshes"]) and not crape_summer & set(s["hide_meshes"]))
@@ -227,3 +258,54 @@ class Rules(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PondSlab(unittest.TestCase):
+    """The yard slab's layers under a pond opening hid the liner and every koi (a floor 49 mm under the water, found by ray cast). The cut must remove them at the pond and ONLY there."""
+    Z = -3.0
+
+    def mesh(self):
+        big = lambda z, up: [[-5, -5, z], [5, -5, z], [5, 5, z], [-5, 5, z]][::1 if up else -1]
+        return [dict(id="shell-000", group="shell", material="m", faces=[big(self.Z - 0.2, False), big(self.Z - 0.199, True), big(self.Z, True)], label="")]
+
+    def test_a_pond_opening_is_cut_through_the_slab_layers_and_nothing_else_is(self):
+        from shapely.geometry import box as sbox
+        ms = self.mesh()
+        n = PR._cut_slab_under_ponds(ms, [sbox(-1, -1, 1, 1)], self.Z)
+        self.assertEqual(n, 2)                                              # the two layers under the finish; the finish top (z = ground) is reveal_ground's job
+        from shapely.geometry import Point, Polygon
+        hole = Point(0, 0)
+        for f in ms[0]["faces"]:
+            z = f[0][2]
+            if z < self.Z - 0.05:
+                self.assertFalse(Polygon([p[:2] for p in f]).buffer(0).contains(hole), "a slab face still spans the pond")
+        self.assertTrue(any(Polygon([p[:2] for p in f]).buffer(0).contains(Point(4.3, 3.1)) for f in ms[0]["faces"] if f[0][2] < self.Z - 0.05))      # negative: the slab away from the pond is kept
+        self.assertTrue(any(abs(f[0][2] - self.Z) < 1e-9 for f in ms[0]["faces"]))                                                              # negative: the finish layer is untouched here
+        self.assertIn("slab layers cut", ms[0]["label"])
+
+    def test_no_pond_means_no_cut(self):
+        ms = self.mesh()
+        before = [f for f in ms[0]["faces"]]
+        self.assertEqual(PR._cut_slab_under_ponds(ms, [], self.Z), 0)
+        self.assertEqual(ms[0]["faces"], before)
+
+    def test_winding_of_the_cut_pieces_follows_the_original_face(self):
+        from shapely.geometry import box as sbox
+        ms = self.mesh()
+        PR._cut_slab_under_ponds(ms, [sbox(-1, -1, 1, 1)], self.Z)
+        for f in ms[0]["faces"]:
+            if f[0][2] < self.Z - 0.05:
+                self.assertEqual(PR._ccw(f), abs(f[0][2] - (self.Z - 0.199)) < 1e-9, f[0][2])         # up face counter-clockwise, down face clockwise
+
+
+class KoiDepth(unittest.TestCase):
+    def test_every_koi_swims_below_the_grille_and_above_the_trench_floor(self):
+        from archpipe.landscape.build import policy as P
+        for p in G["props"]:
+            if p["ldb"]["kind"] != "koi":
+                continue
+            L = p["ldb"]["length_m"]
+            top = p["ldb"]["at"][2] + 0.43 * L / 2            # the asset is banked: measured height 0.30 m for 0.70 m length (0.43 of it)
+            water = p["position"][2]
+            self.assertLess(top, water - P.POND["grille_top_below_water"] - P.POND["grille_t"], p["id"])
+            self.assertGreater(p["ldb"]["at"][2] - 0.43 * L / 2, water - 0.9, p["id"])

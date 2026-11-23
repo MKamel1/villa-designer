@@ -44,7 +44,7 @@ def _m(base, rough=0.9, asset=None, tile=None, metal=0.0, note="", **kw):
     return d
 
 
-FACADE = (0.590, 0.672, 0.605)      # production 'paint-exterior-grey-green': the house's own exterior and boundary-wall finish
+FACADE = (0.455, 0.518, 0.470)      # production 'paint-exterior-grey-green': the house's own exterior and boundary-wall finish
 STONE = (0.70, 0.66, 0.58)
 TONES = [(0.64, 0.60, 0.55), (0.58, 0.55, 0.51), (0.68, 0.64, 0.58)]
 
@@ -212,6 +212,23 @@ def _prop(o, species, water_z=None):
     return d
 
 
+def _fg_props(o):
+    """A generated plant (lane FG) as scene props: one per leaf state (a deciduous plant is two props under one element id, `ld_season` summer / winter; a view hides the one it does not
+    show). The plant itself is built inside the Blender job from `ldb.fg` (species, size, state, seed from the element id); the fidelity label rides on the prop."""
+    a = o.asset
+    fg = a["fg"]
+    out = []
+    for i, st in enumerate(fg["states"]):
+        pid = o.id if i == 0 else o.id + ".winter"
+        d = dict(id=pid, asset="ldb-flora-fg-" + fg["species"], label="dressing: " + o.label, position=list(a["at"]), rotation_deg=[0, 0, fg["yaw_deg"]], scale=1.0, zone="lower", element_ids=[o.id],
+                 ldb=dict(at=list(a["at"]), asset_id=a["asset_id"], native_size_m=list(a["native_size_m"]), gltf="", mode="fg", yaw_deg=fg["yaw_deg"], kind="plant", fg=dict(fg, state=st)),
+                 grade="generated", licence=a["licence"], author=a["author"], source=a["source"], species=fg["species"], fidelity=fg["label"]["fidelity"], caption=fg["label"]["caption"])
+        if len(fg["states"]) > 1:
+            d["ld_season"] = "summer" if st == "leaf-on" else "winter"
+        out.append(d)
+    return out
+
+
 def _fence_meshes(scene, table):
     """The plot fences the layout's own walls do not cover (the sister half), as rendered walls with coping. House, neighbours and street are the production scene's own."""
     from . import elements as E
@@ -254,17 +271,21 @@ def garden(layout_path=LAYOUT, age=3):
             meshes += _object_meshes(o, table, o.parts, "summer" if o.winter_parts else None, ("." + o.state) if o.state else "")      # the fire pit cover has two states under one id
             if o.winter_parts:
                 meshes += _object_meshes(o, table, o.winter_parts, "winter", ".winter")
-        if o.asset:
+        if o.asset and o.asset.get("mode") == "fg":
+            props += _fg_props(o)
+        elif o.asset:
             props.append(_prop(o, o.meta.get("species"), water.get(o.rests_on[0]) if o.kind == "koi" else None))
         if o.kind == "plant":
-            plants.append(dict(id=o.id, species=o.meta.get("species", ""), standin=o.standin, label=o.label))
+            plants.append(dict(id=o.id, species=o.meta.get("species", ""), standin=o.standin, generated=bool(o.meta.get("fg")), fidelity=(o.meta.get("fg") or {}).get("fidelity"), label=o.label))
     meshes += _fence_meshes(sc, table) + _ground_meshes(sc, table)
-    drawn = sum(1 for p in plants if not p["standin"])
-    notes = ["Garden (lane GI): the decided layout %s built into the production scene at age %s: %d plants, %d drawn from graded assets, %d labelled STAND-INS (generic masses, climbers as generic leaf cards); "
-             "house, facade, neighbours and street are the production scene's own." % (L["meta"]["layout_id"], age, len(plants), drawn, len(plants) - drawn)] + ["garden build: " + w for w in sc.warnings]
+    gen = sum(1 for p in plants if p["generated"])
+    drawn = sum(1 for p in plants if not p["standin"]) - gen
+    spec_ = sum(1 for p in plants if p["fidelity"] == "species")
+    notes = ["Garden (lane GI): the decided layout %s built into the production scene at age %s: %d plants, %d drawn from graded assets, %d GENERATED from leaf scans (lane FG: %d species-fidelity, %d form-class), "
+             "%d labelled STAND-INS (generic masses); house, facade, neighbours and street are the production scene's own." % (L["meta"]["layout_id"], age, len(plants), drawn, gen, spec_, gen - spec_, len(plants) - drawn - gen)] + ["garden build: " + w for w in sc.warnings]
     return dict(meshes=meshes, props=props, notes=notes, materials=table, scene=sc, plants=plants,
                 plan=dict(g6=None, beds={}, accent_beds={}, paths={}, plants=[], plant_light_review=[], layout_id=L["meta"]["layout_id"]),
-                summary=dict(plants=len(plants), drawn=drawn, standins=len(plants) - drawn))
+                summary=dict(plants=len(plants), drawn=drawn, generated=gen, generated_species_fidelity=spec_, standins=len(plants) - drawn - gen))
 
 
 def view_hides(garden_meshes, season, state="closed"):
@@ -371,7 +392,7 @@ def clear_camera(view, g):
 
 def prepare_view(view, g):
     """Hide the other season's and the other state's meshes in this view; for a garden view drop the authored old-garden subject lists and name the garden objects in frame."""
-    hid = view_hides(g["meshes"], season_for(view["when"]), view.get("ld_state", "closed"))
+    hid = view_hides(g["meshes"] + g["props"], season_for(view["when"]), view.get("ld_state", "closed"))
     view["hide_meshes"] = list(dict.fromkeys(list(view.get("hide_meshes", [])) + hid))
     if not is_garden_view(view):
         return
@@ -398,10 +419,10 @@ def prepare_view(view, g):
 KEY_VIEWS = {
     "gi-living-door": dict(title="South garden from the living door", position=[22.85, -26.13, -1.65], target=[27.5, -26.33, -1.65], shift_y=0.02),
     "gi-dining-firepit": dict(title="South garden: dining table, fire pit and the screen opening", position=[27.4, -25.0, -1.75], target=[25.1, -29.6, -1.75], shift_y=-0.04),
-    "gi-north-court-pond": dict(title="North court: the koi pond from the lounge side", position=[3.3, -27.6, -1.65], target=[1.2, -24.9, -1.65], shift_y=-0.27),
+    "gi-north-court-pond": dict(title="North court: the koi pond from the lounge side, standing close so the fish are seen through the water", position=[3.2, -25.0, -1.65], target=[0.4, -25.0, -1.65], shift_y=-0.25),
     # the same camera twice, October and January: the shade tree's two leaf states (client: sun welcome Dec-Feb)
-    "gi-dining-crown-summer": dict(title="Dining under the crape: leaf-on (October)", position=[23.4, -27.3, -1.65], target=[25.5, -25.2, -1.65], shift_y=0.30),
-    "gi-dining-crown-winter": dict(title="Dining under the crape: leaf-off (January)", position=[23.4, -27.3, -1.65], target=[25.5, -25.2, -1.65], shift_y=0.30, when="2027-01-15T10:30:00+02:00"),
+    "gi-dining-crown-summer": dict(title="Dining under the crape: leaf-on (October)", position=[23.3, -27.6, -1.65], target=[26.4, -24.4, -1.65], shift_y=0.05),
+    "gi-dining-crown-winter": dict(title="Dining under the crape: leaf-off (January)", position=[23.3, -27.6, -1.65], target=[26.4, -24.4, -1.65], shift_y=0.05, when="2027-01-15T10:30:00+02:00"),
 }
 
 
@@ -448,10 +469,58 @@ def reveal_ground(shell_meshes, g):
             if q.area > 1e-6:
                 cuts.append(dict(id="cut-" + o.id, part_kind="soil-bed", faces=[[[x, y, z] for x, y in list(q.exterior.coords)[:-1]]]))
     LAND.reveal_ground_soil(shell_meshes, cuts)
-    return len(cuts)
+    ponds = [sbox(*o.meta["rect"]) for o in g["scene"].objects if o.kind == "pond"]
+    return len(cuts) + _cut_slab_under_ponds(shell_meshes, ponds, z)
+
+
+SLAB_BAND_M = 0.30      # the yard slab (finish layers, structural slab underside, their thin stacked duplicates) lies within this depth under the garden surface
+
+
+def _cut_slab_under_ponds(shell_meshes, ponds, ground_z):
+    """The pond is a hole in the yard slab: the basin solid goes down to -4.15 but the shell's slab layers (the 1 mm stacked `ceiling-white` finish at z = ground - 0.2, 157 m2, and any other
+    horizontal face in the band under the finish) still span the pond opening, and their faces are two-sided in the renderer: from above they were a floor 49 mm under the water that hid the
+    liner and every koi (found with a ray cast from the pond camera: the first hit under the water was `villa-merged-0000` at z = -3.199). Cut those horizontal faces back at every pond rect.
+    Returns the number of faces cut."""
+    from shapely.ops import triangulate
+    from ...concept.garden_render_review import normal
+    from shapely.geometry import Polygon
+    n = 0
+    for m in shell_meshes:
+        if m.get("group") not in ("shell", "ground", "context"):
+            continue
+        slots = m.get("face_materials", [m["material"]] * len(m["faces"]))
+        faces, materials, changed = [], [], False
+        for face, material in zip(m["faces"], slots):
+            z = face[0][2]
+            if abs(normal(face)[2]) < 0.999 or max(q[2] for q in face) - min(q[2] for q in face) > 1e-6 or not ground_z - SLAB_BAND_M <= z <= ground_z - 0.02:
+                faces.append(face); materials.append(material)
+                continue
+            poly = Polygon([q[:2] for q in face]).buffer(0)
+            rest = poly
+            for pond in ponds:
+                rest = rest.difference(pond)
+            if abs(rest.area - poly.area) < 1e-9:
+                faces.append(face); materials.append(material)
+                continue
+            changed = True
+            n += 1
+            up = normal(face)[2] > 0
+            for tri in triangulate(rest):
+                if rest.covers(tri):
+                    pts = [[x, y, z] for x, y in list(tri.exterior.coords)[:-1]]
+                    faces.append(pts if _ccw(pts) == up else pts[::-1]); materials.append(material)      # wound as the original: counter-clockwise for an up face, clockwise for a down face
+        if changed:
+            m["faces"], m["face_materials"] = faces, materials
+            m["label"] = m.get("label", "") + "; slab layers cut back at the garden ponds"
+    return n
+
+
+def _ccw(pts):
+    return sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts))) > 0
 
 
 BOUNDS_FILE = ROOT / "knowledge/landscape/build/ldb-prop-bounds.json"
+SCHEDULE_FILE = ROOT / "knowledge/landscape/build/production/schedule.json"
 
 
 def prop_bounds(props):
@@ -466,5 +535,8 @@ def prop_bounds(props):
 
 if __name__ == "__main__":      # python -m archpipe.landscape.build.production  -> rewrite knowledge/landscape/build/ldb-prop-bounds.json
     import json
-    BOUNDS_FILE.write_text(json.dumps(prop_bounds(garden()["props"]), indent=1, sort_keys=True))
+    g = garden()
+    BOUNDS_FILE.write_text(json.dumps(prop_bounds(g["props"]), indent=1, sort_keys=True))
     print("wrote", BOUNDS_FILE)
+    SCHEDULE_FILE.write_text(json.dumps(g["scene"].schedule, indent=1, sort_keys=True, default=float))      # one row per planted individual: status asset | generated, fidelity, label fields, sizes and their basis
+    print("wrote", SCHEDULE_FILE, "(%d rows)" % len(g["scene"].schedule))

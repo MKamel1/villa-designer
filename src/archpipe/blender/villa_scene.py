@@ -2069,6 +2069,9 @@ def render(scene_data, args):
                 if args.views in ("all", "review") else set(args.views.split(",")))
 
     hideable = {m for v in scene_data["views"] for m in v.get("hide_meshes", [])}
+    if scene_data.get("garden_source") == "ldb":        # lane GI: a generated plant's other leaf state is hidden per view like a mesh (its prop id is in hide_meshes)
+        from archpipe.blender import garden_ldb
+        objects.update(garden_ldb.hideable_props(imported_props, hideable))
 
     def setup_view(view):
         for mid in hideable:                     # a door opened for a doorway camera, in that view only
@@ -2200,11 +2203,10 @@ def render(scene_data, args):
                   "white_balance_tint": float(s.view_settings.white_balance_tint),
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
         if scene_data.get('exposure_groups'):
-            from archpipe.exposure_groups import RULE_SHA256
             record = scene_data['exposure_groups']
             report.update(exposure_group=group, exposure_locked_per_group=bool(locked),
                           white_balance_k=float(s.view_settings.white_balance_temperature),
-                          exposure_rule_sha256=RULE_SHA256,
+                          exposure_rule_sha256=record['rule_sha256'],
                           exposure_measurement_sha256=record['measurement_sha256'],
                           exposure_rule_measurement=record['measurements'][view['id']],
                           group_meters={ident: metered[ident] for ident in metered_over[group]})
