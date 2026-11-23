@@ -132,6 +132,8 @@ def extract(bank):
         mc = col[c[:, 0], c[:, 1]].mean(0)
         if mc[1] / max(mc[0], 1e-6) < 1.0 or (mc[2] > 0.7 * mc[1] and mc.mean() > 100):
             dropped["dead_or_white"] += 1; continue
+        if bank == "australian_laurel" and mc[1] / max(mc[0], 1e-6) > 1.55:      # chlorotic / lime young leaf: it would turn the whole plant yellow-green
+            dropped["pale"] = dropped.get("pale", 0) + 1; continue
         r = _leaf(c, mc)
         if r is None or r["wid_px"] < 6 * DS or r["len_px"] / r["wid_px"] > 16:    # specks, canes and petioles are not leaves
             dropped["tiny"] += 1; continue

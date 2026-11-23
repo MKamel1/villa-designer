@@ -25,7 +25,7 @@ _U = "/home/omar/archpipe/shared/assets/user/landscape"
 BARKS = {"platanus": tuple(_U + "/polyhaven-tex/bark_platanus/bark_platanus_%s_2k.jpg" % k for k in ("diff", "rough", "nor_gl")),
          "sakura": tuple(_U + "/polyhaven-tex/sakura_bark/sakura_bark_%s_2k.jpg" % k for k in ("diff", "rough", "nor_gl")),
          "banyan": tuple(_U + "/fab/unzipped/banyan_bark_tfhjaeju_4k/Banyan_Bark_tfhjaeju_4K_%s.jpg" % k for k in ("BaseColor", "Roughness", "Normal"))}
-BARK_CHOICE = os.environ.get("FG_BARK", "platanus")
+BARK_CHOICE = os.environ.get("FG_BARK", "banyan")
 COLS, ROWS = 3, 5
 RGBA = "/home/omar/archpipe/shared/assets/generated/foliage/atlas/rgba_%s.png"
 
@@ -252,6 +252,10 @@ if __name__ == "__main__":
     out = argv[argv.index("--out") + 1]
     specs = [parse_spec(argv[i + 1]) for i, a in enumerate(argv) if a == "--spec"]
     os.makedirs(out, exist_ok=True)
+    for ov in os.environ.get("FG_BANKS", "").split(","):      # experiment switch: FG_BANKS=slug=bank[+bank]  swaps a species' leaf bank for one sheet
+        if "=" in ov:
+            sl, bk = ov.split("=")
+            G.SPECS[sl]["banks"] = {b: 1.0 for b in bk.split("+")}
     res = []
     for sp in specs:
         plant = G.generate(sp["slug"], sp["seed"], sp["height_m"], sp["spread_m"], sp["state"], sp["lod"])

@@ -1038,9 +1038,9 @@
  },
  "australian_laurel": {
   "mean_rgb": [
-   59.6,
-   87.7,
-   5.6
+   81.9,
+   107.2,
+   6.2
   ],
   "scientific_name": "Pittosporum undulatum",
   "atlas": "australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K",
@@ -1052,22 +1052,6 @@
    "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/australian_laurel_pf5hkss2_4k/Australian_Laurel_pf5hkss2_4K_Translucency.jpg"
   },
   "leaves": [
-   {
-    "base_px": [
-     1164.5,
-     831.3
-    ],
-    "axis": [
-     0.0037,
-     -1.0
-    ],
-    "len_px": 463.3,
-    "wid_px": 156.1,
-    "petiole_frac": 0.167,
-    "fill": 0.992,
-    "g_over_r": 2.001,
-    "area_px": 60992
-   },
    {
     "base_px": [
      479.8,
@@ -1083,38 +1067,6 @@
     "fill": 0.99,
     "g_over_r": 1.394,
     "area_px": 51792
-   },
-   {
-    "base_px": [
-     2158.4,
-     761.6
-    ],
-    "axis": [
-     0.1193,
-     -0.9929
-    ],
-    "len_px": 346.0,
-    "wid_px": 166.2,
-    "petiole_frac": 0.25,
-    "fill": 0.986,
-    "g_over_r": 1.694,
-    "area_px": 48128
-   },
-   {
-    "base_px": [
-     1921.2,
-     735.7
-    ],
-    "axis": [
-     0.0637,
-     -0.998
-    ],
-    "len_px": 289.8,
-    "wid_px": 168.9,
-    "petiole_frac": 0.208,
-    "fill": 0.996,
-    "g_over_r": 1.727,
-    "area_px": 41344
    },
    {
     "base_px": [
@@ -1230,6 +1182,22 @@
    },
    {
     "base_px": [
+     1434.8,
+     1166.5
+    ],
+    "axis": [
+     0.0869,
+     -0.9962
+    ],
+    "len_px": 123.6,
+    "wid_px": 88.7,
+    "petiole_frac": 0.25,
+    "fill": 1.048,
+    "g_over_r": 1.31,
+    "area_px": 9648
+   },
+   {
+    "base_px": [
      1723.0,
      1191.8
     ],
@@ -1243,70 +1211,6 @@
     "fill": 1.025,
     "g_over_r": 1.503,
     "area_px": 12704
-   },
-   {
-    "base_px": [
-     1188.3,
-     1593.1
-    ],
-    "axis": [
-     -0.0956,
-     -0.9954
-    ],
-    "len_px": 298.8,
-    "wid_px": 206.1,
-    "petiole_frac": 0.167,
-    "fill": 0.988,
-    "g_over_r": 1.723,
-    "area_px": 50064
-   },
-   {
-    "base_px": [
-     1436.8,
-     1686.9
-    ],
-    "axis": [
-     0.0276,
-     -0.9996
-    ],
-    "len_px": 351.6,
-    "wid_px": 176.5,
-    "petiole_frac": 0.208,
-    "fill": 0.993,
-    "g_over_r": 1.633,
-    "area_px": 50464
-   },
-   {
-    "base_px": [
-     1003.2,
-     1970.6
-    ],
-    "axis": [
-     0.0749,
-     -0.9972
-    ],
-    "len_px": 355.8,
-    "wid_px": 225.8,
-    "petiole_frac": 0.208,
-    "fill": 0.984,
-    "g_over_r": 1.86,
-    "area_px": 64336
-   },
-   {
-    "base_px": [
-     1314.4,
-     2146.0
-    ],
-    "axis": [
-     -0.0001,
-     -1.0
-    ],
-    "len_px": 390.0,
-    "wid_px": 196.0,
-    "petiole_frac": 0.167,
-    "fill": 0.985,
-    "g_over_r": 1.662,
-    "area_px": 63840
    },
    {
     "base_px": [
@@ -1346,7 +1250,8 @@
    "dead_or_white": 8,
    "holed": 0,
    "tiny": 0,
-   "ragged_or_oversize": 1,
+   "pale": 7,
+   "ragged_or_oversize": 0,
    "not_isolated": 0
   }
  },

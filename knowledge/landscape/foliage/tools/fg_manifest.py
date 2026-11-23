@@ -1,7 +1,7 @@
 """FG: sha256 manifest of the client-downloaded Fab zips + Poly Haven textures -> knowledge/landscape/foliage/assets_manifest.json"""
 import hashlib, json, re
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[4]
 FAB = Path("/home/omar/archpipe/shared/assets/user/landscape/fab")
 PH = Path("/home/omar/archpipe/shared/assets/user/landscape/polyhaven-tex")
 DL = (ROOT / "knowledge/landscape/foliage/DOWNLOADS.md").read_text()
