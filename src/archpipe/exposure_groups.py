@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 RULE_SHA256 = '428c21b30457aeb96ab95b3944f18b2d903197491798c92430de889540901374'
 VIEW_KEYS = ('id', 'state', 'exposure', 'camera', 'sun', 'layers_on', 'dimmers',
-             'hide_meshes', 'resolution', 'max_bounces')
+             'hide_meshes', 'curtain_state', 'resolution', 'max_bounces')
 APPEARANCE_KEYS = ('draped_appearances', 'drape_material_overrides', 'drape_policy_sha256',
                    'drape_polish_policy_sha256', 'imported_appearances', 'physical_model_meshes',
                    'imported_admission_policy')

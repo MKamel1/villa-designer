@@ -485,7 +485,12 @@ def validate_scene(scene: dict) -> list[str]:
         need(_number(c.get("open_stack_m"), positive=True) and
              c.get("open_stack_m", -1) >= c.get("open_pier_reach_m", 1e9),
              p+".open_stack_m", "must be at least the pier reach (it starts there and may extend further)")
+        inner = c.get("sheer_half_inner_m")
+        need(_number(inner, positive=True) and inner <= c.get("width", 0) / 2,
+             p+".sheer_half_inner_m", "positive, within the opening half-width (the half-drawn sheer leaf's inner edge)")
         if c.get("opening_kind") == "garden-door":
+            need(_number(inner) and 2 * inner >= DOOR_CLEAR_WIDTH_M - 1e-9,
+                 p+".sheer_half_inner_m", "a door's half-drawn sheers must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
             # DOOR_CLEAR_WIDTH_M == archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of
             # travel at least 36 in (914 mm). A window is never walked through, so it carries no clear-width field.
             need(_number(c.get("open_clear_width_m"), positive=True) and

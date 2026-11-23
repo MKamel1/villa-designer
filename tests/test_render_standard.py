@@ -958,6 +958,29 @@ class RenderStandard(unittest.TestCase):
         errors = C.validate_scene(bad)
         self.assertTrue(any("open_clear_width_m" in e for e in errors), errors)
 
+    def test_day_views_declare_the_half_drawn_sheer_state(self):
+        """RF (client 2026-11-22, option b): every day-state view declares curtain_state "sheer-half" (a declared
+        per-view state, not an overlay); the half-drawn leaves sit on the design's own track (between the open stack
+        and the opening centre) and a door keeps F.BODY clear. Non-day views declare nothing (negative control)."""
+        from archpipe.concept import villa_furnish as F
+        from archpipe import villa_render_contract as C
+        import copy
+        day = [v for v in SCENE["views"] if v["state"] == "day"]
+        self.assertTrue(day)
+        for v in SCENE["views"]:
+            self.assertEqual(v.get("curtain_state"), "sheer-half" if v["state"] == "day" else None, v["id"])
+        for c in SCENE["curtains"]:
+            inner = c["sheer_half_inner_m"]
+            open_inner = c["width"] / 2 + c["open_pier_reach_m"] - c["open_stack_m"]
+            self.assertLess(inner, open_inner, c["id"])                       # drawn in from the open stack ...
+            self.assertGreater(inner, 0, c["id"])                             # ... but not closed
+            if c["opening_kind"] == "garden-door":
+                self.assertGreaterEqual(2 * inner, F.BODY, c["id"])
+        bad = copy.deepcopy(SCENE)
+        door = next(c for c in SCENE["curtains"] if c["opening_kind"] == "garden-door")
+        bad["curtains"] = [dict(door, sheer_half_inner_m=0.30)]               # < F.BODY / 2: a door half-closed
+        self.assertTrue(any("sheer_half_inner_m" in e for e in C.validate_scene(bad)))
+
     def test_curtain_panels_hang_on_the_room_side_of_the_wall_not_the_window(self):
         """Lead review of draft render 1: the closed curtain hung INSIDE the window reveal (behind
         detail-window-frames, alu-bronze, +-0.03 m of the window line; split by the mullion into two apparent
