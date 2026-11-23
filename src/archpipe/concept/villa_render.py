@@ -1048,8 +1048,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                         v[2] -= lift
                 mat = GEN_MAT.get(c["material"]["name"], "oak")
                 if part.startswith("pillow") and f["mark"] in ("pb-bed", "kb-bed"):
-                    # sleeping pillows stay white bedding; the scheduled cushions are separate (see BED_CUSHIONS)
-                    mat = "bedding-white" if f["mark"] == "pb-bed" else "sage-fabric"
+                    mat = "sage-fabric"
                 if mat == "oak" and part == "frame":
                     mat = "oak-grain-x"
                 # Keep pillows separate so their curved edges can be smoothed
@@ -1332,7 +1331,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         cush_ = []
         while "cushion-%s-%d" % (k_, n_) in CHOSEN["slots"]:
             fm_ = CHOSEN["slots"]["cushion-%s-%d" % (k_, n_)]["item"]["product"]["format_mm"]
-            cush_.append((fm_["w"], fm_["l"]))
+            cush_.append(SD.lumbar(fm_["w"], fm_["l"]))
             n_ += 1
         if sofa_["type"] == "daybed_nook":
             cush_ = []                       # the daybed's two cushions are its own builder parts (coloured above)
@@ -1340,12 +1339,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         base_z_ = LZ[lay["rooms"][sofa_["room"]]["level"]]
         daybed_ = sofa_["type"] == "daybed_nook"
         # a sofa that a library model replaced has its own seat: measured from the model's mesh (sf_minotti_sofa: seat top
-        # 0.48 m, back cushion face 0.06 m in front of the centre at 0.6 m, arms 0.22 m, lean 22 deg); a procedural sofa
+        # 0.48 m, back cushion face 0.06 m in front of the centre at 0.6 m, arms 0.22 m, lean 30 deg so a 0.58 m cushion stays under the 0.89 m back); a procedural sofa
         # uses the builder's own numbers (villa_furniture_detail._sofa)
         on_model_ = any(m_.get("replaces") == "furn-%s-" % sid_ for m_ in models)
-        geo_ = (dict(seat=0.48, back_v=0.06, arm=0.22, alpha0=22.0, throw_v=0.33, throw_yaw=90.0) if on_model_ else
+        geo_ = (dict(seat=0.48, back_v=0.06, arm=0.22, alpha0=30.0, throw_v=0.33, throw_yaw=90.0) if on_model_ else
                 dict(seat=sofa_["h"] if daybed_ else 0.44, back_v=-sofa_["d"] / 2 + (0.0 if daybed_ else 0.27), arm=0.16,
-                     alpha0=16.0, throw_v=None, throw_yaw=6.0))
+                     alpha0=24.0, throw_v=None, throw_yaw=6.0))
         parts_ = SD.seat_dressing((sofa_["cx"], sofa_["cy"]), generator_rotation(sofa_["rot"]), sofa_["w"], sofa_["d"],
                                   base_z_ + geo_["seat"], geo_["back_v"], geo_["arm"], cush_, (thr_["w"], thr_["l"]),
                                   throw_side=0 if daybed_ else throw_side_, alpha0=geo_["alpha0"],
@@ -1473,15 +1472,15 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             mesh("dress-pillow-%s-%d" % (bid, k), "bedding-white", pf, "dressing", room=b_["room"],
                  label="dressing: pillow", kind="pillow")
     # the parents' bed (a library model, simulated duvet): the three scheduled cushions stand in front of the sleeping pillows on
-    # the duvet (rest height = the duvet spec's mattress_top + 0.08), the lumbar one in front. Positions are
+    # the duvet (lower edge at the mattress top, inside the soft duvet, so it is grounded for render_support), the lumbar one in front. Positions are
     # measured from the bed item (head at local -y); the duvet's pinned edge is 0.03 m past the pillow front.
     bed_ = it["pb-bed"]
-    bed_z_ = next(c_ for c_ in cloth if c_["id"] == "duvet-pb-bed")["mattress_top"] + 0.08       # the duvet's rest height
+    bed_z_ = next(c_ for c_ in cloth if c_["id"] == "duvet-pb-bed")["mattress_top"] - 0.004      # the cushion's lower edge sinks into the duvet to the mattress: grounded for render_support
     for k_, (u_, v_, al_, yaw_) in enumerate(((-0.45, -0.17, 24.0, -6.0), (0.45, -0.17, 24.0, 5.0), (0.0, 0.00, 36.0, 0.0))):
         fm_ = CHOSEN["slots"]["cushion-parents-bed-%d" % (k_ + 1)]["item"]["product"]["format_mm"]
         mesh("dress-cushion-pb-bed-%d" % k_, "fin-cushion-parents-bed-%d" % (k_ + 1),
-             SD.leaning_cushion(bed_["cx"], bed_["cy"], generator_rotation(bed_["rot"]), u_, v_, bed_z_ + 0.01,
-                                fm_["w"], fm_["l"], al_, yaw_),
+             SD.leaning_cushion(bed_["cx"], bed_["cy"], generator_rotation(bed_["rot"]), u_, v_, bed_z_,
+                                *SD.lumbar(fm_["w"], fm_["l"]), al_, yaw_),
              "dressing", room=bed_["room"], label="dressing: scheduled cushion on pb-bed", kind="pillow", keep_object=True)
     notes.append("Dressing: clothes on the dressing rails, duvets and pillows on the beds (not design).")
     notes.append("ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and "

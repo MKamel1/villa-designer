@@ -545,7 +545,10 @@ class RenderStandard(unittest.TestCase):
     def test_painted_walls_are_smooth(self):                        # ADR-0013 part 7 (real finishes)
         m = SCENE["materials"]["plaster-warm-white"]
         self.assertNotIn("asset", m, "a photo-texture with a bump map made painted walls look rough")
-        self.assertAlmostEqual(m["reflectance"], 0.80)
+        # L4 2026-11-23: the wall paint is the client's chosen B Dulux Off White, reflectance = its published LRV 89
+        self.assertAlmostEqual(m["reflectance"], 0.89)
+        self.assertGreater(SCENE["materials"]["fin-wall-feature"]["reflectance"], 0.2)    # Nile Clay LRV 27: still a smooth flat colour
+        self.assertNotIn("asset", SCENE["materials"]["fin-wall-feature"])
 
     def test_construction_details_present(self):                    # ADR-0013 part 10 (skirting, frames)
         ids = {m["id"] for m in SCENE["meshes"]}

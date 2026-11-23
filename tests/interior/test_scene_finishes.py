@@ -92,6 +92,31 @@ class KitchenAndJoinery(unittest.TestCase):
         self.assertTrue(any(m["material"] == "marble-white" and m.get("room") in kitchen for m in sc["meshes"]))
 
 
+class CushionHeight(unittest.TestCase):
+    """Real defect (v34 draft, 2026-11-23): a 0.58 m LAGERPOPPEL leaning at 22 deg on the 0.89 m library sofa stood 10 cm proud
+    of its back and read as a dark panel from behind."""
+
+    def test_the_first_lean_stood_proud_and_the_chosen_lean_does_not(self):
+        from archpipe.interior import soft_dressing as SD
+        def top(alpha, z0=0.44, h=580):
+            faces = SD.leaning_cushion(0, 0, 0, 0, 0.1, z0, 500, h, alpha)
+            return max(p[2] for f in faces for p in f)
+        self.assertGreater(top(22.0, z0=0.48 - 0.04) - 0.89, 0.04)       # the first render's setting: proud
+        self.assertLess(top(30.0, z0=0.48 - 0.04, h=SD.lumbar(400, 580)[1]) - 0.89, 0.03)     # the chosen one: lumbar, landscape
+        self.assertLess(top(30.0, z0=0.48 - 0.04, h=500) - 0.89, 0.03)                      # and a 500 mm SANELA
+
+    def test_scene_cushions_stay_near_their_sofa_back(self):
+        sc = scene()
+        from archpipe.concept import villa_furnish as F, villa_r11 as R
+        items = {i["id"]: i for i in F.layout(R.design("D1"))}
+        for m in sc["meshes"]:
+            if m["id"].startswith("dress-cushion-") and not m["id"].startswith("dress-cushion-pb-bed"):
+                sofa = m["id"][len("dress-cushion-"):].rsplit("-", 1)[0]
+                lo, hi = bbox(m)
+                base = -3.0 if items[sofa]["room"] in ("lounge", "living", "cinema", "bar-alcove") else 0.0
+                self.assertLess(hi[2] - base - items[sofa]["h"], 0.05, m["id"])
+
+
 class SoftSchedule(unittest.TestCase):
     def test_every_scheduled_cushion_throw_and_rug_is_drawn_except_the_documented_gaps(self):
         sc = scene()

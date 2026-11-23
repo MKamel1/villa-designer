@@ -21,11 +21,21 @@ def _world(verts_mm, tris, place):
     return [[place(*verts_mm[i]) for i in t] for t in tris]
 
 
-def leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha_deg=12.0, yaw_deg=0.0, thick_mm=110):
+def lumbar(w_mm, l_mm):
+    """(width, height) of a scheduled cushion as it stands: an oblong one (400 x 580 mm LAGERPOPPEL) lies landscape as a lumbar
+    cushion; a 580 mm portrait one stood 10 cm proud of the 0.89 m library sofa back (v34, 2026-11-23)."""
+    return (max(w_mm, l_mm), min(w_mm, l_mm))
+
+
+def leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha_deg=12.0, yaw_deg=0.0, thick_mm=140):
     """One cushion stood on its edge at (u0, v0, z0 = lowest edge height), top leaning back by alpha."""
     xa, xb, ya, yb = -w_mm / 2, w_mm / 2, -h_mm / 2, h_mm / 2
-    rings = [(xa + 28, xb - 28, ya + 24, yb - 24, 0, 40), (xa, xb, ya, yb, 30, 60),
-             (xa, xb, ya, yb, thick_mm - 30, 60), (xa + 48, xb - 48, ya + 42, yb - 42, thick_mm, 45)]
+    # An inflated pillow, not a slab (the first rings were a flat plateau with chamfers and the critic read them as rigid
+    # boards): seven rings whose inset follows a circular profile, widest at mid-thickness, rounded at the seams.
+    rings = []
+    for t in (0.0, 0.14, 0.3, 0.5, 0.7, 0.86, 1.0):
+        inset = 62.0 * (1.0 - math.sqrt(max(0.0, 1.0 - (2 * t - 1) ** 2)))
+        rings.append((xa + inset, xb - inset, ya + inset * 0.9, yb - inset * 0.9, thick_mm * t, 55.0))
     verts, tris = FG._loft_rings(rings, 8)
     al = math.radians(alpha_deg)
     ca, sa = math.cos(al), math.sin(al)
