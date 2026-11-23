@@ -32,6 +32,8 @@ def _mirror(o):
             o[k] = _rect(o[k])
     if "center" in o:
         o["center"] = [o["center"][0], fy(o["center"][1])]
+    if "crown_center" in o:                       # a tree's crown centre mirrors with its trunk (LDB finding: crowns landed 11-15 m from their trunks)
+        o["crown_center"] = [o["crown_center"][0], fy(o["crown_center"][1])]
     if "polyline" in o:
         o["polyline"] = [[p[0], fy(p[1])] for p in o["polyline"]]
     if "at" in o and isinstance(o["at"], list):

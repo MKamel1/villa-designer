@@ -1,5 +1,6 @@
 """Final design (round 2): zero hard fails, plus a negative for every new check ("does it stay quiet when it should / fail when it should")."""
 import copy
+import math
 import unittest
 
 from archpipe.landscape.concept import final as F, final_checks as K, final_fire as FF, final_vis as V, ty_core as C, ty_run as R
@@ -32,6 +33,27 @@ class Design(unittest.TestCase):
         self.assertEqual(len(segs), 2)
         self.assertAlmostEqual(segs[1][0] - segs[0][2], F.OPEN_A[1] - F.OPEN_A[0], 2)
         self.assertTrue(all(s["height_m"] == 2.1 for s in L0["screens"]))
+
+    def test_jasmine_by_distance_to_seats_and_herbs(self):
+        from shapely.geometry import Point, box
+        near = [box(*o["rect"]) for o in L0["seating"]] + [box(*o["rect"]) for o in L0["features"] if o.get("kind") == "herb_bed"]
+        got = {F.STAR: 0, F.SAMBAC: 0}
+        for g in L0["planting_groups"]:
+            for p in g["plants"]:
+                if p["species"] in got:
+                    got[p["species"]] += 1
+                    d = min(Point(*p["at"]).distance(n) for n in near)
+                    if p["species"] == F.STAR:
+                        self.assertGreaterEqual(d, F.NEAR_M, (g["id"], p["at"], d))                  # star jasmine only 2 m or more from a seat or the herb bed
+                    # (sambac may also sit just past 2 m by the critic's stricter seat-point measure; the negative is the star check above and the critic below)
+        self.assertTrue(all(got.values()), got)
+        self.assertEqual([r for r in RES if r.criterion == "LDG-POL-TOXIC" and r.status != "pass"], [])
+        from archpipe.landscape.critic import critique
+        self.assertEqual([f.evidence for f in critique(L0) if f.criterion == "H-TOXIC-PLACEMENT" and f.status != "pass"], [])
+
+    def test_east_yard_south_boundary_is_a_wall_with_a_climber(self):
+        w = next(w for w in L0["walls"] if w["id"] == "wall-yard-south")
+        self.assertTrue(any(g["id"].startswith("e-") and p["species"] in (F.STAR, F.SAMBAC) and abs(p["at"][1] - w["rect"][1]) < 0.75 for g in L0["planting_groups"] for p in g["plants"]))
 
     def test_dining_8_extends_to_10_not_12(self):
         ext = R.extension_checks(L0)
@@ -71,7 +93,7 @@ class Design(unittest.TestCase):
         from archpipe.landscape.concept import final_trees as FT
         lt = FT.layer_table(L0)
         self.assertEqual(lt["south garden"]["missing"], [])
-        self.assertEqual(lt["east yard"]["missing"], ["climber"])         # its south boundary is not a declared wall: no climber claimed
+        self.assertEqual(lt["east yard"]["missing"], [])                   # its south boundary is a declared wall (client 2026-11-22) and carries climbers
         self.assertEqual(lt["north court"]["missing"], ["canopy"])         # no tree fits the 3.7 m court (NHBC, pond, 1.3 h sun): stated in the report
         self.assertTrue(all(FT.climber_faces(L0).values()), FT.climber_faces(L0))
 
@@ -216,6 +238,15 @@ class Visualisation(unittest.TestCase):
         ids = [o["id"] for k in C.KEYS for o in v.get(k, []) if o.get("id")]
         self.assertTrue(all(i.startswith("vis-") for i in ids))
         self.assertTrue(any("LABEL" not in str(z.get("label")) and "VISUALISATION ONLY" in str(z.get("label")) for z in v["zones"]))
+
+    def test_mirror_reflects_crown_centre_with_the_trunk(self):
+        v = V.mirror(L0)
+        trees = [t for t in v["trees"] if "crown_center" in t]
+        self.assertTrue(trees)
+        for t in trees:
+            self.assertAlmostEqual(math.hypot(t["crown_center"][0] - t["center"][0], t["crown_center"][1] - t["center"][1]), t["crown_lean_m"], 2)    # crown stays within its lean of the trunk
+        src = next(t for t in L0["trees"] if t["id"] == "s-tree-crape")
+        self.assertAlmostEqual(next(t for t in trees if t["id"] == "vis-s-tree-crape")["crown_center"][1], V.fy(src["crown_center"][1]), 3)
 
     def test_mirror_is_a_reflection_about_the_west_line(self):
         v = V.mirror(L0)

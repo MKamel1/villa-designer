@@ -875,7 +875,7 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       27.907,
       -30.266
@@ -886,7 +886,7 @@
      "visualisation_only": true
     },
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       27.357,
       -30.266
@@ -1029,6 +1029,17 @@
      "at": [
       27.847,
       -32.941
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "visualisation_only": true
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      27.997,
+      -32.266
      ],
      "spread_m": 0.5,
      "form": "shrub",
@@ -1339,7 +1350,7 @@
    "water_demand": "moderate",
    "crown_center": [
     25.297,
-    -24.816
+    -35.016
    ],
    "crown_lean_m": 1.25,
    "pruned": {
@@ -1376,7 +1387,7 @@
    "water_demand": "low",
    "crown_center": [
     26.797,
-    -22.516
+    -37.316
    ],
    "crown_lean_m": 0.0,
    "pruned": {

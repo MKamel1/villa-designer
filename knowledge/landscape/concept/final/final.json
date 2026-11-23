@@ -387,9 +387,9 @@
    "not_evaluated": 0
   },
   "horticulturist": {
-   "pass": 23,
-   "fail": 2,
-   "warn": 2,
+   "pass": 20,
+   "fail": 3,
+   "warn": 4,
    "not_evaluated": 3
   },
   "user": {
@@ -429,7 +429,7 @@
    "criterion": "A-ENCLOSURE",
    "status": "fail",
    "severity": "major",
-   "evidence": "room 'e-quiet': 0% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
+   "evidence": "room 'e-quiet': 28% of its perimeter enclosed by walls/buildings/screens/planting >= 1.8 m (required >= 50%)",
    "source": "AD-COMP-ENCLOSURE / AD-TS-ENCLOSURE (qualitative); share threshold policy",
    "kind": "computed",
    "subject": "e-quiet",
@@ -509,6 +509,45 @@
    "extra": {}
   },
   {
+   "critic": "horticulturist",
+   "criterion": "H-BED-CROWDING",
+   "status": "warn",
+   "severity": "minor",
+   "evidence": "bed e-divider: mature crowns 2.9 m2 on 1.8 m2 of bed (limit 1.5 x)",
+   "source": "LDL mature spread; 1.5 overlap is policy",
+   "kind": "computed",
+   "subject": "e-divider",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-BED-CROWDING",
+   "status": "warn",
+   "severity": "minor",
+   "evidence": "bed e-far: mature crowns 2.9 m2 on 1.8 m2 of bed (limit 1.5 x)",
+   "source": "LDL mature spread; 1.5 overlap is policy",
+   "kind": "computed",
+   "subject": "e-far",
+   "calibrated": false,
+   "extra": {}
+  },
+  {
+   "critic": "horticulturist",
+   "criterion": "H-DRIFTS",
+   "status": "fail",
+   "severity": "major",
+   "evidence": "54% of 96 shrub/ground plants sit in drifts of >= 3 (required 60%); median drift 2; lone single-plant species: 0",
+   "source": "AD-COMP-RHYTHM (qualitative, Ching); threshold is policy",
+   "kind": "computed",
+   "subject": "",
+   "calibrated": false,
+   "extra": {
+    "share": 0.542,
+    "lone": []
+   }
+  },
+  {
    "critic": "user",
    "criterion": "U-GATHER-GROUPS",
    "status": "fail",
@@ -547,26 +586,26 @@
  ],
  "build_checks": {
   "closed": {
-   "climber-coverage:pass": 5,
-   "footprint:pass": 62,
-   "id:pass": 180,
+   "climber-coverage:pass": 6,
+   "footprint:pass": 63,
+   "id:pass": 186,
    "pit-half:pass": 2,
-   "plant-footprint:info": 7,
-   "plant-footprint:pass": 66,
+   "plant-footprint:info": 33,
+   "plant-footprint:pass": 40,
    "pond-section:pass": 18,
-   "standin:pass": 96,
-   "support:pass": 178
+   "standin:pass": 101,
+   "support:pass": 184
   },
   "open": {
-   "climber-coverage:pass": 5,
-   "footprint:pass": 61,
-   "id:pass": 180,
+   "climber-coverage:pass": 6,
+   "footprint:pass": 62,
+   "id:pass": 186,
    "pit-half:pass": 3,
-   "plant-footprint:info": 7,
-   "plant-footprint:pass": 66,
+   "plant-footprint:info": 33,
+   "plant-footprint:pass": 40,
    "pond-section:pass": 18,
-   "standin:pass": 96,
-   "support:pass": 179
+   "standin:pass": 101,
+   "support:pass": 185
   }
  },
  "build_warnings": [],
@@ -1730,7 +1769,7 @@
    "achieved": 0,
    "required": 0,
    "unit": "duplicates",
-   "message": "every element id is unique across all gardens (91 ids)"
+   "message": "every element id is unique across all gardens (93 ids)"
   },
   {
    "criterion": "LDG-ZONE-CLASS",
@@ -1799,10 +1838,10 @@
    "criterion": "LDG-FIRE-MANUAL",
    "status": "pass",
    "subject": "s-firepit/overhead",
-   "achieved": 2193,
+   "achieved": 2412,
    "required": 2000,
    "unit": "mm",
-   "message": "nearest pergola, vine, crown or tall plant above or beside the burner: 2193 mm straight-line (s-bed-screen-s:jasminum_sambac); manuals state 1830-2000 mm overhead (PTI top 6 ft, Solus 1.95 m, MAD 2000 mm). No pergola or climber is over the pit."
+   "message": "nearest pergola, vine, crown or tall plant above or beside the burner: 2412 mm straight-line (s-bed-wall-b:rhapis_excelsa); manuals state 1830-2000 mm overhead (PTI top 6 ft, Solus 1.95 m, MAD 2000 mm). No pergola or climber is over the pit."
   },
   {
    "criterion": "LDG-BBQ-MANUAL",
@@ -1943,6 +1982,26 @@
  "schedule": [
   {
    "zone": "east yard",
+   "bed": "e-divider",
+   "species": "Jasminum sambac (L.) Aiton",
+   "slug": "jasminum_sambac",
+   "count": 2,
+   "layer": "climber",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "frost: hardy only to 1 C; typical-year minimum is 5.1 C, floor policy 0.0 C",
+    "heat: moderate tolerance; plant in afternoon shade or verify locally",
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)"
+   ],
+   "water": "medium",
+   "toxic": null,
+   "mature_h_m": 4,
+   "mature_spread_m": 1,
+   "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "east yard",
    "bed": "e-edge",
    "species": "Acorus gramineus Aiton",
    "slug": "acorus_gramineus",
@@ -2070,11 +2129,30 @@
    "drawable": true
   },
   {
+   "zone": "east yard",
+   "bed": "e-far",
+   "species": "Trachelospermum jasminoides (Lindl.) Lem.",
+   "slug": "trachelospermum_jasminoides",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)",
+    "client decision 2026-11-22 (star jasmine on screens and walls away from seats and herbs)"
+   ],
+   "water": "medium",
+   "toxic": "toxic",
+   "mature_h_m": 6.1,
+   "mature_spread_m": 1.2,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
+  },
+  {
    "zone": "north court",
    "bed": "n-screen",
    "species": "Jasminum sambac (L.) Aiton",
    "slug": "jasminum_sambac",
-   "count": 3,
+   "count": 1,
    "layer": "climber",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -2143,8 +2221,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "north court",
@@ -2199,8 +2277,28 @@
    "toxic": "non_toxic",
    "mature_h_m": 3.7,
    "mature_spread_m": 4.6,
-   "status": "DRAWABLE: graded B asset skf3_86982789",
+   "status": "DRAWABLE: graded B asset fab_broadleaf_lady_palm_shqke_high; skf3_86982789",
    "drawable": true
+  },
+  {
+   "zone": "north court",
+   "bed": "n-screen",
+   "species": "Trachelospermum jasminoides (Lindl.) Lem.",
+   "slug": "trachelospermum_jasminoides",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)",
+    "client decision 2026-11-22 (star jasmine on screens and walls away from seats and herbs)",
+    "sun conditional at 1.7 h (21 Jun)"
+   ],
+   "water": "medium",
+   "toxic": "toxic",
+   "mature_h_m": 6.1,
+   "mature_spread_m": 1.2,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
+   "drawable": false
   },
   {
    "zone": "other",
@@ -2217,8 +2315,8 @@
    "toxic": null,
    "mature_h_m": 9.1,
    "mature_spread_m": 7.6,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_olive_tree_source",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2253,8 +2351,8 @@
    "toxic": null,
    "mature_h_m": 9.1,
    "mature_spread_m": 7.6,
-   "status": "STAND-IN (generic mass, labelled): not drawable yet",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_olive_tree_source",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2317,10 +2415,10 @@
   },
   {
    "zone": "south",
-   "bed": "s-bed-screen-s",
+   "bed": "s-bed-wall",
    "species": "Jasminum sambac (L.) Aiton",
    "slug": "jasminum_sambac",
-   "count": 2,
+   "count": 1,
    "layer": "climber",
    "verdict": "viable_with_conditions",
    "conditions": [
@@ -2450,8 +2548,8 @@
    "toxic": "non_toxic",
    "mature_h_m": 0.6,
    "mature_spread_m": 0.6,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_oregano_umkhceeia_high; fab_oregano_umkhceeia_raw",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2468,8 +2566,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2486,8 +2584,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2504,8 +2602,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2522,8 +2620,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2540,8 +2638,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2558,8 +2656,8 @@
    "toxic": null,
    "mature_h_m": 0.9,
    "mature_spread_m": 0.9,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_cast___iron_plant_shdmr_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2634,8 +2732,8 @@
    "toxic": null,
    "mature_h_m": 1.22,
    "mature_spread_m": 1.22,
-   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
-   "drawable": false
+   "status": "DRAWABLE: graded B asset fab_red_fountain_grass_slglz_high",
+   "drawable": true
   },
   {
    "zone": "south",
@@ -2671,7 +2769,7 @@
    "toxic": "non_toxic",
    "mature_h_m": 3.7,
    "mature_spread_m": 4.6,
-   "status": "DRAWABLE: graded B asset skf3_86982789",
+   "status": "DRAWABLE: graded B asset fab_broadleaf_lady_palm_shqke_high; skf3_86982789",
    "drawable": true
   },
   {
@@ -2709,6 +2807,25 @@
    "mature_h_m": 0.91,
    "mature_spread_m": 0.91,
    "status": "STAND-IN (generic mass, labelled): not drawable yet",
+   "drawable": false
+  },
+  {
+   "zone": "south",
+   "bed": "s-bed-screen-s",
+   "species": "Trachelospermum jasminoides (Lindl.) Lem.",
+   "slug": "trachelospermum_jasminoides",
+   "count": 2,
+   "layer": "shrub/perennial",
+   "verdict": "viable_with_conditions",
+   "conditions": [
+    "alkaline-soil tolerance is a GAP (site soil unmeasured)",
+    "client decision 2026-11-22 (star jasmine on screens and walls away from seats and herbs)"
+   ],
+   "water": "medium",
+   "toxic": "toxic",
+   "mature_h_m": 6.1,
+   "mature_spread_m": 1.2,
+   "status": "STAND-IN (generic mass, labelled): graded asset file missing on this machine",
    "drawable": false
   },
   {
@@ -3349,7 +3466,7 @@
   },
   {
    "item": "LDG-FIRE-MANUAL [s-firepit/overhead]",
-   "achieved": "2193 mm",
+   "achieved": "2412 mm",
    "required": "2000 mm",
    "status": "pass",
    "source": "POLICY / decision (ours)"
@@ -3469,12 +3586,12 @@
   "features": 5,
   "trees": 4,
   "paths": 3,
-  "obstacles": 5,
+  "obstacles": 6,
   "boundary": 3,
   "seatwalls": 1,
   "canopies": 0,
   "screens": 2,
-  "walls": 3,
+  "walls": 4,
   "doors": 0,
   "steps": 0
  },
@@ -3636,8 +3753,8 @@
    "toxic": null,
    "nhbc_water": "low",
    "nhbc_need_species_height_m": 4.55,
-   "graded_best": "C",
-   "drawable": false,
+   "graded_best": "B",
+   "drawable": true,
    "pruned": {
     "height_m": 4.5,
     "spread_m": 2.6,
@@ -3756,10 +3873,11 @@
     ]
    },
    "climber": {
-    "plants": 14,
+    "plants": 15,
     "species": [
      "jasminum_sambac",
      "petrea_volubilis",
+     "trachelospermum_jasminoides",
      "vitis_vinifera"
     ]
    },
@@ -3797,12 +3915,13 @@
     ]
    },
    "climber": {
-    "plants": 0,
-    "species": []
+    "plants": 4,
+    "species": [
+     "jasminum_sambac",
+     "trachelospermum_jasminoides"
+    ]
    },
-   "missing": [
-    "climber"
-   ]
+   "missing": []
   },
   "north court": {
    "canopy": {
@@ -3837,7 +3956,8 @@
    "climber": {
     "plants": 3,
     "species": [
-     "jasminum_sambac"
+     "jasminum_sambac",
+     "trachelospermum_jasminoides"
     ]
    },
    "missing": [
@@ -3850,7 +3970,7 @@
    "vitis_vinifera"
   ],
   "screen S stub": [
-   "jasminum_sambac"
+   "trachelospermum_jasminoides"
   ],
   "south garden rear wall": [
    "jasminum_sambac",
@@ -3860,8 +3980,13 @@
    "jasminum_sambac",
    "petrea_volubilis"
   ],
+  "east yard south wall": [
+   "jasminum_sambac",
+   "trachelospermum_jasminoides"
+  ],
   "north court street fence": [
-   "jasminum_sambac"
+   "jasminum_sambac",
+   "trachelospermum_jasminoides"
   ]
  },
  "before_after": {
@@ -3882,11 +4007,11 @@
     "species_total": 13
    },
    "after": {
-    "drawable": 9,
-    "stand_in": 87,
-    "total": 96,
-    "species_drawable": 5,
-    "species_total": 17
+    "drawable": 37,
+    "stand_in": 64,
+    "total": 101,
+    "species_drawable": 9,
+    "species_total": 18
    }
   },
   "winter_sun_h_21dec_10_15": {

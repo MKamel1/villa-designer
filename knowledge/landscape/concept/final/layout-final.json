@@ -1114,7 +1114,7 @@
    "over_structure": false,
    "plants": [
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       27.907,
       -29.566
@@ -1124,7 +1124,7 @@
      "water_need": "medium"
     },
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       27.357,
       -29.566
@@ -1255,6 +1255,16 @@
      "at": [
       27.847,
       -26.891
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      27.997,
+      -27.566
      ],
      "spread_m": 0.5,
      "form": "shrub",
@@ -1530,7 +1540,7 @@
      "role": "climber"
     },
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       0.127,
       -26.071
@@ -1541,7 +1551,7 @@
      "role": "climber"
     },
     {
-     "species": "jasminum_sambac",
+     "species": "trachelospermum_jasminoides",
      "at": [
       0.127,
       -25.671
@@ -1726,7 +1736,7 @@
      "species": "phoenix_roebelenii",
      "at": [
       22.288,
-      -20.741
+      -21.116
      ],
      "spread_m": 0.99,
      "form": "shrub",
@@ -1761,6 +1771,28 @@
      "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      22.112,
+      -20.791
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
+    },
+    {
+     "species": "jasminum_sambac",
+     "at": [
+      22.462,
+      -20.791
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
     }
    ],
    "role": "mass",
@@ -1793,7 +1825,7 @@
      "species": "phoenix_roebelenii",
      "at": [
       16.312,
-      -20.741
+      -21.116
      ],
      "spread_m": 0.99,
      "form": "shrub",
@@ -1828,6 +1860,28 @@
      "spread_m": 0.5,
      "form": "shrub",
      "water_need": "medium"
+    },
+    {
+     "species": "trachelospermum_jasminoides",
+     "at": [
+      15.762,
+      -20.891
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
+    },
+    {
+     "species": "trachelospermum_jasminoides",
+     "at": [
+      16.362,
+      -20.891
+     ],
+     "spread_m": 0.5,
+     "form": "shrub",
+     "water_need": "medium",
+     "role": "climber"
     }
    ],
    "role": "mass",
@@ -1850,7 +1904,7 @@
      "species": "acorus_gramineus",
      "at": [
       17.062,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1860,7 +1914,7 @@
      "species": "acorus_gramineus",
      "at": [
       17.362,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1870,7 +1924,7 @@
      "species": "acorus_gramineus",
      "at": [
       17.662,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1880,7 +1934,7 @@
      "species": "acorus_gramineus",
      "at": [
       17.962,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1890,7 +1944,7 @@
      "species": "acorus_gramineus",
      "at": [
       18.262,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1900,7 +1954,7 @@
      "species": "acorus_gramineus",
      "at": [
       18.562,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1910,7 +1964,7 @@
      "species": "acorus_gramineus",
      "at": [
       18.862,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1920,7 +1974,7 @@
      "species": "acorus_gramineus",
      "at": [
       19.162,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -1930,7 +1984,7 @@
      "species": "acorus_gramineus",
      "at": [
       19.462,
-      -20.721
+      -20.786
      ],
      "spread_m": 0.33,
      "form": "shrub",
@@ -2382,6 +2436,18 @@
    ]
   },
   {
+   "id": "yard-south",
+   "rect": [
+    15.412,
+    -20.601,
+    22.597,
+    -20.351
+   ],
+   "trace": [
+    "SITE-FENCE"
+   ]
+  },
+  {
    "id": "obs-sister-screen-n",
    "rect": [
     22.597,
@@ -2518,6 +2584,16 @@
     -29.916,
     -0.123,
     -23.591
+   ],
+   "height_m": 4.0
+  },
+  {
+   "id": "wall-yard-south",
+   "rect": [
+    15.412,
+    -20.601,
+    22.597,
+    -20.351
    ],
    "height_m": 4.0
   }
