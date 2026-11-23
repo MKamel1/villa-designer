@@ -231,3 +231,133 @@ class Walkthrough(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+class VillaWalkthrough(unittest.TestCase):
+    """Whole-villa route: connectivity, admission, door state and the negative controls.
+
+    Built once from the real design layout and spec (no Blender, no scene build)."""
+    @classmethod
+    def setUpClass(cls):
+        from archpipe.concept import villa_r11 as R, revit_spec as RS
+        cls.layout=R.design('D1');cls.spec=RS.build(cls.layout)
+        cls.vm=W.VillaMap(cls.layout,cls.spec)
+        cls.nodes,cls.stations=W.plan_villa_route(cls.vm)
+        cls.path=W.sample_villa_path(cls.vm,cls.nodes,cls.stations)
+
+    def test_every_room_on_both_floors_is_visited(self):
+        visited=set(W.route_rooms(self.path,self.layout))
+        self.assertEqual(set(self.layout['rooms'])-visited,set())
+        self.assertEqual({f['level'] for f in self.path['frames']},{'GF','B'})
+
+    def test_levels_change_only_on_the_real_flight(self):
+        frames=self.path['frames']
+        stair=[f for f in frames if f['stair']]
+        self.assertTrue(stair)
+        self.assertAlmostEqual(max(f['ground_m'] for f in stair),0.,delta=.05)
+        self.assertAlmostEqual(min(f['ground_m'] for f in stair),-3.,delta=.05)
+        for a,b in zip(frames,frames[1:]):
+            if a['level']!=b['level']:self.assertTrue(a['stair'] or b['stair'])
+            self.assertLess(abs(a['ground_m']-b['ground_m']),.02)   # no teleport between floors
+        x0,x1=W.stair_extent(self.spec)
+        for f in stair:self.assertTrue(x0-.3<=f['camera']['position'][0]<=x1+.5)
+
+    def test_pace_is_the_cited_walking_speed_and_never_exceeds_the_cited_maximum(self):
+        policy=W.villa_policy()
+        self.assertIn('Bohannon',policy['cruise_speed_basis'])
+        speeds=[r['speed_m_s'] for r in W.motion_findings(self.path['frames'],self.path['settings'])]
+        self.assertLessEqual(max(speeds),policy['maximum_speed_m_s'])
+        self.assertAlmostEqual(max(speeds),policy['cruise_speed_m_s'],delta=.01)
+        self.assertEqual(len(self.path['frames']),self.path['settings']['frames'])
+        self.assertAlmostEqual(self.path['duration_s'],len(self.path['frames'])/24)
+        self.assertFalse(any(r['failures'] for r in W.motion_findings(self.path['frames'],self.path['settings'])))
+
+    def test_holds_are_real_pauses(self):
+        frames=self.path['frames'];held=0
+        for a,b in zip(frames,frames[1:]):
+            held+=a['camera']['position']==b['camera']['position']
+        self.assertGreaterEqual(held/24,sum(s['hold_s'] for s in self.path['stations'])-1)
+
+    def test_plan_admission_is_clean_on_every_flat_interior_frame(self):
+        self.assertEqual(W.plan_findings(self.path,self.vm),{})
+
+    def test_negative_a_route_through_a_wall_fails(self):
+        # kitchen to the dirty-kitchen straight through the wall between them, away from the pocket door
+        from copy import deepcopy
+        path=deepcopy(self.path);frames=path['frames']
+        base=next(f for f in frames if f['room']=='kitchen')
+        path['frames']=[]
+        for k in range(60):
+            f=deepcopy(base);f['index']=k;f['stair']=False;f['segment']='interior'
+            f['camera']['position']=[11.5+k*.04,-24.5,base['camera']['position'][2]];f['level']='B'
+            f['room']='kitchen' if 11.5+k*.04<14.9 else 'dirty-kitchen'
+            path['frames'].append(f)
+        # walk along y=-24.5 from x=11.5 to 13.9 stays in the kitchen; now cross y=-23.59 into the extension
+        for k,f in enumerate(path['frames']):
+            f['camera']['position'][:2]=[12.2,-24.5+k*.03]
+            f['room']='kitchen' if f['camera']['position'][1]<-23.59 else 'dirty-kitchen'
+        findings=W.plan_findings(path,self.vm)
+        self.assertTrue(any('wall' in m for v in findings.values() for m in v))
+
+    def test_negative_the_planned_route_through_the_same_door_is_quiet(self):
+        # the planner's own kitchen -> dirty-kitchen hop passes the pocket door and raises nothing
+        first=next(i for i,f in enumerate(self.path['frames']) if f['room']=='dirty-kitchen')
+        findings=W.plan_findings(self.path,self.vm)
+        self.assertFalse([i for i in findings if abs(i-first)<400])
+
+    def test_furniture_blocks_a_standing_point(self):
+        item=next(i for i in self.vm.items if i['level']=='B' and i['id'].startswith('dining-table'))
+        x0,y0,x1,y1=self.vm.F.footprint(item)
+        cx,cy=(x0+x1)/2,(y0+y1)/2
+        i,j=self.vm.cell(cx,cy)
+        self.assertFalse(self.vm.free('B')[i,j])
+
+    def test_flight_is_not_walkable_floor_on_gf_and_the_under_stair_is_blocked_on_b(self):
+        o=self.spec['gf_opening']
+        self.assertFalse(self.vm.free('GF')[self.vm.cell((o[0]+o[2])/2,(o[1]+o[3])/2)])
+        sb=self.layout['rooms']['stair-b']['rect']
+        self.assertFalse(self.vm.free('B')[self.vm.cell((sb[0]+sb[2])/2,(sb[1]+sb[3])/2)])
+
+    def test_garden_glazing_is_never_free_floor(self):
+        for d in self.spec['doors']:
+            if d.get('garden'):
+                self.assertFalse(self.vm.free(d['level'])[self.vm.cell(d['x'],d['y'])],d)
+
+    def test_door_leaf_is_rotated_not_hidden_and_the_handle_follows(self):
+        door=next(d for d in self.spec['doors'] if d['rooms']==['family','guest-wc'])
+        leaf=[[10.297,-23.641,0.-3.],[11.097,-23.641,-3.],[11.097,-23.541,-3.],[10.297,-23.541,-3.]]
+        top=[[x,y,-0.9] for x,y,_ in leaf]
+        mesh=dict(id='door-leaf-test',part_kind='door-leaf',element_ids=['door-B-family-guest-wc'],
+                  faces=[leaf,top,[[10.297,-23.641,-3.],[11.097,-23.641,-3.],[11.097,-23.641,-.9],[10.297,-23.641,-.9]]])
+        handle=dict(id='detail-door-handles',faces=[[[10.9,-23.6,-2.0],[10.95,-23.6,-2.0],[10.95,-23.55,-2.0]]])
+        scene={'meshes':[mesh,handle]}
+        frames=[f for f in self.path['frames'] if f['level']=='B']
+        report=W.open_interior_doors(scene,self.vm,frames)
+        self.assertEqual(report[0]['state'],'open')
+        self.assertEqual(len(mesh['faces']),3)
+        before=np.array([[10.297,-23.641],[11.097,-23.541]])
+        after=np.array([v[:2] for face in mesh['faces'] for v in face])
+        self.assertGreater(np.abs(after[:,1]-(-23.591)).max(),.5)     # swung out of the opening plane
+        self.assertNotEqual(handle['faces'][0][0][:2],[10.9,-23.6])
+        self.assertEqual(report[0]['handle_faces_moved'],1)
+
+    def test_entrance_leaves_stay_closed(self):
+        mesh=dict(id='door-leaf-core',part_kind='door-leaf',element_ids=['door-GF-landing-gf-core'],faces=[[[4.1,-28.67,0],[5.1,-28.67,0],[5.1,-28.47,2.1],[4.1,-28.47,2.1]]])
+        scene={'meshes':[mesh]};before=json.dumps(mesh['faces'])
+        report=W.open_interior_doors(scene,self.vm,self.path['frames'])
+        self.assertEqual(report[0]['state'],'closed');self.assertEqual(json.dumps(mesh['faces']),before)
+
+    def test_frame_views_follow_the_room_and_garden_frames_get_their_own_group(self):
+        scene={'curtains':[]}
+        views=W.frame_views(self.path,scene)
+        self.assertEqual(len(views),len(self.path['frames']))
+        inside=next(v for v,f in zip(views,self.path['frames']) if f['room']=='cinema')
+        self.assertEqual(inside['subjects'],['room:cinema']);self.assertEqual(inside['exposure'],'day')
+        garden=next(v for v,f in zip(views,self.path['frames']) if f['segment']!='interior')
+        self.assertEqual(garden['exposure'],'exterior-day')
+
+    def test_path_hash_binds_the_villa_route(self):
+        from copy import deepcopy
+        W.require_path_hash(self.path)
+        bad=deepcopy(self.path);bad['frames'][10]['camera']['position'][0]+=.5
+        with self.assertRaises(ValueError):W.require_path_hash(bad)
