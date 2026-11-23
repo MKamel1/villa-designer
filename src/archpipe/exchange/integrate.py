@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import argparse
 import shutil
 import subprocess
@@ -38,7 +39,7 @@ def main() -> None:
     run("-m", "archpipe.documents", "--out", "out/documents/D1")
     samples = ROOT / "src/archpipe/documents/samples"
     for f in [*Path(ROOT, "out/documents/D1").glob("schedule-*.csv"), ROOT / "out/documents/D1/schedules.md"]:
-        shutil.copy(f, samples / f.name)
+        copy_file(f, samples / f.name)
     import glob
     run("-m", "pytest", *SUITE, *sorted(g for pat in SCENE_TESTS for g in glob.glob(str(ROOT / pat))), "-q")
 

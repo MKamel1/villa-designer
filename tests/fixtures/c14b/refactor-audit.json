@@ -90,7 +90,7 @@
     "revit/build_villa_option.py": {
       "Swallow": "63634d179a5be8cc5a3da7030d5c3f20e85f4256b33adba3bcc52a0e94bb25f5",
       "build_furniture": "68f321ececd3f6ac0364320694b698f30b9d250c23ef19f56bfe5ac5ad29ef6c",
-      "build_option": "d95097d1ed46db12d7476bce0cb4c4c56f05f9328feadeefacbea9681f2c9076",
+      "build_option": "f5dde6b295c67f92a747b70aaec79a2095e2f0ac3a5f24a7270337c10ea57c15",
       "build_round2": "bcd71a5301d680d577626291011ee433d83a948a747c2889cdeedaa414b831f5",
       "build_round3": "12f0e5f3f80c02562fe0846d689da9c697f3d4e70c6fc21072acc3a50ee54083",
       "clear_interior": "d2ce29d67320a64392703fabbcd19a3114c1b188f7b2ad028d075807aa174a0a",
@@ -147,6 +147,15 @@
       "commit": "6be1230",
       "reason": "Render release ships knowledge/ records read inside Blender, including compressed JSON; intentional runtime dependency repair.",
       "proof": "tests/test_release_package.py"
+    },
+    {
+      "script": "revit/build_villa_option.py",
+      "function": "build_option",
+      "previous_sha256": "d95097d1ed46db12d7476bce0cb4c4c56f05f9328feadeefacbea9681f2c9076",
+      "sha256": "f5dde6b295c67f92a747b70aaec79a2095e2f0ac3a5f24a7270337c10ea57c15",
+      "commit": "c446276",
+      "reason": "Lane D G1 design fixes (riser infill, tread overlap, door swing, under-stair cupboard, lounge glazing) extend the Revit option builder. Recorded by lane HY 2026-11-23; digest taken with ast.dump(show_empty=True), the pre-3.13 format. The builder runs only inside Revit, so this record is attribution, not a behavioural proof.",
+      "proof": "tests/test_villa_concepts.py"
     }
   ]
 }

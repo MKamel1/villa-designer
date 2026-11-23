@@ -6,6 +6,7 @@ none is computed. Lumens are the datasheet 'Luminous flux of the luminaire'.
 """
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import hashlib
 import json
 import os
@@ -93,7 +94,7 @@ def product(art: str) -> dict:
         if not src.exists():
             src = ROOT / "knowledge/lighting-products/erco" / code / n   # already stored
         if src.resolve() != (dest / n).resolve():
-            shutil.copyfile(src, dest / n)
+            copy_file(src, dest / n)
         files[n] = dict(
             path=f"knowledge/lighting-products/erco/{code}/{n}", sha256=_sha(dest / n))
     ies = dest / (f"{pre}-ies-1.ies" if d.get("two_files") else f"{pre}-ies.ies")

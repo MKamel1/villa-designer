@@ -7,6 +7,7 @@ reflectances.json, expected-engine.json (what the engine says: Em/Emin/U0 per pl
 """
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import csv
 import json
 import shutil
@@ -46,7 +47,7 @@ def export(villa, results_dir: Path | None = None, out: Path = OUT) -> dict:
         for p in villa.cluster_placements(cl):
             if p.meta.get("ies_path"):
                 name = Path(p.meta["ies_path"]).name
-                shutil.copy(p.meta["ies_path"], d / "ies" / name)
+                copy_file(p.meta["ies_path"], d / "ies" / name)
             else:
                 name = "generic-%s.ies" % p.meta.get("kind")
                 (d / "ies" / name).write_text(p.meta["ies_text"], encoding="utf-8")

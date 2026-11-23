@@ -153,7 +153,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
         poly = tuple((float(a), float(b)) for a, b in p["polygon_mm"])
         occ = p.get("occupancy", "")
         rooms[e.room] = Room(e.room, KIND_BY_OCC.get(occ, "living" if occ in ("living", "media") else occ), _rect(poly), e.level,
-                             float(p.get("clear_height_mm") or 2700.0), poly, str(p.get("name", "")), tuple(p.get("open_to", [])))
+                             float(p.get("clear_height_mm") or 2700.0), poly, str(p.get("name", "")), tuple(p.get("open_to", [])))  # falsy-ok: a 0 mm clear height is not a room
     # kitchen-like rooms keep the engine's special kind
     for rid, occ in (("kitchen", "kitchen"), ("kitchen-island", "kitchen")):
         if rid in rooms:
@@ -184,7 +184,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
             head = heads.get(over) if over else None
             params["head_h_mm"] = float(head.placement[2]) if head else 2250.0
             if kind == "bath":
-                params.update(has_basin=True, rim_mm=float(e.size[2] or 550.0))
+                params.update(has_basin=True, rim_mm=float(e.size[2] or 550.0))  # falsy-ok: a 0 mm bath rim means "not modelled"; 550 is the stated default
             elif e.size[2] > 0:                       # shower with a low tray
                 params.update(has_basin=True, rim_mm=float(e.size[2]))
             else:                                     # wet-zone shower, no tray: zones from the fixed outlet
@@ -262,7 +262,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
             z0 = float(e.params.get("sill_mm") or 0.0)
             z1 = z0 + float(e.params.get("height_mm") or e.size[2])
         else:
-            z0, z1 = 0.0, float(e.params.get("height_mm") or 2100.0)
+            z0, z1 = 0.0, float(e.params.get("height_mm") or 2100.0)  # falsy-ok: a 0 mm element height is not an element; 2100 is the stated default
         box = (x - w / 2, y - 150.0, x + w / 2, y + 150.0) if horiz else (x - 150.0, y - w / 2, x + 150.0, y + w / 2)
         openings.append({"id": e.id, "kind": e.kind, "level": e.level, "x0": box[0], "y0": box[1], "x1": box[2], "y1": box[3], "z0": z0, "z1": z1})
     mdb_x, mdb_y = anchors["gate"]

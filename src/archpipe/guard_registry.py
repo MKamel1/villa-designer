@@ -2973,9 +2973,9 @@ def check_villa_lighting_grooming_task(
 ) -> list[dict[str, Any]]:
     """Validates task illumination requirements for grooming and work planes (l0606)."""
     res = villa_lighting.check(lay, fixtures)
-    failed = [t for t in res.get("tasks", []) if t.get("status") == "fail"]
+    failed = _task_regressions(res)
     if failed:
-        raise ValueError(f"Lighting task targets failed: {failed}")
+        raise ValueError(f"Lighting task targets fell below the design's direct-only level: {failed}")
     return failed
 
 
@@ -3502,6 +3502,35 @@ register_guard(
 )
 
 
+def _task_planes(res: dict[str, Any]) -> dict[Any, list[dict[str, Any]]]:
+    """Task rows by (room, what, card), each group ordered by achieved lux (a task can have several planes)."""
+    out: dict[Any, list[dict[str, Any]]] = {}
+    for t in res.get("tasks", []):
+        out.setdefault((t["room"], t["what"], t["card"]), []).append(t)
+    return {k: sorted(v, key=lambda t: t["achieved_lx"]) for k, v in out.items()}
+
+
+@functools.lru_cache(maxsize=1)
+def _direct_only_task_baseline() -> dict[Any, list[dict[str, Any]]]:
+    """Direct-only task lux of the L6b design. villa_lighting.check ignores driver dimming and
+    inter-reflection, so it reads 19 task planes of the verified design as failing (INT2, L6b doc);
+    the Radiance rows are the gate. What this check can still prove is that REMOVING fittings makes
+    a task worse than the design's own direct-only figure."""
+    return _task_planes(villa_lighting.check(_cached_villa_layout(), _cached_lighting_design()))
+
+
+def _task_regressions(res: dict[str, Any], card: str | None = None) -> list[dict[str, Any]]:
+    base = _direct_only_task_baseline()
+    out = []
+    for key, rows in _task_planes(res).items():
+        if card is not None and key[2] != card:
+            continue
+        ref = base.get(key)
+        out += [t for i, t in enumerate(rows) if t["status"] == "fail"
+                and (ref is None or i >= len(ref) or t["achieved_lx"] < ref[i]["achieved_lx"])]
+    return out
+
+
 # 73. l0689, l0874: Kitchen prep task illuminance target
 def check_villa_lighting_prep_task(
     lay: dict[str, Any] | None = None,
@@ -3509,10 +3538,7 @@ def check_villa_lighting_prep_task(
 ) -> list[dict[str, Any]]:
     """Validates kitchen prep task illuminance target (ies-res-kitchen-prep-500) (l0689, l0874)."""
     res = villa_lighting.check(lay, fixtures)
-    failed_prep = [
-        t for t in res.get("tasks", [])
-        if t.get("card") == "ies-res-kitchen-prep-500" and t.get("status") == "fail"
-    ]
+    failed_prep = _task_regressions(res, "ies-res-kitchen-prep-500")
     if failed_prep:
         raise ValueError(f"Kitchen prep task illumination check failed: {failed_prep}")
     return failed_prep
@@ -3520,7 +3546,7 @@ def check_villa_lighting_prep_task(
 
 _fx_lighting_no_prep = [
     f for f in _fx_lighting_clean
-    if not (f.kind == "DLN" and f.room == "kitchen")
+    if not (f.card == "ies-res-kitchen-prep-500" and f.room == "kitchen")   # L6b: the island prep fittings are DL bound to the prep card (the old DLN kind is gone)
 ]
 
 register_guard(

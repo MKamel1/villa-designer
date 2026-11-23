@@ -4,8 +4,9 @@ Line weights are pen widths in mm on paper, chosen by plan scale (ISO 128-style 
 gets larger so lines do not clog; the grading is a house standard, not a quoted clause). Text heights are paper mm.
 """
 from __future__ import annotations
+from archpipe.units import in_to_mm
 
-PT = 25.4 / 72.0                    # mm per point
+PT = in_to_mm(1) / 72.0                    # mm per point
 
 # pen width (mm) per role and scale denominator. Roles: cut (section cut / wall cut edge), proj (projected edge),
 # beyond (distant edge), ctx (neighbours, context), dim (dimension, extension), grid, hatch, fine.

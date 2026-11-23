@@ -7,6 +7,7 @@ looking at exported sheets in the Revit era.
 """
 from __future__ import annotations
 
+from archpipe.units import in_to_mm
 import math
 import re
 from pathlib import Path
@@ -162,7 +163,7 @@ MIN_TEXT_MM = 1.8
 DRAWING_KINDS = {"site", "plan", "callout", "elevation", "section", "interior"}
 MIN_FILL = 0.60                    # ink bounding box over the drawing area
 FRAME_LEFT, FRAME_EDGE, TITLE_BAND_MM = 20.0, 10.0, 16.0
-PT_MM = 25.4 / 72.0
+PT_MM = in_to_mm(1) / 72.0
 
 
 def pdf_spans(pdf: Path | str) -> list[dict]:
@@ -204,7 +205,7 @@ def fill_ratio(pdf: Path | str, strip_mm: float = 88.0, cell_mm: float = 40.0) -
     doc = fitz.open(str(pdf))
     page = doc[0]
     W, H = page.rect.width * PT_MM, page.rect.height * PT_MM
-    dpi = max(10, round(25.4 / (cell_mm / 6)))                  # 6 px per cell
+    dpi = max(10, round(in_to_mm(1) / (cell_mm / 6)))                  # 6 px per cell
     pix = page.get_pixmap(dpi=dpi, colorspace=fitz.csGRAY)
     img = np.frombuffer(pix.samples, np.uint8).reshape(pix.h, pix.w) < 235
     doc.close()

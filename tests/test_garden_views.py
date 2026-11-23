@@ -128,6 +128,9 @@ class PresentationDecisions(unittest.TestCase):
                       'v41-south-garden-terrace', 'v36-north-garden',
                       'v37-north-garden-lounge', 'v39-north-garden-hanging-retreat'):
             self.assertIn(ident, presentation_view_ids(self.views))
+
+    @unittest.skip("LEGACY old-garden (G-series) baseline: v41 camera and subjects equal the 2026-10 terrace proposal (knowledge/garden-views-terrace-proposal.json). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md: GI re-authored the garden cameras (v41 position now differs); the decided views are guarded by tests/test_render_views.py DecidedGardenViews")
+    def test_v41_terrace_view_equals_the_reviewed_proposal(self):
         proposal = json.loads(Path('knowledge/garden-views-terrace-proposal.json').read_text())
         view = self.views['v41-south-garden-terrace']
         for field in ('position', 'target', 'lens_mm', 'sensor_mm', 'shift_y'):
@@ -135,6 +138,7 @@ class PresentationDecisions(unittest.TestCase):
         for field in ('subjects', 'visibility_targets', 'caption_notes', 'visibility_allowances'):
             self.assertEqual(view[field], proposal[field])
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: replays the frozen integration-6 full scene inventory (old garden meshes) against the current scene. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; no equivalent: the decided garden's geometry is guarded by tests/landscape/build/test_production.py; the integration-6 replay of the non-garden rows survives in tests/test_integ6.py")
     def test_integrated_candidate_retains_reviewed_preview_geometry(self):
         import hashlib
         # Frozen by value from the accepted neutral preview receipt, rather
@@ -159,6 +163,7 @@ class PresentationDecisions(unittest.TestCase):
         data = json.dumps(rows, sort_keys=True, separators=(',', ':')).encode()
         self.assertEqual(hashlib.sha256(data).hexdigest(), reviewed)
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: the allowance list is exactly v37 stone + v41 chair (landscape-g6-seating-chair-1, old south seating). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; same as above; v41 keeps its camera but has no allowances in the decided garden")
     def test_actual_candidate_has_only_reviewed_rear_chair_allowance(self):
         from archpipe.concept.garden_render_review import subject_visibility_evidence, subject_visibility_findings
         view = self.views['v41-south-garden-terrace']
@@ -173,6 +178,7 @@ class PresentationDecisions(unittest.TestCase):
         self.assertEqual(subject_visibility_findings(original, self.scene),
                          [view['id']+': named subject obscured '+chair])
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: the v41 terrace caption of the old garden and its 'names west/east' mutations. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; the orientation guard for the decided garden is tests/test_orientation.py (GI dc23ae4)")
     def test_integrated_caption_uses_measured_camera_side_without_waiver(self):
         from archpipe.orientation_guard import scene_findings
         view = deepcopy(self.views['v41-south-garden-terrace'])
@@ -185,6 +191,7 @@ class PresentationDecisions(unittest.TestCase):
         del view['caption_camera_garden']
         self.assertTrue(any('names east' in f for f in scene_findings(scene)))
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: five-ray failure of the v41 chair allowance (view['visibility_allowances'] no longer exists). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; no allowance exists in the decided scene (measured: no view carries visibility_allowances), so the five-ray exception has nothing to bind; the seven-ray rule is exercised by the surviving subject_visibility tests of this module")
     def test_five_rays_fail_and_every_other_subject_still_requires_seven(self):
         from unittest.mock import patch
         from archpipe.concept import garden_render_review as review
@@ -206,6 +213,7 @@ class PresentationDecisions(unittest.TestCase):
             self.assertEqual(review.subject_visibility_findings(other, self.scene),
                              [other['id']+': named subject obscured landscape-g6-seating-chair-1'])
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: the lead's 2026-10-08 visibility allowance for landscape-north-feature-stone on v37, which the decided garden no longer has. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; decided views carry no allowances; subject visibility of the decided garden is tests/test_render_views.py DecidedGardenViews")
     def test_v37_stone_allowance_is_subject_and_view_bound_and_five_still_fails(self):
         from unittest.mock import patch
         from archpipe.concept import garden_render_review as review
