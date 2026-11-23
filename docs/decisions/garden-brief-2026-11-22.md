@@ -85,3 +85,8 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 - **Evergreen olive:** still allowed where year-round screening from overlooking matters more than winter sun.
 - **Pruning to the space:** remains acceptable.
 - **Every pick needs a source** for its leaf-drop and leaf-out months in a Cairo-like climate.
+
+## Client decision (2026-11-22): climbers
+- **Star jasmine (Trachelospermum jasminoides)** goes on the screens and walls AWAY from the seats and the herbs. Its sap irritates, so the placement constraint applies. Graded B as a climber panel.
+- **Arabian jasmine (Jasminum sambac)** stays next to the seating, for scent. It has no 3D model, so it is a labelled stand-in in renders.
+- Grape stays on the north screen stub. Petrea stays a stand-in.
