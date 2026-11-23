@@ -62,6 +62,12 @@ def _prism_faces(n):
 def prism(material, poly, z0, z1):
     """Extruded CCW polygon (no holes)."""
     poly = list(poly)
+    for k in range(len(poly)):          # start the polygon where a fan triangulation from its first vertex has no zero-area triangle (a cut paver with collinear edge points)
+        r = poly[k:] + poly[:k]
+        fan = lambda r: all(abs((r[i][0] - r[0][0]) * (r[i + 1][1] - r[0][1]) - (r[i + 1][0] - r[0][0]) * (r[i][1] - r[0][1])) > 1e-9 for i in range(1, len(r) - 1))
+        if fan(r) and fan(r[::-1]):         # the top face fans from the first vertex, the bottom face from the last
+            poly = r
+            break
     area = sum(poly[i][0] * poly[(i + 1) % len(poly)][1] - poly[(i + 1) % len(poly)][0] * poly[i][1] for i in range(len(poly)))
     if area < 0:
         poly = poly[::-1]

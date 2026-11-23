@@ -320,6 +320,15 @@ def _climber_cards(oid, slug, f, cl, lo, hi, base_z, hh, support, row, col, why,
         c = np.array(to3(u, d, z))
         hw, hl = lw * sc / 2, lh * sc / 2
         quad = [c - a * hw - b * hl, c + a * hw - b * hl, c + a * hw + b * hl, c - a * hw + b * hl]
+        kd, ku = (1, 0) if axis == "x" else (0, 1)              # the whole card moves (it stays planar) to stand at least 12 mm off the face and inside the free stretch
+        dmin = min((q[kd] - face) * sgn for q in quad)
+        if dmin < 0.012:
+            quad = [q + nout * (0.012 - dmin) for q in quad]
+        umin, umax = min(q[ku] for q in quad), max(q[ku] for q in quad)
+        if umin < lo + 0.012:
+            quad = [q + tang * (lo + 0.012 - umin) for q in quad]
+        elif umax > hi - 0.012:
+            quad = [q - tang * (umax - hi + 0.012) for q in quad]
         if any(k[0] - 0.01 < q[0] < k[3] + 0.01 and k[1] - 0.01 < q[1] < k[4] + 0.01 and k[2] < q[2] < k[5] for q in quad for k in keep):
             continue                                     # a leaf never grows through a bench, table or pot standing against the face
         k0 = len(verts)
