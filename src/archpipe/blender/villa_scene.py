@@ -420,6 +420,9 @@ def add_material(name, spec, library_root, warnings):
         nt.links.new(height, bump.inputs['Height'])
         nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
         mat['mineral_pattern_scale_m'] = size
+    if spec.get("garden_look"):                 # lane GI: procedural finishes of the decided garden (water, liner, leaf cut-outs, matte stand-ins, weathered render)
+        from archpipe.blender import garden_ldb
+        garden_ldb.apply_look(mat, spec)
     return mat
 
 
@@ -1228,6 +1231,10 @@ def import_props(prop_specs, library_root):
     """Transform each complete asset around one shared origin, then seat it."""
     imported = []
     for spec in prop_specs:
+        if spec.get("ldb"):                      # lane GI: an asset of the decided garden (FBX or glTF outside the library), placed and measured by garden_ldb
+            from archpipe.blender import garden_ldb
+            imported.append(garden_ldb.import_prop(spec))
+            continue
         from archpipe.asset_intake import require_registered_asset
         from pathlib import Path
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
@@ -2017,6 +2024,9 @@ def render(scene_data, args):
     configure_glass(materials, scene_data["materials"])
     render_meshes = rendered_meshes(scene_data) if needs_admission(scene_data) else scene_data['meshes']
     objects = build_meshes(render_meshes, materials, scene_data["materials"], warnings)
+    if scene_data.get("garden_source") == "ldb":
+        from archpipe.blender import garden_ldb
+        garden_ldb.finish_meshes(render_meshes, objects, scene_data["materials"])
     build_climbers(render_meshes, objects, materials, warnings)
     switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
     emissive_sources = []

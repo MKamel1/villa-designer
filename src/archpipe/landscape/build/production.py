@@ -51,7 +51,7 @@ TONES = [(0.64, 0.60, 0.55), (0.58, 0.55, 0.51), (0.68, 0.64, 0.58)]
 
 # LDB material name -> (production material name, spec). A name not listed here raises: no part is rendered with a guessed finish.
 FIXED = {
-    "wall-render": ("garden-render", _m(FACADE, 0.9, "white_rough_plaster", 1.2, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), CC0 Poly Haven white_rough_plaster texture; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
+    "wall-render": ("garden-render", _m(FACADE, 0.9, "white_rough_plaster", 1.2, contrast=1.4, note="rendered boundary wall in the house's own exterior colour (production paint-exterior-grey-green), CC0 Poly Haven white_rough_plaster texture; weathered base and streaks in the shader (garden_look wall)", garden_look="wall")),
     "wall-coping": ("garden-coping", _m(STONE, 0.7, "Travertine009", 0.8, note="stone coping slab (ASSUMED)")),
     "paving-joint": ("garden-joint", _m((0.30, 0.28, 0.25), 0.95, note="paving joint (ASSUMED)")),
     "bed-soil": ("garden-mulch", _m((0.30, 0.19, 0.11), 1.0, "wood_chip_path", 0.7, note="bark mulch over soil, CC0 Poly Haven wood_chip_path", procedural_stone_m=0.04)),
@@ -87,18 +87,20 @@ def material(name: str, table: dict) -> str:
     if base == "paving-unit" or base == "path-unit":
         k = int(name.split("#")[1]) if "#" in name else 0
         n = "garden-paving-%d" % k if base == "paving-unit" else "garden-path-%d" % k
-        spec = _m(TONES[k % 3] if base == "paving-unit" else (0.50, 0.46, 0.40), 0.78, "PavingStones146", 0.6, contrast=0.4,
-                  note="0.6 x 0.3 m paving units, joints are geometry; light stone (ASSUMED), library PavingStones146 texture at low contrast so it does not draw a second joint pattern")
+        spec = _m(TONES[k % 3] if base == "paving-unit" else (0.50, 0.46, 0.40), 0.78, "Travertine009", 0.9, contrast=0.6, procedural_stone_m=0.02,
+                  note="0.6 x 0.3 m paving units, joints are geometry; light stone (ASSUMED), library Travertine009 texture (honed stone, no joint lines of its own)")
         table.setdefault(n, spec)
         return n
     if base.startswith("standin:"):
         c = tuple(float(x) for x in base[8:].split(","))
         n = "garden-standin-%02x%02x%02x" % tuple(round(255 * x) for x in c)
+        c = tuple(ALBEDO * x for x in c)
         table.setdefault(n, _m(c, 1.0, note="STAND-IN plant mass: matte (no specular, no sheen), slight tonal variation in the shader", garden_look="standin", specular=0.0))
         return n
     if base.startswith("leafcut:"):
         c = tuple(float(x) for x in base.split(":")[1].split(","))
         n = "garden-leafcut-%02x%02x%02x" % tuple(round(255 * x) for x in c)
+        c = tuple(ALBEDO * x for x in c)
         table.setdefault(n, _m(c, 0.8, note="STAND-IN tree foliage clumps: matte leaf cut-out (procedural)", garden_look="leafcut", specular=0.0))
         return n
     if base == "leaf-card:star-jasmine":
@@ -107,6 +109,7 @@ def material(name: str, table: dict) -> str:
     if base.startswith("leaf-card:standin:"):
         c = tuple(float(x) for x in base.split(":")[2].split(","))
         n = "garden-leaf-standin-%02x%02x%02x" % tuple(round(255 * x) for x in c)
+        c = tuple(ALBEDO * x for x in c)
         table.setdefault(n, _m(c, 0.7, note="STAND-IN generic leaf card (procedural oval cut-out), not any species' leaf", garden_look="generic-leaf", specular=0.2))
         return n
     if base in ALIAS:
@@ -116,6 +119,9 @@ def material(name: str, table: dict) -> str:
         table.setdefault(n, spec)
         return n
     raise KeyError("no production finish for garden part material %r" % name)
+
+
+ALBEDO = 0.5      # ASSUMED: the stand-in colour read from the sourced foliage text is a display colour; a leaf's linear diffuse reflectance is about half of it (green channel 0.1-0.25), so masses and cards are rendered at this fraction
 
 
 def _faces(part):
@@ -167,6 +173,14 @@ BOX_PART_KIND = {"paving": "finish-layer", "path": "finish-layer", "gravel": "fi
 GROUPS = {"bench": "furniture", "table": "furniture", "chair": "furniture", "bbq": "furniture", "pot": "furniture", "plant": "dressing", "koi": "dressing"}
 
 
+def _leaf_uv(spec):
+    """UV window [u0, v0, u1, v1] per leaf cut-out: the atlas rectangles (px of the 4096 square, origin top-left) for a real atlas, the whole card for a procedural stand-in leaf."""
+    if not spec.get("atlas"):
+        return [[0.0, 0.0, 1.0, 1.0]]
+    from . import planting as PL
+    return [[x0 / 4096, 1 - y1 / 4096, x1 / 4096, 1 - y0 / 4096] for x0, y0, x1, y1 in PL.leaf_rects()[0]]
+
+
 def _object_meshes(o, table, parts, season, tag):
     by, out = {}, []
     for i, p in enumerate(parts):
@@ -177,7 +191,7 @@ def _object_meshes(o, table, parts, season, tag):
             e["rects"] = (e["rects"] or []) + list(p.leaf_rects)
         else:
             e["faces"].extend(_faces(p))
-    group = GROUPS.get(o.kind, "ground" if o.kind in SURFACE_KINDS else "shell")
+    group = GROUPS.get(o.kind, "ground" if o.kind in SURFACE_KINDS else "dressing")      # never 'shell' or 'context': the furniture receipts hash those groups (architecture), and the garden is not architecture
     for m, e in by.items():
         faces = e["faces"]
         mid = o.id + tag if len(by) == 1 else "%s%s.%s" % (o.id, tag, m)
@@ -186,7 +200,7 @@ def _object_meshes(o, table, parts, season, tag):
             kw["ld_season"] = season
             kw["keep_object"] = True
         if e["rects"] is not None:
-            kw.update(leaf_atlas=table[m].get("atlas", ""), leaf_rects=e["rects"], explicit_geometry=True, part_kind="ld-climber-leaf-cards")
+            kw.update(leaf_atlas=table[m].get("atlas", ""), leaf_rects=e["rects"], leaf_uv=_leaf_uv(table[m]), explicit_geometry=True, part_kind="ld-climber-leaf-cards")
         out.append(_mesh(o.id, mid, m, faces, o, group, **kw))
     return out
 
