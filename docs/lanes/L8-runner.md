@@ -84,6 +84,15 @@ jobq submit --gpu --id RF-final-0 -- blender -b ... -P src/archpipe/blender/vill
 - Walkthrough chunks: `walkthrough.py` already caches its build as `<root>/assembly/scene.blend` (stage `assembly`)
   and every later stage opens it, so chunks do not rebuild. Do not add `--blend-cache` to them; the env var
   `ARCHPIPE_BLEND_CACHE` only affects the `assembly` stage if you want it to reuse a shared build.
+- Measured 2026-11-22 on the production scene (633 MB scene.json, 1.09 GB `.blend` + 96 MB state), one view, 16 spp
+  480x320, GPU shared with other lanes' jobs (so absolute numbers are loose): fresh 252.6 s wall, scene ready after
+  195.5 s, GPU busy (nvidia-smi pmon, our pid) 17 % of wall; cached 119.3 s wall, scene ready after 70.9 s (of which the
+  `.blend` open is 7 s; the rest is parsing scene.json and the receipt), GPU busy 31 %. On CPU, two views: 354 s fresh vs 179 s cached.
+  The one-off build job takes about 230 s. A fresh GPU job showed no GPU context at all for its first ~195-228 s.
+- Cached and fresh renders are not bit-identical, and neither are two fresh renders (denoised 16 spp, metered
+  exposure): mean abs difference per 8-bit pixel was 0.39 / 2.84 (cached vs fresh, two views) against 0.41 / 2.66 (fresh
+  vs fresh). The scene receipt is byte-identical and all structural report fields (object counts, lights, cloth, props)
+  are equal; only noise-driven fields (metered exposure, log-average) differ, as they do between two fresh runs.
 - The cache replaces only the build. Exposure metering, the receipt and the render still run per job.
 
 ## Rules
