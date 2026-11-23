@@ -14,6 +14,15 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
+    # L4 client finish mix (2026-11-23): chosen products' look-alikes, knowledge/products/finishes/chosen.json
+    "fin-cushion-cinema-sofa-1", "fin-cushion-cinema-sofa-2", "fin-cushion-library-daybed-1",
+    "fin-cushion-library-daybed-2", "fin-cushion-living-sofa-1", "fin-cushion-living-sofa-2",
+    "fin-cushion-living-sofa-3", "fin-cushion-lounge-sofa-1", "fin-cushion-lounge-sofa-2",
+    "fin-cushion-lounge-sofa-3", "fin-cushion-parents-bed-1", "fin-cushion-parents-bed-2",
+    "fin-cushion-parents-bed-3", "fin-cushion-study-sofa-1", "fin-cushion-study-sofa-2", "fin-kitchen-joinery",
+    "fin-kitchen-joinery-x", "fin-rug-living", "fin-rug-lounge", "fin-rug-parents-bedroom", "fin-throw-cinema-sofa",
+    "fin-throw-library-daybed", "fin-throw-living-sofa", "fin-throw-lounge-sofa", "fin-throw-parents-bed",
+    "fin-throw-study-sofa", "fin-wall-feature",
     "aspidistra-leaf",  # G4e neutral-reviewed ASSUMED glossy botanical appearance
     "north-pale-gravel", "north-light-stone",  # G4d reviewed ASSUMED mineral appearances
     "g6-jasmine-leaf", "g6-petrea-leaf", "g6-pittosporum-leaf", "g6-leaf-vein",
