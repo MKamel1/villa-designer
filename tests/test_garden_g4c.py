@@ -8,6 +8,8 @@ from archpipe.concept import garden_swing as S,villa_render as V,villa_r11 as R
 from archpipe.concept.mounting import scene_findings as mounting_findings
 
 
+@unittest.skip("LEGACY old-garden (G-series) baseline: %s. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; %s" % ('the north hanging swing (scene["north_swing"], hanging_swing meshes) no longer exists; GI replaced it with the north court (docs/lanes/GI.md decision 1)',
+    'no decided-garden equivalent: the decided layout has no suspended furniture. Soil-visibility and subject-prefix concerns: camera/subject framing is covered by tests/test_render_views.py DecidedGardenViews'))
 class HangingRetreat(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
