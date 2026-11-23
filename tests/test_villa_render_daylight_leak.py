@@ -32,8 +32,6 @@ def test_windowless_views_are_lamp_lit(view):
     assert daylight_fraction(m) <= MAX_DAYLIGHT_FRACTION
 
 
-@pytest.mark.xfail(strict=True, reason="OPEN: daylight enters the east hall from the open plan at its west end and is balanced to the "
-                                      "lamp group 2700 K; remove this mark when the view state or the opening is changed")
 def test_east_hall_has_no_daylight_leak():
     m = json.loads(RECORD.read_text())["measurements"]["n10-gf-hall-east-day"]
     assert daylight_fraction(m) <= MAX_DAYLIGHT_FRACTION
