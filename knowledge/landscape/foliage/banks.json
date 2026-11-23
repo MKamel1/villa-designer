@@ -1,0 +1,1120 @@
+{
+ "star_jasmine": {
+  "mean_rgb": [
+   129.7,
+   143.6,
+   5.4
+  ],
+  "scientific_name": "Trachelospermum jasminoides",
+  "atlas": "star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/star_jasmine_pjycl2_4k/Star_Jasmine_pjycl2_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2883.2,
+     762.8
+    ],
+    "axis": [
+     -0.2706,
+     -0.9627
+    ],
+    "len_px": 507.1,
+    "wid_px": 475.3,
+    "petiole_frac": 0.042,
+    "fill": 0.963,
+    "g_over_r": 1.243,
+    "area_px": 192464
+   },
+   {
+    "base_px": [
+     1816.6,
+     343.4
+    ],
+    "axis": [
+     0.8115,
+     0.5843
+    ],
+    "len_px": 445.4,
+    "wid_px": 430.6,
+    "petiole_frac": 0.0,
+    "fill": 0.967,
+    "g_over_r": 1.25,
+    "area_px": 149056
+   },
+   {
+    "base_px": [
+     1247.5,
+     728.5
+    ],
+    "axis": [
+     0.0215,
+     -0.9998
+    ],
+    "len_px": 442.1,
+    "wid_px": 364.4,
+    "petiole_frac": 0.125,
+    "fill": 0.962,
+    "g_over_r": 1.335,
+    "area_px": 127840
+   },
+   {
+    "base_px": [
+     3594.8,
+     834.4
+    ],
+    "axis": [
+     -0.0747,
+     -0.9972
+    ],
+    "len_px": 539.7,
+    "wid_px": 470.0,
+    "petiole_frac": 0.0,
+    "fill": 0.961,
+    "g_over_r": 1.309,
+    "area_px": 197216
+   },
+   {
+    "base_px": [
+     621.5,
+     328.7
+    ],
+    "axis": [
+     -0.674,
+     0.7387
+    ],
+    "len_px": 410.1,
+    "wid_px": 371.3,
+    "petiole_frac": 0.0,
+    "fill": 0.969,
+    "g_over_r": 1.285,
+    "area_px": 121968
+   },
+   {
+    "base_px": [
+     512.6,
+     1703.9
+    ],
+    "axis": [
+     0.0588,
+     -0.9983
+    ],
+    "len_px": 492.5,
+    "wid_px": 289.6,
+    "petiole_frac": 0.083,
+    "fill": 0.967,
+    "g_over_r": 1.042,
+    "area_px": 116368
+   },
+   {
+    "base_px": [
+     2008.9,
+     1688.5
+    ],
+    "axis": [
+     -0.1105,
+     -0.9939
+    ],
+    "len_px": 470.0,
+    "wid_px": 338.8,
+    "petiole_frac": 0.042,
+    "fill": 0.964,
+    "g_over_r": 1.028,
+    "area_px": 121872
+   },
+   {
+    "base_px": [
+     1142.5,
+     1293.6
+    ],
+    "axis": [
+     0.5331,
+     0.8461
+    ],
+    "len_px": 458.3,
+    "wid_px": 379.9,
+    "petiole_frac": 0.0,
+    "fill": 0.968,
+    "g_over_r": 1.105,
+    "area_px": 131696
+   },
+   {
+    "base_px": [
+     2685.5,
+     1686.4
+    ],
+    "axis": [
+     0.3255,
+     -0.9456
+    ],
+    "len_px": 366.2,
+    "wid_px": 332.6,
+    "petiole_frac": 0.0,
+    "fill": 0.962,
+    "g_over_r": 1.06,
+    "area_px": 97328
+   },
+   {
+    "base_px": [
+     3566.0,
+     1809.2
+    ],
+    "axis": [
+     0.04,
+     -0.9992
+    ],
+    "len_px": 479.4,
+    "wid_px": 392.5,
+    "petiole_frac": 0.042,
+    "fill": 0.965,
+    "g_over_r": 1.077,
+    "area_px": 147200
+   },
+   {
+    "base_px": [
+     2003.4,
+     2699.5
+    ],
+    "axis": [
+     0.074,
+     -0.9973
+    ],
+    "len_px": 517.6,
+    "wid_px": 410.1,
+    "petiole_frac": 0.042,
+    "fill": 0.966,
+    "g_over_r": 1.021,
+    "area_px": 168960
+   },
+   {
+    "base_px": [
+     1262.0,
+     2741.4
+    ],
+    "axis": [
+     0.0589,
+     -0.9983
+    ],
+    "len_px": 535.0,
+    "wid_px": 366.0,
+    "petiole_frac": 0.042,
+    "fill": 0.964,
+    "g_over_r": 1.021,
+    "area_px": 155520
+   },
+   {
+    "base_px": [
+     2720.3,
+     2218.0
+    ],
+    "axis": [
+     0.0855,
+     0.9963
+    ],
+    "len_px": 498.2,
+    "wid_px": 377.0,
+    "petiole_frac": 0.083,
+    "fill": 0.961,
+    "g_over_r": 1.031,
+    "area_px": 146448
+   },
+   {
+    "base_px": [
+     3509.5,
+     2201.9
+    ],
+    "axis": [
+     0.064,
+     0.9979
+    ],
+    "len_px": 516.9,
+    "wid_px": 429.9,
+    "petiole_frac": 0.042,
+    "fill": 0.964,
+    "g_over_r": 1.031,
+    "area_px": 174832
+   },
+   {
+    "base_px": [
+     559.7,
+     2273.7
+    ],
+    "axis": [
+     0.0596,
+     0.9982
+    ],
+    "len_px": 458.7,
+    "wid_px": 368.8,
+    "petiole_frac": 0.125,
+    "fill": 0.968,
+    "g_over_r": 1.052,
+    "area_px": 136816
+   }
+  ],
+  "dropped": {
+   "merged": 0,
+   "dead_or_white": 5,
+   "holed": 0,
+   "tiny": 0
+  }
+ },
+ "ginger_lily": {
+  "mean_rgb": [
+   32.7,
+   47.3,
+   2.1
+  ],
+  "scientific_name": "Hedychium coronarium",
+  "atlas": "ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/ginger_lily_ud5fffgja_high/Ginger_Lily_ud5fffgja_High_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2837.5,
+     81.7
+    ],
+    "axis": [
+     -0.0129,
+     0.9999
+    ],
+    "len_px": 1368.0,
+    "wid_px": 296.8,
+    "petiole_frac": 0.042,
+    "fill": 0.96,
+    "g_over_r": 1.536,
+    "area_px": 301504
+   },
+   {
+    "base_px": [
+     303.6,
+     340.8
+    ],
+    "axis": [
+     0.0333,
+     -0.9994
+    ],
+    "len_px": 273.0,
+    "wid_px": 160.4,
+    "petiole_frac": 0.167,
+    "fill": 0.987,
+    "g_over_r": 1.642,
+    "area_px": 34768
+   },
+   {
+    "base_px": [
+     1665.7,
+     1756.1
+    ],
+    "axis": [
+     -0.0061,
+     -1.0
+    ],
+    "len_px": 1479.7,
+    "wid_px": 227.9,
+    "petiole_frac": 0.0,
+    "fill": 0.972,
+    "g_over_r": 1.363,
+    "area_px": 257936
+   },
+   {
+    "base_px": [
+     3862.9,
+     1270.3
+    ],
+    "axis": [
+     -0.0452,
+     -0.999
+    ],
+    "len_px": 579.0,
+    "wid_px": 257.2,
+    "petiole_frac": 0.167,
+    "fill": 0.97,
+    "g_over_r": 1.776,
+    "area_px": 118544
+   },
+   {
+    "base_px": [
+     3608.7,
+     1248.0
+    ],
+    "axis": [
+     0.0012,
+     1.0
+    ],
+    "len_px": 1498.8,
+    "wid_px": 272.1,
+    "petiole_frac": 0.0,
+    "fill": 0.971,
+    "g_over_r": 1.379,
+    "area_px": 321424
+   },
+   {
+    "base_px": [
+     1829.4,
+     2260.0
+    ],
+    "axis": [
+     0.0174,
+     -0.9998
+    ],
+    "len_px": 576.0,
+    "wid_px": 296.4,
+    "petiole_frac": 0.0,
+    "fill": 0.962,
+    "g_over_r": 1.402,
+    "area_px": 132896
+   },
+   {
+    "base_px": [
+     2881.7,
+     3101.6
+    ],
+    "axis": [
+     0.0069,
+     -1.0
+    ],
+    "len_px": 1056.8,
+    "wid_px": 340.1,
+    "petiole_frac": 0.042,
+    "fill": 0.968,
+    "g_over_r": 1.77,
+    "area_px": 291248
+   },
+   {
+    "base_px": [
+     2729.6,
+     4060.1
+    ],
+    "axis": [
+     -0.0091,
+     -1.0
+    ],
+    "len_px": 975.2,
+    "wid_px": 220.4,
+    "petiole_frac": 0.0,
+    "fill": 0.977,
+    "g_over_r": 1.653,
+    "area_px": 164256
+   },
+   {
+    "base_px": [
+     3023.1,
+     3076.0
+    ],
+    "axis": [
+     -0.0004,
+     1.0
+    ],
+    "len_px": 865.3,
+    "wid_px": 356.0,
+    "petiole_frac": 0.0,
+    "fill": 0.966,
+    "g_over_r": 1.379,
+    "area_px": 236896
+   },
+   {
+    "base_px": [
+     89.0,
+     3430.1
+    ],
+    "axis": [
+     -0.0104,
+     0.9999
+    ],
+    "len_px": 509.7,
+    "wid_px": 124.2,
+    "petiole_frac": 0.042,
+    "fill": 0.989,
+    "g_over_r": 1.213,
+    "area_px": 48960
+   },
+   {
+    "base_px": [
+     253.4,
+     3438.0
+    ],
+    "axis": [
+     -0.0082,
+     1.0
+    ],
+    "len_px": 506.1,
+    "wid_px": 124.2,
+    "petiole_frac": 0.042,
+    "fill": 0.99,
+    "g_over_r": 1.213,
+    "area_px": 48832
+   }
+  ],
+  "dropped": {
+   "merged": 15,
+   "dead_or_white": 19,
+   "holed": 0,
+   "tiny": 6
+  }
+ },
+ "jungle_ginger": {
+  "mean_rgb": [
+   48.5,
+   59.1,
+   5.6
+  ],
+  "scientific_name": "Zingiber (Megascans 'Jungle Ginger')",
+  "atlas": "jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/jungle_ginger_sgbms_high/Jungle_Ginger_sgbms_High_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     2367.8,
+     243.9
+    ],
+    "axis": [
+     -0.0034,
+     1.0
+    ],
+    "len_px": 1120.0,
+    "wid_px": 196.1,
+    "petiole_frac": 0.125,
+    "fill": 0.961,
+    "g_over_r": 1.382,
+    "area_px": 156400
+   },
+   {
+    "base_px": [
+     3714.7,
+     248.3
+    ],
+    "axis": [
+     -0.022,
+     0.9998
+    ],
+    "len_px": 1070.3,
+    "wid_px": 164.3,
+    "petiole_frac": 0.125,
+    "fill": 0.952,
+    "g_over_r": 1.414,
+    "area_px": 137664
+   },
+   {
+    "base_px": [
+     2711.3,
+     1439.1
+    ],
+    "axis": [
+     -0.0931,
+     -0.9957
+    ],
+    "len_px": 1338.8,
+    "wid_px": 138.8,
+    "petiole_frac": 0.042,
+    "fill": 0.927,
+    "g_over_r": 1.105,
+    "area_px": 113664
+   },
+   {
+    "base_px": [
+     1122.0,
+     111.1
+    ],
+    "axis": [
+     0.0738,
+     0.9973
+    ],
+    "len_px": 1184.9,
+    "wid_px": 149.1,
+    "petiole_frac": 0.0,
+    "fill": 0.931,
+    "g_over_r": 1.227,
+    "area_px": 111040
+   },
+   {
+    "base_px": [
+     1465.5,
+     282.7
+    ],
+    "axis": [
+     0.0522,
+     0.9986
+    ],
+    "len_px": 1118.5,
+    "wid_px": 118.8,
+    "petiole_frac": 0.125,
+    "fill": 0.964,
+    "g_over_r": 1.025,
+    "area_px": 99376
+   },
+   {
+    "base_px": [
+     3897.1,
+     1278.4
+    ],
+    "axis": [
+     0.0202,
+     -0.9998
+    ],
+    "len_px": 1057.2,
+    "wid_px": 133.0,
+    "petiole_frac": 0.083,
+    "fill": 0.979,
+    "g_over_r": 1.247,
+    "area_px": 109504
+   },
+   {
+    "base_px": [
+     1825.0,
+     301.4
+    ],
+    "axis": [
+     0.0065,
+     1.0
+    ],
+    "len_px": 1183.4,
+    "wid_px": 148.4,
+    "petiole_frac": 0.125,
+    "fill": 0.961,
+    "g_over_r": 1.015,
+    "area_px": 115776
+   },
+   {
+    "base_px": [
+     3483.9,
+     971.8
+    ],
+    "axis": [
+     -0.0353,
+     -0.9994
+    ],
+    "len_px": 765.2,
+    "wid_px": 143.5,
+    "petiole_frac": 0.042,
+    "fill": 0.935,
+    "g_over_r": 1.006,
+    "area_px": 84944
+   },
+   {
+    "base_px": [
+     2083.7,
+     1334.1
+    ],
+    "axis": [
+     -0.011,
+     -0.9999
+    ],
+    "len_px": 1060.1,
+    "wid_px": 140.4,
+    "petiole_frac": 0.083,
+    "fill": 0.976,
+    "g_over_r": 1.261,
+    "area_px": 113056
+   },
+   {
+    "base_px": [
+     1149.9,
+     2827.7
+    ],
+    "axis": [
+     -0.0332,
+     -0.9994
+    ],
+    "len_px": 1224.1,
+    "wid_px": 127.9,
+    "petiole_frac": 0.042,
+    "fill": 0.953,
+    "g_over_r": 1.17,
+    "area_px": 113520
+   },
+   {
+    "base_px": [
+     2113.3,
+     1777.6
+    ],
+    "axis": [
+     -0.0381,
+     0.9993
+    ],
+    "len_px": 1077.2,
+    "wid_px": 162.0,
+    "petiole_frac": 0.125,
+    "fill": 0.957,
+    "g_over_r": 1.389,
+    "area_px": 130400
+   },
+   {
+    "base_px": [
+     1474.5,
+     1802.0
+    ],
+    "axis": [
+     -0.0104,
+     0.9999
+    ],
+    "len_px": 1110.6,
+    "wid_px": 172.5,
+    "petiole_frac": 0.125,
+    "fill": 0.961,
+    "g_over_r": 1.027,
+    "area_px": 136320
+   },
+   {
+    "base_px": [
+     3719.4,
+     2970.3
+    ],
+    "axis": [
+     -0.0343,
+     -0.9994
+    ],
+    "len_px": 1138.5,
+    "wid_px": 148.3,
+    "petiole_frac": 0.042,
+    "fill": 0.947,
+    "g_over_r": 1.359,
+    "area_px": 119552
+   },
+   {
+    "base_px": [
+     1775.3,
+     1812.0
+    ],
+    "axis": [
+     0.0645,
+     0.9979
+    ],
+    "len_px": 1007.5,
+    "wid_px": 146.8,
+    "petiole_frac": 0.0,
+    "fill": 0.97,
+    "g_over_r": 1.26,
+    "area_px": 97728
+   },
+   {
+    "base_px": [
+     3918.1,
+     3103.1
+    ],
+    "axis": [
+     0.0656,
+     -0.9978
+    ],
+    "len_px": 1185.1,
+    "wid_px": 115.4,
+    "petiole_frac": 0.0,
+    "fill": 0.957,
+    "g_over_r": 1.324,
+    "area_px": 102768
+   }
+  ],
+  "dropped": {
+   "merged": 1,
+   "dead_or_white": 20,
+   "holed": 0,
+   "tiny": 0
+  }
+ },
+ "cast_iron": {
+  "mean_rgb": [
+   15.2,
+   21.7,
+   1.4
+  ],
+  "scientific_name": "Aspidistra elatior",
+  "atlas": "cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/cast___iron_plant_shdmr_high/Cast_-_Iron_Plant_shdmr_High_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     973.6,
+     280.9
+    ],
+    "axis": [
+     1.0,
+     -0.0039
+    ],
+    "len_px": 1334.6,
+    "wid_px": 352.1,
+    "petiole_frac": 0.375,
+    "fill": 0.939,
+    "g_over_r": 1.367,
+    "area_px": 390480
+   },
+   {
+    "base_px": [
+     3272.1,
+     1295.8
+    ],
+    "axis": [
+     -0.0532,
+     -0.9986
+    ],
+    "len_px": 954.2,
+    "wid_px": 230.7,
+    "petiole_frac": 0.333,
+    "fill": 0.928,
+    "g_over_r": 1.28,
+    "area_px": 174256
+   },
+   {
+    "base_px": [
+     405.0,
+     2031.7
+    ],
+    "axis": [
+     -0.0464,
+     0.9989
+    ],
+    "len_px": 1832.5,
+    "wid_px": 383.9,
+    "petiole_frac": 0.375,
+    "fill": 0.922,
+    "g_over_r": 3.844,
+    "area_px": 550768
+   },
+   {
+    "base_px": [
+     1436.8,
+     2161.7
+    ],
+    "axis": [
+     -0.0187,
+     0.9998
+    ],
+    "len_px": 1717.7,
+    "wid_px": 319.6,
+    "petiole_frac": 0.333,
+    "fill": 0.921,
+    "g_over_r": 1.131,
+    "area_px": 410144
+   },
+   {
+    "base_px": [
+     1914.8,
+     2847.7
+    ],
+    "axis": [
+     0.024,
+     -0.9997
+    ],
+    "len_px": 1434.4,
+    "wid_px": 338.4,
+    "petiole_frac": 0.417,
+    "fill": 0.923,
+    "g_over_r": 1.994,
+    "area_px": 380160
+   },
+   {
+    "base_px": [
+     866.0,
+     2759.5
+    ],
+    "axis": [
+     0.027,
+     -0.9996
+    ],
+    "len_px": 1182.7,
+    "wid_px": 361.2,
+    "petiole_frac": 0.333,
+    "fill": 0.934,
+    "g_over_r": 2.212,
+    "area_px": 328192
+   },
+   {
+    "base_px": [
+     3696.8,
+     3059.9
+    ],
+    "axis": [
+     0.0682,
+     -0.9977
+    ],
+    "len_px": 1447.3,
+    "wid_px": 447.5,
+    "petiole_frac": 0.375,
+    "fill": 0.913,
+    "g_over_r": 1.97,
+    "area_px": 517328
+   },
+   {
+    "base_px": [
+     2511.2,
+     3319.9
+    ],
+    "axis": [
+     0.0789,
+     -0.9969
+    ],
+    "len_px": 1154.8,
+    "wid_px": 261.0,
+    "petiole_frac": 0.333,
+    "fill": 0.932,
+    "g_over_r": 1.363,
+    "area_px": 236816
+   }
+  ],
+  "dropped": {
+   "merged": 0,
+   "dead_or_white": 4,
+   "holed": 0,
+   "tiny": 0
+  }
+ },
+ "taro": {
+  "mean_rgb": [
+   19.1,
+   28.6,
+   1.5
+  ],
+  "scientific_name": "Colocasia esculenta",
+  "atlas": "taro_sjli7_high/Taro_sjli7_High_4K",
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/taro_sjli7_high/Taro_sjli7_High_4K_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/taro_sjli7_high/Taro_sjli7_High_4K_Opacity.jpg",
+   "Roughness": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/taro_sjli7_high/Taro_sjli7_High_4K_Roughness.jpg",
+   "Normal": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/taro_sjli7_high/Taro_sjli7_High_4K_Normal.jpg",
+   "Translucency": "/home/omar/archpipe/shared/assets/user/landscape/fab/unzipped/taro_sjli7_high/Taro_sjli7_High_4K_Translucency.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     577.4,
+     1428.4
+    ],
+    "axis": [
+     0.0492,
+     -0.9988
+    ],
+    "len_px": 1301.7,
+    "wid_px": 1008.9,
+    "petiole_frac": 0.0,
+    "fill": 0.88,
+    "g_over_r": 2.153,
+    "area_px": 972896
+   },
+   {
+    "base_px": [
+     2659.0,
+     793.7
+    ],
+    "axis": [
+     0.9976,
+     -0.0687
+    ],
+    "len_px": 1173.8,
+    "wid_px": 916.7,
+    "petiole_frac": 0.042,
+    "fill": 0.902,
+    "g_over_r": 1.543,
+    "area_px": 818096
+   },
+   {
+    "base_px": [
+     1336.6,
+     2730.4
+    ],
+    "axis": [
+     0.0242,
+     -0.9997
+    ],
+    "len_px": 1246.3,
+    "wid_px": 989.6,
+    "petiole_frac": 0.0,
+    "fill": 0.942,
+    "g_over_r": 1.83,
+    "area_px": 974464
+   },
+   {
+    "base_px": [
+     2440.2,
+     2678.7
+    ],
+    "axis": [
+     -0.1301,
+     -0.9915
+    ],
+    "len_px": 1187.6,
+    "wid_px": 869.3,
+    "petiole_frac": 0.042,
+    "fill": 0.903,
+    "g_over_r": 1.525,
+    "area_px": 793152
+   },
+   {
+    "base_px": [
+     704.4,
+     2749.0
+    ],
+    "axis": [
+     0.0201,
+     0.9998
+    ],
+    "len_px": 857.5,
+    "wid_px": 174.5,
+    "petiole_frac": 0.583,
+    "fill": 0.917,
+    "g_over_r": 1.293,
+    "area_px": 126240
+   },
+   {
+    "base_px": [
+     486.9,
+     1848.4
+    ],
+    "axis": [
+     0.0594,
+     0.9982
+    ],
+    "len_px": 2074.0,
+    "wid_px": 143.2,
+    "petiole_frac": 0.125,
+    "fill": 0.915,
+    "g_over_r": 1.245,
+    "area_px": 169616
+   },
+   {
+    "base_px": [
+     2904.7,
+     1957.3
+    ],
+    "axis": [
+     0.9916,
+     0.1292
+    ],
+    "len_px": 1063.2,
+    "wid_px": 908.6,
+    "petiole_frac": 0.042,
+    "fill": 0.904,
+    "g_over_r": 1.381,
+    "area_px": 771888
+   },
+   {
+    "base_px": [
+     241.5,
+     1981.4
+    ],
+    "axis": [
+     0.0594,
+     0.9982
+    ],
+    "len_px": 2076.9,
+    "wid_px": 143.0,
+    "petiole_frac": 0.125,
+    "fill": 0.911,
+    "g_over_r": 1.245,
+    "area_px": 168544
+   },
+   {
+    "base_px": [
+     125.5,
+     3188.9
+    ],
+    "axis": [
+     0.02,
+     0.9998
+    ],
+    "len_px": 857.5,
+    "wid_px": 174.8,
+    "petiole_frac": 0.583,
+    "fill": 0.921,
+    "g_over_r": 1.293,
+    "area_px": 126192
+   }
+  ],
+  "dropped": {
+   "merged": 0,
+   "dead_or_white": 4,
+   "holed": 0,
+   "tiny": 0
+  }
+ },
+ "palmate_fatsia": {
+  "mean_rgb": [
+   26.2,
+   77.6,
+   19.0
+  ],
+  "scientific_name": "Fatsia japonica (outline only; surface scanned from Colocasia)",
+  "atlas": "generated/fatsia",
+  "synthetic_outline": true,
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/fatsia_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/fatsia_Opacity.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     384.0,
+     760.3199999999999
+    ],
+    "axis": [
+     0.0,
+     -1.0
+    ],
+    "len_px": 698.88,
+    "wid_px": 706.5600000000001,
+    "petiole_frac": 0.0,
+    "fill": 1.0,
+    "g_over_r": 1.2,
+    "area_px": 276636,
+    "size_px": 768
+   }
+  ],
+  "dropped": {},
+  "surface_from": "taro"
+ },
+ "palmate_grape": {
+  "mean_rgb": [
+   27.1,
+   79.5,
+   19.5
+  ],
+  "scientific_name": "Vitis vinifera (outline only; surface scanned from Colocasia)",
+  "atlas": "generated/grape",
+  "synthetic_outline": true,
+  "maps": {
+   "BaseColor": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/grape_BaseColor.jpg",
+   "Opacity": "/home/omar/archpipe/lanes/FG/knowledge/landscape/foliage/generated/grape_Opacity.jpg"
+  },
+  "leaves": [
+   {
+    "base_px": [
+     384.0,
+     760.3199999999999
+    ],
+    "axis": [
+     0.0,
+     -1.0
+    ],
+    "len_px": 698.88,
+    "wid_px": 706.5600000000001,
+    "petiole_frac": 0.0,
+    "fill": 1.0,
+    "g_over_r": 1.2,
+    "area_px": 281179,
+    "size_px": 768
+   }
+  ],
+  "dropped": {},
+  "surface_from": "taro"
+ }
+}
