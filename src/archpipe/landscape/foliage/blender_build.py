@@ -20,7 +20,12 @@ from archpipe.landscape.foliage import generate as G          # noqa: E402
 from archpipe.landscape.plants.megascans_mat import red, reset_scene, tex   # noqa: E402
 
 BANKS = G.BANKS
-BARK = "/home/omar/archpipe/shared/assets/user/landscape/polyhaven_tex/bark_platanus/bark_platanus_%s_2k.jpg"
+_U = "/home/omar/archpipe/shared/assets/user/landscape"
+# bark candidates: (diffuse, roughness, normal) per choice; FG_BARK selects (default = the choice recorded in docs/lanes/FG.md)
+BARKS = {"platanus": tuple(_U + "/polyhaven-tex/bark_platanus/bark_platanus_%s_2k.jpg" % k for k in ("diff", "rough", "nor_gl")),
+         "sakura": tuple(_U + "/polyhaven-tex/sakura_bark/sakura_bark_%s_2k.jpg" % k for k in ("diff", "rough", "nor_gl")),
+         "banyan": tuple(_U + "/fab/unzipped/banyan_bark_tfhjaeju_4k/Banyan_Bark_tfhjaeju_4K_%s.jpg" % k for k in ("BaseColor", "Roughness", "Normal"))}
+BARK_CHOICE = os.environ.get("FG_BARK", "platanus")
 COLS, ROWS = 3, 5
 RGBA = "/home/omar/archpipe/shared/assets/generated/foliage/atlas/rgba_%s.png"
 
@@ -163,8 +168,8 @@ def leaf_material_export(bank):
 def wood_material(kind):
     m = bpy.data.materials.new("wood_" + kind); m.use_nodes = True
     nt = m.node_tree; pb = nt.nodes["Principled BSDF"]
-    if kind == "bark" and os.path.exists(BARK % "diff"):
-        d = tex(nt, BARK % "diff", False, "diff"); r = tex(nt, BARK % "rough", True, "rough"); n = tex(nt, BARK % "nor_gl", True, "nor")
+    if kind == "bark" and os.path.exists(BARKS[BARK_CHOICE][0]):
+        d = tex(nt, BARKS[BARK_CHOICE][0], False, "diff"); r = tex(nt, BARKS[BARK_CHOICE][1], True, "rough"); n = tex(nt, BARKS[BARK_CHOICE][2], True, "nor")
         nm = nt.nodes.new("ShaderNodeNormalMap")
         nt.links.new(d.outputs["Color"], pb.inputs["Base Color"]); nt.links.new(red(nt, r), pb.inputs["Roughness"])
         nt.links.new(n.outputs["Color"], nm.inputs["Color"]); nt.links.new(nm.outputs["Normal"], pb.inputs["Normal"])

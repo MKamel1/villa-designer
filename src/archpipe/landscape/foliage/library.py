@@ -26,7 +26,7 @@ REQUIRED = ("species", "accepted_name", "generator_version", "seed", "state", "a
 # the 2.1 m trellis screens of the layout)
 DEMO = {"jasminum_sambac": (2.1, 1.0), "petrea_volubilis": (2.1, 1.0), "vitis_vinifera": (2.1, 1.0),
         "trachelospermum_jasminoides": (2.1, 1.2), "fatsia_japonica": (2.0, 1.2), "alpinia_zerumbet": (2.7, 1.5),
-        "lagerstroemia_indica": (4.5, 4.0)}
+        "lagerstroemia_indica": (4.5, 4.0), "pittosporum_tobira": (2.4, 1.5)}
 
 
 class LabelError(ValueError):
@@ -96,7 +96,7 @@ def schedule(grades=None):
     lay = _layout_species()
     rows = []
     for slug in sorted(SPECS):
-        if slug not in lay and slug not in ("trachelospermum_jasminoides", "alpinia_zerumbet"):
+        if slug not in lay and slug not in ("trachelospermum_jasminoides", "alpinia_zerumbet", "pittosporum_tobira"):
             continue
         p = plant_for(slug, slug + "#demo", *(DEMO.get(slug) or (None, None)))
         spreads = [s for s in lay.get(slug, []) if s]
