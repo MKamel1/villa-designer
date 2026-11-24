@@ -25,7 +25,7 @@ def test_bound_kinds_are_the_v10_verified_erco_products():
         assert row["lm"] == p["lumens"], kind                 # the spec is the product's own catalogue lumens
         assert Path(row["ies"]).exists()
         assert int(row["cct"]) == FR.KINDS[kind]["cct"] == 2700
-    assert set(FR.bind_products()) == {"DL", "DLN", "ADJ", "WW", "PEN-LIN", "DESK"}
+    assert set(FR.bind_products()) == {"DL", "DLN", "ADJ", "WW", "PEN-LIN", "DESK", "PCOVE"}
 
 
 def test_every_design_fixture_is_in_exactly_one_schedule_row(sched):
