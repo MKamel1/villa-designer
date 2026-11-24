@@ -29,3 +29,17 @@
 ## Applied to the production scene (L4, 2026-11-23)
 
 The chosen mix is scheduled in `knowledge/products/finishes/chosen.json` and drawn in the production scene; decisions the lead took on the way, the renders, the critic and the open items are in `docs/lanes/L4-finishes.md` ("Round 2"). Needing a client yes: GF walls other than the parents' feature wall are B Off White; the en-suite and bathrooms read dark copper-brown; the rug sizes keep the design footprints.
+
+## Client decisions (2026-11-24), after reviewing their own style references (docs/brief/villa_01_guidelines_images, taste.json)
+1. **Kitchen, toward reference image 23:**
+   - walnut fronts (EGGER Dijon Walnut, palette A);
+   - a WHITE marble-look worktop and WATERFALL island with gold-brown veining (a real Calacatta Gold-look porcelain or quartz product), with a matching backsplash.
+   - This replaces palette B's kitchen.
+2. **Ensuite, toward reference image 12:**
+   - keep the dark Frappuccino marble walls;
+   - ADD a light veined-marble feature panel behind the bath with an LED cove;
+   - a light veined marble-look floor;
+   - brass taps and fittings.
+3. **Lead decisions applied (the client was told and did not object):**
+   - tree uplights: John Cullen Kew 25 spike, pending the maker confirming DALI-2 and supplying the 2027 article's photometry;
+   - ground-floor walls: Off White.
