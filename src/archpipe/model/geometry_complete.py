@@ -27,6 +27,7 @@ from .geometry_net import wall_slab
 from .spec_source import LEVELS, mm
 
 BUILD_UPS = Path(__file__).resolve().parents[3] / "knowledge" / "finish-build-ups.json"
+# (the parents' feature wall "fin-wall-feature" is a face-level paint on the same interior-plaster build-up; mounting hosts accept it)
 # wall finish code (villa_render.FINISH) -> assembly in finish-build-ups.json; codes absent here have no recorded build-up
 WALL_ASSEMBLY = {"plaster-warm-white": "interior-plaster", "marble-bath": "marble-wall-thinset"}
 FUNCTION = {"interior-plaster": "finish", "wall-tile-bed": "substrate", "porcelain-wall-tile": "finish",
