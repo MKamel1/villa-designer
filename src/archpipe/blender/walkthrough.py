@@ -331,10 +331,12 @@ def depth_samples(camera,grid,far=40.):
             d=(R@Vector((x*cam.sensor_width,y*cam.sensor_width,-cam.lens))).normalized()
             o=origin.copy();travelled=0.;hit_ok=False
             for _ in range(4):
-                hit,loc,n,_,obj,_ = scene.ray_cast(deps,o,d,distance=far-travelled)
+                hit,loc,n,face,obj,_ = scene.ray_cast(deps,o,d,distance=far-travelled)
                 if not hit:break
                 travelled+=(loc-o).length
-                if 'glass' in obj.name.lower() or any(m and 'glass' in m.name.lower() for m in obj.data.materials if obj.type=='MESH'):
+                slot=obj.data.polygons[face].material_index if obj.type=='MESH' and face<len(obj.data.polygons) else -1
+                mat=obj.data.materials[slot] if 0<=slot<len(obj.data.materials) else None
+                if 'glass' in obj.name.lower() or (mat is not None and 'glass' in mat.name.lower()):
                     o=loc+d*1e-3;travelled+=1e-3;continue
                 hit_ok=True;break
             depth.append(travelled if hit_ok else far);pts.append(list(loc) if hit_ok else [0,0,0]);nor.append(list(n) if hit_ok else [0,0,1])
