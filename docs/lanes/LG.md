@@ -144,7 +144,13 @@ the **narrow 500 mA file passes V10 clean** and is the swap if the 2 % bar must 
 | LA4 glare, worst luminance (dining / gathering) | 2163 / 2884 cd/m2 (DN-1) | 2163 / 2884 (DN-1), **only because the Kew is declared shielded**; as a bare 16 mm opening UP-3 would read 10 275 / 15 412 cd/m2 against the 3000 cap |
 | garden check counts | 50 pass, 0 fail | 50 pass, 0 fail |
 
-The ULR margin is thin: UP-3 (east-yard olive, the smallest crown, 2.6 m) lets 14.6 % of its flux past the crown with the 22 deg beam (12.2 % with the assumed 25 deg file and its cleaner skirt). A bare crown (winter) is already handled by switching the uplights off.
+The ULR margin is thin: UP-3 (east-yard olive, the smallest crown, 2.6 m) lets 14.6 % of its flux past the crown with the Kew file (12.2 % with the assumed file; UP-1 and UP-2 5.0 % and 4.9 %, were 1.7 % and 1.5 %), because the real file carries a back lobe and a wider skirt than the cosine-power stand-in. A bare crown (winter) is already handled by switching the uplights off.
+
+### Re-run after the swap (jobq, committed tree)
+* Garden calculations regenerated (`garden-lighting.json`, `zones-garden.json`): 50 pass / 0 fail (before 50 / 0). V5/V7 Radiance (`LG-kew-radiance-tests-2`): analytic vs Radiance direct 0.01-0.02 % on every plane (unchanged); no plane depends on the uplights, so the crown is not cross-checked by Radiance (the Kew file converts and loads in `ies2rad` after the one-field fix). V1: Kew -2.25 % **fail** (pinned by a test), Iku pass. V2/V3/V8/V12 unchanged (tests). V10: table above.
+* Exposure: production `LG-kew-measure-prod-2` (48 views) and render set `LG-kew-measure-set-2` (46 views), copied byte-for-byte into `knowledge/exposure-groups.json` and `knowledge/render-set/exposure-groups.json`; group membership unchanged for every view, v07 lamp fraction 0.133 -> 0.120; builds with no bypass `LG-kew-build-prod-2`, `LG-kew-build-set-2` accepted the records.
+* Dusk views re-rendered (`LG-kew-render-1`, GPU, 128 spp, 1920 x 1280; I looked at both and at the previous pair): **v07-terrace-dusk** - the crape's stems keep a warm light from below but it is visibly weaker and the bark reads darker; the wall wash and the table are unchanged; render_qa: colour_cast FAIL 0.035 (was 0.025), highlight_clipping WARN 11.4 % (11.0), exposure_midtones WARN 0.29 vs 0.30 (new, marginal). **gi-dining-firepit-dusk** - no uplight in frame, no visible change; render_qa unchanged (colour_cast FAIL 0.067, the specified dusk sky). Both fail render_qa as before; v07 is slightly worse because the uplight is 0.4 x the old light. Copies in `knowledge/lighting/garden/dusk/`.
+* Tests (jobq `LG-kew-tests-lane-1`): `tests/lightcalc tests/luminaires` 218 passed, 1 skipped, 1 xfailed (focused run `LG-kew-radiance-tests-2`); the full lane suite (the command of `LG-tests-lane-2`) **754 passed, 5 skipped, 1 xfailed, 0 failed** (14 min). One earlier run had 2 failures, both tests that encoded the assumed file (`ulr_raw > 0.99`, flux > 200 lm); updated, not weakened.
 
 ### Not met / to confirm with John Cullen before ordering
 1. **DALI-2** is not stated; the datasheet lists "DALI" among the dimming protocols (the driver is a separate IP66 enclosure, accessories ACENIPLRG / ACENIPSML). Ask for the DALI-2 driver part and a no-phase-cut driver.
@@ -163,13 +169,13 @@ Sensors: east and rear neighbours and the east-yard neighbour at ground-floor (g
 
 | scene | max Ev on any sensor (lx) | worst group | I toward a sensor (cd) | upward flux to the sky (after crowns) |
 |---|---|---|---|---|
-| summer-night dining | 0.39 | apartment-above 0.39 | 181 | 0.122 (UP-3) |
-| social gathering | 0.59 | apartment-above 0.59 | 254 | 0.122 |
+| summer-night dining | 0.12 (was 0.39, assumed uplight) | apartment-above 0.12 | 181 | 0.146 (UP-3; was 0.122) |
+| social gathering | 0.17 (was 0.59) | apartment-above 0.17 | 254 | 0.146 (was 0.122) |
 | quiet north court | 0.02 | sister facade | 6 | 0.001 |
 | winter evening | 0.03 | sister facade | 72 | 0.001 |
 
-All under the post-curfew limits (2 lx, 1000 cd, 0.15), with no curfew switch-off needed. The ground-floor neighbour windows get **exactly zero**: every boundary is a 4 m wall (the test removes the wall and light arrives). The apartment above sees at most 0.59 lx, from the uplights, **without** the crown stopping any of it (the engine counts no foliage in Ev: conservative).
-All Iku are downlights: ULR 0.005 or less in the installed attitude. The three uplights are ULR 1.0 by definition; the check counts only the flux of rays that miss the opaque (leaf-on) crown ellipsoid: 1.7 %, 1.5 % and 12.2 % (the east-yard olive, the smallest crown, 2.6 m).
+All under the post-curfew limits (2 lx, 1000 cd, 0.15), with no curfew switch-off needed. The ground-floor neighbour windows get **exactly zero**: every boundary is a 4 m wall (the test removes the wall and light arrives). The apartment above sees at most 0.17 lx (0.59 with the assumed uplight file), from the uplights, **without** the crown stopping any of it (the engine counts no foliage in Ev: conservative).
+All Iku are downlights: ULR 0.005 or less in the installed attitude. The three uplights are ULR 1.0 by definition; the check counts only the flux of rays that miss the opaque (leaf-on) crown ellipsoid: 5.0 %, 4.9 % and 14.6 % with the Kew 25 (1.7 %, 1.5 % and 12.2 % with the assumed file); the east-yard olive is the smallest crown, 2.6 m.
 **In winter the crape is bare, so the winter scene switches the uplights off** (and the olive crowns are evergreen but the scene keeps them off for calm). A bare crown would otherwise let the beam out: this is a seasonal operating rule that must reach the commissioning notes.
 Glare (policy 3000 cd/m2 within 45 deg of a level sightline from 8 seated or standing eye points to the table, pit, door and pond): worst 2163 cd/m2 (summer), 2884 (gathering, DN-1, 4 % margin), 387 (quiet, winter).
 
@@ -177,7 +183,7 @@ Glare (policy 3000 cd/m2 within 45 deg of a level sightline from 8 seated or sta
 
 | # | result |
 |---|---|
-| V1 inputs | ERCO Iku: stated 676 lm, integrated 676.4 (0.07 %); the uplight's ASSUMED file integrates to 254.5 vs 250 (self-consistency only). Spec = bound product (lumens, watts, IP, DALI) except the CCT deviation above. Negative: a lumens x2 spec is flagged. |
+| V1 inputs | ERCO Iku: stated 676 lm, integrated 676.4 (0.07 %); the Kew 25 file integrates to 90.9 vs 93 stated (-2.25 %, **fail** at the 2 % bar; the bar is not relaxed). Spec = bound product (lumens, watts, IP, DALI) except the CCT deviation above. Negative: a lumens x2 spec is flagged. |
 | V2 placement | all 22 emitters outside every solid, above ground, below 3.6 m, none over water; negatives: GR-1 shifted 0.30 m into the wall, a fitting at 4.2 m. Positions are design values in the layout frame (nothing built: no model read-back exists; the 0.30 m arm and the branch clamp are not in any Revit/model). |
 | V3 sensors | no floor sensor within 50 mm of furniture; slivers under 0.30 m removed (the bench-back strip read 0.8 lx before); table plane at 0.75 m (the table top, 5 mm). Negative: a sensor in a bench. |
 | V4 reference cases | the engine's CIE 171 cases (5.2, 5.8) are the existing `tests/lightcalc/test_reference_cases.py`, unchanged by this lane; run in the lane suite. |
@@ -186,7 +192,7 @@ Glare (policy 3000 cd/m2 within 45 deg of a level sightline from 8 seated or sta
 | V7 convergence | Radiance ab N vs 2N: 0.02 % on every plane. |
 | V8 mutations | lumens x2, a fitting moved 300 mm, aim rolled 90 deg: each moves the pond ring average by more than 5 % (the bar of the test; 7.5 % for the 300 mm shift), V1 flags the lumens, V2 the wall shift, V3 the sensor in the bench. A mutation-detection test exists for each. |
 | V9 | declined by the client. |
-| V10 | Iku: pass (LP lane). The uplight: **cannot be run** (no manufacturer file). |
+| V10 | Iku: pass (LP lane). Kew 25 medium (bound): **fail on lumens by 0.25 point** (peak and beam pass); Kew narrow 500 mA pass; ERCO Kona 35394 (alternate) fail on beam diameter (5-6 %), lumens/Imax/lux pass. Table in "Tree uplight selection". |
 | V11 DIALux | **not run** (Windows, one-off, at design freeze); open item. |
 | V12 headroom | 4 safety zones need 4-11 % of maximum to reach their recommended value; every scene level is <= 0.45; all fittings DALI-2 dimmable. |
 
@@ -197,14 +203,14 @@ Glare (policy 3000 cd/m2 within 45 deg of a level sightline from 8 seated or sta
 ## Deviations from the client rules (stated, not hidden)
 
 * **CCT**: the verified product's file is 3000 K (2700 K on request, no file). **Night 2200 K cannot be met**: a fixed-CCT LED does not shift with dimming; dim-to-warm needs a DT8 product no found exterior product offers.
-* **CRI >= 90**: Iku 92. Uplight unspecified (requirement).
+* **CRI >= 90**: Iku 92; Kew 25 uplight 98 (R9 not published).
 * **No phase-cut**: Iku is DALI-2 (datasheet); drivers are in the fitting.
 * **Driver <= 0.80**: met everywhere.
 * **Flush/concealed**: nothing is flush in the ground (no verified product), so the "flush fittings for ambient" aesthetic is met on walls and screens only.
 
 ## In the production scene
 
-* `landscape/build/lights.py` + `production.lights()/write_ies()`; one small edit **outside LG's ownership**, in `concept/villa_render.py` (L2's file; `lane_guard` lists it): `lights.extend(PRD.lights())` after the interior lights, and the writer calls `PRD.write_ies` for `garden/...` IES paths (the Iku's own ERCO file, and the ASSUMED uplight's). No other file outside the lane's paths was touched except the two exposure records the shared-file rule requires.
+* `landscape/build/lights.py` + `production.lights()/write_ies()`; one small edit **outside LG's ownership**, in `concept/villa_render.py` (L2's file; `lane_guard` lists it): `lights.extend(PRD.lights())` after the interior lights, and the writer calls `PRD.write_ies` for `garden/...` IES paths (the Iku's own ERCO file, and the Kew 25's). No other file outside the lane's paths was touched except the two exposure records the shared-file rule requires.
 * 22 lights (19 Iku, 3 uplights) at the `social-gathering` levels (`RENDER_SCENE`: the dusk views show a gathering; layer `evening-garden`, `dimmer` = scene level, `lumens` = rated). 17 black Iku bodies of 76 mm with 30 mm arms to the wall, screen post or fence (arms are ASSUMED accessories, drawn so the scene's support and part guards see a mounted fixture; the two branch-clamped dining fittings and the uplights have no body: nothing in the scene hosts them). Bodies are `dressing` solids; their lens is not emissive (the lit face of a downlight is not drawn).
 * Dusk garden views get the `evening-garden` layer in `prepare_view` (exterior-dusk garden views only; day views and interior dusk views do not: tests with negatives). Two new key views, `gi-dining-firepit-dusk` and `gi-north-court-pond-dusk`, clone `v07-terrace-dusk`.
 * **Camera fix found by the first dusk render**: v07 and v19 stood in the south-east bed corner, 0.00 m from a plant (GI's override said "NOT CLEARED ... camera left where it is"), and a black plant leaf crossed v07's frame. `CLEAR_SEARCH_M` 3.5 -> 6 m: v07 moves to (24.0, -23.41), v19 likewise cleared; `test_no_production_garden_view_is_left_uncleared` with the old 3 m search as its negative.
@@ -238,7 +244,7 @@ Fresh clone of the pushed `lane/LG` at `a36226c` (jobq, `NO_COLOR=1`, laneP-venv
 
 ## Open items
 
-1. **Product**: confirm ERCO's 2700 K Iku article and its LDT (3000 K file in use); find a 2700 K / CRI >= 90 / DALI / IP67 narrow in-ground uplight WITH an LDT (V1/V10) and bind it to `up-assumed`; fetch BX67's file if the soffit alternate is wanted. Nothing here is purchasable for the uplights.
+1. **Product**: confirm ERCO's 2700 K Iku article and its LDT (3000 K file in use). Uplights: confirm with John Cullen the DALI-2 driver and the 2027 article's own LDT ("Not met / to confirm" above); an in-ground IP67 2700 K / CRI >= 90 product with a file was not found. The uplight levels can rise to 0.80.
 2. **Night 2200 K** is not met (fixed CCT).
 3. **Fixture mounting** (wall arm, branch clamp, post bracket) are not in the architectural model or any product list; the slab edge at 2.4 m, the sister-screen posts and the crape branch at 3.0 m need a designer and an arborist. The sister owner must agree to a fitting on the shared posts (and to the pit light falling on their garden).
 4. **Survey**: neighbour and apartment window positions are assumed heights; the apartment above's windows have no model. Cairo's leaf-drop months (crape) set when the winter scene starts.
