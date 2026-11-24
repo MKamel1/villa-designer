@@ -313,6 +313,83 @@ Loader and consistency checks: `src/archpipe/interior/chosen.py`. Scene wiring: 
 
 ## Production scene: receipts, exposure, hashes (no bypass)
 
+* Merged `origin/integ/aplus` (`60ed0fe`: GI, RF, HY, LG). Took theirs for `knowledge/furniture-stage2.json.gz`, `parents-bed.json.gz` and both exposure records, then regenerated on top (RA method, baseline-relative): old tree = `origin/integ/aplus` in a git worktree, **reproduces all 8 stored section digests**; section diff (`knowledge/approvals-review/evidence-l4/section-diff.json`): layout, specification, furniture, models, props unchanged; **materials** 14 changed ids (the finishes' look-alikes) + 27 `fin-*` added, 0 removed; **meshes** 9 added (the scheduled cushions and throws in the cinema, the study and on the parents' bed) and 2 changed (`rug-kids-a`, `rug-parents-bed`, material); **architecture** 48 finish-layer faces removed / 48 added, **0 unexplained** (wet-room floor layers 18 + 18; the parents' head-wall plaster layers 30 + 30 now carrying the feature colour). `refresh_receipts.py` writes `refresh_2026_11_23_L4` beside the earlier records. `review-current`: **16 individual + joint reviews, all ok, 0 findings** (receipts regenerated four times as fixes landed; the last for the final cushion geometry). The parents' bed cloth spec changed (the scheduled throw): disclosed in the note; the cloth is re-simulated at render.
+* Exposure re-measured on the final tree through the documented procedure (`write(measure_exposure_groups=True)` / `render_set.write_scene(measure=True)`, ERCO IES assembled from `knowledge/lighting-products`, Blender `villa_scene.py --measure-exposure-groups`), jobq **`L4-measure-prod-6`** and **`L4-measure-set-6`**, each with a NEW id because the materials and geometry changed (ids `-prod-1..5` and `-set-1..5` were superseded by tree changes; `-set-1` and `-prod-5` died, one of GPU out-of-memory when two jobs ran together, one OOM-killed by host RAM while my parallel test chunks ran: do not run big test batches beside measurement). Copied byte for byte. **No membership change** against the integ records (production: evening 15, exterior-day 11, day 9, exterior-shade 5, lamp-dominant 3, lamp-low-key 1, exterior-dusk 1, exterior-dusk-dim 1; render set: evening 19, day 13, exterior-day 5, lamp-dominant 4, exterior-shade 2, lamp-low-key 1, dusk 1, dusk-dim 1).
+* Scene hashes: `knowledge/render-set/l4/scene-hashes.json` (file, ids-stripped and content hashes of the production and render-set scenes, built clean at the commit it names).
+
+## Renders (draft, 96 spp, 1920 x 1280, GPU through jobq `L4-draft-4` with the scene cache `a7918642...`; JPEGs at 1500 px in `knowledge/render-set/l4/draft/`, PNGs in `out/L4/draft/`)
+
+I looked at every image (v33, v34, n13, v05, n03 in the final pass; n01, n02, n15, n16, v06 in the previous pass, their finishes and scene content unchanged since, only the cushion geometry differs). What each shows, honestly:
+
+* **v33 basement north-south**: the Gris Fleury floor reads as a veined taupe stone at tile scale (no stripes); walls Off White (grey-beige in shade); dark Brown Halifax bookcases and TV wall; the library sofa carries three scheduled cushions (a landscape lumbar in peach-tan at the left arm, dark green, dark brown) and a white-grey folded throw. **Seen face-on the cushions still read as flat rounded boards, and the throw as a flat white block**; the critic still says "flat, rigid rectangles" here (R8 1).
+* **v34 basement south-north**: same floor and sofa from behind. The dark backs of the cushions still peek a few centimetres above the sofa back (much less than the first pass's 10-15 cm). The right 10 % of the frame is the dark TV-wall/door edge (critic R10 0, a camera item, not a finish). Off White walls and curtains read well.
+* **n02 kitchen island**: Dekton Nacre worktop reads as a pale veined slab; island fronts are Natural Halifax Oak (blond, wavy grain); the day group's blue cast is pre-existing, not changed here.
+* **n03 kitchen run**: marble-look floor, blond oak island, white Dekton worktops, beige FENIX front on the run; the far sofa shows cushions. The best of the set (critic pass).
+* **n13 parents' bedroom by day**: **the Nile Clay feature wall is visible behind the bed** (a light taupe in daylight) with the oak slats over it, Durian smoke-oak door, Brown Halifax desk. The three scheduled cushions (dark brown, tan SANELA, cream bouclé-like lumbar) now read as plump rounded cushions (critic: "soft, rounded forms"). Bed pillows white (the library bed's own). Headboard and desk are unchanged models.
+* **v05 parents' bedroom (evening)**: Nile Clay reads as a deep taupe-brown, the smoke-oak door nearly black, cushions soft and believable, a plain taupe throw at the foot (critic pass).
+* **n15 and n16 en-suite**: **the Frappuccino taupe walls read as a deep copper-brown** in 2700 K light (stated colour `#b8a58e`, reflectance 0.39, an ESTIMATE from the colour name; the room's warm bounce saturates it). Both rooms are dark, far darker than the old cream marble. A client decision about the colour or the room lighting belongs here.
+* **n01 dining (day)**: Gris Fleury floor, Brown Halifax table, chairs and sideboard (dark, heavy), the living sofa's cushions behind. The dining end is much darker than the old walnut-on-cream scheme.
+* **v06 kids room A (GF bedroom)**: Smoked Cocoa floor (very dark, reflectance 0.064), Natural Halifax Oak bunk and desks, Off White walls, the living rug product. The window is blown (physical; RF item 7).
+
+## Critic (frozen-v1 rubric, VLM `L4-critic-vlm-3`, gates R8/R10/R11 plus the deterministic six; `knowledge/render-set/l4/critic-results.json`)
+
+**2 pass (n03, v05), 8 fail** on the final renders (first pass with the slab cushions: 1 pass, 9 fail; before the merge also 1 / 9). n01 fail (R4 0: crushed shadows in the dark dining end); n02 fail (R12 0, the day group's blue cast); n13 fail (R4 0: window clipped 3.7 %, no VLM warning left); n15 fail (3 WARNs: bare room, flat shower head); n16 fail (4 WARNs); v06 fail (R4 0: window); v33 fail (R3 lean, R8 cushions "flat rigid rectangles"); v34 fail (R10 0: the dark right edge). None of the failures is a finish-colour finding; the cushion-shape finding was real and the inflated profile cleared it in the bedroom views. The critic is a noisy high-recall filter (RF, L9P).
+
+## Open items
+1. Render and look at the 9 draft views (queued), then revise this section if they disagree.
+2. Egypt supply for hard finishes (a distributor call for Marazzi, Egger, Kahrs, Caesarstone/Cosentino, FENIX; or Egyptian equivalents).
+3. LRV for non-paint finishes (maker data sheets), slip ratings (DIN 51130 / BS 7976) for wet-room tiles, Martindale for cushion fabrics (IKEA does not state).
+4. Kitchen backsplash geometry does not exist in the scene (RF open item); the backsplash appears on the boards only.
+5. Cushion props are the shared `throw_pillows_01` model: the palette renders swap the pillow, throw and rug materials, not per-sofa cushion models; sofa upholstery materials are unchanged.
+6. Integration of the chosen palette into the production scene is a later lane.
+
+
+---
+
+# Round 2 (2026-11-23): the client's finish mix applied to the production scene
+
+Client choice and lead-confirmed proposals: `docs/decisions/interior-presentation-2026-11-22.md`, "Client palette choice (2026-11-23)". Schedule: `knowledge/products/finishes/chosen.json` (generated by `scripts/build_chosen.py` from palettes B and C; never hand-edited; no prices).
+Loader and consistency checks: `src/archpipe/interior/chosen.py`. Scene wiring: `villa_render.py` (`CHOSEN`, `FINISH`, `part_material`, `RUG_MATERIAL`, `SOFA_SCHEDULE`), `src/archpipe/interior/soft_dressing.py`.
+
+## Chosen schedule (48 slots, 30 rooms)
+
+| slot | product (look-alike, labelled; texture scale from the product format) | drives (scene material) | rooms |
+|---|---|---|---|
+| floor-basement | C Marazzi Mystone Gris Fleury Taupe RT 60x120 (ambientCG Marble007, 1.2 m) | `travertine` | all basement rooms except the cinema |
+| floor-gf | C Havwoods Venture Cantal Smoked Cocoa oak (WoodFloor041, 2.35 m) | `oak-floor` | GF circulation, study, kids A/B, parents' bedroom, entry, dressing |
+| floor-wet / wall-tile-wet | C Marazzi Mystone Limestone20 Taupe 60x120 (Concrete012, 1.2 m) / Grande Marble Look Frappuccino 120x120 (Marble015, 1.2 m) | `marble-wet` / `marble-bath`, `marble-ensuite` | guest bathroom, family bathroom, en-suite (and the shower) |
+| wall-paint-main | B Dulux Off White, LRV 89 (flat colour) | `plaster-warm-white` | all basement and GF rooms except the wet rooms and the cinema |
+| wall-feature-parents | C Dulux Nile Clay, LRV 27 (flat) | `fin-wall-feature` | parents' bedroom head wall, behind the bed only |
+| worktop | B Cosentino Dekton Nacre (Marble025, 3.27 m slab) | `marble-white` | kitchen island, run, laundry counter |
+| backsplash | B Cosentino Dekton Nacre | none | **no backsplash zone in the design model: not built** |
+| kitchen-front | B FENIX 0719 Beige Luxor (flat) | `greige-lacquer` | kitchen zone only |
+| kitchen-joinery | B EGGER H1180 Natural Halifax Oak (white_oak_veneer, 0.5 m) | `fin-kitchen-joinery(-x)` | island carcass |
+| joinery-timber | C EGGER H3180 Brown Halifax Oak (Wood051, 0.8 m) | `walnut`, `-grain-x`, `-grain-y` | TV wall, sideboards, bookcases, vanities, parents' wardrobes, stair |
+| joinery-light | C EGGER H1180 Natural Halifax Oak (white_oak_veneer, 0.5 m) | `oak`, `oak-grain-x` | wardrobes, desks, bed frames, headboard slats |
+| door | C Durian Trace Smoke Oak (Wood049, 0.8 m) | `door-oak` | every door leaf |
+| cushions, throws, rugs | C IKEA SANELA / LAGERPOPPEL / MYRULL / HOLMVI / BRÖNDEN / TIDTABELL (colours from the maker's colour names, ESTIMATES) | `fin-cushion-<sofa>-<n>`, `fin-throw-<sofa>`, `fin-rug-*` | living, lounge, study, cinema sofas, library daybed, parents' bed; living, lounge, parents' rugs (kids A rug = the living rug) |
+| open-shelf objects, books, garments | C | none | chosen, **not applied**: the scene has no such assets to colour |
+
+## Decisions I took (listed, all reversible)
+
+1. **GF walls other than the feature wall are B Off White.** The client's "rest of the house follows C" has no whole-wall C paint: C's only paint is Nile Clay (LRV 27), which its own item says is for feature walls. Off White keeps the GF light and matches the basement. Needs a client yes.
+2. **Cinema and the stair void keep their design finishes** (acoustic fabric walls and carpet; the stair void has no finish layer): recorded as `retained` with a reason, not assigned a palette slot.
+3. **The basement service rooms** (pantry, store under the ramp, dirty kitchen) take the basement floor and wall as before (they shared the open plan's stone).
+4. **Kitchen joinery uses the light-oak look-alike.** B's joinery-timber slot names the same EGGER product but its look-alike (oak_veneer_01) rendered salmon in the first draft; the product is identical, the proxy is the better match.
+5. **Backsplash not built.** `grep` of the model and the furnish layer finds only the brief's K-SPLASH 600 mm clearance target, no zone or element. Reported, not invented.
+6. **Garden paving (C) not applied**: outside the client's list, and lanes GI and LG own the garden.
+7. **Product format replaces RF's assumed 0.6 m texture policy for the chosen finishes** (`tests/test_villa_render_texture_scale.py`: product-derived materials must equal `finishes.texture_scale_m`, density floor 400 px/m for large formats; the assumed policy still guards everything else).
+8. **Mounting finish tables accept `fin-wall-feature`** (`fitting_mounting.py`, `exterior_mounting.py`): it is paint on the same interior-plaster build-up, so the lead-approved mounting schedule is unchanged.
+9. The dressing room's drawer fronts (garments.py) were `greige-lacquer` (the kitchen front's name): now `walnut-grain-x`, the parents' joinery.
+
+## Defect found in the first draft and its guard (defect-learning)
+
+* `chosen-stone-grain-axis`: the first `chosen.json` forced `grain_axis: "z"` on every textured slot, and a floor quad is thin in z, so the Box projection sampled one texel row: the Gris Fleury floor rendered as horizontal stripes in v33, v34, n01, n03 (draft `L4-draft-1`). I looked at the images before any change; the cause is the documented `grain.mapping_rotated_span` class (stair treads, 2026-09-28), and it was missed because the schedule's own tests checked the file, not the geometry it ends up on. Guard: `tests/interior/test_scene_finishes.py::FinishLayers` builds the scene and fails any finish layer whose grain rotation collapses a coordinate (compared with the identity mapping so narrow strips are not flagged); its negative control is the REAL lounge floor with the grain axis the first file used.
+* The first feature wall was a 3 mm overlay at the structural face and sat inside the plaster finish layers (invisible in n13). The wall colour is now set on the shell face, so `finish_layers.py` inherits it; guard `test_scene_finishes.py::FeatureWall`.
+* The first sofa cushions sat behind the library sofa's tall back cushions (v33). The model's seat top, back-cushion face and arm width are now measured from its mesh and used when a model replaced the procedural sofa.
+
+## Production scene: receipts, exposure, hashes (no bypass)
+
 * Merged `origin/integ/aplus` (`60ed0fe`: GI, RF, HY, LG). Took theirs for `knowledge/furniture-stage2.json.gz`, `parents-bed.json.gz` and both exposure records, then regenerated on top (RA method, baseline-relative): old tree = `origin/integ/aplus` in a git worktree, **reproduces all 8 stored section digests**; section diff (`knowledge/approvals-review/evidence-l4/section-diff.json`): layout, specification, furniture, models, props unchanged; **materials** 14 changed ids (the finishes' look-alikes) + 27 `fin-*` added, 0 removed; **meshes** 9 added (the scheduled cushions and throws in the cinema, the study and on the parents' bed) and 4 changed (`furn-pb-bed-4/5` pillow material, `rug-kids-a`, `rug-parents-bed`); **architecture** 48 finish-layer faces removed / 48 added, **0 unexplained** (wet-room floor layers 18 + 18; the parents' head-wall plaster layers 30 + 30 now carrying the feature colour). `refresh_receipts.py` writes `refresh_2026_11_23_L4` beside the earlier records. `review-current`: **16 individual + joint reviews, all ok, 0 findings**. The parents' bed cloth spec changed (the scheduled throw): disclosed in the note; the cloth is re-simulated at render.
 * Exposure re-measured on the final tree through the documented procedure (`write(measure_exposure_groups=True)` / `render_set.write_scene(measure=True)`, ERCO IES assembled from `knowledge/lighting-products`, Blender `villa_scene.py --measure-exposure-groups`, jobq **`L4-measure-prod-3`** and **`L4-measure-set-4`**, each with a NEW id because materials changed; earlier ids `-prod-1/-2`, `-set-1..3` were superseded by tree changes, and `-set-1` failed with GPU out-of-memory when two jobs ran together: later jobs ask `--vram-mb 16000`). Copied byte for byte. **No membership change** against the integ records (production: evening 15, exterior-day 11, day 9, exterior-shade 5, lamp-dominant 3, lamp-low-key 1, exterior-dusk 1, exterior-dusk-dim 1; render set: evening 19, day 13, exterior-day 5, lamp-dominant 4, exterior-shade 2, lamp-low-key 1, dusk 1, dusk-dim 1). The records' measurement hashes: production `d0da444a...`, set `99d02f57...`.
 
@@ -343,7 +420,7 @@ I looked at every image. What each shows, honestly:
 
 ## Open items
 
-1. **Cushion and throw shape (mine, visible):** the lofted cushions render as chamfered slabs and the folded throw as a flat block (v33, v05, n13; the critic agrees). A rounder inflated mesh and a draped cloth throw (as the bed's) are the fix; any change re-opens receipts and exposure (cushions are in receipt rooms), so it is a separate pass. In v34 the dark back faces stand 10-15 cm above the sofa back: reduce the lean height for the library sofa.
+1. **Cushion and throw shape (mine, visible):** after the inflated-profile fix the bed cushions read soft, but the sofa cushions still read as flat rounded boards face-on (v33) and the folded throws as flat blocks; a draped cloth throw (as the bed's) and a true inflated cushion mesh are the fix; any change re-opens receipts and exposure (the cushions are in receipt rooms), so it is a separate pass. In v34 the cushions' dark backs still stand a few cm above the library sofa back.
 2. **Rug product sizes are not applied.** The rugs keep the design footprints (living 2.6 x 2.4, lounge 3.1 x 2.0, parents 2.2 x 2.6 m); the schedule products are BRÖNDEN 2.0 x 3.0 (living), 1.7 x 2.4 (lounge) and TIDTABELL 0.8 x 2.0 bedside runners. Material and colour are the product's; the size is a layout decision for the client. Kids A takes the living rug product.
 3. **En-suite and bathrooms read dark copper-brown** under 2700 K light (n15, n16). Colour is an ESTIMATE from the maker's colour name (`render-colours.json`); a client colour sample, a lighter wall, or cooler bathroom light is the decision.
 4. **GF walls = B Off White** is my decision (decision 1 above); needs a client yes.
