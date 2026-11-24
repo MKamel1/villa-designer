@@ -1,0 +1,415 @@
+{
+ "v33-basement-north-south": {
+  "pos": [
+   20.3,
+   -23.9
+  ],
+  "yaw": -90.0,
+  "covers": [
+   "living",
+   "dining",
+   "kitchen"
+  ],
+  "lens": 24
+ },
+ "v34-basement-south-north": {
+  "pos": [
+   17.8,
+   -28.9
+  ],
+  "yaw": 39.7,
+  "covers": [
+   "bar-alcove",
+   "living"
+  ],
+  "lens": 24
+ },
+ "v02-garden-living": {
+  "pos": [
+   18.367,
+   -25.071
+  ],
+  "yaw": -55.0,
+  "covers": [
+   "living"
+  ],
+  "lens": 24
+ },
+ "v10-living-evening": {
+  "pos": [
+   18.367,
+   -25.071
+  ],
+  "yaw": -55.0,
+  "covers": [
+   "living"
+  ],
+  "lens": 24
+ },
+ "v03-street-lounge": {
+  "pos": [
+   9.617,
+   -27.471
+  ],
+  "yaw": 150.0,
+  "covers": [
+   "lounge",
+   "family"
+  ],
+  "lens": 24
+ },
+ "v21-lounge-evening": {
+  "pos": [
+   9.617,
+   -27.471
+  ],
+  "yaw": 150.0,
+  "covers": [
+   "lounge"
+  ],
+  "lens": 24
+ },
+ "v09-dining-evening": {
+  "pos": [
+   18.302,
+   -24.471
+  ],
+  "yaw": -140.0,
+  "covers": [
+   "dining",
+   "kitchen-island"
+  ],
+  "lens": 24
+ },
+ "n01-dining-day": {
+  "pos": [
+   15.002,
+   -24.271
+  ],
+  "yaw": -35.0,
+  "covers": [
+   "dining"
+  ],
+  "lens": 24
+ },
+ "n02-kitchen-island-day": {
+  "pos": [
+   14.7,
+   -24.9
+  ],
+  "yaw": -127.5,
+  "covers": [
+   "kitchen",
+   "kitchen-island"
+  ],
+  "lens": 24
+ },
+ "n03-kitchen-run-evening": {
+  "pos": [
+   14.897,
+   -24.271
+  ],
+  "yaw": -170.0,
+  "covers": [
+   "kitchen"
+  ],
+  "lens": 24
+ },
+ "n04-library-nook-evening": {
+  "pos": [
+   19.6,
+   -25.6
+  ],
+  "yaw": -90.0,
+  "covers": [
+   "bar-alcove"
+  ],
+  "lens": 24
+ },
+ "v08-cinema": {
+  "pos": [
+   3.125,
+   -22.191
+  ],
+  "yaw": 10.0,
+  "covers": [
+   "cinema"
+  ],
+  "lens": 24
+ },
+ "v29-under-stair-store": {
+  "pos": [
+   5.2,
+   -25.9
+  ],
+  "yaw": -82.0,
+  "covers": [
+   "stair-b",
+   "lounge-nook"
+  ],
+  "lens": 24
+ },
+ "v30-under-ramp-store": {
+  "pos": [
+   0.377,
+   -23.591
+  ],
+  "yaw": 60.0,
+  "covers": [
+   "store-ramp"
+  ],
+  "lens": 24
+ },
+ "n05-pantry-evening": {
+  "pos": [
+   4.5,
+   -29.25
+  ],
+  "yaw": 0.0,
+  "covers": [
+   "pantry"
+  ],
+  "lens": 24
+ },
+ "n07-family-corner-day": {
+  "pos": [
+   12.6,
+   -24.6
+  ],
+  "yaw": -171.4,
+  "covers": [
+   "family",
+   "lounge"
+  ],
+  "lens": 24
+ },
+ "n06-stair-foot-hall-evening": {
+  "pos": [
+   10.45,
+   -28.4
+  ],
+  "yaw": 90.6,
+  "covers": [
+   "hall-b",
+   "family"
+  ],
+  "lens": 24
+ },
+ "n08-guest-wc-evening": {
+  "pos": [
+   10.827,
+   -23.891
+  ],
+  "yaw": 130.0,
+  "covers": [
+   "guest-wc"
+  ],
+  "lens": 24
+ },
+ "n09-dirty-kitchen-day": {
+  "pos": [
+   14.5,
+   -23.591
+  ],
+  "yaw": 110.0,
+  "covers": [
+   "dirty-kitchen"
+  ],
+  "lens": 24
+ },
+ "v11-stair-void": {
+  "pos": [
+   10.45,
+   -27.95
+  ],
+  "yaw": 180.0,
+  "covers": [
+   "stair-b",
+   "stair-gf",
+   "hall-b"
+  ],
+  "lens": 24
+ },
+ "n10-gf-hall-east-day": {
+  "pos": [
+   11.8,
+   -28.05
+  ],
+  "yaw": 0.0,
+  "covers": [
+   "corridor",
+   "gallery-end"
+  ],
+  "lens": 24
+ },
+ "n18-stair-gallery-day": {
+  "pos": [
+   11.2,
+   -26.9
+  ],
+  "yaw": -168.9,
+  "covers": [
+   "stair-gf",
+   "landing-gf",
+   "gallery-end"
+  ],
+  "lens": 24
+ },
+ "n19-entry-lobby-evening": {
+  "pos": [
+   14.9,
+   -28.2
+  ],
+  "yaw": 90.0,
+  "covers": [
+   "entry-b"
+  ],
+  "lens": 24
+ },
+ "n20-dining-side-day": {
+  "pos": [
+   15.002,
+   -24.271
+  ],
+  "yaw": -40.0,
+  "covers": [
+   "dining-side",
+   "dining"
+  ],
+  "lens": 24
+ },
+ "n11-study-desks-day": {
+  "pos": [
+   8.817,
+   -26.371
+  ],
+  "yaw": 155.0,
+  "covers": [
+   "study-game"
+  ],
+  "lens": 24
+ },
+ "n12-study-sofa-evening": {
+  "pos": [
+   8.817,
+   -26.371
+  ],
+  "yaw": 155.0,
+  "covers": [
+   "study-game"
+  ],
+  "lens": 24
+ },
+ "v06-kids-room": {
+  "pos": [
+   13.177,
+   -27.371
+  ],
+  "yaw": 115.0,
+  "covers": [
+   "kids-a"
+  ],
+  "lens": 24
+ },
+ "v13-kids-b": {
+  "pos": [
+   16.652,
+   -27.571
+  ],
+  "yaw": 100.0,
+  "covers": [
+   "kids-b"
+  ],
+  "lens": 24
+ },
+ "n13-parents-day": {
+  "pos": [
+   18.827,
+   -24.541
+  ],
+  "yaw": -35.0,
+  "covers": [
+   "parents-bed",
+   "parents-entry"
+  ],
+  "lens": 24
+ },
+ "v05-parents-bedroom": {
+  "pos": [
+   18.827,
+   -24.541
+  ],
+  "yaw": -35.0,
+  "covers": [
+   "parents-bed"
+  ],
+  "lens": 24
+ },
+ "v31-dressing-hers": {
+  "pos": [
+   21.627,
+   -28.271
+  ],
+  "yaw": 135.0,
+  "covers": [
+   "parents-dressing"
+  ],
+  "lens": 24
+ },
+ "n14-dressing-his-evening": {
+  "pos": [
+   22.027,
+   -27.371
+  ],
+  "yaw": -145.0,
+  "covers": [
+   "parents-dressing",
+   "parents-dressing-ext"
+  ],
+  "lens": 24
+ },
+ "n15-ensuite-bath-evening": {
+  "pos": [
+   21.604,
+   -28.711
+  ],
+  "yaw": -125.0,
+  "covers": [
+   "parents-ensuite"
+  ],
+  "lens": 24
+ },
+ "n16-ensuite-basin-day": {
+  "pos": [
+   21.704,
+   -28.911
+  ],
+  "yaw": -145.0,
+  "covers": [
+   "parents-ensuite"
+  ],
+  "lens": 24
+ },
+ "n17-family-bath-basin-day": {
+  "pos": [
+   10.427,
+   -26.671
+  ],
+  "yaw": 125.0,
+  "covers": [
+   "family-bath"
+  ],
+  "lens": 24
+ },
+ "n21-family-bath-wc-day": {
+  "pos": [
+   9.8,
+   -25.05
+  ],
+  "yaw": -27.2,
+  "covers": [
+   "family-bath"
+  ],
+  "lens": 24
+ }
+}

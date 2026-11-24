@@ -1,0 +1,169 @@
+{
+ "schema": "flythrough-villa-tour/1",
+ "intent": "Whole-villa tour: a 360 in every room of both floors, walking that looks along its route, the real flight climbed, three garden thresholds viewed from inside the closed panes.",
+ "levels": {
+  "B": -3.0,
+  "GF": 0.0
+ },
+ "stair": {
+  "top": [
+   4.95,
+   -27.946
+  ],
+  "bottom": [
+   9.85,
+   -27.946
+  ],
+  "top_level": "GF",
+  "bottom_level": "B"
+ },
+ "proxy_points": {
+  "stair-b": [
+   9.85,
+   -27.946
+  ],
+  "stair-gf": [
+   4.95,
+   -27.946
+  ]
+ },
+ "order_note": "entrance (entry-b) -> dining side, dining (+ east yard), living (+ south garden), bar alcove -> kitchen island, kitchen, dirty kitchen -> family, guest WC, stair-foot hall, lounge (+ north court), nook, pantry, cinema, store -> stair foot, up the flight -> GF: top of the flight, landing, study, gallery, family bath, corridor, kids A and B, parents entry, bedroom, dressing, dressing ext, ensuite",
+ "stations": [
+  {
+   "room": "entry-b"
+  },
+  {
+   "room": "dining-side"
+  },
+  {
+   "room": "dining"
+  },
+  {
+   "garden": "east-yard",
+   "door": [
+    16.889,
+    -23.591
+   ]
+  },
+  {
+   "room": "living"
+  },
+  {
+   "garden": "south-garden",
+   "door": [
+    22.597,
+    -26.131
+   ]
+  },
+  {
+   "room": "bar-alcove"
+  },
+  {
+   "room": "kitchen-island"
+  },
+  {
+   "room": "kitchen"
+  },
+  {
+   "room": "dirty-kitchen"
+  },
+  {
+   "room": "family"
+  },
+  {
+   "room": "guest-wc"
+  },
+  {
+   "room": "hall-b"
+  },
+  {
+   "room": "lounge"
+  },
+  {
+   "garden": "north-court",
+   "door": [
+    3.617,
+    -26.156
+   ]
+  },
+  {
+   "room": "lounge-nook"
+  },
+  {
+   "room": "pantry"
+  },
+  {
+   "room": "cinema"
+  },
+  {
+   "room": "store-ramp"
+  },
+  {
+   "room": "stair-b",
+   "pitch": {
+    "yaw_deg": 180,
+    "pitch_deg": 15
+   }
+  },
+  {
+   "stair": "up"
+  },
+  {
+   "room": "stair-gf",
+   "pitch": {
+    "yaw_deg": 0,
+    "pitch_deg": -22
+   }
+  },
+  {
+   "room": "landing-gf"
+  },
+  {
+   "room": "study-game"
+  },
+  {
+   "room": "gallery-end"
+  },
+  {
+   "room": "family-bath"
+  },
+  {
+   "room": "corridor"
+  },
+  {
+   "room": "kids-a"
+  },
+  {
+   "room": "kids-b"
+  },
+  {
+   "room": "parents-entry"
+  },
+  {
+   "room": "parents-bed"
+  },
+  {
+   "room": "parents-dressing",
+   "via": [
+    [
+     20.4,
+     -24.215
+    ],
+    [
+     21.465,
+     -24.25
+    ],
+    [
+     21.465,
+     -25.4
+    ]
+   ]
+  },
+  {
+   "room": "parents-dressing-ext"
+  },
+  {
+   "room": "parents-ensuite"
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "flythrough-tour-policy/1",
+  "status": "WT lane 2026-11-24, registered before any tour frame was rendered; overrides knowledge/flythrough/villa-policy.json",
+  "turn_rate_deg_s": 40,
+  "turn_rate_basis": "ASSUMED policy, inside the client-requested 30-45 deg/s comfortable band for an on-screen pan; a full 360 takes 9 s. No published standard claimed.",
+  "turn_accel_deg_s2": 90,
+  "turn_accel_basis": "ASSUMED: yaw rate ramps 0 to 40 deg/s in 0.44 s so no turn starts or stops with a snap",
+  "best_view_hold_s": 1.5,
+  "best_view_hold_basis": "ASSUMED short pause on the room's best view (the same subject as its still view in knowledge/render-set/views.json)",
+  "walk_yaw_rate_deg_s": 30,
+  "walk_yaw_rate_basis": "ASSUMED: walking speed drops wherever the heading would turn faster than this",
+  "maximum_yaw_rate_deg_s": 45,
+  "lookahead_m": 1.5,
+  "lookahead_basis": "ASSUMED: the camera heading is the direction of the route 1.5 m ahead, so it always looks where it is going",
+  "point_wall_clearance_m": 1.0,
+  "point_wall_clearance_basis": "production forward-wall screen (camera_wall_sightline_clearance, 1.0 m); the 360 point keeps every direction clear, so no frame of the turn faces a wall within 1 m",
+  "garden_pan_deg": 30,
+  "garden_pan_rate_deg_s": 20,
+  "garden_inward_offsets_m": [
+    2.0,
+    1.5,
+    1.0,
+    0.7
+  ],
+  "stair_pitch_up_deg": 12,
+  "stair_void_pitch_down_deg": 22,
+  "pitch_basis": "ASSUMED: the camera looks up the flight while climbing and down the void from the top landing; vertical lens shift is used, as for every still",
+  "interior_preview_every_nth_frame_for_exposure": 48
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "flythrough-informative-rule/1",
+  "status": "REGISTERED 2026-11-24 before measurement; thresholds below are the registered candidates (calibration result in docs/lanes/WT.md)",
+  "grid": [32, 18],
+  "near_m": 1.2,
+  "near_fraction_max": 0.5,
+  "plane_fraction_max": 0.6,
+  "max_run_seconds": 1.0,
+  "basis": "ASSUMED. A frame is non-informative when more than near_fraction_max of a 32x18 grid of rays (through the 24 mm / 36 mm lens, glazing treated as transparent) hits within near_m, or more than plane_fraction_max of the hits lie on one plane (one wall or wardrobe front). A run longer than max_run_seconds fails."
+}
