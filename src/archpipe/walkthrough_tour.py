@@ -477,7 +477,7 @@ def frame_metrics(depth, points, normals, rule=None):
     near = float((depth < rule['near_m']).mean())
     plane = plane_fraction(points, normals)
     return dict(near_fraction=near, plane_fraction=plane, median_depth_m=float(np.median(depth)),
-                non_informative=bool(near > rule['near_fraction_max'] or plane > rule['plane_fraction_max']))
+                non_informative=bool(near > rule['near_fraction_max'] or plane > rule['plane_fraction_max'] or near+plane >= rule['combined_max']))
 
 
 def run_findings(rows, fps=24, max_seconds=1., waived=()):
