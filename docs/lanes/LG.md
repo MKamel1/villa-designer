@@ -162,7 +162,7 @@ Honest limits: three of four are blue hour with small warm accents; two fail `re
 ## Tests
 
 Fresh clone of the pushed `lane/LG` at `a36226c` (jobq, `NO_COLOR=1`, laneP-venv):
-* lane suite (`tests/lightcalc tests/luminaires tests/lightverify tests/landscape tests/critic tests/test_villa_lighting.py tests/test_exposure_groups.py tests/test_villa_render_*.py tests/parity tests/markup`): see the hand-back (job `LG-tests-lane-2`, log below).
+* lane suite (`tests/lightcalc tests/luminaires tests/lightverify tests/landscape tests/critic tests/test_villa_lighting.py tests/test_exposure_groups.py tests/test_villa_render_*.py tests/parity tests/markup`): **752 passed, 5 skipped, 1 xfailed, 0 failed** (`LG-tests-lane-2`, 18 min).
 * scene group (`tests/test_mounting*.py tests/test_d1_*.py tests/test_villa_parking.py`): **124 passed, 1 skipped** (`LG-tests-scene-2`).
 * `python -m archpipe.compliance.run_d1` (`LG-run-d1-2`): exit 0, 198 results, **0 failing gates** (the regenerated L1 report was left in the throwaway clone).
 * New tests: `tests/lightcalc/test_garden.py` (33: Cards 2, SafetyPlanes 8, Headroom 4, Dining 3, Spill 5, Glare 2, ZonesModel 2, Verification 8 incl. mutations and hand calculation, RadianceCrossCheck 2 with a negative) and `tests/lightcalc/test_garden_scene.py` (16).
