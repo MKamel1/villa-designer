@@ -54,7 +54,7 @@ class Lights(unittest.TestCase):
             self.assertTrue(0 < l["dimmer"] <= 1)
             self.assertAlmostEqual(l["dimmer"], GD.SCENES[GD.RENDER_SCENE]["levels"][l["garden_lg"]["zone"]], places=3)
 
-    def test_ies_files_are_the_manufacturers_and_the_assumed_one(self):
+    def test_ies_files_are_the_manufacturers_own(self):
         import tempfile, pathlib
         from archpipe.photometry import parse
         with tempfile.TemporaryDirectory() as d:
@@ -63,8 +63,10 @@ class Lights(unittest.TestCase):
                 t = pathlib.Path(d) / by[lid]["ies"]
                 PRD.write_ies(by[lid], t)
                 ph = parse(t.read_text(encoding="utf-8"))
-                self.assertGreater(ph.integrated_flux if not callable(ph.integrated_flux) else ph.integrated_flux(), 200)
+                want = {"gl-NP-1": 676.0, "gl-UP-1": 90.9}[lid]            # the Kew file integrates 90.9 lm (stated 93: the open V10 miss)
+                self.assertAlmostEqual(ph.integrated_flux(), want, delta=0.5)
             self.assertIn("ERCO", (pathlib.Path(d) / by["gl-NP-1"]["ies"]).read_text(encoding="utf-8"))
+            self.assertIn("John Cullen", (pathlib.Path(d) / by["gl-UP-1"]["ies"]).read_text(encoding="utf-8"))
 
 
 class Bodies(unittest.TestCase):

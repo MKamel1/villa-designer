@@ -23,7 +23,7 @@ Function and beauty per space, with the client's aesthetic (flush/concealed for 
 
 **No ambient luminaire is flush or concealed in the ground** because no 2700 K / CRI >= 90 / DALI / IP67 in-ground product with a downloadable photometry file was found (below). Everything is wall-, post- or branch-mounted, shielded, aimed down.
 
-## Fittings (22: 19 ERCO Iku, 3 ASSUMED uplights). Positions are model metres, third value = height above ground (scene z = -3.00 + h)
+## Fittings (22: 19 ERCO Iku, 3 John Cullen Kew 25 uplights). Positions are model metres, third value = height above ground (scene z = -3.00 + h)
 
 | id | zone | role | product | x, y, h | mount |
 |---|---|---|---|---|---|
@@ -46,9 +46,9 @@ Function and beauty per space, with the client's aesthetic (flush/concealed for 
 | GR-1 | graze | beauty | ERCO Iku B0000184 | 28.15, -27.50, 3.40 | rear wall bracket 0.15 m off the face |
 | GR-2 | graze | beauty | ERCO Iku B0000184 | 28.15, -24.40, 3.40 | rear wall bracket 0.15 m off the face |
 | GR-3 | graze | beauty | ERCO Iku B0000184 | 26.40, -20.75, 3.40 | south wall bracket 0.15 m off the face |
-| UP-1 | uplight | beauty | ASSUMED uplight (no product) | 26.55, -23.30, 0.05 | in-ground spike beside the crape stem |
-| UP-2 | uplight | beauty | ASSUMED uplight (no product) | 27.35, -22.95, 0.05 | in-ground spike beside the olive stem |
-| UP-3 | uplight | beauty | ASSUMED uplight (no product) | 21.95, -21.70, 0.05 | in-ground spike beside the east-yard olive |
+| UP-1 | uplight | beauty | John Cullen Kew 25 GLK2SM254 | 26.55, -23.30, 0.05 | ground spike (IP66) beside the crape stem |
+| UP-2 | uplight | beauty | John Cullen Kew 25 GLK2SM254 | 27.35, -22.95, 0.05 | ground spike (IP66) beside the olive stem |
+| UP-3 | uplight | beauty | John Cullen Kew 25 GLK2SM254 | 21.95, -21.70, 0.05 | ground spike (IP66) beside the east-yard olive |
 
 Mounting items that are **assumptions to detail** (not products): the 0.30 m stainless wall arm below the first-floor slab edge (the Iku is a surface-mounted downlight; ERCO lists no arm for it), the non-combustible bracket on the sister-screen posts (the fire pit's own installation
 manual governs clearances), the tree-friendly clamp on the crape's lower branches (an arborist's detail; no screws through bark; the crown must be pruned so the branch is at 3.0 m over the table).
@@ -58,7 +58,7 @@ manual governs clearances), the tree-friendly clamp on the crape's lower branche
 | role | product | evidence | status |
 |---|---|---|---|
 | every safety fitting, dining downlights, wall graze | **ERCO Iku surface-mounted downlight B0000184**, 5 W (7 W system) 676 lm, IP65 / IK07, DALI-2 1-100 %, CRI 92, own ERCO LDT/IES in `knowledge/lighting-products/erco/B0000184` | V10 **pass**: Imax 815 cd, 676 lm, lux on axis at 1-5 m and cone diameters within 1.7 % of the datasheet (LP lane, `candidates.json`); V1 here: integrated 676.4 lm vs 676 (0.07 %) | **verified photometry; CCT deviation**: ERCO lists it at 3000 K and says 2700 K / CRI 92 "available on request". No 2700 K file exists, so the 3000 K photometry is used (same optic), the renders tint 2700 K. The flux of the 2700 K variant is unknown (a few % lower is typical); V12 headroom (<= 11 % output needed) absorbs it. **Confirm the 2700 K article number with ERCO before ordering.** |
-| tree uplights (3) | requirement only: in-ground or spike narrow uplight, 2700 K, CRI >= 90, DALI, IP67, beam about 25 deg, 200-400 lm | none: iGuzzini BV66 and EP66 floodlights have photometry but CRI 82-83 (fail >= 90) and are tunable white; no ERCO or iGuzzini 2700 K in-ground product with an LDT was reachable (iGuzzini family pages are JavaScript and list no codes; ERCO's outdoor finder lists 3000/4000 K only, LP lane) | **UNVERIFIED**: ASSUMED 250 lm / 25 deg generic file, `up-assumed`. Cannot be bought on this evidence; the person must fetch a candidate's LDT and run V1/V10 first |
+| tree uplights (3) | **John Cullen Kew 25 Spike, Medium 22 deg, GLK2SM254**, 2700 K, CRI 98, 1.5 W 93 lm 479 cd, IP66 spike, DALI by driver option; own LDT/IES (family file) in `knowledge/lighting-products/john-cullen/GLK2SM254` | V10 (`candidates.json`, `garden_uplight_candidates`): peak 479 cd **pass** (0.2 %), beam 22 deg **pass** (0.9 %), lumens **FAIL at the 2 % bar** (file integrates 90.9 lm vs 93 stated, -2.25 %) | **file is not the 2027 article's own; DALI-2 not stated; V10 lumens miss**: see "Tree uplight selection" below |
 
 Alternates (none priced, none a swap-in without its V10 run):
 * **iGuzzini BX67** (Laser Blade InOut recessed, IP65, 2700 K, CRI 97, Rf 95, DALI-2, 12.5 W, 654.5 lm, wide flood 47 deg; page https://www.iguzzini.com/en/bx67/): a recessed soffit luminaire, an alternate for the facade positions if the first-floor slab overhangs (it needs a soffit). **No photometry file on the page** (the person downloads it), so it is not verifiable here.
@@ -85,6 +85,75 @@ Dimming need (V12, plane met at its recommended value): fire pit **0.073**, nort
 (The north-pond level is .08 in all four scenes; the table above lists the scene levels as written in `SCENES`.) The first-pass 12 % pond level lit the margin at 22 lx: the north court is calm at 8 %.
 No steps exist in the decided layout (single level, `steps: []`), so there is no step plane; `LS-STEP-*` are not evaluated for lighting.
 The water surface is lit nearly as much as the margin (85 %): the Iku is a downlight and cannot be shielded from the water it stands over. The policy check (water <= margin) passes; "do not flood the water" is therefore met only in the weak sense. Reported, not tuned away.
+
+## Tree uplight selection (2026-11-24): the assumed generic uplight is replaced
+
+**Rules (client, all required):** 2700 K; CRI >= 90 (R9 if published); DALI-2 (or DALI with a documented DALI-2 driver), no phase-cut; IP67+ in-ground, or IP65+ spike/surface if in-ground is impossible; a manufacturer
+photometric file for the EXACT article (V10); beam 10-40 deg; glare control (recessed lamp, honeycomb or snoot); no prices.
+
+**Beam from the tree geometry** (`layout-final.json`): crape crown 4.0 m spread, clear stem 2.2 m, top 4.5 m (2.3 m deep); olives 3.6 m and 2.6 m, same heights. A spike beside the stem is 3.4-3.7 m (slant) from the crown's centre,
+so a 22 deg beam paints a 1.3-1.4 m disc: the heart of the crown and the stems, soft at the edge. 11 deg (0.65-0.7 m) lights a stripe; 30 deg (1.9 m) spreads the light thin over a crown it still does not fill and loses the modelling of the
+stems. Medium (22 deg) is the choice; the ASSUMED file was 25 deg.
+
+**In-ground was impossible on this evidence:** no in-ground product with 2700 K and CRI >= 90 and a downloadable file for its exact article was found (table). The client's fallback applies: a spike spotlight, IP65+.
+
+### Candidates, rule by rule (datasheet line quoted; retrieved 2026-11-24)
+
+| # | candidate | 2700 K | CRI >= 90 | DALI-2, no phase-cut | IP | file for the exact article | beam | glare control | verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| A | **John Cullen Kew 25 Spike, Medium 2027, GLK2SM254** (spike) | "COLOUR TEMPERATURE 2700K" **met** | "CIE CRI AVAILABLE AS 98 Ra", "IES TM-30 Rf 94, Rg 98.4"; R9 not published **met** | "DIMMING PROTOCOL DALI/Mains (Phase)/0-10V/Casambi/Non-Dim": DALI is an option, phase is another option, **DALI-2 not stated: unmet, to confirm** | "INGRESS RATING IP66" **met (spike)** | "Kew_25_Photometrics.zip": LDT + IES for Medium/Narrow/Wide at 350/500 mA, but the family file (LUMCAT GLK2XMXX3, 2023), **not the 2027 article's own: unmet, to confirm** | "BEAM ANGLE 22 deg" **met** (narrow 11, wide 30) | "A shielded light source delivers precise beam control with minimal glare" **met as shielded**; no snoot/honeycomb accessory listed | **PICK** |
+| B | **ERCO Kona 35394.000** (spike, 107 mm, 14 deg spot, 622 lm, 7.9 W) | "LED module: 6.1W 777lm 3000K"; "Version with 3000K CRI 97 or 2700K, 3500K CRI 92 available on request" **unmet: 3000 K only, no 2700 K file** | "Colour rendition index CRI 92" **met** | "DALI-2", "ERCO DALI control gear" **met** | "Protection mode IP65"; Ground spike listed as accessory **met (spike)** | own ERCO LDT + IES + PDF for 35394.000 **met (3000 K)** | Imax 6245 cd, "14.7 deg" **met** | "Internal anti-glare cone, polymer, black lacquered. Cut-off angle 30 deg" **met** | **ALTERNATE** (client accepts 3000 K, as already for the Iku) |
+| C | ERCO Tesis New (in-ground), narrow spot / spot sizes | "2700K, 3500K with CRI 92" under "Variants on request" **unmet** | "3000K CRI 92" standard, 97 on request **met** | "DALI dimmable" **met** | "Protection mode IP68" **met, in-ground** | 3000 K articles only; no 2700 K article exists to download **unmet** | narrow spot / spot **met** | covered/flush glass **met** | rejected: 2700 K is on request, no file. Candidate if the client accepts 3000 K in-ground (not downloaded: no article chosen) |
+| D | BEGA 84 255 K27 (in-ground floodlight, 5 deg half beam) | "Colour temperature 2700 K" **met** | "Colour rendering index CRI > 80" **unmet** | "DALI-controllable" **met** | "IP 68" **met** | the cdn pattern for the manual works (`/manuals/en`), no LDT/IES URL found by a script **unmet (not retrievable)** | half beam 5 deg = 10 deg full, edge **met** | not read | rejected: CRI > 80 |
+| E | WE-EF ETC310-FS LED, "[EES] symmetric, very narrow beam, sharp cut-off", 185-9977 | "LED-3/6W/2700K 652.3 lm" **met** | "CRI 80" in the table **unmet** | static white: "Integral EC electronic converter", "1-10 V analogue dimming on request"; DALI only on the TW versions **unmet** | "IP67", also "IP68" on the page **met, in-ground** | "Photometrics (ZIP)" per article **met** (not downloaded) | very narrow / medium **met** | sharp cut-off optic **met** | rejected: CRI 80, no DALI on static white |
+| F | iGuzzini Lun-Up Evo BE16 / BE17; Light Up Earth E143 (in-ground) | BE16, BE17: "3000 K"; E143 "3000 K" **unmet** | "CRI 82" (all three) **unmet** | E143 "DALI-2"; BE16/17 24 V DC external supply **partly** | not read from the product pages (a search snippet says IP67 / IP68) **unverified** | LDT/IES by code (static URL), not downloaded **met** | 32 / 26 deg **met** | recessed **met** | rejected: 3000 K and CRI 82 |
+| G | iGuzzini Laser Blade InOut BX67 (recessed soffit; found by search) | "2700 K" **met** | "CRI 97, Rf 95" **met** | "Control DALI-2" **met** | "IP65" **met** | no file on the page **unmet** | "WF - Wide Flood 47 deg" **unmet (>40)** | recessed **met** | rejected for uplighting: a soffit luminaire, 47 deg |
+| H | iGuzzini P772, P309 (ceiling-recessed, from a search snippet only, page not read) | 2700 K | CRI 92 | DALI-2 | not an outdoor in-ground | not checked | 10 / 14 deg | | not an outdoor uplight; not pursued |
+| I | Simes S.8894H (walk-over), Minilinear/Miniround; LuxR Micro Spike; Cooper Boca 696 | search snippets only: 2700 K (Simes on request), CRI 90 (Simes, LuxR), DALI on S.8894H | | | IP67 / IP68 / IP67 | **none found** | 16 deg (LuxR), 12 deg (Boca) | | not verified: no spec page and no file reached |
+| J | Zumtobel, Flos Outdoor, Delta Light, Hunza, Linea Light, Lumascape, Targetti, Signify Color Kinetics (white) | | | | | | | | **not evaluated**: the searches returned no product page with these rules and no file; the Zumtobel/Delta pages were found JavaScript-gated by the earlier lane (`candidates.json` `sourcing_log`) |
+
+**Why A is the pick:** it is the only candidate that meets 2700 K, CRI >= 90, IP65+ spike, 10-40 deg and a shielded source together with a downloadable manufacturer file. Its open points are the exact-article file and DALI-2 (below).
+**Why B is the alternate:** the only candidate with DALI-2, an exact-article file and an anti-glare cone documented line by line, but only at 3000 K; an ERCO 2700 K article would need to be requested (no file exists today).
+
+### V10 on the candidates (`archpipe.luminaires.v10.check_product`; published points = the datasheet's own; results in `candidates.json` -> `garden_uplight_candidates`)
+
+| product / file | lumens (2 %) | Imax (5 %) | beam angle (5 %) | other points | V10 |
+|---|---|---|---|---|---|
+| Kew 25 medium 500 mA (bound) | stated 93: file 90.9 / 91.2 independent, **-2.25 % FAIL** | 479 cd: 478.1, 0.2 % pass | 22 deg: 21.8, 0.9 % pass | none published | **fail (lumens by 0.25 point)** |
+| Kew 25 narrow 500 mA | 94: 93.8, 0.25 % pass | 1349 cd: 1334.9, 1.0 % pass | 11 deg: 11.2, 2.7 % pass | none | pass |
+| Kew 25 medium 350 mA / wide 500 mA / wide 350 mA / narrow 350 mA (not saved) | -3.3 % fail / -2.05 % fail / -1.1 % pass / -1.2 % pass | all within 1.4 % | all within 0.6 % (narrow 2.7 %) | | fail / fail / pass / pass |
+| ERCO Kona 35394 | 622: 623.1, 0.3 % pass | 6245 cd: 6230, 0.2 % pass | | lux on axis at 2, 4, 6, 8, 10 m: 0.04-0.7 % pass; beam diameter D at 2-10 m: **5.4-6.4 % FAIL** (the engine's 50 %-of-axis cone is 15.6 deg; ERCO prints 14.7 deg) | **fail (beam diameter)**; the file is ERCO's own |
+
+The Kew 93 lm in the file header integrates to 90.9 lm: the file is an LDT converted by a third-party viewer (the IES says so), the datasheet quotes "+-5 % tolerance". Reported, not relaxed, not repaired. The Kew medium is bound for its beam;
+the **narrow 500 mA file passes V10 clean** and is the swap if the 2 % bar must be met strictly (11 deg is narrower than the crowns).
+
+### Design before -> after (the three uplights UP-1..3)
+
+| | before (ASSUMED) | after (Kew 25 medium, GLK2SM254) |
+|---|---|---|
+| lumens / peak / beam | 250 lm (file 254.5) / 1189 cd / 25 deg | 93 lm (file 90.9) / 478 cd / 22 deg |
+| opening | 60 mm round (assumed) | 16 mm round (the LDT's own) |
+| power | 5 W (assumed) | 1.5 W |
+| CCT / CRI | 2700 K / >= 90 (requirement only) | 2700 K / 98 |
+| IP / mount | IP67 in-ground (requirement) | IP66 spike, 0.05 m above grade (head height ASSUMED, not on the datasheet) |
+| centre-of-beam lux on the crown at the gathering level 0.45 (3.4-3.7 m slant) | 39 / 46 / 45 lx | 16 / 18 / 18 lx (0.4 x; the scene levels were not raised: 0.80 x 478 cd is 71 % of the old peak) |
+| Ev on the apartment above, max (dining / gathering) | 0.39 / 0.59 lx | 0.12 / 0.17 lx (E3 2 lx) |
+| Ev max, all other sensor groups | unchanged | unchanged (rear neighbour 0.0003 -> 0.0018 lx from the stray light of the Kew head) |
+| I toward a sensor (dining / gathering) | 181 / 254 cd (GR-3) | 181 / 254 cd (unchanged: the graze fitting, not the uplights) |
+| ULR (crown-aware, worst, UP-3) | 0.122 | **0.146** (E3 0.15: passes by 0.004; raw ULR 0.98) |
+| LA4 glare, worst luminance (dining / gathering) | 2163 / 2884 cd/m2 (DN-1) | 2163 / 2884 (DN-1), **only because the Kew is declared shielded**; as a bare 16 mm opening UP-3 would read 10 275 / 15 412 cd/m2 against the 3000 cap |
+| garden check counts | 50 pass, 0 fail | 50 pass, 0 fail |
+
+The ULR margin is thin: UP-3 (east-yard olive, the smallest crown, 2.6 m) lets 14.6 % of its flux past the crown with the 22 deg beam (12.2 % with the assumed 25 deg file and its cleaner skirt). A bare crown (winter) is already handled by switching the uplights off.
+
+### Not met / to confirm with John Cullen before ordering
+1. **DALI-2** is not stated; the datasheet lists "DALI" among the dimming protocols (the driver is a separate IP66 enclosure, accessories ACENIPLRG / ACENIPSML). Ask for the DALI-2 driver part and a no-phase-cut driver.
+2. **The exact-article photometry**: the LDT/IES are the Kew 25 family files (2023/24), the order code is GLK2SM254 of the 2027 range. Ask for the file of the 2027 article; re-run V10.
+3. **V10 lumens -2.25 %** on the medium file (see above).
+4. **IP66 spike, not IP67 in-ground**: no in-ground product met the rules (table). The Kew spike needs a planting bed for its ground spike; a permanent in-ground installation is not offered.
+5. **Glare**: "shielded" is the datasheet's word; no honeycomb or snoot is listed; the head height above grade and its hood depth are not on the datasheet (the 0.05 m is ASSUMED).
+6. **R9** is not published (Rf 94, Rg 98.4 are).
+7. The uplight levels in the scenes (0.30, 0.45) were designed for a 1189 cd file; the crown now gets 0.4 x the light. They can rise to 0.80 within the V12 cap; not done.
 
 ## Obtrusive light and privacy (SLL Table 3.2, zone E3, post-curfew column: Ev 2 lx, I 1000 cd, ULR 0.15; pre-curfew 10 lx / 10 000 cd)
 
