@@ -357,20 +357,61 @@ def workbench(args,path,scene,context):
     indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
     camera,_=V.configure_camera(views[indices[0]])
     metrics_file=out/'metrics.json';rows={r['index']:r for r in json.loads(metrics_file.read_text())} if metrics_file.exists() else {}
+    cull=None
+    if args.cull>0:
+        objs=[o for o in bpy.context.scene.objects if o.type=='MESH' and not o.hide_render]
+        boxes=np.array([[list(o.matrix_world@Vector(c)) for c in o.bound_box] for o in objs]);lo=boxes.min(1);hi=boxes.max(1)
+        cull=(objs,lo,hi,np.zeros(len(objs),bool));print('WALKTHROUGH culling',len(objs),'objects',flush=True)
     started=time.monotonic();done=0
     for index in indices:
         jpg=out/f'frame-{index:05d}.jpg'
-        need_image=not args.metrics_only and not jpg.exists()
+        need_image=not args.metrics_only and not jpg.exists() and not args.animation
         if index in rows and not need_image:continue
         place_camera(camera,views[index]['camera']);bpy.context.view_layer.update()
+        t0=time.monotonic()
         if index not in rows:
             depth,pts,nor,ok=depth_samples(camera,rule['grid'])
             m=frame_metrics(depth,pts,nor,rule);m['index']=index;rows[index]=m
+        if cull and need_image:
+            objs,lo,hi,hidden=cull;c=np.array(views[index]['camera']['position']);g=path['frames'][index]['ground_m']
+            far=((lo[:,0]>c[0]+args.cull)|(hi[:,0]<c[0]-args.cull)|(lo[:,1]>c[1]+args.cull)|(hi[:,1]<c[1]-args.cull)
+                 |(hi[:,2]<g-3.6)|(lo[:,2]>g+6.6))
+            for k in np.where(far!=hidden)[0]:objs[k].hide_render=bool(far[k])
+            hidden[:]=far
+        t1=time.monotonic()
         if need_image:
-            s.render.filepath=str(jpg);bpy.ops.render.render(write_still=True)
+            s.render.filepath=str(jpg)
+            if args.opengl:bpy.ops.render.opengl(write_still=True,view_context=False)
+            else:bpy.ops.render.render(write_still=True)
         done+=1
+        if done<=12 or done%500==0:print('WALKTHROUGH timing',index,'rays',round(t1-t0,2),'render',round(time.monotonic()-t1,2),flush=True)
         if done%500==0:
             save(metrics_file,[rows[k] for k in sorted(rows)]);print('WALKTHROUGH workbench',done,'/',len(indices),round(time.monotonic()-started),'s',flush=True)
+    if args.animation and not args.metrics_only:
+        # one animation render: the engine and its scene copy persist across frames (a fresh render per frame re-exports the whole scene, ~6 s)
+        todo=[i for i in indices if not (out/f'frame-{i:05d}.jpg').exists()]
+        if todo:
+            camera.animation_data_clear()
+            for i in todo:
+                place_camera(camera,views[i]['camera'])
+                for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
+                camera.data.keyframe_insert('shift_y',frame=i)
+            for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
+                for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+            run=todo[0];first=todo[0]
+            s.frame_start=min(todo);s.frame_end=max(todo);s.frame_step=1
+            s.render.filepath=str(out/'frame-#####');t2=time.monotonic()
+            if len(todo)==s.frame_end-s.frame_start+1:bpy.ops.render.render(animation=True)
+            else:
+                # sparse (resume): render each maximal run
+                runs=[];a=b=todo[0]
+                for i in todo[1:]:
+                    if i==b+1:b=i
+                    else:runs.append((a,b));a=b=i
+                runs.append((a,b))
+                for a,b in runs:
+                    s.frame_start,s.frame_end=a,b;bpy.ops.render.render(animation=True)
+            print('WALKTHROUGH animation',len(todo),'frames',round(time.monotonic()-t2,1),'s',flush=True)
     save(metrics_file,[rows[k] for k in sorted(rows)])
     print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
 
@@ -413,7 +454,7 @@ def main():
     parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','workbench','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
     parser.add_argument('--frames');parser.add_argument('--segments')
-    parser.add_argument('--target-stage');parser.add_argument('--metrics-only',action='store_true');parser.add_argument('--out-name')
+    parser.add_argument('--target-stage');parser.add_argument('--metrics-only',action='store_true');parser.add_argument('--out-name');parser.add_argument('--opengl',action='store_true');parser.add_argument('--cull',type=float,default=0.);parser.add_argument('--animation',action='store_true')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production pin is Blender 4.5.14')
     if args.stage=='preflight':
