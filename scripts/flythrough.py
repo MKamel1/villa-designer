@@ -260,12 +260,27 @@ def report(out):
     """Non-informative-frame report for the workbench pass: metrics runs, direction, coverage, stair; written to report.json."""
     from archpipe import walkthrough_tour as WT
     path=require_inputs(out);rule=WT.informative_rule()
-    rows=json.loads((out/'workbench'/path['sha256'][:10]/'metrics.json').read_text())
-    waived={f['index'] for f in path['frames'] if f['station'] in {s['room'] for s in path['stations'] if s.get('flagged_under_1m')} and f['phase']=='turn'}
-    strict=WT.run_findings(rows,24,rule['max_run_seconds']);kept=WT.run_findings(rows,24,rule['max_run_seconds'],waived=waived)
-    rooms=[s['room'] for s in path['stations'] if s['room']]
-    result=dict(rule=rule,frames=len(rows),non_informative_frames=sum(r['non_informative'] for r in rows),
-        runs_over_limit_all=strict,runs_over_limit_after_waiver=kept,waived_frames=len(waived),
+    wb=out/'workbench'/path['sha256'][:10]
+    rows={r['index']:r for r in json.loads((wb/'metrics.json').read_text())}
+    for extra in sorted((out/'workbench').glob('pan*/metrics.json')):   # re-measured subsets (glass classified by material) override
+        rows.update({r['index']:r for r in json.loads(extra.read_text())})
+    rows=[rows[k] for k in sorted(rows)];phase={f['index']:f['phase'] for f in path['frames']}
+    flagged={s['room'] for s in path['stations'] if s.get('flagged_under_1m')}
+    waived={f['index'] for f in path['frames'] if f['station'] in flagged and f['phase']=='turn'}
+    move=[r for r in rows if phase[r['index']]!='turn'];turn=[r for r in rows if phase[r['index']]=='turn']
+    runs=WT.run_findings(move,24,rule['max_run_seconds'])
+    runs_turn=WT.run_findings(turn,24,rule['max_run_seconds'],waived=waived)
+    per_room={}
+    for f in path['frames']:
+        if f['phase']=='turn':
+            a=per_room.setdefault(f['station'],[0,0]);a[1]+=1
+    bad={r['index'] for r in rows if r['non_informative']}
+    per_room={k:[sum(1 for f in path['frames'] if f['station']==k and f['phase']=='turn' and f['index'] in bad),sum(1 for f in path['frames'] if f['station']==k and f['phase']=='turn')] for k in per_room}
+    rooms=[s['room'] for s in path['stations'] if s['room'] and s['kind']=='turn']
+    result=dict(rule=rule,frames=len(rows),non_informative_frames=len(bad),
+        moving_frames=len(move),moving_non_informative=sum(r['non_informative'] for r in move),runs_over_limit_walk_stair_pan=runs,
+        turn_frames=len(turn),turn_non_informative=sum(r['non_informative'] for r in turn),runs_over_limit_in_turns_unwaived=runs_turn,
+        turn_wall_facing_fraction_by_room={k:round(v[0]/v[1],2) for k,v in per_room.items()},waived_turn_frames=len(waived),
         direction_findings=WT.direction_findings(path['frames']),stair_findings=WT.stair_findings(path['frames']),
         coverage_findings=WT.coverage_findings(path['frames'],rooms),path_sha256=path['sha256'])
     save(out/'report.json',result);print(json.dumps({k:(v if not isinstance(v,list) else len(v)) for k,v in result.items() if k!='rule'}))
