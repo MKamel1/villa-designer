@@ -436,3 +436,102 @@ I looked at every image. What each shows, honestly:
 7. **Products with no Egypt supplier found (`egypt.available: unknown`, no price):** Marazzi (floor-basement, floor-wet, wall-tile-wet: only a Dubai showroom reported), Havwoods Cantal (floor-gf), Dulux Australia Off White and Nile Clay (not Egypt products; Jotun Egypt colour matches would be needed), Cosentino Dekton (worktop, backsplash: Dubai hub), FENIX 0719 ("to be checked"), EGGER (kitchen joinery, joinery-timber, joinery-light: a third-party list shows an Egyptian EGGER agent, unverified), Durian door (an Indian maker). Books (Rizzoli) and garments (UNIQLO) not checked. The 27 IKEA soft items are available through IKEA Egypt.
 8. **Texture scale is the product format** (Marazzi 120 cm, Dekton slab 3.27 m, Havwoods plank 2.35 m): one look-alike image per format unit, so the worktop and the plank read soft at close range (400-630 px/m). A measured sample would replace the look-alike.
 9. n02 keeps the day group's blue cast and the windows stay blown by day (RF items, not finishes).
+
+
+---
+
+# Round 3 (2026-11-23): render-fidelity fixes (lead findings on the applied drafts)
+
+## 1. Colours now come from the makers' own images (cause, fix, evidence)
+
+* **Cause.** Every finish colour in `render-colours.json` (and the soft-goods `NAME_HEX` table) was an estimate from the maker's colour NAME. The lead read the en-suite as a "flat dark copper-brown" and expected a light beige marble. **The maker's own image says the premise was wrong: Marazzi Grande Marble Look Frappuccino (M0G3) is a dark brown marble** (the maker's alt text on the page: "gres porcellanato marrone scuro"; sampled mean `#514238`, luma 0.060). The flatness had a different cause: the look-alike was `Marble015`, a near-uniform cream (luma spread cv 0.02) against the maker's strongly veined slab (cv 0.78), so a dark tint on it gave a flat panel. The product stays (client's choice); the colour and the look-alike change.
+* **Fix.** `scripts/source_maker_colours.py` downloads the maker's swatch (or product photo, backdrop masked) and samples the mean colour in linear space (`src/archpipe/interior/maker_colour.py`), recording the URL, sha256, mode and luma spread in `render-colours.json` (images are the makers' and are cached, not committed). Dulux publishes the hex on the colour page ("Hex" row), used as published. `scripts/build_chosen.py` writes the source into every slot (`colour_source`). **Guard:** `interior/chosen.py::colour_problems` (run by `problems()` and `tests/interior/test_chosen.py::MakerColour`) fails any chosen product without a maker-sourced colour; the one documented gap is `UNSOURCED` (below). The look-alike pattern guard fails a look-alike whose luma spread is outside 0.25 to 4 times the maker image's; its negative control is the real defect (Marble015 vs M0G3 is 39 times off).
+* **Items whose colour was a name-based estimate, all now sampled (48 chosen products; before and after):**
+
+| item | product | before (name-based estimate) | now (maker image, mean linear) | method | maker image / page |
+|---|---|---|---|---|---|
+| C-floor-living | Marazzi Taupe | #a39786 | #aca29b | swatch | https://www.marazzi.it/app/uploads/collezioni/mystone-gris-fleury-mlgy/marazzi_mystone_gris_fleury_mlgy-800x400.jpg |
+| C-floor-gf | Havwoods Smoked Cocoa (colour group Cocoa) | #5a4332 | #3f3326 | swatch | https://res.cloudinary.com/havwoods-global/image/upload/ar_1.4429824561403508,c_fill,g_center,w_1479/f_auto/q_auto/v1721144786/image_%7C_hw7470_%7C_panel_%7C_photo.jpg |
+| C-floor-wet | Marazzi Taupe | #a09484 | #aa9e8e | swatch | https://www.marazzigroup.com/app/uploads/collezioni/mystone-limestone20-m7sq/marazzi_mystone_limestone20_m7sq.jpg |
+| C-bath-tile | Marazzi Frappuccino | #b8a58e | #514238 | swatch | https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m0g3/marazzi_grande_marble_look_m0g3-800x800.jpg |
+| B-wall-paint | Dulux (Australia) Off White | #efebe3 | #f9f1e1 | published-hex | https://www.dulux.com.au/specifier/colour/whites-sw1/off-white |
+| C-wall-paint | Dulux Australia Nile Clay | #8b8074 | #8b8074 | published-hex | https://www.dulux.com.au/specifier/colour/s13/nile-clay/ |
+| B-worktop | Cosentino Nacre | #e2d9cb | #ded4c0 | swatch | https://assetstools.cosentino.com/api/v1/bynder/color/CKC/detalle/CKC-thumb.jpg?w=700&h=700&auto=compress%2Cformat |
+| B-backsplash | Cosentino Nacre | #e2d9cb | #ded4c0 | swatch | https://assetstools.cosentino.com/api/v1/bynder/color/CKC/detalle/CKC-thumb.jpg?w=700&h=700&auto=compress%2Cformat |
+| B-kitchen-front | FENIX Beige Luxor | #cdc0a8 | #b0a187 | swatch | https://res.cloudinary.com/dozlb75sf/image/upload/v1679331548/FENIX%20Colours/Thumb/FENIX_0719_BEIGE_LUXOR_thumb_eloyrz.jpg |
+| B-joinery-light | EGGER Natural Halifax Oak | #c0a27a | #ba9c77 | swatch | https://cdn.egger.com/img/pim/8854365372446/8854523117598/original.png |
+| C-joinery-timber | EGGER Brown Halifax Oak | #4b3626 | #735a42 | swatch | https://cdn.egger.com/img/pim/8860203974686/8860204007454/original.png |
+| C-joinery-light | EGGER Natural Halifax Oak | #b08e62 | #ba9c77 | swatch | https://cdn.egger.com/img/pim/8854365372446/8854523117598/original.png |
+| C-door | Durian Smoke Oak | #4a3c32 | #4a3c32 | - | - |
+| C-cushion-living-sofa-1 | IKEA dark brown | #4a3426 | #362b24 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg |
+| C-cushion-living-sofa-2 | IKEA dark green | #3d4a36 | #2a3328 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-green__1502326_pe1007596_s5.jpg |
+| C-cushion-living-sofa-3 | IKEA light brown | #b8987a | #a9795a | product | https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg |
+| C-cushion-lounge-sofa-1 | IKEA dark green | #3d4a36 | #2a3328 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-green__1502326_pe1007596_s5.jpg |
+| C-cushion-lounge-sofa-2 | IKEA dark grey | #4a4a48 | #4f4f51 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-grey__1284674_pe933082_s5.jpg |
+| C-cushion-lounge-sofa-3 | IKEA yellow-brown | #b88a4a | #a3763b | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-yellow-brown__1502327_pe1007597_s5.jpg |
+| C-cushion-study-sofa-1 | IKEA dark brown | #4a3426 | #362b24 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg |
+| C-cushion-study-sofa-2 | IKEA light beige | #d9ccb4 | #d5cab8 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-light-beige__1284678_pe933086_s5.jpg |
+| C-cushion-cinema-sofa-1 | IKEA dark grey | #4a4a48 | #4f4f51 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-grey__1284674_pe933082_s5.jpg |
+| C-cushion-cinema-sofa-2 | IKEA dark brown | #4a3426 | #362b24 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg |
+| C-cushion-library-daybed-1 | IKEA yellow-brown | #b88a4a | #a3763b | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-yellow-brown__1502327_pe1007597_s5.jpg |
+| C-cushion-library-daybed-2 | IKEA light brown | #b8987a | #a9795a | product | https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg |
+| C-cushion-parents-bed-1 | IKEA light beige | #d8ccb6 | #d5cab8 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-light-beige__1284678_pe933086_s5.jpg |
+| C-cushion-parents-bed-2 | IKEA dark brown | #4a3426 | #362b24 | product | https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg |
+| C-cushion-parents-bed-3 | IKEA light brown | #b8987a | #a9795a | product | https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg |
+| C-throw-living-sofa | IKEA light grey | #c4c1ba | #b2ada2 | product | https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg |
+| C-throw-lounge-sofa | IKEA light grey | #c4c1ba | #b2ada2 | product | https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg |
+| C-throw-study-sofa | IKEA grey | #8a8a88 | #9f9f9e | product | https://www.ikea.com/eg/en/images/products/holmvi-throw-grey__1022849_pe832952_s5.jpg |
+| C-throw-cinema-sofa | IKEA grey | #8a8a88 | #9f9f9e | product | https://www.ikea.com/eg/en/images/products/holmvi-throw-grey__1022849_pe832952_s5.jpg |
+| C-throw-library-daybed | IKEA light grey | #c4c1ba | #b2ada2 | product | https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg |
+| C-throw-parents-bed | IKEA light grey | #bdbab3 | #b2ada2 | product | https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg |
+| C-rug-living | IKEA beige | #cdbd9f | #dccfc5 | product | https://www.ikea.com/eg/en/images/products/broenden-rug-low-pile-handmade-beige__0804523_pe769465_s5.jpg |
+| C-rug-lounge | IKEA beige | #c9b89a | #dccfc5 | product | https://www.ikea.com/eg/en/images/products/broenden-rug-low-pile-handmade-beige__0804523_pe769465_s5.jpg |
+| C-rug-parents-bedroom | IKEA beige | #c9b89a | #e1d8c3 | product | https://www.ikea.com/eg/en/images/products/tidtabell-rug-flatwoven-beige__1185186_pe898305_s5.jpg |
+| C-object-vase | IKEA dark grey-beige | #4a4a48 | #867974 | product | https://www.ikea.com/eg/en/images/products/stilren-vase-dark-grey-beige__1450873_pe990482_s5.jpg |
+| C-object-bowl-brown | IKEA brown | #6b4a35 | #5f4e48 | product | https://www.ikea.com/eg/en/images/products/stockholm-2025-bowl-brown__1387524_pe964281_s5.jpg |
+| C-object-bowl-beige | IKEA beige | #c9b89a | #b0a38f | product | https://www.ikea.com/eg/en/images/products/stockholm-2025-serving-bowl-beige__1387533_pe964285_s5.jpg |
+| C-book-wearstler-evocative | Rizzoli Kelly Wearstler: Evocative | none (look-alike own mean) | #a29372 | product | https://images.penguinrandomhouse.com/cover/9780847866038 |
+| C-book-wearstler-synchronicity | Rizzoli Kelly Wearstler: Synchroni | none (look-alike own mean) | #c6c3bd | product | https://images.penguinrandomhouse.com/cover/9780847873425 |
+| C-book-van-duysen-private | Rizzoli Vincent Van Duysen: Privat | none (look-alike own mean) | #a79073 | product | https://images.penguinrandomhouse.com/cover/9780847899555 |
+| C-book-loyzaga | Rizzoli Jorge Loyzaga: Classical a | none (look-alike own mean) | #8b7f6d | product | https://images.penguinrandomhouse.com/cover/9780847873678 |
+| C-garment-merino-olive | UNIQLO Olive | #6b6a3f | #948153 | swatch | https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/469426/chip/goods_56_469426_chip.jpg |
+| C-garment-merino-grey | UNIQLO Grey | #8a8a88 | #737376 | product | https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450514001/item/goods_06_450514001_3x4.jpg |
+| C-garment-linen-trouser | UNIQLO OLIVE | #6b6a3f | #6f7663 | swatch | https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/463857/chip/goods_57_463857_chip.jpg |
+| C-garment-merino-crew | UNIQLO GRAY | none (look-alike own mean) | #99999e | product | https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/429066/item/goods_03_429066_3x4.jpg |
+
+* **`C-door` (Durian Trace, Smoke Oak) is the one product still on its name-based estimate**: `durian.in` returns Cloudflare 522 to curl and to the browser tool, the Wayback Machine would not connect, and the brochure PDFs do not list Trace. It is a lead-confirmed slot, recorded in `chosen.UNSOURCED` with the reason; `tests/interior/test_chosen.py::MakerColour` pins that set to exactly this one id so it cannot grow silently. Run `scripts/source_maker_colours.py` when the site answers (add its image to `SWATCH`) and empty `UNSOURCED`.
+* **The sourced colours moved some finishes noticeably:** Smoked Cocoa is much darker than estimated (`#3f3326`, luma 0.036 against the old 0.062); the Natural Halifax Oak joinery is lighter and yellower; the Dekton Nacre worktop is lighter. The IKEA/UNIQLO fabrics are sampled from the product photo's foreground.
+
+## 2. Look-alikes checked against the makers' images
+
+| slot | maker image shows | look-alike | verdict |
+|---|---|---|---|
+| wall-tile-wet (Frappuccino) | dark brown marble, broad flowing bands, cream veins, cv 0.78 | was `Marble015` (cream, cv 0.02) | **swapped to `Marble011`** (grey-brown, white veins, cv 0.36, colour ratio 1:0.79:0.62 against the maker's 1:0.67:0.48). A first swap to `Marble008` had the right pattern but is orange (1:0.55:0.25) and per-channel matching turned its cream veins lilac in the render |
+| floor-gf (Smoked Cocoa oak) | clean wide plank, fine grain, bevelled seams, very dark | was `WoodFloor041` (knotty rustic boards in mixed light and dark tones) | **swapped to Poly Haven `laminate_floor_02`** (clean oak planks with seams, CC0, 1.7 m scan; colour 1:1:1.01 of the maker's). Plank tone comes from the maker's swatch, not the look-alike |
+| floor-basement (Gris Fleury) | fine speckled grey-taupe aggregate, cv 0.19 | `Marble007` (cloudy brown with dark blotches, cv 0.16) | kept; pattern scale and contrast agree, not an aggregate. The terrazzo candidates (`Terrazzo019*`) have chips that are too big |
+| floor-wet (Limestone20 taupe) | speckled stone, cv 0.12 | `Concrete012` (cv 0.09) | kept |
+| worktop (Dekton Nacre), kitchen joinery (Halifax oak) | near-uniform cream (cv 0.03); blond oak with wavy grain (cv 0.26) | `Marble025`; `white_oak_veneer` | kept; per-material pattern contrast now stretches the look-alike to the maker's spread (clamped 0.5 to 2) |
+
+## 3. Throws and cushions
+
+* **Cause.** `soft_dressing.py` lofted every cushion from seven rounded-rectangle rings (a flat plateau) and every throw as a three-layer slab.
+* **Fix.** Cushions are now an inflated closed shell (rounded-rectangle thickness profile, corner pinch, centre dimple, bowed cover, small wrinkles; 3,600 triangles); throws are a closed cloth shell (rolled rim, soft ridges, seeded wrinkle field) from the same module. The products, formats, schedule and placement are unchanged. The bed throw stays the existing Blender cloth simulation (`drape_cloth`), the same pipeline as the duvet. `src/archpipe/drape*.py` are garment cloth (wardrobe hangers) and do not apply to a throw on a sofa, so I did not force them.
+* **Guard.** `tests/interior/test_scene_finishes.py::SoftGeometry`: closed (every edge shared by two faces), outward normals, real volume, not a few planes.
+* **Evidence (looked at).** n13 and v05: cushions read as plump pillows (critic R8 2 in v05; in n13 the critic's R8 1 is about the bed's own pillows and the wall lamps). v33: critic R8 now **2** (it was 1, "flat rigid rectangles"). **The sofa throw still reads as a flat pale folded slab with a wavy top edge seen face-on from v33** (honest limit: no real cloth simulation on the sofas; a simulated throw over the library model needs invisible seat colliders and is the next step).
+
+## 4. Dark rooms (n01 dining, v06 kids' room): not a finish defect
+
+Mean relative luminance of the render (linear, Rec. 709 weights, `scripts/mean_luminance.py`, 96 spp, 1920 x 1280):
+
+| view | before the finishes (`60ed0fe`, old cream stone + walnut) | first finishes draft (name-based estimates) | final (maker colours, `L4-r4-draft-1`) |
+|---|---|---|---|
+| n01 dining, day | 0.1744 | 0.1834 | **0.1842** |
+| v06 kids' room A | 0.2237 | 0.2499 | **0.2452** |
+
+The mean is not lower with the finishes (n01 +6 %, v06 +10 %), because the exposure groups compensate and the walls stay Off White. What the eye reads as darker is the large dark masses (the Brown Halifax table, chairs and sideboard in n01; the Smoked Cocoa floor, whose sourced luma is 0.036, in v06): this is the true look of the chosen finishes, not a defect. The exposure groups **were** re-measured on the final tree (new jobq ids below). Membership changes against the previous record: render set n15 evening -> lamp-low-key and n16 lamp-dominant -> lamp-low-key (the dark marble absorbs the lamp light, so those rooms are exposed longer; they are now properly lit), production v01 lamp-dominant -> day. n01 and v06 do not change group.
+
+## Production scene, receipts, exposure, hashes (no bypass)
+
+* Merged `origin/integ/aplus` (nothing new since the last merge). Receipts regenerated baseline-relative twice (once for the colours and geometry, once after the Marble011 swap): old tree `e348c08` reproduces all 8 stored digests; section diff (`knowledge/approvals-review/evidence-l4/section-diff.json`): layout, specification, furniture, architecture, models and props unchanged; materials 40 changed ids, 0 added, 0 removed; meshes 9 changed ids (the cushions and throws on the cinema and study sofas and the parents' bed), 0 added, 0 removed; the parents' bed cloth specs unchanged. `review-current`: 16 individual + joint reviews, 0 findings. The second refresh's section diff against `e348c08` reports "RECEIPT-DIFFERS-FROM-OLD-TREE" only because the stored receipt is by then the first refresh.
+* Exposure: jobq `L4-r4-measure-prod-1` and `L4-r4-measure-set-1` (new ids; the earlier `L4-r3-measure-*` pair was superseded by the Marble011 swap), copied byte for byte.
+* Renders: jobq `L4-r4-draft-1` (96 spp, scene cache), JPEGs at 1500 px in `knowledge/render-set/l4/draft/`; critic VLM jobq `L4-r4-critic-vlm-2`, `knowledge/render-set/l4/critic-results.json`: **3 pass (n01, n03, v05), 7 fail** (R4 clipped window in n13, n16, v06; n02 blue cast R12; n15 and v34 framing and bare-room WARNs; v33 R12/R3 WARNs). None is a finish-colour finding.
