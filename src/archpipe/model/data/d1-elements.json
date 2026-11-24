@@ -46,14 +46,14 @@
   "floor": 30,
   "furniture": 79,
   "garden": 14,
-  "luminaire": 132,
+  "luminaire": 135,
   "plant": 80,
   "railing": 8,
   "room": 30,
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 109,
+  "type": 111,
   "wall": 36,
   "window": 8
  },
@@ -19971,7 +19971,7 @@
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 810.5,
+    "flux_lm": 500.5,
     "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
@@ -20025,7 +20025,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "ASSUMED generic linear LED bar over the mirror",
-    "flux_lm": 53.3,
+    "flux_lm": 38.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -20079,7 +20079,7 @@
     "layer": "task",
     "mount": "strip",
     "what": "backlit mirror halo, 2700 K",
-    "flux_lm": 93.2,
+    "flux_lm": 66.6,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -20110,7 +20110,169 @@
    }
   },
   {
-   "id": "lum-TOE-parents-ensuite-07",
+   "id": "lum-PCOVE-parents-ensuite-07",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    19924.0,
+    -31082.0,
+    1490.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1820.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "parents-ensuite",
+   "product_id": "iguzzini/ST39",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "PCOVE",
+    "layer": "decorative",
+    "mount": "strip",
+    "what": "LED cove framing the ensuite bath feature panel, 2700 K, IP65",
+    "flux_lm": 485.9,
+    "watts": 15.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 120.0,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "ST39",
+     "ies": "knowledge/lighting/ies/IGUZZINI-ST39.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.8,
+     0.6,
+     0.0
+    ],
+    "along": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "length_mm": 1820.0,
+    "illuminance_card": "",
+    "why": "LED cove, left edge of the bath feature panel (client reference image12)",
+    "emitter_z_scene_mm": 1490.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire-iguzzini-ST39-PCOVE-strip-1820-0"
+   }
+  },
+  {
+   "id": "lum-PCOVE-parents-ensuite-08",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    21484.0,
+    -31082.0,
+    1490.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1820.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "parents-ensuite",
+   "product_id": "iguzzini/ST39",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "PCOVE",
+    "layer": "decorative",
+    "mount": "strip",
+    "what": "LED cove framing the ensuite bath feature panel, 2700 K, IP65",
+    "flux_lm": 485.9,
+    "watts": 15.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 120.0,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "ST39",
+     "ies": "knowledge/lighting/ies/IGUZZINI-ST39.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     -0.8,
+     0.6,
+     0.0
+    ],
+    "along": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "length_mm": 1820.0,
+    "illuminance_card": "",
+    "why": "LED cove, right edge of the bath feature panel (client reference image12)",
+    "emitter_z_scene_mm": 1490.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire-iguzzini-ST39-PCOVE-strip-1820-0"
+   }
+  },
+  {
+   "id": "lum-PCOVE-parents-ensuite-09",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    20704.0,
+    -31082.0,
+    2430.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1560.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "parents-ensuite",
+   "product_id": "iguzzini/ST39",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "PCOVE",
+    "layer": "decorative",
+    "mount": "strip",
+    "what": "LED cove framing the ensuite bath feature panel, 2700 K, IP65",
+    "flux_lm": 416.5,
+    "watts": 15.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 120.0,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "ST39",
+     "ies": "knowledge/lighting/ies/IGUZZINI-ST39.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.5,
+     -0.87
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 1560.0,
+    "illuminance_card": "",
+    "why": "LED cove, top edge of the bath feature panel: washes the panel face from above",
+    "emitter_z_scene_mm": 2430.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire-iguzzini-ST39-PCOVE-strip-1560-0"
+   }
+  },
+  {
+   "id": "lum-TOE-parents-ensuite-10",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -25450,10 +25612,10 @@
    "room": "parents-ensuite",
    "product_id": "",
    "finish_codes": [
-    "marble-wet"
+    "marble-ensuite-floor"
    ],
    "params": {
-    "finish_code": "marble-wet",
+    "finish_code": "marble-ensuite-floor",
     "polygon_mm": [
      [
       19804.0,
@@ -25477,7 +25639,7 @@
     "layers": [
      {
       "function": "finish",
-      "material": "marble-wet",
+      "material": "marble-ensuite-floor",
       "thickness_mm": null,
       "status": "UNVERIFIED",
       "source": "villa_render.FINISH",
@@ -32897,7 +33059,7 @@
      "fixture_kind": "MIRROR",
      "mount": "strip",
      "layer": "task",
-     "flux_lm": 93.2,
+     "flux_lm": 66.6,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32920,6 +33082,113 @@
      "MIRROR",
      "strip",
      700.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-luminaire-iguzzini-ST39-PCOVE-strip-1820-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1820.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "iguzzini/ST39",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "PCOVE",
+     "mount": "strip",
+     "layer": "decorative",
+     "flux_lm": 485.9,
+     "watts": 15.0,
+     "cct_k": 2700.0,
+     "cri": 90,
+     "beam_deg": 120.0,
+     "photometry": {
+      "manufacturer": "iguzzini",
+      "code": "ST39",
+      "ies": "knowledge/lighting/ies/IGUZZINI-ST39.ies",
+      "substitute": false,
+      "generic": false
+     }
+    },
+    "occurrences": 2,
+    "occurrence_ids": [
+     "lum-PCOVE-parents-ensuite-07",
+     "lum-PCOVE-parents-ensuite-08"
+    ],
+    "key": [
+     "luminaire",
+     "iguzzini/ST39",
+     "PCOVE",
+     "strip",
+     1820.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-luminaire-iguzzini-ST39-PCOVE-strip-1560-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1560.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "iguzzini/ST39",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "PCOVE",
+     "mount": "strip",
+     "layer": "decorative",
+     "flux_lm": 416.5,
+     "watts": 15.0,
+     "cct_k": 2700.0,
+     "cri": 90,
+     "beam_deg": 120.0,
+     "photometry": {
+      "manufacturer": "iguzzini",
+      "code": "ST39",
+      "ies": "knowledge/lighting/ies/IGUZZINI-ST39.ies",
+      "substitute": false,
+      "generic": false
+     }
+    },
+    "occurrences": 1,
+    "occurrence_ids": [
+     "lum-PCOVE-parents-ensuite-09"
+    ],
+    "key": [
+     "luminaire",
+     "iguzzini/ST39",
+     "PCOVE",
+     "strip",
+     1560.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
@@ -32965,7 +33234,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-TOE-parents-ensuite-07"
+     "lum-TOE-parents-ensuite-10"
     ],
     "key": [
      "luminaire",

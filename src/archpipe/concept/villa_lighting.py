@@ -57,7 +57,7 @@ LOBBY_COVE_ROOM = "parents-entry"
 # wall_finish: the marble wall layer is 23 mm thick (finish-layer-*-marble-bath faces, measured in the scene: the first panel sat INSIDE it and
 # was invisible); the panel and the cove stand on that face.
 # the panel starts at the bath rim (z0 = the bath height, asserted in villa_render): the tub stands flush to this wall.
-BATH_PANEL = dict(width=1.50, z0=0.55, z1=2.40, thick=0.012, edge_gap=0.03, strip_z0=0.58, strip_off=0.029, wall_finish=0.023, dimmer=0.20)
+BATH_PANEL = dict(width=1.50, z0=0.55, z1=2.40, thick=0.012, edge_gap=0.03, strip_z0=0.58, strip_off=0.029, wall_finish=0.023, dimmer=0.15)
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
 
