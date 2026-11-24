@@ -19,6 +19,7 @@ HOST_BOUNDARIES = {
     "drawings2d/section.py": "locates the Blender executable",
     "interior/fetch_lookalike.py": "downloads look-alike materials into the host library",
     "landscape/build/planting.py": "reads the host garden-asset store; stand-in fallback (see above)",
+    "lightcalc/garden.py": "locates the host Radiance install for the V5/V7 cross-check only (no scene-build read)",
     "landscape/build/tools/fetch_gi_assets.py": "downloads garden assets into the host library",
     "landscape/critic/massing.py": "locates the Blender executable",
     "landscape/plants/atlas_panel.py": "preview of host Fab downloads",
