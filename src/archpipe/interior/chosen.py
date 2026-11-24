@@ -35,6 +35,21 @@ def room_finish(ch: dict | None = None) -> dict[str, tuple[str, str]]:
     return out
 
 
+# Chosen products whose maker image could not be fetched. Each needs a dated reason; the render keeps its earlier name-based
+# estimate and the hand-back says so. Empty this the day the image is sampled (scripts/source_maker_colours.py).
+UNSOURCED = {"C-door": "durian.in returns Cloudflare 522 to curl, the browser tool and the Wayback Machine (2026-11-23)"}
+
+
+def colour_problems(sid: str, s: dict) -> list[str]:
+    """A chosen product without a maker-sourced colour fails (never tint by eye)."""
+    if s.get("item_id") in UNSOURCED:
+        return []
+    c = s.get("colour_source") or {}
+    if not (c.get("url") and str(c.get("basis", "")).startswith("maker") and c.get("hex")):
+        return [f"{sid}: no maker-sourced colour (colour_source needs url, hex and a 'maker ...' basis)"]
+    return []
+
+
 def problems(ch: dict, design_rooms: dict, palettes: dict[str, dict]) -> list[str]:
     """Everything wrong with the schedule: price keys, unlabelled look-alikes, unassigned slots, uncovered rooms."""
     p: list[str] = []
@@ -49,6 +64,7 @@ def problems(ch: dict, design_rooms: dict, palettes: dict[str, dict]) -> list[st
         if item != ref:
             p.append(f"{sid}: embedded item differs from palette {s['palette']}")
         p += finishes.item_problems(item)
+        p += colour_problems(sid, s)
         if not (s.get("applies_to") or {}).get("rooms") and not s.get("no_geometry"):
             p.append(f"{sid}: applies to no room and no no_geometry reason")
         if not s.get("scene_materials") and not s.get("no_geometry"):

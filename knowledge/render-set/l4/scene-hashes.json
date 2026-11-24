@@ -1,37 +1,37 @@
 {
- "built_at_commit": "60718a182a7d1fc148676c6d9d8ccca9f7883984",
+ "built_at_commit": "ce9ac9b574dec3e47fee9bde72597b793834612f",
  "git_dirty": false,
- "source_hash": "6354e12134dbe38221f62fd1cab3dcd9b4af62bf8a3aeac294ff036b9f5f3e8c",
+ "source_hash": "dee051a7fd140c23c8778d1ca692ff8563396b9e52016c8d46b4097d8bafd7f6",
  "production": {
   "writer": "villa_render.write (46 views, receipts and exposure record active, no bypass)",
-  "file_bytes": 260973574,
-  "sha256": "c55c9eff5d721bdad03f81e4b2677e241a5aa81344574bfc6bc73510c25a8eba",
-  "ids_stripped_incl_provenance_sha256": "37f6f13687ee53cacaf6b42d7fcf4c0568d9bfedc3f0fcdb5879bf94942fcef6",
-  "content_sha256_ids_and_provenance_stripped": "cb2d2a984a45d3da5761dfed17827d4d09998af7d5797f668c8e1429924edb1f",
+  "file_bytes": 272995744,
+  "sha256": "39a8174d84a1202ee2b1d0552c15e00518614ac8d998bb59dcf911e6ade6ba60",
+  "ids_stripped_incl_provenance_sha256": "0cd5558149e33166a0e0270d2c1f1ca8a2585fbb2d1d2a56cb6014b5dc1be8b7",
+  "content_sha256_ids_and_provenance_stripped": "d00d565b80cd2d43eeea67b44acdf05d8b7c5889302cae359223dfef6410b7d5",
   "meshes": 1226,
   "views": 46,
-  "exposure_measurement_sha256": "54d2279502cc49ca5e2826b36e612f956eeb32b37cb3b78e7f278c3aff6dc44e"
+  "exposure_measurement_sha256": "eb49f80696cba1bbb21d860a38f3c70976db3c8ed698771a0d2998fad345c82f"
  },
  "render_set": {
   "writer": "render_set.write_scene (46 views)",
-  "file_bytes": 261014022,
-  "sha256": "a43e993a31bea4ea0f002485abcfc6d560457476348eeecc2160bf83275f3931",
-  "ids_stripped_incl_provenance_sha256": "0cd692a8cc374a7996c304bab4ce0b5fd5c4f4367c7c7b226d7408c01f80465a",
-  "content_sha256_ids_and_provenance_stripped": "602dc5ff914a7e2d97dda4c8b5ca66c78a2e133b1820d90a5686b2f53ae49f61",
+  "file_bytes": 273036203,
+  "sha256": "3d19c10687e463e8e59af2bbf5d5eba0a487eda167e7eeed2fd4e3856f0a516c",
+  "ids_stripped_incl_provenance_sha256": "4a48cc8ec9561b8aed753f390c73f5ef9a708983e927b2078241f0f1bd9af172",
+  "content_sha256_ids_and_provenance_stripped": "2c46884bda38aefe4ed1f1dbd891d6b408c96d487bec5d7efad25d58162b00fd",
   "meshes": 1226,
   "views": 46,
-  "exposure_measurement_sha256": "3026a0a26d4c395580983eeebdb6120422aad09aae416a79531340b2f114df51"
+  "exposure_measurement_sha256": "eb0b9fbb274f68564344dc48adacb069339597903bdff3ebecba82d8b6150b5f"
  },
- "note": "The images were rendered from a render-set scene built before the production record commit (jobq L4-draft-4, scene cache a791864224043a766f9c28bf); its provenance-stripped content hash (602dc5ff...) equals the final build's.",
+ "note": "Round 3 (2026-11-23). The images were rendered from the render-set scene f4 (jobq L4-r4-draft-1, built before the docs commit); its provenance-stripped content hash equals the final build's: True.",
  "receipts": {
-  "furniture-stage2_room_context": "6e8be36d53359c59",
-  "parents-bed_room_context": "3d71d6c05e41d8fe"
+  "furniture-stage2_room_context": "e9532d04871c53e5",
+  "parents-bed_room_context": "3ad6955d132b45d9"
  },
  "jobs": {
-  "measure_prod": "L4-measure-prod-6",
-  "measure_set": "L4-measure-set-6",
-  "build_cache": "L4-build-cache-4",
-  "draft": "L4-draft-4",
-  "critic_vlm": "L4-critic-vlm-3"
+  "measure_prod": "L4-r4-measure-prod-1",
+  "measure_set": "L4-r4-measure-set-1",
+  "draft": "L4-r4-draft-1",
+  "critic_vlm": "L4-r4-critic-vlm-2",
+  "base_luminance": "L4-base-lum-1"
  }
 }

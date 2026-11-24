@@ -124,3 +124,37 @@ class SceneUsesTheSchedule(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MakerColour(unittest.TestCase):
+    """Colours come from the maker's own image (guard for the Frappuccino defect, 2026-11-23)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.ch = CH.load()
+
+    def test_every_chosen_product_has_a_sourced_colour(self):
+        bad = [p for sid, s in self.ch["slots"].items() for p in CH.colour_problems(sid, s)]
+        self.assertEqual(bad, [])
+        self.assertEqual(set(CH.UNSOURCED), {"C-door"})        # the one documented gap; never grows silently
+
+    def test_name_based_estimate_fails(self):
+        s = copy.deepcopy(self.ch["slots"]["worktop"])
+        s["colour_source"] = dict(hex="#b8a58e", basis="estimate from the maker's colour name (not a maker-published value)", url="x")
+        self.assertEqual(len(CH.colour_problems("worktop", s)), 1)
+        del s["colour_source"]
+        self.assertEqual(len(CH.colour_problems("worktop", s)), 1)
+
+    @unittest.skipUnless((LIB / "materials").exists(), "needs library")
+    def test_lookalike_pattern_is_the_makers_kind(self):
+        """Pattern contrast (luma spread) of the look-alike within 4x of the maker swatch; Marble015 (cream, cv 0.02) for the
+        dark veined Frappuccino (cv 0.78) was 39x off and rendered as a flat panel."""
+        from archpipe.interior import palette_scene as PS
+        cols = PS.load_colours()
+        for sid, s in self.ch["slots"].items():
+            la, c = s["item"].get("lookalike"), cols.get(s["item_id"], {})
+            if la and c.get("mode") == "swatch":
+                r = c["luma_cv"] / PS.lookalike_luma_cv(LIB / "materials" / la["id"])
+                self.assertTrue(0.25 <= r <= 4, f"{sid}: {la['id']} pattern contrast {r:.1f}x the maker's")
+        r = cols["C-bath-tile"]["luma_cv"] / PS.lookalike_luma_cv(LIB / "materials" / "Marble015")
+        self.assertGreater(r, 4)                                # the real defect fails the same check
