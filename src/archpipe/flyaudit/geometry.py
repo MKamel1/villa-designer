@@ -60,15 +60,22 @@ class Geometry:
     """Opaque + glass Embree scenes over the same triangle table."""
 
     def __init__(self, tris, elem, room, cls, grp, elem_names, room_names):
-        from embreex import rtcore_scene as rs
-        from embreex.mesh_construction import TriangleMesh
+        try:
+            from embreex import rtcore_scene as rs
+            from embreex.mesh_construction import TriangleMesh
+        except ImportError:
+            rs = None      # numpy brute force below: fine for test-sized scenes only
         self.tris, self.elem, self.room, self.cls, self.grp = tris, elem, room, cls, grp
         self.elem_names, self.room_names = list(elem_names), list(room_names)
         self._scenes = {}
         for kind in (OPAQUE, GLASS):
             sel = np.flatnonzero(cls == kind)
             self._scenes[kind] = None
-            if len(sel):
+            if len(sel) and rs is None:
+                if len(sel) > 20000:
+                    raise ImportError('embreex is required for scenes of this size (pip install embreex)')
+                self._scenes[kind] = (None, sel)
+            elif len(sel):
                 sc = rs.EmbreeScene()
                 TriangleMesh(sc, tris[sel].reshape(-1, 3).astype(np.float32),
                              np.arange(len(sel) * 3, dtype=np.int32).reshape(-1, 3))
@@ -80,7 +87,7 @@ class Geometry:
         return cls(z['tris'], z['elem'], z['room'], z['cls'], z['grp'], z['elem_names'], z['room_names'])
 
     def cast(self, origins, dirs):
-        """-> (dist, tri) of first opaque hit (inf, -1 if none) and distance of first glass hit (inf if none)."""
+        """-> (dist, tri) of first opaque hit (inf, -1 if none), then (dist, tri) of first glass hit."""
         o = np.ascontiguousarray(origins, np.float32); d = np.ascontiguousarray(dirs, np.float32)
         n = len(o); out = {}
         for kind in (OPAQUE, GLASS):
@@ -88,10 +95,31 @@ class Geometry:
             if s is None:
                 out[kind] = (np.full(n, np.inf, np.float32), np.full(n, -1))
                 continue
+            if s[0] is None:
+                t, prim = _brute(self.tris[s[1]], o, d)
+                hit = prim >= 0
+                out[kind] = (t.astype(np.float32), np.where(hit, s[1][np.maximum(prim, 0)], -1))
+                continue
             r = s[0].run(o, d, output=1)
             hit = r['primID'] >= 0
             out[kind] = (np.where(hit, r['tfar'], np.inf).astype(np.float32), np.where(hit, s[1][np.maximum(r['primID'], 0)], -1))
-        return out[OPAQUE][0], out[OPAQUE][1], out[GLASS][0]
+        return out[OPAQUE][0], out[OPAQUE][1], out[GLASS][0], out[GLASS][1]
 
     def tri_elem(self, tri):
         return np.where(tri >= 0, self.elem[np.maximum(tri, 0)], -1)
+
+
+def _brute(tris, o, d, eps=1e-9):
+    """Moller-Trumbore, every ray against every triangle. -> (t or inf, tri index or -1)."""
+    o = o.astype(np.float64); d = d.astype(np.float64); T = tris.astype(np.float64)
+    e1, e2 = T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]
+    best = np.full(len(o), np.inf); prim = np.full(len(o), -1)
+    for k in range(len(T)):
+        h = np.cross(d, e2[k]); a = h @ e1[k]
+        ok = np.abs(a) > eps
+        f = np.where(ok, 1. / np.where(ok, a, 1.), 0.)
+        s = o - T[k, 0]; u = f * (s * h).sum(1)
+        q = np.cross(s, e1[k]); v = f * (d * q).sum(1); t = f * (q @ e2[k])
+        m = ok & (u >= 0) & (v >= 0) & (u + v <= 1) & (t > 1e-6) & (t < best)
+        best[m] = t[m]; prim[m] = k
+    return best, prim
