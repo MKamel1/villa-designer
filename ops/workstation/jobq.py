@@ -19,7 +19,11 @@ ones), and only while nvidia-smi shows >= --vram-mb free (reserving that for job
 1 GB margin. --exclusive jobs hold every slot, i.e. run with no other queue GPU job. CPU jobs run up to
 --cpu-slots at once.
 
-    jobq submit [--id ID] [--gpu [--vram-mb M] [--exclusive]] [--timeout S] [--attempts N] [--cwd D] [--env K=V] [--retry] -- argv...
+RAM guard (all jobs): a job is admitted only if /proc/meminfo MemAvailable, minus the --ram-mb of jobs launched in the
+last RAM_RESERVE_S seconds (still growing, so not yet in MemAvailable), is >= its --ram-mb + 6 GB. Default --ram-mb is
+4000, or 24000 when argv runs Blender. A job the RAM guard holds also holds every later job (strict submit order).
+
+    jobq submit [--id ID] [--gpu [--vram-mb M] [--exclusive]] [--ram-mb M] [--timeout S] [--attempts N] [--cwd D] [--env K=V] [--retry] -- argv...
     jobq status ID | list | wait ID | log ID | cancel ID | daemon | tick
 """
 from __future__ import annotations
@@ -46,6 +50,10 @@ ACTIVE = {"launching", "waiting_lock", "running"}
 LAUNCH_GRACE_S = 30
 DEFAULT_VRAM_MB = 6000
 VRAM_MARGIN_MB = 1024
+DEFAULT_RAM_MB = 4000
+BLENDER_RAM_MB = 24000  # a villa scene build peaks near 23 GB
+RAM_MARGIN_MB = 6000
+RAM_RESERVE_S = 300  # a scene build takes minutes to reach its peak; reserve that long
 VRAM_RESERVE_S = 60  # a freshly launched job's VRAM is not on nvidia-smi yet; reserve it this long
 # Dirs put in front of PATH for every job: the service's own PATH lacks them (`blender` died with FileNotFoundError).
 EXTRA_PATH = [Path.home() / "opt" / "blender", Path.home() / "archpipe" / "envs" / "laneP-venv" / "bin"]
@@ -184,11 +192,26 @@ def vram_free_mb():
         return None
 
 
+def mem_available_mb(path="/proc/meminfo"):
+    """MemAvailable in MB, or None if unreadable (guard then does not apply)."""
+    try:
+        for line in Path(path).read_text().splitlines():
+            if line.startswith("MemAvailable:"):
+                return int(line.split()[1]) // 1024
+    except (OSError, ValueError, IndexError):
+        pass
+    return None
+
+
+def default_ram_mb(argv) -> int:
+    return BLENDER_RAM_MB if any(Path(a).name.lower().startswith("blender") for a in argv) else DEFAULT_RAM_MB
+
+
 # ---- queue ------------------------------------------------------------------------------------
 
 class Queue:
     def __init__(self, root=DEFAULT_ROOT, gpu_lock=DEFAULT_GPU_LOCK, cpu_slots=2, launcher=None, alive=pid_alive,
-                 gpu_slots=3, vram_free=vram_free_mb):
+                 gpu_slots=3, vram_free=vram_free_mb, mem_available=mem_available_mb):
         self.root = Path(root)
         self.gpu_lock = Path(gpu_lock)
         self.cpu_slots = cpu_slots
@@ -196,6 +219,7 @@ class Queue:
         self.alive = alive
         self.gpu_slots = gpu_slots
         self.vram_free = vram_free
+        self.mem_available = mem_available
 
     def jobdir(self, job_id: str) -> Path:
         return self.root / "jobs" / job_id
@@ -217,11 +241,12 @@ class Queue:
         return st
 
     def submit(self, argv, job_id=None, gpu=False, timeout_s=3600, max_attempts=2, cwd=None, env=None,
-               retry=False, vram_mb=DEFAULT_VRAM_MB, exclusive=False) -> str:
+               retry=False, vram_mb=DEFAULT_VRAM_MB, exclusive=False, ram_mb=None) -> str:
         """Idempotent: an existing job id returns as-is unless it ended badly and retry is set."""
         argv = [str(a) for a in argv]
         if not argv:
             raise ValueError("no command")
+        ram_mb = ram_mb or default_ram_mb(argv)
         job_id = job_id or hashlib.sha256(json.dumps([argv, cwd, env, gpu], sort_keys=True).encode()).hexdigest()[:16]
         if not job_id.replace("-", "").replace("_", "").replace(".", "").isalnum():
             raise ValueError("job id must be alphanumeric with - _ .")
@@ -234,10 +259,10 @@ class Queue:
         atomic_write(self.jobdir(job_id) / "spec.json",
                      {"id": job_id, "argv": argv, "gpu": bool(gpu), "timeout_s": timeout_s,
                       "max_attempts": max_attempts, "cwd": cwd, "env": env or {}, "submitted": now(),
-                      "vram_mb": vram_mb, "exclusive": bool(exclusive)})
+                      "vram_mb": vram_mb, "exclusive": bool(exclusive), "ram_mb": ram_mb})
         self.set_status(job_id, state="queued", attempt=0, gpu=bool(gpu), submitted=now(),
                         timeout_s=timeout_s, max_attempts=max_attempts, vram_mb=vram_mb,
-                        exclusive=bool(exclusive))
+                        exclusive=bool(exclusive), ram_mb=ram_mb)
         return job_id
 
     def job_ids(self):
@@ -293,23 +318,38 @@ class Queue:
         started = []
         gpu_blocked = False  # submit-order fairness: once the head GPU job waits, later ones wait too
         cache = [None]  # nvidia-smi read once per tick
+        ram_blocked = False  # same rule for RAM, across CPU and GPU jobs
+        avail = self.mem_available()
         for j in queued:
+            if ram_blocked:
+                continue
+            if avail is not None:
+                need = self._ram_mb(j, sts) + RAM_MARGIN_MB
+                promised = sum(self._ram_mb(a, sts) for a in active if now() - (
+                    sts[a].get("run_started") or sts[a].get("launched") or 0) < RAM_RESERVE_S)
+                if avail - promised < need:
+                    ram_blocked = True
+                    continue
             if sts[j].get("gpu"):
                 if gpu_blocked or not self._gpu_admits(j, sts, gpu_active, cache):
                     gpu_blocked = True
                     continue
                 gpu_active.append(j)
-                sts[j] = dict(sts[j], launched=now(), run_started=None)  # so later admits this tick reserve its VRAM
             else:
                 if cpu_busy >= self.cpu_slots:
                     continue
                 cpu_busy += 1
+            active.append(j)
+            sts[j] = dict(sts[j], launched=now(), run_started=None)  # later admits this tick reserve its VRAM and RAM
             attempt = sts[j].get("attempt", 0) + 1
             self.set_status(j, state="launching", attempt=attempt, launched=now(), runner_pid=None,
                             command_pid=None, reason=None)
             self.launcher(j)
             started.append(j)
         return {"reaped": reaped, "started": started}
+
+    def _ram_mb(self, j, sts) -> int:
+        return sts[j].get("ram_mb") or default_ram_mb((self.spec(j) or {}).get("argv", []))
 
     def _gpu_admits(self, j, sts, gpu_active, free_cache) -> bool:
         excl = bool(sts[j].get("exclusive"))
@@ -416,6 +456,7 @@ def main(argv=None) -> int:
     s.add_argument("--id")
     s.add_argument("--gpu", action="store_true")
     s.add_argument("--vram-mb", type=int, default=DEFAULT_VRAM_MB)
+    s.add_argument("--ram-mb", type=int, default=None, help="RAM the job needs (default 4000; 24000 if argv runs Blender)")
     s.add_argument("--exclusive", action="store_true", help="GPU job that must run with no other GPU job (implies --gpu)")
     s.add_argument("--timeout", type=int, default=3600)
     s.add_argument("--attempts", type=int, default=2)
@@ -441,7 +482,7 @@ def main(argv=None) -> int:
         cmd = a.command[1:] if a.command and a.command[0] == "--" else a.command
         env = dict(kv.split("=", 1) for kv in a.env)
         print(q.submit(cmd, a.id, a.gpu or a.exclusive, a.timeout, a.attempts, a.cwd, env, a.retry, a.vram_mb,
-                       a.exclusive))
+                       a.exclusive, a.ram_mb))
     elif a.cmd == "status":
         st = q.status(a.id)
         print(json.dumps(st, indent=2, sort_keys=True) if st else "unknown job")

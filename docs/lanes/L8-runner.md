@@ -56,6 +56,21 @@ dodge the queue**: CPU renders load the 32 threads the test suites need. Submit 
 `--vram-mb 4000` if yours is small). Render **final timing jobs and any timing measurement with `--exclusive`** so
 another job does not skew the number. Tools that `flock graphics.lock` directly still work, but they occupy slot 0 only.
 
+## RAM guard (admission by memory)
+
+Slots and VRAM do not bound RAM: a villa render/measure job builds its scene in about 23 GB, so two GPU jobs plus two
+CPU jobs could need ~90 GB of the machine's 89 GB. jobq now also checks RAM (`ops/workstation/jobq.py`):
+
+- `jobq submit --ram-mb M` (default **4000**; **24000** when any argv element is a `blender*` executable, e.g.
+  `blender -b ...` or `env X=1 blender ...`; a Python wrapper that spawns Blender must pass `--ram-mb 24000` itself).
+- A queued job starts only if `/proc/meminfo` MemAvailable minus the `ram_mb` of jobs launched in the last 300 s
+  (`RAM_RESERVE_S`: a scene build takes minutes to reach its peak, so it is not yet in MemAvailable) is at least
+  its `ram_mb` + 6000 MB margin.
+- Strict submit order: a job the RAM guard holds also holds every later job, CPU or GPU, so a big job is not starved
+  by small ones. Slot and VRAM rules are unchanged. Unreadable meminfo disables the guard (slots/VRAM only).
+- Deploy: `bash ops/workstation/install_jobq.sh` (service has `KillMode=process`; running jobs survive the restart).
+  Slot counts live in `~/.config/systemd/user/jobq.service.d/memory.conf` (client-owned drop-in).
+
 ## Scene build cache (stills): build once, render many
 
 A `villa_scene.py` render first BUILDS the scene (hundreds of glTF imports, cloth) on the CPU: minutes, with a GPU
