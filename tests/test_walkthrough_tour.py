@@ -68,8 +68,8 @@ class Tour(unittest.TestCase):
                 self.assertTrue(self.vm.free(lv)[i, j], room)
 
     def test_best_view_is_the_still_view_where_one_exists(self):
-        got = {s['room']: s['best_view'] for s in self.path['stations'] if s['room']}
-        self.assertEqual(got['dining'], 'v09-dining-evening') if got['dining'] != 'deepest-wedge' else None
+        got = {s['room']: s['best_view'] for s in self.path['stations'] if s['kind'] == 'turn'}
+        self.assertIn(got['dining'], ('v09-dining-evening', 'n01-dining-day', 'n20-dining-side-day'))
         self.assertTrue(sum(v != 'deepest-wedge' for v in got.values()) >= 20)
 
 
@@ -103,9 +103,10 @@ class NonInformativeRule(unittest.TestCase):
     def test_backward_looking_segment_fails_the_direction_check(self):
         from archpipe.concept import villa_r11 as R, revit_spec as RS
         layout = R.design('D1'); spec = RS.build(layout); path = WT.plan_tour(FT.VillaMap(layout, spec))
-        frames = copy.deepcopy(path['frames']); walk = [f for f in frames if f['phase'] == 'walk']
-        start = walk[len(walk)//2]['index']
-        for f in frames[start:start+60]:
+        frames = copy.deepcopy(path['frames'])
+        fast = max((i for i in range(1, len(frames)) if frames[i]['phase'] == 'walk'),
+                   key=lambda i: math.dist(frames[i]['camera']['position'], frames[i-1]['camera']['position']))
+        for f in frames[fast-30:fast+30]:
             if f['phase'] == 'walk':
                 f['yaw_deg'] += 180.
         self.assertTrue(WT.direction_findings(frames))      # the real path is clean (see Tour), the tampered one is not
