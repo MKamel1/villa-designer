@@ -27,8 +27,9 @@ class Lights(unittest.TestCase):
         self.assertEqual(iku["cct_k"], 2700)                       # the 2700 K variant on request; the 3000 K file is the photometry (caveat in the record)
         self.assertIn("3000 K", iku["garden_lg"]["caveat"])
         up = by["gl-UP-1"]
-        self.assertTrue(up["product"]["generic"])
-        self.assertTrue(up["garden_lg"]["status"].startswith("UNVERIFIED"))
+        self.assertEqual((up["product"]["manufacturer"], up["product"]["code"], up["product"]["generic"]), ("john-cullen", "GLK2SM254", False))
+        self.assertEqual((up["lumens"], up["cct_k"], up["cri"]), (93.0, 2700, 98))
+        self.assertIn("lumens FAIL", up["garden_lg"]["status"])      # the open V10 miss travels with the light
 
     def test_arm_reaches_its_host_face_and_a_body_without_host_is_floating(self):
         import numpy as np

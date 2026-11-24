@@ -28,19 +28,16 @@ def lights(scene: str = GD.RENDER_SCENE) -> list[dict]:
         if p.dim <= 0:
             continue
         prod = GD.PRODUCTS[f.product]
-        generic = f.product != "iku"
         out.append(dict(id="gl-" + f.id, room="garden", layer=LAYER, type="ies", position=[round(c, 4) for c in p.position], aim=[round(c, 6) for c in p.aim], spin_deg=0.0,
                         ies=f"{IES_DIR}/{ies_name(f.product)}", lumens=prod["lumens"], cct_k=prod["cct_variant_k"] if "cct_variant_k" in prod else prod["cct_k"],
                         cri=prod["cri"], dimmer=round(p.dim, 4),
-                        product=dict(manufacturer=prod["manufacturer"], code=prod["code"], generic=generic, **({} if generic else dict(substitute=False))),
+                        product=dict(manufacturer=prod["manufacturer"], code=prod["code"], generic=False, substitute=False),
                         garden_lg=dict(zone=f.zone, role=f.role, mount=f.mount, scene=scene, status=prod["status"], caveat=prod["caveat"])))
     return out
 
 
 def ies_text(product: str) -> str:
     p = GD.PRODUCTS[product]
-    if p["ies"] is None:
-        return GD.up_assumed_ies()
     return Path(p["ies"]).read_text(encoding="utf-8", errors="replace").lstrip("﻿")
 
 

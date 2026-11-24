@@ -136,7 +136,7 @@ class Spill(unittest.TestCase):
         self.assertEqual([r.status for r in res if "Ev" in r.subject], ["fail"])
 
     def test_negative_uplight_missing_its_crown_fails_ulr(self):
-        bad = g.Fix("BAD", "uplight", "beauty", "up-assumed", (23.5, -28.5, 0.05), (23.5, -28.5, 9.0), "straight up, no crown above")
+        bad = g.Fix("BAD", "uplight", "beauty", "kew25", (23.5, -28.5, 0.05), (23.5, -28.5, 9.0), "straight up, no crown above")
         res, _ = g.spill(g.placements({"uplight": 1.0}, [bad]), BOXES)
         ulr = [r for r in res if r.subject.endswith("ULR")][0]
         self.assertEqual(ulr.status, "fail")
@@ -146,6 +146,19 @@ class Spill(unittest.TestCase):
         res, info = g.spill(g.placements(g.SCENES["social-gathering"]["levels"]), BOXES)
         self.assertEqual(info["ulr_raw"]["UP-1"] > 0.99, True)     # raw ULR of an uplight is 1 by definition
         self.assertLess(info["ulr"]["UP-1"], 0.05)                  # but its beam ends in the crape crown
+
+    def test_kew_opening_is_read_from_its_file_and_its_shield_is_what_keeps_glare_in_policy(self):
+        import dataclasses
+        from archpipe.lightcalc.direct import luminous_area_m2
+        pls = g.placements(g.SCENES["social-gathering"]["levels"])
+        up = [p for p in pls if p.id.startswith("UP-")]
+        self.assertAlmostEqual(luminous_area_m2(up[0].photometry), math.pi / 4 * 0.016 ** 2, places=7)     # 16 mm round, as the LDT says
+        self.assertTrue(all(p.meta["shielded"] for p in up))
+        bare = [dataclasses.replace(p, meta={**p.meta, "shielded": False}) for p in pls]
+        _, worst = g.check_glare(bare, "bare")
+        self.assertEqual((worst.status, worst.element_ids[0].startswith("UP-")), ("fail", True))           # negative: unshielded, the policy cap is exceeded
+        _, worst = g.check_glare(pls, "as-built")
+        self.assertEqual(worst.status, "pass")
 
     def test_walls_stop_the_light(self):
         """Every fence is 4 m: ground-floor neighbour windows get nothing even from a floodlight at full."""
@@ -187,7 +200,8 @@ class Verification(unittest.TestCase):
         rows = {r["product"]: r for r in g.v1_inputs()}
         self.assertEqual(rows["iku"]["status"], "pass")
         self.assertLess(abs(rows["iku"]["error"]), 0.02)
-        self.assertFalse(rows["up-assumed"]["verified"])
+        self.assertEqual(rows["kew25"]["status"], "fail")           # the Kew file integrates 90.9 lm against 93 stated: -2.25 % at a 2 % bar, reported not relaxed
+        self.assertAlmostEqual(rows["kew25"]["error"], -0.0225, places=3)
 
     def test_v1_negative_doubled_lumens_is_flagged(self):
         self.assertEqual({r["product"]: r for r in g.v1_inputs(lumens_scale=2.0)}["iku"]["status"], "fail")

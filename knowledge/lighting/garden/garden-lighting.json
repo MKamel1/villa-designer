@@ -41,14 +41,14 @@
     },
     "e-pond-water": {
      "n": 112,
-     "avg": 18.632,
+     "avg": 18.633,
      "min": 10.742,
-     "max": 22.791,
+     "max": 22.792,
      "u0": 0.577
     },
     "s-path-door": {
      "n": 138,
-     "avg": 13.635,
+     "avg": 13.636,
      "min": 9.272,
      "max": 16.864,
      "u0": 0.68
@@ -64,11 +64,11 @@
    "spill": {
     "ev_max_by_group": {
      "east-neighbour": 4.7095756600679896e-05,
-     "rear-neighbour": 0.00019343077217660453,
+     "rear-neighbour": 0.0011846376299871658,
      "sister-villa-facade": 0.02024338403719233,
      "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 7.350857102122515e-05,
-     "apartment-above-facade": 0.390458073224569
+     "apartment-above-facade": 0.11615887882887439
     },
     "ulr": {
      "NP-1": 0.00014225265390307708,
@@ -90,9 +90,9 @@
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0,
-     "UP-1": 0.017334295608427995,
-     "UP-2": 0.014830462589597405,
-     "UP-3": 0.12201957109981822
+     "UP-1": 0.04960796003630766,
+     "UP-2": 0.048580690397640326,
+     "UP-3": 0.14605269413380803
     },
     "ulr_raw": {
      "NP-1": 0.00014225265390307708,
@@ -114,9 +114,9 @@
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0,
-     "UP-1": 1.0,
-     "UP-2": 1.0,
-     "UP-3": 1.0
+     "UP-1": 0.9777955692801503,
+     "UP-2": 0.977974800701518,
+     "UP-3": 0.9779264603109945
     }
    }
   },
@@ -155,22 +155,22 @@
     "e-pond-edge-ring": {
      "n": 144,
      "avg": 20.148,
-     "min": 8.718,
+     "min": 8.719,
      "max": 24.293,
      "u0": 0.433
     },
     "e-pond-water": {
      "n": 112,
      "avg": 18.633,
-     "min": 10.742,
-     "max": 22.791,
+     "min": 10.743,
+     "max": 22.792,
      "u0": 0.577
     },
     "s-path-door": {
      "n": 138,
      "avg": 20.123,
-     "min": 13.757,
-     "max": 24.25,
+     "min": 13.758,
+     "max": 24.251,
      "u0": 0.684
     },
     "s-dining-table": {
@@ -184,11 +184,11 @@
    "spill": {
     "ev_max_by_group": {
      "east-neighbour": 7.849292766779983e-05,
-     "rear-neighbour": 0.0003223846202943409,
+     "rear-neighbour": 0.0017868066382415633,
      "sister-villa-facade": 0.03349028727429076,
      "street-side": 0.0003142255288923429,
      "east-yard-neighbour": 0.0001225142850353753,
-     "apartment-above-facade": 0.5856871098368533
+     "apartment-above-facade": 0.1742383182433116
     },
     "ulr": {
      "NP-1": 0.00014225265390307708,
@@ -210,9 +210,9 @@
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0,
-     "UP-1": 0.017334295608427922,
-     "UP-2": 0.014830462589597406,
-     "UP-3": 0.122019571099818
+     "UP-1": 0.04960796003630777,
+     "UP-2": 0.04858069039764038,
+     "UP-3": 0.1460526941338093
     },
     "ulr_raw": {
      "NP-1": 0.00014225265390307708,
@@ -234,9 +234,9 @@
      "GR-1": 0.0,
      "GR-2": 0.0,
      "GR-3": 0.0,
-     "UP-1": 1.0,
-     "UP-2": 1.0,
-     "UP-3": 1.0
+     "UP-1": 0.9777955692801539,
+     "UP-2": 0.9779748007015292,
+     "UP-3": 0.9779264603109826
     }
    }
   },
@@ -817,7 +817,7 @@
    "id": "UP-1",
    "zone": "uplight",
    "role": "beauty",
-   "product": "up-assumed",
+   "product": "kew25",
    "pos": [
     26.55,
     -23.3,
@@ -828,13 +828,13 @@
     -24.6,
     3.4
    ],
-   "mount": "in-ground spike beside the crape stem"
+   "mount": "ground spike beside the crape stem"
   },
   {
    "id": "UP-2",
    "zone": "uplight",
    "role": "beauty",
-   "product": "up-assumed",
+   "product": "kew25",
    "pos": [
     27.35,
     -22.95,
@@ -845,13 +845,13 @@
     -22.5,
     3.4
    ],
-   "mount": "in-ground spike beside the olive stem"
+   "mount": "ground spike beside the olive stem"
   },
   {
    "id": "UP-3",
    "zone": "uplight",
    "role": "beauty",
-   "product": "up-assumed",
+   "product": "kew25",
    "pos": [
     21.95,
     -21.7,
@@ -862,7 +862,7 @@
     -21.7,
     3.4
    ],
-   "mount": "in-ground spike beside the east-yard olive"
+   "mount": "ground spike beside the east-yard olive"
   }
  ],
  "products": {
@@ -881,18 +881,20 @@
    "status": "V10 pass (knowledge/lighting-products/candidates.json)",
    "caveat": "ERCO lists the Iku at 3000 K; the datasheet says 2700 K / CRI 92 is available on request. No 2700 K file exists, so the 3000 K photometry is used; the optic is the same, flux of the 2700 K variant is unknown and typically a few % lower (V12 headroom covers it)."
   },
-  "up-assumed": {
-   "manufacturer": "generic",
-   "code": "ASSUMED-GARDEN-UP-250lm-25deg",
-   "name": "ASSUMED narrow in-ground / spike uplight, 2700 K, CRI >= 90, DALI",
-   "lumens": 250.0,
-   "watts": 5.0,
+  "kew25": {
+   "manufacturer": "john-cullen",
+   "code": "GLK2SM254",
+   "name": "Kew 25 Spike Olive Green Medium 2027, 500 mA, IP66 spike spotlight",
+   "lumens": 93.0,
+   "watts": 1.5,
    "cct_k": 2700,
-   "cri": 90,
-   "ip": "IP67 (required)",
-   "ies": null,
-   "status": "UNVERIFIED: no product with a V10-checkable file meets 2700 K + CRI >= 90 + DALI + IP67",
-   "caveat": "requirement only; candidates must be fetched with their LDT and pass V1/V10 before purchase"
+   "cri": 98,
+   "dimming": "DALI (driver option; DALI-2 not stated in the datasheet)",
+   "ip": "IP66",
+   "ies": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-medium-500mA.ies",
+   "shielded": true,
+   "status": "V10: peak 479 cd and beam 22 deg pass; lumens FAIL at the 2 % bar (file integrates 90.9 lm vs 93 stated, -2.25 %); the file is the Kew 25 family file (LUMCAT GLK2XMXX3, 2023), not the 2027 article's own",
+   "caveat": "IP66 spike, not in-ground IP67: no in-ground product with 2700 K + CRI >= 90 + a downloadable file was found. DALI-2 and the exact-article LDT are to be confirmed with John Cullen."
   }
  },
  "checks": [
@@ -990,10 +992,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "summer-night-dining/garden/Ev (post-curfew)",
-   "achieved": 0.390458073224569,
+   "achieved": 0.11615887882887439,
    "required": 2.0,
    "unit": "lx",
-   "message": "max vertical illuminance on the boundary 0.39 lx vs E3 2 lx"
+   "message": "max vertical illuminance on the boundary 0.12 lx vs E3 2 lx"
   },
   {
    "criterion": "LA12",
@@ -1008,10 +1010,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "summer-night-dining/garden/ULR",
-   "achieved": 0.122,
+   "achieved": 0.1461,
    "required": 0.15,
    "unit": "fraction",
-   "message": "max upward flux fraction to the sky 0.122 (UP-3); raw ULR of uplights 1.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry is ASSUMED (unverified)"
+   "message": "max upward flux fraction to the sky 0.146 (UP-3); raw ULR of uplights 0.98 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
   },
   {
    "criterion": "LA11",
@@ -1107,10 +1109,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "social-gathering/garden/Ev (post-curfew)",
-   "achieved": 0.5856871098368533,
+   "achieved": 0.1742383182433116,
    "required": 2.0,
    "unit": "lx",
-   "message": "max vertical illuminance on the boundary 0.59 lx vs E3 2 lx"
+   "message": "max vertical illuminance on the boundary 0.17 lx vs E3 2 lx"
   },
   {
    "criterion": "LA12",
@@ -1125,10 +1127,10 @@
    "criterion": "LA12",
    "status": "pass",
    "subject": "social-gathering/garden/ULR",
-   "achieved": 0.122,
+   "achieved": 0.1461,
    "required": 0.15,
    "unit": "fraction",
-   "message": "max upward flux fraction to the sky 0.122 (UP-3); raw ULR of uplights 1.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry is ASSUMED (unverified)"
+   "message": "max upward flux fraction to the sky 0.146 (UP-3); raw ULR of uplights 0.98 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
   },
   {
    "criterion": "LA11",
@@ -1218,7 +1220,7 @@
    "achieved": 0.0011,
    "required": 0.15,
    "unit": "fraction",
-   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry is ASSUMED (unverified)"
+   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
   },
   {
    "criterion": "LA11",
@@ -1308,7 +1310,7 @@
    "achieved": 0.0011,
    "required": 0.15,
    "unit": "fraction",
-   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry is ASSUMED (unverified)"
+   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
   },
   {
    "criterion": "LA11",

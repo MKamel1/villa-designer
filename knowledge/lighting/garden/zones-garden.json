@@ -3,10 +3,10 @@
  "design": "D1-garden",
  "contract": "contracts.LightingZone (v0.1)",
  "units": {
-  "watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 5 W ASSUMED per uplight)"
+  "watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 1.5 W per Kew 25 uplight)"
  },
  "assumptions": [
-  "ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are an ASSUMED generic requirement (no verified product)",
+  "ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are John Cullen Kew 25 spike, DALI via a driver option (DALI-2 to confirm)",
   "scene value = fraction of maximum output per zone, linear dimming (stated)"
  ],
  "zones": [
@@ -116,10 +116,10 @@
     "lum-gl-UP-2",
     "lum-gl-UP-3"
    ],
-   "watts": 6.8,
+   "watts": 2.0,
    "dimming": "dali2",
    "product": [
-    "ASSUMED-GARDEN-UP-250lm-25deg"
+    "GLK2SM254"
    ],
    "role": "beauty"
   }

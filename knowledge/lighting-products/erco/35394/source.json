@@ -1,0 +1,24 @@
+{
+ "code": "35394.000",
+ "maker": "erco",
+ "name": "Kona projector, 14 deg spot, 3000 K CRI 92, 622 lm, 7.9 W, DALI-2, IP65 ('2700K, 3500K CRI 92 available on request')",
+ "fetched": "2026-11-24",
+ "product_url": "https://www.erco.com/35394.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=35394.000&types=15|4|3&formattedId=false (types fetched one at a time: 15 spec pdf, 4 ldt, 3 ies)",
+ "retrieval": "real Chrome via Playwright, in-page fetch; public, no login",
+ "files": {
+  "erco-35394-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/35394/erco-35394-000-en-specs.pdf",
+   "sha256": "7903a4883b933a150951c4d5cf3159cdb2769e669de157ef7447c905e13fc33f"
+  },
+  "erco-35394-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/35394/erco-35394-000-en-ldt.ldt",
+   "sha256": "6e497b40173e3859cf3548929eb60d0cd13b404d0b81a92b0022e55343a44a3b"
+  },
+  "erco-35394-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/35394/erco-35394-000-en-ies.ies",
+   "sha256": "4b5d6e8c3038ad578cd46dda3f786997ca5f094cd3496ce1f1b3d43195f8be03"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

@@ -2,7 +2,7 @@
 
 Metres, model frame, scene z (garden ground z = -3.00). One verified product carries every SAFETY plane: ERCO Iku B0000184
 (IP65 / IK07, DALI-2, 676 lm, its own manufacturer LDT/IES, V10 pass in knowledge/lighting-products). Beauty fittings with no
-verified product (tree uplights) use ASSUMED generic photometry and are marked `unverified`; no safety plane depends on them.
+verified product (the tree uplights are John Cullen Kew 25 spike lights, V10 in knowledge/lighting-products); no safety plane depends on them.
 
 Direct light only is gated (no reflected light, shadows from walls, furniture and screens). Radiance total light is a cross-check.
 Maintained values = initial x MF (MF 0.8, the project's value in lightcalc.dining).
@@ -25,6 +25,7 @@ from .direct import Placement, _norm, direct_illuminance, upward_light_ratio
 ROOT = Path(__file__).resolve().parents[3]
 LAYOUT = ROOT / "knowledge/landscape/concept/final/layout-final.json"
 IKU_DIR = ROOT / "knowledge/lighting-products/erco/B0000184"
+KEW_DIR = ROOT / "knowledge/lighting-products/john-cullen/GLK2SM254"
 G = -3.0                       # garden ground, scene z
 MF = 0.8                       # maintenance factor (project value)
 V12_MAX_LEVEL = 0.80           # LIGHTING-VERIFICATION V12: every task met with the driver at <= 80 %
@@ -38,10 +39,11 @@ PRODUCTS = {
                 status="V10 pass (knowledge/lighting-products/candidates.json)",
                 caveat="ERCO lists the Iku at 3000 K; the datasheet says 2700 K / CRI 92 is available on request. No 2700 K file exists, so the 3000 K "
                        "photometry is used; the optic is the same, flux of the 2700 K variant is unknown and typically a few % lower (V12 headroom covers it)."),
-    "up-assumed": dict(manufacturer="generic", code="ASSUMED-GARDEN-UP-250lm-25deg", name="ASSUMED narrow in-ground / spike uplight, 2700 K, CRI >= 90, DALI",
-                       lumens=250.0, watts=5.0, cct_k=2700, cri=90, ip="IP67 (required)", ies=None,
-                       status="UNVERIFIED: no product with a V10-checkable file meets 2700 K + CRI >= 90 + DALI + IP67",
-                       caveat="requirement only; candidates must be fetched with their LDT and pass V1/V10 before purchase"),
+    "kew25": dict(manufacturer="john-cullen", code="GLK2SM254", name="Kew 25 Spike Olive Green Medium 2027, 500 mA, IP66 spike spotlight", lumens=93.0, watts=1.5,
+                  cct_k=2700, cri=98, dimming="DALI (driver option; DALI-2 not stated in the datasheet)", ip="IP66", ies=KEW_DIR / "kew25-medium-500mA.ies",
+                  shielded=True,    # datasheet: "A shielded light source delivers precise beam control with minimal glare"; the bare 16 mm opening would read 10-15 kcd/m2 at grazing view (test)
+                  status="V10: peak 479 cd and beam 22 deg pass; lumens FAIL at the 2 % bar (file integrates 90.9 lm vs 93 stated, -2.25 %); the file is the Kew 25 family file (LUMCAT GLK2XMXX3, 2023), not the 2027 article's own",
+                  caveat="IP66 spike, not in-ground IP67: no in-ground product with 2700 K + CRI >= 90 + a downloadable file was found. DALI-2 and the exact-article LDT are to be confirmed with John Cullen."),
 }
 
 
@@ -87,10 +89,10 @@ FIXTURES = [
     F("GR-1", "graze", "beauty", "iku", (28.15, -27.50, 3.4), (28.15, -27.50, 0), "rear wall bracket 0.15 m off the face"),
     F("GR-2", "graze", "beauty", "iku", (28.15, -24.40, 3.4), (28.15, -24.40, 0), "rear wall bracket 0.15 m off the face"),
     F("GR-3", "graze", "beauty", "iku", (26.40, -20.75, 3.4), (26.40, -20.75, 0), "south wall bracket 0.15 m off the face"),
-    # uplights (ASSUMED photometry): crape, olive, east-yard olive, pomegranate
-    F("UP-1", "uplight", "beauty", "up-assumed", (26.55, -23.30, 0.05), (25.60, -24.60, 3.4), "in-ground spike beside the crape stem"),
-    F("UP-2", "uplight", "beauty", "up-assumed", (27.35, -22.95, 0.05), (26.80, -22.50, 3.4), "in-ground spike beside the olive stem"),
-    F("UP-3", "uplight", "beauty", "up-assumed", (21.95, -21.70, 0.05), (21.05, -21.70, 3.4), "in-ground spike beside the east-yard olive"),
+    # uplights (John Cullen Kew 25 spike, medium 22 deg): crape, olive, east-yard olive, pomegranate
+    F("UP-1", "uplight", "beauty", "kew25", (26.55, -23.30, 0.05), (25.60, -24.60, 3.4), "ground spike beside the crape stem"),
+    F("UP-2", "uplight", "beauty", "kew25", (27.35, -22.95, 0.05), (26.80, -22.50, 3.4), "ground spike beside the olive stem"),
+    F("UP-3", "uplight", "beauty", "kew25", (21.95, -21.70, 0.05), (21.05, -21.70, 3.4), "ground spike beside the east-yard olive"),
 ]
 ZONES = ["pond-N", "pond-E", "pit", "path-S", "dining", "graze", "uplight"]
 
@@ -155,17 +157,9 @@ def _blocked(a, b, boxes, eps=1e-6) -> bool:
     return False
 
 
-def up_assumed_ies() -> str:
-    """ASSUMED uplight LM-63 text: cos^n 25 deg beam, 250 lm, 60 mm round opening (a real file replaces it)."""
-    from ..concept.villa_lighting import generic_ies
-    return generic_ies(PRODUCTS["up-assumed"]["lumens"], 25, "GARDEN-UP").replace(" 2 0 0 0\n", " 2 0.06 0.06 0\n", 1)
-
-
 def _photometry(product: str) -> Photometry:
     p = PRODUCTS[product]
-    if p["ies"] is not None:
-        return parse(Path(p["ies"]).read_text(encoding="utf-8", errors="replace"), name=p["code"], source=Path(p["ies"]))
-    return parse(up_assumed_ies(), name=p["code"])
+    return parse(Path(p["ies"]).read_text(encoding="utf-8", errors="replace"), name=p["code"], source=Path(p["ies"]))
 
 
 def placements(levels: dict | None = None, fixtures=FIXTURES, *, shift=(0, 0, 0), aim_roll_deg=0.0, lumens_scale=1.0) -> list[Placement]:
@@ -181,7 +175,7 @@ def placements(levels: dict | None = None, fixtures=FIXTURES, *, shift=(0, 0, 0)
             aim = _norm((aim[0], aim[1] * c - aim[2] * s, aim[1] * s + aim[2] * c))
         dim = 1.0 if levels is None else levels.get(f.zone, 0.0)
         out.append(Placement(f.id, ph, pos, aim, 0.0, dim * lumens_scale, f.zone, "evening-garden", PRODUCTS[f.product]["watts"],
-                             meta=dict(product=f.product, role=f.role, **({"ies_text": up_assumed_ies()} if f.product == "up-assumed" else {}))))
+                             meta=dict(product=f.product, role=f.role, shielded=PRODUCTS[f.product].get("shielded", False))))
     return out
 
 
@@ -431,7 +425,7 @@ def spill(pls: list[Placement], boxes, *, curfew="post") -> tuple[list[CheckResu
     worst = max(ulr.values()) if ulr else 0.0
     res.append(_res("LA12", "pass" if worst <= 0.15 else "fail", "garden/ULR", ["SLL-T3.2-E3"], achieved=round(worst, 4), required=0.15, unit="fraction",
                     message=f"max upward flux fraction to the sky {worst:.3f} ({max(ulr, key=ulr.get) if ulr else '-'}); raw ULR of uplights {max(raw.values()) if raw else 0:.2f} "
-                            f"but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry is ASSUMED (unverified)"))
+                            f"but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"))
     return res, dict(ev_max_by_group={k: max(v) for k, v in ev.items()}, ulr=ulr, ulr_raw=raw)
 
 
@@ -497,8 +491,8 @@ def zones_json() -> dict:
                           watts=round(sum(PRODUCTS[f.product]["watts"] for f in fs) * top, 1), dimming="dali2",
                           product=sorted({PRODUCTS[f.product]["code"] for f in fs}), role=fs[0].role))
     return {"schema": "archpipe-lighting-zones/1", "design": "D1-garden", "contract": "contracts.LightingZone (v0.1)",
-            "units": {"watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 5 W ASSUMED per uplight)"},
-            "assumptions": ["ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are an ASSUMED generic requirement (no verified product)",
+            "units": {"watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 1.5 W per Kew 25 uplight)"},
+            "assumptions": ["ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are John Cullen Kew 25 spike, DALI via a driver option (DALI-2 to confirm)",
                             "scene value = fraction of maximum output per zone, linear dimming (stated)"],
             "zones": zones, "scenes": {"garden": {v["label"]: v["levels"] for v in SCENES.values()}}}
 
@@ -565,15 +559,15 @@ def radiance_check(workdir: Path, *, step=3, ab=6, workers=8, plane_ids=None) ->
 
 # ------------------------------------------------------------------ V1 / V2 / V3
 def v1_inputs(lumens_scale: float = 1.0) -> list[dict]:
-    """V1: integrate each bound photometry and compare with the product's stated lumens (2 %). The unverified uplight is reported as such."""
+    """V1: integrate each bound photometry and compare with the product's stated lumens (2 %). """
     rows = []
     for key, p in PRODUCTS.items():
         ph = _photometry(key)
         integ = ph.integrated_flux() if callable(getattr(ph, "integrated_flux", None)) else ph.integrated_flux
         stated = p["lumens"] * lumens_scale
         err = integ / stated - 1
-        rows.append(dict(product=key, stated_lm=stated, integrated_lm=round(integ, 1), error=round(err, 4), verified=(key == "iku"),
-                         status=("pass" if abs(err) <= 0.02 else "fail") + ("" if key == "iku" else " (ASSUMED photometry: self-consistency only, not a product check)")))
+        rows.append(dict(product=key, stated_lm=stated, integrated_lm=round(integ, 1), error=round(err, 4), verified=True,
+                         status="pass" if abs(err) <= 0.02 else "fail"))
     return rows
 
 

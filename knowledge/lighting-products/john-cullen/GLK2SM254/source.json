@@ -1,0 +1,40 @@
+{
+ "code": "GLK2SM254",
+ "maker": "john-cullen",
+ "name": "Kew 25 Spike Olive Green Medium 2027, 22 deg, 2700 K, CRI 98 Ra, IP66, 500 mA (93 lm, 479 cd)",
+ "fetched": "2026-11-24",
+ "product_url": "https://www.johncullenlighting.com/product/kew-25-spike-2027/",
+ "retrieval": "real Chrome via Playwright; public links on the product page (Photometric Data zip, Family Spec Sheet); no login",
+ "files": {
+  "Kew_25_Photometrics.zip": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/Kew_25_Photometrics.zip",
+   "sha256": "6a42694f82e0c5ea621682bc3c70dd2b2a591922f6e416a6b8889ff52a6d4a7c"
+  },
+  "Kew_25_Spike_Olive_Green_Medium_2027_10_11_26.pdf": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/Kew_25_Spike_Olive_Green_Medium_2027_10_11_26.pdf",
+   "sha256": "7191fe2863f55b9249fc6374121cf27dbd18b839924c3e76ceb43413d490e4ef"
+  },
+  "Kew_25_Spike_Olive_Green_Narrow_2027_10_11_26.pdf": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/Kew_25_Spike_Olive_Green_Narrow_2027_10_11_26.pdf",
+   "sha256": "10d55fa254f4847f1fd221fd804e3575ac93cbb1464a8e4e45d9b14fc6265a4e"
+  },
+  "kew25-medium-500mA.ldt": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-medium-500mA.ldt",
+   "sha256": "0065fbf55057e615052aeecfddea25a10fccc699e84026798599dcbda7a2124f"
+  },
+  "kew25-medium-500mA.ies": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-medium-500mA.ies",
+   "sha256": "d781d3cfcbd90c515e6cb62b87c9c4aef0454826b787d517a9cf087441ad83c0"
+  },
+  "kew25-narrow-500mA.ldt": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-narrow-500mA.ldt",
+   "sha256": "f843b79e77f7a2329e836cad5c4b212fa3c82f935b7bcf08de2277a678278bac"
+  },
+  "kew25-narrow-500mA.ies": {
+   "path": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-narrow-500mA.ies",
+   "sha256": "0195161e0a63dc19e85c921b349febf14f3ae603b201b21ed716539164e6d163"
+  }
+ },
+ "origin_note": "the four kew25-*.ldt/.ies files are byte copies of 'Kew 25 Medium @ 500mA.ldt' / '..._LDT.ies' and the Narrow equivalents inside Kew_25_Photometrics.zip (dated 2024-03-08, LDT 23/11/2023, LUMCAT GLK2XMXX3 / family file, NOT the 2027 article's own file). The IES is a converter output (IES Viewer 3.6) whose opening reads width 0, length -0.016; the LDT says 16 mm round.",
+ "redistribution": "John Cullen serves these files publicly for specifiers; terms not separately read"
+}
