@@ -1,0 +1,8 @@
+{
+ "frames": 8000,
+ "median_depth_corr": 0.597,
+ "near_share_corr": 0.74,
+ "other_non_informative_share": 0.411,
+ "audit_non_informative_share": 0.4081,
+ "per_frame_agreement": 0.7654
+}
