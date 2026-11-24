@@ -411,6 +411,12 @@ lanes:
     - tests/luminaires/**
     - docs/lanes/LG*.md
     - docs/lessons/LG.md
+  WTA: # independent geometric audit of walkthrough routes (coverage, blocking, direction) without rendering
+    - src/archpipe/flyaudit/**
+    - tests/flyaudit/**
+    - knowledge/flyaudit/**
+    - docs/lanes/WTA*.md
+    - docs/lessons/WTA.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
