@@ -1,0 +1,52 @@
+{
+ "s-firepit-edge-ring": {
+  "n": 31,
+  "analytic_direct_avg": 30.725746037757258,
+  "radiance_direct_avg": 30.73159396111081,
+  "direct_diff": 0.00019032648861849744,
+  "worst_point_diff": 0.0002552324866595976,
+  "radiance_total_avg": 31.529508942490757,
+  "total_over_direct": 0.025963995957699604,
+  "convergence": 0.00028108852777886106
+ },
+ "n-pond-edge-ring": {
+  "n": 23,
+  "analytic_direct_avg": 14.57653483880805,
+  "radiance_direct_avg": 14.578925722713045,
+  "direct_diff": 0.0001640227894650348,
+  "worst_point_diff": 0.00019096668181348915,
+  "radiance_total_avg": 15.410361960787126,
+  "total_over_direct": 0.05703000714097595,
+  "convergence": -2.6891828498465387e-06
+ },
+ "e-pond-edge-ring": {
+  "n": 48,
+  "analytic_direct_avg": 20.166562172785888,
+  "radiance_direct_avg": 20.169192655170814,
+  "direct_diff": 0.0001304378189197486,
+  "worst_point_diff": 0.00018302446010259537,
+  "radiance_total_avg": 21.395186898357625,
+  "total_over_direct": 0.060785489243293966,
+  "convergence": -3.8940123519903835e-05
+ },
+ "s-path-door": {
+  "n": 46,
+  "analytic_direct_avg": 20.129892249205387,
+  "radiance_direct_avg": 20.131849953890672,
+  "direct_diff": 9.72536097585408e-05,
+  "worst_point_diff": 0.0002100718203604076,
+  "radiance_total_avg": 21.80623362544282,
+  "total_over_direct": 0.08317087974463866,
+  "convergence": -8.626319843663133e-06
+ },
+ "s-dining-table": {
+  "n": 16,
+  "analytic_direct_avg": 40.39357718598835,
+  "radiance_direct_avg": 40.400325616599076,
+  "direct_diff": 0.0001670669220419363,
+  "worst_point_diff": 0.0002519241815502183,
+  "radiance_total_avg": 41.70154005476295,
+  "total_over_direct": 0.03220801858164357,
+  "convergence": -0.0003459978789875917
+ }
+}

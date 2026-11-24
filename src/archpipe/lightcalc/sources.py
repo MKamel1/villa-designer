@@ -145,6 +145,33 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
         quote="", value="each task card is met (+/-10 %, <= 1.5x) in the scene that owns it; night level <= 10 %",
         status="policy", url_or_path="docs/quality/a-plus-lighting-electrical.md LA10 (values are proposals, UNVERIFIED)"),
     SourceCard(
+        id="LS-POND-EDGE-LIGHT-IES-T33.2",
+        document='IES, The Lighting Handbook', edition='10th ed., 2011', locator='Table 33.2 Residential Exteriors > Pool and Hot Tub Deck (printed p.33.4)',
+        quote='Pool and Hot Tub Deck LZ4i Eh @grade C 2 4 8 Avg',
+        value="4 lx (visual age 25-65), 8 lx (over 65) horizontal at grade; analogue: a swimming-pool deck, not a garden pond or fire pit (LS-POND-EDGE-LIGHT)",
+        status="sourced", url_or_path="knowledge/landscape/rules/rules.json H-ies-pooldeck, H-ies-steps"),
+    SourceCard(
+        id="SLL-T3.5-walkway",
+        document='SLL, Code for Lighting', edition='2012', locator='Table 3.5 General circulation areas at outdoor work places, 3.5.1 (printed p.96)',
+        quote='Walkways exclusively for pedestrians 5 0.25 50 20 Where there are other hazards present higher values of Ēm are required.',
+        value="5 lx maintained average, Uo 0.25 (outdoor WORKPLACE walkway: an analogue; hazards such as water or fire call for more)",
+        status="sourced", url_or_path="knowledge/landscape/rules/rules.json H-sll-walkway"),
+    SourceCard(
+        id="LG-POLICY-dining-30lx",
+        document="LG lane policy", edition="2026-11", locator="garden dining table",
+        quote="", value="outdoor dining table: average 30 lx (min 15) summer-night scene, 40 lx social scene; no published figure exists; 1.5x cap by L6-POLICY-LA2",
+        status="policy", url_or_path="docs/lanes/LG.md"),
+    SourceCard(
+        id="LG-POLICY-pond-water-not-flooded",
+        document="LG lane policy (from the text of rule LS-POND-EDGE-LIGHT, fix: 'do not flood the water')", edition="2026-11", locator="knowledge/landscape/rules/rules.json LS-POND-EDGE-LIGHT",
+        quote="", value="mean Eh on the water surface <= mean Eh on the margin ring (the margin is lit, the water is not the brightest thing); no published figure",
+        status="policy", url_or_path="docs/lanes/LG.md"),
+    SourceCard(
+        id="LG-OBTRUSIVE-GN01-CIE150-not-held",
+        document="ILP GN01 and CIE 150 (not held)", edition="", locator="obtrusive light, environmental zones",
+        quote="", value="NOT USED for any number; the E3 limits are SLL Table 3.2 (SLL-T3.2-E3), held. GN01 / CIE 150 must be read before the figures are quoted as theirs",
+        status="unverified", url_or_path="ILP Guidance Note 01 for the reduction of obtrusive light; CIE 150:2017"),
+    SourceCard(
         id="L6-POLICY-V12-headroom",
         document="L6b villa lighting policy", edition="2026-11", locator="V12",
         quote="", value="every task card is met with its zone driver <= 0.80 of maximum output (>= 25 % upward headroom)",
