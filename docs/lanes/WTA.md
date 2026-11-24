@@ -35,3 +35,17 @@ brute-force caster for scenes under 20,000 triangles, so `tests/flyaudit` (11 te
 
 ## Calibration against the first villa preview (old route)
 See `docs/lessons/WTA.md` and the hand-back; numbers are in `knowledge/flyaudit/villa-route-wt-villa3/report.json` (`calibration`).
+
+## Results (2026-11-24)
+| | old route (villa3, 312.8 s) | WT tour (villa4, 670.5 s, path sha af05502b84f4) |
+|---|---|---|
+| informative | 68.2% | 58.9% (65.0% outside 360 sweeps) |
+| wall-dominated | 9.9% | 30.1% |
+| backward | 13.4% | 0.6% |
+| blocked / dark | 1.6% / 6.8% | 2.4% / 8.0% |
+| rooms with a full 360 | 0 / 30 | 28 / 30 (not the two stair rooms) |
+| runs > 1 s of wall/backward/blocked | 18 (67.9 s) | 66 (206.2 s) |
+| garden frames | 54.8 s placeholders | none (all frames inside the footprint) |
+
+Calibration of the old route: lead by eye ~30 % wall / ~12 % near-black / ~40 % good. Registered v1: interior wall 3.0%, dark 7.0%; v2 (post-hoc, see lessons): wall 12.0%, dark 8.3%, informative 63.1%.
+Cross-check of the new route against WT's own Blender Workbench depth grid (`crosscheck-workbench.json`, 8,000 frames): non-informative share 40.8 % (audit) vs 41.1 % (Workbench), per-frame agreement 76.5 %, near-share correlation 0.74, median-depth correlation 0.60.

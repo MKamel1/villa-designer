@@ -195,6 +195,18 @@ def classify(recs, th, no_daylight_rooms, version=2, key='cat'):
     return recs
 
 
+def add_modes(recs, fps, th):
+    """walking (moving), sweeping (in-place rotation >= 8 deg/s: the 360s) or holding (still). A wall in a hold is worse than in a sweep."""
+    dt = (recs[1]['i'] - recs[0]['i']) / fps if len(recs) > 1 else 1.
+    for k, r in enumerate(recs):
+        a, b = recs[max(0, k - 2)], recs[min(len(recs) - 1, k + 2)]
+        dy = ((b['yaw'] - a['yaw'] + 180) % 360) - 180
+        rate = abs(dy) / max(1e-9, (b['i'] - a['i']) / fps)
+        r['yaw_rate'] = round(rate, 1)
+        r['mode'] = 'walking' if r['speed'] >= th['backward']['min_speed_m_s'] else 'sweeping' if rate >= 8 else 'holding'
+    return recs
+
+
 def runs(recs, fps, stride, min_s, bad=('wall_dominated', 'backward', 'blocked')):
     """Consecutive bad frames lasting more than min_s."""
     out, cur = [], []
@@ -203,7 +215,8 @@ def runs(recs, fps, stride, min_s, bad=('wall_dominated', 'backward', 'blocked')
             cats = {}
             for r in cur:
                 cats[r['cat']] = cats.get(r['cat'], 0) + 1
-            out.append(dict(start_frame=cur[0]['i'], end_frame=cur[-1]['i'], seconds=round(len(cur) * stride / fps, 2),
+            modes = {m: sum(1 for r in cur if r['mode'] == m) for m in ('walking', 'sweeping', 'holding')}
+            out.append(dict(start_frame=cur[0]['i'], end_frame=cur[-1]['i'], modes=modes, seconds=round(len(cur) * stride / fps, 2),
                             room=cur[0]['room'], level=cur[0]['level'], cats=cats))
     for r in recs:
         if r['cat'] in bad:

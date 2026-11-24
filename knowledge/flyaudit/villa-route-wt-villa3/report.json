@@ -123,6 +123,42 @@
    "dark": 0.0827
   },
   "informative_share": 0.6825,
+  "modes": {
+   "walking": {
+    "seconds": 263.1,
+    "cats": {
+     "informative": 0.6383,
+     "wall_dominated": 0.1159,
+     "blocked": 0.0177,
+     "backward": 0.1596,
+     "outward": 0.0,
+     "dark": 0.0684
+    }
+   },
+   "sweeping": {
+    "seconds": 1.2,
+    "cats": {
+     "informative": 0.1429,
+     "wall_dominated": 0.3571,
+     "blocked": 0.3571,
+     "backward": 0.0,
+     "outward": 0.0,
+     "dark": 0.1429
+    }
+   },
+   "holding": {
+    "seconds": 48.6,
+    "cats": {
+     "informative": 0.9348,
+     "wall_dominated": 0.0,
+     "blocked": 0.0,
+     "backward": 0.0,
+     "outward": 0.0,
+     "dark": 0.0652
+    }
+   }
+  },
+  "informative_share_excluding_sweeps": 0.6845,
   "bad_runs_over_1s": 18,
   "bad_run_seconds": 67.9
  },
@@ -291,6 +327,11 @@
     {
      "start_frame": 2394,
      "end_frame": 2514,
+     "modes": {
+      "walking": 61,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 5.08,
      "room": "stair-gf",
      "level": "GF",
@@ -302,6 +343,11 @@
     {
      "start_frame": 2682,
      "end_frame": 2706,
+     "modes": {
+      "walking": 13,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 1.08,
      "room": "stair-gf",
      "level": "GF",
@@ -361,6 +407,11 @@
     {
      "start_frame": 882,
      "end_frame": 910,
+     "modes": {
+      "walking": 15,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 1.25,
      "room": "corridor",
      "level": "GF",
@@ -371,6 +422,11 @@
     {
      "start_frame": 938,
      "end_frame": 1178,
+     "modes": {
+      "walking": 119,
+      "sweeping": 2,
+      "holding": 0
+     },
      "seconds": 10.08,
      "room": "corridor",
      "level": "GF",
@@ -628,6 +684,11 @@
     {
      "start_frame": 792,
      "end_frame": 854,
+     "modes": {
+      "walking": 32,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 2.67,
      "room": "kids-a",
      "level": "GF",
@@ -837,6 +898,11 @@
     {
      "start_frame": 498,
      "end_frame": 774,
+     "modes": {
+      "walking": 137,
+      "sweeping": 2,
+      "holding": 0
+     },
      "seconds": 11.58,
      "room": "family-bath",
      "level": "GF",
@@ -967,6 +1033,11 @@
     {
      "start_frame": 1606,
      "end_frame": 1644,
+     "modes": {
+      "walking": 20,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 1.67,
      "room": "parents-bed",
      "level": "GF",
@@ -978,6 +1049,11 @@
     {
      "start_frame": 1966,
      "end_frame": 2010,
+     "modes": {
+      "walking": 23,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 1.92,
      "room": "parents-bed",
      "level": "GF",
@@ -988,6 +1064,11 @@
     {
      "start_frame": 2074,
      "end_frame": 2132,
+     "modes": {
+      "walking": 30,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 2.5,
      "room": "parents-bed",
      "level": "GF",
@@ -1114,6 +1195,11 @@
     {
      "start_frame": 1660,
      "end_frame": 1780,
+     "modes": {
+      "walking": 56,
+      "sweeping": 5,
+      "holding": 0
+     },
      "seconds": 5.08,
      "room": "parents-dressing",
      "level": "GF",
@@ -1516,6 +1602,11 @@
     {
      "start_frame": 3626,
      "end_frame": 3740,
+     "modes": {
+      "walking": 57,
+      "sweeping": 1,
+      "holding": 0
+     },
      "seconds": 4.83,
      "room": "lounge",
      "level": "B",
@@ -1936,6 +2027,11 @@
     {
      "start_frame": 4676,
      "end_frame": 4768,
+     "modes": {
+      "walking": 47,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 3.92,
      "room": "family",
      "level": "B",
@@ -2044,6 +2140,11 @@
     {
      "start_frame": 5058,
      "end_frame": 5152,
+     "modes": {
+      "walking": 48,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 4.0,
      "room": "kitchen",
      "level": "B",
@@ -2200,6 +2301,11 @@
     {
      "start_frame": 5272,
      "end_frame": 5386,
+     "modes": {
+      "walking": 58,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 4.83,
      "room": "dining",
      "level": "B",
@@ -2267,6 +2373,11 @@
     {
      "start_frame": 5576,
      "end_frame": 5600,
+     "modes": {
+      "walking": 13,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 1.08,
      "room": "dining-side",
      "level": "B",
@@ -2813,6 +2924,11 @@
     {
      "start_frame": 4284,
      "end_frame": 4364,
+     "modes": {
+      "walking": 41,
+      "sweeping": 0,
+      "holding": 0
+     },
      "seconds": 3.42,
      "room": "cinema",
      "level": "B",
@@ -3262,6 +3378,11 @@
   {
    "start_frame": 498,
    "end_frame": 774,
+   "modes": {
+    "walking": 137,
+    "sweeping": 2,
+    "holding": 0
+   },
    "seconds": 11.58,
    "room": "family-bath",
    "level": "GF",
@@ -3273,6 +3394,11 @@
   {
    "start_frame": 792,
    "end_frame": 854,
+   "modes": {
+    "walking": 32,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 2.67,
    "room": "kids-a",
    "level": "GF",
@@ -3283,6 +3409,11 @@
   {
    "start_frame": 882,
    "end_frame": 910,
+   "modes": {
+    "walking": 15,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.25,
    "room": "corridor",
    "level": "GF",
@@ -3293,6 +3424,11 @@
   {
    "start_frame": 938,
    "end_frame": 1178,
+   "modes": {
+    "walking": 119,
+    "sweeping": 2,
+    "holding": 0
+   },
    "seconds": 10.08,
    "room": "corridor",
    "level": "GF",
@@ -3305,6 +3441,11 @@
   {
    "start_frame": 1606,
    "end_frame": 1644,
+   "modes": {
+    "walking": 20,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.67,
    "room": "parents-bed",
    "level": "GF",
@@ -3316,6 +3457,11 @@
   {
    "start_frame": 1660,
    "end_frame": 1780,
+   "modes": {
+    "walking": 56,
+    "sweeping": 5,
+    "holding": 0
+   },
    "seconds": 5.08,
    "room": "parents-dressing",
    "level": "GF",
@@ -3327,6 +3473,11 @@
   {
    "start_frame": 1966,
    "end_frame": 2010,
+   "modes": {
+    "walking": 23,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.92,
    "room": "parents-bed",
    "level": "GF",
@@ -3337,6 +3488,11 @@
   {
    "start_frame": 2074,
    "end_frame": 2132,
+   "modes": {
+    "walking": 30,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 2.5,
    "room": "parents-bed",
    "level": "GF",
@@ -3347,6 +3503,11 @@
   {
    "start_frame": 2394,
    "end_frame": 2514,
+   "modes": {
+    "walking": 61,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 5.08,
    "room": "stair-gf",
    "level": "GF",
@@ -3358,6 +3519,11 @@
   {
    "start_frame": 2682,
    "end_frame": 2706,
+   "modes": {
+    "walking": 13,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.08,
    "room": "stair-gf",
    "level": "GF",
@@ -3369,6 +3535,11 @@
   {
    "start_frame": 3346,
    "end_frame": 3378,
+   "modes": {
+    "walking": 17,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.42,
    "room": null,
    "level": "B",
@@ -3379,6 +3550,11 @@
   {
    "start_frame": 3626,
    "end_frame": 3740,
+   "modes": {
+    "walking": 57,
+    "sweeping": 1,
+    "holding": 0
+   },
    "seconds": 4.83,
    "room": "lounge",
    "level": "B",
@@ -3390,6 +3566,11 @@
   {
    "start_frame": 4284,
    "end_frame": 4364,
+   "modes": {
+    "walking": 41,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 3.42,
    "room": "cinema",
    "level": "B",
@@ -3400,6 +3581,11 @@
   {
    "start_frame": 4676,
    "end_frame": 4768,
+   "modes": {
+    "walking": 47,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 3.92,
    "room": "family",
    "level": "B",
@@ -3410,6 +3596,11 @@
   {
    "start_frame": 5058,
    "end_frame": 5152,
+   "modes": {
+    "walking": 48,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 4.0,
    "room": "kitchen",
    "level": "B",
@@ -3420,6 +3611,11 @@
   {
    "start_frame": 5272,
    "end_frame": 5386,
+   "modes": {
+    "walking": 58,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 4.83,
    "room": "dining",
    "level": "B",
@@ -3431,6 +3627,11 @@
   {
    "start_frame": 5576,
    "end_frame": 5600,
+   "modes": {
+    "walking": 13,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.08,
    "room": "dining-side",
    "level": "B",
@@ -3441,6 +3642,11 @@
   {
    "start_frame": 6174,
    "end_frame": 6208,
+   "modes": {
+    "walking": 18,
+    "sweeping": 0,
+    "holding": 0
+   },
    "seconds": 1.5,
    "room": null,
    "level": "B",

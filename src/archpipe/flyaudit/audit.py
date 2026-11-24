@@ -64,6 +64,7 @@ def run(route_path, scene_path, out_dir, route_id=None, rooms=None, views=None, 
     nod1, nod = no_daylight_v1(geom, rooms), no_daylight(geom, rooms, th)
     core.classify(recs, th, nod1, version=1, key='cat_v1')
     core.classify(recs, th, nod)
+    core.add_modes(recs, R['settings']['fps'], th)
     report = summarise(recs, st, sstats, subj, geom, et, rooms, th, R, nod)
     out = Path(out_dir) / (route_id or Path(route_path).parent.name or 'route'); out.mkdir(parents=True, exist_ok=True)
     (out / 'report.json').write_text(json.dumps(report, indent=1))
@@ -146,6 +147,8 @@ def summarise(recs, st, sstats, subj, geom, et, rooms, th, R, nod):
                  cats={c: share(recs, c) for c in CATS},
                  interior_cats={c: share([r for r in recs if not r['garden']], c) for c in CATS},
                  informative_share=share(recs, 'informative'),
+                 modes={m: dict(seconds=round(sum(1 for r in recs if r['mode'] == m) * dt, 1), cats={c: share([r for r in recs if r['mode'] == m], c) for c in CATS}) for m in ('walking', 'sweeping', 'holding')},
+                 informative_share_excluding_sweeps=round(sum(1 for r in recs if r['cat'] == 'informative' and r['mode'] != 'sweeping') / max(1, sum(1 for r in recs if r['mode'] != 'sweeping')), 4),
                  bad_runs_over_1s=len(bad_runs), bad_run_seconds=round(sum(b['seconds'] for b in bad_runs), 1))
     cal = calibration(recs, R, th)
     return dict(schema='flyaudit/1', route_sha256=R['sha'], thresholds=th, whole=whole, rooms=per_room, subjects=subjects,

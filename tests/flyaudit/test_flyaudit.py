@@ -98,7 +98,7 @@ class ThreeSixtyTests(unittest.TestCase):
 
 class RunTests(unittest.TestCase):
     def test_run_over_one_second_is_reported_but_short_one_is_not(self):
-        mk = lambda i, c: dict(i=i, cat=c, room='hall', level='GF')
+        mk = lambda i, c: dict(i=i, cat=c, room='hall', level='GF', mode='walking')
         recs = [mk(i, 'wall_dominated' if 10 <= i < 60 else 'informative') for i in range(0, 200, 2)]
         self.assertEqual(len(core.runs(recs, 24, 2, 1.0)), 1)
         short = [mk(i, 'wall_dominated' if 10 <= i < 30 else 'informative') for i in range(0, 200, 2)]
