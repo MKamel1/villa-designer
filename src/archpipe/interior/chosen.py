@@ -82,7 +82,7 @@ def problems(ch: dict, design_rooms: dict, palettes: dict[str, dict]) -> list[st
             if c.get(k) not in slots:
                 p.append(f"room {rid}: {k} slot {c.get(k)!r} is not a scheduled slot")
         if r.get("occupancy") in ("bathroom", "ensuite", "wc") and not (
-                c.get("floor") == "floor-wet" and c.get("wall") == "wall-tile-wet"):
+                c.get("floor") in ("floor-wet", "floor-ensuite") and c.get("wall") == "wall-tile-wet"):
             p.append(f"room {rid}: wet room without the wet-room floor and wall finish")
     for rid in ch.get("rooms", {}):
         if rid not in design_rooms:

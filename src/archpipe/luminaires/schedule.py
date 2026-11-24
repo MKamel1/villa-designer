@@ -89,6 +89,12 @@ TYPE_SPEC = {
                  name="Underscore15 ledstrip hi performance, 680 lm/m, 5 W/m, 2700 K")], beam=(120, "wide, indirect onto the ceiling"), cct=2700,
                  ugr="not visible (indirect)", ip="IP20 (IP65 if the cove can be wet-cleaned)", ik="-", dimming=DIM_DALI + " via a constant-voltage/current driver",
                  size="strip width <= 12 mm; continuous, no dark gaps", finish="-", note="decorative: lumens-only; CRI >= 90 and 2700 K on the strip itself"),
+    "PCOVE": dict(name="LED cove, ensuite bath feature panel", role="Frames the light-marble feature panel behind the ensuite bath (client reference image12)",
+                  mount="surface, in a reveal round the panel", ref=[dict(maker="iGuzzini", code="ST39", url="https://www.iguzzini.com/en/st39/", v10="pass",
+                  name="Underscore Ledstrip Tube Hi Performance, 15 W/m, 1780 lm/m, 2700 K, CRI 92, IP65 (uncut), 24 V")], beam=(120, "wide, grazing the panel and the wall"),
+                  cct=2700, ugr="not visible (in the reveal, behind the panel edge)", ip="IP65 (uncut; seal every cut end: the cut ends are IP20)", ik="-",
+                  dimming=DIM_DALI + " via a separate 24 V DALI-2 constant-voltage driver (not included with the strip)", size="strip width 10 mm, height 4 mm",
+                  finish="-", note="2700 K CRI >= 90 on the strip itself (CRI 92, MacAdam 2); run at a driver <= 0.80 of its rated 1780 lm/m"),
     "BACK": dict(name="LED strip, cabinet", role="Inside glass book cabinets and under-stair bays", mount="surface, in the cabinet", ref=[dict(maker="iGuzzini", code="ST49",
                  url="https://www.iguzzini.com/en/st49/", v10="lumens-only", name="Underscore15 ledstrip hi performance, 680 lm/m, 2700 K")],
                  beam=(120, "wide"), cct=2700, ugr="shielded from the eye", ip="IP20", ik="-", dimming=DIM_DALI + " zone", size="strip width <= 12 mm",
@@ -143,7 +149,7 @@ TYPE_SPEC = {
                    note="ERCO lists 3000 K; ask for 2700 K. Quantity follows the exterior design (not in the D1 interior count)"),
 }
 
-_STRIPS = ("COVE", "BACK", "UC", "RAIL", "TOE", "NL", "VSTRIP", "MIRROR")
+_STRIPS = ("COVE", "PCOVE", "BACK", "UC", "RAIL", "TOE", "NL", "VSTRIP", "MIRROR")
 
 
 def _rated_lm(f, kinds):

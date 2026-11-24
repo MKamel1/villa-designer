@@ -1,0 +1,19 @@
+{
+ "code": "ST39",
+ "maker": "iguzzini",
+ "name": "Underscore15: Underscore Ledstrip Tube Hi Performance - 15W/m - 15W 1780lm (1.0 m) - 2700K",
+ "fetched": "2026-11-24",
+ "product_url": "https://www.iguzzini.com/en/st39/",
+ "files": {
+  "ldt": {
+   "path": "knowledge/lighting-products/iguzzini/ST39/ST39.ldt",
+   "sha256": "af9c347a9b592924db6c36ee00466200d80651b99f3fe659ff709060292626ff"
+  },
+  "ies": {
+   "path": "knowledge/lighting-products/iguzzini/ST39/ST39.ies",
+   "sha256": "a6876398d5fb74c14391bf86db9d7b0bf338d2747ddbc58fe8c60d4180425e9f"
+  }
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "origin_note": null
+}

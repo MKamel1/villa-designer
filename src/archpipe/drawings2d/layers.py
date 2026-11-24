@@ -96,7 +96,7 @@ LUM = {  # fixture_kind -> (symbol, description). Description comes from the ele
     "DL": "dl", "DLN": "dl", "ADJ": "adj", "WW": "lin", "COVE": "lin", "BACK": "lin", "STEP": "pt", "TOE": "lin",
     "UC": "lin", "NL": "pt", "SCONCE": "wall", "PEN-GLOBE": "pen", "PEN-LIN": "lin", "SWING": "wall",
     "DESK": "pt", "STORE-BATTEN": "lin", "VANITY-LIN": "lin", "PATH": "pt", "WALL-READ": "wall", "RAIL": "lin",
-    "VSTRIP": "lin", "MIRROR": "lin",
+    "VSTRIP": "lin", "MIRROR": "lin", "PCOVE": "lin",
 }
 
 
