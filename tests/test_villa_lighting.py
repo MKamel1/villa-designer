@@ -2,6 +2,7 @@
 import copy
 import unittest
 
+from archpipe import fixture_record as FR
 from archpipe import photometry as ph
 from archpipe.concept import villa_furnish as F
 from archpipe.concept import villa_lighting as VL
@@ -174,3 +175,39 @@ class Photometry(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BathFeatureCove(unittest.TestCase):
+    """Client 2026-11-24 (reference image12): an LED cove frames the ensuite bath feature panel. Real product, zone-rated, quiet elsewhere."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.fx = VL.design()
+        cls.cove = [f for f in cls.fx if f.kind == "PCOVE"]
+
+    def test_three_strips_frame_the_panel_in_the_ensuite_only(self):
+        self.assertEqual({f.room for f in self.cove}, {"parents-ensuite"})
+        self.assertEqual(len(self.cove), 3)                                   # two sides and the top
+        bp = VL.BATH_PANEL
+        tops = [f for f in self.cove if f.along == (1.0, 0.0, 0.0)]
+        sides = [f for f in self.cove if f.along == (0.0, 0.0, 1.0)]
+        self.assertEqual((len(tops), len(sides)), (1, 2))
+        self.assertAlmostEqual(tops[0].length, bp["width"] + 2 * bp["edge_gap"], places=3)
+        self.assertGreater(min(f.z - f.length / 2 for f in sides), bp["z0"])    # sides start above the bath rim, not inside the tub
+
+    def test_the_product_is_ip65_2700k_cri_90_dali_and_driven_at_or_below_080(self):
+        import json
+        from pathlib import Path
+        row = json.loads((Path(__file__).resolve().parents[1] / "knowledge/lighting/products-frozen.json").read_text())["PCOVE"]
+        self.assertEqual(FR.bind_products()["PCOVE"]["code"], "ST39")
+        self.assertEqual((row["manufacturer"], row["code"], row["cct"], row["v10"]), ("iguzzini", "ST39", 2700.0, "pass"))
+        self.assertGreaterEqual(row["cri"], 90)
+        self.assertTrue(row["ip"].startswith("IP65"))
+        self.assertIn("DALI-2", row["dimming"])
+        for f in self.cove:
+            self.assertLessEqual(f.extra["dimmer"], 0.80)
+            self.assertAlmostEqual(f.lumens, 1780.0 * f.length * f.extra["dimmer"], delta=1.0)
+
+    def test_negative_other_strips_and_rooms_do_not_use_the_wet_zone_product(self):
+        self.assertFalse([f for f in self.fx if f.kind in ("COVE", "TOE", "MIRROR") and f.room != "parents-ensuite"
+                          and FR.bind_products().get(f.kind)])                  # the IP20 strips stay generic and elsewhere

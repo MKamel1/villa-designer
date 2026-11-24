@@ -1,4 +1,6 @@
 """V10 for the bound products (read from the binding, L6d: ERCO A9003138 + iGuzzini RP65, alternate RP25): data-sheet numbers parsed by this lane, against the files the engine loads."""
+from pathlib import Path
+
 import pytest
 
 from archpipe.lightverify import v10_erco as V
@@ -87,3 +89,16 @@ def test_cri_overstated_in_the_record_fails_and_understated_is_flagged(monkeypat
     rp = next(t for t in V.run().table if t["code"] == "RP65")["rows"]
     assert "understates" in next(m for n, _, m in rp if n == "cri")      # record below the page's CRI 90: flagged, not failed
     assert next(s for n, s, _ in rp if n == "cri") == "pass"
+
+
+def test_strip_page_figures_are_compared_per_metre_not_per_reel():
+    """ST39 (2026-11-24): the iGuzzini strip page prints 8900 lm / 75 W for the 5 m reel, the photometric file is the 1 m length
+    (1780 lm, 15 W). Without the per-metre normalisation V10 failed the product's lumens by 400 %. A non-strip page is unchanged."""
+    from archpipe.lightverify import v10_erco as V
+    page = (Path(__file__).resolve().parents[2] / "knowledge/lighting-products/iguzzini/ST39/ST39-product-page.txt").read_text(encoding="utf-8")
+    ds = V.datasheet_iguzzini(page)
+    assert ds["lumens"] == 1780.0 and ds["watts"] == 15.0 and ds["imax"] == [577.0]          # per metre; Imax is a peak, not a flux
+    no_reel = page.replace("Supplied in 5-metre reels", "Supplied singly")                   # negative control: not a strip page
+    assert V.datasheet_iguzzini(no_reel)["lumens"] == 8900.0
+    rp = (Path(__file__).resolve().parents[2] / "knowledge/lighting-products/iguzzini/RP65/RP65-product-page.txt").read_text(encoding="utf-8")
+    assert V.datasheet_iguzzini(rp)["lumens"] == 1079.0                                          # a luminaire page keeps its system lumens
