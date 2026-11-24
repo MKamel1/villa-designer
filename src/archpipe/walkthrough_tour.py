@@ -345,9 +345,10 @@ def plan_tour(vm, route=None, pol=None):
             continue
         if s['kind'] == 'walk':
             n = max(1, int(math.ceil(s['leg']['T']*fps))); leg = s['leg']; T = leg['T']
+            dest = next((n.get('room') or n.get('garden') for n in legs[k+1:] if n['kind'] in ('turn', 'pan')), None)
             X, Y, G, YW, SF, PI = leg['at'](np.arange(n)*T/n)
             for q in range(n):
-                frames.append(((X[q], Y[q], G[q], float(YW[q]), bool(SF[q]), float(PI[q])), dict(phase='stair' if s['label'] == 'stair' else 'walk', station=None)))
+                frames.append(((X[q], Y[q], G[q], float(YW[q]), bool(SF[q]), float(PI[q])), dict(phase='stair' if s['label'] == 'stair' else 'walk', station=None, heading_to=dest)))
             continue
         T = s['T']; n = max(1, int(math.ceil(T*fps)))
         x, y = s['at']; g = LEVEL_Z[s['level']]
@@ -374,7 +375,7 @@ def plan_tour(vm, route=None, pol=None):
         ym = math.radians(yaw_deg); z = g+eye; lvl = level_at(g)
         run = math.cos(math.radians(pitch))
         out.append(dict(index=i, seconds=i/fps, yaw_deg=float(yaw_deg), pitch_deg=float(pitch), ground_m=float(g), level=lvl, stair=bool(sf),
-                        room=vm.room_at(lvl, x, y) if not sf else None, segment='interior', phase=tag['phase'], station=tag['station'],
+                        room=vm.room_at(lvl, x, y) if not sf else None, segment='interior', phase=tag['phase'], station=tag['station'], heading_to=tag.get('heading_to'),
                         camera=dict(position=[float(x), float(y), float(z)],
                                     target=[float(x+math.cos(ym)*run), float(y+math.sin(ym)*run), float(z+math.sin(math.radians(pitch)))],
                                     lens_mm=24, sensor_mm=36, shift_x=0, shift_y=0)))

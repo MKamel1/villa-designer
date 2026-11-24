@@ -1188,7 +1188,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
         if abs(pos[2]-frame['ground_m']-settings['eye_height_m']) > 1e-9:
             row['failures'].append('camera eye height differs from still-view rule')
         sight = wall_sightline_findings(view, host_walls)
-        if sight and (frame.get('station') if frame.get('phase') == 'turn' else frame['room']) in flagged_rooms:
+        if sight and ((frame.get('station') if frame.get('phase') == 'turn' else frame.get('heading_to')) in flagged_rooms or frame['room'] in flagged_rooms):
             row['waived_wall_sightline'] = sight       # room too small for the 1 m rule from any standing point: flagged, never silent
         else:
             row['failures'].extend(sight)
