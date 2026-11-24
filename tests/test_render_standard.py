@@ -19,8 +19,8 @@ ALLOWED_MATERIALS = {
     "fin-cushion-library-daybed-2", "fin-cushion-living-sofa-1", "fin-cushion-living-sofa-2",
     "fin-cushion-living-sofa-3", "fin-cushion-lounge-sofa-1", "fin-cushion-lounge-sofa-2",
     "fin-cushion-lounge-sofa-3", "fin-cushion-parents-bed-1", "fin-cushion-parents-bed-2",
-    "fin-cushion-parents-bed-3", "fin-cushion-study-sofa-1", "fin-cushion-study-sofa-2", "fin-kitchen-joinery",
-    "fin-kitchen-joinery-x", "fin-rug-living", "fin-rug-lounge", "fin-rug-parents-bedroom", "fin-throw-cinema-sofa",
+    "fin-cushion-parents-bed-3", "fin-cushion-study-sofa-1", "fin-cushion-study-sofa-2", "fin-kitchen-front",
+    "fin-kitchen-front-x", "marble-backsplash", "marble-bath-panel", "marble-ensuite-floor", "brass-ensuite", "fin-rug-living", "fin-rug-lounge", "fin-rug-parents-bedroom", "fin-throw-cinema-sofa",
     "fin-throw-library-daybed", "fin-throw-living-sofa", "fin-throw-lounge-sofa", "fin-throw-parents-bed",
     "fin-throw-study-sofa", "fin-wall-feature",
     "aspidistra-leaf",  # G4e neutral-reviewed ASSUMED glossy botanical appearance

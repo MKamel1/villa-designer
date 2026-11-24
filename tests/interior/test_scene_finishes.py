@@ -81,15 +81,78 @@ class FeatureWall(unittest.TestCase):
 
 
 class KitchenAndJoinery(unittest.TestCase):
-    def test_kitchen_zone_takes_B_and_nothing_else_takes_the_kitchen_front(self):
+    def test_kitchen_zone_is_dijon_walnut_with_a_white_slab_worktop(self):
         sc = scene()
         kitchen = ("kitchen", "kitchen-island", "dirty-kitchen")
+        mats = {m["material"] for m in sc["meshes"] if m.get("room") in kitchen}
         for m in sc["meshes"]:
             if m["material"] == "greige-lacquer":
-                self.assertIn(m.get("room"), kitchen, m["id"])          # the fenix front is the kitchen's only
+                self.assertIn(m.get("room"), kitchen, m["id"])          # the lacquer stand-in never leaves the kitchen
             if m.get("room") in kitchen:
-                self.assertNotIn(m["material"], ("walnut", "walnut-grain-x", "oak"), m["id"])   # kitchen timber is B's joinery
+                self.assertNotIn(m["material"], ("walnut", "walnut-grain-x", "oak", "fin-kitchen-joinery"), m["id"])   # kitchen timber is EGGER Dijon Walnut
+        self.assertIn("fin-kitchen-front", mats)
         self.assertTrue(any(m["material"] == "marble-white" and m.get("room") in kitchen for m in sc["meshes"]))
+        self.assertNotIn("fin-kitchen-front", {m["material"] for m in sc["meshes"] if m.get("room") not in kitchen})   # nothing else takes it
+
+    def test_waterfall_ends_return_the_slab_to_the_floor_in_the_slab_material(self):
+        """The design model's island carries `waterfall_ends: both-short` (furn-k-island); its slab material is the chosen white
+        veined stone and both short ends run from the worktop to the basement floor."""
+        sc = scene()
+        ms = [m for m in sc["meshes"] if m["id"].startswith("furn-k-island") and not m["id"].startswith("furn-k-island-stool")
+              and m["material"] == "marble-white"]
+        self.assertTrue(ms)
+        P = np.array([p for m in ms for f in m["faces"] for p in f])
+        x0, x1 = P[:, 0].min(), P[:, 0].max()
+        self.assertAlmostEqual(x1 - x0, 3.05, places=2)
+        for edge in (x0, x1):
+            end = P[np.abs(P[:, 0] - edge) < 1e-3]
+            self.assertLess(end[:, 2].min(), -2.99)                        # reaches the floor (-3.0 m)
+            self.assertAlmostEqual(end[:, 2].max(), -3.0 + 0.92, places=2)  # and meets the worktop's top
+
+    def test_backsplash_is_a_600mm_slab_on_the_wall_behind_each_run_and_quiet_elsewhere(self):
+        sc = scene()
+        sp = [m for m in sc["meshes"] if m["material"] == "marble-backsplash"]
+        self.assertEqual(sorted(m["id"] for m in sp), ["detail-backsplash-dk-run", "detail-backsplash-k-run"])
+        for m in sp:
+            lo, hi = bbox(m)
+            self.assertAlmostEqual(hi[2] - lo[2], 0.60, places=3)
+            self.assertAlmostEqual(lo[2], -3.0 + 0.90, places=3)       # starts at the worktop's top
+            self.assertAlmostEqual(min(hi[0] - lo[0], hi[1] - lo[1]), 0.012, places=3)
+        # negative control: no splash behind the island (a freestanding piece has no wall) or in other rooms
+        self.assertFalse([m for m in sc["meshes"] if m["material"] == "marble-backsplash" and "island" in m["id"]])
+
+
+class EnsuiteFeature(unittest.TestCase):
+    def test_feature_panel_sits_on_the_wall_behind_the_bath_from_rim_to_240(self):
+        sc = scene()
+        (m,) = [m for m in sc["meshes"] if m["id"] == "detail-bath-feature-panel"]
+        lo, hi = bbox(m)
+        self.assertEqual((m["material"], m["room"]), ("marble-bath-panel", "parents-ensuite"))
+        self.assertAlmostEqual(lo[2], 0.55, places=3)
+        self.assertAlmostEqual(hi[2], 2.40, places=3)
+        self.assertAlmostEqual(lo[1], -31.111 + 0.023, places=3)          # on the face of the 23 mm marble wall layer
+        walls = [w for w in sc["meshes"] if w["id"].startswith("finish-layer") and w["material"] == "marble-bath" and w.get("room") == "parents-ensuite"]
+        faces_y = [bbox(w)[1][1] for w in walls if bbox(w)[0][0] < 20.7 < bbox(w)[1][0] and bbox(w)[1][1] < -31.0]
+        self.assertTrue(faces_y and lo[1] >= max(faces_y) - 1e-6, "the panel is buried in the wall finish (the first render's defect)")
+        self.assertAlmostEqual(hi[0] - lo[0], 1.50, places=3)
+
+    def test_dark_walls_are_kept_floor_is_light_and_shower_floor_is_still_slip_rated(self):
+        sc = scene()
+        from archpipe.concept import villa_render as V
+        self.assertEqual(V.FINISH["parents-ensuite"][:2], ("marble-ensuite-floor", "marble-bath"))
+        self.assertEqual(V.FINISH["family-bath"][0], "marble-wet")
+        self.assertIn("FRAPPUCCINO", CH.load()["slots"]["wall-tile-wet"]["item"]["product"]["name"])
+        # the ensuite has a bath and no walk-in shower: its floor is the light marble; the other wet rooms keep the slip-rated finish
+        self.assertFalse(any(m["material"] == "marble-wet" and m.get("room") == "parents-ensuite" for m in sc["meshes"]))
+        self.assertTrue(any(m["material"] == "marble-wet" and m.get("room") in ("family-bath", "guest-wc") for m in sc["meshes"]))
+
+    def test_brass_is_the_gessi_finish_in_the_ensuite_only(self):
+        sc = scene()
+        ens = {m["material"] for m in sc["meshes"] if m.get("room") == "parents-ensuite"}
+        self.assertIn("brass-ensuite", ens)
+        self.assertNotIn("brass", ens)                                   # no generic brass left in the room
+        self.assertNotIn("brass-ensuite", {m["material"] for m in sc["meshes"] if m.get("room") != "parents-ensuite"})
+        self.assertEqual(sc["materials"]["brass-ensuite"]["metallic"], 1.0)
 
 
 class CushionHeight(unittest.TestCase):

@@ -616,6 +616,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     #                       furniture_stage2 hashes every mesh attribute and the ids must not change its receipt
 
     def mesh(mid, mat, faces, group, *, kind, room=None, label=None, **kw):
+        if mat == "brass" and room == "parents-ensuite":
+            mat = "brass-ensuite"        # client 2026-11-24: the ensuite's brass is the Gessi316 finish 727 (chosen.json), same geometry
         if "element_ids" in kw:
             declared_ids[mid] = {k: kw.pop(k) for k in ("element_ids", "faces_by_element") if k in kw}
         if group in ("furniture", "dressing") and "bevel_m" not in kw and mat not in ("glass-guard", "rug") \
@@ -1632,6 +1634,31 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     notes.append("ASSUMED hatch reveals and roll-up shutter housing: shutter raised for all current day views; "
                  "three 0.4 m sliding panels are stowed inside the 0.4 m west pocket, with an overhead track.")
 
+    # Client 2026-11-24 (reference image23): a backsplash slab in the kitchen's own worktop stone, SPLASH (600 mm, the design's K-SPLASH
+    # figure) above each base run's worktop, 12 mm thick, on the wall the run stands against. The design model holds no splash zone, so
+    # this is a render finish layer hosted on the run (element ids = the run), not a model element: reported, not invented.
+    for run_id in ("k-run", "dk-run"):
+        run = it_all[run_id]
+        ax, ay, _ = FD.to_world_point(run, -run["w"] / 2, -run["d"] / 2, 0, 0)
+        bx, by, _ = FD.to_world_point(run, run["w"] / 2, -run["d"] / 2 + SPLASH_T, 0, 0)
+        zt = LZ[run["level"]] + run["h"]
+        mesh("detail-backsplash-" + run_id, "marble-backsplash",
+             box_faces(min(ax, bx), min(ay, by), zt, max(ax, bx), max(ay, by), zt + F3.SPLASH),
+             "fixture", room=run["room"], label="client 2026-11-24 backsplash slab, %.0f mm, on the wall behind %s" % (F3.SPLASH * 1000, run_id),
+             kind="finish-layer", element_ids=["furn-" + run_id])
+    # Client 2026-11-24 (reference image12): the light-marble feature panel on the ensuite wall behind the bath, from the bath rim to
+    # 2.40 m, framed by the PCOVE cove (villa_lighting.BATH_PANEL carries the numbers both share).
+    bp, ens = VL.BATH_PANEL, F.clear_rect(lay, "parents-ensuite")
+    bath = it_all["pe-bath"]
+    assert abs(bp["z0"] - bath["h"]) < 1e-9, "the panel starts at the bath rim"
+    bb = F.footprint(bath)
+    pcx, lz = (bb[0] + bb[2]) / 2, LZ[bath["level"]]
+    mesh("detail-bath-feature-panel", "marble-bath-panel",
+         box_faces(pcx - bp["width"] / 2, ens[1] + bp["wall_finish"], lz + bp["z0"], pcx + bp["width"] / 2,
+                   ens[1] + bp["wall_finish"] + bp["thick"], lz + bp["z1"]),
+         "fixture", room="parents-ensuite", label="client 2026-11-24 light-marble feature panel behind the bath, %.0f mm thick" % (bp["thick"] * 1000),
+         kind="finish-layer", element_ids=["furn-pe-bath"])
+
     for fitting in sp["bath_fittings"]:
         fid = "detail-" + fitting["id"]
         if fitting["kind"] == "ceiling-rain-head":
@@ -2637,16 +2664,21 @@ RUG_MATERIAL = {"lounge": "fin-rug-lounge", "living": "fin-rug-living", "parents
                 "kids-a": "fin-rug-living"}
 
 
+SPLASH_T = 0.012          # backsplash slab thickness (Marazzi Grande Marble Look is 6.5 mm; 12 mm with its adhesive bed)
+
+
 def part_material(f, part):
     """Scene material of one furniture part under the client's finish mix (2026-11-23).
 
     The stand-in table below still decides WHICH role a part plays (worktop, front, timber, ...); here the kitchen zone's
-    carcass timber takes the kitchen joinery (B), and a laminate front used outside the kitchen is joinery timber (C),
-    because the client chose the fenix front for the kitchen only.
+    carcass timber, the fronts and the tall units take EGGER Dijon Walnut (client 2026-11-24, reference image23), and a laminate
+    front used outside the kitchen is joinery timber (C).
     """
     mat = _stand_in_part_material(f, part)
-    if f["room"] in KITCHEN_ROOMS and mat in ("walnut", "oak", "walnut-grain-x"):
-        return "fin-kitchen-joinery-x" if part in ("top", "shelf", "apron") or mat.endswith("-x") else "fin-kitchen-joinery"
+    if mat == "brass" and f["room"] == "parents-ensuite":
+        return "brass-ensuite"            # client 2026-11-24: the Gessi316 brass finish, same geometry
+    if f["room"] in KITCHEN_ROOMS and mat in ("walnut", "oak", "walnut-grain-x", "greige-lacquer"):
+        return "fin-kitchen-front-x" if part in ("top", "shelf", "apron") or mat.endswith("-x") else "fin-kitchen-front"
     if mat == "greige-lacquer" and f["room"] not in KITCHEN_ROOMS:
         return "walnut"
     return mat

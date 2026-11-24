@@ -6,7 +6,7 @@ from pathlib import Path
 from archpipe.interior import chosen as CH, finishes as F
 
 LIB = Path.home() / "archpipe/assets/library"
-PALS = {p: F.load_palette(p) for p in "BC"}
+PALS = {p: F.load_palette(p) for p in "ABCR"}
 
 
 def design_rooms():
@@ -25,17 +25,36 @@ class Schedule(unittest.TestCase):
 
     def test_the_client_mix(self):
         s = self.ch["slots"]
-        want = {"worktop": "B-worktop", "backsplash": "B-backsplash", "kitchen-front": "B-kitchen-front",
-                "kitchen-joinery": "B-joinery-light", "floor-basement": "C-floor-living", "floor-gf": "C-floor-gf",
+        want = {"worktop": "R-worktop", "backsplash": "R-backsplash", "kitchen-front": "A-joinery-timber",
+                "floor-ensuite": "R-floor-ensuite", "wall-feature-bath": "R-bath-panel", "brass-ensuite": "R-brass-bath-mixer",
+                "floor-basement": "C-floor-living", "floor-gf": "C-floor-gf",
                 "door": "C-door", "floor-wet": "C-floor-wet", "wall-tile-wet": "C-bath-tile",
                 "wall-paint-main": "B-wall-paint", "wall-feature-parents": "C-wall-paint"}
+        self.assertNotIn("kitchen-joinery", s)          # the island carcass is walnut too (reference image23)
         self.assertEqual({k: s[k]["item_id"] for k in want}, want)
         self.assertIn("Gris Fleury", s["floor-basement"]["item"]["product"]["name"])
         self.assertEqual(s["wall-paint-main"]["item"]["product"]["colour_name"], "Off White")
         self.assertEqual(s["wall-feature-parents"]["item"]["product"]["colour_name"], "Nile Clay")
         # Nile Clay is the feature wall behind the bed only
         self.assertEqual(s["wall-feature-parents"]["applies_to"]["rooms"], ["parents-bed"])
-        self.assertEqual([r for r, c in self.ch["rooms"].items() if c.get("feature_wall")], ["parents-bed"])
+        self.assertEqual([r for r, c in self.ch["rooms"].items() if c.get("feature_wall")], ["parents-bed", "parents-ensuite"])
+
+    def test_the_2026_11_24_kitchen_and_ensuite_decisions(self):
+        """Client decisions after their reference images: walnut fronts, white Calacatta-gold-look worktop/waterfall/backsplash,
+        dark Frappuccino ensuite walls KEPT, light feature panel and floor, brass."""
+        s = self.ch["slots"]
+        self.assertEqual(s["kitchen-front"]["item"]["product"]["colour_name"], "Natural Dijon Walnut")
+        for k in ("worktop", "backsplash", "wall-feature-bath"):
+            self.assertIn("VENA VECCHIA", s[k]["item"]["product"]["name"], k)
+        self.assertIn("FRAPPUCCINO", s["wall-tile-wet"]["item"]["product"]["name"])        # the dark walls are kept
+        self.assertEqual(s["floor-ensuite"]["applies_to"]["rooms"], ["parents-ensuite"])   # other wet floors stay slip-rated
+        self.assertEqual(self.ch["rooms"]["family-bath"]["floor"], "floor-wet")
+        self.assertEqual(s["brass-ensuite"]["render"]["metallic"], 1.0)
+        self.assertEqual(s["brass-ensuite"]["item"]["product"]["maker"], "Gessi")
+        self.assertIn("finish_name_caveat", s["brass-ensuite"]["item"]["product"]["extra"])   # the unverified finish name is disclosed
+        for k in ("worktop", "backsplash", "wall-feature-bath", "floor-ensuite"):           # true scale: the 1600 x 3200 mm slab
+            self.assertEqual(s[k]["render"]["tile_m"], 3.2, k)
+        self.assertTrue(s["backsplash"]["applies_to"]["rooms"] and not s["backsplash"].get("no_geometry"))
 
     def test_every_room_has_floor_and_wall_and_wet_rooms_are_wet(self):
         self.assertEqual(set(self.ch["rooms"]), set(self.rooms))
@@ -46,12 +65,13 @@ class Schedule(unittest.TestCase):
                 continue
             self.assertIn(c["floor"], self.ch["slots"]); self.assertIn(c["wall"], self.ch["slots"])
             if r["occupancy"] in ("bathroom", "ensuite", "wc"):
-                self.assertEqual((c["floor"], c["wall"]), ("floor-wet", "wall-tile-wet"), rid)
+                self.assertEqual((c["floor"], c["wall"]),
+                                 ("floor-ensuite" if rid == "parents-ensuite" else "floor-wet", "wall-tile-wet"), rid)
 
     def test_no_slot_is_unassigned_and_no_geometry_is_reported_not_hidden(self):
         for sid, s in self.ch["slots"].items():
             self.assertTrue(s["applies_to"]["rooms"] or s.get("no_geometry"), sid)
-        self.assertIn("no backsplash zone", self.ch["slots"]["backsplash"]["no_geometry"])
+        self.assertFalse(self.ch["slots"]["backsplash"].get("no_geometry"))      # the backsplash IS drawn now (detail-backsplash-*)
 
     def test_cushion_schedule_has_a_slot_per_scheduled_cushion_and_throw(self):
         ids = [i["id"] for i in PALS["C"]["items"] if i["slot"].startswith(("cushion", "throw")) and i["group"] == "soft"]
@@ -95,8 +115,12 @@ class NegativeControls(unittest.TestCase):
         self.assertTrue(any("not in the design model" in p for p in self.probs()))
 
     def test_slot_assigned_to_nothing(self):
-        self.ch["slots"]["backsplash"].pop("no_geometry")
+        self.ch["slots"]["backsplash"]["applies_to"]["rooms"] = []
         self.assertTrue(any("backsplash" in p and "no room" in p for p in self.probs()))
+
+    def test_ensuite_with_the_wrong_floor_slot(self):
+        self.ch["rooms"]["parents-ensuite"]["floor"] = "floor-gf"
+        self.assertTrue(any("wet room" in p for p in self.probs()))
 
     def test_price_key_is_refused(self):
         self.ch["slots"]["worktop"]["item"]["product"]["extra"] = {"price_egp": 1}
