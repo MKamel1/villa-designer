@@ -1,0 +1,167 @@
+{
+ "schema": "archpipe-lighting-zones/1",
+ "design": "D1-garden",
+ "contract": "contracts.LightingZone (v0.1)",
+ "units": {
+  "watts": "W installed at the highest commissioned level of any scene (7 W rated per Iku; 1.5 W per Kew 25 uplight)"
+ },
+ "assumptions": [
+  "ERCO Iku B0000184 is DALI-2, 1-100 % (datasheet); the uplights are John Cullen Kew 25 spike, DALI via a driver option (DALI-2 to confirm)",
+  "scene value = fraction of maximum output per zone, linear dimming (stated)"
+ ],
+ "zones": [
+  {
+   "id": "Z-G-POND-N",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-NP-1",
+    "lum-gl-NP-2",
+    "lum-gl-NP-3",
+    "lum-gl-NP-4"
+   ],
+   "watts": 2.2,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "safety"
+  },
+  {
+   "id": "Z-G-POND-E",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-EP-1",
+    "lum-gl-EP-2",
+    "lum-gl-EP-3",
+    "lum-gl-EP-5",
+    "lum-gl-EP-6"
+   ],
+   "watts": 4.2,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "safety"
+  },
+  {
+   "id": "Z-G-PIT",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-FP-1",
+    "lum-gl-FP-2"
+   ],
+   "watts": 2.8,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "safety"
+  },
+  {
+   "id": "Z-G-PATH-S",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-PS-1",
+    "lum-gl-PS-2",
+    "lum-gl-PS-3"
+   ],
+   "watts": 3.1,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "safety"
+  },
+  {
+   "id": "Z-G-DINING",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-DN-1",
+    "lum-gl-DN-2"
+   ],
+   "watts": 3.1,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "use"
+  },
+  {
+   "id": "Z-G-GRAZE",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-GR-1",
+    "lum-gl-GR-2",
+    "lum-gl-GR-3"
+   ],
+   "watts": 7.3,
+   "dimming": "dali2",
+   "product": [
+    "B0000184"
+   ],
+   "role": "beauty"
+  },
+  {
+   "id": "Z-G-UPLIGHT",
+   "room": "garden",
+   "layer": "exterior",
+   "luminaire_ids": [
+    "lum-gl-UP-1",
+    "lum-gl-UP-2",
+    "lum-gl-UP-3"
+   ],
+   "watts": 2.0,
+   "dimming": "dali2",
+   "product": [
+    "GLK2SM254"
+   ],
+   "role": "beauty"
+  }
+ ],
+ "scenes": {
+  "garden": {
+   "Summer-night dining under the crape myrtle": {
+    "dining": 0.165,
+    "path-S": 0.1,
+    "pit": 0.12,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.25,
+    "uplight": 0.3
+   },
+   "Social gathering (10-20 people, standing room)": {
+    "dining": 0.22,
+    "path-S": 0.15,
+    "pit": 0.2,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.35,
+    "uplight": 0.45
+   },
+   "Quiet north court (south garden at its safety floor)": {
+    "dining": 0.0,
+    "path-S": 0.1,
+    "pit": 0.1,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.0,
+    "uplight": 0.0
+   },
+   "Winter evening around the fire pit (crape leafless: no uplight)": {
+    "dining": 0.0,
+    "path-S": 0.1,
+    "pit": 0.2,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.1,
+    "uplight": 0.0
+   }
+  }
+ }
+}

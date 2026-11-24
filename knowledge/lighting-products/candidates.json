@@ -4,7 +4,7 @@
   {
    "code": "451G",
    "maker": "iguzzini",
-   "name": "Sipario LV Ø 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
+   "name": "Sipario LV \u00d8 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
    "lumens": 1957.5,
    "watts": 19.9,
    "beam_deg": 33.9,
@@ -48,7 +48,7 @@
       "worst_error": 0.004,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "product page 'F - Flood 34°'"
+      "source": "product page 'F - Flood 34\u00b0'"
      },
      {
       "kind": "lumens",
@@ -247,7 +247,7 @@
       "worst_error": 0.0147,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "datasheet p1 cone table header '54.5°'"
+      "source": "datasheet p1 cone table header '54.5\u00b0'"
      }
     ],
     "status": "pass"
@@ -470,7 +470,7 @@
        "worst_error": 0.0179,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 56°'"
+       "source": "datasheet p1 'Beam angle C0 56\u00b0'"
       },
       {
        "kind": "lumens",
@@ -616,7 +616,7 @@
        "worst_error": 0.0315,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 89°'"
+       "source": "datasheet p1 'Beam angle C0 89\u00b0'"
       },
       {
        "kind": "lumens",
@@ -1466,7 +1466,7 @@
        "worst_error": 0.2128,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '4.7°'"
+       "source": "datasheet p1 cone table header '4.7\u00b0'"
       }
      ],
      "status": "fail"
@@ -1675,7 +1675,7 @@
        "worst_error": 0.2,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '5.0°'"
+       "source": "datasheet p1 cone table header '5.0\u00b0'"
       }
      ],
      "status": "fail"
@@ -2620,7 +2620,7 @@
        "worst_error": 0.0349,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 86°'"
+       "source": "datasheet p1 'Beam angle C0 86\u00b0'"
       }
      ],
      "status": "pass"
@@ -2681,7 +2681,7 @@
    {
     "code": "QA03",
     "maker": "iguzzini",
-    "name": "Laser pendant, Ø59 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
+    "name": "Laser pendant, \u00d859 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
     "exterior": null,
     "lumens": 831.6,
     "watts": 12.3,
@@ -2781,7 +2781,7 @@
    {
     "code": "QA11",
     "maker": "iguzzini",
-    "name": "Laser pendant, Ø59 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
+    "name": "Laser pendant, \u00d859 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
     "exterior": null,
     "lumens": 766.8,
     "watts": 12.3,
@@ -3182,5 +3182,215 @@
   "VSCONCE": [],
   "STEP": [],
   "PATH": []
+ },
+ "garden_uplight_candidates": {
+  "generated": "2026-11-24",
+  "note": "LG lane, tree uplight search; V10 by archpipe.luminaires.v10.check_product; points are the datasheet's own. Rules and evidence in docs/lanes/LG.md.",
+  "products": {
+   "john-cullen GLK2SM254 (Kew 25 medium, 500 mA)": {
+    "lumens": {
+     "stated": 93,
+     "independent": 91.2,
+     "archpipe": 90.9,
+     "worst_error": 0.0225,
+     "tolerance": 0.02,
+     "status": "fail"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 479,
+      "engine": 478.0826,
+      "independent": 478.0826,
+      "worst_error": 0.0019,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet INTENSITY RATING 479 cd"
+     },
+     {
+      "kind": "beam_angle",
+      "distance_m": null,
+      "published": 22,
+      "engine": 21.8,
+      "independent": 21.7922,
+      "worst_error": 0.0094,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet BEAM ANGLE 22 deg"
+     }
+    ],
+    "status": "fail"
+   },
+   "john-cullen GLK2SN254 (Kew 25 narrow, 500 mA)": {
+    "lumens": {
+     "stated": 94,
+     "independent": 94.2,
+     "archpipe": 93.8,
+     "worst_error": 0.0025,
+     "tolerance": 0.02,
+     "status": "pass"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 1349,
+      "engine": 1334.8786,
+      "independent": 1334.8786,
+      "worst_error": 0.0105,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet INTENSITY RATING 1349 cd"
+     },
+     {
+      "kind": "beam_angle",
+      "distance_m": null,
+      "published": 11,
+      "engine": 11.3,
+      "independent": 11.2094,
+      "worst_error": 0.0273,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet BEAM ANGLE 11 deg"
+     }
+    ],
+    "status": "pass"
+   },
+   "erco 35394.000 (Kona 14 deg spot)": {
+    "lumens": {
+     "stated": 622,
+     "independent": 624.0,
+     "archpipe": 623.1,
+     "worst_error": 0.0032,
+     "tolerance": 0.02,
+     "status": "pass"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 6245,
+      "engine": 6230.2,
+      "independent": 6230.2,
+      "worst_error": 0.0024,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet Imax=6245cd"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 2,
+      "published": 1561,
+      "engine": 1557.55,
+      "independent": 1557.55,
+      "worst_error": 0.0022,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet E(lx) at h"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 4,
+      "published": 390,
+      "engine": 389.3875,
+      "independent": 389.3875,
+      "worst_error": 0.0016,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet E(lx) at h"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 6,
+      "published": 173,
+      "engine": 173.0611,
+      "independent": 173.0611,
+      "worst_error": 0.0004,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet E(lx) at h"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 8,
+      "published": 98,
+      "engine": 97.3469,
+      "independent": 97.3469,
+      "worst_error": 0.0067,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet E(lx) at h"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 10,
+      "published": 62,
+      "engine": 62.302,
+      "independent": 62.302,
+      "worst_error": 0.0049,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet E(lx) at h"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 2,
+      "published": 0.52,
+      "engine": 0.5479,
+      "independent": 0.5463,
+      "worst_error": 0.0537,
+      "tolerance": 0.05,
+      "status": "fail",
+      "source": "datasheet D(m)"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 4,
+      "published": 1.03,
+      "engine": 1.0959,
+      "independent": 1.0927,
+      "worst_error": 0.0639,
+      "tolerance": 0.05,
+      "status": "fail",
+      "source": "datasheet D(m)"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 6,
+      "published": 1.55,
+      "engine": 1.6438,
+      "independent": 1.639,
+      "worst_error": 0.0605,
+      "tolerance": 0.05,
+      "status": "fail",
+      "source": "datasheet D(m)"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 8,
+      "published": 2.06,
+      "engine": 2.1917,
+      "independent": 2.1853,
+      "worst_error": 0.0639,
+      "tolerance": 0.05,
+      "status": "fail",
+      "source": "datasheet D(m)"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 10,
+      "published": 2.58,
+      "engine": 2.7397,
+      "independent": 2.7316,
+      "worst_error": 0.0619,
+      "tolerance": 0.05,
+      "status": "fail",
+      "source": "datasheet D(m)"
+     }
+    ],
+    "status": "fail"
+   }
+  }
  }
 }

@@ -127,11 +127,10 @@ def radiance_safe_ies(text: str) -> str:
         if ln.strip().upper().startswith("TILT=") and ln.strip().upper() == "TILT=NONE":
             j = i + 1
             tok = lines[j].split()
-            if len(tok) >= 13:           # n_lamps lumens mult nV nH type units w l h (+ ballast fields on the same line)
+            if len(tok) >= 10:           # n_lamps lumens mult nV nH type units w l h (+ ballast fields on the same line)
                 tok[7:10] = [t.lstrip("-") for t in tok[7:10]]
-                lines[j] = " ".join(tok)
-            elif len(tok) == 10:
-                tok[7:10] = [t.lstrip("-") for t in tok[7:10]]
+                if (float(tok[7]) == 0) != (float(tok[8]) == 0):      # one diameter in one field (John Cullen Kew 25 IES: 0 / -0.016): ies2rad needs both
+                    tok[7] = tok[8] = tok[7] if float(tok[7]) else tok[8]
                 lines[j] = " ".join(tok)
             break
     return "\n".join(lines) + "\n"

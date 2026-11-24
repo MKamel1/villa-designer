@@ -1,0 +1,1358 @@
+{
+ "scenes": {
+  "summer-night-dining": {
+   "levels": {
+    "dining": 0.165,
+    "path-S": 0.1,
+    "pit": 0.12,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.25,
+    "uplight": 0.3
+   },
+   "planes": {
+    "s-firepit-edge-ring": {
+     "n": 93,
+     "avg": 18.578,
+     "min": 14.05,
+     "max": 21.356,
+     "u0": 0.756
+    },
+    "n-pond-edge-ring": {
+     "n": 67,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
+     "u0": 0.628
+    },
+    "n-pond-water": {
+     "n": 70,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
+     "u0": 0.607
+    },
+    "e-pond-edge-ring": {
+     "n": 144,
+     "avg": 20.147,
+     "min": 8.679,
+     "max": 24.292,
+     "u0": 0.431
+    },
+    "e-pond-water": {
+     "n": 112,
+     "avg": 18.633,
+     "min": 10.742,
+     "max": 22.792,
+     "u0": 0.577
+    },
+    "s-path-door": {
+     "n": 138,
+     "avg": 13.636,
+     "min": 9.272,
+     "max": 16.864,
+     "u0": 0.68
+    },
+    "s-dining-table": {
+     "n": 48,
+     "avg": 30.257,
+     "min": 18.824,
+     "max": 38.846,
+     "u0": 0.622
+    }
+   },
+   "spill": {
+    "ev_max_by_group": {
+     "east-neighbour": 4.7095756600679896e-05,
+     "rear-neighbour": 0.0011846376299871658,
+     "sister-villa-facade": 0.02024338403719233,
+     "street-side": 0.0003142255288923429,
+     "east-yard-neighbour": 7.350857102122515e-05,
+     "apartment-above-facade": 0.11615887882887439
+    },
+    "ulr": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.0003559346848828268,
+     "FP-2": 0.0003559346848828313,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
+     "DN-1": 0.0,
+     "DN-2": 0.0,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0,
+     "UP-1": 0.04960796003630766,
+     "UP-2": 0.048580690397640326,
+     "UP-3": 0.14605269413380803
+    },
+    "ulr_raw": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.0003559346848828268,
+     "FP-2": 0.0003559346848828313,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
+     "DN-1": 0.0,
+     "DN-2": 0.0,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0,
+     "UP-1": 0.9777955692801503,
+     "UP-2": 0.977974800701518,
+     "UP-3": 0.9779264603109945
+    }
+   }
+  },
+  "social-gathering": {
+   "levels": {
+    "dining": 0.22,
+    "path-S": 0.15,
+    "pit": 0.2,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.35,
+    "uplight": 0.45
+   },
+   "planes": {
+    "s-firepit-edge-ring": {
+     "n": 93,
+     "avg": 30.771,
+     "min": 23.175,
+     "max": 35.374,
+     "u0": 0.753
+    },
+    "n-pond-edge-ring": {
+     "n": 67,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
+     "u0": 0.628
+    },
+    "n-pond-water": {
+     "n": 70,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
+     "u0": 0.607
+    },
+    "e-pond-edge-ring": {
+     "n": 144,
+     "avg": 20.148,
+     "min": 8.719,
+     "max": 24.293,
+     "u0": 0.433
+    },
+    "e-pond-water": {
+     "n": 112,
+     "avg": 18.633,
+     "min": 10.743,
+     "max": 22.792,
+     "u0": 0.577
+    },
+    "s-path-door": {
+     "n": 138,
+     "avg": 20.123,
+     "min": 13.758,
+     "max": 24.251,
+     "u0": 0.684
+    },
+    "s-dining-table": {
+     "n": 48,
+     "avg": 40.534,
+     "min": 25.802,
+     "max": 51.854,
+     "u0": 0.637
+    }
+   },
+   "spill": {
+    "ev_max_by_group": {
+     "east-neighbour": 7.849292766779983e-05,
+     "rear-neighbour": 0.0017868066382415633,
+     "sister-villa-facade": 0.03349028727429076,
+     "street-side": 0.0003142255288923429,
+     "east-yard-neighbour": 0.0001225142850353753,
+     "apartment-above-facade": 0.1742383182433116
+    },
+    "ulr": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.2781594847062607e-05,
+     "PS-2": 1.2781594847062607e-05,
+     "PS-3": 2.8230966230258797e-05,
+     "DN-1": 0.0,
+     "DN-2": 0.0,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0,
+     "UP-1": 0.04960796003630777,
+     "UP-2": 0.04858069039764038,
+     "UP-3": 0.1460526941338093
+    },
+    "ulr_raw": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.2781594847062607e-05,
+     "PS-2": 1.2781594847062607e-05,
+     "PS-3": 2.8230966230258797e-05,
+     "DN-1": 0.0,
+     "DN-2": 0.0,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0,
+     "UP-1": 0.9777955692801539,
+     "UP-2": 0.9779748007015292,
+     "UP-3": 0.9779264603109826
+    }
+   }
+  },
+  "quiet-north-court": {
+   "levels": {
+    "dining": 0.0,
+    "path-S": 0.1,
+    "pit": 0.1,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.0,
+    "uplight": 0.0
+   },
+   "planes": {
+    "s-firepit-edge-ring": {
+     "n": 93,
+     "avg": 15.011,
+     "min": 11.0,
+     "max": 17.249,
+     "u0": 0.733
+    },
+    "n-pond-edge-ring": {
+     "n": 67,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
+     "u0": 0.628
+    },
+    "n-pond-water": {
+     "n": 70,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
+     "u0": 0.607
+    },
+    "e-pond-edge-ring": {
+     "n": 144,
+     "avg": 20.146,
+     "min": 8.675,
+     "max": 24.291,
+     "u0": 0.431
+    },
+    "e-pond-water": {
+     "n": 112,
+     "avg": 18.632,
+     "min": 10.741,
+     "max": 22.791,
+     "u0": 0.576
+    },
+    "s-path-door": {
+     "n": 138,
+     "avg": 11.652,
+     "min": 8.375,
+     "max": 13.448,
+     "u0": 0.719
+    },
+    "s-dining-table": {
+     "n": 48,
+     "avg": 0.888,
+     "min": 0.022,
+     "max": 4.933,
+     "u0": 0.025
+    }
+   },
+   "spill": {
+    "ev_max_by_group": {
+     "east-neighbour": 3.9246463833899915e-05,
+     "rear-neighbour": 0.00016119231014717045,
+     "sister-villa-facade": 0.016092342569442173,
+     "street-side": 0.0003142255288923429,
+     "east-yard-neighbour": 6.125714251768765e-05,
+     "apartment-above-facade": 4.653944590104231e-05
+    },
+    "ulr": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05
+    },
+    "ulr_raw": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05
+    }
+   }
+  },
+  "winter-evening": {
+   "levels": {
+    "dining": 0.0,
+    "path-S": 0.1,
+    "pit": 0.2,
+    "pond-N": 0.08,
+    "pond-E": 0.12,
+    "graze": 0.1,
+    "uplight": 0.0
+   },
+   "planes": {
+    "s-firepit-edge-ring": {
+     "n": 93,
+     "avg": 30.061,
+     "min": 22.231,
+     "max": 34.55,
+     "u0": 0.74
+    },
+    "n-pond-edge-ring": {
+     "n": 67,
+     "avg": 14.634,
+     "min": 9.187,
+     "max": 17.487,
+     "u0": 0.628
+    },
+    "n-pond-water": {
+     "n": 70,
+     "avg": 12.527,
+     "min": 7.609,
+     "max": 15.582,
+     "u0": 0.607
+    },
+    "e-pond-edge-ring": {
+     "n": 144,
+     "avg": 20.146,
+     "min": 8.676,
+     "max": 24.292,
+     "u0": 0.431
+    },
+    "e-pond-water": {
+     "n": 112,
+     "avg": 18.632,
+     "min": 10.741,
+     "max": 22.791,
+     "u0": 0.576
+    },
+    "s-path-door": {
+     "n": 138,
+     "avg": 11.705,
+     "min": 8.496,
+     "max": 13.514,
+     "u0": 0.726
+    },
+    "s-dining-table": {
+     "n": 48,
+     "avg": 1.146,
+     "min": 0.355,
+     "max": 4.952,
+     "u0": 0.31
+    }
+   },
+   "spill": {
+    "ev_max_by_group": {
+     "east-neighbour": 7.849292766779983e-05,
+     "rear-neighbour": 0.0003223846202943409,
+     "sister-villa-facade": 0.03255771432042904,
+     "street-side": 0.0003142255288923429,
+     "east-yard-neighbour": 0.0001225142850353753,
+     "apartment-above-facade": 9.307889180208462e-05
+    },
+    "ulr": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0
+    },
+    "ulr_raw": {
+     "NP-1": 0.00014225265390307708,
+     "NP-2": 0.00014225265390307708,
+     "NP-3": 0.00017604805562720165,
+     "NP-4": 0.0010658093706296106,
+     "EP-1": 0.0001571806131620164,
+     "EP-2": 0.00014225265390307765,
+     "EP-3": 0.00014386297077135387,
+     "EP-5": 7.043509584018462e-05,
+     "EP-6": 6.714649454535098e-05,
+     "FP-1": 0.00035593468488282696,
+     "FP-2": 0.0003559346848828311,
+     "PS-1": 1.278159484706269e-05,
+     "PS-2": 1.278159484706269e-05,
+     "PS-3": 2.8230966230258847e-05,
+     "GR-1": 0.0,
+     "GR-2": 0.0,
+     "GR-3": 0.0
+    }
+   }
+  }
+ },
+ "safety_levels": {
+  "s-firepit-edge-ring": {
+   "zone": "pit",
+   "level_for_target": 0.07347559699377253,
+   "min_at_full": 108.87968696161863,
+   "avg_at_full": 148.56819216344738,
+   "u0": 0.7328600111242828,
+   "n": 93
+  },
+  "n-pond-edge-ring": {
+   "zone": "pond-N",
+   "level_for_target": 0.06966059147873208,
+   "min_at_full": 114.84255057527702,
+   "avg_at_full": 182.93118782158496,
+   "u0": 0.6277909849209768,
+   "n": 67
+  },
+  "e-pond-edge-ring": {
+   "zone": "pond-E",
+   "level_for_target": 0.11163415027027668,
+   "min_at_full": 71.66265860967503,
+   "avg_at_full": 167.86691233867452,
+   "u0": 0.42690163065068076,
+   "n": 144
+  },
+  "s-path-door": {
+   "zone": "path-S",
+   "level_for_target": 0.043090834251542705,
+   "min_at_full": 83.31945281715488,
+   "avg_at_full": 116.03395679954824,
+   "u0": 0.7180609462546509,
+   "n": 138
+  }
+ },
+ "fixtures": [
+  {
+   "id": "NP-1",
+   "zone": "pond-N",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    3.3,
+    -25.35,
+    2.4
+   ],
+   "target": [
+    2.3,
+    -25.35,
+    0
+   ],
+   "mount": "east building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "NP-2",
+   "zone": "pond-N",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    3.3,
+    -24.35,
+    2.4
+   ],
+   "target": [
+    2.3,
+    -24.35,
+    0
+   ],
+   "mount": "east building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "NP-3",
+   "zone": "pond-N",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    1.25,
+    -23.85,
+    2.4
+   ],
+   "target": [
+    0.45,
+    -24.6,
+    0
+   ],
+   "mount": "south building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "NP-4",
+   "zone": "pond-N",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    3.3,
+    -26.35,
+    2.4
+   ],
+   "target": [
+    1.6,
+    -25.95,
+    0
+   ],
+   "mount": "east building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "EP-1",
+   "zone": "pond-E",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    17.0,
+    -23.3,
+    2.4
+   ],
+   "target": [
+    17.3,
+    -22.3,
+    0
+   ],
+   "mount": "north building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "EP-2",
+   "zone": "pond-E",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    18.5,
+    -23.3,
+    2.4
+   ],
+   "target": [
+    18.5,
+    -22.3,
+    0
+   ],
+   "mount": "north building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "EP-3",
+   "zone": "pond-E",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    19.8,
+    -23.3,
+    2.4
+   ],
+   "target": [
+    19.7,
+    -22.3,
+    0
+   ],
+   "mount": "north building face, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "EP-5",
+   "zone": "pond-E",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    16.95,
+    -20.78,
+    2.4
+   ],
+   "target": [
+    16.8,
+    -21.5,
+    0
+   ],
+   "mount": "south wall bracket 0.15 m off the face"
+  },
+  {
+   "id": "EP-6",
+   "zone": "pond-E",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    20.2,
+    -20.78,
+    2.4
+   ],
+   "target": [
+    20.2,
+    -21.5,
+    0
+   ],
+   "mount": "south wall bracket 0.15 m off the face"
+  },
+  {
+   "id": "FP-1",
+   "zone": "pit",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    23.8,
+    -29.8,
+    1.9
+   ],
+   "target": [
+    24.9,
+    -29.55,
+    0
+   ],
+   "mount": "sister-screen post, non-combustible bracket"
+  },
+  {
+   "id": "FP-2",
+   "zone": "pit",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    27.0,
+    -29.8,
+    1.9
+   ],
+   "target": [
+    25.9,
+    -29.55,
+    0
+   ],
+   "mount": "sister-screen post, non-combustible bracket"
+  },
+  {
+   "id": "PS-1",
+   "zone": "path-S",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    22.9,
+    -27.3,
+    2.4
+   ],
+   "target": [
+    23.25,
+    -27.3,
+    0
+   ],
+   "mount": "house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "PS-2",
+   "zone": "path-S",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    22.9,
+    -25.4,
+    2.4
+   ],
+   "target": [
+    23.25,
+    -25.4,
+    0
+   ],
+   "mount": "house facade, 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "PS-3",
+   "zone": "path-S",
+   "role": "safety",
+   "product": "iku",
+   "pos": [
+    22.9,
+    -23.75,
+    2.4
+   ],
+   "target": [
+    23.25,
+    -23.4,
+    0
+   ],
+   "mount": "house facade (its last 0.84 m before the facade ends at y -23.591), 0.30 m stainless wall arm below the first-floor slab edge (ASSUMED accessory, to be detailed)"
+  },
+  {
+   "id": "DN-1",
+   "zone": "dining",
+   "role": "use",
+   "product": "iku",
+   "pos": [
+    25.0,
+    -25.4,
+    3.0
+   ],
+   "target": [
+    25.0,
+    -25.4,
+    0.75
+   ],
+   "mount": "crape myrtle lower branch clamp above the table"
+  },
+  {
+   "id": "DN-2",
+   "zone": "dining",
+   "role": "use",
+   "product": "iku",
+   "pos": [
+    25.9,
+    -25.4,
+    3.0
+   ],
+   "target": [
+    25.9,
+    -25.4,
+    0.75
+   ],
+   "mount": "crape myrtle lower branch clamp above the table"
+  },
+  {
+   "id": "GR-1",
+   "zone": "graze",
+   "role": "beauty",
+   "product": "iku",
+   "pos": [
+    28.15,
+    -27.5,
+    3.4
+   ],
+   "target": [
+    28.15,
+    -27.5,
+    0
+   ],
+   "mount": "rear wall bracket 0.15 m off the face"
+  },
+  {
+   "id": "GR-2",
+   "zone": "graze",
+   "role": "beauty",
+   "product": "iku",
+   "pos": [
+    28.15,
+    -24.4,
+    3.4
+   ],
+   "target": [
+    28.15,
+    -24.4,
+    0
+   ],
+   "mount": "rear wall bracket 0.15 m off the face"
+  },
+  {
+   "id": "GR-3",
+   "zone": "graze",
+   "role": "beauty",
+   "product": "iku",
+   "pos": [
+    26.4,
+    -20.75,
+    3.4
+   ],
+   "target": [
+    26.4,
+    -20.75,
+    0
+   ],
+   "mount": "south wall bracket 0.15 m off the face"
+  },
+  {
+   "id": "UP-1",
+   "zone": "uplight",
+   "role": "beauty",
+   "product": "kew25",
+   "pos": [
+    26.55,
+    -23.3,
+    0.05
+   ],
+   "target": [
+    25.6,
+    -24.6,
+    3.4
+   ],
+   "mount": "ground spike beside the crape stem"
+  },
+  {
+   "id": "UP-2",
+   "zone": "uplight",
+   "role": "beauty",
+   "product": "kew25",
+   "pos": [
+    27.35,
+    -22.95,
+    0.05
+   ],
+   "target": [
+    26.8,
+    -22.5,
+    3.4
+   ],
+   "mount": "ground spike beside the olive stem"
+  },
+  {
+   "id": "UP-3",
+   "zone": "uplight",
+   "role": "beauty",
+   "product": "kew25",
+   "pos": [
+    21.95,
+    -21.7,
+    0.05
+   ],
+   "target": [
+    21.05,
+    -21.7,
+    3.4
+   ],
+   "mount": "ground spike beside the east-yard olive"
+  }
+ ],
+ "products": {
+  "iku": {
+   "manufacturer": "erco",
+   "code": "B0000184",
+   "name": "Iku surface-mounted downlight IP65, IK07",
+   "lumens": 676.0,
+   "watts": 7.0,
+   "cct_k": 3000,
+   "cct_variant_k": 2700,
+   "cri": 92,
+   "dimming": "DALI-2, 1-100 %",
+   "ip": "IP65",
+   "ies": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ies.ies",
+   "status": "V10 pass (knowledge/lighting-products/candidates.json)",
+   "caveat": "ERCO lists the Iku at 3000 K; the datasheet says 2700 K / CRI 92 is available on request. No 2700 K file exists, so the 3000 K photometry is used; the optic is the same, flux of the 2700 K variant is unknown and typically a few % lower (V12 headroom covers it)."
+  },
+  "kew25": {
+   "manufacturer": "john-cullen",
+   "code": "GLK2SM254",
+   "name": "Kew 25 Spike Olive Green Medium 2027, 500 mA, IP66 spike spotlight",
+   "lumens": 93.0,
+   "watts": 1.5,
+   "cct_k": 2700,
+   "cri": 98,
+   "dimming": "DALI (driver option; DALI-2 not stated in the datasheet)",
+   "ip": "IP66",
+   "ies": "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-medium-500mA.ies",
+   "shielded": true,
+   "status": "V10: peak 479 cd and beam 22 deg pass; lumens FAIL at the 2 % bar (file integrates 90.9 lm vs 93 stated, -2.25 %); the file is the Kew 25 family file (LUMCAT GLK2XMXX3, 2023), not the 2027 article's own",
+   "caveat": "IP66 spike, not in-ground IP67: no in-ground product with 2700 K + CRI >= 90 + a downloadable file was found. DALI-2 and the exact-article LDT are to be confirmed with John Cullen."
+  }
+ },
+ "checks": [
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/s-firepit-edge-ring",
+   "achieved": 14.05,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 14.0 lx (avg 18.6, max 21.4) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/n-pond-edge-ring",
+   "achieved": 9.19,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/e-pond-edge-ring",
+   "achieved": 8.68,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "summer-night-dining/s-path-door",
+   "achieved": 13.64,
+   "required": 5.0,
+   "unit": "lx",
+   "message": "avg 13.6 lx (min 9.3) vs 5 lx; Uo 0.68 vs 0.25; zone level 0.10"
+  },
+  {
+   "criterion": "LA1",
+   "status": "pass",
+   "subject": "summer-night-dining/s-dining-table",
+   "achieved": 30.25702930865044,
+   "required": 30.0,
+   "unit": "lx",
+   "message": "Eavg 30 lx vs card 30 lx; allowed 27-33 lx (1.01x of target)"
+  },
+  {
+   "criterion": "LA2",
+   "status": "pass",
+   "subject": "summer-night-dining/s-dining-table",
+   "achieved": 30.25702930865044,
+   "required": 45.0,
+   "unit": "lx",
+   "message": "Eavg 30 lx vs cap 45 lx (1.5 x card 30 lx): 1.01 x target"
+  },
+  {
+   "criterion": "LA3",
+   "status": "pass",
+   "subject": "summer-night-dining/s-dining-table/min",
+   "achieved": 18.8,
+   "required": 15.0,
+   "unit": "lx",
+   "message": "table minimum 18.8 lx vs 15; U0 0.62"
+  },
+  {
+   "criterion": "LA4",
+   "status": "pass",
+   "subject": "summer-night-dining/glare",
+   "achieved": 2163.0,
+   "required": 3000.0,
+   "unit": "cd/m2",
+   "message": "32 seated sightlines; worst source luminance 2163 cd/m2 (DN-1) vs cap 3000 cd/m)"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "summer-night-dining/garden/Ev (post-curfew)",
+   "achieved": 0.11615887882887439,
+   "required": 2.0,
+   "unit": "lx",
+   "message": "max vertical illuminance on the boundary 0.12 lx vs E3 2 lx"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "summer-night-dining/garden/I toward neighbours (post-curfew)",
+   "achieved": 181.09870664469065,
+   "required": 1000.0,
+   "unit": "cd",
+   "message": "max intensity toward neighbour points 181 cd (GR-3) vs E3 1000 cd"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "summer-night-dining/garden/ULR",
+   "achieved": 0.1461,
+   "required": 0.15,
+   "unit": "fraction",
+   "message": "max upward flux fraction to the sky 0.146 (UP-3); raw ULR of uplights 0.98 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/s-firepit-edge-ring",
+   "achieved": 23.18,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 23.2 lx (avg 30.8, max 35.4) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/n-pond-edge-ring",
+   "achieved": 9.19,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/e-pond-edge-ring",
+   "achieved": 8.72,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "social-gathering/s-path-door",
+   "achieved": 20.12,
+   "required": 5.0,
+   "unit": "lx",
+   "message": "avg 20.1 lx (min 13.8) vs 5 lx; Uo 0.68 vs 0.25; zone level 0.15"
+  },
+  {
+   "criterion": "LA1",
+   "status": "pass",
+   "subject": "social-gathering/s-dining-table",
+   "achieved": 40.53382950694427,
+   "required": 40.0,
+   "unit": "lx",
+   "message": "Eavg 41 lx vs card 40 lx; allowed 36-44 lx (1.01x of target)"
+  },
+  {
+   "criterion": "LA2",
+   "status": "pass",
+   "subject": "social-gathering/s-dining-table",
+   "achieved": 40.53382950694427,
+   "required": 60.0,
+   "unit": "lx",
+   "message": "Eavg 41 lx vs cap 60 lx (1.5 x card 40 lx): 1.01 x target"
+  },
+  {
+   "criterion": "LA3",
+   "status": "pass",
+   "subject": "social-gathering/s-dining-table/min",
+   "achieved": 25.8,
+   "required": 15.0,
+   "unit": "lx",
+   "message": "table minimum 25.8 lx vs 15; U0 0.64"
+  },
+  {
+   "criterion": "LA4",
+   "status": "pass",
+   "subject": "social-gathering/glare",
+   "achieved": 2884.0,
+   "required": 3000.0,
+   "unit": "cd/m2",
+   "message": "32 seated sightlines; worst source luminance 2884 cd/m2 (DN-1) vs cap 3000 cd/m)"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "social-gathering/garden/Ev (post-curfew)",
+   "achieved": 0.1742383182433116,
+   "required": 2.0,
+   "unit": "lx",
+   "message": "max vertical illuminance on the boundary 0.17 lx vs E3 2 lx"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "social-gathering/garden/I toward neighbours (post-curfew)",
+   "achieved": 253.5381893025669,
+   "required": 1000.0,
+   "unit": "cd",
+   "message": "max intensity toward neighbour points 254 cd (GR-3) vs E3 1000 cd"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "social-gathering/garden/ULR",
+   "achieved": 0.1461,
+   "required": 0.15,
+   "unit": "fraction",
+   "message": "max upward flux fraction to the sky 0.146 (UP-3); raw ULR of uplights 0.98 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/s-firepit-edge-ring",
+   "achieved": 11.0,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 11.0 lx (avg 15.0, max 17.2) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.10"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/n-pond-edge-ring",
+   "achieved": 9.19,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/e-pond-edge-ring",
+   "achieved": 8.67,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "quiet-north-court/s-path-door",
+   "achieved": 11.65,
+   "required": 5.0,
+   "unit": "lx",
+   "message": "avg 11.7 lx (min 8.4) vs 5 lx; Uo 0.72 vs 0.25; zone level 0.10"
+  },
+  {
+   "criterion": "LA4",
+   "status": "pass",
+   "subject": "quiet-north-court/glare",
+   "achieved": 387.0,
+   "required": 3000.0,
+   "unit": "cd/m2",
+   "message": "32 seated sightlines; worst source luminance 387 cd/m2 (NP-4) vs cap 3000 cd/m)"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "quiet-north-court/garden/Ev (post-curfew)",
+   "achieved": 0.016092342569442173,
+   "required": 2.0,
+   "unit": "lx",
+   "message": "max vertical illuminance on the boundary 0.02 lx vs E3 2 lx"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "quiet-north-court/garden/I toward neighbours (post-curfew)",
+   "achieved": 5.878933747333423,
+   "required": 1000.0,
+   "unit": "cd",
+   "message": "max intensity toward neighbour points 6 cd (NP-4) vs E3 1000 cd"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "quiet-north-court/garden/ULR",
+   "achieved": 0.0011,
+   "required": 0.15,
+   "unit": "fraction",
+   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/s-firepit-edge-ring",
+   "achieved": 22.23,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 22.2 lx (avg 30.1, max 34.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.20"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/n-pond-edge-ring",
+   "achieved": 9.19,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 9.2 lx (avg 14.6, max 17.5) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.08"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/n-pond-water",
+   "achieved": 12.53,
+   "required": 14.63,
+   "unit": "lx",
+   "message": "water mean 12.5 lx vs margin ring mean 14.6 lx (max on water 15.6)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/e-pond-edge-ring",
+   "achieved": 8.68,
+   "required": 4.0,
+   "unit": "lx",
+   "message": "min Eh at grade 8.7 lx (avg 20.1, max 24.3) vs 4 lx; recommended for over-65s 8 lx met; zone level 0.12"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/e-pond-water",
+   "achieved": 18.63,
+   "required": 20.15,
+   "unit": "lx",
+   "message": "water mean 18.6 lx vs margin ring mean 20.1 lx (max on water 22.8)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "winter-evening/s-path-door",
+   "achieved": 11.71,
+   "required": 5.0,
+   "unit": "lx",
+   "message": "avg 11.7 lx (min 8.5) vs 5 lx; Uo 0.73 vs 0.25; zone level 0.10"
+  },
+  {
+   "criterion": "LA4",
+   "status": "pass",
+   "subject": "winter-evening/glare",
+   "achieved": 387.0,
+   "required": 3000.0,
+   "unit": "cd/m2",
+   "message": "32 seated sightlines; worst source luminance 387 cd/m2 (NP-4) vs cap 3000 cd/m)"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "winter-evening/garden/Ev (post-curfew)",
+   "achieved": 0.03255771432042904,
+   "required": 2.0,
+   "unit": "lx",
+   "message": "max vertical illuminance on the boundary 0.03 lx vs E3 2 lx"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "winter-evening/garden/I toward neighbours (post-curfew)",
+   "achieved": 72.43948265787627,
+   "required": 1000.0,
+   "unit": "cd",
+   "message": "max intensity toward neighbour points 72 cd (GR-3) vs E3 1000 cd"
+  },
+  {
+   "criterion": "LA12",
+   "status": "pass",
+   "subject": "winter-evening/garden/ULR",
+   "achieved": 0.0011,
+   "required": 0.15,
+   "unit": "fraction",
+   "message": "max upward flux fraction to the sky 0.001 (NP-4); raw ULR of uplights 0.00 but their beams end in the crown (leaf-on); vs E3 0.15. Uplight photometry: John Cullen Kew 25 file (V10: lumens -2.25 %)"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "s-firepit-edge-ring/V12-headroom",
+   "achieved": 0.073,
+   "required": 0.8,
+   "unit": "x max output",
+   "message": "minimum level for the plane's recommended value 0.07 of maximum vs 0.8"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "n-pond-edge-ring/V12-headroom",
+   "achieved": 0.07,
+   "required": 0.8,
+   "unit": "x max output",
+   "message": "minimum level for the plane's recommended value 0.07 of maximum vs 0.8"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "e-pond-edge-ring/V12-headroom",
+   "achieved": 0.112,
+   "required": 0.8,
+   "unit": "x max output",
+   "message": "minimum level for the plane's recommended value 0.11 of maximum vs 0.8"
+  },
+  {
+   "criterion": "LA11",
+   "status": "pass",
+   "subject": "s-path-door/V12-headroom",
+   "achieved": 0.043,
+   "required": 0.8,
+   "unit": "x max output",
+   "message": "minimum level for the plane's recommended value 0.04 of maximum vs 0.8"
+  }
+ ],
+ "counts": {
+  "pass": 50,
+  "fail": 0,
+  "warn": 0,
+  "not_evaluated": 0
+ }
+}
