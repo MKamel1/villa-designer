@@ -1,0 +1,15 @@
+{
+  "_status": "PRE-REGISTERED 2026-11-24 before any comparison with the lead's by-eye counts. All values are policy (ours), not published standards.",
+  "camera": {"lens_mm": 24, "sensor_width_mm": 36, "aspect": "from path settings final_resolution (16:9)"},
+  "grid": {"cols": 64, "rows": 36, "frame_stride": 2, "note": "every 2nd frame = 12 fps; ray grid at pixel centres"},
+  "wall_dominated": {"near_m": 1.2, "min_near_share": 0.5, "rule": "share of rays whose first opaque hit is < near_m is >= min_near_share"},
+  "blocked": {"centre_window": "middle half of columns and rows", "near_m": 0.6, "min_near_share": 0.5},
+  "outward": {"min_out_share": 0.6, "rule": "rays that pass through glass first, or hit ground/context, or hit nothing"},
+  "backward": {"min_angle_deg": 90, "travel_window_s": 0.5, "min_speed_m_s": 0.1, "note": "stationary frames (holds, 360 turns) are never backward"},
+  "dark_proxy": {"rule": "camera room has no glazing within 0.6 m of its rectangle, and the walkthrough uses one house-wide day exposure"},
+  "seen": {"min_rays_in_one_frame": 3},
+  "full_360": {"min_coverage_deg": 342, "standing_radius_m": 1.0, "rule": "union of horizontal view intervals of frames inside the room within radius of one standing point"},
+  "bad_run_s": 1.0,
+  "priority": ["backward", "blocked", "wall_dominated", "outward", "dark", "informative"],
+  "calibration_sampling": "lead looked every 6 s of the 8 fps preview of every 3rd interior frame = every 144th interior path frame"
+}
