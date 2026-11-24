@@ -759,7 +759,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         else:
             buckets.setdefault(key, []).append(pts)
     hide = {}
-    for k, ((mat, room, source), faces) in enumerate(sorted(buckets.items(), key=lambda kv: (kv[0][0], kv[0][1] or "", kv[0][2] or ""))):
+    for k, ((mat, room, source), faces) in enumerate(sorted(buckets.items(), key=lambda kv: (kv[0][0] == "fin-wall-feature", kv[0][0], kv[0][1] or "", kv[0][2] or ""))):
+        # (the parents' feature-wall bucket sorts LAST: shell bucket ids are frozen in fixtures, and a new material name in
+        # the middle of the alphabetical order would renumber every later bucket)
         grp = "context" if mat == "render-exterior" else "shell"
         if room and room.startswith("open-for:"):
             mid = "door-open-%03d" % k
