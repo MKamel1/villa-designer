@@ -377,8 +377,8 @@
     "lookalike": {
      "label": "look-alike-proxy",
      "maker_site": "ambientCG",
-     "id": "Marble008",
-     "url": "https://ambientcg.com/view?id=Marble008",
+     "id": "Marble011",
+     "url": "https://ambientcg.com/view?id=Marble011",
      "licence": "CC0",
      "on_disk": true,
      "physical_scan_mm": null
@@ -389,7 +389,7 @@
      "lrv",
      "slip rating (Lux finish: not a floor-safe claim)"
     ],
-    "lookalike_note": "look-alike changed Marble015 -> Marble008 (2026-11-23): the maker's own M0G3 image is a dark brown marble with broad flowing bands and cream veining (luma cv 0.78); Marble015 is a near-uniform cream (cv 0.02), wrong in kind, so tinting it dark gave a flat panel. Marble008 is brown with cream veins"
+    "lookalike_note": "look-alike changed Marble015 -> Marble011 (2026-11-23): the maker's own M0G3 image is a dark brown marble with broad flowing bands and cream veining (luma cv 0.78, colour ratio R:G:B 1:0.67:0.48); Marble015 is a near-uniform cream (cv 0.02), wrong in kind, so tinting it dark gave a flat panel. Marble008 (first swap) has the right pattern but is orange (1:0.55:0.25): per-channel matching to the brown turned its cream veins lilac in the render. Marble011 is grey-brown with white veins (1:0.79:0.62, cv 0.36)"
    },
    "scene_materials": [
     "marble-bath",
@@ -408,7 +408,7 @@
    "decided_by": "lead-confirmed",
    "render": {
     "kind": "principled",
-    "asset": "Marble008",
+    "asset": "Marble011",
     "base_rgb": [
      0.0823,
      0.0545,
@@ -417,7 +417,7 @@
     "reflectance": 0.0593,
     "roughness": 0.5,
     "tile_m": 1.2,
-    "note": "LOOK-ALIKE (ambientCG Marble008, CC0) standing for Marazzi Grande Marble Look M0G3; tile_m 1.2 m from format-long-side; colour from maker image, mean linear colour, mode swatch",
+    "note": "LOOK-ALIKE (ambientCG Marble011, CC0) standing for Marazzi Grande Marble Look M0G3; tile_m 1.2 m from format-long-side; colour from maker image, mean linear colour, mode swatch",
     "contrast": 2.0
    },
    "texture_scale": {

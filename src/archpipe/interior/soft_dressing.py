@@ -104,12 +104,12 @@ def draped_throw(w_mm, l_mm, seed=3):
 
     def top(x, y):
         u, v = x / a, y / b
-        edge = max(0.0, 1 - max(abs(u), abs(v)) ** 6)                       # the rim settles onto the seat
-        ridge = 0.5 + 0.5 * math.sin(9.0 * (v + 0.35 * u) + 0.8)            # soft folds across the length
-        bunch = 70.0 * math.exp(-((v - 0.15) / 0.55) ** 2) * (0.35 + 0.65 * ridge)
-        curl = 26.0 * max(0.0, u * 0.9 + v * 0.9 - 1.1) ** 1.2 * 4          # one corner lifts
-        return 14.0 + edge * (bunch + 14.0 * wr(x, y)) + curl
-    return _grid_shell(w_mm, l_mm, top, lambda x, y: max(0.0, top(x, y) - 14.0), n=34, m=40)
+        edge = max(0.0, 1 - max(abs(u), abs(v)) ** 4)                       # the rim rolls down onto the seat
+        rim = math.sqrt(max(0.0, 1 - max(abs(u), abs(v)) ** 8))             # thick folded edge, rounded off
+        ridge = 0.55 + 0.45 * math.sin(7.0 * (v + 0.3 * u) + 0.8)           # two or three soft folds across the length
+        bunch = 40.0 * math.exp(-((v - 0.1) / 0.7) ** 2) * ridge
+        return 1.5 + 26.0 * rim + edge * (bunch + 8.0 * wr(x, y))
+    return _grid_shell(w_mm, l_mm, top, lambda x, y: 0.0, n=34, m=40)
 
 
 def folded_throw(cx, cy, theta, u0, v0, z0, w_mm, l_mm, yaw_deg=0.0, thick_mm=70):
