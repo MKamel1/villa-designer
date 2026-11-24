@@ -1,5 +1,5 @@
 {
- "note": "Render colours for finishes where the look-alike's own colour is not the product's. ESTIMATES unless the basis says the maker published it. Never a price, never a claim of exact match.",
+ "note": "Render colours of the CHOSEN products, sampled from the maker's own image (or the maker's published hex): scripts/source_maker_colours.py. Entries whose basis is 'estimate...' are palette-board items that were not chosen.",
  "colours": {
   "A-wall-paint": {
    "hex": "#efeae0",
@@ -66,32 +66,87 @@
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "B-worktop": {
-   "hex": "#e2d9cb",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#ded4c0",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://assetstools.cosentino.com/api/v1/bynder/color/CKC/detalle/CKC-thumb.jpg?w=700&h=700&auto=compress%2Cformat",
+   "page": "https://www.cosentino.com/usa/colors/dekton/nacre/",
+   "mode": "swatch",
+   "image_sha256": "b7a132ed2e00fa59589733141d8c5f5d231323406ece99b3bcabf2e0b8bd1113",
+   "mean_linear": [
+    0.7329,
+    0.661,
+    0.5294
+   ],
+   "luma": 0.6668,
+   "luma_cv": 0.028,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "B-backsplash": {
-   "hex": "#e2d9cb",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#ded4c0",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://assetstools.cosentino.com/api/v1/bynder/color/CKC/detalle/CKC-thumb.jpg?w=700&h=700&auto=compress%2Cformat",
+   "page": "https://www.cosentino.com/usa/colors/dekton/nacre/",
+   "mode": "swatch",
+   "image_sha256": "b7a132ed2e00fa59589733141d8c5f5d231323406ece99b3bcabf2e0b8bd1113",
+   "mean_linear": [
+    0.7329,
+    0.661,
+    0.5294
+   ],
+   "luma": 0.6668,
+   "luma_cv": 0.028,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "B-joinery-timber": {
    "hex": "#a98259",
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "B-joinery-light": {
-   "hex": "#c0a27a",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#ba9c77",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://cdn.egger.com/img/pim/8854365372446/8854523117598/original.png",
+   "page": "https://www.egger.com/en/furniture-interior-design/decors/Q1180_RO?lci=Y29sbD0xNjU1Jm5jPW5hdzEg",
+   "mode": "swatch",
+   "image_sha256": "a08ab71c6491f470694cc9ee985d2f02a56a1543b83aab65734bf56cb4d12d8c",
+   "mean_linear": [
+    0.4939,
+    0.3323,
+    0.184
+   ],
+   "luma": 0.356,
+   "luma_cv": 0.257,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "B-door": {
    "hex": "#b89a72",
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "B-kitchen-front": {
-   "hex": "#cdc0a8",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#b0a187",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://res.cloudinary.com/dozlb75sf/image/upload/v1679331548/FENIX%20Colours/Thumb/FENIX_0719_BEIGE_LUXOR_thumb_eloyrz.jpg",
+   "page": "https://www.fenixforinteriors.com/en/fenix/beige-luxor",
+   "mode": "swatch",
+   "image_sha256": "1b0b080fff7891d94f88fe395d433b5b777f20c77c96f2bc50e8de27990ac32a",
+   "mean_linear": [
+    0.4356,
+    0.3556,
+    0.2417
+   ],
+   "luma": 0.3644,
+   "luma_cv": 0.025,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "B-wall-paint": {
-   "hex": "#efebe3",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#f9f1e1",
+   "basis": "maker page publishes this hex (Dulux colour page 'Hex' row)",
+   "url": "https://www.dulux.com.au/specifier/colour/whites-sw1/off-white",
+   "mode": "published-hex",
+   "sampled": "2026-11-23"
   },
   "B-garden-paving": {
    "hex": "#d0c4ab",
@@ -106,28 +161,106 @@
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "C-floor-living": {
-   "hex": "#a39786",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#aca29b",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzi.it/app/uploads/collezioni/mystone-gris-fleury-mlgy/marazzi_mystone_gris_fleury_mlgy-800x400.jpg",
+   "page": "https://www.marazzi.it/en/mystone-gris-fleury",
+   "mode": "swatch",
+   "image_sha256": "7d47767eb515f8ed2072e616ac4f1a417c7fd9c18eb935feff00626438e69594",
+   "mean_linear": [
+    0.4119,
+    0.3629,
+    0.3256
+   ],
+   "luma": 0.3706,
+   "luma_cv": 0.187,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-floor-gf": {
-   "hex": "#5a4332",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#3f3326",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://res.cloudinary.com/havwoods-global/image/upload/ar_1.4429824561403508,c_fill,g_center,w_1479/f_auto/q_auto/v1721144786/image_%7C_hw7470_%7C_panel_%7C_photo.jpg",
+   "page": "https://www.havwoods.com/uk/products/hw7470/",
+   "mode": "swatch",
+   "image_sha256": "9ba22bf054ca9b859c7f3980b27a41359268428ed1153a2b58cdd7c7c05efb01",
+   "mean_linear": [
+    0.0498,
+    0.0335,
+    0.0197
+   ],
+   "luma": 0.036,
+   "luma_cv": 0.345,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-floor-wet": {
-   "hex": "#a09484",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#aa9e8e",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/mystone-limestone20-m7sq/marazzi_mystone_limestone20_m7sq.jpg",
+   "page": "https://www.marazzigroup.com/collections/mystone-limestone20-collection/",
+   "mode": "swatch",
+   "image_sha256": "cc742273d795eb6eb5c840cc38cb11b512dd13aea361ef33d54859eb11776832",
+   "mean_linear": [
+    0.3996,
+    0.3417,
+    0.2722
+   ],
+   "luma": 0.349,
+   "luma_cv": 0.116,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-bath-tile": {
-   "hex": "#b8a58e",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#514238",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m0g3/marazzi_grande_marble_look_m0g3-800x800.jpg",
+   "page": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+   "mode": "swatch",
+   "image_sha256": "98607b3b972880d2dd5cb49a52bbdb6c399dd1f9ec8d6fea9fe53aee8cfdc677",
+   "mean_linear": [
+    0.0825,
+    0.0552,
+    0.0395
+   ],
+   "luma": 0.0598,
+   "luma_cv": 0.779,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-joinery-timber": {
-   "hex": "#4b3626",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#735a42",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://cdn.egger.com/img/pim/8860203974686/8860204007454/original.png",
+   "page": "https://www.egger.com/en/furniture-interior-design/decors/H3180_37?country=GB",
+   "mode": "swatch",
+   "image_sha256": "c800cd250bb0d0e520dfee0b98d7970557139b03aad79c9dcaebe43823747ec5",
+   "mean_linear": [
+    0.1703,
+    0.1013,
+    0.0544
+   ],
+   "luma": 0.1126,
+   "luma_cv": 0.286,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-joinery-light": {
-   "hex": "#b08e62",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#ba9c77",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://cdn.egger.com/img/pim/8854365372446/8854523117598/original.png",
+   "page": "https://www.egger.com/en/furniture-interior-design/decors/H1180_37?country=GB",
+   "mode": "swatch",
+   "image_sha256": "a08ab71c6491f470694cc9ee985d2f02a56a1543b83aab65734bf56cb4d12d8c",
+   "mean_linear": [
+    0.4939,
+    0.3323,
+    0.184
+   ],
+   "luma": 0.356,
+   "luma_cv": 0.257,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
   },
   "C-door": {
    "hex": "#4a3c32",
@@ -139,23 +272,609 @@
   },
   "C-wall-paint": {
    "hex": "#8b8074",
-   "basis": "maker page hex #8b8074 (Dulux AU)"
+   "basis": "maker page publishes this hex (Dulux colour page 'Hex' row)",
+   "url": "https://www.dulux.com.au/specifier/colour/s13/nile-clay/",
+   "mode": "published-hex",
+   "sampled": "2026-11-23"
   },
   "C-garden-paving": {
    "hex": "#a89d8c",
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "C-cushion-parents-bed-1": {
-   "hex": "#d8ccb6",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#d5cab8",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-light-beige__1284678_pe933086_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+   "mode": "product",
+   "image_sha256": "0e62321e2948de61955e1dfc7e62d53d180ea3d542e6c2705d53095789c36685",
+   "mean_linear": [
+    0.6627,
+    0.5889,
+    0.479
+   ],
+   "luma": 0.5966,
+   "luma_cv": 0.164,
+   "coverage": 0.722,
+   "sampled": "2026-11-23"
   },
   "C-throw-parents-bed": {
-   "hex": "#bdbab3",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#b2ada2",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+   "mode": "product",
+   "image_sha256": "411da4a1fa53fd53a74aaa0ef2822321143d099cca18aa9d0121fc80dcb59332",
+   "mean_linear": [
+    0.4475,
+    0.4167,
+    0.3624
+   ],
+   "luma": 0.4194,
+   "luma_cv": 0.486,
+   "coverage": 0.555,
+   "sampled": "2026-11-23"
   },
   "C-rug-living": {
-   "hex": "#cdbd9f",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#dccfc5",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/broenden-rug-low-pile-handmade-beige__0804523_pe769465_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+   "mode": "product",
+   "image_sha256": "9d90aa86dbe017500b7387473be38ce9e6ab198a3871e384baea9c7ad10a8129",
+   "mean_linear": [
+    0.7147,
+    0.6255,
+    0.5586
+   ],
+   "luma": 0.6397,
+   "luma_cv": 0.122,
+   "coverage": 0.633,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-living-sofa-1": {
+   "hex": "#362b24",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+   "mode": "product",
+   "image_sha256": "0a6013aa416457eba15d1f8f7a489819be2899bd23fe4044093353d8e683455b",
+   "mean_linear": [
+    0.0372,
+    0.0238,
+    0.0176
+   ],
+   "luma": 0.0262,
+   "luma_cv": 2.021,
+   "coverage": 0.741,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-living-sofa-2": {
+   "hex": "#2a3328",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-green__1502326_pe1007596_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+   "mode": "product",
+   "image_sha256": "7fb924a3f37effbe60a59c1727661248bece94f89ef048e0acb22fc59685aabb",
+   "mean_linear": [
+    0.0231,
+    0.0332,
+    0.021
+   ],
+   "luma": 0.0302,
+   "luma_cv": 1.707,
+   "coverage": 0.754,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-living-sofa-3": {
+   "hex": "#a9795a",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+   "mode": "product",
+   "image_sha256": "bdd815347e7843a9479a767be5a275ed5969c3de4001744caf2d0352fbd158d6",
+   "mean_linear": [
+    0.3969,
+    0.1928,
+    0.1019
+   ],
+   "luma": 0.2297,
+   "luma_cv": 0.338,
+   "coverage": 0.542,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-lounge-sofa-1": {
+   "hex": "#2a3328",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-green__1502326_pe1007596_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-green-40636004/",
+   "mode": "product",
+   "image_sha256": "7fb924a3f37effbe60a59c1727661248bece94f89ef048e0acb22fc59685aabb",
+   "mean_linear": [
+    0.0231,
+    0.0332,
+    0.021
+   ],
+   "luma": 0.0302,
+   "luma_cv": 1.707,
+   "coverage": 0.754,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-lounge-sofa-2": {
+   "hex": "#4f4f51",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-grey__1284674_pe933082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+   "mode": "product",
+   "image_sha256": "871c154c80350a49592a1c4f4568ca5e88d4446a07c63b666820d8f05b2d44d8",
+   "mean_linear": [
+    0.0784,
+    0.0784,
+    0.0822
+   ],
+   "luma": 0.0786,
+   "luma_cv": 0.809,
+   "coverage": 0.724,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-lounge-sofa-3": {
+   "hex": "#a3763b",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-yellow-brown__1502327_pe1007597_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+   "mode": "product",
+   "image_sha256": "4e5fb33f43ff9bdfec7529c42088bc40730b6e16b96be4908e2ac5e278d8f979",
+   "mean_linear": [
+    0.3639,
+    0.1814,
+    0.0433
+   ],
+   "luma": 0.2102,
+   "luma_cv": 0.386,
+   "coverage": 0.754,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-study-sofa-1": {
+   "hex": "#362b24",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+   "mode": "product",
+   "image_sha256": "0a6013aa416457eba15d1f8f7a489819be2899bd23fe4044093353d8e683455b",
+   "mean_linear": [
+    0.0372,
+    0.0238,
+    0.0176
+   ],
+   "luma": 0.0262,
+   "luma_cv": 2.021,
+   "coverage": 0.741,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-study-sofa-2": {
+   "hex": "#d5cab8",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-light-beige__1284678_pe933086_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-light-beige-50590897/",
+   "mode": "product",
+   "image_sha256": "0e62321e2948de61955e1dfc7e62d53d180ea3d542e6c2705d53095789c36685",
+   "mean_linear": [
+    0.6627,
+    0.5889,
+    0.479
+   ],
+   "luma": 0.5966,
+   "luma_cv": 0.164,
+   "coverage": 0.722,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-cinema-sofa-1": {
+   "hex": "#4f4f51",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-grey__1284674_pe933082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-grey-30591124/",
+   "mode": "product",
+   "image_sha256": "871c154c80350a49592a1c4f4568ca5e88d4446a07c63b666820d8f05b2d44d8",
+   "mean_linear": [
+    0.0784,
+    0.0784,
+    0.0822
+   ],
+   "luma": 0.0786,
+   "luma_cv": 0.809,
+   "coverage": 0.724,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-cinema-sofa-2": {
+   "hex": "#362b24",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+   "mode": "product",
+   "image_sha256": "0a6013aa416457eba15d1f8f7a489819be2899bd23fe4044093353d8e683455b",
+   "mean_linear": [
+    0.0372,
+    0.0238,
+    0.0176
+   ],
+   "luma": 0.0262,
+   "luma_cv": 2.021,
+   "coverage": 0.741,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-library-daybed-1": {
+   "hex": "#a3763b",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-yellow-brown__1502327_pe1007597_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-yellow-brown-50635990/",
+   "mode": "product",
+   "image_sha256": "4e5fb33f43ff9bdfec7529c42088bc40730b6e16b96be4908e2ac5e278d8f979",
+   "mean_linear": [
+    0.3639,
+    0.1814,
+    0.0433
+   ],
+   "luma": 0.2102,
+   "luma_cv": 0.386,
+   "coverage": 0.754,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-library-daybed-2": {
+   "hex": "#a9795a",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+   "mode": "product",
+   "image_sha256": "bdd815347e7843a9479a767be5a275ed5969c3de4001744caf2d0352fbd158d6",
+   "mean_linear": [
+    0.3969,
+    0.1928,
+    0.1019
+   ],
+   "luma": 0.2297,
+   "luma_cv": 0.338,
+   "coverage": 0.542,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-parents-bed-2": {
+   "hex": "#362b24",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/sanela-cushion-cover-dark-brown__1502335_pe1007600_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/sanela-cushion-cover-dark-brown-90636025/",
+   "mode": "product",
+   "image_sha256": "0a6013aa416457eba15d1f8f7a489819be2899bd23fe4044093353d8e683455b",
+   "mean_linear": [
+    0.0372,
+    0.0238,
+    0.0176
+   ],
+   "luma": 0.0262,
+   "luma_cv": 2.021,
+   "coverage": 0.741,
+   "sampled": "2026-11-23"
+  },
+  "C-cushion-parents-bed-3": {
+   "hex": "#a9795a",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/lagerpoppel-cushion-cover-light-brown__1259129_pe926539_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/lagerpoppel-cushion-cover-light-brown-90561807/",
+   "mode": "product",
+   "image_sha256": "bdd815347e7843a9479a767be5a275ed5969c3de4001744caf2d0352fbd158d6",
+   "mean_linear": [
+    0.3969,
+    0.1928,
+    0.1019
+   ],
+   "luma": 0.2297,
+   "luma_cv": 0.338,
+   "coverage": 0.542,
+   "sampled": "2026-11-23"
+  },
+  "C-throw-living-sofa": {
+   "hex": "#b2ada2",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+   "mode": "product",
+   "image_sha256": "411da4a1fa53fd53a74aaa0ef2822321143d099cca18aa9d0121fc80dcb59332",
+   "mean_linear": [
+    0.4475,
+    0.4167,
+    0.3624
+   ],
+   "luma": 0.4194,
+   "luma_cv": 0.486,
+   "coverage": 0.555,
+   "sampled": "2026-11-23"
+  },
+  "C-throw-lounge-sofa": {
+   "hex": "#b2ada2",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+   "mode": "product",
+   "image_sha256": "411da4a1fa53fd53a74aaa0ef2822321143d099cca18aa9d0121fc80dcb59332",
+   "mean_linear": [
+    0.4475,
+    0.4167,
+    0.3624
+   ],
+   "luma": 0.4194,
+   "luma_cv": 0.486,
+   "coverage": 0.555,
+   "sampled": "2026-11-23"
+  },
+  "C-throw-study-sofa": {
+   "hex": "#9f9f9e",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/holmvi-throw-grey__1022849_pe832952_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+   "mode": "product",
+   "image_sha256": "6f89b16b1432c101b0812700dc0856a0461288e3eef1f45763a193308716937b",
+   "mean_linear": [
+    0.3481,
+    0.3468,
+    0.3405
+   ],
+   "luma": 0.3467,
+   "luma_cv": 0.442,
+   "coverage": 0.689,
+   "sampled": "2026-11-23"
+  },
+  "C-throw-cinema-sofa": {
+   "hex": "#9f9f9e",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/holmvi-throw-grey__1022849_pe832952_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/holmvi-throw-grey-30513598/",
+   "mode": "product",
+   "image_sha256": "6f89b16b1432c101b0812700dc0856a0461288e3eef1f45763a193308716937b",
+   "mean_linear": [
+    0.3481,
+    0.3468,
+    0.3405
+   ],
+   "luma": 0.3467,
+   "luma_cv": 0.442,
+   "coverage": 0.689,
+   "sampled": "2026-11-23"
+  },
+  "C-throw-library-daybed": {
+   "hex": "#b2ada2",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/myrull-throw-light-grey__1187183_pe899082_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/myrull-throw-light-grey-90563482",
+   "mode": "product",
+   "image_sha256": "411da4a1fa53fd53a74aaa0ef2822321143d099cca18aa9d0121fc80dcb59332",
+   "mean_linear": [
+    0.4475,
+    0.4167,
+    0.3624
+   ],
+   "luma": 0.4194,
+   "luma_cv": 0.486,
+   "coverage": 0.555,
+   "sampled": "2026-11-23"
+  },
+  "C-rug-lounge": {
+   "hex": "#dccfc5",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/broenden-rug-low-pile-handmade-beige__0804523_pe769465_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/broenden-rug-low-pile-handmade-beige-70532972/",
+   "mode": "product",
+   "image_sha256": "9d90aa86dbe017500b7387473be38ce9e6ab198a3871e384baea9c7ad10a8129",
+   "mean_linear": [
+    0.7147,
+    0.6255,
+    0.5586
+   ],
+   "luma": 0.6397,
+   "luma_cv": 0.122,
+   "coverage": 0.633,
+   "sampled": "2026-11-23"
+  },
+  "C-rug-parents-bedroom": {
+   "hex": "#e1d8c3",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/tidtabell-rug-flatwoven-beige__1185186_pe898305_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/tidtabell-rug-flatwoven-beige-60561875/",
+   "mode": "product",
+   "image_sha256": "3f49a2f42ffea2c00992cd1a09458050a470c00cdbb4efa1c7a02398a1e4523a",
+   "mean_linear": [
+    0.7498,
+    0.6882,
+    0.5486
+   ],
+   "luma": 0.6912,
+   "luma_cv": 0.089,
+   "coverage": 0.368,
+   "sampled": "2026-11-23"
+  },
+  "C-object-vase": {
+   "hex": "#867974",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/stilren-vase-dark-grey-beige__1450873_pe990482_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/stilren-vase-dark-grey-beige-40623266",
+   "mode": "product",
+   "image_sha256": "ccf0895e124259df3216eab5f8124191f5bb2f401158edf26021849fef65349a",
+   "mean_linear": [
+    0.2394,
+    0.1914,
+    0.1737
+   ],
+   "luma": 0.2004,
+   "luma_cv": 0.588,
+   "coverage": 0.447,
+   "sampled": "2026-11-23"
+  },
+  "C-object-bowl-brown": {
+   "hex": "#5f4e48",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/stockholm-2025-bowl-brown__1387524_pe964281_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/stockholm-2025-bowl-brown-30592425",
+   "mode": "product",
+   "image_sha256": "98c6413c4005ab6c24713c01f3c37950da15598347e88095e684d8bf3d482c34",
+   "mean_linear": [
+    0.115,
+    0.0757,
+    0.0648
+   ],
+   "luma": 0.0833,
+   "luma_cv": 1.549,
+   "coverage": 0.205,
+   "sampled": "2026-11-23"
+  },
+  "C-object-bowl-beige": {
+   "hex": "#b0a38f",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://www.ikea.com/eg/en/images/products/stockholm-2025-serving-bowl-beige__1387533_pe964285_s5.jpg",
+   "page": "https://www.ikea.com/eg/en/p/stockholm-2025-serving-bowl-beige-50592429/",
+   "mode": "product",
+   "image_sha256": "32e5f281844b25d0fb8e8499d033b14329820bd999043b40c7f17202879529aa",
+   "mean_linear": [
+    0.4345,
+    0.3646,
+    0.2742
+   ],
+   "luma": 0.3729,
+   "luma_cv": 0.316,
+   "coverage": 0.285,
+   "sampled": "2026-11-23"
+  },
+  "C-garment-merino-olive": {
+   "hex": "#948153",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/469426/chip/goods_56_469426_chip.jpg",
+   "page": "https://www.uniqlo.com/de/en/products/E469426-000/00",
+   "mode": "swatch",
+   "image_sha256": "5f75615f602e5e6aed2a920b55c3269e20540cec59b3728ad1e92f42f928cf51",
+   "mean_linear": [
+    0.2957,
+    0.2202,
+    0.0867
+   ],
+   "luma": 0.2266,
+   "luma_cv": 0.287,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
+  },
+  "C-garment-merino-grey": {
+   "hex": "#737376",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450514001/item/goods_06_450514001_3x4.jpg",
+   "page": "https://www.uniqlo.com/be/en/products/E450514-001/00",
+   "mode": "product",
+   "image_sha256": "7b5f00638b8c790dab07858cc483364d8d6f9e0165b05957d7557534efcb9f3b",
+   "mean_linear": [
+    0.1699,
+    0.1727,
+    0.1816
+   ],
+   "luma": 0.1727,
+   "luma_cv": 0.412,
+   "coverage": 0.174,
+   "sampled": "2026-11-23"
+  },
+  "C-garment-linen-trouser": {
+   "hex": "#6f7663",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/463857/chip/goods_57_463857_chip.jpg",
+   "page": "https://www.uniqlo.com/uk/en/products/E463857-000/00",
+   "mode": "swatch",
+   "image_sha256": "a1cfc84c6c9279c6f0362033c9308a699cea26acbe116c5c13340f3681fc6d19",
+   "mean_linear": [
+    0.1587,
+    0.1805,
+    0.1255
+   ],
+   "luma": 0.1719,
+   "luma_cv": 0.106,
+   "coverage": 1.0,
+   "sampled": "2026-11-23"
+  },
+  "C-garment-merino-crew": {
+   "hex": "#99999e",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/429066/item/goods_03_429066_3x4.jpg",
+   "page": "https://www.uniqlo.com/us/en/products/E429066-000/00",
+   "mode": "product",
+   "image_sha256": "f4d9b5c2747560f96cb7d3cb7cbcc71f2de78ae00b2ded9c8602b868a0af3285",
+   "mean_linear": [
+    0.3197,
+    0.3168,
+    0.342
+   ],
+   "luma": 0.3193,
+   "luma_cv": 0.169,
+   "coverage": 0.465,
+   "sampled": "2026-11-23"
+  },
+  "C-book-wearstler-evocative": {
+   "hex": "#a29372",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://images.penguinrandomhouse.com/cover/9780847866038",
+   "page": "https://www.rizzoliusa.com/book/9780847866038",
+   "mode": "product",
+   "image_sha256": "d30899f2604dbad9ceec769039deec3992cfcbe156fba4723d3014f5d0ebcdb0",
+   "mean_linear": [
+    0.3596,
+    0.2905,
+    0.1668
+   ],
+   "luma": 0.2963,
+   "luma_cv": 0.661,
+   "coverage": 0.924,
+   "sampled": "2026-11-23"
+  },
+  "C-book-wearstler-synchronicity": {
+   "hex": "#c6c3bd",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://images.penguinrandomhouse.com/cover/9780847873425",
+   "page": "https://www.rizzolibookstore.com/product/kelly-wearstler-synchronicity",
+   "mode": "product",
+   "image_sha256": "657e61f6a76bd9f3ef3e646647df7ce6e23f5e147399bbcd8140f5e90398fd55",
+   "mean_linear": [
+    0.5652,
+    0.5476,
+    0.5103
+   ],
+   "luma": 0.5487,
+   "luma_cv": 0.357,
+   "coverage": 0.718,
+   "sampled": "2026-11-23"
+  },
+  "C-book-van-duysen-private": {
+   "hex": "#a79073",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://images.penguinrandomhouse.com/cover/9780847899555",
+   "page": "https://www.rizzoliusa.com/book/9780847899555",
+   "mode": "product",
+   "image_sha256": "efd5ea3e820a960b34cfff47e2dbd1073ef040964878b2cfd78ecb8ee5e14284",
+   "mean_linear": [
+    0.3888,
+    0.2779,
+    0.1725
+   ],
+   "luma": 0.2939,
+   "luma_cv": 0.701,
+   "coverage": 0.785,
+   "sampled": "2026-11-23"
+  },
+  "C-book-loyzaga": {
+   "hex": "#8b7f6d",
+   "basis": "maker image, mean linear colour, mode product",
+   "url": "https://images.penguinrandomhouse.com/cover/9780847873678",
+   "page": "https://www.rizzoliusa.com/book/9780847873678",
+   "mode": "product",
+   "image_sha256": "f1b1fb10ad34a977a9429d8765b61f3cc8a3118c694d886845f6516560ab4ca7",
+   "mean_linear": [
+    0.2597,
+    0.2134,
+    0.1515
+   ],
+   "luma": 0.2187,
+   "luma_cv": 0.96,
+   "coverage": 0.762,
+   "sampled": "2026-11-23"
   }
  }
 }

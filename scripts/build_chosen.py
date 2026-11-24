@@ -74,7 +74,8 @@ def build(library_root: Path) -> dict:
     def add(sid, iid, scene, applies, who, **extra):
         pid = iid[0]
         item = items[pid][iid]
-        s = dict(palette=pid, item_id=iid, group=item["group"], item=item, scene_materials=scene, applies_to=applies,
+        src = colours.get(iid) or {}
+        s = dict(colour_source={k: src[k] for k in ("hex", "basis", "url", "mode", "sampled") if k in src}, palette=pid, item_id=iid, group=item["group"], item=item, scene_materials=scene, applies_to=applies,
                  decided_by=who, **extra)
         if scene:
             spec = palette_scene.item_spec(item, library_root, colours)

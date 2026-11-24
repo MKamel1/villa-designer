@@ -46,6 +46,20 @@ def lookalike_mean_linear(folder: Path):
     return [float(x) for x in lin.reshape(-1, 3).mean(0)]
 
 
+CONTRAST_MIN, CONTRAST_MAX = 0.5, 2.0   # POLICY: how far the look-alike's pattern may be stretched to the maker's contrast
+
+
+def lookalike_luma_cv(folder: Path) -> float:
+    """Coefficient of variation of the look-alike colour map's luma (the pattern contrast the maker image is compared with)."""
+    import numpy as np
+    from PIL import Image
+    f = sorted(folder.glob("*_Color.jpg"))[0]
+    a = np.asarray(Image.open(f).convert("RGB").resize((256, 256)), dtype=float) / 255.0
+    lin = np.where(a <= 0.04045, a / 12.92, ((a + 0.055) / 1.055) ** 2.4).reshape(-1, 3)
+    y = lin @ np.array([0.2126, 0.7152, 0.0722])
+    return float(y.std() / max(y.mean(), 1e-9))
+
+
 def _hex_lin(h: str):
     h = h.lstrip("#")
     return [_srgb_to_lin(int(h[i:i + 2], 16) / 255.0) for i in (0, 2, 4)]
@@ -102,12 +116,19 @@ def item_spec(item: dict, library_root: Path, colours: dict | None = None) -> di
         refl = lrv / 100.0 if lrv is not None else _lum(mean)
         k = refl / max(_lum(mean), 1e-9)
         base = [min(1.0, c * k) for c in mean] if lrv is not None else mean
-    return dict(kind="principled", asset=la["id"], base_rgb=[round(c, 4) for c in base], reflectance=round(refl, 4),
-                roughness=0.5, tile_m=round(tile_m, 4),
-                note=f"LOOK-ALIKE ({la['maker_site']} {la['id']}, {la['licence']}) standing for {p.get('maker')} "
-                     f"{p.get('range') or p.get('name')} {p.get('colour_code') or ''}; tile_m {tile_m} m from {basis}; "
-                     f"colour {'from the stated hex (estimate)' if hx else 'the look-alike own mean'}"
-                     f"{', reflectance = maker LRV ' + str(lrv) if lrv is not None else ''}")
+    out = dict(kind="principled", asset=la["id"], base_rgb=[round(c, 4) for c in base], reflectance=round(refl, 4),
+               roughness=0.5, tile_m=round(tile_m, 4),
+               note=f"LOOK-ALIKE ({la['maker_site']} {la['id']}, {la['licence']}) standing for {p.get('maker')} "
+                    f"{p.get('range') or p.get('name')} {p.get('colour_code') or ''}; tile_m {tile_m} m from {basis}; "
+                    f"colour {'from ' + ((colours.get(item['id']) or {}).get('basis') or 'the stated hex') if hx else 'the look-alike own mean'}"
+                    f"{', reflectance = maker LRV ' + str(lrv) if lrv is not None else ''}")
+    # veining/pattern contrast: draw the look-alike toward (or away from) its own mean so its luma spread matches the maker's image
+    # (swatches only: a product photo's spread is its shading and backdrop, not the cloth's pattern)
+    ent = colours.get(item["id"]) or {}
+    cv_maker = ent.get("luma_cv") if ent.get("mode") == "swatch" else None
+    if cv_maker and cv_maker > 0:
+        out["contrast"] = round(min(CONTRAST_MAX, max(CONTRAST_MIN, cv_maker / max(lookalike_luma_cv(folder), 1e-6))), 3)
+    return out
 
 
 def scene_names(item: dict) -> list[str]:
