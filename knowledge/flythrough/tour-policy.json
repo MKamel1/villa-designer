@@ -25,5 +25,13 @@
   "stair_pitch_up_deg": 12,
   "stair_void_pitch_down_deg": 22,
   "pitch_basis": "ASSUMED: the camera looks up the flight while climbing and down the void from the top landing; vertical lens shift is used, as for every still",
-  "interior_preview_every_nth_frame_for_exposure": 48
+  "interior_preview_every_nth_frame_for_exposure": 48,
+  "preview": {
+    "resolution": [
+      480,
+      270
+    ],
+    "samples": 16,
+    "denoise": true
+  }
 }

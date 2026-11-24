@@ -263,7 +263,7 @@ def render_frames(args,path,scene,context):
     out.mkdir(parents=True,exist_ok=True)
     views=frame_views(path,scene)
     resolution=path['settings']['preview']['resolution'] if args.stage in ('draft','preview') else path['settings']['final_resolution']
-    samples=32 if args.stage in ('draft','preview') else args.samples
+    samples=path['settings']['preview'].get('samples',32) if args.stage in ('draft','preview') else args.samples
     n=len(path['frames'])
     default=[f['index'] for f in path['frames'] if f.get('segment','interior') in (args.segments.split(',') if args.segments else ['interior','garden-placeholder'])]
     indices=[0,(n-1)//2,n-1] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else default
@@ -310,6 +310,71 @@ def render_frames(args,path,scene,context):
         print('WALKTHROUGH wrote',png,elapsed,flush=True)
 
 
+def place_camera(obj,c):
+    """Same placement as villa_scene.configure_camera, applied to an existing camera (level camera, vertical lens shift)."""
+    obj.location=c['position']
+    direction=Vector(c['target'])-Vector(c['position']);horizontal=Vector((direction.x,direction.y,0))
+    obj.rotation_euler=horizontal.to_track_quat('-Z','Y').to_euler()
+    obj.data.shift_y=c.get('shift_y',0)+direction.z/max(horizontal.length,1e-9)*obj.data.lens/obj.data.sensor_width
+
+
+def depth_samples(camera,grid,far=40.):
+    """First-hit depth, point and normal over a grid of rays through the frame; glazing is transparent (we look through it)."""
+    from archpipe.walkthrough_tour import informative_rule
+    deps=bpy.context.evaluated_depsgraph_get();scene=bpy.context.scene
+    W,H=grid;cam=camera.data;mw=camera.matrix_world;R=mw.to_3x3();origin=mw.translation
+    aspect=scene.render.resolution_y/scene.render.resolution_x
+    xs=(np.arange(W)+.5)/W-.5;ys=((np.arange(H)+.5)/H-.5)*aspect+cam.shift_y
+    depth=[];pts=[];nor=[]
+    for y in ys:
+        for x in xs:
+            d=(R@Vector((x*cam.sensor_width,y*cam.sensor_width,-cam.lens))).normalized()
+            o=origin.copy();travelled=0.;hit_ok=False
+            for _ in range(4):
+                hit,loc,n,_,obj,_ = scene.ray_cast(deps,o,d,distance=far-travelled)
+                if not hit:break
+                travelled+=(loc-o).length
+                if 'glass' in obj.name.lower() or any(m and 'glass' in m.name.lower() for m in obj.data.materials if obj.type=='MESH'):
+                    o=loc+d*1e-3;travelled+=1e-3;continue
+                hit_ok=True;break
+            depth.append(travelled if hit_ok else far);pts.append(list(loc) if hit_ok else [0,0,0]);nor.append(list(n) if hit_ok else [0,0,1])
+    ok=np.array([d<far for d in depth])
+    return np.array(depth),np.array(pts)[ok],np.array(nor)[ok],ok
+
+
+def workbench(args,path,scene,context):
+    """Fast geometry preview of every frame: Workbench solid shading with cavity, 640x360 JPEG, plus the depth-grid metrics
+    behind the non-informative-frame rule. --metrics-only skips the images (used to calibrate on an earlier path)."""
+    from archpipe.walkthrough_tour import frame_metrics,informative_rule
+    out=Path(args.root)/'workbench'/(args.out_name or path['sha256'][:10]);out.mkdir(parents=True,exist_ok=True)
+    s=bpy.context.scene;rule=informative_rule()
+    s.render.engine='BLENDER_WORKBENCH';s.render.resolution_x,s.render.resolution_y=640,360;s.render.resolution_percentage=100
+    sh=s.display.shading;sh.type='SOLID';sh.light='STUDIO';sh.color_type='MATERIAL';sh.show_cavity=True;sh.cavity_type='BOTH'
+    sh.cavity_ridge_factor=1.;sh.cavity_valley_factor=1.5;sh.show_object_outline=False
+    s.display.render_aa='FXAA';s.view_settings.view_transform='Standard';s.view_settings.look='None';s.view_settings.exposure=0
+    s.render.film_transparent=False;s.render.image_settings.file_format='JPEG';s.render.image_settings.quality=85
+    views=frame_views(path,scene)
+    indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
+    camera,_=V.configure_camera(views[indices[0]])
+    metrics_file=out/'metrics.json';rows={r['index']:r for r in json.loads(metrics_file.read_text())} if metrics_file.exists() else {}
+    started=time.monotonic();done=0
+    for index in indices:
+        jpg=out/f'frame-{index:05d}.jpg'
+        need_image=not args.metrics_only and not jpg.exists()
+        if index in rows and not need_image:continue
+        place_camera(camera,views[index]['camera']);bpy.context.view_layer.update()
+        if index not in rows:
+            depth,pts,nor,ok=depth_samples(camera,rule['grid'])
+            m=frame_metrics(depth,pts,nor,rule);m['index']=index;rows[index]=m
+        if need_image:
+            s.render.filepath=str(jpg);bpy.ops.render.render(write_still=True)
+        done+=1
+        if done%500==0:
+            save(metrics_file,[rows[k] for k in sorted(rows)]);print('WALKTHROUGH workbench',done,'/',len(indices),round(time.monotonic()-started),'s',flush=True)
+    save(metrics_file,[rows[k] for k in sorted(rows)])
+    print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
+
+
 def measure_static_coverage(args,path,scene,context):
     """Early real-scene diagnostic; no exposure selection or presentation."""
     out=Path(args.root)/'coverage';out.mkdir(exist_ok=True)
@@ -345,10 +410,10 @@ def measure_static_coverage(args,path,scene,context):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--root',required=True)
-    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','sampling','reference','final'],required=True)
+    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','workbench','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
     parser.add_argument('--frames');parser.add_argument('--segments')
-    parser.add_argument('--target-stage')
+    parser.add_argument('--target-stage');parser.add_argument('--metrics-only',action='store_true');parser.add_argument('--out-name')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production pin is Blender 4.5.14')
     if args.stage=='preflight':
@@ -377,6 +442,7 @@ def main():
         path,scene,context=load_context(args)
         if args.stage=='coverage':measure_static_coverage(args,path,scene,context)
         elif args.stage=='exposure':measure(args,path,scene,context)
+        elif args.stage=='workbench':workbench(args,path,scene,context)
         else:render_frames(args,path,scene,context)
 
 

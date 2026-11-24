@@ -37,7 +37,9 @@ def source_inventory():
     from archpipe.concept.villa_render import provenance_inputs
     files=provenance_inputs()+[ROOT/'knowledge/flythrough-policy.json',ROOT/'knowledge/flythrough-route.json',ROOT/'scripts/flythrough.py',
                               ROOT/'scripts/villa_render_views.py',ROOT/'scripts/villa_render.py',
-                              ROOT/'knowledge/flythrough/villa-policy.json',ROOT/'knowledge/flythrough/villa-route.json']
+                              ROOT/'knowledge/flythrough/villa-policy.json',ROOT/'knowledge/flythrough/villa-route.json',
+                              ROOT/'knowledge/flythrough/tour-policy.json',ROOT/'knowledge/flythrough/villa-tour.json',ROOT/'knowledge/flythrough/tour-stills.json',
+                              ROOT/'knowledge/flythrough/informative-rule.json',ROOT/'src/archpipe/walkthrough_tour.py']
     return {str(p.relative_to(ROOT)):file_hash(p) for p in files}
 
 
@@ -51,11 +53,15 @@ def prepare(out,route='clip'):
     started=time.monotonic()
     before=source_inventory()
     scene=V.build(views=[])
-    if route=='villa':
+    if route in ('villa','tour'):
         from archpipe.concept import villa_r11 as R,revit_spec as RS
         from archpipe import flythrough as FT
         layout=R.design('D1');spec=RS.build(layout);vm=FT.VillaMap(layout,spec,scene=scene)
-        nodes,stations=FT.plan_villa_route(vm);path=FT.sample_villa_path(vm,nodes,stations)
+        if route=='tour':
+            from archpipe import walkthrough_tour as WT
+            path=WT.plan_tour(vm)
+        else:
+            nodes,stations=FT.plan_villa_route(vm);path=FT.sample_villa_path(vm,nodes,stations)
         # interior door leaves swing open (rotated, never hidden); the report travels with the scene
         scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'])
         save(out/'door-states.json',scene['door_states'])
@@ -97,7 +103,7 @@ def require_inputs(out):
     return path
 
 
-def graphics(out,stage,blender,samples=64,frames=None,segments=None):
+def graphics(out,stage,blender,samples=64,frames=None,segments=None,extra=()):
     # Admit downstream host imports before starting expensive native work.
     from scripts.villa_render_views import camera_proximity_violations
     from scripts.villa_render import villa_qa_context
@@ -121,6 +127,7 @@ def graphics(out,stage,blender,samples=64,frames=None,segments=None):
              str(ROOT/'src/archpipe/blender/walkthrough.py'),'--','--root',str(out),'--stage',stage,'--samples',str(samples)]
     if frames:command+=['--frames',frames]
     if segments:command+=['--segments',segments]
+    command+=list(extra)
     preflight=list(command)
     preflight[preflight.index('--stage')+1]='preflight'
     preflight+=['--target-stage',stage]
@@ -223,21 +230,64 @@ def encode_villa(out,stage,segments,step):
     print(target,info['streams'][0])
 
 
+def frame_file(out,path,stage,i):
+    if stage=='workbench':return out/'workbench'/path['sha256'][:10]/f'frame-{i:05d}.jpg'
+    return out/stage/f'frame-{i:04d}.png'
+
+
+def encode_draft(out,stage,step,crf=26):
+    """MP4 of every `step`th frame at 24/step fps (real-time pace). Workbench JPEGs or Cycles PNGs of the current path only."""
+    path=require_inputs(out);keep=[f['index'] for f in path['frames'] if f['index']%step==0]
+    link=out/'tmp'/(stage+'-seq');link.mkdir(parents=True,exist_ok=True)
+    for old in link.glob('*'):old.unlink()
+    for n,i in enumerate(keep):
+        src=frame_file(out,path,stage,i)
+        if not src.exists():raise ValueError(f'frame {i} missing: {src}')
+        if stage!='workbench':
+            record=json.loads(src.with_suffix('.json').read_text())
+            if record['path_sha256']!=path['sha256'] or record['png_sha256']!=file_hash(src):raise ValueError(f'frame {i} stale')
+        (link/f'{n:05d}{src.suffix}').symlink_to(src)
+    ext=frame_file(out,path,stage,keep[0]).suffix;fps=24//step
+    target=out/f'walkthrough-{stage}.mp4'
+    subprocess.run(['ffmpeg','-y','-framerate',str(fps),'-i',str(link/f'%05d{ext}'),'-c:v','libx264','-threads','8','-preset','medium','-crf',str(crf),
+        '-pix_fmt','yuv420p','-movflags','+faststart',str(target)],check=True,capture_output=True)
+    info=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=codec_name,width,height,pix_fmt,nb_frames,r_frame_rate,duration','-of','json',str(target)]))
+    save(out/f'walkthrough-{stage}.json',dict(path=str(target),sha256=file_hash(target),stream=info['streams'][0],frames=len(keep),fps=fps,step=step,path_sha256=path['sha256']))
+    print(target,info['streams'][0])
+
+
+def report(out):
+    """Non-informative-frame report for the workbench pass: metrics runs, direction, coverage, stair; written to report.json."""
+    from archpipe import walkthrough_tour as WT
+    path=require_inputs(out);rule=WT.informative_rule()
+    rows=json.loads((out/'workbench'/path['sha256'][:10]/'metrics.json').read_text())
+    waived={f['index'] for f in path['frames'] if f['station'] in {s['room'] for s in path['stations'] if s.get('flagged_under_1m')} and f['phase']=='turn'}
+    strict=WT.run_findings(rows,24,rule['max_run_seconds']);kept=WT.run_findings(rows,24,rule['max_run_seconds'],waived=waived)
+    rooms=[s['room'] for s in path['stations'] if s['room']]
+    result=dict(rule=rule,frames=len(rows),non_informative_frames=sum(r['non_informative'] for r in rows),
+        runs_over_limit_all=strict,runs_over_limit_after_waiver=kept,waived_frames=len(waived),
+        direction_findings=WT.direction_findings(path['frames']),stair_findings=WT.stair_findings(path['frames']),
+        coverage_findings=WT.coverage_findings(path['frames'],rooms),path_sha256=path['sha256'])
+    save(out/'report.json',result);print(json.dumps({k:(v if not isinstance(v,list) else len(v)) for k,v in result.items() if k!='rule'}))
+    return result
+
+
 def contact(out,stage,every,columns=6):
     """Contact sheet of every Nth rendered frame, captioned with frame, time and the room the camera is in."""
     from PIL import Image,ImageDraw
     path=require_inputs(out);directory=out/stage
-    rows=[f for f in path['frames'] if f['index']%every==0 and (directory/f"frame-{f['index']:04d}.png").exists()]
+    rows=[f for f in path['frames'] if f['index']%every==0 and frame_file(out,path,stage,f['index']).exists()]
     thumb=(320,180);pad=16
+    directory.mkdir(parents=True,exist_ok=True)
     sheets=[];per=columns*6
     for s in range(0,len(rows),per):
         part=rows[s:s+per];h=(len(part)+columns-1)//columns
         sheet=Image.new('RGB',(columns*thumb[0],h*(thumb[1]+pad)),'black');draw=ImageDraw.Draw(sheet)
         for k,f in enumerate(part):
-            with Image.open(directory/f"frame-{f['index']:04d}.png") as im:im=im.convert('RGB').resize(thumb)
+            with Image.open(frame_file(out,path,stage,f['index'])) as im:im=im.convert('RGB').resize(thumb)
             x,y=(k%columns)*thumb[0],(k//columns)*(thumb[1]+pad)
-            sheet.paste(im,(x,y+pad));draw.text((x+3,y+2),f"{f['index']} {f['seconds']:.0f}s {f['room'] or f['segment']}",fill='white')
-        target=directory/f'contact-{s//per:02d}.jpg';sheet.save(target,quality=88);sheets.append(str(target))
+            sheet.paste(im,(x,y+pad));draw.text((x+3,y+2),f"{f['index']} {f['seconds']:.0f}s {f.get('station') or f['room'] or ''} {f.get('phase','')}",fill='white')
+        target=out/f'contact-{stage}-{s//per:02d}.jpg';sheet.save(target,quality=88);sheets.append(str(target))
     print('\n'.join(sheets))
 
 
@@ -293,12 +343,12 @@ def temporal(out):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation',choices=['prepare','contact','encode-villa','assembly','coverage','exposure','draft','preview','sampling','reference','final','choose-samples','temporal','qa','encode'])
+    parser.add_argument('operation',choices=['prepare','contact','encode-villa','encode-draft','workbench','report','assembly','coverage','exposure','draft','preview','sampling','reference','final','choose-samples','temporal','qa','encode'])
     parser.add_argument('--out',type=Path,default=ROOT/'out/flythrough')
-    parser.add_argument('--route',choices=['clip','villa'],default='clip')
+    parser.add_argument('--route',choices=['clip','villa','tour'],default='clip')
     parser.add_argument('--blender',type=Path,default=Path('/home/omar/opt/blender/blender'))
     parser.add_argument('--samples',type=int,default=64);parser.add_argument('--every',type=int,default=1)
-    parser.add_argument('--frames');parser.add_argument('--segments');parser.add_argument('--stage',choices=['draft','preview','sampling','reference','final'],default='preview')
+    parser.add_argument('--frames');parser.add_argument('--segments');parser.add_argument('--stage',choices=['draft','preview','workbench','sampling','reference','final'],default='preview')
     args=parser.parse_args();out=args.out.resolve()
     if args.operation=='prepare':prepare(out,args.route)
     elif args.operation=='choose-samples':choose_samples(out,args.blender)
@@ -310,6 +360,8 @@ def main():
     elif args.operation=='encode':encode(out,args.stage)
     elif args.operation=='encode-villa':encode_villa(out,args.stage,(args.segments or 'interior').split(','),args.every)
     elif args.operation=='contact':contact(out,args.stage,args.every)
+    elif args.operation=='encode-draft':encode_draft(out,args.stage,args.every)
+    elif args.operation=='report':report(out)
     else:
         samples=args.samples
         if args.operation=='final':

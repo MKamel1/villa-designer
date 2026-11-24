@@ -1177,6 +1177,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
     items = {i['id']: i for i in vm.items}
     walls_by_level = {lv: F._walls(spec, lv)+F._columns() for lv in LEVEL_Z}
     host_walls = scene_wall_hosts(scene)
+    flagged_rooms = {s['room'] for s in path.get('stations', []) if s.get('flagged_under_1m')}
     sweeps = [CameraSweep(scene)]+([CameraSweep({'meshes': evaluated_meshes})] if evaluated_meshes else [])
     geometry = CameraProximityGeometry(scene)
     rows = motion_findings(path['frames'], settings)
@@ -1186,7 +1187,11 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
         pos = frame['camera']['position']; x, y = pos[:2]; lv = frame['level']
         if abs(pos[2]-frame['ground_m']-settings['eye_height_m']) > 1e-9:
             row['failures'].append('camera eye height differs from still-view rule')
-        row['failures'].extend(wall_sightline_findings(view, host_walls))
+        sight = wall_sightline_findings(view, host_walls)
+        if sight and frame.get('phase') == 'turn' and frame.get('station') in flagged_rooms:
+            row['waived_wall_sightline'] = sight       # room too small for the 1 m rule from any standing point: flagged, never silent
+        else:
+            row['failures'].extend(sight)
         room = frame['room']
         row['failures'].extend(plan.get(frame['index'], []))
         view['standing_room'] = room or ('stair-b' if frame['ground_m'] < -1.5 else 'stair-gf')
