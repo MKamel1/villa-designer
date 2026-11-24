@@ -70,12 +70,15 @@ def pillow(w_mm, h_mm, thick_mm=140, seed=1):
 
     def half(x, y):
         u, v = abs(x) / a, abs(y) / b
-        prof = math.sqrt(max(0.0, 1 - u ** 2.4)) * math.sqrt(max(0.0, 1 - v ** 2.4))
-        corner = 1 - 0.35 * (u * v) ** 2                                   # corners are pinched flat by the seam
-        dimple = 1 - 0.16 * math.exp(-(u * u + v * v) / 0.18)              # the fill settles in the middle
-        return thick_mm / 2 * prof * corner * dimple + 0.8 + 2.2 * wr(x, y) * prof
+        prof = max(0.0, 1 - u ** 2.0) ** 0.5 * max(0.0, 1 - v ** 2.0) ** 0.5
+        corner = 1 - 0.6 * (u * v) ** 1.5                                   # corners are pinched flat by the seam
+        dimple = 1 - 0.28 * math.exp(-(u * u + v * v) / 0.25)              # the fill settles in the middle
+        return thick_mm / 2 * prof * corner * dimple + 0.8 + 5.0 * wr(x, y) * prof
     c = thick_mm / 2
-    return _grid_shell(w_mm, h_mm, lambda x, y: c + half(x, y), lambda x, y: c - half(x, y) * 0.96)
+
+    def bow(x, y):                                                         # the cover bows: corners fall away from the crown
+        return -26.0 * ((x / a) ** 2 * 0.6 + (y / b) ** 2 * 0.4) + 6.0 * wr(y, x)
+    return _grid_shell(w_mm, h_mm, lambda x, y: c + half(x, y) + bow(x, y), lambda x, y: c - half(x, y) * 0.96 + bow(x, y))
 
 
 def leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha_deg=12.0, yaw_deg=0.0, thick_mm=140):
@@ -102,16 +105,16 @@ def draped_throw(w_mm, l_mm, seed=3):
     def top(x, y):
         u, v = x / a, y / b
         edge = max(0.0, 1 - max(abs(u), abs(v)) ** 6)                       # the rim settles onto the seat
-        ridge = 0.5 + 0.5 * math.sin(7.0 * (v + 0.25 * u) + 0.8)            # soft folds across the length
-        bunch = 22.0 * math.exp(-((v - 0.15) / 0.55) ** 2) * (0.35 + 0.65 * ridge)
+        ridge = 0.5 + 0.5 * math.sin(9.0 * (v + 0.35 * u) + 0.8)            # soft folds across the length
+        bunch = 70.0 * math.exp(-((v - 0.15) / 0.55) ** 2) * (0.35 + 0.65 * ridge)
         curl = 26.0 * max(0.0, u * 0.9 + v * 0.9 - 1.1) ** 1.2 * 4          # one corner lifts
-        return 14.0 + edge * (bunch + 7.0 * wr(x, y)) + curl
+        return 14.0 + edge * (bunch + 14.0 * wr(x, y)) + curl
     return _grid_shell(w_mm, l_mm, top, lambda x, y: max(0.0, top(x, y) - 14.0), n=34, m=40)
 
 
 def folded_throw(cx, cy, theta, u0, v0, z0, w_mm, l_mm, yaw_deg=0.0, thick_mm=70):
     """The scheduled throw (w x l mm) folded in three to a third of its length, then loosely draped: see `draped_throw`."""
-    verts, tris = draped_throw(w_mm / 3.0 * 1.15, l_mm / 3.0 * 1.15, seed=int(w_mm + l_mm))
+    verts, tris = draped_throw(w_mm / 3.0 * 0.95, l_mm / 3.0 * 1.0, seed=int(w_mm + l_mm))
 
     def place(x, y, z):
         du, dv = _rot(x / 1000.0, y / 1000.0, yaw_deg)
