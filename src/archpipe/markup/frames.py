@@ -9,6 +9,7 @@ Supported: plan sheets (A-101, A-111, A-121, A-131). Site, section, elevation, c
 """
 from __future__ import annotations
 
+from archpipe.units import in_to_mm
 import json
 import re
 import tempfile
@@ -18,7 +19,7 @@ from archpipe import model
 from archpipe.documents import plans, schedules, sheetset
 from archpipe.drawings2d import orient, variants
 
-PT_PER_MM = 72.0 / 25.4
+PT_PER_MM = 72.0 / in_to_mm(1)
 FRAMES_PATH = Path(__file__).resolve().parents[3] / "knowledge" / "markup" / "frames-D1.json"
 MIN_TAG_HIT = 0.8        # share of room tags that must land inside their room for a frame to count as verified
 

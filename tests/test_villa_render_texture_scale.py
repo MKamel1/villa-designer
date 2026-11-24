@@ -9,6 +9,12 @@ LIB = Path(os.environ.get("ARCHPIPE_LIBRARY", Path.home() / "archpipe/assets/lib
 STONE = ("travertine", "marble-")
 VENEER = ("walnut", "oak", "door-oak")      # teak is the garden lounge (lane GI)
 MIN_TEXELS_PER_M = 1000       # 1 mm texel; ASSUMED policy
+PRODUCT_MIN_TEXELS_PER_M = 400   # 2.5 mm texel: a large-format product (2.35 m plank, 3.27 m slab) maps ONE scan per format unit
+
+
+def product_derived(spec):
+    """Finishes from the client's chosen schedule: their scale is the PRODUCT's format, not RF's assumed 0.6-0.7 m policy."""
+    return str(spec.get("note", "")).startswith("LOOK-ALIKE")
 
 
 def _klass(name):
@@ -26,7 +32,7 @@ def over_scaled(materials):
     out = []
     for name, spec in materials.items():
         k = _klass(name)
-        if k and spec.get("asset") and spec["tile_m"] > VR.TEXTURE_FIGURE_MAX_M[k]:
+        if k and spec.get("asset") and not product_derived(spec) and spec["tile_m"] > VR.TEXTURE_FIGURE_MAX_M[k]:
             out.append((name, spec["tile_m"], VR.TEXTURE_FIGURE_MAX_M[k]))
     return out
 
@@ -34,6 +40,19 @@ def over_scaled(materials):
 class TextureScale(unittest.TestCase):
     def test_materials_within_limit(self):
         self.assertEqual(over_scaled(VR.M), [])
+
+    def test_product_scale_is_not_held_to_the_assumed_limit_but_must_equal_the_product_format(self):
+        from archpipe.interior import chosen as CH, finishes
+        ch = CH.load()
+        for sid, slot in ch["slots"].items():
+            if not slot.get("render") or not slot["render"].get("asset"):
+                continue
+            want = finishes.texture_scale_m(slot["item"])[0]
+            for name in slot["scene_materials"]:
+                self.assertTrue(product_derived(VR.M[name]), name)
+                self.assertAlmostEqual(VR.M[name]["tile_m"], round(want, 4), msg=name)
+        # negative: an over-wide ASSUMED material (no product behind it) is still flagged
+        self.assertEqual([n for n, *_ in over_scaled({"marble-x": dict(asset="Marble014", tile_m=1.2, note="ASSUMED")})], ["marble-x"])
 
     def test_the_draft_values_are_caught(self):          # negative: the L9P draft's real values
         draft = {"marble-bath": dict(asset="Marble014", tile_m=1.2), "door-oak": dict(asset="oak_veneer_01", tile_m=1.83)}
@@ -51,7 +70,7 @@ class TextureScale(unittest.TestCase):
                 col = next((f for f in (LIB / spec["asset"]).iterdir() if "_Color" in f.name), None)
                 if col:
                     px = Image.open(col).size[0] / spec["tile_m"]
-                    if px < MIN_TEXELS_PER_M:
+                    if px < (PRODUCT_MIN_TEXELS_PER_M if product_derived(spec) else MIN_TEXELS_PER_M):
                         low.append((name, round(px)))
         self.assertEqual(low, [])
 

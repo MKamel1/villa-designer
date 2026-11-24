@@ -197,7 +197,7 @@ def apply_lead_review(scene):
     record = scene['mounting_hosts'][render_meshes[mid]['mounting']['host_id']]
     outward=record['normal'];origin=record['structural_point'];depth=record['finish']['thickness_m']
     for source in list(scene['meshes']):
-        if source.get('source_id')!='villa-shell' or source['material'] not in ('marble-bath','plaster-warm-white','porcelain-tile'):continue
+        if source.get('source_id')!='villa-shell' or source['material'] not in ('marble-bath','plaster-warm-white','porcelain-tile','fin-wall-feature'):continue
         faces=[f for f in source['faces'] if sum(normal(f)[i]*outward[i] for i in range(3))>.999999
                and all(abs(sum((p[i]-origin[i])*outward[i] for i in range(3)))<1e-8 for p in f)]
         if not faces:continue

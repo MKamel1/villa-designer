@@ -10,6 +10,7 @@ undimensioned exterior walls without re-reading the image.
 """
 from __future__ import annotations
 
+from archpipe.units import in_to_mm, mm_to_in
 import math
 import textwrap
 from pathlib import Path
@@ -28,7 +29,7 @@ from . import arabic, names, schedules  # noqa: E402
 
 PAPER = (420.0, 297.0)
 SCALE = 100.0            # 1:100
-PT = 25.4 / 72.0         # mm per point
+PT = in_to_mm(1) / 72.0         # mm per point
 STRIP = 88.0             # title-block strip width (right)
 LEFT, EDGE = 20.0, 10.0
 BANNER_AR = "مولّد من نموذج التصميم"
@@ -103,7 +104,7 @@ class _Sheet:
 
     def __init__(self, ox: float, oy: float, x0: float, y0: float, paper=PAPER, scale: float = SCALE):
         self.paper, self.scale = paper, float(scale)
-        self.fig = plt.figure(figsize=(paper[0] / 25.4, paper[1] / 25.4), facecolor="white")
+        self.fig = plt.figure(figsize=(mm_to_in(paper[0]), mm_to_in(paper[1])), facecolor="white")
         self.ax = self.fig.add_axes([0, 0, 1, 1])
         self.ax.set_xlim(0, paper[0])
         self.ax.set_ylim(0, paper[1])

@@ -229,7 +229,7 @@ def _build(wardrobes, floor):
                 # One tray and actual contents behind EVERY authored drawer front.
                 for j,label in enumerate(wardrobe['drawers']):
                     z=floor+.11+j*.25; front_y=q[3]-.018 if wardrobe['rot']==0 else q[1]
-                    front=add(f'front-{j}','greige-lacquer',box_faces(lo,front_y,z,hi,front_y+.018,z+.23),
+                    front=add(f'front-{j}','walnut-grain-x',box_faces(lo,front_y,z,hi,front_y+.018,z+.23),
                               'door-leaf','drawer front',source)
                     tray=add(f'tray-{j}','walnut-grain-x',box_faces(lo,q[1]+(.020 if wardrobe['rot']==0 else .018),z,hi,q[3]-(.018 if wardrobe['rot']==0 else .020),z+.012),
                              'shelf','drawer tray',source)

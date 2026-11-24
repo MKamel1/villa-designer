@@ -1,6 +1,7 @@
 """python -m archpipe.lightverify --design D1  ->  out/checks/LV.json and docs/lanes/LV-report.md"""
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import argparse
 import os
 import sys
@@ -21,7 +22,7 @@ def regen_radiance(rad: Path, freeze: bool) -> Path:
     res = out / "lvregen"
     if freeze:
         for f in res.glob("*.json"):
-            shutil.copyfile(f, rad / f.name)
+            copy_file(f, rad / f.name)
         return rad
     return res
 

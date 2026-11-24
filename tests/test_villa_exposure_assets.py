@@ -44,7 +44,12 @@ class ExposureCohortTest(unittest.TestCase):
         self.assertEqual(peers[1]["v16-guest-wc"]["log_average"], 0.18)
 
 
+STAGED_PROPS = ROOT / "out/villa/round3/stage-props"     # untracked render-host staging (gitignored out/); absent in a fresh clone
+needs_staged_props = unittest.skipUnless(STAGED_PROPS.is_dir(), "environment: needs the render-host staged props %s (produced by the round-3 villa render staging, not tracked)" % STAGED_PROPS)
+
+
 class LavenderMaterialTest(unittest.TestCase):
+    @needs_staged_props
     def test_actual_planter_asset_has_black_rgb_background_and_import_cutout(self):
         folder = ROOT / "out/villa/round3/stage-props/sf_lavender_clump"
         model = json.loads((folder / "model.gltf").read_text(encoding="utf-8"))
@@ -132,6 +137,7 @@ class ImportedEmissionTest(unittest.TestCase):
                                     os=os, bpy=SimpleNamespace(path=SimpleNamespace(abspath=lambda p: p)))
         return validate
 
+    @needs_staged_props
     def test_real_bougainvillea_unlit_pattern_converts(self):
         model = json.loads((ROOT / "out/villa/round3/stage-props/sf_bougainvillea/model.gltf").read_text())
         self.assertIn("KHR_materials_unlit", model["materials"][0]["extensions"])

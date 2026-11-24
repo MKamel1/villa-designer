@@ -274,6 +274,15 @@ class NativeContractTests(unittest.TestCase):
             self.assertIn('serialization failed',rec['metadata']['error'])
 
 
+def FP(node):
+    # Digests were frozen before Python 3.13, which stopped printing empty/None fields in ast.dump;
+    # show_empty=True reproduces the frozen format (111 of 112 digests matched on 3.14.4).
+    try:
+        return ast.dump(node,include_attributes=False,show_empty=True)
+    except TypeError:       # Python < 3.13 prints the frozen format by default
+        return ast.dump(node,include_attributes=False)
+
+
 class FingerprintTests(unittest.TestCase):
     def test_refactor_keeps_branch_start_computation_functions(self):
         import hashlib
@@ -285,7 +294,7 @@ class FingerprintTests(unittest.TestCase):
             current={n.name:n for n in tree.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
             for name, digest in functions.items():
                 with self.subTest(script=script,function=name):
-                    self.assertEqual(hashlib.sha256(ast.dump(current[name],include_attributes=False).replace(', type_params=[]', '').encode()).hexdigest(),digest)
+                    self.assertEqual(hashlib.sha256(FP(current[name]).replace(', type_params=[]', '').encode()).hexdigest(),digest)
 
     def test_reviewed_package_fingerprint_still_rejects_unreviewed_edits(self):
         import hashlib
@@ -303,7 +312,7 @@ class FingerprintTests(unittest.TestCase):
             expected=audit['unchanged_functions'][change['script']][name]
             if name=='package':self.assertEqual(expected,change['sha256'])
             original=functions[name]
-            fingerprint=lambda node:hashlib.sha256(ast.dump(node,include_attributes=False).replace(', type_params=[]','').encode()).hexdigest()
+            fingerprint=lambda node:hashlib.sha256(FP(node).replace(', type_params=[]','').encode()).hexdigest()
             self.assertEqual(fingerprint(original),expected)
             mutated=deepcopy(original)
             mutated.body.append(ast.Return(value=ast.Constant(value='unreviewed computation')))

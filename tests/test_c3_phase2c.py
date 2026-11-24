@@ -259,7 +259,7 @@ class FinalPhysicalScene(unittest.TestCase):
         retired = {'lamp-VSCONCE-parents-ensuite-04','lamp-VSCONCE-parents-ensuite-05'}
         leaves = [m for m in self.scene['meshes'] if m['part_kind']=='door-leaf'
                   and m['group'] in ('shell','context')]
-        face_key = lambda face: tuple(tuple(p) for p in face)
+        face_key = lambda face: tuple(tuple(round(c, 4) for c in p) for p in face)   # 0.1 mm: -0.8999999999999999 vs -0.9 is float noise, a moved leaf is not
         door_faces = {face_key(f) for m in leaves for f in m['faces']}
         for mesh in FROZEN['meshes']:
             with self.subTest(id=mesh['id']):

@@ -14,6 +14,15 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
+    # L4 client finish mix (2026-11-23): chosen products' look-alikes, knowledge/products/finishes/chosen.json
+    "fin-cushion-cinema-sofa-1", "fin-cushion-cinema-sofa-2", "fin-cushion-library-daybed-1",
+    "fin-cushion-library-daybed-2", "fin-cushion-living-sofa-1", "fin-cushion-living-sofa-2",
+    "fin-cushion-living-sofa-3", "fin-cushion-lounge-sofa-1", "fin-cushion-lounge-sofa-2",
+    "fin-cushion-lounge-sofa-3", "fin-cushion-parents-bed-1", "fin-cushion-parents-bed-2",
+    "fin-cushion-parents-bed-3", "fin-cushion-study-sofa-1", "fin-cushion-study-sofa-2", "fin-kitchen-joinery",
+    "fin-kitchen-joinery-x", "fin-rug-living", "fin-rug-lounge", "fin-rug-parents-bedroom", "fin-throw-cinema-sofa",
+    "fin-throw-library-daybed", "fin-throw-living-sofa", "fin-throw-lounge-sofa", "fin-throw-parents-bed",
+    "fin-throw-study-sofa", "fin-wall-feature",
     "aspidistra-leaf",  # G4e neutral-reviewed ASSUMED glossy botanical appearance
     "north-pale-gravel", "north-light-stone",  # G4d reviewed ASSUMED mineral appearances
     "g6-jasmine-leaf", "g6-petrea-leaf", "g6-pittosporum-leaf", "g6-leaf-vein",
@@ -34,11 +43,15 @@ ALLOWED_MATERIALS = {
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
     "opal-VANITY-LIN-guest-wc-03", "opal-VANITY-LIN-parents-ensuite-04",  # client 2026-10-08, ASSUMED opal bars
     "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
+    # GI decided garden (landscape/build production): each carries a note and its measured look, ASSUMED where stated
+    "garden-path-0", "garden-grille", "garden-ground-ours", "garden-ground-neutral", "garden-edging", "garden-pond-liner", "garden-trellis", "garden-water", "garden-lava", "garden-paving-0", "garden-paving-1", "garden-paving-2", "garden-pit-steel", "garden-burner", "garden-pond-edge", "garden-coping", "garden-joint", "garden-gravel-chip", "garden-mulch", "garden-flame", "garden-terracotta", "garden-seat-timber", "garden-render",
+    "opal-sconce-2700", "opal-vsconce-2700",  # L6b LA6: one CCT per layer (was opal-sconce-3000)
     "garment-navy", "garment-charcoal", "garment-stone", "garment-olive",
 }
 
 
 class RenderStandard(unittest.TestCase):
+    @unittest.skip("LEGACY old-garden (G-series) baseline: needs the old stepping-stone mesh landscape-stone-study-00 (StopIteration: the decided garden has none). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md; the ground-only downward-face check itself runs on the decided scene in verify.py ('scene contains no ground-only downward faces')")
     def test_g2f_real_steps_and_ground_siblings_have_no_paved_soffits(self):
         from copy import deepcopy
         import json
@@ -136,23 +149,26 @@ class RenderStandard(unittest.TestCase):
         translated['props'][0]['position'][2] += .002
         self.assertTrue(any('base' in f for f in plant_support_findings(translated)))
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: planter, planter-rim, trellis, climber-branch and climber Part kinds, and the retained west trellis landscape-trellis-north with >= 48 faces. Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md (measured: the decided scene has no mesh of those kinds; its climbers are leaf cards); decided-garden parts are tests/landscape/build/test_production.py and test_c3_chunk_b_visible_parts_and_removed_frame (ld-* planter-soil)")
+    def test_legacy_garden_part_kinds(self):
+        pass
+
     def test_c3_chunk_b_visible_parts_and_removed_frame(self):
         from archpipe.concept.physical_part import Part
         by_id = {m["id"]: m for m in SCENE["meshes"]}
+        # The previous garden's planter, planter-rim, trellis, climber-branch and climber parts are retired (see
+        # test_legacy_garden_part_kinds); the decided garden (ids ld-*) carries planter-soil.
         kinds = ("hanging-rail", "rail-bracket", "storage-box", "box-handle",
-                 "suitcase", "suitcase-handle", "suitcase-wheel", "planter",
-                 "planter-rim", "planter-soil", "trellis", "climber-branch", "climber", "extract-valve")
+                 "suitcase", "suitcase-handle", "suitcase-wheel",
+                 "planter-soil", "extract-valve")
         for kind in kinds:
             members = [m for m in SCENE["meshes"] if m["part_kind"] == kind and
                        (m["id"].startswith(("dress-", "furn-", "landscape-door-pot-", "landscape-lemon-pot",
-                                            "landscape-top", "landscape-trellis-",
+                                            "landscape-top", "landscape-trellis-", "ld-",
                                             "landscape-climber-", "detail-vent-")))]
             self.assertTrue(members, kind)
             for m in members:
                 Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
-        # G1 removes the former north trellis because it occupied the full
-        # east court. The retained west assembly still needs real members.
-        self.assertGreaterEqual(len(by_id["landscape-trellis-north"]["faces"]), 48)
         cases = [m for m in SCENE["meshes"] if m["part_kind"] == "suitcase" and m["id"].startswith("furn-")]
         self.assertTrue(cases)
         for case in cases:
@@ -325,6 +341,7 @@ class RenderStandard(unittest.TestCase):
                             "edge" not in m["id"] and m["id"][-2:].isdigit()))
         self.assertEqual(next(m for m in SCENE["meshes"] if m["id"] == "detail-stair-wall-handrail")["material"], "oak")
 
+    @unittest.skip("LEGACY old-garden (G-series) baseline: calls the previous garden builder villa_landscape.build directly and expects every mesh inside the yard; it now places landscape-north-mid-02 outside the yard (measured; the cause was not traced because the builder is retired). Retired by the client's decided garden, docs/decisions/garden-brief-2026-11-22.md (the builder is only reachable behind GARDEN_SOURCE=legacy); decided-garden plot setbacks are tests/landscape/build/test_production.py")
     def test_wp2b_landscape_plot_support_setbacks_and_routes(self):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))
@@ -528,7 +545,10 @@ class RenderStandard(unittest.TestCase):
     def test_painted_walls_are_smooth(self):                        # ADR-0013 part 7 (real finishes)
         m = SCENE["materials"]["plaster-warm-white"]
         self.assertNotIn("asset", m, "a photo-texture with a bump map made painted walls look rough")
-        self.assertAlmostEqual(m["reflectance"], 0.80)
+        # L4 2026-11-23: the wall paint is the client's chosen B Dulux Off White, reflectance = its published LRV 89
+        self.assertAlmostEqual(m["reflectance"], 0.89)
+        self.assertGreater(SCENE["materials"]["fin-wall-feature"]["reflectance"], 0.2)    # Nile Clay LRV 27: still a smooth flat colour
+        self.assertNotIn("asset", SCENE["materials"]["fin-wall-feature"])
 
     def test_construction_details_present(self):                    # ADR-0013 part 10 (skirting, frames)
         ids = {m["id"] for m in SCENE["meshes"]}
@@ -1122,8 +1142,7 @@ class ArtificialGrassGuard(unittest.TestCase):
 
 def _watertight_and_volume(faces):
     """faces: list of planar polygons (each a list of [x, y, z] points), the same shape `mesh()` stores. Returns
-    (is_closed, signed_volume). `is_closed`: every directed edge has exactly one match and exactly one reverse
-    match (a watertight two-manifold). `signed_volume`: the divergence-theorem volume from a fan triangulation
+    (is_closed, signed_volume). `is_closed`: every directed edge is matched by an equal number of reverse edges (watertight; shells may share an edge). `signed_volume`: the divergence-theorem volume from a fan triangulation
     of each face; positive for a solid with consistently outward-wound (CCW) faces -- zero or negative means
     either a degenerate (zero-thickness) shape or inconsistent winding."""
     edge_count = {}
@@ -1140,7 +1159,10 @@ def _watertight_and_volume(faces):
             volume += (v0[0] * (v1[1]*v2[2] - v1[2]*v2[1])
                        - v0[1] * (v1[0]*v2[2] - v1[2]*v2[0])
                        + v0[2] * (v1[0]*v2[1] - v1[1]*v2[0])) / 6.0
-    closed = all(count == 1 and edge_count.get((b, a), 0) == 1 for (a, b), count in edge_count.items())
+    # Balanced edges (each directed edge matched by as many reverses): two closed boxes of one mesh may touch along
+    # an edge (the L-shaped terrace-edge guard, G1), which the old one-and-one rule read as open. A plane or a box
+    # with a face missing still leaves unmatched edges.
+    closed = all(count == edge_count.get((b, a), 0) for (a, b), count in edge_count.items())
     return closed, volume
 
 

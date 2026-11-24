@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import workstation  # noqa: E402
 
+# ROOT / "..." literals that are NOT reads: external_claims lists assets/user (a tracked symlink to the host
+# store, never shipped) among the roots it REFUSES to write into. Exact (file, name) pairs only.
+NOT_READS = {("src/archpipe/external_claims.py", "assets/user")}
 LITERAL = re.compile(r"ROOT\s*/\s*['\"]([^'\"]+)['\"]")
 
 
@@ -46,6 +49,8 @@ class ReleasePackage(unittest.TestCase):
         missing = []
         for path in sorted((ROOT / "src").rglob("*.py")):
             for name in LITERAL.findall(path.read_text(encoding="utf-8")):
+                if (path.relative_to(ROOT).as_posix(), name) in NOT_READS:
+                    continue
                 if name in self.tracked and name not in self.names:
                     missing.append("%s reads %s" % (path.relative_to(ROOT), name))
         self.assertEqual(missing, [])

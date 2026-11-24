@@ -6,6 +6,7 @@ datasheet stays None.
 """
 from __future__ import annotations
 
+from archpipe.safe_io import copy_file
 import hashlib
 import json
 import re
@@ -81,7 +82,7 @@ def _product(code: str) -> dict:
     files = {}
     for kind, f in (("ldt", ldt), ("ies", ies)):
         name = f"{code}.{kind}"
-        shutil.copyfile(f, dest / name)
+        copy_file(f, dest / name)
         files[kind] = dict(path=f"knowledge/lighting-products/iguzzini/{code}/{name}", sha256=_sha(dest / name))
     L = eu.load(dest / f"{code}.ldt")
     ls = L.lamp_sets[0]

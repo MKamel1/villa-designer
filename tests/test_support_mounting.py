@@ -21,6 +21,7 @@ class SupportMounting(unittest.TestCase):
              patch('archpipe.concept.furniture_stage2.apply', side_effect=lambda s,*a:s), \
              patch('archpipe.concept.parents_bed.apply', side_effect=lambda s,*a:s):
             cls.scene=VR.build(views=[])
+            cls.full_views=VR.build()['views']
 
     def test_real_missing_sites_now_bound_and_only_pending_findings(self):
         frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
@@ -28,7 +29,25 @@ class SupportMounting(unittest.TestCase):
         import gzip
         inventory = json.loads(gzip.decompress((Path(__file__).parent/'fixtures/integ6-support-inventory.json.gz').read_bytes()))
         self.assertEqual(len(inventory['before']), 294)
-        self.assertEqual(self.scene['support_inventory_before'], inventory['after'])
+        # The integration-6 inventory, plus the reviewed design deltas since (an unexplained id still fails):
+        added = {'detail-vstrip-VSTRIP-parents-dressing-03', 'detail-vstrip-VSTRIP-parents-dressing-04',
+                 'detail-vstrip-VSTRIP-parents-dressing-05',                       # L6b vertical wardrobe strips
+                 'furn-stair-flight-store-storage-box-28', 'furn-stair-flight-store-storage-box-28-handle',  # SC2/SC3 stair store
+                 'lamp-arm-DESK-kids-a-05', 'lamp-shade-DESK-kids-a-05',            # L6b desk lamps renumbered
+                 'marker-PATH-landing-gf-01', 'marker-PATH-landing-gf-02',            # INT2 landing PATH markers
+                 'furn-library-daybed-2', 'furn-library-daybed-3'}                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
+        removed = {'fix-DLN-bar-alcove-11', 'fix-DLN-bar-alcove-12', 'lens-DLN-bar-alcove-11', 'lens-DLN-bar-alcove-12',  # L6b redesign
+                   'furn-stair-flight-store-storage-box-35', 'furn-stair-flight-store-storage-box-35-handle',
+                   'furn-stair-flight-store-storage-box-40', 'furn-stair-flight-store-storage-box-40-handle',
+                   'furn-stair-flight-store-suitcase-22', 'furn-stair-flight-store-suitcase-22-handle', 'furn-stair-flight-store-suitcase-22-wheels',
+                   'furn-stair-flight-store-suitcase-27', 'furn-stair-flight-store-suitcase-27-handle', 'furn-stair-flight-store-suitcase-27-wheels',  # SC2/SC3 stair store
+                   'lamp-arm-DESK-kids-a-04', 'lamp-shade-DESK-kids-a-04',
+                   'landscape-climber-branches-east', 'landscape-climber-branches-north', 'landscape-climber-east',
+                   'landscape-climber-north', 'landscape-trellis-east', 'landscape-trellis-north'}                    # GI decided garden
+        now, then = self.scene['support_inventory_before'], inventory['after']
+        self.assertEqual(set(now) - set(then), added)
+        self.assertEqual(set(then) - set(now), removed)
+        self.assertEqual([i for i in now if i in then], [i for i in then if i in now])
         findings=scene_findings(self.scene)
         self.assertFalse(any('MISSING mounting host' in f for f in findings))
         pending={r['id'] for r in self.scene['mounting_movements'] if r['approval']=='PENDING'}
@@ -52,7 +71,7 @@ class SupportMounting(unittest.TestCase):
                     self.assertIn(row['id'], self.scene['e_lead_review']['applied'])
                 self.assertEqual(target['faces'], row['proposed_faces'])
         from archpipe.villa_render_contract import validate_scene
-        self.assertEqual(validate_scene(dict(self.scene,views=VR.VIEWS(R.design('D1')))),[])
+        self.assertEqual(validate_scene(dict(self.scene,views=self.full_views)),[])   # the decided garden's views, as the build binds them (VR.VIEWS alone still names the previous garden's subjects)
         proposal=deepcopy(self.scene);by={m['id']:m for m in proposal['meshes']}
         for row in proposal['mounting_movements']:
             if row['approval']=='PENDING':by[row['id']]['faces']=row['proposed_faces']
@@ -116,6 +135,13 @@ class SupportMounting(unittest.TestCase):
         for m in scene['meshes']:
             if m['id'] in before:
                 original = before[m['id']]['faces']
+                if m['id'] in ('fix-DL-family-bath-01', 'lens-DL-family-bath-01'):
+                    # L6b redesign moved this downlight 115 mm in -y; its shape is otherwise the frozen one
+                    for fa, fb in zip(m['faces'], original):
+                        for a, b in zip(fa, fb):
+                            for got, want in zip(a, (b[0], b[1] - .115, b[2])):self.assertAlmostEqual(got, want, places=6)
+                    self.assertEqual(len(m['faces']), len(original))
+                    continue
                 if m.get('construction_backing_m'):
                     # C3 completes the historical open floor at its exact
                     # front datum. Only its declared backing may be added.
@@ -129,7 +155,8 @@ class SupportMounting(unittest.TestCase):
         self.assertEqual(continuous_candidates(item,[],[1.5,0,2.5,4])[1],[])
         axis,candidates=continuous_candidates(item,[],[0,0,4,4]);self.assertEqual(axis,0);self.assertIn(0,candidates)
 
-    def test_joinery_recess_lights_and_support_siblings_fail_closed(self):
+    @unittest.skip("LEGACY pre-L6b baseline: the recessed DLN bar-alcove lights fix-DLN-bar-alcove-11/12 and their 120 mm joinery void requirement on furn-library-daybed-0. Retired by the L6b redesign, which removed those fixtures (frozen-inventory delta in test_real_missing_sites_now_bound_and_only_pending_findings); the alcove now carries SWING-bar-alcove-09/10 with no void requirement (measured: void_status None), so there is no recess depth to mutate. Support-sibling fail-closed stays live below")
+    def test_joinery_recess_lights_void_depth(self):
         scene=self.scene
         trim=next(m for m in scene['meshes'] if m['id']=='fix-DLN-bar-alcove-11')
         host=scene['mounting_hosts'][trim['mounting']['host_id']]
@@ -139,11 +166,14 @@ class SupportMounting(unittest.TestCase):
             mutant=deepcopy(scene);m=next(m for m in mutant['meshes'] if m['id']==mid)
             mutant['mounting_hosts'][m['mounting']['host_id']]['void_depth_m']=.09
             self.assertTrue(any('void' in f for f in scene_findings(mutant) if f.startswith(mid+':')))
+
+    def test_joinery_recess_lights_and_support_siblings_fail_closed(self):   # registered in knowledge/mounting-guards.json; the recess-light half is retired (test_joinery_recess_lights_void_depth)
+        scene=self.scene
         rail=next(m for m in scene['meshes'] if m.get('mounting',{}).get('support_parts'))
         mutant=deepcopy(scene);support_id=rail['mounting']['support_parts'][0]
         mutant['meshes']=[m for m in mutant['meshes'] if m['id']!=support_id]
         self.assertTrue(any('MISSING declared supporting part' in f for f in scene_findings(mutant)))
-        self.assertEqual(len(scene['support_light_movements']),7)
+        self.assertEqual(len(scene['support_light_movements']),5)   # was 7: L6b removed fix-DLN-bar-alcove-11/12
         self.assertTrue(scene['support_associated_movements'])
         self.assertEqual(len(scene['e_approved_light_movements']),8)
         self.assertEqual(len(scene['e_approved_associated_movements']),7)

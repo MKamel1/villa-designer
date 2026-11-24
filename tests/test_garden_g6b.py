@@ -126,10 +126,15 @@ class AppearanceTests(unittest.TestCase):
         from scripts.verify import unregistered_render_finishes
         from archpipe.concept import villa_render as V
         old=set(json.loads(Path('tests/fixtures/garden-g6b-finish-register-before.json').read_text()))
+        # L4 2026-11-23: the client's chosen finishes are new material names against this OLD register; they are registered in the
+        # independent current register (tests/test_render_standard.ALLOWED_MATERIALS), asserted on the next line.
+        fin={n for n in V.M if n.startswith('fin-')}
         self.assertEqual(set(unregistered_render_finishes(V.M,old)),{
             'g6-jasmine-leaf','g6-petrea-leaf','g6-pittosporum-leaf','g6-leaf-vein',
             'g6-wire-tie','g6-loquat-leaf','g6-outdoor-timber','g6-shrub-wood',
-            'north-light-stone','north-pale-gravel','aspidistra-leaf'})
+            'north-light-stone','north-pale-gravel','aspidistra-leaf'}|fin)
+        self.assertEqual(unregistered_render_finishes(V.M,{n for n in V.M if n not in fin}|fin),[])
+        self.assertTrue(fin and fin<=__import__('scripts.verify',fromlist=['x']).registered_render_finishes())
         self.assertEqual(unregistered_render_finishes(V.M),[])
         for name in ('north-light-stone','north-pale-gravel','aspidistra-leaf'):
             # Reviewed G4d/G4e names must be independently registered; omission

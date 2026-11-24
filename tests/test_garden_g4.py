@@ -141,6 +141,18 @@ class NorthShade(unittest.TestCase):
             for q in face:q[2]-=.05
         self.assertEqual(soil_visibility_findings(buried),[])
 
+    def test_build_writes_no_files(self):
+        from archpipe.concept import villa_render as V,villa_lighting as VL
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+        self.assertEqual([k for k in VL.KINDS if k not in VL.products() and VL.KINDS[k]["mount"] in ("recessed","task-lamp")],[])
+        with TemporaryDirectory() as tmp:
+            link=Path(tmp)/'output';link.mkdir()
+            with patch.object(V,'OUT',link),patch.object(Path,'write_text',side_effect=AssertionError('build wrote a file')),patch.object(Path,'write_bytes',side_effect=AssertionError('build wrote a file')):
+                V.build(views=[])
+            self.assertEqual(list(link.iterdir()),[])
+
+    @unittest.skip("LEGACY pre-L6c baseline: the frozen generic-IES write branch exports generic/DESK.ies. Retired by L6c, which bound DESK (and every recessed or task-lamp kind) to a verified ERCO product (docs/lanes/INT-integration.md, tests/test_villa_lighting.py Cards): no recessed or task-lamp kind is generic any more, so that branch writes nothing and the scene carries no generic-IES light. The build-writes-nothing half is kept live in test_build_writes_no_files")
     def test_g4_generic_photometry_writes_only_explicit_exports(self):
         from archpipe.concept import villa_render as V,villa_lighting as VL
         from tempfile import TemporaryDirectory

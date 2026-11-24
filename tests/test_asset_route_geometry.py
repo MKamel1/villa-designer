@@ -32,7 +32,15 @@ class AssetRouteGeometry(unittest.TestCase):
             triangles = geometry.prop_triangles(prop)
             self.assertGreater(len(triangles), 40000)
             self.assertLess(len(triangles), 82691)
-            scene = VR.build(views=[])
+            # The sf_* route record belongs to the previous (G-series) garden; the decided
+            # garden (GARDEN_SOURCE "ldb") places other assets and its stand-in fallbacks change
+            # the materials the furniture/bed receipts bind, so under an empty HOME the receipt
+            # gates (not the route record) would refuse. Build the previous garden, with the
+            # receipt-bound stages bypassed exactly as landscape/build/tools/gi_scene.py does.
+            with patch.object(VR, "GARDEN_SOURCE", "legacy"), \
+                    patch("archpipe.concept.furniture_stage2.apply", side_effect=lambda s, *a: s), \
+                    patch("archpipe.concept.parents_bed.apply", side_effect=lambda s, *a: s):
+                scene = VR.build(views=[])
             self.assertTrue(scene["meshes"])
             # Every placed landscape prop, not just the overlapping tree.
             garden = [p for p in scene["props"] if p["id"].startswith("landscape-")]
@@ -58,7 +66,8 @@ class AssetRouteGeometry(unittest.TestCase):
             rejects(missing)
             stale = copy.deepcopy(original); stale["assets"][asset]["source_sha256"] = "0"*64
             rejects(stale)
-            with patch.object(records, "RECORD", record_path), patch.object(records, "MANIFEST", manifest_path):
+            with patch.object(records, "RECORD", record_path), patch.object(records, "MANIFEST", manifest_path), \
+                    patch.object(VR, "GARDEN_SOURCE", "legacy"):    # sf_frangipani is placed by the previous garden only
                 with self.assertRaisesRegex(ValueError, "sf_frangipani:.*generate_asset_route_geometry.py"):
                     VR.build(views=[])
             stale = copy.deepcopy(manifest)
@@ -277,6 +286,15 @@ class AssetRouteGeometry(unittest.TestCase):
                 records.write_record(record,document)
                 with self.assertRaisesRegex(ValueError,"thin-branch:.*generate_asset_route_geometry.py"):
                     records.recorded_geometry("thin-branch")
+
+    def test_host_boundaries_are_real_files_and_do_not_shelter_siblings(self):
+        from archpipe.build_input_guard import HOST_BOUNDARIES
+        root = ROOT / "src/archpipe"
+        for rel in HOST_BOUNDARIES:        # a renamed/deleted boundary must not leave a dead exemption
+            self.assertTrue((root / rel).is_file(), rel)
+        home = "from pathlib import Path\nx = Path.home() / 'archpipe'"
+        self.assertEqual(source_findings(home, "landscape/build/planting.py"), [])
+        self.assertTrue(source_findings(home, "landscape/build/planting_copy.py"))
 
     def test_static_guard_real_old_path_siblings_and_clean_build(self):
         frozen = (ROOT/"tests/fixtures/route_geometry_ec0bc39.py").read_text()
