@@ -19,7 +19,7 @@
  },
  "proxy_points": {
   "stair-b": [
-   9.85,
+   10.05,
    -27.946
   ],
   "stair-gf": [
@@ -165,5 +165,20 @@
   {
    "room": "parents-ensuite"
   }
- ]
+ ],
+ "point_bounds": {
+  "store-ramp": [
+   2.1,
+   -23.59,
+   3.12,
+   -20.6
+  ],
+  "landing-gf": [
+   3.62,
+   -28.67,
+   4.6,
+   -26.37
+  ]
+ },
+ "point_bounds_note": "store-ramp: the soffit is 1.45 m at the west end (measured), so the 360 is taken in the east part; landing-gf: 0.6 m back from the stair guard, which the swept 0.15 m envelope otherwise hits"
 }

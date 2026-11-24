@@ -72,7 +72,7 @@ def best_view_yaw(room, rect, stills, depth72, wall_floor=1.5):
     return math.degrees(ANGLES[int(wedge.argmax())]), 'deepest-wedge'
 
 
-def room_points(vm, policy_=None, stills=None, proxies=None):
+def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
     """The 360 point of every room: max visible floor area and features with every direction at least 1.0 m from a wall.
 
     Candidates are free cells (standing policy plus evaluated furniture meshes) inside the room rectangle. Score =
@@ -81,13 +81,14 @@ def room_points(vm, policy_=None, stills=None, proxies=None):
     score wins; if none exists the room is `flagged` and the point with the longest shortest ray wins.
     """
     policy_ = policy_ or tour_policy(); stills = stills if stills is not None else still_yaws()
-    need = policy_['point_wall_clearance_m']+.02; out = {}; proxies = proxies or {}
+    need = policy_['point_wall_clearance_m']+.02; out = {}; proxies = proxies or {}; bounds = bounds or {}
     for lv in LEVEL_Z:
         grid = _opaque_grid(vm, lv); free = vm.free(lv); clear = vm.clearance_cells(lv)
         for room, r in vm.rooms[lv].items():
             rect = r['rect']
             cells = [(i, j) for i in range(vm.nx) for j in range(vm.ny)
-                     if free[i, j] and rect[0] < vm.xy(i, j)[0] < rect[2] and rect[1] < vm.xy(i, j)[1] < rect[3]]
+                     if free[i, j] and rect[0] < vm.xy(i, j)[0] < rect[2] and rect[1] < vm.xy(i, j)[1] < rect[3]
+                     and (room not in bounds or (bounds[room][0] < vm.xy(i, j)[0] < bounds[room][2] and bounds[room][1] < vm.xy(i, j)[1] < bounds[room][3]))]
             if room in proxies:     # the room is not walkable (under/over the flight): its 360 is taken at the authored point
                 pts = np.array([proxies[room]], float)
             elif not cells:
@@ -274,7 +275,7 @@ def _inward(vm, door, offsets):
 def plan_tour(vm, route=None, pol=None):
     """Plan, sample at 24 fps and return the `flythrough-villa-path/1` record for the tour."""
     route = route or tour_route(); pol = dict(pol or tour_policy()); spec = vm.spec
-    pts = room_points(vm, pol, proxies={k: tuple(v) for k, v in route.get('proxy_points', {}).items()})
+    pts = room_points(vm, pol, proxies={k: tuple(v) for k, v in route.get('proxy_points', {}).items()}, bounds=route.get('point_bounds'))
     steps = []       # dicts: kind walk|turn|pan, plus data
     where = None; level = None
     top, bottom = route['stair']['top'], route['stair']['bottom']
@@ -288,7 +289,7 @@ def plan_tour(vm, route=None, pol=None):
 
     for st in route['stations']:
         if st.get('stair') == 'up':
-            P = [(bottom[0], bottom[1], LEVEL_Z['B'])]
+            P = [(where[0], where[1], LEVEL_Z['B'])]
             for x in np.arange(x1, x0-.01, -.5):
                 P.append((float(x), bottom[1], stair_ground(float(x), spec)))
             P.append((top[0], top[1], LEVEL_Z['GF']))

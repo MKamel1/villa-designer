@@ -1151,7 +1151,7 @@ def villa_frame_views(path, scene):
         garden = f['segment'] != 'interior'
         views.append(dict(id='frame-%04d' % f['index'], title='Whole-villa walkthrough', camera=f['camera'],
                           state='day', exposure='exterior-day' if garden else 'day',
-                          subjects=['landscape-g6-terrace'] if (garden or not f['room']) else ['room:'+f['room']],
+                          subjects=[] if (garden or not f['room']) else ['room:'+f['room']],   # g6 terrace no longer exists (GI garden replaced it)
                           resolution=path['settings']['final_resolution'], samples=1024,
                           layers_on=['ambient', 'accent'], dimmers={'ambient': .5, 'accent': .5},
                           hide_meshes=list(hidden), sun=dict(sun),
@@ -1188,7 +1188,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
         if abs(pos[2]-frame['ground_m']-settings['eye_height_m']) > 1e-9:
             row['failures'].append('camera eye height differs from still-view rule')
         sight = wall_sightline_findings(view, host_walls)
-        if sight and frame.get('phase') == 'turn' and frame.get('station') in flagged_rooms:
+        if sight and (frame.get('station') if frame.get('phase') == 'turn' else frame['room']) in flagged_rooms:
             row['waived_wall_sightline'] = sight       # room too small for the 1 m rule from any standing point: flagged, never silent
         else:
             row['failures'].extend(sight)
