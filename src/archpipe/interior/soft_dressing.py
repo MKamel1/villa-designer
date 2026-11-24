@@ -27,21 +27,65 @@ def lumbar(w_mm, l_mm):
     return (max(w_mm, l_mm), min(w_mm, l_mm))
 
 
+def _grid_shell(w_mm, l_mm, top, bottom, n=30, m=30):
+    """Closed shell over a w x l (mm) rectangle: `top(x, y)` and `bottom(x, y)` are heights (mm) at point (x, y).
+    Grid lines cluster toward the rim (cosine spacing) so a steep rolled edge is resolved. Returns (verts_mm, tris)."""
+    xs = [w_mm / 2 * math.sin(math.pi / 2 * (2 * i / (n - 1) - 1)) for i in range(n)]
+    ys = [l_mm / 2 * math.sin(math.pi / 2 * (2 * j / (m - 1) - 1)) for j in range(m)]
+    verts, tris = [], []
+    for z in (top, bottom):
+        for x in xs:
+            for y in ys:
+                verts.append((x, y, z(x, y)))
+    idx = lambda layer, i, j: layer * n * m + i * m + j
+    for i in range(n - 1):
+        for j in range(m - 1):
+            a, b, c, d = idx(0, i, j), idx(0, i + 1, j), idx(0, i + 1, j + 1), idx(0, i, j + 1)
+            tris += [(a, b, c), (a, c, d)]
+            a, b, c, d = idx(1, i, j), idx(1, i + 1, j), idx(1, i + 1, j + 1), idx(1, i, j + 1)
+            tris += [(a, c, b), (a, d, c)]
+    rim = [(i, 0) for i in range(n - 1)] + [(n - 1, j) for j in range(m - 1)] + \
+          [(i, m - 1) for i in range(n - 1, 0, -1)] + [(0, j) for j in range(m - 1, 0, -1)]
+    for k, (i, j) in enumerate(rim):
+        i2, j2 = rim[(k + 1) % len(rim)]
+        a, b, c, d = idx(0, i, j), idx(0, i2, j2), idx(1, i2, j2), idx(1, i, j)
+        tris += [(a, d, c), (a, c, b)]
+    return verts, tris
+
+
+def _noise(seed):
+    """Smooth deterministic wrinkle field f(x_mm, y_mm) in [-1, 1] (sum of a few sines, no RNG state)."""
+    r = [((seed * 2654435761 + k * 40503) % 1000) / 1000.0 for k in range(12)]
+    waves = [(0.011 + 0.010 * r[0], 0.006 + 0.012 * r[1], 6.28 * r[2]), (0.007 + 0.012 * r[3], -0.012 + 0.010 * r[4], 6.28 * r[5]),
+             (0.019 + 0.012 * r[6], 0.014 + 0.010 * r[7], 6.28 * r[8])]
+    return lambda x, y: sum(math.sin(a * x + b * y + ph) for a, b, ph in waves) / len(waves) * 1.3
+
+
+def pillow(w_mm, h_mm, thick_mm=140, seed=1):
+    """An inflated scatter cushion: a closed shell whose thickness follows a rounded-rectangle profile (widest at the middle,
+    rolling to the seam), pinched at the corners, with a soft centre dimple and small wrinkles. Replaces the seven-ring loft,
+    whose flat plateau read as a board from the front. Local frame: x width, y height, z thickness from 0."""
+    a, b = w_mm / 2, h_mm / 2
+    wr = _noise(seed)
+
+    def half(x, y):
+        u, v = abs(x) / a, abs(y) / b
+        prof = math.sqrt(max(0.0, 1 - u ** 2.4)) * math.sqrt(max(0.0, 1 - v ** 2.4))
+        corner = 1 - 0.35 * (u * v) ** 2                                   # corners are pinched flat by the seam
+        dimple = 1 - 0.16 * math.exp(-(u * u + v * v) / 0.18)              # the fill settles in the middle
+        return thick_mm / 2 * prof * corner * dimple + 0.8 + 2.2 * wr(x, y) * prof
+    c = thick_mm / 2
+    return _grid_shell(w_mm, h_mm, lambda x, y: c + half(x, y), lambda x, y: c - half(x, y) * 0.96)
+
+
 def leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha_deg=12.0, yaw_deg=0.0, thick_mm=140):
     """One cushion stood on its edge at (u0, v0, z0 = lowest edge height), top leaning back by alpha."""
-    xa, xb, ya, yb = -w_mm / 2, w_mm / 2, -h_mm / 2, h_mm / 2
-    # An inflated pillow, not a slab (the first rings were a flat plateau with chamfers and the critic read them as rigid
-    # boards): seven rings whose inset follows a circular profile, widest at mid-thickness, rounded at the seams.
-    rings = []
-    for t in (0.0, 0.14, 0.3, 0.5, 0.7, 0.86, 1.0):
-        inset = 62.0 * (1.0 - math.sqrt(max(0.0, 1.0 - (2 * t - 1) ** 2)))
-        rings.append((xa + inset, xb - inset, ya + inset * 0.9, yb - inset * 0.9, thick_mm * t, 55.0))
-    verts, tris = FG._loft_rings(rings, 8)
+    verts, tris = pillow(w_mm, h_mm, thick_mm, seed=int(w_mm + 3 * h_mm + 1000 * u0 + 7 * alpha_deg))
     al = math.radians(alpha_deg)
     ca, sa = math.cos(al), math.sin(al)
 
     def place(x, y, z):
-        t, s = (y) / 1000.0, (z - thick_mm / 2) / 1000.0
+        t, s = (y + h_mm / 2) / 1000.0 - h_mm / 2000.0, (z - thick_mm / 2) / 1000.0
         du, dv = _rot(-x / 1000.0, -sa * t + ca * s, yaw_deg)          # -x keeps the basis right-handed
         zz = z0 + ca * (t + h_mm / 2000.0) + sa * s
         wu, wv = _rot(u0 + du, v0 + dv, theta)
@@ -49,13 +93,25 @@ def leaning_cushion(cx, cy, theta, u0, v0, z0, w_mm, h_mm, alpha_deg=12.0, yaw_d
     return _world(verts, tris, place)
 
 
+def draped_throw(w_mm, l_mm, seed=3):
+    """A throw as loose cloth: one end lies flat on the seat, the rest bunches into soft ridges and one corner lifts and rolls.
+    Thickness 14 mm; the cloth never goes below its z = 0 contact plane. Local frame as `pillow`."""
+    a, b = w_mm / 2, l_mm / 2
+    wr = _noise(seed)
+
+    def top(x, y):
+        u, v = x / a, y / b
+        edge = max(0.0, 1 - max(abs(u), abs(v)) ** 6)                       # the rim settles onto the seat
+        ridge = 0.5 + 0.5 * math.sin(7.0 * (v + 0.25 * u) + 0.8)            # soft folds across the length
+        bunch = 22.0 * math.exp(-((v - 0.15) / 0.55) ** 2) * (0.35 + 0.65 * ridge)
+        curl = 26.0 * max(0.0, u * 0.9 + v * 0.9 - 1.1) ** 1.2 * 4          # one corner lifts
+        return 14.0 + edge * (bunch + 7.0 * wr(x, y)) + curl
+    return _grid_shell(w_mm, l_mm, top, lambda x, y: max(0.0, top(x, y) - 14.0), n=34, m=40)
+
+
 def folded_throw(cx, cy, theta, u0, v0, z0, w_mm, l_mm, yaw_deg=0.0, thick_mm=70):
-    """A throw folded in three and laid flat on the seat."""
-    fw, fl = w_mm / 3.0, l_mm / 3.0
-    xa, xb, ya, yb = -fw / 2, fw / 2, -fl / 2, fl / 2
-    rings = [(xa + 12, xb - 12, ya + 12, yb - 12, 0, 22), (xa, xb, ya, yb, 14, 30),
-             (xa, xb, ya, yb, thick_mm - 14, 30), (xa + 12, xb - 12, ya + 12, yb - 12, thick_mm, 22)]
-    verts, tris = FG._loft_rings(rings, 8)
+    """The scheduled throw (w x l mm) folded in three to a third of its length, then loosely draped: see `draped_throw`."""
+    verts, tris = draped_throw(w_mm / 3.0 * 1.15, l_mm / 3.0 * 1.15, seed=int(w_mm + l_mm))
 
     def place(x, y, z):
         du, dv = _rot(x / 1000.0, y / 1000.0, yaw_deg)

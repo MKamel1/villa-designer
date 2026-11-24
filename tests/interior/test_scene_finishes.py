@@ -140,3 +140,30 @@ class SoftSchedule(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SoftGeometry(unittest.TestCase):
+    """Throws and cushions read as flat blocks in the draft views (2026-11-23): they are now closed, outward-facing,
+    non-planar shells (inflated pillow, draped cloth)."""
+
+    @staticmethod
+    def _vol(faces):
+        import numpy as np
+        return sum(float(np.dot(a, np.cross(b, c))) / 6 for a, b, c in faces)
+
+    def test_cushion_and_throw_are_closed_outward_and_not_boards(self):
+        import numpy as np
+        from archpipe.interior import soft_dressing as SD
+        for faces in (SD.leaning_cushion(0, 0, 0, 0, 0.1, 0.4, 500, 500, 24, 5), SD.folded_throw(0, 0, 0, 0, 0.3, 0.44, 1300, 1700)):
+            self.assertGreater(self._vol(faces), 1e-3)                       # outward normals, real volume
+            edges = {}
+            for f in faces:
+                for k in range(3):
+                    e = tuple(sorted((tuple(np.round(f[k], 6)), tuple(np.round(f[(k + 1) % 3], 6)))))
+                    edges[e] = edges.get(e, 0) + 1
+            self.assertEqual({v for v in edges.values()}, {2})                # watertight
+        top = [p[2] for f in SD.folded_throw(0, 0, 0, 0, 0.3, 0.44, 1300, 1700) for p in f]
+        self.assertGreater(max(top) - min(top), 0.05)                         # a flat folded block was 0.07 m of constant slab
+        flat = SD.draped_throw(433, 567)
+        zs = sorted({round(v[2], 1) for v in flat[0]})
+        self.assertGreater(len(zs), 200)                                      # cloth surface, not a few planes
