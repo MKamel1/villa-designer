@@ -256,7 +256,7 @@ def programme(waypoints, holds, rate, accel):
     return total, theta
 
 
-def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None, fresh=None):
+def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None, fresh=None, dull=None):
     """Hold the room's best view, finish a full 360, end on `exit_`. Angles are absolute degrees; returns (T, yaw(t), alpha).
 
     Sweeping direction sigma is the one that makes the extra turn to the exit heading shorter; the best view is passed
@@ -269,20 +269,20 @@ def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None, fresh=None
     beta = (sigma*(exit_-y0)) % 360.
     total_angle = 360.+beta
     wp = [0.]; hd = [0.]
-    if fresh is not None and not fresh[int(round(best/30.)) % 12]:
+    if (fresh is not None and not fresh[int(round(best/30.)) % 12]) or (dull and dull[int(round(best/30.)) % 12]):
         best_hold = min(best_hold, pol.get('stale_hold_s', .4))      # the best view adds no new surface in this route: a glance, not a hold
     if alpha > 10.:
         wp.append(alpha); hd.append(best_hold)
     else:
         hd[0] = best_hold
     wp.append(total_angle); hd.append(2.5 if final else 0.)
-    if yaw_table and pol.get('turn_rate_wall_deg_s'):
+    if (yaw_table or dull) and pol.get('turn_rate_wall_deg_s'):
         # sweep faster through the headings where the audit finds a wall-dominated frame, slower on the informative ones (both inside the client's 30-45 deg/s band)
-        ys = np.array([r[0] for r in yaw_table], float); bad = np.array([r[1] for r in yaw_table], bool)
+        ys = np.array([r[0] for r in yaw_table], float) if yaw_table else np.zeros(1); bad = np.array([r[1] for r in yaw_table], bool) if yaw_table else np.zeros(1, bool)
         grown = bad | np.roll(bad, 1) | np.roll(bad, -1)        # the frame has width: widen each bad heading by one table step
         def rate(theta):
             k = int(np.abs((y0+sigma*theta-ys+180.) % 360.-180.).argmin())
-            stale = fresh is not None and not fresh[int(round(((y0+sigma*theta) % 360.)/30.)) % 12]       # nothing new there: sweep fast
+            stale = (fresh is not None and not fresh[int(round(((y0+sigma*theta) % 360.)/30.)) % 12]) or bool(dull and dull[int(round(((y0+sigma*theta) % 360.)/30.)) % 12])       # nothing new there (or a blank wall / bright window, `dull`): sweep fast
             return pol['turn_rate_wall_deg_s'] if grown[k] or stale else pol['turn_rate_view_deg_s']
         T, th = programme(wp, hd, rate, accel)
     else:
@@ -300,6 +300,37 @@ def _bump(x, width):
 def tour_sweep():
     p = ROOT/'knowledge/flythrough/tour-sweep.json'
     return json.loads(p.read_text()) if p.exists() else {'min_m2': 0., 'bins': {}}
+
+
+def corridor_arc(vm, lv, point, rect, pol, toward):
+    """(start yaw, span) of an arc in a corridor: along its LENGTH, centred on the end nearer the heading the route takes next (`toward`), so the camera never turns
+    back on itself; when both ends are equally near (a dead end), the end with the longer sightline from `point`."""
+    along_x = (rect[2]-rect[0]) >= (rect[3]-rect[1]); ends = (0., 180.) if along_x else (90., 270.)
+    off = [abs(wrap(e-toward)) for e in ends]
+    if abs(off[0]-off[1]) < 1.:
+        k = int(ray_depths(vm, _opaque_grid(vm, lv), np.array([point], float), np.radians(np.array(ends)))[0].argmax())
+    else:
+        k = int(np.argmin(off))
+    half = pol.get('corridor_arc_deg', 40.)/2
+    return ends[k]-half, 2*half
+
+
+def tour_dull(pol):
+    """room -> 12 flags (30-degree heading bins) of headings showing a blank wall or a bright window (scripts/wt_reaim.py), for the rooms the client asked to re-aim (`dull_rooms`)."""
+    f = ROOT/'knowledge/flythrough/tour-dull.json'
+    rooms = json.loads(f.read_text())['rooms'] if f.is_file() else {}
+    return {k: v['dull'] for k, v in rooms.items() if k in pol.get('dull_rooms', ())}
+
+
+def pan_range(garden, pol):
+    """(low, high) yaw offsets from the facing direction for the garden pan: the glass's angular edges (tour-pans.json, from scripts/wt_pans.py) pulled in by half the
+    horizontal field of view of the base lens, so the view's edge ends on the glass edge; at least +-`garden_pan_min_deg` so there is always a small motion."""
+    f = ROOT/'knowledge/flythrough/tour-pans.json'
+    rec = json.loads(f.read_text())['gardens'].get(garden) if f.is_file() else None
+    half = math.degrees(math.atan(.5*36/pol.get('base_lens_mm', 24)))
+    lo, hi = (rec['glass_angle_deg'][0]+half, rec['glass_angle_deg'][1]-half) if rec else (-pol['garden_pan_deg'], pol['garden_pan_deg'])
+    m = pol.get('garden_pan_min_deg', 8.)
+    mid = (lo+hi)/2; return min(lo, mid-m), max(hi, mid+m)
 
 
 def tour_aim():
@@ -404,7 +435,7 @@ def _fresh(room):
     return None if b is None else [v >= sw['min_m2'] for v in b]
 
 
-def plan_tour(vm, route=None, pol=None, aim=None):
+def plan_tour(vm, route=None, pol=None, aim=None, doors=True):
     """Plan, sample at 24 fps and return the `flythrough-villa-path/1` record for the tour."""
     route = route or tour_route(); pol = dict(pol or tour_policy()); spec = vm.spec
     aim = tour_aim() if aim is None else aim
@@ -479,12 +510,18 @@ def plan_tour(vm, route=None, pol=None, aim=None):
         s['y0'] = prev['heading_end'] if prev else (nxt['heading_start'] if nxt else 0.)
         s['exit'] = nxt['heading_start'] if nxt else None
         if s['kind'] == 'turn':
-            best = s['info']['best_yaw_deg']
-            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, fresh=_fresh(s['room']), yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'))
+            best = s['info']['best_yaw_deg']; dull = tour_dull(pol).get(s['room'])
+            if dull and dull[int(round(best/30.)) % 12]:      # never hold the best view on a blank wall or a bright window: the nearest heading that is neither (audit table, tour-dull.json)
+                ok = [k for k in range(12) if not dull[k]]
+                if ok: best = 30.*min(ok, key=lambda k: abs(wrap(30.*k-best)))
+            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, fresh=_fresh(s['room']), yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'), dull=dull)
             s.update(T=T, yawfn=yaw, alpha=alpha)
         elif s['kind'] == 'arc':
             # a partial look: go to the nearer end of the arc, sweep it at the view rate, hold, then turn to the exit heading
             a0, span = s['info']['arc']; a1 = a0+span
+            if s['room'].split('~')[0] in pol.get('corridor_rooms', ()):
+                a0, span = corridor_arc(vm, s['level'], s['at'], vm.rooms[s['level']][s['room'].split('~')[0]]['rect'], pol, s['exit'] if s['exit'] is not None else s['y0'])
+                a1 = a0+span
             ex = s['exit'] if s['exit'] is not None else None
             cost = lambda st, sg: abs(wrap(st-s['y0']))+(abs(wrap(ex-(st+sg*span))) if ex is not None else 0.)       # turn in + turn out: take the sweep direction that turns least overall
             near0 = cost(a0, 1.) <= cost(a1, -1.)
@@ -493,10 +530,11 @@ def plan_tour(vm, route=None, pol=None, aim=None):
             T, th = programme([0., t1, t1+sg*span, t1+sg*span+e], [0., 0., pol['arc_hold_s'], 0.], [pol['turn_rate_deg_s'], pol['turn_rate_view_deg_s'], pol['turn_rate_deg_s']], pol['turn_accel_deg_s2'])
             s.update(T=T, yawfn=(lambda t, th=th, y0=s['y0']: y0+th(t)))
         else:
-            n = s['face']; t1 = wrap(n-s['y0']); pan = pol['garden_pan_deg']
-            e = wrap(s['exit']-n) if s['exit'] is not None else 0.
-            wp = [0., t1, t1+pan, t1-pan, t1, t1+e]; hd = [0., 0., .8, .8, 0., 0.]
-            T, th = programme(wp, hd, [pol['turn_rate_deg_s'], pol['garden_pan_rate_deg_s'], pol['garden_pan_rate_deg_s'], pol['garden_pan_rate_deg_s'], pol['turn_rate_deg_s']], pol['turn_accel_deg_s2'])
+            # one sweep across the glass width (the view centre from the glass's right edge to its left edge, so the frame always shows glass), a short hold at each end; no back-and-forth
+            n = s['face']; lo, hi = pan_range(s['garden'], pol)
+            t1 = wrap(n+lo-s['y0']); span = hi-lo; e = wrap(s['exit']-(n+hi)) if s['exit'] is not None else 0.
+            hold = pol['garden_pan_hold_s']
+            T, th = programme([0., t1, t1+span, t1+span+e], [0., hold, hold, 0.], [pol['turn_rate_deg_s'], pol['garden_pan_rate_deg_s'], pol['turn_rate_deg_s']], pol['turn_accel_deg_s2'])
             s.update(T=T, yawfn=(lambda t, th=th, y0=s['y0']: y0+th(t)))
 
     fps = pol['fps']; frames = []; cur = None
@@ -570,7 +608,28 @@ def plan_tour(vm, route=None, pol=None, aim=None):
                   distance_m=float(sum(s['leg']['length'] for s in legs if s['kind'] == 'walk')),
                   duration_s=len(out)/fps, stations=stations, route='tour',
                   room_points={k: v for k, v in pts.items()})
+    if doors:
+        attach_doors(record)
     record['sha256'] = digest(record)
+    return record
+
+
+def tour_doors():
+    f = ROOT/'knowledge/flythrough/tour-doors.json'
+    return json.loads(f.read_text()) if f.is_file() else None
+
+
+def attach_doors(record):
+    """Animate the door leaves in knowledge/flythrough/tour-doors.json (scripts/wt_doors.py schedule): path['door_anim'] and per-frame frame['doors'].
+    The schedule is bound to the camera frames it was planned on; a changed camera path makes it stale and raises, so a leaf can never close on a frame it was not planned for."""
+    from . import door_anim
+    spec = tour_doors()
+    if not spec or not spec['doors']:
+        return record
+    if digest([f['camera'] for f in record['frames']]) != spec['camera_sha256']:
+        raise ValueError('knowledge/flythrough/tour-doors.json was planned on a different camera path: rerun scripts/wt_doors.py schedule')
+    door_anim.attach(record, [d['record'] for d in spec['doors']], {d['record']['element']: d['schedule'] for d in spec['doors']})
+    record['settings']['door_leaf_clearance_m'] = spec['clearance_m']
     return record
 
 

@@ -394,7 +394,10 @@ def workbench(args,path,scene,context):
         jpg=out/f'frame-{index:05d}.jpg'
         need_image=not args.metrics_only and not jpg.exists() and not args.animation
         if index in rows and not need_image:continue
-        place_camera(camera,views[index]['camera']);bpy.context.view_layer.update()
+        place_camera(camera,views[index]['camera'])
+        if not args.animation:
+            for rec,objs in door_objects(path,context):pose_door(rec,objs,path['frames'][index].get('doors',{}).get(rec['element'],1.))
+        bpy.context.view_layer.update()
         t0=time.monotonic()
         if index not in rows:
             depth,pts,nor,ok=depth_samples(camera,rule['grid'])
@@ -425,6 +428,7 @@ def workbench(args,path,scene,context):
                 camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
             for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
                 for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+            key_doors(path,door_objects(path,context),todo)
             run=todo[0];first=todo[0]
             s.frame_start=min(todo);s.frame_end=max(todo);s.frame_step=1
             s.render.filepath=str(out/'frame-#####');t2=time.monotonic()
@@ -441,6 +445,40 @@ def workbench(args,path,scene,context):
             print('WALKTHROUGH animation',len(todo),'frames',round(time.monotonic()-t2,1),'s',flush=True)
     save(metrics_file,[rows[k] for k in sorted(rows)])
     print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
+
+
+def door_objects(path,context):
+    """[(record, [leaf object, handle object])] of the path's animated door leaves; the leaf and its split-off handle turn together about the hinge.
+    The leaf is never hidden or removed: only its transform is keyframed."""
+    out=[]
+    for rec in path.get('door_anim',[]):
+        objs=[context['objects'][rec['leaf_id']]]
+        handle=context['objects'].get('door-handle-'+rec['element'])
+        if handle is not None:objs.append(handle)
+        for o in objs:
+            if o.hide_render or o.hide_viewport:raise ValueError('animated door part is hidden: '+o.name)
+        out.append((rec,objs))
+    return out
+
+
+def pose_door(rec,objs,state):
+    """Turn the leaf (built in its open pose) about the hinge: angle = -signed_open*(1-state), so state 1 is open as built and 0 is closed as authored."""
+    psi=-math.radians(rec['signed_open_deg'])*(1.-state);c,sn=math.cos(psi),math.sin(psi);hx,hy=rec['hinge']
+    for o in objs:
+        o.rotation_mode='XYZ';o.rotation_euler=(0.,0.,psi);o.location=(hx-(hx*c-hy*sn),hy-(hx*sn+hy*c),0.)
+
+
+def key_doors(path,doors,indices):
+    for i in indices:
+        for rec,objs in doors:
+            pose_door(rec,objs,path['frames'][i].get('doors',{}).get(rec['element'],1.))
+            for o in objs:
+                for prop in ('location','rotation_euler'):o.keyframe_insert(prop,frame=i)
+    for rec,objs in doors:
+        for o in objs:
+            if o.animation_data and o.animation_data.action:
+                for fc in o.animation_data.action.fcurves:
+                    for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
 
 
 def lookdev(args,path,scene,context):
@@ -474,6 +512,7 @@ def lookdev(args,path,scene,context):
     fcs=list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves)+list(s.animation_data.action.fcurves)
     for fc in fcs:
         for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+    key_doors(path,door_objects(path,context),todo)      # animated door leaves: pose per rendered frame
     runs=[];a=b=todo[0];step=None
     for i in todo[1:]:
         if step is None and i>b:step=i-b

@@ -107,7 +107,7 @@ def analyse_frames(geom, frames, settings, rooms, th, subjects=None, progress=No
         f = frames[fi]; c = f['camera']; pos = np.array(c['position']); tgt = np.array(c['target'])
         D = ray_dirs(pos, tgt, cols, rows, c['lens_mm'], c['sensor_mm'], asp, (c.get('shift_x', 0.), c.get('shift_y', 0.)))
         O = np.repeat(pos[None], len(D), 0)
-        dist, tri, gdist, _ = geom.cast(O, D)
+        dist, tri, gdist, _ = geom.cast(O, D, doors=f.get('doors'))
         hit = tri >= 0
         e = geom.tri_elem(tri); g = np.where(hit, geom.grp[np.maximum(tri, 0)], -1)
         garden = f['segment'] != 'interior'
@@ -157,7 +157,7 @@ def analyse_frames(geom, frames, settings, rooms, th, subjects=None, progress=No
             if not infr.any():
                 continue
             ss['in_frustum'] += 1
-            od, ot, _, _ = geom.cast(np.repeat(pos[None], int(infr.sum()), 0), u[infr])
+            od, ot, _, _ = geom.cast(np.repeat(pos[None], int(infr.sum()), 0), u[infr], doors=f.get('doors'))
             te = geom.tri_elem(ot); ok = (od >= d[infr] - .05) | np.isin(te, s['elems'])
             frac = float(ok.mean())
             if frac >= .3:

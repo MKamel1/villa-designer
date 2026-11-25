@@ -64,7 +64,7 @@ def prepare(out,route='clip'):
         else:
             nodes,stations=FT.plan_villa_route(vm);path=FT.sample_villa_path(vm,nodes,stations)
         # interior door leaves swing open (rotated, never hidden); the report travels with the scene
-        scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'])
+        scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'],door_anim=path.get('door_anim'))
         save(out/'door-states.json',scene['door_states'])
     else:path=authored_path()
     save(out/'path.json',path)
