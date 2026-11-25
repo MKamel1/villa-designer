@@ -423,6 +423,21 @@ lanes:
     - knowledge/refmatch/**
     - docs/lanes/RM*.md
     - docs/lessons/RM.md
+  DF: # design fix: parents' bedroom passage to the dressing room (vanity chair pinch)
+    - src/archpipe/model/**
+    - tests/model/**
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/blender/**
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - knowledge/render-set/**
+    - knowledge/*.json.gz
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - tests/test_mounting*.py
+    - docs/lanes/DF*.md
+    - docs/lessons/DF.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
