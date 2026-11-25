@@ -71,14 +71,28 @@ class G1Geometry(unittest.TestCase):
         with self.assertRaises(ValueError):
             G1.bar_guard(g, box_faces, "m", "x")
 
+    def refitted_infill_spec(self):
+        """The infill refitted (client veto of 2026-11-25 is reversible): same flight with straight(infill=True)."""
+        from archpipe.concept import stairs as S
+        f = S.party_flight_r8()
+        fit = S.straight(3977 + 1200, 3977 + 1200 + 16 * 280, f["pitch_line"]["y0"], f["pitch_line"]["y1"], 17,
+                         "refit", overlap=S.NOSING_OVERLAP, infill=True)
+        return dict(self.sp, stair_infill=[p["box"] for p in fit["infill"]["bars"]],
+                    stair_infill_spec={k: v for k, v in fit["infill"].items() if k != "bars"})
+
+    def test_waived_spec_has_no_infill_part(self):
+        self.assertEqual(self.sp["stair_infill"], [])
+        self.assertIsNone(G1.riser_infill(self.sp, box_faces, -28.396, -27.536))
+
     def test_riser_infill_one_bar_per_gap_between_the_steel(self):
-        part = G1.riser_infill(self.sp, box_faces, -28.396, -27.536)
-        self.assertEqual(len(part.faces) // 6, self.sp["stair_infill_spec"]["count"])
+        sp = self.refitted_infill_spec()
+        part = G1.riser_infill(sp, box_faces, -28.396, -27.536)
+        self.assertEqual(len(part.faces) // 6, sp["stair_infill_spec"]["count"])
         lo, hi = bounds(part.faces)
         self.assertAlmostEqual(lo[1], -28.396); self.assertAlmostEqual(hi[1], -27.536)
         self.assertEqual(part.element_ids, ["stair-main"])
         # the slot left at the tread edge stays under the 100 mm sphere
-        tread_edge = max(b[4] for b in self.sp["stair"]) / 1000
+        tread_edge = max(b[4] for b in sp["stair"]) / 1000
         self.assertLess(tread_edge - hi[1], 0.100)
 
     def test_riser_infill_none_without_spec_infill(self):

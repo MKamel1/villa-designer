@@ -36,6 +36,17 @@ INFILL_BAR_H = 40                             # flat bar on edge, mm (steel 40 x
 INFILL_BAR_T = 10
 
 
+# Client veto 2026-11-25 (docs/decisions/client-changes-2026-11-25.md, item 4) of the G1 infill above: the bars are removed
+# (straight(infill=False)); the 16 mm overlap and every guard stay. Recorded as a waiver, never suppressed: LS2 keeps failing.
+INFILL_WAIVER = {
+    "date": "2026-11-25", "by": "client", "criterion": "LS2", "card": "ukadk-open-risers-dwelling",
+    "supersedes": "G1 2026-11-21 LS2 riser infill (flat bars)", "required_mm": 100.0,
+    "consequence": ("the gap between treads returns to the full open gap and a 100 mm sphere passes it: a child under about 5 "
+                    "can get a foot, leg or head through. The stair is no longer best practice on this item."),
+    "reversible": "the infill bar can be refitted (stairs.straight(infill=True)) if small children use the house",
+}
+
+
 def straight(x_top, x_foot, y0, y1, risers, name, overlap=0, infill=False):
     """A straight flight rising from the basement foot (x_foot) to the GF (x_top); goings are equal. Headroom is
     measured from the PITCH LINE (the line through the nosings, AD K Diagram 1.3), not from the tread tops: over a
@@ -188,7 +199,8 @@ def party_flight_r8():
     tread_setback = 250
     y0 = outer_face + tread_setback
     result = straight(3977 + 1200, 3977 + 1200 + 16 * 280, y0, y0 + 950, 17,
-                      "party-wall flight (r8, landing 1.2 m)", overlap=NOSING_OVERLAP, infill=True)
+                      "party-wall flight (r8, landing 1.2 m)", overlap=NOSING_OVERLAP, infill=False)
+    result["infill_waiver"] = INFILL_WAIVER
     result["wall_datum"] = dict(outer_face_mm=outer_face, tread_setback_mm=tread_setback,
                                 basis="villa_env.BAR measured CAD outer face; existing 250 mm beam clearance")
     return result
