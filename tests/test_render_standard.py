@@ -783,7 +783,7 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual(bath["rot"], 0)  # local rear rim faces its wall
         parts = FD.world_parts(bath, 0)
         self.assertIn("tap", parts)
-        self.assertTrue(any(m["id"].startswith("furn-pe-bath-") and m["material"] == "brass"
+        self.assertTrue(any(m["id"].startswith("furn-pe-bath-") and m["material"] == "brass-ensuite"
                             for m in SCENE["meshes"]))
         for item in items.values():
             if item["type"].startswith("sofa") or item["type"] in ("armchair", "recliner"):

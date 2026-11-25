@@ -1692,6 +1692,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 mount = (x, wall[3] - .02)
             else:
                 mount = (x, wall[1] + .02)
+                if fitting["room"] == "parents-ensuite" and abs(x - pcx) <= bp["width"] / 2 and lz + bp["z0"] <= z <= lz + bp["z1"]:
+                    # the riser rail now stands on the feature panel's face, not on the bare wall layer behind it (a bracket that ended
+                    # inside the panel read as an unsupported fitting in the mounting solver, 2026-11-24)
+                    mount = (x, ens[1] + bp["wall_finish"] + bp["thick"])
             mesh(fid + "-rail", "brass", round_tube((x, rail_y, z - .35), (x, rail_y, z + .45), .012),
                  "fixture", room=fitting["room"], label="ASSUMED 800 mm closed brass riser rail", kind="riser-rail")
             for suffix, zz in (("lower", z - .31), ("upper", z + .41)):
