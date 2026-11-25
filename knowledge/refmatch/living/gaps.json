@@ -1,0 +1,99 @@
+{
+ "schema": 1,
+ "room": "living",
+ "references": [
+  {
+   "id": "image16",
+   "why": "walnut plank TV wall, tray ceiling, walnut credenza"
+  },
+  {
+   "id": "image17",
+   "why": "reclaimed plank wall with grazing downlights"
+  },
+  {
+   "id": "image19",
+   "why": "backlit console niche, perimeter cove, clear-glass globe cluster, dark slat strip beside glazing"
+  },
+  {
+   "id": "image21",
+   "why": "large-format beige-grey marble wall panels with grazing downlights, polished marble floor"
+  },
+  {
+   "id": "image22",
+   "why": "grey stone-look panels, walnut shelving with shelf LED, cove above"
+  },
+  {
+   "id": "image36",
+   "why": "beige stone wall behind TV, walnut shelving with shelf LED, opal globe lamps"
+  },
+  {
+   "id": "image37",
+   "why": "stacked slate wall, cove, linear floor strip"
+  },
+  {
+   "id": "image32",
+   "why": "cross-room (media): book-matched beige marble TV wall, backlit shelves, fluted walnut"
+  },
+  {
+   "id": "image33",
+   "why": "cross-room (media): grey marble TV wall flanked by backlit shelves"
+  }
+ ],
+ "gaps": [
+  {
+   "id": "L-G1",
+   "rank": 1,
+   "feature": "Full-height stone feature wall behind the TV / seating (large-format, veined, taupe-beige-grey), flanked by timber",
+   "refs_showing_it": [
+    "image21",
+    "image36",
+    "image22",
+    "image37",
+    "image32",
+    "image33"
+   ],
+   "present_in_scene": "no: lounge TV wall is walnut flutes only; the garden-living library alcove (2.0 m wide, z -2.45..-0.95) is a bare painted panel inside a walnut frame",
+   "visual_weight": "high (largest single surface in each reference)"
+  },
+  {
+   "id": "L-G2",
+   "rank": 2,
+   "feature": "Light used as a feature: lit halo or reveal around the TV panel, glow under the floating console, grazing wash down the stone",
+   "refs_showing_it": [
+    "image19",
+    "image36",
+    "image22",
+    "image37",
+    "image32",
+    "image33"
+   ],
+   "present_in_scene": "partly: ceiling coves COVE-lounge-05/06 and COVE-living-01/02 are designed (L6), but nothing lights the TV wall, console or alcove",
+   "visual_weight": "high (sets the warm 2700 K evening mood in 6 of 9 references)"
+  },
+  {
+   "id": "L-G3",
+   "rank": 3,
+   "feature": "Clear- or opal-glass globe luminaires (cluster over the coffee table, floor/shelf globes)",
+   "refs_showing_it": [
+    "image19",
+    "image36"
+   ],
+   "present_in_scene": "no decorative luminaire in either living space; only recessed downlights and coves",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "L-G4",
+   "rank": 4,
+   "feature": "Dark, low, round or chamfered coffee table and cognac/rust accent cushions",
+   "refs_showing_it": [
+    "image19",
+    "image21",
+    "image22",
+    "image17"
+   ],
+   "present_in_scene": "partly: cushions follow the chosen palette C (dark brown, dark green, light brown); coffee tables are walnut rectangles",
+   "visual_weight": "low; not proposed (cushions are the client's own palette C choice)"
+  }
+ ],
+ "method": "references read by eye for concrete features, then counted; gaps are features most of the room's references share that the scene lacks"
+}

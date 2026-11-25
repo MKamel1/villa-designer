@@ -105,7 +105,7 @@ def media():
         {"id": "M-P1", "gap": "M-G1", "title": "Frappuccino marble-look panel behind the screen",
          "location": {"room": "cinema", "wall_or_zone": "east wall behind the screen (x = 9.18)", "rect_m": [-22.90, -20.65], "z_range_m": [-2.9, -1.1],
                       "basis": "design model: furn-cinema-tv screen y -22.69..-20.81, z -2.56..-1.50; cinema ceiling slopes 2.0-2.65 m under the ramp"},
-         "change": "A 2.25 m x 1.8 m panel of 120 x 120 cm tiles book-matched in a 2 x 2 grid... (tile grid shown in the mock-up as one surface).",
+         "change": "A 2.25 m wide x 1.8 m high panel cut from 120 x 120 cm tiles (two columns, two rows; the mock-up draws it as one surface, so tile joints are not shown).",
          "effect": "Dark Emperador-look wall of reference 35 using the stone the client already chose for the wet rooms.",
          "product": P.STONE_FRAPPUCCINO, "architecture_change": {"flag": False, "note": "applied finish over the fabric wall; acoustic fabric behind is lost on this panel (about 4 m2), lead to confirm with the cinema acoustics"}},
         {"id": "M-P2", "gap": "M-G4", "title": "Walnut slat flank on the north side of the screen wall",

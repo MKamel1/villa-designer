@@ -1,0 +1,167 @@
+{
+ "schema": 1,
+ "room": "living",
+ "concept": "see docs/lanes/RM.md",
+ "proposals": [
+  {
+   "id": "L-P1",
+   "gap": "L-G1",
+   "title": "Book-matched Tafu stone panel on the lounge TV wall, walnut flutes kept either side",
+   "location": {
+    "room": "lounge",
+    "wall_or_zone": "north wall behind the TV (y = -23.65)",
+    "rect_m": [
+     4.8,
+     7.2
+    ],
+    "z_range_m": [
+     -3.0,
+     -0.3
+    ],
+    "basis": "design model: detail-tv-fluting spans x 4.40-7.56; TV screen x 5.17-6.83; slab 120 x 278 cm vs 2.70 m storey height, two slabs = 2.40 m wide"
+   },
+   "change": "Replace the central 2.40 m of the walnut fluted wall with two 120 x 278 cm Tafu Lux slabs; keep 0.40 m of fluting each side (the ceiling and floor lines do not move).",
+   "effect": "Brings the stone-behind-TV of references 36, 21 and 33 into the room while keeping the walnut the client already has.",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "Tafu Lux RT",
+    "code": "MEP6",
+    "colour_or_finish": "Tafu, Lux (polished), rectified; taupe-grey marble look with white veining",
+    "format_mm": {
+     "w": 1200,
+     "l": 2780,
+     "t": 6.5
+    },
+    "maker_url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "maker_quote": "GRANDE MARBLE LOOK TAFU LUX RT Size: 120x278cm Code: MEP6 Technology: Colorbody fine porcelain stoneware Thickness: MM 6,5",
+    "colour_source": "maker swatch image grande-marble-look-mep6 (mean linear 0.406/0.338/0.269)",
+    "label": "look-alike-proxy",
+    "lookalike": "ambientCG Marble007 (CC0), colour-matched to the maker swatch",
+    "consistent_with": "Marazzi Mystone Gris Fleury Taupe floor chosen 2026-11-23 (same maker, taupe family)"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "applied finish only; 6.5 mm porcelain on the existing wall"
+   }
+  },
+  {
+   "id": "L-P2",
+   "gap": "L-G1",
+   "title": "Tafu stone panel in the garden-living library alcove",
+   "location": {
+    "room": "living",
+    "wall_or_zone": "back wall of the walnut-framed alcove (y = -29.72)",
+    "rect_m": [
+     18.7,
+     20.64
+    ],
+    "z_range_m": [
+     -2.45,
+     -0.95
+    ],
+    "basis": "design model: furn-library-daybed-0 frame x 18.67-20.67, cabinets top at z -0.90"
+   },
+   "change": "Line the blank back wall of the alcove with the same stone, 1.94 m x 1.50 m.",
+   "effect": "Replaces the blank grey-beige panel (current render) with the stone-plus-walnut pairing of reference 36.",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "Tafu Lux RT",
+    "code": "MEP6",
+    "colour_or_finish": "Tafu, Lux (polished), rectified; taupe-grey marble look with white veining",
+    "format_mm": {
+     "w": 1200,
+     "l": 2780,
+     "t": 6.5
+    },
+    "maker_url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "maker_quote": "GRANDE MARBLE LOOK TAFU LUX RT Size: 120x278cm Code: MEP6 Technology: Colorbody fine porcelain stoneware Thickness: MM 6,5",
+    "colour_source": "maker swatch image grande-marble-look-mep6 (mean linear 0.406/0.338/0.269)",
+    "label": "look-alike-proxy",
+    "lookalike": "ambientCG Marble007 (CC0), colour-matched to the maker swatch",
+    "consistent_with": "Marazzi Mystone Gris Fleury Taupe floor chosen 2026-11-23 (same maker, taupe family)"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "applied finish only"
+   }
+  },
+  {
+   "id": "L-P3",
+   "gap": "L-G2",
+   "title": "Lighting ask: halo, toe glow and stone wash on the lounge TV wall; edge glow and wash in the alcove",
+   "location": {
+    "room": "lounge",
+    "wall_or_zone": "TV wall: 25 mm reveal around the screen (x 5.10-6.90, z -2.46..-1.34), under the console (x 5.0-7.0, z -2.92), wash from the ceiling line (z -0.33); alcove: edge strips x 18.70 and 20.64, wash at z -0.97",
+    "basis": "design model: furn-lounge-tv screen x 5.17-6.83, console x 5.0-7.0, floor z -3.0"
+   },
+   "lighting_ask": {
+    "effect": "2700 K, dimmable with the ambient layer: (a) a soft halo around the TV panel, no hot spot on the screen; (b) a continuous toe glow under the floating console; (c) a grazing wash down the stone from the ceiling line so the veining reads; (d) 20 mm edge glow either side of the alcove stone with a wash across it. Mock-up used about 250, 120 and 700 lm per metre-run as placeholders only.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Lighting only; the stone is not translucent porcelain, so the glow is a reveal and wash, not light through the stone.",
+   "effect": "The lit-edge look of references 19, 22, 36 and 37.",
+   "architecture_change": {
+    "flag": true,
+    "note": "needs a 25 mm reveal at the TV panel edge and a ceiling-line slot; small joinery change, lead to approve"
+   }
+  },
+  {
+   "id": "L-P4",
+   "gap": "L-G3",
+   "title": "Clear blown-glass globe cluster over the garden-living coffee table",
+   "location": {
+    "room": "living",
+    "wall_or_zone": "ceiling over the coffee table, centre (20.35, -26.0), globes 0.8-1.35 m below the ceiling",
+    "rect_m": [
+     20.0,
+     20.7
+    ],
+    "z_range_m": [
+     -1.5,
+     -0.27
+    ],
+    "basis": "design model: furn-living-coffee x 19.8-20.9, y -26.23..-25.77; ceiling z -0.27"
+   },
+   "product": {
+    "maker": "Bocci",
+    "range": "28 Series (cluster)",
+    "name": "28.19 Cluster, Clear",
+    "code": "28.19",
+    "colour_or_finish": "Clear hand-blown glass",
+    "maker_url": "https://bocci.com/shop/products/28-19-cluster/",
+    "maker_quote": "28.19 is composed of 19 hand-blown glass pendants that attach using a connector to a single cluster canopy. Colour Options Clear",
+    "colour_source": "maker product page, Colour Options: Clear",
+    "label": "look-alike-proxy",
+    "lookalike": "clear glass globes with an emissive core; number of globes in the mock-up (5) is NOT the maker's 19",
+    "note": "the maker also sells the series as single pendants and a configurator for custom installations; confirm a 5-globe canopy with Bocci",
+    "consistent_with": "clear blown-glass globe clusters in references 19, 28 and 31"
+   },
+   "lighting_ask": {
+    "effect": "Five dimmable 2700 K globes at staggered heights, on the ambient circuit; the downlights DL-living-03/04 stay.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Add a decorative pendant cluster; no structure needed beyond a canopy fixing in the slab.",
+   "effect": "The globe cluster of reference 19.",
+   "architecture_change": {
+    "flag": false,
+    "note": "ceiling fixing only"
+   }
+  }
+ ],
+ "mockup": {
+  "scene": "COPY of the render-set scene.json built by scripts/refmatch_build.py; production scene and design model untouched",
+  "exposure": "frozen exposure groups dropped (stale for any geometry change); current and mock-up both use per-state set-metered exposure",
+  "renders": [
+   "mock_v03-street-lounge.jpg",
+   "mock_v02-garden-living.jpg",
+   "cur_v03-street-lounge.jpg",
+   "cur_v02-garden-living.jpg"
+  ]
+ }
+}

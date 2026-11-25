@@ -10,7 +10,7 @@ RM = ROOT / "knowledge" / "refmatch"
 ROOMS = ("living", "media", "bedroom", "dining")
 IMG = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff"}
 PRICE_KEYS = re.compile(r"price|cost|eur|usd|gbp|egp|aed|currency|\bvat\b", re.I)
-PRICE_TEXT = re.compile(r"[$€£]\s?\d|\b\d[\d,.]*\s?(EGP|USD|EUR|GBP|AED|kr)\b", re.I)
+PRICE_TEXT = re.compile(r"[$€£]\s?\d|\b(EGP|USD|EUR|GBP|AED)\s?\d|\b\d[\d,.]*\s?(EGP|USD|EUR|GBP|AED|kr)\b", re.I)
 
 
 def _rooms():
@@ -80,6 +80,19 @@ class ProductSourcing(unittest.TestCase):
                 self.assertIsNone(PRICE_KEYS.search(str(k)), f"{f.name}: key {k}")
                 if isinstance(v, str):
                     self.assertIsNone(PRICE_TEXT.search(v), f"{f.name}: {v[:60]}")
+
+
+class NegativeControls(unittest.TestCase):
+    """The guards must fail on a real violation, not just stay quiet on clean data."""
+
+    def test_price_patterns_catch_prices(self):
+        for bad in ("costs EUR 120", "$1,025 USD", "£439.00", "1.200 EGP", "749,00 kr"):
+            self.assertTrue(PRICE_TEXT.search(bad), bad)
+        self.assertTrue(PRICE_KEYS.search("unit_price"))
+        self.assertIsNone(PRICE_TEXT.search("120 x 278 cm, 6.5 mm, code MEP6"))
+
+    def test_walk_reaches_nested_keys(self):
+        self.assertIn("price", [k for k, _ in _walk({"a": [{"b": {"price": 1}}]})])
 
 
 class NoReferenceImages(unittest.TestCase):
