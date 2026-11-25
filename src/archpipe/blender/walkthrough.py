@@ -183,6 +183,7 @@ def measure(args,path,scene,context):
     views=frame_views(path,scene);villa=is_villa_path(path)
     segments=sorted({group_of(f) for f in path['frames']})
     if args.segments:segments=[s for s in segments if s in args.segments.split(',')]
+    bpy.context.scene.render.use_persistent_data=False      # metering renders at 1920x1080 with a changed scene each frame: kept data held 9.1 GB (measured) and pushed the peak past the 14 GB left beside the RAG service; same pixels
     every=path['settings'].get('interior_preview_every_nth_frame_for_exposure',1) if villa else 1
     for segment in segments:
         indices=[f['index'] for f in path['frames'] if group_of(f)==segment]
