@@ -211,6 +211,11 @@ def refine(scene='out/wt/villa4/scene.json', max_iter=24):
         for k, a in enumerate(K):
             st = fr[k*stride]['station']; new_by[st] += len(a-seen)*AREA; seen |= a
         short = [r for r, v in C.room_report(seen).items() if v['share'] is not None and v['share'] < MIN_ROOM_SHARE]
+        elems = lambda keys: {int(k) for k in np.unique(np.array(sorted(keys), np.int64)//(4096*4096*64))} if keys else set()
+        movable = np.array([i for i, n in enumerate(C.geom.elem_names) if n.startswith(('furn-', 'fixture-'))])       # furniture and sanitary fixtures (not the small luminaires): each one seen in the unpruned route stays seen
+        now = elems(seen) & {int(e) for e in movable}
+        if it == 0: full_feats = set(now)
+        short += ['feature:'+C.geom.elem_names[e] for e in sorted(full_feats-now)]
         if last and short and not set(short) <= last['short_before']:       # the last drop left a room under-covered: put it back and keep that stop
             route['stations'].insert(last['at'], last['entry']); protected.add(last['id']); dropped.pop()
             (ROOT/'knowledge/flythrough/villa-tour.json').write_text(json.dumps(route, indent=1)); print('restore', last['id'], 'rooms short', short, flush=True); last = None; continue

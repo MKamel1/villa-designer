@@ -120,9 +120,6 @@
    "space": "study-game"
   },
   {
-   "space": "study-game~a3"
-  },
-  {
    "space": "corridor~a1"
   },
   {
@@ -135,6 +132,9 @@
    "space": "kids-a~a2"
   },
   {
+   "space": "kids-a"
+  },
+  {
    "space": "corridor~a2"
   },
   {
@@ -142,6 +142,9 @@
   },
   {
    "space": "parents-bed~a2"
+  },
+  {
+   "space": "parents-bed"
   },
   {
    "space": "parents-ensuite~a2"
