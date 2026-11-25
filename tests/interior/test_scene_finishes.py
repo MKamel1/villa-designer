@@ -130,10 +130,11 @@ class EnsuiteFeature(unittest.TestCase):
         self.assertEqual((m["material"], m["room"]), ("marble-bath-panel", "parents-ensuite"))
         self.assertAlmostEqual(lo[2], 0.55, places=3)
         self.assertAlmostEqual(hi[2], 2.40, places=3)
-        self.assertAlmostEqual(lo[1], -31.111 + 0.023, places=3)          # on the face of the 23 mm marble wall layer
+        self.assertAlmostEqual(lo[1], -31.111, places=3)                  # stands on the shell wall (supported in the unfinished baseline too)
+        self.assertAlmostEqual(hi[1], -31.111 + 0.023 + 0.012, places=3)  # its face is 12 mm proud of the 23 mm marble wall layer
         walls = [w for w in sc["meshes"] if w["id"].startswith("finish-layer") and w["material"] == "marble-bath" and w.get("room") == "parents-ensuite"]
         faces_y = [bbox(w)[1][1] for w in walls if bbox(w)[0][0] < 20.7 < bbox(w)[1][0] and bbox(w)[1][1] < -31.0]
-        self.assertTrue(faces_y and lo[1] >= max(faces_y) - 1e-6, "the panel is buried in the wall finish (the first render's defect)")
+        self.assertTrue(faces_y and hi[1] >= max(faces_y) + 0.011, "the panel face is buried in the wall finish (the first render's defect)")
         self.assertAlmostEqual(hi[0] - lo[0], 1.50, places=3)
 
     def test_dark_walls_are_kept_floor_is_light_and_shower_floor_is_still_slip_rated(self):

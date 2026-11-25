@@ -1654,9 +1654,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     bb = F.footprint(bath)
     pcx, lz = (bb[0] + bb[2]) / 2, LZ[bath["level"]]
     mesh("detail-bath-feature-panel", "marble-bath-panel",
-         box_faces(pcx - bp["width"] / 2, ens[1] + bp["wall_finish"], lz + bp["z0"], pcx + bp["width"] / 2,
-                   ens[1] + bp["wall_finish"] + bp["thick"], lz + bp["z1"]),
-         "fixture", room="parents-ensuite", label="client 2026-11-24 light-marble feature panel behind the bath, %.0f mm thick" % (bp["thick"] * 1000),
+         box_faces(pcx - bp["width"] / 2, ens[1], lz + bp["z0"], pcx + bp["width"] / 2,
+                   ens[1] + bp["wall_finish"] + bp["thick"], lz + bp["z1"]),     # from the shell wall: it replaces the 23 mm marble layer there
+         "shell", room="parents-ensuite", label="client 2026-11-24 light-marble feature panel behind the bath, %.0f mm slab on the wall (%.0f mm with its bed)" % (bp["thick"] * 1000, (bp["thick"] + bp["wall_finish"]) * 1000),
          kind="finish-layer", element_ids=["furn-pe-bath"])
 
     for fitting in sp["bath_fittings"]:
