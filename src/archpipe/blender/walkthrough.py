@@ -463,9 +463,10 @@ def door_objects(path,context):
 
 def pose_door(rec,objs,state):
     """Turn the leaf (built in its open pose) about the hinge: angle = -signed_open*(1-state), so state 1 is open as built and 0 is closed as authored."""
-    psi=-math.radians(rec['signed_open_deg'])*(1.-state);c,sn=math.cos(psi),math.sin(psi);hx,hy=rec['hinge']
+    from archpipe.door_anim import pivot_transform
+    psi,(tx,ty)=pivot_transform(rec,state)
     for o in objs:
-        o.rotation_mode='XYZ';o.rotation_euler=(0.,0.,psi);o.location=(hx-(hx*c-hy*sn),hy-(hx*sn+hy*c),0.)
+        o.rotation_mode='XYZ';o.rotation_euler=(0.,0.,psi);o.location=(tx,ty,0.)
 
 
 def key_doors(path,doors,indices):

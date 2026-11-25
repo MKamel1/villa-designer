@@ -74,17 +74,18 @@ def main(scene='out/wt/villa4/scene.json'):
                 y = math.radians(yaw); p = P[i]
                 views.append((p, p+np.array([math.cos(y), math.sin(y), 0.]), fr[i]['camera']['lens_mm']))
         bad, med = classify_views(geom, surface, th, views); bad = bad.reshape(len(idx), len(offs)); med = med.reshape(len(idx), len(offs))
-        axis = np.zeros((len(idx), len(offs)))
+        axis = np.zeros((len(idx), len(offs))); cu = np.zeros((len(idx), len(offs)), bool)
         for k, i in enumerate(idx):
             for m, o in enumerate(offs):
-                if closeup(boxes, P[i], fr[i]['yaw_deg']+o, fr[i]['camera']['lens_mm'], pol['closeup_m']): bad[k, m] = True
+                if closeup(boxes, P[i], fr[i]['yaw_deg']+o, fr[i]['camera']['lens_mm'], pol['closeup_m']): bad[k, m] = True; cu[k, m] = True
             room = fr[i]['room']
             if room in pol.get('corridor_rooms', ()):
                 r = vm.rooms[fr[i]['level']][room]['rect']; ends = (0., 180.) if (r[2]-r[0]) >= (r[3]-r[1]) else (90., 270.)
                 near = [e for e in ends if abs(WT.wrap(e-travs[k])) <= 75.]     # only an end the camera is travelling toward (never turn back on the way: that is 'backward')
                 if near: axis[k] = [min(abs(WT.wrap(fr[i]['yaw_deg']+o-e)) for e in near) for o in offs]      # degrees off the corridor's length
         cost = bad*1. + PREFER*np.abs(offs)[None] + CORRIDOR*axis; cost = np.where(ok, cost, 1e6); zero = int(np.where(offs == 0)[0][0])
-        cost[0, :] = np.where(np.arange(len(offs)) == zero, cost[0, zero], 1e6)
+        if not cu[0, zero]:      # the leg leaves the 360 on offset 0, unless the stop itself stands within the close-up distance of a curtain stack or column: then the first heading is free
+            cost[0, :] = np.where(np.arange(len(offs)) == zero, cost[0, zero], 1e6)
         best = np.full(cost.shape, np.inf); back = np.zeros(cost.shape, int); best[0] = cost[0]
         for k in range(1, len(idx)):
             for m in range(len(offs)):

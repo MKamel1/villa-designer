@@ -74,3 +74,10 @@ def clearance_findings(path, clearance_m, margin_frames=0):
             if d < clearance_m:
                 out.append((f['index'], el, round(float(d), 3)))
     return out
+
+
+def pivot_transform(rec, state):
+    """Object transform that turns a leaf built in its OPEN pose to `state` about the hinge: (rotation about z in radians, (x, y) translation).
+    A vertex v goes to R v + t. state 1 is the identity, state 0 maps the open leaf back onto the closed leaf as authored (Blender's pose_door uses this)."""
+    psi = -math.radians(rec['signed_open_deg'])*(1.-state); c, s = math.cos(psi), math.sin(psi); hx, hy = rec['hinge']
+    return psi, (hx-(hx*c-hy*s), hy-(hx*s+hy*c))

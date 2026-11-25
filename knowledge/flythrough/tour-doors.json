@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "d3ff4e49c0ab1fddcf0d7aebd2a19316b88271ab6bd70ee4cce9e2f3b6410c6a",
+"camera_sha256": "035f3e4e1a95e0bf852b51c1efbf25e4233204e06dc4354deac49d56b71d63a9",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -157,10 +157,10 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 6710,
-"close_end": 6758,
-"open_start": 6822,
-"open_end": 6870
+"close_start": 6792,
+"close_end": 6840,
+"open_start": 6904,
+"open_end": 6952
 },
 "features": [
 "furn-fb-wc"
@@ -312,10 +312,10 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(22.049999999999997), np.float64(-28.881)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 8706,
-"close_end": 8754,
-"open_start": 8882,
-"open_end": 8930
+"close_start": 8800,
+"close_end": 8848,
+"open_start": 8976,
+"open_end": 9024
 },
 "features": [
 "furn-pd-hang-2"
@@ -328,8 +328,8 @@
 "scheduled": false,
 "reason": "no swing side clears the camera in every frame of the animation",
 "blocked_frames": [
-8808,
-8838
+8902,
+8932
 ]
 },
 {
@@ -339,18 +339,18 @@
 "furn-fb-wc"
 ],
 "blocked_frames": [
-6758,
-6810
+6840,
+6892
 ],
 "schedule": {
-"close_start": 6710,
-"close_end": 6758,
-"open_start": 6822,
-"open_end": 6870
+"close_start": 6792,
+"close_end": 6840,
+"open_start": 6904,
+"open_end": 6952
 },
 "delay_frames": 0,
 "hold_after_last_blocked_frame_s": 2.5,
-"leave_frame": 7008,
+"leave_frame": 7090,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },
@@ -359,8 +359,8 @@
 "scheduled": false,
 "reason": "no swing side clears the camera in every frame of the animation",
 "blocked_frames": [
-7464,
-7476
+7546,
+7558
 ]
 },
 {
@@ -370,18 +370,18 @@
 "furn-pd-hang-2"
 ],
 "blocked_frames": [
-8754,
-8924
+8848,
+9018
 ],
 "schedule": {
-"close_start": 8706,
-"close_end": 8754,
-"open_start": 8882,
-"open_end": 8930
+"close_start": 8800,
+"close_end": 8848,
+"open_start": 8976,
+"open_end": 9024
 },
 "delay_frames": 0,
 "hold_after_last_blocked_frame_s": 0.25,
-"leave_frame": 8930,
+"leave_frame": 9024,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 }
