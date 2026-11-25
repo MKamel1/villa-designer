@@ -35,3 +35,10 @@ The client watched the first whole-villa preview (lane WT, out/wt/villa3/preview
 * **Exposure groups** (revision-1 contact sheets: store-ramp and cinema near-black for 25 s, garden pans blown out): each frame carries an `exposure_group` (`interior`, `dark-<room>` for the six rooms the audit finds without glazing visible, `pan-<garden>`), each group has its own measured lock (camera meter on at least six frames of the group, the registered rule-3 classification of the metered sources gives its group and white balance),
   and exposure and white balance between groups move with a 1.25 s moving average (keyframed per frame, no cut). The render-set stills' own groups for the same rooms (cinema `evening`, store-ramp `lamp-low-key`, ensuite `lamp-low-key`) are listed in the report next to the groups the walkthrough meter measured.
 * **Not done (stated):** the "exempt the flight from the one-plane clause" candidate fix concerned my own depth-grid rule; the audit (not mine) has no plane clause and judges the flight frames itself, so nothing was exempted. Garden pans were not shortened separately: the audit calls no pan frame wall-dominated (pans are outside the interior categories).
+
+## Client feedback on version 2 (2026-11-24): too much redundancy
+"the walkthrough has many redundancy of the 360, it covers everything but it is redundant."
+- The design-model "rooms" inside one open space (entry-b, dining, dining-side, kitchen, kitchen-island, living, lounge and so on) each got their own 360, so the same views repeat.
+- **Rule from now on:** one 360 per VISUALLY CONNECTED SPACE, not per model room, placed where it shows the most. Smaller sub-areas get a short look or a partial arc only if they show something not yet seen.
+- **Coverage drives the route.** Use the geometric audit's per-surface coverage. A turn, arc or hold must add new coverage (a stated minimum share of the space's surfaces and features not seen before); otherwise shorten or drop it. Report the redundancy before → after (seconds spent on already-seen surfaces).
+- Keep everything covered (every room, both floors, the stair, the gardens), with 16 mm in the small rooms.

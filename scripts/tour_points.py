@@ -47,6 +47,8 @@ def main(scene='out/wt/villa4/scene.json'):
     th = core.thresholds(); route = WT.tour_route(); wide = WT.lens_rooms(); bounds = route.get('point_bounds', {}); skip = set(route.get('proxy_points', {}))
     layout, spec, vm = vmap(); rooms = audit.design_rooms()
     geom = audit.geometry_for(scene, ROOT/'out/flyaudit'); et = core.element_table(geom)
+    from archpipe.concept.render_views import standing_point_clear
+    standing = {lv: vm.F._walls(vm.spec, lv)+vm.F._columns() for lv in FT.LEVEL_Z}
     surface = np.array([core.feature_kind(n, g) is not None for n, g in zip(geom.elem_names, et['grp'])])
     cur = {k: v['point'] for k, v in json.loads((ROOT/'out/wt/villa4/plan-only.json').read_text())['room_points'].items() if v.get('point')}
     yaws = np.arange(N_YAW)*2*math.pi/N_YAW; out = {}
@@ -55,12 +57,15 @@ def main(scene='out/wt/villa4/scene.json'):
         lv = r['level']; free = vm.free(lv); x0, y0, x1, y1 = r['rect']; z = FT.LEVEL_Z[lv]+PITCH; lens = 16. if room in wide else 24.
         b = bounds.get(room)
         cells = [vm.xy(i, j) for i in range(0, vm.nx, 2) for j in range(0, vm.ny, 2) if free[i, j]
+                 and standing_point_clear(layout, spec, room, vm.xy(i, j)[0], vm.xy(i, j)[1], vm.pieces[lv], standing[lv])
                  and x0 < vm.xy(i, j)[0] < x1 and y0 < vm.xy(i, j)[1] < y1 and (not b or (b[0] < vm.xy(i, j)[0] < b[2] and b[1] < vm.xy(i, j)[1] < b[3]))]
         if room in cur:
             def reach(c):
                 try: vm.astar(lv, tuple(cur[room]), tuple(c)); return True
                 except ValueError: return False
-            cells = [c for c in cells if reach(c)]; cells.append(tuple(cur[room]))      # the planner must be able to walk there
+            cells = [c for c in cells if reach(c)]      # the planner must be able to walk there
+            c0 = tuple(cur[room])
+            if standing_point_clear(layout, spec, room, c0[0], c0[1], vm.pieces[lv], standing[lv]): cells.append(c0)      # the current point only if the standing policy still admits it
         best = None; table = []
         for c in cells:
             bad, med = frame_bad(geom, surface, th, np.array([c[0], c[1], z]), yaws, lens)
@@ -68,7 +73,7 @@ def main(scene='out/wt/villa4/scene.json'):
         table.sort(key=lambda t: (round(t[0], 2), t[1]))
         now = next((t for t in table if tuple(t[2]) == tuple(cur.get(room, ())) ), None)
         yaw_table = [[round(math.degrees(y)), bool(b), round(float(m), 2)] for y, b, m in zip(yaws, table[0][3], table[0][4])]
-        w = table[0]; out[room] = dict(point=[round(w[2][0], 2), round(w[2][1], 2)], lens_mm=lens, bad_share=round(float(w[0]), 3), median_dist_m=round(float(-w[1]), 2),
+        w = table[0]; out[room] = dict(point=[float(w[2][0]), float(w[2][1])], lens_mm=lens, bad_share=round(float(w[0]), 3), median_dist_m=round(float(-w[1]), 2),
                                        candidates=len(cells), yaw_table=yaw_table, current_point=cur.get(room), current_bad_share=None if now is None else round(float(now[0]), 3))
         print(room, out[room], flush=True)
     (ROOT/'knowledge/flythrough/tour-points.json').write_text(json.dumps(dict(schema='flythrough-tour-points/1', method=__doc__.split('\n')[0], points=out), indent=1))
