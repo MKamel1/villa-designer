@@ -374,7 +374,6 @@ def _build(lay):
     # riser infill bars are NOT in spec["stair"] (checkers read every box under 300 mm high there as a tread)
     spec["stair_infill"] = [p["box"] for p in st["infill"]["bars"]] if st.get("infill") else []
     spec["stair_infill_spec"] = {k: v for k, v in st["infill"].items() if k != "bars"} if st.get("infill") else {}
-    spec["stair_infill_waiver"] = st.get("infill_waiver", {})
     if "wall_datum" in st:
         spec["stair_wall_datum"] = dict(st["wall_datum"], structural_thickness_m=EXT_T)
     pk2 = lay.get("parking2")
