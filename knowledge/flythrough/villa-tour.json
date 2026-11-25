@@ -49,13 +49,13 @@
    ]
   },
   {
-   "space": "living~a2"
-  },
-  {
-   "space": "dining-side~a1"
+   "space": "living~a5"
   },
   {
    "space": "living~a3"
+  },
+  {
+   "space": "living~a2"
   },
   {
    "garden": "east-yard",
@@ -68,25 +68,28 @@
    "space": "dining~a1"
   },
   {
-   "space": "dining~a2"
-  },
-  {
    "space": "dirty-kitchen~a2"
   },
   {
    "space": "dirty-kitchen"
   },
   {
-   "space": "family~a1"
+   "space": "family~a2"
   },
   {
-   "space": "cinema"
+   "space": "family~a1"
   },
   {
    "space": "cinema~a2"
   },
   {
-   "space": "store-ramp"
+   "space": "cinema"
+  },
+  {
+   "space": "lounge~a2"
+  },
+  {
+   "space": "lounge"
   },
   {
    "garden": "north-court",
@@ -94,18 +97,6 @@
     3.617,
     -26.156
    ]
-  },
-  {
-   "space": "lounge-nook~a1"
-  },
-  {
-   "space": "lounge~a4"
-  },
-  {
-   "space": "lounge"
-  },
-  {
-   "space": "lounge~a3"
   },
   {
    "space": "hall-b~a1"
@@ -120,10 +111,13 @@
    "space": "study-game"
   },
   {
+   "space": "study-game~a2"
+  },
+  {
    "space": "corridor~a1"
   },
   {
-   "space": "corridor~a3"
+   "space": "corridor~a2"
   },
   {
    "space": "family-bath"
@@ -132,10 +126,7 @@
    "space": "kids-a~a2"
   },
   {
-   "space": "kids-a"
-  },
-  {
-   "space": "corridor~a2"
+   "space": "kids-b~a2"
   },
   {
    "space": "kids-b"
@@ -144,10 +135,38 @@
    "space": "parents-bed~a2"
   },
   {
-   "space": "parents-bed"
+   "space": "parents-dressing~a2",
+   "via": [
+    [
+     20.4,
+     -24.215
+    ],
+    [
+     21.465,
+     -24.25
+    ],
+    [
+     21.465,
+     -25.4
+    ]
+   ]
   },
   {
-   "space": "parents-ensuite~a2"
+   "space": "parents-dressing",
+   "via": [
+    [
+     20.4,
+     -24.215
+    ],
+    [
+     21.465,
+     -24.25
+    ],
+    [
+     21.465,
+     -25.4
+    ]
+   ]
   }
  ],
  "point_bounds": {

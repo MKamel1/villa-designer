@@ -1177,7 +1177,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
     items = {i['id']: i for i in vm.items}
     walls_by_level = {lv: F._walls(spec, lv)+F._columns() for lv in LEVEL_Z}
     host_walls = scene_wall_hosts(scene)
-    flagged_rooms = {s['room'] for s in path.get('stations', []) if s.get('flagged_under_1m')}
+    flagged_rooms = {s['room'] for s in path.get('stations', []) if s.get('flagged_under_1m')} | {s['room'].split('~')[0] for s in path.get('stations', []) if s.get('flagged_under_1m') and s.get('room')}      # an arc is 'room~aN': its room is flagged too
     sweeps = [CameraSweep(scene)]+([CameraSweep({'meshes': evaluated_meshes})] if evaluated_meshes else [])
     geometry = CameraProximityGeometry(scene)
     rows = motion_findings(path['frames'], settings)

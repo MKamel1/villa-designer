@@ -20,7 +20,7 @@ from wt_plan import vmap
 from tour_points import classify_views
 
 CELL = .5; AREA = .25; COLS, ROWS = 48, 27; BINS = 12; MAXD = 8.
-HUB_MIN_M2 = 12.; HUB2_MIN_M2 = 60.; ARC_MIN_M2 = 6.; NEW_MIN_M2 = 1.; HUB_MIN_WIDTH_M = 2.0; MIN_ROOM_SHARE = .8; PITCH_STEP = 4      # policy (ours)
+HUB_MIN_M2 = 12.; HUB2_MIN_M2 = 60.; ARC_MIN_M2 = 6.; NEW_MIN_M2 = 1.; HUB_MIN_WIDTH_M = 2.0; DOOR_KEEP_M = .45; MIN_ROOM_SHARE = .8; PITCH_STEP = 4      # policy (ours)
 EYE = 1.35
 
 
@@ -28,7 +28,7 @@ class Cover:
     def __init__(self, scene='out/wt/villa4/scene.json'):
         self.geom = audit.geometry_for(scene, ROOT/'out/flyaudit'); et = core.element_table(self.geom)
         self.surface = np.array([core.feature_kind(n, g) is not None for n, g in zip(self.geom.elem_names, et['grp'])])
-        self.th = core.thresholds(); self.rooms = audit.design_rooms()
+        self.th = core.thresholds(); self.rooms = audit.design_rooms(); self.et = et
         self.RX = np.array([r['rect'] for r in self.rooms.values()]); self.names = list(self.rooms)
         self.RZ = np.array([-3. if r['level'] == 'B' else 0. for r in self.rooms.values()])
 
@@ -95,6 +95,9 @@ def candidates(vm, layout, spec, rooms, pitch_step=PITCH_STEP):
 def select(scene='out/wt/villa4/scene.json'):
     C = Cover(scene); layout, spec, vm = vmap(); wide = WT.lens_rooms(); route = WT.tour_route()
     cands = candidates(vm, layout, spec, C.rooms)
+    doors = [(C.et['lo'][i], C.et['hi'][i]) for i, n in enumerate(C.geom.elem_names) if n.startswith('door-') and C.et['hi'][i][2]-C.et['lo'][i][2] > 1.5]
+    near_door = lambda xy: any(lo[0]-DOOR_KEEP_M < xy[0] < hi[0]+DOOR_KEEP_M and lo[1]-DOOR_KEEP_M < xy[1] < hi[1]+DOOR_KEEP_M for lo, hi in doors)
+    cands = [c for c in cands if not near_door(c[2])]      # nothing stops in a doorway: the leaf swings there and the door-open search finds no free swing (kids-a, villa6 admission)
     ref = {'B': tuple(WT.tour_points()['entry-b']), 'GF': tuple(route['stair']['top'])}
     def reach(c):
         try: vm.astar(c[1], ref[c[1]], tuple(c[2])); return True
@@ -171,7 +174,8 @@ def select(scene='out/wt/villa4/scene.json'):
         bad, med = classify_views(C.geom, C.surface, th, [(pos, pos+np.array([math.cos(a), math.sin(a), 0.]), lens) for a in ys])
         tab = [[round(math.degrees(a)), bool(b), round(float(m), 2)] for a, b, m in zip(ys, bad, med)]
         k = sum(1 for t in stations if t['room'] == p['room'])
-        rec = dict(id=p['room'] if p['kind'] == 'turn' and not any(t['id'] == p['room'] for t in stations) else f"{p['room']}~{'t' if p['kind'] == 'turn' else 'a'}{k+1}", kind=p['kind'], level=p['level'], room=p['room'], point=[round(v, 3) for v in p['point']], gain_m2=round(p['gain_m2'], 1), lens_mm=lens, yaw_table=tab)
+        grid = WT._opaque_grid(vm, p['level']); wall_min = float(WT.ray_depths(vm, grid, np.array([p['point']]))[0].min())
+        rec = dict(wall_min_m=round(wall_min, 3), flagged_under_1m=wall_min < 1.02, id=p['room'] if p['kind'] == 'turn' and not any(t['id'] == p['room'] for t in stations) else f"{p['room']}~{'t' if p['kind'] == 'turn' else 'a'}{k+1}", kind=p['kind'], level=p['level'], room=p['room'], point=[round(v, 3) for v in p['point']], gain_m2=round(p['gain_m2'], 1), lens_mm=lens, yaw_table=tab)
         if p['kind'] == 'turn':
             bg = np.array(p['bin_gain']); good = np.array([not tab[2*b][1] for b in range(BINS)])
             b = int(np.where(good, bg, -1).argmax()); rec['best_yaw_deg'] = b*30.; rec['best_view'] = 'coverage'
