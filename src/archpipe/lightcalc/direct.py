@@ -119,7 +119,8 @@ def luminous_area_m2(ph: Photometry) -> float:
     openings (negative dimensions in LM-63) are treated as discs."""
     w, l, _h = ph.luminous_dimensions_m()
     if w < 0 or l < 0:                   # LM-63: negative = circular/ellipsoidal
-        return math.pi / 4.0 * abs(w) * abs(l if l != 0 else w)
+        a, b = abs(w) or abs(l), abs(l) or abs(w)     # a converter may write the one diameter into one field (the Kew 25 IES: 0 / -0.016)
+        return math.pi / 4.0 * a * b
     if l == 0:
         l = w
     return w * l

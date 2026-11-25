@@ -30,6 +30,8 @@ class JobqTest(unittest.TestCase):
 
     def queue(self, **kw):
         kw.setdefault("gpu_slots", 1)
+        kw.setdefault("vram_free", lambda: 10**6)  # not the real, possibly busy, GPU
+        kw.setdefault("mem_available", lambda: 10**6)
         return jobq.Queue(self.root / "q", self.lock, **kw)
 
     def run_all(self, q):
@@ -216,6 +218,7 @@ class GpuSlotsTest(unittest.TestCase):
         self.free = 20000
 
     def queue(self, **kw):
+        kw.setdefault("mem_available", lambda: 10**6)
         q = jobq.Queue(self.root / "q", self.lock, gpu_slots=3, vram_free=lambda: self.free, **kw)
         q.launcher = lambda j: None
         return q
@@ -267,6 +270,45 @@ class GpuSlotsTest(unittest.TestCase):
         self.free = 9000                      # room for one 6000 job (+1024), not two
         self.submit(q, "g1", "g2")
         self.assertEqual(q.tick()["started"], ["g1"])
+
+    def test_ram_guard_threshold_default_blender_and_order(self):
+        q = self.queue(cpu_slots=4)
+        self.ram = 24000 + 6000 - 1                   # one MB short for a Blender job
+        q.mem_available = lambda: self.ram
+        q.submit(["blender", "-b"], job_id="bl", gpu=True)
+        q.submit(py("pass"), job_id="cpu")            # 4000+6000 fits, but must not jump the head job
+        self.assertEqual(q.status("bl")["ram_mb"], 24000)
+        self.assertEqual(q.status("cpu")["ram_mb"], 4000)
+        self.assertEqual(q.tick()["started"], [])
+        self.ram += 1
+        self.assertEqual(q.tick()["started"], ["bl"])  # cpu then lacks room: 30000-24000 promised < 10000
+        self.ram = 10**6
+        self.assertEqual(q.tick()["started"], ["cpu"])
+
+    def test_ram_explicit_override_and_reservation_expires(self):
+        q = self.queue(cpu_slots=4)
+        q.mem_available = lambda: 15000
+        q.submit(py("pass"), job_id="a", ram_mb=9000)   # needs 15000: exactly enough
+        q.submit(py("pass"), job_id="b", ram_mb=1000)   # needs 7000; 15000-9000 promised = 6000: waits
+        self.assertEqual(q.tick()["started"], ["a"])
+        self.assertEqual(q.tick()["started"], [])
+        q.alive = lambda *a: True
+        q.set_status("a", runner_pid=1, launched=jobq.now() - jobq.RAM_RESERVE_S - 1)  # now visible in MemAvailable
+        self.assertEqual(q.tick()["started"], ["b"])
+
+    def test_ram_unreadable_meminfo_does_not_block(self):
+        q = self.queue(cpu_slots=4)
+        q.mem_available = lambda: None
+        q.submit(["blender"], job_id="bl")
+        self.assertEqual(q.tick()["started"], ["bl"])
+
+    def test_mem_available_parses_fake_meminfo(self):
+        f = self.root / "meminfo"
+        f.write_text("MemTotal:       90000000 kB\nMemAvailable:   30720000 kB\n")
+        self.assertEqual(jobq.mem_available_mb(f), 30000)
+        self.assertIsNone(jobq.mem_available_mb(self.root / "missing"))
+        f.write_text("MemTotal: 1 kB\n")
+        self.assertIsNone(jobq.mem_available_mb(f))
 
     def test_unreadable_nvidia_smi_falls_back_to_slots_only(self):
         q = self.queue()

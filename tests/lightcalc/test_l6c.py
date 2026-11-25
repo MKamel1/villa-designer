@@ -27,6 +27,16 @@ def test_radiance_safe_ies_strips_bom_and_negative_opening():
     assert b.integrated_flux() == pytest.approx(a.integrated_flux(), rel=1e-9)      # photometry untouched
 
 
+def test_radiance_safe_ies_gives_a_one_field_diameter_to_both_fields():
+    """The John Cullen Kew 25 IES writes its 16 mm round opening as width 0 / length -0.016; ies2rad refused it (LG radiance check, 2026-11-24)."""
+    kew = Path(__file__).resolve().parents[2] / "knowledge/lighting-products/john-cullen/GLK2SM254/kew25-medium-500mA.ies"
+    raw = kew.read_text(encoding="latin-1")
+    assert " 2 0 -0.016 0\n" in raw
+    out = radiance_safe_ies(raw)
+    assert " 2 0.016 0.016 0\n" in out
+    assert ph.parse(out).integrated_flux() == pytest.approx(ph.parse(raw).integrated_flux(), rel=1e-9)
+
+
 def test_radiance_safe_ies_leaves_an_ordinary_file_alone():
     plain = "IESNA:LM-63-2002\nTILT=NONE\n1 1000 1 3 1 1 2 0.1 0.1 0\n1 1 10\n0 45 90\n0\n100 80 0\n"
     assert radiance_safe_ies(plain) == plain

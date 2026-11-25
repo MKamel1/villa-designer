@@ -97,14 +97,14 @@
    },
    "lookalike": {
     "label": "look-alike-proxy",
-    "maker_site": "ambientCG",
-    "id": "WoodFloor041",
-    "url": "https://ambientcg.com/view?id=WoodFloor041",
+    "maker_site": "Poly Haven",
+    "id": "laminate_floor_02",
+    "url": "https://polyhaven.com/a/laminate_floor_02",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": [
-     1900,
-     1900
+     1700,
+     1700
     ]
    },
    "maintenance": {
@@ -114,7 +114,8 @@
    },
    "missing": [
     "lrv"
-   ]
+   ],
+   "lookalike_note": "look-alike changed WoodFloor041 -> laminate_floor_02 (2026-11-23): the maker's HW7470 panel photo is clean wide oak planks with fine grain and bevelled seams; WoodFloor041 is knotty rustic boards in mixed light and dark tones"
   },
   {
    "id": "C-floor-wet",
@@ -213,8 +214,8 @@
    "lookalike": {
     "label": "look-alike-proxy",
     "maker_site": "ambientCG",
-    "id": "Marble015",
-    "url": "https://ambientcg.com/view?id=Marble015",
+    "id": "Marble011",
+    "url": "https://ambientcg.com/view?id=Marble011",
     "licence": "CC0",
     "on_disk": true,
     "physical_scan_mm": null
@@ -225,7 +226,7 @@
     "lrv",
     "slip rating (Lux finish: not a floor-safe claim)"
    ],
-   "lookalike_note": "look-alike changed to Marble015 after board review 2026-11-22 (closer in pattern to the product)"
+   "lookalike_note": "look-alike changed Marble015 -> Marble011 (2026-11-23): the maker's own M0G3 image is a dark brown marble with broad flowing bands and cream veining (luma cv 0.78, colour ratio R:G:B 1:0.67:0.48); Marble015 is a near-uniform cream (cv 0.02), wrong in kind, so tinting it dark gave a flat panel. Marble008 (first swap) has the right pattern but is orange (1:0.55:0.25): per-channel matching to the brown turned its cream veins lilac in the render. Marble011 is grey-brown with white veins (1:0.79:0.62, cv 0.36)"
   },
   {
    "id": "C-worktop",

@@ -338,10 +338,15 @@ def add_material(name, spec, library_root, warnings):
             bounded.operation = "MINIMUM"
             bounded.inputs[1].default_value = (1, 1, 1)
             nt.links.new(scale.outputs["Vector"], bounded.inputs[0])
-            nt.links.new(bounded.outputs["Vector"], bsdf.inputs["Base Color"])
+            # contrast > 1 (a look-alike stretched to the maker's pattern contrast) can push a texel below zero
+            floored = nt.nodes.new("ShaderNodeVectorMath")
+            floored.operation = "MAXIMUM"
+            floored.inputs[1].default_value = (0, 0, 0)
+            nt.links.new(bounded.outputs["Vector"], floored.inputs[0])
+            nt.links.new(floored.outputs["Vector"], bsdf.inputs["Base Color"])
             if kind == "translucent":
                 # the transmitted (Translucent BSDF) colour keeps the same weave, not just the reflected one
-                nt.links.new(bounded.outputs["Vector"], trans.inputs["Color"])
+                nt.links.new(floored.outputs["Vector"], trans.inputs["Color"])
             mat["texture_mean_linear"] = mean
             mat["texture_mean_rgb_linear"] = mean_rgb
             mat["texture_scale"] = factor
