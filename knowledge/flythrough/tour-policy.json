@@ -66,5 +66,7 @@
  "arc_hold_s": 0.5,
  "arc_hold_basis": "ASSUMED: half a second on the last heading of a partial look",
  "wide_pad_s": 1.5,
- "wide_pad_basis": "policy (ours): the wide lens is kept 1.5 s before and after a stop in a small room (the door crossings, where the audit finds the walking frames wall-dominated at 24 mm), then eased out over lens_ease_s"
+ "wide_pad_basis": "policy (ours): the wide lens is kept 1.5 s before and after a stop in a small room (the door crossings, where the audit finds the walking frames wall-dominated at 24 mm), then eased out over lens_ease_s",
+ "stair_approach_m": 0.4,
+ "stair_approach_basis": "the under-stair cupboard toe projects about 0.2 m past the first riser (scene, merged 2026-11-24) and the 0.15 m swept envelope reached it on flat frames; the last 0.4 m before the riser is walked as the flight (stair clearance 0.25 m), found by the villa admission (4 frames, hall-b)"
 }

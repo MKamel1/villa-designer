@@ -36,6 +36,9 @@
    ]
   },
   {
+   "space": "living~a5"
+  },
+  {
    "space": "living"
   },
   {
@@ -47,9 +50,6 @@
     22.597,
     -26.131
    ]
-  },
-  {
-   "space": "living~a5"
   },
   {
    "space": "living~a3"
@@ -86,6 +86,9 @@
    "space": "cinema"
   },
   {
+   "space": "store-ramp"
+  },
+  {
    "space": "lounge~a2"
   },
   {
@@ -97,6 +100,9 @@
     3.617,
     -26.156
    ]
+  },
+  {
+   "space": "lounge~a3"
   },
   {
    "space": "hall-b~a1"
@@ -126,33 +132,16 @@
    "space": "kids-a~a2"
   },
   {
-   "space": "kids-b~a2"
-  },
-  {
    "space": "kids-b"
   },
   {
    "space": "parents-bed~a2"
   },
   {
-   "space": "parents-dressing~a2",
-   "via": [
-    [
-     20.4,
-     -24.215
-    ],
-    [
-     21.465,
-     -24.25
-    ],
-    [
-     21.465,
-     -25.4
-    ]
-   ]
+   "space": "parents-bed"
   },
   {
-   "space": "parents-dressing",
+   "space": "parents-dressing~a2",
    "via": [
     [
      20.4,

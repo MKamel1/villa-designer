@@ -1263,7 +1263,7 @@
    ]
   },
   {
-   "wall_min_m": 2.25,
+   "wall_min_m": 1.05,
    "flagged_under_1m": false,
    "id": "dining~a1",
    "kind": "arc",
@@ -1271,135 +1271,135 @@
    "room": "dining",
    "point": [
     15.377,
-    -26.211
+    -25.011
    ],
-   "gain_m2": 17.0,
+   "gain_m2": 16.8,
    "lens_mm": 24.0,
    "yaw_table": [
     [
      0,
      false,
-     5.21
+     5.42
     ],
     [
      15,
      false,
-     4.96
+     5.88
     ],
     [
      30,
      false,
-     5.72
+     5.31
     ],
     [
      45,
      false,
-     5.71
+     4.88
     ],
     [
      60,
      false,
-     3.93
+     4.15
     ],
     [
      75,
      false,
-     3.8
+     1.34
     ],
     [
      90,
      false,
-     4.67
+     2.6
     ],
     [
      105,
      false,
-     3.56
+     1.34
     ],
     [
      120,
      false,
-     3.41
+     2.29
     ],
     [
      135,
      false,
-     4.38
+     3.66
     ],
     [
      150,
      false,
-     4.34
+     4.52
     ],
     [
      165,
      false,
-     4.46
+     4.27
     ],
     [
      180,
      false,
-     4.5
+     4.05
     ],
     [
      195,
      false,
-     4.13
+     4.49
     ],
     [
      210,
      false,
-     3.58
+     4.36
     ],
     [
      225,
      false,
-     3.2
+     3.84
     ],
     [
      240,
-     true,
-     2.69
+     false,
+     3.67
     ],
     [
      255,
-     true,
-     2.45
+     false,
+     3.66
     ],
     [
      270,
-     true,
-     2.46
+     false,
+     3.69
     ],
     [
      285,
      false,
-     2.44
+     3.67
     ],
     [
      300,
      false,
-     2.57
+     3.68
     ],
     [
      315,
      false,
-     3.06
+     4.03
     ],
     [
      330,
      false,
-     4.29
+     5.05
     ],
     [
      345,
      false,
-     4.8
+     5.2
     ]
    ],
    "arc": [
-    -15.0,
-    60.0
+    315.0,
+    90.0
    ]
   },
   {
@@ -1693,7 +1693,7 @@
     21.777,
     -25.011
    ],
-   "gain_m2": 14.0,
+   "gain_m2": 13.8,
    "lens_mm": 24.0,
    "yaw_table": [
     [
@@ -2103,6 +2103,146 @@
    ]
   },
   {
+   "wall_min_m": 1.5,
+   "flagged_under_1m": false,
+   "id": "living~a5",
+   "kind": "arc",
+   "level": "B",
+   "room": "living",
+   "point": [
+    20.177,
+    -28.211
+   ],
+   "gain_m2": 11.0,
+   "lens_mm": 24.0,
+   "yaw_table": [
+    [
+     0,
+     false,
+     2.39
+    ],
+    [
+     15,
+     false,
+     2.41
+    ],
+    [
+     30,
+     false,
+     3.62
+    ],
+    [
+     45,
+     false,
+     4.52
+    ],
+    [
+     60,
+     false,
+     4.84
+    ],
+    [
+     75,
+     false,
+     4.59
+    ],
+    [
+     90,
+     false,
+     4.62
+    ],
+    [
+     105,
+     false,
+     4.71
+    ],
+    [
+     120,
+     false,
+     4.68
+    ],
+    [
+     135,
+     false,
+     4.93
+    ],
+    [
+     150,
+     false,
+     5.32
+    ],
+    [
+     165,
+     false,
+     4.27
+    ],
+    [
+     180,
+     false,
+     3.03
+    ],
+    [
+     195,
+     false,
+     2.82
+    ],
+    [
+     210,
+     false,
+     1.99
+    ],
+    [
+     225,
+     false,
+     1.8
+    ],
+    [
+     240,
+     true,
+     1.7
+    ],
+    [
+     255,
+     true,
+     1.62
+    ],
+    [
+     270,
+     true,
+     1.56
+    ],
+    [
+     285,
+     true,
+     1.55
+    ],
+    [
+     300,
+     false,
+     1.56
+    ],
+    [
+     315,
+     false,
+     1.88
+    ],
+    [
+     330,
+     false,
+     2.14
+    ],
+    [
+     345,
+     false,
+     2.3
+    ]
+   ],
+   "arc": [
+    45.0,
+    120.0
+   ]
+  },
+  {
    "wall_min_m": 0.9,
    "flagged_under_1m": true,
    "id": "dirty-kitchen~a2",
@@ -2380,146 +2520,6 @@
    "arc": [
     165.0,
     90.0
-   ]
-  },
-  {
-   "wall_min_m": 1.5,
-   "flagged_under_1m": false,
-   "id": "living~a5",
-   "kind": "arc",
-   "level": "B",
-   "room": "living",
-   "point": [
-    18.977,
-    -25.411
-   ],
-   "gain_m2": 10.0,
-   "lens_mm": 24.0,
-   "yaw_table": [
-    [
-     0,
-     false,
-     3.96
-    ],
-    [
-     15,
-     false,
-     4.58
-    ],
-    [
-     30,
-     false,
-     4.58
-    ],
-    [
-     45,
-     false,
-     4.87
-    ],
-    [
-     60,
-     false,
-     4.29
-    ],
-    [
-     75,
-     false,
-     4.16
-    ],
-    [
-     90,
-     false,
-     3.84
-    ],
-    [
-     105,
-     false,
-     2.76
-    ],
-    [
-     120,
-     false,
-     2.06
-    ],
-    [
-     135,
-     false,
-     3.92
-    ],
-    [
-     150,
-     false,
-     5.11
-    ],
-    [
-     165,
-     false,
-     5.38
-    ],
-    [
-     180,
-     false,
-     5.19
-    ],
-    [
-     195,
-     false,
-     4.74
-    ],
-    [
-     210,
-     false,
-     4.28
-    ],
-    [
-     225,
-     false,
-     4.31
-    ],
-    [
-     240,
-     false,
-     4.27
-    ],
-    [
-     255,
-     false,
-     4.08
-    ],
-    [
-     270,
-     false,
-     3.97
-    ],
-    [
-     285,
-     false,
-     4.35
-    ],
-    [
-     300,
-     false,
-     4.3
-    ],
-    [
-     315,
-     false,
-     4.39
-    ],
-    [
-     330,
-     false,
-     4.52
-    ],
-    [
-     345,
-     false,
-     4.13
-    ]
-   ],
-   "arc": [
-    15.0,
-    120.0
    ]
   },
   {
@@ -2947,7 +2947,7 @@
     17.377,
     -25.011
    ],
-   "gain_m2": 52.0,
+   "gain_m2": 52.2,
    "lens_mm": 16.0,
    "yaw_table": [
     [
@@ -3911,6 +3911,146 @@
    ]
   },
   {
+   "wall_min_m": 0.4,
+   "flagged_under_1m": true,
+   "id": "parents-dressing~a2",
+   "kind": "arc",
+   "level": "GF",
+   "room": "parents-dressing",
+   "point": [
+    21.777,
+    -28.211
+   ],
+   "gain_m2": 14.5,
+   "lens_mm": 16.0,
+   "yaw_table": [
+    [
+     0,
+     true,
+     0.55
+    ],
+    [
+     15,
+     true,
+     0.68
+    ],
+    [
+     30,
+     true,
+     0.75
+    ],
+    [
+     45,
+     true,
+     0.92
+    ],
+    [
+     60,
+     true,
+     1.07
+    ],
+    [
+     75,
+     true,
+     1.19
+    ],
+    [
+     90,
+     false,
+     1.36
+    ],
+    [
+     105,
+     false,
+     1.58
+    ],
+    [
+     120,
+     false,
+     2.24
+    ],
+    [
+     135,
+     false,
+     2.21
+    ],
+    [
+     150,
+     false,
+     1.51
+    ],
+    [
+     165,
+     false,
+     1.32
+    ],
+    [
+     180,
+     false,
+     1.31
+    ],
+    [
+     195,
+     false,
+     1.85
+    ],
+    [
+     210,
+     false,
+     2.24
+    ],
+    [
+     225,
+     true,
+     1.05
+    ],
+    [
+     240,
+     true,
+     0.99
+    ],
+    [
+     255,
+     true,
+     0.94
+    ],
+    [
+     270,
+     true,
+     0.9
+    ],
+    [
+     285,
+     true,
+     0.94
+    ],
+    [
+     300,
+     true,
+     0.68
+    ],
+    [
+     315,
+     true,
+     0.56
+    ],
+    [
+     330,
+     true,
+     0.58
+    ],
+    [
+     345,
+     true,
+     0.58
+    ]
+   ],
+   "arc": [
+    105.0,
+    120.0
+   ]
+  },
+  {
    "wall_min_m": 0.35,
    "flagged_under_1m": true,
    "id": "study-game~a2",
@@ -4051,146 +4191,6 @@
    ]
   },
   {
-   "wall_min_m": 0.4,
-   "flagged_under_1m": true,
-   "id": "parents-dressing~a2",
-   "kind": "arc",
-   "level": "GF",
-   "room": "parents-dressing",
-   "point": [
-    21.777,
-    -28.211
-   ],
-   "gain_m2": 14.0,
-   "lens_mm": 16.0,
-   "yaw_table": [
-    [
-     0,
-     true,
-     0.55
-    ],
-    [
-     15,
-     true,
-     0.68
-    ],
-    [
-     30,
-     true,
-     0.75
-    ],
-    [
-     45,
-     true,
-     0.92
-    ],
-    [
-     60,
-     true,
-     1.07
-    ],
-    [
-     75,
-     true,
-     1.19
-    ],
-    [
-     90,
-     false,
-     1.36
-    ],
-    [
-     105,
-     false,
-     1.58
-    ],
-    [
-     120,
-     false,
-     2.24
-    ],
-    [
-     135,
-     false,
-     2.21
-    ],
-    [
-     150,
-     false,
-     1.51
-    ],
-    [
-     165,
-     false,
-     1.32
-    ],
-    [
-     180,
-     false,
-     1.31
-    ],
-    [
-     195,
-     false,
-     1.85
-    ],
-    [
-     210,
-     false,
-     2.24
-    ],
-    [
-     225,
-     true,
-     1.05
-    ],
-    [
-     240,
-     true,
-     0.99
-    ],
-    [
-     255,
-     true,
-     0.94
-    ],
-    [
-     270,
-     true,
-     0.9
-    ],
-    [
-     285,
-     true,
-     0.94
-    ],
-    [
-     300,
-     true,
-     0.68
-    ],
-    [
-     315,
-     true,
-     0.56
-    ],
-    [
-     330,
-     true,
-     0.58
-    ],
-    [
-     345,
-     true,
-     0.58
-    ]
-   ],
-   "arc": [
-    105.0,
-    120.0
-   ]
-  },
-  {
    "wall_min_m": 0.3,
    "flagged_under_1m": true,
    "id": "kids-a~a2",
@@ -4328,146 +4328,6 @@
    "arc": [
     -15.0,
     90.0
-   ]
-  },
-  {
-   "wall_min_m": 0.35,
-   "flagged_under_1m": true,
-   "id": "kids-b~a2",
-   "kind": "arc",
-   "level": "GF",
-   "room": "kids-b",
-   "point": [
-    15.377,
-    -26.611
-   ],
-   "gain_m2": 8.5,
-   "lens_mm": 16.0,
-   "yaw_table": [
-    [
-     0,
-     true,
-     1.06
-    ],
-    [
-     15,
-     false,
-     2.36
-    ],
-    [
-     30,
-     false,
-     3.08
-    ],
-    [
-     45,
-     false,
-     3.04
-    ],
-    [
-     60,
-     false,
-     3.12
-    ],
-    [
-     75,
-     false,
-     2.9
-    ],
-    [
-     90,
-     false,
-     2.34
-    ],
-    [
-     105,
-     true,
-     1.28
-    ],
-    [
-     120,
-     true,
-     0.8
-    ],
-    [
-     135,
-     true,
-     0.56
-    ],
-    [
-     150,
-     true,
-     0.46
-    ],
-    [
-     165,
-     true,
-     0.44
-    ],
-    [
-     180,
-     true,
-     0.45
-    ],
-    [
-     195,
-     true,
-     0.44
-    ],
-    [
-     210,
-     true,
-     0.46
-    ],
-    [
-     225,
-     true,
-     0.56
-    ],
-    [
-     240,
-     true,
-     0.72
-    ],
-    [
-     255,
-     true,
-     0.75
-    ],
-    [
-     270,
-     true,
-     0.79
-    ],
-    [
-     285,
-     true,
-     0.82
-    ],
-    [
-     300,
-     true,
-     0.85
-    ],
-    [
-     315,
-     true,
-     0.85
-    ],
-    [
-     330,
-     true,
-     0.89
-    ],
-    [
-     345,
-     true,
-     0.97
-    ]
-   ],
-   "arc": [
-    45.0,
-    60.0
    ]
   },
   {
@@ -4621,7 +4481,7 @@
    "seen_m2": 32.0
   },
   "corridor": {
-   "coverable_m2": 82.2,
+   "coverable_m2": 79.5,
    "seen_m2": 67.8
   },
   "study-game": {
@@ -4629,12 +4489,12 @@
    "seen_m2": 66.8
   },
   "kids-a": {
-   "coverable_m2": 93.5,
+   "coverable_m2": 93.0,
    "seen_m2": 84.0
   },
   "kids-b": {
-   "coverable_m2": 38.5,
-   "seen_m2": 37.8
+   "coverable_m2": 33.2,
+   "seen_m2": 31.5
   },
   "family-bath": {
    "coverable_m2": 18.8,
@@ -4686,7 +4546,7 @@
   },
   "entry-b": {
    "coverable_m2": 11.2,
-   "seen_m2": 10.2
+   "seen_m2": 10.5
   },
   "family": {
    "coverable_m2": 13.2,
@@ -4694,27 +4554,27 @@
   },
   "kitchen": {
    "coverable_m2": 51.2,
-   "seen_m2": 46.0
+   "seen_m2": 46.8
   },
   "kitchen-island": {
    "coverable_m2": 10.2,
-   "seen_m2": 9.2
+   "seen_m2": 9.5
   },
   "dining": {
    "coverable_m2": 39.2,
-   "seen_m2": 36.0
+   "seen_m2": 36.5
   },
   "dining-side": {
-   "coverable_m2": 14.5,
-   "seen_m2": 12.2
+   "coverable_m2": 14.2,
+   "seen_m2": 13.0
   },
   "living": {
-   "coverable_m2": 114.5,
-   "seen_m2": 100.0
+   "coverable_m2": 114.2,
+   "seen_m2": 103.8
   },
   "bar-alcove": {
    "coverable_m2": 49.2,
-   "seen_m2": 45.0
+   "seen_m2": 44.8
   },
   "store-ramp": {
    "coverable_m2": 85.5,
@@ -4725,12 +4585,12 @@
    "seen_m2": 75.0
   },
   "guest-wc": {
-   "coverable_m2": 29.2,
+   "coverable_m2": 29.0,
    "seen_m2": 24.8
   },
   "dirty-kitchen": {
    "coverable_m2": 58.8,
-   "seen_m2": 52.5
+   "seen_m2": 52.0
   }
  }
 }

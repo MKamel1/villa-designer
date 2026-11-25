@@ -411,13 +411,15 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     for st in route['stations']:
         if st.get('stair') == 'up':
             # walk-and-look: one continuous leg from where we stand, to the foot, up the real flight and off the top (the stair rooms are transit)
-            foot = (x1, bottom[1]); P = []
+            appr = pol.get('stair_approach_m', 0.); foot = (x1+appr, bottom[1]); P = []
             if math.dist(where, foot) > .05:
                 poly = _walk_polyline(vm, 'B', where, foot, st.get('via', ()))
                 P = [(q[0], q[1], LEVEL_Z['B']) for q in poly]
             else:
                 P = [(where[0], where[1], LEVEL_Z['B'])]
             nflat = len(P)-1
+            if appr:
+                P.append((x1, bottom[1], LEVEL_Z['B']))      # the approach to the first riser is judged as the flight (the cupboard toe under it projects past the riser)
             for x in np.arange(x1-.5, x0-.01, -.5):
                 P.append((float(x), bottom[1], stair_ground(float(x), spec)))
             P.append((top[0], top[1], LEVEL_Z['GF']))

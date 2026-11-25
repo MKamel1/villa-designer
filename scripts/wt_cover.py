@@ -97,7 +97,9 @@ def select(scene='out/wt/villa4/scene.json'):
     cands = candidates(vm, layout, spec, C.rooms)
     doors = [(C.et['lo'][i], C.et['hi'][i]) for i, n in enumerate(C.geom.elem_names) if n.startswith('door-') and C.et['hi'][i][2]-C.et['lo'][i][2] > 1.5]
     near_door = lambda xy: any(lo[0]-DOOR_KEEP_M < xy[0] < hi[0]+DOOR_KEEP_M and lo[1]-DOOR_KEEP_M < xy[1] < hi[1]+DOOR_KEEP_M for lo, hi in doors)
-    cands = [c for c in cands if not near_door(c[2])]      # nothing stops in a doorway: the leaf swings there and the door-open search finds no free swing (kids-a, villa6 admission)
+    bans = json.loads((ROOT/'knowledge/flythrough/tour-spaces-bans.json').read_text())['doors']
+    banned = [(C.et['lo'][i], C.et['hi'][i], bans[n]) for i, n in enumerate(C.geom.elem_names) if n in bans]
+    cands = [c for c in cands if not near_door(c[2]) and not any(lo[0]-k < c[2][0] < hi[0]+k and lo[1]-k < c[2][1] < hi[1]+k for lo, hi, k in banned)]      # nothing stops in a doorway: the leaf swings there and the door-open search finds no free swing (kids-a, villa6 admission)
     ref = {'B': tuple(WT.tour_points()['entry-b']), 'GF': tuple(route['stair']['top'])}
     def reach(c):
         try: vm.astar(c[1], ref[c[1]], tuple(c[2])); return True
