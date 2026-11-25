@@ -1,0 +1,125 @@
+{
+ "schema": 1,
+ "room": "dining",
+ "concept": "see docs/lanes/RM.md",
+ "proposals": [
+  {
+   "id": "D-P1",
+   "gap": "D-G1",
+   "title": "Staggered clear-glass globe cluster replacing the linear pendant",
+   "location": {
+    "room": "dining",
+    "wall_or_zone": "over the table, centre (16.95, -25.9), globes 0.9-1.3 m below the ceiling",
+    "rect_m": [
+     16.35,
+     17.55
+    ],
+    "z_range_m": [
+     -1.45,
+     -0.3
+    ],
+    "basis": "design model: furn-dining-table x 16.05-17.85, lamp-PEN-LIN-dining-01 x 16.38-17.52"
+   },
+   "product": {
+    "maker": "Bocci",
+    "range": "28 Series (cluster)",
+    "name": "28.19 Cluster, Clear",
+    "code": "28.19",
+    "colour_or_finish": "Clear hand-blown glass",
+    "maker_url": "https://bocci.com/shop/products/28-19-cluster/",
+    "maker_quote": "28.19 is composed of 19 hand-blown glass pendants that attach using a connector to a single cluster canopy. Colour Options Clear",
+    "colour_source": "maker product page, Colour Options: Clear",
+    "label": "look-alike-proxy",
+    "lookalike": "clear glass globes with an emissive core; number of globes in the mock-up (5) is NOT the maker's 19",
+    "note": "the maker also sells the series as single pendants and a configurator for custom installations; confirm a 5-globe canopy with Bocci",
+    "consistent_with": "clear blown-glass globe clusters in references 19, 28 and 31"
+   },
+   "lighting_ask": {
+    "effect": "Replace the 399 lm linear pendant circuit with a 2700 K dimmable globe cluster of at least the same task output on the table (the L6 dining task plane must still pass); the two crossed spots stay.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Swap one luminaire for a cluster; the table task light must be re-verified.",
+   "effect": "References 28-31.",
+   "architecture_change": {
+    "flag": false,
+    "note": "canopy fixing"
+   }
+  },
+  {
+   "id": "D-P2",
+   "gap": "D-G2",
+   "title": "Gris Fleury taupe stone carried up the party-side wall",
+   "location": {
+    "room": "dining-side",
+    "wall_or_zone": "south wall behind the sideboard (y = -28.47)",
+    "rect_m": [
+     15.5,
+     17.4
+    ],
+    "z_range_m": [
+     -3.0,
+     -0.3
+    ],
+    "basis": "design model: sideboard x 16.2-17.4, wall x 15.44-17.47"
+   },
+   "product": {
+    "maker": "Marazzi",
+    "range": "Mystone Gris Fleury",
+    "name": "Gris Fleury Taupe RT 60x120",
+    "code": "MLGY",
+    "colour_or_finish": "Taupe, matt, rectified, through-body coloured porcelain",
+    "format_mm": {
+     "w": 600,
+     "l": 1200,
+     "t": 10
+    },
+    "maker_url": "https://www.marazzi.it/en/mystone-gris-fleury",
+    "maker_quote": "GRIS FLEURY TAUPE RT Formato: 60x120cm Codice: MLGY Tecnologia: Gres fine porcellanato colorato in massa",
+    "colour_source": "chosen.json floor-basement (client palette C, 2026-11-23)",
+    "label": "look-alike-proxy",
+    "lookalike": "ambientCG Marble007 (CC0), as the floor",
+    "consistent_with": "the client's chosen basement floor, carried up the dining wall"
+   },
+   "change": "Floor-to-ceiling stone panel 1.9 m wide in the same product as the floor.",
+   "effect": "The concrete-look wall of references 29 and 30 using the client's own chosen stone.",
+   "architecture_change": {
+    "flag": false,
+    "note": "applied finish"
+   }
+  },
+  {
+   "id": "D-P3",
+   "gap": "D-G3",
+   "title": "Lighting ask: ceiling-line wash on the stone and up/down sconces either side of the sideboard",
+   "location": {
+    "room": "dining-side",
+    "wall_or_zone": "wall wash at z -0.34, x 15.50-17.40; sconces at x 15.66 and 17.24, z -1.75..-1.60",
+    "basis": "design model coordinates above"
+   },
+   "lighting_ask": {
+    "effect": "2700 K wall wash grazing the stone from a 40 mm ceiling-line slot, plus two up/down wall sconces on the dining circuit. Mock-up placeholders 600 lm and 120 lm per side.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Lighting only.",
+   "effect": "References 28 and 29.",
+   "architecture_change": {
+    "flag": false,
+    "note": "a ceiling-line slot"
+   }
+  }
+ ],
+ "mockup": {
+  "scene": "COPY of the render-set scene.json built by scripts/refmatch_build.py; production scene and design model untouched",
+  "exposure": "frozen exposure groups dropped (stale for any geometry change); current and mock-up both use per-state set-metered exposure",
+  "renders": [
+   "mock_n01-dining-day.jpg",
+   "mock_n20-dining-side-day.jpg",
+   "cur_n01-dining-day.jpg",
+   "cur_n20-dining-side-day.jpg"
+  ]
+ }
+}

@@ -1,0 +1,86 @@
+{
+ "schema": 1,
+ "room": "dining",
+ "references": [
+  {
+   "id": "image28",
+   "why": "grey marble wall panel framed in bronze, clear-glass pendant cluster, up/down sconces, cove, banquette"
+  },
+  {
+   "id": "image29",
+   "why": "textured concrete wall, opal globe pendants at staggered heights, up/down wall cubes, walnut slat flank"
+  },
+  {
+   "id": "image30",
+   "why": "concrete wall with backlit walnut shelving, black dome pendant cluster"
+  },
+  {
+   "id": "image31",
+   "why": "walnut panelling, clear bubble-glass chandelier, large art"
+  }
+ ],
+ "gaps": [
+  {
+   "id": "D-G1",
+   "rank": 1,
+   "feature": "Pendant cluster of glass or opal globes at staggered heights over the table",
+   "refs_showing_it": [
+    "image28",
+    "image29",
+    "image30",
+    "image31"
+   ],
+   "present_in_scene": "no: one black linear LED pendant (399 lm, 1.14 m long)",
+   "visual_weight": "high (every reference has it)"
+  },
+  {
+   "id": "D-G2",
+   "rank": 2,
+   "feature": "Stone or concrete-look feature wall behind the sideboard / party side",
+   "refs_showing_it": [
+    "image28",
+    "image29",
+    "image30"
+   ],
+   "present_in_scene": "no: plaster-warm-white (Off White) wall behind the walnut sideboard",
+   "visual_weight": "high"
+  },
+  {
+   "id": "D-G3",
+   "rank": 3,
+   "feature": "Cove, backlit shelf or wall wash on the feature wall",
+   "refs_showing_it": [
+    "image28",
+    "image29",
+    "image30"
+   ],
+   "present_in_scene": "two adjustable spots on the sideboard side (ADJ-dining-side-01/02); no wash or cove on the wall",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "D-G4",
+   "rank": 4,
+   "feature": "Up/down wall sconces flanking the art zone",
+   "refs_showing_it": [
+    "image28",
+    "image29"
+   ],
+   "present_in_scene": "no",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "D-G5",
+   "rank": 5,
+   "feature": "Upholstered, curved-back dining chairs with cognac or rust seats",
+   "refs_showing_it": [
+    "image28",
+    "image29",
+    "image30",
+    "image31"
+   ],
+   "present_in_scene": "walnut slat-back chairs with bouclé seats",
+   "visual_weight": "medium; NOT proposed: no verified maker chair found in this pass"
+  }
+ ],
+ "method": "references read by eye for concrete features, then counted; gaps are features most of the room's references share that the scene lacks"
+}
