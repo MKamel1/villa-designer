@@ -40,6 +40,42 @@ def wrap(deg):
     return (deg+180.) % 360.-180.
 
 
+def lens_rooms():
+    return set(json.loads((ROOT/'knowledge/flythrough/lens-rooms.json').read_text())['rooms'])
+
+
+def lens_profile(n, wide_spans, fps, base, wide, ease_s):
+    """Focal length per frame: `wide` inside the frame spans, `base` further than `ease_s` seconds from any span, smoothstep between.
+
+    Spans are (first, last) frame indices of the 360 turns in small rooms. The ease runs outside the span (on the walk
+    arriving at it and the walk leaving it) so it is always under a moving or turning camera and never a cut."""
+    lens = np.full(n, float(base))
+    if not wide_spans:
+        return lens
+    i = np.arange(n)
+    for a, b in wide_spans:
+        d = np.maximum(np.maximum(a-i, i-b), 0)/fps          # seconds outside the span
+        u = np.clip(1.-d/ease_s, 0., 1.)
+        lens = np.minimum(lens, base-(base-wide)*(u*u*(3.-2.*u)))
+    return lens
+
+
+def smooth_series(v, width):
+    """Centred moving average over `width` samples (edge-padded): a step in `v` becomes a ramp `width` samples long."""
+    v = np.asarray(v, float); w = max(1, int(width)); pad = w//2
+    k = np.ones(w)/w; x = np.concatenate([np.full(pad, v[0]), v, np.full(w-1-pad, v[-1])])
+    return np.convolve(x, k, mode='valid')
+
+
+def exposure_group_of(room, phase, station, dark_rooms):
+    """The exposure group a frame is metered in: its garden pan, its dark room, else the house day group."""
+    if phase == 'pan':
+        return 'pan-'+str(station)
+    if room in dark_rooms:
+        return 'dark-'+room
+    return 'interior'
+
+
 # ---- the 360 point of a room ------------------------------------------------------------------------
 def ray_depths(vm, grid, pts, angles=ANGLES, limit=8., step=.05):
     """First wall/column hit distance along each angle from each point; `limit` if none. pts (N,2) -> (N,len(angles))."""
@@ -72,7 +108,30 @@ def best_view_yaw(room, rect, stills, depth72, wall_floor=1.5):
     return math.degrees(ANGLES[int(wedge.argmax())]), 'deepest-wedge'
 
 
-def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
+def tour_point_records():
+    f = ROOT/'knowledge/flythrough/tour-points.json'
+    return json.loads(f.read_text())['points'] if f.is_file() else {}
+
+
+def tour_points():
+    """Authored 360 points chosen by scripts/tour_points.py with the audit's own measure (room -> (x, y))."""
+    return {k: tuple(v['point']) for k, v in tour_point_records().items()}
+
+
+def audited_best_yaw(still_yaw, yaw_table):
+    """The still's heading when the audit finds that heading informative from the 360 point, else the not-bad heading with the longest sightline.
+
+    yaw_table rows are [yaw_deg, bad, median_hit_m] for evenly spaced headings. Returns (yaw_deg, 'still'|'audit-longest-sightline')."""
+    ys = np.array([r[0] for r in yaw_table], float); bad = np.array([r[1] for r in yaw_table], bool); med = np.array([r[2] for r in yaw_table], float)
+    if still_yaw is not None:
+        k = int(np.abs((ys-still_yaw+180.) % 360.-180.).argmin())
+        if not bad[k]:
+            return still_yaw, 'still'
+    k = int(np.where(bad, -1e9, med).argmax()) if (~bad).any() else int(med.argmax())
+    return float(ys[k]), 'audit-longest-sightline'
+
+
+def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None, fixed=None):
     """The 360 point of every room: max visible floor area and features with every direction at least 1.0 m from a wall.
 
     Candidates are free cells (standing policy plus evaluated furniture meshes) inside the room rectangle. Score =
@@ -81,7 +140,7 @@ def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
     score wins; if none exists the room is `flagged` and the point with the longest shortest ray wins.
     """
     policy_ = policy_ or tour_policy(); stills = stills if stills is not None else still_yaws()
-    need = policy_['point_wall_clearance_m']+.02; out = {}; proxies = proxies or {}; bounds = bounds or {}
+    need = policy_['point_wall_clearance_m']+.02; out = {}; proxies = proxies or {}; bounds = bounds or {}; fixed = {**(fixed or {}), **proxies}
     for lv in LEVEL_Z:
         grid = _opaque_grid(vm, lv); free = vm.free(lv); clear = vm.clearance_cells(lv)
         for room, r in vm.rooms[lv].items():
@@ -89,8 +148,8 @@ def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
             cells = [(i, j) for i in range(vm.nx) for j in range(vm.ny)
                      if free[i, j] and rect[0] < vm.xy(i, j)[0] < rect[2] and rect[1] < vm.xy(i, j)[1] < rect[3]
                      and (room not in bounds or (bounds[room][0] < vm.xy(i, j)[0] < bounds[room][2] and bounds[room][1] < vm.xy(i, j)[1] < bounds[room][3]))]
-            if room in proxies:     # the room is not walkable (under/over the flight): its 360 is taken at the authored point
-                pts = np.array([proxies[room]], float)
+            if room in fixed:       # authored point: the flight proxies (not walkable floor) and the audit-chosen points (tour-points.json)
+                pts = np.array([fixed[room]], float)
             elif not cells:
                 out[room] = dict(level=lv, point=None, reason='no free standing cell (not walkable)'); continue
             else:
@@ -106,13 +165,17 @@ def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
                 dx, dy = cx-pts[:, 0], cy-pts[:, 1]; dist = np.hypot(dx, dy)
                 k = np.rint(np.arctan2(dy, dx)/(2*math.pi)*72).astype(int) % 72
                 seen += (depth[np.arange(len(pts)), k] > dist-.3)
-            score = area+1.5*seen+(.3*room_clear if room not in proxies else 0.)
+            score = area+1.5*seen+(.3*room_clear if room not in fixed else 0.)
             ok = wall_min >= need
             if ok.any():
                 pick = int(np.where(ok, score, -1e9).argmax()); flagged = False
             else:
                 pick = int(np.lexsort((score, wall_min))[-1]); flagged = True
             yaw, source = best_view_yaw(room, rect, stills, depth[pick])
+            if room in fixed and 'yaw_table' in tour_point_records().get(room, {}):
+                still = yaw if source != 'deepest-wedge' else None
+                yaw, source = audited_best_yaw(still, tour_point_records()[room]['yaw_table'])
+                source = source if source != 'still' else best_view_yaw(room, rect, stills, depth[pick])[1]
             out[room] = dict(level=lv, proxy=room in proxies, point=[float(pts[pick][0]), float(pts[pick][1])], wall_min_m=float(wall_min[pick]),
                              flagged_under_1m=flagged, visible_area_m2=float(area[pick]), features_visible=int(seen[pick]),
                              features_in_room=len(feats), best_yaw_deg=float(yaw), best_view=source,
@@ -121,11 +184,28 @@ def room_points(vm, policy_=None, stills=None, proxies=None, bounds=None):
 
 
 # ---- yaw programmes: rest-to-rest turns with eased rate ---------------------------------------------
+def variable_turn(A, rate_fn, accel, dt=1/240.):
+    """Rest-to-rest rotation through A degrees at the rate `rate_fn(theta)` (deg/s) wherever the yaw rate can follow it:
+    the rate never changes faster than `accel` and the turn starts and ends at rest. -> (duration, theta(t))."""
+    th = 0.; v = 0.; ts = [0.]; xs = [0.]; t = 0.
+    while th < A-1e-6:
+        goal = min(rate_fn(th), math.sqrt(2*accel*max(th, 1e-9)), math.sqrt(2*accel*max(A-th, 1e-9)))
+        v += float(np.clip(goal-v, -accel*dt, accel*dt)); v = max(v, 1.)       # 1 deg/s floor so the turn always finishes
+        th = min(A, th+v*dt); t += dt; ts.append(t); xs.append(th)
+    ts = np.array(ts); xs = np.array(xs)
+    return float(ts[-1]), (lambda tt: np.interp(np.asarray(tt, float), ts, xs))
+
+
 def turn_curve(angle, rate, accel):
-    """(duration, theta(t)) for a signed rest-to-rest rotation of `angle` degrees: trapezoid in yaw rate (triangle if short)."""
+    """(duration, theta(t)) for a signed rest-to-rest rotation of `angle` degrees: trapezoid in yaw rate (triangle if short).
+
+    `rate` may be a function of the angle turned so far (deg -> deg/s), see variable_turn."""
     A = abs(angle)
     if A < 1e-9:
         return 0., lambda t: np.zeros_like(np.asarray(t, float))
+    if callable(rate):
+        T, th = variable_turn(A, rate, accel); sg = math.copysign(1., angle)
+        return T, (lambda t: sg*th(t))
     ramp = rate/accel
     if A >= rate*ramp:
         cruise = (A-rate*ramp)/rate; peak = rate
@@ -146,7 +226,10 @@ def programme(waypoints, holds, rate, accel):
     """Piecewise yaw: cumulative signed angles `waypoints` (first 0), `holds` seconds at each; returns (T, theta(t)).
 
     `rate` is one number or one per segment."""
-    rates = [rate]*len(waypoints) if np.isscalar(rate) else [None]+list(rate)
+    if callable(rate):      # rate(cumulative angle) -> deg/s; each segment sees its own start angle
+        rates = [None]+[(lambda th, b=waypoints[k-1]: rate(b+th)) for k in range(1, len(waypoints))]
+    else:
+        rates = [rate]*len(waypoints) if np.isscalar(rate) else [None]+list(rate)
     parts = []   # (start time, duration, theta0, theta fn, kind)
     t0 = 0.
     if holds[0] > 0:
@@ -167,7 +250,7 @@ def programme(waypoints, holds, rate, accel):
     return total, theta
 
 
-def spin_programme(y0, best, exit_, pol, final=False):
+def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None):
     """Hold the room's best view, finish a full 360, end on `exit_`. Angles are absolute degrees; returns (T, yaw(t), alpha).
 
     Sweeping direction sigma is the one that makes the extra turn to the exit heading shorter; the best view is passed
@@ -185,7 +268,16 @@ def spin_programme(y0, best, exit_, pol, final=False):
     else:
         hd[0] = best_hold
     wp.append(total_angle); hd.append(2.5 if final else 0.)
-    T, th = programme(wp, hd, rate, accel)
+    if yaw_table and pol.get('turn_rate_wall_deg_s'):
+        # sweep faster through the headings where the audit finds a wall-dominated frame, slower on the informative ones (both inside the client's 30-45 deg/s band)
+        ys = np.array([r[0] for r in yaw_table], float); bad = np.array([r[1] for r in yaw_table], bool)
+        grown = bad | np.roll(bad, 1) | np.roll(bad, -1)        # the frame has width: widen each bad heading by one table step
+        def rate(theta):
+            k = int(np.abs((y0+sigma*theta-ys+180.) % 360.-180.).argmin())
+            return pol['turn_rate_wall_deg_s'] if grown[k] else pol['turn_rate_view_deg_s']
+        T, th = programme(wp, hd, rate, accel)
+    else:
+        T, th = programme(wp, hd, rate, accel)
     return T, (lambda t: y0+sigma*th(t)), alpha
 
 
@@ -196,7 +288,17 @@ def _bump(x, width):
     return np.sin(u*math.pi/2)**2
 
 
-def walk_leg(P, stair_flag, pol):
+def tour_aim():
+    """leg key -> (s metres along the leg, yaw offset degrees from the look-ahead heading), chosen by scripts/tour_aim.py."""
+    f = ROOT/'knowledge/flythrough/tour-aim.json'
+    return {k: (np.array(v['s']), np.array(v['offset_deg'])) for k, v in json.loads(f.read_text())['legs'].items()} if f.is_file() else {}
+
+
+def leg_key(P, dest):
+    return f'{P[0][0]:.1f},{P[0][1]:.1f}>{dest}'
+
+
+def walk_leg(P, stair_flag, pol, aim=None):
     """Walk a polyline of (x, y, ground) points from rest to rest.
 
     Returns dict(T, at(t) -> (x, y, ground, yaw_deg, stair, pitch_deg), heading_start, heading_end, length).
@@ -220,6 +322,8 @@ def walk_leg(P, stair_flag, pol):
         d = X[min(j, n-1), :2]-X[k, :2]
         head[i] = math.atan2(d[1], d[0]) if np.hypot(*d) > 1e-6 else last
         last = head[i]
+    if aim is not None:      # audit-chosen offsets from the look-ahead heading, bounded by the tool to +-60 deg of the travel direction
+        head = np.unwrap(head)+np.radians(np.interp(s, aim[0], aim[1]))*(1.-(sf & (X[:, 2] < -1.))) # the flight keeps its own look except the last 1 m of climb
     head = _smooth(np.unwrap(head), .5/ds)
     dyaw = np.abs(np.gradient(head, s)) if n > 2 else np.zeros(n)
     vmax = np.where(sf, pol['stair_speed_m_s'], pol['cruise_speed_m_s'])
@@ -272,10 +376,11 @@ def _inward(vm, door, offsets):
     raise ValueError(f'garden door {door} has no free standing point inside')
 
 
-def plan_tour(vm, route=None, pol=None):
+def plan_tour(vm, route=None, pol=None, aim=None):
     """Plan, sample at 24 fps and return the `flythrough-villa-path/1` record for the tour."""
     route = route or tour_route(); pol = dict(pol or tour_policy()); spec = vm.spec
-    pts = room_points(vm, pol, proxies={k: tuple(v) for k, v in route.get('proxy_points', {}).items()}, bounds=route.get('point_bounds'))
+    aim = tour_aim() if aim is None else aim
+    pts = room_points(vm, pol, proxies={k: tuple(v) for k, v in route.get('proxy_points', {}).items()}, bounds=route.get('point_bounds'), fixed=tour_points())
     steps = []       # dicts: kind walk|turn|pan, plus data
     where = None; level = None
     top, bottom = route['stair']['top'], route['stair']['bottom']
@@ -289,11 +394,18 @@ def plan_tour(vm, route=None, pol=None):
 
     for st in route['stations']:
         if st.get('stair') == 'up':
-            P = [(where[0], where[1], LEVEL_Z['B'])]
-            for x in np.arange(x1, x0-.01, -.5):
+            # walk-and-look: one continuous leg from where we stand, to the foot, up the real flight and off the top (the stair rooms are transit)
+            foot = (x1, bottom[1]); P = []
+            if math.dist(where, foot) > .05:
+                poly = _walk_polyline(vm, 'B', where, foot, st.get('via', ()))
+                P = [(q[0], q[1], LEVEL_Z['B']) for q in poly]
+            else:
+                P = [(where[0], where[1], LEVEL_Z['B'])]
+            nflat = len(P)-1
+            for x in np.arange(x1-.5, x0-.01, -.5):
                 P.append((float(x), bottom[1], stair_ground(float(x), spec)))
             P.append((top[0], top[1], LEVEL_Z['GF']))
-            flags = [True]*(len(P)-1)
+            flags = [False]*nflat+[True]*(len(P)-1-nflat)
             steps.append(dict(kind='walk', P=P, stair=flags, label='stair', room=None))
             where, level = tuple(top), 'GF'
             continue
@@ -315,7 +427,10 @@ def plan_tour(vm, route=None, pol=None):
         where, level = p, lv
 
     # the walk legs are fixed; resolve each turn's arrival and exit headings
-    legs = [dict(s, leg=walk_leg(s['P'], s['stair'], pol)) if s['kind'] == 'walk' else dict(s) for s in steps]
+    def dest_of(k):
+        return next((n.get('room') or n.get('garden') for n in steps[k+1:] if n['kind'] in ('turn', 'pan')), None)
+    legs = [dict(s, key=leg_key(s['P'], dest_of(k)), leg=walk_leg(s['P'], s['stair'], pol, aim.get(leg_key(s['P'], dest_of(k)))))
+            if s['kind'] == 'walk' else dict(s) for k, s in enumerate(steps)]
     for k, s in enumerate(legs):
         if s['kind'] not in ('turn', 'pan'):
             continue
@@ -325,7 +440,7 @@ def plan_tour(vm, route=None, pol=None):
         s['exit'] = nxt['heading_start'] if nxt else None
         if s['kind'] == 'turn':
             best = s['info']['best_yaw_deg']
-            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None)
+            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, yaw_table=tour_point_records().get(s['room'], {}).get('yaw_table'))
             s.update(T=T, yawfn=yaw, alpha=alpha)
         else:
             n = s['face']; t1 = wrap(n-s['y0']); pan = pol['garden_pan_deg']
@@ -348,7 +463,7 @@ def plan_tour(vm, route=None, pol=None):
             dest = next((n.get('room') or n.get('garden') for n in legs[k+1:] if n['kind'] in ('turn', 'pan')), None)
             X, Y, G, YW, SF, PI = leg['at'](np.arange(n)*T/n)
             for q in range(n):
-                frames.append(((X[q], Y[q], G[q], float(YW[q]), bool(SF[q]), float(PI[q])), dict(phase='stair' if s['label'] == 'stair' else 'walk', station=None, heading_to=dest)))
+                frames.append(((X[q], Y[q], G[q], float(YW[q]), bool(SF[q]), float(PI[q])), dict(phase='stair' if SF[q] else 'walk', station=None, heading_to=dest)))
             continue
         T = s['T']; n = max(1, int(math.ceil(T*fps)))
         x, y = s['at']; g = LEVEL_Z[s['level']]
@@ -369,16 +484,26 @@ def plan_tour(vm, route=None, pol=None):
         frames.append(((x, y, g, float(yw), bool(sf), float(pi)), dict(phase='walk', station=None)))
 
     eye = pol['eye_height_m']; out = []; unwrapped = None
+    wide_rooms = lens_rooms() if pol.get('wide_lens_mm') else set()
+    spans = {}
+    for i, (_, tag) in enumerate(frames):
+        if tag['phase'] == 'turn' and tag['station'] in wide_rooms:
+            a, b = spans.get(tag['station'], (i, i)); spans[tag['station']] = (min(a, i), max(b, i))
+    lens = lens_profile(len(frames), list(spans.values()), fps, pol.get('base_lens_mm', 24), pol.get('wide_lens_mm', 24), pol.get('lens_ease_s', 1.25))
+    dark = set(pol.get('dark_rooms', []))
     for i, ((x, y, g, yw, sf, pitch), tag) in enumerate(frames):
         yaw_deg = yw if unwrapped is None else unwrapped+wrap(yw-unwrapped)   # keep the yaw continuous across phases
         unwrapped = yaw_deg
         ym = math.radians(yaw_deg); z = g+eye; lvl = level_at(g)
-        run = math.cos(math.radians(pitch))
+        run = math.cos(math.radians(pitch)); room = vm.room_at(lvl, x, y) if not sf else None
+        wide = bool(lens[i] < pol.get('base_lens_mm', 24)-1e-9)
         out.append(dict(index=i, seconds=i/fps, yaw_deg=float(yaw_deg), pitch_deg=float(pitch), ground_m=float(g), level=lvl, stair=bool(sf),
-                        room=vm.room_at(lvl, x, y) if not sf else None, segment='interior', phase=tag['phase'], station=tag['station'], heading_to=tag.get('heading_to'),
+                        room=room, segment='interior', phase=tag['phase'], station=tag['station'], heading_to=tag.get('heading_to'),
+                        exposure_group=exposure_group_of(room, tag['phase'], tag['station'], dark),
+                        caption=pol.get('lens_caption') if wide else None,
                         camera=dict(position=[float(x), float(y), float(z)],
                                     target=[float(x+math.cos(ym)*run), float(y+math.sin(ym)*run), float(z+math.sin(math.radians(pitch)))],
-                                    lens_mm=24, sensor_mm=36, shift_x=0, shift_y=0)))
+                                    lens_mm=round(float(lens[i]), 4), sensor_mm=36, shift_x=0, shift_y=0)))
     pol['frames'] = len(out)
     stations = []
     for s in legs:
