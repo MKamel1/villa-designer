@@ -56,7 +56,7 @@ def main(scene='out/wt/villa4/scene.json'):
         best = np.full(cost.shape, np.inf); back = np.zeros(cost.shape, int); best[0] = cost[0]
         for k in range(1, len(idx)):
             for m in range(len(offs)):
-                lo, hi = max(0, m-1), min(len(offs), m+2); c = best[k-1, lo:hi]; q = int(c.argmin())
+                lo, hi = max(0, m-2), min(len(offs), m+3); c = best[k-1, lo:hi]; q = int(c.argmin())
                 best[k, m] = cost[k, m]+c[q]+.01*abs(lo+q-m); back[k, m] = lo+q
         m = int(best[-1].argmin()); chosen = [m]
         for k in range(len(idx)-1, 0, -1):

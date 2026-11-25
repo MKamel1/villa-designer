@@ -521,6 +521,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     for i, (_, tag) in enumerate(frames):
         if tag['phase'] in ('turn', 'hold') and str(tag['station']).split('~')[0] in wide_rooms:
             a, b = spans.get(tag['station'], (i, i)); spans[tag['station']] = (min(a, i), max(b, i))
+    pad = int(round(pol.get('wide_pad_s', 0.)*fps)); spans = {k: (max(0, a-pad), min(len(frames)-1, b+pad)) for k, (a, b) in spans.items()}
     lens = lens_profile(len(frames), list(spans.values()), fps, pol.get('base_lens_mm', 24), pol.get('wide_lens_mm', 24), pol.get('lens_ease_s', 1.25))
     dark = set(pol.get('dark_rooms', []))
     for i, ((x, y, g, yw, sf, pitch), tag) in enumerate(frames):

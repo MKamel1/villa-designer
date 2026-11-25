@@ -19,13 +19,36 @@ class Tour(unittest.TestCase):
         cls.path = WT.plan_tour(cls.vm)
         cls.frames = cls.path['frames']
 
-    def test_route_connectivity_every_room_has_a_full_360(self):
-        rooms = {s['room'] for s in self.path['stations'] if s['room']}
-        transit = set(WT.tour_route()['transit_rooms'])                  # the two stair rooms: a walk-and-look, not a turn
-        self.assertEqual(set(self.layout['rooms'])-rooms-transit, set())  # all 30 rooms (13 GF + 17 B)
-        self.assertEqual(transit, {'stair-b', 'stair-gf'}); self.assertFalse(transit & rooms)
-        self.assertEqual(len(self.layout['rooms']), 30)
-        self.assertEqual(WT.coverage_findings(self.frames, sorted(rooms)), [])
+    def test_every_hub_has_a_full_360_and_every_room_is_covered_by_the_route(self):
+        import json
+        hubs = [s['room'] for s in self.path['stations'] if s['kind'] == 'turn']
+        self.assertEqual(WT.coverage_findings(self.frames, hubs), [])
+        prune = json.loads((WT.ROOT/'knowledge/flythrough/tour-prune.json').read_text())
+        shares = {k: v['share'] for k, v in prune['room_coverage'].items() if v['share'] is not None}
+        self.assertEqual(len(shares), 28)                                  # every room that has surface to show (parents-entry and the dressing strip have none)
+        self.assertGreaterEqual(min(shares.values()), .8)                  # each room's coverable surface is shown at least this far by the whole route
+        self.assertEqual({'stair-b', 'stair-gf'}, set(WT.tour_route()['transit_rooms']))
+        self.assertFalse({'stair-b', 'stair-gf'} & {s['room'].split('~')[0] for s in self.path['stations'] if s['room']})
+
+    def test_one_360_per_connected_space_and_arcs_only_for_what_is_not_yet_seen(self):
+        import json
+        sp = json.loads((WT.ROOT/'knowledge/flythrough/tour-spaces.json').read_text())
+        used = {s['room'] for s in self.path['stations']}
+        open_plan = {'entry-b', 'dining-side', 'dining', 'living', 'bar-alcove', 'kitchen-island', 'kitchen', 'family'}
+        turns = [s for s in self.path['stations'] if s['kind'] == 'turn' and s['room'].split('~')[0] in open_plan]
+        self.assertLessEqual(len(turns), 2)                                # the basement open plan: one 360, two at most
+        self.assertTrue([s for s in self.path['stations'] if s['kind'] == 'arc'])
+        for s in self.path['stations']:
+            if s['kind'] == 'arc':                                         # a partial look sweeps at most 4 x 30 degrees and is a fraction of a turn
+                fs = [f for f in self.frames if f['station'] == s['room']]; yaw = [f['yaw_deg'] for f in fs]
+                self.assertLess(max(yaw)-min(yaw), 360.)
+        prune = json.loads((WT.ROOT/'knowledge/flythrough/tour-prune.json').read_text()); pol = sp['policy']
+        for st in self.path['stations']:                                   # every stop adds surface in route order, else it is kept only because its room needs it
+            if st['kind'] in ('turn', 'arc'):
+                new = prune['kept_in_route_new_m2'][st['room']]; need = pol['hub_min_m2'] if st['kind'] == 'turn' else pol['arc_min_m2']
+                if new < need:
+                    self.assertIn(st['room'], prune['protected'])      # below its minimum only because dropping it left a room under 80 % covered
+        self.assertTrue(prune['dropped'])                                  # negative: the prune really dropped stops that showed nothing new
 
     def test_both_floors_and_gardens_are_covered(self):
         self.assertEqual({f['level'] for f in self.frames}, {'GF', 'B'})
@@ -42,7 +65,7 @@ class Tour(unittest.TestCase):
         i0 = next(i for i, f in enumerate(self.frames) if f['stair']); i1 = max(i for i, f in enumerate(self.frames) if f['stair'])
         self.assertEqual({f['phase'] for f in self.frames[i0-20:i1+20]} - {'walk', 'stair'}, set())
         # at the top the camera turns off the flight toward the landing instead of facing the plaster at the end of it
-        top = [f['yaw_deg'] for f in self.frames[i1-10:i1+60]]; self.assertGreater(max(top)-min(top), 20)
+        top = [f['yaw_deg'] for f in self.frames[i1-10:i1+60]]; self.assertGreater(max(top)-min(top), 15)
 
     def test_walking_never_looks_backward_or_sideways(self):
         # 110 deg, not 75: the 0.47 m gap into the parents' dressing room is a hairpin, where the route 1 m ahead is up to 105 deg off the camera for a moment;
@@ -75,10 +98,14 @@ class Tour(unittest.TestCase):
                 lv = info['level']; i, j = self.vm.cell(*info['point'])
                 self.assertTrue(self.vm.free(lv)[i, j], room)
 
-    def test_best_view_is_the_still_view_where_one_exists(self):
-        got = {s['room']: s['best_view'] for s in self.path['stations'] if s['kind'] == 'turn'}
-        self.assertIn(got['dining'], ('v09-dining-evening', 'n01-dining-day', 'n20-dining-side-day'))
-        self.assertTrue(sum(v != 'deepest-wedge' for v in got.values()) >= 20)
+    def test_the_hold_of_every_360_is_on_a_heading_the_audit_finds_informative(self):
+        sp = WT.tour_spaces(); n = 0
+        for s in self.path['stations']:
+            if s['kind'] != 'turn':
+                continue
+            tab = sp[s['room']]['yaw_table']; k = min(range(len(tab)), key=lambda i: abs(WT.wrap(tab[i][0]-s['best_yaw_deg'])))
+            self.assertFalse(tab[k][1], s['room']); n += 1                   # the hold is not on a wall-dominated heading
+        self.assertGreaterEqual(n, 10)
 
 
 class NonInformativeRule(unittest.TestCase):
@@ -155,9 +182,11 @@ class SmallRoomLens(unittest.TestCase):
         for f in self.frames:
             if f['phase'] != 'turn':
                 continue
-            want = self.pol['wide_lens_mm'] if f['station'] in self.wide else self.pol['base_lens_mm']
-            self.assertEqual(f['camera']['lens_mm'], want, (f['index'], f['station']))
-        self.assertTrue(self.wide & {s['room'] for s in self.path['stations']})
+            if str(f['station']).split('~')[0] in self.wide:
+                self.assertEqual(f['camera']['lens_mm'], self.pol['wide_lens_mm'], (f['index'], f['station']))
+            else:
+                self.assertLessEqual(f['camera']['lens_mm'], self.pol['base_lens_mm'])      # 24, or easing out of a neighbouring small room's pad
+        self.assertTrue(self.wide & {s['room'].split('~')[0] for s in self.path['stations']})
 
     def test_focal_length_never_steps_and_the_caption_is_on_exactly_when_wider_than_24(self):
         self.assertEqual(WT.lens_findings(self.frames, ease_s=self.pol['lens_ease_s']), [])

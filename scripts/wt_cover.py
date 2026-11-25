@@ -150,7 +150,9 @@ def select(scene='out/wt/villa4/scene.json'):
             for c in sel:
                 for b0 in range(BINS):
                     for L in (1, 2, 3, 4):
-                        ids = np.unique(np.concatenate([per[c][(b0+k) % BINS] for k in range(L)])); g_ = gain(ids)/(1+.15*L)       # a longer arc costs time: favour short ones
+                        bins = [(b0+k) % BINS for k in range(L)]
+                        if len(per[c][bins[0]]) == 0 or len(per[c][bins[-1]]) == 0: continue      # an arc starts and ends on informative headings (a wall-dominated bin shows nothing and costs time)
+                        ids = np.unique(np.concatenate([per[c][b] for b in bins])); g_ = gain(ids)/(1+.15*L+.5*sum(len(per[c][b]) == 0 for b in bins))       # a longer arc costs time: favour short ones
                         if g_ > best[0]: best = (g_, (c, b0, L, ids))
             if best[0] < ARC_MIN_M2 or best[1] is None: break
             c, b0, L, ids = best[1]; real = gain(ids)
@@ -222,7 +224,7 @@ def refine(scene='out/wt/villa4/scene.json', max_iter=24):
     rooms = C.room_report(seen); print({k: v['share'] for k, v in rooms.items()})
     rep = {s['room']: round(new_by[s['room']], 1) for s in path['stations'] if s['kind'] in ('turn', 'arc')}
     (ROOT/'knowledge/flythrough/tour-prune.json').write_text(json.dumps(dict(schema='flythrough-tour-prune/1', rule=f'a stop is kept when its frames add >= {HUB_MIN_M2} m2 (360) / {ARC_MIN_M2} m2 (arc) of surface not shown by any earlier frame of the route; weakest dropped first, route re-measured',
-                                                                              dropped=dropped, kept_in_route_new_m2=rep, room_coverage=rooms), indent=1))
+                                                                              dropped=dropped, protected=sorted(protected), kept_in_route_new_m2=rep, room_coverage=rooms), indent=1))
 
 
 if __name__ == '__main__':

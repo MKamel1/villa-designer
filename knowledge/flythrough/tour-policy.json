@@ -64,5 +64,7 @@
  "turn_rate_view_deg_s": 30,
  "turn_rate_variable_basis": "ASSUMED policy inside the client's 30-45 deg/s band: the 360 sweeps at 44 deg/s through headings the audit finds wall-dominated from that standing point (tour-points.json yaw_table, widened by one step) and at 30 deg/s through the others, rate changes bounded by turn_accel_deg_s2. 44 not 45 so the measured peak stays under maximum_yaw_rate_deg_s",
  "arc_hold_s": 0.5,
- "arc_hold_basis": "ASSUMED: half a second on the last heading of a partial look"
+ "arc_hold_basis": "ASSUMED: half a second on the last heading of a partial look",
+ "wide_pad_s": 1.5,
+ "wide_pad_basis": "policy (ours): the wide lens is kept 1.5 s before and after a stop in a small room (the door crossings, where the audit finds the walking frames wall-dominated at 24 mm), then eased out over lens_ease_s"
 }

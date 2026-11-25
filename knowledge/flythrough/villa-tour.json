@@ -105,6 +105,9 @@
    "space": "lounge"
   },
   {
+   "space": "lounge~a3"
+  },
+  {
    "space": "hall-b~a1"
   },
   {
@@ -139,23 +142,6 @@
   },
   {
    "space": "parents-bed~a2"
-  },
-  {
-   "space": "parents-dressing",
-   "via": [
-    [
-     20.4,
-     -24.215
-    ],
-    [
-     21.465,
-     -24.25
-    ],
-    [
-     21.465,
-     -25.4
-    ]
-   ]
   },
   {
    "space": "parents-ensuite~a2"
