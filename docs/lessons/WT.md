@@ -36,3 +36,14 @@ Each entry: why it was missed, and the guard that now catches it. Tests are in `
   directory; edit first, then prepare into a fresh directory.
 * **jobq `--gpu` already holds `graphics.lock`.** The old code locked again from the child and would deadlock; `graphics()` skips
   its own flock when `JOBQ_JOB_ID` is set.
+
+## Tour redesign (2026-11-24)
+
+* **A per-frame render call re-exports the whole scene.** Workbench took 6 s/frame and Cycles 3-6 s of every 2 s render on the 1.1 GB production scene, so 16k frames was 30 h; one `render(animation=True)` over keyframed camera
+  poses keeps the engine's scene (Workbench 0.14 s/frame, Cycles about 0.5 s/frame alone). Measure a render call's fixed cost before scaling a loop (`walkthrough.py` stages `workbench`, `lookdev`). Culling objects by distance did not help (cost is not object count).
+* **`Scene.ray_cast` ignores `hide_render` and returns evaluated-mesh face indices.** The depth metric hit the day state's hidden closed curtains at 0.6 m (garden pans flagged 100 % "near") and indexing the original mesh raised IndexError.
+  **Guard:** hidden objects and glass (by evaluated-mesh material, not object name: panes are merged into `villa-merged-*`) are skipped; frame 1250 debug showed the real hit list. Calibration was re-run on the fixed code (same 10/12, 0/20).
+* **A rule registered before measurement can be too weak.** The registered near>0.5 / plane>0.6 rule caught 5 of 12 frames the client called bad; the calibrated third clause (near+plane>=0.9) catches 10, with 0 of 20 good frames flagged. Both are recorded; the calibration labels are in the repo.
+* **A 360 and "no wall frames" conflict in a room with no 1 m point.** 16 of 31 turn points cannot clear 1 m from every wall. The sightline finding is waived (recorded per frame, 912 frames), never dropped, and the non-informative arcs are reported per room, not hidden.
+* **Editing a hashed source after `prepare` invalidates the directory.** `walkthrough.py` and `flythrough.py` are in the manifest. Workbench-only edits refreshed the hash in the manifest (noted in it); anything touching path, scene or assembly needs a fresh prepare.
+* **Do not start a GPU stage as a CPU job and call it jobq-safe.** `--gpu` is what takes the slot; a chained prepare+assembly+render job without it would have rendered unqueued.
