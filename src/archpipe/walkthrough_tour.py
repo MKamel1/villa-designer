@@ -113,6 +113,12 @@ def tour_point_records():
     return json.loads(f.read_text())['points'] if f.is_file() else {}
 
 
+def tour_spaces():
+    """id -> stop (turn = a full 360, arc = a partial look) chosen by scripts/wt_cover.py from surface coverage; villa-tour.json stations name them by `space`."""
+    f = ROOT/'knowledge/flythrough/tour-spaces.json'
+    return {t['id']: t for t in json.loads(f.read_text())['stations']} if f.is_file() else {}
+
+
 def tour_points():
     """Authored 360 points chosen by scripts/tour_points.py with the audit's own measure (room -> (x, y))."""
     return {k: tuple(v['point']) for k, v in tour_point_records().items()}
@@ -341,7 +347,7 @@ def walk_leg(P, stair_flag, pol, aim=None):
     pitch = np.zeros(n)
     if sf.any():
         on = np.where(sf)[0]; s0, s1 = s[on[0]], s[on[-1]]
-        pitch = pol['stair_pitch_up_deg']*np.clip(np.minimum((s-s0)/.8, (s1-s)/.8), 0, 1)
+        pitch = pol['stair_pitch_up_deg']*np.clip(np.minimum((s-s0)/.8, (s1-s-pol.get('stair_pitch_zero_last_m', 0.))/pol.get('stair_pitch_out_m', .8)), 0, 1)
         pitch = np.where(sf, pitch, 0.)
 
     def at(tt):
@@ -390,7 +396,8 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     route = route or tour_route(); pol = dict(pol or tour_policy()); spec = vm.spec
     aim = tour_aim() if aim is None else aim
     pts = room_points(vm, pol, proxies={k: tuple(v) for k, v in route.get('proxy_points', {}).items()}, bounds=route.get('point_bounds'), fixed=tour_points())
-    steps = []       # dicts: kind walk|turn|pan, plus data
+    steps = []       # dicts: kind walk|turn|arc|pan, plus data
+    spaces = tour_spaces()
     where = None; level = None
     top, bottom = route['stair']['top'], route['stair']['bottom']
     x0, x1 = stair_extent(spec)
@@ -426,7 +433,12 @@ def plan_tour(vm, route=None, pol=None, aim=None):
             steps.append(dict(kind='pan', at=p, face=face, garden=st['garden'], level='B', room=vm.room_at('B', *p)))
             where, level = p, 'B'
             continue
-        room = st['room']; p, info = stand(room, None); lv = info['level']
+        if st.get('start'):
+            where, level = tuple(st['start']), 'B'; steps.append(dict(kind='start')); continue
+        if st.get('space'):
+            info = dict(spaces[st['space']]); room = info['id']; p = tuple(info['point']); lv = info['level']
+        else:
+            room = st['room']; p, info = stand(room, None); lv = info['level']
         if where is not None and math.dist(where, p) > .05:
             poly = _walk_polyline(vm, lv, where, p, st.get('via', ()))
             if steps and steps[-1]['kind'] == 'walk' and steps[-1]['label'] == 'stair':
@@ -436,16 +448,16 @@ def plan_tour(vm, route=None, pol=None, aim=None):
                 steps.append(dict(kind='walk', P=[(q[0], q[1], LEVEL_Z[lv]) for q in poly], stair=[False]*(len(poly)-1), label='walk', room=None))
         elif where is None:
             steps.append(dict(kind='start'))
-        steps.append(dict(kind='turn', at=p, room=room, info=info, level=lv, pitch=st.get('pitch')))
+        steps.append(dict(kind='arc' if info.get('kind') == 'arc' else 'turn', at=p, room=room, info=info, level=lv, pitch=st.get('pitch')))
         where, level = p, lv
 
     # the walk legs are fixed; resolve each turn's arrival and exit headings
     def dest_of(k):
-        return next((n.get('room') or n.get('garden') for n in steps[k+1:] if n['kind'] in ('turn', 'pan')), None)
+        return next((n.get('room') or n.get('garden') for n in steps[k+1:] if n['kind'] in ('turn', 'arc', 'pan')), None)
     legs = [dict(s, key=leg_key(s['P'], dest_of(k)), leg=walk_leg(s['P'], s['stair'], pol, aim.get(leg_key(s['P'], dest_of(k)))))
             if s['kind'] == 'walk' else dict(s) for k, s in enumerate(steps)]
     for k, s in enumerate(legs):
-        if s['kind'] not in ('turn', 'pan'):
+        if s['kind'] not in ('turn', 'arc', 'pan'):
             continue
         prev = legs[k-1]['leg'] if k and legs[k-1]['kind'] == 'walk' else None
         nxt = legs[k+1]['leg'] if k+1 < len(legs) and legs[k+1]['kind'] == 'walk' else None
@@ -453,8 +465,15 @@ def plan_tour(vm, route=None, pol=None, aim=None):
         s['exit'] = nxt['heading_start'] if nxt else None
         if s['kind'] == 'turn':
             best = s['info']['best_yaw_deg']
-            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, yaw_table=tour_point_records().get(s['room'], {}).get('yaw_table'))
+            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'))
             s.update(T=T, yawfn=yaw, alpha=alpha)
+        elif s['kind'] == 'arc':
+            # a partial look: go to the nearer end of the arc, sweep it at the view rate, hold, then turn to the exit heading
+            a0, span = s['info']['arc']; a1 = a0+span; near0 = abs(wrap(a0-s['y0'])) <= abs(wrap(a1-s['y0']))
+            st0, sg = (a0, 1.) if near0 else (a1, -1.); t1 = wrap(st0-s['y0']); end = st0+sg*span
+            e = wrap(s['exit']-end) if s['exit'] is not None else 0.
+            T, th = programme([0., t1, t1+sg*span, t1+sg*span+e], [0., 0., pol['arc_hold_s'], 0.], [pol['turn_rate_deg_s'], pol['turn_rate_view_deg_s'], pol['turn_rate_deg_s']], pol['turn_accel_deg_s2'])
+            s.update(T=T, yawfn=(lambda t, th=th, y0=s['y0']: y0+th(t)))
         else:
             n = s['face']; t1 = wrap(n-s['y0']); pan = pol['garden_pan_deg']
             e = wrap(s['exit']-n) if s['exit'] is not None else 0.
@@ -473,7 +492,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
             continue
         if s['kind'] == 'walk':
             n = max(1, int(math.ceil(s['leg']['T']*fps))); leg = s['leg']; T = leg['T']
-            dest = next((n.get('room') or n.get('garden') for n in legs[k+1:] if n['kind'] in ('turn', 'pan')), None)
+            dest = next((n.get('room') or n.get('garden') for n in legs[k+1:] if n['kind'] in ('turn', 'arc', 'pan')), None)
             X, Y, G, YW, SF, PI = leg['at'](np.arange(n)*T/n)
             for q in range(n):
                 frames.append(((X[q], Y[q], G[q], float(YW[q]), bool(SF[q]), float(PI[q])), dict(phase='stair' if SF[q] else 'walk', station=None, heading_to=dest)))
@@ -490,7 +509,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
             frames.append(((x, y, g, yw, False, pitch), dict(phase=phase, station=s.get('room') or s.get('garden'))))
     # end state: the last station's final pose
     last = legs[-1]
-    if last['kind'] in ('turn', 'pan'):
+    if last['kind'] in ('turn', 'arc', 'pan'):
         x, y = last['at']; frames.append(((x, y, LEVEL_Z[last['level']], float(last['yawfn'](np.array([last['T']]))[0]), False, 0.), dict(phase='hold', station=last.get('room') or last.get('garden'))))
     elif last['kind'] == 'walk':
         leg = last['leg']; x, y, g, yw, sf, pi = (v[0] for v in leg['at']([leg['T']]))
@@ -500,7 +519,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     wide_rooms = lens_rooms() if pol.get('wide_lens_mm') else set()
     spans = {}
     for i, (_, tag) in enumerate(frames):
-        if tag['phase'] in ('turn', 'hold') and tag['station'] in wide_rooms:
+        if tag['phase'] in ('turn', 'hold') and str(tag['station']).split('~')[0] in wide_rooms:
             a, b = spans.get(tag['station'], (i, i)); spans[tag['station']] = (min(a, i), max(b, i))
     lens = lens_profile(len(frames), list(spans.values()), fps, pol.get('base_lens_mm', 24), pol.get('wide_lens_mm', 24), pol.get('lens_ease_s', 1.25))
     dark = set(pol.get('dark_rooms', []))
@@ -520,7 +539,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     pol['frames'] = len(out)
     stations = []
     for s in legs:
-        if s['kind'] in ('turn', 'pan'):
+        if s['kind'] in ('turn', 'arc', 'pan'):
             f = [o['index'] for o in out if o['station'] == (s.get('room') or s.get('garden')) and o['phase'] in ('turn', 'pan')]
             info = s.get('info', {})
             stations.append(dict(room=s.get('room'), garden=s.get('garden'), kind=s['kind'], point=list(s['at']), first_frame=f[0], last_frame=f[-1],

@@ -17,7 +17,7 @@ from archpipe.flyaudit import core, audit
 from wt_plan import vmap
 from tour_points import classify_views
 
-STRIDE = 6; STEP = 5; MAXOFF = 90; TRAVEL_LIMIT = 70; STAIR_TRAVEL_LIMIT = 85; PREFER = .004; WINDOW = 12
+STRIDE = 6; STEP = 5; MAXOFF = 90; TRAVEL_LIMIT = 85; STAIR_TRAVEL_LIMIT = 85; PREFER = .004; WINDOW = 12
 
 
 def legs_of(frames):

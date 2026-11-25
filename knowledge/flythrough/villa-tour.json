@@ -30,23 +30,16 @@
  "order_note": "entrance (entry-b) -> dining side, dining (+ east yard), living (+ south garden), bar alcove -> kitchen island, kitchen, dirty kitchen -> family, guest WC, stair-foot hall, lounge (+ north court), nook, pantry, cinema, store -> stair foot, up the flight -> GF: top of the flight, landing, study, gallery, family bath, corridor, kids A and B, parents entry, bedroom, dressing, dressing ext, ensuite",
  "stations": [
   {
-   "room": "entry-b"
-  },
-  {
-   "room": "dining-side"
-  },
-  {
-   "room": "dining"
-  },
-  {
-   "garden": "east-yard",
-   "door": [
-    16.889,
-    -23.591
+   "start": [
+    15.577,
+    -26.811
    ]
   },
   {
-   "room": "living"
+   "space": "living"
+  },
+  {
+   "space": "living~a4"
   },
   {
    "garden": "south-garden",
@@ -56,28 +49,44 @@
    ]
   },
   {
-   "room": "bar-alcove"
+   "space": "living~a2"
   },
   {
-   "room": "kitchen-island"
+   "space": "dining-side~a1"
   },
   {
-   "room": "kitchen"
+   "space": "living~a3"
   },
   {
-   "room": "dirty-kitchen"
+   "garden": "east-yard",
+   "door": [
+    16.889,
+    -23.591
+   ]
   },
   {
-   "room": "family"
+   "space": "dining~a1"
   },
   {
-   "room": "guest-wc"
+   "space": "dining~a2"
   },
   {
-   "room": "hall-b"
+   "space": "dirty-kitchen~a2"
   },
   {
-   "room": "lounge"
+   "space": "dirty-kitchen"
+  },
+  {
+   "space": "family~a1"
+  },
+  {
+   "space": "cinema"
+  },
+  {
+   "space": "cinema~a2"
+  },
+  {
+   "space": "store-ramp"
   },
   {
    "garden": "north-court",
@@ -87,49 +96,52 @@
    ]
   },
   {
-   "room": "lounge-nook"
+   "space": "lounge-nook~a1"
   },
   {
-   "room": "pantry"
+   "space": "lounge~a4"
   },
   {
-   "room": "cinema"
+   "space": "lounge"
   },
   {
-   "room": "store-ramp"
+   "space": "hall-b~a1"
   },
   {
    "stair": "up"
   },
   {
-   "room": "landing-gf"
+   "space": "landing-gf~a1"
   },
   {
-   "room": "study-game"
+   "space": "study-game"
   },
   {
-   "room": "gallery-end"
+   "space": "study-game~a3"
   },
   {
-   "room": "family-bath"
+   "space": "corridor~a1"
   },
   {
-   "room": "corridor"
+   "space": "corridor~a3"
   },
   {
-   "room": "kids-a"
+   "space": "family-bath"
   },
   {
-   "room": "kids-b"
+   "space": "kids-a~a2"
   },
   {
-   "room": "parents-entry"
+   "space": "corridor~a2"
   },
   {
-   "room": "parents-bed"
+   "space": "kids-b"
   },
   {
-   "room": "parents-dressing",
+   "space": "parents-bed~a2"
+  },
+  {
+   "space": "parents-dressing",
    "via": [
     [
      20.4,
@@ -146,10 +158,7 @@
    ]
   },
   {
-   "room": "parents-dressing-ext"
-  },
-  {
-   "room": "parents-ensuite"
+   "space": "parents-ensuite~a2"
   }
  ],
  "point_bounds": {
@@ -170,5 +179,28 @@
  "transit_rooms": {
   "stair-b": "under the flight; a walk-and-look (the climb looks up the flight)",
   "stair-gf": "over the flight; a walk-and-look off the top of the flight, no turn"
- }
+ },
+ "orig_gardens": [
+  {
+   "garden": "east-yard",
+   "door": [
+    16.889,
+    -23.591
+   ]
+  },
+  {
+   "garden": "south-garden",
+   "door": [
+    22.597,
+    -26.131
+   ]
+  },
+  {
+   "garden": "north-court",
+   "door": [
+    3.617,
+    -26.156
+   ]
+  }
+ ]
 }

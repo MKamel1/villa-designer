@@ -1,66 +1,68 @@
 {
-  "schema": "flythrough-tour-policy/1",
-  "status": "WT lane 2026-11-24, registered before any tour frame was rendered; overrides knowledge/flythrough/villa-policy.json",
-  "turn_rate_deg_s": 40,
-  "turn_rate_basis": "ASSUMED policy, inside the client-requested 30-45 deg/s comfortable band for an on-screen pan; a full 360 takes 9 s. No published standard claimed.",
-  "turn_accel_deg_s2": 90,
-  "turn_accel_basis": "ASSUMED: yaw rate ramps 0 to 40 deg/s in 0.44 s so no turn starts or stops with a snap",
-  "best_view_hold_s": 1.5,
-  "best_view_hold_basis": "ASSUMED short pause on the room's best view (the same subject as its still view in knowledge/render-set/views.json)",
-  "walk_yaw_rate_deg_s": 40,
-  "walk_yaw_rate_basis": "ASSUMED policy, 40 deg/s = the 360 turn rate, inside the client band 30-45 (was 30, raised 2026-11-24 so the slow walk through a bend, which was most of the wall-facing walking time, is shorter): walking speed drops wherever the heading would turn faster than this",
-  "maximum_yaw_rate_deg_s": 45,
-  "lookahead_m": 1.5,
-  "lookahead_basis": "ASSUMED: the camera heading is the direction of the route 1.5 m ahead, so it always looks where it is going",
-  "point_wall_clearance_m": 1.0,
-  "point_wall_clearance_basis": "production forward-wall screen (camera_wall_sightline_clearance, 1.0 m); the 360 point keeps every direction clear, so no frame of the turn faces a wall within 1 m",
-  "garden_pan_deg": 30,
-  "garden_pan_rate_deg_s": 20,
-  "garden_inward_offsets_m": [
-    2.0,
-    1.5,
-    1.0,
-    0.7
+ "schema": "flythrough-tour-policy/1",
+ "status": "WT lane 2026-11-24, registered before any tour frame was rendered; overrides knowledge/flythrough/villa-policy.json",
+ "turn_rate_deg_s": 40,
+ "turn_rate_basis": "ASSUMED policy, inside the client-requested 30-45 deg/s comfortable band for an on-screen pan; a full 360 takes 9 s. No published standard claimed.",
+ "turn_accel_deg_s2": 90,
+ "turn_accel_basis": "ASSUMED: yaw rate ramps 0 to 40 deg/s in 0.44 s so no turn starts or stops with a snap",
+ "best_view_hold_s": 1.5,
+ "best_view_hold_basis": "ASSUMED short pause on the room's best view (the same subject as its still view in knowledge/render-set/views.json)",
+ "walk_yaw_rate_deg_s": 40,
+ "walk_yaw_rate_basis": "ASSUMED policy, 40 deg/s = the 360 turn rate, inside the client band 30-45 (was 30, raised 2026-11-24 so the slow walk through a bend, which was most of the wall-facing walking time, is shorter): walking speed drops wherever the heading would turn faster than this",
+ "maximum_yaw_rate_deg_s": 45,
+ "lookahead_m": 1.5,
+ "lookahead_basis": "ASSUMED: the camera heading is the direction of the route 1.5 m ahead, so it always looks where it is going",
+ "point_wall_clearance_m": 1.0,
+ "point_wall_clearance_basis": "production forward-wall screen (camera_wall_sightline_clearance, 1.0 m); the 360 point keeps every direction clear, so no frame of the turn faces a wall within 1 m",
+ "garden_pan_deg": 30,
+ "garden_pan_rate_deg_s": 20,
+ "garden_inward_offsets_m": [
+  2.0,
+  1.5,
+  1.0,
+  0.7
+ ],
+ "stair_pitch_up_deg": 12,
+ "stair_void_pitch_down_deg": 22,
+ "pitch_basis": "ASSUMED: the camera looks up the flight while climbing and down the void from the top landing; vertical lens shift is used, as for every still",
+ "interior_preview_every_nth_frame_for_exposure": 48,
+ "preview": {
+  "resolution": [
+   480,
+   270
   ],
-  "stair_pitch_up_deg": 12,
-  "stair_void_pitch_down_deg": 22,
-  "pitch_basis": "ASSUMED: the camera looks up the flight while climbing and down the void from the top landing; vertical lens shift is used, as for every still",
-  "interior_preview_every_nth_frame_for_exposure": 48,
-  "preview": {
-    "resolution": [
-      480,
-      270
-    ],
-    "samples": 16,
-    "denoise": true
-  },
-  "base_lens_mm": 24,
-  "wide_lens_mm": 16,
-  "lens_ease_s": 1.25,
-  "lens_basis": "client decision 2026-11-24: 16 mm for the 360 in small rooms, 24 mm elsewhere; the focal length eases between the two over lens_ease_s (policy, inside the client's 1-1.5 s) while the camera moves or turns, never a cut; smoothstep, so the largest step is 1.5*8/(1.25*24)=0.4 mm per frame",
-  "lens_caption": "16 mm wide lens: small room",
-  "lens_room_rule": {
-    "audit": "archpipe.flyaudit v2 categories",
-    "lens_mm": 24,
-    "modes": [
-      "sweeping",
-      "holding"
-    ],
-    "min_wall_dominated_share": 0.25,
-    "basis": "a room gets 16 mm when a 24 mm 360 there is wall-dominated in at least this share of its sweep and hold frames (policy; derived by scripts/lens_rooms.py into lens-rooms.json)"
-  },
-  "exposure_ease_s": 1.25,
-  "exposure_basis": "each exposure group (the house day group, each dark room, each garden pan) has its own measured lock; the exposure and white balance move between groups with a moving average of exposure_ease_s so there is no cut",
-  "dark_rooms": [
-    "family-bath",
-    "parents-ensuite",
-    "parents-dressing-ext",
-    "store-ramp",
-    "cinema",
-    "guest-wc"
+  "samples": 16,
+  "denoise": true
+ },
+ "base_lens_mm": 24,
+ "wide_lens_mm": 16,
+ "lens_ease_s": 1.25,
+ "lens_basis": "client decision 2026-11-24: 16 mm for the 360 in small rooms, 24 mm elsewhere; the focal length eases between the two over lens_ease_s (policy, inside the client's 1-1.5 s) while the camera moves or turns, never a cut; smoothstep, so the largest step is 1.5*8/(1.25*24)=0.4 mm per frame",
+ "lens_caption": "16 mm wide lens: small room",
+ "lens_room_rule": {
+  "audit": "archpipe.flyaudit v2 categories",
+  "lens_mm": 24,
+  "modes": [
+   "sweeping",
+   "holding"
   ],
-  "dark_rooms_basis": "rooms the audit (v2) finds without glazing visible from the room; each is metered as its own exposure group",
-  "turn_rate_wall_deg_s": 44,
-  "turn_rate_view_deg_s": 30,
-  "turn_rate_variable_basis": "ASSUMED policy inside the client's 30-45 deg/s band: the 360 sweeps at 44 deg/s through headings the audit finds wall-dominated from that standing point (tour-points.json yaw_table, widened by one step) and at 30 deg/s through the others, rate changes bounded by turn_accel_deg_s2. 44 not 45 so the measured peak stays under maximum_yaw_rate_deg_s"
+  "min_wall_dominated_share": 0.25,
+  "basis": "a room gets 16 mm when a 24 mm 360 there is wall-dominated in at least this share of its sweep and hold frames (policy; derived by scripts/lens_rooms.py into lens-rooms.json)"
+ },
+ "exposure_ease_s": 1.25,
+ "exposure_basis": "each exposure group (the house day group, each dark room, each garden pan) has its own measured lock; the exposure and white balance move between groups with a moving average of exposure_ease_s so there is no cut",
+ "dark_rooms": [
+  "family-bath",
+  "parents-ensuite",
+  "parents-dressing-ext",
+  "store-ramp",
+  "cinema",
+  "guest-wc"
+ ],
+ "dark_rooms_basis": "rooms the audit (v2) finds without glazing visible from the room; each is metered as its own exposure group",
+ "turn_rate_wall_deg_s": 44,
+ "turn_rate_view_deg_s": 30,
+ "turn_rate_variable_basis": "ASSUMED policy inside the client's 30-45 deg/s band: the 360 sweeps at 44 deg/s through headings the audit finds wall-dominated from that standing point (tour-points.json yaw_table, widened by one step) and at 30 deg/s through the others, rate changes bounded by turn_accel_deg_s2. 44 not 45 so the measured peak stays under maximum_yaw_rate_deg_s",
+ "arc_hold_s": 0.5,
+ "arc_hold_basis": "ASSUMED: half a second on the last heading of a partial look"
 }

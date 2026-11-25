@@ -23,7 +23,7 @@ if __name__ == '__main__':
     for s in path['stations']:
         print(s['room'] or s['garden'], s['kind'], [round(v, 2) for v in s['point']], s['first_frame'], round(s['seconds'], 1), 'wall', s['wall_min_m'] and round(s['wall_min_m'], 2), 'FLAG' if s['flagged_under_1m'] else '', s['best_view'])
     print('dir', WT.direction_findings(path['frames'])[:5]); print('stair', WT.stair_findings(path['frames']))
-    print('cov', WT.coverage_findings(path['frames'], [s['room'] for s in path['stations'] if s['room']]))
+    print('cov', WT.coverage_findings(path['frames'], [s['room'] for s in path['stations'] if s['room'] and s['kind'] == 'turn']))
     import collections
     bad = WT.direction_findings(path['frames'])
     print(len(bad), collections.Counter((path['frames'][i]['phase'], path['frames'][i]['room']) for i, _ in bad).most_common(8))
