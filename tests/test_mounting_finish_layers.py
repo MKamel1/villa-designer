@@ -26,6 +26,10 @@ class FinishLayers(unittest.TestCase):
              patch('archpipe.concept.parents_bed.apply', side_effect=lambda s,*a:s):
             cls.before = VR.build(views=[])
         cls.scene = deepcopy(cls.before)
+        # The frozen baseline is the historical omitted-finish defect. The 2026-11-24 bath feature panel (a shell layer standing on the
+        # wall) now grounds the ensuite riser rail even without the finish layers, which would hide that defect: it stays in the clean
+        # scene (which must stay quiet with it) and is taken out of the historical baseline only.
+        cls.before["meshes"] = [m for m in cls.before["meshes"] if m["id"] != "detail-bath-feature-panel"]
         lay = R.design("D1")
         build(cls.scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
 

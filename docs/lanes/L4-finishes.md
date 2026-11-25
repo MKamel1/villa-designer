@@ -536,3 +536,53 @@ The mean is not lower with the finishes (n01 +6 %, v06 +10 %), because the expos
 * Exposure: jobq `L4-r4-measure-prod-1` and `L4-r4-measure-set-1` (new ids; the earlier `L4-r3-measure-*` pair was superseded by the Marble011 swap), copied byte for byte.
 * Renders: jobq `L4-r4-draft-1` (96 spp, scene cache), JPEGs at 1500 px in `knowledge/render-set/l4/draft/`; critic VLM jobq `L4-r4-critic-vlm-2`, `knowledge/render-set/l4/critic-results.json`: **3 pass (n01, n03, v05), 7 fail** (R4 clipped window in n13, n16, v06; n02 blue cast R12; n15 and v34 framing and bare-room WARNs; v33 R12/R3 WARNs). None is a finish-colour finding.
 * Scene hashes (built clean at the commit in `knowledge/render-set/l4/scene-hashes.json`, `git_dirty` false, receipts and records active, no bypass): production `39a8174d84a1202e...` (272,995,744 bytes, content `d00d565b...`), render set `3d19c10687e463e8...` (273,036,203 bytes, content `2c46884b...`), 1,226 meshes, 46 views; receipts `furniture-stage2` room_context `e9532d04871c53e5`, `parents-bed` `3ad6955d132b45d9`; exposure measurement hashes production `eb49f806...`, set `eb0b9fbb...`. The images were rendered from a scene whose provenance-stripped content hash equals the final build's.
+
+# Round 5 (2026-11-24): the client's kitchen and ensuite decisions, taken from their own reference images
+
+Decision: `docs/decisions/interior-presentation-2026-11-22.md`, "Client decisions (2026-11-24)". References (third-party, never committed): `docs/brief/villa_01_guidelines_images/image23.png` (kitchen) and `image12.jpg` (bathroom), read in the lead checkout. Data: `knowledge/products/finishes/R.json` (new palette R), `chosen.json` (50 slots), `render-colours.json`. No prices.
+
+## Products (maker page quoted in each item; colours sampled from the maker's own image by `scripts/source_maker_colours.py`)
+
+| slot | product | source | colour |
+|---|---|---|---|
+| kitchen-front (fronts, island carcass, tall units) | EGGER H3734 ST9 Natural Dijon Walnut (palette A's product) | egger.com decor page, quote in `A.json` | maker decor image, `#8d623b` |
+| worktop, waterfall island, backsplash | Marazzi Grande Marble Look **Calacatta Vena Vecchia** Lux RT 6.5 mm, M7GF, 1600 x 3200 mm | marazzigroup.com collection page; listing row (size, code, thickness) in `R.json` | maker swatch, `#eae7e2` |
+| ensuite feature panel | the same slab (M7GF) | same | same |
+| ensuite floor | Marazzi Grande Marble Look **Calacatta Extra** Lux RT 6.5 mm, M0ZK | same | maker swatch, `#e0dcd6` |
+| ensuite brass | Gessi **Gessi316**, bath mixer 54037, finish 727 "Brass Brushed PVD" | areapro.gessi.com/en/product/54037 | Gessi's own finish chip 727, `#d0be93`; metal |
+| ensuite LED cove | iGuzzini **ST39** Underscore Ledstrip Tube Hi Performance, 15 W/m, 1780 lm/m, 2700 K, CRI 92 (Rf 93), IP65 uncut, 24 V | iguzzini.com/en/st39 (page text `knowledge/lighting-products/iguzzini/ST39/ST39-product-page.txt`) | n/a |
+
+Kept: dark Frappuccino ensuite walls (C-bath-tile). Stools and island globes unchanged. Look-alikes are CC0 ambientCG Marble014 (slab veining) and Marble019 (floor), labelled, true 3.2 m slab scale.
+
+**Honest limits.** (1) No CC0 scan has gold veining (ambientCG Marble001-025 checked), so the look-alike veining is finer, patchier and rust-toned compared with the real slab's gold ribbons in image23. (2) The Gessi page opens on finish 726 "Warm Bronze"; the name "Brass Brushed PVD (727)" comes from Gessi's finish listings relayed by search and the maker's own image URL `54037#727` and chip, not from page text: recorded as `finish_name_caveat` in `R.json`/`chosen.json`; confirm before ordering. Egypt supply of Marazzi and Gessi is unconfirmed (recorded as gaps). (3) The Lux floor is polished: Marazzi makes no slip claim; the other wet rooms keep the slip-rated Limestone20 floor. (4) ST39's strip is not DALI by itself: DALI-2 needs a separate 24 V constant-voltage driver; the cut ends are IP20 until sealed.
+
+## Model changes
+
+* **Waterfall island:** the design model's island (`furn-k-island`) already carries `waterfall_ends: both-short`, two 40 mm full-height end slabs; no panels were added. They take the worktop slab material (`test_waterfall_ends_return_the_slab_to_the_floor_in_the_slab_material`).
+* **Backsplash:** the model holds no splash zone (only the K-SPLASH 600 mm target). `villa_render.py` adds `detail-backsplash-k-run` and `detail-backsplash-dk-run`, 600 mm x 12 mm slabs on the wall behind each base run's worktop, element ids = the run: a render finish layer, not an authored model element. Reported, not invented.
+* **Ensuite:** `detail-bath-feature-panel`, 1.50 m wide, rim (0.55 m) to 2.40 m, a 35 mm shell finish layer standing on the wall (its face 12 mm proud of the 23 mm marble wall layer), centred on the bath. The hand-shower riser rail brackets mount on its face. The ensuite floor takes `marble-ensuite-floor`; the ensuite's `brass` meshes (and furniture taps) take `brass-ensuite`; positions unchanged.
+* **Lighting:** new kind `PCOVE`, three strips (two sides, top) round the panel, zone `Z-GF-PARENTS-ENSUITE-PCOVE`, decorative layer, product-bound to ST39 (`products-frozen.json`, `knowledge/lighting-products/iguzzini/ST39/`), driver 0.15 (limit 0.80). Registered in the schedule, drawing legend, `lp_candidates`, `candidates.json`, the model snapshot (3 luminaires; the TOE marker renumbered 07 -> 10).
+
+## Cove verification (lightcalc / LV rows)
+
+* V10 (ST39, all rows pass): lumens 1780.0 integrated vs 1780 published per metre (0.00 %); Imax 574 cd vs 577 cd published (-0.58 %); 15 W vs 15 W; CRI 92 vs 92; flux at or above 90 deg 81.1 vs 81.2 lm; the bound file is byte-identical to the manufacturer's download; LDT and IES agree to 0.006 % under V10's cross-check (the library's own pair check reports "FAIL 96.3 %", a conversion artefact of its LDT-to-IES step on a strip; the manufacturer IES is the file used, as for ST49).
+* The cove is decorative but adds direct light: with the first driver (0.20) the basin plane read 447 lx against its 300 lx card (LV12 x1.49, fail). `villa_tune_cli` re-solved the two ensuite task zones (basin 0.76 -> 0.47, task 0.70 -> 0.50), the ensuite Radiance cluster was regenerated (`knowledge/lighting-verify/radiance/GF-parents-ensuite.json`): LV12 card/pe-basin **302 lx = x1.007**, LV12 driver 50 % (limit 80 %), LV5 ensuite +0.5 %, LV6 ensuite -5 %, LV7 converged, LV3 clear, LV2 PCOVE rows inside the room. Remaining LV failures: the same 16 as before (none in the ensuite or from PCOVE; the LV6 dressing-room row is old).
+* Cycles and V8 were not run (`--no-cycles --skip-v8`).
+
+## Renders (96 spp, 1920 x 1280, jobq `L4-r5-render-3` from the render-set scene; JPEGs in `knowledge/render-set/l4/draft/`)
+
+* **n02 / n41 / n03 (kitchen), next to image23.** Alike: walnut fronts and island body, a white slab with warm veining, the slab returning to the floor at the island end (n41), a matching 600 mm splash behind the sink (n03), globe pendants and stools unchanged. Unlike: the veining is fine rust-brown patches, not image23's bold flowing gold ribbons; the walnut is a lighter orange-brown than the reference's dark walnut (the maker's decor image mean); the splash stops at 600 mm where the reference runs a full slab to the hood; no cooker hood or wall units.
+* **n42 / n15 (ensuite bath wall), next to image12.** Alike: dark marble walls kept either side, a light cream-and-brown veined panel behind the bath, framed by a thin LED glow down both sides and across the top, brass mixer and handset. Unlike: the panel is lit more evenly and the veins are rust blotches rather than a single vertical brown vein; the LED glow reads as a hard white line against a faint halo, not the reference's soft warm bloom; the dark side walls are more brown than the reference's near-black green-grey.
+* **n16 (basin).** The light panel and brass show at the left; no floor visible, so the light floor is not shown in any of the seven views (a floor-level view is an open item).
+* **v33 (basement):** unchanged by the decisions (no kitchen in frame; the library and sofa).
+
+## Critic (frozen-v1 rubric, VLM `L4-r5-critic-vlm-2`; `knowledge/render-set/l4/critic-results.json`, these 7 views only)
+
+**1 pass (n03), 6 fail.** n02 R12 0 (blue daylight cast, as before) plus WARNs R8/R10/R11; n41 R12 0 (warm +0.26 cast in the evening-lit basement); n16 R4 0 (clipped window 1.3 %); n15 and n42 WARN R10 (tub cut off at the bottom, dark side bands) and R11 (bare bath); v33 WARN R3 (1.15 deg lean) and R12. None of these is a finish-colour finding; R11 "bare" is the known empty-props limit.
+
+## Production scene, receipts, exposure, hashes (no bypass)
+
+* `origin/lane/LG` (garden lighting) had not landed in `integ/aplus` when this step ran (lead had not merged it), so lane/L4 merged `origin/integ/aplus` and then `origin/lane/LG` (candidates.json: took theirs and re-added the PCOVE entry). Repeat the receipt/exposure step if integ moves again.
+* Receipts regenerated baseline-relative (`refresh_2026_11_24_L4`): old tree `origin/lane/LG` (1dddb34) reproduces all 8 stored digests; changed sections: architecture 6 faces removed / 12 added (ensuite floor layer 6 + 6, the 6-face panel), materials 6 added / 2 removed / 4 changed (the last two are the ensuite task-driver re-solve); layout, specification, furniture, meshes, models, props unchanged. 16 individual + joint reviews, 0 findings (`knowledge/approvals-review/evidence-l4/`).
+* Exposure re-measured on the final tree: jobq `L4-r5-measure-both-4` (production then render set, copied byte for byte). Earlier attempts: `L4-r5-measure-prod-1/-set-1` ran out of GPU memory beside another lane's Blender; `-both-2` cancelled; `-both-3` measured the tree before the panel became a shell layer (the rebuild then rejected that record as stale, as designed).
+* Scene hashes: `knowledge/render-set/l4/scene-hashes.json`; production 273,158,509 bytes, render set 273,195,477 bytes, 1,263 meshes, 48 views.
