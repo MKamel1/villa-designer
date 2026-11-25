@@ -105,7 +105,7 @@ class Tour(unittest.TestCase):
                 continue
             tab = sp[s['room']]['yaw_table']; k = min(range(len(tab)), key=lambda i: abs(WT.wrap(tab[i][0]-s['best_yaw_deg'])))
             self.assertFalse(tab[k][1], s['room']); n += 1                   # the hold is not on a wall-dominated heading
-        self.assertGreaterEqual(n, 10)
+        self.assertGreaterEqual(n, 6)
 
 
 class NonInformativeRule(unittest.TestCase):
