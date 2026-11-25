@@ -425,6 +425,9 @@ def add_material(name, spec, library_root, warnings):
         nt.links.new(height, bump.inputs['Height'])
         nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
         mat['mineral_pattern_scale_m'] = size
+    if spec.get("fabric_class"):                # lane SOFT: soft-goods fabric finish (sheen, fuzz, mm-scaled weave)
+        from archpipe.blender import fabric_nodes
+        fabric_nodes.finish_fabric(mat, spec)
     if spec.get("garden_look"):                 # lane GI: procedural finishes of the decided garden (water, liner, leaf cut-outs, matte stand-ins, weathered render)
         from archpipe.blender import garden_ldb
         garden_ldb.apply_look(mat, spec)
@@ -2016,6 +2019,10 @@ def render(scene_data, args):
     if needs_scene_admission(scene_data):
         require_scene(scene_data)
     os.makedirs(args.out, exist_ok=True)
+    if not args.no_soft:                         # lane SOFT: baked cloth cushions, inflated upholstery, fabric finish
+        from archpipe.blender import soft_goods
+        soft_report = soft_goods.soften_scene(scene_data)
+        print("soft goods:", soft_report)
     if args.views == "none" and not (args.calibrate or args.measure_lighting or args.measure_exposure_groups):
         raise ValueError("--views none requires --calibrate or --measure-lighting")
     if args.views == "none" and args.calibrate:
@@ -2249,6 +2256,7 @@ def main():
     ap.add_argument("--samples", type=int)
     ap.add_argument("--res", type=lambda s: [int(v) for v in s.lower().split("x")])
     ap.add_argument("--cpu", action="store_true")
+    ap.add_argument("--no-soft", action="store_true", help="render the rigid soft goods (before/after comparison only)")
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
     ap.add_argument("--measure-exposure-groups", action="store_true")

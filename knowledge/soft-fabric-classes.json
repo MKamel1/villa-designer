@@ -1,0 +1,45 @@
+{
+ "policy": "OURS (unverified): the held books carry no fabric weave figures. Targets are band centres.",
+ "feature_fraction_of_tile": {
+  "rough_linen": 0.003906,
+  "Fabric066": 0.003906,
+  "Carpet016": 0.005859,
+  "Leather035A": 0.011719,
+  "Fabric036": 0.003906,
+  "Fabric081C": 0.048828,
+  "Fabric082A": 0.003906,
+  "Fabric030": 0.001953
+ },
+ "classes": {
+  "boucle": {
+   "feature_mm": 5.0,
+   "roughness": 0.92,
+   "sheen": 0.35,
+   "fuzz": 0.55
+  },
+  "linen": {
+   "feature_mm": 1.2,
+   "roughness": 0.9,
+   "sheen": 0.25,
+   "fuzz": 0.3
+  },
+  "cotton": {
+   "feature_mm": 1.2,
+   "roughness": 0.9,
+   "sheen": 0.22,
+   "fuzz": 0.25
+  },
+  "leather": {
+   "feature_mm": 2.0,
+   "roughness": 0.55,
+   "sheen": 0.0,
+   "fuzz": 0.0
+  },
+  "velvet": {
+   "feature_mm": 0.8,
+   "roughness": 0.85,
+   "sheen": 0.8,
+   "fuzz": 0.7
+  }
+ }
+}
