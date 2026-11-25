@@ -82,15 +82,7 @@ def _stool(xc, y0, y1, seat=0.65):
             ("seat", (xc - 0.19, y0 + 0.01, seat - 0.05, xc + 0.19, y1 - 0.01, seat))]
 
 
-def _vanity_stool(xc, y0, y1, seat=0.46, w=0.40):
-    """A backless dressing-table stool: 4 legs and a seat. Backless so it can sit wholly under the table top."""
-    parts = [("seat", (xc - w / 2, y0, seat - 0.04, xc + w / 2, y1, seat))]
-    parts += [("leg", (xc + sx * (w / 2 - 0.03) - 0.02, yy, 0, xc + sx * (w / 2 - 0.03) + 0.02, yy + 0.04, seat - 0.04))
-              for sx in (-1, 1) for yy in (y0 + 0.02, y1 - 0.06)]
-    return parts
-
-
-# Pieces whose seat is staged TUCKED under the top, as designed furniture: a pulled-out chair at the principal
+# Pieces whose chair is staged TUCKED under the top, as designed furniture: a pulled-out chair at the principal
 # bedroom's vanity left 0.46 m between the duvet and the chair on the only way to the dressing door (WT, 2026-11-23;
 # docs/lessons/DF.md). Test the old staging with it["chair_pulled_out"] = True.
 TUCKED_SEAT = {"pb-vanity"}
@@ -353,8 +345,8 @@ def extras(it):
             xc = -W / 2 + (k + 0.5) * W / it["stools"]
             out.append(("stool-%d" % (k + 1), _stool(xc, -D / 2 - 0.05, -D / 2 + 0.35)))
     if it["type"] == "desk" and it["id"] in TUCKED_SEAT and not it.get("chair_pulled_out"):
-        # dressing-table stool wholly under the top: 0.38 m deep inside the 0.40 m top, no projection past its front
-        out.append(("chair-1", _vanity_stool(0.0, D / 2 - 0.39, D / 2 - 0.01)))
+        # seat under the top, back against its front edge: only the 0.03 m back stands proud of the 0.40 m top
+        out.append(("chair-1", _chair(0.0, D / 2 - 0.42, D / 2 + 0.03, True)))
     elif it["type"] == "desk":
         n = it.get("chairs", max(1, int(W // 0.9)))
         for k in range(n):

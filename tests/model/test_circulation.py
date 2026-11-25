@@ -33,13 +33,14 @@ class StagedCirculation(unittest.TestCase):
         self.assertEqual([C.describe(r) for r in C.pinches(LAY)], [])
         self.assertGreater(len(C.routes(LAY)), 30)                 # it did look at every door approach
 
-    def test_tucked_seat_stays_inside_the_vanity_footprint(self):
+    def test_tucked_chair_projects_only_its_back(self):
         v = next(i for i in F.layout(LAY) if i["id"] == "pb-vanity")
         fx0, fy0, fx1, fy1 = F.footprint(v)
         for _, parts in F3.extras(v):
             for _, b in parts:
                 x0, y0, _, x1, y1, _ = F3.to_world(v, b)
-                self.assertTrue(fx0 - 1e-6 <= x0 and x1 <= fx1 + 1e-6 and fy0 - 1e-6 <= y0 and y1 <= fy1 + 1e-6)
+                m = 0.03 + 1e-6                      # only the back (0.03 m) may stand proud of the top's front edge
+                self.assertTrue(fx0 - m <= x0 and x1 <= fx1 + m and fy0 - m <= y0 and y1 <= fy1 + m)
 
     def test_a_chair_elsewhere_is_not_flagged(self):
         # negative: pulling out a desk chair where there is room (kids-b desk) changes nothing

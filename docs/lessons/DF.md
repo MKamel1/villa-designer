@@ -14,8 +14,8 @@ Client, walkthrough v3 at 6:21: "something is blocking the way to the dressing r
   (`tests/model/test_circulation.py::DressingOverhang`).
 * **The vanity chair was a real second pinch.** The generated desk chair stands 0.30 m out from the vanity; the duvet is 0.10 m past
   the bed; between them 0.46 m (WT: 0.47). `villa_furnish.check` rasterises routes against plan pieces over 0.3 m only, so loose
-  seats were not in it and the principal bedroom passed. **Fix:** the vanity's seat is a backless dressing stool staged
-  tucked under the top (`villa_furnish3d.TUCKED_SEAT`, designed furniture, not a render trick). A chair with a back cannot tuck
+  seats were not in it and the principal bedroom passed. **Fix:** the vanity's chair is staged
+  tucked under the top (`villa_furnish3d.TUCKED_SEAT`, designed furniture, not a render trick). Its back cannot go under
   (its back is 0.85 m, the top 0.75 m).
   **Guard:** `model/circulation.py` raster-tests the widest path between every door approach of every cluster with chairs and
   stools as obstacles; `villa_render._build` raises `staged circulation` on any route under its requirement. Positive test: the

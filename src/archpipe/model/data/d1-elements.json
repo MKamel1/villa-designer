@@ -53,7 +53,7 @@
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 111,
+  "type": 112,
   "wall": 36,
   "window": 8
  },
@@ -20974,15 +20974,15 @@
    "kind": "furniture",
    "level": "GF",
    "placement": [
-    21305.0,
-    -26391.0,
+    21151.0,
+    -26379.0,
     550.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    551.3,
-    163.1,
-    237.4
+    330.8,
+    97.9,
+    142.4
    ],
    "host": "",
    "room": "",
@@ -20991,10 +20991,10 @@
    "params": {
     "type": "dressing",
     "label": "dressing: books on the bedside",
-    "scale": 1.0,
+    "scale": 0.6,
     "plant": false,
-    "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 1.0",
-    "type_id": "type-furniture-dressing-book_encyclopedia_set_01-551_3-163_1-237_4"
+    "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 0.6",
+    "type_id": "type-furniture-dressing-book_encyclopedia_set_01-330_8-97_9-142_4"
    }
   },
   {
@@ -33388,7 +33388,7 @@
     "shared": {
      "type": "dressing"
     },
-    "occurrences": 18,
+    "occurrences": 17,
     "occurrence_ids": [
      "prop-lounge-books",
      "prop-library-books-0",
@@ -33406,8 +33406,7 @@
      "prop-library-books-12",
      "prop-library-books-13",
      "prop-library-books-14",
-     "prop-library-books-15",
-     "prop-bedside-books"
+     "prop-library-books-15"
     ],
     "key": [
      "furniture",
@@ -33534,6 +33533,45 @@
      701.2,
      657.4,
      841.2
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-furniture-dressing-book_encyclopedia_set_01-330_8-97_9-142_4",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    330.8,
+    97.9,
+    142.4
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "book_encyclopedia_set_01",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "furniture",
+    "shared": {
+     "type": "dressing"
+    },
+    "occurrences": 1,
+    "occurrence_ids": [
+     "prop-bedside-books"
+    ],
+    "key": [
+     "furniture",
+     "dressing",
+     "book_encyclopedia_set_01",
+     330.8,
+     97.9,
+     142.4
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
