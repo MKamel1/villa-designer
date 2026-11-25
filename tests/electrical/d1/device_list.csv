@@ -342,12 +342,16 @@ parents-dressing-ext,GF,lum-VSTRIP-parents-dressing-ext-02,luminaire,task,21170,
 parents-dressing-ext,GF,SWI-parents-dressing-ext-094,power/lighting control,switch,19704,-28671,1150,EA1-switch-open-plan,,DB-GF/L2,
 parents-ensuite,GF,lum-WW-parents-ensuite-01,luminaire,accent,20104,-29646,,,Z-GF-PARENTS-ENSUITE-ACCENT,DB-GF/L1,10.1 W
 parents-ensuite,GF,lum-WW-parents-ensuite-02,luminaire,accent,21824,-29646,,,Z-GF-PARENTS-ENSUITE-ACCENT,DB-GF/L1,10.1 W
-parents-ensuite,GF,lum-DL-parents-ensuite-03,luminaire,ambient,20154,-29281,,,Z-GF-PARENTS-ENSUITE-BASIN-TASK,DB-GF/L1,14.4 W
-parents-ensuite,GF,lum-TOE-parents-ensuite-07,luminaire,night,20324,-29281,,,Z-GF-PARENTS-ENSUITE-NIGHT,DB-GF/L1,0.9 W
-parents-ensuite,GF,lum-MIRROR-parents-ensuite-06,luminaire,task,19874,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L1,1.04 W
-parents-ensuite,GF,lum-VANITY-LIN-parents-ensuite-04,luminaire,task,19847,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L1,0.59 W
+parents-ensuite,GF,lum-DL-parents-ensuite-03,luminaire,ambient,20154,-29281,,,Z-GF-PARENTS-ENSUITE-BASIN-TASK,DB-GF/L2,14.4 W
+parents-ensuite,GF,lum-PCOVE-parents-ensuite-07,luminaire,decorative,19924,-31082,,,Z-GF-PARENTS-ENSUITE-PCOVE,DB-GF/L2,15 W
+parents-ensuite,GF,lum-PCOVE-parents-ensuite-08,luminaire,decorative,21484,-31082,,,Z-GF-PARENTS-ENSUITE-PCOVE,DB-GF/L2,15 W
+parents-ensuite,GF,lum-PCOVE-parents-ensuite-09,luminaire,decorative,20704,-31082,,,Z-GF-PARENTS-ENSUITE-PCOVE,DB-GF/L2,15 W
+parents-ensuite,GF,lum-TOE-parents-ensuite-10,luminaire,night,20324,-29281,,,Z-GF-PARENTS-ENSUITE-NIGHT,DB-GF/L1,0.9 W
+parents-ensuite,GF,lum-MIRROR-parents-ensuite-06,luminaire,task,19874,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L2,0.74 W
+parents-ensuite,GF,lum-VANITY-LIN-parents-ensuite-04,luminaire,task,19847,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L2,0.42 W
 parents-ensuite,GF,FCU-parents-ensuite-088,power/lighting control,fcu,20284,-28881,2300,EA2-fcu-outside-zones,WH-ENSUITE,DB-GF/D6,
-parents-ensuite,GF,SWI-parents-ensuite-087,power/lighting control,switch,21100,-28881,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
+parents-ensuite,GF,DRV-PCOVE-parents-ensuite,power/lighting control,led_driver,19904,-31011,2400,EA3-lighting-driver,,,
+parents-ensuite,GF,SWI-parents-ensuite-087,power/lighting control,switch,21100,-28881,1150,EA1-switch-latch-side,,DB-GF/L1+DB-GF/L2,hinge assumed (policy)
 parents-entry,GF,lum-COVE-parents-entry-01,luminaire,decorative,18977,-26911,,,Z-GF-PARENTS-ENTRY-DECORATIVE,DB-GF/L2,8 W
 parents-entry,GF,SWI-parents-entry-093,power/lighting control,switch,18427,-26971,1150,EA1-switch-open-plan,,DB-GF/L2,
 stair-gf,GF,SMOKE-014,ELV/fire,smoke,7032,-27521,2800,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"

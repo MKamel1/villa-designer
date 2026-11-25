@@ -34,8 +34,21 @@
    "basis": "estimate from the maker's colour name (not a maker-published value)"
   },
   "A-joinery-timber": {
-   "hex": "#6e4830",
-   "basis": "estimate from the maker's colour name (not a maker-published value)"
+   "hex": "#8d623b",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://cdn.egger.com/img/pim/8854421438494/8854545432606/original.png",
+   "page": "https://www.egger.com/en/furniture-interior-design/decors/H3734_9?country=GB",
+   "mode": "swatch",
+   "image_sha256": "37fc3005423be14552406e36771e5210df40a8f485251fa4cce7cac309facfaf",
+   "mean_linear": [
+    0.2677,
+    0.1211,
+    0.0436
+   ],
+   "luma": 0.1466,
+   "luma_cv": 0.163,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
   },
   "A-door": {
    "hex": "#734d36",
@@ -875,6 +888,91 @@
    "luma_cv": 0.96,
    "coverage": 0.762,
    "sampled": "2026-11-23"
+  },
+  "R-worktop": {
+   "hex": "#eae7e2",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m7gf/marazzi_grande_marble_look_m7gf-400x800.jpg",
+   "page": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+   "mode": "swatch",
+   "image_sha256": "f7e0f6e7de385b1c112fa8252e2b874043912c48bd9f5116e62012649c6e595e",
+   "mean_linear": [
+    0.8258,
+    0.7989,
+    0.758
+   ],
+   "luma": 0.8016,
+   "luma_cv": 0.198,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
+  },
+  "R-backsplash": {
+   "hex": "#eae7e2",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m7gf/marazzi_grande_marble_look_m7gf-400x800.jpg",
+   "page": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+   "mode": "swatch",
+   "image_sha256": "f7e0f6e7de385b1c112fa8252e2b874043912c48bd9f5116e62012649c6e595e",
+   "mean_linear": [
+    0.8258,
+    0.7989,
+    0.758
+   ],
+   "luma": 0.8016,
+   "luma_cv": 0.198,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
+  },
+  "R-bath-panel": {
+   "hex": "#eae7e2",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m7gf/marazzi_grande_marble_look_m7gf-400x800.jpg",
+   "page": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+   "mode": "swatch",
+   "image_sha256": "f7e0f6e7de385b1c112fa8252e2b874043912c48bd9f5116e62012649c6e595e",
+   "mean_linear": [
+    0.8258,
+    0.7989,
+    0.758
+   ],
+   "luma": 0.8016,
+   "luma_cv": 0.198,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
+  },
+  "R-floor-ensuite": {
+   "hex": "#e0dcd6",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://www.marazzigroup.com/app/uploads/collezioni/grande-marble-look-m0zk/marazzi_grande_marble_look_m0zk-400x800.jpg",
+   "page": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+   "mode": "swatch",
+   "image_sha256": "32ae5b427ac220744c8221c96f73b2b0948c91f6b2ff637db299fb3988acdf4d",
+   "mean_linear": [
+    0.7476,
+    0.7173,
+    0.6725
+   ],
+   "luma": 0.7205,
+   "luma_cv": 0.161,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
+  },
+  "R-brass-bath-mixer": {
+   "hex": "#d0be93",
+   "basis": "maker image, mean linear colour, mode swatch",
+   "url": "https://gessistorage.azureedge.net/finiturethumb/727.jpg",
+   "page": "https://areapro.gessi.com/en/product/54037",
+   "mode": "swatch",
+   "image_sha256": "2f08bff0a35bcbde61a7561915b041a4590059afb5051426c3d8d0f05b2573b3",
+   "mean_linear": [
+    0.6332,
+    0.5167,
+    0.2914
+   ],
+   "luma": 0.5252,
+   "luma_cv": 0.2,
+   "coverage": 1.0,
+   "sampled": "2026-11-24"
   }
  }
 }

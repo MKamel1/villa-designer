@@ -8,7 +8,7 @@
 | 4 | MDB/D4 | L2 | Garden lighting (LV transformer) GARDEN-LIGHT | RCBO 6 A B 30 mA Type A | 1.52 | 2C+E 2.5 mm2 PVC | 28.7 | 24.0 | 0.71 |
 | 5 | MDB/S1 | L2 | Garden sockets site-garden | RCBO 16 A B 30 mA Type A | 16.0 | 2C+E 4 mm2 PVC | 45.3 | 33.0 | 3.98 |
 | 6 | MDB/D5 | L3 | Gate intercom station and camera supply ELV-GATE | RCBO 6 A B 30 mA Type A | 1.01 | 2C+E 2.5 mm2 PVC | 18.2 | 24.0 | 0.51 |
-| 7 | MDB/F-DB-B | 3P | Feeder to DB-B | MCCB 80 A 4P | 71.52 | 4C+E 25 mm2 PVC | 10.4 | 83.5 | 0.27 |
-| 8 | MDB/F-DB-GF | 3P | Feeder to DB-GF | MCCB 50 A 4P | 48.28 | 4C+E 16 mm2 PVC | 14.9 | 66.1 | 0.4 |
+| 7 | MDB/F-DB-B | 3P | Feeder to DB-B | MCCB 80 A 4P | 72.55 | 4C+E 25 mm2 PVC | 10.4 | 83.5 | 0.28 |
+| 8 | MDB/F-DB-GF | 3P | Feeder to DB-GF | MCCB 50 A 4P | 49.92 | 4C+E 16 mm2 PVC | 14.9 | 66.1 | 0.41 |
 
 Ways 10, used 8, spare 2 (20 %).

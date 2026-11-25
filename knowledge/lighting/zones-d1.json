@@ -678,7 +678,7 @@
    "luminaire_ids": [
     "lum-DL-parents-ensuite-03"
    ],
-   "watts": 11.0,
+   "watts": 6.8,
    "dimming": "dali2"
   },
   {
@@ -686,9 +686,21 @@
    "room": "parents-ensuite",
    "layer": "accent",
    "luminaire_ids": [
-    "lum-TOE-parents-ensuite-07"
+    "lum-TOE-parents-ensuite-10"
    ],
    "watts": 0.9,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENSUITE-PCOVE",
+   "room": "parents-ensuite",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-PCOVE-parents-ensuite-07",
+    "lum-PCOVE-parents-ensuite-08",
+    "lum-PCOVE-parents-ensuite-09"
+   ],
+   "watts": 6.8,
    "dimming": "dali2"
   },
   {
@@ -699,7 +711,7 @@
     "lum-VANITY-LIN-parents-ensuite-04",
     "lum-MIRROR-parents-ensuite-06"
    ],
-   "watts": 1.6,
+   "watts": 1.2,
    "dimming": "dali2"
   },
   {

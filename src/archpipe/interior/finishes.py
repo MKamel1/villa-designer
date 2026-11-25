@@ -18,8 +18,9 @@ _PRICE_KEY = re.compile(r"price|cost|egp|usd|eur|fee|tariff|quote_amount", re.I)
 # Format-based goods: one look-alike image stands for ONE format unit (tile, slab, board), so the image is
 # mapped at the format's long side. Fabrics and veneers with no format use the look-alike scan's published size.
 # Painted or lacquered surfaces are rendered as a flat colour (LRV + stated colour): no look-alike image, no scale.
-FLAT_SLOTS = ("wall-paint", "kitchen-front")
-FORMAT_SLOTS = ("floor-living", "floor-gf", "floor-wet", "bath-tile", "worktop", "backsplash", "garden-paving")
+FLAT_SLOTS = ("wall-paint", "kitchen-front", "brass-fittings")
+FORMAT_SLOTS = ("floor-living", "floor-gf", "floor-wet", "bath-tile", "worktop", "backsplash", "garden-paving",
+                "floor-ensuite", "bath-feature")
 
 
 def _keys(obj, path=""):

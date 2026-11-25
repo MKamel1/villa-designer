@@ -106,5 +106,23 @@
   "dimming": "push-button dimmer, 1-100 % CCR_PWM",
   "ies_lumens_per_file": 233.9,
   "source_dir": "knowledge/lighting-products/erco/31327"
+ },
+ "PCOVE": {
+  "manufacturer": "iguzzini",
+  "code": "ST39",
+  "lm": 1780.0,
+  "watts": 15.0,
+  "cct": 2700.0,
+  "beam": 120.0,
+  "what": "Underscore Ledstrip Tube Hi Performance, 15 W/m, 1780 lm/m, 2700 K CRI 92, IP65 (uncut), 24 V, DALI-2 via a separate driver",
+  "substitute": false,
+  "ies_file": "IGUZZINI-ST39.ies",
+  "v10": "pass",
+  "url": "https://www.iguzzini.com/en/st39/",
+  "ip": "IP65 (strip uncut; cut ends IP20 until sealed)",
+  "cri": 92.0,
+  "dimming": "DALI-2 via a separate 24 V DALI-2 constant-voltage driver (not included with the strip)",
+  "ies_lumens_per_file": 1779.6,
+  "source_dir": "knowledge/lighting-products/iguzzini/ST39"
  }
 }

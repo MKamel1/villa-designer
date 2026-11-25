@@ -4,7 +4,7 @@
   {
    "code": "451G",
    "maker": "iguzzini",
-   "name": "Sipario LV \u00d8 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
+   "name": "Sipario LV Ø 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
    "lumens": 1957.5,
    "watts": 19.9,
    "beam_deg": 33.9,
@@ -48,7 +48,7 @@
       "worst_error": 0.004,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "product page 'F - Flood 34\u00b0'"
+      "source": "product page 'F - Flood 34°'"
      },
      {
       "kind": "lumens",
@@ -247,7 +247,7 @@
       "worst_error": 0.0147,
       "tolerance": 0.05,
       "status": "pass",
-      "source": "datasheet p1 cone table header '54.5\u00b0'"
+      "source": "datasheet p1 cone table header '54.5°'"
      }
     ],
     "status": "pass"
@@ -470,7 +470,7 @@
        "worst_error": 0.0179,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 56\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 56°'"
       },
       {
        "kind": "lumens",
@@ -616,7 +616,7 @@
        "worst_error": 0.0315,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 89\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 89°'"
       },
       {
        "kind": "lumens",
@@ -1466,7 +1466,7 @@
        "worst_error": 0.2128,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '4.7\u00b0'"
+       "source": "datasheet p1 cone table header '4.7°'"
       }
      ],
      "status": "fail"
@@ -1675,7 +1675,7 @@
        "worst_error": 0.2,
        "tolerance": 0.05,
        "status": "fail",
-       "source": "datasheet p1 cone table header '5.0\u00b0'"
+       "source": "datasheet p1 cone table header '5.0°'"
       }
      ],
      "status": "fail"
@@ -2620,7 +2620,7 @@
        "worst_error": 0.0349,
        "tolerance": 0.05,
        "status": "pass",
-       "source": "datasheet p1 'Beam angle C0 86\u00b0'"
+       "source": "datasheet p1 'Beam angle C0 86°'"
       }
      ],
      "status": "pass"
@@ -2681,7 +2681,7 @@
    {
     "code": "QA03",
     "maker": "iguzzini",
-    "name": "Laser pendant, \u00d859 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
+    "name": "Laser pendant, Ø59 Tech, DALI-2, Wide Flood 44 deg, 12.3 W system, 831.6 lm system, 2700 K, CRI 90, white",
     "exterior": null,
     "lumens": 831.6,
     "watts": 12.3,
@@ -2781,7 +2781,7 @@
    {
     "code": "QA11",
     "maker": "iguzzini",
-    "name": "Laser pendant, \u00d859 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
+    "name": "Laser pendant, Ø59 Deco, DALI-2, Flood 38 deg, 12.3 W system, 766.8 lm system, 2700 K, CRI 90, black",
     "exterior": null,
     "lumens": 766.8,
     "watts": 12.3,
@@ -3181,7 +3181,79 @@
   "VANITY-LIN": [],
   "VSCONCE": [],
   "STEP": [],
-  "PATH": []
+  "PATH": [],
+  "PCOVE": [
+   {
+    "code": "ST39",
+    "maker": "iguzzini",
+    "name": "Underscore15: Underscore Ledstrip Tube Hi Performance - 15W/m - 15W 1780lm (1.0 m) - 2700K",
+    "lumens": 1780.0,
+    "watts": 15.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "DALI-2 via a separate 24 V driver (not included)",
+    "flicker": null,
+    "ip": "IP65 (page: strip uncut)",
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 1780.0,
+      "independent": 1780.0,
+      "archpipe": 1779.6,
+      "worst_error": 0.0002,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 577,
+       "engine": 573.65,
+       "independent": 573.65,
+       "worst_error": 0.0058,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "product page 'Maximum intensity (cd)' 577"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 1780,
+       "engine": 1779.6211,
+       "independent": 1780.0003,
+       "worst_error": 0.0002,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "product page '15W 1780lm (1.0 m)'"
+      }
+     ],
+     "status": "pass"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/ST39/ST39.ldt",
+      "sha256": "af9c347a9b592924db6c36ee00466200d80651b99f3fe659ff709060292626ff"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/ST39/ST39.ies",
+      "sha256": "a6876398d5fb74c14391bf86db9d7b0bf338d2747ddbc58fe8c60d4180425e9f"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/st39/"
+    ],
+    "notes": [
+     "library pair check: LDT and manufacturer IES disagree (96.3 % worst direction); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ]
  },
  "garden_uplight_candidates": {
   "generated": "2026-11-24",

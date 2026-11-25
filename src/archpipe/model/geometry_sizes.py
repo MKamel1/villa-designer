@@ -147,7 +147,8 @@ def apply(elements: list[DesignElement]) -> list[DesignElement]:
     for e in elements:
         zero = not any(e.size)
         if e.kind == "luminaire":
-            if e.product_id:
+            # a product STRIP keeps its authored run length: the file's opening is the 1 m measured length, not the run (PCOVE, ST39)
+            if e.product_id and not (e.params.get("mount") == "strip" and e.size[0] > 0):
                 rec = t["luminaires"].get(e.product_id)
                 if rec is None:
                     raise SizeDataError(f"{e.id}: product {e.product_id} missing from the derived size table")

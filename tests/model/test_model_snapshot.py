@@ -31,7 +31,7 @@ class Snapshot(unittest.TestCase):
         k = self.kinds
         self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (30, 36, 18, 8, 1))
         self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
-        self.assertEqual(k["luminaire"], 132)
+        self.assertEqual(k["luminaire"], 135)        # +3 PCOVE (ST39 cove round the ensuite bath feature panel, L4 round 5)
         self.assertEqual(k["plant"], 80)
         self.assertEqual(k["furniture"], 79)       # includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
 
@@ -59,7 +59,7 @@ class Snapshot(unittest.TestCase):
     def test_luminaires_carry_photometry_ref(self):
         lums = [e for e in self.els if e.kind == "luminaire"]
         with_ies = [e for e in lums if e.params["photometry"]["ies"]]
-        self.assertEqual(len(with_ies), 74)      # L6d: the entry-lobby DL became a generic cove (75 -> 74). L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
+        self.assertEqual(len(with_ies), 77)      # +3 PCOVE carry the ST39 IES (74 -> 77; generic stays 58). L6d: the entry-lobby DL became a generic cove (75 -> 74). L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
         # every luminaire without an IES must say so: generic, no product, no manufacturer code (never a silent gap)
         for e in lums:
             ph = e.params["photometry"]

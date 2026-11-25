@@ -30,6 +30,10 @@ PRODUCTS = {
     "LSEVO-AAHENX": (["ADJ"], None, []),
     "LSEVO-AAKR2I": (["WW"], None, []),
     "ST49": (["COVE", "BACK", "NL", "TOE"], "https://www.iguzzini.com/en/st49/", []),
+    # page https://www.iguzzini.com/en/st39/ read 2026-11-24: Maximum intensity 577 cd, 1780 lm per metre (title), 15 W/m, CRI 92, 2700 K, IP65 uncut
+    "ST39": (["PCOVE"], "https://www.iguzzini.com/en/st39/",
+             [v10.Point("imax", 577, source="product page 'Maximum intensity (cd)' 577"),
+              v10.Point("lumens", 1780, source="product page '15W 1780lm (1.0 m)'")]),
     # page https://www.iguzzini.com/en/451g/ read 2026-11-21: Maximum intensity 5759 cd, beam F - Flood 34 deg,
     # 1957.5 lm system, 19.9 W, CRI 92, 3000 K, LOR 87
     "451G": ([], "https://www.iguzzini.com/en/451g/",
@@ -133,7 +137,7 @@ def _notes(p: dict) -> list:
 
 
 # from the PRODUCT_CHOICE comment in fixture_record.py (lane L6b's library import, 2026-09)
-PAIR_FAILED = {"ST49": "59.8 % flux", "LSEVO-AAKR2I": "100 %, asymmetric"}
+PAIR_FAILED = {"ST49": "59.8 % flux", "ST39": "96.3 % worst direction", "LSEVO-AAKR2I": "100 %, asymmetric"}
 
 
 def build() -> dict:

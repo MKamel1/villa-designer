@@ -70,6 +70,10 @@ KINDS = {
                  layer="decorative"),
     "BACK": dict(what="LED strip inside glass-door book cabinet", mount="strip", lm_per_m=400, cct=2700, cri=90,
                  layer="accent"),
+    # client 2026-11-24 (reference image12): an LED cove framing the light-marble feature panel behind the ensuite bath. Bound to
+    # iGuzzini ST39, the IP65 2700 K CRI 92 Underscore Tube strip (the ST49 of the other strips is IP20: not for the bath zones).
+    "PCOVE": dict(what="LED cove framing the ensuite bath feature panel, 2700 K, IP65", mount="strip", lm_per_m=1780, cct=2700,
+                  cri=90, layer="decorative"),
     "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=2700, cri=90, layer="task"),
     "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=2700, cri=90,
                  layer="task"),
@@ -106,6 +110,8 @@ PRODUCT_CHOICE = {
     "WW": ("erco", "41374", "Quintessence lens wallwasher, recessed, 399 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
     "PEN-LIN": ("iguzzini", "RP65", "Libera System down light module, frame, L 1140, UGR<19 Space optic, 1079 lm, 2700 K CRI 90 (Rf 91), 48 V PWM "
                                     "with an external DALI-2 supply (V10 pass; client decision 2026-11-22 replaced the single QA03 O59)"),
+    "PCOVE": ("iguzzini", "ST39", "Underscore Ledstrip Tube Hi Performance 15 W/m, 1780 lm/m, 2700 K CRI 92 (Rf 93), IP65 uncut, 24 V; DALI-2 via a separate "
+                                  "driver (V10 pass: lumens and Imax 577 cd published; the LDT and manufacturer IES disagree like ST49's, the IES is used)"),
     "DESK": ("erco", "31327", "Lucy task light, wide beam, 234 lm, 2700 K CRI 92, on-board dim (V10 pass)"),
 }
 

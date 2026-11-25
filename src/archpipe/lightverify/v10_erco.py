@@ -127,9 +127,15 @@ def _inline_cri(text: str):
 def datasheet_iguzzini(text: str) -> dict:
     """What the iGuzzini product page prints (it IS their datasheet): system lm/W, Imax, LOR, flux at/above 90 deg, beam class angle."""
     m = re.search(r"Optic and beam angle\s*\n\s*[A-Z]+\s*-\s*[\w ]+?(\d+(?:\.\d+)?)\s*°", text)
-    return {"lumens": _label_value(text, "lm system"), "watts": _label_value(text, "W system"), "imax": [v] if (v := _label_value(text, "Maximum intensity (cd)")) else [],
+    # An LED strip page states its figures for the whole reel ("Supplied in 5-metre reels", "15W/m"), while the photometric file is the
+    # 1 m length ("15W 1780lm (1.0 m)"): lumens, watts and the flux split are compared per metre.
+    reel = re.search(r"Supplied in (\d+)-metre reels", text)
+    per = float(reel.group(1)) if reel and "W/m" in text else 1.0
+    def _pm(v):
+        return v / per if v is not None else None
+    return {"lumens": _pm(_label_value(text, "lm system")), "watts": _pm(_label_value(text, "W system")), "imax": [v] if (v := _label_value(text, "Maximum intensity (cd)")) else [],
             "cone": [], "beam_angle": float(m.group(1)) if m else None, "lor": _label_value(text, "Light output ratio (LOR)"), "cri": _label_value(text, "CRI") or _inline_cri(text),
-            "above90": _label_value(text, "Total light flux at or above an angle of 90° (Lm)"), "lamp_lm": _label_value(text, "lm source")}
+            "above90": _pm(_label_value(text, "Total light flux at or above an angle of 90° (Lm)")), "lamp_lm": _pm(_label_value(text, "lm source"))}
 
 
 def product_dir(maker: str, code: str) -> Path:

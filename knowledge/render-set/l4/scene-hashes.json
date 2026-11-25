@@ -1,37 +1,34 @@
 {
- "built_at_commit": "ce9ac9b574dec3e47fee9bde72597b793834612f",
+ "built_at_commit": "4e5e5e51363ec689c415ea3387b7fded34529205",
  "git_dirty": false,
- "source_hash": "dee051a7fd140c23c8778d1ca692ff8563396b9e52016c8d46b4097d8bafd7f6",
+ "source_hash": "434f64f31661d25351e860068f4440b74a1fdd7495395a28540895056ce28152",
  "production": {
-  "writer": "villa_render.write (46 views, receipts and exposure record active, no bypass)",
-  "file_bytes": 272995744,
-  "sha256": "39a8174d84a1202ee2b1d0552c15e00518614ac8d998bb59dcf911e6ade6ba60",
-  "ids_stripped_incl_provenance_sha256": "0cd5558149e33166a0e0270d2c1f1ca8a2585fbb2d1d2a56cb6014b5dc1be8b7",
-  "content_sha256_ids_and_provenance_stripped": "d00d565b80cd2d43eeea67b44acdf05d8b7c5889302cae359223dfef6410b7d5",
-  "meshes": 1226,
-  "views": 46,
-  "exposure_measurement_sha256": "eb49f80696cba1bbb21d860a38f3c70976db3c8ed698771a0d2998fad345c82f"
+  "writer": "villa_render.write (48 views, receipts and exposure record active, no bypass)",
+  "file_bytes": 273158509,
+  "sha256": "4cc8f87b6bdd9b72032c2a71f0ea7c6b3040e8a24d3c771c5e035337f3739018",
+  "ids_stripped_incl_provenance_sha256": "81e7751c103138d5e9a5a23eabf053dbba3834bd51a599975877c558affde3fe",
+  "meshes": 1263,
+  "views": 48,
+  "exposure_measurement_sha256": "bd03493bd42c35c21ad433bccd2c995f37ffbdd217716e5e6ad6f9652b2f127b"
  },
  "render_set": {
-  "writer": "render_set.write_scene (46 views)",
-  "file_bytes": 273036203,
-  "sha256": "3d19c10687e463e8e59af2bbf5d5eba0a487eda167e7eeed2fd4e3856f0a516c",
-  "ids_stripped_incl_provenance_sha256": "4a48cc8ec9561b8aed753f390c73f5ef9a708983e927b2078241f0f1bd9af172",
-  "content_sha256_ids_and_provenance_stripped": "2c46884bda38aefe4ed1f1dbd891d6b408c96d487bec5d7efad25d58162b00fd",
-  "meshes": 1226,
-  "views": 46,
-  "exposure_measurement_sha256": "eb0b9fbb274f68564344dc48adacb069339597903bdff3ebecba82d8b6150b5f"
+  "writer": "render_set.write_scene (48 views)",
+  "file_bytes": 273195477,
+  "sha256": "c97e9615a2654af98a47afe2e63a23677e0f02467afdc4abd83a43aa7ce0afe4",
+  "ids_stripped_incl_provenance_sha256": "198c8dd784b3a78ac191856e48d3110160004f0675dd80cb73f1a8c0f3334c51",
+  "meshes": 1263,
+  "views": 48,
+  "exposure_measurement_sha256": "b8a8b366950a7ad7ff3804d1c850f1f22d884312664558eb236e7b25dc8a9854"
  },
- "note": "Round 3 (2026-11-23). The images were rendered from the render-set scene f4 (jobq L4-r4-draft-1, built before the docs commit); its provenance-stripped content hash equals the final build's: True.",
+ "note": "Round 5 (2026-11-24), built on lane/L4 with origin/lane/LG merged (LG was not yet in integ/aplus). The 7 images were rendered from the render-set scene of this record (jobq L4-r5-render-3). The tree was then committed with docs only, so source_hash and content are unchanged.",
  "receipts": {
-  "furniture-stage2_room_context": "e9532d04871c53e5",
-  "parents-bed_room_context": "3ad6955d132b45d9"
+  "furniture-stage2_room_context": "be4ca1b32a2a37d7",
+  "parents-bed_room_context": "81bf55ed12e41ce4"
  },
  "jobs": {
-  "measure_prod": "L4-r4-measure-prod-1",
-  "measure_set": "L4-r4-measure-set-1",
-  "draft": "L4-r4-draft-1",
-  "critic_vlm": "L4-r4-critic-vlm-2",
-  "base_luminance": "L4-base-lum-1"
+  "exposure": "L4-r5-measure-both-4 (production then render set)",
+  "render": "L4-r5-render-3",
+  "critic_vlm": "L4-r5-critic-vlm-2",
+  "builds": "L4-r5-final-prod-4, L4-r5-final-set-4"
  }
 }

@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "7bc36bbd65772659bbce5dcee3efe0c5fca50c22da1ca2aa45ea17acc09cadec",
-  "transport_sha256": "f764aeb025d3cdb540953562a1cfdf1c0e47c18a082b028b6a6ce4e50a7d5797",
+  "transport_sha256": "8973b7f5a4366d5607cd2dd2c3e6a8b6fd384c7d5ed6aace1742fe20f1b10718",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -27,11 +27,11 @@
   },
   "measurements": {
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 96882.85122092938,
-      "daylight_luminance_sum": 2133717.751508887,
+      "lamp_luminance_sum": 97095.11070112318,
+      "daylight_luminance_sum": 2133118.320765444,
       "sky_luminance_sum": null,
-      "metered_pixels": 13400,
-      "lamp_fraction": 0.04343352687270138,
+      "metered_pixels": 13402,
+      "lamp_fraction": 0.04353624156826746,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -431,7 +431,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -496,11 +496,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 67725.10461820023,
-      "daylight_luminance_sum": 2492067.074277637,
+      "lamp_luminance_sum": 68002.47910307217,
+      "daylight_luminance_sum": 2491578.5544026215,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
-      "lamp_fraction": 0.02645726679554641,
+      "lamp_fraction": 0.026567816456247742,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -900,7 +900,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -965,11 +965,11 @@
       "group": "day"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 74035.61397386782,
-      "daylight_luminance_sum": 2233507.0264936443,
+      "lamp_luminance_sum": 74151.6499832851,
+      "daylight_luminance_sum": 2232249.961158437,
       "sky_luminance_sum": null,
-      "metered_pixels": 13406,
-      "lamp_fraction": 0.03208418023376941,
+      "metered_pixels": 13404,
+      "lamp_fraction": 0.032150363416793795,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1369,7 +1369,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -1458,11 +1458,11 @@
       "group": "day"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 77102.94006874155,
-      "daylight_luminance_sum": 40.96049426161121,
+      "lamp_luminance_sum": 77625.67576335114,
+      "daylight_luminance_sum": 40.00295555558674,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.9994690378116393,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.9994849339345844,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1967,12 +1967,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 202.625,
+          "flux_lm": 125.125,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 46.6,
+          "flux_lm": 33.3,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -2047,7 +2062,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 26.65069150393755,
+          "flux_lm": 19.000493004683435,
           "cct_k": 2700
         }
       ],
@@ -2147,11 +2162,11 @@
       "group": "evening"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 236503.3769939413,
-      "daylight_luminance_sum": 133243.79415205753,
+      "lamp_luminance_sum": 237345.0292142699,
+      "daylight_luminance_sum": 132769.90326598525,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.6396353926411928,
+      "lamp_fraction": 0.6412738541072827,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2551,7 +2566,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -2640,11 +2655,11 @@
       "group": "lamp-dominant"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 140101.3512111784,
-      "daylight_luminance_sum": 18.00513788036314,
+      "lamp_luminance_sum": 141061.95052494318,
+      "daylight_luminance_sum": 17.598533772369265,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998715014231474,
+      "lamp_fraction": 0.999875258080354,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3149,12 +3164,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 243.14999999999998,
+          "flux_lm": 150.15,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -3229,7 +3259,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -3329,11 +3359,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 317496.71467606863,
-      "daylight_luminance_sum": 52.906376557585254,
+      "lamp_luminance_sum": 320356.6077256197,
+      "daylight_luminance_sum": 47.98219636370773,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998333917817877,
+      "lamp_fraction": 0.9998502449781529,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3838,12 +3868,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 283.67499999999995,
+          "flux_lm": 175.17499999999998,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 46.6,
+          "flux_lm": 33.3,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -3918,7 +3963,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 26.65069150393755,
+          "flux_lm": 19.000493004683435,
           "cct_k": 2700
         }
       ],
@@ -4018,11 +4063,11 @@
       "group": "evening"
     },
     "n01-dining-day": {
-      "lamp_luminance_sum": 138104.1510570855,
-      "daylight_luminance_sum": 1601204.775779379,
+      "lamp_luminance_sum": 138637.70776620097,
+      "daylight_luminance_sum": 1600176.9982142074,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
-      "lamp_fraction": 0.07940173762476785,
+      "lamp_fraction": 0.07973115668355926,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4422,7 +4467,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -4511,11 +4556,11 @@
       "group": "day"
     },
     "n02-kitchen-island-day": {
-      "lamp_luminance_sum": 642884.7324614653,
-      "daylight_luminance_sum": 409581.8833615109,
+      "lamp_luminance_sum": 681136.4267037003,
+      "daylight_luminance_sum": 425936.0964856559,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.6108362230176408,
+      "lamp_fraction": 0.6152590841487241,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4915,7 +4960,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -5004,11 +5049,11 @@
       "group": "lamp-dominant"
     },
     "n03-kitchen-run-evening": {
-      "lamp_luminance_sum": 328692.38135727576,
-      "daylight_luminance_sum": 191.78460491621064,
+      "lamp_luminance_sum": 342710.6909294848,
+      "daylight_luminance_sum": 148.20502917212568,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.999416862759704,
+      "lamp_fraction": 0.9995677375418313,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5513,12 +5558,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 74.56,
+          "flux_lm": 53.28,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -5593,7 +5653,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 42.64110640630008,
+          "flux_lm": 30.400788807493498,
           "cct_k": 2700
         }
       ],
@@ -5693,11 +5753,11 @@
       "group": "evening"
     },
     "n04-library-nook-evening": {
-      "lamp_luminance_sum": 54536.25060101155,
-      "daylight_luminance_sum": 22.722393795986193,
+      "lamp_luminance_sum": 56035.18237513171,
+      "daylight_luminance_sum": 22.028847905522444,
       "sky_luminance_sum": null,
-      "metered_pixels": 13406,
-      "lamp_fraction": 0.9995835259985897,
+      "metered_pixels": 13403,
+      "lamp_fraction": 0.9996070291863455,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -6202,12 +6262,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 243.14999999999998,
+          "flux_lm": 150.15,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -6282,7 +6357,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -6382,10 +6457,10 @@
       "group": "evening"
     },
     "v08-cinema": {
-      "lamp_luminance_sum": 62490.328155431445,
+      "lamp_luminance_sum": 61873.65784243584,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
+      "metered_pixels": 13403,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -6891,12 +6966,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -6971,7 +7061,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -7069,11 +7159,11 @@
       "group": "evening"
     },
     "v29-under-stair-store": {
-      "lamp_luminance_sum": 64294.622361378555,
-      "daylight_luminance_sum": 9.301254570633338,
+      "lamp_luminance_sum": 64178.90574647043,
+      "daylight_luminance_sum": 8.97577861093974,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998553547894498,
+      "lamp_fraction": 0.9998601639686857,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7503,7 +7593,22 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 291.54999999999995,
           "cct_k": 2700
         },
         {
@@ -7643,11 +7748,11 @@
       "group": "evening"
     },
     "v30-under-ramp-store": {
-      "lamp_luminance_sum": 9698.954885750314,
+      "lamp_luminance_sum": 9692.388814596565,
       "daylight_luminance_sum": 0.05058120643054134,
       "sky_luminance_sum": null,
       "metered_pixels": 12857,
-      "lamp_fraction": 0.9999947849079368,
+      "lamp_fraction": 0.9999947813750114,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7727,7 +7832,7 @@
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -7762,7 +7867,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -7858,7 +7963,7 @@
       "group": "lamp-low-key"
     },
     "n05-pantry-evening": {
-      "lamp_luminance_sum": 730781.0296421599,
+      "lamp_luminance_sum": 730597.6773322864,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -8197,12 +8302,12 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -8237,7 +8342,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -8332,11 +8437,11 @@
       "group": "evening"
     },
     "n07-family-corner-day": {
-      "lamp_luminance_sum": 335032.2452770371,
-      "daylight_luminance_sum": 246266.42501413793,
+      "lamp_luminance_sum": 343487.4996276552,
+      "daylight_luminance_sum": 222701.75584633552,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5763513016625653,
+      "lamp_fraction": 0.6066655209486471,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8736,7 +8841,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -8825,11 +8930,11 @@
       "group": "lamp-dominant"
     },
     "n06-stair-foot-hall-evening": {
-      "lamp_luminance_sum": 202359.4528468141,
-      "daylight_luminance_sum": 75.8971337004371,
+      "lamp_luminance_sum": 206042.97332793454,
+      "daylight_luminance_sum": 54.95868655937151,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9996250796429194,
+      "lamp_fraction": 0.9997333370304972,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9259,7 +9364,22 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 291.54999999999995,
           "cct_k": 2700
         },
         {
@@ -9399,11 +9519,11 @@
       "group": "evening"
     },
     "n08-guest-wc-evening": {
-      "lamp_luminance_sum": 71960.71687096806,
-      "daylight_luminance_sum": 5.020440763170238,
+      "lamp_luminance_sum": 72064.7562589684,
+      "daylight_luminance_sum": 4.643761453279327,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999302384585956,
+      "lamp_fraction": 0.999935565420942,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9878,12 +9998,12 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -9918,7 +10038,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -10015,11 +10135,11 @@
       "group": "evening"
     },
     "n09-dirty-kitchen-day": {
-      "lamp_luminance_sum": 456306.54269411904,
-      "daylight_luminance_sum": 807702.6873793862,
+      "lamp_luminance_sum": 411940.71509788424,
+      "daylight_luminance_sum": 727702.2789220413,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3609993755089777,
+      "lamp_fraction": 0.3614647018930227,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10419,7 +10539,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -10508,11 +10628,11 @@
       "group": "day"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 296090.6633394998,
-      "daylight_luminance_sum": 65.73286941728061,
+      "lamp_luminance_sum": 297919.3202951291,
+      "daylight_luminance_sum": 63.50548102302696,
       "sky_luminance_sum": null,
-      "metered_pixels": 13408,
-      "lamp_fraction": 0.9997780467676581,
+      "metered_pixels": 13409,
+      "lamp_fraction": 0.9997868820766511,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11017,12 +11137,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -11097,7 +11232,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -11172,11 +11307,11 @@
       "group": "evening"
     },
     "n10-gf-hall-east-day": {
-      "lamp_luminance_sum": 209778.6070530325,
-      "daylight_luminance_sum": 21.110471685988294,
+      "lamp_luminance_sum": 210897.11232342006,
+      "daylight_luminance_sum": 21.169471496662375,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.999899377978507,
+      "lamp_fraction": 0.9998996318796242,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11606,7 +11741,22 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 291.54999999999995,
           "cct_k": 2700
         },
         {
@@ -11746,11 +11896,11 @@
       "group": "evening"
     },
     "n18-stair-gallery-day": {
-      "lamp_luminance_sum": 247039.39632184754,
-      "daylight_luminance_sum": 1436822.33709859,
+      "lamp_luminance_sum": 247795.3668216953,
+      "daylight_luminance_sum": 1438448.2527181855,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.1467100245933109,
+      "lamp_fraction": 0.14695110715337223,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12150,7 +12300,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -12236,11 +12386,11 @@
       "group": "day"
     },
     "n19-entry-lobby-evening": {
-      "lamp_luminance_sum": 185629.01893004647,
-      "daylight_luminance_sum": 164.5175305419702,
+      "lamp_luminance_sum": 190773.44221765987,
+      "daylight_luminance_sum": 141.05517361766763,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9991145142415819,
+      "lamp_fraction": 0.9992611604904547,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12670,7 +12820,22 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 340.12999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 291.54999999999995,
           "cct_k": 2700
         },
         {
@@ -12810,11 +12975,11 @@
       "group": "evening"
     },
     "n20-dining-side-day": {
-      "lamp_luminance_sum": 153773.77301715442,
-      "daylight_luminance_sum": 1526551.8675678133,
+      "lamp_luminance_sum": 154872.5990293831,
+      "daylight_luminance_sum": 1525216.6496687701,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
-      "lamp_fraction": 0.09151426920059468,
+      "lamp_fraction": 0.09218117379739728,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13214,7 +13379,7 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         }
       ],
@@ -13303,11 +13468,11 @@
       "group": "day"
     },
     "n11-study-desks-day": {
-      "lamp_luminance_sum": 0.3277778203696242,
-      "daylight_luminance_sum": 2751638.474579401,
+      "lamp_luminance_sum": 0.3280236747849132,
+      "daylight_luminance_sum": 2754860.39164906,
       "sky_luminance_sum": null,
       "metered_pixels": 13112,
-      "lamp_fraction": 1.1912094715659257e-07,
+      "lamp_fraction": 1.1907087441570582e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -13389,11 +13554,11 @@
       "group": "day"
     },
     "n12-study-sofa-evening": {
-      "lamp_luminance_sum": 124112.6431639311,
-      "daylight_luminance_sum": 866.7481065704421,
+      "lamp_luminance_sum": 124599.46332391299,
+      "daylight_luminance_sum": 873.4715862762184,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.99306487175398,
+      "lamp_fraction": 0.993038565752037,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13898,12 +14063,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 324.20000000000005,
+          "flux_lm": 200.20000000000002,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 55.92,
+          "flux_lm": 39.959999999999994,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -13978,7 +14158,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 31.98082980472506,
+          "flux_lm": 22.80059160562012,
           "cct_k": 2700
         }
       ],
@@ -14078,11 +14258,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.05625980403062322,
-      "daylight_luminance_sum": 7784306.791649894,
+      "lamp_luminance_sum": 0.056259803921626585,
+      "daylight_luminance_sum": 7784322.186035161,
       "sky_luminance_sum": null,
       "metered_pixels": 12780,
-      "lamp_fraction": 7.227336374301655e-09,
+      "lamp_fraction": 7.227322067417412e-09,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -14165,11 +14345,11 @@
       "group": "day"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 106882.64438354856,
-      "daylight_luminance_sum": 87.65438557370014,
+      "lamp_luminance_sum": 106136.07595363988,
+      "daylight_luminance_sum": 87.47262206120529,
       "sky_luminance_sum": null,
-      "metered_pixels": 13402,
-      "lamp_fraction": 0.9991805726768803,
+      "metered_pixels": 13403,
+      "lamp_fraction": 0.9991765232546447,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14674,12 +14854,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -14754,7 +14949,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -14852,11 +15047,11 @@
       "group": "evening"
     },
     "n13-parents-day": {
-      "lamp_luminance_sum": 0.09878896958620341,
-      "daylight_luminance_sum": 7726001.364405783,
+      "lamp_luminance_sum": 0.09878896956959704,
+      "daylight_luminance_sum": 7725972.264630477,
       "sky_luminance_sum": null,
       "metered_pixels": 13396,
-      "lamp_fraction": 1.278655848783046e-08,
+      "lamp_fraction": 1.2786606646088743e-08,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -14938,11 +15133,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 68831.03360137022,
-      "daylight_luminance_sum": 45.56596131367741,
+      "lamp_luminance_sum": 68733.56391538336,
+      "daylight_luminance_sum": 45.47021302727899,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9993384406082328,
+      "lamp_fraction": 0.999338894277835,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -15447,12 +15642,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 243.14999999999998,
+          "flux_lm": 150.15,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 46.6,
+          "flux_lm": 33.3,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -15527,7 +15737,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 26.65069150393755,
+          "flux_lm": 19.000493004683435,
           "cct_k": 2700
         }
       ],
@@ -15628,10 +15838,10 @@
       "group": "evening"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 148014.05043806045,
+      "lamp_luminance_sum": 150223.01865396657,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13369,
+      "metered_pixels": 13403,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -16137,12 +16347,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 486.29999999999995,
+          "flux_lm": 300.3,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -16217,7 +16442,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -16316,10 +16541,10 @@
       "group": "evening"
     },
     "n14-dressing-his-evening": {
-      "lamp_luminance_sum": 97085.0784049214,
+      "lamp_luminance_sum": 103633.69336201745,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13363,
+      "metered_pixels": 13406,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -16825,12 +17050,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 486.29999999999995,
+          "flux_lm": 300.3,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -16905,7 +17145,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -17004,10 +17244,10 @@
       "group": "evening"
     },
     "n15-ensuite-bath-evening": {
-      "lamp_luminance_sum": 11880.376176496207,
+      "lamp_luminance_sum": 78281.7936350218,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13408,
+      "metered_pixels": 13409,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -17513,12 +17753,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 405.25,
+          "flux_lm": 250.25,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -17593,7 +17848,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -17690,10 +17945,10 @@
           1280
         ]
       },
-      "group": "lamp-low-key"
+      "group": "evening"
     },
     "n16-ensuite-basin-day": {
-      "lamp_luminance_sum": 39953.85437355064,
+      "lamp_luminance_sum": 46352.71417071556,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -18172,12 +18427,12 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -18212,7 +18467,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -18300,11 +18555,11 @@
       "group": "lamp-low-key"
     },
     "n17-family-bath-basin-day": {
-      "lamp_luminance_sum": 242464.43531362287,
-      "daylight_luminance_sum": 305718.8108546867,
+      "lamp_luminance_sum": 242251.35005329698,
+      "daylight_luminance_sum": 306056.36295235174,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.44230544623244217,
+      "lamp_fraction": 0.44181641860434906,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -18779,12 +19034,12 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -18819,7 +19074,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -18907,11 +19162,11 @@
       "group": "day"
     },
     "n21-family-bath-wc-day": {
-      "lamp_luminance_sum": 44490.81128416335,
-      "daylight_luminance_sum": 47936.46239488966,
+      "lamp_luminance_sum": 44504.66207182409,
+      "daylight_luminance_sum": 47868.43238140187,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.481360203684623,
+      "lamp_fraction": 0.4817924779423674,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -19386,12 +19641,12 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 810.5,
+          "flux_lm": 500.5,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 93.2,
+          "flux_lm": 66.6,
           "cct_k": 2700
         },
         {
@@ -19426,7 +19681,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 53.3013830078751,
+          "flux_lm": 38.00098600936687,
           "cct_k": 2700
         }
       ],
@@ -19513,12 +19768,12 @@
       "group": "day"
     },
     "v36-north-garden": {
-      "lamp_luminance_sum": 1.1644184428920152,
-      "daylight_luminance_sum": 1414535.473009185,
-      "sky_luminance_sum": 704454.0313190147,
+      "lamp_luminance_sum": 1.164423103489068,
+      "daylight_luminance_sum": 1414495.2733545227,
+      "sky_luminance_sum": 704443.9509018027,
       "metered_pixels": 13365,
-      "lamp_fraction": 8.231801227923944e-07,
-      "solar_fraction": 0.5019891372392323,
+      "lamp_fraction": 8.232068122550675e-07,
+      "solar_fraction": 0.5019821103882586,
       "lamp_population": [],
       "view_input": {
         "id": "v36-north-garden",
@@ -19591,12 +19846,12 @@
       "group": "exterior-shade"
     },
     "v37-north-garden-lounge": {
-      "lamp_luminance_sum": 0.7138154646573345,
-      "daylight_luminance_sum": 515303.8723749231,
-      "sky_luminance_sum": 302757.98063706217,
+      "lamp_luminance_sum": 0.7138018724714265,
+      "daylight_luminance_sum": 515190.4091849672,
+      "sky_luminance_sum": 302727.5297242257,
       "metered_pixels": 13336,
-      "lamp_fraction": 1.3852301799495409e-06,
-      "solar_fraction": 0.4124670958870992,
+      "lamp_fraction": 1.3855088735480022e-06,
+      "solar_fraction": 0.41239680644843224,
       "lamp_population": [],
       "view_input": {
         "id": "v37-north-garden-lounge",
@@ -19653,11 +19908,11 @@
       "group": "exterior-shade"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 5668.421100934516,
-      "daylight_luminance_sum": 10878.332539581988,
+      "lamp_luminance_sum": 5846.961770481068,
+      "daylight_luminance_sum": 10768.443895449025,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3425699822504626,
+      "lamp_fraction": 0.3519000310940509,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -20272,12 +20527,27 @@
         },
         {
           "id": "DL-parents-ensuite-03",
-          "flux_lm": 405.25,
+          "flux_lm": 250.25,
           "cct_k": 2700
         },
         {
           "id": "MIRROR-parents-ensuite-06",
-          "flux_lm": 37.28,
+          "flux_lm": 26.64,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
           "cct_k": 2700
         },
         {
@@ -20352,7 +20622,7 @@
         },
         {
           "id": "lamp-VANITY-LIN-parents-ensuite-04",
-          "flux_lm": 21.32055320315004,
+          "flux_lm": 15.200394403746749,
           "cct_k": 2700
         }
       ],
@@ -20453,11 +20723,11 @@
       "group": "exterior-dusk"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 3357.9028700214544,
-      "daylight_luminance_sum": 2456.9598267650167,
+      "lamp_luminance_sum": 3343.387800985226,
+      "daylight_luminance_sum": 2457.2724167590777,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5774689868218501,
+      "lamp_fraction": 0.5763805628121009,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -20619,11 +20889,11 @@
       "group": "exterior-dusk-dim"
     },
     "gi-living-view-out": {
-      "lamp_luminance_sum": 0.013063012203085983,
-      "daylight_luminance_sum": 6436631.404466902,
+      "lamp_luminance_sum": 0.01302465068583552,
+      "daylight_luminance_sum": 6435606.4576757355,
       "sky_luminance_sum": null,
       "metered_pixels": 13392,
-      "lamp_fraction": 2.0294796075334343e-09,
+      "lamp_fraction": 2.0238420023246155e-09,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -20705,12 +20975,12 @@
       "group": "day"
     },
     "gi-firepit-opening": {
-      "lamp_luminance_sum": 0.09502494457317756,
-      "daylight_luminance_sum": 55356062.80454835,
-      "sky_luminance_sum": 7505922.747427962,
+      "lamp_luminance_sum": 0.09502494464415896,
+      "daylight_luminance_sum": 55356178.162770465,
+      "sky_luminance_sum": 7505928.434831913,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.7166131331552852e-09,
-      "solar_fraction": 0.8644064919513886,
+      "lamp_fraction": 1.7166095571414793e-09,
+      "solar_fraction": 0.8644066717763405,
       "lamp_population": [],
       "view_input": {
         "id": "gi-firepit-opening",
@@ -20791,12 +21061,12 @@
       "group": "exterior-day"
     },
     "gi-east-yard-pond": {
-      "lamp_luminance_sum": 0.019051797754376095,
-      "daylight_luminance_sum": 14477734.271962877,
-      "sky_luminance_sum": 534959.8871096023,
+      "lamp_luminance_sum": 0.019051797774961323,
+      "daylight_luminance_sum": 14477475.44689965,
+      "sky_luminance_sum": 534894.0643518498,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.3159377960265664e-09,
-      "solar_fraction": 0.9630494746580901,
+      "lamp_fraction": 1.3159613234895753e-09,
+      "solar_fraction": 0.96305336062812,
       "lamp_population": [],
       "view_input": {
         "id": "gi-east-yard-pond",
@@ -20877,12 +21147,12 @@
       "group": "exterior-day"
     },
     "gi-east-yard-bench": {
-      "lamp_luminance_sum": 0.07970357646745746,
-      "daylight_luminance_sum": 20376669.88353941,
-      "sky_luminance_sum": 3322250.8380650245,
+      "lamp_luminance_sum": 0.07967865846583994,
+      "daylight_luminance_sum": 20376561.849706355,
+      "sky_luminance_sum": 3322053.6797474856,
       "metered_pixels": 13409,
-      "lamp_fraction": 3.9115113809681825e-09,
-      "solar_fraction": 0.8369581066458367,
+      "lamp_fraction": 3.910309243628359e-09,
+      "solar_fraction": 0.8369669179594517,
       "lamp_population": [],
       "view_input": {
         "id": "gi-east-yard-bench",
@@ -20963,12 +21233,12 @@
       "group": "exterior-day"
     },
     "gi-beds-mass": {
-      "lamp_luminance_sum": 0.02832869614174967,
-      "daylight_luminance_sum": 5943080.573373929,
-      "sky_luminance_sum": 1508761.8576093721,
+      "lamp_luminance_sum": 0.0283299526405124,
+      "daylight_luminance_sum": 5942960.579461939,
+      "sky_luminance_sum": 1508708.6312959772,
       "metered_pixels": 13400,
-      "lamp_fraction": 4.7666686757763e-09,
-      "solar_fraction": 0.7461313473741383,
+      "lamp_fraction": 4.766976345656513e-09,
+      "solar_fraction": 0.7461351777244042,
       "lamp_population": [],
       "view_input": {
         "id": "gi-beds-mass",
@@ -21049,12 +21319,12 @@
       "group": "exterior-day"
     },
     "gi-beds-wall": {
-      "lamp_luminance_sum": 0.0459260968731774,
-      "daylight_luminance_sum": 12160568.018156024,
-      "sky_luminance_sum": 1639197.0652650793,
+      "lamp_luminance_sum": 0.04592609682662363,
+      "daylight_luminance_sum": 12160538.703389652,
+      "sky_luminance_sum": 1639170.584149983,
       "metered_pixels": 13409,
-      "lamp_fraction": 3.7766407482908895e-09,
-      "solar_fraction": 0.8652039063621273,
+      "lamp_fraction": 3.776649848610351e-09,
+      "solar_fraction": 0.8652057590431353,
       "lamp_population": [],
       "view_input": {
         "id": "gi-beds-wall",
@@ -21133,17 +21403,1213 @@
         ]
       },
       "group": "exterior-day"
+    },
+    "n41-island-waterfall-end": {
+      "lamp_luminance_sum": 400336.380588103,
+      "daylight_luminance_sum": 768758.9901043236,
+      "sky_luminance_sum": null,
+      "metered_pixels": 13409,
+      "lamp_fraction": 0.342432611251376,
+      "solar_fraction": null,
+      "lamp_population": [
+        {
+          "id": "DL-lounge-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-02",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-03",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-04",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-07",
+          "flux_lm": 159.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-08",
+          "flux_lm": 159.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-lounge-09",
+          "flux_lm": 133.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-01",
+          "flux_lm": 96.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-02",
+          "flux_lm": 56.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-03",
+          "flux_lm": 46.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-lounge-nook-01",
+          "flux_lm": 26.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-nook-02",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-pantry-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-hall-b-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-entry-b-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-entry-b-02",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-04",
+          "flux_lm": 639.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-05",
+          "flux_lm": 639.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-06",
+          "flux_lm": 639.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-07",
+          "flux_lm": 639.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-08",
+          "flux_lm": 639.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-09",
+          "flux_lm": 553.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-10",
+          "flux_lm": 553.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-11",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-island-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-island-02",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-dining-side-01",
+          "flux_lm": 380.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-dining-side-02",
+          "flux_lm": 380.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-living-03",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-living-04",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-01",
+          "flux_lm": 220.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-02",
+          "flux_lm": 220.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-03",
+          "flux_lm": 220.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-04",
+          "flux_lm": 220.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-05",
+          "flux_lm": 286.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-06",
+          "flux_lm": 286.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-07",
+          "flux_lm": 286.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-08",
+          "flux_lm": 286.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-cinema-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-cinema-02",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-03",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-04",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-05",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-guest-wc-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-guest-wc-02",
+          "flux_lm": 487.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-01",
+          "flux_lm": 805.1,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-02",
+          "flux_lm": 805.1,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-03",
+          "flux_lm": 805.1,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-04",
+          "flux_lm": 805.1,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-05",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-06",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-landing-gf-03",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-01",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-02",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-03",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-04",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-05",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-06",
+          "flux_lm": 199.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-gallery-end-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-02",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-03",
+          "flux_lm": 563.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-04",
+          "flux_lm": 563.4,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-05",
+          "flux_lm": 688.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-02",
+          "flux_lm": 484.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-03",
+          "flux_lm": 289.7,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-02",
+          "flux_lm": 537.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-04",
+          "flux_lm": 537.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-b-01",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-b-02",
+          "flux_lm": 640.1,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-bed-04",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-parents-bed-05",
+          "flux_lm": 380.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-dressing-06",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-dressing-07",
+          "flux_lm": 1065.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-parents-ensuite-01",
+          "flux_lm": 79.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-parents-ensuite-02",
+          "flux_lm": 79.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-ensuite-03",
+          "flux_lm": 500.5,
+          "cct_k": 2700
+        }
+      ],
+      "view_input": {
+        "id": "n41-island-waterfall-end",
+        "state": "day",
+        "exposure": "day",
+        "camera": {
+          "position": [
+            14.85,
+            -27.9,
+            -1.65
+          ],
+          "target": [
+            14.5,
+            -26.0,
+            -1.65
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": 0.0,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": null,
+              "new": [
+                14.85,
+                -27.9,
+                -1.65
+              ],
+              "reason": "authored standing point (render-set data)"
+            },
+            {
+              "field": "target",
+              "prior": null,
+              "new": [
+                14.5,
+                -26.0,
+                -1.65
+              ],
+              "reason": "authored standing point (render-set data)"
+            }
+          ],
+          "reframed": false,
+          "home_room": "entry-b"
+        },
+        "sun": {
+          "altitude_deg": 40.07,
+          "azimuth_true_deg": 135.34
+        },
+        "layers_on": [
+          "ambient",
+          "accent"
+        ],
+        "dimmers": {
+          "ambient": 1.0,
+          "accent": 0.5
+        },
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "curtain_state": "sheer-half",
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "day"
+    },
+    "n42-ensuite-feature-wall": {
+      "lamp_luminance_sum": 77865.59565072642,
+      "daylight_luminance_sum": 0.0,
+      "sky_luminance_sum": null,
+      "metered_pixels": 13409,
+      "lamp_fraction": 1.0,
+      "solar_fraction": null,
+      "lamp_population": [
+        {
+          "id": "DL-lounge-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-02",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-03",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-04",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-lounge-05",
+          "flux_lm": 1093.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-lounge-06",
+          "flux_lm": 1998.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-07",
+          "flux_lm": 79.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-08",
+          "flux_lm": 79.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-lounge-09",
+          "flux_lm": 266.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-01",
+          "flux_lm": 192.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-02",
+          "flux_lm": 112.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-stair-b-03",
+          "flux_lm": 92.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-lounge-nook-01",
+          "flux_lm": 52.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-lounge-nook-02",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-pantry-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-hall-b-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-entry-b-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-entry-b-02",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-04",
+          "flux_lm": 319.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-05",
+          "flux_lm": 319.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-06",
+          "flux_lm": 319.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-07",
+          "flux_lm": 319.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-08",
+          "flux_lm": 319.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-09",
+          "flux_lm": 276.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-10",
+          "flux_lm": 276.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-11",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-island-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kitchen-island-02",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-dining-side-01",
+          "flux_lm": 760.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-dining-side-02",
+          "flux_lm": 760.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-living-01",
+          "flux_lm": 1566.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-living-02",
+          "flux_lm": 1183.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-living-03",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-living-04",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-01",
+          "flux_lm": 440.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-02",
+          "flux_lm": 440.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-03",
+          "flux_lm": 440.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-04",
+          "flux_lm": 440.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-05",
+          "flux_lm": 572.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-06",
+          "flux_lm": 572.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-07",
+          "flux_lm": 572.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "BACK-bar-alcove-08",
+          "flux_lm": 572.8,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-cinema-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-cinema-02",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-03",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-04",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-cinema-05",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DESK-cinema-07",
+          "flux_lm": 80.7,
+          "cct_k": 2700
+        },
+        {
+          "id": "DESK-cinema-08",
+          "flux_lm": 80.7,
+          "cct_k": 2700
+        },
+        {
+          "id": "STORE-BATTEN-store-ramp-01",
+          "flux_lm": 630.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "STORE-BATTEN-store-ramp-02",
+          "flux_lm": 630.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "STORE-BATTEN-store-ramp-03",
+          "flux_lm": 630.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-guest-wc-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-guest-wc-02",
+          "flux_lm": 243.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-01",
+          "flux_lm": 402.55,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-02",
+          "flux_lm": 402.55,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-03",
+          "flux_lm": 402.55,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-04",
+          "flux_lm": 402.55,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-05",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-dirty-kitchen-06",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-landing-gf-03",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-01",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-02",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-03",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-04",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-05",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-corridor-06",
+          "flux_lm": 399.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-gallery-end-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-02",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-03",
+          "flux_lm": 281.7,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-04",
+          "flux_lm": 281.7,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-study-game-05",
+          "flux_lm": 344.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-02",
+          "flux_lm": 242.3,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-family-bath-03",
+          "flux_lm": 144.85,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-02",
+          "flux_lm": 268.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DESK-kids-a-03",
+          "flux_lm": 118.2,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-a-04",
+          "flux_lm": 268.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "DESK-kids-a-05",
+          "flux_lm": 118.2,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-b-01",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-kids-b-02",
+          "flux_lm": 320.05,
+          "cct_k": 2700
+        },
+        {
+          "id": "DESK-kids-b-03",
+          "flux_lm": 140.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-parents-bed-01",
+          "flux_lm": 945.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-bed-04",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "ADJ-parents-bed-05",
+          "flux_lm": 760.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "COVE-parents-entry-01",
+          "flux_lm": 720.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "RAIL-parents-dressing-01",
+          "flux_lm": 810.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "RAIL-parents-dressing-02",
+          "flux_lm": 623.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "VSTRIP-parents-dressing-03",
+          "flux_lm": 900.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "VSTRIP-parents-dressing-04",
+          "flux_lm": 900.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "VSTRIP-parents-dressing-05",
+          "flux_lm": 900.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "VSTRIP-parents-dressing-ext-01",
+          "flux_lm": 900.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "VSTRIP-parents-dressing-ext-02",
+          "flux_lm": 900.0,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-dressing-06",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-dressing-07",
+          "flux_lm": 532.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-parents-ensuite-01",
+          "flux_lm": 159.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "WW-parents-ensuite-02",
+          "flux_lm": 159.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "DL-parents-ensuite-03",
+          "flux_lm": 250.25,
+          "cct_k": 2700
+        },
+        {
+          "id": "MIRROR-parents-ensuite-06",
+          "flux_lm": 66.6,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-07",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-08",
+          "flux_lm": 485.9,
+          "cct_k": 2700
+        },
+        {
+          "id": "PCOVE-parents-ensuite-09",
+          "flux_lm": 416.5,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-kitchen-01",
+          "flux_lm": 790.455786179491,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-kitchen-02",
+          "flux_lm": 790.4553432731936,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-kitchen-03",
+          "flux_lm": 790.4567500859666,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-PEN-LIN-dining-01",
+          "flux_lm": 659.6284915924072,
+          "cct_k": 2700
+        },
+        {
+          "id": "swing-emitter-SWING-bar-alcove-09",
+          "flux_lm": 229.8117146143166,
+          "cct_k": 2700
+        },
+        {
+          "id": "swing-emitter-SWING-bar-alcove-10",
+          "flux_lm": 229.81604148487241,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-stair-gf-01",
+          "flux_lm": 790.4596829790735,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-stair-gf-02",
+          "flux_lm": 790.458583131398,
+          "cct_k": 2700
+        },
+        {
+          "id": "bulb-PEN-GLOBE-stair-gf-03",
+          "flux_lm": 790.4577322313617,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-SCONCE-family-bath-04",
+          "flux_lm": 99.16407042456122,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-SCONCE-family-bath-05",
+          "flux_lm": 99.16401216064114,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-WALL-READ-parents-bed-02",
+          "flux_lm": 163.61301058701937,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-WALL-READ-parents-bed-03",
+          "flux_lm": 163.61246899219694,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-VANITY-LIN-guest-wc-03",
+          "flux_lm": 100.00094478055249,
+          "cct_k": 2700
+        },
+        {
+          "id": "lamp-VANITY-LIN-parents-ensuite-04",
+          "flux_lm": 38.00098600936687,
+          "cct_k": 2700
+        }
+      ],
+      "view_input": {
+        "id": "n42-ensuite-feature-wall",
+        "state": "evening",
+        "exposure": "evening",
+        "camera": {
+          "position": [
+            20.7,
+            -29.1,
+            1.35
+          ],
+          "target": [
+            20.7,
+            -31.1,
+            1.35
+          ],
+          "lens_mm": 24,
+          "sensor_mm": 36,
+          "shift_x": 0.0,
+          "shift_y": 0.0,
+          "overrides": [
+            {
+              "field": "position",
+              "prior": null,
+              "new": [
+                20.7,
+                -29.1,
+                1.35
+              ],
+              "reason": "authored standing point (render-set data)"
+            },
+            {
+              "field": "target",
+              "prior": null,
+              "new": [
+                20.7,
+                -31.1,
+                1.35
+              ],
+              "reason": "authored standing point (render-set data)"
+            }
+          ],
+          "reframed": false,
+          "home_room": "parents-ensuite"
+        },
+        "sun": {
+          "altitude_deg": -2.89,
+          "azimuth_true_deg": 261.64
+        },
+        "layers_on": [
+          "ambient",
+          "task",
+          "accent",
+          "decorative"
+        ],
+        "dimmers": {
+          "ambient": 0.5
+        },
+        "hide_meshes": [
+          "curtain-study-game-01-heavy-open-l",
+          "curtain-study-game-01-heavy-open-r",
+          "curtain-study-game-02-heavy-open-l",
+          "curtain-study-game-02-heavy-open-r",
+          "curtain-kids-a-01-heavy-open-l",
+          "curtain-kids-a-01-heavy-open-r",
+          "curtain-kids-b-01-heavy-open-l",
+          "curtain-kids-b-01-heavy-open-r",
+          "curtain-parents-bed-01-heavy-open-l",
+          "curtain-parents-bed-01-heavy-open-r",
+          "curtain-parents-bed-02-heavy-open-l",
+          "curtain-parents-bed-02-heavy-open-r",
+          "curtain-dining-01-heavy-open-l",
+          "curtain-dining-01-heavy-open-r",
+          "curtain-living-01-heavy-open-l",
+          "curtain-living-01-heavy-open-r",
+          "curtain-living-02-heavy-open-l",
+          "curtain-living-02-heavy-open-r",
+          "curtain-lounge-01-heavy-open-l",
+          "curtain-lounge-01-heavy-open-r",
+          "ld-s-firepit-flame.open",
+          "ld-s-firepit-cover.open.garden-joint",
+          "ld-s-firepit-cover.open.garden-paving-2",
+          "ld-s-firepit-cover.open.garden-paving-1",
+          "ld-s-firepit-cover.open.garden-paving-0",
+          "ld-s-tree-crape.winter",
+          "ld-plant-s-bed-screen-n-00.winter",
+          "ld-plant-s-bed-screen-n-01.winter"
+        ],
+        "resolution": [
+          1920,
+          1280
+        ]
+      },
+      "group": "evening"
     }
   },
-  "measurement_sha256": "45f0b26bef61151f3fbac2195f5bf859f1c420bb19515139167a046dbd9c6445",
+  "measurement_sha256": "b8a8b366950a7ad7ff3804d1c850f1f22d884312664558eb236e7b25dc8a9854",
   "white_balance_k": {
-    "exterior-shade": 5500,
     "exterior-dusk-dim": 4300,
-    "lamp-dominant": 2700,
     "lamp-low-key": 2700,
-    "exterior-day": 5500,
-    "day": 5500,
+    "lamp-dominant": 2700,
+    "exterior-dusk": 4300,
     "evening": 3000,
-    "exterior-dusk": 4300
+    "day": 5500,
+    "exterior-day": 5500,
+    "exterior-shade": 5500
   }
 }

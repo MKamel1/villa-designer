@@ -1,0 +1,315 @@
+ST39
+PRODUCTS
+Services
+Inspiration
+Configurators
+About us
+Contacts
+Global
+PRODUCTS
+Services
+Inspiration
+Configurators
+About us
+Contacts
+Global
+Indoor
+Outdoor
+Smart Controls
+iGuzzini Echoes
+Laser Evo
+Lander
+All indoor products
+Downlights & recessed luminaires
+Fixtures for mains voltage track
+Fixtures for low voltage track
+Pendants
+Linear systems
+Wall luminaires
+Ceiling luminaires
+Floor recessed luminaires
+Table & floor lamps
+Emergency lighting
+Led strips
+Lighting effect luminaries
+Laser Evo
+Newfo
+All outdoor products
+Pole & wall mounted systems
+Pole & wall mounted multiple floodlights
+Poles
+Linear systems
+Floodlights
+Recessed in-ground luminaires
+Recessed wall luminaires
+Recessed ceiling luminaires
+Bollards
+Wall mounted luminaries
+Ceiling mounted luminaires
+Lighting effect luminaires
+Agorà
+Lander
+All Smart Controls
+Wireless
+Wired DALI
+Wired DMX
+Wireless DALI
+EPBD Compliance
+CESPUGLIO | Design Ennio Lucini | Re-edition 2026
+POLSINO | design Gio Ponti, 1968 | re-edition 2022
+NITIA | design Rodolfo Bonetto, 1971 | re-edition 2023
+CLAN | design Harvey, 1968 | re-edition 2023
+SORELLA | design Harvey, 1972 | re-edition 2023
+ZURIGO | design Luigi Massoni, 1966 | re-edition 2022
+LE PERROQUET | Design Piano Design
+LINGOTTO | Design Renzo Piano
+PIZZAKOBRA | Design Ron Arad
+Sorella
+Polsino
+Global network
+Technical consulting
+Bespoke
+Smart Services
+Certifications
+Warranty
+EPBD Compliance
+Culture
+Retail
+Hospitality & Residential
+Working
+Urban
+Infrastructure
+The Fernand Cina winery tasting complex
+A new lighting system for Michelangelo’s La Pietà
+All indoor products
+Downlights & recessed luminaires
+Fixtures for mains voltage track
+Fixtures for low voltage track
+Pendants
+Linear systems
+Wall luminaires
+Ceiling luminaires
+Floor recessed luminaires
+Table & floor lamps
+Emergency lighting
+Led strips
+Lighting effect luminaries
+Laser Evo
+Newfo
+All outdoor products
+Pole & wall mounted systems
+Pole & wall mounted multiple floodlights
+Poles
+Linear systems
+Floodlights
+Recessed in-ground luminaires
+Recessed wall luminaires
+Recessed ceiling luminaires
+Bollards
+Wall mounted luminaries
+Ceiling mounted luminaires
+Lighting effect luminaires
+Agorà
+Lander
+All Smart Controls
+Wireless
+Wired DALI
+Wired DMX
+Wireless DALI
+EPBD Compliance
+CESPUGLIO | Design Ennio Lucini | Re-edition 2026
+POLSINO | design Gio Ponti, 1968 | re-edition 2022
+NITIA | design Rodolfo Bonetto, 1971 | re-edition 2023
+CLAN | design Harvey, 1968 | re-edition 2023
+SORELLA | design Harvey, 1972 | re-edition 2023
+ZURIGO | design Luigi Massoni, 1966 | re-edition 2022
+LE PERROQUET | Design Piano Design
+LINGOTTO | Design Renzo Piano
+PIZZAKOBRA | Design Ron Arad
+Sorella
+Polsino
+History
+Social Innovation
+Responsibility
+Warm technology
+Region and Language
+Product standard
+Global
+China
+North America
+Your language
+English
+italiano (Italia)
+Deutsch (Deutschland)
+español (España)
+français (France)
+English (world)
+English
+français
+Update
+Indoor
+/
+Linear systems
+/
+Underscore Ledstrip
+/
+Tube High Performance
+ST39
+Save to favorites
+Favourites
+Downloads
+Downloads
+Colour
+Optional components
+Technical data
+Photometric data
+Electrical data
+Installation
+Downloads
+Reset
+ST39
+Part of
+Underscore Ledstrip Tube High Performance
+Underscore15 Corner
+Underscore15 Perimetral
+Underscore15 Recessed
+Underscore15 Surface-mounted
+Description
+Underscore Ledstrip Tube Hi Performance - 15W/m
+GL - general lighting
+75 W system
+8900 lm system
+118.67 lm/W
+2700 K
+CRI
+92
+- Rf (Colour Fidelity Index) 93 - Rg (Gamut Index) 99
+Designed by
+iGuzzini
+Colour
+Optional components
+Technical Data
+last update:
+20/11/2026
+Description
+Product for linear lighting - with white monochromatic LED with high colour rendering - made on a white flexible circuit. External protection in transparent silicone sheath with end caps. IP65 protection rating for the strip with full length (not sectioned). The ends of the circuits are equipped with connectors with IP20 protection rating, therefore the installer is responsible for adapting the connectors to the insulation. Supplied in 5-metre reels wrapped in special supports; a connection kit for in-line or power connections is included in the package. The strip can be sectioned at 50 mm intervals; in case of intermediate cuts, make sure to carefully seal the cut ends to restore the protection conditions. LED characteristics: white colour 2700K - CRI 90 - 160 LED/m - 120° opening angle - 75 W total - 24 V power supply. Power supplies to be ordered separately. The LED strip features a pre-applied high-adhesion 3M backing tape, ensuring secure and long-lasting attachment to clean, smooth surfaces, and allowing for easy, tool-free installation..
+Dimensions
+General (mm)
+5018x10x4
+Technical performance
+Class III
+Protected against penetration of solids larger than 12 mm, not protected against penetration of liquids.
+Completely protected against penetration of dust, Protected against jets of water
+If the strip is uncut
+Complies with EN60598-1 and pertinent regulations
+Physical properties
+Weight (kg)
+0.27
+Material
+Technopolymer
+Product certification
+View certification countries
+CE
+EAC
+ENEC-25
+UK Conformity Assessed
+Photometric data
+Details
+lm system
+8900
+W system
+75
+lm source
+W source
+Luminous efficiency - lm/W (system value)
+118.67
+lm in emergency mode
+/
+Maximum intensity (cd)
+577
+Total light flux at or above an angle of 90° (Lm)
+406
+Light output ratio (LOR)
+100
+Optic and beam angle
+GL - general lighting
+Adjustability
+fixed
+Light colour quality
+CRI
+92
+- Rf (Colour Fidelity Index) 93 - Rg (Gamut Index) 99
+Colour temperature
+2700 K
+MacAdam Step
+2
+Lifetime LED 1
+>50,000h - L80 - B10 (Ta 25°C)
+Lifetime LED 2
+Charts and polar curves
+Electrical data
+Operating ambient temperature range (C°)
+Power factor
+See installation instructions
+Supply voltage
+24 VDC
+ZVEI code
+LED
+Power Supply
+Electronic Driver not included
+Mounting options
+Remote
+Installation
+Description
+fixing kit: clips (code MWG2: 10 pieces) and rigid aluminium support (code MWG1: 5 pieces x 1 m) - The strip is designed to be combined with all Underscore 15 profiles
+Mounting
+Surface mounted, Ceiling surface
+Wiring
+ON-OFF and Dimmable power supplies to be ordered separately. For compatibility, check the instruction sheet.
+Notes
+For correct heat dissipation, it is recommended to use the strip in combination with the available profiles. The prepared connectors guarantee an IP20 protection rating. If the strip is cut (in the prepared areas), it is recommended to carefully restore the seal after performing the connection welds
+Stay connected with our latest innovations. Subscribe to our newsletter for updates on new products, fairs,  and initiatives.
+Subscribe
+-->
+-->
+-->
+-->
+-->
+-->
+-->
+Thank you for subscribing!
+iGuzzini illuminazione S.p.A
+Via Mariano Guzzini 37
+62019 Recanati (Italy)
+Share Capital €21.050.000,00 i.v.
+VAT N. and R.I. : (IT)00082630435
+CCIAA Macerata, R.E.A. 40632
+iGuzzini® is a registered trademark of
+iGuzzini Illuminazione S.p.A. All rights reserved.
+Contacts & Locations
+Social
+Instagram
+LinkedIn
+Facebook
+YouTube
+Pinterest
+Products
+Indoor
+Outdoor
+Smart control
+iGuzzini Echoes
+About us
+Social Innovation
+History
+Warm Technology
+Responsibility
+Work with us
+Privacy
+Certifications
+5 Year Warranty
+Whistleblowing
+Cookie Policy
+Accessibility statement
+Our Codes
+Knowledge Base (login required)
+Downloads

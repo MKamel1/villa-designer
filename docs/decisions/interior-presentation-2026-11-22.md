@@ -43,3 +43,6 @@ The chosen mix is scheduled in `knowledge/products/finishes/chosen.json` and dra
 3. **Lead decisions applied (the client was told and did not object):**
    - tree uplights: John Cullen Kew 25 spike, pending the maker confirming DALI-2 and supplying the 2027 article's photometry;
    - ground-floor walls: Off White.
+
+### Applied (lane L4 round 5, 2026-11-24)
+Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene; products, model changes, cove verification and the honest likeness to the references are in `docs/lanes/L4-finishes.md` ("Round 5"). Decision 3's tree uplights belong to lane LG.

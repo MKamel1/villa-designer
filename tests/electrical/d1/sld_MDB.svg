@@ -118,8 +118,8 @@
 <line x1="638" y1="314" x2="638" y2="370" stroke="#c00" stroke-width="2"/>
 <text x="638" y="384" text-anchor="middle">25 mm2</text>
 <text x="638" y="396" text-anchor="middle">10.4 m</text>
-<text x="638" y="408" text-anchor="middle">Ib 71.5 A</text>
-<text x="638" y="420" text-anchor="middle">dV 0.27 %</text>
+<text x="638" y="408" text-anchor="middle">Ib 72.6 A</text>
+<text x="638" y="420" text-anchor="middle">dV 0.28 %</text>
 <rect x="598" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="638" y="446" text-anchor="middle">Feeder to DB-B</text>
 <text x="638" y="460" text-anchor="middle">DB-B</text>
@@ -133,8 +133,8 @@
 <line x1="730" y1="314" x2="730" y2="370" stroke="#c00" stroke-width="2"/>
 <text x="730" y="384" text-anchor="middle">16 mm2</text>
 <text x="730" y="396" text-anchor="middle">14.9 m</text>
-<text x="730" y="408" text-anchor="middle">Ib 48.3 A</text>
-<text x="730" y="420" text-anchor="middle">dV 0.40 %</text>
+<text x="730" y="408" text-anchor="middle">Ib 49.9 A</text>
+<text x="730" y="420" text-anchor="middle">dV 0.41 %</text>
 <rect x="690" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
 <text x="730" y="446" text-anchor="middle">Feeder to DB-GF</text>
 <text x="730" y="460" text-anchor="middle">DB-GF</text>

@@ -51,6 +51,13 @@ LOBBY_COVE_SETBACK = 0.03
 LOBBY_COVE_BACK = 0.02       # the trough's back wall, 20 mm behind the strip: a closed white trough (without it the light is lost in the plenum above the bedroom ceiling)
 LOBBY_COVE_LM_PER_M = 900.0  # the COVE kind's own rating: Cycles measured the built coffer at 11 lx (cove alone, 450 lm/m, open trough), 30 lx lobby minimum needs the closed trough AND 900 lm/m
 LOBBY_COVE_ROOM = "parents-entry"
+# Client 2026-11-24 (reference image12): a light-marble feature panel on the wall behind the ensuite bath, framed by an LED cove
+# (PCOVE, iGuzzini ST39). The finish layer (villa_render) and the strips share these numbers; metres. The cove sits in a reveal
+# `edge_gap` outside each panel edge and above its top, 8 mm proud of the panel face, emitting across the panel (grazing) and into the room;
+# wall_finish: the marble wall layer is 23 mm thick (finish-layer-*-marble-bath faces, measured in the scene: the first panel sat INSIDE it and
+# was invisible); the panel and the cove stand on that face.
+# the panel starts at the bath rim (z0 = the bath height, asserted in villa_render): the tub stands flush to this wall.
+BATH_PANEL = dict(width=1.50, z0=0.55, z1=2.40, thick=0.012, edge_gap=0.03, strip_z0=0.58, strip_off=0.029, wall_finish=0.023, dimmer=0.15)
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
 
@@ -606,6 +613,16 @@ def design(lay=None):
         add("WW", "parents-ensuite", x, ym, aim=(-0.25 if x < (PEn[0] + PEn[2]) / 2 else 0.25, 0, -1),
             why="washes the marble wall; no direct downlight over the tub (advisory B-NODOWN)", card="ies-res-shower-50")
     _sconces(add, "parents-ensuite", fp["pe-basin"], lay, rc, vertical=True)
+    pw, eg = BATH_PANEL["width"] / 2, BATH_PANEL["edge_gap"]
+    pcx, wy = (bt[0] + bt[2]) / 2, PEn[1] + BATH_PANEL["strip_off"]       # the panel is centred on the bath, on the wall behind it
+    zc, zh = (BATH_PANEL["strip_z0"] + BATH_PANEL["z1"]) / 2, BATH_PANEL["z1"] - BATH_PANEL["strip_z0"]
+    for s_, side in ((-1, "left"), (1, "right")):
+        add("PCOVE", "parents-ensuite", pcx + s_ * (pw + eg), wy, z=zc, level="GF", length=round(zh, 3), along=(0.0, 0.0, 1.0),
+            aim=(-0.8 * s_, 0.6, 0.0), zone="pcove:decorative", extra=dict(dimmer=BATH_PANEL["dimmer"]),
+            why="LED cove, %s edge of the bath feature panel (client reference image12)" % side)
+    add("PCOVE", "parents-ensuite", pcx, wy, z=BATH_PANEL["z1"] + eg, level="GF", length=round(2 * (pw + eg), 3), along=(1.0, 0.0, 0.0),
+        aim=(0.0, 0.5, -0.87), zone="pcove:decorative", extra=dict(dimmer=BATH_PANEL["dimmer"]),
+        why="LED cove, top edge of the bath feature panel: washes the panel face from above")
     # ASSUMED initial driver setting; final dimmer scene is measured in the render.
     for fixture in out:
         if fixture.room == "parents-ensuite" and fixture.layer != "task":      # L6c: the tuned task layer gets its driver from the table

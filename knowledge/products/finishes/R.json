@@ -1,0 +1,255 @@
+{
+ "palette": "R",
+ "name": "R: client reference images (2026-11-24)",
+ "character": "Products chosen after the client reviewed their own style references (image23 kitchen, image12 bathroom): white Calacatta-gold-look slab for the kitchen, a light veined feature panel and floor and brass fittings for the ensuite. Look-alikes are CC0 render proxies.",
+ "egypt_alternatives": [],
+ "items": [
+  {
+   "id": "R-worktop",
+   "slot": "worktop",
+   "group": "hard",
+   "use": "Kitchen island worktop and waterfall ends, base-run worktops",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM",
+    "colour_code": "M7GF",
+    "colour_name": "Calacatta Vena Vecchia",
+    "format_mm": {
+     "w": 1600,
+     "l": 3200,
+     "t": 6.5
+    },
+    "finish": "Lux (per product name), rectified (RT), 6.5 mm",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "listing_row": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM | Size: 160x320cm | Code: M7GF | Colorbody fine porcelain stoneware | Frost proof | Resistance deep abrasion | Thickness: MM 6,5"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-24"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble014",
+    "url": "https://ambientcg.com/view?id=Marble014",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "lrv"
+   ],
+   "lookalike_note": "Marble014 (ambientCG, CC0) is the nearest CC0 scan: cream marble with tan-brown veining. It is NOT the product: the maker's M7GF has bold gold-brown ribbons on white (image23, the client's kitchen reference, shows the same look); no CC0 scan with gold veining was found (ambientCG Marble001-025 checked), so the render's veining is paler and finer than the real slab."
+  },
+  {
+   "id": "R-backsplash",
+   "slot": "backsplash",
+   "group": "hard",
+   "use": "Kitchen backsplash, matching the worktop",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM",
+    "colour_code": "M7GF",
+    "colour_name": "Calacatta Vena Vecchia",
+    "format_mm": {
+     "w": 1600,
+     "l": 3200,
+     "t": 6.5
+    },
+    "finish": "Lux (per product name), rectified (RT), 6.5 mm",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "listing_row": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM | Size: 160x320cm | Code: M7GF | Colorbody fine porcelain stoneware | Frost proof | Resistance deep abrasion | Thickness: MM 6,5"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-24"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble014",
+    "url": "https://ambientcg.com/view?id=Marble014",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "lrv"
+   ],
+   "lookalike_note": "Marble014 (ambientCG, CC0) is the nearest CC0 scan: cream marble with tan-brown veining. It is NOT the product: the maker's M7GF has bold gold-brown ribbons on white (image23, the client's kitchen reference, shows the same look); no CC0 scan with gold veining was found (ambientCG Marble001-025 checked), so the render's veining is paler and finer than the real slab."
+  },
+  {
+   "id": "R-bath-panel",
+   "slot": "bath-feature",
+   "group": "hard",
+   "use": "Ensuite feature panel behind the bath, edge-lit by an LED cove",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM",
+    "colour_code": "M7GF",
+    "colour_name": "Calacatta Vena Vecchia",
+    "format_mm": {
+     "w": 1600,
+     "l": 3200,
+     "t": 6.5
+    },
+    "finish": "Lux (per product name), rectified (RT), 6.5 mm",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "listing_row": "GRANDE MARBLE LOOK CALACATTA VENA VECCHIA LUX RT 6,5MM | Size: 160x320cm | Code: M7GF | Colorbody fine porcelain stoneware | Frost proof | Resistance deep abrasion | Thickness: MM 6,5"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-24"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble014",
+    "url": "https://ambientcg.com/view?id=Marble014",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "lrv"
+   ],
+   "lookalike_note": "Marble014 (ambientCG, CC0) is the nearest CC0 scan: cream marble with tan-brown veining. It is NOT the product: the maker's M7GF has bold gold-brown ribbons on white (image23, the client's kitchen reference, shows the same look); no CC0 scan with gold veining was found (ambientCG Marble001-025 checked), so the render's veining is paler and finer than the real slab."
+  },
+  {
+   "id": "R-floor-ensuite",
+   "slot": "floor-ensuite",
+   "group": "hard",
+   "use": "Ensuite floor (light veined marble look)",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "GRANDE MARBLE LOOK CALACATTA EXTRA LUX RT 6,5MM",
+    "colour_code": "M0ZK",
+    "colour_name": "Calacatta Extra",
+    "format_mm": {
+     "w": 1600,
+     "l": 3200,
+     "t": 6.5
+    },
+    "finish": "Lux (per product name), rectified (RT), 6.5 mm",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "Colorbody fine porcelain stoneware",
+    "extra": {
+     "listing_row": "GRANDE MARBLE LOOK CALACATTA EXTRA LUX RT 6,5MM | Size: 160x320cm | Code: M0ZK | Colorbody fine porcelain stoneware | Frost proof | Resistance deep abrasion | Thickness: MM 6,5"
+    }
+   },
+   "source": {
+    "url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "quote": "Marble Look interprets the beauty of fine marbles in porcelain stoneware, turning it into large slabs that enhance depth and graphic richness.",
+    "fetched": "2026-11-24"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Egypt distributor/showroom/dealer page found for Marazzi (searches and Marazzi where-to-buy URL guesses returned nothing); only a Dubai Marazzi Middle East showroom is reported. Confirm with Marazzi Middle East."
+   },
+   "lookalike": {
+    "label": "look-alike-proxy",
+    "maker_site": "ambientCG",
+    "id": "Marble019",
+    "url": "https://ambientcg.com/view?id=Marble019",
+    "licence": "CC0",
+    "on_disk": true,
+    "physical_scan_mm": null
+   },
+   "maintenance": null,
+   "missing": [
+    "lrv",
+    "slip rating (Lux finish: not a floor-safe claim)"
+   ],
+   "lookalike_note": "Marble019 (ambientCG, CC0): white with fine grey veins, the nearest CC0 scan to the maker's M0ZK (white with grey-blue veining). Lux is a polished finish: the maker makes no slip claim; the shower wet floor stays on the slip-rated Mystone Limestone20 (floor-wet)."
+  },
+  {
+   "id": "R-brass-bath-mixer",
+   "slot": "brass-fittings",
+   "group": "hard",
+   "use": "Ensuite taps and fittings (bath mixer, basin mixer, rail, rain head, handset): brass finish",
+   "product": {
+    "maker": "Gessi",
+    "range": "Gessi316",
+    "name": "54037 Four-holes bath mixer with diverter, tub-filler spout and 1,50 m flexible hose and antilimestone handshower",
+    "colour_code": "727",
+    "colour_name": "Brass Brushed PVD",
+    "format_mm": null,
+    "finish": "Brass Brushed PVD (finish code 727)",
+    "lrv": null,
+    "lrv_source": null,
+    "composition": "AISI 316 stainless steel body, PVD finish",
+    "extra": {
+     "companion_articles": [
+      "54186 Washbasin Mixer (same Gessi316 collection, same finish range)"
+     ],
+     "finish_name_caveat": "The maker page (Area Pro 54037) opens on finish 726 'Warm Bronze Br. Pvd'. The finish code 727 'Brass Brushed PVD' was read from Gessi's finish listings as relayed by search results and from the maker's own image URL 54037#727 and finish chip 727, not from page text; confirm with Gessi before ordering."
+    }
+   },
+   "source": {
+    "url": "https://areapro.gessi.com/en/product/54037",
+    "quote": "Four-holes bath mixer with diverter, tub-filler spout and 1,50 m flexible hose and antilimestone handshower",
+    "fetched": "2026-11-24"
+   },
+   "egypt": {
+    "available": "unknown",
+    "supplier": null,
+    "url": null,
+    "quote": null,
+    "gap": "No Gessi Egypt dealer page read. Gessi lists showrooms in Milan, Dubai, London, Singapore and New York; confirm Egypt supply with Gessi."
+   },
+   "lookalike": null,
+   "maintenance": null,
+   "missing": [
+    "lrv"
+   ],
+   "lookalike_note": "flat metallic colour sampled from the maker's product image (no image look-alike); geometry is the design's own procedural brass fittings, positions unchanged, not the Gessi article's geometry"
+  }
+ ]
+}

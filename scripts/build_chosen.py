@@ -9,7 +9,7 @@ from pathlib import Path
 
 from archpipe.interior import finishes, palette_scene
 
-DECISION = "docs/decisions/interior-presentation-2026-11-22.md#client-palette-choice-2026-11-23-a-mix"
+DECISION = "docs/decisions/interior-presentation-2026-11-22.md#client-decisions-2026-11-24-after-reviewing-their-own-style-references-docs-brief-villa_01_guidelines_images-tastejson"
 KITCHEN_ROOMS = ["kitchen", "kitchen-island", "dirty-kitchen"]
 BASEMENT = ["lounge", "lounge-nook", "stair-b", "hall-b", "entry-b", "family", "kitchen", "kitchen-island", "dining",
             "dining-side", "living", "bar-alcove", "dirty-kitchen", "pantry", "store-ramp"]
@@ -26,18 +26,21 @@ HARD = {
     "wall-tile-wet": ("C-bath-tile", ["marble-bath", "marble-ensuite"], dict(rooms=WET, parts=["shower walls"]), "lead-confirmed"),
     "wall-paint-main": ("B-wall-paint", ["plaster-warm-white"], dict(rooms=BASEMENT + GF), "lead-confirmed (basement); lead decision (GF, see decisions)"),
     "wall-feature-parents": ("C-wall-paint", ["fin-wall-feature"], dict(rooms=["parents-bed"], parts=["the head wall behind the bed (whole wall face, door openings excepted)"]), "lead-confirmed"),
-    "worktop": ("B-worktop", ["marble-white"], dict(rooms=KITCHEN_ROOMS, parts=["island worktop and waterfall ends", "base-run worktop", "laundry folding counter worktop"]), "client"),
-    "backsplash": ("B-backsplash", [], dict(rooms=[]), "client"),
-    "kitchen-front": ("B-kitchen-front", ["greige-lacquer"], dict(rooms=KITCHEN_ROOMS, parts=["base-run fronts", "dirty-kitchen tall units"]), "client"),
-    "kitchen-joinery": ("B-joinery-light", ["fin-kitchen-joinery", "fin-kitchen-joinery-x"], dict(rooms=KITCHEN_ROOMS, parts=["island carcass"]), "client"),
+    # client 2026-11-24 (reference image23): walnut fronts (palette A's EGGER product), white Calacatta-gold-look slab worktop,
+    # waterfall island and matching backsplash. Replaces palette B's FENIX front, Halifax oak carcass and Dekton Nacre.
+    "worktop": ("R-worktop", ["marble-white"], dict(rooms=KITCHEN_ROOMS, parts=["island worktop and both waterfall ends", "base-run worktop", "laundry folding counter worktop"]), "client 2026-11-24"),
+    "backsplash": ("R-backsplash", ["marble-backsplash"], dict(rooms=["kitchen", "dirty-kitchen"], parts=["600 mm splash slab behind the k-run and dk-run worktops"]), "client 2026-11-24"),
+    "kitchen-front": ("A-joinery-timber", ["fin-kitchen-front", "fin-kitchen-front-x"], dict(rooms=KITCHEN_ROOMS, parts=["base-run fronts", "island carcass and fronts", "dirty-kitchen tall units"]), "client 2026-11-24"),
+    "floor-ensuite": ("R-floor-ensuite", ["marble-ensuite-floor"], dict(rooms=["parents-ensuite"], note="the shower wet floor stays on floor-wet (slip-rated)"), "client 2026-11-24"),
+    "wall-feature-bath": ("R-bath-panel", ["marble-bath-panel"], dict(rooms=["parents-ensuite"], parts=["feature panel on the wall behind the bath (finish layer, edge-lit by the PCOVE cove)"]), "client 2026-11-24"),
+    "brass-ensuite": ("R-brass-bath-mixer", ["brass-ensuite"], dict(rooms=["parents-ensuite"], parts=["bath mixer, hand-shower rail, rain head, basin tap and the other brass fittings of the ensuite"]), "client 2026-11-24"),
     "joinery-timber": ("C-joinery-timber", ["walnut", "walnut-grain-x", "walnut-grain-y"], dict(rooms=BASEMENT + GF, parts=["TV wall, sideboards, bookcases, bedside tables, vanities, parents' wardrobes, stair treads and handrail"]), "client (parents' bedroom) / lead-confirmed (rest)"),
     "joinery-light": ("C-joinery-light", ["oak", "oak-grain-x"], dict(rooms=GF, parts=["wardrobes, desks, bed frames, headboard slats"]), "lead-confirmed"),
     "door": ("C-door", ["door-oak"], dict(rooms=BASEMENT + GF, parts=["interior door leaves"]), "lead-confirmed"),
 }
-NO_GEOMETRY = {"backsplash": "the design model holds no backsplash zone or element (only the K-SPLASH 600 mm clearance target, "
-                              "and wall units exist only where a tall wall run is authored): reported, not invented"}
+NO_GEOMETRY = {}
 UNAPPLIED_SOFT = ("open-shelf", "wardrobe-garment")      # chosen C, but the scene has no such dressing assets to colour
-GRAIN_AXIS = dict(palette_scene.GRAIN, **{"fin-kitchen-joinery": "z", "fin-kitchen-joinery-x": "x"})
+GRAIN_AXIS = dict(palette_scene.GRAIN, **{"fin-kitchen-front": "z", "fin-kitchen-front-x": "x"})
 SOFT_ROOMS = {"living-sofa": ["living"], "lounge-sofa": ["lounge"], "study-sofa": ["study-game"], "cinema-sofa": ["cinema"],
               "library-daybed": ["bar-alcove"], "parents-bed": ["parents-bed"], "living": ["living"], "lounge": ["lounge"],
               "parents-bedroom": ["parents-bed"]}
@@ -60,13 +63,14 @@ def rooms_table():
     t["parents-bed"]["feature_wall"] = "wall-feature-parents"
     for r in WET:
         t[r] = dict(zone="wet-room", floor="floor-wet", wall="wall-tile-wet")
+    t["parents-ensuite"].update(floor="floor-ensuite", feature_wall="wall-feature-bath")
     for r, d in RETAINED.items():
         t[r] = dict(zone="basement" if r == "cinema" else "ground-floor", floor="retained", wall="retained", retained=d)
     return t
 
 
 def build(library_root: Path) -> dict:
-    pal = {p: finishes.load_palette(p) for p in "ABC"}
+    pal = {p: finishes.load_palette(p) for p in "ABCR"}
     items = {p: {i["id"]: i for i in pal[p]["items"]} for p in pal}
     colours = palette_scene.load_colours()
     slots = {}
@@ -84,6 +88,8 @@ def build(library_root: Path) -> dict:
                 # smeared the Gris Fleury image into stripes (v33 draft, 2026-11-23)
                 if scene[0] in GRAIN_AXIS:
                     spec["grain_axis"] = GRAIN_AXIS[scene[0]]
+            if sid == "brass-ensuite":        # a metal: the chip's colour is the tint, the finish is brushed (satin) PVD
+                spec.update(metallic=1.0, roughness=0.32)
             s["render"] = spec
             s["texture_scale"] = (dict(zip(("tile_m", "basis"), finishes.texture_scale_m(item))) if item.get("lookalike")
                                   else dict(tile_m=None, basis="flat colour (painted or laminated, no image)"))
@@ -101,8 +107,8 @@ def build(library_root: Path) -> dict:
             continue
         key = sid.split("-", 1)[1].rsplit("-", 1)[0] if sid[-1].isdigit() else sid.split("-", 1)[1]
         add(sid, it["id"], ["fin-" + sid], dict(rooms=SOFT_ROOMS[key], furniture=key), "client (palette C)")
-    return dict(schema=1, decision=DECISION, decided="2026-11-23", palettes_used=["B", "C"],
-                note="GENERATED by scripts/build_chosen.py from knowledge/products/finishes/{B,C}.json; no prices anywhere. "
+    return dict(schema=1, decision=DECISION, decided="2026-11-23", palettes_used=["A", "B", "C", "R"],
+                note="GENERATED by scripts/build_chosen.py from knowledge/products/finishes/{A,B,C,R}.json; no prices anywhere. "
                      "Look-alikes are CC0 render proxies, never the product.",
                 slots=slots, rooms=rooms_table())
 
