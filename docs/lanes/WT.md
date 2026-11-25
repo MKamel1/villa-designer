@@ -85,3 +85,89 @@ frame 6710 (living, glass) **13.84 s**; mean 12.07 s.
 5. Parents' dressing door pinch (0.47 m between duvet and vanity chair) and the 1.45 m store-ramp soffit are design findings.
 6. Bohannon speeds are from the abstract only; confirm against the paper's table. Hinge sides of interior doors are assumed.
 7. Dining pendant draws the old stand-in; scene will change, so the prepared directory and path hash will too.
+
+
+# Tour redesign (2026-11-24): 360 in every room, look along the route, both floors, the flight, the gardens
+
+The client watched the first preview and asked for: no scenes where the camera looks at a wall or backward and then turns to the subject; a 360 in each room;
+both floors and the stair; no long 1080p before the route is confirmed. The old route (above) is kept for history; the new planner is
+`src/archpipe/walkthrough_tour.py` (`plan_tour`), authored in `knowledge/flythrough/villa-tour.json`, policy in `tour-policy.json`.
+Same path schema, so prepare / assembly / admission / exposure / render are the existing ones: `scripts/flythrough.py prepare --route tour`.
+
+## Route (16,091 frames = **670.5 s = 11 min 10 s at 24 fps**, 150.9 m walked)
+
+Time budget: 428 s in 360 turns (31 turns), 189 s walking, 43 s garden pans, 9 s on the flight.
+Order: entry-b (arrival) -> dining side, dining (+ east-yard pan) -> living (+ south-garden pan) -> bar alcove -> kitchen island, kitchen, dirty kitchen ->
+family, guest WC, stair-foot hall -> lounge (+ north-court pan) -> nook, pantry, cinema, store -> stair foot -> **up the flight** -> GF top of flight, landing, study, gallery,
+family bath, corridor, kids A, kids B, parents' entry, bedroom, dressing (through the 0.47 m gap), dressing ext, ensuite. All 30 rooms (13 GF + 17 B) have a 360
+(`test_route_connectivity_every_room_has_a_full_360`). The three garden zones are viewed **from inside the closed panes** (2.0 m back, pan +-30 deg): no placeholder legs, nothing hidden.
+
+| room / garden | level | 360 point x, y (m) | starts (s) | turn s | shortest wall ray (m) | best view (still) |
+|---|---|---|---|---|---|---|
+| entry-b | B | 15.28, -26.81 | 0 | 11.4 | 1.70  | n19-entry-lobby-evening |
+| dining-side | B | 15.78, -26.71 | 13 | 13.8 | 1.80  | n20-dining-side-day |
+| dining | B | 15.58, -26.01 | 29 | 12.3 | 2.10  | v09-dining-evening |
+| dining | B | 16.89, -24.59 | 29 | 13.6 | - | - |
+| living | B | 18.48, -25.51 | 63 | 15.5 | 1.55  | v33-basement-north-south |
+| living | B | 21.60, -26.13 | 63 | 13.8 | - | - |
+| bar-alcove | B | 20.98, -28.71 | 114 | 13.3 | 1.00 **FLAG** | v34-basement-south-north |
+| kitchen-island | B | 13.98, -27.11 | 135 | 14.8 | 1.35  | v09-dining-evening |
+| kitchen | B | 14.88, -25.71 | 153 | 11.8 | 1.75  | n02-kitchen-island-day |
+| dirty-kitchen | B | 13.98, -22.51 | 169 | 15.0 | 1.05  | n09-dirty-kitchen-day |
+| family | B | 10.38, -26.41 | 193 | 15.3 | 2.05  | v03-street-lounge |
+| guest-wc | B | 10.08, -22.51 | 213 | 15.8 | 0.80 **FLAG** | deepest-wedge |
+| hall-b | B | 10.98, -26.81 | 235 | 14.7 | 1.70  | n06-stair-foot-hall-evening |
+| lounge | B | 3.98, -26.31 | 258 | 14.9 | 1.70  | v03-street-lounge |
+| lounge | B | 4.62, -26.16 | 258 | 15.8 | - | - |
+| lounge-nook | B | 4.88, -27.61 | 293 | 11.9 | 1.00 **FLAG** | deepest-wedge |
+| pantry | B | 4.58, -29.11 | 309 | 15.9 | 0.50 **FLAG** | n05-pantry-evening |
+| cinema | B | 8.08, -22.41 | 337 | 13.2 | 1.05  | deepest-wedge |
+| store-ramp | B | 2.18, -22.21 | 357 | 15.7 | 0.95 **FLAG** | v30-under-ramp-store |
+| stair-b | B | 10.05, -27.95 | 385 | 14.1 | 0.55 **FLAG** | v11-stair-void |
+| stair-gf | GF | 4.95, -27.95 | 408 | 12.4 | 0.55 **FLAG** | deepest-wedge |
+| landing-gf | GF | 4.58, -27.61 | 422 | 14.0 | 0.75 **FLAG** | deepest-wedge |
+| study-game | GF | 7.78, -25.11 | 443 | 15.4 | 1.05  | n11-study-desks-day |
+| gallery-end | GF | 10.28, -27.31 | 463 | 14.0 | 0.95 **FLAG** | n18-stair-gallery-day |
+| family-bath | GF | 10.28, -25.31 | 481 | 15.7 | 1.00 **FLAG** | deepest-wedge |
+| corridor | GF | 9.28, -27.51 | 501 | 14.7 | 1.00 **FLAG** | n10-gf-hall-east-day |
+| kids-a | GF | 13.18, -26.21 | 523 | 15.7 | 1.15  | v06-kids-room |
+| kids-b | GF | 17.38, -26.21 | 548 | 15.9 | 1.00 **FLAG** | v13-kids-b |
+| parents-entry | GF | 18.98, -26.71 | 573 | 11.7 | 0.50 **FLAG** | deepest-wedge |
+| parents-bed | GF | 21.48, -25.11 | 593 | 15.5 | 0.85 **FLAG** | deepest-wedge |
+| parents-dressing | GF | 21.28, -27.81 | 621 | 12.8 | 1.00 **FLAG** | v31-dressing-hers |
+| parents-dressing-ext | GF | 21.68, -28.71 | 637 | 12.5 | 0.40 **FLAG** | n14-dressing-his-evening |
+| parents-ensuite | GF | 20.98, -30.01 | 652 | 17.9 | 1.05  | deepest-wedge |
+
+**Policy (all in `tour-policy.json`, all stated as ASSUMED, none a published standard):** yaw 40 deg/s (client band 30-45), eased 0.44 s ramps (no snap), a 1.5 s hold on the room's best view
+(the still view in `knowledge/render-set/views.json` that covers the room, from a camera standing in the room if one exists, else the deepest wedge), the sweep ends on the heading of the next leg so every walk starts already facing where it goes.
+A full turn is 9 s; dead-end rooms add the turn to the exit heading. Walking heading = the route 1.5 m ahead (never backward by construction; `direction_findings` proves it: 0 frames more than 75 deg off).
+Longer look-ahead (2.5, 3.5 m) was tried and is worse (frames with a wall within 1.5 m ahead: 7 %, 16 %, 20 %).
+
+**The 1 m rule at the 360 point.** The point is the free cell with the best score (visible floor area + 1.5 per visible furniture piece) among those whose every direction clears a wall by 1.0 m.
+**16 of 31 turn points cannot** (flagged in the table): bar-alcove, guest-wc, lounge-nook, pantry, store-ramp, stair-b, stair-gf, landing-gf, gallery-end, family-bath, corridor, kids-b, parents-entry,
+parents-bed, parents-dressing, parents-dressing-ext (a 1.3 m corridor, 1.5 m hall, WC, pantry, bedrooms whose floor is mostly bed). Admission keeps the rule everywhere else; in a flagged room the
+sightline finding is recorded as `waived_wall_sightline` (912 frames) and never dropped. `stair-b` / `stair-gf` are not walkable floor (under / over the flight): their 360 is at the foot and the top of the flight.
+Authored hints (`point_bounds`): store-ramp east part (soffit 1.45 m at the west end), landing-gf 0.6 m back from the stair guard (swept envelope hit it).
+
+**The flight.** Climbed continuously (3.0 m, 9.4 s at 0.7 m/s) with the camera pitched 12 deg up the flight (vertical lens shift, like every still); at the top the stair-gf 360 tilts 22 deg down the void
+when facing it; then landing and gallery. `stair_findings`: climbs 3.0 m monotonically, pitch up.
+
+## Admission
+
+0 of 16,091 frames fail (clearance, no clipping, swept envelope against authored and evaluated meshes, speed, yaw rate <= 45 deg/s; max measured 40.0). Doors are rotated open, none hidden (`door-states.json`).
+912 frames carry the recorded wall-sightline waiver (flagged rooms, and walks into them).
+
+## Non-informative-frame rule
+
+Registered **before** measuring (`knowledge/flythrough/informative-rule.json`, first commit): a 32x18 grid of rays through the 24 mm lens (glazing transparent); a frame is non-informative if more than 50 % of rays hit within 1.2 m,
+or more than 60 % of hits lie on one plane (normals within ~6 deg, offset within 0.1 m). A run longer than 1 s fails.
+**Calibration on the client-watched preview** (`out/wt/villa3`, frames labelled from its contact sheet: 12 known-bad = GF corridor, kids' and dressing wardrobe fronts, bathroom wall; 20 good;
+`informative-calibration-labels.json`): the registered clauses flagged 5 of 12 bad, 0 of 20 good. Adding `near + plane >= 0.9` flags 10 of 12, still 0 of 20 good (best good frame 0.84); on the bad
+stretches (stride 6) it flags 64/90 (kids/corridor), 17/19 and 10/24. Missed: the marble bathroom wall with its window (0.47+0.0) and one corridor frame (0.80). The final rule is the three-clause one.
+
+## Validation passes
+
+(a) **Workbench** (solid, cavity, 640x360) of every frame: one animation render (a render call per frame re-exports the 1.1 GB scene, 6 s/frame; one animation render is 0.14 s/frame), plus the depth-grid metric (0.17 s/frame): about 85 min.
+Workbench draws glass as an opaque pane, so garden pans look like a blank wall there; the Cycles preview shows the glass.
+(b) **Cycles** 480x270, 16 spp, denoised, every 2nd frame, interior exposure lock -8.34 stops 5500 K (337 metered frames, every 48th).
+(c) Contact sheets every 2 s (every 48th frame).
