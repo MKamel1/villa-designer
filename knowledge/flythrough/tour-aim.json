@@ -1121,8 +1121,8 @@
 10,
 10
 ],
-"first_frame": 7119,
-"last_frame": 7245
+"first_frame": 7145,
+"last_frame": 7271
 },
 "12.2,-27.8>kids-a~a2": {
 "s": [
@@ -1171,8 +1171,8 @@
 -55,
 -55
 ],
-"first_frame": 7338,
-"last_frame": 7457
+"first_frame": 7364,
+"last_frame": 7483
 },
 "12.2,-27.0>kids-b": {
 "s": [
@@ -1251,8 +1251,8 @@
 0,
 0
 ],
-"first_frame": 7624,
-"last_frame": 7834
+"first_frame": 7650,
+"last_frame": 7860
 },
 "17.4,-25.0>parents-bed~a2": {
 "s": [
@@ -1349,8 +1349,8 @@
 -30,
 -30
 ],
-"first_frame": 8221,
-"last_frame": 8482
+"first_frame": 8247,
+"last_frame": 8508
 },
 "19.0,-24.6>parents-dressing~a2": {
 "s": [
@@ -1421,8 +1421,8 @@
 -5,
 0
 ],
-"first_frame": 8719,
-"last_frame": 8900
+"first_frame": 8745,
+"last_frame": 8926
 },
 "21.8,-28.2>parents-ensuite~a1": {
 "s": [
@@ -1459,8 +1459,8 @@
 0,
 0
 ],
-"first_frame": 9095,
-"last_frame": 9177
+"first_frame": 9121,
+"last_frame": 9203
 }
 }
 }

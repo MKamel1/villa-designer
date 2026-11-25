@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "035f3e4e1a95e0bf852b51c1efbf25e4233204e06dc4354deac49d56b71d63a9",
+"camera_sha256": "d11448b58aa0b2fa88cdb89d90bbc2023c549f523a952971f32af672da07d3c6",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -159,8 +159,8 @@
 "schedule": {
 "close_start": 6792,
 "close_end": 6840,
-"open_start": 6904,
-"open_end": 6952
+"open_start": 7069,
+"open_end": 7117
 },
 "features": [
 "furn-fb-wc"
@@ -312,10 +312,10 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(22.049999999999997), np.float64(-28.881)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 8800,
-"close_end": 8848,
-"open_start": 8976,
-"open_end": 9024
+"close_start": 8827,
+"close_end": 8875,
+"open_start": 9003,
+"open_end": 9051
 },
 "features": [
 "furn-pd-hang-2"
@@ -328,8 +328,8 @@
 "scheduled": false,
 "reason": "no swing side clears the camera in every frame of the animation",
 "blocked_frames": [
-8902,
-8932
+8930,
+8958
 ]
 },
 {
@@ -340,17 +340,17 @@
 ],
 "blocked_frames": [
 6840,
-6892
+7116
 ],
 "schedule": {
 "close_start": 6792,
 "close_end": 6840,
-"open_start": 6904,
-"open_end": 6952
+"open_start": 7069,
+"open_end": 7117
 },
 "delay_frames": 0,
-"hold_after_last_blocked_frame_s": 2.5,
-"leave_frame": 7090,
+"hold_after_last_blocked_frame_s": 0.04,
+"leave_frame": 7117,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },
@@ -359,8 +359,8 @@
 "scheduled": false,
 "reason": "no swing side clears the camera in every frame of the animation",
 "blocked_frames": [
-7546,
-7558
+7574,
+7584
 ]
 },
 {
@@ -370,18 +370,18 @@
 "furn-pd-hang-2"
 ],
 "blocked_frames": [
-8848,
-9018
+8874,
+9044
 ],
 "schedule": {
-"close_start": 8800,
-"close_end": 8848,
-"open_start": 8976,
-"open_end": 9024
+"close_start": 8827,
+"close_end": 8875,
+"open_start": 9003,
+"open_end": 9051
 },
-"delay_frames": 0,
-"hold_after_last_blocked_frame_s": 0.25,
-"leave_frame": 9024,
+"delay_frames": 1,
+"hold_after_last_blocked_frame_s": 0.29,
+"leave_frame": 9051,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 }

@@ -340,6 +340,19 @@ class ClientPass(unittest.TestCase):
                 bad.append(f['index'])
         self.assertLessEqual(len(bad), 30, bad[:5])      # was 94 walking frames (4 s); one residual 1 s stretch (parents' bed -> dressing: the aim cannot turn away fast enough from the first heading) is reported in docs/lanes/WT.md
 
+    def test_the_family_bath_camera_aims_at_the_wc_once_the_leaf_has_closed(self):
+        rv = WT.tour_reveal()['family-bath']; door = rv['door']
+        closed = [f for f in self.frames if f['room'] == 'family-bath' and f.get('doors', {}).get(door, 1.) <= .01]
+        self.assertGreater(len(closed), 24)
+        off = [abs(WT.wrap(f['yaw_deg']-math.degrees(math.atan2(rv['target'][1]-f['camera']['position'][1], rv['target'][0]-f['camera']['position'][0])))) for f in closed]
+        self.assertLess(min(off), 5.)                                                      # the held view centres the WC while the leaf is shut
+        self.assertGreaterEqual(sum(o < 10. for o in off), 12)                             # for at least half a second, not a flick
+
+    def test_negative_the_old_family_bath_hold_was_not_on_the_wc(self):
+        rv = WT.tour_reveal()['family-bath']; old = -60.      # villa9 route: held at -60 deg (leaf and blank wall), the WC is 28 deg to one side of that
+        head = math.degrees(math.atan2(rv['target'][1]+25.01, rv['target'][0]-9.777))
+        self.assertGreater(abs(WT.wrap(old-head)), 20.)
+
     def test_negative_the_close_up_test_fires_on_a_camera_pressed_to_a_stack(self):
         _sys.path.insert(0, str(_Path(__file__).resolve().parents[1]/'scripts'))
         from tour_aim import closeup

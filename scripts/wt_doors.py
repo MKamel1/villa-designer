@@ -101,7 +101,12 @@ def schedule(plan_file=None):
         clusters = [[fr[0]]]
         for i in fr[1:]:
             (clusters[-1].append(i) if i-clusters[-1][-1] <= CLUSTER_GAP_S*fps else clusters.append([i]))
-        cl = max(clusters, key=len); c0, c1 = cl[0], cl[-1]
+        cl = max(clusters, key=len)
+        v0 = cl[0]
+        while v0 > 0 and frames[v0-1]['room'] == frames[cl[0]]['room'] and frames[v0-1]['phase'] != 'walk': v0 -= 1
+        v1 = next((f['index'] for f in frames[cl[-1]:] if f['phase'] == 'walk'), len(frames))
+        cl = [i for i in fr if v0 <= i < v1]      # every pass of the same visit (a 360 sweeps past the feature twice): the leaf stays shut for all of them
+        c0, c1 = cl[0], cl[-1]
         rec = recs[door]; lv = FT.level_at(rec['closed_faces'][0][0][2])
         track = np.array([f['camera']['position'][:2] for f in frames if f['level'] == lv and not f['stair']])
         centre = np.array(rec['hinge'])

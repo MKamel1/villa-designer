@@ -322,6 +322,12 @@ def tour_dull(pol):
     return {k: v['dull'] for k, v in rooms.items() if k in pol.get('dull_rooms', ())}
 
 
+def tour_reveal():
+    """room -> dict(door, feature, target [x, y]) for a feature a door leaf hides: the room's best view is aimed at it, so the animated leaf closes onto it (scripts/wt_doors.py reveal)."""
+    f = ROOT/'knowledge/flythrough/tour-reveal.json'
+    return json.loads(f.read_text())['rooms'] if f.is_file() else {}
+
+
 def pan_range(garden, pol):
     """(low, high) yaw offsets from the facing direction for the garden pan: the glass's angular edges (tour-pans.json, from scripts/wt_pans.py) pulled in by half the
     horizontal field of view of the base lens, so the view's edge ends on the glass edge; at least +-`garden_pan_min_deg` so there is always a small motion."""
@@ -514,6 +520,9 @@ def plan_tour(vm, route=None, pol=None, aim=None, doors=True):
             if dull and dull[int(round(best/30.)) % 12]:      # never hold the best view on a blank wall or a bright window: the nearest heading that is neither (audit table, tour-dull.json)
                 ok = [k for k in range(12) if not dull[k]]
                 if ok: best = 30.*min(ok, key=lambda k: abs(wrap(30.*k-best)))
+            rv = tour_reveal().get(s['room'])
+            if rv:      # the feature the leaf hides: hold the view centred on it (not nudged off it by the dull-heading rule)
+                best = math.degrees(math.atan2(rv['target'][1]-s['at'][1], rv['target'][0]-s['at'][0]))
             T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, fresh=_fresh(s['room']), yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'), dull=dull)
             s.update(T=T, yawfn=yaw, alpha=alpha)
         elif s['kind'] == 'arc':
