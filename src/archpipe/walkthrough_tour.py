@@ -362,6 +362,15 @@ def _walk_polyline(vm, lv, a, b, via=()):
         else:
             pts.extend(vm.door_cross(lv, vm.astar(lv, pts[-1], v))[1:])
     pts.extend(vm.door_cross(lv, vm.astar(lv, pts[-1], tuple(b)))[1:])
+    # door_cross puts its exit node past the door; when the target lies before it the walk would overshoot and come back (the pantry: the camera
+    # reversed for 0.3 s). Drop a vertex that makes a reversal of more than 120 degrees when the shortcut is free.
+    k = len(pts)-2
+    while k >= 1:
+        a, v, c = (np.asarray(q, float) for q in (pts[k-1], pts[k], pts[k+1]))
+        u, w = v-a, c-v
+        if np.dot(u, w) < -.5*np.linalg.norm(u)*np.linalg.norm(w) and vm.line_free(lv, tuple(a), tuple(c), 1):
+            del pts[k]
+        k -= 1
     return pts
 
 
@@ -420,7 +429,11 @@ def plan_tour(vm, route=None, pol=None, aim=None):
         room = st['room']; p, info = stand(room, None); lv = info['level']
         if where is not None and math.dist(where, p) > .05:
             poly = _walk_polyline(vm, lv, where, p, st.get('via', ()))
-            steps.append(dict(kind='walk', P=[(q[0], q[1], LEVEL_Z[lv]) for q in poly], stair=[False]*(len(poly)-1), label='walk', room=None))
+            if steps and steps[-1]['kind'] == 'walk' and steps[-1]['label'] == 'stair':
+                # off the top of the flight the walk continues into the room without a stop or a turn (walk-and-look)
+                steps[-1]['P'] += [(q[0], q[1], LEVEL_Z[lv]) for q in poly[1:]]; steps[-1]['stair'] += [False]*(len(poly)-1)
+            else:
+                steps.append(dict(kind='walk', P=[(q[0], q[1], LEVEL_Z[lv]) for q in poly], stair=[False]*(len(poly)-1), label='walk', room=None))
         elif where is None:
             steps.append(dict(kind='start'))
         steps.append(dict(kind='turn', at=p, room=room, info=info, level=lv, pitch=st.get('pitch')))
@@ -478,7 +491,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     # end state: the last station's final pose
     last = legs[-1]
     if last['kind'] in ('turn', 'pan'):
-        x, y = last['at']; frames.append(((x, y, LEVEL_Z[last['level']], float(last['yawfn'](np.array([last['T']]))[0]), False, 0.), dict(phase='hold', station=None)))
+        x, y = last['at']; frames.append(((x, y, LEVEL_Z[last['level']], float(last['yawfn'](np.array([last['T']]))[0]), False, 0.), dict(phase='hold', station=last.get('room') or last.get('garden'))))
     elif last['kind'] == 'walk':
         leg = last['leg']; x, y, g, yw, sf, pi = (v[0] for v in leg['at']([leg['T']]))
         frames.append(((x, y, g, float(yw), bool(sf), float(pi)), dict(phase='walk', station=None)))
@@ -487,7 +500,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
     wide_rooms = lens_rooms() if pol.get('wide_lens_mm') else set()
     spans = {}
     for i, (_, tag) in enumerate(frames):
-        if tag['phase'] == 'turn' and tag['station'] in wide_rooms:
+        if tag['phase'] in ('turn', 'hold') and tag['station'] in wide_rooms:
             a, b = spans.get(tag['station'], (i, i)); spans[tag['station']] = (min(a, i), max(b, i))
     lens = lens_profile(len(frames), list(spans.values()), fps, pol.get('base_lens_mm', 24), pol.get('wide_lens_mm', 24), pol.get('lens_ease_s', 1.25))
     dark = set(pol.get('dark_rooms', []))
@@ -521,6 +534,31 @@ def plan_tour(vm, route=None, pol=None, aim=None):
                   room_points={k: v for k, v in pts.items()})
     record['sha256'] = digest(record)
     return record
+
+
+# ---- the lens caption burned into the video ---------------------------------------------------------------
+CAPTION_FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+
+
+def caption_geometry(width, height, text, font_px_per_height=.055):
+    """(font size px, box x0, y0, x1, y1) for a lower-left caption: text height is 5.5 % of the frame height (15 px at 270, 59 px at 1080),
+    margin 2.5 % of the height, so the same fraction of the picture at every resolution."""
+    from PIL import ImageFont
+    size = max(12, int(round(height*font_px_per_height))); font = ImageFont.truetype(CAPTION_FONT, size)
+    l, t, r, b = font.getbbox(text); pad = max(4, size//3); m = int(round(height*.025))
+    return size, m, height-m-(b-t)-2*pad, m+(r-l)+2*pad, height-m
+
+
+def burn_caption(img, text):
+    """Return a copy of a PIL image with `text` on a dark box at the lower left (white on 72 % black)."""
+    from PIL import Image, ImageDraw, ImageFont
+    im = img.convert('RGB'); W, H = im.size
+    size, x0, y0, x1, y1 = caption_geometry(W, H, text); font = ImageFont.truetype(CAPTION_FONT, size)
+    over = Image.new('RGBA', im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(over)
+    d.rounded_rectangle((x0, y0, x1, y1), radius=max(3, size//4), fill=(0, 0, 0, 184))
+    l, t, r, b = font.getbbox(text); pad = max(4, size//3)
+    d.text((x0+pad-l, y0+pad-t), text, font=font, fill=(255, 255, 255, 255))
+    return Image.alpha_composite(im.convert('RGBA'), over).convert('RGB')
 
 
 # ---- guards specific to the tour ----------------------------------------------------------------------
@@ -572,6 +610,30 @@ def coverage_findings(frames, rooms):
         yaw = [f['yaw_deg'] for f in fs]
         if max(yaw)-min(yaw) < 359.:
             bad.append(f'{room}: turn covers {max(yaw)-min(yaw):.0f} degrees')
+    return bad
+
+
+def lens_findings(frames, base=24., max_step_mm=.5, ease_s=None, fps=24):
+    """Guards for the small-room lens: the focal length never steps (largest change per frame <= max_step_mm), changes only while the camera moves or turns,
+    and the caption is on exactly when the lens is wider than `base`. Returns a list of strings (empty = clean)."""
+    bad = []
+    for a, b in zip(frames, frames[1:]):
+        la, lb = a['camera']['lens_mm'], b['camera']['lens_mm']
+        if abs(lb-la) > max_step_mm:
+            bad.append(f"frame {b['index']}: lens steps {la:.2f} -> {lb:.2f} mm")
+        still = a['camera']['position'] == b['camera']['position'] and a['yaw_deg'] == b['yaw_deg'] and a['pitch_deg'] == b['pitch_deg']
+        if lb != la and still:
+            bad.append(f"frame {b['index']}: lens changes while the camera is still")
+    for f in frames:
+        wide = f['camera']['lens_mm'] < base-1e-9
+        if bool(f.get('caption')) != wide:
+            bad.append(f"frame {f['index']}: caption {'on' if f.get('caption') else 'off'} at {f['camera']['lens_mm']:.2f} mm")
+    if ease_s is not None:      # the ramp from base to the narrowest lens lasts about ease_s, never a cut
+        lens = np.array([f['camera']['lens_mm'] for f in frames]); lo = lens.min()
+        if lo < base-1e-9:
+            full = (np.abs(np.diff(lens)) > 0).sum()
+            if full < ease_s*fps*.8:
+                bad.append(f'lens ramps are shorter than {ease_s} s')
     return bad
 
 

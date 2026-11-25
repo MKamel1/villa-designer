@@ -8,7 +8,7 @@
    "sweeping",
    "holding"
   ],
-  "min_wall_dominated_share": 0.35,
+  "min_wall_dominated_share": 0.25,
   "basis": "a room gets 16 mm when a 24 mm 360 there is wall-dominated in at least this share of its sweep and hold frames (policy; derived by scripts/lens_rooms.py into lens-rooms.json)"
  },
  "wall_dominated_share_at_24mm": {
@@ -42,14 +42,17 @@
   "parents-ensuite": 0.62
  },
  "rooms": [
+  "bar-alcove",
   "cinema",
   "corridor",
+  "dirty-kitchen",
   "family-bath",
   "gallery-end",
   "guest-wc",
   "hall-b",
   "kids-a",
   "kids-b",
+  "kitchen-island",
   "landing-gf",
   "pantry",
   "parents-dressing",

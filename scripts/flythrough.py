@@ -39,7 +39,8 @@ def source_inventory():
                               ROOT/'scripts/villa_render_views.py',ROOT/'scripts/villa_render.py',
                               ROOT/'knowledge/flythrough/villa-policy.json',ROOT/'knowledge/flythrough/villa-route.json',
                               ROOT/'knowledge/flythrough/tour-policy.json',ROOT/'knowledge/flythrough/villa-tour.json',ROOT/'knowledge/flythrough/tour-stills.json',
-                              ROOT/'knowledge/flythrough/informative-rule.json',ROOT/'src/archpipe/walkthrough_tour.py']
+                              ROOT/'knowledge/flythrough/informative-rule.json',ROOT/'src/archpipe/walkthrough_tour.py',
+                              ROOT/'knowledge/flythrough/lens-rooms.json',ROOT/'knowledge/flythrough/tour-points.json',ROOT/'knowledge/flythrough/tour-aim.json']
     return {str(p.relative_to(ROOT)):file_hash(p) for p in files}
 
 
@@ -217,7 +218,7 @@ def encode_villa(out,stage,segments,step):
     for n,i in enumerate(keep):
         png=directory/f'frame-{i:04d}.png';record=json.loads(png.with_suffix('.json').read_text())
         if record['path_sha256']!=path['sha256'] or record['png_sha256']!=file_hash(png):raise ValueError(f'frame {i} incomplete or stale')
-        (link/f'{n:05d}.png').symlink_to(png)
+        put_frame(link/f'{n:05d}.png',png,path['frames'][i].get('caption'))
     fps=24//step;target=directory/'walkthrough.mp4'
     subprocess.run(['ffmpeg','-y','-framerate',str(fps),'-i',str(link/'%05d.png'),'-c:v','libx264','-threads','8','-preset','slow',
         '-crf',str(policy()['encode'][stage+'_crf']),'-vf','scale=out_color_matrix=bt709:out_range=tv','-pix_fmt','yuv420p',
@@ -235,6 +236,14 @@ def frame_file(out,path,stage,i):
     return out/stage/f'frame-{i:04d}.png'
 
 
+def put_frame(dst,src,caption):
+    """A frame for the encoder: a link to the render, or, when the frame carries a lens caption, a copy with the caption burned in."""
+    if not caption:dst.symlink_to(src);return
+    from PIL import Image
+    from archpipe.walkthrough_tour import burn_caption
+    with Image.open(src) as im:burn_caption(im,caption).save(dst,quality=93) if dst.suffix=='.jpg' else burn_caption(im,caption).save(dst)
+
+
 def encode_draft(out,stage,step,crf=26):
     """MP4 of every `step`th frame at 24/step fps (real-time pace). Workbench JPEGs or Cycles PNGs of the current path only."""
     path=require_inputs(out);keep=[f['index'] for f in path['frames'] if f['index']%step==0]
@@ -246,7 +255,7 @@ def encode_draft(out,stage,step,crf=26):
         if stage!='workbench':
             record=json.loads(src.with_suffix('.json').read_text())
             if record['path_sha256']!=path['sha256'] or record['png_sha256']!=file_hash(src):raise ValueError(f'frame {i} stale')
-        (link/f'{n:05d}{src.suffix}').symlink_to(src)
+        put_frame(link/f'{n:05d}{src.suffix}',src,path['frames'][i].get('caption'))
     ext=frame_file(out,path,stage,keep[0]).suffix;fps=24//step
     target=out/f'walkthrough-{stage}.mp4'
     subprocess.run(['ffmpeg','-y','-framerate',str(fps),'-i',str(link/f'%05d{ext}'),'-c:v','libx264','-threads','8','-preset','medium','-crf',str(crf),
@@ -300,9 +309,15 @@ def contact(out,stage,every,columns=6):
         part=rows[s:s+per];h=(len(part)+columns-1)//columns
         sheet=Image.new('RGB',(columns*thumb[0],h*(thumb[1]+pad)),'black');draw=ImageDraw.Draw(sheet)
         for k,f in enumerate(part):
-            with Image.open(frame_file(out,path,stage,f['index'])) as im:im=im.convert('RGB').resize(thumb)
+            with Image.open(frame_file(out,path,stage,f['index'])) as im:
+                im=im.convert('RGB')
+                if f.get('caption'):
+                    from archpipe.walkthrough_tour import burn_caption
+                    im=burn_caption(im,f['caption'])      # the caption as the video shows it
+                im=im.resize(thumb)
             x,y=(k%columns)*thumb[0],(k//columns)*(thumb[1]+pad)
-            sheet.paste(im,(x,y+pad));draw.text((x+3,y+2),f"{f['index']} {f['seconds']:.0f}s {f.get('station') or f['room'] or ''} {f.get('phase','')}",fill='white')
+            lens=f['camera']['lens_mm']
+            sheet.paste(im,(x,y+pad));draw.text((x+3,y+2),f"{f['index']} {f['seconds']:.0f}s {f.get('station') or f['room'] or ''} {f.get('phase','')} {lens:.0f}mm",fill='white')
         target=out/f'contact-{stage}-{s//per:02d}.jpg';sheet.save(target,quality=88);sheets.append(str(target))
     print('\n'.join(sheets))
 

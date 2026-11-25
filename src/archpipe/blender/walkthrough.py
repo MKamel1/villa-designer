@@ -181,12 +181,14 @@ def measure(args,path,scene,context):
     from archpipe.exposure_groups import RULE_SHA256,transport_digest
     out=Path(args.root)/'exposure';out.mkdir(parents=True,exist_ok=True)
     views=frame_views(path,scene);villa=is_villa_path(path)
-    segments=sorted({f.get('segment','interior') for f in path['frames']})
+    segments=sorted({group_of(f) for f in path['frames']})
     if args.segments:segments=[s for s in segments if s in args.segments.split(',')]
     every=path['settings'].get('interior_preview_every_nth_frame_for_exposure',1) if villa else 1
     for segment in segments:
-        indices=[f['index'] for f in path['frames'] if f.get('segment','interior')==segment]
-        if villa:indices=indices[::every]+([indices[-1]] if indices[-1] not in indices[::every] else [])
+        indices=[f['index'] for f in path['frames'] if group_of(f)==segment]
+        if villa:
+            step=max(1,min(every,len(indices)//6))      # a small group (a dark room, a garden pan) still gets at least six meter readings
+            indices=indices[::step]+([indices[-1]] if indices[-1] not in indices[::step] else [])
         rows=[];meters={}
         for index in indices:
             view=views[index];file=out/(view['id']+'.json')
@@ -211,8 +213,28 @@ def measure(args,path,scene,context):
         save(out/('lock.json' if not villa else f'lock-{segment}.json'),lock)
 
 
+def group_of(frame):
+    """The exposure group a frame is metered in: the tour names one per dark room and garden pan; older routes use the segment."""
+    return frame.get('exposure_group') or frame.get('segment','interior')
+
+
+def frame_exposure(args,path,every_ease_s=None):
+    """Per frame (exposure stops, white balance K, tint) for the whole path: each frame's own group lock, with every step between groups
+    turned into a ramp of `exposure_ease_s` by a moving average (smooth, no cut). Locks are loaded and bound-checked once per group."""
+    from archpipe.walkthrough_tour import smooth_series
+    locks={};ev=[];kelvin=[];tint=[]
+    for f in path['frames']:
+        g=group_of(f)
+        if g not in locks:locks[g]=load_lock(args,path,f)
+        l=locks[g];ev.append(l['exposure_stops']);kelvin.append(l['white_balance_k']);tint.append(0. if l['white_balance_illuminant']=='planckian' else 10.)
+    ease=every_ease_s if every_ease_s is not None else path['settings'].get('exposure_ease_s',0.)
+    w=int(round(ease*path['settings'].get('fps',24)))
+    if w>1:ev,kelvin,tint=(smooth_series(v,w) for v in (ev,kelvin,tint))
+    return np.array(ev),np.array(kelvin),np.array(tint),locks
+
+
 def load_lock(args,path,frame):
-    name='lock.json' if not is_villa_path(path) else f"lock-{frame.get('segment','interior')}.json"
+    name='lock.json' if not is_villa_path(path) else f"lock-{group_of(frame)}.json"
     lock=json.loads((Path(args.root)/'exposure'/name).read_text())
     if lock['path_sha256']!=path['sha256'] or lock['sha256']!=digest({k:v for k,v in lock.items() if k!='sha256'}):
         raise ValueError('Clip camera lock binding changed')
@@ -268,6 +290,7 @@ def render_frames(args,path,scene,context):
     default=[f['index'] for f in path['frames'] if f.get('segment','interior') in (args.segments.split(',') if args.segments else ['interior','garden-placeholder'])]
     indices=[0,(n-1)//2,n-1] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else default
     position_output=static_position_output(out) if args.stage=='final' else None
+    ev,kelvin,tint,_=frame_exposure(args,path)
     for index in indices:
         lock=load_lock(args,path,path['frames'][index])
         view=views[index];png=out/(view['id']+'.png');receipt_file=png.with_suffix('.json')
@@ -283,8 +306,8 @@ def render_frames(args,path,scene,context):
         s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
         s.cycles.seed=0;s.cycles.use_animated_seed=False
         s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
-        s.view_settings.exposure=lock['exposure_stops']
-        wb=V.photoreal.white_balance(lock['white_balance_k'],illuminant=lock['white_balance_illuminant'])
+        s.view_settings.exposure=float(ev[index])
+        wb=V.photoreal.white_balance(float(kelvin[index]),illuminant=lock['white_balance_illuminant']);s.view_settings.white_balance_tint=float(tint[index])
         s.render.image_settings.file_format='PNG';s.render.image_settings.color_depth='8';s.render.filepath=str(png)
         if position_output:position_output.file_slots[0].path=view['id']+'-position-'
         bpy.context.view_layer.update();started=time.monotonic();bpy.ops.render.render(write_still=True)
@@ -315,6 +338,7 @@ def place_camera(obj,c):
     obj.location=c['position']
     direction=Vector(c['target'])-Vector(c['position']);horizontal=Vector((direction.x,direction.y,0))
     obj.rotation_euler=horizontal.to_track_quat('-Z','Y').to_euler()
+    obj.data.lens=c.get('lens_mm',obj.data.lens)       # per frame: the 16 mm small-room 360s and the eased focal length between them
     obj.data.shift_y=c.get('shift_y',0)+direction.z/max(horizontal.length,1e-9)*obj.data.lens/obj.data.sensor_width
 
 
@@ -398,7 +422,7 @@ def workbench(args,path,scene,context):
             for i in todo:
                 place_camera(camera,views[i]['camera'])
                 for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
-                camera.data.keyframe_insert('shift_y',frame=i)
+                camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
             for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
                 for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
             run=todo[0];first=todo[0]
@@ -431,20 +455,24 @@ def lookdev(args,path,scene,context):
     indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
     todo=[i for i in indices if not (out/f'frame-{i:04d}.png').exists()]
     if not todo:print('WALKTHROUGH lookdev nothing to do',flush=True);return
-    lock=load_lock(args,path,path['frames'][todo[0]])
+    ev,kelvin,tint,locks=frame_exposure(args,path)
     camera,pitch,emissive=setup(scene,context,views[todo[0]])
     s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=resolution;s.render.resolution_percentage=100
     s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
     s.cycles.seed=0;s.cycles.use_animated_seed=False;s.render.use_persistent_data=True
-    s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=lock['exposure_stops']
-    V.photoreal.white_balance(lock['white_balance_k'],illuminant=lock['white_balance_illuminant'])
+    s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
+    V.photoreal.white_balance(5500.,illuminant='daylight')
     s.render.image_settings.file_format='PNG';s.render.image_settings.color_depth='8'
-    camera.animation_data_clear()
+    camera.animation_data_clear();s.animation_data_clear() if s.animation_data else None
+    vs=s.view_settings
     for i in todo:
         place_camera(camera,views[i]['camera'])
         for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
-        camera.data.keyframe_insert('shift_y',frame=i)
-    for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
+        camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
+        vs.exposure=float(ev[i]);vs.white_balance_temperature=float(kelvin[i]);vs.white_balance_tint=float(tint[i])      # eased between groups (frame_exposure)
+        for prop in ('exposure','white_balance_temperature','white_balance_tint'):vs.keyframe_insert(prop,frame=i)
+    fcs=list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves)+list(s.animation_data.action.fcurves)
+    for fc in fcs:
         for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
     runs=[];a=b=todo[0];step=None
     for i in todo[1:]:
@@ -459,7 +487,8 @@ def lookdev(args,path,scene,context):
     each=(time.monotonic()-started)/len(todo)
     for i in todo:
         png=out/f'frame-{i:04d}.png'
-        save(png.with_suffix('.json'),dict(path_sha256=path['sha256'],lock_sha256=lock['sha256'],samples=samples,resolution=resolution,
+        lock=locks[group_of(path['frames'][i])]
+        save(png.with_suffix('.json'),dict(path_sha256=path['sha256'],lock_sha256=lock['sha256'],exposure_group=group_of(path['frames'][i]),exposure_stops=float(ev[i]),white_balance_k=float(kelvin[i]),lens_mm=views[i]['camera']['lens_mm'],samples=samples,resolution=resolution,
              render_seconds=each,png_sha256=hashlib.sha256(png.read_bytes()).hexdigest(),index=i,render_device=context['render_device']))
     print('WALKTHROUGH lookdev done',len(todo),'frames',round(each,2),'s/frame',flush=True)
 
