@@ -334,8 +334,9 @@ def depth_samples(camera,grid,far=40.):
                 hit,loc,n,face,obj,_ = scene.ray_cast(deps,o,d,distance=far-travelled)
                 if not hit:break
                 travelled+=(loc-o).length
-                slot=obj.data.polygons[face].material_index if obj.type=='MESH' and face<len(obj.data.polygons) else -1
-                mat=obj.data.materials[slot] if 0<=slot<len(obj.data.materials) else None
+                ev=obj.evaluated_get(deps).data if obj.type=='MESH' else None      # the face index belongs to the evaluated mesh
+                slot=ev.polygons[face].material_index if ev is not None and 0<=face<len(ev.polygons) else -1
+                mat=ev.materials[slot] if ev is not None and 0<=slot<len(ev.materials) else None
                 if 'glass' in obj.name.lower() or (mat is not None and 'glass' in mat.name.lower()):
                     o=loc+d*1e-3;travelled+=1e-3;continue
                 hit_ok=True;break
