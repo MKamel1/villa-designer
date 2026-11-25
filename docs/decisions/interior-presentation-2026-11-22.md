@@ -59,3 +59,4 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
 - **Accepted trade-off:** the bed moves about 150–200 mm toward the window, and the foot clearance falls from about 0.8 m toward 0.6 m.
 - **Condition:** if the measured foot clearance or any passage falls below its sourced minimum, the lane reports back rather than applying.
 - **Reason:** a clean, minimal look and more room to move on both sides of the bed.
+- **2026-11-25 refinement (client):** option (a). Both drawers take their depth from the built-out headboard wall only (about 150–200 mm), identical on both sides. The dressing-room wardrobe (furn-pd-hang-1) stays UNTOUCHED and loses no hanging length.
