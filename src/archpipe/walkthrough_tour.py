@@ -484,7 +484,10 @@ def plan_tour(vm, route=None, pol=None, aim=None):
             s.update(T=T, yawfn=yaw, alpha=alpha)
         elif s['kind'] == 'arc':
             # a partial look: go to the nearer end of the arc, sweep it at the view rate, hold, then turn to the exit heading
-            a0, span = s['info']['arc']; a1 = a0+span; near0 = abs(wrap(a0-s['y0'])) <= abs(wrap(a1-s['y0']))
+            a0, span = s['info']['arc']; a1 = a0+span
+            ex = s['exit'] if s['exit'] is not None else None
+            cost = lambda st, sg: abs(wrap(st-s['y0']))+(abs(wrap(ex-(st+sg*span))) if ex is not None else 0.)       # turn in + turn out: take the sweep direction that turns least overall
+            near0 = cost(a0, 1.) <= cost(a1, -1.)
             st0, sg = (a0, 1.) if near0 else (a1, -1.); t1 = wrap(st0-s['y0']); end = st0+sg*span
             e = wrap(s['exit']-end) if s['exit'] is not None else 0.
             T, th = programme([0., t1, t1+sg*span, t1+sg*span+e], [0., 0., pol['arc_hold_s'], 0.], [pol['turn_rate_deg_s'], pol['turn_rate_view_deg_s'], pol['turn_rate_deg_s']], pol['turn_accel_deg_s2'])

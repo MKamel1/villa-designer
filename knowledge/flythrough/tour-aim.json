@@ -423,8 +423,8 @@
 -50,
 -40
 ],
-"first_frame": 3238,
-"last_frame": 3361
+"first_frame": 3210,
+"last_frame": 3333
 },
 "9.8,-21.8>family~a1": {
 "s": [
@@ -463,8 +463,8 @@
 0,
 0
 ],
-"first_frame": 3530,
-"last_frame": 3620
+"first_frame": 3502,
+"last_frame": 3592
 },
 "10.6,-24.2>cinema~a2": {
 "s": [
@@ -527,8 +527,8 @@
 70,
 70
 ],
-"first_frame": 3730,
-"last_frame": 3888
+"first_frame": 3702,
+"last_frame": 3860
 },
 "8.6,-21.4>cinema": {
 "s": [
@@ -581,8 +581,8 @@
 0,
 0
 ],
-"first_frame": 4057,
-"last_frame": 4184
+"first_frame": 4029,
+"last_frame": 4156
 },
 "4.6,-22.6>store-ramp~a3": {
 "s": [
@@ -619,8 +619,8 @@
 0,
 5
 ],
-"first_frame": 4470,
-"last_frame": 4552
+"first_frame": 4442,
+"last_frame": 4524
 },
 "2.6,-21.8>lounge": {
 "s": [
@@ -739,8 +739,8 @@
 0,
 0
 ],
-"first_frame": 4717,
-"last_frame": 5046
+"first_frame": 4689,
+"last_frame": 5018
 },
 "4.6,-26.2>lounge": {
 "s": [
@@ -761,8 +761,8 @@
 0,
 0
 ],
-"first_frame": 5349,
-"last_frame": 5380
+"first_frame": 5321,
+"last_frame": 5352
 },
 "4.6,-25.8>landing-gf~a1": {
 "s": [
@@ -921,8 +921,8 @@
 -10,
 -10
 ],
-"first_frame": 5705,
-"last_frame": 6155
+"first_frame": 5677,
+"last_frame": 6127
 },
 "4.6,-27.0>study-game": {
 "s": [
@@ -959,8 +959,8 @@
 0,
 0
 ],
-"first_frame": 6309,
-"last_frame": 6392
+"first_frame": 6281,
+"last_frame": 6364
 },
 "5.8,-25.0>corridor~a1": {
 "s": [
@@ -1023,8 +1023,8 @@
 10,
 0
 ],
-"first_frame": 6812,
-"last_frame": 6972
+"first_frame": 6784,
+"last_frame": 6944
 },
 "9.4,-27.8>family-bath": {
 "s": [
@@ -1069,8 +1069,8 @@
 -15,
 -15
 ],
-"first_frame": 7178,
-"last_frame": 7284
+"first_frame": 7150,
+"last_frame": 7256
 },
 "9.8,-25.0>corridor~a2": {
 "s": [
@@ -1121,8 +1121,8 @@
 5,
 5
 ],
-"first_frame": 7608,
-"last_frame": 7734
+"first_frame": 7580,
+"last_frame": 7706
 },
 "12.2,-27.8>kids-a~a2": {
 "s": [
@@ -1171,8 +1171,8 @@
 -55,
 -55
 ],
-"first_frame": 7817,
-"last_frame": 7936
+"first_frame": 7789,
+"last_frame": 7908
 },
 "12.2,-27.0>kids-b": {
 "s": [
@@ -1251,8 +1251,8 @@
 0,
 0
 ],
-"first_frame": 8103,
-"last_frame": 8313
+"first_frame": 8075,
+"last_frame": 8285
 },
 "17.4,-25.0>parents-bed~a2": {
 "s": [
@@ -1349,8 +1349,8 @@
 -30,
 -30
 ],
-"first_frame": 8700,
-"last_frame": 8961
+"first_frame": 8672,
+"last_frame": 8933
 },
 "19.0,-24.6>parents-dressing~a2": {
 "s": [
@@ -1421,8 +1421,8 @@
 -40,
 -40
 ],
-"first_frame": 9215,
-"last_frame": 9396
+"first_frame": 9170,
+"last_frame": 9351
 },
 "21.8,-28.2>parents-ensuite~a1": {
 "s": [
@@ -1459,8 +1459,8 @@
 0,
 0
 ],
-"first_frame": 9591,
-"last_frame": 9673
+"first_frame": 9546,
+"last_frame": 9628
 }
 }
 }
