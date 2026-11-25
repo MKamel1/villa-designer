@@ -171,3 +171,27 @@ stretches (stride 6) it flags 64/90 (kids/corridor), 17/19 and 10/24. Missed: th
 Workbench draws glass as an opaque pane, so garden pans look like a blank wall there; the Cycles preview shows the glass.
 (b) **Cycles** 480x270, 16 spp, denoised, every 2nd frame, interior exposure lock -8.34 stops 5500 K (337 metered frames, every 48th).
 (c) Contact sheets every 2 s (every 48th frame).
+
+## Results (2026-11-24)
+
+Deliverables (absolute paths, all under `/home/omar/archpipe/lanes/WT/out/wt/villa4/`; `out/` is not in git):
+* `walkthrough-workbench.mp4` : Workbench geometry preview, 640x360, 24 fps, all 16,091 frames, 670.5 s (`walkthrough-workbench.json`).
+* `walkthrough-lookdev.mp4` : Cycles, 480x270, 16 spp denoised, every 2nd frame (8,046 frames) at 12 fps = 670.5 s real-time pace.
+* contact sheets (every 48th frame = 2 s, captioned frame / second / room / phase): `contact-workbench-00..09.jpg`, `contact-lookdev-00..09.jpg`.
+* `report.json` (non-informative-frame report), `assembly/guards.json` (admission), `path.json`, `door-states.json`.
+Cycles frames: `lookdev/frame-NNNN.png`; no per-frame `render_qa` was run on this draft (a draft preview bypasses the per-frame receipts); the lead decides whether QA is needed before the client sees it.
+
+**Non-informative-frame report (final rule, hidden objects and glass skipped).** 5,810 moving frames (walk, stair, pan): 1,832 (31.5 %) flagged, in **31 runs longer than 1 s (95.6 s in total)**:
+* 17 are walks arriving at or leaving small rooms and the stair foot (guest WC 17.4 s, hall -> stair foot 4.0 s, lounge -> cinema 2.8, kids A -> B 2.7, family bath -> corridor 3.3, kids B -> parents' entry 3.0 ...): the camera looks along the route 1.5 m ahead and the route ends at a wall.
+* 9 are garden-pan runs of 1.7-2.8 s: the pan crosses the mullion and the curtain stack at the end of the glass (the garden itself reads well in the Cycles frames).
+* 1 is the flight (16.7 s): looking up the stair the stringer and soffit fill the frame, so the "one plane" clause fires; the Cycles frames show this is the intended view up the stair, i.e. a false positive of the rule for that segment.
+* 360 arcs: 4,354 of 10,281 turn frames are wall-facing, 5,434 turn frames carry the waiver (flagged rooms). Per room: guest WC 0.90, pantry 0.83, dressing 0.69, kids B 0.62, bar alcove 0.63, ensuite 0.60; open rooms 0.0-0.35 (living 0.0).
+**The "fail and fix any run over 1 s" requirement is NOT met**: the planner was tuned (turn points, bounds, look-ahead) but 31 moving runs remain; they are listed in `report.json`. Candidate fixes, not done: end each walk 0.5 s before the stop with
+a hold looking at the room's best view; shorten the pan to the glass width; a different 360 point for the dead-end rooms; exempt the flight from the plane clause.
+
+**Calibration** (final rule): 10 of 12 known-bad preview frames flagged, 0 of 20 good (re-run after the hidden-object fix gave the same result).
+**What reads well** (contact sheets): the open-plan basement (entry, dining, island, living with the garden through the glass, kitchen), the ascent looking up the flight, the GF open stair/landing/gallery views, the parents' bedroom.
+**What looks wrong:** store-ramp, cinema and the dressing rooms are nearly black under the one interior exposure (-8.34 stops); bare-wall frames at the stair foot (9,200-9,500) and some 360 arcs; Workbench shows glass as an opaque pane (garden pans look like a wall there, not in Cycles); the stair-gf 360 shows mostly plaster; dining pendants are still the old stand-ins.
+
+**Final-render estimate (not started).** Measured earlier on this scene: 1080p, 64 spp, 12.07 s/frame (3 frames, shared GPU, per-render-call export). With the animation render the per-call export drops out; the Cycles preview ran about 0.5 s/frame at 480x270 16 spp alone,
+so a 1080p 64 spp frame is estimated at about 8-12 s. 16,091 frames = **36-54 GPU-hours** at 24 fps (18-27 h at every 2nd frame, 12 fps), plus the 337-frame exposure metering (about 40 min) and QA/encode. Not scheduled.
