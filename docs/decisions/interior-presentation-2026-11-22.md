@@ -46,3 +46,16 @@ The chosen mix is scheduled in `knowledge/products/finishes/chosen.json` and dra
 
 ### Applied (lane L4 round 5, 2026-11-24)
 Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene; products, model changes, cove verification and the honest likeness to the references are in `docs/lanes/L4-finishes.md` ("Round 5"). Decision 3's tree uplights belong to lane LG.
+
+## 2026-11-25: parents' bedroom headboard wall with hidden nightstands (client approved)
+- **Removed:** both floor-standing nightstands. The east one stood 17 mm from the dressing-door opening, and its books blocked the way at 6:21 of the v3 walkthrough.
+- **Replaced by:** one full-width headboard wall across the bed and both sides. It carries:
+  - a matched pair of flush ledges at mattress height with push-to-open drawers, no handles;
+  - the existing 2700 K headboard cove along the top;
+  - the existing swing-arm reading lights.
+- **Where the depth comes from:**
+  - The east side borrows depth from the end of the wardrobe behind it (furn-pd-hang-1).
+  - The west side, with the entry behind it, gets its depth from building the wall out about 150–200 mm into the bedroom.
+- **Accepted trade-off:** the bed moves about 150–200 mm toward the window, and the foot clearance falls from about 0.8 m toward 0.6 m.
+- **Condition:** if the measured foot clearance or any passage falls below its sourced minimum, the lane reports back rather than applying.
+- **Reason:** a clean, minimal look and more room to move on both sides of the bed.
