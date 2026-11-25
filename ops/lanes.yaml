@@ -417,6 +417,12 @@ lanes:
     - knowledge/flyaudit/**
     - docs/lanes/WTA*.md
     - docs/lessons/WTA.md
+  RM: # reference match: rooms vs the client's style references -> gap lists and proposals (no design change until approved)
+    - src/archpipe/refmatch/**
+    - tests/refmatch/**
+    - knowledge/refmatch/**
+    - docs/lanes/RM*.md
+    - docs/lessons/RM.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
