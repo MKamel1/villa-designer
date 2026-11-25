@@ -364,7 +364,7 @@ def main():
     parser.add_argument('--route',choices=['clip','villa','tour'],default='clip')
     parser.add_argument('--blender',type=Path,default=Path('/home/omar/opt/blender/blender'))
     parser.add_argument('--samples',type=int,default=64);parser.add_argument('--every',type=int,default=1)
-    parser.add_argument('--frames');parser.add_argument('--segments');parser.add_argument('--stage',choices=['draft','preview','workbench','sampling','reference','final'],default='preview')
+    parser.add_argument('--frames');parser.add_argument('--segments');parser.add_argument('--stage',choices=['draft','preview','workbench','lookdev','sampling','reference','final'],default='preview')
     args=parser.parse_args();out=args.out.resolve()
     if args.operation=='prepare':prepare(out,args.route)
     elif args.operation=='choose-samples':choose_samples(out,args.blender)
