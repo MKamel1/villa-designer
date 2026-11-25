@@ -163,6 +163,24 @@ def select(scene='out/wt/villa4/scene.json'):
             c, b0, L, ids = best[1]; real = gain(ids)
             picks.append(dict(kind='arc', level=lv, room=cands[c][0], point=list(cands[c][2]), gain_m2=real, cand=c, b0=b0, nbins=L)); covered[ids] = True
             print('ARC', lv, cands[c][0], [round(v, 2) for v in cands[c][2]], 'bins', b0, L, round(real, 1), flush=True)
+        # completeness: a room left under MIN_ROOM_SHARE of its coverable surface gets the arcs that add most inside it, whatever the arc minimum (every room stays covered)
+        for r, nm in enumerate(C.names):
+            if C.rooms[nm]['level'] != lv: continue
+            m = owner == r; tot = int(m.sum())
+            while tot and (m & covered).sum() < MIN_ROOM_SHARE*tot:
+                best = (0., None)
+                for c in sel:
+                    if cands[c][0] != nm: continue
+                    for b0 in range(BINS):
+                        for L in (1, 2, 3, 4):
+                            bins = [(b0+k) % BINS for k in range(L)]
+                            if len(per[c][bins[0]]) == 0 or len(per[c][bins[-1]]) == 0: continue
+                            ids = np.unique(np.concatenate([per[c][b] for b in bins])); g_ = float((m[ids] & ~covered[ids]).sum())*AREA/(1+.15*L)
+                            if g_ > best[0]: best = (g_, (c, b0, L, ids))
+                if best[1] is None: break
+                c, b0, L, ids = best[1]; real = gain(ids)
+                picks.append(dict(kind='arc', level=lv, room=cands[c][0], point=list(cands[c][2]), gain_m2=real, cand=c, b0=b0, nbins=L)); covered[ids] = True
+                print('FILL', lv, nm, [round(v, 2) for v in cands[c][2]], 'bins', b0, L, round(real, 1), flush=True)
     # residual per room (stated)
     resid = {}
     for r, nm in enumerate(C.names):
