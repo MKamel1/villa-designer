@@ -50,3 +50,10 @@ The client watched the first whole-villa preview (lane WT, out/wt/villa3/preview
 * **Prune in route order** (`refine`): every stop must add >= its minimum of new surface after all earlier frames of the route (walking counts); the weakest is dropped first and the route re-measured. A drop is refused (stop kept, listed as `protected` in `tour-prune.json`) when a room would fall under 80 % of its coverable surface or a furniture/fixture piece seen before would be lost.
 * **Redundant second** (stated rule, `wt_cover.py measure`): a second of the route in which the frames show < 1.0 m2 of surface not shown by any earlier informative frame. Before (version 2, 670.5 s): 438 s redundant (65 %); after: see docs/lanes/WT.md.
 * **Wide lens pad:** the 16 mm span of a small-room stop is kept 1.5 s either side (the door crossings, wall-dominated at 24 mm), then eased out over 1.25 s; the caption follows the lens.
+
+## Client decisions on version 3 (2026-11-25)
+- Approved the lead's short pass:
+  - trim the garden pan;
+  - re-aim the study turn and the curtain and column close-ups;
+  - in corridors, look down the corridor's length instead of at the side wall.
+- **Doors that hide features:** in some rooms the open door leaf blocks features behind it. Where the audit shows a feature blocked by a door leaf, ANIMATE the door: enter, then close the leaf smoothly (eased, realistic speed) so the camera can see what was behind it, then open it again before leaving. The door is animated, never hidden or removed. Its geometry and hinge side come from the model, and the path's clearance must hold during the animation.
