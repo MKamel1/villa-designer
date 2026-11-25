@@ -1411,6 +1411,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             dv = box_faces(xa, q[1] - 0.03, z, xb, q[3] + 0.03, z + 0.07)
             xa2, xb2 = sorted((head + s_ * 0.08, head + s_ * 0.48))
             pil = [box_faces(xa2, q[1] + 0.07, z, xb2, q[3] - 0.07, z + 0.14)]
+        if b_.get("loft"):                  # client 2026-11-25 loft beds: an inflated pillow shell at the head, not a box (box = refused proxy)
+            from ..interior import soft_dressing as SD_
+            xc_, yc_ = (q[0] + q[2]) / 2, head + s_ * 0.28
+            v_, t_ = SD_.pillow(480, 340, 110, seed=11)
+            pil = [SD_._world(v_, t_, lambda x, y, z, xc_=xc_, yc_=yc_, z_=z: [xc_ + x / 1000.0, yc_ + y / 1000.0, z_ + z / 1000.0])]
         # the duvet is CLOTH, draped by the renderer onto the bed's own parts (render review: box duvets read as
         # rigid slabs). Its cut follows the bedroom standard (photoreal.cloth_bedding): from 0.55 m below the head
         # to 0.30 m OVER THE FOOT, mattress width + 0.30 m each side, so both the sides and the foot hang. The first
