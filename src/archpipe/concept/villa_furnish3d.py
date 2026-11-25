@@ -345,8 +345,8 @@ def extras(it):
             xc = -W / 2 + (k + 0.5) * W / it["stools"]
             out.append(("stool-%d" % (k + 1), _stool(xc, -D / 2 - 0.05, -D / 2 + 0.35)))
     if it["type"] == "desk" and it["id"] in TUCKED_SEAT and not it.get("chair_pulled_out"):
-        # seat under the top, back against its front edge: only the 0.03 m back stands proud of the 0.40 m top
-        out.append(("chair-1", _chair(0.0, D / 2 - 0.42, D / 2 + 0.03, True)))
+        # seat under the top (0.01 m clear of the wall), back against its front edge: only the 0.03 m back stands proud of the 0.40 m top
+        out.append(("chair-1", _chair(0.0, D / 2 - 0.39, D / 2 + 0.03, True)))
     elif it["type"] == "desk":
         n = it.get("chairs", max(1, int(W // 0.9)))
         for k in range(n):
