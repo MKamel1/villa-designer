@@ -60,3 +60,8 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
 - **Condition:** if the measured foot clearance or any passage falls below its sourced minimum, the lane reports back rather than applying.
 - **Reason:** a clean, minimal look and more room to move on both sides of the bed.
 - **2026-11-25 refinement (client):** option (a). Both drawers take their depth from the built-out headboard wall only (about 150–200 mm), identical on both sides. The dressing-room wardrobe (furn-pd-hang-1) stays UNTOUCHED and loses no hanging length.
+- **2026-11-25 revision (client, after measurement):** the built-out wall left 0.60–0.65 m at the bed foot, where 0.75 m is required (UK AD M 2.25a, card ukadm-bedroom-route-750) on the only route from the entry to the dressing room. It is replaced by a SLIM bed-mounted headboard panel (about 50 mm) carrying:
+  - a matched pair of floating side ledges with slim push-to-open drawers (about 80 mm);
+  - the cove and the reading lights.
+  Both bedside tables are still removed, and the wardrobe is untouched. The bed moves at most 50 mm, and the foot route must stay ≥ 0.75 m.
+- **Lead decision (staging):** park the curtain stacks clear of the bed-foot corners, and shorten the duvet's foot drop so the cloth does not narrow that route (DF measured 0.45 m with cloth as obstacles).
