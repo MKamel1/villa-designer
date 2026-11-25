@@ -105,9 +105,6 @@
    "space": "lounge~a3"
   },
   {
-   "space": "hall-b~a1"
-  },
-  {
    "stair": "up"
   },
   {
@@ -115,9 +112,6 @@
   },
   {
    "space": "study-game"
-  },
-  {
-   "space": "study-game~a2"
   },
   {
    "space": "corridor~a1"

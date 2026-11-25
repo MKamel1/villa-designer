@@ -20,7 +20,7 @@ from wt_plan import vmap
 from tour_points import classify_views
 
 CELL = .5; AREA = .25; COLS, ROWS = 48, 27; BINS = 12; MAXD = 8.
-HUB_MIN_M2 = 12.; HUB2_MIN_M2 = 60.; ARC_MIN_M2 = 6.; NEW_MIN_M2 = 1.; HUB_MIN_WIDTH_M = 2.0; DOOR_KEEP_M = .45; MIN_ROOM_SHARE = .8; PITCH_STEP = 4      # policy (ours)
+HUB_MIN_M2 = 12.; HUB2_MIN_M2 = 60.; ARC_MIN_M2 = 10.; NEW_MIN_M2 = 1.; HUB_MIN_WIDTH_M = 2.0; DOOR_KEEP_M = .45; MIN_ROOM_SHARE = .8; PITCH_STEP = 4      # policy (ours)
 EYE = 1.35
 
 
@@ -206,6 +206,25 @@ def measure(path, scene='out/wt/villa4/scene.json', fps=24, stride=6):
     print(json.dumps(out)); return out, red, idx
 
 
+SWEEP_MIN_M2 = .5      # policy (ours): a 30-degree heading of a 360 that adds less than this of unseen surface is swept at the fast rate and is not held on
+
+
+def sweep(path='out/wt/villa4/plan-only.json', scene='out/wt/villa4/scene.json', stride=3):
+    """Per 360 stop, the new surface (m2, vs every earlier frame of the route) each of the 12 heading bins adds -> knowledge/flythrough/tour-sweep.json."""
+    C = Cover(scene); fr = json.loads(Path(path).read_text())['frames']; idx = list(range(0, len(fr), stride))
+    K = C.keys([(np.array(fr[i]['camera']['position']), np.array(fr[i]['camera']['target']), fr[i]['camera']['lens_mm']) for i in idx])
+    seen = set(); new = collections.defaultdict(lambda: np.zeros(BINS))
+    for i, a in zip(idx, K):
+        a = set(a.tolist()); f = fr[i]
+        if f['phase'] == 'turn' and f.get('station'):
+            p, t = f['camera']['position'], f['camera']['target']; b = int(round(math.degrees(math.atan2(t[1]-p[1], t[0]-p[0]))/30.)) % BINS
+            new[f['station']][b] += len(a-seen)*AREA
+        seen |= a
+    (ROOT/'knowledge/flythrough/tour-sweep.json').write_text(json.dumps(dict(schema='flythrough-tour-sweep/1', min_m2=SWEEP_MIN_M2, basis='new surface per 30-degree heading bin of each stop, in route order (wt_cover.py sweep)',
+                                                                           bins={k: [round(float(x), 2) for x in v] for k, v in new.items()}), indent=1))
+    print({k: int((v < SWEEP_MIN_M2).sum()) for k, v in new.items()})
+
+
 def refine(scene='out/wt/villa4/scene.json', max_iter=24):
     """Plan the route, give every stop its in-route new surface (what its frames show that no earlier frame of the route showed) and drop stops below
     their minimum (hub HUB_MIN_M2, arc ARC_MIN_M2); repeat until none is dropped. Rewrites the station list of villa-tour.json, records the drops."""
@@ -240,4 +259,4 @@ def refine(scene='out/wt/villa4/scene.json', max_iter=24):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    {'select': select, 'measure': measure, 'refine': refine}[cmd](*sys.argv[2:])
+    {'select': select, 'measure': measure, 'refine': refine, 'sweep': sweep}[cmd](*sys.argv[2:])

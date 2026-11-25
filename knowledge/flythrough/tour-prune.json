@@ -1,28 +1,22 @@
 {
  "schema": "flythrough-tour-prune/1",
- "rule": "a stop is kept when its frames add >= 12.0 m2 (360) / 6.0 m2 (arc) of surface not shown by any earlier frame of the route; weakest dropped first, route re-measured",
+ "rule": "a stop is kept when its frames add >= 12.0 m2 (360) / 10.0 m2 (arc) of surface not shown by any earlier frame of the route; weakest dropped first, route re-measured",
  "dropped": [
   {
-   "id": "lounge~a4",
-   "in_route_new_m2": 0.8
+   "id": "study-game~a2",
+   "in_route_new_m2": 5.2
   },
   {
-   "id": "study-game~a3",
-   "in_route_new_m2": 1.8
-  },
-  {
-   "id": "parents-dressing",
-   "in_route_new_m2": 4.2
-  },
-  {
-   "id": "kids-a",
-   "in_route_new_m2": 7.2
+   "id": "hall-b~a1",
+   "in_route_new_m2": 8.2
   }
  ],
  "protected": [
   "family-bath",
+  "living~a2",
+  "lounge~a3",
   "parents-bed",
-  "study-game~a2"
+  "store-ramp"
  ],
  "kept_in_route_new_m2": {
   "living~a5": 133.5,
@@ -32,27 +26,25 @@
   "living~a2": 7.2,
   "dining~a1": 17.8,
   "dirty-kitchen~a2": 18.8,
-  "dirty-kitchen": 19.0,
-  "family~a2": 39.5,
-  "family~a1": 19.5,
-  "cinema~a2": 24.5,
-  "cinema": 16.8,
-  "store-ramp": 12.0,
-  "lounge~a2": 36.0,
-  "lounge": 34.8,
-  "lounge~a3": 6.2,
-  "hall-b~a1": 9.2,
-  "landing-gf~a1": 90.5,
-  "study-game": 25.2,
-  "study-game~a2": 4.8,
-  "corridor~a1": 44.8,
-  "corridor~a2": 18.2,
+  "dirty-kitchen": 17.2,
+  "family~a2": 39.0,
+  "family~a1": 17.8,
+  "cinema~a2": 23.8,
+  "cinema": 17.5,
+  "store-ramp": 10.0,
+  "lounge~a2": 31.2,
+  "lounge": 37.8,
+  "lounge~a3": 5.2,
+  "landing-gf~a1": 122.5,
+  "study-game": 25.5,
+  "corridor~a1": 56.2,
+  "corridor~a2": 12.2,
   "family-bath": 3.2,
-  "kids-a~a2": 10.0,
-  "kids-b": 26.2,
-  "parents-bed~a2": 38.5,
-  "parents-bed": 11.8,
-  "parents-dressing~a2": 17.2
+  "kids-a~a2": 13.0,
+  "kids-b": 25.5,
+  "parents-bed~a2": 39.8,
+  "parents-bed": 11.0,
+  "parents-dressing~a2": 15.0
  },
  "room_coverage": {
   "landing-gf": {
@@ -72,13 +64,13 @@
   },
   "study-game": {
    "coverable_m2": 74.2,
-   "seen_m2": 73.0,
-   "share": 0.98
+   "seen_m2": 73.2,
+   "share": 0.99
   },
   "kids-a": {
    "coverable_m2": 93.0,
-   "seen_m2": 86.5,
-   "share": 0.93
+   "seen_m2": 87.0,
+   "share": 0.94
   },
   "kids-b": {
    "coverable_m2": 33.2,
@@ -87,8 +79,8 @@
   },
   "family-bath": {
    "coverable_m2": 18.8,
-   "seen_m2": 18.0,
-   "share": 0.96
+   "seen_m2": 18.2,
+   "share": 0.97
   },
   "parents-bed": {
    "coverable_m2": 64.8,
@@ -97,13 +89,13 @@
   },
   "parents-dressing": {
    "coverable_m2": 28.2,
-   "seen_m2": 27.5,
-   "share": 0.98
+   "seen_m2": 28.2,
+   "share": 1.0
   },
   "parents-ensuite": {
    "coverable_m2": 29.0,
-   "seen_m2": 23.8,
-   "share": 0.82
+   "seen_m2": 25.0,
+   "share": 0.86
   },
   "gallery-end": {
    "coverable_m2": 1.8,
@@ -122,18 +114,18 @@
   },
   "lounge": {
    "coverable_m2": 147.5,
-   "seen_m2": 147.5,
-   "share": 1.0
+   "seen_m2": 144.8,
+   "share": 0.98
   },
   "lounge-nook": {
    "coverable_m2": 23.2,
-   "seen_m2": 22.5,
-   "share": 0.97
+   "seen_m2": 22.8,
+   "share": 0.98
   },
   "stair-b": {
    "coverable_m2": 39.0,
-   "seen_m2": 37.2,
-   "share": 0.96
+   "seen_m2": 36.5,
+   "share": 0.94
   },
   "pantry": {
    "coverable_m2": 9.2,
@@ -142,8 +134,8 @@
   },
   "hall-b": {
    "coverable_m2": 6.8,
-   "seen_m2": 6.5,
-   "share": 0.96
+   "seen_m2": 6.8,
+   "share": 0.99
   },
   "entry-b": {
    "coverable_m2": 11.2,
@@ -152,13 +144,13 @@
   },
   "family": {
    "coverable_m2": 13.2,
-   "seen_m2": 12.5,
-   "share": 0.95
+   "seen_m2": 11.5,
+   "share": 0.87
   },
   "kitchen": {
    "coverable_m2": 51.2,
-   "seen_m2": 50.8,
-   "share": 0.99
+   "seen_m2": 51.0,
+   "share": 1.0
   },
   "kitchen-island": {
    "coverable_m2": 10.2,
@@ -187,13 +179,13 @@
   },
   "store-ramp": {
    "coverable_m2": 85.5,
-   "seen_m2": 85.5,
-   "share": 1.0
+   "seen_m2": 75.0,
+   "share": 0.88
   },
   "cinema": {
    "coverable_m2": 84.5,
-   "seen_m2": 80.8,
-   "share": 0.96
+   "seen_m2": 77.0,
+   "share": 0.91
   },
   "guest-wc": {
    "coverable_m2": 29.0,

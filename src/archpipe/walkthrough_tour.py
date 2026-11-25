@@ -256,7 +256,7 @@ def programme(waypoints, holds, rate, accel):
     return total, theta
 
 
-def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None):
+def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None, fresh=None):
     """Hold the room's best view, finish a full 360, end on `exit_`. Angles are absolute degrees; returns (T, yaw(t), alpha).
 
     Sweeping direction sigma is the one that makes the extra turn to the exit heading shorter; the best view is passed
@@ -269,6 +269,8 @@ def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None):
     beta = (sigma*(exit_-y0)) % 360.
     total_angle = 360.+beta
     wp = [0.]; hd = [0.]
+    if fresh is not None and not fresh[int(round(best/30.)) % 12]:
+        best_hold = min(best_hold, pol.get('stale_hold_s', .4))      # the best view adds no new surface in this route: a glance, not a hold
     if alpha > 10.:
         wp.append(alpha); hd.append(best_hold)
     else:
@@ -280,7 +282,8 @@ def spin_programme(y0, best, exit_, pol, final=False, yaw_table=None):
         grown = bad | np.roll(bad, 1) | np.roll(bad, -1)        # the frame has width: widen each bad heading by one table step
         def rate(theta):
             k = int(np.abs((y0+sigma*theta-ys+180.) % 360.-180.).argmin())
-            return pol['turn_rate_wall_deg_s'] if grown[k] else pol['turn_rate_view_deg_s']
+            stale = fresh is not None and not fresh[int(round(((y0+sigma*theta) % 360.)/30.)) % 12]       # nothing new there: sweep fast
+            return pol['turn_rate_wall_deg_s'] if grown[k] or stale else pol['turn_rate_view_deg_s']
         T, th = programme(wp, hd, rate, accel)
     else:
         T, th = programme(wp, hd, rate, accel)
@@ -292,6 +295,11 @@ def _bump(x, width):
     """1 at x=0 falling smoothly to 0 at |x|=width."""
     u = np.clip(1-np.abs(x)/width, 0, 1)
     return np.sin(u*math.pi/2)**2
+
+
+def tour_sweep():
+    p = ROOT/'knowledge/flythrough/tour-sweep.json'
+    return json.loads(p.read_text()) if p.exists() else {'min_m2': 0., 'bins': {}}
 
 
 def tour_aim():
@@ -391,6 +399,11 @@ def _inward(vm, door, offsets):
     raise ValueError(f'garden door {door} has no free standing point inside')
 
 
+def _fresh(room):
+    sw = tour_sweep(); b = sw['bins'].get(room)
+    return None if b is None else [v >= sw['min_m2'] for v in b]
+
+
 def plan_tour(vm, route=None, pol=None, aim=None):
     """Plan, sample at 24 fps and return the `flythrough-villa-path/1` record for the tour."""
     route = route or tour_route(); pol = dict(pol or tour_policy()); spec = vm.spec
@@ -467,7 +480,7 @@ def plan_tour(vm, route=None, pol=None, aim=None):
         s['exit'] = nxt['heading_start'] if nxt else None
         if s['kind'] == 'turn':
             best = s['info']['best_yaw_deg']
-            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'))
+            T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, fresh=_fresh(s['room']), yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'))
             s.update(T=T, yawfn=yaw, alpha=alpha)
         elif s['kind'] == 'arc':
             # a partial look: go to the nearer end of the arc, sweep it at the view rate, hold, then turn to the exit heading
