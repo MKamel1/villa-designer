@@ -181,12 +181,14 @@ def measure(args,path,scene,context):
     from archpipe.exposure_groups import RULE_SHA256,transport_digest
     out=Path(args.root)/'exposure';out.mkdir(parents=True,exist_ok=True)
     views=frame_views(path,scene);villa=is_villa_path(path)
-    segments=sorted({f.get('segment','interior') for f in path['frames']})
+    segments=sorted({group_of(f) for f in path['frames']})
     if args.segments:segments=[s for s in segments if s in args.segments.split(',')]
     every=path['settings'].get('interior_preview_every_nth_frame_for_exposure',1) if villa else 1
     for segment in segments:
-        indices=[f['index'] for f in path['frames'] if f.get('segment','interior')==segment]
-        if villa:indices=indices[::every]+([indices[-1]] if indices[-1] not in indices[::every] else [])
+        indices=[f['index'] for f in path['frames'] if group_of(f)==segment]
+        if villa:
+            step=max(1,min(every,len(indices)//6))      # a small group (a dark room, a garden pan) still gets at least six meter readings
+            indices=indices[::step]+([indices[-1]] if indices[-1] not in indices[::step] else [])
         rows=[];meters={}
         for index in indices:
             view=views[index];file=out/(view['id']+'.json')
@@ -211,8 +213,28 @@ def measure(args,path,scene,context):
         save(out/('lock.json' if not villa else f'lock-{segment}.json'),lock)
 
 
+def group_of(frame):
+    """The exposure group a frame is metered in: the tour names one per dark room and garden pan; older routes use the segment."""
+    return frame.get('exposure_group') or frame.get('segment','interior')
+
+
+def frame_exposure(args,path,every_ease_s=None):
+    """Per frame (exposure stops, white balance K, tint) for the whole path: each frame's own group lock, with every step between groups
+    turned into a ramp of `exposure_ease_s` by a moving average (smooth, no cut). Locks are loaded and bound-checked once per group."""
+    from archpipe.walkthrough_tour import smooth_series
+    locks={};ev=[];kelvin=[];tint=[]
+    for f in path['frames']:
+        g=group_of(f)
+        if g not in locks:locks[g]=load_lock(args,path,f)
+        l=locks[g];ev.append(l['exposure_stops']);kelvin.append(l['white_balance_k']);tint.append(0. if l['white_balance_illuminant']=='planckian' else 10.)
+    ease=every_ease_s if every_ease_s is not None else path['settings'].get('exposure_ease_s',0.)
+    w=int(round(ease*path['settings'].get('fps',24)))
+    if w>1:ev,kelvin,tint=(smooth_series(v,w) for v in (ev,kelvin,tint))
+    return np.array(ev),np.array(kelvin),np.array(tint),locks
+
+
 def load_lock(args,path,frame):
-    name='lock.json' if not is_villa_path(path) else f"lock-{frame.get('segment','interior')}.json"
+    name='lock.json' if not is_villa_path(path) else f"lock-{group_of(frame)}.json"
     lock=json.loads((Path(args.root)/'exposure'/name).read_text())
     if lock['path_sha256']!=path['sha256'] or lock['sha256']!=digest({k:v for k,v in lock.items() if k!='sha256'}):
         raise ValueError('Clip camera lock binding changed')
@@ -263,11 +285,12 @@ def render_frames(args,path,scene,context):
     out.mkdir(parents=True,exist_ok=True)
     views=frame_views(path,scene)
     resolution=path['settings']['preview']['resolution'] if args.stage in ('draft','preview') else path['settings']['final_resolution']
-    samples=32 if args.stage in ('draft','preview') else args.samples
+    samples=path['settings']['preview'].get('samples',32) if args.stage in ('draft','preview') else args.samples
     n=len(path['frames'])
     default=[f['index'] for f in path['frames'] if f.get('segment','interior') in (args.segments.split(',') if args.segments else ['interior','garden-placeholder'])]
     indices=[0,(n-1)//2,n-1] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else default
     position_output=static_position_output(out) if args.stage=='final' else None
+    ev,kelvin,tint,_=frame_exposure(args,path)
     for index in indices:
         lock=load_lock(args,path,path['frames'][index])
         view=views[index];png=out/(view['id']+'.png');receipt_file=png.with_suffix('.json')
@@ -283,8 +306,8 @@ def render_frames(args,path,scene,context):
         s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
         s.cycles.seed=0;s.cycles.use_animated_seed=False
         s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
-        s.view_settings.exposure=lock['exposure_stops']
-        wb=V.photoreal.white_balance(lock['white_balance_k'],illuminant=lock['white_balance_illuminant'])
+        s.view_settings.exposure=float(ev[index])
+        wb=V.photoreal.white_balance(float(kelvin[index]),illuminant=lock['white_balance_illuminant']);s.view_settings.white_balance_tint=float(tint[index])
         s.render.image_settings.file_format='PNG';s.render.image_settings.color_depth='8';s.render.filepath=str(png)
         if position_output:position_output.file_slots[0].path=view['id']+'-position-'
         bpy.context.view_layer.update();started=time.monotonic();bpy.ops.render.render(write_still=True)
@@ -308,6 +331,166 @@ def render_frames(args,path,scene,context):
             position_file.unlink()
         save(receipt_file,record);remove_camera(camera)
         print('WALKTHROUGH wrote',png,elapsed,flush=True)
+
+
+def place_camera(obj,c):
+    """Same placement as villa_scene.configure_camera, applied to an existing camera (level camera, vertical lens shift)."""
+    obj.location=c['position']
+    direction=Vector(c['target'])-Vector(c['position']);horizontal=Vector((direction.x,direction.y,0))
+    obj.rotation_euler=horizontal.to_track_quat('-Z','Y').to_euler()
+    obj.data.lens=c.get('lens_mm',obj.data.lens)       # per frame: the 16 mm small-room 360s and the eased focal length between them
+    obj.data.shift_y=c.get('shift_y',0)+direction.z/max(horizontal.length,1e-9)*obj.data.lens/obj.data.sensor_width
+
+
+def depth_samples(camera,grid,far=40.):
+    """First-hit depth, point and normal over a grid of rays through the frame; glazing is transparent (we look through it)."""
+    from archpipe.walkthrough_tour import informative_rule
+    deps=bpy.context.evaluated_depsgraph_get();scene=bpy.context.scene
+    W,H=grid;cam=camera.data;mw=camera.matrix_world;R=mw.to_3x3();origin=mw.translation
+    aspect=scene.render.resolution_y/scene.render.resolution_x
+    xs=(np.arange(W)+.5)/W-.5;ys=((np.arange(H)+.5)/H-.5)*aspect+cam.shift_y
+    depth=[];pts=[];nor=[]
+    for y in ys:
+        for x in xs:
+            d=(R@Vector((x*cam.sensor_width,y*cam.sensor_width,-cam.lens))).normalized()
+            o=origin.copy();travelled=0.;hit_ok=False
+            for _ in range(4):
+                hit,loc,n,face,obj,_ = scene.ray_cast(deps,o,d,distance=far-travelled)
+                if not hit:break
+                travelled+=(loc-o).length
+                ev=obj.evaluated_get(deps).data if obj.type=='MESH' else None      # the face index belongs to the evaluated mesh
+                slot=ev.polygons[face].material_index if ev is not None and 0<=face<len(ev.polygons) else -1
+                mat=ev.materials[slot] if ev is not None and 0<=slot<len(ev.materials) else None
+                if obj.hide_render or 'glass' in obj.name.lower() or (mat is not None and 'glass' in mat.name.lower()):   # ray_cast ignores hide_render: the hidden closed curtains were hit at 0.6 m
+                    o=loc+d*1e-3;travelled+=1e-3;continue
+                hit_ok=True;break
+            depth.append(travelled if hit_ok else far);pts.append(list(loc) if hit_ok else [0,0,0]);nor.append(list(n) if hit_ok else [0,0,1])
+    ok=np.array([d<far for d in depth])
+    return np.array(depth),np.array(pts)[ok],np.array(nor)[ok],ok
+
+
+def workbench(args,path,scene,context):
+    """Fast geometry preview of every frame: Workbench solid shading with cavity, 640x360 JPEG, plus the depth-grid metrics
+    behind the non-informative-frame rule. --metrics-only skips the images (used to calibrate on an earlier path)."""
+    from archpipe.walkthrough_tour import frame_metrics,informative_rule
+    out=Path(args.root)/'workbench'/(args.out_name or path['sha256'][:10]);out.mkdir(parents=True,exist_ok=True)
+    s=bpy.context.scene;rule=informative_rule()
+    s.render.engine='BLENDER_WORKBENCH';s.render.resolution_x,s.render.resolution_y=640,360;s.render.resolution_percentage=100
+    sh=s.display.shading;sh.type='SOLID';sh.light='STUDIO';sh.color_type='MATERIAL';sh.show_cavity=True;sh.cavity_type='BOTH'
+    sh.cavity_ridge_factor=1.;sh.cavity_valley_factor=1.5;sh.show_object_outline=False
+    s.display.render_aa='FXAA';s.view_settings.view_transform='Standard';s.view_settings.look='None';s.view_settings.exposure=0
+    s.render.film_transparent=False;s.render.image_settings.file_format='JPEG';s.render.image_settings.quality=85
+    views=frame_views(path,scene)
+    indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
+    camera,_=V.configure_camera(views[indices[0]])
+    metrics_file=out/'metrics.json';rows={r['index']:r for r in json.loads(metrics_file.read_text())} if metrics_file.exists() else {}
+    cull=None
+    if args.cull>0:
+        objs=[o for o in bpy.context.scene.objects if o.type=='MESH' and not o.hide_render]
+        boxes=np.array([[list(o.matrix_world@Vector(c)) for c in o.bound_box] for o in objs]);lo=boxes.min(1);hi=boxes.max(1)
+        cull=(objs,lo,hi,np.zeros(len(objs),bool));print('WALKTHROUGH culling',len(objs),'objects',flush=True)
+    started=time.monotonic();done=0
+    for index in indices:
+        jpg=out/f'frame-{index:05d}.jpg'
+        need_image=not args.metrics_only and not jpg.exists() and not args.animation
+        if index in rows and not need_image:continue
+        place_camera(camera,views[index]['camera']);bpy.context.view_layer.update()
+        t0=time.monotonic()
+        if index not in rows:
+            depth,pts,nor,ok=depth_samples(camera,rule['grid'])
+            m=frame_metrics(depth,pts,nor,rule);m['index']=index;rows[index]=m
+        if cull and need_image:
+            objs,lo,hi,hidden=cull;c=np.array(views[index]['camera']['position']);g=path['frames'][index]['ground_m']
+            far=((lo[:,0]>c[0]+args.cull)|(hi[:,0]<c[0]-args.cull)|(lo[:,1]>c[1]+args.cull)|(hi[:,1]<c[1]-args.cull)
+                 |(hi[:,2]<g-3.6)|(lo[:,2]>g+6.6))
+            for k in np.where(far!=hidden)[0]:objs[k].hide_render=bool(far[k])
+            hidden[:]=far
+        t1=time.monotonic()
+        if need_image:
+            s.render.filepath=str(jpg)
+            if args.opengl:bpy.ops.render.opengl(write_still=True,view_context=False)
+            else:bpy.ops.render.render(write_still=True)
+        done+=1
+        if done<=12 or done%500==0:print('WALKTHROUGH timing',index,'rays',round(t1-t0,2),'render',round(time.monotonic()-t1,2),flush=True)
+        if done%500==0:
+            save(metrics_file,[rows[k] for k in sorted(rows)]);print('WALKTHROUGH workbench',done,'/',len(indices),round(time.monotonic()-started),'s',flush=True)
+    if args.animation and not args.metrics_only:
+        # one animation render: the engine and its scene copy persist across frames (a fresh render per frame re-exports the whole scene, ~6 s)
+        todo=[i for i in indices if not (out/f'frame-{i:05d}.jpg').exists()]
+        if todo:
+            camera.animation_data_clear()
+            for i in todo:
+                place_camera(camera,views[i]['camera'])
+                for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
+                camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
+            for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
+                for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+            run=todo[0];first=todo[0]
+            s.frame_start=min(todo);s.frame_end=max(todo);s.frame_step=1
+            s.render.filepath=str(out/'frame-#####');t2=time.monotonic()
+            if len(todo)==s.frame_end-s.frame_start+1:bpy.ops.render.render(animation=True)
+            else:
+                # sparse (resume): render each maximal run
+                runs=[];a=b=todo[0]
+                for i in todo[1:]:
+                    if i==b+1:b=i
+                    else:runs.append((a,b));a=b=i
+                runs.append((a,b))
+                for a,b in runs:
+                    s.frame_start,s.frame_end=a,b;bpy.ops.render.render(animation=True)
+            print('WALKTHROUGH animation',len(todo),'frames',round(time.monotonic()-t2,1),'s',flush=True)
+    save(metrics_file,[rows[k] for k in sorted(rows)])
+    print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
+
+
+def lookdev(args,path,scene,context):
+    """Low-sample Cycles preview as ONE animation render per arithmetic run of frames.
+
+    The interior exposure lock, lights and emissives are identical for every frame, and a render call per frame
+    re-exports the whole scene (3-6 s of a 2 s render), so the camera is keyframed and the engine keeps its scene
+    (persistent data). Same Cycles settings, lock, seed and tone map as `render_frames`; per-frame receipts are
+    written afterwards (path hash, PNG hash, mean render seconds). No per-frame render_qa here: a draft."""
+    out=Path(args.root)/'lookdev';out.mkdir(parents=True,exist_ok=True)
+    views=frame_views(path,scene);resolution=path['settings']['preview']['resolution'];samples=path['settings']['preview'].get('samples',16)
+    indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
+    todo=[i for i in indices if not (out/f'frame-{i:04d}.png').exists()]
+    if not todo:print('WALKTHROUGH lookdev nothing to do',flush=True);return
+    ev,kelvin,tint,locks=frame_exposure(args,path)
+    camera,pitch,emissive=setup(scene,context,views[todo[0]])
+    s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=resolution;s.render.resolution_percentage=100
+    s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
+    s.cycles.seed=0;s.cycles.use_animated_seed=False;s.render.use_persistent_data=True
+    s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
+    V.photoreal.white_balance(5500.,illuminant='daylight')
+    s.render.image_settings.file_format='PNG';s.render.image_settings.color_depth='8'
+    camera.animation_data_clear();s.animation_data_clear() if s.animation_data else None
+    vs=s.view_settings
+    for i in todo:
+        place_camera(camera,views[i]['camera'])
+        for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
+        camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
+        vs.exposure=float(ev[i]);vs.white_balance_temperature=float(kelvin[i]);vs.white_balance_tint=float(tint[i])      # eased between groups (frame_exposure)
+        for prop in ('exposure','white_balance_temperature','white_balance_tint'):vs.keyframe_insert(prop,frame=i)
+    fcs=list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves)+list(s.animation_data.action.fcurves)
+    for fc in fcs:
+        for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+    runs=[];a=b=todo[0];step=None
+    for i in todo[1:]:
+        if step is None and i>b:step=i-b
+        if step is not None and i==b+step:b=i
+        else:runs.append((a,b,step or 1));a=b=i;step=None
+    runs.append((a,b,step or 1))
+    s.render.filepath=str(out/'frame-####');started=time.monotonic()
+    for a,b,step in runs:
+        s.frame_start,s.frame_end,s.frame_step=a,b,step;bpy.ops.render.render(animation=True)
+        print('WALKTHROUGH lookdev run',a,b,step,round(time.monotonic()-started),'s',flush=True)
+    each=(time.monotonic()-started)/len(todo)
+    for i in todo:
+        png=out/f'frame-{i:04d}.png'
+        lock=locks[group_of(path['frames'][i])]
+        save(png.with_suffix('.json'),dict(path_sha256=path['sha256'],lock_sha256=lock['sha256'],exposure_group=group_of(path['frames'][i]),exposure_stops=float(ev[i]),white_balance_k=float(kelvin[i]),lens_mm=views[i]['camera']['lens_mm'],samples=samples,resolution=resolution,
+             render_seconds=each,png_sha256=hashlib.sha256(png.read_bytes()).hexdigest(),index=i,render_device=context['render_device']))
+    print('WALKTHROUGH lookdev done',len(todo),'frames',round(each,2),'s/frame',flush=True)
 
 
 def measure_static_coverage(args,path,scene,context):
@@ -345,10 +528,10 @@ def measure_static_coverage(args,path,scene,context):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--root',required=True)
-    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','sampling','reference','final'],required=True)
+    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','workbench','lookdev','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
     parser.add_argument('--frames');parser.add_argument('--segments')
-    parser.add_argument('--target-stage')
+    parser.add_argument('--target-stage');parser.add_argument('--metrics-only',action='store_true');parser.add_argument('--out-name');parser.add_argument('--opengl',action='store_true');parser.add_argument('--cull',type=float,default=0.);parser.add_argument('--animation',action='store_true')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production pin is Blender 4.5.14')
     if args.stage=='preflight':
@@ -377,6 +560,8 @@ def main():
         path,scene,context=load_context(args)
         if args.stage=='coverage':measure_static_coverage(args,path,scene,context)
         elif args.stage=='exposure':measure(args,path,scene,context)
+        elif args.stage=='workbench':workbench(args,path,scene,context)
+        elif args.stage=='lookdev':lookdev(args,path,scene,context)
         else:render_frames(args,path,scene,context)
 
 

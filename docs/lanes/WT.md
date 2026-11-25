@@ -85,3 +85,137 @@ frame 6710 (living, glass) **13.84 s**; mean 12.07 s.
 5. Parents' dressing door pinch (0.47 m between duvet and vanity chair) and the 1.45 m store-ramp soffit are design findings.
 6. Bohannon speeds are from the abstract only; confirm against the paper's table. Hinge sides of interior doors are assumed.
 7. Dining pendant draws the old stand-in; scene will change, so the prepared directory and path hash will too.
+
+
+# Tour redesign (2026-11-24): 360 in every room, look along the route, both floors, the flight, the gardens
+
+The client watched the first preview and asked for: no scenes where the camera looks at a wall or backward and then turns to the subject; a 360 in each room;
+both floors and the stair; no long 1080p before the route is confirmed. The old route (above) is kept for history; the new planner is
+`src/archpipe/walkthrough_tour.py` (`plan_tour`), authored in `knowledge/flythrough/villa-tour.json`, policy in `tour-policy.json`.
+Same path schema, so prepare / assembly / admission / exposure / render are the existing ones: `scripts/flythrough.py prepare --route tour`.
+
+## Route (16,091 frames = **670.5 s = 11 min 10 s at 24 fps**, 150.9 m walked)
+
+Time budget: 428 s in 360 turns (31 turns), 189 s walking, 43 s garden pans, 9 s on the flight.
+Order: entry-b (arrival) -> dining side, dining (+ east-yard pan) -> living (+ south-garden pan) -> bar alcove -> kitchen island, kitchen, dirty kitchen ->
+family, guest WC, stair-foot hall -> lounge (+ north-court pan) -> nook, pantry, cinema, store -> stair foot -> **up the flight** -> GF top of flight, landing, study, gallery,
+family bath, corridor, kids A, kids B, parents' entry, bedroom, dressing (through the 0.47 m gap), dressing ext, ensuite. All 30 rooms (13 GF + 17 B) have a 360
+(`test_route_connectivity_every_room_has_a_full_360`). The three garden zones are viewed **from inside the closed panes** (2.0 m back, pan +-30 deg): no placeholder legs, nothing hidden.
+
+| room / garden | level | 360 point x, y (m) | starts (s) | turn s | shortest wall ray (m) | best view (still) |
+|---|---|---|---|---|---|---|
+| entry-b | B | 15.28, -26.81 | 0 | 11.4 | 1.70  | n19-entry-lobby-evening |
+| dining-side | B | 15.78, -26.71 | 13 | 13.8 | 1.80  | n20-dining-side-day |
+| dining | B | 15.58, -26.01 | 29 | 12.3 | 2.10  | v09-dining-evening |
+| dining | B | 16.89, -24.59 | 29 | 13.6 | - | - |
+| living | B | 18.48, -25.51 | 63 | 15.5 | 1.55  | v33-basement-north-south |
+| living | B | 21.60, -26.13 | 63 | 13.8 | - | - |
+| bar-alcove | B | 20.98, -28.71 | 114 | 13.3 | 1.00 **FLAG** | v34-basement-south-north |
+| kitchen-island | B | 13.98, -27.11 | 135 | 14.8 | 1.35  | v09-dining-evening |
+| kitchen | B | 14.88, -25.71 | 153 | 11.8 | 1.75  | n02-kitchen-island-day |
+| dirty-kitchen | B | 13.98, -22.51 | 169 | 15.0 | 1.05  | n09-dirty-kitchen-day |
+| family | B | 10.38, -26.41 | 193 | 15.3 | 2.05  | v03-street-lounge |
+| guest-wc | B | 10.08, -22.51 | 213 | 15.8 | 0.80 **FLAG** | deepest-wedge |
+| hall-b | B | 10.98, -26.81 | 235 | 14.7 | 1.70  | n06-stair-foot-hall-evening |
+| lounge | B | 3.98, -26.31 | 258 | 14.9 | 1.70  | v03-street-lounge |
+| lounge | B | 4.62, -26.16 | 258 | 15.8 | - | - |
+| lounge-nook | B | 4.88, -27.61 | 293 | 11.9 | 1.00 **FLAG** | deepest-wedge |
+| pantry | B | 4.58, -29.11 | 309 | 15.9 | 0.50 **FLAG** | n05-pantry-evening |
+| cinema | B | 8.08, -22.41 | 337 | 13.2 | 1.05  | deepest-wedge |
+| store-ramp | B | 2.18, -22.21 | 357 | 15.7 | 0.95 **FLAG** | v30-under-ramp-store |
+| stair-b | B | 10.05, -27.95 | 385 | 14.1 | 0.55 **FLAG** | v11-stair-void |
+| stair-gf | GF | 4.95, -27.95 | 408 | 12.4 | 0.55 **FLAG** | deepest-wedge |
+| landing-gf | GF | 4.58, -27.61 | 422 | 14.0 | 0.75 **FLAG** | deepest-wedge |
+| study-game | GF | 7.78, -25.11 | 443 | 15.4 | 1.05  | n11-study-desks-day |
+| gallery-end | GF | 10.28, -27.31 | 463 | 14.0 | 0.95 **FLAG** | n18-stair-gallery-day |
+| family-bath | GF | 10.28, -25.31 | 481 | 15.7 | 1.00 **FLAG** | deepest-wedge |
+| corridor | GF | 9.28, -27.51 | 501 | 14.7 | 1.00 **FLAG** | n10-gf-hall-east-day |
+| kids-a | GF | 13.18, -26.21 | 523 | 15.7 | 1.15  | v06-kids-room |
+| kids-b | GF | 17.38, -26.21 | 548 | 15.9 | 1.00 **FLAG** | v13-kids-b |
+| parents-entry | GF | 18.98, -26.71 | 573 | 11.7 | 0.50 **FLAG** | deepest-wedge |
+| parents-bed | GF | 21.48, -25.11 | 593 | 15.5 | 0.85 **FLAG** | deepest-wedge |
+| parents-dressing | GF | 21.28, -27.81 | 621 | 12.8 | 1.00 **FLAG** | v31-dressing-hers |
+| parents-dressing-ext | GF | 21.68, -28.71 | 637 | 12.5 | 0.40 **FLAG** | n14-dressing-his-evening |
+| parents-ensuite | GF | 20.98, -30.01 | 652 | 17.9 | 1.05  | deepest-wedge |
+
+**Policy (all in `tour-policy.json`, all stated as ASSUMED, none a published standard):** yaw 40 deg/s (client band 30-45), eased 0.44 s ramps (no snap), a 1.5 s hold on the room's best view
+(the still view in `knowledge/render-set/views.json` that covers the room, from a camera standing in the room if one exists, else the deepest wedge), the sweep ends on the heading of the next leg so every walk starts already facing where it goes.
+A full turn is 9 s; dead-end rooms add the turn to the exit heading. Walking heading = the route 1.5 m ahead (never backward by construction; `direction_findings` proves it: 0 frames more than 75 deg off).
+Longer look-ahead (2.5, 3.5 m) was tried and is worse (frames with a wall within 1.5 m ahead: 7 %, 16 %, 20 %).
+
+**The 1 m rule at the 360 point.** The point is the free cell with the best score (visible floor area + 1.5 per visible furniture piece) among those whose every direction clears a wall by 1.0 m.
+**16 of 31 turn points cannot** (flagged in the table): bar-alcove, guest-wc, lounge-nook, pantry, store-ramp, stair-b, stair-gf, landing-gf, gallery-end, family-bath, corridor, kids-b, parents-entry,
+parents-bed, parents-dressing, parents-dressing-ext (a 1.3 m corridor, 1.5 m hall, WC, pantry, bedrooms whose floor is mostly bed). Admission keeps the rule everywhere else; in a flagged room the
+sightline finding is recorded as `waived_wall_sightline` (912 frames) and never dropped. `stair-b` / `stair-gf` are not walkable floor (under / over the flight): their 360 is at the foot and the top of the flight.
+Authored hints (`point_bounds`): store-ramp east part (soffit 1.45 m at the west end), landing-gf 0.6 m back from the stair guard (swept envelope hit it).
+
+**The flight.** Climbed continuously (3.0 m, 9.4 s at 0.7 m/s) with the camera pitched 12 deg up the flight (vertical lens shift, like every still); at the top the stair-gf 360 tilts 22 deg down the void
+when facing it; then landing and gallery. `stair_findings`: climbs 3.0 m monotonically, pitch up.
+
+## Admission
+
+0 of 16,091 frames fail (clearance, no clipping, swept envelope against authored and evaluated meshes, speed, yaw rate <= 45 deg/s; max measured 40.0). Doors are rotated open, none hidden (`door-states.json`).
+912 frames carry the recorded wall-sightline waiver (flagged rooms, and walks into them).
+
+## Non-informative-frame rule
+
+Registered **before** measuring (`knowledge/flythrough/informative-rule.json`, first commit): a 32x18 grid of rays through the 24 mm lens (glazing transparent); a frame is non-informative if more than 50 % of rays hit within 1.2 m,
+or more than 60 % of hits lie on one plane (normals within ~6 deg, offset within 0.1 m). A run longer than 1 s fails.
+**Calibration on the client-watched preview** (`out/wt/villa3`, frames labelled from its contact sheet: 12 known-bad = GF corridor, kids' and dressing wardrobe fronts, bathroom wall; 20 good;
+`informative-calibration-labels.json`): the registered clauses flagged 5 of 12 bad, 0 of 20 good. Adding `near + plane >= 0.9` flags 10 of 12, still 0 of 20 good (best good frame 0.84); on the bad
+stretches (stride 6) it flags 64/90 (kids/corridor), 17/19 and 10/24. Missed: the marble bathroom wall with its window (0.47+0.0) and one corridor frame (0.80). The final rule is the three-clause one.
+
+## Validation passes
+
+(a) **Workbench** (solid, cavity, 640x360) of every frame: one animation render (a render call per frame re-exports the 1.1 GB scene, 6 s/frame; one animation render is 0.14 s/frame), plus the depth-grid metric (0.17 s/frame): about 85 min.
+Workbench draws glass as an opaque pane, so garden pans look like a blank wall there; the Cycles preview shows the glass.
+(b) **Cycles** 480x270, 16 spp, denoised, every 2nd frame, interior exposure lock -8.34 stops 5500 K (337 metered frames, every 48th).
+(c) Contact sheets every 2 s (every 48th frame).
+
+## Results (2026-11-24)
+
+Deliverables (absolute paths, all under `/home/omar/archpipe/lanes/WT/out/wt/villa4/`; `out/` is not in git):
+* `walkthrough-workbench.mp4` : Workbench geometry preview, 640x360, 24 fps, all 16,091 frames, 670.5 s (`walkthrough-workbench.json`).
+* `walkthrough-lookdev.mp4` : Cycles, 480x270, 16 spp denoised, every 2nd frame (8,046 frames) at 12 fps = 670.5 s real-time pace.
+* contact sheets (every 48th frame = 2 s, captioned frame / second / room / phase): `contact-workbench-00..09.jpg`, `contact-lookdev-00..09.jpg`.
+* `report.json` (non-informative-frame report), `assembly/guards.json` (admission), `path.json`, `door-states.json`.
+Cycles frames: `lookdev/frame-NNNN.png`; no per-frame `render_qa` was run on this draft (a draft preview bypasses the per-frame receipts); the lead decides whether QA is needed before the client sees it.
+
+**Non-informative-frame report (final rule, hidden objects and glass skipped).** 5,810 moving frames (walk, stair, pan): 1,832 (31.5 %) flagged, in **31 runs longer than 1 s (95.6 s in total)**:
+* 17 are walks arriving at or leaving small rooms and the stair foot (guest WC 17.4 s, hall -> stair foot 4.0 s, lounge -> cinema 2.8, kids A -> B 2.7, family bath -> corridor 3.3, kids B -> parents' entry 3.0 ...): the camera looks along the route 1.5 m ahead and the route ends at a wall.
+* 9 are garden-pan runs of 1.7-2.8 s: the pan crosses the mullion and the curtain stack at the end of the glass (the garden itself reads well in the Cycles frames).
+* 1 is the flight (16.7 s): looking up the stair the stringer and soffit fill the frame, so the "one plane" clause fires; the Cycles frames show this is the intended view up the stair, i.e. a false positive of the rule for that segment.
+* 360 arcs: 4,354 of 10,281 turn frames are wall-facing, 5,434 turn frames carry the waiver (flagged rooms). Per room: guest WC 0.90, pantry 0.83, dressing 0.69, kids B 0.62, bar alcove 0.63, ensuite 0.60; open rooms 0.0-0.35 (living 0.0).
+**The "fail and fix any run over 1 s" requirement is NOT met**: the planner was tuned (turn points, bounds, look-ahead) but 31 moving runs remain; they are listed in `report.json`. Candidate fixes, not done: end each walk 0.5 s before the stop with
+a hold looking at the room's best view; shorten the pan to the glass width; a different 360 point for the dead-end rooms; exempt the flight from the plane clause.
+
+**Calibration** (final rule): 10 of 12 known-bad preview frames flagged, 0 of 20 good (re-run after the hidden-object fix gave the same result).
+**What reads well** (contact sheets): the open-plan basement (entry, dining, island, living with the garden through the glass, kitchen), the ascent looking up the flight, the GF open stair/landing/gallery views, the parents' bedroom.
+**What looks wrong:** store-ramp, cinema and the dressing rooms are nearly black under the one interior exposure (-8.34 stops); bare-wall frames at the stair foot (9,200-9,500) and some 360 arcs; Workbench shows glass as an opaque pane (garden pans look like a wall there, not in Cycles); the stair-gf 360 shows mostly plaster; dining pendants are still the old stand-ins.
+
+**Final-render estimate (not started).** Measured earlier on this scene: 1080p, 64 spp, 12.07 s/frame (3 frames, shared GPU, per-render-call export). With the animation render the per-call export drops out; the Cycles preview ran about 0.5 s/frame at 480x270 16 spp alone,
+so a 1080p 64 spp frame is estimated at about 8-12 s. 16,091 frames = **36-54 GPU-hours** at 24 fps (18-27 h at every 2nd frame, 12 fps), plus the 337-frame exposure metering (about 40 min) and QA/encode. Not scheduled.
+
+
+# Revision 4 (2026-11-24): coverage-driven route, 16 mm small rooms, re-audit (villa8)
+
+Resumed after the client's "too much redundancy" feedback (docs/decisions/walkthrough-2026-11-24.md). Chain: `scripts/wt_chain.sh` (lens rooms -> select -> order -> prune -> aim -> plan -> measure -> audit); render chain `scripts/wt_render8.sh` (jobq job `wt8-render`).
+
+**Route:** 398.8 s (was 670.5 s in version 2, 537 s in the previous revision). **Redundant seconds** (rule: a second showing < 1.0 m2 of surface not shown by any earlier informative frame; `wt_cover.py measure`): **438 s -> 180 s** (65 % -> 45 %). Unique surface shown 1712 m2.
+By phase: walk 143 s (53 redundant), turn 207 s (99), garden pan 41 s (25: the pans show the garden, which the surface-cell measure does not count), flight 8.5 s (4).
+**Stops:** 11 full 360s (living, lounge, dirty-kitchen, cinema, store-ramp, study, kids-b, family-bath, parents-dressing, ...) and 22 arcs; the basement open plan is the living 360 plus short arcs (was 14 turns).
+**What changed this revision:**
+* `wt_cover.py sweep` -> `tour-sweep.json`: new surface per 30-degree heading of each 360 in route order. Headings adding < 0.5 m2 are swept at the fast rate (44 deg/s) and a best view that adds nothing is a 0.4 s glance, not a 1.5 s hold.
+* Arc minimum raised 6 -> 10 m2 (policy). Arc sweep direction now chosen by least total turning (an arc turned 384 deg before; test `one_360_per_connected_space...`).
+* **Completeness fill** in `select`: a room under 80 % of its coverable surface gets the arcs that add most inside it whatever the minimum (guest WC, ensuite, were never entered by the pruned route). Rooms never entered now: bar-alcove, kitchen-island, lounge-nook, pantry (seen from their connected space, 97-100 % of their surface).
+* Vanity-chair ban 1.0 -> 1.6 m (the parents'-bed walk clipped it: admission failed 13 frames); local admission (`wt_admit.py`) and the real assembly admission: **0 failures**.
+* 16 mm rooms (rule: >= 25 % wall-dominated at 24 mm in the audit of the earlier route; `lens-rooms.json`): bar-alcove, cinema, corridor, dirty-kitchen, family-bath, gallery-end, guest-wc, hall-b, kids-a, kids-b, kitchen-island, landing-gf, pantry, parents-dressing, parents-dressing-ext, parents-ensuite, parents-entry, store-ramp. Ease 1.25 s smoothstep, caption "16 mm wide lens: small room"; tests for no focal step and caption exactly when focal < 24 mm already in `tests/test_walkthrough_tour.py`.
+
+## Audit (`knowledge/flyaudit/wt-villa8-tour/`, route sha of villa8)
+Wall-dominated share of frames, overall **30 % -> 13.8 %** (sweep 13 %, walking 18 %, holding 8 %). **Target <= 10 % NOT met**; no single bad run > 1 s outside the 360s NOT met: 9 runs, 15 s in total, all walking: guest-wc 1.7 s, lounge 1.25, stair foot (stair-b) 1.5, stair top (stair-gf) 1.6, gallery-end 1.75, family-bath 1.7, corridor 1.9, kids-b 2.4, ensuite 1.25. Causes from the audit's ray data: 1.3 m corridors and door approaches where every heading within 88 deg of travel is within 1.2 m of a wall (the aim search was widened to +-110 deg offset / 88 deg of travel with no change); at the flight the camera sees the landing floor slab at 0.5 m (a floor, not a wall: the audit's "near" rule counts it). The remaining wall share is concentrated in the tiny rooms that the completeness fill now enters (ensuite 77 %, family-bath 45 %, guest WC 44 %, gallery 53 %, corridor 35 %), which is the price of showing them; the earlier 7-rooms-skipped route scored 11 %.
+Per room wall share before (revision-1 route) -> after: ensuite .66->.77, gallery-end .49->.53, family-bath .56->.45, guest-wc .82->.44, corridor .41->.35, parents-dressing .66->.32, stair-gf .34->.28, kids-a .43->.27, kids-b .55->.22, stair-b .20, hall-b .41->.18, cinema .32->.15, store-ramp .34->.11, parents-bed .03->.11, landing-gf .50->.06, dirty-kitchen .32->.06, family .22->.03, study .16->0, living/dining/entry/dining-side 0.
+Full-360 rule (audit, 342 deg): rooms with a 360 by the one-per-space rule; the per-room table is in `rooms.md`.
+
+## Previews (villa8, 2026-11-25; `out/` is not in git) — 1080p NOT started
+Under `/home/omar/archpipe/lanes/WT/out/wt/villa8/`: `walkthrough-workbench.mp4` (Workbench, all 9,572 frames, 398.8 s), `walkthrough-lookdev.mp4` (Cycles 480x270, 16 spp, every 2nd frame, 12 fps), `contact-workbench-00..05.jpg`, `contact-lookdev-00..05.jpg` (every 2 s, captioned). Jobs wt8-prep, wt8-render3 (Workbench 49 min, exposure + Cycles ~80 min). The `report` (depth-grid metrics) step was not run for villa8; the flyaudit replaces it.
+Contact sheet 02 check: the 16 mm caption is on in guest WC, cinema, store-ramp and eased off at 22 mm on the way out; the cinema is exposed (its own group) instead of near-black.
