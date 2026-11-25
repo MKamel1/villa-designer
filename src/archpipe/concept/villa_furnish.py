@@ -43,7 +43,7 @@ PRODUCT_ASSETS = {
     "living-sofa": "sf_minotti_sofa", "living-chair-1": "sf_probber_cane_armchair",
     "living-chair-2": "sf_probber_cane_armchair", "lounge-sofa": "sf_modern_low_sofa",
     "lounge-armchair": "sf_probber_cane_armchair", "cinema-sofa": "sf_cinema_sofa_velvet",
-    "pb-bed": "sf_chelsea_bed", "dining-table#chair-": "sf_dining_chair_boucle",
+    "pb-bed": "sf_chelsea_bed", "dining-table#chair-": "sf_dining_chair_curved_armchair",
     "ka-desk-1#chair-": "sf_kidschair_oak", "ka-desk-2#chair-": "sf_kidschair_oak",
     "kb-desk#chair-": "sf_kidschair_oak", "study-desk#chair-": "modern_arm_chair_01",
     "study-adult-desk#chair-": "modern_arm_chair_01", "rug-living": "sf_rug_round_jute",
@@ -52,6 +52,10 @@ _MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manif
 _PROPS = {p["id"]: p for p in json.loads(_MANIFEST.read_text(encoding="utf-8"))["props"]}
 # These overall heights are ASSUMED from the former catalogue envelopes where the
 # native units cannot be inferred safely. They affect only uniform scale.
+# Client 2026-11-25 dining chair: one uniform scale to the real product's SEAT height (Audo Harbour Arm Chair dining height: seat
+# 478 mm, W 584, D 574, H 810; model seat 0.647 m -> 0.739). The model then is W 584, D 518 (-9.7 %), H 870 (+7.4 %): a look-alike.
+_PRODUCT_SEAT_SCALE = {"sf_dining_chair_curved_armchair": (0.739, "uniform scale to the product seat height 478 mm (look-alike of "
+                                                           "Audo Harbour Arm Chair; D -9.7 %, H +7.4 % vs the product)")}
 _AMBIGUOUS_HEIGHT = {"sf_probber_cane_armchair": 0.85, "sf_kidschair_oak": 0.80}
 
 
@@ -64,6 +68,8 @@ def product(asset):
     if asset == "sf_rug_round_jute":
         scale = 2.4 / native[0]
         basis = "ASSUMED 2.4 m diameter from living rug envelope; native units ambiguous"
+    elif asset in _PRODUCT_SEAT_SCALE:
+        scale, basis = _PRODUCT_SEAT_SCALE[asset]
     elif asset in _AMBIGUOUS_HEIGHT:
         scale = _AMBIGUOUS_HEIGHT[asset] / native[2]
         basis = "ASSUMED overall height from catalogue envelope"

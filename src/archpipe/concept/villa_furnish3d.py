@@ -349,6 +349,22 @@ def body(it):
     return [("block", (x0, yb, 0, x1, yf, H))]
 
 
+def wall_unit_problems(it, worktop=COUNTER_TOP, soffit=2.40):
+    """Wall cupboards against their sources: underside >= worktop + 0.50 m (Neufert 1980, Habitat 75 fig. 1; Mitton & Nystuen 4th ed.
+    p. 121 fig. 5.28 gives >= 457 mm), top <= 2.00 m (Neufert's reach line), depth <= 0.305 m (Neufert 300; Mitton 12 in), and below
+    the beam soffit `soffit` (beams at z 2.40, d1-elements). Returns the failures as strings."""
+    w, out = it["wall_units"], []
+    if w["z0"] - worktop < 0.50 - 1e-9:
+        out.append("underside %.3f m is %.0f mm over the worktop, need >= 500" % (w["z0"], (w["z0"] - worktop) * 1000))
+    if w["z1"] > 2.00 + 1e-9:
+        out.append("top %.3f m is over the 2.00 m reach line" % w["z1"])
+    if w["depth"] > 0.305 + 1e-9:
+        out.append("depth %.0f mm is over 305" % (w["depth"] * 1000))
+    if w["z1"] > soffit - 1e-9:
+        out.append("top %.3f m reaches the beam soffit %.2f m" % (w["z1"], soffit))
+    return out
+
+
 def wall_unit_bays(it):
     """The wall cupboards over a base run (it["wall_units"] = {z0, z1, depth}): equal bays no wider than 0.70 m,
     local x span (a, b) and the dimensions."""

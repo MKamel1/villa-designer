@@ -1189,7 +1189,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     WHOLE_ITEM_MODELS = {mark: asset for mark, asset in F.PRODUCT_ASSETS.items() if "#" not in mark and
                          not mark.startswith("rug-")}
     CHAIR_EXTRA_MODELS = (
-        ("dining-table#chair-", "sf_dining_chair_boucle"),
+        ("dining-table#chair-", "sf_dining_chair_curved_armchair"),
         ("ka-desk-1#chair-", "sf_kidschair_oak"), ("ka-desk-2#chair-", "sf_kidschair_oak"),
         ("kb-desk#chair-", "sf_kidschair_oak"),
         ("study-desk#chair-", "modern_arm_chair_01"), ("study-adult-desk#chair-", "modern_arm_chair_01"),

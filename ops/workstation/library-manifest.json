@@ -5238,6 +5238,79 @@
       },
       "preview_image": "props/sf_desk_aee7ef03/preview.png",
       "status": "measured source; neutral and room acceptance required"
+    },
+    {
+      "id": "sf_dining_chair_curved_armchair",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/curved-armchair-2346030885474d15adcd32923d308fe4",
+      "author": "SaretiX",
+      "author_url": "https://sketchfab.com/SaretiX",
+      "licence": "CC Attribution",
+      "credit": "This work is based on \"Curved Armchair\" (https://sketchfab.com/3d-models/curved-armchair-2346030885474d15adcd32923d308fe4) by SaretiX (https://sketchfab.com/SaretiX) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "role": "dining-chair",
+      "faces": 33520,
+      "bounds_m": {
+        "min": [
+          -0.3894,
+          -0.0173,
+          -0.4057
+        ],
+        "max": [
+          0.4006,
+          1.1602,
+          0.2955
+        ]
+      },
+      "units_note": "glTF native units = metres (nodes carry a 0.01 x 100 scale chain that cancels); model is oversized vs the product, scale uniformly",
+      "front_axis": "+Z",
+      "front_axis_basis": "neutral Blender preview (open front faces Blender -Y = glTF +Z), looked at",
+      "up_axis": "+Y",
+      "expected_size_range": {
+        "basis": "product",
+        "source_url": "https://us.audocph.com/products/harbour-arm-chair-dining-height-wood-base-upholstered",
+        "width_m": [
+          0.55,
+          0.62
+        ],
+        "depth_m": [
+          0.54,
+          0.61
+        ],
+        "height_m": [
+          0.78,
+          0.84
+        ],
+        "seat_height_m": [
+          0.45,
+          0.5
+        ]
+      },
+      "note": "LOOK-ALIKE, not the exact product",
+      "use": "dining chair (look-alike of the Audo Harbour Arm Chair, dining height; client reference images 28 and 31 style)",
+      "look_alike_of": {
+        "manufacturer": "Audo Copenhagen (formerly Menu), design Norm Architects",
+        "name": "Harbour Arm Chair, Dining Height, Oak Base, Upholstered",
+        "sku": "71103-006971",
+        "url": "https://us.audocph.com/products/harbour-arm-chair-dining-height-wood-base-upholstered",
+        "published_inches": {
+          "height": 31.9,
+          "width": 23,
+          "depth": 22.6,
+          "arm_rest_height": 26.6,
+          "seat_height": 18.8
+        },
+        "mm_converted": {
+          "W": 584,
+          "D": 574,
+          "H": 810,
+          "arm_height": 676,
+          "seat_height": 478
+        },
+        "note": "page publishes inches only (US site); mm are converted by us, rounded. Legs: dark/natural/black oak, angled. Other Audo retail listings differ slightly (e.g. 20.5 in wide); manufacturer page used.",
+        "match": "Closest buyable: upholstered shell armchair with angled solid-oak legs; not the tub of image28 nor tapered-splayed legs of image31 exactly. Not verified against the client's references by a maker's statement."
+      },
+      "uniform_scale_note": "scale 0.739 = product seat height 0.478 / model 0.647; depth -9.7 %, height +7.4 % vs the product (no uniform scale matches all axes)",
+      "recolour": "baseColorFactor tints in the library copy: light grey fabric, mid grey shell, walnut legs"
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."
