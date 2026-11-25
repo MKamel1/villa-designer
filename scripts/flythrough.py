@@ -78,6 +78,9 @@ def prepare(out,route='clip'):
     for light in scene['lights']:
         if light['type']!='ies':continue
         name=light['ies'];target=out/'ies'/name;target.parent.mkdir(parents=True,exist_ok=True)
+        if name.startswith('garden/'):     # lane LG's garden fittings: their own IES, written exactly as the production export writes it
+            from archpipe.landscape.build import production as PRD_LG
+            PRD_LG.write_ies(light,target);continue
         if name.startswith('generic/'):
             kind=Path(name).stem;record=light.get('fixture_record')
             flux=record['flux_lm'] if light.get('garden_g4d') else L.KINDS[kind]['lm']

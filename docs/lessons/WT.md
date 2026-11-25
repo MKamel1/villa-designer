@@ -47,3 +47,21 @@ Each entry: why it was missed, and the guard that now catches it. Tests are in `
 * **A 360 and "no wall frames" conflict in a room with no 1 m point.** 16 of 31 turn points cannot clear 1 m from every wall. The sightline finding is waived (recorded per frame, 912 frames), never dropped, and the non-informative arcs are reported per room, not hidden.
 * **Editing a hashed source after `prepare` invalidates the directory.** `walkthrough.py` and `flythrough.py` are in the manifest. Workbench-only edits refreshed the hash in the manifest (noted in it); anything touching path, scene or assembly needs a fresh prepare.
 * **Do not start a GPU stage as a CPU job and call it jobq-safe.** `--gpu` is what takes the slot; a chained prepare+assembly+render job without it would have rendered unqueued.
+
+## Tour revision 2 (2026-11-24, client: 16 mm in small rooms; lead and audit review)
+
+* **A wall-sightline waiver is not a fix.** Revision 1 recorded the 1 m forward-wall finding as waived in 16 rooms and called the arcs "reported, not hidden"; the audit (lane WTA, independent
+  geometry) then measured 30.2 % of frames wall-dominated and the lead declined the waiver. **Guard:** the quality bar is now the audit's own wall-dominated share per room (`scripts/wt_summary.py`, `scripts/wt_chain.sh`), measured on
+  the planned path before any render; the admission waiver stays only as a recorded physical fact about a 0.5 m pantry, never as the answer to "is the frame informative".
+* **A guard tuned on its own measure can disagree with the independent one.** My depth-grid rule (plane/near clauses, 24 mm) read 31.5 % of moving frames, the audit's v2 wall-dominated read 30.2 % of all frames and agreed per frame only 76.5 %.
+  The 360-point and walking-aim searches therefore use the audit's classifier on the audit's geometry (`scripts/tour_points.py`, `scripts/tour_aim.py` import `archpipe.flyaudit.core`), not a proxy of my own; and every result is re-audited by the unmodified tool.
+* **A search proxy can improve while the audit does not.** Widening the walking-aim range to +-90 deg cut the search's own bad samples 137 -> 83 but the audit moved 14.4 % -> 14.8 %: the search ran on the un-aimed plan, and the aim changes the speed profile (slower where it turns), so the sampled positions move.
+  Result: ranges kept at +-60 deg of the look-ahead and 70 deg of travel (85 on the flight); the audit is the judge.
+* **Candidates must be reachable, not just free.** The first 360-point search chose a free cell in kids-B that A* could not reach (`no walkable route`): `tour_points.py` now filters candidates by the planner's own `astar` from the current point.
+* **A door-crossing polyline can overshoot its target.** `door_cross` puts its exit node past the door; the pantry target lay before it, so the camera walked past the point and came back (8 frames, 180 deg off the travel direction). **Guard:** `_walk_polyline` drops a vertex that reverses more than 120 deg when the shortcut is free;
+  `direction_findings` in `test_walking_never_looks_backward_or_sideways` caught it.
+* **Removing a turn removes the thing that joined two headings.** Taking out the in-place turns at the stair foot and top left the flight leg ending on one heading and the next leg starting on another: a 75 deg yaw snap in one frame (`motion_findings`: 1,793 deg/s).
+  **Guard:** the flight and the walk off it are one leg; `test_motion_bounds_and_no_snap` fails on any snap.
+* **A lens ease needs the same frame ownership as the turn.** The final hold frame carried `station=None`, so it fell outside the wide-room span and the lens eased 16 -> 24 on a still camera. `lens_findings` (changes only while the camera moves or turns, never a step, caption exactly when wider than 24 mm) is a test and a plan check.
+* **One exposure for the house makes the dark rooms black and the garden white.** Revision 1 metered one lock for every interior frame (-8.34 stops). Frames now carry an `exposure_group` (house, each dark room, each garden pan); each group has its own measured lock
+  and the exposure and white balance between groups move with a moving average of 1.25 s (`frame_exposure`, `smooth_series`), keyframed per frame in the lookdev render. Guard: `test_exposure_eases_between_groups_over_the_stated_time`; the contact sheets of the new preview.
