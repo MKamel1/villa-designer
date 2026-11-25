@@ -19,3 +19,10 @@ The client watched the first whole-villa preview (lane WT, out/wt/villa3/preview
 - **Lens:** small rooms (those where the geometric audit finds a 24 mm 360 wall-dominated: guest WC, parents' ensuite and dressing, pantry, family bath, kids-b, landing-GF and similar, decided by the audit's rule, not by eye) use a **16 mm** lens for their 360. Everywhere else stays at 24 mm.
 - **Labelling:** the video LABELS those scenes as 16 mm, with an on-screen caption such as "16 mm wide lens: small room" for as long as the lens is wider than 24 mm.
 - **Transitions:** 24→16 and 16→24 are SMOOTH. Ease the focal length over a stated duration (about 1–1.5 s, policy) while the camera is moving or turning, never as a cut. The audit and the preview check the transition frames too.
+
+## Client feedback on version 2 (2026-11-24): too much redundancy
+"the walkthrough has many redundancy of the 360, it covers everything but it is redundant."
+- The design-model "rooms" inside one open space (entry-b, dining, dining-side, kitchen, kitchen-island, living, lounge and so on) each got their own 360, so the same views repeat.
+- **Rule from now on:** one 360 per VISUALLY CONNECTED SPACE, not per model room, placed where it shows the most. Smaller sub-areas get a short look or a partial arc only if they show something not yet seen.
+- **Coverage drives the route.** Use the geometric audit's per-surface coverage. A turn, arc or hold must add new coverage (a stated minimum share of the space's surfaces and features not seen before); otherwise shorten or drop it. Report the redundancy before → after (seconds spent on already-seen surfaces).
+- Keep everything covered (every room, both floors, the stair, the gardens), with 16 mm in the small rooms.
