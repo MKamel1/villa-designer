@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import sys
 import time
@@ -110,7 +111,7 @@ def load_context(args):
     replayed=V.evaluated_scene_receipt(scene,{r['id']:metadata['objects'][r['id']] for r in metadata['curtain_report']})
     if replayed['evaluated_meshes_sha256']!=metadata['receipt']['evaluated_meshes_sha256']:
         raise ValueError('Cached Blender evaluated geometry changed')
-    device=V.configure_cycles(False)
+    device=V.configure_cycles(os.environ.get('ARCHPIPE_CYCLES_CPU')=='1')      # =1: Cycles on the CPU (exposure and lookdev beside a GPU shared with the RAG service; docs/lanes/WT.md Revision 6)
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production Blender pin differs')
     return path,scene,metadata
 
@@ -585,7 +586,7 @@ def main():
         views=frame_views(path,scene)
         V.configure_camera(views[0])
         static_position_output(root/'preflight-diagnostics')
-        device=V.configure_cycles(False)
+        device=V.configure_cycles(os.environ.get('ARCHPIPE_CYCLES_CPU')=='1')      # =1: Cycles on the CPU (exposure and lookdev beside a GPU shared with the RAG service; docs/lanes/WT.md Revision 6)
         save(root/('preflight-'+args.target_stage+'.json'),dict(passed=True,
              blender=bpy.app.version_string,render_device=device,path_sha256=path['sha256'],
              frames=len(views),sun=views[0]['sun'],cache_readback=args.target_stage!='assembly'))
