@@ -1,0 +1,3871 @@
+{
+ "schema": "flyaudit/1",
+ "route_sha256": "6c64dc24169ac14ea09186ffd9654413e6d4bb22de93c2376f4f7a82b8022250",
+ "thresholds": {
+  "_status": "PRE-REGISTERED 2026-11-24 before any comparison with the lead's by-eye counts. All values are policy (ours), not published standards.",
+  "camera": {
+   "lens_mm": 24,
+   "sensor_width_mm": 36,
+   "aspect": "from path settings final_resolution (16:9)"
+  },
+  "grid": {
+   "cols": 64,
+   "rows": 36,
+   "frame_stride": 2,
+   "note": "every 2nd frame = 12 fps; ray grid at pixel centres"
+  },
+  "wall_dominated": {
+   "near_m": 1.2,
+   "min_near_share": 0.5,
+   "rule": "share of rays whose first opaque hit is < near_m is >= min_near_share"
+  },
+  "blocked": {
+   "centre_window": "middle half of columns and rows",
+   "near_m": 0.6,
+   "min_near_share": 0.5
+  },
+  "outward": {
+   "min_out_share": 0.6,
+   "rule": "rays that pass through glass first, or hit ground/context, or hit nothing"
+  },
+  "backward": {
+   "min_angle_deg": 90,
+   "travel_window_s": 0.5,
+   "min_speed_m_s": 0.1,
+   "note": "stationary frames (holds, 360 turns) are never backward"
+  },
+  "dark_proxy": {
+   "rule": "camera room has no glazing within 0.6 m of its rectangle, and the walkthrough uses one house-wide day exposure"
+  },
+  "seen": {
+   "min_rays_in_one_frame": 3
+  },
+  "full_360": {
+   "min_coverage_deg": 342,
+   "standing_radius_m": 1.0,
+   "rule": "union of horizontal view intervals of frames inside the room within radius of one standing point"
+  },
+  "bad_run_s": 1.0,
+  "priority": [
+   "backward",
+   "blocked",
+   "wall_dominated",
+   "outward",
+   "dark",
+   "informative"
+  ],
+  "calibration_sampling": "lead looked every 6 s of the 8 fps preview of every 3rd interior frame = every 144th interior path frame",
+  "wall_dominated_v2": {
+   "min_single_surface_share": 0.5,
+   "max_median_dist_m": 3.0,
+   "rule": "one wall/door/furniture element (not floor/ceiling) takes >= 0.5 of the rays and the frame's median hit distance is < 3.0 m; interior frames only"
+  },
+  "dark_proxy_v2": {
+   "rule": "no window/glazed-door glass is seen first (before any opaque hit, within 10 m) by >= 2 % of rays cast from the room centre or its four quarter points at eye height, 72 azimuths x pitches -10,0,10,20 deg",
+   "min_glass_share": 0.02,
+   "max_glass_dist_m": 10
+  },
+  "revisions": [
+   {
+    "date": "2026-11-24",
+    "version": "v2",
+    "made_after": "first full run on the old route (v1 numbers kept in report.calibration as *_v1) and looking at the contact sheet of the by-eye frames",
+    "changes": [
+     "wall_dominated: v1 (distance < 1.2 m, registered per the brief) caught 3 % of frames against ~30 % by eye. Contact-sheet frames the lead would call wall (kids-a 720, 810; corridor 900; parents-bed 1980) are a single flat surface at 1.5-3 m with 40-70 % element share, which a 1.2 m cut cannot see. v2 adds single-surface dominance. This is a post-hoc change made after seeing the by-eye counts; it is flagged as such.",
+     "dark proxy: v1 (no glass within 0.6 m of the room rectangle) marked open-plan sub-rooms (kitchen-island, dining-side) dark although they sit in a daylit hall. v2 asks whether glazing is visible from the room.",
+     "blocked: a plain wall in the centre counts as wall_dominated, not blocked (a camera facing a wall at 0.5 m is wall-dominated); blocked is for furniture, doors or pillars in the middle of the view."
+    ]
+   }
+  ]
+ },
+ "whole": {
+  "seconds": 398.8,
+  "frames_sampled": 4786,
+  "stride": 2,
+  "levels": {
+   "GF": {
+    "seconds": 152.3
+   },
+   "B": {
+    "seconds": 246.5
+   }
+  },
+  "rooms_entered": 26,
+  "rooms_total": 30,
+  "rooms_never_entered": [
+   "bar-alcove",
+   "kitchen-island",
+   "lounge-nook",
+   "pantry"
+  ],
+  "stair": {
+   "frames_sampled": 103,
+   "seconds": 8.6,
+   "ground_z_range": [
+    -3.0,
+    -0.01
+   ],
+   "flight_element_seen_s": 68.3
+  },
+  "gardens": {
+   "seconds": 0.0,
+   "frames_sampled": 0
+  },
+  "cats": {
+   "informative": 0.7202,
+   "wall_dominated": 0.1383,
+   "blocked": 0.0061,
+   "backward": 0.001,
+   "outward": 0.0,
+   "dark": 0.1344
+  },
+  "interior_cats": {
+   "informative": 0.7202,
+   "wall_dominated": 0.1383,
+   "blocked": 0.0061,
+   "backward": 0.001,
+   "outward": 0.0,
+   "dark": 0.1344
+  },
+  "informative_share": 0.7202,
+  "modes": {
+   "walking": {
+    "seconds": 151.2,
+    "cats": {
+     "informative": 0.6722,
+     "wall_dominated": 0.1636,
+     "blocked": 0.011,
+     "backward": 0.0028,
+     "outward": 0.0,
+     "dark": 0.1504
+    }
+   },
+   "sweeping": {
+    "seconds": 218.1,
+    "cats": {
+     "informative": 0.7489,
+     "wall_dominated": 0.128,
+     "blocked": 0.0034,
+     "backward": 0.0,
+     "outward": 0.0,
+     "dark": 0.1196
+    }
+   },
+   "holding": {
+    "seconds": 29.5,
+    "cats": {
+     "informative": 0.7542,
+     "wall_dominated": 0.0847,
+     "blocked": 0.0,
+     "backward": 0.0,
+     "outward": 0.0,
+     "dark": 0.161
+    }
+   }
+  },
+  "informative_share_excluding_sweeps": 0.6856,
+  "bad_runs_over_1s": 22,
+  "bad_run_seconds": 42.5
+ },
+ "rooms": {
+  "landing-gf": {
+   "level": "GF",
+   "seconds": 9.6,
+   "cats": {
+    "informative": 0.9391,
+    "wall_dominated": 0.0609,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 183,
+    "full": false,
+    "at": [
+     4.93,
+     -27.91
+    ],
+    "seconds_at_spot": 8.6
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 2,
+     "seen": 2
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-06",
+     "kind": "wall",
+     "area_m2": 29.2,
+     "seen_s": 7.75,
+     "min_dist_m": 2.11
+    },
+    {
+     "id": "door-GF-landing-gf-core",
+     "kind": "shell",
+     "area_m2": 8.49,
+     "seen_s": 8.5,
+     "min_dist_m": 1.5
+    },
+    {
+     "id": "wall-GF-ext-27",
+     "kind": "wall",
+     "area_m2": 66.78,
+     "seen_s": 14.0,
+     "min_dist_m": 0.78
+    }
+   ],
+   "bad_runs": []
+  },
+  "stair-gf": {
+   "level": "GF",
+   "seconds": 6.2,
+   "cats": {
+    "informative": 0.6667,
+    "wall_dominated": 0.28,
+    "blocked": 0.0533,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 129,
+    "full": false,
+    "at": [
+     6.32,
+     -27.95
+    ],
+    "seconds_at_spot": 3.4
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 1,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 5,
+     "seen": 4
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [
+    "rail-gf-stair-void",
+    "rail-stair-open-glass"
+   ],
+   "features": [
+    {
+     "id": "rail-gf-stair-void",
+     "kind": "furniture",
+     "area_m2": 10.39,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "rail-stair-wall-handrail",
+     "kind": "fixture",
+     "area_m2": 5.52,
+     "seen_s": 9.92,
+     "min_dist_m": 0.69
+    },
+    {
+     "id": "rail-stair-open-glass",
+     "kind": "fixture",
+     "area_m2": 9.33,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-PEN-GLOBE-stair-gf-01",
+     "kind": "fixture",
+     "area_m2": 0.41,
+     "seen_s": 9.58,
+     "min_dist_m": 1.93
+    },
+    {
+     "id": "lum-PEN-GLOBE-stair-gf-02",
+     "kind": "fixture",
+     "area_m2": 0.43,
+     "seen_s": 14.08,
+     "min_dist_m": 1.31
+    },
+    {
+     "id": "lum-PEN-GLOBE-stair-gf-03",
+     "kind": "fixture",
+     "area_m2": 0.42,
+     "seen_s": 15.08,
+     "min_dist_m": 1.13
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 5958,
+     "end_frame": 5994,
+     "modes": {
+      "walking": 19,
+      "sweeping": 0,
+      "holding": 0
+     },
+     "seconds": 1.58,
+     "room": "stair-gf",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 19
+     }
+    }
+   ]
+  },
+  "corridor": {
+   "level": "GF",
+   "seconds": 27.6,
+   "cats": {
+    "informative": 0.6465,
+    "wall_dominated": 0.3474,
+    "blocked": 0.0,
+    "backward": 0.006,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     9.71,
+     -27.44
+    ],
+    "seconds_at_spot": 11.3
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [],
+   "bad_runs": [
+    {
+     "start_frame": 7716,
+     "end_frame": 7770,
+     "modes": {
+      "walking": 23,
+      "sweeping": 5,
+      "holding": 0
+     },
+     "seconds": 2.33,
+     "room": "corridor",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 28
+     }
+    }
+   ]
+  },
+  "study-game": {
+   "level": "GF",
+   "seconds": 21.8,
+   "cats": {
+    "informative": 0.9962,
+    "wall_dominated": 0.0038,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     5.38,
+     -25.87
+    ],
+    "seconds_at_spot": 21.8
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 4,
+     "seen": 4
+    },
+    "furniture": {
+     "total": 4,
+     "seen": 4
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 5,
+     "seen": 4
+    }
+   },
+   "never_seen": [
+    "beam-0-e0"
+   ],
+   "features": [
+    {
+     "id": "column-00",
+     "kind": "wall",
+     "area_m2": 29.02,
+     "seen_s": 18.17,
+     "min_dist_m": 1.54
+    },
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 6.5,
+     "min_dist_m": 0.94
+    },
+    {
+     "id": "column-05",
+     "kind": "wall",
+     "area_m2": 27.34,
+     "seen_s": 14.33,
+     "min_dist_m": 2.0
+    },
+    {
+     "id": "beam-0-e0",
+     "kind": "shell",
+     "area_m2": 13.59,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "window-GF-study-game-1",
+     "kind": "shell",
+     "area_m2": 10.3,
+     "seen_s": 23.58,
+     "min_dist_m": 1.32
+    },
+    {
+     "id": "door-GF-study-game-deck",
+     "kind": "shell",
+     "area_m2": 11.29,
+     "seen_s": 17.92,
+     "min_dist_m": 2.7
+    },
+    {
+     "id": "wall-GF-ext-27",
+     "kind": "wall",
+     "area_m2": 66.78,
+     "seen_s": 16.67,
+     "min_dist_m": 0.83
+    },
+    {
+     "id": "window-GF-study-game-2",
+     "kind": "shell",
+     "area_m2": 7.35,
+     "seen_s": 14.75,
+     "min_dist_m": 1.38
+    },
+    {
+     "id": "beam-3000-e0",
+     "kind": "shell",
+     "area_m2": 8.94,
+     "seen_s": 12.42,
+     "min_dist_m": 2.0
+    },
+    {
+     "id": "furn-study-desk",
+     "kind": "furniture",
+     "area_m2": 9.47,
+     "seen_s": 19.75,
+     "min_dist_m": 1.03
+    },
+    {
+     "id": "furn-study-adult-desk",
+     "kind": "furniture",
+     "area_m2": 7.12,
+     "seen_s": 18.17,
+     "min_dist_m": 1.2
+    },
+    {
+     "id": "furn-study-tv",
+     "kind": "furniture",
+     "area_m2": 5.99,
+     "seen_s": 21.92,
+     "min_dist_m": 1.78
+    },
+    {
+     "id": "furn-study-sofa",
+     "kind": "furniture",
+     "area_m2": 13.86,
+     "seen_s": 12.08,
+     "min_dist_m": 1.26
+    }
+   ],
+   "bad_runs": []
+  },
+  "kids-a": {
+   "level": "GF",
+   "seconds": 9.2,
+   "cats": {
+    "informative": 0.7,
+    "wall_dominated": 0.2727,
+    "blocked": 0.0273,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 236,
+    "full": false,
+    "at": [
+     13.14,
+     -27.19
+    ],
+    "seconds_at_spot": 9.2
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 4,
+     "seen": 4
+    },
+    "fixture": {
+     "total": 2,
+     "seen": 2
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [
+    "column-01"
+   ],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "door-GF-corridor-kids-a",
+     "kind": "shell",
+     "area_m2": 6.85,
+     "seen_s": 15.25,
+     "min_dist_m": 0.3
+    },
+    {
+     "id": "window-GF-kids-a-3",
+     "kind": "shell",
+     "area_m2": 10.89,
+     "seen_s": 8.08,
+     "min_dist_m": 3.29
+    },
+    {
+     "id": "furn-ka-bunk",
+     "kind": "furniture",
+     "area_m2": 20.79,
+     "seen_s": 7.5,
+     "min_dist_m": 0.56
+    },
+    {
+     "id": "furn-ka-desk-1",
+     "kind": "furniture",
+     "area_m2": 5.64,
+     "seen_s": 8.08,
+     "min_dist_m": 2.39
+    },
+    {
+     "id": "furn-ka-desk-2",
+     "kind": "furniture",
+     "area_m2": 5.64,
+     "seen_s": 6.5,
+     "min_dist_m": 3.08
+    },
+    {
+     "id": "furn-ka-wardrobe",
+     "kind": "furniture",
+     "area_m2": 21.61,
+     "seen_s": 4.42,
+     "min_dist_m": 2.24
+    },
+    {
+     "id": "lum-DESK-kids-a-03",
+     "kind": "fixture",
+     "area_m2": 0.16,
+     "seen_s": 2.0,
+     "min_dist_m": 2.89
+    },
+    {
+     "id": "lum-DESK-kids-a-05",
+     "kind": "fixture",
+     "area_m2": 0.16,
+     "seen_s": 1.67,
+     "min_dist_m": 3.55
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 7834,
+     "end_frame": 7864,
+     "modes": {
+      "walking": 8,
+      "sweeping": 6,
+      "holding": 2
+     },
+     "seconds": 1.33,
+     "room": "kids-a",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 16
+     }
+    }
+   ]
+  },
+  "kids-b": {
+   "level": "GF",
+   "seconds": 23.6,
+   "cats": {
+    "informative": 0.7739,
+    "wall_dominated": 0.2191,
+    "blocked": 0.0071,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     17.45,
+     -25.91
+    ],
+    "seconds_at_spot": 21.4
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 3,
+     "seen": 2
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 1,
+     "seen": 1
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [
+    "column-01"
+   ],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "column-03",
+     "kind": "wall",
+     "area_m2": 27.53,
+     "seen_s": 10.08,
+     "min_dist_m": 2.23
+    },
+    {
+     "id": "column-07",
+     "kind": "wall",
+     "area_m2": 27.75,
+     "seen_s": 10.83,
+     "min_dist_m": 0.9
+    },
+    {
+     "id": "door-GF-corridor-kids-b",
+     "kind": "shell",
+     "area_m2": 6.85,
+     "seen_s": 17.0,
+     "min_dist_m": 0.37
+    },
+    {
+     "id": "window-GF-kids-b-4",
+     "kind": "shell",
+     "area_m2": 10.7,
+     "seen_s": 12.33,
+     "min_dist_m": 1.35
+    },
+    {
+     "id": "furn-kb-bed",
+     "kind": "furniture",
+     "area_m2": 14.66,
+     "seen_s": 9.83,
+     "min_dist_m": 1.67
+    },
+    {
+     "id": "furn-kb-desk",
+     "kind": "furniture",
+     "area_m2": 5.97,
+     "seen_s": 9.42,
+     "min_dist_m": 0.95
+    },
+    {
+     "id": "furn-kb-wardrobe",
+     "kind": "furniture",
+     "area_m2": 18.08,
+     "seen_s": 12.5,
+     "min_dist_m": 0.31
+    },
+    {
+     "id": "lum-DESK-kids-b-03",
+     "kind": "fixture",
+     "area_m2": 0.16,
+     "seen_s": 7.83,
+     "min_dist_m": 0.92
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 8368,
+     "end_frame": 8424,
+     "modes": {
+      "walking": 0,
+      "sweeping": 29,
+      "holding": 0
+     },
+     "seconds": 2.42,
+     "room": "kids-b",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 29
+     }
+    },
+    {
+     "start_frame": 8632,
+     "end_frame": 8688,
+     "modes": {
+      "walking": 29,
+      "sweeping": 0,
+      "holding": 0
+     },
+     "seconds": 2.42,
+     "room": "kids-b",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 29
+     }
+    }
+   ]
+  },
+  "family-bath": {
+   "level": "GF",
+   "seconds": 17.8,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.4507,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.5493
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     10.34,
+     -25.82
+    ],
+    "seconds_at_spot": 17.8
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 1
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 6.83,
+     "min_dist_m": 0.93
+    },
+    {
+     "id": "window-GF-family-bath-5",
+     "kind": "shell",
+     "area_m2": 1.95,
+     "seen_s": 8.5,
+     "min_dist_m": 1.36
+    },
+    {
+     "id": "furn-fb-shower",
+     "kind": "furniture",
+     "area_m2": 6.9,
+     "seen_s": 5.42,
+     "min_dist_m": 2.4
+    },
+    {
+     "id": "furn-fb-wc",
+     "kind": "furniture",
+     "area_m2": 1.13,
+     "seen_s": 9.83,
+     "min_dist_m": 1.57
+    },
+    {
+     "id": "furn-fb-basin",
+     "kind": "furniture",
+     "area_m2": 2.63,
+     "seen_s": 3.83,
+     "min_dist_m": 0.67
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 7230,
+     "end_frame": 7264,
+     "modes": {
+      "walking": 0,
+      "sweeping": 18,
+      "holding": 0
+     },
+     "seconds": 1.5,
+     "room": "family-bath",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 18
+     }
+    },
+    {
+     "start_frame": 7328,
+     "end_frame": 7406,
+     "modes": {
+      "walking": 0,
+      "sweeping": 40,
+      "holding": 0
+     },
+     "seconds": 3.33,
+     "room": "family-bath",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 40
+     }
+    },
+    {
+     "start_frame": 7450,
+     "end_frame": 7482,
+     "modes": {
+      "walking": 0,
+      "sweeping": 17,
+      "holding": 0
+     },
+     "seconds": 1.42,
+     "room": "family-bath",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 17
+     }
+    },
+    {
+     "start_frame": 7546,
+     "end_frame": 7584,
+     "modes": {
+      "walking": 20,
+      "sweeping": 0,
+      "holding": 0
+     },
+     "seconds": 1.67,
+     "room": "family-bath",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 13,
+      "blocked": 7
+     }
+    }
+   ]
+  },
+  "parents-bed": {
+   "level": "GF",
+   "seconds": 17.8,
+   "cats": {
+    "informative": 0.8925,
+    "wall_dominated": 0.1075,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 270,
+    "full": false,
+    "at": [
+     18.98,
+     -25.56
+    ],
+    "seconds_at_spot": 12.7
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 3,
+     "seen": 3
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 2,
+     "seen": 2
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-07",
+     "kind": "wall",
+     "area_m2": 27.75,
+     "seen_s": 12.42,
+     "min_dist_m": 0.67
+    },
+    {
+     "id": "column-08",
+     "kind": "wall",
+     "area_m2": 24.27,
+     "seen_s": 8.67,
+     "min_dist_m": 1.81
+    },
+    {
+     "id": "wall-GF-ext-35",
+     "kind": "wall",
+     "area_m2": 67.33,
+     "seen_s": 11.17,
+     "min_dist_m": 0.65
+    },
+    {
+     "id": "window-GF-parents-bed-6",
+     "kind": "shell",
+     "area_m2": 10.89,
+     "seen_s": 12.92,
+     "min_dist_m": 0.95
+    },
+    {
+     "id": "window-GF-parents-bed-7",
+     "kind": "shell",
+     "area_m2": 9.57,
+     "seen_s": 10.5,
+     "min_dist_m": 0.88
+    },
+    {
+     "id": "furn-pb-bed",
+     "kind": "furniture",
+     "area_m2": 28.9,
+     "seen_s": 12.0,
+     "min_dist_m": 1.01
+    },
+    {
+     "id": "furn-pb-bedside",
+     "kind": "furniture",
+     "area_m2": 1.37,
+     "seen_s": 1.67,
+     "min_dist_m": 1.99
+    },
+    {
+     "id": "furn-pb-vanity",
+     "kind": "furniture",
+     "area_m2": 4.57,
+     "seen_s": 8.75,
+     "min_dist_m": 1.33
+    },
+    {
+     "id": "lum-WALL-READ-parents-bed-02",
+     "kind": "fixture",
+     "area_m2": 0.06,
+     "seen_s": 5.33,
+     "min_dist_m": 1.1
+    },
+    {
+     "id": "lum-WALL-READ-parents-bed-03",
+     "kind": "fixture",
+     "area_m2": 0.06,
+     "seen_s": 5.33,
+     "min_dist_m": 1.66
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 8820,
+     "end_frame": 8844,
+     "modes": {
+      "walking": 10,
+      "sweeping": 2,
+      "holding": 1
+     },
+     "seconds": 1.08,
+     "room": "parents-bed",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 13
+     }
+    }
+   ]
+  },
+  "parents-dressing": {
+   "level": "GF",
+   "seconds": 10.5,
+   "cats": {
+    "informative": 0.6825,
+    "wall_dominated": 0.3175,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 202,
+    "full": false,
+    "at": [
+     22.0,
+     -27.32
+    ],
+    "seconds_at_spot": 9.8
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 2,
+     "seen": 2
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 3,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 2,
+     "seen": 2
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [
+    "lum-VSTRIP-parents-dressing-03",
+    "lum-VSTRIP-parents-dressing-04",
+    "lum-VSTRIP-parents-dressing-05"
+   ],
+   "features": [
+    {
+     "id": "column-04",
+     "kind": "wall",
+     "area_m2": 37.95,
+     "seen_s": 4.25,
+     "min_dist_m": 0.67
+    },
+    {
+     "id": "wall-GF-ext-35",
+     "kind": "wall",
+     "area_m2": 67.33,
+     "seen_s": 9.42,
+     "min_dist_m": 0.65
+    },
+    {
+     "id": "door-GF-parents-bed-parents-dressing",
+     "kind": "shell",
+     "area_m2": 6.36,
+     "seen_s": 10.42,
+     "min_dist_m": 0.36
+    },
+    {
+     "id": "lum-VSTRIP-parents-dressing-03",
+     "kind": "fixture",
+     "area_m2": 0.12,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-VSTRIP-parents-dressing-04",
+     "kind": "fixture",
+     "area_m2": 0.12,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-VSTRIP-parents-dressing-05",
+     "kind": "fixture",
+     "area_m2": 0.12,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "furn-pd-hang-1",
+     "kind": "dressing",
+     "area_m2": 49.09,
+     "seen_s": 6.0,
+     "min_dist_m": 0.9
+    },
+    {
+     "id": "furn-pd-hang-2",
+     "kind": "dressing",
+     "area_m2": 41.79,
+     "seen_s": 11.58,
+     "min_dist_m": 0.45
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 9240,
+     "end_frame": 9268,
+     "modes": {
+      "walking": 10,
+      "sweeping": 4,
+      "holding": 1
+     },
+     "seconds": 1.25,
+     "room": "parents-dressing",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 15
+     }
+    },
+    {
+     "start_frame": 9418,
+     "end_frame": 9448,
+     "modes": {
+      "walking": 7,
+      "sweeping": 8,
+      "holding": 1
+     },
+     "seconds": 1.33,
+     "room": "parents-dressing",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 16
+     }
+    }
+   ]
+  },
+  "parents-ensuite": {
+   "level": "GF",
+   "seconds": 4.3,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.7692,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.2308
+   },
+   "full_360": {
+    "coverage_deg": 108,
+    "full": false,
+    "at": [
+     21.42,
+     -29.39
+    ],
+    "seconds_at_spot": 4.3
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 4,
+     "seen": 3
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [
+    "column-04",
+    "fixture-pe-bath-screen"
+   ],
+   "features": [
+    {
+     "id": "column-04",
+     "kind": "wall",
+     "area_m2": 37.95,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "door-GF-parents-dressing-ext-parents-ensuite",
+     "kind": "shell",
+     "area_m2": 6.37,
+     "seen_s": 10.42,
+     "min_dist_m": 0.4
+    },
+    {
+     "id": "furn-pe-wc",
+     "kind": "furniture",
+     "area_m2": 1.03,
+     "seen_s": 5.67,
+     "min_dist_m": 1.66
+    },
+    {
+     "id": "furn-pe-bath",
+     "kind": "furniture",
+     "area_m2": 6.5,
+     "seen_s": 12.83,
+     "min_dist_m": 1.3
+    },
+    {
+     "id": "furn-pe-basin",
+     "kind": "furniture",
+     "area_m2": 3.69,
+     "seen_s": 1.33,
+     "min_dist_m": 1.12
+    },
+    {
+     "id": "fixture-pe-rain-head",
+     "kind": "fixture",
+     "area_m2": 0.28,
+     "seen_s": 5.5,
+     "min_dist_m": 1.84
+    },
+    {
+     "id": "fixture-pe-hand-shower",
+     "kind": "fixture",
+     "area_m2": 0.15,
+     "seen_s": 7.08,
+     "min_dist_m": 1.18
+    },
+    {
+     "id": "fixture-pe-bath-screen",
+     "kind": "fixture",
+     "area_m2": 2.84,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-VANITY-LIN-parents-ensuite-04",
+     "kind": "fixture",
+     "area_m2": 0.2,
+     "seen_s": 1.0,
+     "min_dist_m": 1.34
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 9490,
+     "end_frame": 9540,
+     "modes": {
+      "walking": 14,
+      "sweeping": 10,
+      "holding": 2
+     },
+     "seconds": 2.17,
+     "room": "parents-ensuite",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 26
+     }
+    },
+    {
+     "start_frame": 9544,
+     "end_frame": 9570,
+     "modes": {
+      "walking": 0,
+      "sweeping": 7,
+      "holding": 7
+     },
+     "seconds": 1.17,
+     "room": "parents-ensuite",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 14
+     }
+    }
+   ]
+  },
+  "gallery-end": {
+   "level": "GF",
+   "seconds": 3.2,
+   "cats": {
+    "informative": 0.2895,
+    "wall_dominated": 0.5263,
+    "blocked": 0.1842,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 223,
+    "full": false,
+    "at": [
+     9.88,
+     -27.25
+    ],
+    "seconds_at_spot": 3.2
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "door-GF-gallery-end-family-bath",
+     "kind": "shell",
+     "area_m2": 6.37,
+     "seen_s": 28.0,
+     "min_dist_m": 0.22
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 6824,
+     "end_frame": 6944,
+     "modes": {
+      "walking": 20,
+      "sweeping": 40,
+      "holding": 1
+     },
+     "seconds": 5.08,
+     "room": "gallery-end",
+     "level": "GF",
+     "cats": {
+      "wall_dominated": 61
+     }
+    }
+   ]
+  },
+  "parents-entry": {
+   "level": "GF",
+   "seconds": 0.6,
+   "cats": {
+    "informative": 1.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 77,
+    "full": false,
+    "at": [
+     18.98,
+     -27.36
+    ],
+    "seconds_at_spot": 0.6
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "door-GF-corridor-parents-entry",
+     "kind": "shell",
+     "area_m2": 6.84,
+     "seen_s": 10.75,
+     "min_dist_m": 0.37
+    }
+   ],
+   "bad_runs": []
+  },
+  "parents-dressing-ext": {
+   "level": "GF",
+   "seconds": 0.2,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 1.0
+   },
+   "full_360": {
+    "coverage_deg": 78,
+    "full": false,
+    "at": [
+     21.65,
+     -28.71
+    ],
+    "seconds_at_spot": 0.2
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 1
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-04",
+     "kind": "wall",
+     "area_m2": 37.95,
+     "seen_s": 1.33,
+     "min_dist_m": 0.77
+    }
+   ],
+   "bad_runs": []
+  },
+  "lounge": {
+   "level": "B",
+   "seconds": 42.8,
+   "cats": {
+    "informative": 0.9376,
+    "wall_dominated": 0.0624,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     5.1,
+     -25.17
+    ],
+    "seconds_at_spot": 18.6
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 5,
+     "seen": 5
+    },
+    "furniture": {
+     "total": 4,
+     "seen": 4
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-00",
+     "kind": "wall",
+     "area_m2": 29.02,
+     "seen_s": 38.08,
+     "min_dist_m": 0.69
+    },
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 35.0,
+     "min_dist_m": 0.41
+    },
+    {
+     "id": "column-05",
+     "kind": "wall",
+     "area_m2": 27.34,
+     "seen_s": 37.92,
+     "min_dist_m": 1.77
+    },
+    {
+     "id": "wall-B-ext-12",
+     "kind": "wall",
+     "area_m2": 49.4,
+     "seen_s": 50.25,
+     "min_dist_m": 1.69
+    },
+    {
+     "id": "door-B-lounge-yard",
+     "kind": "shell",
+     "area_m2": 21.42,
+     "seen_s": 51.5,
+     "min_dist_m": 0.87
+    },
+    {
+     "id": "beam-0-e0",
+     "kind": "shell",
+     "area_m2": 13.59,
+     "seen_s": 41.17,
+     "min_dist_m": 2.77
+    },
+    {
+     "id": "wall-GF-ext-27",
+     "kind": "wall",
+     "area_m2": 66.78,
+     "seen_s": 8.67,
+     "min_dist_m": 2.23
+    },
+    {
+     "id": "furn-lounge-tv",
+     "kind": "furniture",
+     "area_m2": 31.52,
+     "seen_s": 23.58,
+     "min_dist_m": 0.92
+    },
+    {
+     "id": "furn-lounge-sofa",
+     "kind": "furniture",
+     "area_m2": 24.61,
+     "seen_s": 30.75,
+     "min_dist_m": 1.54
+    },
+    {
+     "id": "furn-lounge-coffee",
+     "kind": "furniture",
+     "area_m2": 2.79,
+     "seen_s": 20.58,
+     "min_dist_m": 2.51
+    },
+    {
+     "id": "furn-lounge-armchair",
+     "kind": "furniture",
+     "area_m2": 8.3,
+     "seen_s": 47.75,
+     "min_dist_m": 1.42
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 5758,
+     "end_frame": 5786,
+     "modes": {
+      "walking": 15,
+      "sweeping": 0,
+      "holding": 0
+     },
+     "seconds": 1.25,
+     "room": "lounge",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 15
+     }
+    }
+   ]
+  },
+  "lounge-nook": {
+   "level": "B",
+   "seconds": 0.0,
+   "cats": {},
+   "full_360": {
+    "coverage_deg": 0,
+    "full": false,
+    "at": null
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 3,
+     "seen": 3
+    },
+    "furniture": {
+     "total": 1,
+     "seen": 1
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "wall-B-ext-12",
+     "kind": "wall",
+     "area_m2": 49.4,
+     "seen_s": 36.5,
+     "min_dist_m": 2.02
+    },
+    {
+     "id": "column-06",
+     "kind": "wall",
+     "area_m2": 29.2,
+     "seen_s": 33.08,
+     "min_dist_m": 2.11
+    },
+    {
+     "id": "wall-GF-ext-27",
+     "kind": "wall",
+     "area_m2": 66.78,
+     "seen_s": 7.0,
+     "min_dist_m": 2.44
+    },
+    {
+     "id": "furn-stair-landing-store",
+     "kind": "furniture",
+     "area_m2": 3.81,
+     "seen_s": 21.75,
+     "min_dist_m": 2.31
+    }
+   ],
+   "bad_runs": []
+  },
+  "stair-b": {
+   "level": "B",
+   "seconds": 3.8,
+   "cats": {
+    "informative": 0.7174,
+    "wall_dominated": 0.1957,
+    "blocked": 0.087,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 77,
+    "full": false,
+    "at": [
+     9.63,
+     -27.95
+    ],
+    "seconds_at_spot": 1.8
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 2,
+     "seen": 2
+    },
+    "fixture": {
+     "total": 2,
+     "seen": 2
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "stair-main",
+     "kind": "shell",
+     "area_m2": 14.23,
+     "seen_s": 68.33,
+     "min_dist_m": 1.38
+    },
+    {
+     "id": "rail-stair-wall-handrail",
+     "kind": "fixture",
+     "area_m2": 5.52,
+     "seen_s": 55.0,
+     "min_dist_m": 0.63
+    },
+    {
+     "id": "rail-stair-open-glass",
+     "kind": "fixture",
+     "area_m2": 9.33,
+     "seen_s": 11.5,
+     "min_dist_m": 1.55
+    },
+    {
+     "id": "joinery-understair-cupboard",
+     "kind": "furniture",
+     "area_m2": 12.92,
+     "seen_s": 63.5,
+     "min_dist_m": 1.48
+    },
+    {
+     "id": "furn-stair-flight-store",
+     "kind": "furniture",
+     "area_m2": 24.13,
+     "seen_s": 21.17,
+     "min_dist_m": 1.79
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 5890,
+     "end_frame": 5924,
+     "modes": {
+      "walking": 18,
+      "sweeping": 0,
+      "holding": 0
+     },
+     "seconds": 1.5,
+     "room": "stair-b",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 10,
+      "blocked": 8
+     }
+    }
+   ]
+  },
+  "pantry": {
+   "level": "B",
+   "seconds": 0.0,
+   "cats": {},
+   "full_360": {
+    "coverage_deg": 0,
+    "full": false,
+    "at": null
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 2,
+     "seen": 1
+    },
+    "furniture": {
+     "total": 2,
+     "seen": 1
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 3,
+     "seen": 1
+    }
+   },
+   "never_seen": [
+    "wall-B-ext-12",
+    "env-share-front-ceiling",
+    "ctx-sister-core-B-front",
+    "furn-pantry-shelves-2"
+   ],
+   "features": [
+    {
+     "id": "wall-B-ext-12",
+     "kind": "wall",
+     "area_m2": 49.4,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "column-06",
+     "kind": "wall",
+     "area_m2": 29.2,
+     "seen_s": 10.17,
+     "min_dist_m": 2.31
+    },
+    {
+     "id": "env-share-front-ceiling",
+     "kind": "shell",
+     "area_m2": 16.44,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "door-B-lounge-nook-pantry",
+     "kind": "shell",
+     "area_m2": 6.36,
+     "seen_s": 12.17,
+     "min_dist_m": 2.48
+    },
+    {
+     "id": "ctx-sister-core-B-front",
+     "kind": "shell",
+     "area_m2": 47.27,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "furn-pantry-shelves-1",
+     "kind": "furniture",
+     "area_m2": 10.85,
+     "seen_s": 10.42,
+     "min_dist_m": 3.35
+    },
+    {
+     "id": "furn-pantry-shelves-2",
+     "kind": "furniture",
+     "area_m2": 10.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    }
+   ],
+   "bad_runs": []
+  },
+  "hall-b": {
+   "level": "B",
+   "seconds": 1.8,
+   "cats": {
+    "informative": 0.8182,
+    "wall_dominated": 0.1818,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 117,
+    "full": false,
+    "at": [
+     9.82,
+     -27.01
+    ],
+    "seconds_at_spot": 1.8
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [],
+   "bad_runs": []
+  },
+  "entry-b": {
+   "level": "B",
+   "seconds": 1.0,
+   "cats": {
+    "informative": 1.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 80,
+    "full": false,
+    "at": [
+     15.58,
+     -26.81
+    ],
+    "seconds_at_spot": 1.0
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "door-B-entry-b-core",
+     "kind": "shell",
+     "area_m2": 8.5,
+     "seen_s": 33.0,
+     "min_dist_m": 3.46
+    }
+   ],
+   "bad_runs": []
+  },
+  "family": {
+   "level": "B",
+   "seconds": 9.2,
+   "cats": {
+    "informative": 0.973,
+    "wall_dominated": 0.027,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 260,
+    "full": false,
+    "at": [
+     10.95,
+     -24.61
+    ],
+    "seconds_at_spot": 8.4
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 1
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 23.33,
+     "min_dist_m": 0.41
+    }
+   ],
+   "bad_runs": []
+  },
+  "kitchen": {
+   "level": "B",
+   "seconds": 17.2,
+   "cats": {
+    "informative": 0.9029,
+    "wall_dominated": 0.0534,
+    "blocked": 0.0437,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     12.76,
+     -24.71
+    ],
+    "seconds_at_spot": 13.6
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 2,
+     "seen": 2
+    },
+    "fixture": {
+     "total": 3,
+     "seen": 3
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [
+    "column-01"
+   ],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "beam-0-e7",
+     "kind": "shell",
+     "area_m2": 61.07,
+     "seen_s": 32.25,
+     "min_dist_m": 2.77
+    },
+    {
+     "id": "furn-k-run",
+     "kind": "furniture",
+     "area_m2": 18.91,
+     "seen_s": 51.58,
+     "min_dist_m": 0.76
+    },
+    {
+     "id": "furn-k-island",
+     "kind": "furniture",
+     "area_m2": 39.95,
+     "seen_s": 58.25,
+     "min_dist_m": 1.13
+    },
+    {
+     "id": "nonmodel-kitchen-hatch",
+     "kind": "shell",
+     "area_m2": 2.12,
+     "seen_s": 36.33,
+     "min_dist_m": 0.97
+    },
+    {
+     "id": "lum-PEN-GLOBE-kitchen-01",
+     "kind": "fixture",
+     "area_m2": 0.41,
+     "seen_s": 36.42,
+     "min_dist_m": 1.42
+    },
+    {
+     "id": "lum-PEN-GLOBE-kitchen-02",
+     "kind": "fixture",
+     "area_m2": 0.41,
+     "seen_s": 29.5,
+     "min_dist_m": 1.86
+    },
+    {
+     "id": "lum-PEN-GLOBE-kitchen-03",
+     "kind": "fixture",
+     "area_m2": 0.41,
+     "seen_s": 30.67,
+     "min_dist_m": 1.6
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 3166,
+     "end_frame": 3204,
+     "modes": {
+      "walking": 0,
+      "sweeping": 20,
+      "holding": 0
+     },
+     "seconds": 1.67,
+     "room": "kitchen",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 11,
+      "blocked": 9
+     }
+    }
+   ]
+  },
+  "kitchen-island": {
+   "level": "B",
+   "seconds": 0.0,
+   "cats": {},
+   "full_360": {
+    "coverage_deg": 0,
+    "full": false,
+    "at": null
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 0,
+     "seen": 0
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "beam-0-e1",
+     "kind": "shell",
+     "area_m2": 51.91,
+     "seen_s": 50.58,
+     "min_dist_m": 3.62
+    }
+   ],
+   "bad_runs": []
+  },
+  "dining": {
+   "level": "B",
+   "seconds": 30.5,
+   "cats": {
+    "informative": 1.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     16.16,
+     -24.57
+    ],
+    "seconds_at_spot": 28.2
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 4,
+     "seen": 3
+    },
+    "furniture": {
+     "total": 1,
+     "seen": 1
+    },
+    "fixture": {
+     "total": 1,
+     "seen": 1
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 1
+    }
+   },
+   "never_seen": [
+    "column-01"
+   ],
+   "features": [
+    {
+     "id": "column-01",
+     "kind": "wall",
+     "area_m2": 28.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "column-03",
+     "kind": "wall",
+     "area_m2": 27.53,
+     "seen_s": 41.67,
+     "min_dist_m": 0.56
+    },
+    {
+     "id": "wall-B-ext-04",
+     "kind": "wall",
+     "area_m2": 45.59,
+     "seen_s": 43.5,
+     "min_dist_m": 1.22
+    },
+    {
+     "id": "column-07",
+     "kind": "wall",
+     "area_m2": 27.75,
+     "seen_s": 26.83,
+     "min_dist_m": 1.1
+    },
+    {
+     "id": "door-B-dining-yard",
+     "kind": "shell",
+     "area_m2": 14.54,
+     "seen_s": 42.67,
+     "min_dist_m": 0.87
+    },
+    {
+     "id": "furn-dining-table",
+     "kind": "furniture",
+     "area_m2": 12.67,
+     "seen_s": 39.08,
+     "min_dist_m": 1.32
+    },
+    {
+     "id": "lum-PEN-LIN-dining-01",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 11.67,
+     "min_dist_m": 1.34
+    }
+   ],
+   "bad_runs": []
+  },
+  "dining-side": {
+   "level": "B",
+   "seconds": 4.1,
+   "cats": {
+    "informative": 1.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 211,
+    "full": false,
+    "at": [
+     17.47,
+     -27.58
+    ],
+    "seconds_at_spot": 3.0
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 1,
+     "seen": 1
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 0,
+     "seen": 0
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "furn-dining-sideboard",
+     "kind": "furniture",
+     "area_m2": 6.05,
+     "seen_s": 30.67,
+     "min_dist_m": 1.48
+    }
+   ],
+   "bad_runs": []
+  },
+  "living": {
+   "level": "B",
+   "seconds": 60.2,
+   "cats": {
+    "informative": 1.0,
+    "wall_dominated": 0.0,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     21.74,
+     -26.71
+    ],
+    "seconds_at_spot": 39.9
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 6,
+     "seen": 6
+    },
+    "furniture": {
+     "total": 4,
+     "seen": 4
+    },
+    "fixture": {
+     "total": 0,
+     "seen": 0
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 4,
+     "seen": 3
+    }
+   },
+   "never_seen": [
+    "beam-0-e5"
+   ],
+   "features": [
+    {
+     "id": "wall-B-ext-04",
+     "kind": "wall",
+     "area_m2": 45.59,
+     "seen_s": 32.83,
+     "min_dist_m": 1.22
+    },
+    {
+     "id": "column-04",
+     "kind": "wall",
+     "area_m2": 37.95,
+     "seen_s": 30.83,
+     "min_dist_m": 1.54
+    },
+    {
+     "id": "column-07",
+     "kind": "wall",
+     "area_m2": 27.75,
+     "seen_s": 29.17,
+     "min_dist_m": 1.06
+    },
+    {
+     "id": "column-08",
+     "kind": "wall",
+     "area_m2": 24.27,
+     "seen_s": 29.83,
+     "min_dist_m": 1.77
+    },
+    {
+     "id": "wall-B-ext-18",
+     "kind": "wall",
+     "area_m2": 52.97,
+     "seen_s": 47.67,
+     "min_dist_m": 0.96
+    },
+    {
+     "id": "wall-GF-ext-35",
+     "kind": "wall",
+     "area_m2": 67.33,
+     "seen_s": 8.42,
+     "min_dist_m": 3.04
+    },
+    {
+     "id": "door-B-living-yard",
+     "kind": "shell",
+     "area_m2": 16.61,
+     "seen_s": 25.67,
+     "min_dist_m": 1.31
+    },
+    {
+     "id": "door-B-living-yard-2",
+     "kind": "shell",
+     "area_m2": 14.79,
+     "seen_s": 39.17,
+     "min_dist_m": 0.75
+    },
+    {
+     "id": "beam-0-e5",
+     "kind": "shell",
+     "area_m2": 1.47,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "beam-0-e6",
+     "kind": "shell",
+     "area_m2": 13.75,
+     "seen_s": 24.83,
+     "min_dist_m": 2.77
+    },
+    {
+     "id": "furn-living-sofa",
+     "kind": "furniture",
+     "area_m2": 30.08,
+     "seen_s": 37.58,
+     "min_dist_m": 1.24
+    },
+    {
+     "id": "furn-living-coffee",
+     "kind": "furniture",
+     "area_m2": 1.92,
+     "seen_s": 7.42,
+     "min_dist_m": 3.84
+    },
+    {
+     "id": "furn-living-chair-1",
+     "kind": "furniture",
+     "area_m2": 8.3,
+     "seen_s": 25.67,
+     "min_dist_m": 1.35
+    },
+    {
+     "id": "furn-living-chair-2",
+     "kind": "furniture",
+     "area_m2": 8.3,
+     "seen_s": 15.33,
+     "min_dist_m": 1.4
+    }
+   ],
+   "bad_runs": []
+  },
+  "bar-alcove": {
+   "level": "B",
+   "seconds": 0.0,
+   "cats": {},
+   "full_360": {
+    "coverage_deg": 0,
+    "full": false,
+    "at": null
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 2,
+     "seen": 2
+    },
+    "furniture": {
+     "total": 4,
+     "seen": 4
+    },
+    "fixture": {
+     "total": 10,
+     "seen": 2
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 0
+    }
+   },
+   "never_seen": [
+    "env-share-rear-ceiling",
+    "lum-BACK-bar-alcove-01",
+    "lum-BACK-bar-alcove-02",
+    "lum-BACK-bar-alcove-03",
+    "lum-BACK-bar-alcove-04",
+    "lum-BACK-bar-alcove-05",
+    "lum-BACK-bar-alcove-06",
+    "lum-BACK-bar-alcove-07",
+    "lum-BACK-bar-alcove-08"
+   ],
+   "features": [
+    {
+     "id": "column-04",
+     "kind": "wall",
+     "area_m2": 37.95,
+     "seen_s": 25.67,
+     "min_dist_m": 1.69
+    },
+    {
+     "id": "wall-B-ext-18",
+     "kind": "wall",
+     "area_m2": 52.97,
+     "seen_s": 25.33,
+     "min_dist_m": 2.12
+    },
+    {
+     "id": "env-share-rear-ceiling",
+     "kind": "shell",
+     "area_m2": 31.85,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "furn-library-cabinet-left",
+     "kind": "furniture",
+     "area_m2": 19.56,
+     "seen_s": 16.33,
+     "min_dist_m": 1.94
+    },
+    {
+     "id": "furn-library-daybed",
+     "kind": "furniture",
+     "area_m2": 22.93,
+     "seen_s": 35.92,
+     "min_dist_m": 0.76
+    },
+    {
+     "id": "furn-library-cabinet-right",
+     "kind": "furniture",
+     "area_m2": 24.13,
+     "seen_s": 20.75,
+     "min_dist_m": 1.97
+    },
+    {
+     "id": "furn-library-end-panel",
+     "kind": "furniture",
+     "area_m2": 2.67,
+     "seen_s": 12.58,
+     "min_dist_m": 2.49
+    },
+    {
+     "id": "lum-BACK-bar-alcove-01",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-02",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-03",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-04",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-05",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-06",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-07",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-BACK-bar-alcove-08",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "lum-SWING-bar-alcove-09",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 8.83,
+     "min_dist_m": 1.45
+    },
+    {
+     "id": "lum-SWING-bar-alcove-10",
+     "kind": "fixture",
+     "area_m2": 0.13,
+     "seen_s": 7.33,
+     "min_dist_m": 1.65
+    }
+   ],
+   "bad_runs": []
+  },
+  "store-ramp": {
+   "level": "B",
+   "seconds": 9.5,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.114,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.886
+   },
+   "full_360": {
+    "coverage_deg": 260,
+    "full": false,
+    "at": [
+     3.07,
+     -22.1
+    ],
+    "seconds_at_spot": 9.5
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 1,
+     "seen": 1
+    },
+    "furniture": {
+     "total": 1,
+     "seen": 1
+    },
+    "fixture": {
+     "total": 3,
+     "seen": 3
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 1,
+     "seen": 0
+    }
+   },
+   "never_seen": [
+    "spec-ramp-wall-infill-0"
+   ],
+   "features": [
+    {
+     "id": "wall-B-ext-10",
+     "kind": "wall",
+     "area_m2": 22.12,
+     "seen_s": 21.42,
+     "min_dist_m": 2.5
+    },
+    {
+     "id": "spec-ramp-wall-infill-0",
+     "kind": "shell",
+     "area_m2": 1.25,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    },
+    {
+     "id": "furn-store-shelves",
+     "kind": "furniture",
+     "area_m2": 32.92,
+     "seen_s": 12.33,
+     "min_dist_m": 0.65
+    },
+    {
+     "id": "lum-STORE-BATTEN-store-ramp-01",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 2.92,
+     "min_dist_m": 1.59
+    },
+    {
+     "id": "lum-STORE-BATTEN-store-ramp-02",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 5.33,
+     "min_dist_m": 0.69
+    },
+    {
+     "id": "lum-STORE-BATTEN-store-ramp-03",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 6.33,
+     "min_dist_m": 0.76
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 4618,
+     "end_frame": 4642,
+     "modes": {
+      "walking": 11,
+      "sweeping": 1,
+      "holding": 1
+     },
+     "seconds": 1.08,
+     "room": "store-ramp",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 13
+     }
+    }
+   ]
+  },
+  "cinema": {
+   "level": "B",
+   "seconds": 33.5,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.1542,
+    "blocked": 0.0,
+    "backward": 0.0075,
+    "outward": 0.0,
+    "dark": 0.8383
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     5.35,
+     -22.91
+    ],
+    "seconds_at_spot": 16.5
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 2,
+     "seen": 2
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 5,
+     "seen": 5
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "door-B-lounge-cinema",
+     "kind": "shell",
+     "area_m2": 6.84,
+     "seen_s": 25.42,
+     "min_dist_m": 0.26
+    },
+    {
+     "id": "door-B-cinema-store-ramp",
+     "kind": "shell",
+     "area_m2": 5.66,
+     "seen_s": 23.42,
+     "min_dist_m": 0.3
+    },
+    {
+     "id": "slab-ramp",
+     "kind": "shell",
+     "area_m2": 97.47,
+     "seen_s": 43.83,
+     "min_dist_m": 1.13
+    },
+    {
+     "id": "spec-ramp-wall-infill-1",
+     "kind": "shell",
+     "area_m2": 17.43,
+     "seen_s": 20.17,
+     "min_dist_m": 1.66
+    },
+    {
+     "id": "spec-ramp-wall-infill-2",
+     "kind": "shell",
+     "area_m2": 1.05,
+     "seen_s": 8.83,
+     "min_dist_m": 2.3
+    },
+    {
+     "id": "furn-cinema-tv",
+     "kind": "furniture",
+     "area_m2": 4.56,
+     "seen_s": 13.08,
+     "min_dist_m": 0.92
+    },
+    {
+     "id": "furn-cinema-sofa",
+     "kind": "furniture",
+     "area_m2": 15.57,
+     "seen_s": 22.5,
+     "min_dist_m": 1.3
+    },
+    {
+     "id": "furn-cinema-desk",
+     "kind": "furniture",
+     "area_m2": 7.1,
+     "seen_s": 17.67,
+     "min_dist_m": 1.11
+    },
+    {
+     "id": "lum-DESK-cinema-07",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 7.08,
+     "min_dist_m": 1.5
+    },
+    {
+     "id": "lum-DESK-cinema-08",
+     "kind": "fixture",
+     "area_m2": 0.17,
+     "seen_s": 9.25,
+     "min_dist_m": 1.74
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 4270,
+     "end_frame": 4334,
+     "modes": {
+      "walking": 0,
+      "sweeping": 33,
+      "holding": 0
+     },
+     "seconds": 2.75,
+     "room": "cinema",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 33
+     }
+    }
+   ]
+  },
+  "guest-wc": {
+   "level": "B",
+   "seconds": 10.8,
+   "cats": {
+    "informative": 0.0,
+    "wall_dominated": 0.4385,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.5615
+   },
+   "full_360": {
+    "coverage_deg": 248,
+    "full": false,
+    "at": [
+     10.08,
+     -22.74
+    ],
+    "seconds_at_spot": 10.7
+   },
+   "no_daylight": true,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 2,
+     "seen": 2
+    },
+    "fixture": {
+     "total": 3,
+     "seen": 3
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [],
+   "features": [
+    {
+     "id": "door-B-family-guest-wc",
+     "kind": "shell",
+     "area_m2": 6.37,
+     "seen_s": 11.75,
+     "min_dist_m": 0.41
+    },
+    {
+     "id": "rail-edge-1",
+     "kind": "shell",
+     "area_m2": 45.81,
+     "seen_s": 0.75,
+     "min_dist_m": 8.15
+    },
+    {
+     "id": "furn-gwc-wc",
+     "kind": "furniture",
+     "area_m2": 1.13,
+     "seen_s": 5.42,
+     "min_dist_m": 1.0
+    },
+    {
+     "id": "furn-gwc-basin",
+     "kind": "furniture",
+     "area_m2": 3.69,
+     "seen_s": 4.92,
+     "min_dist_m": 1.06
+    },
+    {
+     "id": "fixture-gwc-rain-head",
+     "kind": "fixture",
+     "area_m2": 0.27,
+     "seen_s": 0.92,
+     "min_dist_m": 2.56
+    },
+    {
+     "id": "fixture-gwc-hand-shower",
+     "kind": "fixture",
+     "area_m2": 0.15,
+     "seen_s": 5.75,
+     "min_dist_m": 0.98
+    },
+    {
+     "id": "lum-VANITY-LIN-guest-wc-03",
+     "kind": "fixture",
+     "area_m2": 0.2,
+     "seen_s": 2.67,
+     "min_dist_m": 1.29
+    }
+   ],
+   "bad_runs": [
+    {
+     "start_frame": 3298,
+     "end_frame": 3354,
+     "modes": {
+      "walking": 19,
+      "sweeping": 9,
+      "holding": 1
+     },
+     "seconds": 2.42,
+     "room": "guest-wc",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 29
+     }
+    },
+    {
+     "start_frame": 3360,
+     "end_frame": 3400,
+     "modes": {
+      "walking": 0,
+      "sweeping": 21,
+      "holding": 0
+     },
+     "seconds": 1.75,
+     "room": "guest-wc",
+     "level": "B",
+     "cats": {
+      "wall_dominated": 21
+     }
+    }
+   ]
+  },
+  "dirty-kitchen": {
+   "level": "B",
+   "seconds": 22.1,
+   "cats": {
+    "informative": 0.9396,
+    "wall_dominated": 0.0604,
+    "blocked": 0.0,
+    "backward": 0.0,
+    "outward": 0.0,
+    "dark": 0.0
+   },
+   "full_360": {
+    "coverage_deg": 360,
+    "full": true,
+    "at": [
+     14.37,
+     -23.13
+    ],
+    "seconds_at_spot": 22.1
+   },
+   "no_daylight": false,
+   "seen_share": {
+    "wall": {
+     "total": 0,
+     "seen": 0
+    },
+    "furniture": {
+     "total": 3,
+     "seen": 3
+    },
+    "fixture": {
+     "total": 2,
+     "seen": 1
+    },
+    "dressing": {
+     "total": 0,
+     "seen": 0
+    },
+    "shell": {
+     "total": 2,
+     "seen": 2
+    }
+   },
+   "never_seen": [
+    "nonmodel-ventilation-fitting"
+   ],
+   "features": [
+    {
+     "id": "window-B-dirty-kitchen-0",
+     "kind": "shell",
+     "area_m2": 16.84,
+     "seen_s": 37.5,
+     "min_dist_m": 0.71
+    },
+    {
+     "id": "spec-ramp-wall-infill-3",
+     "kind": "shell",
+     "area_m2": 4.7,
+     "seen_s": 21.67,
+     "min_dist_m": 2.49
+    },
+    {
+     "id": "furn-dk-run",
+     "kind": "furniture",
+     "area_m2": 32.73,
+     "seen_s": 47.33,
+     "min_dist_m": 0.93
+    },
+    {
+     "id": "furn-dk-appliance-bank",
+     "kind": "furniture",
+     "area_m2": 19.01,
+     "seen_s": 22.08,
+     "min_dist_m": 1.72
+    },
+    {
+     "id": "furn-dk-fold",
+     "kind": "furniture",
+     "area_m2": 9.36,
+     "seen_s": 21.42,
+     "min_dist_m": 1.25
+    },
+    {
+     "id": "door-B-kitchen-dirty-kitchen",
+     "kind": "fixture",
+     "area_m2": 5.42,
+     "seen_s": 13.92,
+     "min_dist_m": 1.43
+    },
+    {
+     "id": "nonmodel-ventilation-fitting",
+     "kind": "fixture",
+     "area_m2": 0.27,
+     "seen_s": 0.0,
+     "min_dist_m": null
+    }
+   ],
+   "bad_runs": []
+  }
+ },
+ "subjects": [
+  {
+   "id": "dining-table",
+   "view": "n01-dining-day",
+   "rooms": [
+    "dining"
+   ],
+   "status": "seen",
+   "seconds_visible": 4.58,
+   "seconds_in_frustum": 4.58,
+   "seconds_in_room": 30.5,
+   "best_distance_m": 1.97,
+   "blockers": []
+  },
+  {
+   "id": "k-run",
+   "view": "n03-kitchen-run-evening",
+   "rooms": [
+    "kitchen"
+   ],
+   "status": "seen",
+   "seconds_visible": 7.33,
+   "seconds_in_frustum": 7.33,
+   "seconds_in_room": 17.17,
+   "best_distance_m": 1.11,
+   "blockers": []
+  },
+  {
+   "id": "stair-flight-store",
+   "view": "v29-under-stair-store",
+   "rooms": [
+    "lounge-nook",
+    "stair-b"
+   ],
+   "status": "seen",
+   "seconds_visible": 0.75,
+   "seconds_in_frustum": 3.83,
+   "seconds_in_room": 3.83,
+   "best_distance_m": 2.49,
+   "blockers": [
+    {
+     "id": "stair-main",
+     "hits": 305
+    },
+    {
+     "id": "joinery-understair-cupboard",
+     "hits": 89
+    },
+    {
+     "id": "rail-stair-wall-handrail",
+     "hits": 25
+    },
+    {
+     "id": "slab-GF-floor",
+     "hits": 1
+    }
+   ]
+  },
+  {
+   "id": "stair-landing-store",
+   "view": "v29-under-stair-store",
+   "rooms": [
+    "lounge-nook",
+    "stair-b"
+   ],
+   "status": "seen",
+   "seconds_visible": 0.67,
+   "seconds_in_frustum": 3.83,
+   "seconds_in_room": 3.83,
+   "best_distance_m": 4.2,
+   "blockers": [
+    {
+     "id": "stair-main",
+     "hits": 628
+    },
+    {
+     "id": "joinery-understair-cupboard",
+     "hits": 242
+    },
+    {
+     "id": "furn-stair-flight-store",
+     "hits": 9
+    },
+    {
+     "id": "slab-GF-floor",
+     "hits": 1
+    }
+   ]
+  },
+  {
+   "id": "gwc-wc",
+   "view": "n08-guest-wc-evening",
+   "rooms": [
+    "guest-wc"
+   ],
+   "status": "seen",
+   "seconds_visible": 2.08,
+   "seconds_in_frustum": 2.08,
+   "seconds_in_room": 10.83,
+   "best_distance_m": 2.83,
+   "blockers": []
+  },
+  {
+   "id": "gwc-basin",
+   "view": "n08-guest-wc-evening",
+   "rooms": [
+    "guest-wc"
+   ],
+   "status": "seen",
+   "seconds_visible": 2.33,
+   "seconds_in_frustum": 2.33,
+   "seconds_in_room": 10.83,
+   "best_distance_m": 1.69,
+   "blockers": []
+  },
+  {
+   "id": "dk-run",
+   "view": "n09-dirty-kitchen-day",
+   "rooms": [
+    "dirty-kitchen"
+   ],
+   "status": "seen",
+   "seconds_visible": 10.25,
+   "seconds_in_frustum": 10.25,
+   "seconds_in_room": 22.08,
+   "best_distance_m": 2.5,
+   "blockers": []
+  },
+  {
+   "id": "dining-sideboard",
+   "view": "n20-dining-side-day",
+   "rooms": [
+    "dining",
+    "dining-side"
+   ],
+   "status": "seen",
+   "seconds_visible": 3.58,
+   "seconds_in_frustum": 3.58,
+   "seconds_in_room": 34.58,
+   "best_distance_m": 2.01,
+   "blockers": []
+  },
+  {
+   "id": "study-desk",
+   "view": "n11-study-desks-day",
+   "rooms": [
+    "study-game"
+   ],
+   "status": "seen",
+   "seconds_visible": 3.33,
+   "seconds_in_frustum": 3.33,
+   "seconds_in_room": 21.75,
+   "best_distance_m": 1.54,
+   "blockers": []
+  },
+  {
+   "id": "study-adult-desk",
+   "view": "n11-study-desks-day",
+   "rooms": [
+    "study-game"
+   ],
+   "status": "seen",
+   "seconds_visible": 5.0,
+   "seconds_in_frustum": 5.0,
+   "seconds_in_room": 21.75,
+   "best_distance_m": 2.27,
+   "blockers": []
+  },
+  {
+   "id": "study-sofa",
+   "view": "n12-study-sofa-evening",
+   "rooms": [
+    "study-game"
+   ],
+   "status": "seen",
+   "seconds_visible": 9.83,
+   "seconds_in_frustum": 10.5,
+   "seconds_in_room": 21.75,
+   "best_distance_m": 2.54,
+   "blockers": [
+    {
+     "id": "nonmodel-wardrobe-contents",
+     "hits": 8
+    }
+   ]
+  },
+  {
+   "id": "pb-bed",
+   "view": "n13-parents-day",
+   "rooms": [
+    "parents-bed",
+    "parents-entry"
+   ],
+   "status": "seen",
+   "seconds_visible": 8.33,
+   "seconds_in_frustum": 8.33,
+   "seconds_in_room": 18.42,
+   "best_distance_m": 3.0,
+   "blockers": []
+  },
+  {
+   "id": "pd-hang-2",
+   "view": "n14-dressing-his-evening",
+   "rooms": [
+    "parents-dressing",
+    "parents-dressing-ext"
+   ],
+   "status": "seen",
+   "seconds_visible": 7.67,
+   "seconds_in_frustum": 7.67,
+   "seconds_in_room": 10.75,
+   "best_distance_m": 2.25,
+   "blockers": []
+  },
+  {
+   "id": "pe-bath",
+   "view": "n15-ensuite-bath-evening",
+   "rooms": [
+    "parents-ensuite"
+   ],
+   "status": "seen",
+   "seconds_visible": 1.33,
+   "seconds_in_frustum": 1.33,
+   "seconds_in_room": 4.33,
+   "best_distance_m": 2.4,
+   "blockers": []
+  },
+  {
+   "id": "pe-basin",
+   "view": "n16-ensuite-basin-day",
+   "rooms": [
+    "parents-ensuite"
+   ],
+   "status": "seen",
+   "seconds_visible": 0.25,
+   "seconds_in_frustum": 0.25,
+   "seconds_in_room": 4.33,
+   "best_distance_m": 1.87,
+   "blockers": []
+  },
+  {
+   "id": "fb-basin",
+   "view": "n17-family-bath-basin-day",
+   "rooms": [
+    "family-bath"
+   ],
+   "status": "seen",
+   "seconds_visible": 2.0,
+   "seconds_in_frustum": 2.0,
+   "seconds_in_room": 17.75,
+   "best_distance_m": 1.2,
+   "blockers": []
+  }
+ ],
+ "bad_runs": [
+  {
+   "start_frame": 3166,
+   "end_frame": 3204,
+   "modes": {
+    "walking": 0,
+    "sweeping": 20,
+    "holding": 0
+   },
+   "seconds": 1.67,
+   "room": "kitchen",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 11,
+    "blocked": 9
+   }
+  },
+  {
+   "start_frame": 3298,
+   "end_frame": 3354,
+   "modes": {
+    "walking": 19,
+    "sweeping": 9,
+    "holding": 1
+   },
+   "seconds": 2.42,
+   "room": "guest-wc",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 29
+   }
+  },
+  {
+   "start_frame": 3360,
+   "end_frame": 3400,
+   "modes": {
+    "walking": 0,
+    "sweeping": 21,
+    "holding": 0
+   },
+   "seconds": 1.75,
+   "room": "guest-wc",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 21
+   }
+  },
+  {
+   "start_frame": 4270,
+   "end_frame": 4334,
+   "modes": {
+    "walking": 0,
+    "sweeping": 33,
+    "holding": 0
+   },
+   "seconds": 2.75,
+   "room": "cinema",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 33
+   }
+  },
+  {
+   "start_frame": 4618,
+   "end_frame": 4642,
+   "modes": {
+    "walking": 11,
+    "sweeping": 1,
+    "holding": 1
+   },
+   "seconds": 1.08,
+   "room": "store-ramp",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 13
+   }
+  },
+  {
+   "start_frame": 5758,
+   "end_frame": 5786,
+   "modes": {
+    "walking": 15,
+    "sweeping": 0,
+    "holding": 0
+   },
+   "seconds": 1.25,
+   "room": "lounge",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 15
+   }
+  },
+  {
+   "start_frame": 5890,
+   "end_frame": 5924,
+   "modes": {
+    "walking": 18,
+    "sweeping": 0,
+    "holding": 0
+   },
+   "seconds": 1.5,
+   "room": "stair-b",
+   "level": "B",
+   "cats": {
+    "wall_dominated": 10,
+    "blocked": 8
+   }
+  },
+  {
+   "start_frame": 5958,
+   "end_frame": 5994,
+   "modes": {
+    "walking": 19,
+    "sweeping": 0,
+    "holding": 0
+   },
+   "seconds": 1.58,
+   "room": "stair-gf",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 19
+   }
+  },
+  {
+   "start_frame": 6824,
+   "end_frame": 6944,
+   "modes": {
+    "walking": 20,
+    "sweeping": 40,
+    "holding": 1
+   },
+   "seconds": 5.08,
+   "room": "gallery-end",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 61
+   }
+  },
+  {
+   "start_frame": 7230,
+   "end_frame": 7264,
+   "modes": {
+    "walking": 0,
+    "sweeping": 18,
+    "holding": 0
+   },
+   "seconds": 1.5,
+   "room": "family-bath",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 18
+   }
+  },
+  {
+   "start_frame": 7328,
+   "end_frame": 7406,
+   "modes": {
+    "walking": 0,
+    "sweeping": 40,
+    "holding": 0
+   },
+   "seconds": 3.33,
+   "room": "family-bath",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 40
+   }
+  },
+  {
+   "start_frame": 7450,
+   "end_frame": 7482,
+   "modes": {
+    "walking": 0,
+    "sweeping": 17,
+    "holding": 0
+   },
+   "seconds": 1.42,
+   "room": "family-bath",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 17
+   }
+  },
+  {
+   "start_frame": 7546,
+   "end_frame": 7584,
+   "modes": {
+    "walking": 20,
+    "sweeping": 0,
+    "holding": 0
+   },
+   "seconds": 1.67,
+   "room": "family-bath",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 13,
+    "blocked": 7
+   }
+  },
+  {
+   "start_frame": 7716,
+   "end_frame": 7770,
+   "modes": {
+    "walking": 23,
+    "sweeping": 5,
+    "holding": 0
+   },
+   "seconds": 2.33,
+   "room": "corridor",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 28
+   }
+  },
+  {
+   "start_frame": 7834,
+   "end_frame": 7864,
+   "modes": {
+    "walking": 8,
+    "sweeping": 6,
+    "holding": 2
+   },
+   "seconds": 1.33,
+   "room": "kids-a",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 16
+   }
+  },
+  {
+   "start_frame": 8368,
+   "end_frame": 8424,
+   "modes": {
+    "walking": 0,
+    "sweeping": 29,
+    "holding": 0
+   },
+   "seconds": 2.42,
+   "room": "kids-b",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 29
+   }
+  },
+  {
+   "start_frame": 8632,
+   "end_frame": 8688,
+   "modes": {
+    "walking": 29,
+    "sweeping": 0,
+    "holding": 0
+   },
+   "seconds": 2.42,
+   "room": "kids-b",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 29
+   }
+  },
+  {
+   "start_frame": 8820,
+   "end_frame": 8844,
+   "modes": {
+    "walking": 10,
+    "sweeping": 2,
+    "holding": 1
+   },
+   "seconds": 1.08,
+   "room": "parents-bed",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 13
+   }
+  },
+  {
+   "start_frame": 9240,
+   "end_frame": 9268,
+   "modes": {
+    "walking": 10,
+    "sweeping": 4,
+    "holding": 1
+   },
+   "seconds": 1.25,
+   "room": "parents-dressing",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 15
+   }
+  },
+  {
+   "start_frame": 9418,
+   "end_frame": 9448,
+   "modes": {
+    "walking": 7,
+    "sweeping": 8,
+    "holding": 1
+   },
+   "seconds": 1.33,
+   "room": "parents-dressing",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 16
+   }
+  },
+  {
+   "start_frame": 9490,
+   "end_frame": 9540,
+   "modes": {
+    "walking": 14,
+    "sweeping": 10,
+    "holding": 2
+   },
+   "seconds": 2.17,
+   "room": "parents-ensuite",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 26
+   }
+  },
+  {
+   "start_frame": 9544,
+   "end_frame": 9570,
+   "modes": {
+    "walking": 0,
+    "sweeping": 7,
+    "holding": 7
+   },
+   "seconds": 1.17,
+   "room": "parents-ensuite",
+   "level": "GF",
+   "cats": {
+    "wall_dominated": 14
+   }
+  }
+ ],
+ "calibration": {
+  "interior_all": {
+   "n": 4786,
+   "informative": 0.7202,
+   "wall_dominated": 0.1383,
+   "blocked": 0.0061,
+   "backward": 0.001,
+   "outward": 0.0,
+   "dark": 0.1344
+  },
+  "lead_sampling_every_6s": {
+   "n": 67,
+   "informative": 0.7164,
+   "wall_dominated": 0.1343,
+   "blocked": 0.0,
+   "backward": 0.0149,
+   "outward": 0.0,
+   "dark": 0.1343
+  },
+  "interior_all_v1_registered": {
+   "n": 4786,
+   "informative": 0.9104,
+   "wall_dominated": 0.0677,
+   "blocked": 0.0061,
+   "backward": 0.001,
+   "outward": 0.0,
+   "dark": 0.0148
+  },
+  "lead_sampling_every_6s_v1_registered": {
+   "n": 67,
+   "informative": 0.8955,
+   "wall_dominated": 0.0746,
+   "blocked": 0.0,
+   "backward": 0.0149,
+   "outward": 0.0,
+   "dark": 0.0149
+  },
+  "wall_threshold_sensitivity": {
+   "wall_near_share>=0.4": 0.1402,
+   "wall_near_share>=0.5": 0.0738,
+   "wall_near_share>=0.6": 0.0251
+  },
+  "lead_counts_by_eye": {
+   "wall_dominated": 0.3,
+   "near_black": 0.12,
+   "good": 0.4
+  }
+ },
+ "limits": [
+  "Geometry is the scene meshes (imported furniture appears as its stand-in/evaluated meshes in the scene file); curtains and cloth are included only if present as meshes.",
+  "Glass is see-through for coverage. Features inside closed cupboards are reported never-seen.",
+  "dark is a proxy (room with no glazing under one house-wide day exposure), not a lux measurement."
+ ]
+}

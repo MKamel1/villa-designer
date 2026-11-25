@@ -195,3 +195,23 @@ a hold looking at the room's best view; shorten the pan to the glass width; a di
 
 **Final-render estimate (not started).** Measured earlier on this scene: 1080p, 64 spp, 12.07 s/frame (3 frames, shared GPU, per-render-call export). With the animation render the per-call export drops out; the Cycles preview ran about 0.5 s/frame at 480x270 16 spp alone,
 so a 1080p 64 spp frame is estimated at about 8-12 s. 16,091 frames = **36-54 GPU-hours** at 24 fps (18-27 h at every 2nd frame, 12 fps), plus the 337-frame exposure metering (about 40 min) and QA/encode. Not scheduled.
+
+
+# Revision 4 (2026-11-24): coverage-driven route, 16 mm small rooms, re-audit (villa8)
+
+Resumed after the client's "too much redundancy" feedback (docs/decisions/walkthrough-2026-11-24.md). Chain: `scripts/wt_chain.sh` (lens rooms -> select -> order -> prune -> aim -> plan -> measure -> audit); render chain `scripts/wt_render8.sh` (jobq job `wt8-render`).
+
+**Route:** 398.8 s (was 670.5 s in version 2, 537 s in the previous revision). **Redundant seconds** (rule: a second showing < 1.0 m2 of surface not shown by any earlier informative frame; `wt_cover.py measure`): **438 s -> 180 s** (65 % -> 45 %). Unique surface shown 1712 m2.
+By phase: walk 143 s (53 redundant), turn 207 s (99), garden pan 41 s (25: the pans show the garden, which the surface-cell measure does not count), flight 8.5 s (4).
+**Stops:** 11 full 360s (living, lounge, dirty-kitchen, cinema, store-ramp, study, kids-b, family-bath, parents-dressing, ...) and 22 arcs; the basement open plan is the living 360 plus short arcs (was 14 turns).
+**What changed this revision:**
+* `wt_cover.py sweep` -> `tour-sweep.json`: new surface per 30-degree heading of each 360 in route order. Headings adding < 0.5 m2 are swept at the fast rate (44 deg/s) and a best view that adds nothing is a 0.4 s glance, not a 1.5 s hold.
+* Arc minimum raised 6 -> 10 m2 (policy). Arc sweep direction now chosen by least total turning (an arc turned 384 deg before; test `one_360_per_connected_space...`).
+* **Completeness fill** in `select`: a room under 80 % of its coverable surface gets the arcs that add most inside it whatever the minimum (guest WC, ensuite, were never entered by the pruned route). Rooms never entered now: bar-alcove, kitchen-island, lounge-nook, pantry (seen from their connected space, 97-100 % of their surface).
+* Vanity-chair ban 1.0 -> 1.6 m (the parents'-bed walk clipped it: admission failed 13 frames); local admission (`wt_admit.py`) and the real assembly admission: **0 failures**.
+* 16 mm rooms (rule: >= 25 % wall-dominated at 24 mm in the audit of the earlier route; `lens-rooms.json`): bar-alcove, cinema, corridor, dirty-kitchen, family-bath, gallery-end, guest-wc, hall-b, kids-a, kids-b, kitchen-island, landing-gf, pantry, parents-dressing, parents-dressing-ext, parents-ensuite, parents-entry, store-ramp. Ease 1.25 s smoothstep, caption "16 mm wide lens: small room"; tests for no focal step and caption exactly when focal < 24 mm already in `tests/test_walkthrough_tour.py`.
+
+## Audit (`knowledge/flyaudit/wt-villa8-tour/`, route sha of villa8)
+Wall-dominated share of frames, overall **30 % -> 13.8 %** (sweep 13 %, walking 18 %, holding 8 %). **Target <= 10 % NOT met**; no single bad run > 1 s outside the 360s NOT met: 9 runs, 15 s in total, all walking: guest-wc 1.7 s, lounge 1.25, stair foot (stair-b) 1.5, stair top (stair-gf) 1.6, gallery-end 1.75, family-bath 1.7, corridor 1.9, kids-b 2.4, ensuite 1.25. Causes from the audit's ray data: 1.3 m corridors and door approaches where every heading within 88 deg of travel is within 1.2 m of a wall (the aim search was widened to +-110 deg offset / 88 deg of travel with no change); at the flight the camera sees the landing floor slab at 0.5 m (a floor, not a wall: the audit's "near" rule counts it). The remaining wall share is concentrated in the tiny rooms that the completeness fill now enters (ensuite 77 %, family-bath 45 %, guest WC 44 %, gallery 53 %, corridor 35 %), which is the price of showing them; the earlier 7-rooms-skipped route scored 11 %.
+Per room wall share before (revision-1 route) -> after: ensuite .66->.77, gallery-end .49->.53, family-bath .56->.45, guest-wc .82->.44, corridor .41->.35, parents-dressing .66->.32, stair-gf .34->.28, kids-a .43->.27, kids-b .55->.22, stair-b .20, hall-b .41->.18, cinema .32->.15, store-ramp .34->.11, parents-bed .03->.11, landing-gf .50->.06, dirty-kitchen .32->.06, family .22->.03, study .16->0, living/dining/entry/dining-side 0.
+Full-360 rule (audit, 342 deg): rooms with a 360 by the one-per-space rule; the per-room table is in `rooms.md`.
