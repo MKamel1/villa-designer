@@ -12,6 +12,7 @@ suite (project waiver already recorded in villa_furnish._route_problems). Achiev
 disc that can travel the route (clearance field at CELL resolution, so +-CELL/2)."""
 import heapq
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -32,6 +33,16 @@ def _measured_duvets():
             for b in json.loads(p.read_text())["boxes"] if b["id"].startswith("cloth-duvet-")}
 
 
+def _measured_curtains():
+    """[(room, x0, y0, x1, y1)] of the evaluated curtain stacks (WT assembly measurement)."""
+    p = ROOT / "knowledge/flythrough/evaluated-obstacles.json"
+    out = []
+    for b in (json.loads(p.read_text())["boxes"] if p.exists() else []):
+        if b["id"].startswith("curtain-") and b["hi"][2] > 0.3 and b["lo"][2] > -0.5:
+            out.append((re.match(r"curtain-(.+?)-\d\d-", b["id"]).group(1), b["lo"][0], b["lo"][1], b["hi"][0], b["hi"][1]))
+    return out
+
+
 def staged_items(lay, items=None, dressed=False):
     """The plan pieces plus what stands loose around them: chairs/stools as world boxes (`extras`, honouring each
     piece's own staging). dressed=True also adds each bed's duvet envelope (measured where the walkthrough measured it,
@@ -40,6 +51,10 @@ def staged_items(lay, items=None, dressed=False):
     items = list(items if items is not None else F.layout(lay))
     duvets = _measured_duvets()
     out = []
+    if dressed:
+        for k, (room, x0, y0, x1, y1) in enumerate(_measured_curtains()):
+            out.append(dict(id="curtain-%d" % k, room=room, level="GF", type="curtain", h=2.3, cx=(x0 + x1) / 2,
+                            cy=(y0 + y1) / 2, w=x1 - x0, d=y1 - y0, rot=0))
     for it in items:
         out.append(it)
         if dressed and it["type"].startswith("bed_"):
