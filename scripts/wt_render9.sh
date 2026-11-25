@@ -2,7 +2,7 @@
 set -e
 cd /home/omar/archpipe/lanes/WT
 PY=/home/omar/archpipe/envs/laneP-venv/bin/python
-O=${1:-/home/omar/archpipe/lanes/WT/out/wt/villa9b}
+O=${1:-/home/omar/archpipe/lanes/WT/out/wt/villa9c}
 B=src/archpipe/blender/walkthrough.py
 blender -b -t 8 --python-exit-code 1 -P $B -- --root $O --stage workbench --animation
 $PY scripts/flythrough.py contact --stage workbench --every 48 --out $O
