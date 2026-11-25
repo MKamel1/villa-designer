@@ -337,7 +337,7 @@ def depth_samples(camera,grid,far=40.):
                 ev=obj.evaluated_get(deps).data if obj.type=='MESH' else None      # the face index belongs to the evaluated mesh
                 slot=ev.polygons[face].material_index if ev is not None and 0<=face<len(ev.polygons) else -1
                 mat=ev.materials[slot] if ev is not None and 0<=slot<len(ev.materials) else None
-                if 'glass' in obj.name.lower() or (mat is not None and 'glass' in mat.name.lower()):
+                if obj.hide_render or 'glass' in obj.name.lower() or (mat is not None and 'glass' in mat.name.lower()):   # ray_cast ignores hide_render: the hidden closed curtains were hit at 0.6 m
                     o=loc+d*1e-3;travelled+=1e-3;continue
                 hit_ok=True;break
             depth.append(travelled if hit_ok else far);pts.append(list(loc) if hit_ok else [0,0,0]);nor.append(list(n) if hit_ok else [0,0,1])
@@ -419,6 +419,51 @@ def workbench(args,path,scene,context):
     print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
 
 
+def lookdev(args,path,scene,context):
+    """Low-sample Cycles preview as ONE animation render per arithmetic run of frames.
+
+    The interior exposure lock, lights and emissives are identical for every frame, and a render call per frame
+    re-exports the whole scene (3-6 s of a 2 s render), so the camera is keyframed and the engine keeps its scene
+    (persistent data). Same Cycles settings, lock, seed and tone map as `render_frames`; per-frame receipts are
+    written afterwards (path hash, PNG hash, mean render seconds). No per-frame render_qa here: a draft."""
+    out=Path(args.root)/'lookdev';out.mkdir(parents=True,exist_ok=True)
+    views=frame_views(path,scene);resolution=path['settings']['preview']['resolution'];samples=path['settings']['preview'].get('samples',16)
+    indices=[int(i) for i in args.frames.split(',')] if args.frames else [f['index'] for f in path['frames']]
+    todo=[i for i in indices if not (out/f'frame-{i:04d}.png').exists()]
+    if not todo:print('WALKTHROUGH lookdev nothing to do',flush=True);return
+    lock=load_lock(args,path,path['frames'][todo[0]])
+    camera,pitch,emissive=setup(scene,context,views[todo[0]])
+    s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=resolution;s.render.resolution_percentage=100
+    s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
+    s.cycles.seed=0;s.cycles.use_animated_seed=False;s.render.use_persistent_data=True
+    s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=lock['exposure_stops']
+    V.photoreal.white_balance(lock['white_balance_k'],illuminant=lock['white_balance_illuminant'])
+    s.render.image_settings.file_format='PNG';s.render.image_settings.color_depth='8'
+    camera.animation_data_clear()
+    for i in todo:
+        place_camera(camera,views[i]['camera'])
+        for prop in ('location','rotation_euler'):camera.keyframe_insert(prop,frame=i)
+        camera.data.keyframe_insert('shift_y',frame=i)
+    for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
+        for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+    runs=[];a=b=todo[0];step=None
+    for i in todo[1:]:
+        if step is None and i>b:step=i-b
+        if step is not None and i==b+step:b=i
+        else:runs.append((a,b,step or 1));a=b=i;step=None
+    runs.append((a,b,step or 1))
+    s.render.filepath=str(out/'frame-####');started=time.monotonic()
+    for a,b,step in runs:
+        s.frame_start,s.frame_end,s.frame_step=a,b,step;bpy.ops.render.render(animation=True)
+        print('WALKTHROUGH lookdev run',a,b,step,round(time.monotonic()-started),'s',flush=True)
+    each=(time.monotonic()-started)/len(todo)
+    for i in todo:
+        png=out/f'frame-{i:04d}.png'
+        save(png.with_suffix('.json'),dict(path_sha256=path['sha256'],lock_sha256=lock['sha256'],samples=samples,resolution=resolution,
+             render_seconds=each,png_sha256=hashlib.sha256(png.read_bytes()).hexdigest(),index=i,render_device=context['render_device']))
+    print('WALKTHROUGH lookdev done',len(todo),'frames',round(each,2),'s/frame',flush=True)
+
+
 def measure_static_coverage(args,path,scene,context):
     """Early real-scene diagnostic; no exposure selection or presentation."""
     out=Path(args.root)/'coverage';out.mkdir(exist_ok=True)
@@ -454,7 +499,7 @@ def measure_static_coverage(args,path,scene,context):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--root',required=True)
-    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','workbench','sampling','reference','final'],required=True)
+    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','workbench','lookdev','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
     parser.add_argument('--frames');parser.add_argument('--segments')
     parser.add_argument('--target-stage');parser.add_argument('--metrics-only',action='store_true');parser.add_argument('--out-name');parser.add_argument('--opengl',action='store_true');parser.add_argument('--cull',type=float,default=0.);parser.add_argument('--animation',action='store_true')
@@ -487,6 +532,7 @@ def main():
         if args.stage=='coverage':measure_static_coverage(args,path,scene,context)
         elif args.stage=='exposure':measure(args,path,scene,context)
         elif args.stage=='workbench':workbench(args,path,scene,context)
+        elif args.stage=='lookdev':lookdev(args,path,scene,context)
         else:render_frames(args,path,scene,context)
 
 

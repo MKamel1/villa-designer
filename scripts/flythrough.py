@@ -261,8 +261,9 @@ def report(out):
     from archpipe import walkthrough_tour as WT
     path=require_inputs(out);rule=WT.informative_rule()
     wb=out/'workbench'/path['sha256'][:10]
-    rows={r['index']:r for r in json.loads((wb/'metrics.json').read_text())}
-    for extra in sorted((out/'workbench').glob('pan*/metrics.json')):   # re-measured subsets (glass classified by material) override
+    final=out/'workbench'/'metrics2'/'metrics.json'      # full re-measure with hidden objects and glass skipped
+    rows={r['index']:r for r in json.loads((final if final.exists() else wb/'metrics.json').read_text())}
+    for extra in ([] if final.exists() else sorted((out/'workbench').glob('pan*/metrics.json'))):   # re-measured subsets (glass classified by material) override
         rows.update({r['index']:r for r in json.loads(extra.read_text())})
     rows=[rows[k] for k in sorted(rows)];phase={f['index']:f['phase'] for f in path['frames']}
     flagged={s['room'] for s in path['stations'] if s.get('flagged_under_1m')}
