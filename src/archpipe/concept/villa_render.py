@@ -1299,7 +1299,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
 
     # rugs (design: soft floor where people sit)
     for rid, anchor, (w, d) in (("lounge", "lounge-coffee", (3.1, 2.0)), ("living", "living-coffee", (2.6, 2.4)),
-                                ("parents-bed", "pb-bed", (2.2, 2.6)), ("kids-a", "ka-bunk", (1.4, 2.0))):
+                                ("parents-bed", "pb-bed", (2.2, 2.6))):
         q = F.footprint(it[anchor])
         cx, cy = (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
         z = LZ[lay["rooms"][rid]["level"]] + 0.012
@@ -1387,10 +1387,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     garment_modules = []
     notes.append("Dressing contents: owned procedural appearances; colours, spacing, forms and unsourced "
                  "drops ASSUMED. Neufert 1980 p.74 Fig.6 dress/jacket drops. Closed drawers retain hidden contents.")
-    for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-bunk", "bedding-white")):
+    for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-loft-1", "bedding-white"),
+                      ("ka-loft-2", "bedding-white")):
         b_ = it[bid]
         q = F.footprint(b_)
-        z = LZ["GF"] + (0.40 if b_["h"] >= 1.5 else b_["h"])
+        z = LZ["GF"] + (b_["mattress_top"] if b_.get("loft") else 0.40 if b_["h"] >= 1.5 else b_["h"])
         if b_["rot"] in (0, 180):
             head = q[1] if b_["rot"] == 0 else q[3]
             s_ = 1 if b_["rot"] == 0 else -1
@@ -1466,7 +1467,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                               center=throw_center, size=throw_size, z_start=round(z + 0.22, 3),
                               frames=40, mass=0.8, bending=4.0, thickness=0.012,
                               label="dressing: woven bed throw (cloth)"))
-        if bunk:                                           # the upper bunk has its own duvet
+        if bunk and not b_.get("loft"):                    # the upper bunk has its own duvet
             cloth.append(dict(id="duvet-" + bid + "-upper", material=duvet, colliders=["furn-" + bid + "-"],
                               center=center, size=size, z_start=round(LZ["GF"] + 1.40 + 0.08, 3), pin=pin,
                               frames=60, mass=0.4, bending=0.6, loft=0.018, thickness=0.05, cut=cut, bunk=True,
@@ -2995,7 +2996,7 @@ def _VIEWS(lay=None, resolve=True):
       room="study-game")
     v("v05-parents-bedroom", "Parents' bedroom", "evening", I, I, 24, ["pb-bed"], room="parents-bed",
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
-    v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-bunk", "ka-desk-1"], room="kids-a")
+    v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-loft-1", "ka-loft-2", "ka-desk-1"], room="kids-a")
     v("v07-terrace-dusk", "South garden pergola and retained frangipani at dusk", "exterior-dusk", [28.1, -20.81, B + 1.35], [25.6363, -25.1509, B + 1.35],
       24, ["landscape-tree-south", "living-sofa"], shift_y=0.073, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})

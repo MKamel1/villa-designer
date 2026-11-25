@@ -88,6 +88,32 @@ def _stool(xc, y0, y1, seat=0.65):
             ("seat", (xc - 0.19, y0 + 0.01, seat - 0.05, xc + 0.19, y1 - 0.01, seat))]
 
 
+def loft_parts(it):
+    """A loft bed (client 2026-11-25; product basis IKEA SMASTAD 504.540.36: frame 205 x 104, clear height under 142 cm,
+    overall 182 cm, mattress 90 x 200, <= 20 cm thick): oak posts and side rails, slat base at `under`, a 150 mm mattress
+    to `mattress_top`, guard boards up to `rail_top` on the wall side, both ends and the room side except the ladder gap,
+    and a vertical ladder on the room side (+x) at the foot end (`ladder_at` +y / -y). Local x: wall side -x, room side +x."""
+    W, D = it["w"], it["d"]
+    x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    z_base, z_mat, z_rail = it["under"], it["mattress_top"], it["rail_top"]
+    sgn = 1 if it["ladder_at"] == "+y" else -1                       # the foot (ladder) end
+    ye = yf if sgn > 0 else yb
+    gap = (ye - 0.50 * sgn, ye - 0.04 * sgn)                         # the 0.46 m ladder opening in the room-side rail
+    glo, ghi = sorted(gap)
+    p = [("post", (sx * (W / 2 - 0.03) - 0.03, sy * (D / 2 - 0.03) - 0.03, 0, sx * (W / 2 - 0.03) + 0.03,
+                   sy * (D / 2 - 0.03) + 0.03, z_rail)) for sx in (-1, 1) for sy in (-1, 1)]
+    p += [("frame", (x0, yb, z_base, x0 + 0.04, yf, z_base + 0.06)), ("frame", (x1 - 0.04, yb, z_base, x1, yf, z_base + 0.06)),
+          ("frame", (x0, yb, z_base, x1, yb + 0.04, z_base + 0.06)), ("frame", (x0, yf - 0.04, z_base, x1, yf, z_base + 0.06)),
+          ("slats", (x0 + 0.04, yb + 0.04, z_base + 0.03, x1 - 0.04, yf - 0.04, z_base + 0.06)),
+          ("mattress", (x0 + 0.07, yb + 0.025, z_base + 0.06, x1 - 0.07, yf - 0.025, z_mat))]
+    p += [("rail", (x0, yb, z_mat, x0 + 0.03, yf, z_rail)),                          # wall side
+          ("rail", (x0, yb, z_mat, x1, yb + 0.03, z_rail)), ("rail", (x0, yf - 0.03, z_mat, x1, yf, z_rail)),   # both ends
+          ("rail", (x1 - 0.03, yb, z_mat, x1, glo, z_rail)), ("rail", (x1 - 0.03, ghi, z_mat, x1, yf, z_rail))]  # room side
+    p += [("ladder-stile", (x1 - 0.045, y - 0.02, 0, x1, y + 0.02, z_mat)) for y in (glo + 0.03, ghi - 0.03)]
+    p += [("ladder-rung", (x1 - 0.04, glo + 0.03, z, x1, ghi - 0.03, z + 0.03)) for z in (0.28, 0.56, 0.84, 1.12, 1.40)]
+    return p
+
+
 def body(it):
     """The piece's own parts [(name, local box)], all inside the footprint (x in +-w/2, y in +-d/2)."""
     W, D, H, t = it["w"], it["d"], it["h"], it["type"]
@@ -99,6 +125,8 @@ def body(it):
                 ("nook-side", (x0, yb, 0, x0 + 0.025, yf, it["nook_top"])),
                 ("nook-side", (x1 - 0.025, yb, 0, x1, yf, it["nook_top"])),
                 ("nook-top", (x0, yb, it["nook_top"] - 0.025, x1, yf, it["nook_top"]))]
+    if t.startswith("bed_") and it.get("loft"):
+        return loft_parts(it)
     if t.startswith("bed_"):
         if H >= 1.5:                                                # a bunk bed
             p = [("post", (sx * W / 2 - (0.06 if sx > 0 else 0), sy * D / 2 - (0.06 if sy > 0 else 0), 0,

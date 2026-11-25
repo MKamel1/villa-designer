@@ -245,7 +245,7 @@ def sightlines(v) -> list[dict]:
 # bed -> (room, head end, eye height above the floor). Head ends from the furnishing spec: the parents' bed head is on the north
 # wall (wall reading lights at its head), kids' B "head to the west wall"; the bunk's is not declared, so both ends are tested.
 # Eye heights: 0.7 m on a 0.5 m bed (as the reclined sightline above); upper berth 1.5 m (ASSUMED: furnishing h = 1.7 m).
-BEDS = {"pb-bed": ("parents-bed", ("min-y",), 0.7), "kb-bed": ("kids-b", ("min-x",), 0.7), "ka-bunk": ("kids-a", ("min-y", "max-y"), 1.5)}
+BEDS = {"pb-bed": ("parents-bed", ("min-y",), 0.7), "kb-bed": ("kids-b", ("min-x",), 0.7), "ka-loft-1": ("kids-a", ("min-y",), 1.83), "ka-loft-2": ("kids-a", ("max-y",), 1.83)}   # loft 1 head south, loft 2 head north (rot 180); eye 0.2 m over the 1.63 m mattress top (client 2026-11-25)
 PILLOW_OFFSET = 0.4      # m from the head end to the eye of a person lying on the pillow
 
 
