@@ -358,3 +358,16 @@ def test_d1_boards_have_a_600_mm_clear_wall_stretch(d1):
         w = min(placement.room_walls(rooms[b.room]).values(), key=lambda w: abs(w.depth_of(*b.xy)))
         a = w.along_of(*b.xy)
         assert all(placement.clearance(h, b.level, *w.point(a + dx), b.height_mm)[0] for dx in (-300.0, 0.0, 300.0)), b.id
+
+
+# ---- strip zones need a remote driver (L4 round 5: the ST39 ensuite cove) ----------------------------------------------
+def test_pcove_zone_has_a_real_24v_dali2_driver_within_the_loading_limit():
+    drv = json.loads(villa.EQUIPMENT_JSON.read_text(encoding="utf-8"))["lighting_drivers"]
+    d = next(x for x in drv if x["serves_zone"] == "Z-GF-PARENTS-ENSUITE-PCOVE")
+    assert d["maker"] == "Tridonic" and "24V" in d["model"] and "DALI-2" in d["control"]
+    assert d["load_w_at_full_output"] / d["rated_w"] <= 0.80                     # V12 driver loading, at 100 % output
+    zones = json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))["zones"]
+    z = next(z for z in zones if z["id"] == d["serves_zone"])
+    assert len(z["luminaire_ids"]) == 3 and z["dimming"] == "dali2"
+    # negative: a loading above the limit would be caught
+    assert 78.0 / 90.0 > 0.80

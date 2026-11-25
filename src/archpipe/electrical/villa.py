@@ -244,6 +244,10 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
     site_rooms["site-garden"] = Room("site-garden", "outdoor", plot, "SITE", 0.0, name="garden")
     for g, (x, y) in zip(eq["garden_sockets"], gx):
         extra.append(Device(f"SOC-site-garden-{g['id']}", "socket", "site-garden", x, y, 400.0, "E11-garden-socket", "", {"ip": "IP66", "rcd": "30 mA", "basis": g["reason"]}))
+    for dr in eq.get("lighting_drivers", []):   # remote 24 V CV DALI-2 driver for a strip zone (L4 round 5: ST39 cove); its load is in the zone's watts
+        r = rooms[dr["room"]]
+        extra.append(Device(dr["id"], "led_driver", r.id, r.rect[0] + 300.0, r.rect[1] + 300.0, 2400.0, "EA3-lighting-driver", "",
+                            {k: dr[k] for k in ("maker", "model", "output", "rated_w", "control", "serves_zone", "load_w_at_full_output", "mounting")}))
     all_rooms = list(rooms.values()) + list(site_rooms.values())
 
     s = eq["supply"]

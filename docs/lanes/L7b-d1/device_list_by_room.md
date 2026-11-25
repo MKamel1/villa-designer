@@ -28,7 +28,7 @@
 | GF | parents-bed | ELV:data x2, ELV:intercom_monitor x1, ELV:smoke x1, lum:accent x1, lum:ambient x1, lum:decorative x3, pow:data x2, pow:isolator_ac x1, pow:socket x9, pow:switch x1 |
 | GF | parents-dressing | ELV:smoke x1, lum:ambient x2, lum:task x5, pow:socket x5, pow:switch x1 |
 | GF | parents-dressing-ext | lum:task x2, pow:switch x1 |
-| GF | parents-ensuite | lum:accent x2, lum:ambient x1, lum:night x1, lum:task x2, pow:fcu x1, pow:switch x1 |
+| GF | parents-ensuite | lum:accent x2, lum:ambient x1, lum:decorative x3, lum:night x1, lum:task x2, pow:fcu x1, pow:led_driver x1, pow:switch x1 |
 | GF | parents-entry | lum:decorative x1, pow:switch x1 |
 | GF | stair-gf | ELV:smoke x1, lum:decorative x3, pow:switch x1 |
 | GF | study-game | ELV:data x5, ELV:smoke x1, ELV:tv_sat x1, lum:ambient x5, pow:data x5, pow:isolator_ac x1, pow:socket x12, pow:switch x1, pow:tv_sat x1 |

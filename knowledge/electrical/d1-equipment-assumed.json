@@ -396,5 +396,21 @@
     "premises": "household",
     "single_phase_limit_a": 63.0,
     "single_phase_limit_note": "policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified"
-  }
+  },
+  "lighting_drivers": [
+    {
+      "id": "DRV-PCOVE-parents-ensuite",
+      "room": "parents-ensuite",
+      "serves_zone": "Z-GF-PARENTS-ENSUITE-PCOVE",
+      "maker": "Tridonic",
+      "model": "LC 100W 24V one4all NF LP EXC2",
+      "output": "24 V DC constant voltage",
+      "rated_w": 100.0,
+      "control": "DALI-2 (listed, DALI Alliance product 9586)",
+      "load_w_at_full_output": 78.0,
+      "basis": "ST39 15 W/m (iGuzzini datasheet) x 5.20 m (3 runs: 1.82 + 1.82 + 1.56 m); loading 0.78 of rated at 100 % output, limit 0.80 (V12); the scenes run the strip at 15 %",
+      "product_source": "https://dali-alliance.org/products/9586/lc-100w-24v-one4all-nf-lp-exc2",
+      "mounting": "remote, in the ceiling void / service zone outside the bath zones (client to confirm location)"
+    }
+  ]
 }
