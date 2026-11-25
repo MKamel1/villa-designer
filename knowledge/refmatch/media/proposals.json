@@ -1,0 +1,178 @@
+{
+ "schema": 1,
+ "room": "media",
+ "concept": "see docs/lanes/RM.md",
+ "proposals": [
+  {
+   "id": "M-P1",
+   "gap": "M-G1",
+   "title": "Frappuccino marble-look panel behind the screen",
+   "location": {
+    "room": "cinema",
+    "wall_or_zone": "east wall behind the screen (x = 9.18)",
+    "rect_m": [
+     -22.9,
+     -20.65
+    ],
+    "z_range_m": [
+     -2.9,
+     -1.1
+    ],
+    "basis": "design model: furn-cinema-tv screen y -22.69..-20.81, z -2.56..-1.50; cinema ceiling slopes 2.0-2.65 m under the ramp"
+   },
+   "change": "A 2.25 m wide x 1.8 m high panel cut from 120 x 120 cm tiles (two columns, two rows; the mock-up draws it as one surface, so tile joints are not shown).",
+   "effect": "Dark Emperador-look wall of reference 35 using the stone the client already chose for the wet rooms.",
+   "product": {
+    "maker": "Marazzi",
+    "range": "Grande Marble Look",
+    "name": "Frappuccino Rettificato Lux",
+    "code": "M0G3",
+    "colour_or_finish": "Frappuccino, Lux, rectified; dark brown marble look with pale veining",
+    "format_mm": {
+     "w": 1200,
+     "l": 1200,
+     "t": 6.5
+    },
+    "maker_url": "https://www.marazzigroup.com/collections/grande-marble-look-collection/",
+    "maker_quote": "GRANDE MARBLE LOOK FRAPPUCCINO RETTIFICATO LUX Size: 120x120cm Code: M0G3 Technology: Colorbody fine porcelain stoneware Thickness: MM 6,5",
+    "colour_source": "maker swatch image grande-marble-look-m0g3 (mean linear 0.082/0.055/0.039)",
+    "label": "look-alike-proxy",
+    "lookalike": "ambientCG Marble007 (CC0), colour-matched to the maker swatch",
+    "consistent_with": "the client's chosen wet-room wall tile (Frappuccino), so the same stone runs from the ensuite to the cinema"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "applied finish over the fabric wall; acoustic fabric behind is lost on this panel (about 4 m2), lead to confirm with the cinema acoustics"
+   }
+  },
+  {
+   "id": "M-P2",
+   "gap": "M-G4",
+   "title": "Walnut slat flank on the north side of the screen wall",
+   "location": {
+    "room": "cinema",
+    "wall_or_zone": "east wall, north of the stone",
+    "rect_m": [
+     -23.55,
+     -22.95
+    ],
+    "z_range_m": [
+     -2.9,
+     -1.1
+    ],
+    "basis": "design model: cinema wall y -23.64..-20.60"
+   },
+   "change": "0.60 m of walnut slat panel beside the stone (mock-up slat 40 mm at 60 mm centres, assumed).",
+   "effect": "Slat-and-stone pairing of references 18 and 32.",
+   "product": {
+    "maker": "WoodUpp",
+    "range": "Akupanel (Natural Wood)",
+    "name": "Akupanel Acoustic Panel, Natural Wood, Walnut, Black Felt, 240 x 60 cm",
+    "colour_or_finish": "Walnut veneer slats on black felt",
+    "format_mm": {
+     "w": 600,
+     "l": 2400
+    },
+    "maker_url": "https://woodupp.com/products/akupanel-acoustic-panel-natural-wood-walnut-black-felt-240-x-60-cm",
+    "maker_quote": "Akupanel | Acoustic Panel Natural Wood, Walnut, Black Felt, 240 x 60 cm",
+    "colour_source": "maker product name (walnut veneer); slat width and pitch are NOT on the page text and are not claimed",
+    "label": "look-alike-proxy",
+    "lookalike": "scene 'walnut' material (EGGER H3180 look-alike, CC0 Wood051)",
+    "consistent_with": "reads as the client's chosen Brown Halifax / walnut joinery; acoustic benefit for the cinema"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "applied finish; the slat panel also absorbs sound"
+   }
+  },
+  {
+   "id": "M-P3",
+   "gap": "M-G3",
+   "title": "Floating walnut console under the screen",
+   "location": {
+    "room": "cinema",
+    "wall_or_zone": "east wall",
+    "rect_m": [
+     -22.95,
+     -20.62
+    ],
+    "z_range_m": [
+     -2.8,
+     -2.45
+    ],
+    "basis": "x 8.74-9.18 (0.44 m deep), 0.20 m off the floor"
+   },
+   "change": "A 2.33 m long, 0.35 m high wall-hung console in the chosen Brown Halifax Oak.",
+   "effect": "References 18, 32, 35.",
+   "product": {
+    "maker": "EGGER",
+    "range": "Feelwood",
+    "name": "H3180 ST37 Brown Halifax Oak",
+    "code": "H3180 ST37",
+    "colour_or_finish": "Brown Halifax Oak, ST37 (dark brown woodgrain)",
+    "maker_url": "https://www.egger.com/en/furniture-interior-design/decors/H3180_37?country=GB",
+    "maker_quote": "The dark brown colour of H3180 Brown Halifax Oak meets the trend for dark woodgrain decors and is reminiscent in terms of colour of the colonial style.",
+    "colour_source": "chosen.json joinery-timber (client palette C, 2026-11-23)",
+    "label": "look-alike-proxy",
+    "lookalike": "scene 'walnut' material",
+    "consistent_with": "the client's chosen parents' bedroom joinery"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "furniture; needs a wall fixing through the fabric"
+   }
+  },
+  {
+   "id": "M-P4",
+   "gap": "M-G2",
+   "title": "Lighting ask: screen halo, console toe glow and stone wash",
+   "location": {
+    "room": "cinema",
+    "wall_or_zone": "east wall: halo 20 mm around the screen (y -22.76..-20.74, z -2.58..-1.44), toe strip under the console (z -2.82), wash from z -1.12",
+    "basis": "design model coordinates above"
+   },
+   "lighting_ask": {
+    "effect": "2700 K, own dimmer, down to near-off for film; halo no brighter than needed to separate the screen from the wall (reference 35); toe glow; grazing wash so the veining reads. Mock-up placeholders 220, 150, 500 lm per run.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Lighting only.",
+   "effect": "The glow of references 32, 34, 35.",
+   "architecture_change": {
+    "flag": false,
+    "note": "none beyond a reveal in the console and panel"
+   }
+  },
+  {
+   "id": "M-P5",
+   "gap": "M-G5",
+   "title": "Lighting ask: backlit shelf niches either side of the screen (not modelled)",
+   "location": {
+    "room": "cinema",
+    "wall_or_zone": "either side of the stone panel",
+    "basis": "needs about 0.25 m of wall depth; the north side is only 0.60 m wide and the south side 0.05 m"
+   },
+   "lighting_ask": {
+    "effect": "2700 K LED line under each shelf, as references 32-35.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Not in the mock-up: the room is 3.04 m wide and the screen wall cannot take shelves on both sides without narrowing the room.",
+   "effect": "Shelf glow of references 32-35.",
+   "architecture_change": {
+    "flag": true,
+    "note": "changes the room's usable width by about 0.25 m; lead must approve"
+   }
+  }
+ ],
+ "mockup": {
+  "scene": "COPY of the render-set scene.json built by scripts/refmatch_build.py; production scene and design model untouched",
+  "exposure": "frozen exposure groups dropped (stale for any geometry change); current and mock-up both use per-state set-metered exposure",
+  "renders": [
+   "mock_v08-cinema.jpg",
+   "cur_v08-cinema.jpg"
+  ]
+ }
+}

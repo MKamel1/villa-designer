@@ -1,0 +1,99 @@
+{
+ "schema": 1,
+ "room": "media",
+ "references": [
+  {
+   "id": "image18",
+   "why": "dark stacked-stone TV wall between vertical wood slats, cove wash on the stone, floating black console"
+  },
+  {
+   "id": "image20",
+   "why": "dark reclaimed-plank TV wall with a floating wood ledge and recessed spots in the soffit"
+  },
+  {
+   "id": "image32",
+   "why": "book-matched beige marble, fluted walnut, backlit shelves, floor LED under console"
+  },
+  {
+   "id": "image33",
+   "why": "grey marble TV wall flanked by backlit shelves, stone and brass tables"
+  },
+  {
+   "id": "image34",
+   "why": "grey marble with gold veins, backlit niches, floor LED, cove (screenshot overlay; not buildable as shown)"
+  },
+  {
+   "id": "image35",
+   "why": "dark Emperador-style marble, backlit shelves, halo around the TV, floating black console"
+  }
+ ],
+ "gaps": [
+  {
+   "id": "M-G1",
+   "rank": 1,
+   "feature": "Book-matched marble or dark stone panel behind the screen",
+   "refs_showing_it": [
+    "image18",
+    "image32",
+    "image33",
+    "image34",
+    "image35"
+   ],
+   "present_in_scene": "no: the cinema walls are taupe acoustic fabric (shell-157); the screen sits on it with no panel",
+   "visual_weight": "high"
+  },
+  {
+   "id": "M-G2",
+   "rank": 2,
+   "feature": "Light on the wall: halo around the screen, glow under the console, wash down the stone",
+   "refs_showing_it": [
+    "image18",
+    "image32",
+    "image34",
+    "image35"
+   ],
+   "present_in_scene": "no: cinema lighting is two downlights, three wall-washers on the west wall and a night line",
+   "visual_weight": "high"
+  },
+  {
+   "id": "M-G3",
+   "rank": 3,
+   "feature": "Floating console under the screen",
+   "refs_showing_it": [
+    "image18",
+    "image20",
+    "image32",
+    "image34",
+    "image35"
+   ],
+   "present_in_scene": "no console in the model: screen only",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "M-G4",
+   "rank": 4,
+   "feature": "Vertical timber slats or flutes flanking the stone",
+   "refs_showing_it": [
+    "image18",
+    "image32",
+    "image34"
+   ],
+   "present_in_scene": "no",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "M-G5",
+   "rank": 5,
+   "feature": "Backlit shelves or niches either side of the screen",
+   "refs_showing_it": [
+    "image32",
+    "image33",
+    "image34",
+    "image35"
+   ],
+   "present_in_scene": "no",
+   "visual_weight": "high but needs wall depth; asked of the lighting lanes and flagged as an architecture change, not modelled"
+  }
+ ],
+ "method": "references read by eye for concrete features, then counted; gaps are features most of the room's references share that the scene lacks"
+}
