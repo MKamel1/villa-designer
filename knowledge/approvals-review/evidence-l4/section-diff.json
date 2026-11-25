@@ -13,9 +13,9 @@
  },
  "architecture": {
   "changed": true,
-  "receipt_component": true,
+  "receipt_component": false,
   "faces_removed": 6,
-  "faces_added": 6,
+  "faces_added": 12,
   "removed_sample": [
    {
     "part_kind": "finish-layer",
@@ -78,6 +78,36 @@
     "part_kind": "finish-layer",
     "host": "villa-shell",
     "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-ensuite"
    }
   ]
  },
@@ -95,7 +125,7 @@
  },
  "materials": {
   "changed": true,
-  "receipt_component": true,
+  "receipt_component": false,
   "added": [
    "brass-ensuite",
    "fin-kitchen-front",
