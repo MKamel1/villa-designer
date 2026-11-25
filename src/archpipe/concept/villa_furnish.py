@@ -241,7 +241,9 @@ def _layout(lay=None, products=True):
     K, KI = r["kitchen"], r["kitchen-island"]
     add(against("k-run", K, "y1", 11.54, "base_run", w=2.01, d=0.6, h=0.9,
                 modules=[("dw", 0.6), ("counter", 0.05), ("sink", 0.9), ("counter", 0.46)],
-                why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
+                wall_units={"z0": 1.50, "z1": 2.00, "depth": 0.30},
+                why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it; "
+                    "client 2026-11-25: wall cupboards above (underside 1.50 m, top 2.00 m, 300 deep)"),
         "kitchen")
     run_front = K[3] - 0.6
     island = item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,

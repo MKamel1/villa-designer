@@ -13,6 +13,8 @@ mapping as in `villa_furnish` (`rot` 0 front +y, 180 front -y, -90 front +x, 90 
 """
 from __future__ import annotations
 
+import math
+
 from . import villa_furnish as F
 
 # where a part may rise above the piece's checked height h (name -> why)
@@ -38,6 +40,10 @@ PLINTH, PLINTH_SET = 0.10, 0.05
 # advisory targets adopted from villa_01_guidelines.docx (K-SPLASH / K-UPPER, K-OVERHANG): sound practice
 SPLASH = 0.60                # worktop to the underside of the wall units (units from 1.50 m)
 OVERHANG = 0.025             # worktop beyond the cabinet face
+# Client 2026-11-25: wall cupboards over the sink run. Underside 1.50 m = worktop 0.90 + K-SPLASH 0.60 (client brief K-UPPER; clear
+# of Neufert 1980 p. Habitat 75 fig. 1 ">= 500" over the worktop and of Mitton & Nystuen 4th ed. p. 121 fig. 5.28 "457 mm
+# recommended minimum above counter"); top 2.00 m = Neufert's 2000 reach line; depth 0.30 = Neufert's 300 (Mitton: 12 in / 305 mm)
+WALL_UNITS = {"z0": 1.50, "z1": 2.00, "depth": 0.30}
 
 
 def to_world(it, b):
@@ -213,6 +219,8 @@ def body(it):
                   ("worktop", (a, yb, COUNTER_TOP - 0.04, b, yf, COUNTER_TOP))]
             if tall_wall:
                 p.append(("wall-units", (a, yb, COUNTER_TOP + SPLASH, b, yb + 0.35, H)))
+        if it.get("wall_units"):
+            p += [("wall-units", (a, yb, w["z0"], b, yb + w["depth"], w["z1"])) for a, b, w in wall_unit_bays(it)]
         return p
     if t in ("bookcase", "pantry_shelving", "store_shelving"):
         if t == "store_shelving" and it.get("soffit") == "ramp":
@@ -311,6 +319,15 @@ def body(it):
                     ("linear-drain", (x1 - 0.04, yb + 0.06, -0.006, x1 - 0.02, yf - 0.06, 0))]
         return [("tray", (x0, yb, 0, x1, yf, H)), ("glass", (x0 + W * 0.45, yf - 0.01, H, x1, yf, 2.0))]
     return [("block", (x0, yb, 0, x1, yf, H))]
+
+
+def wall_unit_bays(it):
+    """The wall cupboards over a base run (it["wall_units"] = {z0, z1, depth}): equal bays no wider than 0.70 m,
+    local x span (a, b) and the dimensions."""
+    w = it["wall_units"]
+    n = max(1, math.ceil(it["w"] / 0.70 - 1e-9))
+    pitch = it["w"] / n
+    return [(-it["w"] / 2 + k * pitch, -it["w"] / 2 + (k + 1) * pitch, w) for k in range(n)]
 
 
 def _local_modules(it):

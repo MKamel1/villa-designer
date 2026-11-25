@@ -275,6 +275,11 @@ def _runs(it, W, D, H, island):
             wu0 = (F3.COUNTER_TOP + F3.SPLASH) * 1000
             out.append(("wall-units", G._box(a, b, yb, yb + 350 - FRONT_T, wu0, H)))
             out += [(n, g) for n, g in _fronts(a, b, yb + 350, wu0, H, "wall-units", handle=None)]
+    if it.get("wall_units") and not island:           # client 2026-11-25: wall cupboards, walnut fronts, 3 mm gaps
+        for a, b, w in F3.wall_unit_bays(it):
+            a, b, z0, z1, dep = a * 1000, b * 1000, w["z0"] * 1000, w["z1"] * 1000, w["depth"] * 1000
+            out.append(("wall-units", G._box(a, b, yb, yb + dep - FRONT_T, z0, z1)))
+            out += [(n, g) for n, g in _fronts(a, b, yb + dep, z0, z1, "wall-units", handle=None)]
     # worktop, cut around each sink
     edges = [x0] + [v for a, b in sink_holes for v in (a + 60, b - 60)] + [x1]
     y_hole0, y_hole1 = (yb + yf) / 2 - 220, (yb + yf) / 2 + 220
