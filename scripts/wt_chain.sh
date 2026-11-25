@@ -4,9 +4,9 @@ set -e
 cd /home/omar/archpipe/lanes/WT
 python scripts/lens_rooms.py knowledge/flyaudit/wt-villa4-tour/frames.json
 python scripts/wt_plan.py > /dev/null
-scripts/wt_py.sh scripts/tour_points.py > /tmp/tp.log 2>&1
+scripts/wt_py.sh scripts/tour_points.py ${SCENE:-out/wt/villa4/scene.json} > /tmp/tp.log 2>&1
 python scripts/wt_plan.py > /dev/null
-scripts/wt_py.sh scripts/tour_aim.py > /tmp/ta.log 2>&1; tail -1 /tmp/ta.log
+scripts/wt_py.sh scripts/tour_aim.py ${SCENE:-out/wt/villa4/scene.json} > /tmp/ta.log 2>&1; tail -1 /tmp/ta.log
 python scripts/wt_plan.py | grep -E "^frames|^dir|^cov"
 scripts/wt_audit.sh out/wt/villa4/plan-only.json "$1" | tail -1
 python scripts/wt_summary.py out/wt/audits/"$1" knowledge/flyaudit/wt-villa4-tour | head -26
