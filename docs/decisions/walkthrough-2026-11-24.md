@@ -14,3 +14,8 @@ The client watched the first whole-villa preview (lane WT, out/wt/villa3/preview
 3. **Both floors and the stair** (a continuous flight, the landing, the gallery), plus the gardens.
 4. **Validate cheaply first:** a Workbench shape preview of every frame, then a low-sample Cycles preview, with contact sheets and the wall-check report. The 1080p final starts only after the client approves the route.
 5. **Dark rooms** (cinema, stores) use their own exposure groups, not one house-wide exposure.
+
+## Client decision (2026-11-24, later): 16 mm in small rooms
+- **Lens:** small rooms (those where the geometric audit finds a 24 mm 360 wall-dominated: guest WC, parents' ensuite and dressing, pantry, family bath, kids-b, landing-GF and similar, decided by the audit's rule, not by eye) use a **16 mm** lens for their 360. Everywhere else stays at 24 mm.
+- **Labelling:** the video LABELS those scenes as 16 mm, with an on-screen caption such as "16 mm wide lens: small room" for as long as the lens is wider than 24 mm.
+- **Transitions:** 24→16 and 16→24 are SMOOTH. Ease the focal length over a stated duration (about 1–1.5 s, policy) while the camera is moving or turning, never as a cut. The audit and the preview check the transition frames too.
