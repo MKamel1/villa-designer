@@ -18,13 +18,13 @@
    "fuzz": 0.55
   },
   "linen": {
-   "feature_mm": 1.2,
+   "feature_mm": 2.0,
    "roughness": 0.9,
    "sheen": 0.25,
    "fuzz": 0.3
   },
   "cotton": {
-   "feature_mm": 1.2,
+   "feature_mm": 1.6,
    "roughness": 0.9,
    "sheen": 0.22,
    "fuzz": 0.25

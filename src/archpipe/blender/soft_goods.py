@@ -199,10 +199,12 @@ def soft_throw_faces(identifier, points):
 
 def soften_throws(scene):
     n = 0
+    hosts = host_shells(scene)
     for m in scene["meshes"]:
         if THROW_ID.match(m["id"]):
             pts = np.array([p for f in m["faces"] for p in f], float)
-            m["faces"] = soft_throw_faces(m["id"], pts)
+            m["faces"], moved = rest_on_hosts(soft_throw_faces(m["id"], pts), hosts)
+            m["soft_goods_moved_m"] = [round(float(v), 3) for v in moved]
             m["smooth_shaded"] = True
             m["subdivide"] = 1
             m.pop("bevel_m", None)
@@ -211,13 +213,63 @@ def soften_throws(scene):
     return n
 
 
+def host_shells(scene):
+    """(bbox, triangles) of every closed shell of the visible solid furniture a soft good can rest on."""
+    from ..concept.render_support import _islands
+    from ..critic.furniture_realism import triangles
+    out = []
+    for m in scene["meshes"]:
+        if m["group"] != "furniture" or not m.get("visibility", {}).get("camera", True) or m["material"].startswith("glass"):
+            continue
+        for isl in _islands(m["faces"]):
+            t = triangles(isl)
+            pts = t.reshape(-1, 3)
+            out.append((pts.min(0), pts.max(0), t))
+    return out
+
+
+def rest_on_hosts(faces, hosts, tol=0.004, step=0.004, limit=0.16):
+    """Move a soft good out of any host it sinks into: up first (out of a seat), then forward along its own
+    horizontal normal (out of a back), a few mm at a time. A cushion rests ON its seat, it does not sink into it."""
+    from ..critic.furniture_realism import inside_mask
+    pts = np.array([p for f in faces for p in f], float)
+    ctr, e_a, e_b, e_t, _ = footprint(pts)
+    fwd = np.array([e_t[0], e_t[1], 0.0])
+    fwd = fwd / np.linalg.norm(fwd) if np.linalg.norm(fwd) > 0.2 else np.zeros(3)
+    sample = pts[:: max(1, len(pts) // 300)]
+
+    def sunk(offset):
+        q = sample + offset
+        lo, hi = q.min(0), q.max(0)
+        for hlo, hhi, tris in hosts:
+            if np.any(hhi < lo) or np.any(hlo > hi):
+                continue
+            # tolerate a rim touching: only count points deeper than tol inside (test a copy lowered by tol)
+            if inside_mask(q - np.array([0, 0, tol]), tris).any():
+                return True
+        return False
+    off = np.zeros(3)
+    for axis in (np.array([0, 0, 1.0]), fwd):
+        if not np.any(axis):
+            continue
+        for _ in range(int(limit / step)):
+            if not sunk(off):
+                break
+            off = off + axis * step
+    if np.any(off):
+        faces = [[(np.array(p) + off).round(6).tolist() for p in f] for f in faces]
+    return faces, off
+
+
 def soften_cushions(scene):
     n = 0
+    hosts = host_shells(scene)
     for m in scene["meshes"]:
         if not CUSHION_ID.match(m["id"]):
             continue
         pts = np.array([p for f in m["faces"] for p in f], float)
-        m["faces"] = soft_cushion_faces(m["id"], pts)
+        m["faces"], moved = rest_on_hosts(soft_cushion_faces(m["id"], pts), hosts)
+        m["soft_goods_moved_m"] = [round(float(v), 3) for v in moved]
         m["smooth_shaded"] = True
         m["subdivide"] = 1
         m.pop("bevel_m", None)
@@ -293,6 +345,8 @@ def puff_upholstery(mesh):
 def soften_upholstery(scene):
     n = 0
     for m in scene["meshes"]:
+        if not m.get("visibility", {}).get("camera", True):
+            continue                      # a proxy replaced by an imported model: nothing to see
         if m["id"].startswith("furn-") and UPHOLSTERED.search(m.get("part_kind", "") + " " + m.get("assembly_kind", "")):
             n += puff_upholstery(m)
     return n

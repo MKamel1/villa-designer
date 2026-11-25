@@ -112,7 +112,7 @@ def bake_throw(w_mm, l_mm, seed):
     vs = {}
     for i in range(nx + 1):
         for j in range(ny + 1):
-            vs[i, j] = bm.verts.new((w * (i / nx - 0.5), l * (j / ny - 0.5), 0.10))
+            vs[i, j] = bm.verts.new((w * (i / nx - 0.5), l * (j / ny - 0.5), 0.06))
     for i in range(nx):
         for j in range(ny):
             bm.faces.new((vs[i, j], vs[i + 1, j], vs[i + 1, j + 1], vs[i, j + 1]))
@@ -134,8 +134,8 @@ def bake_throw(w_mm, l_mm, seed):
     bml.to_mesh(lump.data)
     bml.free()
     bpy.context.collection.objects.link(lump)
-    lump.scale = (0.17, 0.05 + 0.012 * seed, 0.045 + 0.01 * seed)
-    lump.location = (0.02 * (seed - 2), 0.06 * (seed - 2), 0.03)
+    lump.scale = (0.16, 0.035 + 0.006 * seed, 0.016 + 0.005 * seed)
+    lump.location = (0.02 * (seed - 2), 0.07 * (seed - 2), 0.016)
     lump.rotation_euler = (0, 0, 0.35 * seed)
     lump.modifiers.new("c", "COLLISION")
     cloth = obj.modifiers.new("cloth", "CLOTH")
@@ -145,7 +145,7 @@ def bake_throw(w_mm, l_mm, seed):
     s.tension_stiffness = 12
     s.compression_stiffness = 12
     s.shear_stiffness = 6
-    s.bending_stiffness = 1.2
+    s.bending_stiffness = 3.0
     cloth.collision_settings.use_collision = True
     cloth.collision_settings.use_self_collision = True
     cloth.collision_settings.distance_min = 0.004
@@ -185,6 +185,11 @@ def main():
             print("throw", seed, "height mm", throws["%dx%d:%d" % (THROW[0], THROW[1], seed)]["height_mm"], flush=True)
     doc = {"throws": throws, "blender": bpy.app.version_string, "solver": "cloth pressure inflation, two panels sewn at the rim",
            "frame": "x width, y height, z thickness above the lying base, mm", "bakes": bakes}
+    if throws_only:                       # keep the cushion bakes already in the file
+        with gzip.open(out, "rt", encoding="utf-8") as f:
+            old = json.load(f)
+        old["throws"] = throws
+        doc = old
     with gzip.open(out, "wt", encoding="utf-8") as f:
         json.dump(doc, f, separators=(",", ":"))
 
