@@ -438,6 +438,34 @@ lanes:
     - tests/test_mounting*.py
     - docs/lanes/DF*.md
     - docs/lessons/DF.md
+  FX: # client furniture changes 2026-11-25: kids loft beds, kitchen wall cupboards, dining chairs, stair infill waiver
+    - src/archpipe/model/**
+    - tests/model/**
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/concept/stairs.py
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/blender/**
+    - src/archpipe/compliance/**
+    - knowledge/exposure-groups.json
+    - knowledge/render-set/**
+    - knowledge/*.json.gz
+    - tests/compliance/**
+    - tests/test_villa_render*.py
+    - tests/test_d1_*.py
+    - tests/test_mounting*.py
+    - docs/lanes/FX*.md
+    - docs/lessons/FX.md
+  SOFT: # photoreal soft furnishings + furniture realism check
+    - src/archpipe/blender/**
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/critic/**
+    - tests/critic/**
+    - knowledge/exposure-groups.json
+    - knowledge/render-set/**
+    - knowledge/*.json.gz
+    - tests/test_villa_render*.py
+    - docs/lanes/SOFT*.md
+    - docs/lessons/SOFT.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
