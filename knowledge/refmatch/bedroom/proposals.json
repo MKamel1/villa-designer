@@ -1,0 +1,125 @@
+{
+ "schema": 1,
+ "room": "bedroom",
+ "concept": "see docs/lanes/RM.md",
+ "proposals": [
+  {
+   "id": "B-P1",
+   "gap": "B-G1",
+   "title": "Headboard slat wall in the client's chosen Brown Halifax Oak, to the ceiling and wider than the bed",
+   "location": {
+    "room": "parents-bed",
+    "wall_or_zone": "south (head) wall, y = -26.59",
+    "rect_m": [
+     19.1,
+     21.8
+    ],
+    "z_range_m": [
+     0.0,
+     2.62
+    ],
+    "basis": "design model: bed x 19.57-21.09, nightstand to 21.48, wall z 0-2.7; mock-up slat 24 mm at 45 mm centres (assumed)"
+   },
+   "change": "Change the slat finish from Natural Halifax to Brown Halifax and extend the panel to 2.70 m wide, 2.62 m high (it now stops at 2.10 m).",
+   "effect": "Reads as the walnut slat wall of references 6 and 7, with the Nile Clay feature wall above and beside.",
+   "product": {
+    "maker": "EGGER",
+    "range": "Feelwood",
+    "name": "H3180 ST37 Brown Halifax Oak",
+    "code": "H3180 ST37",
+    "colour_or_finish": "Brown Halifax Oak, ST37 (dark brown woodgrain)",
+    "maker_url": "https://www.egger.com/en/furniture-interior-design/decors/H3180_37?country=GB",
+    "maker_quote": "The dark brown colour of H3180 Brown Halifax Oak meets the trend for dark woodgrain decors and is reminiscent in terms of colour of the colonial style.",
+    "colour_source": "chosen.json joinery-timber (client palette C, 2026-11-23)",
+    "label": "look-alike-proxy",
+    "lookalike": "scene 'walnut' material",
+    "consistent_with": "the client's chosen parents' bedroom joinery"
+   },
+   "architecture_change": {
+    "flag": false,
+    "note": "joinery only"
+   }
+  },
+  {
+   "id": "B-P2",
+   "gap": "B-G3",
+   "title": "Lighting ask: wash down the slat wall from a ceiling-line cove",
+   "location": {
+    "room": "parents-bed",
+    "wall_or_zone": "head wall at the ceiling line, x 19.10-21.80, z 2.60",
+    "basis": "existing COVE-parents-bed-01 at (20.33, -26.47, 2.73)"
+   },
+   "lighting_ask": {
+    "effect": "2700 K, dimmable, grazing the slats from above so each slat catches light (references 6, 7). Mock-up placeholder 600 lm per run.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Lighting only; check COVE-parents-bed-01 already does this before adding a second run.",
+   "effect": "Head-wall glow of references 5-7.",
+   "architecture_change": {
+    "flag": false,
+    "note": "a 0.12 m plaster return at the ceiling"
+   }
+  },
+  {
+   "id": "B-P3",
+   "gap": "B-G4",
+   "title": "Lighting ask: LED glow under the bed base",
+   "location": {
+    "room": "parents-bed",
+    "wall_or_zone": "under the bed base",
+    "basis": "bed x 19.57-21.09, y -26.33..-24.63"
+   },
+   "lighting_ask": {
+    "effect": "2200-2700 K, very low level, night path; the room has no night line near the bed.",
+    "cct_k": 2700,
+    "to_be_designed_by": "lighting lanes (L6 family)",
+    "not_a_finished_design": true
+   },
+   "change": "Lighting only.",
+   "effect": "Reference 7.",
+   "architecture_change": {
+    "flag": false,
+    "note": "none"
+   }
+  },
+  {
+   "id": "B-P4",
+   "gap": "B-G1",
+   "title": "Opal globe pendants over the nightstands (alternative to the wall-read lamps)",
+   "location": {
+    "room": "parents-bed",
+    "wall_or_zone": "above the nightstands, x 19.35 and 21.3, 1.1 m above the floor",
+    "basis": "existing WALL-READ-parents-bed-02/03 are wall opal globes on brass brackets"
+   },
+   "product": {
+    "maker": "Flos",
+    "range": "IC Lights",
+    "name": "IC Lights S1 (Suspension 1), Brass",
+    "code": "F3175059",
+    "colour_or_finish": "Brass frame, blown opal glass diffuser",
+    "maker_url": "https://flos.com/en/gb/ic-lights-suspension/M-ic-lights-suspension.html",
+    "maker_quote": "Suspension lamp emitting diffused light. Features a metal frame available in brushed and transparent varnished brass, chrome-plated steel or black, with a blown opal glass diffuser.",
+    "colour_source": "maker page, Color: Brass",
+    "label": "look-alike-proxy",
+    "lookalike": "emissive opal sphere",
+    "consistent_with": "opal globe pendants low over the nightstands in reference 5, brass accents in the brief"
+   },
+   "change": "Optional: swap the wall-read globes for two pendant globes; not in the mock-up because the wall-reads already read as opal globes.",
+   "effect": "Reference 5.",
+   "architecture_change": {
+    "flag": false,
+    "note": "ceiling fixing"
+   }
+  }
+ ],
+ "mockup": {
+  "scene": "COPY of the render-set scene.json built by scripts/refmatch_build.py; production scene and design model untouched",
+  "exposure": "frozen exposure groups dropped (stale for any geometry change); current and mock-up both use per-state set-metered exposure",
+  "renders": [
+   "mock_n13-parents-day.jpg",
+   "cur_n13-parents-day.jpg"
+  ]
+ }
+}

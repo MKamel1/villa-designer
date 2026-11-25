@@ -1,0 +1,77 @@
+{
+ "schema": 1,
+ "room": "bedroom",
+ "references": [
+  {
+   "id": "image5",
+   "why": "oak vertical slats flanking a plaster niche with 2700 K cove, opal globe pendants over floating nightstands"
+  },
+  {
+   "id": "image6",
+   "why": "walnut slats and grey stone panels at the head wall, cove above the headboard, taupe upholstered bed"
+  },
+  {
+   "id": "image7",
+   "why": "walnut vertical slats behind a bouclé platform bed, under-bed LED glow, slat-wall uplight, tinted-glass wardrobes"
+  }
+ ],
+ "gaps": [
+  {
+   "id": "B-G1",
+   "rank": 1,
+   "feature": "Slat colour: dark walnut tone (refs 6, 7); the scene slats render light oak",
+   "refs_showing_it": [
+    "image6",
+    "image7"
+   ],
+   "present_in_scene": "the slat wall exists (x 19.54-21.12, z 0-2.1) but uses the light 'oak' material; the client chose EGGER Brown Halifax (dark) for this room's joinery",
+   "visual_weight": "high (it is the room's focal surface)"
+  },
+  {
+   "id": "B-G2",
+   "rank": 2,
+   "feature": "Slat wall full height and wider than the bed, to the ceiling",
+   "refs_showing_it": [
+    "image5",
+    "image6",
+    "image7"
+   ],
+   "present_in_scene": "no: it stops at 2.10 m, 1.58 m wide, about the bed width",
+   "visual_weight": "high"
+  },
+  {
+   "id": "B-G3",
+   "rank": 3,
+   "feature": "Glow on the head wall: cove or uplight washing the slats",
+   "refs_showing_it": [
+    "image5",
+    "image6",
+    "image7"
+   ],
+   "present_in_scene": "a cove light COVE-parents-bed-01 exists in the lighting design but nothing in the day or dusk views shows it grazing the slats",
+   "visual_weight": "high"
+  },
+  {
+   "id": "B-G4",
+   "rank": 4,
+   "feature": "LED glow under the bed base",
+   "refs_showing_it": [
+    "image7"
+   ],
+   "present_in_scene": "no",
+   "visual_weight": "medium"
+  },
+  {
+   "id": "B-G5",
+   "rank": 5,
+   "feature": "Bouclé bed, floating nightstands, glass-door wardrobes, floor-to-ceiling glazing",
+   "refs_showing_it": [
+    "image6",
+    "image7"
+   ],
+   "present_in_scene": "grey channel-upholstered headboard; one window; wardrobes are in the dressing room",
+   "visual_weight": "medium; NOT proposed: no verified maker product found for the bed, and glazing changes the architecture"
+  }
+ ],
+ "method": "references read by eye for concrete features, then counted; gaps are features most of the room's references share that the scene lacks"
+}
