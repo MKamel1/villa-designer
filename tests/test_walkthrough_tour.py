@@ -347,6 +347,8 @@ class ClientPass(unittest.TestCase):
         off = [abs(WT.wrap(f['yaw_deg']-math.degrees(math.atan2(rv['target'][1]-f['camera']['position'][1], rv['target'][0]-f['camera']['position'][0])))) for f in closed]
         self.assertLess(min(off), 5.)                                                      # the held view centres the WC while the leaf is shut
         self.assertGreaterEqual(sum(o < 10. for o in off), 12)                             # for at least half a second, not a flick
+        held = [f for f in closed if abs(WT.wrap(f['yaw_deg']-math.degrees(math.atan2(rv['target'][1]-f['camera']['position'][1], rv['target'][0]-f['camera']['position'][0])))) < 5.]
+        self.assertLess(min(f['pitch_deg'] for f in held), -15.)                            # tilted down onto the bowl and cistern, not level with the eye (the bowl was cut off at the frame's foot)
 
     def test_negative_the_old_family_bath_hold_was_not_on_the_wc(self):
         rv = WT.tour_reveal()['family-bath']; old = -60.      # villa9 route: held at -60 deg (leaf and blank wall), the WC is 28 deg to one side of that

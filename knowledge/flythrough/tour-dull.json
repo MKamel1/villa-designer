@@ -171,13 +171,13 @@ true,
 true,
 false,
 false,
-true
+false
 ],
 "kinds": [
 "",
 "wall",
 "wall",
-"wall",
+"window",
 "wall",
 "wall",
 "wall",
@@ -185,7 +185,7 @@ true
 "",
 "",
 "",
-"wall"
+""
 ]
 },
 "kids-b": {

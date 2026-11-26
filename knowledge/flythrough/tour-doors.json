@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "d11448b58aa0b2fa88cdb89d90bbc2023c549f523a952971f32af672da07d3c6",
+"camera_sha256": "617b6a103eff16bdf2cc2ea53228c6da9782fdea98fdc551037f1bb4feb3e3f0",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -157,8 +157,8 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 6792,
-"close_end": 6840,
+"close_start": 6786,
+"close_end": 6834,
 "open_start": 7069,
 "open_end": 7117
 },
@@ -339,12 +339,12 @@
 "furn-fb-wc"
 ],
 "blocked_frames": [
-6840,
+6834,
 7116
 ],
 "schedule": {
-"close_start": 6792,
-"close_end": 6840,
+"close_start": 6786,
+"close_end": 6834,
 "open_start": 7069,
 "open_end": 7117
 },

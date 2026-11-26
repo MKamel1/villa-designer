@@ -1,1 +1,15 @@
-{"schema":"flythrough-tour-reveal/1","basis":"policy (ours): a feature a door leaf hides is the room best view, so the camera is aimed at it when the leaf has closed (scripts/wt_reveal.py proves it is seen)","rooms":{"family-bath":{"door":"door-GF-gallery-end-family-bath","feature":"furn-fb-wc","target":[11.129,-25.8195]}}}
+{
+ "schema": "flythrough-tour-reveal/1",
+ "basis": "policy (ours): a feature a door leaf hides is the room best view, so the camera is aimed at it when the leaf has closed (scripts/wt_reveal.py proves it is seen)",
+ "rooms": {
+  "family-bath": {
+   "door": "door-GF-gallery-end-family-bath",
+   "feature": "furn-fb-wc",
+   "target": [
+    11.129,
+    -25.8195,
+    0.62
+   ]
+  }
+ }
+}

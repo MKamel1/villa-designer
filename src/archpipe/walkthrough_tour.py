@@ -523,6 +523,8 @@ def plan_tour(vm, route=None, pol=None, aim=None, doors=True):
             rv = tour_reveal().get(s['room'])
             if rv:      # the feature the leaf hides: hold the view centred on it (not nudged off it by the dull-heading rule)
                 best = math.degrees(math.atan2(rv['target'][1]-s['at'][1], rv['target'][0]-s['at'][0]))
+                if len(rv['target']) > 2 and not s.get('pitch'):      # and tilted onto its height (a WC is low: level with the eye the bowl is cut off at the frame's foot)
+                    s['pitch'] = dict(yaw_deg=best, pitch_deg=math.degrees(math.atan2(rv['target'][2]-(LEVEL_Z[s['level']]+pol['eye_height_m']), math.dist(rv['target'][:2], s['at']))))
             T, yaw, alpha = spin_programme(s['y0'], best, s['exit'] if s['exit'] is not None else best, pol, final=s['exit'] is None, fresh=_fresh(s['room']), yaw_table=s['info'].get('yaw_table') or tour_point_records().get(s['room'], {}).get('yaw_table'), dull=dull)
             s.update(T=T, yawfn=yaw, alpha=alpha)
         elif s['kind'] == 'arc':
