@@ -2301,6 +2301,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     failures = indoor_plant_violations(scene['props'], lay, scene)
     if failures:
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
+    from ..model import circulation as _circ
+    failures = [_circ.describe(r) for r in _circ.pinches(lay)]
+    if failures:
+        raise ValueError('staged circulation: ' + '; '.join(failures))
     scene = _passes.run_stage("assembly", scene, pass_ctx)
     g4d_failures=garden_g4d.scene_findings(scene)
     if g4d_failures:raise ValueError('G4d garden records: '+ '; '.join(g4d_failures))
@@ -2851,8 +2855,14 @@ def props(lay):
                 add("library-books-%d" % n, "book_encyclopedia_set_01", bk[0] + dx, bk[1] + 0.16, B + z,
                     label="books on the library shelves")
                 n += 1
+    # The set is 0.551 x 0.163 m at scale 1 with its origin at the left end, so placing the origin at the bedside's
+    # centre put it 0.357 m past the 0.35 m top, floating in the dressing door's opening (client, walkthrough 6:21).
+    # Scale 0.6 (0.331 m) and seat the measured bounds on the top's centre; dressing_overhang_violations guards it.
     x, y = c("pb-bedside")
-    add("bedside-books", "book_encyclopedia_set_01", x, y, G + it["pb-bedside"]["h"], label="books on the bedside")
+    sc = 0.6
+    (bx0, _, bz0), (bx1, _, bz1) = MANIFEST_BOUNDS["book_encyclopedia_set_01"]["min"], MANIFEST_BOUNDS["book_encyclopedia_set_01"]["max"]
+    add("bedside-books", "book_encyclopedia_set_01", x - sc * (bx0 + bx1) / 2, y + sc * (bz0 + bz1) / 2,
+        G + it["pb-bedside"]["h"], s=sc, label="books on the bedside")
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
     # bedroom one moved out of the vanity chair's way into the window corner beside the vanity; the study one out of
     # the new low window into the corner beside the TV unit
@@ -2867,6 +2877,30 @@ def props(lay):
     failures = indoor_plant_violations(out, lay)
     if failures:
         raise ValueError("indoor plant placement: " + "; ".join(failures))
+    failures = dressing_overhang_violations(out, lay)
+    if failures:
+        raise ValueError("dressing overhang: " + "; ".join(failures))
+    return out
+
+
+def dressing_overhang_violations(placed, lay):
+    """A prop standing on a furniture top must lie wholly on it. Every prop whose base is at a piece's top height and
+    whose measured world box touches that piece's footprint is judged against the footprint: the bedside books once
+    hung 0.357 m past the top into the dressing door's opening (docs/lessons/DF.md)."""
+    from .villa_landscape import PROP_BOUNDS, prop_world_box
+    out = []
+    items = F.layout(lay)
+    for p in placed:
+        if p["asset"] not in PROP_BOUNDS:
+            continue
+        x0, y0, z0, x1, y1, _ = prop_world_box(p["asset"], p["position"], p["rotation_deg"], p["scale"])
+        for it in items:
+            fx0, fy0, fx1, fy1 = F.footprint(it)
+            if abs(z0 - (LZ[it["level"]] + it["h"])) > 2e-3 or x1 <= fx0 or x0 >= fx1 or y1 <= fy0 or y0 >= fy1:
+                continue
+            over = max(fx0 - x0, fy0 - y0, x1 - fx1, y1 - fy1)
+            if over > 1e-3:
+                out.append("%s overhangs %s by %.3f m" % (p["id"], it["id"], over))
     return out
 
 

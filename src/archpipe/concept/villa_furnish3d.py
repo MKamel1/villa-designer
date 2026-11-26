@@ -82,6 +82,12 @@ def _stool(xc, y0, y1, seat=0.65):
             ("seat", (xc - 0.19, y0 + 0.01, seat - 0.05, xc + 0.19, y1 - 0.01, seat))]
 
 
+# Pieces whose chair is staged TUCKED under the top, as designed furniture: a pulled-out chair at the principal
+# bedroom's vanity left 0.46 m between the duvet and the chair on the only way to the dressing door (WT, 2026-11-23;
+# docs/lessons/DF.md). Test the old staging with it["chair_pulled_out"] = True.
+TUCKED_SEAT = {"pb-vanity"}
+
+
 def body(it):
     """The piece's own parts [(name, local box)], all inside the footprint (x in +-w/2, y in +-d/2)."""
     W, D, H, t = it["w"], it["d"], it["h"], it["type"]
@@ -338,7 +344,10 @@ def extras(it):
         for k in range(it["stools"]):
             xc = -W / 2 + (k + 0.5) * W / it["stools"]
             out.append(("stool-%d" % (k + 1), _stool(xc, -D / 2 - 0.05, -D / 2 + 0.35)))
-    if it["type"] == "desk":
+    if it["type"] == "desk" and it["id"] in TUCKED_SEAT and not it.get("chair_pulled_out"):
+        # seat under the top (0.01 m clear of the wall), back against its front edge: only the 0.03 m back stands proud of the 0.40 m top
+        out.append(("chair-1", _chair(0.0, D / 2 - 0.39, D / 2 + 0.03, True)))
+    elif it["type"] == "desk":
         n = it.get("chairs", max(1, int(W // 0.9)))
         for k in range(n):
             xc = -W / 2 + (k + 0.5) * W / n
