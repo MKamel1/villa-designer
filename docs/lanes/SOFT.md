@@ -20,7 +20,7 @@ all furniture." Root cause, fix and guards are in `docs/lessons/SOFT.md`. The fu
 
 ## The check, on the 2026-11-25 scene (merged integ/aplus)
 
-Before the fix 188 findings on 173 objects, after 153 on 153 (the soft goods all pass):
+Before the fix 185 findings on 173 objects, after 153 on 153 (the soft goods all pass):
 
 | | before | after |
 |---|---|---|
@@ -30,7 +30,6 @@ Before the fix 188 findings on 173 objects, after 153 on 153 (the soft goods all
 | upholstery: wrong weave scale | 10 | 8 |
 | upholstery: pure box, no bevel | 3 | 3 |
 | case goods: pure box, no edge radius | 142 (incl. 7 imported desk scans at 85-89 %) | 142 |
-| case goods: wrong weave scale (rugs) | 3 | 0 (a carpet is meant to be coarse) |
 
 The remaining 153 items are not soft goods; see the ranked file for each with the fix. In short: 8 upholstered pieces (6 dining chairs
 and the vanity chair, the lounge sofa) carry a bouclé finish whose weave is 1.2 mm where bouclé loops are 3-9 mm (retile, or choose a
