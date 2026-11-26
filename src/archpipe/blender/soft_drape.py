@@ -71,7 +71,7 @@ def collide(ob):
     ob.collision.cloth_friction = 50.0
 
 
-def landing_spot(hv, zref, ang, avoid, cell=0.02, reach=0.9):
+def landing_spot(hv, zref, ang, avoid, cell=0.02, reach=0.55):
     """(x, y, supported fraction): the centre within `reach` of the origin that puts the most of the throw's resting
     footprint (0.4 x 0.8 m along its axis `ang`) over host surface within -0.30..+0.12 m of height `zref`, and as little
     as possible of it over the `avoid` points (the scatter cushions: a throw that buries them hides the pillow)."""
