@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 
 from archpipe.blender.soft_goods import THROW_PLY_MM  # noqa: E402
 
-SHEET = (0.65, 1.30)     # a 1300 x 1700 throw folded once, laid with its 1.3 m edge along its long axis: ours (policy)
+SHEET = (0.50, 1.00)     # a 1300 x 1700 throw folded in four, laid with its long axis along its authored axis: ours (policy)
 GRID_M = 0.02
 YAW_RETRIES = (0.0, 0.2, -0.2, 0.4, -0.4)
 DROP_M = 0.20
@@ -71,16 +71,21 @@ def collide(ob):
     ob.collision.cloth_friction = 50.0
 
 
-def landing_spot(hv, zref, ang, cell=0.02, reach=0.9):
+def landing_spot(hv, zref, ang, avoid, cell=0.02, reach=0.9):
     """(x, y, supported fraction): the centre within `reach` of the origin that puts the most of the throw's resting
-    footprint (0.45 x 0.9 m along its axis `ang`) over host surface within -0.30..+0.12 m of height `zref`."""
+    footprint (0.4 x 0.8 m along its axis `ang`) over host surface within -0.30..+0.12 m of height `zref`, and as little
+    as possible of it over the `avoid` points (the scatter cushions: a throw that buries them hides the pillow)."""
     half = 2.0
     n = int(2 * half / cell)
     near = hv[(hv[:, 2] > zref - 0.30) & (hv[:, 2] < zref + 0.12)]
     grid = np.zeros((n, n), bool)
     ij = np.floor((near[:, :2] + half) / cell).astype(int)
     grid[ij[:, 0].clip(0, n - 1), ij[:, 1].clip(0, n - 1)] = True
-    uu, vv = np.meshgrid(np.arange(-0.225, 0.226, cell), np.arange(-0.45, 0.451, cell), indexing="ij")
+    taken = np.zeros((n, n), bool)
+    if len(avoid):
+        ak = np.floor((avoid[:, :2] + half) / cell).astype(int)
+        taken[ak[:, 0].clip(0, n - 1), ak[:, 1].clip(0, n - 1)] = True
+    uu, vv = np.meshgrid(np.arange(-0.2, 0.201, cell), np.arange(-0.4, 0.401, cell), indexing="ij")
     c, s = np.cos(ang), np.sin(ang)
     off = np.stack([(c * uu - s * vv).ravel(), (s * uu + c * vv).ravel()], 1)       # footprint cell offsets, world axes
     best = (-9.0, 0.0, 0.0, 0.0)
@@ -88,7 +93,8 @@ def landing_spot(hv, zref, ang, cell=0.02, reach=0.9):
         for dy in np.arange(-reach, reach + 1e-9, 0.04):
             q = np.floor((off + [dx, dy] + half) / cell).astype(int).clip(0, n - 1)
             frac = grid[q[:, 0], q[:, 1]].mean()
-            score = frac - 0.05 * np.hypot(dx, dy)               # prefer staying where it was authored
+            buried = taken[q[:, 0], q[:, 1]].mean()
+            score = frac - 1.5 * buried - 0.05 * np.hypot(dx, dy)               # prefer staying where it was authored
             if score > best[0]:
                 best = (score, dx, dy, frac)
     if best[3] < 0.6:
@@ -135,7 +141,8 @@ def drop(points, hosts, models, library_root, frames, seed, yaw=0.0, grid=GRID_M
     # The authored throw can sit mostly off its sofa (a lounge throw hangs 0.4 m past the seat front). Drop it where
     # there is a seat to land on: the centre that puts most of its footprint over host surface at the old throw's height.
     zref = points[:, 2].min() - shift[2]
-    sx, sy, supported = landing_spot(hv, zref, ang)
+    cushions = np.vstack([np.asarray(t).reshape(-1, 3) - shift for name, t in hosts if name.startswith("dress-cushion")] or [np.zeros((0, 3))])
+    sx, sy, supported = landing_spot(hv, zref, ang, cushions)
     top = max(v[2] for v in hv if abs(v[0] - sx) < SHEET[1] / 2 and abs(v[1] - sy) < SHEET[1] / 2
               and v[2] < points[:, 2].max() + CANOPY_M - shift[2])
     # the floor under the hosts: a throw that slides off hangs over it (no floor = it falls out of the world)
