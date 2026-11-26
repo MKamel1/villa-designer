@@ -61,10 +61,14 @@ class Shapes(unittest.TestCase):
                 if lv == s["level"] and m != owner and s["type"] == "chair":
                     self.assertFalse(F._ov(plan, fp), (s["mark"], m))
 
-    def test_a_bunk_bed_has_two_tiers(self):
-        s = next(x for x in SPEC if x["mark"] == "ka-bunk")
-        self.assertIn("upper-mattress", s["parts"])
-        self.assertAlmostEqual(s["envelope"][5], 1.7)
+    def test_a_loft_bed_has_one_raised_mattress_and_a_ladder(self):       # client 2026-11-25: replaces the bunk
+        for mark in ("ka-loft-1", "ka-loft-2"):
+            s = next(x for x in SPEC if x["mark"] == mark)
+            self.assertIn("mattress", s["parts"])
+            self.assertNotIn("upper-mattress", s["parts"])
+            self.assertIn("ladder-rung", s["parts"])
+            self.assertAlmostEqual(s["envelope"][5], 1.82)
+        self.assertNotIn("ka-bunk", [x["mark"] for x in SPEC])
 
     def test_island_stone_returns_and_open_shower_are_in_revit_input(self):
         island = next(x for x in SPEC if x["mark"] == "k-island")

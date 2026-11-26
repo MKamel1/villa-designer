@@ -61,9 +61,9 @@ class Layout(unittest.TestCase):
             cat.get(it["type"])
 
     def test_the_route_check_really_examines_rooms(self):
-        # the kids A wardrobe moved into the room's middle shuts the bunk and both desks off from the door
-        res = _run(lambda items, ids: ids["ka-wardrobe"].update(cx=13.4))
-        self.assertTrue(any(p.startswith("ka-bunk") for p in res["routes"]["problems"]), res["routes"])
+        # the kids A wardrobe moved across the room's middle shuts the desks under the lofts off from the door (loft footprints are overhead)
+        res = _run(lambda items, ids: ids["ka-wardrobe"].update(cx=13.4, cy=-26.3, rot=0, w=2.8))
+        self.assertTrue(any(p.startswith("ka-desk") for p in res["routes"]["problems"]), res["routes"])
 
     def test_the_body_turns_a_corner_the_path_turns(self):
         # the private dressing follows the bedroom's 750 mm route at its 800 mm door; a 700 mm aisle is refused:
