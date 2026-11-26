@@ -64,3 +64,14 @@ available, so it was removed. Next step: debug that sim in a small scene, then d
 | `tests/critic` (own) | 84 passed (new: 9 in test_soft_goods, 21 in test_furniture_realism) |
 | `run_d1` | exit 0; gates 79 rows: 73 pass, 0 fail, 0 warn, 6 not evaluated |
 | `scripts/verify.py` | ALL PASS (207 PASS, 5 SKIP) |
+
+## Shared-file rule (integ/aplus merged last, 2026-11-25)
+
+- Merged `origin/integ/aplus` (DF slim-headboard commits) clean; the production scene rebuilt with receipts and exposure records active,
+  no bypass (`SOFT-rebuild-2`, exit 0). SOFT changes no scene file, so the receipts are unchanged baseline-relative (nothing to regenerate).
+- Exposure re-measured with a new id (`SOFT-measure-exposure-6`, prod and render-set scenes, 48 views each): **0 membership flips**,
+  largest lamp-fraction change 0.0009 (prod) and 0.0005 (set). The committed records stay: they still pass the build and `test_exposure_groups`.
+- A finding worth keeping: `villa_scene` mutated `scene_data` (softening) before `--measure-exposure-groups` recorded the transport digest, so a record
+  measured that way failed the authored scene's digest ("Stale dominant-light rule or transport measurement", `SOFT-rebuild-1`). Guard: softening is
+  skipped in the measuring modes, and `tests/critic/test_soft_goods.py::RenderWiring` pins it.
+- Renders: `SOFT-final-after-2/3` (after) and `SOFT-final-before-5` (before, `--no-soft`), 96 samples, 1600x1067, six views.
