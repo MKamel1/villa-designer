@@ -6,7 +6,7 @@ Ray casting needs a BVH: `embreex` (Intel Embree wheel) is the only new dependen
 rays against 1.7 M triangles in reasonable time. Glass is a second scene so a ray can pass through it and report it.
 """
 from __future__ import annotations
-import hashlib, json, os
+import hashlib, json, math, os
 from pathlib import Path
 import numpy as np
 
@@ -59,7 +59,9 @@ def extract(scene_path, cache_path):
 class Geometry:
     """Opaque + glass Embree scenes over the same triangle table."""
 
-    def __init__(self, tris, elem, room, cls, grp, elem_names, room_names):
+    def __init__(self, tris, elem, room, cls, grp, elem_names, room_names, exclude=None):
+        self._build_args = (tris, elem, room, cls, grp, elem_names, room_names)
+        self.leaves = {}
         try:
             from embreex import rtcore_scene as rs
             from embreex.mesh_construction import TriangleMesh
@@ -69,7 +71,7 @@ class Geometry:
         self.elem_names, self.room_names = list(elem_names), list(room_names)
         self._scenes = {}
         for kind in (OPAQUE, GLASS):
-            sel = np.flatnonzero(cls == kind)
+            sel = np.flatnonzero((cls == kind) & ~exclude) if exclude is not None else np.flatnonzero(cls == kind)
             self._scenes[kind] = None
             if len(sel) and rs is None:
                 if len(sel) > 20000:
@@ -86,8 +88,47 @@ class Geometry:
         z = np.load(path)
         return cls(z['tris'], z['elem'], z['room'], z['cls'], z['grp'], z['elem_names'], z['room_names'])
 
-    def cast(self, origins, dirs):
-        """-> (dist, tri) of first opaque hit (inf, -1 if none), then (dist, tri) of first glass hit."""
+    def animate(self, door_anim):
+        """A copy of this geometry whose door leaves in `door_anim` are cast separately at a per-frame state.
+
+        Each record: element (the door's element name), hinge [x, y], signed_open_deg, closed_faces (the leaf as built, closed).
+        The baked-open leaf triangles of those elements are left out of the BVH; the closed leaf is appended to the table and
+        rotated about the hinge by signed_open * s (s = 1 open as baked, 0 closed) when `cast(..., doors={element: s})` is called."""
+        tris, elem, room, cls, grp, names, rooms = self._build_args
+        names = list(names); ids = {r['element']: names.index(r['element']) for r in door_anim}
+        exclude = np.isin(elem, list(ids.values()))
+        add_t, add_e, add_r, add_g = [], [], [], []; spans = {}
+        for r in door_anim:
+            e = ids[r['element']]; src = np.flatnonzero(elem == e)
+            t = [(f[0], f[k], f[k+1]) for f in r['closed_faces'] for k in range(1, len(f)-1)]
+            spans[r['element']] = (len(tris)+len(add_t), len(t), r)
+            add_t += t; add_e += [e]*len(t); add_r += [int(room[src[0]]) if len(src) else 0]*len(t); add_g += [int(grp[src[0]]) if len(src) else 0]*len(t)
+        g = Geometry(np.concatenate([tris, np.asarray(add_t, np.float32)]), np.concatenate([elem, np.asarray(add_e, np.int32)]),
+                     np.concatenate([room, np.asarray(add_r, np.int32)]), np.concatenate([cls, np.zeros(len(add_t), np.int8)]),
+                     np.concatenate([grp, np.asarray(add_g, np.int8)]), names, rooms, exclude=np.concatenate([exclude, np.zeros(len(add_t), bool)]))
+        g.leaves = spans
+        return g
+
+    def _leaf_tris(self, doors):
+        """-> (triangles, table index) of every animated leaf at its state."""
+        T, I = [], []
+        for name, (a, n, r) in self.leaves.items():
+            s = float((doors or {}).get(name, 1.)); psi = math.radians(r['signed_open_deg'])*s; c, sn = math.cos(psi), math.sin(psi); h = np.asarray(r['hinge'], np.float64)
+            t = self.tris[a:a+n].astype(np.float64); d = t[..., :2]-h
+            T.append(np.concatenate([h+np.stack([d[..., 0]*c-d[..., 1]*sn, d[..., 0]*sn+d[..., 1]*c], -1), t[..., 2:]], -1)); I.append(np.arange(a, a+n))
+        return (np.concatenate(T), np.concatenate(I)) if T else (None, None)
+
+    def cast(self, origins, dirs, doors=None):
+        """-> (dist, tri) of first opaque hit (inf, -1 if none), then (dist, tri) of first glass hit. `doors`: element -> state s of the animated leaves."""
+        dist, tri, gd, gt = self._cast(origins, dirs)
+        T, I = self._leaf_tris(doors)
+        if T is not None:
+            t, prim = _brute(T, np.asarray(origins, np.float32), np.asarray(dirs, np.float32))
+            better = (prim >= 0) & (t < dist)
+            dist = np.where(better, t, dist).astype(np.float32); tri = np.where(better, I[np.maximum(prim, 0)], tri)
+        return dist, tri, gd, gt
+
+    def _cast(self, origins, dirs):
         o = np.ascontiguousarray(origins, np.float32); d = np.ascontiguousarray(dirs, np.float32)
         n = len(o); out = {}
         for kind in (OPAQUE, GLASS):

@@ -12,7 +12,7 @@ def load_route(path):
     frames = d['frames'] if isinstance(d, dict) else d
     settings = d.get('settings', {}) if isinstance(d, dict) else {}
     settings = dict(dict(fps=24, final_resolution=[1920, 1080]), **{k: v for k, v in settings.items() if k in ('fps', 'final_resolution')})
-    return dict(frames=frames, settings=settings, stations=d.get('stations', []) if isinstance(d, dict) else [],
+    return dict(frames=frames, settings=settings, door_anim=d.get('door_anim', []) if isinstance(d, dict) else [], stations=d.get('stations', []) if isinstance(d, dict) else [],
                 sha=(d.get('sha256') if isinstance(d, dict) else None))
 
 
@@ -49,12 +49,17 @@ def resolve_subjects(geom, et, views_path):
     return out
 
 
-def run(route_path, scene_path, out_dir, route_id=None, rooms=None, views=None, cache_dir=None, log=print):
+def run(route_path, scene_path, out_dir, route_id=None, rooms=None, views=None, cache_dir=None, log=print, doors_open=False):
+    """`doors_open`: audit the same route with every animated leaf held open (the 'before' state of a door animation)."""
     th = core.thresholds(); R = load_route(route_path); frames = R['frames']; fps = R['settings']['fps']
     stride = th['grid']['frame_stride']
     rooms = rooms or design_rooms()
     geom = geometry_for(scene_path, Path(cache_dir or core.ROOT / 'out/flyaudit'))
     et = core.element_table(geom)
+    if R['door_anim']:
+        geom = geom.animate(R['door_anim'])      # the leaves are cast at the per-frame state frame['doors']; the baked-open leaf is left out
+        if doors_open:
+            frames = [{k: v for k, v in f.items() if k != 'doors'} for f in frames]
     subj = resolve_subjects(geom, et, views or core.ROOT / 'knowledge/render-set/views.json')
     live = [s for s in subj if not s.get('unresolved')]
     t0 = time.time()
@@ -66,6 +71,9 @@ def run(route_path, scene_path, out_dir, route_id=None, rooms=None, views=None, 
     core.classify(recs, th, nod)
     core.add_modes(recs, R['settings']['fps'], th)
     report = summarise(recs, st, sstats, subj, geom, et, rooms, th, R, nod)
+    if R['door_anim']:
+        from .doorblock import door_blocked
+        report['door_blocked'] = door_blocked(geom, frames, rooms, et, th, R['door_anim'], fps)
     out = Path(out_dir) / (route_id or Path(route_path).parent.name or 'route'); out.mkdir(parents=True, exist_ok=True)
     (out / 'report.json').write_text(json.dumps(report, indent=1))
     (out / 'frames.json').write_text(json.dumps(recs, separators=(',', ':')))

@@ -1,0 +1,446 @@
+{
+"schema": "curtain-stacks/1",
+"source": "out/wt/villa8/assembly/assembly.json curtain_report (evaluated cloth bounds, metres), snapshot 2026-11-25; only the stacks shown in the walkthrough day state (sheer and heavy-open, left/right), not the alternate half/closed states",
+"stacks": [
+{
+"id": "curtain-study-game-01-sheer-l",
+"bounds": [
+4.191,
+-23.934,
+0.01,
+4.602,
+-23.858,
+2.694
+]
+},
+{
+"id": "curtain-study-game-01-sheer-r",
+"bounds": [
+6.386,
+-23.947,
+0.01,
+6.797,
+-23.838,
+2.694
+]
+},
+{
+"id": "curtain-study-game-01-heavy-open-l",
+"bounds": [
+4.188,
+-23.986,
+0.01,
+4.61,
+-23.907,
+2.694
+]
+},
+{
+"id": "curtain-study-game-01-heavy-open-r",
+"bounds": [
+6.394,
+-23.973,
+0.01,
+6.799,
+-23.886,
+2.694
+]
+},
+{
+"id": "curtain-study-game-02-sheer-l",
+"bounds": [
+3.889,
+-26.254,
+0.01,
+3.961,
+-25.974,
+2.694
+]
+},
+{
+"id": "curtain-study-game-02-sheer-r",
+"bounds": [
+3.87,
+-24.653,
+0.01,
+3.946,
+-24.368,
+2.694
+]
+},
+{
+"id": "curtain-study-game-02-heavy-open-l",
+"bounds": [
+3.925,
+-26.253,
+0.01,
+4.016,
+-25.976,
+2.694
+]
+},
+{
+"id": "curtain-study-game-02-heavy-open-r",
+"bounds": [
+3.933,
+-24.659,
+0.01,
+4.016,
+-24.357,
+2.694
+]
+},
+{
+"id": "curtain-kids-a-01-sheer-l",
+"bounds": [
+11.837,
+-23.931,
+0.01,
+12.28,
+-23.852,
+2.694
+]
+},
+{
+"id": "curtain-kids-a-01-sheer-r",
+"bounds": [
+14.158,
+-23.932,
+0.01,
+14.608,
+-23.868,
+2.694
+]
+},
+{
+"id": "curtain-kids-a-01-heavy-open-l",
+"bounds": [
+11.833,
+-23.983,
+0.01,
+12.275,
+-23.891,
+2.694
+]
+},
+{
+"id": "curtain-kids-a-01-heavy-open-r",
+"bounds": [
+14.167,
+-24.055,
+0.01,
+14.602,
+-23.871,
+2.694
+]
+},
+{
+"id": "curtain-kids-b-01-sheer-l",
+"bounds": [
+15.511,
+-23.929,
+0.01,
+15.98,
+-23.87,
+2.694
+]
+},
+{
+"id": "curtain-kids-b-01-sheer-r",
+"bounds": [
+17.821,
+-23.948,
+0.01,
+18.251,
+-23.861,
+2.694
+]
+},
+{
+"id": "curtain-kids-b-01-heavy-open-l",
+"bounds": [
+15.522,
+-23.978,
+0.01,
+15.966,
+-23.892,
+2.694
+]
+},
+{
+"id": "curtain-kids-b-01-heavy-open-r",
+"bounds": [
+17.818,
+-23.988,
+0.01,
+18.245,
+-23.911,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-01-sheer-l",
+"bounds": [
+19.174,
+-23.916,
+0.01,
+19.613,
+-23.862,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-01-sheer-r",
+"bounds": [
+21.498,
+-23.935,
+0.01,
+21.937,
+-23.849,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-01-heavy-open-l",
+"bounds": [
+19.176,
+-24.037,
+0.015,
+19.609,
+-23.855,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-01-heavy-open-r",
+"bounds": [
+21.498,
+-23.979,
+0.01,
+21.949,
+-23.906,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-02-sheer-l",
+"bounds": [
+22.261,
+-26.629,
+0.008,
+22.346,
+-26.244,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-02-sheer-r",
+"bounds": [
+22.268,
+-24.592,
+0.01,
+22.339,
+-24.219,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-02-heavy-open-l",
+"bounds": [
+22.211,
+-26.625,
+0.014,
+22.3,
+-26.254,
+2.694
+]
+},
+{
+"id": "curtain-parents-bed-02-heavy-open-r",
+"bounds": [
+22.216,
+-24.59,
+0.01,
+22.272,
+-24.221,
+2.694
+]
+},
+{
+"id": "curtain-dining-01-sheer-l",
+"bounds": [
+15.534,
+-23.937,
+-2.99,
+15.962,
+-23.848,
+-0.306
+]
+},
+{
+"id": "curtain-dining-01-sheer-r",
+"bounds": [
+17.821,
+-23.963,
+-2.99,
+18.248,
+-23.882,
+-0.306
+]
+},
+{
+"id": "curtain-dining-01-heavy-open-l",
+"bounds": [
+15.531,
+-23.982,
+-2.99,
+15.958,
+-23.91,
+-0.306
+]
+},
+{
+"id": "curtain-dining-01-heavy-open-r",
+"bounds": [
+17.82,
+-24.006,
+-2.985,
+18.244,
+-23.901,
+-0.306
+]
+},
+{
+"id": "curtain-living-01-sheer-l",
+"bounds": [
+18.985,
+-23.934,
+-2.99,
+19.508,
+-23.847,
+-0.306
+]
+},
+{
+"id": "curtain-living-01-sheer-r",
+"bounds": [
+21.619,
+-23.961,
+-2.99,
+22.122,
+-23.862,
+-0.306
+]
+},
+{
+"id": "curtain-living-01-heavy-open-l",
+"bounds": [
+18.996,
+-23.997,
+-2.986,
+19.496,
+-23.906,
+-0.306
+]
+},
+{
+"id": "curtain-living-01-heavy-open-r",
+"bounds": [
+21.62,
+-23.991,
+-2.99,
+22.119,
+-23.902,
+-0.306
+]
+},
+{
+"id": "curtain-living-02-sheer-l",
+"bounds": [
+22.262,
+-27.521,
+-2.99,
+22.334,
+-27.064,
+-0.306
+]
+},
+{
+"id": "curtain-living-02-sheer-r",
+"bounds": [
+22.221,
+-25.183,
+-2.99,
+22.377,
+-24.748,
+-0.306
+]
+},
+{
+"id": "curtain-living-02-heavy-open-l",
+"bounds": [
+22.183,
+-27.512,
+-2.99,
+22.29,
+-27.063,
+-0.306
+]
+},
+{
+"id": "curtain-living-02-heavy-open-r",
+"bounds": [
+22.218,
+-25.183,
+-2.99,
+22.299,
+-24.746,
+-0.306
+]
+},
+{
+"id": "curtain-lounge-01-sheer-l",
+"bounds": [
+3.887,
+-28.191,
+-2.998,
+3.943,
+-27.523,
+-0.306
+]
+},
+{
+"id": "curtain-lounge-01-sheer-r",
+"bounds": [
+3.875,
+-24.814,
+-2.99,
+3.952,
+-24.105,
+-0.306
+]
+},
+{
+"id": "curtain-lounge-01-heavy-open-l",
+"bounds": [
+3.926,
+-28.191,
+-2.999,
+4.01,
+-27.523,
+-0.306
+]
+},
+{
+"id": "curtain-lounge-01-heavy-open-r",
+"bounds": [
+3.864,
+-24.789,
+-2.99,
+4.015,
+-24.12,
+-0.306
+]
+}
+]
+}

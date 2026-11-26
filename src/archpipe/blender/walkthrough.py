@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import sys
 import time
@@ -110,7 +111,7 @@ def load_context(args):
     replayed=V.evaluated_scene_receipt(scene,{r['id']:metadata['objects'][r['id']] for r in metadata['curtain_report']})
     if replayed['evaluated_meshes_sha256']!=metadata['receipt']['evaluated_meshes_sha256']:
         raise ValueError('Cached Blender evaluated geometry changed')
-    device=V.configure_cycles(False)
+    device=V.configure_cycles(os.environ.get('ARCHPIPE_CYCLES_CPU')=='1')      # =1: Cycles on the CPU (exposure and lookdev beside a GPU shared with the RAG service; docs/lanes/WT.md Revision 6)
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production Blender pin differs')
     return path,scene,metadata
 
@@ -183,6 +184,7 @@ def measure(args,path,scene,context):
     views=frame_views(path,scene);villa=is_villa_path(path)
     segments=sorted({group_of(f) for f in path['frames']})
     if args.segments:segments=[s for s in segments if s in args.segments.split(',')]
+    bpy.context.scene.render.use_persistent_data=False      # metering renders at 1920x1080 with a changed scene each frame: kept data held 9.1 GB (measured) and pushed the peak past the 14 GB left beside the RAG service; same pixels
     every=path['settings'].get('interior_preview_every_nth_frame_for_exposure',1) if villa else 1
     for segment in segments:
         indices=[f['index'] for f in path['frames'] if group_of(f)==segment]
@@ -394,7 +396,10 @@ def workbench(args,path,scene,context):
         jpg=out/f'frame-{index:05d}.jpg'
         need_image=not args.metrics_only and not jpg.exists() and not args.animation
         if index in rows and not need_image:continue
-        place_camera(camera,views[index]['camera']);bpy.context.view_layer.update()
+        place_camera(camera,views[index]['camera'])
+        if not args.animation:
+            for rec,objs in door_objects(path,context):pose_door(rec,objs,path['frames'][index].get('doors',{}).get(rec['element'],1.))
+        bpy.context.view_layer.update()
         t0=time.monotonic()
         if index not in rows:
             depth,pts,nor,ok=depth_samples(camera,rule['grid'])
@@ -425,6 +430,7 @@ def workbench(args,path,scene,context):
                 camera.data.keyframe_insert('shift_y',frame=i);camera.data.keyframe_insert('lens',frame=i)
             for fc in list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves):
                 for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+            key_doors(path,door_objects(path,context),todo)
             run=todo[0];first=todo[0]
             s.frame_start=min(todo);s.frame_end=max(todo);s.frame_step=1
             s.render.filepath=str(out/'frame-#####');t2=time.monotonic()
@@ -441,6 +447,41 @@ def workbench(args,path,scene,context):
             print('WALKTHROUGH animation',len(todo),'frames',round(time.monotonic()-t2,1),'s',flush=True)
     save(metrics_file,[rows[k] for k in sorted(rows)])
     print('WALKTHROUGH workbench done',len(indices),round(time.monotonic()-started),'s',flush=True)
+
+
+def door_objects(path,context):
+    """[(record, [leaf object, handle object])] of the path's animated door leaves; the leaf and its split-off handle turn together about the hinge.
+    The leaf is never hidden or removed: only its transform is keyframed."""
+    out=[]
+    for rec in path.get('door_anim',[]):
+        objs=[context['objects'][rec['leaf_id']]]
+        handle=context['objects'].get('door-handle-'+rec['element'])
+        if handle is not None:objs.append(handle)
+        for o in objs:
+            if o.hide_render or o.hide_viewport:raise ValueError('animated door part is hidden: '+o.name)
+        out.append((rec,objs))
+    return out
+
+
+def pose_door(rec,objs,state):
+    """Turn the leaf (built in its open pose) about the hinge: angle = -signed_open*(1-state), so state 1 is open as built and 0 is closed as authored."""
+    from archpipe.door_anim import pivot_transform
+    psi,(tx,ty)=pivot_transform(rec,state)
+    for o in objs:
+        o.rotation_mode='XYZ';o.rotation_euler=(0.,0.,psi);o.location=(tx,ty,0.)
+
+
+def key_doors(path,doors,indices):
+    for i in indices:
+        for rec,objs in doors:
+            pose_door(rec,objs,path['frames'][i].get('doors',{}).get(rec['element'],1.))
+            for o in objs:
+                for prop in ('location','rotation_euler'):o.keyframe_insert(prop,frame=i)
+    for rec,objs in doors:
+        for o in objs:
+            if o.animation_data and o.animation_data.action:
+                for fc in o.animation_data.action.fcurves:
+                    for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
 
 
 def lookdev(args,path,scene,context):
@@ -474,6 +515,7 @@ def lookdev(args,path,scene,context):
     fcs=list(camera.animation_data.action.fcurves)+list(camera.data.animation_data.action.fcurves)+list(s.animation_data.action.fcurves)
     for fc in fcs:
         for kp in fc.keyframe_points:kp.interpolation='CONSTANT'
+    key_doors(path,door_objects(path,context),todo)      # animated door leaves: pose per rendered frame
     runs=[];a=b=todo[0];step=None
     for i in todo[1:]:
         if step is None and i>b:step=i-b
@@ -544,7 +586,7 @@ def main():
         views=frame_views(path,scene)
         V.configure_camera(views[0])
         static_position_output(root/'preflight-diagnostics')
-        device=V.configure_cycles(False)
+        device=V.configure_cycles(os.environ.get('ARCHPIPE_CYCLES_CPU')=='1')      # =1: Cycles on the CPU (exposure and lookdev beside a GPU shared with the RAG service; docs/lanes/WT.md Revision 6)
         save(root/('preflight-'+args.target_stage+'.json'),dict(passed=True,
              blender=bpy.app.version_string,render_device=device,path_sha256=path['sha256'],
              frames=len(views),sun=views[0]['sun'],cache_readback=args.target_stage!='assembly'))
