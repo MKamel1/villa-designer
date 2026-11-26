@@ -1,4 +1,4 @@
-# Furniture realism check: every flagged item after the soft-goods fix, ranked
+# Furniture realism check: every flagged item after the soft-goods fix, ranked (merged integ/aplus scene, 2026-11-25)
 
 | rank | object | category | check | achieved | required | fix |
 |---|---|---|---|---|---|---|
