@@ -36,3 +36,39 @@ mm-scaled bump and a few-cm mottle. Colours are untouched (maker-image means, cl
 **Limits, stated.** The thresholds and fabric feature bands are ours (`policy`): the held books have no weave, cushion-shape or
 edge-radius figures (knowledge search 2026-11-25, no hits). The check measures what is in the scene; imported scans are judged by the
 VLM crop only. The VLM is a second opinion, not a gate.
+
+
+## Round 2 (2026-11-25): the throw, the weave scale, the edges
+
+**The throw: why it was a plate and why the first cloth attempt "fell through".** Two separate causes, found in a small scene
+(`blender/soft_drape.py`, one throw, one sofa, a box host in `scratch`):
+1. *The authored position was off the sofa.* `soft_dressing.seat_dressing` places the throw from a seat frame; on the lounge, study and
+   cinema sofas 0.2-0.4 m of it hung past the seat end or front, and the living sofa's imported scan has a different seat from
+   its proxy. A baked lump fitted to that footprint is a plate cantilevered into air. The drape now first moves the drop point to
+   where most of the footprint has host surface under it (`landing_spot`), and the bake refuses a throw with under 60 % support.
+2. *The first sim had no floor and too little friction.* A 0.65 x 1.3 m sheet slid off the seat over 40 frames (cloth friction 10)
+   and fell out of the world: z -13 m looked like "through the sofa". Fixes, each measured in the small scene: collision friction 50,
+   a floor plane at the host's lowest point, cloth quality 20 / collision quality 8, a distance of 4 mm.
+3. *The host mesh must be one watertight shell.* glTF parts overlap, carry fins and inconsistent winding; the sheet tunnelled
+   through 3-8 vertices at the seat front (clearance measured against the product as imported: 164 intersections). A 4 mm voxel remesh of
+   the joined hosts as the collider gives 0 intersections, 0 inside, 3-12 mm minimum clearance against the original meshes.
+   (Not a cause, tried: self-collision at a 2 cm grid needs `self_distance_min` below the cell; a 0.01 object scale; world offset
+   of 27 m, which did no harm in the box test.)
+
+The result is baked once per throw (`knowledge/soft-throw-drapes.json.gz`, Blender 4.5.14, ~6 min for five) and used at render
+time only while its hosts match their stored signature (ids, triangle counts, boxes to 2 mm, model poses): a changed sofa
+falls back to the old lump and is named in `report["stale_throw_drapes"]`. Re-bake: `blender -b -P src/archpipe/blender/soft_drape.py
+-- --scene SCENE.json --out knowledge/soft-throw-drapes.json.gz`. The bake refuses a throw with any host intersection or vertex inside a host
+(it retries turned 0.2 rad steps first; the cinema sofa needed one).
+*Guard:* `tests/critic/test_soft_goods.py::ThrowDrape` (closed shell, not a plate, signature tolerance, stale fallback); the bake itself.
+*Why missed:* the realism check measured the throw's shape in isolation (crown spread) and sink into proxies that are hidden for the imported
+sofa; it never asked "is there a seat under it". Now the bake asks, and refuses.
+
+**Weave scale on every fabric.** `soften_materials` retiled only cushion and throw materials; the dining chairs, vanity chair and lounge sofa
+share `boucle` and kept 1.2 mm loops. It now applies to every fabric material on a visible furniture or dressing mesh (garments excluded),
+so one rule covers the next chair. *Guard:* `FabricScaleEverywhere`; the realism check's `scale` finding.
+
+**Edges.** The generators authored `bevel_m=0` for the garment-module joinery and 1.5 mm on some cabinets, and the check's floor is 2 mm.
+`soft_goods.ease_edges` (one rule, in `soften_scene`) raises case goods to 2 mm and upholstered boxes to 6 mm, smooth-shaded; glass,
+garments, hidden proxies and already-rounded pieces are left alone. *Guard:* `EasedEdges`; the realism check's `box` finding.
+*Left:* the seven imported desk scans (85-89 % axis-aligned): their geometry is the product's, not ours.

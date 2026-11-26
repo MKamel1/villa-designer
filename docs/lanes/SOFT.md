@@ -45,13 +45,21 @@ nubby texture); 3 upholstered boxes (two kids' beds, the library daybed) need ro
   `render_support.unsupported` for floating. Their upholstery is not re-modelled.
 - Not hand-modelled bouclé loops: the loop look is a Voronoi bump at 5 mm. A 12 mm sunk tolerance (render_support REST) applies.
 
-## Throws (open)
+## Round 2 (2026-11-25, same scene)
 
-The throw is the weakest soft good. It is a baked cloth drop (knit finish, rounded by a Laplacian pass), but it is shaped over a rolled
-lump, not over the sofa. On the scanned living sofa its proxy is not the scan, so the throw reads as a stiff folded plate
-cantilevered off the arm (as before the fix). A render-time cloth drop onto the host's real render geometry (`drape_cloth`'s
-approach) was tried: the solver let the sheet fall through the sofa (min z 7-12 m below the floor) and I could not isolate why in the time
-available, so it was removed. Next step: debug that sim in a small scene, then drape every `dress-throw-*` onto the imported model objects.
+| item | change | where |
+|---|---|---|
+| 1 throw | each throw is a cloth sheet (0.65 x 1.3 m, two plies = 8 mm) dropped, once, onto the real host: the imported living sofa scan, or the procedural sofa and its softened cushions. Seated on seat and arm or back, 0 intersections and 0 vertices inside the hosts measured against the product as imported, 3-12 mm clearance | `blender/soft_drape.py` (bake), `knowledge/soft-throw-drapes.json.gz`, `soft_goods.soften_throws` |
+| 2 weave scale | one rule for every fabric on visible furniture (not only cushions and throws): the tile that puts the measured weave in the class band. Dining chairs (geometry untouched), vanity chair, lounge sofa: 1.2 mm -> 5.3 mm loops | `soft_goods.soften_materials` |
+| 3 upholstered boxes | 6 mm arris on `furn-kb-bed-2/-3` and `furn-library-daybed-0` (the kids-a bunk is untouched) | `soft_goods.ease_edges` |
+| 4 case goods | 2 mm eased edge on every case good below it (135 meshes: garment-module joinery authored at 0, cabinets at 1.5 mm, the 3 rugs) | `soft_goods.ease_edges` |
+
+All render-time: scene.json, receipts and exposure records are unchanged (no shared-file regeneration). Findings from the root cause are in
+`docs/lessons/SOFT.md`, "Round 2".
+
+Realism check on the merged scene (`--soft`): 153 flagged objects after round 1 -> **7 after round 2**; the 7 are imported desk scans
+(85-89 % of face area axis-aligned: the product's own geometry, not ours; fix is a better asset or an import-time bevel).
+Soft goods 0 (shape, scale, float, penetrate), upholstery 0 (scale 8 -> 0, box 3 -> 0), case goods 142 -> 7 (the scans).
 
 ## Tests (fresh clone of origin/lane/SOFT, `/home/omar/archpipe/scratch/soft-fresh`)
 
