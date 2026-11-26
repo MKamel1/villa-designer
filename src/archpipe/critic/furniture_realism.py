@@ -335,8 +335,10 @@ def crop_for(view, points, image_path, out_path, pad=0.25, min_px=96):
 
 # ------------------------------------------------------------------------------------------------------- driver
 def fabric_table():
-    root = Path(__file__).resolve().parents[3] / "knowledge" / "soft-fabric-classes.json"
-    return json.loads(root.read_text(encoding="utf-8"))["feature_fraction_of_tile"]
+    import gzip
+    root = Path(__file__).resolve().parents[3] / "knowledge" / "soft-fabric-classes.json.gz"
+    with gzip.open(root, "rt", encoding="utf-8") as f:
+        return json.load(f)["feature_fraction_of_tile"]
 
 
 def run(scene, with_float=True, with_penetration=True):

@@ -52,7 +52,8 @@ def throw_bakes():
 
 @lru_cache(maxsize=1)
 def fabric_classes():
-    return json.loads((KNOWLEDGE / "soft-fabric-classes.json").read_text(encoding="utf-8"))
+    with gzip.open(KNOWLEDGE / "soft-fabric-classes.json.gz", "rt", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def _seed(identifier, n=3):
