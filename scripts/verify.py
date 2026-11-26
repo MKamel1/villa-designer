@@ -410,10 +410,10 @@ def main() -> int:
     from archpipe.furniture_fit import require_furniture_geometry
     measured=[m for m in scene['models'] if m.get('furniture_fitting')]
     for model in measured:require_furniture_geometry(model)
-    expect('seven measured desk instances have reviewed source and fixed-room bindings',
-           len([m for m in measured if m['role']=='desk'])==7 and all(m['room_review']['ok'] for m in measured))
-    expect('eight task chairs retain seat-driven cited back-height acceptance',
-           len([m for m in measured if m['role']=='task_chair'])==8 and all(
+    expect('five measured desk instances have reviewed source and fixed-room bindings',   # FX 2026-11-25: ka-desk-1/2 moved under the loft beds, procedural again
+           len([m for m in measured if m['role']=='desk'])==5 and all(m['room_review']['ok'] for m in measured))
+    expect('six task chairs retain seat-driven cited back-height acceptance',   # FX 2026-11-25: the two kids A desk chairs followed their desks
+           len([m for m in measured if m['role']=='task_chair'])==6 and all(
                m['furniture_fitting'].get('back_height_range') for m in measured if m['role']=='task_chair'))
     expect('parents bed omits only separable source covers and has both activation gates',
            scene.get('parents_bed',{}).get('status')=='active' and all(
