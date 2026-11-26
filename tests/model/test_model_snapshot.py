@@ -65,7 +65,7 @@ class Snapshot(unittest.TestCase):
             ph = e.params["photometry"]
             if not ph["ies"]:
                 self.assertTrue(ph["generic"] and not ph["code"] and not e.product_id, e.id)
-        self.assertEqual(len(lums) - len(with_ies), 62)   # FX 2026-11-25: 58 -> 62 generic (3 under-loft/under-cupboard UC strips, +1 kids night light, +2 NL ...)
+        self.assertEqual(len(lums) - len(with_ies), 62)   # FX 2026-11-25: 58 -> 62 generic (3 UC strips: sink run + 2 under lofts; +1 kids night light)
         for e in with_ies:
             self.assertFalse(e.params["photometry"]["ies"].startswith(("C:", "/", "\\")), e.id)
             self.assertTrue(e.params["photometry"]["ies"].endswith(".ies"))
