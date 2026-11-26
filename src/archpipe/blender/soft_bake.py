@@ -134,7 +134,7 @@ def bake_throw(w_mm, l_mm, seed):
     bml.to_mesh(lump.data)
     bml.free()
     bpy.context.collection.objects.link(lump)
-    lump.scale = (0.16, 0.035 + 0.006 * seed, 0.016 + 0.005 * seed)
+    lump.scale = (0.16, 0.04 + 0.006 * seed, 0.024 + 0.007 * seed)
     lump.location = (0.02 * (seed - 2), 0.07 * (seed - 2), 0.016)
     lump.rotation_euler = (0, 0, 0.35 * seed)
     lump.modifiers.new("c", "COLLISION")

@@ -20,12 +20,13 @@ def finish_fabric(mat, spec):
     bsdf.inputs["Sheen Weight"].default_value *= 0.25 + 0.75 * dark
     if "Sheen Tint" in bsdf.inputs:
         bsdf.inputs["Sheen Tint"].default_value = (0.35 + 0.65 * base[0], 0.35 + 0.65 * base[1], 0.35 + 0.65 * base[2], 1.0)
-    feature_m = {"boucle": 0.005, "linen": 0.002, "cotton": 0.0016, "leather": 0.002, "velvet": 0.0008}[spec["fabric_class"]]
+    feature_m = {"boucle": 0.005, "linen": 0.002, "cotton": 0.0016, "knit": 0.004, "leather": 0.002, "velvet": 0.0008}[spec["fabric_class"]]
     coord = nt.nodes.new("ShaderNodeTexCoord")
-    height = nt.nodes.new("ShaderNodeTexVoronoi" if spec["fabric_class"] == "boucle" else "ShaderNodeTexNoise")
+    looped = spec["fabric_class"] in ("boucle", "knit")
+    height = nt.nodes.new("ShaderNodeTexVoronoi" if looped else "ShaderNodeTexNoise")
     height.inputs["Scale"].default_value = 1.0 / feature_m
     nt.links.new(coord.outputs["Object"], height.inputs["Vector"])
-    if spec["fabric_class"] == "boucle":
+    if looped:
         height.feature = "F1"                       # round loops
         value, strength, dist = height.outputs["Distance"], 0.9, 0.0012
         inv = nt.nodes.new("ShaderNodeMath")

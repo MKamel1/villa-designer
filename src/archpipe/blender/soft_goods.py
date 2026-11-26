@@ -179,7 +179,7 @@ def soft_throw_faces(identifier, points):
     v[:, 2] = np.minimum(v[:, 2], THROW_MAX_MM)
     # cloth creases fold sharply in a coarse sim; a few Laplacian passes on the height give rounded folds
     h = v[:, 2].reshape(nx + 1, ny + 1)
-    for _ in range(4):
+    for _ in range(2):
         pad = np.pad(h, 1, mode="edge")
         h = 0.5 * h + 0.125 * (pad[:-2, 1:-1] + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:])
     v[:, 2] = h.ravel()
@@ -383,7 +383,7 @@ def soften_materials(scene):
         spec = scene["materials"].get(name)
         if not spec or spec.get("kind") != "principled":
             continue
-        fclass = LOOKALIKE_CLASS.get(spec.get("asset", ""), "cotton")
+        fclass = "knit" if name.startswith("fin-throw") else LOOKALIKE_CLASS.get(spec.get("asset", ""), "cotton")
         table = cls["classes"][fclass]
         frac = cls["feature_fraction_of_tile"].get(spec.get("asset", ""))
         if frac:

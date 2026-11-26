@@ -33,7 +33,7 @@ POLICY = {
     "soft_crown_spread_deg": 45.0,         # front-face normals must fan out this much (90th pct). Measured 2026-11-25: the rigid
                                            # cushions 31-35 deg, the baked ones 57-60, the scanned Poly Haven pillows 70-71
     "throw_crown_spread_deg": 25.0,        # a folded throw is flatter than a cushion: rigid sheet 0, baked drape 34-39
-    "feature_mm_band": {"boucle": [3.0, 9.0], "linen": [0.5, 3.0], "cotton": [0.5, 3.0], "leather": [1.0, 4.0],
+    "feature_mm_band": {"boucle": [3.0, 9.0], "knit": [2.0, 6.0], "linen": [0.5, 3.0], "cotton": [0.5, 3.0], "leather": [1.0, 4.0],
                         "velvet": [0.3, 2.0]},
     "penetrate_m": 0.012,                  # render_support REST tolerance: a cushion settles by a few mm
     "vlm_fail_below": 1,                   # VLM score 0 = fake/rigid, 1 = doubtful, 2 = convincing
