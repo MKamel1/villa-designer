@@ -53,6 +53,13 @@ class ExposureGroups(unittest.TestCase):
         scene['exposure_groups'] = record
         return scene, record
 
+    def test_device_evidence_accepts_gpu_and_explicit_cpu_only(self):
+        from archpipe.exposure_groups import device_evidence_ok
+        self.assertTrue(device_evidence_ok({'device': 'GPU', 'explicit_cpu': False}))
+        self.assertTrue(device_evidence_ok({'device': 'CPU', 'explicit_cpu': True}))
+        self.assertFalse(device_evidence_ok({'device': 'CPU', 'explicit_cpu': False}))  # silent fallback
+        self.assertFalse(device_evidence_ok(None))
+
     def test_real_membership_mutation_and_renamed_sibling_refuse(self):
         scene, record = self.real_scene()
         require_record(scene, record)
