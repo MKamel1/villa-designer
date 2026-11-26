@@ -63,13 +63,19 @@ CPU jobs could need ~90 GB of the machine's 89 GB. jobq now also checks RAM (`op
 
 - `jobq submit --ram-mb M` (default **4000**; **24000** when any argv element is a `blender*` executable, e.g.
   `blender -b ...` or `env X=1 blender ...`; a Python wrapper that spawns Blender must pass `--ram-mb 24000` itself).
-- A queued job starts only if `/proc/meminfo` MemAvailable minus the `ram_mb` of jobs launched in the last 300 s
-  (`RAM_RESERVE_S`: a scene build takes minutes to reach its peak, so it is not yet in MemAvailable) is at least
-  its `ram_mb` + 6000 MB margin.
+- A queued job starts only if `/proc/meminfo` MemAvailable minus, for EVERY active job, `max(0, ram_mb - current RSS of
+  the job's process tree)` (read from /proc via `command_pid` and its descendants; the whole life of the job, no time
+  window) is at least its `ram_mb` + 6000 MB margin. A wrapper (`sh chain.sh`) defaults to 24000 when its argv or the
+  script file it runs mentions `blender`. Cause of the 2026-11-25 OOM kills: the old reservation lapsed 300 s after
+  launch and wrappers got 4000.
+- A GPU job whose `vram_mb` + 1 GB exceeds total VRAM minus VRAM used by non-queue processes (e.g. the RAG services)
+  can never run: it stays `queued` with `reason: never fits: ...` and does NOT block later jobs.
 - Strict submit order: a job the RAM guard holds also holds every later job, CPU or GPU, so a big job is not starved
   by small ones. Slot and VRAM rules are unchanged. Unreadable meminfo disables the guard (slots/VRAM only).
-- Deploy: `bash ops/workstation/install_jobq.sh` (service has `KillMode=process`; running jobs survive the restart).
-  Slot counts live in `~/.config/systemd/user/jobq.service.d/memory.conf` (client-owned drop-in).
+- Deploy: `bash ops/workstation/install_jobq.sh` (service has `KillMode=process`; runners are separate sessions logging
+  to files, and a restarted daemon adopts them; proven by `RestartSurvivalTest`).
+- Slots: `~/archpipe/queue/slots.json`, e.g. `{"cpu": 4, "gpu": 3}`, re-read every tick: no restart needed. It overrides
+  the `--cpu-slots/--gpu-slots` flags (and the `memory.conf` drop-in). A bad file is ignored.
 
 ## Scene build cache (stills): build once, render many
 
