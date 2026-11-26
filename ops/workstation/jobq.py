@@ -19,8 +19,7 @@ ones), and only while nvidia-smi shows >= --vram-mb free (reserving that for job
 1 GB margin. --exclusive jobs hold every slot, i.e. run with no other queue GPU job. CPU jobs run up to
 --cpu-slots at once.
 
-RAM guard (all jobs): a job is admitted only if /proc/meminfo MemAvailable, minus the --ram-mb of jobs launched in the
-the sum over active jobs of max(0, ram_mb - RSS of the job tree), is >= its --ram-mb + 6 GB. Default --ram-mb is
+RAM guard (all jobs): a job is admitted only if /proc/meminfo MemAvailable, minus the sum over active jobs of max(0, ram_mb - RSS of the job tree), is >= its --ram-mb + 6 GB. Default --ram-mb is
 4000, or 24000 when argv runs Blender. A job the RAM guard holds also holds every later job (strict submit order).
 
     jobq submit [--id ID] [--gpu [--vram-mb M] [--exclusive]] [--ram-mb M] [--timeout S] [--attempts N] [--cwd D] [--env K=V] [--retry] -- argv...
