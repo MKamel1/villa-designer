@@ -56,8 +56,8 @@ class NativeDetails(unittest.TestCase):
             self.assertTrue(all(abs(w["sill"] - 0.9) < 1e-8 and
                                 abs(w["sill"] + w["height"] - 2.3) < 1e-8 for w in other_study))
         furniture = {f["mark"]: f for f in SPEC["furniture"]}
-        self.assertAlmostEqual(furniture["pb-bedside"]["footprint"][2] -
-                               furniture["pb-bedside"]["footprint"][0], 0.35)
+        self.assertAlmostEqual(furniture["pb-ledge-e"]["footprint"][2] -
+                               furniture["pb-ledge-e"]["footprint"][0], 0.28)
         self.assertTrue(any(p.startswith("ladder-") for f in SPEC["furniture"]
                             if f["type"].startswith("bed_") for p in f["parts"]))
 

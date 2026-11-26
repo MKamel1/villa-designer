@@ -1109,15 +1109,22 @@ def build_curtains(curtain_specs, materials):
         # width through a DOOR is (villa_render's `open_clear_width_m`, checked in
         # test_curtain_clear_width_through_doors, not by the generic render_support.blocked_openings, which has
         # no notion of "clear width" and would flag this overlap by design).
+        # Parked (spec park_side "r", client 2026-11-25): both leaves draw to the far end of the east pier, the left
+        # leaf's stack beside the right one's, so no stack stands at the bed-foot corner; the rail runs the same way.
+        east = half + spec["park_reach_m"] if spec.get("park_side") == "r" else None
+        l_lo, l_hi = (east - 2 * stack, east - stack) if east else (-half - pier_reach, -half - pier_reach + stack)
+        r_lo, r_hi = (east - stack, east) if east else (half + pier_reach - stack, half + pier_reach)
+        half_l = -half - closed_overlap if east else -half - pier_reach
+        half_r = east if east else half + pier_reach
         panels = [
-            panel(spec["id"] + "-sheer-l", -half - pier_reach, -half - pier_reach + stack, sheer_off, spec["sheer_material"]),
-            panel(spec["id"] + "-sheer-r", half + pier_reach - stack, half + pier_reach, sheer_off, spec["sheer_material"]),
-            panel(spec["id"] + "-heavy-open-l", -half - pier_reach, -half - pier_reach + stack, heavy_off, spec["heavy_material"]),
-            panel(spec["id"] + "-heavy-open-r", half + pier_reach - stack, half + pier_reach, heavy_off, spec["heavy_material"]),
+            panel(spec["id"] + "-sheer-l", l_lo, l_hi, sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-sheer-r", r_lo, r_hi, sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-heavy-open-l", l_lo, l_hi, heavy_off, spec["heavy_material"]),
+            panel(spec["id"] + "-heavy-open-r", r_lo, r_hi, heavy_off, spec["heavy_material"]),
             # Half-drawn sheer (day views declare curtain_state "sheer-half"): the same sheer fabric on the same track,
             # each leaf drawn in from the open stack to `sheer_half_inner_m` from the opening centre.
-            panel(spec["id"] + "-sheer-half-l", -half - pier_reach, -spec["sheer_half_inner_m"], sheer_off, spec["sheer_material"]),
-            panel(spec["id"] + "-sheer-half-r", spec["sheer_half_inner_m"], half + pier_reach, sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-sheer-half-l", half_l, -spec["sheer_half_inner_m"], sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-sheer-half-r", spec["sheer_half_inner_m"], half_r, sheer_off, spec["sheer_material"]),
             panel(spec["id"] + "-heavy-closed", -half - closed_overlap, half + closed_overlap, heavy_off, spec["heavy_material"]),
         ]
         for obj in panels:

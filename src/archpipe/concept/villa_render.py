@@ -1419,6 +1419,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         # 0.26 m drop (the bedroom's 0.30 was on a higher mattress): on these 0.48-0.53 m mattresses a 0.30 m drop on
         # two sides draped the foot corners to 30-50 mm off the floor (render_qa cloth_plausible, draft 12)
         over, foot_over = (-0.05, -0.05) if bunk else (0.26, 0.26)
+        if bid == "pb-bed":
+            # Client 2026-11-25 (slim headboard, no built-out wall): the foot route round the bed is 0.80 m between the
+            # mattress foot and the south wall (0.75 m required, UK AD M 2.25a), and the floating ledges stand beside the
+            # mattress at its top height, so the duvet is cut to end level with the bed foot and 0.03 m past the sides (it
+            # hung 0.155 m past the foot and 0.16 m past the west side, measured) and rests on the ledges.
+            over, foot_over = PB_DUVET_OVER, PB_DUVET_FOOT
         axis = "y" if b_["rot"] in (0, 180) else "x"
         if axis == "y":
             head = q[1] if b_["rot"] == 0 else q[3]
@@ -1450,7 +1456,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         size = [width, length] if axis == "y" else [length, width]
         pin = [axis, start, 0.03]
         cut = dict(foot_overhang_m=foot_over, side_overhang_m=over, head_to_pin_m=0.55)
-        cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "furn-" + bid + "side-", "dress-pillow-" + bid],
+        cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "furn-" + bid + "side-", "dress-pillow-" + bid]
+                          + (["furn-pb-ledge-w-", "furn-pb-ledge-e-"] if bid == "pb-bed" else []),
                           center=center, size=size, z_start=round(z + 0.08, 3), pin=pin, frames=60, mass=0.4,
                           bending=0.6, loft=0.018, thickness=0.05, cut=cut, bunk=bunk, mattress_top=round(z, 3),
                           mattress_span=mspan, length_axis=axis,
@@ -1938,6 +1945,14 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         else:
             overlap = max(0.0, desired_stack - pier_reach)
         stack = round(pier_reach + overlap, 3)
+        park, park_from = CURTAIN_PARK.get(cid, (None, None))
+        if park:
+            assert axis == "h" and park == "r", cid                 # only the east draw of an x-running window is built
+            # the stacks end 0.02 m short of the room's east face; both leaves (sheer and heavy) draw there, side by side,
+            # each gathered into half the room left between park_from and that face (a fuller stack than the ASSUMED
+            # 0.18 x width is not asked for: this one is the same fabric gathered tighter, 0.34 m a leaf)
+            park_reach = round(rx1 - 0.02 - (o["x"] + width / 2), 3)
+            stack = round(min(stack, (rx1 - 0.02 - park_from) / 2), 3)
         curtains.append(dict(
             id=cid, room=room, level=level, axis=axis, center=[o["x"], o["y"]], width=round(width, 3),
             floor_z=floor_z, track_z=round(track_z, 3), normal_sign=sign, wall_face=round(wall_face, 3),
@@ -1946,6 +1961,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             open_stack_m=stack, open_pier_reach_m=pier_reach, closed_overlap_m=0.05,
             sheer_half_inner_m=sheer_half_inner(width, opening_kind),
             **({"open_clear_width_m": clear_width} if clear_width is not None else {}),
+            **({"park_side": park, "park_reach_m": park_reach} if park else {}),
             # Floor-length regardless of sill height: a punched bedroom window's curtain still runs track-to-floor
             # (the norm in bedrooms/living rooms, not a curtain cut to the glass), so track_z/floor_z alone (not
             # the window's own sill/head) drive villa_scene.build_curtains' panel height.
@@ -1955,13 +1971,16 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         # and reveal, not offset from the glazing line. It already runs the full opening width, so no change is
         # needed for a stack that overlaps the glazing (that is fabric on the SAME rail, gathered further in).
         half = width / 2 + pier_reach
+        half_lo = half
+        if park:
+            half, half_lo = width / 2 + park_reach, width / 2 + 0.05
         z0, z1 = track_z - 0.03, track_z
         track_at = wall_face + sign * 0.125
         d0, d1 = sorted((track_at - 0.02, track_at + 0.02))
         if axis == "h":
-            box = (o["x"] - half, d0, z0, o["x"] + half, d1, z1)
+            box = (o["x"] - half_lo, d0, z0, o["x"] + half, d1, z1)
         else:
-            box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
+            box = (d0, o["y"] - half_lo, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
              label="detail: curtain ceiling track (ASSUMED)", kind="curtain-track")
     # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
@@ -2664,9 +2683,15 @@ def generated_components(src, kind, hh=None):
     from .. import furniture as FG
     return FG.build_furniture({"id": src["id"], "type": kind, "at": [src["cx"] * 1000, src["cy"] * 1000],
                                "size": [src["w"] * 1000, src["d"] * 1000],
-                               "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"])})
+                               "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"]),
+                               **({"headboard_mm": src["headboard_m"] * 1000} if src.get("headboard_m") else {})})
 
 
+PB_DUVET_OVER, PB_DUVET_FOOT = 0.03, 0.0   # m: the parents' duvet cut beyond the mattress sides / the bed foot (see _build)
+# Open-curtain stacks parked off the route (client 2026-11-25, lead decision): curtain id -> the side the whole open stack
+# is drawn to, and the x its stacks must not start west of. The parents' south window has the SW column and the 0.77 m west passage on its west side; a stack there
+# leaves 0.58-0.63 m on the only way round the bed foot, so both leaves draw to the east pier, past the vanity.
+CURTAIN_PARK = {"curtain-parents-bed-01": ("r", 21.70)}   # (side, x where the parked stacks may start: 0.68 m of east pier)
 KITCHEN_ROOMS = ("kitchen", "kitchen-island", "dirty-kitchen")
 # rug slot of the client's schedule per room; the cinema carpet is a design finish, not a schedule slot
 SOFA_SCHEDULE = {"living-sofa": ("living-sofa", 1), "lounge-sofa": ("lounge-sofa", -1), "study-sofa": ("study-sofa", 1),
@@ -2763,6 +2788,8 @@ def _stand_in_part_material(f, part):
         if room in ("parents-dressing", "parents-dressing-ext"):
             return "walnut-grain-x"  # thin side/back panels must not sample their own 18 mm thickness
         return "oak" if room not in ("dirty-kitchen",) else "greige-lacquer"
+    if t == "bedside_ledge":
+        return {"headboard": "taupe-fabric", "top": "walnut-grain-x", "drawer": "walnut"}.get(part, "oak")
     if t in ("sideboard", "tv_unit", "bedside_table", "window_bench"):
         return "screen-black" if part == "screen" else "walnut"
     if t == "screen":
@@ -2855,14 +2882,7 @@ def props(lay):
                 add("library-books-%d" % n, "book_encyclopedia_set_01", bk[0] + dx, bk[1] + 0.16, B + z,
                     label="books on the library shelves")
                 n += 1
-    # The set is 0.551 x 0.163 m at scale 1 with its origin at the left end, so placing the origin at the bedside's
-    # centre put it 0.357 m past the 0.35 m top, floating in the dressing door's opening (client, walkthrough 6:21).
-    # Scale 0.6 (0.331 m) and seat the measured bounds on the top's centre; dressing_overhang_violations guards it.
-    x, y = c("pb-bedside")
-    sc = 0.6
-    (bx0, _, bz0), (bx1, _, bz1) = MANIFEST_BOUNDS["book_encyclopedia_set_01"]["min"], MANIFEST_BOUNDS["book_encyclopedia_set_01"]["max"]
-    add("bedside-books", "book_encyclopedia_set_01", x - sc * (bx0 + bx1) / 2, y + sc * (bz0 + bz1) / 2,
-        G + it["pb-bedside"]["h"], s=sc, label="books on the bedside")
+    # (the bedside books are gone with the bedside tables, client 2026-11-25: the ledges are 0.25 m deep, bed furniture only)
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
     # bedroom one moved out of the vanity chair's way into the window corner beside the vanity; the study one out of
     # the new low window into the corner beside the TV unit

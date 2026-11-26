@@ -118,7 +118,7 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertEqual(res["clearances"]["status"], "fail")
 
     def test_bedside_table_outside_zone_a_is_refused(self):
-        res = _run(lambda items, ids: ids["pb-bedside"].update(cy=ids["pb-bedside"]["cy"] + 0.9))  # along the bed
+        res = _run(lambda items, ids: ids["pb-ledge-e"].update(cy=ids["pb-ledge-e"]["cy"] + 0.9))  # along the bed
         self.assertTrue(any("pb-bed" in p for p in res["clearances"]["problems"]))
 
     def test_bedside_table_in_zone_a_is_allowed(self):

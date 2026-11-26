@@ -337,7 +337,10 @@ def _check_envelope(item_id, name, verts, width, depth, height, eps=1e-6):
 
 def build_furniture(item):
     item_id, ftype, at, width, depth, height, rotation = _validate_item(item)
-    components = _BUILDERS[ftype](width, depth, height)
+    if ftype == "bed_double" and item.get("headboard_mm"):
+        components = _build_bed_double(width, depth, height, headboard_mm=float(item["headboard_mm"]))
+    else:
+        components = _BUILDERS[ftype](width, depth, height)
 
     ca, sa = _rotation_components(rotation)
     out = []
@@ -355,14 +358,14 @@ def build_furniture(item):
 
 # --------------------------------------------------------------- bed_double
 
-def _build_bed_double(w, d, h):
+def _build_bed_double(w, d, h, headboard_mm=None):
     hw, hd = w / 2.0, d / 2.0
     comps = []
 
     leg_h = 0.08 * h
     rail_h = 0.09 * h
     frame_top = leg_h + rail_h
-    hb_depth = max(40.0, min(0.11 * d, 220.0))
+    hb_depth = headboard_mm if headboard_mm else max(40.0, min(0.11 * d, 220.0))
     hb_y1 = -hd + hb_depth
 
     leg_margin = min(60.0, 0.2 * min(w, d))
