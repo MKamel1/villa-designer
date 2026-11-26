@@ -35,7 +35,8 @@ class SupportMounting(unittest.TestCase):
                  'furn-stair-flight-store-storage-box-28', 'furn-stair-flight-store-storage-box-28-handle',  # SC2/SC3 stair store
                  'lamp-arm-DESK-kids-a-05', 'lamp-shade-DESK-kids-a-05',            # L6b desk lamps renumbered
                  'marker-PATH-landing-gf-01', 'marker-PATH-landing-gf-02',            # INT2 landing PATH markers
-                 'furn-library-daybed-2', 'furn-library-daybed-3'}                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
+                 'furn-library-daybed-2', 'furn-library-daybed-3',
+                 'furn-ka-loft-1-0', 'furn-ka-loft-1-1', 'furn-ka-loft-2-0', 'furn-ka-loft-2-1'}  # FX 2026-11-25: kids A loft beds (mattress and slats) replace the bunk                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
         removed = {'fix-DLN-bar-alcove-11', 'fix-DLN-bar-alcove-12', 'lens-DLN-bar-alcove-11', 'lens-DLN-bar-alcove-12',  # L6b redesign
                    'furn-stair-flight-store-storage-box-35', 'furn-stair-flight-store-storage-box-35-handle',
                    'furn-stair-flight-store-storage-box-40', 'furn-stair-flight-store-storage-box-40-handle',
@@ -43,7 +44,8 @@ class SupportMounting(unittest.TestCase):
                    'furn-stair-flight-store-suitcase-27', 'furn-stair-flight-store-suitcase-27-handle', 'furn-stair-flight-store-suitcase-27-wheels',  # SC2/SC3 stair store
                    'lamp-arm-DESK-kids-a-04', 'lamp-shade-DESK-kids-a-04',
                    'landscape-climber-branches-east', 'landscape-climber-branches-north', 'landscape-climber-east',
-                   'landscape-climber-north', 'landscape-trellis-east', 'landscape-trellis-north'}                    # GI decided garden
+                   'landscape-climber-north', 'landscape-trellis-east', 'landscape-trellis-north',
+                   'furn-ka-bunk-0', 'furn-ka-bunk-1'}  # FX: the kids A bunk is removed (loft beds replace it)                    # GI decided garden
         now, then = self.scene['support_inventory_before'], inventory['after']
         self.assertEqual(set(now) - set(then), added)
         self.assertEqual(set(then) - set(now), removed)

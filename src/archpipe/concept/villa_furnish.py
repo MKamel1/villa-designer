@@ -1037,8 +1037,7 @@ def _route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
         for a, b, c, d in rects:                  # half-open, so a cell centred on a shared edge is not lost
             free |= (X >= a - 1e-9) & (X < c - 1e-9) & (Y >= b - 1e-9) & (Y < d - 1e-9)
         walls_l = _walls(sp, level)
-        # a loft bed is overhead (frame underside 1.42 m): the desk and chair under it are the floor obstacles, the loft itself is not
-        obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3 and not it.get("loft")] + _columns() + walls_l
+        obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3] + _columns() + walls_l
         chairs = {it["id"]: _cinema_chair_rects(it) for it in items if it["id"] == "cinema-desk" and it["room"] in cl}
         obst += [rect for pair in chairs.values() for rect in pair]   # Mitton path body must pass the pulled-out chairs
         # not floor: the basement flight (you stand at its foot, not on it), the GF stair opening and any voids
