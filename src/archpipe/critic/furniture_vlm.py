@@ -5,6 +5,12 @@
 
 One question per object (cushion, pillow, throw, furniture item) whose projected bounds lie wholly inside the view: the
 crop is cut from the render, `furniture_realism.vlm_question` asked, evidence before score, temperature 0.
+
+ADVISORY, NOT A GATE. Calibrated 2026-11-25 on the rigid cushions, the baked ones and a real scan (Poly Haven
+throw_pillows_01), with gemma4:12b and qwen2.5vl:7b: an absolute "is it real" prompt scored everything 0 (scan
+included); a three-observation rubric scored everything 2 (rigid cushion included); a pairwise comparison against the
+scan always preferred the in-scene crop. None separates the defect from a good asset, so the gate is geometric
+(`furniture_realism.check_scene`) and the VLM text is kept as a second opinion in the report.
 """
 from __future__ import annotations
 
@@ -27,11 +33,13 @@ def objects(scene):
     for m in scene["meshes"]:
         if F.SOFT_ID.match(m["id"]):
             items[m["id"]] = (KIND[m["id"].split("-")[1]], [m])
+            items[m["id"]][1][0]["_room"] = m.get("room")
         elif m["group"] == "furniture" and m["id"].startswith("furn-") and m.get("label") \
                 and not m["label"].startswith(("ASSUMED", "stair")) \
                 and m.get("part_kind") not in ("joinery-pull", "box-handle", "glass-pane"):
             items.setdefault(m["label"], (m["label"].replace("-", " "), []))[1].append(m)
-    return {k: (kind, np.array([p for mm in ms for f in mm["faces"] for p in f], float)) for k, (kind, ms) in items.items()}
+    return {k: (kind, np.array([p for mm in ms for f in mm["faces"] for p in f], float), ms[0].get("room"))
+            for k, (kind, ms) in items.items()}
 
 
 def run(scene, render_dir, views, host, model, out_dir):
@@ -40,13 +48,18 @@ def run(scene, render_dir, views, host, model, out_dir):
     by_view = {v["id"]: v for v in scene["views"]}
     for vid in views:
         png = Path(render_dir) / (vid + ".png")
-        for oid, (kind, pts) in objs.items():
-            crop = F.crop_for(by_view[vid], pts, png, Path(out_dir) / ("%s__%s.png" % (vid, oid)))
+        view = by_view[vid]
+        for oid, (kind, pts, room) in objs.items():
+            # only what the view is about: its subjects, and the soft goods of its own room (no occlusion test here)
+            if not (oid in view.get("subjects", []) or (F.SOFT_ID.match(oid) and room == view.get("room"))):
+                continue
+            crop = F.crop_for(view, pts, png, Path(out_dir) / ("%s__%s.png" % (vid, oid)))
             if not crop:
                 continue
             try:
                 ans = vlm.chat(host, model, F.vlm_question(kind), [vlm.b64(crop)],
-                               {"temperature": 0, "seed": 7, "num_predict": 300}, vlm.SCORE_SCHEMA)
+                               {"temperature": 0, "seed": 7, "num_predict": 400}, F.VLM_SCHEMA)
+                ans["score"] = F.vlm_score(ans)
             except vlm.VlmUnavailable as e:
                 ans = {"error": str(e)}
             out.append({"view": vid, "object": oid, "kind": kind, "crop": str(crop), **ans})

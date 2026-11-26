@@ -118,7 +118,14 @@ class VlmCrop(unittest.TestCase):
     def test_question_names_the_object_and_the_scale(self):
         q = F.vlm_question("scatter cushion")
         self.assertIn("scatter cushion", q)
-        self.assertIn("0 = clearly fake", q)
+        self.assertIn("Describe the evidence first", q)
+
+    def test_score_from_three_answers(self):
+        k = ("outline_is_stiff_straight_lines_like_a_board", "soft_creases_or_sag_visible", "fabric_texture_looks_plausible_at_real_size")
+        self.assertEqual(F.vlm_score(dict(zip(k, (True, False, False)))), 0)
+        self.assertEqual(F.vlm_score(dict(zip(k, (False, True, False)))), 1)
+        self.assertEqual(F.vlm_score(dict(zip(k, (False, True, True)))), 2)
+        self.assertIsNone(F.vlm_score({}))
 
     def test_projection_puts_target_at_centre(self):
         view = {"camera": {"position": [0, 0, 1.2], "target": [5, 0, 1.2], "lens_mm": 24, "sensor_mm": 36}, "resolution": [1600, 1000]}

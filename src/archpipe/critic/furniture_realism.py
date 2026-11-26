@@ -282,13 +282,33 @@ def penetration_findings(scene):
 
 
 # --------------------------------------------------------------------------------------------- the VLM question
+VLM_SCHEMA = {"type": "object",
+              "properties": {"evidence": {"type": "string"},
+                             "outline_is_stiff_straight_lines_like_a_board": {"type": "boolean"},
+                             "soft_creases_or_sag_visible": {"type": "boolean"},
+                             "fabric_texture_looks_plausible_at_real_size": {"type": "boolean"}},
+              "required": ["evidence", "outline_is_stiff_straight_lines_like_a_board", "soft_creases_or_sag_visible",
+                           "fabric_texture_looks_plausible_at_real_size"]}
+
+
 def vlm_question(kind):
-    return ("This is a close crop from a rendered interior. The object is a %s. Judge only that object. "
-            "Does it look like a real, photographed %s: soft where it should be, natural creases and rounded edges, "
-            "a believable fabric or finish at the right scale? Or does it look like a rigid computer-graphics object: "
-            "stiff board or box shape, sharp straight edges, flat or wrongly scaled texture? "
-            "Give the evidence you can see first, then a score: 0 = clearly fake or rigid, 1 = doubtful, 2 = convincingly real."
-            % (kind, kind))
+    """Observable features, not an overall 'is it real' (a 12B model scored every crop 0 on that, a real scan included)."""
+    return ("This is a close crop from a rendered interior. Look only at the %s. Answer three questions about what you see. "
+            "(1) Is its outline stiff, with straight edges and sharp corners like a board or box? "
+            "(2) Are there soft creases, sag, puckering or a rounded crown, as stuffed fabric has? "
+            "(3) Does the fabric texture look plausible at the real size of this object, not blown up or smeared? "
+            "Describe the evidence first." % kind)
+
+
+def vlm_score(answer):
+    """0 = fake/rigid, 1 = doubtful, 2 = convincing, from the three answers."""
+    stiff = answer.get("outline_is_stiff_straight_lines_like_a_board")
+    soft = answer.get("soft_creases_or_sag_visible")
+    tex = answer.get("fabric_texture_looks_plausible_at_real_size")
+    if stiff is None or soft is None or tex is None:
+        return None
+    good = (not stiff) + soft + tex
+    return 0 if good <= 1 else 1 if good == 2 else 2
 
 
 def project(view, points):
