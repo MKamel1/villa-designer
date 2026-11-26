@@ -83,3 +83,12 @@ Soft goods 0 (shape, scale, float, penetrate), upholstery 0 (scale 8 -> 0, box 3
   measured that way failed the authored scene's digest ("Stale dominant-light rule or transport measurement", `SOFT-rebuild-1`). Guard: softening is
   skipped in the measuring modes, and `tests/critic/test_soft_goods.py::RenderWiring` pins it.
 - Renders: `SOFT-final-after-2/3` (after) and `SOFT-final-before-5` (before, `--no-soft`), 96 samples, 1600x1067, six views.
+
+## Round 3 (2026-11-26): the throw, seated
+
+Round 2's throws buried the scatter cushions and read as a lumpy sheet. Now: sheet 0.5 x 1.0 m (a throw folded in four), the landing spot
+penalises overlap with the scatter cushions (weight 1.5), reach capped at 0.55 m (a first rebake at 0.9 m dropped the living-sofa throw onto
+the coffee table, caught in the v02 render, not by the clearance check: clearance only proves no interpenetration). Rebaked, all five throws
+0 intersections / 0 inside vertices, 2-6 mm clearance. Realism check still 7 (the imported desk scans); soft goods, upholstery 0.
+Renders (CPU Cycles, 96 spp, 1600x1067): `out/soft/r3-before` (round 1 commit 8644922) and `out/soft/r3-after`; crops in `out/soft/crops-r3`.
+Fresh clone: critic + interior + villa_render 242 passed; `verify.py` ALL PASS; test_soft_goods + test_furniture_realism 35 OK.
