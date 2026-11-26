@@ -2019,7 +2019,10 @@ def render(scene_data, args):
     if needs_scene_admission(scene_data):
         require_scene(scene_data)
     os.makedirs(args.out, exist_ok=True)
-    if not args.no_soft:                         # lane SOFT: baked cloth cushions, inflated upholstery, fabric finish
+    # lane SOFT: baked cloth cushions, inflated upholstery, fabric finish. Not in the measuring modes: the dominant-light
+    # record's transport digest is taken from scene_data, which softening mutates (a record measured on softened geometry
+    # no longer matched the authored scene: "Stale dominant-light rule or transport measurement", SOFT-rebuild-1).
+    if not (args.no_soft or args.measure_exposure_groups or args.measure_lighting or args.calibrate):
         from archpipe.blender import soft_goods
         soft_report = soft_goods.soften_scene(scene_data)
         print("soft goods:", soft_report)
