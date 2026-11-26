@@ -3,7 +3,7 @@
 set -e
 cd /home/omar/archpipe/lanes/WT
 PY=/home/omar/archpipe/envs/laneP-venv/bin/python
-O=${1:-/home/omar/archpipe/lanes/WT/out/wt/villa9d}
+O=${1:-/home/omar/archpipe/lanes/WT/out/wt/villa9e}
 B=src/archpipe/blender/walkthrough.py
 blender -b -t 8 --python-exit-code 1 -P $B -- --root $O --stage lookdev --frames $(cat /home/omar/archpipe/lanes/WT/out/wt/even9b.txt)
 $PY scripts/flythrough.py contact --stage lookdev --every 48 --out $O
