@@ -12,6 +12,8 @@ def apply(scene,layout,specification,furniture):
     if not RECEIPT.is_file():return scene
     receipt=json.loads(gzip.decompress(RECEIPT.read_bytes()))
     if layout['id']!=receipt['option']:return scene
+    if receipt.get('status')=='retired':           # client 2026-11-26: the bed is custom joinery now, nothing to integrate
+        return dict(scene,parents_bed=dict(status='retired',reason=receipt['retired_2026_11_26']['reason']))
     models=deepcopy(receipt['models'])
     if receipt.get('status')!='accepted' or receipt.get('room_context_sha256')!=room_context(scene,layout,specification,furniture,models):
         raise ValueError('parents bed fixed-room inputs changed; repeat relative review and neutral previews')

@@ -1004,15 +1004,19 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     GEN = {"bed_double": ("bed_double", 1.05), "bed_small_double": ("bed_double", 0.95),
            "wardrobe": ("wardrobe", None), "bedside_table": ("bedside_table", None)}
     GEN_MAT = {"archpipe oak": "oak", "archpipe warm linen": "linen", "archpipe ivory bedding": "bedding-white",
-               "archpipe muted taupe throw": "linen", "archpipe dark metal": "black-metal"}
+               "archpipe muted taupe throw": "linen", "archpipe dark metal": "black-metal",
+               "archpipe walnut": "walnut-grain-x", "archpipe taupe upholstery": "taupe-fabric", "archpipe tray lining": "linen"}
     generated = set()
     detailed = set()
     from . import villa_furniture_detail as FD
     gen_comps = {}
+    tray_open, tray_closed = {}, []
     for f in F3.spec(lay):
         src = it_all.get(f["mark"])
         if src is not None and src["type"] in GEN and not str(src["room"]).startswith("parents-dressing"):
             kind, hh = GEN[src["type"]]
+            if src.get("joinery"):
+                hh = JOINERY_BED_H                           # envelope: up to the headboard top (1.35 m), not the 1.05 m of the stock bed
             comps = generated_components(src, kind, hh)
             z = LZ[f["level"]]
             by = {}
@@ -1058,16 +1062,30 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 # Keep pillows separate so their curved edges can be smoothed
                 # without subdividing the mattress or the hard bed frame.
                 key = (mat, part) if part.startswith("pillow") else (mat, "body")
+                if part == "headboard-panel":
+                    key = (mat, part)
+                if part.startswith("tray-"):
+                    # each tray is its own mesh; the east tray also gets a pulled-out copy (n18 shows it, hides the closed one)
+                    key = (mat, "tray-" + part[-1])
+                    if part.endswith("-e"):
+                        tray_open.setdefault(mat, []).extend(
+                            [[[vs[t[i]][0] + JOINERY_TRAY_PULL, vs[t[i]][1], vs[t[i]][2]] for i in range(3)] for t in triangles])
                 by.setdefault(key, []).extend(
                     [[vs[t[0]], vs[t[1]], vs[t[2]]] for t in triangles])
             for k, ((mat, part), faces) in enumerate(by.items()):
+                if part == "tray-e":
+                    tray_closed.append("furn-%s-%d" % (f["mark"], k))
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"], k), group="furniture", material=mat,
                                    room=f["room"], label=f["mark"] + (" dressing: pillow" if part.startswith("pillow") else ""),
-                                   faces=faces, part_kind="pillow" if part.startswith("pillow") else f["type"],
+                                   faces=faces, part_kind=bed_part_kind(part, mat, f["type"]),
                                    keep_object=True, subdivide=1 if part.startswith("pillow") else 0,
                                    bevel_m=0.003 if part.startswith("pillow") else 0))
             generated.add(f["mark"])
             gen_comps[f["mark"]] = comps
+            for k, (mat, faces) in enumerate(sorted(tray_open.items()) if f["mark"] == "pb-bed" else []):
+                meshes.append(dict(id=TRAY_OPEN_PREFIX + "%d" % k, group="furniture", material=mat, room=f["room"],
+                                   label=f["mark"] + " east tray pulled out (n18 only)", faces=faces, part_kind=bed_part_kind("tray-e", mat, "bed_double"),
+                                   keep_object=True, subdivide=0, bevel_m=0))
             continue
         z = LZ[f["level"]]
         # detailed render geometry inside the same checked envelope (villa_furniture_detail); boxes only where no
@@ -1376,7 +1394,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from archpipe.beds import label_fallbacks
     label_fallbacks(meshes, it_all.values(),
                     [r["mark"] for r in fit_report if r["ok"]])
-    notes.append("BEDS: PROCEDURAL BED FALLBACK (stand-in) retained for parents, both kids' rooms and library "
+    notes.append("BEDS: the parents' bed is custom joinery (client 2026-11-26: walnut deck with a push-to-open tray in each side rail, "
+                 "50 mm walnut-and-upholstery headboard; runner basis Blum MOVENTO 760H NL 270 with TIP-ON, ASSUMED until ordered). "
+                 "PROCEDURAL BED FALLBACK (stand-in) retained for both kids' rooms and library "
                  "daybed until a measured, uniformly fitting, neutral-preview-reviewed model is available. "
                  "Per-part fallback_label records the disclosure without changing view subject identity.")
 
@@ -1456,8 +1476,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         size = [width, length] if axis == "y" else [length, width]
         pin = [axis, start, 0.03]
         cut = dict(foot_overhang_m=foot_over, side_overhang_m=over, head_to_pin_m=0.55)
-        cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "furn-" + bid + "side-", "dress-pillow-" + bid]
-                          + (["furn-pb-ledge-w-", "furn-pb-ledge-e-"] if bid == "pb-bed" else []),
+        cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "furn-" + bid + "side-", "dress-pillow-" + bid],
                           center=center, size=size, z_start=round(z + 0.08, 3), pin=pin, frames=60, mass=0.4,
                           bending=0.6, loft=0.018, thickness=0.05, cut=cut, bunk=bunk, mattress_top=round(z, 3),
                           mattress_span=mspan, length_axis=axis,
@@ -1998,6 +2017,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "cap. The heavy layer closes across the opening at night; the sheer layer stays open in both "
                  "states (its job is daytime diffusion, and the closed heavy layer already gives the night "
                  "blackout/dim-out). ASSUMED: track and stacking dimensions, not a specified product.")
+    for v in views:
+        # the parents' east tray: closed in every view, pulled out (copy shown, closed one hidden) in the n18 close view only
+        tray_hide = tray_closed if v["id"] == TRAY_VIEW else [m["id"] for m in meshes if m["id"].startswith(TRAY_OPEN_PREFIX)]
+        if tray_hide:
+            fill_defaults(v, {"hide_meshes": []})
+            override(v, "hide_meshes", v["hide_meshes"] + tray_hide, "the east tray is closed or pulled out per view")
     for v in views:
         if v["state"] in DAY_CURTAIN_STATE_STATES and curtains:
             fill_defaults(v, {"curtain_state": SHEER_HALF_STATE})
@@ -2684,9 +2709,22 @@ def generated_components(src, kind, hh=None):
     return FG.build_furniture({"id": src["id"], "type": kind, "at": [src["cx"] * 1000, src["cy"] * 1000],
                                "size": [src["w"] * 1000, src["d"] * 1000],
                                "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"]),
-                               **({"headboard_mm": src["headboard_m"] * 1000} if src.get("headboard_m") else {})})
+                               **({"joinery": True} if src.get("joinery") else {})})
 
 
+def bed_part_kind(part, mat, furniture_type):
+    """Physical kind of a generated bed's mesh: the joinery bed's trays are door-leaf fronts and carcass linings, its upholstered panel a wall panel."""
+    if part.startswith("pillow"):
+        return "pillow"
+    if part.startswith("tray-"):
+        return "door-leaf" if mat == "walnut-grain-x" else "cabinet-carcass"
+    return "wall-panel" if part == "headboard-panel" else furniture_type
+
+
+JOINERY_BED_H = 1.35        # m: the parents' joinery bed's envelope height (headboard top)
+JOINERY_TRAY_PULL = 0.25    # m: the east tray pulled out for the close view (furniture.JOINERY_BED["tray_pull_m"])
+TRAY_OPEN_PREFIX = "tray-open-e-"
+TRAY_VIEW = "n18-parents-tray-open"
 PB_DUVET_OVER, PB_DUVET_FOOT = 0.03, 0.0   # m: the parents' duvet cut beyond the mattress sides / the bed foot (see _build)
 # Open-curtain stacks parked off the route (client 2026-11-25, lead decision): curtain id -> the side the whole open stack
 # is drawn to, and the x its stacks must not start west of. The parents' south window has the SW column and the 0.77 m west passage on its west side; a stack there
@@ -2788,8 +2826,6 @@ def _stand_in_part_material(f, part):
         if room in ("parents-dressing", "parents-dressing-ext"):
             return "walnut-grain-x"  # thin side/back panels must not sample their own 18 mm thickness
         return "oak" if room not in ("dirty-kitchen",) else "greige-lacquer"
-    if t == "bedside_ledge":
-        return {"headboard": "taupe-fabric", "top": "walnut-grain-x", "drawer": "walnut"}.get(part, "oak")
     if t in ("sideboard", "tv_unit", "bedside_table", "window_bench"):
         return "screen-black" if part == "screen" else "walnut"
     if t == "screen":

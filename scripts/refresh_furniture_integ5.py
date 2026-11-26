@@ -22,7 +22,7 @@ def save(path,value):
 def inputs():
     raw=load(OUT/'procedural-scene.json');context=raw['authoring_room_context']
     fr=load(ROOT/'knowledge/furniture-stage2.json.gz');br=load(ROOT/'knowledge/parents-bed.json.gz')
-    models=[dict(m,review_geometry=fr['geometry'][m['asset']]) for m in fr['models']]+br['models']
+    models=[dict(m,review_geometry=fr['geometry'][m['asset']]) for m in fr['models']]+([] if br.get('status')=='retired' else br['models'])   # the parents' bed is custom joinery since 2026-11-26: no imported bed to review
     return raw,context,models,fr,br
 
 def export():

@@ -32,10 +32,7 @@ DIRS = {0: {"front": (0, 1), "back": (0, -1), "right": (1, 0), "left": (-1, 0)},
         180: {"front": (0, -1), "back": (0, 1), "right": (-1, 0), "left": (1, 0)},
         -90: {"front": (1, 0), "back": (-1, 0), "right": (0, -1), "left": (0, 1)},
         90: {"front": (-1, 0), "back": (1, 0), "right": (0, 1), "left": (0, -1)}}
-LEDGE_TOP = 0.525      # m: the parents' bed mattress top (generated bed, 0.5 x 1.05 m overall height); the ledges' top
-PB_BED_X = 20.33        # m: the parents' bed centre. UNMOVED (the client allowed up to 50 mm): the lead-approved wall fittings and slats are bound to it
-LEDGE_D = 0.30          # m: the 50 mm headboard panel the ledge hangs from + 250 mm of ledge beyond its face
-LEDGE_W = 0.28          # m: ledge width along the wall (~300 asked); 0.30 left the west passage 0.753 m, read 0.746 on the 20 mm grid (the gate tolerates half a cell, a design should not lean on it)
+PB_BED_X = 20.33        # m: the parents' bed centre. UNMOVED: the lead-approved wall fittings and slats are bound to it
 BODY = 0.914            # card mitton-path-of-travel-min: paths of travel at least 36 in (914 mm)
 PRINCIPAL_BEDROOM = "parents-bed"
 BEDROOM_ROUTE = 0.750   # card ukadm-bedroom-route-750: inside a bedroom, a 750 mm access route from the doorway
@@ -47,7 +44,7 @@ PRODUCT_ASSETS = {
     "living-sofa": "sf_minotti_sofa", "living-chair-1": "sf_probber_cane_armchair",
     "living-chair-2": "sf_probber_cane_armchair", "lounge-sofa": "sf_modern_low_sofa",
     "lounge-armchair": "sf_probber_cane_armchair", "cinema-sofa": "sf_cinema_sofa_velvet",
-    "pb-bed": "sf_chelsea_bed", "dining-table#chair-": "sf_dining_chair_boucle",
+    "dining-table#chair-": "sf_dining_chair_boucle",
     "ka-desk-1#chair-": "sf_kidschair_oak", "ka-desk-2#chair-": "sf_kidschair_oak",
     "kb-desk#chair-": "sf_kidschair_oak", "study-desk#chair-": "modern_arm_chair_01",
     "study-adult-desk#chair-": "modern_arm_chair_01", "rug-living": "sf_rug_round_jute",
@@ -379,17 +376,13 @@ def _layout(lay=None, products=True):
                 h=2.2, why="wardrobe beside the door"), "kids-b")
     # -- parents: queen bed, head on the dressing wall; vanity at the garden window (answers)
     PB = r["parents-bed"]
-    add(item("pb-bed", None, "bed_double", PB_BED_X, PB[1] + 1.0, 0, h=0.5, headboard_m=0.05,
-             why="queen 160 x 200 (answers), head on the dressing wall, east of the entry; 750 mm both sides and "
-                 "the foot"), "parents-bed")
-    # Client 2026-11-25: both bedside tables go. The bed keeps its place; its headboard becomes a ~50 mm panel fixed to
-    # the bed, which carries a matched pair of floating ledges (top at the mattress top, 0.525 m), each with a slim
-    # push-to-open drawer. Nothing stands on the floor, so nothing narrows the way in from the entry.
-    for iid, sx, side in (("pb-ledge-w", -1, "west"), ("pb-ledge-e", 1, "east")):
-        add(item(iid, None, "bedside_ledge", PB_BED_X + sx * (0.8 + LEDGE_W / 2), PB[1] + LEDGE_D / 2, 0, w=LEDGE_W, d=LEDGE_D, h=LEDGE_TOP,
-                 why="floating %s ledge cantilevered from the bed-mounted headboard panel, top at the mattress top, "
-                     "80 mm push-to-open drawer, no handles, no legs (client 2026-11-25)" % side),
-            "parents-bed")
+    # Client 2026-11-26: a custom JOINERY queen bed (furniture.JOINERY_BED): mattress 1600 x 2000, frame = the mattress outline,
+    # a 50 mm walnut-and-upholstery headboard, and a hidden push-to-open tray in each side rail. The floating ledges (2026-11-25)
+    # stood in the entry opening and 9 cm from the dressing door, so nothing stands beside the bed: the trays are inside it.
+    add(item("pb-bed", None, "bed_double", PB_BED_X, PB[1] + 1.0, 0, h=0.5, joinery=True,
+             why="joinery queen 1600 x 2000 (client), head on the dressing wall, east of the entry; 750 mm both sides and "
+                 "the foot; a hidden pull-out tray in each side rail, flush when closed"),
+        "parents-bed")
     add(against("pb-vanity", PB, "x1", -25.3, "desk", w=1.0, d=0.4, h=0.75,
                 why="vanity / dressing table at the garden window (answers), clear of the bed zone"), "parents-bed")
     # -- dressing: hanging on both long walls
@@ -447,10 +440,6 @@ def _layout(lay=None, products=True):
             if it["id"] == "lounge-sofa":
                 it["product_rejected"] = ("real 3.29 x 1.62 m sofa closes the 914 mm pantry and yard routes "
                                           "with the coffee table beyond its 457 mm front clearance")
-                continue
-            if it["id"] == "pb-bed":
-                it["product_rejected"] = ("real products available are king size (1.97-2.14 m); "
-                                          "approved 0.35 m bedside arrangement kept")
                 continue
             old = (it["cx"], it["cy"], it["w"], it["d"], it["h"])
             prior_overrides = list(it.get("overrides", []))
@@ -675,7 +664,7 @@ def _check(items=None, lay=None, _extended=False):
                 if end - z[0] <= 0.2 + 1e-6:
                     z = (end, z[1], z[2], z[3])
             hit = [o["id"] for o in by_level[it["level"]] if o is not it and _ov(z, footprint(o))
-                   and not (it["type"].startswith("bed") and s in ("left", "right") and o["type"] in ("bedside_table", "bedside_ledge")
+                   and not (it["type"].startswith("bed") and s in ("left", "right") and o["type"] == "bedside_table"
                             and _inside(footprint(o), [head_zone(it, ZONE_A)]))]
             wall = not _inside(z, rects)
             colh = [c for c in cols if _ov(z, c)]

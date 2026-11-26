@@ -45,6 +45,23 @@ MATERIAL_LINEN = {"name": "archpipe warm linen", "rgb": [214, 196, 168]}
 MATERIAL_BEDDING = {"name": "archpipe ivory bedding", "rgb": [245, 240, 227]}
 MATERIAL_THROW = {"name": "archpipe muted taupe throw", "rgb": [143, 127, 113]}
 MATERIAL_METAL = {"name": "archpipe dark metal", "rgb": [45, 45, 48]}
+MATERIAL_WALNUT = {"name": "archpipe walnut", "rgb": [92, 64, 44]}
+MATERIAL_UPHOLSTERY = {"name": "archpipe taupe upholstery", "rgb": [150, 134, 120]}
+MATERIAL_TRAY = {"name": "archpipe tray lining", "rgb": [196, 178, 150]}
+
+# The parents' joinery queen bed (client 2026-11-26), local mm, head wall at -depth/2. ONE source for the render builder
+# (_build_bed_joinery) and the design model (concept.villa_furnish3d.body). The frame is exactly the mattress outline
+# (1600 x 2000): the side rails are the deck sides, so nothing stands outside the footprint when the trays are closed.
+JOINERY_BED = dict(
+    plinth_h=100.0, plinth_inset=60.0,            # recessed plinth: a 60 mm shadow gap under the deck
+    deck_top=355.0, mattress_top=525.0,           # a 170 mm mattress; deck top = rail top
+    panel_t=50.0, panel_z0=525.0, panel_z1=1350.0, frame_w=50.0, fabric_recess=8.0,   # headboard: floats from the mattress top, 50 mm
+    tray_v0=350.0, tray_v1=800.0,                 # tray window along the bed, from the head wall (beside the chest when sitting up)
+    tray_z0=215.0, tray_z1=337.0, tray_front_t=18.0, reveal=3.0,
+    tray_stored_depth=300.0,                      # stored length across the bed, under the mattress: front 18 + Blum MOVENTO 760H NL 270 body
+    tray_box_h=100.0, tray_wall=12.0,
+    tray_pull_m=0.25,                             # full extension of the NL 270 runner (travel about NL less the retained overlap; ASSUMED, confirm on the Blum datasheet)
+)
 
 
 class FurnitureError(ValueError):
@@ -337,8 +354,8 @@ def _check_envelope(item_id, name, verts, width, depth, height, eps=1e-6):
 
 def build_furniture(item):
     item_id, ftype, at, width, depth, height, rotation = _validate_item(item)
-    if ftype == "bed_double" and item.get("headboard_mm"):
-        components = _build_bed_double(width, depth, height, headboard_mm=float(item["headboard_mm"]))
+    if ftype == "bed_double" and item.get("joinery"):
+        components = _build_bed_joinery(width, depth, height)
     else:
         components = _BUILDERS[ftype](width, depth, height)
 
@@ -358,14 +375,14 @@ def build_furniture(item):
 
 # --------------------------------------------------------------- bed_double
 
-def _build_bed_double(w, d, h, headboard_mm=None):
+def _build_bed_double(w, d, h):
     hw, hd = w / 2.0, d / 2.0
     comps = []
 
     leg_h = 0.08 * h
     rail_h = 0.09 * h
     frame_top = leg_h + rail_h
-    hb_depth = headboard_mm if headboard_mm else max(40.0, min(0.11 * d, 220.0))
+    hb_depth = max(40.0, min(0.11 * d, 220.0))
     hb_y1 = -hd + hb_depth
 
     leg_margin = min(60.0, 0.2 * min(w, d))
@@ -450,6 +467,60 @@ def _build_bed_double(w, d, h, headboard_mm=None):
                          throw_z0 + 2 * throw_layer_t, 15.0, 6.0, seg=3)
     comps.append(("throw_fold", v, t, MATERIAL_THROW))
 
+    return comps
+
+
+def _build_bed_joinery(w, d, h):
+    """Queen joinery bed: walnut deck (plinth, carcass with a push-to-open tray in each side rail, top board), 170 mm mattress,
+    a 50 mm floating headboard (walnut frame + upholstered inset) and two pillows. The duvet and throw are cloth at render."""
+    J = JOINERY_BED
+    hw, hd = w / 2.0, d / 2.0
+    comps = []
+
+    def add(name, box, mat):
+        v, t = _box(*box)
+        comps.append((name, v, t, mat))
+
+    add("plinth", (-hw + J["plinth_inset"], hw - J["plinth_inset"], -hd, hd - J["plinth_inset"], 0.0, J["plinth_h"]), MATERIAL_WALNUT)
+    z0, zt, z1, ztop = J["plinth_h"], J["tray_z0"], J["tray_z1"], J["deck_top"]
+    y0, y1 = -hd + J["tray_v0"], -hd + J["tray_v1"]
+    dep = J["tray_stored_depth"]
+    add("deck-lower", (-hw, hw, -hd, hd, z0, zt), MATERIAL_WALNUT)
+    add("deck-head", (-hw, hw, -hd, y0, zt, z1), MATERIAL_WALNUT)
+    add("deck-foot", (-hw, hw, y1, hd, zt, z1), MATERIAL_WALNUT)
+    add("deck-core", (-hw + dep, hw - dep, y0, y1, zt, z1), MATERIAL_WALNUT)
+    add("deck-top", (-hw, hw, -hd, hd, z1, ztop), MATERIAL_WALNUT)
+    ft, rv = J["tray_front_t"], J["reveal"]
+    for sx in (-1, 1):
+        xo = sx * hw                                                  # the rail's outer face
+        xs = sorted((xo, xo - sx * ft))
+        add("tray-front-" + ("w" if sx < 0 else "e"), (xs[0], xs[1], y0 + rv, y1 - rv, zt + rv, z1 - rv), MATERIAL_WALNUT)
+        xi = sorted((xo - sx * ft, xo - sx * (dep - 10.0)))           # the stored tray body, inside the pocket
+        add("tray-body-" + ("w" if sx < 0 else "e"), (xi[0], xi[1], y0 + J["tray_wall"], y1 - J["tray_wall"],
+                                                       zt + rv + 8.0, zt + rv + 8.0 + J["tray_box_h"]), MATERIAL_TRAY)
+    mt = J["mattress_top"]
+    v, t = _beveled_box(-hw, hw, -hd, hd, ztop, mt, 40.0, 25.0)
+    comps.append(("mattress", v, t, MATERIAL_BEDDING))
+
+    pt, fw = J["panel_t"], J["frame_w"]
+    pz0, pz1 = J["panel_z0"], J["panel_z1"]
+    yh = -hd
+    add("headboard-frame-top", (-hw, hw, yh, yh + pt, pz1 - fw, pz1), MATERIAL_WALNUT)
+    add("headboard-frame-bottom", (-hw, hw, yh, yh + pt, pz0, pz0 + fw), MATERIAL_WALNUT)
+    add("headboard-frame-stile-w", (-hw, -hw + fw, yh, yh + pt, pz0 + fw, pz1 - fw), MATERIAL_WALNUT)
+    add("headboard-frame-stile-e", (hw - fw, hw, yh, yh + pt, pz0 + fw, pz1 - fw), MATERIAL_WALNUT)
+    add("headboard-panel", (-hw + fw, hw - fw, yh, yh + pt - J["fabric_recess"], pz0 + fw, pz1 - fw), MATERIAL_UPHOLSTERY)
+
+    gap = 40.0
+    avail = w - 2 * 80.0 - gap
+    prx = avail / 4.0
+    pry = 220.0
+    prz = 0.068 * 1050.0
+    pcz = mt + prz * 0.85
+    pcy = yh + pt + pry + 10.0
+    for name, cx in (("pillow_left", -(prx + gap / 2.0)), ("pillow_right", prx + gap / 2.0)):
+        v, t = _ellipsoid(cx, pcy, pcz, prx, pry, prz, seg_u=16, seg_v=10)
+        comps.append((name, v, t, MATERIAL_BEDDING))
     return comps
 
 

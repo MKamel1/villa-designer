@@ -48,48 +48,66 @@ class StagedCirculation(unittest.TestCase):
         self.assertEqual(C.pinches(LAY, items), [])
 
 
-class SlimHeadboardLedges(unittest.TestCase):
-    """Client 2026-11-25: a ~50 mm bed-mounted headboard panel with a matched pair of floating ledges replaces the bedside tables.
-    The earlier built-out wall failed the foot route (0.60-0.65 m), so these pin what makes the slim version pass."""
+class JoineryBedTrays(unittest.TestCase):
+    """Client 2026-11-26: a joinery queen bed with a hidden pull-out tray in each side rail replaces the floating ledges, which
+    stood in the entry opening (0.77 m left) and 9 cm from the dressing door. Nothing may project when closed; open, the way
+    round the bed and both doors stay clear."""
     ITEMS = {i["id"]: i for i in F.layout(LAY)}
+    BASE = F.layout(LAY)
 
-    def test_no_bedside_table_and_a_matched_pair_of_ledges(self):
-        self.assertNotIn("pb-bedside", self.ITEMS)
-        w, e = self.ITEMS["pb-ledge-w"], self.ITEMS["pb-ledge-e"]
-        self.assertEqual((w["w"], w["d"], w["h"]), (e["w"], e["d"], e["h"]))
-        self.assertAlmostEqual(w["cx"] + e["cx"], 2 * self.ITEMS["pb-bed"]["cx"], 6)           # mirrored about the bed
+    def _route(self, items, dressed=False):
+        return next(r for r in C.routes(LAY, items=items, dressed=dressed)
+                    if "parents-bed" in r["cluster"] and r["to"].startswith("door corridor") and r["frm"].startswith("door parents-bed"))
 
-    def test_ledge_top_is_the_mattress_top_and_nothing_stands_on_legs(self):
-        from archpipe.furniture import build_furniture
+    def test_no_ledge_no_bedside_and_the_bed_is_where_it_was(self):
+        self.assertFalse({"pb-ledge-w", "pb-ledge-e", "pb-bedside"} & set(self.ITEMS))
         bed = self.ITEMS["pb-bed"]
-        comps = VR.generated_components(bed, "bed_double", 1.05)
-        mattress_top = max(v[2] for c in comps if c["name"].endswith(":mattress") for v in c["vertices_mm"]) / 1000.0
-        self.assertAlmostEqual(self.ITEMS["pb-ledge-e"]["h"], mattress_top, 3)
-        names = [n for n, _ in F3.body(self.ITEMS["pb-ledge-e"])]
-        self.assertFalse({"leg", "plinth", "handle", "pull"} & set(names), names)
+        self.assertEqual((bed["cx"], bed["cy"], bed["w"], bed["d"]), (20.33, -25.591, 1.6, 2.0))     # mattress 1600 x 2000, unmoved
+        self.assertTrue(bed["joinery"])
 
-    def test_headboard_is_a_50_mm_panel_and_the_bed_did_not_move(self):
-        bed = self.ITEMS["pb-bed"]
-        hb = dict(F3.body(bed))["headboard"]
-        self.assertAlmostEqual(hb[4] - hb[1], 0.05, 6)
-        self.assertEqual((bed["cx"], bed["cy"]), (20.33, -25.591))                             # moved 0 mm of the 50 allowed
+    def test_mattress_is_1600_by_2000_with_its_top_at_0p525(self):
+        m = dict(F3.body(self.ITEMS["pb-bed"]))["mattress"]
+        self.assertEqual((round(m[3] - m[0], 4), round(m[4] - m[1], 4), round(m[5], 4)), (1.6, 2.0, 0.525))
 
-    def test_west_ledge_leaves_the_entry_passage_its_750(self):
-        w = F.footprint(self.ITEMS["pb-ledge-w"])
-        west_wall = max(x1 for x0, y0, x1, y1 in F._walls(F.RS.build(LAY), "GF") if abs(x0 - 18.377) < 1e-3)
-        self.assertGreaterEqual(w[0] - west_wall, F.BEDROOM_ROUTE)                              # 0.773 m clear, 0.75 required
+    def test_closed_nothing_projects_beyond_the_bed_footprint_and_no_handle(self):
+        spec = next(s for s in F3.spec(LAY, self.BASE) if s["mark"] == "pb-bed")
+        fx0, fy0, fx1, fy1 = F.footprint(self.ITEMS["pb-bed"])
+        e = spec["envelope"]
+        for got, lim in ((e[0], fx0), (e[1], fy0), (-e[3], -fx1), (-e[4], -fy1)):
+            self.assertGreaterEqual(got, lim - 1e-6)
+        names = set(spec["parts"])
+        self.assertFalse({"handle", "pull", "knob"} & names, names)
+        self.assertEqual({"tray-front-w", "tray-front-e"} - names, set())
 
-    def test_a_0p30_ledge_would_have_read_below_750_on_the_grid(self):
-        # the first draft: 0.30 wide left 0.753 m, which the 20 mm path grid reads as 0.746 m < 0.75 (negative control)
-        items = [dict(i, w=0.30, cx=i["cx"] - 0.01) if i["id"] == "pb-ledge-w" else i
-                 for i in F.layout(LAY)]
-        r = next(r for r in C.routes(LAY, items=items) if "parents-bed" in r["cluster"] and r["to"] != "its own approach")
-        self.assertLess(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))     # 0.746; the gate tolerates half a cell, a design should not lean on it
+    def test_tray_fronts_are_flush_with_the_rail_faces(self):
+        parts = dict(F3.body(self.ITEMS["pb-bed"]))
+        self.assertAlmostEqual(parts["tray-front-w"][0], -0.8, 6)
+        self.assertAlmostEqual(parts["tray-front-e"][3], 0.8, 6)
 
-    def test_door_approach_to_the_dressing_room_stays_clear(self):
-        r = next(r for r in C.routes(LAY) if r["frm"] == "door parents-bed/parents-dressing" and r["to"] == "its own approach"
-                 and "parents-bed" in r["cluster"])
-        self.assertTrue(r["ok"], C.describe(r))
+    def test_headboard_is_50_mm_and_floats_on_the_mattress_top(self):
+        parts = F3.body(self.ITEMS["pb-bed"])
+        for n, b in parts:
+            if n.startswith("headboard-frame"):
+                self.assertAlmostEqual(b[4] - b[1], 0.05, 6)
+                self.assertGreaterEqual(b[2], 0.525 - 1e-9)
+        self.assertAlmostEqual(max(b[5] for n, b in parts if n.startswith("headboard")), 1.35, 6)
+
+    def test_open_trays_leave_the_route_and_both_door_approaches_their_750(self):
+        items = C.with_trays(self.BASE, 0.25)
+        r = self._route(items)
+        self.assertGreaterEqual(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))                 # 0.766 m with both trays out
+        for frm in ("door parents-bed/parents-dressing", "door corridor/parents-entry"):
+            a = next(x for x in C.routes(LAY, items=items) if x["frm"] == frm and x["to"] == "its own approach" and "parents-bed" in x["cluster"])
+            self.assertTrue(a["ok"], C.describe(a))
+
+    def test_the_first_draft_window_would_have_pinched_the_vanity_corner(self):
+        # negative control from the real first draft: trays 0.10 m further down the bed (v 0.45-0.90), pulled 0.25 m,
+        # left 0.708 m between the east tray corner and the vanity: the gate must catch it
+        shifted = [dict(i, cy=i["cy"] + 0.10) if i["id"].startswith("pb-tray-open") else i for i in C.with_trays(self.BASE, 0.25)]
+        self.assertLess(self._route(shifted)["achieved"], F.BEDROOM_ROUTE)
+
+    def test_closed_trays_change_nothing(self):
+        self.assertAlmostEqual(self._route(self.BASE)["achieved"], self._route(C.with_trays(self.BASE, 0.0))["achieved"], 6)
 
     def test_dressed_route_with_the_evaluated_cloth_as_obstacles(self):
         # evaluated cloth (duvet, throw, parked curtain stacks) from the Blender build; see knowledge/flythrough
@@ -97,19 +115,23 @@ class SlimHeadboardLedges(unittest.TestCase):
         self.assertGreaterEqual(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))
 
 
+    def test_dressed_route_with_both_trays_out(self):
+        r = self._route(C.with_trays(self.BASE, 0.25), dressed=True)
+        self.assertGreaterEqual(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))                 # 0.766 m: cloth and both trays out at once
+
+
 class DressingOverhang(unittest.TestCase):
     def test_props_sit_wholly_on_their_supports(self):
         self.assertEqual(VR.dressing_overhang_violations(VR.props(LAY), LAY), [])
 
-    def test_books_with_origin_at_the_top_centre_overhang_into_the_door(self):
-        # the pre-fix placement (then on the bedside, now the same mistake on the east ledge): scale 1, origin at the top's
-        # centre; the set reaches x 21.84, the door opening starts 21.497
-        old = {"id": "bedside-books", "asset": "book_encyclopedia_set_01", "position": [21.305, -26.391, 0.525],
+    def test_books_with_origin_at_the_top_centre_overhang_the_top(self):
+        # the same mistake as the pre-fix bedside books (scale 1, origin at the top's centre, 0.357 m past the top into the dressing
+        # door's opening), reproduced on the vanity, the one piece in the room that still carries a top: the set hangs past its east edge
+        old = {"id": "vanity-books", "asset": "book_encyclopedia_set_01", "position": [22.30, -24.8, 0.75],
                "rotation_deg": [0, 0, 0.0], "scale": 1.0}
         bad = VR.dressing_overhang_violations([old], LAY)
         self.assertEqual(len(bad), 1, bad)
-        self.assertIn("pb-ledge-e", bad[0])
-        self.assertGreater(LAND.prop_world_box(old["asset"], old["position"], old["rotation_deg"], 1.0)[3], 21.497)
+        self.assertIn("pb-vanity", bad[0])
 
 
 if __name__ == "__main__":

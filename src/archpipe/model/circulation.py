@@ -71,6 +71,27 @@ def staged_items(lay, items=None, dressed=False):
     return out
 
 
+def tray_boxes(items, pull):
+    """World footprints (x0, y0, x1, y1) of each tray as pulled `pull` m beyond the bed side (0 = closed)."""
+    bed = next(i for i in items if i["id"] == "pb-bed")
+    out = {}
+    for tag, sx in (("w", -1), ("e", 1)):
+        fr = next(b for n, b in F3.body(bed) if n == "tray-front-" + tag)
+        x = [F3.to_world(bed, fr)[0], F3.to_world(bed, fr)[3]]
+        y0, y1 = F3.to_world(bed, fr)[1], F3.to_world(bed, fr)[4]
+        body = next(b for n, b in F3.body(bed) if n == "tray-body-" + tag)
+        bw = F3.to_world(bed, body)
+        lo, hi = min(x[0], bw[0]), max(x[1], bw[3])      # front + stored body, closed
+        out[tag] = (lo + sx * pull, y0, hi + sx * pull, y1)
+    return out
+
+
+def with_trays(items, pull):
+    ex = [dict(id="pb-tray-open-" + t, room="parents-bed", level="GF", type="tray_open", h=0.34, rot=0, cx=(b[0] + b[2]) / 2,
+               cy=(b[1] + b[3]) / 2, w=b[2] - b[0], d=b[3] - b[1]) for t, b in tray_boxes(items, pull).items()]
+    return items + ex
+
+
 def _required(lay, cl):
     if all(lay["rooms"][c]["occupancy"] == "bedroom" for c in cl) or cl == {"parents-dressing", "parents-dressing-ext"}:
         return min(F.BODY, F.BEDROOM_ROUTE), "ukadm-bedroom-route-750 (private dressing: project waiver)"

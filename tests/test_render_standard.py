@@ -557,7 +557,7 @@ class RenderStandard(unittest.TestCase):
 
     def test_generated_furniture_where_a_builder_exists(self):      # archpipe.furniture, as the bedroom
         ids = {m["id"].rsplit("-", 1)[0] for m in SCENE["meshes"] if m["group"] == "furniture"}
-        for mark in ("furn-pb-bed", "furn-pb-ledge-e", "furn-pb-ledge-w", "furn-kb-bed", "furn-kb-desk", "furn-ka-wardrobe"):
+        for mark in ("furn-pb-bed", "furn-kb-bed", "furn-kb-desk", "furn-ka-wardrobe"):
             self.assertIn(mark, ids)
         tri = [m for m in SCENE["meshes"] if m["id"].startswith("furn-pb-bed-")]
         self.assertTrue(all(len(f) == 3 for m in tri for f in m["faces"]), "the bed is not the generated one")
@@ -672,7 +672,6 @@ class RenderStandard(unittest.TestCase):
             found = {mid for mid, _ in S.blocked_openings(old, lay)}
         self.assertIn("lamp-PEN-SMALL-parents-bed-02", found)
         self.assertIn("lamp-PEN-SMALL-parents-bed-03", found)
-        self.assertIn("furn-pb-ledge-e-0", found)
 
     def test_doorway_guard_uses_the_leaf_actually_in_the_scene(self):
         # The telescopic kitchen door's panels are stowed in the pocket, clear of its 1.2 m opening, so the v17
