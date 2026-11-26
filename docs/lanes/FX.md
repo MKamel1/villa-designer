@@ -74,3 +74,18 @@ library copy `assets/library/props/sf_dining_chair_curved_armchair`, tinted ligh
 No uniform scale matches every axis; the model is scaled 0.739 to the product **seat height** (what governs fit at the table): W 584 (0 %), D 518 (-9.7 %), H 870 (+7.4 %).
 Table top 750 - seat 478 = 272 mm; arm tops 676 are 74 mm under the table top (they clear the top, not an apron deeper than 74 mm). Pitch: 3 per long side at
 1.8 / 3 = 0.60 m centres (chair 0.584 wide: 16 mm between chairs; the project's own 0.6 m per place policy, not a book figure).
+
+## 5. Lighting (probes, not Radiance)
+
+Own analytic probe (`archpipe.lightcalc.direct`, ray test of every downlight against the cupboard box, 5 cm grid on the `sink` plane, target 300 lx `ies-res-kitchen-sink-300`):
+direct from the existing downlights 288 lx average / 127 lx minimum without cupboards; **270 / 6 lx with them**. With the iGuzzini Underscore15 ST49 strip
+(680 lm/m, 5 W/m, 2700 K; file `knowledge/lighting-products/iguzzini/ST49`) at full output the plane is about 700 / 274 lx, so the strip is dimmed: the design binds it as
+fixture kind `UC` (generic photometry, ST49 named as the product basis; no new product record was imported). Kids A desks: the ceiling downlight per desk would sit above
+the loft, so each desk has an under-loft `UC` strip (1.2 m, underside 1.40 m) and the child's own ERCO Lucy 31327; target 400 lx `ies-res-desk-400`. **Not verified in Radiance**: the
+engine has no furniture shadows (documented limit) and the final Radiance rows (`villa-after-rows.json`, `out/L6b`) were not re-run in this lane. New control zone `Z-B-KITCHEN-RUN-UC`
+(`zones-d1.json`, 70 zones), electrical design regenerated (59 final circuits + 2 feeders = 61 systems).
+
+## Status at hand-back (what is NOT done)
+
+See the hand-back report: photoreal renders of the four views and the exposure re-measure on the final merged tree were blocked by the shared queue (jobq GPU/RAM starvation,
+repeated host OOM kills of Blender). Geometry previews (matplotlib, not presentation renders) were looked at instead: `out/fx/preview/`.
