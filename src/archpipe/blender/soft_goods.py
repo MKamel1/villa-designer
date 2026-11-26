@@ -51,6 +51,16 @@ def throw_bakes():
 
 
 @lru_cache(maxsize=1)
+def throw_drapes():
+    """Cloth drops baked onto the real hosts (blender/soft_drape.py), keyed by throw id; {} before the first bake."""
+    path = KNOWLEDGE / "soft-throw-drapes.json.gz"
+    if not path.exists():
+        return {}
+    with gzip.open(path, "rt", encoding="utf-8") as f:
+        return json.load(f)["throws"]
+
+
+@lru_cache(maxsize=1)
 def fabric_classes():
     with gzip.open(KNOWLEDGE / "soft-fabric-classes.json.gz", "rt", encoding="utf-8") as f:
         return json.load(f)
@@ -204,20 +214,102 @@ def soft_throw_faces(identifier, points):
     return [[pw[i].round(6).tolist() for i in q] for q in faces]
 
 
+THROW_PLY_MM = 8.0          # two plies of knit; the same figure the bake's clearance was measured with
+
+
+def drape_faces(rec, ply_m=THROW_PLY_MM / 1000.0):
+    """World faces (m) of a baked drape: the sheet as the underside, the same sheet `ply_m` along its upward normal as
+    the face, a rim between. The sheet already clears its host by the bake's collision distance."""
+    v = np.array(rec["verts_m"], float)
+    nx, ny = rec["grid"]
+    g = v.reshape(nx + 1, ny + 1, 3)
+    du = np.gradient(g, axis=0)
+    dv = np.gradient(g, axis=1)
+    nrm = np.cross(du, dv).reshape(-1, 3)
+    nrm /= np.maximum(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9)
+    if nrm[:, 2].sum() < 0:                  # grid winding is arbitrary: the face is the side that looks up
+        nrm = -nrm
+    n = len(v)
+    verts = np.vstack([v, v + nrm * ply_m])
+    quads = rec["quads"]
+    faces = [q[::-1] for q in quads] + [[i + n for i in q] for q in quads]
+    idx = lambda i, j: i * (ny + 1) + j
+    ring = [idx(i, 0) for i in range(nx)] + [idx(nx, j) for j in range(ny)] + \
+           [idx(i, ny) for i in range(nx, 0, -1)] + [idx(0, j) for j in range(ny, 0, -1)]
+    for k, i0 in enumerate(ring):
+        i1 = ring[(k + 1) % len(ring)]
+        faces.append([i0, i1, i1 + n, i0 + n])
+    faces = _closed_outward(verts, faces)
+    return [[verts[i].round(6).tolist() for i in q] for q in faces]
+
+
 def soften_throws(scene):
-    n = 0
+    """Each throw becomes its baked cloth drop on the real furniture it lies on. A throw whose hosts changed since the
+    bake (signature mismatch, 2 mm) falls back to the older baked lump and is named in the report: re-run blender/soft_drape.py."""
+    n, stale = 0, []
     hosts = host_shells(scene)
     for m in scene["meshes"]:
         if THROW_ID.match(m["id"]):
             pts = np.array([p for f in m["faces"] for p in f], float)
-            m["faces"], moved = rest_on_hosts(soft_throw_faces(m["id"], pts), hosts)
-            m["soft_goods_moved_m"] = [round(float(v), 3) for v in moved]
+            rec = throw_drapes().get(m["id"])
+            if rec and signature_matches(rec["hosts"], throw_signature(*throw_hosts(scene, pts.min(0) - THROW_REACH_M, pts.max(0) + THROW_REACH_M))):
+                m["faces"] = drape_faces(rec)
+                m["soft_goods"] = "cloth drop baked onto its hosts"
+            else:
+                stale.append(m["id"])
+                m["faces"], moved = rest_on_hosts(soft_throw_faces(m["id"], pts), hosts)
+                m["soft_goods_moved_m"] = [round(float(v), 3) for v in moved]
+                m["soft_goods"] = "baked cloth-drop lump (no current drape bake)"
             m["smooth_shaded"] = True
             m["subdivide"] = 2
             m.pop("bevel_m", None)
-            m["soft_goods"] = "baked cloth-drop throw"
             n += 1
+    scene["soft_goods_stale_throws"] = stale
     return n
+
+
+THROW_REACH_M = 0.9   # the box around a throw that selects its hosts (the bake and the renderer use the same)
+REACH_Z = 0.9    # hosts are boxes lo..hi grown by REACH_M; a model whose top is below the throw's base is no host
+
+
+def throw_hosts(scene, lo, hi):
+    """(procedural hosts [(id, triangles)], model specs) a throw in the box lo..hi can rest on (furniture and
+    the already softened cushions). A model replaces its
+    procedural stand-in (spec['replaces'] prefix), so the stand-in is not a host."""
+    from ..critic.furniture_realism import triangles
+    models = [s for s in scene.get("models", []) if s.get("replaces") and s.get("role") != "bed"
+              and s["position"][2] <= hi[2] and s["position"][2] + s["reference_h"] >= lo[2] + REACH_Z
+              and s["position"][0] + s["footprint_w"] / 2 + 0.05 >= lo[0] and s["position"][0] - s["footprint_w"] / 2 - 0.05 <= hi[0]
+              and s["position"][1] + s["footprint_w"] / 2 + 0.05 >= lo[1] and s["position"][1] - s["footprint_w"] / 2 - 0.05 <= hi[1]]
+    replaced = tuple(s["replaces"] for s in scene.get("models", []) if s.get("replaces"))
+    out = []
+    for m in scene["meshes"]:
+        if not (m["group"] == "furniture" or CUSHION_ID.match(m["id"])) or not m.get("visibility", {}).get("camera", True) \
+                or m["material"].startswith(("glass", "rug")) or m["id"].startswith(("rug",) + replaced):
+            continue
+        p = np.array([q for f in m["faces"] for q in f], float)
+        if np.any(p.max(0) < lo) or np.any(p.min(0) > hi):
+            continue
+        out.append((m["id"], triangles(m["faces"])))
+    return out, models
+
+
+def throw_signature(procedural, models):
+    """What a throw was dropped on, as numbers: each procedural host's id, triangle count and bounding box, each placed
+    model's asset, pose and scale. Not a hash: Blender's numpy and the system's differ in the last digits."""
+    hosts = []
+    for name, t in sorted(procedural, key=lambda x: x[0]):
+        p = np.asarray(t).reshape(-1, 3)
+        hosts.append({"id": name, "tris": len(t), "lo": p.min(0).round(5).tolist(), "hi": p.max(0).round(5).tolist()})
+    return {"hosts": hosts, "models": [[s["id"], s["asset"], s["position"], s["rotation_deg"], s["scale"]]
+                                       for s in sorted(models, key=lambda x: x["id"])]}
+
+
+def signature_matches(a, b, tol=0.002):
+    if a["models"] != b["models"] or [h["id"] for h in a["hosts"]] != [h["id"] for h in b["hosts"]]:
+        return False
+    return all(x["tris"] == y["tris"] and np.allclose(x["lo"], y["lo"], atol=tol) and np.allclose(x["hi"], y["hi"], atol=tol)
+               for x, y in zip(a["hosts"], b["hosts"]))
 
 
 def host_shells(scene):
@@ -378,7 +470,13 @@ def soften_materials(scene):
     and fabric roughness. Colours (the maker image's mean linear colour) are not touched."""
     cls = fabric_classes()
     n = 0
-    used = {m["material"] for m in scene["meshes"] if CUSHION_ID.match(m["id"]) or THROW_ID.match(m["id"])}
+    # every fabric on visible furniture or dressing (sofas, chairs, beds as well as the soft goods): one rule, so a
+    # bouclé is 3-9 mm loops on a dining chair as on a cushion. Rugs are meant to be coarse; garments have their own check.
+    used = {m["material"] for m in scene["meshes"]
+            if (m["group"] in ("furniture", "dressing") and m.get("visibility", {}).get("camera", True)
+                and not m["id"].startswith("rug") and m.get("part_kind") not in ("garment", "folded-fabric")
+                and scene["materials"].get(m["material"], {}).get("asset") in LOOKALIKE_CLASS)
+            or CUSHION_ID.match(m["id"]) or THROW_ID.match(m["id"])}
     for name in used:
         spec = scene["materials"].get(name)
         if not spec or spec.get("kind") != "principled":
@@ -397,11 +495,39 @@ def soften_materials(scene):
     return n
 
 
+CASE_BEVEL_M = 0.002       # an eased edge on joinery and case goods; the realism check's floor (policy)
+UPHOLSTERY_BEVEL_M = 0.006  # a soft arris on upholstered boxes (beds, daybed bases): ours (policy)
+
+
+def ease_edges(scene):
+    """One rule for every visible furniture or dressing mesh with a knife edge: case goods get a CASE_BEVEL_M edge,
+    upholstered boxes UPHOLSTERY_BEVEL_M, both smooth-shaded. The generators author bevel 0 on garment-module joinery and
+    1.5 mm on a few cabinets; a real panel has neither. Blender clamps a bevel on a panel thinner than twice its width.
+    Imported scans, glass, garments and the garden are not authored boxes and are left alone."""
+    from ..critic.furniture_realism import categorise
+    n = 0
+    for m in scene["meshes"]:
+        if m["group"] not in ("furniture", "dressing") or not m.get("visibility", {}).get("camera", True):
+            continue
+        if m["id"].startswith(("ld-", "gl-", "detail-stair", "detail-guard")) or m["material"].startswith("glass"):
+            continue
+        if m.get("part_kind") in ("garment", "folded-fabric", "hanger", "shoe", "rail-bracket", "hanging-rail") or THROW_ID.match(m["id"]) \
+                or CUSHION_ID.match(m["id"]):
+            continue
+        want = {"case": CASE_BEVEL_M, "upholstered": UPHOLSTERY_BEVEL_M}.get(categorise(m))
+        if want and m.get("bevel_m", 0) < want and not m.get("subdivide"):
+            m["bevel_m"] = want
+            m["smooth_shaded"] = True
+            n += 1
+    return n
+
+
 def soften_scene(scene):
     """Entry point: returns the same dict, softened, with a record of what changed."""
     # upholstery first: the soft goods must rest on the inflated seat, not on the rigid one it replaces
-    report = {"upholstery_islands": soften_upholstery(scene)}
+    report = {"upholstery_islands": soften_upholstery(scene), "eased_edges": ease_edges(scene)}
     report.update(cushions=soften_cushions(scene), throws=soften_throws(scene), materials=soften_materials(scene))
+    report["stale_throw_drapes"] = scene.pop("soft_goods_stale_throws")      # non-empty: re-run blender/soft_drape.py
     scene["soft_goods"] = report
     return report
 
