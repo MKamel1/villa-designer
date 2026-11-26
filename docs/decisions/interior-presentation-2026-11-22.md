@@ -65,3 +65,12 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
   - the cove and the reading lights.
   Both bedside tables are still removed, and the wardrobe is untouched. The bed moves at most 50 mm, and the foot route must stay ≥ 0.75 m.
 - **Lead decision (staging):** park the curtain stacks clear of the bed-foot corners, and shorten the duvet's foot drop so the cloth does not narrow that route (DF measured 0.45 m with cloth as obstacles).
+- **2026-11-26 revision (client): pull-out trays replace the floating ledges.** The ledges (furn-pb-ledge-w and -e, 280 × 300 mm, top at 0.525 m) sat beside doorways:
+  - the west ledge projected 0.30 m where you step in from the entry lobby, narrowing the 1.05 m opening to about 0.77 m;
+  - the east ledge stood 0.09 m from the dressing door frame.
+
+  The client: "night stand blocking the room door". Decision: remove both ledges. The parents' bed becomes a custom joinery bed with:
+  - a slim walnut-and-fabric headboard of our own design (replacing the imported grey headboard, so frame, headboard and cove read as one piece);
+  - a hidden tray-drawer in each side rail at mattress height that slides out when used and sits flush when closed.
+
+  Nothing may project at the entry or the dressing door. The bed position and the 0.75 m foot route are unchanged.
