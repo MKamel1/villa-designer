@@ -13,6 +13,7 @@ KINDS = {
     'flush-plate': 'wall-plate', 'pull': 'joinery-pull',
     'front': 'door-leaf', 'drawer': 'door-leaf',
     'sliding-door-pocketed': 'door-leaf', 'joinery_end_panel': 'wall-panel',
+    'headboard': 'cabinet-carcass',
     'back': 'cabinet-carcass', 'side': 'cabinet-carcass',
     'base': 'cabinet-carcass', 'carcass': 'cabinet-carcass',
     'shelf': 'shelf', 'top': 'worktop', 'worktop': 'worktop',

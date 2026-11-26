@@ -119,7 +119,15 @@ def body(it):
             return p
         return [("base", (x0, yb, 0.0, x1, yf, 0.25)),
                 ("mattress", (x0 + 0.02, yb + 0.06, 0.25, x1 - 0.02, yf - 0.02, H)),
-                ("headboard", (x0, yb, 0.0, x1, yb + 0.06, 1.05))]
+                ("headboard", (x0, yb, 0.0, x1, yb + it.get("headboard_m", 0.06), 1.05))]
+    if t == "bedside_ledge":
+        # a floating ledge cantilevered from the bed's headboard panel (no legs): the panel wing carries it, the top is
+        # walnut, the 80 mm push-to-open drawer front is oak with a 3 mm reveal under the top and no handle
+        top, panel = H, 0.05
+        return [("headboard", (x0, yb, 0.084, x1, yb + panel, 0.96)),      # up to where the bed's own headboard end face stops (its top corner is rounded)
+                ("shelf", (x0, yb + panel, top - 0.03 - 0.095, x1, yf - 0.018, top - 0.03)),
+                ("drawer", (x0 + 0.003, yf - 0.018, top - 0.03 - 0.003 - 0.08, x1 - 0.003, yf, top - 0.03 - 0.003)),
+                ("top", (x0, yb + panel, top - 0.03, x1, yf, top))]
     if t.startswith("sofa") or t in ("armchair", "recliner"):
         arm = 0.12 if t in ("armchair", "recliner") else 0.16
         return [("base", (x0 + arm, yb, 0.0, x1 - arm, yf, 0.22)),

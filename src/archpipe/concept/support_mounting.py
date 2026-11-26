@@ -192,6 +192,26 @@ def migrate(scene, lay):
             # All television assembly pieces share the authored rear plane.
             fixing=min(sum(p[i]*outward[i] for i in range(3)) for m in members for p in points(m))
             package(scene,members,host,fixing,'e-support',root['id'])
+        elif assembly == 'bedside_ledge' and item:
+            # A floating ledge is cantilevered from the bed's headboard panel (client 2026-11-25): its host is the panel's
+            # end face, not the floor and not the room wall (the west ledge stands in the entry opening, where there is none).
+            bed=next(it for it in furniture if it['id']=='pb-bed')
+            sx=-1 if item['cx']<bed['cx'] else 1
+            outward=(sx,0,0)
+            panel_meshes=[m for m in original if m['id'].startswith('furn-pb-bed-') and m.get('room')==room
+                          and 'headboard' in m.get('physical_components',['headboard'])] or \
+                         [m for m in original if m['id'].startswith('furn-pb-bed-') and m.get('room')==room]
+            contact=bb[3] if sx<0 else bb[0]
+            host=nearest(scene,[contact,anchor[1],0.5],outward,panel_meshes,'support-'+key,'joinery-panel')
+            wing=[m for m in members if 'headboard' in m.get('physical_components',[])]
+            body=[m for m in members if m not in wing]
+            fixing=min(sum(p[i]*outward[i] for i in range(3)) for m in wing for p in points(m))
+            package(scene,wing,host,fixing,'e-support',wing[0]['id'])
+            # the shelf, drawer front and top are fixed to the wing's front face
+            bb_body=bounds(min(body,key=lambda m:bounds(m)[2]))
+            front_host=nearest(scene,[(bb_body[0]+bb_body[3])/2,max(bounds(wing[0])[4],bb_body[1]),(bb_body[2]+bb_body[5])/2],
+                (0,1,0),wing,'support-'+key+'-body','joinery-panel')
+            package(scene,body,front_host,min(bounds(m)[1] for m in body),'e-support',min(body,key=lambda m:bounds(m)[2])['id'])
         elif item and (item.get('wet_zone') or (room=='family-bath' and item['type']=='shower_walkin')):
             # The modeled open-shower finish and its drain retain their falls
             # and depth; use the actual finish top, not an invented floor stack.

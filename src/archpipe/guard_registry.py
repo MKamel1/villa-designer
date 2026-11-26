@@ -2922,7 +2922,7 @@ def check_villa_furnish_bedside_zone_a(
 
 
 _items_bedside_bad = copy.deepcopy(_cached_furnish_layout())
-_pb_bedside = next(i for i in _items_bedside_bad if i["id"] == "pb-bedside")
+_pb_bedside = next(i for i in _items_bedside_bad if i["id"] == "pb-ledge-e")
 _pb_bedside["cy"] += 0.9
 
 register_guard(
