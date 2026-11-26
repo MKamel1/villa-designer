@@ -79,3 +79,16 @@ class RenderWiring(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipUnless((Path.home() / "archpipe/assets/library/props/throw_pillows_01/model.gltf").exists(), "render-host library absent")
+class ScannedAsset(unittest.TestCase):
+    def test_gltf_reader_agrees_with_the_committed_fixture(self):
+        from archpipe.blender.gltf_check import gltf_triangles
+        tris = gltf_triangles(Path.home() / "archpipe/assets/library/props/throw_pillows_01/model.gltf")
+        self.assertEqual(len(tris), 3124 + 3238)
+
+    def test_scanned_pillows_are_not_a_box(self):
+        from archpipe.blender.gltf_check import model_findings
+        scene = {"models": [{"id": "model-x", "asset": "throw_pillows_01", "role": "cushion"}]}
+        self.assertEqual(model_findings(scene, Path.home() / "archpipe/assets/library"), [])
