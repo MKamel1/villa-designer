@@ -55,10 +55,11 @@ class Shapes(unittest.TestCase):
             e = s["envelope"]
             plan = (e[0], e[1], e[3], e[4])
             owner = s["mark"].split("#")[0]
+            under = ITEMS[owner].get("under") if owner in ITEMS else None      # a desk chair stands under its loft bed (FX 2026-11-25)
             for q in walls[s["level"]] + F._columns():
                 self.assertFalse(F._ov(plan, q), (s["mark"], q))
             for m, lv, fp in bodies:
-                if lv == s["level"] and m != owner and s["type"] == "chair":
+                if lv == s["level"] and m != owner and m != under and s["type"] == "chair":
                     self.assertFalse(F._ov(plan, fp), (s["mark"], m))
 
     def test_a_loft_bed_has_one_raised_mattress_and_a_ladder(self):       # client 2026-11-25: replaces the bunk

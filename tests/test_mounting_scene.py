@@ -305,7 +305,7 @@ class StairFirstPackage(unittest.TestCase):
             self.assertEqual(zone['required_void_mm'],zone['max_housing_depth_mm']+25)
         meshes=[m for m in self.scene['meshes'] if m.get('mounting',{}).get('geometry_role')=='recessed-trim'
                 and m.get('mounting_package')=='d-ceiling']
-        self.assertEqual(len(meshes),68)   # L6d design: 52 DL + 12 WW + 4 ADJ recessed fittings (69 in L6c: the entry-lobby DL became a cove; 80 before the L6b/L6c ambient cuts)
+        self.assertEqual(len(meshes),66)   # FX 2026-11-25: -2 (kids A desk downlights replaced by under-loft strips); 68 in L6d design: 52 DL + 12 WW + 4 ADJ recessed fittings (69 in L6c: the entry-lobby DL became a cove; 80 before the L6b/L6c ambient cuts)
         for root in (meshes[0],next(m for m in meshes if 'cinema' in m['id'])):
             mutant=deepcopy(self.scene)
             host=mutant['mounting_hosts'][root['mounting']['host_id']]

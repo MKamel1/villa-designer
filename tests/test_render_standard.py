@@ -896,9 +896,9 @@ class RenderStandard(unittest.TestCase):
         # Draft 9 preceded the assumed stair steel; leaving it in the reproduction would support the old marker.
         sc["meshes"] = [m for m in sc["meshes"] if not m["id"].startswith(
             ("detail-stair-wall-stringer-", "detail-stair-wall-plate"))]
-        # draft 9's desk lamp: no base or stem, an arm bracketed to the window (kids A, north glazing y -23.591)
-        sc["meshes"] = [m for m in sc["meshes"] if m["id"] != "lamp-arm-DESK-kids-a-03"]
-        shade = next(m for m in sc["meshes"] if m["id"] == "lamp-shade-DESK-kids-a-03")
+        # draft 9's desk lamp: no base or stem, an arm bracketed to the window (kids B, north glazing y -23.591; kids A's lamps now stand under the loft beds, client 2026-11-25)
+        sc["meshes"] = [m for m in sc["meshes"] if m["id"] != "lamp-arm-DESK-kids-b-03"]
+        shade = next(m for m in sc["meshes"] if m["id"] == "lamp-shade-DESK-kids-b-03")
         zs = [v[2] for f in shade["faces"] for v in f]
         x = sum(v[0] for f in shade["faces"] for v in f) / sum(len(f) for f in shade["faces"])
         y = sum(v[1] for f in shade["faces"] for v in f) / sum(len(f) for f in shade["faces"])
@@ -910,7 +910,7 @@ class RenderStandard(unittest.TestCase):
             for v in f:
                 v[1] += 0.068
         found = {u[0] for u in S.unsupported(sc)}
-        self.assertIn("lamp-shade-DESK-kids-a-03", found)
+        self.assertIn("lamp-shade-DESK-kids-b-03", found)
         self.assertIn(mk["id"], found)
 
     def test_every_bedroom_and_living_window_has_a_curtain(self):
