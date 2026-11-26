@@ -79,7 +79,7 @@ def test_text_floor_clamps_small_requests(tmp_path):
 # ---- stair detail ------------------------------------------------------------------------------------------------------
 def test_stair_detail_missing_on_the_old_section(els):
     v = sheetqa.stair_detail_violations(els, FX / "old-A-301-section.pdf", 50.0)
-    assert v["bars_missing"] == 15 and v["guards_missing"] == 2 and v["cupboard_walls_missing"] == 3
+    assert v["bars_missing"] == 0 and v["guards_missing"] == 2 and v["cupboard_walls_missing"] == 3
 
 
 def _stair_sheet(els, tmp_path, draw: bool):
@@ -95,13 +95,13 @@ def _stair_sheet(els, tmp_path, draw: bool):
 
 def test_stair_detail_counts_match_the_model_when_drawn(els, tmp_path):
     v = _stair_sheet(els, tmp_path, True)
-    assert v["bars_found"] == v["bars_expected"] == 15
+    assert v["bars_found"] == v["bars_expected"] == 0   # client waiver 2026-11-25: no riser infill bars
     assert v["guards_missing"] == v["cupboard_walls_missing"] == 0
 
 
 def test_stair_detail_check_fails_when_not_drawn(els, tmp_path):
     v = _stair_sheet(els, tmp_path, False)
-    assert v["bars_missing"] == 15 and v["guards_missing"] == 2
+    assert v["bars_missing"] == 0 and v["guards_missing"] == 2
 
 
 def test_stair_detail_not_applied_to_sections_away_from_the_stair(els):
