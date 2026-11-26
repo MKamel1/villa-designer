@@ -177,7 +177,7 @@ def check_mesh(mesh, materials, fabric_table):
         out.append(Finding(mesh["id"], cat, "flat", "material '%s' is a flat colour" % mesh["material"],
                            "a textured library finish", "assign a library texture at its true scale, colour from the palette"))
     fclass = spec.get("fabric_class") or fabric_class_of(spec)
-    if spec.get("asset") and fclass:
+    if spec.get("asset") and fclass and not (mesh["id"].startswith("rug") or mesh["material"].startswith(("rug", "carpet"))):    # a carpet is meant to be coarse
         frac_tile = fabric_table.get(spec["asset"])
         if frac_tile:
             mm = frac_tile * spec.get("tile_m", 1.0) * 1000.0
