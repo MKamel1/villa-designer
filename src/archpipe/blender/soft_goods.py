@@ -154,7 +154,7 @@ def soft_cushion_faces(identifier, points):
     return [[world[i].round(6).tolist() for i in q] for q in quads]
 
 
-THROW_THICK_MM = 14.0       # a throw folded in three, loosely: ours (policy), not a product figure
+THROW_THICK_MM = 20.0       # a throw folded in three, loosely: ours (policy), not a product figure
 THROW_MAX_MM = 70.0
 
 
@@ -175,7 +175,13 @@ def soft_throw_faces(identifier, points):
     v = v.copy()
     v[:, 0] *= a * 1000 / 410.0
     v[:, 1] *= b * 1000 / 570.0
-    v[:, 2] = np.minimum(v[:, 2], THROW_MAX_MM) * 1.0
+    v[:, 2] = np.minimum(v[:, 2], THROW_MAX_MM)
+    # cloth creases fold sharply in a coarse sim; a few Laplacian passes on the height give rounded folds
+    h = v[:, 2].reshape(nx + 1, ny + 1)
+    for _ in range(4):
+        pad = np.pad(h, 1, mode="edge")
+        h = 0.5 * h + 0.125 * (pad[:-2, 1:-1] + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:])
+    v[:, 2] = h.ravel()
     bottom, top = v.copy(), v.copy()
     top[:, 2] += THROW_THICK_MM
     n = len(v)
@@ -206,7 +212,7 @@ def soften_throws(scene):
             m["faces"], moved = rest_on_hosts(soft_throw_faces(m["id"], pts), hosts)
             m["soft_goods_moved_m"] = [round(float(v), 3) for v in moved]
             m["smooth_shaded"] = True
-            m["subdivide"] = 1
+            m["subdivide"] = 2
             m.pop("bevel_m", None)
             m["soft_goods"] = "baked cloth-drop throw"
             n += 1
@@ -229,33 +235,42 @@ def host_shells(scene):
 
 
 def rest_on_hosts(faces, hosts, tol=0.004, step=0.004, limit=0.16):
-    """Move a soft good out of any host it sinks into: up first (out of a seat), then forward along its own
-    horizontal normal (out of a back), a few mm at a time. A cushion rests ON its seat, it does not sink into it."""
+    """Move a soft good out of any host it sinks into, a few mm at a time: straight up out of a seat (a host whose
+    thin axis is vertical), forward along the soft good's own horizontal normal out of a back. A cushion rests ON its
+    seat; it does not sink into it, and a cushion never climbs a back to dodge a seat."""
     from ..critic.furniture_realism import inside_mask
     pts = np.array([p for f in faces for p in f], float)
     ctr, e_a, e_b, e_t, _ = footprint(pts)
     fwd = np.array([e_t[0], e_t[1], 0.0])
     fwd = fwd / np.linalg.norm(fwd) if np.linalg.norm(fwd) > 0.2 else np.zeros(3)
-    sample = pts[:: max(1, len(pts) // 300)]
-
-    def sunk(offset):
-        q = sample + offset
-        lo, hi = q.min(0), q.max(0)
-        for hlo, hhi, tris in hosts:
-            if np.any(hhi < lo) or np.any(hlo > hi):
-                continue
-            # tolerate a rim touching: only count points deeper than tol inside (test a copy lowered by tol)
-            if inside_mask(q - np.array([0, 0, tol]), tris).any():
-                return True
-        return False
-    off = np.zeros(3)
-    for axis in (np.array([0, 0, 1.0]), fwd):
-        if not np.any(axis):
+    sample = np.unique(pts.round(4), axis=0)
+    lo0, hi0 = pts.min(0) - limit, pts.max(0) + limit
+    near = [(hlo, hhi, tris) for hlo, hhi, tris in hosts if not (np.any(hhi < lo0) or np.any(hlo > hi0))]
+    axes = []
+    for hlo, hhi, tris in near:
+        thin = int(np.argmin(hhi - hlo))
+        if thin == 2:
+            axes.append(np.array([0, 0, 1.0]))
             continue
-        for _ in range(int(limit / step)):
-            if not sunk(off):
-                break
-            off = off + axis * step
+        out = np.zeros(3)                                # horizontal, perpendicular to the back, towards the soft good
+        out[thin] = 1.0 if ctr[thin] >= (hlo[thin] + hhi[thin]) / 2 else -1.0
+        axes.append(out)
+
+    def sunk(k, off):
+        hlo, hhi, tris = near[k]
+        q = sample + off
+        if np.any(hhi < q.min(0)) or np.any(hlo > q.max(0)):
+            return False
+        return bool(inside_mask(q - np.array([0, 0, tol]), tris).any())
+    off = np.zeros(3)
+    for _ in range(2):                                   # a second pass: a lift can bring a back into contact
+        for k, axis in enumerate(axes):
+            if not np.any(axis):
+                continue
+            for _ in range(int(limit / step)):
+                if not sunk(k, off):
+                    break
+                off = off + axis * step
     if np.any(off):
         faces = [[(np.array(p) + off).round(6).tolist() for p in f] for f in faces]
     return faces, off
@@ -311,7 +326,7 @@ def puff_upholstery(mesh):
             continue
         # an island is a seat cushion when its thin axis is vertical, a back cushion when it is horizontal
         toward = e_t if e_t[2] > 0.7 else (e_t if np.dot(e_t[:2], (centre - ctr)[:2]) >= 0 else -e_t)
-        crown_m = 0.034 if e_t[2] > 0.7 else 0.05
+        crown_m = 0.045 if e_t[2] > 0.7 else 0.06
         keys = {}
         for i in idx:
             for p in faces[i]:
@@ -383,7 +398,19 @@ def soften_materials(scene):
 
 def soften_scene(scene):
     """Entry point: returns the same dict, softened, with a record of what changed."""
-    report = {"cushions": soften_cushions(scene), "throws": soften_throws(scene), "upholstery_islands": soften_upholstery(scene),
-              "materials": soften_materials(scene)}
+    # upholstery first: the soft goods must rest on the inflated seat, not on the rigid one it replaces
+    report = {"upholstery_islands": soften_upholstery(scene)}
+    report.update(cushions=soften_cushions(scene), throws=soften_throws(scene), materials=soften_materials(scene))
     scene["soft_goods"] = report
     return report
+
+
+def assert_soft_goods_real(scene):
+    """Render post-condition: after softening, no soft good may fail the furniture realism check (shape, fabric scale,
+    floating or sinking). A rigid cushion cannot reach a presentation render again."""
+    from ..critic import furniture_realism as F
+    found = [f for f in F.check_scene(scene, F.fabric_table()) if f.category == "soft"] + F.penetration_findings(scene)
+    if found:
+        raise ValueError("soft goods fail the realism check: " + "; ".join(
+            "%s %s (%s)" % (f.object_id, f.check, f.achieved) for f in found[:8]))
+    return len(found)

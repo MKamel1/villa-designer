@@ -2023,6 +2023,7 @@ def render(scene_data, args):
         from archpipe.blender import soft_goods
         soft_report = soft_goods.soften_scene(scene_data)
         print("soft goods:", soft_report)
+        soft_goods.assert_soft_goods_real(scene_data)
     if args.views == "none" and not (args.calibrate or args.measure_lighting or args.measure_exposure_groups):
         raise ValueError("--views none requires --calibrate or --measure-lighting")
     if args.views == "none" and args.calibrate:
