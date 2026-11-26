@@ -44,16 +44,16 @@
   "door": 18,
   "fixture": 7,
   "floor": 30,
-  "furniture": 79,
+  "furniture": 80,
   "garden": 14,
-  "luminaire": 135,
+  "luminaire": 137,
   "plant": 80,
   "railing": 8,
   "room": 30,
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 111,
+  "type": 113,
   "wall": 36,
   "window": 8
  },
@@ -7370,139 +7370,16 @@
     "tread_depth_mm": 296.0,
     "nosing_overlap_mm": 16,
     "tread_thickness_mm": 60.0,
-    "riser_infill": {
-     "type": "horizontal flat bar",
-     "bar_h_mm": 40,
-     "bar_t_mm": 10,
-     "gap_mm": 116.47058823529412,
-     "max_clear_opening_mm": 38.24,
-     "count": 15,
-     "present": true,
-     "bar_boxes_mm": [
-      [
-       9367.0,
-       -28421,
-       -2785.294117647059,
-       9377.0,
-       -27471,
-       -2745.294117647059
-      ],
-      [
-       9087.0,
-       -28421,
-       -2608.823529411765,
-       9097.0,
-       -27471,
-       -2568.823529411765
-      ],
-      [
-       8807.0,
-       -28421,
-       -2432.3529411764707,
-       8817.0,
-       -27471,
-       -2392.3529411764707
-      ],
-      [
-       8527.0,
-       -28421,
-       -2255.8823529411766,
-       8537.0,
-       -27471,
-       -2215.8823529411766
-      ],
-      [
-       8247.0,
-       -28421,
-       -2079.4117647058824,
-       8257.0,
-       -27471,
-       -2039.4117647058824
-      ],
-      [
-       7967.0,
-       -28421,
-       -1902.9411764705883,
-       7977.0,
-       -27471,
-       -1862.9411764705883
-      ],
-      [
-       7687.0,
-       -28421,
-       -1726.4705882352941,
-       7697.0,
-       -27471,
-       -1686.4705882352941
-      ],
-      [
-       7407.0,
-       -28421,
-       -1550.0,
-       7417.0,
-       -27471,
-       -1510.0
-      ],
-      [
-       7127.0,
-       -28421,
-       -1373.5294117647059,
-       7137.0,
-       -27471,
-       -1333.5294117647059
-      ],
-      [
-       6847.0,
-       -28421,
-       -1197.0588235294117,
-       6857.0,
-       -27471,
-       -1157.0588235294117
-      ],
-      [
-       6567.0,
-       -28421,
-       -1020.5882352941176,
-       6577.0,
-       -27471,
-       -980.5882352941176
-      ],
-      [
-       6287.0,
-       -28421,
-       -844.1176470588236,
-       6297.0,
-       -27471,
-       -804.1176470588236
-      ],
-      [
-       6007.0,
-       -28421,
-       -667.6470588235295,
-       6017.0,
-       -27471,
-       -627.6470588235295
-      ],
-      [
-       5727.0,
-       -28421,
-       -491.17647058823536,
-       5737.0,
-       -27471,
-       -451.17647058823536
-      ],
-      [
-       5447.0,
-       -28421,
-       -314.7058823529412,
-       5457.0,
-       -27471,
-       -274.7058823529412
-      ]
-     ],
-     "sphere_test_mm": 100.0,
-     "openings_above_and_below_bar_mm": 38.24,
-     "basis": "a horizontal flat bar 40 x 10 mm centred in each 116.5 mm gap between treads leaves two openings of 38.2 mm: no 100 mm sphere passes (ADK 1.9)"
+    "riser_infill": {},
+    "infill_waiver": {
+     "date": "2026-11-25",
+     "by": "client",
+     "criterion": "LS2",
+     "card": "ukadk-open-risers-dwelling",
+     "supersedes": "G1 2026-11-21 LS2 riser infill (flat bars)",
+     "required_mm": 100.0,
+     "consequence": "the gap between treads returns to the full open gap and a 100 mm sphere passes it: a child under about 5 can get a foot, leg or head through. The stair is no longer best practice on this item.",
+     "reversible": "the infill bar can be refitted (stairs.straight(infill=True)) if small children use the house"
     },
     "steel": {
      "members": [
@@ -11615,7 +11492,7 @@
    "finish_codes": [],
    "params": {
     "type": "base_run",
-    "why": "sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it",
+    "why": "sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it; client 2026-11-25: wall cupboards above (underside 1.50 m, top 2.00 m, 300 deep)",
     "extra": {
      "modules": [
       [
@@ -12569,19 +12446,19 @@
    }
   },
   {
-   "id": "furn-ka-bunk",
+   "id": "furn-ka-loft-1",
    "kind": "furniture",
    "level": "GF",
    "placement": [
-    11977.0,
-    -25450.0,
+    12047.0,
+    -26296.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    900.0,
-    2000.0,
-    1700.0
+    1040.0,
+    2050.0,
+    1820.0
    ],
    "host": "",
    "room": "kids-a",
@@ -12589,12 +12466,51 @@
    "finish_codes": [],
    "params": {
     "type": "bed_single",
-    "why": "bunk bed against the west wall (answers)",
+    "why": "loft bed 1 against the west wall, south end: head to the south wall, ladder at the north foot end on the room side (the head end is local -y)",
     "extra": {
-     "berths": 2
+     "ladder_at": "+y",
+     "loft": true,
+     "berths": 1,
+     "mattress_top": 1.63,
+     "under": 1.42,
+     "rail_top": 1.82
     },
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-bed_single---900-2000-1700"
+    "type_id": "type-furniture-bed_single---1040-2050-1820"
+   }
+  },
+  {
+   "id": "furn-ka-loft-2",
+   "kind": "furniture",
+   "level": "GF",
+   "placement": [
+    14382.0,
+    -26296.0,
+    0.0
+   ],
+   "rotation_deg": 180.0,
+   "size": [
+    1040.0,
+    2050.0,
+    1820.0
+   ],
+   "host": "",
+   "room": "kids-a",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "type": "bed_single",
+    "why": "loft bed 2 against the east wall, south end: head to the north (local -y at rot 180), ladder at the south foot end on the room side, beside the door",
+    "extra": {
+     "ladder_at": "+y",
+     "loft": true,
+     "berths": 1,
+     "mattress_top": 1.63,
+     "under": 1.42,
+     "rail_top": 1.82
+    },
+    "size_basis": "authored in the furniture layout",
+    "type_id": "type-furniture-bed_single---1040-2050-1820"
    }
   },
   {
@@ -12602,13 +12518,13 @@
    "kind": "furniture",
    "level": "GF",
    "placement": [
-    13170.0,
-    -24091.0,
+    11827.0,
+    -26441.0,
     0.0
    ],
-   "rotation_deg": 180.0,
+   "rotation_deg": -90.0,
    "size": [
-    1100.0,
+    1400.0,
     600.0,
     750.0
    ],
@@ -12618,10 +12534,12 @@
    "finish_codes": [],
    "params": {
     "type": "desk",
-    "why": "desk, girl 1",
-    "extra": {},
+    "why": "desk under loft 1 (IKEA SMASTAD desk is 148 x 60 x 73), against the west wall, chair on the room side under the frame",
+    "extra": {
+     "under": "ka-loft-1"
+    },
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-desk---1100-600-750"
+    "type_id": "type-furniture-desk---1400-600-750"
    }
   },
   {
@@ -12629,13 +12547,13 @@
    "kind": "furniture",
    "level": "GF",
    "placement": [
-    14310.0,
-    -24091.0,
+    14602.0,
+    -26441.0,
     0.0
    ],
-   "rotation_deg": 180.0,
+   "rotation_deg": 90.0,
    "size": [
-    1100.0,
+    1400.0,
     600.0,
     750.0
    ],
@@ -12645,10 +12563,12 @@
    "finish_codes": [],
    "params": {
     "type": "desk",
-    "why": "desk, girl 2",
-    "extra": {},
+    "why": "desk under loft 2, against the east wall",
+    "extra": {
+     "under": "ka-loft-2"
+    },
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-desk---1100-600-750"
+    "type_id": "type-furniture-desk---1400-600-750"
    }
   },
   {
@@ -12657,12 +12577,12 @@
    "level": "GF",
    "placement": [
     14602.0,
-    -26551.0,
+    -24581.0,
     0.0
    ],
    "rotation_deg": 90.0,
    "size": [
-    1500.0,
+    1360.0,
     600.0,
     2200.0
    ],
@@ -12672,10 +12592,10 @@
    "finish_codes": [],
    "params": {
     "type": "wardrobe",
-    "why": "1.5 m wardrobe",
+    "why": "wardrobe north of loft 2, ending 0.30 m short of the window wall (the window check: nothing taller than the sill within 0.30 m of it): 1.36 m where 1.5 m was asked; the 2.05 m loft frame leaves 1.48 m of the 3.53 m wall",
     "extra": {},
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-wardrobe---1500-600-2200"
+    "type_id": "type-furniture-wardrobe---1360-600-2200"
    }
   },
   {
@@ -18544,57 +18464,57 @@
    }
   },
   {
-   "id": "lum-DL-kids-a-02",
+   "id": "lum-UC-kids-a-02",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    13170.0,
-    -23991.0,
-    2700.0
+    11727.0,
+    -26441.0,
+    1400.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    76.0,
-    76.0,
+    1200.0,
+    0.0,
     0.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "erco/41321",
+   "product_id": "",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 537.8,
-    "watts": 14.4,
-    "cct_k": 2700.0,
+    "fixture_kind": "UC",
+    "layer": "task",
+    "mount": "strip",
+    "what": "under-cabinet LED strip",
+    "flux_lm": 606.0,
+    "watts": null,
+    "cct_k": 2700,
     "cri": 90,
-    "beam_deg": 57.0,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "erco",
-     "code": "41321",
-     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
      "substitute": false,
-     "generic": false
+     "generic": true
     },
     "aim": [
-     0.0,
-     0.0,
-     -1.0
+     0,
+     0,
+     -1
     ],
     "along": [
-     1.0,
      0.0,
+     1.0,
      0.0
     ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-desk-400",
-    "why": "L6c: desk downlight in front of the child (Lucy alone (234 lm) cannot reach 400 lx at a safe driver setting)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
+    "length_mm": 1200.0,
+    "illuminance_card": "",
+    "why": "under-loft desk strip (loft underside 1.42 m): task light for the desk below, shielded by the frame",
+    "emitter_z_scene_mm": 1400.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---UC-strip-1200-0"
    }
   },
   {
@@ -18602,8 +18522,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    13170.0,
-    -24041.0,
+    11827.0,
+    -26391.0,
     1200.0
    ],
    "rotation_deg": 0.0,
@@ -18652,57 +18572,57 @@
    }
   },
   {
-   "id": "lum-DL-kids-a-04",
+   "id": "lum-UC-kids-a-04",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    14310.0,
-    -23991.0,
-    2700.0
+    14702.0,
+    -26441.0,
+    1400.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    76.0,
-    76.0,
+    1200.0,
+    0.0,
     0.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "erco/41321",
+   "product_id": "",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 537.8,
-    "watts": 14.4,
-    "cct_k": 2700.0,
+    "fixture_kind": "UC",
+    "layer": "task",
+    "mount": "strip",
+    "what": "under-cabinet LED strip",
+    "flux_lm": 606.0,
+    "watts": null,
+    "cct_k": 2700,
     "cri": 90,
-    "beam_deg": 57.0,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "erco",
-     "code": "41321",
-     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
      "substitute": false,
-     "generic": false
+     "generic": true
     },
     "aim": [
-     0.0,
-     0.0,
-     -1.0
+     0,
+     0,
+     -1
     ],
     "along": [
-     1.0,
      0.0,
+     1.0,
      0.0
     ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-desk-400",
-    "why": "L6c: desk downlight in front of the child (Lucy alone (234 lm) cannot reach 400 lx at a safe driver setting)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
+    "length_mm": 1200.0,
+    "illuminance_card": "",
+    "why": "under-loft desk strip (loft underside 1.42 m): task light for the desk below, shielded by the frame",
+    "emitter_z_scene_mm": 1400.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---UC-strip-1200-0"
    }
   },
   {
@@ -18710,8 +18630,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    14310.0,
-    -24041.0,
+    14602.0,
+    -26391.0,
     1200.0
    ],
    "rotation_deg": 0.0,
@@ -18764,13 +18684,13 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    11977.0,
-    -26470.0,
+    12047.0,
+    -27291.0,
     80.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    800.0,
+    940.0,
     0.0,
     0.0
    ],
@@ -18783,7 +18703,7 @@
     "layer": "night",
     "mount": "strip",
     "what": "night-light strip under the bed / plinth",
-    "flux_lm": 80.0,
+    "flux_lm": 94.0,
     "watts": null,
     "cct_k": 2200,
     "cri": 90,
@@ -18797,7 +18717,7 @@
     },
     "aim": [
      0,
-     -0.3,
+     0.3,
      -1
     ],
     "along": [
@@ -18805,12 +18725,66 @@
      0.0,
      0.0
     ],
-    "length_mm": 800.0,
+    "length_mm": 940.0,
     "illuminance_card": "",
-    "why": "warm glow under the bed side: kids' night light",
+    "why": "warm glow at the foot of the loft bed: kids' night light",
     "emitter_z_scene_mm": 80.0,
     "size_basis": "authored run length (strip); section not authored",
-    "type_id": "type-luminaire---NL-strip-800-0"
+    "type_id": "type-luminaire---NL-strip-940-0"
+   }
+  },
+  {
+   "id": "lum-NL-kids-a-07",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    14382.0,
+    -27291.0,
+    80.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    940.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "kids-a",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "NL",
+    "layer": "night",
+    "mount": "strip",
+    "what": "night-light strip under the bed / plinth",
+    "flux_lm": 94.0,
+    "watts": null,
+    "cct_k": 2200,
+    "cri": 90,
+    "beam_deg": null,
+    "photometry": {
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
+     "substitute": false,
+     "generic": true
+    },
+    "aim": [
+     0,
+     0.3,
+     -1
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 940.0,
+    "illuminance_card": "",
+    "why": "warm glow at the foot of the loft bed: kids' night light",
+    "emitter_z_scene_mm": 80.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---NL-strip-940-0"
    }
   },
   {
@@ -20323,6 +20297,60 @@
     "emitter_z_scene_mm": 300.0,
     "size_basis": "authored run length (strip); section not authored",
     "type_id": "type-luminaire---TOE-strip-540-0"
+   }
+  },
+  {
+   "id": "lum-UC-kitchen-13",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    12545.0,
+    -23911.0,
+    1480.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1950.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "kitchen",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "UC",
+    "layer": "task",
+    "mount": "strip",
+    "what": "under-cabinet LED strip",
+    "flux_lm": 1950.0,
+    "watts": null,
+    "cct_k": 2700,
+    "cri": 90,
+    "beam_deg": null,
+    "photometry": {
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
+     "substitute": false,
+     "generic": true
+    },
+    "aim": [
+     0,
+     0.5,
+     -1
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 1950.0,
+    "illuminance_card": "ies-res-kitchen-sink-300",
+    "why": "under-cupboard task strip over the sink run (cupboard underside 1.50 m, 0.27 m off the wall)",
+    "emitter_z_scene_mm": -1520.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---UC-strip-1950-0"
    }
   },
   {
@@ -30629,7 +30657,7 @@
    }
   },
   {
-   "id": "type-furniture-bed_single---900-2000-1700",
+   "id": "type-furniture-bed_single---1040-2050-1820",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -30639,9 +30667,9 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    900.0,
-    2000.0,
-    1700.0
+    1040.0,
+    2050.0,
+    1820.0
    ],
    "host": "",
    "room": "",
@@ -30652,23 +30680,24 @@
     "shared": {
      "type": "bed_single"
     },
-    "occurrences": 1,
+    "occurrences": 2,
     "occurrence_ids": [
-     "furn-ka-bunk"
+     "furn-ka-loft-1",
+     "furn-ka-loft-2"
     ],
     "key": [
      "furniture",
      "bed_single",
      "-",
-     900.0,
-     2000.0,
-     1700.0
+     1040.0,
+     2050.0,
+     1820.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
   },
   {
-   "id": "type-furniture-desk---1100-600-750",
+   "id": "type-furniture-desk---1400-600-750",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -30678,7 +30707,7 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    1100.0,
+    1400.0,
     600.0,
     750.0
    ],
@@ -30700,7 +30729,7 @@
      "furniture",
      "desk",
      "-",
-     1100.0,
+     1400.0,
      600.0,
      750.0
     ],
@@ -30708,7 +30737,7 @@
    }
   },
   {
-   "id": "type-furniture-wardrobe---1500-600-2200",
+   "id": "type-furniture-wardrobe---1360-600-2200",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -30718,7 +30747,7 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    1500.0,
+    1360.0,
     600.0,
     2200.0
    ],
@@ -30739,7 +30768,7 @@
      "furniture",
      "wardrobe",
      "-",
-     1500.0,
+     1360.0,
      600.0,
      2200.0
     ],
@@ -31174,7 +31203,7 @@
       "generic": false
      }
     },
-    "occurrences": 52,
+    "occurrences": 50,
     "occurrence_ids": [
      "lum-DL-lounge-01",
      "lum-DL-lounge-02",
@@ -31220,8 +31249,6 @@
      "lum-DL-family-bath-02",
      "lum-DL-family-bath-03",
      "lum-DL-kids-a-01",
-     "lum-DL-kids-a-02",
-     "lum-DL-kids-a-04",
      "lum-DL-kids-b-01",
      "lum-DL-kids-b-02",
      "lum-DL-parents-bed-04",
@@ -32606,7 +32633,7 @@
    }
   },
   {
-   "id": "type-luminaire---NL-strip-800-0",
+   "id": "type-luminaire---UC-strip-1200-0",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -32616,7 +32643,61 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    800.0,
+    1200.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "UC",
+     "mount": "strip",
+     "layer": "task",
+     "flux_lm": 606.0,
+     "watts": null,
+     "cct_k": 2700,
+     "cri": 90,
+     "beam_deg": null,
+     "photometry": {
+      "manufacturer": "",
+      "code": "",
+      "ies": "",
+      "substitute": false,
+      "generic": true
+     }
+    },
+    "occurrences": 2,
+    "occurrence_ids": [
+     "lum-UC-kids-a-02",
+     "lum-UC-kids-a-04"
+    ],
+    "key": [
+     "luminaire",
+     "-",
+     "UC",
+     "strip",
+     1200.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-luminaire---NL-strip-940-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    940.0,
     0.0,
     0.0
    ],
@@ -32630,7 +32711,7 @@
      "fixture_kind": "NL",
      "mount": "strip",
      "layer": "night",
-     "flux_lm": 80.0,
+     "flux_lm": 94.0,
      "watts": null,
      "cct_k": 2200,
      "cri": 90,
@@ -32643,16 +32724,17 @@
       "generic": true
      }
     },
-    "occurrences": 1,
+    "occurrences": 2,
     "occurrence_ids": [
-     "lum-NL-kids-a-06"
+     "lum-NL-kids-a-06",
+     "lum-NL-kids-a-07"
     ],
     "key": [
      "luminaire",
      "-",
      "NL",
      "strip",
-     800.0,
+     940.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
@@ -33242,6 +33324,59 @@
      "TOE",
      "strip",
      540.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
+   "id": "type-luminaire---UC-strip-1950-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1950.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "UC",
+     "mount": "strip",
+     "layer": "task",
+     "flux_lm": 1950.0,
+     "watts": null,
+     "cct_k": 2700,
+     "cri": 90,
+     "beam_deg": null,
+     "photometry": {
+      "manufacturer": "",
+      "code": "",
+      "ies": "",
+      "substitute": false,
+      "generic": true
+     }
+    },
+    "occurrences": 1,
+    "occurrence_ids": [
+     "lum-UC-kitchen-13"
+    ],
+    "key": [
+     "luminaire",
+     "-",
+     "UC",
+     "strip",
+     1950.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
