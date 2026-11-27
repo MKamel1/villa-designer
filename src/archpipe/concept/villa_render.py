@@ -1004,11 +1004,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     GEN = {"bed_double": ("bed_double", 1.05), "bed_small_double": ("bed_double", 0.95),
            "wardrobe": ("wardrobe", None), "bedside_table": ("bedside_table", None)}
     GEN_MAT = {"archpipe oak": "oak", "archpipe warm linen": "linen", "archpipe ivory bedding": "bedding-white",
-               "archpipe muted taupe throw": "linen", "archpipe dark metal": "black-metal"}
+               "archpipe muted taupe throw": "linen", "archpipe dark metal": "black-metal",
+               "archpipe walnut": "walnut-grain-x", "archpipe taupe upholstery": "boucle", "archpipe tray lining": "linen"}
     generated = set()
     detailed = set()
     from . import villa_furniture_detail as FD
     gen_comps = {}
+    tray_open, tray_closed = {}, []
     for f in F3.spec(lay):
         src = it_all.get(f["mark"])
         if src is not None and src["type"] in GEN and not str(src["room"]).startswith("parents-dressing"):
@@ -1058,16 +1060,30 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 # Keep pillows separate so their curved edges can be smoothed
                 # without subdividing the mattress or the hard bed frame.
                 key = (mat, part) if part.startswith("pillow") else (mat, "body")
+                if part == "headboard-panel":
+                    key = (mat, part)
+                if part.startswith("tray-"):
+                    # each tray is its own mesh; the east tray also gets a pulled-out copy (n18 shows it, hides the closed one)
+                    key = (mat, "tray-" + part[-1])
+                    if part.endswith("-e"):
+                        tray_open.setdefault(mat, []).extend(
+                            [[[vs[t[i]][0] + JOINERY_TRAY_PULL, vs[t[i]][1], vs[t[i]][2]] for i in range(3)] for t in triangles])
                 by.setdefault(key, []).extend(
                     [[vs[t[0]], vs[t[1]], vs[t[2]]] for t in triangles])
             for k, ((mat, part), faces) in enumerate(by.items()):
+                if part == "tray-e":
+                    tray_closed.append("furn-%s-%d" % (f["mark"], k))
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"], k), group="furniture", material=mat,
                                    room=f["room"], label=f["mark"] + (" dressing: pillow" if part.startswith("pillow") else ""),
-                                   faces=faces, part_kind="pillow" if part.startswith("pillow") else f["type"],
+                                   faces=faces, part_kind=bed_part_kind(part, mat, f["type"]),
                                    keep_object=True, subdivide=1 if part.startswith("pillow") else 0,
                                    bevel_m=0.003 if part.startswith("pillow") else 0))
             generated.add(f["mark"])
             gen_comps[f["mark"]] = comps
+            for k, (mat, faces) in enumerate(sorted(tray_open.items()) if f["mark"] == "pb-bed" else []):
+                meshes.append(dict(id=TRAY_OPEN_PREFIX + "%d" % k, group="furniture", material=mat, room=f["room"],
+                                   label=f["mark"] + " east tray pulled out (n18 only)", faces=faces, part_kind=bed_part_kind("tray-e", mat, "bed_double"),
+                                   keep_object=True, subdivide=0, bevel_m=0))
             continue
         z = LZ[f["level"]]
         # detailed render geometry inside the same checked envelope (villa_furniture_detail); boxes only where no
@@ -1376,7 +1392,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from archpipe.beds import label_fallbacks
     label_fallbacks(meshes, it_all.values(),
                     [r["mark"] for r in fit_report if r["ok"]])
-    notes.append("BEDS: PROCEDURAL BED FALLBACK (stand-in) retained for parents, both kids' rooms and library "
+    notes.append("BEDS: the parents' bed is custom joinery (client 2026-11-26: walnut deck with a push-to-open tray in each side rail, "
+                 "50 mm walnut-and-upholstery headboard; runner basis Blum MOVENTO 760H NL 270 with TIP-ON, ASSUMED until ordered). "
+                 "PROCEDURAL BED FALLBACK (stand-in) retained for both kids' rooms and library "
                  "daybed until a measured, uniformly fitting, neutral-preview-reviewed model is available. "
                  "Per-part fallback_label records the disclosure without changing view subject identity.")
 
@@ -1425,6 +1443,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         # 0.26 m drop (the bedroom's 0.30 was on a higher mattress): on these 0.48-0.53 m mattresses a 0.30 m drop on
         # two sides draped the foot corners to 30-50 mm off the floor (render_qa cloth_plausible, draft 12)
         over, foot_over = (-0.05, -0.05) if bunk else (0.26, 0.26)
+        if bid == "pb-bed":
+            # Client 2026-11-25 (slim headboard, no built-out wall): the foot route round the bed is 0.80 m between the
+            # mattress foot and the south wall (0.75 m required, UK AD M 2.25a), and the floating ledges stand beside the
+            # mattress at its top height, so the duvet is cut to end level with the bed foot and 0.03 m past the sides (it
+            # hung 0.155 m past the foot and 0.16 m past the west side, measured) and rests on the ledges.
+            over, foot_over = PB_DUVET_OVER, PB_DUVET_FOOT
         axis = "y" if b_["rot"] in (0, 180) else "x"
         if axis == "y":
             head = q[1] if b_["rot"] == 0 else q[3]
@@ -1944,6 +1968,14 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         else:
             overlap = max(0.0, desired_stack - pier_reach)
         stack = round(pier_reach + overlap, 3)
+        park, park_from = CURTAIN_PARK.get(cid, (None, None))
+        if park:
+            assert axis == "h" and park == "r", cid                 # only the east draw of an x-running window is built
+            # the stacks end 0.02 m short of the room's east face; both leaves (sheer and heavy) draw there, side by side,
+            # each gathered into half the room left between park_from and that face (a fuller stack than the ASSUMED
+            # 0.18 x width is not asked for: this one is the same fabric gathered tighter, 0.34 m a leaf)
+            park_reach = round(rx1 - 0.02 - (o["x"] + width / 2), 3)
+            stack = round(min(stack, (rx1 - 0.02 - park_from) / 2), 3)
         curtains.append(dict(
             id=cid, room=room, level=level, axis=axis, center=[o["x"], o["y"]], width=round(width, 3),
             floor_z=floor_z, track_z=round(track_z, 3), normal_sign=sign, wall_face=round(wall_face, 3),
@@ -1952,6 +1984,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             open_stack_m=stack, open_pier_reach_m=pier_reach, closed_overlap_m=0.05,
             sheer_half_inner_m=sheer_half_inner(width, opening_kind),
             **({"open_clear_width_m": clear_width} if clear_width is not None else {}),
+            **({"park_side": park, "park_reach_m": park_reach} if park else {}),
             # Floor-length regardless of sill height: a punched bedroom window's curtain still runs track-to-floor
             # (the norm in bedrooms/living rooms, not a curtain cut to the glass), so track_z/floor_z alone (not
             # the window's own sill/head) drive villa_scene.build_curtains' panel height.
@@ -1961,13 +1994,16 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         # and reveal, not offset from the glazing line. It already runs the full opening width, so no change is
         # needed for a stack that overlaps the glazing (that is fabric on the SAME rail, gathered further in).
         half = width / 2 + pier_reach
+        half_lo = half
+        if park:
+            half, half_lo = width / 2 + park_reach, width / 2 + 0.05
         z0, z1 = track_z - 0.03, track_z
         track_at = wall_face + sign * 0.125
         d0, d1 = sorted((track_at - 0.02, track_at + 0.02))
         if axis == "h":
-            box = (o["x"] - half, d0, z0, o["x"] + half, d1, z1)
+            box = (o["x"] - half_lo, d0, z0, o["x"] + half, d1, z1)
         else:
-            box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
+            box = (d0, o["y"] - half_lo, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
              label="detail: curtain ceiling track (ASSUMED)", kind="curtain-track")
     # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
@@ -1985,6 +2021,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                  "cap. The heavy layer closes across the opening at night; the sheer layer stays open in both "
                  "states (its job is daytime diffusion, and the closed heavy layer already gives the night "
                  "blackout/dim-out). ASSUMED: track and stacking dimensions, not a specified product.")
+    for v in views:
+        # the parents' east tray: closed in every view, pulled out (copy shown, closed one hidden) in the n18 close view only
+        tray_hide = tray_closed if v["id"] == TRAY_VIEW else [m["id"] for m in meshes if m["id"].startswith(TRAY_OPEN_PREFIX)]
+        if tray_hide:
+            fill_defaults(v, {"hide_meshes": []})
+            override(v, "hide_meshes", v["hide_meshes"] + tray_hide, "the east tray is closed or pulled out per view")
     for v in views:
         if v["state"] in DAY_CURTAIN_STATE_STATES and curtains:
             fill_defaults(v, {"curtain_state": SHEER_HALF_STATE})
@@ -2668,11 +2710,32 @@ def generator_rotation(rot):
 
 def generated_components(src, kind, hh=None):
     from .. import furniture as FG
+    if src.get("joinery"):
+        hh = JOINERY_BED_H                  # the envelope runs up to the headboard top, whatever height the caller passes
     return FG.build_furniture({"id": src["id"], "type": kind, "at": [src["cx"] * 1000, src["cy"] * 1000],
                                "size": [src["w"] * 1000, src["d"] * 1000],
-                               "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"])})
+                               "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"]),
+                               **({"joinery": True} if src.get("joinery") else {})})
 
 
+def bed_part_kind(part, mat, furniture_type):
+    """Physical kind of a generated bed's mesh: the joinery bed's trays are door-leaf fronts and carcass linings, its upholstered panel a wall panel."""
+    if part.startswith("pillow"):
+        return "pillow"
+    if part.startswith("tray-"):
+        return "door-leaf" if mat == "walnut-grain-x" else "cabinet-carcass"
+    return "wall-panel" if part == "headboard-panel" else furniture_type
+
+
+JOINERY_BED_H = 1.35        # m: the parents' joinery bed's envelope height (headboard top)
+JOINERY_TRAY_PULL = 0.25    # m: the east tray pulled out for the close view (furniture.JOINERY_BED["tray_pull_m"])
+TRAY_OPEN_PREFIX = "tray-open-e-"
+TRAY_VIEW = "n18-parents-tray-open"
+PB_DUVET_OVER, PB_DUVET_FOOT = 0.03, 0.0   # m: the parents' duvet cut beyond the mattress sides / the bed foot (see _build)
+# Open-curtain stacks parked off the route (client 2026-11-25, lead decision): curtain id -> the side the whole open stack
+# is drawn to, and the x its stacks must not start west of. The parents' south window has the SW column and the 0.77 m west passage on its west side; a stack there
+# leaves 0.58-0.63 m on the only way round the bed foot, so both leaves draw to the east pier, past the vanity.
+CURTAIN_PARK = {"curtain-parents-bed-01": ("r", 21.70)}   # (side, x where the parked stacks may start: 0.68 m of east pier)
 KITCHEN_ROOMS = ("kitchen", "kitchen-island", "dirty-kitchen")
 # rug slot of the client's schedule per room; the cinema carpet is a design finish, not a schedule slot
 SOFA_SCHEDULE = {"living-sofa": ("living-sofa", 1), "lounge-sofa": ("lounge-sofa", -1), "study-sofa": ("study-sofa", 1),
@@ -2861,14 +2924,7 @@ def props(lay):
                 add("library-books-%d" % n, "book_encyclopedia_set_01", bk[0] + dx, bk[1] + 0.16, B + z,
                     label="books on the library shelves")
                 n += 1
-    # The set is 0.551 x 0.163 m at scale 1 with its origin at the left end, so placing the origin at the bedside's
-    # centre put it 0.357 m past the 0.35 m top, floating in the dressing door's opening (client, walkthrough 6:21).
-    # Scale 0.6 (0.331 m) and seat the measured bounds on the top's centre; dressing_overhang_violations guards it.
-    x, y = c("pb-bedside")
-    sc = 0.6
-    (bx0, _, bz0), (bx1, _, bz1) = MANIFEST_BOUNDS["book_encyclopedia_set_01"]["min"], MANIFEST_BOUNDS["book_encyclopedia_set_01"]["max"]
-    add("bedside-books", "book_encyclopedia_set_01", x - sc * (bx0 + bx1) / 2, y + sc * (bz0 + bz1) / 2,
-        G + it["pb-bedside"]["h"], s=sc, label="books on the bedside")
+    # (the bedside books are gone with the bedside tables, client 2026-11-25: the ledges are 0.25 m deep, bed furniture only)
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
     # bedroom one moved out of the vanity chair's way into the window corner beside the vanity; the study one out of
     # the new low window into the corner beside the TV unit
@@ -3035,7 +3091,7 @@ def _VIEWS(lay=None, resolve=True):
       room="study-game")
     v("v05-parents-bedroom", "Parents' bedroom", "evening", I, I, 24, ["pb-bed"], room="parents-bed",
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
-    v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-loft-1", "ka-loft-2", "ka-desk-1"], room="kids-a")
+    v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-loft-1", "ka-desk-1"], room="kids-a")
     v("v07-terrace-dusk", "South garden pergola and retained frangipani at dusk", "exterior-dusk", [28.1, -20.81, B + 1.35], [25.6363, -25.1509, B + 1.35],
       24, ["landscape-tree-south", "living-sofa"], shift_y=0.073, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})

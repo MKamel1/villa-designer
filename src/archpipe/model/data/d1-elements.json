@@ -44,7 +44,7 @@
   "door": 18,
   "fixture": 7,
   "floor": 30,
-  "furniture": 80,
+  "furniture": 78,
   "garden": 14,
   "luminaire": 137,
   "plant": 80,
@@ -53,7 +53,7 @@
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 114,
+  "type": 112,
   "wall": 36,
   "window": 8
  },
@@ -12700,39 +12700,12 @@
    "finish_codes": [],
    "params": {
     "type": "bed_double",
-    "why": "queen 160 x 200 (answers), head on the dressing wall, east of the entry; 750 mm both sides and the foot",
+    "why": "joinery queen 1600 x 2000 (client), head on the dressing wall, east of the entry; 750 mm both sides and the foot; a hidden pull-out tray in each side rail, flush when closed",
     "extra": {
-     "product_rejected": "real products available are king size (1.97-2.14 m); approved 0.35 m bedside arrangement kept"
+     "joinery": true
     },
     "size_basis": "authored in the furniture layout",
     "type_id": "type-furniture-bed_double---1600-2000-500"
-   }
-  },
-  {
-   "id": "furn-pb-bedside",
-   "kind": "furniture",
-   "level": "GF",
-   "placement": [
-    21305.0,
-    -26391.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    350.0,
-    400.0,
-    550.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "",
-   "finish_codes": [],
-   "params": {
-    "type": "bedside_table",
-    "why": "slim 0.35 m bedside in zone a, clear of the dressing door opening (a 0.5 m one stood 0.23 m in it); the other side has a wall shelf so the way in from the entry stays clear",
-    "extra": {},
-    "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-bedside_table---350-400-550"
    }
   },
   {
@@ -20995,34 +20968,6 @@
     "plant": false,
     "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 1.0",
     "type_id": "type-furniture-dressing-book_encyclopedia_set_01-551_3-163_1-237_4"
-   }
-  },
-  {
-   "id": "prop-bedside-books",
-   "kind": "furniture",
-   "level": "GF",
-   "placement": [
-    21151.0,
-    -26379.0,
-    550.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    330.8,
-    97.9,
-    142.4
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "book_encyclopedia_set_01",
-   "finish_codes": [],
-   "params": {
-    "type": "dressing",
-    "label": "dressing: books on the bedside",
-    "scale": 0.6,
-    "plant": false,
-    "size_basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale, times placed scale 0.6",
-    "type_id": "type-furniture-dressing-book_encyclopedia_set_01-330_8-97_9-142_4"
    }
   },
   {
@@ -30932,45 +30877,6 @@
    }
   },
   {
-   "id": "type-furniture-bedside_table---350-400-550",
-   "kind": "type",
-   "level": "SITE",
-   "placement": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    350.0,
-    400.0,
-    550.0
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "",
-   "finish_codes": [],
-   "params": {
-    "for_kind": "furniture",
-    "shared": {
-     "type": "bedside_table"
-    },
-    "occurrences": 1,
-    "occurrence_ids": [
-     "furn-pb-bedside"
-    ],
-    "key": [
-     "furniture",
-     "bedside_table",
-     "-",
-     350.0,
-     400.0,
-     550.0
-    ],
-    "basis": "elements of one kind with identical shared parameters, size and product share one type"
-   }
-  },
-  {
    "id": "type-furniture-desk---1000-400-750",
    "kind": "type",
    "level": "SITE",
@@ -33668,45 +33574,6 @@
      701.2,
      657.4,
      841.2
-    ],
-    "basis": "elements of one kind with identical shared parameters, size and product share one type"
-   }
-  },
-  {
-   "id": "type-furniture-dressing-book_encyclopedia_set_01-330_8-97_9-142_4",
-   "kind": "type",
-   "level": "SITE",
-   "placement": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    330.8,
-    97.9,
-    142.4
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "book_encyclopedia_set_01",
-   "finish_codes": [],
-   "params": {
-    "for_kind": "furniture",
-    "shared": {
-     "type": "dressing"
-    },
-    "occurrences": 1,
-    "occurrence_ids": [
-     "prop-bedside-books"
-    ],
-    "key": [
-     "furniture",
-     "dressing",
-     "book_encyclopedia_set_01",
-     330.8,
-     97.9,
-     142.4
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }

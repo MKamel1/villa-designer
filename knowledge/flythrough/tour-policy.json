@@ -68,5 +68,20 @@
  "wide_pad_s": 1.5,
  "wide_pad_basis": "policy (ours): the wide lens is kept 1.5 s before and after a stop in a small room (the door crossings, where the audit finds the walking frames wall-dominated at 24 mm), then eased out over lens_ease_s",
  "stair_approach_m": 0.4,
- "stair_approach_basis": "the under-stair cupboard toe projects about 0.2 m past the first riser (scene, merged 2026-11-24) and the 0.15 m swept envelope reached it on flat frames; the last 0.4 m before the riser is walked as the flight (stair clearance 0.25 m), found by the villa admission (4 frames, hall-b)"
+ "stair_approach_basis": "the under-stair cupboard toe projects about 0.2 m past the first riser (scene, merged 2026-11-24) and the 0.15 m swept envelope reached it on flat frames; the last 0.4 m before the riser is walked as the flight (stair clearance 0.25 m), found by the villa admission (4 frames, hall-b)",
+ "garden_pan_hold_s": 0.5,
+ "garden_pan_min_deg": 8,
+ "garden_pan_basis": "client 2026-11-25: the pan lingered ~10 s on nearly the same view. One sweep across the glass width (scripts/wt_pans.py, tour-pans.json) at garden_pan_rate_deg_s, with garden_pan_hold_s at each end (policy, ours); no return sweep",
+ "corridor_rooms": [
+  "corridor",
+  "gallery-end"
+ ],
+ "corridor_arc_deg": 40,
+ "corridor_basis": "client 2026-11-25: in corridors look down the corridor's length (toward its end, door or window), not at the side wall. An arc there is centred on the corridor axis toward the end nearer the route's next heading (never turns back on itself), the longer sightline if equal. Walking aim: tour_aim.py prefers headings within corridor_walk_axis_deg of the axis",
+ "closeup_m": 0.5,
+ "closeup_basis": "client 2026-11-25: walk frames passing within 0.5 m of a curtain stack or column with it in view are re-aimed (tour_aim.py counts them as bad)",
+ "dull_rooms": [
+  "study-game"
+ ],
+ "dull_basis": "client 2026-11-25: the study-game turn spent time on a blank wall and a bright window. In dull_rooms (the room the client named; the same rule would also mark the garden glazing of the living room, which is a showpiece, so it is not applied there) the 360 sweeps dull headings (knowledge/flythrough/tour-dull.json, scripts/wt_reaim.py) at turn_rate_wall_deg_s and never holds the best view on one"
 }

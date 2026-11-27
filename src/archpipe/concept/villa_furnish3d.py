@@ -19,6 +19,11 @@ from . import villa_furnish as F
 
 # where a part may rise above the piece's checked height h (name -> why)
 ABOVE = {"headboard": "a bed's headboard stands against the wall, above the mattress",
+         "headboard-frame-top": "the joinery bed's 50 mm headboard frame stands above the mattress (to 1.35 m)",
+         "headboard-frame-bottom": "the joinery bed's headboard frame stands above the mattress",
+         "headboard-frame-stile": "the joinery bed's headboard frame stands above the mattress",
+         "headboard-panel": "the joinery bed's upholstered headboard panel stands above the mattress",
+         "mattress": "the joinery bed's mattress top is 0.525 m (170 mm mattress on a 355 mm deck); the plan's h 0.5 is the older reference",
          "flush-plate": "a wall-hung WC's flush plate on the wall",
          "screen": "the TV screen above its unit / on the wall",
          "glass": "a walk-in shower's fixed glass screen",
@@ -120,6 +125,40 @@ def loft_parts(it):
 TUCKED_SEAT = {"pb-vanity"}
 
 
+def joinery_bed_parts(W, D):
+    """The parents' joinery bed as boxes (metres, centre-origin), from furniture.JOINERY_BED: the same numbers the render builds."""
+    from ..furniture import JOINERY_BED as J
+    m = 0.001
+    hw, yb, yf = W / 2, -D / 2, D / 2
+    z0, zt, z1, ztop, mt = J["plinth_h"] * m, J["tray_z0"] * m, J["tray_z1"] * m, J["deck_top"] * m, J["mattress_top"] * m
+    y0, y1 = yb + J["tray_v0"] * m, yb + J["tray_v1"] * m
+    dep, ft, rv, pt, fw = J["tray_stored_depth"] * m, J["tray_front_t"] * m, J["reveal"] * m, J["panel_t"] * m, J["frame_w"] * m
+    pz0, pz1 = J["panel_z0"] * m, J["panel_z1"] * m
+    inset = J["plinth_inset"] * m
+    p = [("plinth", (-hw + inset, yb, 0.0, hw - inset, yf - inset, z0)),
+         ("deck-lower", (-hw, yb, z0, hw, yf, zt)), ("deck-head", (-hw, yb, zt, hw, y0, z1)),
+         ("deck-foot", (-hw, y1, zt, hw, yf, z1)), ("deck-core", (-hw + dep, y0, zt, hw - dep, y1, z1)),
+         ("deck-top", (-hw, yb, z1, hw, yf, ztop))]
+    for sx, tag in ((-1, "w"), (1, "e")):
+        xa, xb = sorted((sx * hw, sx * (hw - ft)))
+        p.append(("tray-front-" + tag, (xa, y0 + rv, zt + rv, xb, y1 - rv, z1 - rv)))
+        xa, xb = sorted((sx * (hw - ft), sx * (hw - dep + 0.01)))
+        tw, zb = J["tray_wall"] * m, zt + rv + 0.008
+        zr, ya, yb2 = zb + J["tray_box_h"] * m, y0 + rv, y1 - rv
+        xa2, xb2 = (xb - tw, xb) if sx < 0 else (xa, xa + tw)
+        p += [("tray-body-floor-" + tag, (xa, ya, zb, xb, yb2, zb + tw)),             # an open box: floor, two sides, inner end
+              ("tray-body-side-" + tag, (xa, ya, zb + tw, xb, ya + tw, zr)),
+              ("tray-body-side-" + tag, (xa, yb2 - tw, zb + tw, xb, yb2, zr)),
+              ("tray-body-back-" + tag, (xa2, ya + tw, zb + tw, xb2, yb2 - tw, zr))]
+    p += [("mattress", (-hw, yb, ztop, hw, yf, mt)),
+          ("headboard-frame-top", (-hw, yb, pz1 - fw, hw, yb + pt, pz1)),
+          ("headboard-frame-bottom", (-hw, yb, pz0, hw, yb + pt, pz0 + fw)),
+          ("headboard-frame-stile", (-hw, yb, pz0 + fw, -hw + fw, yb + pt, pz1 - fw)),
+          ("headboard-frame-stile", (hw - fw, yb, pz0 + fw, hw, yb + pt, pz1 - fw)),
+          ("headboard-panel", (-hw + fw, yb, pz0 + fw, hw - fw, yb + pt - J["fabric_recess"] * m, pz1 - fw))]
+    return p
+
+
 def body(it):
     """The piece's own parts [(name, local box)], all inside the footprint (x in +-w/2, y in +-d/2)."""
     W, D, H, t = it["w"], it["d"], it["h"], it["type"]
@@ -151,6 +190,8 @@ def body(it):
             p += [("ladder-rung", (x0, la + 0.025, z, x0 + 0.065, lb - 0.025, z + 0.035))
                   for z in (0.32, 0.59, 0.86, 1.13)]
             return p
+        if it.get("joinery"):
+            return joinery_bed_parts(W, D)
         return [("base", (x0, yb, 0.0, x1, yf, 0.25)),
                 ("mattress", (x0 + 0.02, yb + 0.06, 0.25, x1 - 0.02, yf - 0.02, H)),
                 ("headboard", (x0, yb, 0.0, x1, yb + 0.06, 1.05))]

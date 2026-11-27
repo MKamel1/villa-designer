@@ -436,7 +436,7 @@ def label_fallbacks(meshes, items, replacements=()):
     """Keep rejected/absent-model geometry visible and explicitly labelled."""
     selected = set(replacements)
     for item in bed_items(items):
-        if item['id'] in selected:
+        if item['id'] in selected or item.get('joinery'):   # a designed joinery bed is not a stand-in
             continue
         prefix = 'furn-' + item['id'].replace('#', '-') + '-'
         for mesh in meshes:

@@ -15,7 +15,7 @@ if __name__ == '__main__':
         BASE.write_text(json.dumps(V.build(views=[]))); sys.exit()
     path = json.loads(Path(sys.argv[1] if len(sys.argv) > 1 else ROOT/'out/wt/villa4/plan-only.json').read_text()); scene = json.loads(BASE.read_text())
     layout = R.design('D1'); spec = RS.build(layout); vm = FT.VillaMap(layout, spec, scene=scene)
-    states = FT.open_interior_doors(scene, vm, path['frames'])
+    states = FT.open_interior_doors(scene, vm, path['frames'], door_anim=path.get('door_anim'))
     print('closed doors:', [(s['element'], s['reason']) for s in states if s['state'] != 'open' and 'core' not in s['element']])
     g = FT.admit_villa_path(path, scene, layout, spec, None, vm)
     bad = [f for f in g['frames'] if f['failures']]; print(g['summary'])

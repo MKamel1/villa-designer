@@ -1,0 +1,389 @@
+{
+"schema": "flythrough-tour-doors/1",
+"camera_sha256": "617b6a103eff16bdf2cc2ea53228c6da9782fdea98fdc551037f1bb4feb3e3f0",
+"clearance_m": 0.3,
+"rule": {
+"min_blocked_s": 1.0,
+"close_s": 2.0,
+"open_s": 2.0,
+"hold_after_s": 0.5,
+"cluster_gap_s": 1.5,
+"basis": "policy (ours): a door is animated when a feature is in view but hidden by its leaf for >= 1 s or never seen; closes (eased smoothstep, 2 s) so it is closed when the feature comes into view, held 0.5 s after the last blocked frame, reopened in 2 s"
+},
+"doors": [
+{
+"record": {
+"element": "door-GF-gallery-end-family-bath",
+"leaf_id": "door-leaf-5f1588d0f1035d78da422d9c",
+"hinge": [
+10.752,
+-26.371
+],
+"signed_open_deg": -90.0,
+"closed_faces": [
+[
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+]
+],
+[
+[
+10.752,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+],
+[
+10.752,
+-26.421,
+2.1
+]
+],
+[
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.421,
+0.0
+],
+[
+9.952,
+-26.421,
+0.0
+]
+],
+[
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.421,
+0.0
+],
+[
+9.952,
+-26.421,
+2.1
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+]
+],
+[
+[
+9.952,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.421,
+2.1
+],
+[
+9.952,
+-26.421,
+2.1
+]
+],
+[
+[
+9.952,
+-26.421,
+2.1
+],
+[
+10.752,
+-26.421,
+2.1
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+]
+]
+],
+"note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+},
+"schedule": {
+"close_start": 6786,
+"close_end": 6834,
+"open_start": 7069,
+"open_end": 7117
+},
+"features": [
+"furn-fb-wc"
+]
+},
+{
+"record": {
+"element": "door-GF-parents-dressing-ext-parents-ensuite",
+"leaf_id": "door-leaf-de34774cc02dd1542f58f9d4",
+"hinge": [
+22.049999999999997,
+-28.881
+],
+"signed_open_deg": 90.0,
+"closed_faces": [
+[
+[
+21.25,
+-28.831,
+0.0
+],
+[
+21.25,
+-28.931,
+0.0
+],
+[
+21.25,
+-28.931,
+2.1
+],
+[
+21.25,
+-28.831,
+2.1
+]
+],
+[
+[
+21.25,
+-28.831,
+0.0
+],
+[
+22.049999999999997,
+-28.831,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
+0.0
+],
+[
+21.25,
+-28.931,
+0.0
+]
+],
+[
+[
+21.25,
+-28.931,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
+2.1
+],
+[
+21.25,
+-28.931,
+2.1
+]
+],
+[
+[
+21.25,
+-28.931,
+2.1
+],
+[
+22.049999999999997,
+-28.931,
+2.1
+],
+[
+22.049999999999997,
+-28.831,
+2.1
+],
+[
+21.25,
+-28.831,
+2.1
+]
+],
+[
+[
+22.049999999999997,
+-28.831,
+0.0
+],
+[
+21.25,
+-28.831,
+0.0
+],
+[
+21.25,
+-28.831,
+2.1
+],
+[
+22.049999999999997,
+-28.831,
+2.1
+]
+],
+[
+[
+22.049999999999997,
+-28.931,
+0.0
+],
+[
+22.049999999999997,
+-28.831,
+0.0
+],
+[
+22.049999999999997,
+-28.831,
+2.1
+],
+[
+22.049999999999997,
+-28.931,
+2.1
+]
+]
+],
+"note": "hinge side is not authored; this side (hinge [np.float64(22.049999999999997), np.float64(-28.881)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+},
+"schedule": {
+"close_start": 8827,
+"close_end": 8875,
+"open_start": 9003,
+"open_end": 9051
+},
+"features": [
+"furn-pd-hang-2"
+]
+}
+],
+"report": [
+{
+"door": "door-GF-parents-bed-parents-dressing",
+"scheduled": false,
+"reason": "no swing side clears the camera in every frame of the animation",
+"blocked_frames": [
+8930,
+8958
+]
+},
+{
+"door": "door-GF-gallery-end-family-bath",
+"scheduled": true,
+"features": [
+"furn-fb-wc"
+],
+"blocked_frames": [
+6834,
+7116
+],
+"schedule": {
+"close_start": 6786,
+"close_end": 6834,
+"open_start": 7069,
+"open_end": 7117
+},
+"delay_frames": 0,
+"hold_after_last_blocked_frame_s": 0.04,
+"leave_frame": 7117,
+"reopened_before_leaving": true,
+"route_gap_open_m": 0.35
+},
+{
+"door": "door-GF-corridor-kids-a",
+"scheduled": false,
+"reason": "no swing side clears the camera in every frame of the animation",
+"blocked_frames": [
+7574,
+7584
+]
+},
+{
+"door": "door-GF-parents-dressing-ext-parents-ensuite",
+"scheduled": true,
+"features": [
+"furn-pd-hang-2"
+],
+"blocked_frames": [
+8874,
+9044
+],
+"schedule": {
+"close_start": 8827,
+"close_end": 8875,
+"open_start": 9003,
+"open_end": 9051
+},
+"delay_frames": 1,
+"hold_after_last_blocked_frame_s": 0.29,
+"leave_frame": 9051,
+"reopened_before_leaving": true,
+"route_gap_open_m": 0.35
+}
+]
+}

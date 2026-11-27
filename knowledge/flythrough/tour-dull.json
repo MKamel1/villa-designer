@@ -1,0 +1,222 @@
+{
+"schema": "flythrough-tour-dull/1",
+"method": "Headings of each full 360 that show nothing new: a blank wall (one wall carries >= 45 % of the rays) or a bright window (glass >= 50 % of the rays or",
+"rule": {
+"wall_share": 0.45,
+"glass_share": 0.5,
+"out_share": 0.4,
+"bin_share": 0.5
+},
+"rooms": {
+"living": {
+"dull": [
+true,
+true,
+true,
+true,
+true,
+false,
+false,
+false,
+false,
+false,
+true,
+true
+],
+"kinds": [
+"window",
+"window",
+"window",
+"window",
+"window",
+"",
+"",
+"",
+"",
+"",
+"window",
+"window"
+]
+},
+"dirty-kitchen": {
+"dull": [
+true,
+true,
+true,
+true,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+true
+],
+"kinds": [
+"window",
+"window",
+"",
+"wall",
+"wall",
+"",
+"",
+"",
+"",
+"",
+"",
+"window"
+]
+},
+"cinema": {
+"dull": [
+false,
+false,
+false,
+false,
+false,
+true,
+true,
+false,
+true,
+true,
+true,
+true
+],
+"kinds": [
+"",
+"",
+"",
+"",
+"",
+"wall",
+"wall",
+"",
+"wall",
+"wall",
+"wall",
+"wall"
+]
+},
+"lounge": {
+"dull": [
+false,
+false,
+false,
+false,
+true,
+true,
+true,
+true,
+true,
+false,
+false,
+false
+],
+"kinds": [
+"",
+"",
+"",
+"",
+"window",
+"window",
+"window",
+"window",
+"window",
+"",
+"",
+""
+]
+},
+"study-game": {
+"dull": [
+false,
+false,
+false,
+true,
+true,
+false,
+false,
+false,
+false,
+true,
+true,
+false
+],
+"kinds": [
+"",
+"",
+"",
+"window",
+"window",
+"",
+"",
+"",
+"",
+"wall",
+"wall",
+""
+]
+},
+"family-bath": {
+"dull": [
+false,
+true,
+true,
+true,
+true,
+true,
+true,
+true,
+true,
+false,
+false,
+false
+],
+"kinds": [
+"",
+"wall",
+"wall",
+"window",
+"wall",
+"wall",
+"wall",
+"wall",
+"",
+"",
+"",
+""
+]
+},
+"kids-b": {
+"dull": [
+true,
+true,
+false,
+false,
+false,
+false,
+true,
+true,
+false,
+false,
+true,
+true
+],
+"kinds": [
+"wall",
+"wall",
+"",
+"",
+"",
+"",
+"wall",
+"wall",
+"",
+"",
+"wall",
+"wall"
+]
+}
+}
+}

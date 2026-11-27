@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "7bc36bbd65772659bbce5dcee3efe0c5fca50c22da1ca2aa45ea17acc09cadec",
-  "transport_sha256": "d84a09b53e7eeac361d627e052669362d6414e974d85cda420bafc9d52603085",
+  "transport_sha256": "2db2fb5ba96009dd975cf039d15ede5b1aef9553af52684f9590d5694865077a",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -25,11 +25,11 @@
   },
   "measurements": {
     "v01-kitchen-garden": {
-      "lamp_luminance_sum": 571009.2382508242,
-      "daylight_luminance_sum": 364856.03764150775,
+      "lamp_luminance_sum": 571009.6262939089,
+      "daylight_luminance_sum": 364819.3318220212,
       "sky_luminance_sum": null,
       "metered_pixels": 13279,
-      "lamp_fraction": 0.6101404261488133,
+      "lamp_fraction": 0.6101645192124654,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -524,6 +524,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -552,11 +554,11 @@
       "group": "lamp-dominant"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 71734.18865213174,
-      "daylight_luminance_sum": 1511439.8226745287,
+      "lamp_luminance_sum": 71733.17392942146,
+      "daylight_luminance_sum": 1511425.409115994,
       "sky_luminance_sum": null,
       "metered_pixels": 13401,
-      "lamp_fraction": 0.045310362688445266,
+      "lamp_fraction": 0.04531016330116038,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1007,6 +1009,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -1035,11 +1039,11 @@
       "group": "day"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 225343.01155553613,
+      "lamp_luminance_sum": 225342.76608862434,
       "daylight_luminance_sum": 62328.9224477241,
       "sky_luminance_sum": null,
       "metered_pixels": 13397,
-      "lamp_fraction": 0.7833333214667452,
+      "lamp_fraction": 0.7833331365875839,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1490,6 +1494,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -1519,10 +1525,10 @@
     },
     "v04-study-deck": {
       "lamp_luminance_sum": 0.18187999162053323,
-      "daylight_luminance_sum": 2294287.740729377,
+      "daylight_luminance_sum": 2294305.153075929,
       "sky_luminance_sum": null,
       "metered_pixels": 12958,
-      "lamp_fraction": 7.927513797556637e-08,
+      "lamp_fraction": 7.927453632671242e-08,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -1576,6 +1582,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -1604,11 +1612,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 66775.22210409243,
-      "daylight_luminance_sum": 42.548538196149515,
+      "lamp_luminance_sum": 64419.240399938615,
+      "daylight_luminance_sum": 60.710336218864505,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9993632152376958,
+      "lamp_fraction": 0.9990584618082715,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2277,6 +2285,8 @@
           "task": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -2314,11 +2324,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.01199983333012137,
-      "daylight_luminance_sum": 1128097.298337837,
+      "lamp_luminance_sum": 0.011451981507068795,
+      "daylight_luminance_sum": 1225001.9504893878,
       "sky_luminance_sum": null,
-      "metered_pixels": 12729,
-      "lamp_fraction": 1.0637232462268252e-08,
+      "metered_pixels": 12709,
+      "lamp_fraction": 9.348541359819395e-09,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -2332,21 +2342,15 @@
             1.35
           ],
           "target": [
-            13.377,
-            -26.769,
+            12.653,
+            -27.069,
             1.35
           ],
-          "lens_mm": 16,
+          "lens_mm": 24,
           "sensor_mm": 36,
           "shift_x": 0.0,
           "shift_y": 0.0,
           "overrides": [
-            {
-              "field": "lens_mm",
-              "prior": 24,
-              "new": 16,
-              "reason": "room subjects require the chosen 16 mm frame"
-            },
             {
               "field": "position",
               "prior": null,
@@ -2361,51 +2365,13 @@
               "field": "target",
               "prior": null,
               "new": [
-                13.377,
-                -26.769,
+                12.653,
+                -27.069,
                 1.35
               ],
               "reason": "room chooser aims the camera at declared subjects"
             }
           ],
-          "lens_basis": {
-            "at_24_mm": {
-              "horizontal_need_deg": 45.01689347809915,
-              "lower_top_need_deg": 14.802232697725925,
-              "upper_fitting_need_deg": 0.0,
-              "whole_subject_need_deg": 0.0,
-              "horizontal_limit_deg": 36.86989764584402,
-              "vertical_limit_deg": 26.56505117707799,
-              "position": [
-                11.877,
-                -24.171
-              ],
-              "target": [
-                13.145,
-                -26.89
-              ],
-              "framed_candidates": 0,
-              "search_step_m": 0.1
-            },
-            "at_16_mm": {
-              "horizontal_need_deg": 47.65012421992922,
-              "lower_top_need_deg": 14.802232697725925,
-              "upper_fitting_need_deg": 0.0,
-              "whole_subject_need_deg": 0.0,
-              "horizontal_limit_deg": 48.366460663429805,
-              "vertical_limit_deg": 36.86989764584402,
-              "position": [
-                11.877,
-                -24.171
-              ],
-              "target": [
-                13.377,
-                -26.769
-              ],
-              "framed_candidates": 4,
-              "search_step_m": 0.1
-            }
-          },
           "home_room": "kids-a",
           "reframed": "chosen"
         },
@@ -2416,6 +2382,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -2444,11 +2412,11 @@
       "group": "day"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 4921.663233809756,
-      "daylight_luminance_sum": 40778.927157056925,
+      "lamp_luminance_sum": 4935.727221312905,
+      "daylight_luminance_sum": 40778.930307357776,
       "sky_luminance_sum": null,
-      "metered_pixels": 11917,
-      "lamp_fraction": 0.10769364666223999,
+      "metered_pixels": 11918,
+      "lamp_fraction": 0.10796815481374622,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3219,6 +3187,8 @@
           "task": 0.4
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "ld-s-firepit-flame.open",
           "ld-s-firepit-cover.open.garden-joint",
           "ld-s-firepit-cover.open.garden-paving-2",
@@ -3906,6 +3876,8 @@
         "dimmers": {},
         "hide_meshes": [
           "door-leaf-e92e2c979036ab9fc6150637",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -3943,11 +3915,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 324069.84705732745,
-      "daylight_luminance_sum": 37.896126833042736,
+      "lamp_luminance_sum": 324056.4335335769,
+      "daylight_luminance_sum": 37.93740018893917,
       "sky_luminance_sum": null,
-      "metered_pixels": 13333,
-      "lamp_fraction": 0.9998830755277219,
+      "metered_pixels": 13345,
+      "lamp_fraction": 0.9998829433535682,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4615,6 +4587,8 @@
           "task": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -4652,11 +4626,11 @@
       "group": "evening"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 79023.02370771473,
-      "daylight_luminance_sum": 34.75508758261531,
+      "lamp_luminance_sum": 79018.13392057714,
+      "daylight_luminance_sum": 34.75208728419485,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.999560383707812,
+      "lamp_fraction": 0.9995603944518769,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5324,6 +5298,8 @@
           "task": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -5361,11 +5337,11 @@
       "group": "evening"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 303365.497704865,
-      "daylight_luminance_sum": 49.08447577081679,
+      "lamp_luminance_sum": 302872.85675716936,
+      "daylight_luminance_sum": 48.90934602810789,
       "sky_luminance_sum": null,
-      "metered_pixels": 13399,
-      "lamp_fraction": 0.9998382263785146,
+      "metered_pixels": 13400,
+      "lamp_fraction": 0.9998385413281545,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -6008,6 +5984,8 @@
         ],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -6045,7 +6023,7 @@
       "group": "evening"
     },
     "v12-ensuite": {
-      "lamp_luminance_sum": 108090.20816359119,
+      "lamp_luminance_sum": 107933.26169533745,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13408,
@@ -6761,6 +6739,8 @@
         },
         "hide_meshes": [
           "door-leaf-de34774cc02dd1542f58f9d4",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -6798,11 +6778,11 @@
       "group": "evening"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 106243.19780594189,
-      "daylight_luminance_sum": 81.71245365853964,
+      "lamp_luminance_sum": 105500.26047393051,
+      "daylight_luminance_sum": 81.13347564378175,
       "sky_luminance_sum": null,
-      "metered_pixels": 13401,
-      "lamp_fraction": 0.9992314834457982,
+      "metered_pixels": 13402,
+      "lamp_fraction": 0.9992315551764496,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7468,6 +7448,8 @@
         "dimmers": {},
         "hide_meshes": [
           "door-leaf-b8a329013a918f5421fac7bb",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -7505,11 +7487,11 @@
       "group": "evening"
     },
     "v15-family-bath": {
-      "lamp_luminance_sum": 70117.36285499785,
-      "daylight_luminance_sum": 81357.12815580655,
+      "lamp_luminance_sum": 70330.73780829193,
+      "daylight_luminance_sum": 81196.61267880435,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.462898818059052,
+      "lamp_fraction": 0.4641454996883954,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8133,6 +8115,8 @@
         "dimmers": {},
         "hide_meshes": [
           "door-leaf-5f1588d0f1035d78da422d9c",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -8161,11 +8145,11 @@
       "group": "day"
     },
     "v35-family-bath-wc": {
-      "lamp_luminance_sum": 37511.52083808051,
-      "daylight_luminance_sum": 65274.175927769415,
+      "lamp_luminance_sum": 38004.6477516306,
+      "daylight_luminance_sum": 65261.50480825498,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.36494884033848907,
+      "lamp_fraction": 0.3680261809850148,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8788,6 +8772,8 @@
         ],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -8816,11 +8802,11 @@
       "group": "day"
     },
     "v16-guest-wc": {
-      "lamp_luminance_sum": 103819.53046202927,
-      "daylight_luminance_sum": 2.596504133567759,
+      "lamp_luminance_sum": 103714.04543809709,
+      "daylight_luminance_sum": 2.567015489612611,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999749908404938,
+      "lamp_fraction": 0.9999752497171969,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9530,6 +9516,8 @@
         "dimmers": {},
         "hide_meshes": [
           "door-leaf-08d2d3867ab34e8d27c8c5f2",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -9567,11 +9555,11 @@
       "group": "evening"
     },
     "v17-dirty-kitchen": {
-      "lamp_luminance_sum": 350511.36576932063,
-      "daylight_luminance_sum": 381991.83400818286,
+      "lamp_luminance_sum": 351260.8241669751,
+      "daylight_luminance_sum": 381627.73699271923,
       "sky_luminance_sum": null,
-      "metered_pixels": 13284,
-      "lamp_fraction": 0.47851171964270983,
+      "metered_pixels": 13285,
+      "lamp_fraction": 0.4792827215247481,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10066,6 +10054,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -10094,11 +10084,11 @@
       "group": "day"
     },
     "v18-study-evening": {
-      "lamp_luminance_sum": 96557.42148397639,
-      "daylight_luminance_sum": 1264.0934460285296,
+      "lamp_luminance_sum": 96611.89834889273,
+      "daylight_luminance_sum": 1263.7656186205093,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9870775519380063,
+      "lamp_fraction": 0.9870880506206325,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10766,6 +10756,8 @@
           "task": 0.6
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -10803,12 +10795,12 @@
       "group": "evening"
     },
     "v19-garden-facade": {
-      "lamp_luminance_sum": 0.007862177068415348,
-      "daylight_luminance_sum": 6884283.10982304,
-      "sky_luminance_sum": 4649819.4334322475,
+      "lamp_luminance_sum": 0.0077773798819330275,
+      "daylight_luminance_sum": 6884062.611098378,
+      "sky_luminance_sum": 4649796.110428924,
       "metered_pixels": 11892,
-      "lamp_fraction": 1.1420473176383454e-09,
-      "solar_fraction": 0.32457463482326615,
+      "lamp_fraction": 1.1297659990203804e-09,
+      "solar_fraction": 0.3245563887038745,
       "lamp_population": [],
       "view_input": {
         "id": "v19-garden-facade",
@@ -10853,6 +10845,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -10881,11 +10875,11 @@
       "group": "exterior-shade"
     },
     "v20-kitchen-run": {
-      "lamp_luminance_sum": 597498.1273039073,
-      "daylight_luminance_sum": 202.34036969584264,
+      "lamp_luminance_sum": 598905.8290382464,
+      "daylight_luminance_sum": 202.35708305140997,
       "sky_luminance_sum": null,
-      "metered_pixels": 13325,
-      "lamp_fraction": 0.9996614686107184,
+      "metered_pixels": 13327,
+      "lamp_fraction": 0.9996622361574433,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11597,6 +11591,8 @@
           "task": 0.8
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -11634,11 +11630,11 @@
       "group": "evening"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 143316.40480048038,
-      "daylight_luminance_sum": 12.429048648926345,
+      "lamp_luminance_sum": 143266.93714524867,
+      "daylight_luminance_sum": 12.43146425010655,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999132829849017,
+      "lamp_fraction": 0.9999132361876608,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12306,6 +12302,8 @@
           "accent": 0.6
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -12343,11 +12341,11 @@
       "group": "evening"
     },
     "v22-parents-day": {
-      "lamp_luminance_sum": 3.521399848673785,
-      "daylight_luminance_sum": 8756498.142049339,
+      "lamp_luminance_sum": 3.5559453858157988,
+      "daylight_luminance_sum": 8934216.940424245,
       "sky_luminance_sum": null,
-      "metered_pixels": 13307,
-      "lamp_fraction": 4.0214688285535087e-07,
+      "metered_pixels": 13328,
+      "lamp_fraction": 3.9801406146856763e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -12402,6 +12400,8 @@
         "dimmers": {},
         "hide_meshes": [
           "door-leaf-cc9b36c24536cc51a129765b",
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -12860,6 +12860,8 @@
         ],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -12888,11 +12890,11 @@
       "group": "evening"
     },
     "v24-bar-alcove": {
-      "lamp_luminance_sum": 79842.18963133391,
-      "daylight_luminance_sum": 32.59206521891258,
+      "lamp_luminance_sum": 79760.89235819671,
+      "daylight_luminance_sum": 32.55364276461748,
       "sky_luminance_sum": null,
-      "metered_pixels": 13399,
-      "lamp_fraction": 0.9995919605096045,
+      "metered_pixels": 13400,
+      "lamp_fraction": 0.9995920261074547,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13560,6 +13562,8 @@
           "accent": 0.8
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -13597,12 +13601,12 @@
       "group": "evening"
     },
     "v25-top-garden-gate": {
-      "lamp_luminance_sum": 0.46148899854402514,
-      "daylight_luminance_sum": 41257066.14756013,
-      "sky_luminance_sum": 10608382.465532856,
+      "lamp_luminance_sum": 0.4617222285367652,
+      "daylight_luminance_sum": 41256949.97723845,
+      "sky_luminance_sum": 10608412.19077995,
       "metered_pixels": 12255,
-      "lamp_fraction": 1.11856958449587e-08,
-      "solar_fraction": 0.7428711380593355,
+      "lamp_fraction": 1.1191380449213752e-08,
+      "solar_fraction": 0.7428696935514468,
       "lamp_population": [],
       "view_input": {
         "id": "v25-top-garden-gate",
@@ -13631,6 +13635,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -13659,12 +13665,12 @@
       "group": "exterior-day"
     },
     "v26-top-garden-east": {
-      "lamp_luminance_sum": 0.3485640778254759,
-      "daylight_luminance_sum": 33268637.102977477,
-      "sky_luminance_sum": 7521448.852258555,
+      "lamp_luminance_sum": 0.34847971174035486,
+      "daylight_luminance_sum": 33268747.77641857,
+      "sky_luminance_sum": 7521484.422546461,
       "metered_pixels": 12852,
-      "lamp_fraction": 1.0477257396945923e-08,
-      "solar_fraction": 0.7739177343220531,
+      "lamp_fraction": 1.0474686646821952e-08,
+      "solar_fraction": 0.773917417238114,
       "lamp_population": [],
       "view_input": {
         "id": "v26-top-garden-east",
@@ -13693,6 +13699,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -13721,12 +13729,12 @@
       "group": "exterior-day"
     },
     "v27-east-yard-above": {
-      "lamp_luminance_sum": 0.01861523195495554,
-      "daylight_luminance_sum": 2283030.8842495247,
-      "sky_luminance_sum": 803213.5708043985,
+      "lamp_luminance_sum": 0.018671407937454126,
+      "daylight_luminance_sum": 2282748.4118966945,
+      "sky_luminance_sum": 803222.925147723,
       "metered_pixels": 12054,
-      "lamp_fraction": 8.153736303611603e-09,
-      "solar_fraction": 0.6481810314763088,
+      "lamp_fraction": 8.179354188760702e-09,
+      "solar_fraction": 0.6481333987741823,
       "lamp_population": [],
       "view_input": {
         "id": "v27-east-yard-above",
@@ -13755,6 +13763,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -13783,12 +13793,12 @@
       "group": "exterior-shade"
     },
     "v28-east-yard-below": {
-      "lamp_luminance_sum": 0.024304997014982885,
-      "daylight_luminance_sum": 2323188.284838834,
-      "sky_luminance_sum": 789389.1665791288,
-      "metered_pixels": 12615,
-      "lamp_fraction": 1.046191430945176e-08,
-      "solar_fraction": 0.6602130048043476,
+      "lamp_luminance_sum": 0.024300042077775336,
+      "daylight_luminance_sum": 2322457.4922004426,
+      "sky_luminance_sum": 789361.067558973,
+      "metered_pixels": 12616,
+      "lamp_fraction": 1.04630728033256e-08,
+      "solar_fraction": 0.6601181850647856,
       "lamp_population": [],
       "view_input": {
         "id": "v28-east-yard-below",
@@ -13817,6 +13827,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -13895,6 +13907,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -13957,6 +13971,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -14019,6 +14035,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -14099,6 +14117,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -14560,6 +14580,8 @@
           "accent": 1.0
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -14781,6 +14803,8 @@
           "task": 1.0
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -14818,7 +14842,7 @@
       "group": "lamp-low-key"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 150112.44734979334,
+      "lamp_luminance_sum": 150112.43623707246,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13399,
@@ -15489,6 +15513,8 @@
           "ambient": 0.6
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -16176,6 +16202,8 @@
           "ambient": 0.6
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-open-l",
           "curtain-study-game-01-heavy-open-r",
           "curtain-study-game-02-heavy-open-l",
@@ -16213,11 +16241,11 @@
       "group": "evening"
     },
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 94941.90032568091,
-      "daylight_luminance_sum": 1495192.5730893335,
+      "lamp_luminance_sum": 95272.61834510672,
+      "daylight_luminance_sum": 1495160.474311738,
       "sky_luminance_sum": null,
-      "metered_pixels": 13399,
-      "lamp_fraction": 0.05970683732287195,
+      "metered_pixels": 13397,
+      "lamp_fraction": 0.059903568898929435,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -16644,6 +16672,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -16672,11 +16702,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 63819.169675714475,
-      "daylight_luminance_sum": 1776276.9411746194,
+      "lamp_luminance_sum": 64328.95821904367,
+      "daylight_luminance_sum": 1776282.696370472,
       "sky_luminance_sum": null,
-      "metered_pixels": 13392,
-      "lamp_fraction": 0.03468251973328869,
+      "metered_pixels": 13393,
+      "lamp_fraction": 0.034949772299138246,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17103,6 +17133,8 @@
           "accent": 0.5
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17131,12 +17163,12 @@
       "group": "day"
     },
     "v40-south-garden-espalier": {
-      "lamp_luminance_sum": 0.0028740927627599728,
-      "daylight_luminance_sum": 1273629.959415609,
-      "sky_luminance_sum": 286749.43804212526,
+      "lamp_luminance_sum": 0.0028505804870057904,
+      "daylight_luminance_sum": 1273609.5223632692,
+      "sky_luminance_sum": 286742.46027018357,
       "metered_pixels": 7115,
-      "lamp_fraction": 2.2566152240898897e-09,
-      "solar_fraction": 0.774856553960385,
+      "lamp_fraction": 2.2381903013226554e-09,
+      "solar_fraction": 0.7748584199196992,
       "lamp_population": [],
       "view_input": {
         "id": "v40-south-garden-espalier",
@@ -17183,6 +17215,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17211,12 +17245,12 @@
       "group": "exterior-shade"
     },
     "v41-south-garden-terrace": {
-      "lamp_luminance_sum": 0.012151730339602172,
-      "daylight_luminance_sum": 9672425.982389707,
-      "sky_luminance_sum": 6732839.765273335,
+      "lamp_luminance_sum": 0.012170748469704293,
+      "daylight_luminance_sum": 9671772.23916953,
+      "sky_luminance_sum": 6732822.912339213,
       "metered_pixels": 11603,
-      "lamp_fraction": 1.2563270420947042e-09,
-      "solar_fraction": 0.30391405656330556,
+      "lamp_fraction": 1.2583783151032857e-09,
+      "solar_fraction": 0.3038687485761835,
       "lamp_population": [],
       "view_input": {
         "id": "v41-south-garden-terrace",
@@ -17261,6 +17295,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17289,11 +17325,11 @@
       "group": "exterior-shade"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 2861.7813071869264,
-      "daylight_luminance_sum": 1809.502447761534,
+      "lamp_luminance_sum": 2848.4277396056723,
+      "daylight_luminance_sum": 1810.3787081508838,
       "sky_luminance_sum": null,
-      "metered_pixels": 13385,
-      "lamp_fraction": 0.6126327273857722,
+      "metered_pixels": 13388,
+      "lamp_fraction": 0.6114071858420583,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17438,6 +17474,8 @@
           "evening-garden": 1.0
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "ld-s-firepit-flame.open",
           "ld-s-firepit-cover.open.garden-joint",
           "ld-s-firepit-cover.open.garden-paving-2",
@@ -17455,12 +17493,12 @@
       "group": "exterior-dusk-dim"
     },
     "gi-living-door": {
-      "lamp_luminance_sum": 0.010526614730466973,
-      "daylight_luminance_sum": 3862202.618781287,
-      "sky_luminance_sum": 934286.9572429303,
+      "lamp_luminance_sum": 0.010548108494362133,
+      "daylight_luminance_sum": 3862080.218017641,
+      "sky_luminance_sum": 934314.0832894305,
       "metered_pixels": 10367,
-      "lamp_fraction": 2.7255469846628214e-09,
-      "solar_fraction": 0.7580947843855631,
+      "lamp_fraction": 2.7311986986555575e-09,
+      "solar_fraction": 0.7580800940046236,
       "lamp_population": [],
       "view_input": {
         "id": "gi-living-door",
@@ -17491,6 +17529,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17519,12 +17559,12 @@
       "group": "exterior-day"
     },
     "gi-dining-firepit": {
-      "lamp_luminance_sum": 0.06303972070476922,
-      "daylight_luminance_sum": 47144056.79006413,
-      "sky_luminance_sum": 7088531.093458921,
+      "lamp_luminance_sum": 0.06298479830238021,
+      "daylight_luminance_sum": 47144345.377620295,
+      "sky_luminance_sum": 7088543.790872473,
       "metered_pixels": 11581,
-      "lamp_fraction": 1.3371721678767413e-09,
-      "solar_fraction": 0.8496410454232936,
+      "lamp_fraction": 1.3359989986865284e-09,
+      "solar_fraction": 0.849641696494158,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-firepit",
@@ -17599,6 +17639,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17663,6 +17705,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -17691,11 +17735,11 @@
       "group": "exterior-shade"
     },
     "gi-dining-firepit-dusk": {
-      "lamp_luminance_sum": 8041.630799901696,
-      "daylight_luminance_sum": 31927.979607304518,
+      "lamp_luminance_sum": 8040.647995366946,
+      "daylight_luminance_sum": 31927.96925719799,
       "sky_luminance_sum": null,
       "metered_pixels": 11588,
-      "lamp_fraction": 0.20119362480580624,
+      "lamp_fraction": 0.201174034732236,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -18466,6 +18510,8 @@
           "task": 0.4
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "ld-s-firepit-flame.open",
           "ld-s-firepit-cover.open.garden-joint",
           "ld-s-firepit-cover.open.garden-paving-2",
@@ -18483,11 +18529,11 @@
       "group": "exterior-dusk"
     },
     "gi-north-court-pond-dusk": {
-      "lamp_luminance_sum": 1520.959102216388,
-      "daylight_luminance_sum": 1583.9729210602234,
+      "lamp_luminance_sum": 1524.4411966253042,
+      "daylight_luminance_sum": 1583.3402550396875,
       "sky_luminance_sum": null,
-      "metered_pixels": 12110,
-      "lamp_fraction": 0.4898526250540362,
+      "metered_pixels": 12108,
+      "lamp_fraction": 0.4905239381645019,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -19242,6 +19288,8 @@
           "task": 0.4
         },
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "ld-s-firepit-flame.open",
           "ld-s-firepit-cover.open.garden-joint",
           "ld-s-firepit-cover.open.garden-paving-2",
@@ -19260,11 +19308,11 @@
     },
     "gi-dining-crown-summer": {
       "lamp_luminance_sum": 0.11988618704483939,
-      "daylight_luminance_sum": 4433005.243282886,
-      "sky_luminance_sum": 1861741.4711775105,
+      "daylight_luminance_sum": 4432684.845303761,
+      "sky_luminance_sum": 1861762.8909522365,
       "metered_pixels": 10827,
-      "lamp_fraction": 2.7043997744937303e-08,
-      "solar_fraction": 0.5800272345721866,
+      "lamp_fraction": 2.7045952506507998e-08,
+      "solar_fraction": 0.5799920463723709,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-summer",
@@ -19295,6 +19343,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -19323,12 +19373,12 @@
       "group": "exterior-day"
     },
     "gi-dining-crown-winter": {
-      "lamp_luminance_sum": 0.8479152013495426,
-      "daylight_luminance_sum": 5391191.398530732,
-      "sky_luminance_sum": 2325757.351488204,
+      "lamp_luminance_sum": 0.8479152013495423,
+      "daylight_luminance_sum": 5390980.155093629,
+      "sky_luminance_sum": 2325768.753288803,
       "metered_pixels": 10700,
-      "lamp_fraction": 1.5727786407700794e-07,
-      "solar_fraction": 0.5686004855768901,
+      "lamp_fraction": 1.57284026947285e-07,
+      "solar_fraction": 0.5685814663792971,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-winter",
@@ -19359,6 +19409,8 @@
         "layers_on": [],
         "dimmers": {},
         "hide_meshes": [
+          "tray-open-e-0",
+          "tray-open-e-1",
           "curtain-study-game-01-heavy-closed",
           "curtain-study-game-02-heavy-closed",
           "curtain-kids-a-01-heavy-closed",
@@ -19387,15 +19439,15 @@
       "group": "exterior-day"
     }
   },
-  "measurement_sha256": "bce20014e120f70f2c3eee2477ca3b1fd28df30bef07aacd2aeaef1eb2cdf618",
+  "measurement_sha256": "6bbf7ae34bc5c1658009dcba6e19ee8942c4215d6d86daa4f8c021de7be39ad0",
   "white_balance_k": {
-    "exterior-day": 5500,
-    "day": 5500,
-    "exterior-shade": 5500,
-    "exterior-dusk-dim": 4300,
-    "evening": 3000,
-    "lamp-dominant": 2700,
     "lamp-low-key": 2700,
-    "exterior-dusk": 4300
+    "exterior-dusk-dim": 4300,
+    "day": 5500,
+    "lamp-dominant": 2700,
+    "exterior-dusk": 4300,
+    "exterior-day": 5500,
+    "exterior-shade": 5500,
+    "evening": 3000
   }
 }

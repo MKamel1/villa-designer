@@ -2922,8 +2922,10 @@ def check_villa_furnish_bedside_zone_a(
 
 
 _items_bedside_bad = copy.deepcopy(_cached_furnish_layout())
-_pb_bedside = next(i for i in _items_bedside_bad if i["id"] == "pb-bedside")
-_pb_bedside["cy"] += 0.9
+# the parents' bed carries its own trays now (no bedside piece): the real failure is a bedside table 0.9 m down the side, in the 750 mm side zone
+_pb_bed_item = next(i for i in _items_bedside_bad if i["id"] == "pb-bed")
+_items_bedside_bad.append(dict(_pb_bed_item, id="pb-bedside", type="bedside_table", cx=20.33 + 0.8 + 0.175, cy=-26.591 + 0.2 + 0.9,
+                               w=0.35, d=0.4, h=0.55, joinery=False))
 
 register_guard(
     fn=check_villa_furnish_bedside_zone_a,

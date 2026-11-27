@@ -1,0 +1,57 @@
+{
+ "schema": "flythrough-tour-pans/1",
+ "method": "Glass width seen from each garden-pan standing point -> knowledge/flythrough/tour-pans.json (the pan sweeps this width once, not +-30 deg and back).",
+ "gardens": {
+  "south-garden": {
+   "point": [
+    21.597,
+    -26.131
+   ],
+   "face_deg": 0.0,
+   "glass_lateral_m": [
+    -1.2,
+    1.2
+   ],
+   "glass_width_m": 2.4,
+   "distance_m": 1.0,
+   "glass_angle_deg": [
+    -50.2,
+    50.2
+   ]
+  },
+  "east-yard": {
+   "point": [
+    16.889,
+    -24.591
+   ],
+   "face_deg": 90.0,
+   "glass_lateral_m": [
+    -1.17,
+    1.59
+   ],
+   "glass_width_m": 2.76,
+   "distance_m": 1.0,
+   "glass_angle_deg": [
+    -49.6,
+    57.8
+   ]
+  },
+  "north-court": {
+   "point": [
+    4.617,
+    -26.156
+   ],
+   "face_deg": 180.0,
+   "glass_lateral_m": [
+    -1.85,
+    1.85
+   ],
+   "glass_width_m": 3.71,
+   "distance_m": 1.0,
+   "glass_angle_deg": [
+    -61.7,
+    61.7
+   ]
+  }
+ }
+}
