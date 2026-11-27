@@ -43,3 +43,37 @@ Residual risk of 2A: whenever both leaves are open, anyone in the corridor or on
 
 ## Recommendation
 Option 3 is blocked by the site. If the client wants the vestibule: **2A with the electric interlock (so both leaves cannot be open together), delayed-action closer on the suite door and a door-contact alert**, which is the closest to the stated criterion without geometry. If the client will not rely on a door being shut: **keep 1a** (today), which passes with all doors open. Decisions I made: used 0.20 storage and 0.90 dressing door to clear 750 with margin (0.802); named closers from memory and flagged as unverified; gave relative not absolute cost (no source); treated the entry bay as exempt as before. Not built; model, spec and renders unchanged.
+
+---
+# Step 2: would rotating the bed let the dressing door sit where the bed head is now? (sketches only, 2026-11-26)
+Plans (1:50): `docs/lanes/DF-privacy-options/plan-R1.png`, `plan-R2.png`, `plan-R3.png` (+ .svg, `results-rot.json`). Reproduce: `python scripts/df_privacy_rot.py`. Model, spec and renders unchanged.
+**Answer: yes for the door, but only R3 (head north) keeps the bedsides.** The door is option 4's (x 19.577..20.377, west end of the south wall, beside the lobby opening, leaf into the dressing room). It passes all-doors-open in every variant (0/451 viewpoints, same engine and walls as option 4); the old east door is closed as in option 4. The south wall is no longer a head wall in any of them, so the bed never fights the door; the question is only what the room can hold. Room clear 3.92 x 2.80: a 1.6 m bed across the 2.80 m leaves only 1.20 m for two sides, i.e. **0.60 each** (R1, R2).
+- **R1** head east: bed x 20.397..22.397, y -25.991..-24.391. Vanity moves to the west end of the north window (x 18.9..19.9, under the window's west edge at 19.36).
+- **R2** head west: bed x 18.477..20.477, same y. Vanity stays at the east window (foot to vanity 1.52 m).
+- **R3** head north (bed turned 180, the same as today's bed on the other wall): bed x 19.637..21.237 centred on the room, y -25.791..-23.791. Vanity stays at the east window. Foot to south wall 0.80 m, which is the lobby-to-dressing walk-by.
+
+Bedside figure: 750 mm route inside a bedroom, card `ukadm-bedroom-route-750` (UK Approved Document M, a benchmark, not code compliance with no jurisdiction pack), with the repo's rule that both sides must keep 750 even with a 250 tray out (`DF-dressing-door-study.md`). I did not re-read Neufert or the Metric Handbook for this sketch, so no new book page is cited.
+
+| | 1a today | 2A (vestibule, self-closing) | R1 head east | R2 head west | R3 head north |
+|---|---|---|---|---|---|
+| Bedsides (750 needed) | 1.05 W / 1.27 E* | 1.16 / 1.16 (centred) | **0.60 / 0.60 FAIL** | **0.60 / 0.60 FAIL** | **1.16 / 1.16 pass** (0.76 E beside the vanity) |
+| Trays out 250, open width left | 0.80 / 1.02 | 0.91 / 0.91 | **0.35 / 0.35** | **0.35 / 0.35** | 0.91 / 0.91 (0.51 E at the vanity) |
+| Route corridor to dressing (length, narrowest) | 11.2 m, 800 mm | 3.8 m, 802 mm | 5.9 m, 800 mm | 5.5 m, **600 mm** (strip between bed and south wall, 1 m long) | 5.9 m, 800 mm |
+| Bed to ensuite at night (length, narrowest) | not re-run | not re-run | S side 4.3 m, **600**; N side 6.4 m, **536** | S 3.4 m, **600**; N 6.9 m, **600** | W 5.2 m, 800; E 5.4 m, 800 |
+| All doors open: viewpoints seeing in (0 = pass) | 0/451 PASS | 367/371 FAIL (pass only by closers) | 0/451 PASS | 0/451 PASS | 0/451 PASS |
+| Headboard under a window | no | no | **yes**, east window (sill 0.9, covers the whole headboard) | no | **yes**, north window (sill 0.9) |
+| Hers hanging | 1.72 m | 2.72 m | 1.87 m (+0.15) | 1.87 m (+0.15) | 1.87 m (+0.15) |
+| Slat feature wall behind the head | yes (south wall) | yes | **no** (east is the window wall) | **yes** (west wall solid, 2.69 m) | **no** (north is the window wall) |
+| Envelope change / buildable | none | none | none | none | none |
+
+\* 1a: bed x 19.53..21.13 in the 3.92 m room, so 1.05 W / 1.27 E by subtraction; the tray-out figures 803 / 1017 are the earlier study's (`DF-dressing-door-study.md`). The 1a and 2A route figures are from the options table above.
+Not drawn: the free wall west of the foot in R1 (1.9 m) and east of the foot in R2 (1.5 m) could take a 0.6 m deep wardrobe run in the bedroom; not planned, so no extra hanging is claimed.
+R2 variant not drawn: moving the bed 0.15 m north gives 0.75 south / 0.45 north, so only one side passes. Same for R1.
+
+## Recommendation
+1. **R3 is the only rotation that works.** It is the only one with both bedsides, both trays and every route at or above 750 (narrowest 800; 760 beside the vanity), it passes the privacy test with all doors open, it needs no envelope change. It costs the slat wall (the headboard sits under the 2.40 m north window, sill 0.9 m: glare, draught, curtain and a window behind the head) and the north wall can no longer be the feature wall. Whether a headboard in front of that window is acceptable is the client's call; I would put the slats on the west wall instead (the west wall is solid, as in R2) as a feature wall not behind the head.
+2. **R1 and R2 fail the 750 on both bedsides** (0.60, 0.35 with a tray out). R2 also pinches the lobby route to 600. **Reject both.** R2 is the better of the two only for the slat wall.
+3. Against **1a** (keep today): 1a keeps the slat wall and the bed against a solid wall but costs the 9-11 m arrival route. R3 cuts that to about 6 m and loses the slat wall behind the head. Against **2A**: 2A keeps everything but fails by geometry and passes only by two self-closing doors; R3 passes by walls.
+**Recommended: R3, if the client accepts a headboard under the north window; otherwise stay on 1a.** 2A (with interlock) remains the fallback if the client wants the vestibule.
+
+Decisions I made: used option 4's door position for all three (it already passed); did not search other positions on the south wall; vanity positions chosen by me (R1 moved out of the bed's north-side route); bedside = clear gap from bed edge to wall (duvet overhang 0.10-0.14 m not deducted, which would worsen every figure); the route length is to the dressing centre point used by earlier options, not to the door.
