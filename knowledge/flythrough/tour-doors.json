@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "617b6a103eff16bdf2cc2ea53228c6da9782fdea98fdc551037f1bb4feb3e3f0",
+"camera_sha256": "61926492469b0ef5131a98057f4e1d4d8a356ff247b121809cbddfaf8d1215d0",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -13,377 +13,391 @@
 "doors": [
 {
 "record": {
-"element": "door-GF-gallery-end-family-bath",
-"leaf_id": "door-leaf-5f1588d0f1035d78da422d9c",
+"element": "door-GF-parents-bed-parents-dressing",
+"leaf_id": "door-leaf-300b90f850461b95a078a683",
 "hinge": [
-10.752,
--26.371
+22.296999999999997,
+-26.641
 ],
 "signed_open_deg": -90.0,
 "closed_faces": [
 [
 [
-10.752,
--26.320999999999998,
+21.497,
+-26.590999999999998,
 0.0
 ],
 [
-9.952,
--26.320999999999998,
+21.497,
+-26.691,
 0.0
 ],
 [
-9.952,
--26.320999999999998,
+21.497,
+-26.691,
 2.1
 ],
 [
-10.752,
--26.320999999999998,
-2.1
-]
-],
-[
-[
-10.752,
--26.421,
-0.0
-],
-[
-10.752,
--26.320999999999998,
-0.0
-],
-[
-10.752,
--26.320999999999998,
-2.1
-],
-[
-10.752,
--26.421,
+21.497,
+-26.590999999999998,
 2.1
 ]
 ],
 [
 [
-9.952,
--26.320999999999998,
+21.497,
+-26.590999999999998,
 0.0
 ],
 [
-10.752,
--26.320999999999998,
+22.296999999999997,
+-26.590999999999998,
 0.0
 ],
 [
-10.752,
--26.421,
+22.296999999999997,
+-26.691,
 0.0
 ],
 [
-9.952,
--26.421,
+21.497,
+-26.691,
 0.0
 ]
 ],
 [
 [
-9.952,
--26.320999999999998,
+21.497,
+-26.691,
 0.0
 ],
 [
-9.952,
--26.421,
+22.296999999999997,
+-26.691,
 0.0
 ],
 [
-9.952,
--26.421,
+22.296999999999997,
+-26.691,
 2.1
 ],
 [
-9.952,
--26.320999999999998,
+21.497,
+-26.691,
 2.1
 ]
 ],
 [
 [
-9.952,
--26.421,
+21.497,
+-26.691,
+2.1
+],
+[
+22.296999999999997,
+-26.691,
+2.1
+],
+[
+22.296999999999997,
+-26.590999999999998,
+2.1
+],
+[
+21.497,
+-26.590999999999998,
+2.1
+]
+],
+[
+[
+22.296999999999997,
+-26.590999999999998,
 0.0
 ],
 [
-10.752,
--26.421,
+21.497,
+-26.590999999999998,
 0.0
 ],
 [
-10.752,
--26.421,
+21.497,
+-26.590999999999998,
 2.1
 ],
 [
-9.952,
--26.421,
-2.1
-]
-],
-[
-[
-9.952,
--26.421,
-2.1
-],
-[
-10.752,
--26.421,
-2.1
-],
-[
-10.752,
--26.320999999999998,
-2.1
-],
-[
-9.952,
--26.320999999999998,
+22.296999999999997,
+-26.590999999999998,
 2.1
 ]
+],
+[
+[
+22.296999999999997,
+-26.691,
+0.0
+],
+[
+22.296999999999997,
+-26.590999999999998,
+0.0
+],
+[
+22.296999999999997,
+-26.590999999999998,
+2.1
+],
+[
+22.296999999999997,
+-26.691,
+2.1
+]
 ]
 ],
-"note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+"note": "hinge side is not authored; this side (hinge [np.float64(22.296999999999997), np.float64(-26.641)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 6786,
-"close_end": 6834,
-"open_start": 7069,
-"open_end": 7117
+"close_start": 12122,
+"close_end": 12170,
+"open_start": 12418,
+"open_end": 12466
 },
 "features": [
-"furn-fb-wc"
+"lum-VSTRIP-parents-dressing-03",
+"lum-VSTRIP-parents-dressing-04",
+"lum-VSTRIP-parents-dressing-05",
+"furn-pd-hang-1",
+"furn-pd-hang-2"
 ]
 },
 {
 "record": {
-"element": "door-GF-parents-dressing-ext-parents-ensuite",
-"leaf_id": "door-leaf-de34774cc02dd1542f58f9d4",
+"element": "door-B-cinema-store-ramp",
+"leaf_id": "door-leaf-e92e2c979036ab9fc6150637",
 "hinge": [
-22.049999999999997,
--28.881
+3.125,
+-21.696
 ],
 "signed_open_deg": 90.0,
 "closed_faces": [
 [
 [
-21.25,
--28.831,
-0.0
+3.075,
+-21.696,
+-3.0
 ],
 [
-21.25,
--28.931,
-0.0
+3.075,
+-22.496,
+-3.0
 ],
 [
-21.25,
--28.931,
-2.1
+3.075,
+-22.496,
+-1.12
 ],
 [
-21.25,
--28.831,
-2.1
+3.075,
+-21.696,
+-1.12
 ]
 ],
 [
 [
-21.25,
--28.831,
-0.0
+3.075,
+-22.496,
+-3.0
 ],
 [
-22.049999999999997,
--28.831,
-0.0
+3.075,
+-21.696,
+-3.0
 ],
 [
-22.049999999999997,
--28.931,
-0.0
+3.175,
+-21.696,
+-3.0
 ],
 [
-21.25,
--28.931,
-0.0
+3.175,
+-22.496,
+-3.0
 ]
 ],
 [
 [
-21.25,
--28.931,
-0.0
+3.075,
+-22.496,
+-3.0
 ],
 [
-22.049999999999997,
--28.931,
-0.0
+3.175,
+-22.496,
+-3.0
 ],
 [
-22.049999999999997,
--28.931,
-2.1
+3.175,
+-22.496,
+-1.12
 ],
 [
-21.25,
--28.931,
-2.1
+3.075,
+-22.496,
+-1.12
 ]
 ],
 [
 [
-21.25,
--28.931,
-2.1
+3.175,
+-21.696,
+-3.0
 ],
 [
-22.049999999999997,
--28.931,
-2.1
+3.075,
+-21.696,
+-3.0
 ],
 [
-22.049999999999997,
--28.831,
-2.1
+3.075,
+-21.696,
+-1.12
 ],
 [
-21.25,
--28.831,
-2.1
+3.175,
+-21.696,
+-1.12
 ]
 ],
 [
 [
-22.049999999999997,
--28.831,
-0.0
+3.175,
+-22.496,
+-1.12
 ],
 [
-21.25,
--28.831,
-0.0
+3.175,
+-21.696,
+-1.12
 ],
 [
-21.25,
--28.831,
-2.1
+3.075,
+-21.696,
+-1.12
 ],
 [
-22.049999999999997,
--28.831,
-2.1
+3.075,
+-22.496,
+-1.12
 ]
 ],
 [
 [
-22.049999999999997,
--28.931,
-0.0
+3.175,
+-22.496,
+-3.0
 ],
 [
-22.049999999999997,
--28.831,
-0.0
+3.175,
+-21.696,
+-3.0
 ],
 [
-22.049999999999997,
--28.831,
-2.1
+3.175,
+-21.696,
+-1.12
 ],
 [
-22.049999999999997,
--28.931,
-2.1
+3.175,
+-22.496,
+-1.12
 ]
 ]
 ],
-"note": "hinge side is not authored; this side (hinge [np.float64(22.049999999999997), np.float64(-28.881)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+"note": "hinge side is not authored; this side (hinge [np.float64(3.125), np.float64(-21.696)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 8827,
-"close_end": 8875,
-"open_start": 9003,
-"open_end": 9051
+"close_start": 4882,
+"close_end": 4930,
+"open_start": 5191,
+"open_end": 5239
 },
 "features": [
-"furn-pd-hang-2"
+"furn-store-shelves",
+"lum-STORE-BATTEN-store-ramp-01",
+"lum-STORE-BATTEN-store-ramp-02",
+"lum-STORE-BATTEN-store-ramp-03"
 ]
 }
 ],
 "report": [
 {
+"door": "door-B-lounge-nook-pantry",
+"scheduled": false,
+"reason": "no swing side clears the camera in every frame of the animation",
+"blocked_frames": [
+6672,
+6738
+]
+},
+{
 "door": "door-GF-parents-bed-parents-dressing",
-"scheduled": false,
-"reason": "no swing side clears the camera in every frame of the animation",
-"blocked_frames": [
-8930,
-8958
-]
-},
-{
-"door": "door-GF-gallery-end-family-bath",
 "scheduled": true,
 "features": [
-"furn-fb-wc"
-],
-"blocked_frames": [
-6834,
-7116
-],
-"schedule": {
-"close_start": 6786,
-"close_end": 6834,
-"open_start": 7069,
-"open_end": 7117
-},
-"delay_frames": 0,
-"hold_after_last_blocked_frame_s": 0.04,
-"leave_frame": 7117,
-"reopened_before_leaving": true,
-"route_gap_open_m": 0.35
-},
-{
-"door": "door-GF-corridor-kids-a",
-"scheduled": false,
-"reason": "no swing side clears the camera in every frame of the animation",
-"blocked_frames": [
-7574,
-7584
-]
-},
-{
-"door": "door-GF-parents-dressing-ext-parents-ensuite",
-"scheduled": true,
-"features": [
+"lum-VSTRIP-parents-dressing-03",
+"lum-VSTRIP-parents-dressing-04",
+"lum-VSTRIP-parents-dressing-05",
+"furn-pd-hang-1",
 "furn-pd-hang-2"
 ],
 "blocked_frames": [
-8874,
-9044
+12170,
+12464
 ],
 "schedule": {
-"close_start": 8827,
-"close_end": 8875,
-"open_start": 9003,
-"open_end": 9051
+"close_start": 12122,
+"close_end": 12170,
+"open_start": 12418,
+"open_end": 12466
 },
-"delay_frames": 1,
-"hold_after_last_blocked_frame_s": 0.29,
-"leave_frame": 9051,
+"delay_frames": 0,
+"hold_after_last_blocked_frame_s": 0.08,
+"leave_frame": 12466,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
+},
+{
+"door": "door-B-cinema-store-ramp",
+"scheduled": true,
+"features": [
+"furn-store-shelves",
+"lum-STORE-BATTEN-store-ramp-01",
+"lum-STORE-BATTEN-store-ramp-02",
+"lum-STORE-BATTEN-store-ramp-03"
+],
+"blocked_frames": [
+4930,
+5222
+],
+"schedule": {
+"close_start": 4882,
+"close_end": 4930,
+"open_start": 5191,
+"open_end": 5239
+},
+"delay_frames": 0,
+"hold_after_last_blocked_frame_s": 0.71,
+"leave_frame": 5239,
+"reopened_before_leaving": true,
+"route_gap_open_m": 0.35
+},
+{
+"door": "door-GF-gallery-end-family-bath",
+"scheduled": false,
+"reason": "no swing side clears the camera in every frame of the animation",
+"blocked_frames": [
+8566,
+8836
+]
 }
 ]
 }
