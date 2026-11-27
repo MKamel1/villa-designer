@@ -93,3 +93,10 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 
 ## Client approval (2026-11-22): generated foliage
 The client approved a NEW capability: generate plants from leaf scans (the client's Fab downloads plus CC0 textures) and each species' sourced habit, to replace the egg stand-ins and the crape stand-in tree. Every generated plant is labelled in the schedule and the receipts as "generated": species-faithful where the leaf scan is that species, and form-class otherwise. Free sources only; the client downloads Fab items on request.
+
+## 2026-11-27: south backyard CLOSED to the sister villa by default (client)
+This supersedes the shared/open west line above.
+- **Closed by default:** the south backyard is no longer open to the twin (sister) villa. It stays closed on usual days, for privacy.
+- **Opened for events:** it may be opened to the sister villa's yard for big events and gatherings. The boundary therefore needs a closable opening along the west line (for example a large gate or sliding/folding screen panels). When closed it must read as part of the fence and give full privacy; when open it joins the two yards.
+- **Fence:** extend the outside fence near the sister villa so that it MATCHES the main villa's fence (height, material, style).
+- **Consequence stated at the decision, for the client to confirm:** the shared gas fire pit placed ON the west boundary (2026-11-22) no longer suits a boundary that is closed on usual days. Lead's recommendation: move it just inside our yard beside the event opening, so it serves our yard daily and both yards when the opening is open. The visualisation-only mirror of the garden on the sister plot is unaffected.
