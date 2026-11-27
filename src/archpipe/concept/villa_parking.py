@@ -46,8 +46,13 @@ KIDS_W = 3.36              # each kids bedroom's width (net area >= 11.5 m2, car
 GUEST_WC_END = 11.2        # guest WC under the deck, from the deck start (x 9.227: 1.97 m wide)
 BATH_W = 2.25              # family bath beside the stair (client r9): 2.15 m clear inside (card mh-bathroom-m42-4.30)
 PARENTS_BED_DEPTH = 3.05   # 0.80 m clear at the queen bed foot (3.00 left exactly 0.750, no margin for finishes); parents bedroom from the east face: 11.5 m2 net with its entry (NDSS), queen bed + zones
-DRESSING_DOOR_X = 21.897   # design lead (not client): 0.8 m door, opening 21.497-22.297, 100 mm return to the east
-#                            wall's inner face (22.397); the bedside table is 0.35 m so it stays out of the opening
+DRESSING_DOOR_X = 19.977   # client FINAL 2026-11-26 (R3, sheet DF-102): the dressing door moved to the lobby end of the head wall,
+#                            0.8 m leaf 19.577-20.377 beside the lobby mouth; the old east door (21.897) is built in
+SUITE_DOOR_X = 17.45       # client FINAL 2026-11-26: the GF corridor end past kids-b's door (opening to x 17.189) is annexed to the
+#                            suite; the suite door's wall stands on this line (face 17.40: 0.26 m from kids-b's jamb at 17.139)
+SUITE_DOOR_W = 0.8         # leaf width; chosen in docs/lanes/DF-built.md: a 0.90 leaf shows 31 bedroom points to the corridor with the door open, 0.80 shows 0
+KIDS_B_DOOR_X = 16.689     # kids-b's door centre, unchanged by the annexe
+SUITE_DOOR_Y = -27.931     # the 0.90 opening sits in the 1.05 m clear corridor (-28.471..-27.421): returns 90 mm south, 60 mm north (the leaf is hinged north)
 ENSUITE_DOOR_X = 21.65     # dressing -> ensuite door near the garden end; east jamb 74 mm off the ensuite wall face (22.124) - at 21.75 it ran 26 mm into it
 ENSUITE_GIVES = 0.21       # client questionnaire: the ensuite gets 0.21 m shorter for the dressing room
 DIRTY_KITCHEN_L = 3.8   # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
@@ -301,6 +306,13 @@ def _gf_straight(bath_north=True):
         rooms["parents-entry"] = _room("parents-entry", "GF", (bx0, YC, dx0, py), "bedroom",
                                        "parents' bedroom (entry)", part_of="parents-bed", suite=True)
         rooms["parents-dressing"]["rect"] = [dx0, YP, XR, py]
+        # client FINAL 2026-11-26: the corridor end east of SUITE_DOOR_X becomes the suite vestibule behind a new suite door
+        cx0, cy0, cx1, cy1 = rooms["corridor"]["rect"]
+        rooms["corridor"]["rect"] = [cx0, cy0, SUITE_DOOR_X, cy1]
+        rooms["suite-vestibule"] = _room("suite-vestibule", "GF", (SUITE_DOOR_X, cy0, cx1, cy1), "corridor",
+                                         "suite vestibule (corridor end annexed to the parents' suite)", suite=True, closed=True,
+                                         door_at={"corridor": SUITE_DOOR_Y}, door_w={"corridor": SUITE_DOOR_W})
+        rooms["kids-b"]["door_at"] = {"corridor": KIDS_B_DOOR_X}      # kids-b's door stays exactly where it was (public, unmoved)
         rooms["parents-dressing"]["door_at"] = {"parents-bed": DRESSING_DOOR_X}
         rooms["parents-dressing"]["name"] = "dressing (hanging both sides)"
         # client questionnaire: "deepen the dressing room by 0.21 m (the ensuite gets 0.21 m shorter)"
@@ -314,7 +326,7 @@ def _gf_straight(bath_north=True):
         links = [l for l in links if "family-bath" not in l] + [("gallery-end", "family-bath")]
         links = [l for l in links if tuple(l) not in (("corridor", "parents-bed"),
                                                       ("parents-dressing", "parents-ensuite"))] + [
-            ("corridor", "parents-entry"), ("parents-entry", "parents-bed"),
+            ("corridor", "suite-vestibule"), ("suite-vestibule", "parents-entry"), ("parents-entry", "parents-bed"),
             ("parents-dressing", "parents-dressing-ext"), ("parents-dressing-ext", "parents-ensuite")]
     entries = [e for e in base["entries"] if e[1] == "GF"]
     return list(rooms.values()), links, entries

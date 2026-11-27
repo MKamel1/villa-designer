@@ -312,7 +312,7 @@ class HistoricalRelationships(unittest.TestCase):
         self.assertTrue(Topology.from_inputs(layout=self.layout,specification=spec).opening_host_collisions())
 
     def test_l0570_pocket_approaches_survive_no_swing(self):
-        pocket=next(o for o in self.clean.openings if set(o.rooms)=={'corridor','parents-entry'})
+        pocket=next(o for o in self.clean.openings if set(o.rooms)=={'suite-vestibule','parents-entry'})   # R3: the corridor end is the suite vestibule
         self.assertEqual(pocket.envelope,());self.assertEqual(len(pocket.clear_route),2)
         item=dict(id='chest',room='parents-entry',type='sideboard',cx=18.977,cy=-26.95,rot=0,w=.9,d=.45,h=.8,level='GF',why='frozen regression')
         for identifier in ('historical-chest','renamed-chest'):

@@ -508,13 +508,25 @@ def design(lay=None):
             why="L6b LA13: low marker on the landing's south wall stub: lights the top treads of the flight and the landing (night layer)")
     add("DL", "landing-gf", (Lg[0] + Lg[2]) / 2, (Lg[1] + Lg[3]) / 2, why="stair top", card="ies-res-stairs-50")
     Co = rc["corridor"]
-    xs = [Co[0] + 0.9 + i * 1.75 for i in range(int((Co[2] - Co[0] - 1.0) / 1.75) + 1)]
+    # client FINAL 2026-11-26: the corridor end past kids-b (x >= 17.45) is annexed to the suite as its vestibule. The row is laid out to the OLD corridor end so
+    # every fixture keeps its position; the last washer (x 18.537) is inside the vestibule and is built as WW-suite-vestibule-01, while the corridor's counter skips its old
+    # slot so the approved marker rows (marker-PATH-corridor-07..09) keep their ids.
+    corridor_end = rc["suite-vestibule"][2]
+    xs = [Co[0] + 0.9 + i * 1.75 for i in range(int((corridor_end - Co[0] - 1.0) / 1.75) + 1)]
     for x in xs:
+        if x > Co[2]:        # past the suite door: the vestibule's own wall washer; the corridor's numbering keeps its slot (06) so marker-PATH-corridor-07..09 stay put
+            add("WW", "suite-vestibule", x, Co[1] + 0.30, aim=(0, -0.25, -1), why="the corridor's last wall washer, now inside the suite vestibule",
+                card="ies-res-passage-30")
+            n["corridor"] = n.get("corridor", 0) + 1
+            continue
         add("WW", "corridor", x, Co[1] + 0.30, aim=(0, -0.25, -1), why="grazing the long party wall: the corridor "
             "is lit by its wall, not by a row of spots", card="ies-res-passage-30")
     for x in xs[::2]:
         add("PATH", "corridor", x + 0.4, Co[1] + 0.02, z=0.30, aim=(0, 1, -0.4), level="GF",
             why="low path light to the bathrooms at night")
+    SVr = rc["suite-vestibule"]       # client FINAL 2026-11-26: the annexed corridor end has its own ambient light (WW-corridor-06 only washes its far wall)
+    add("DL", "suite-vestibule", (SVr[0] + SVr[2]) / 2, (SVr[1] + SVr[3]) / 2, why="suite vestibule ambient (the corridor's lights stop at the suite door)",
+        card="ies-res-passage-30")
     Ge = rc["gallery-end"]
     add("DL", "gallery-end", (Ge[0] + Ge[2]) / 2, (Ge[1] + Ge[3]) / 2, why="gallery end", card="ies-res-passage-30")
     S = rc["study-game"]
@@ -574,11 +586,15 @@ def design(lay=None):
     # parents' bedroom: headboard cove, swing-arm bedside lights, reading spots, vanity accent, soft ambient
     PB = rc["parents-bed"]
     b = fp["pb-bed"]
-    strip("COVE", "parents-bed", (b[0] - 0.25, PB[1] + 0.12), (b[2] + 0.25, PB[1] + 0.12), CEILING + 0.03,
-          (0, 0.4, 1), why="headboard cove: warm light grazing the bed wall (taste: 2700 K cove at the headboard)")
+    # client FINAL 2026-11-26 (R3): the head is on the window wall, so the cove (which must not face glass) moves to the slat wall, the
+    # corridor-side west wall x = PB[0]: the strip stands 0.12 m off it and aims along the slats, up and into the room
+    strip("COVE", "parents-bed", (PB[0] + 0.12, PB[1] + 0.15), (PB[0] + 0.12, PB[3] - 0.15), CEILING + 0.03,
+          (0.4, 0, 1), why="slat-wall cove: warm light grazing the slat feature wall (client R3: the cove must not face the glass behind the head)")
+    # Reading lights: swing arms CLAMPED TO THE HEAD PANEL (its top rail is at the 0.90 m sill), the head 0.10 m in front of the panel face and
+    # 1.30 m up, aimed at the pillow. Supply: 24 V DC from the panel-integrated driver (electrical device `bed_head_supply`, see docs/lanes/DF-built.md).
     for x in (b[0] + 0.18, b[2] - 0.18):
-        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.3, -0.55), zone="bed-reading:task", lm=300,
-            why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
+        add("WALL-READ", "parents-bed", x, b[3] - 0.10, z=1.30, aim=(0, -0.3, -0.55), zone="bed-reading:task", lm=300,
+            why="swing arm clamped to the low head panel's top rail, aimed at the pillow; clear of both passages")
     # L6b: the two straight-down adjustable reading spots gave 790 lx on each pillow (4x the 200 lx card): cut; the
     # swing-arm lamps on the head wall are the reading lights
     # L6c: 2 -> 1 ambient (ERCO DL 1065 lm). The one kept is the west one by the entry: the bed-foot one is 23 000 cd/m2 into the eye
@@ -586,7 +602,7 @@ def design(lay=None):
     # L6d LA4 'lying, looking up': that DL (19.03, -25.19) was 89 953 cd/m2 at 39.4 deg off the vertical of a person lying on the pillow
     # (118 820 at pillow 1, 34 deg). The 45 deg cone over the pillows (eye 0.7 m, ceiling 2.7 m) has a 2.0 m radius: the ambient DL
     # now stands at the foot of the bed on its axis, 0.16 m off the south wall, 2.28 m from the nearer pillow
-    for x, y in (((b[0] + b[2]) / 2, PB[3] - 0.16),):
+    for x, y in (((b[0] + b[2]) / 2, PB[1] + 0.16),):       # R3: the foot of the bed is now on the south side (head on the window wall)
         add("DL", "parents-bed", x, y, why="ambient, dimmable (foot of the bed: outside the 45 deg cone over the pillows)",
             card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]
@@ -841,7 +857,7 @@ def task_points(lay=None, *, with_hosts=False):
         add(d, (it[d]["room"], "ies-res-desk-400", *c(d), lv + 0.75, d))
     b = fp["pb-bed"]
     for x in (b[0] + 0.4, b[2] - 0.4):
-        add("pb-bed", ("parents-bed", "ies-res-bed-reading-200", x, b[1] + 0.35, G + 0.9, "pillow"))
+        add("pb-bed", ("parents-bed", "ies-res-bed-reading-200", x, b[3] - 0.35, G + 0.9, "pillow"))
     for basin, room in (("fb-basin", "family-bath"), ("pe-basin", "parents-ensuite"), ("gwc-basin", "guest-wc")):
         lv = B if room == "guest-wc" else G
         add(basin, (room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
@@ -857,7 +873,7 @@ def task_points(lay=None, *, with_hosts=False):
 ROOM_TARGETS = {   # room -> general card (floor average, direct only: advisory)
     "lounge": "ies-res-family-room-100", "family": "ies-res-family-room-100", "living": "ies-res-living-30",
     "kitchen": "ies-res-kitchen-general-50", "kitchen-island": "ies-res-kitchen-general-50",
-    "hall-b": "ies-res-passage-30", "corridor": "ies-res-passage-30", "study-game": "ies-res-game-digital-6",
+    "hall-b": "ies-res-passage-30", "corridor": "ies-res-passage-30", "suite-vestibule": "ies-res-passage-30", "study-game": "ies-res-game-digital-6",
     "kids-a": "ies-res-bedroom-general-50", "kids-b": "ies-res-bedroom-general-50",
     "parents-bed": "ies-res-bedroom-general-50", "parents-dressing": "ies-res-dressing-general-100",
     "cinema": "ies-res-media-lcd-20", "dirty-kitchen": "ies-res-laundry-200", "pantry": "ies-res-storage-frequent-50",

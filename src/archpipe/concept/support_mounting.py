@@ -282,7 +282,7 @@ def migrate(scene, lay):
             fixing=min(sum(p[i]*host.normal[i] for i in range(3)) for p in points(member))
             package(scene,[member],host,fixing,'e-support',mid)
         elif kind in ('wall-panel','wall-marker') or 'hood-' in mid:
-            outward=(0,-1,0) if mid=='detail-tv-fluting' or 'hood-' in mid else (0,1,0)
+            outward=(0,-1,0) if mid=='detail-tv-fluting' or 'hood-' in mid else (1,0,0) if mid=='detail-headboard-slats' else (0,1,0)   # R3: the slat feature is on the west wall, facing +x
             if 'hood-' in mid: anchor[1]=bb[4]
             if kind=='wall-marker' and mid.startswith('marker-STEP-'):
                 record=scene['mounting_hosts']['stair-party-wall']

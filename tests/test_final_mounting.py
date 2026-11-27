@@ -31,9 +31,11 @@ class FinalMounting(unittest.TestCase):
         final = self.scene['c4_final']
         self.assertEqual(len(final['applied']), 2)
         self.assertEqual(len(final['retired']),12)
-        self.assertAlmostEqual(final['headboard']['old_width_mm'], 1980)
-        self.assertAlmostEqual(final['headboard']['new_width_mm'], 1586)
-        self.assertEqual(final['headboard']['basis'], 'Symmetric about unchanged bed centreline')
+        # R3 (2026-11-26): the slat feature moved from behind the bed (1980 -> 1586 mm, symmetric about the bed centre) to the corridor-side wall: a 2330 mm
+        # run along y that fits its finite wall with the 10 mm margin, so nothing is trimmed (old width = new width)
+        self.assertAlmostEqual(final['headboard']['old_width_mm'], 2330)
+        self.assertAlmostEqual(final['headboard']['new_width_mm'], 2330)
+        self.assertEqual(final['headboard']['axis'], 'y')
         for coffee in final['coffee']:
             self.assertAlmostEqual(coffee['delta'][2], .012)
             self.assertEqual(len(coffee['members']), 4)

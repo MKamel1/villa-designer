@@ -55,7 +55,7 @@ MATERIAL_TRAY = {"name": "archpipe tray lining", "rgb": [196, 178, 150]}
 JOINERY_BED = dict(
     plinth_h=100.0, plinth_inset=60.0,            # recessed plinth: a 60 mm shadow gap under the deck
     deck_top=355.0, mattress_top=525.0,           # a 170 mm mattress; deck top = rail top
-    panel_t=50.0, panel_z0=525.0, panel_z1=1350.0, frame_w=50.0, fabric_recess=-3.0,   # upholstery stands 3 mm PROUD of the frame (a recessed panel let the slat fronts, 1 mm proud of it, show through); headboard: floats from the mattress top, 50 mm
+    panel_t=50.0, panel_z0=525.0, panel_z1=900.0, frame_w=50.0, fabric_recess=-3.0,   # upholstery stands 3 mm PROUD of the frame (a recessed panel let the slat fronts, 1 mm proud of it, show through); headboard (client R3, 2026-11-26): a LOW panel floating from the mattress top (0.525) to the window sill (0.90 m), 50 mm
     tray_v0=350.0, tray_v1=800.0,                 # tray window along the bed, from the head wall (beside the chest when sitting up)
     tray_z0=215.0, tray_z1=337.0, tray_front_t=18.0, reveal=3.0,
     tray_stored_depth=300.0,                      # stored length across the bed, under the mattress: front 18 + Blum MOVENTO 760H NL 270 body

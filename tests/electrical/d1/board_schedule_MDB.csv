@@ -1,9 +1,9 @@
 way,circuit,phase,description,device,ib_a,in_a,connected_w,cable,method,length_m,iz_a,derating,vd_total_pct,vd_limit_pct,disconnect_s,protection,feeder_to
-1,MDB/D2,L1,Sliding gate motor GATE-MOTOR,RCBO 6 A C 30 mA Type A,2.27,6.0,400,2C+E 2.5 mm2 PVC,D2,18.2,24.0,1.0,0.69,5.0,,RA not known,
-2,MDB/D3,L1,EV-ready point (7.4 kW wallbox) EV-DECK,RCBO 40 A B 30 mA Type A,33.64,40.0,7400,2C+E 6 mm2 PVC,D2,17.2,41.0,1.0,2.28,5.0,,RA not known,
-3,MDB/D4,L1,Garden lighting (LV transformer) GARDEN-LIGHT,RCBO 6 A B 30 mA Type A,1.52,6.0,300,2C+E 2.5 mm2 PVC,D2,28.7,24.0,1.0,0.71,5.0,,RA not known,
-4,MDB/D1,L2,Irrigation pump PUMP-IRRIGATION,RCBO 6 A C 30 mA Type A,3.12,6.0,550,2C+E 2.5 mm2 PVC,D2,29.1,24.0,1.0,1.1,5.0,,RA not known,
-5,MDB/S1,L2,Garden sockets site-garden,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 4 mm2 PVC,D2,45.3,33.0,1.0,3.98,5.0,,RA not known,
-6,MDB/D5,L3,Gate intercom station and camera supply ELV-GATE,RCBO 6 A B 30 mA Type A,1.01,6.0,200,2C+E 2.5 mm2 PVC,D2,18.2,24.0,1.0,0.51,5.0,,RA not known,
-7,MDB/F-DB-B,3P,Feeder to DB-B,MCCB 80 A 4P,73.79,80.0,,4C+E 25 mm2 PVC,,10.4,83.5,,0.28,,,,DB-B
-8,MDB/F-DB-GF,3P,Feeder to DB-GF,MCCB 50 A 4P,49.88,50.0,,4C+E 16 mm2 PVC,,14.9,66.1,,0.41,,,,DB-GF
+1,MDB/D3,L1,EV-ready point (7.4 kW wallbox) EV-DECK,RCBO 40 A B 30 mA Type A,33.64,40.0,7400,2C+E 6 mm2 PVC,D2,17.2,41.0,1.0,2.27,5.0,,RA not known,
+2,MDB/D1,L2,Irrigation pump PUMP-IRRIGATION,RCBO 6 A C 30 mA Type A,3.12,6.0,550,2C+E 2.5 mm2 PVC,D2,29.1,24.0,1.0,1.09,5.0,,RA not known,
+3,MDB/D2,L2,Sliding gate motor GATE-MOTOR,RCBO 6 A C 30 mA Type A,2.27,6.0,400,2C+E 2.5 mm2 PVC,D2,18.2,24.0,1.0,0.69,5.0,,RA not known,
+4,MDB/D4,L2,Garden lighting (LV transformer) GARDEN-LIGHT,RCBO 6 A B 30 mA Type A,1.52,6.0,300,2C+E 2.5 mm2 PVC,D2,28.7,24.0,1.0,0.71,5.0,,RA not known,
+5,MDB/S1,L2,Garden sockets site-garden,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 4 mm2 PVC,D2,45.3,33.0,1.0,3.97,5.0,,RA not known,
+6,MDB/D5,L3,Gate intercom station and camera supply ELV-GATE,RCBO 6 A B 30 mA Type A,1.01,6.0,200,2C+E 2.5 mm2 PVC,D2,18.2,24.0,1.0,0.5,5.0,,RA not known,
+7,MDB/F-DB-B,3P,Feeder to DB-B,MCCB 80 A 4P,64.92,80.0,,4C+E 25 mm2 PVC,,10.4,83.5,,0.25,,,,DB-B
+8,MDB/F-DB-GF,3P,Feeder to DB-GF,MCCB 63 A 4P,52.28,63.0,,4C+E 16 mm2 PVC,,14.9,66.1,,0.43,,,,DB-GF

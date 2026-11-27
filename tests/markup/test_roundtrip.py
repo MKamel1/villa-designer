@@ -26,8 +26,10 @@ def _marked(sheets, tmp_path, frames_data, items):
 
 def test_door_luminaire_ambiguous_and_empty(els, sheets, frames_data, tmp_path, root):
     door = _el(els, "door-GF-corridor-kids-a")
-    lum = _el(els, "lum-WALL-READ-parents-bed-02")
-    lum2 = _el(els, "lum-VSTRIP-parents-dressing-03")
+    # client FINAL 2026-11-26: the parents' bed turned, so the old midpoint (bed-02 / dressing-03) now falls inside the
+    # bed footprint and links to the bed (furniture tier wins). Two adjacent dressing strips keep the ambiguity case.
+    lum = _el(els, "lum-VSTRIP-parents-dressing-03")
+    lum2 = _el(els, "lum-VSTRIP-parents-dressing-04")
     mid = ((lum.placement[0] + lum2.placement[0]) / 2, (lum.placement[1] + lum2.placement[1]) / 2)
     pdfs = _marked(sheets, tmp_path, frames_data, [
         ("A-111", "GF", door.placement[0] + 40, door.placement[1] + 30, "door too narrow", {}),

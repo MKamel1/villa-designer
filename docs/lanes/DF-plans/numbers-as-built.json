@@ -1,0 +1,22 @@
+{
+ "privacy": "PASS: 0 of 532 outside viewpoints see in (all suite doors open)",
+ "bedsides": "1160 / 1160 mm",
+ "foot": "800 mm",
+ "vestibule": "920 mm clear (door to entry), cabinet 130 deep",
+ "bedroom_routes": "849 mm (door to door, trays open 250)",
+ "dressing_routes": "880 mm",
+ "viewpoints": 532,
+ "seeing": 0,
+ "rows": [
+  "parents-bed+parents-entry: door parents-bed/parents-dressing -> its own approach: 0.988 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-bed+parents-entry: door suite-vestibule/parents-entry -> its own approach: 1.000 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-bed+parents-entry: door parents-bed/parents-dressing -> door suite-vestibule/parents-entry: 0.849 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-dressing+parents-dressing-ext: door parents-bed/parents-dressing -> its own approach: 0.880 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-dressing+parents-dressing-ext: door parents-dressing-ext/parents-ensuite -> its own approach: 0.950 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-dressing+parents-dressing-ext: door parents-bed/parents-dressing -> door parents-dressing-ext/parents-ensuite: 0.880 m clear where 0.750 m is needed (ukadm-bedroom-route-750 (private dressing: project waiver))",
+  "parents-ensuite: door parents-dressing-ext/parents-ensuite -> its own approach: 1.140 m clear where 0.914 m is needed (mitton-path-of-travel-min)",
+  "suite-vestibule: door corridor/suite-vestibule -> its own approach: 0.920 m clear where 0.914 m is needed (mitton-path-of-travel-min (suite vestibule is a passage; the 0.90 hall card ukadm-hall-min-m42 is met by the same width))",
+  "suite-vestibule: door suite-vestibule/parents-entry -> its own approach: 1.080 m clear where 0.914 m is needed (mitton-path-of-travel-min (suite vestibule is a passage; the 0.90 hall card ukadm-hall-min-m42 is met by the same width))",
+  "suite-vestibule: door corridor/suite-vestibule -> door suite-vestibule/parents-entry: 0.920 m clear where 0.914 m is needed (mitton-path-of-travel-min (suite vestibule is a passage; the 0.90 hall card ukadm-hall-min-m42 is met by the same width))"
+ ]
+}

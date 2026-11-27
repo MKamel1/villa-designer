@@ -595,7 +595,7 @@ def main():
         args.out=str(Path(args.root)/'assembly');Path(args.out).mkdir(parents=True,exist_ok=True)
         args.path=str(Path(args.root)/'path.json');args.ies_dir=str(Path(args.root)/'ies')
         args.library_root=None;args.cpu=False;args.views='all';args.calibrate=False
-        args.measure_lighting=False;args.measure_exposure_groups=False;args.walkthrough_callback=prepare
+        args.measure_lighting=False;args.measure_exposure_groups=False;args.no_soft=False;args.walkthrough_callback=prepare      # no_soft=False: the rigid soft goods are part of the scene (lane SOFT)
         from archpipe.blender.element_ids import without_ids
         V.render(without_ids(json.loads((Path(args.root)/'scene.json').read_text())),args)
     else:

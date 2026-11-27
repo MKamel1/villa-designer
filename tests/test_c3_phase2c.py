@@ -259,6 +259,14 @@ class FinalPhysicalScene(unittest.TestCase):
         retired = {'lamp-VSCONCE-parents-ensuite-04','lamp-VSCONCE-parents-ensuite-05',
                    # FX 2026-11-25: the kids A bunk, its pillow and the rug anchored on it are removed (two loft beds replace them)
                    'dress-pillow-ka-bunk-0', 'rug-kids-a'}
+        _hist = lambda scene, mesh: __import__('archpipe.concept.garments', fromlist=['x']).historical_replacements(scene, mesh)
+        # Client FINAL 2026-11-26 (R3, lane DF): the parents' dressing door moved from x 21.9 to x 19.98 and the suite walls
+        # changed, so these frozen faces (count, bounding region x0,y0,x1,y1) no longer exist; nothing else may be lost.
+        R3_LOST = {'shell-017-door-oak': (1, (21.5, -26.7, 22.3, -26.5)), 'shell-018-door-oak': (5, (21.5, -26.7, 22.3, -26.5)),
+                   'shell-022-marble-bath': (2, (9.2, -27.4, 11.5, -23.5)),
+                   'shell-025-paint-exterior-grey-green': (10, (3.5, -30.0, 22.7, -20.5)),
+                   'shell-039-paving': (2, (-0.4, -39.5, 28.6, -20.3))}
+        inside = lambda f, r: all(r[0] - 0.01 <= p[0] <= r[2] + 0.01 and r[1] - 0.01 <= p[1] <= r[3] + 0.01 for p in f)
         leaves = [m for m in self.scene['meshes'] if m['part_kind']=='door-leaf'
                   and m['group'] in ('shell','context')]
         face_key = lambda face: tuple(tuple(round(c, 4) for c in p) for p in face)   # 0.1 mm: -0.8999999999999999 vs -0.9 is float noise, a moved leaf is not
@@ -268,7 +276,19 @@ class FinalPhysicalScene(unittest.TestCase):
                 if mesh['part_kind']=='door-leaf' and mesh['group'] in ('shell','context'):
                     # Render bucket ids retire; every actual authored face
                     # remains in a complete physical door source.
-                    self.assertTrue(all(face_key(f) in door_faces for f in mesh['faces']))
+                    lost = [f for f in mesh['faces'] if face_key(f) not in door_faces]
+                    self.assertEqual(len(lost), R3_LOST.get(mesh['id'], (0,))[0], 'door faces lost beyond the R3 relocation')
+                    self.assertTrue(all(inside(f, R3_LOST[mesh['id']][1]) for f in lost))
+                elif mesh['id'] not in by_id and mesh['id'] not in retired and not _hist(self.scene, mesh):
+                    # shell-NNN-<material> is a render BUCKET index: adding earlier meshes (R3 glass, walls) renumbers it. The
+                    # frozen faces must still all stand in a current mesh of the SAME material, except the faces that the
+                    # client's R3 plan removed (declared by count and region, above).
+                    mat = mesh['id'].split('-', 2)[2]
+                    pool = {face_key(f) for m in self.scene['meshes'] if m['id'].startswith('shell-') and m['id'].split('-', 2)[2] == mat
+                            for f in m['faces']}
+                    lost = [f for f in mesh['faces'] if face_key(f) not in pool]
+                    self.assertEqual(len(lost), R3_LOST.get(mesh['id'], (0,))[0], mesh['id'] + ': frozen faces lost')
+                    self.assertTrue(all(inside(f, R3_LOST[mesh['id']][1]) for f in lost))
                 else:
                     from archpipe.concept.garments import historical_replacements
                     self.assertTrue(mesh['id'] in by_id or mesh['id'] in retired or

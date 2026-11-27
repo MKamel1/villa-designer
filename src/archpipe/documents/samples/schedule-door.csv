@@ -11,9 +11,10 @@ D09,door-B-lounge-nook-pantry,B,lounge (under the stair's top landing),pantry / 
 D10,door-B-lounge-yard,B,lounge (street window floor to beam),yard,3710,2200,sliding,n/a,,,,True,wall-B-ext-12
 D11,door-GF-corridor-kids-a,GF,hall,kids bedroom A,900,2100,hinged,RH,south,kids bedroom A,YES,False,wall-GF-int-23
 D12,door-GF-corridor-kids-b,GF,hall,kids bedroom B,900,2100,hinged,LH,north,kids bedroom B,YES,False,wall-GF-int-23
-D13,door-GF-corridor-parents-entry,GF,hall,parents' bedroom (entry),900,2100,pocket,n/a,,,YES,False,wall-GF-int-23
+D13,door-GF-corridor-suite-vestibule,GF,hall,suite vestibule (corridor end annexed to the parents' suite),800,2100,hinged,LH,east,suite vestibule (corridor end annexed to the parents' suite),,False,wall-GF-int-31
 D14,door-GF-gallery-end-family-bath,GF,gallery (round the stair void to the bedrooms),family bathroom,800,2100,hinged,LH,north,family bathroom,YES,False,wall-GF-int-25
 D15,door-GF-landing-gf-core,GF,stair landing (core door),core,1000,2100,hinged,RH,north,core,,False,wall-GF-ext-21
 D16,door-GF-parents-bed-parents-dressing,GF,parents' bedroom,dressing (hanging both sides),800,2100,hinged,LH,south,dressing (hanging both sides),,False,wall-GF-int-24
 D17,door-GF-parents-dressing-ext-parents-ensuite,GF,dressing (taken from the ensuite),en-suite,800,2100,hinged,LH,south,en-suite,YES,False,wall-GF-int-20
 D18,door-GF-study-game-deck,GF,study / game room (open to the stair; sliding door to the deck),deck,1800,2100,sliding,n/a,,,,False,wall-GF-ext-26
+D19,door-GF-suite-vestibule-parents-entry,GF,suite vestibule (corridor end annexed to the parents' suite),parents' bedroom (entry),900,2100,pocket,n/a,,,YES,False,wall-GF-int-23

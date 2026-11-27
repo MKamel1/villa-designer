@@ -179,6 +179,8 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
         rect = _furn_rect(e)
         wall, gap = _pick_wall(r, rect, kind, flags, e.id)
         params: dict = {"model_type": t, "gap_mm": round(gap, 1)}
+        if kind == "bed" and (e.params.get("extra") or {}).get("head_panel_lights"):
+            params["head_panel_lights"] = True        # reading-light arms clamped to the head panel (R3): needs a supply behind it
         if kind in ("shower", "bath"):
             over = next((k for k in heads if k and e.id == "furn-" + k), None)
             head = heads.get(over) if over else None

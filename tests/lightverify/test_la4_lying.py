@@ -21,7 +21,7 @@ def test_design_sightlines_agree_with_the_engine_and_stay_under_the_cap(villa):
     rows = {r["id"]: r for r in W.run(villa)}
     assert len(rows) == 5 and all(r["eye_in_footprint"] for r in rows.values())
     assert all(r["mine"] <= W.CAP for r in rows.values())
-    adj = rows["pb-bed-lying-up-min-y-p2"]                      # the one fitting in view: the bedroom ADJ toward pillow 2 (L6d: 1656)
+    adj = rows["pb-bed-lying-up-max-y-p2"]                      # the one fitting in view: the bedroom ADJ toward pillow 2 (L6d: 1656; R3 turned the bed, head now max-y: 1757)
     assert adj["mine_by"] == "ADJ-parents-bed-05" and abs(adj["mine"] - adj["engine"]) < 0.01 * adj["engine"] and 1500 < adj["mine"] < 1800
     assert all(abs(r["mine"] - r["engine"]) <= 0.02 * max(r["mine"], r["engine"]) + 10 for r in rows.values())
 

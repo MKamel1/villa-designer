@@ -16,7 +16,7 @@ SPACES = {
     "lounge": ["lounge", "lounge-nook"], "kitchen": ["kitchen", "kitchen-island"], "dining": ["dining", "dining-side"],
     "living": ["living", "bar-alcove"], "family-corner": ["family", "hall-b", "entry-b"], "cinema": ["cinema"],
     "study-game": ["study-game"], "kids-a": ["kids-a"], "kids-b": ["kids-b"],
-    "parents-bed": ["parents-bed", "parents-entry"], "parents-dressing": ["parents-dressing", "parents-dressing-ext"],
+    "parents-bed": ["parents-bed", "parents-entry", "suite-vestibule"], "parents-dressing": ["parents-dressing", "parents-dressing-ext"],
     "parents-ensuite": ["parents-ensuite"], "family-bath": ["family-bath"], "guest-wc": ["guest-wc"],
     "dirty-kitchen": ["dirty-kitchen"], "stair": ["stair-b", "stair-gf", "landing-gf"], "corridor": ["corridor", "gallery-end"],
 }
@@ -238,14 +238,14 @@ def sightlines(v) -> list[dict]:
         {"id": "living-sofa-to-garden", "room": "living", "eye": ((lsf[0] + lsf[2]) / 2, (lsf[1] + lsf[3]) / 2, B + 1.2), "dir": (0, 1, 0)},
         {"id": "dining-seat-along-table", "room": "dining", "eye": (dt[0] + 0.5, (dt[1] + dt[3]) / 2, B + 1.2), "dir": (1, 0, 0)},
         {"id": "dining-seat-to-sideboard", "room": "dining", "eye": ((dt[0] + dt[2]) / 2, dt[1] + 0.2, B + 1.2), "dir": (0, -1, 0)},
-        {"id": "parents-bed-lying", "room": "parents-bed", "eye": ((bed[0] + bed[2]) / 2, bed[1] + 0.4, G + 0.7), "dir": (0, 1, 0.3)},
+        {"id": "parents-bed-lying", "room": "parents-bed", "eye": ((bed[0] + bed[2]) / 2, bed[3] - 0.4, G + 0.7), "dir": (0, -1, 0.3)},
     ] + bed_lying_sightlines(v)
 
 
-# bed -> (room, head end, eye height above the floor). Head ends from the furnishing spec: the parents' bed head is on the north
-# wall (wall reading lights at its head), kids' B "head to the west wall"; the bunk's is not declared, so both ends are tested.
+# bed -> (room, head end, eye height above the floor). Head ends from the furnishing spec: the parents' bed head is on the east
+# window wall (model +y; client R3, 2026-11-26: reading lights on arms clamped to the head panel), kids' B "head to the west wall"; the bunk's is not declared, so both ends are tested.
 # Eye heights: 0.7 m on a 0.5 m bed (as the reclined sightline above); upper berth 1.5 m (ASSUMED: furnishing h = 1.7 m).
-BEDS = {"pb-bed": ("parents-bed", ("min-y",), 0.7), "kb-bed": ("kids-b", ("min-x",), 0.7), "ka-loft-1": ("kids-a", ("min-y",), 1.83), "ka-loft-2": ("kids-a", ("max-y",), 1.83)}   # loft 1 head south, loft 2 head north (rot 180); eye 0.2 m over the 1.63 m mattress top (client 2026-11-25)
+BEDS = {"pb-bed": ("parents-bed", ("max-y",), 0.7), "kb-bed": ("kids-b", ("min-x",), 0.7), "ka-loft-1": ("kids-a", ("min-y",), 1.83), "ka-loft-2": ("kids-a", ("max-y",), 1.83)}   # loft 1 head south, loft 2 head north (rot 180); eye 0.2 m over the 1.63 m mattress top (client 2026-11-25)
 PILLOW_OFFSET = 0.4      # m from the head end to the eye of a person lying on the pillow
 
 

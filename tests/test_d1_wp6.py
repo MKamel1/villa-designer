@@ -27,7 +27,7 @@ def readback():
 
 class Round3BuilderContract(unittest.TestCase):
     def test_real_spec_round_trip_and_counts(self):
-        self.assertEqual(len(SPEC["furniture"]), 72)  # 71 (DF 2026-11-26: bedside and ledges gone with the joinery bed's own trays) + 1 (FX 2026-11-25: two lofts replace one bunk); gwc-shower: the new guest open wet zone belongs in Revit
+        self.assertEqual(len(SPEC["furniture"]), 73)  # +1 sv-store (R3, suite vestibule flat cabinet); 71 (DF 2026-11-26: bedside and ledges gone with the joinery bed's own trays) + 1 (FX 2026-11-25: two lofts replace one bunk); gwc-shower: the new guest open wet zone belongs in Revit
         self.assertIn("gwc-shower", {item["mark"] for item in SPEC["furniture"]})
         self.assertEqual(len(DETAILS), 67)   # round 3b: open bays, sides, shelves, bike hooks; stored contents excluded (75 before RA2 trimmed stair-flight-store to x<=6.5: six fewer bay details; 69 before INT2: L6b cut the two bar-alcove DLN nook downlights, which were the 2 DLN-bar-alcove-11/12 details)
         self.assertEqual(sum(d["mark"].startswith("SWING-") for d in DETAILS), 6)

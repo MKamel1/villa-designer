@@ -2601,13 +2601,14 @@ _blocked_real_scene = {
     ]
 }
 
-# Clean case: headboard slats constrained to the solid wall backing (x in [19.60, 21.40]),
-# leaving both the entry opening (x < 19.527) and dressing door (x > 21.497) completely clear.
+# Clean case: the R3 slat feature (DF-102/104) on the corridor-side (west) wall, x = 18.477, y from 0.30 m past the
+# lobby mouth to the window-wall return. No slat stands on any door or doorless opening (the dressing door is at
+# x 19.577..20.377 on y = -26.641).
 _blocked_clean_faces = []
-for _k in range(int((21.40 - 19.60) / 0.05)):
-    _xa = round(19.60 + _k * 0.05, 3)
-    _x0, _x1 = _xa, _xa + 0.03
-    _y0, _y1 = -26.591, -26.561
+for _k in range(int((-23.961 - -26.291) / 0.05) + 1):
+    _ya = round(-26.291 + _k * 0.05, 3)
+    _x0, _x1 = 18.477, 18.507
+    _y0, _y1 = _ya, _ya + 0.03
     _z0, _z1 = 0.0, 2.10
     _blocked_clean_faces.extend([
         [[_x0, _y0, _z0], [_x0, _y1, _z0], [_x1, _y1, _z0], [_x1, _y0, _z0]],

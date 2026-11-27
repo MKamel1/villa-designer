@@ -37,7 +37,7 @@ CLUSTERS = {
     "B-dirty-kitchen": ["dirty-kitchen"],
     "GF-circulation": ["corridor", "gallery-end", "landing-gf", "stair-gf", "study-game"],
     "GF-kids-a": ["kids-a"], "GF-kids-b": ["kids-b"], "GF-family-bath": ["family-bath"],
-    "GF-parents-bed": ["parents-bed", "parents-entry"], "GF-parents-dressing": ["parents-dressing", "parents-dressing-ext"],
+    "GF-parents-bed": ["parents-bed", "parents-entry"], "GF-suite-vestibule": ["suite-vestibule"], "GF-parents-dressing": ["parents-dressing", "parents-dressing-ext"],
     "GF-parents-ensuite": ["parents-ensuite"],
 }
 CEILING_OVERRIDE = {"B-open": 2.8}       # the lounge and living coves rise to the 2.80 m slab; the rest is 2.70 m

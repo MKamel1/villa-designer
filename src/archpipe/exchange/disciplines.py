@@ -22,7 +22,7 @@ BOARD_IDS = ("MDB", "DB-B", "DB-GF")
 DEVICE_CLASS = {
     "socket": ("IfcOutlet", "POWEROUTLET"), "data": ("IfcOutlet", "DATAOUTLET"), "tv_sat": ("IfcOutlet", "AUDIOVISUALOUTLET"),
     "switch": ("IfcSwitchingDevice", "NOTDEFINED"), "isolator_ac": ("IfcSwitchingDevice", "SWITCHDISCONNECTOR"),
-    "led_driver": ("IfcTransformer", "VOLTAGE"),
+    "led_driver": ("IfcTransformer", "VOLTAGE"), "socket_selv": ("IfcTransformer", "VOLTAGE"),     # R3 bed-head 24 V DC SELV driver/junction
     "fcu": ("IfcElectricAppliance", "NOTDEFINED"), "cooker_unit": ("IfcElectricAppliance", "NOTDEFINED"),
     "smoke": ("IfcSensor", "SMOKESENSOR"), "heat": ("IfcSensor", "HEATSENSOR"),
     "cctv": ("IfcAudioVisualAppliance", "CAMERA"), "ap": ("IfcCommunicationsAppliance", "NETWORKAPPLIANCE"),

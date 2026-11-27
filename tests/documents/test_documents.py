@@ -21,14 +21,14 @@ def spec(els):
 
 def test_schedule_counts_equal_model(els):
     c = model.counts(els)
-    assert len(schedules.door_schedule(els)) == c["door"] == 18
+    assert len(schedules.door_schedule(els)) == c["door"] == 19
     assert len(schedules.window_schedule(els)) == c["window"] == 8
-    assert len(schedules.room_schedule(els)) == c["room"] == 30
+    assert len(schedules.room_schedule(els)) == c["room"] == 31  # +1: suite-vestibule, client FINAL 2026-11-26 (door +1 too)
 
 
 def test_tags_unique_and_stable(els):
     t = schedules.tag_numbers(els)
-    assert len(set(t.values())) == len(t) == 56
+    assert len(set(t.values())) == len(t) == 58
     assert t == schedules.tag_numbers(list(reversed(els)))
 
 
@@ -36,11 +36,11 @@ def test_csv_md_roundtrip(els):
     rows = schedules.room_schedule(els)
     csv_text = schedules.to_csv(rows)
     assert csv_text.count("\n") == len(rows) + 1
-    assert "## Room schedule (30)" in schedules.to_md(rows, "Room schedule")
+    assert "## Room schedule (31)" in schedules.to_md(rows, "Room schedule")
 
 
 def test_sheetset_spec_counts_and_missing_fields(spec, els):
-    assert spec["schedules"]["door"] == 18
+    assert spec["schedules"]["door"] == 19
     assert {"A-001", "A-100", "A-101", "A-111", "A-201", "A-301"} <= {s["no"] for s in spec["sheets"]}
     assert {"owner", "engineer", "syndicate_no"} == set(spec["missing_title_block_fields"])  # never invented
     plan = next(s for s in spec["sheets"] if s["no"] == "A-101")

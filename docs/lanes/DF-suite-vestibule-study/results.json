@@ -1,0 +1,138 @@
+{
+ "E1": {
+  "title": "E1: suite door + vestibule, 0.30 storage, dressing door out-swing to the vestibule (hinge S)",
+  "routes": {
+   "public>bed (W side)": {
+    "length": 3.73,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "public>dressing": {
+    "length": 3.81,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "public>ensuite": {
+    "length": 4.9,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "bedW>ensuite": {
+    "length": 5.2,
+    "widest_m": 0.786,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 9.95,
+    "widest_m": 0.76,
+    "at_750": true
+   }
+  },
+  "vest_len": 1.927,
+  "vest_w": 1.05,
+  "store_d": 0.3,
+  "passage_beside_store": 0.75
+ },
+ "E2": {
+  "title": "E2: as E1 but dressing door swings into the dressing room (hinge N), storage the full vestibule",
+  "routes": {
+   "public>bed (W side)": {
+    "length": 3.73,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "public>dressing": {
+    "length": 3.82,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "public>ensuite": {
+    "length": 4.9,
+    "widest_m": 0.66,
+    "at_750": false
+   },
+   "bedW>ensuite": {
+    "length": 5.09,
+    "widest_m": 0.695,
+    "at_750": false
+   },
+   "bedE>ensuite": {
+    "length": 9.77,
+    "widest_m": 0.695,
+    "at_750": false
+   }
+  },
+  "vest_len": 1.927,
+  "vest_w": 1.05,
+  "store_d": 0.3,
+  "passage_beside_store": 0.75
+ },
+ "E3": {
+  "title": "E3: no storage in the vestibule (reference: widest route)",
+  "routes": {
+   "public>bed (W side)": {
+    "length": 3.8,
+    "widest_m": 0.89,
+    "at_750": true
+   },
+   "public>dressing": {
+    "length": 3.81,
+    "widest_m": 0.786,
+    "at_750": true
+   },
+   "public>ensuite": {
+    "length": 4.97,
+    "widest_m": 0.786,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 5.2,
+    "widest_m": 0.786,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 9.95,
+    "widest_m": 0.76,
+    "at_750": true
+   }
+  },
+  "vest_len": 1.927,
+  "vest_w": 1.05,
+  "store_d": 0,
+  "passage_beside_store": 1.05
+ },
+ "E4": {
+  "title": "E4: 0.60 hanging along the south wall (Neufert depth) - fails the passage",
+  "routes": {
+   "public>bed (W side)": {
+    "length": 3.6,
+    "widest_m": 0.36,
+    "at_750": false
+   },
+   "public>dressing": {
+    "length": 3.88,
+    "widest_m": 0.36,
+    "at_750": false
+   },
+   "public>ensuite": {
+    "length": 4.83,
+    "widest_m": 0.36,
+    "at_750": false
+   },
+   "bedW>ensuite": {
+    "length": 5.2,
+    "widest_m": 0.786,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 9.95,
+    "widest_m": 0.76,
+    "at_750": true
+   }
+  },
+  "vest_len": 1.927,
+  "vest_w": 1.05,
+  "store_d": 0.6,
+  "passage_beside_store": 0.45
+ }
+}

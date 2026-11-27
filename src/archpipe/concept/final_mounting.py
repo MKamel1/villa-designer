@@ -8,29 +8,30 @@ from .attached_assembly import translate
 from .mounting import Host, Finish, MountItem, binding
 
 
-def trim_panel(panel, host, centre, margin):
-    """Fit a width symmetrically about the bed if that centre is on its wall."""
+def trim_panel(panel, host, centre, margin, axis=0):
+    """Fit a run (along x, axis 0, or along y, axis 1) symmetrically about `centre` if that centre is on its wall."""
     old = bounds(panel)
+    lo_i, hi_i = axis, axis + 3
     # Only a source patch covering the full panel height can carry it.
     spans = [bounds(dict(faces=[face])) for face in host['source_faces']]
     spans = [b for b in spans if b[2] <= old[2]+1e-8 and b[5] >= old[5]-1e-8]
-    span = min(spans, key=lambda b: abs((b[0]+b[3])/2-centre))
-    left, right = span[0]+margin, span[3]-margin
+    span = min(spans, key=lambda b: abs((b[lo_i]+b[hi_i])/2-centre))
+    left, right = span[lo_i]+margin, span[hi_i]-margin
     if left < centre < right:
-        half = min(centre-left, right-centre, (old[3]-old[0])/2)
+        half = min(centre-left, right-centre, (old[hi_i]-old[lo_i])/2)
         low, high = centre-half, centre+half
-        basis = 'Symmetric about unchanged bed centreline'
+        basis = 'Symmetric about unchanged bed centreline' if axis == 0 else 'Symmetric about the feature run centre'
     else:
-        low, high = max(left, old[0]), min(right, old[3])
+        low, high = max(left, old[lo_i]), min(right, old[hi_i])
         basis = 'Trim from overrunning side; centre outside finite support'
     if high <= low:
         raise ValueError('Panel has no finite wall span after margin')
     for face in panel['faces']:
         for point in face:
-            point[0] = low+(point[0]-old[0])*(high-low)/(old[3]-old[0])
-    return dict(old_width_mm=(old[3]-old[0])*1000, new_width_mm=(high-low)*1000,
+            point[axis] = low+(point[axis]-old[lo_i])*(high-low)/(old[hi_i]-old[lo_i])
+    return dict(old_width_mm=(old[hi_i]-old[lo_i])*1000, new_width_mm=(high-low)*1000,
                 old_bounds=old, new_bounds=bounds(panel), wall_span=span,
-                margin_mm=margin*1000, centre_x_m=centre, basis=basis)
+                margin_mm=margin*1000, centre_x_m=centre, basis=basis, axis='xy'[axis])
 
 
 def validate_rows(rows, approved_rows):
@@ -79,11 +80,14 @@ def apply(scene, lay):
         target.get('mounting', {}).pop('approval', None)
         row['approval'] = 'APPROVED final lead 2026-10-05; APPLIED'
     from . import villa_furnish as F
-    centre = next(it['cx'] for it in F.layout(lay) if it['id']=='pb-bed')
     panel = render_meshes['detail-headboard-slats']
     before_panel = deepcopy(panel)
+    pb = bounds(panel)
+    # R3 (2026-11-26): the slat feature runs along y on the corridor-side wall; before R3 it ran along x behind the bed head
+    axis = 0 if (pb[3]-pb[0]) >= (pb[4]-pb[1]) else 1
+    centre = (next(it['cx'] for it in F.layout(lay) if it['id']=='pb-bed') if axis == 0 else (pb[1]+pb[4])/2)
     trimmed = trim_panel(panel, scene['mounting_hosts'][panel['mounting']['host_id']],
-                         centre, authority['headboard_margin_m'])
+                         centre, authority['headboard_margin_m'], axis)
     def record_final(member, before, why):
         scene['mounting_movements'].append(dict(id=member['id'], package='final-design-fixes',
             host_id=member['mounting']['host_id'], old=bounds(before), new=bounds(member),

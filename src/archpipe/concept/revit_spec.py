@@ -158,6 +158,8 @@ def _room_at_strict(lay, level, x, y):
 def is_open(room):
     """Open-plan room: its occupancy is open, or the layout marks it open (client r9: the GF study is open to the
     stair, no wall and no door)."""
+    if room.get("closed"):                       # a room of an open occupancy that has its own walls and doors (the suite vestibule)
+        return False
     return room["occupancy"] in OPEN or bool(room.get("open"))
 
 
@@ -274,6 +276,9 @@ def _build(lay):
                 w_ = 0.8
             else:
                 w_ = 0.9
+            wd = (ra.get("door_w") or {}).get(b, (rb.get("door_w") or {}).get(a))
+            if wd is not None:
+                w_ = wd                          # a width the layout fixes (the suite door)
             if {a, b} == {"parents-bed", "parents-dressing"}:
                 w_ = 0.8  # design lead: clears the 0.35 m bedside table with a 100 mm return to the east wall
             if lay["id"] == "D1" and {a, b} == {"kitchen", "dirty-kitchen"}:

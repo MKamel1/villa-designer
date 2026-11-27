@@ -55,8 +55,10 @@ class D1Round3(unittest.TestCase):
             if item["type"] == "under_stair_storage":
                 self.assertEqual(sum(name == "sliding-door-pocketed" for name, _ in named), len(item["modules"]))
                 self.assertEqual(sum(name.endswith("-side") for name, _ in named), 2 * len(item["modules"]))
+            # R3 (2026-11-26): the vestibule's flat 130 mm cabinet `sv-store` is shelving only (wraps and mats are not modelled as contents: a mesh
+            # change would void the exposure record), like the landing cubby it only needs parts
             self.assertTrue(any(name in ("suitcase", "storage-box", "vacuum-body", "tool-case")
-                                for name, _ in named) if item["id"] != "stair-landing-store" else bool(named))
+                                for name, _ in named) if item["id"] not in ("stair-landing-store", "sv-store") else bool(named))
         self.assertEqual(F.check(self.items, self.lay)["under_stair_storage"]["status"], "pass")
         bad = copy.deepcopy(self.items)
         next(i for i in bad if i["id"] == "store-shelves")["soffit"] = None

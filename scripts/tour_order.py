@@ -35,7 +35,7 @@ def order(vm, lv, nodes, start, end):
 if __name__ == '__main__':
     layout, spec, vm = vmap(); route = WT.tour_route(); sp = json.loads((ROOT/'knowledge/flythrough/tour-spaces.json').read_text())['stations']
     by = {s['id']: s for s in sp}; gardens = route.get('orig_gardens') or [s for s in route['stations'] if s.get('garden')]
-    via = {'parents-dressing': [[20.4, -24.215], [21.465, -24.25], [21.465, -25.4]]}      # the pinch through the dressing door (authored, see WT.md)
+    via = {}      # the old authored pinch via-points (door at x 21.897) are gone: DF moved the dressing door to x 19.977 and the A* finds the 0.849 m door-to-door route
     stop = lambda i: dict(space=i, **({'via': via[by[i]['room']]} if by[i]['room'] in via else {}))
     entry = tuple(WT.tour_points()['entry-b']); top = tuple(route['stair']['top']); foot = (route['stair']['bottom'][0]+0., route['stair']['bottom'][1])
     out = [dict(start=list(entry))]

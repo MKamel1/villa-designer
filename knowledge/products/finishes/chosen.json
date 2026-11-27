@@ -202,6 +202,7 @@
      "kids-b",
      "parents-bed",
      "parents-entry",
+     "suite-vestibule",
      "parents-dressing",
      "parents-dressing-ext"
     ]
@@ -504,6 +505,7 @@
      "kids-b",
      "parents-bed",
      "parents-entry",
+     "suite-vestibule",
      "parents-dressing",
      "parents-dressing-ext"
     ]
@@ -1256,6 +1258,7 @@
      "kids-b",
      "parents-bed",
      "parents-entry",
+     "suite-vestibule",
      "parents-dressing",
      "parents-dressing-ext"
     ],
@@ -1364,6 +1367,7 @@
      "kids-b",
      "parents-bed",
      "parents-entry",
+     "suite-vestibule",
      "parents-dressing",
      "parents-dressing-ext"
     ],
@@ -1481,6 +1485,7 @@
      "kids-b",
      "parents-bed",
      "parents-entry",
+     "suite-vestibule",
      "parents-dressing",
      "parents-dressing-ext"
     ],
@@ -4482,6 +4487,11 @@
    "feature_wall": "wall-feature-parents"
   },
   "parents-entry": {
+   "zone": "parents-suite",
+   "floor": "floor-gf",
+   "wall": "wall-paint-main"
+  },
+  "suite-vestibule": {
    "zone": "parents-suite",
    "floor": "floor-gf",
    "wall": "wall-paint-main"

@@ -37,7 +37,8 @@ class SupportMounting(unittest.TestCase):
                  'marker-PATH-landing-gf-01', 'marker-PATH-landing-gf-02',            # INT2 landing PATH markers
                  'furn-library-daybed-2', 'furn-library-daybed-3',
                  'furn-ka-loft-1-0', 'furn-ka-loft-1-1', 'furn-ka-loft-2-0', 'furn-ka-loft-2-1',  # FX 2026-11-25: kids A loft beds (mattress and slats) replace the bunk
-                 'furn-pb-bed-6', 'furn-pb-bed-7', 'furn-pb-bed-8'}                 # DF 2026-11-26: the joinery bed's upholstered panel and two pillows are separate meshes                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
+                 'furn-pb-bed-6', 'furn-pb-bed-7', 'furn-pb-bed-8',
+                 'furn-sv-store-0', 'furn-sv-store-1', 'furn-sv-store-2'}           # R3 2026-11-26: the suite vestibule's flat cabinet (back, sides, shelves)                 # DF 2026-11-26: the joinery bed's upholstered panel and two pillows are separate meshes                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
         removed = {'fix-DLN-bar-alcove-11', 'fix-DLN-bar-alcove-12', 'lens-DLN-bar-alcove-11', 'lens-DLN-bar-alcove-12',  # L6b redesign
                    'furn-stair-flight-store-storage-box-35', 'furn-stair-flight-store-storage-box-35-handle',
                    'furn-stair-flight-store-storage-box-40', 'furn-stair-flight-store-storage-box-40-handle',
@@ -80,8 +81,9 @@ class SupportMounting(unittest.TestCase):
         for row in proposal['mounting_movements']:
             if row['approval']=='PENDING':by[row['id']]['faces']=row['proposed_faces']
         proposed_findings=scene_findings(proposal)
-        self.assertEqual(len(proposed_findings),3)
-        self.assertIn('detail-headboard-slats: MISSING finite host coverage at fixing footprint',proposed_findings)
+        # R3 (2026-11-26): the slat feature is on the west wall with re-created approval rows (c4-e); its finite host coverage is no longer a pending finding
+        self.assertEqual(len(proposed_findings),2)
+        self.assertNotIn('detail-headboard-slats: MISSING finite host coverage at fixing footprint',proposed_findings)
         self.assertEqual(sum('associated assembly body penetrates' in f for f in proposed_findings),2)
 
     def test_generated_child_cannot_invent_floor_support_and_generalises(self):

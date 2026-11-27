@@ -1,6 +1,6 @@
 # Schedules, D1 (generated from the design model)
 
-## Door schedule (18)
+## Door schedule (19)
 
 | tag | id | level | from | to | width_mm | height_mm | operation | handing | hinge_side | swing_into | to_confirm | glazed_garden_door | host_wall |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -16,12 +16,13 @@
 | D10 | door-B-lounge-yard | B | lounge (street window floor to beam) | yard | 3710 | 2200 | sliding | n/a |  |  |  | True | wall-B-ext-12 |
 | D11 | door-GF-corridor-kids-a | GF | hall | kids bedroom A | 900 | 2100 | hinged | RH | south | kids bedroom A | YES | False | wall-GF-int-23 |
 | D12 | door-GF-corridor-kids-b | GF | hall | kids bedroom B | 900 | 2100 | hinged | LH | north | kids bedroom B | YES | False | wall-GF-int-23 |
-| D13 | door-GF-corridor-parents-entry | GF | hall | parents' bedroom (entry) | 900 | 2100 | pocket | n/a |  |  | YES | False | wall-GF-int-23 |
+| D13 | door-GF-corridor-suite-vestibule | GF | hall | suite vestibule (corridor end annexed to the parents' suite) | 800 | 2100 | hinged | LH | east | suite vestibule (corridor end annexed to the parents' suite) |  | False | wall-GF-int-31 |
 | D14 | door-GF-gallery-end-family-bath | GF | gallery (round the stair void to the bedrooms) | family bathroom | 800 | 2100 | hinged | LH | north | family bathroom | YES | False | wall-GF-int-25 |
 | D15 | door-GF-landing-gf-core | GF | stair landing (core door) | core | 1000 | 2100 | hinged | RH | north | core |  | False | wall-GF-ext-21 |
 | D16 | door-GF-parents-bed-parents-dressing | GF | parents' bedroom | dressing (hanging both sides) | 800 | 2100 | hinged | LH | south | dressing (hanging both sides) |  | False | wall-GF-int-24 |
 | D17 | door-GF-parents-dressing-ext-parents-ensuite | GF | dressing (taken from the ensuite) | en-suite | 800 | 2100 | hinged | LH | south | en-suite | YES | False | wall-GF-int-20 |
 | D18 | door-GF-study-game-deck | GF | study / game room (open to the stair; sliding door to the deck) | deck | 1800 | 2100 | sliding | n/a |  |  |  | False | wall-GF-ext-26 |
+| D19 | door-GF-suite-vestibule-parents-entry | GF | suite vestibule (corridor end annexed to the parents' suite) | parents' bedroom (entry) | 900 | 2100 | pocket | n/a |  |  | YES | False | wall-GF-int-23 |
 
 ## Window schedule (8)
 
@@ -32,11 +33,11 @@
 | W03 | window-GF-kids-a-3 | GF | kids bedroom A | 2400 | 1400 | 900 | 3.36 | wall-GF-ext-26 |
 | W04 | window-GF-kids-b-4 | GF | kids bedroom B | 2350 | 1400 | 900 | 3.29 | wall-GF-ext-26 |
 | W05 | window-GF-parents-bed-6 | GF | parents' bedroom | 2400 | 1400 | 900 | 3.36 | wall-GF-ext-26 |
-| W06 | window-GF-parents-bed-7 | GF | parents' bedroom | 2040 | 1400 | 900 | 2.86 | wall-GF-ext-35 |
+| W06 | window-GF-parents-bed-7 | GF | parents' bedroom | 2040 | 1400 | 900 | 2.86 | wall-GF-ext-36 |
 | W07 | window-GF-study-game-1 | GF | study / game room (open to the stair; sliding door to the deck) | 2240 | 1400 | 900 | 3.14 | wall-GF-ext-26 |
 | W08 | window-GF-study-game-2 | GF | study / game room (open to the stair; sliding door to the deck) | 1520 | 1400 | 900 | 2.13 | wall-GF-ext-27 |
 
-## Room schedule (30)
+## Room schedule (31)
 
 | tag | id | level | name | occupancy | gross_area_m2 | net_area_m2 | clear_height_mm |
 |---|---|---|---|---|---|---|---|
@@ -57,7 +58,7 @@
 | R15 | pantry | B | pantry / store | store | 4.14 | 2.91 | 2700 |
 | R16 | stair-b | B | stair (straight, to the GF) | stair | 5.38 | 4.71 | 2700 |
 | R17 | store-ramp | B | store under the ramp (1.45-2.0 m clear) | store | 9.71 | 8.36 | 1674 |
-| R18 | corridor | GF | hall | corridor | 13.83 | 11.25 | 2700 |
+| R18 | corridor | GF | hall | corridor | 11.13 | 9.07 | 2700 |
 | R19 | family-bath | GF | family bathroom | bathroom | 6.25 | 5.24 | 2700 |
 | R20 | gallery-end | GF | gallery (round the stair void to the bedrooms) | corridor | 2.59 | 2.43 | 2700 |
 | R21 | kids-a | GF | kids bedroom A | bedroom | 13.14 | 11.91 | 2700 |
@@ -70,4 +71,5 @@
 | R28 | parents-entry | GF | parents' bedroom (entry) | bedroom | 0.8 | 0.68 | 2800 |
 | R29 | stair-gf | GF | stair void + gallery | stair | 8.53 | 7.79 | 2800 |
 | R30 | study-game | GF | study / game room (open to the stair; sliding door to the deck) | study | 15.6 | 13.66 | 2700 |
+| R31 | suite-vestibule | GF | suite vestibule (corridor end annexed to the parents' suite) | corridor | 2.7 | 2.08 | 2700 |
 

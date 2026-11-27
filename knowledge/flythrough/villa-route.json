@@ -61,24 +61,6 @@
    "hold_s": 4
   },
   {
-   "via": [
-    [
-     20.4,
-     -24.215
-    ],
-    [
-     21.465,
-     -24.25
-    ],
-    [
-     21.465,
-     -25.4
-    ]
-   ],
-   "level": "GF",
-   "note": "the 0.47 m gap between the duvet (x 21.23) and the vanity chair (x 21.70); the dressing door is reached only through it, so the walk is centred in it"
-  },
-  {
    "room": "parents-dressing",
    "hold_s": 0
   },
@@ -89,28 +71,6 @@
   {
    "room": "parents-ensuite",
    "hold_s": 0
-  },
-  {
-   "via": [
-    [
-     21.465,
-     -25.4
-    ],
-    [
-     21.465,
-     -24.25
-    ],
-    [
-     20.4,
-     -24.215
-    ],
-    [
-     19.2,
-     -24.215
-    ]
-   ],
-   "level": "GF",
-   "note": "back out through the same gap"
   },
   {
    "stair": "down",

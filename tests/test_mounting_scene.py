@@ -162,7 +162,7 @@ class StairFirstPackage(unittest.TestCase):
     def test_bc_pending_geometry_unchanged_small_moves_applied(self):
         # Historical function name retained for registry continuity. The
         # explicit frozen 58-row approval now applies; d stays bounded.
-        self.assertEqual(self.scene['lead_approved_count'],64)
+        self.assertEqual(self.scene['lead_approved_count'],58)   # was 64: 6 c4-bc rows retired (the parents' WALL-READ lamps moved off the old head wall onto the head panel; the c4-e slat rows are re-created, so 49 as before): the parents' WALL-READ rows (c4-bc) retired when the reading lights moved onto the head panel (R3, 2026-11-26)
         fixes={'detail-gwc-hand-shower-head','detail-gwc-hand-shower-hose','lamp-SCONCE-guest-wc-03'}
         render_meshes={m['id']:m for m in self.scene['meshes']}
         diag_meshes={m['id']:m for m in self.scene.get('diagnostic_meshes',[])}
@@ -184,7 +184,7 @@ class StairFirstPackage(unittest.TestCase):
                 self.assertEqual(bounds_for_test(mesh),row['old'])
             else:
                 self.assertEqual(mesh['faces'],row['proposed_faces'])
-        self.assertEqual(len([m for m in render_meshes.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),56)
+        self.assertEqual(len([m for m in render_meshes.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),58)   # +2 (R3): each parents' reading light is a clamp post AND an arm tube on the head panel
 
     def test_bc_frozen_handset_and_wall_edge_are_not_silenced(self):
         frozen=json.loads((Path(__file__).parent/'fixtures/c4-guest-before-fixes.json').read_text())
@@ -305,7 +305,7 @@ class StairFirstPackage(unittest.TestCase):
             self.assertEqual(zone['required_void_mm'],zone['max_housing_depth_mm']+25)
         meshes=[m for m in self.scene['meshes'] if m.get('mounting',{}).get('geometry_role')=='recessed-trim'
                 and m.get('mounting_package')=='d-ceiling']
-        self.assertEqual(len(meshes),66)   # FX 2026-11-25: -2 (kids A desk downlights replaced by under-loft strips); 68 in L6d design: 52 DL + 12 WW + 4 ADJ recessed fittings (69 in L6c: the entry-lobby DL became a cove; 80 before the L6b/L6c ambient cuts)
+        self.assertEqual(len(meshes),67)   # R3 2026-11-26: +1 (DL-suite-vestibule-02); FX 2026-11-25: -2 (kids A desk downlights replaced by under-loft strips); 68 in L6d design: 52 DL + 12 WW + 4 ADJ recessed fittings (69 in L6c: the entry-lobby DL became a cove; 80 before the L6b/L6c ambient cuts)
         for root in (meshes[0],next(m for m in meshes if 'cinema' in m['id'])):
             mutant=deepcopy(self.scene)
             host=mutant['mounting_hosts'][root['mounting']['host_id']]

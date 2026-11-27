@@ -1,0 +1,1180 @@
+{
+ "S0 all doors shut": {
+  "viewpoints": {
+   "corridor (whole length, x 8.89-19.48)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair landing GF": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair void / gallery": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "gallery end (family-bath door)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    }
+   }
+  },
+  "thresholds": {
+   "kids-a doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "kids-b doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "family-bath doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "stair-landing core door": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   }
+  },
+  "bedroom_floor_seen_from_corridor_pct": 0.0,
+  "bedroom_seen_extent": null
+ },
+ "S1 entry door open, others shut": {
+  "viewpoints": {
+   "corridor (whole length, x 8.89-19.48)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair landing GF": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair void / gallery": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "gallery end (family-bath door)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    }
+   }
+  },
+  "thresholds": {
+   "kids-a doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "kids-b doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "family-bath doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "stair-landing core door": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   }
+  },
+  "bedroom_floor_seen_from_corridor_pct": 66.4,
+  "bedroom_seen_extent": [
+   18.577,
+   22.377,
+   -26.491,
+   -23.891
+  ]
+ },
+ "S2 entry + dressing doors open, ensuite shut": {
+  "viewpoints": {
+   "corridor (whole length, x 8.89-19.48)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair landing GF": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair void / gallery": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "gallery end (family-bath door)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    }
+   }
+  },
+  "thresholds": {
+   "kids-a doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "kids-b doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "family-bath doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "stair-landing core door": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   }
+  },
+  "bedroom_floor_seen_from_corridor_pct": 66.4,
+  "bedroom_seen_extent": [
+   18.577,
+   22.377,
+   -26.491,
+   -23.891
+  ]
+ },
+ "S3 all doors open": {
+  "viewpoints": {
+   "corridor (whole length, x 8.89-19.48)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 265,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair landing GF": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 77,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "stair void / gallery": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 209,
+     "pct": 0.0,
+     "example_from": null
+    }
+   },
+   "gallery end (family-bath door)": {
+    "dressing floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite floor": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "dressing head-wall doorway": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seeing": 0,
+     "of": 65,
+     "pct": 0.0,
+     "example_from": null
+    }
+   }
+  },
+  "thresholds": {
+   "kids-a doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "kids-b doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "family-bath doorway": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   },
+   "stair-landing core door": {
+    "dressing floor": {
+     "seen": 0,
+     "of": 126,
+     "example_to": null
+    },
+    "dressing-ext (vanity strip)": {
+     "seen": 0,
+     "of": 12,
+     "example_to": null
+    },
+    "ensuite floor": {
+     "seen": 0,
+     "of": 132,
+     "example_to": null
+    },
+    "dressing head-wall doorway": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    },
+    "ensuite doorway (dressing-ext wall)": {
+     "seen": 0,
+     "of": 8,
+     "example_to": null
+    }
+   }
+  },
+  "bedroom_floor_seen_from_corridor_pct": 66.4,
+  "bedroom_seen_extent": [
+   18.577,
+   22.377,
+   -26.491,
+   -23.891
+  ]
+ },
+ "exposure_entry_open": {
+  "corridor (whole length, x 8.89-19.48)": {
+   "lobby floor": {
+    "viewpoints_seeing": 82,
+    "of": 265,
+    "x_range": [
+     14.587,
+     19.387
+    ]
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 40,
+    "of": 265,
+    "x_range": [
+     17.587,
+     19.387
+    ]
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 37,
+    "of": 265,
+    "x_range": [
+     17.587,
+     19.387
+    ]
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 265,
+    "x_range": null
+   }
+  },
+  "stair landing GF": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 77,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 77,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 77,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 77,
+    "x_range": null
+   }
+  },
+  "stair void / gallery": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 209,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 209,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 209,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 209,
+    "x_range": null
+   }
+  },
+  "gallery end (family-bath door)": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 65,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 65,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 65,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 65,
+    "x_range": null
+   }
+  },
+  "kids-a doorway": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   }
+  },
+  "kids-b doorway": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   }
+  },
+  "family-bath doorway": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   }
+  },
+  "stair-landing core door": {
+   "lobby floor": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bedroom floor (whole)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "bed footprint (x 19.53-21.13, y -26.59..-24.59)": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   },
+   "head-wall dressing door, bedroom face": {
+    "viewpoints_seeing": 0,
+    "of": 1,
+    "x_range": null
+   }
+  }
+ }
+}

@@ -39,7 +39,7 @@ class WallTop(unittest.TestCase):
 
     def test_ids_are_not_renumbered(self):
         self.assertEqual(self.sp["walls"][9]["x1"], 15.412)                   # still one piece, same index
-        self.assertEqual(len(self.sp["walls"]), 36)
+        self.assertEqual(len(self.sp["walls"]), 37)  # +1: suite-vestibule, client FINAL 2026-11-26 wall x=17.45
         self.assertEqual(len(self.sp["infills"]), 4)                          # the 3 ramp infills keep indices 0-2
         self.assertEqual(self.sp["infills"][3]["what"], "wall top up to the extension roof soffit")
         self.assertEqual(self.sp["infills"][3]["profile"][0][0], 12.777)      # starts at the deck's end

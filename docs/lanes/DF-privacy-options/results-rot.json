@@ -1,0 +1,77 @@
+{
+ "R1": {
+  "seeing": 0,
+  "viewpoints": 451,
+  "lobby_to_dressing_m": 5.86,
+  "lobby_narrowest_mm": 800,
+  "night": {
+   "S": [
+    4.3,
+    600
+   ],
+   "N": [
+    6.37,
+    536
+   ]
+  },
+  "gaps": [
+   "south",
+   0.6,
+   "north",
+   0.6
+  ],
+  "foot_to_south_wall": null,
+  "under_window": "YES: headboard under the east window (sill 0.9 m, window y -26.44..-24.40 over the whole headboard)",
+  "slat": "NO: the head wall is the east window wall; the slats would have to stop at the 0.9 sill (no whole wall)"
+ },
+ "R2": {
+  "seeing": 0,
+  "viewpoints": 451,
+  "lobby_to_dressing_m": 5.46,
+  "lobby_narrowest_mm": 600,
+  "night": {
+   "S": [
+    3.4,
+    600
+   ],
+   "N": [
+    6.87,
+    600
+   ]
+  },
+  "gaps": [
+   "south",
+   0.6,
+   "north",
+   0.6
+  ],
+  "foot_to_south_wall": null,
+  "under_window": "NO: solid west wall (no window)",
+  "slat": "YES: the west wall is solid and free (2.69 m long, notch only above y -23.95); slats fit behind a 2.0 m head"
+ },
+ "R3": {
+  "seeing": 0,
+  "viewpoints": 451,
+  "lobby_to_dressing_m": 5.86,
+  "lobby_narrowest_mm": 800,
+  "night": {
+   "W": [
+    5.15,
+    800
+   ],
+   "E": [
+    5.39,
+    800
+   ]
+  },
+  "gaps": [
+   "west",
+   1.16,
+   "east",
+   1.16
+  ],
+  "foot_to_south_wall": 0.8,
+  "under_window": "YES: headboard under the 2.40 m north window (sill 0.9 m); bed 1.6 m sits inside it",
+  "slat": "NO: the north wall is the window; slats would have to stop at the 0.9 sill"
+ }
+}

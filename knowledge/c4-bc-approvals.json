@@ -968,132 +968,6 @@
       "mm": 23.0
     },
     {
-      "id": "host-face-WALL-READ-parents-bed-02",
-      "host_id": "WALL-READ-parents-bed-02",
-      "old": [
-        19.527,
-        -26.590999999999998,
-        0.0,
-        22.597,
-        -26.590999999999998,
-        2.8
-      ],
-      "new": [
-        19.527,
-        -26.577999999999996,
-        0.0,
-        22.597,
-        -26.577999999999996,
-        2.8
-      ],
-      "mm": 13.0
-    },
-    {
-      "id": "lamp-WALL-READ-parents-bed-02",
-      "host_id": "WALL-READ-parents-bed-02",
-      "old": [
-        19.65,
-        -26.521,
-        1.39,
-        19.77,
-        -26.401,
-        1.51
-      ],
-      "new": [
-        19.65,
-        -26.458,
-        1.39,
-        19.77,
-        -26.337999999999997,
-        1.51
-      ],
-      "mm": 63.0
-    },
-    {
-      "id": "bracket-WALL-READ-parents-bed-02",
-      "host_id": "WALL-READ-parents-bed-02",
-      "old": [
-        19.698,
-        -26.641,
-        1.438,
-        19.722,
-        -26.461,
-        1.462
-      ],
-      "new": [
-        19.698,
-        -26.577999999999996,
-        1.438,
-        19.722,
-        -26.397999999999996,
-        1.462
-      ],
-      "mm": 63.0
-    },
-    {
-      "id": "host-face-WALL-READ-parents-bed-03",
-      "host_id": "WALL-READ-parents-bed-03",
-      "old": [
-        19.527,
-        -26.590999999999998,
-        0.0,
-        22.597,
-        -26.590999999999998,
-        2.8
-      ],
-      "new": [
-        19.527,
-        -26.577999999999996,
-        0.0,
-        22.597,
-        -26.577999999999996,
-        2.8
-      ],
-      "mm": 13.0
-    },
-    {
-      "id": "lamp-WALL-READ-parents-bed-03",
-      "host_id": "WALL-READ-parents-bed-03",
-      "old": [
-        20.89,
-        -26.521,
-        1.39,
-        21.01,
-        -26.401,
-        1.51
-      ],
-      "new": [
-        20.89,
-        -26.458,
-        1.39,
-        21.01,
-        -26.337999999999997,
-        1.51
-      ],
-      "mm": 63.0
-    },
-    {
-      "id": "bracket-WALL-READ-parents-bed-03",
-      "host_id": "WALL-READ-parents-bed-03",
-      "old": [
-        20.938,
-        -26.641,
-        1.438,
-        20.962,
-        -26.461,
-        1.462
-      ],
-      "new": [
-        20.938,
-        -26.577999999999996,
-        1.438,
-        20.962,
-        -26.397999999999996,
-        1.462
-      ],
-      "mm": 63.0
-    },
-    {
       "id": "host-face-VSCONCE-parents-ensuite-04",
       "host_id": "VSCONCE-parents-ensuite-04",
       "old": [
@@ -1218,6 +1092,128 @@
         1.62
       ],
       "mm": 23.0
+    }
+  ],
+  "retired_rows": [
+    {
+      "id": "host-face-WALL-READ-parents-bed-02",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        19.527,
+        -26.590999999999998,
+        0.0,
+        22.597,
+        -26.590999999999998,
+        2.8
+      ],
+      "new": [
+        19.527,
+        -26.577999999999996,
+        0.0,
+        22.597,
+        -26.577999999999996,
+        2.8
+      ]
+    },
+    {
+      "id": "lamp-WALL-READ-parents-bed-02",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        19.65,
+        -26.521,
+        1.39,
+        19.77,
+        -26.401,
+        1.51
+      ],
+      "new": [
+        19.65,
+        -26.458,
+        1.39,
+        19.77,
+        -26.337999999999997,
+        1.51
+      ]
+    },
+    {
+      "id": "bracket-WALL-READ-parents-bed-02",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        19.698,
+        -26.641,
+        1.438,
+        19.722,
+        -26.461,
+        1.462
+      ],
+      "new": [
+        19.698,
+        -26.577999999999996,
+        1.438,
+        19.722,
+        -26.397999999999996,
+        1.462
+      ]
+    },
+    {
+      "id": "host-face-WALL-READ-parents-bed-03",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        19.527,
+        -26.590999999999998,
+        0.0,
+        22.597,
+        -26.590999999999998,
+        2.8
+      ],
+      "new": [
+        19.527,
+        -26.577999999999996,
+        0.0,
+        22.597,
+        -26.577999999999996,
+        2.8
+      ]
+    },
+    {
+      "id": "lamp-WALL-READ-parents-bed-03",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        20.89,
+        -26.521,
+        1.39,
+        21.01,
+        -26.401,
+        1.51
+      ],
+      "new": [
+        20.89,
+        -26.458,
+        1.39,
+        21.01,
+        -26.337999999999997,
+        1.51
+      ]
+    },
+    {
+      "id": "bracket-WALL-READ-parents-bed-03",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the parents' reading lights are no longer wall-mounted on the old head wall; their arms are clamped to the head panel and host on it. These approvals bound them to the head wall at y -26.591 and are void.",
+      "old": [
+        20.938,
+        -26.641,
+        1.438,
+        20.962,
+        -26.461,
+        1.462
+      ],
+      "new": [
+        20.938,
+        -26.577999999999996,
+        1.438,
+        20.962,
+        -26.397999999999996,
+        1.462
+      ]
     }
   ]
 }

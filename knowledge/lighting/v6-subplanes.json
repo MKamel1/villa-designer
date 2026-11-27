@@ -4,8 +4,8 @@
   "e_hand": 93.3,
   "e_direct": 71.8,
   "e_indirect": 21.5,
-  "radiance": 102.1,
-  "ratio": 1.094,
+  "radiance": 102.2,
+  "ratio": 1.095,
   "rho": 0.681,
   "within_25_percent": true
  },
@@ -24,8 +24,8 @@
   "e_hand": 202.5,
   "e_direct": 182.0,
   "e_indirect": 20.4,
-  "radiance": 199.0,
-  "ratio": 0.983,
+  "radiance": 198.8,
+  "ratio": 0.982,
   "rho": 0.681,
   "within_25_percent": true
  }

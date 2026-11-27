@@ -183,7 +183,8 @@ def _door_operation(d) -> dict:
                      "direction not authored: swing squares kept clear on both sides" if op == "hinged" else "no swing"),
         leaf_width_mm=mm(d["width"]), structural_opening_mm=mm(d["width"] + 0.1),   # leaf + 50 mm frame each side
         clear_width_mm=mm(clear), clear_width_basis=basis,
-        leaf_count=d.get("leaf_count", 1 if op == "hinged" else None), garden=bool(d.get("garden")))
+        leaf_count=d.get("leaf_count", 1 if op == "hinged" else None), garden=bool(d.get("garden")),
+        self_closing=key in F.SELF_CLOSING)
 
 
 def wall_thick(wall_els, d) -> float:

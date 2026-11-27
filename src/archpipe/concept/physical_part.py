@@ -43,6 +43,8 @@ BOX_KINDS = {
     "shutter-housing": "A roller shutter box is a rectangular enclosure.",
     "door-track": "A straight pocket-door track has a rectangular extrusion envelope.",
     "curtain-track": "A straight curtain track has a rectangular extrusion envelope.",
+    "roller-blind": "A roller blackout cassette and its lowered fabric are straight rectangular sections (R3, client FINAL 2026-11-26). Fixed in the window reveal: "
+                    "no reveal host face is modelled, so the part is not a mounted site kind; its mounting is a stated limitation, not a pass.",
     "lamp-housing": "Linear pendants and battens have rectangular manufactured housings.",
     "light-diffuser": "A rectangular opal aperture panel is a closed physical substrate.",
 }
