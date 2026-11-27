@@ -182,9 +182,6 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
         clearance_any=(("left", "right"), 750),
     ),
     FurnitureType("bedside_table", "Bedside table", 500, 400, _c(), "ENVELOPE (no clearance of its own)"),
-    FurnitureType("bedside_ledge", "Floating bedside ledge with push-to-open drawer", 280, 300, _c(),
-        "ENVELOPE (no clearance of its own). Client 2026-11-25: slim bed-mounted headboard panel with a matched pair of floating "
-        "ledges, about 300 x 250 mm (here 280 wide, 250 beyond the 50 mm panel), top at mattress height, drawer about 80 mm, no handles, no legs"),
     FurnitureType("task_chair", "Derived task chair", 440, 450, _c(),
         "ASSUMED villa_furnish3d._chair footprint; access belongs to parent desk's mitton-desk-chair-access-864 card"),
     FurnitureType("vanity_chair", "Derived vanity chair", 440, 450, _c(),

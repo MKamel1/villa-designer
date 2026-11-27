@@ -33,7 +33,7 @@ class Snapshot(unittest.TestCase):
         self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
         self.assertEqual(k["luminaire"], 135)        # +3 PCOVE (ST39 cove round the ensuite bath feature panel, L4 round 5)
         self.assertEqual(k["plant"], 80)
-        self.assertEqual(k["furniture"], 79)       # includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
+        self.assertEqual(k["furniture"], 77)       # 79 less the two floating ledges (DF 2026-11-26: the joinery bed carries its own trays); includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
 
     def test_spec_kinds_equal_a_fresh_derivation(self):
         from archpipe.model import geometry_complete as GC

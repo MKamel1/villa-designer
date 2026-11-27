@@ -25,12 +25,13 @@ def save(path, value):
 raw = without_ids(load(folder / 'procedural-scene.json')); ctx = raw['authoring_room_context']
 fr = load(ROOT / 'knowledge/furniture-stage2.json.gz'); br = load(ROOT / 'knowledge/parents-bed.json.gz')
 comparisons = load(folder / 'room-comparisons-current-furniture.json'); joint = load(folder / 'combined-room-comparison.json')
-models = [dict(m, review_geometry=fr['geometry'][m['asset']]) for m in fr['models']] + br['models']
+retired = br.get('status') == 'retired'      # the imported parents' bed was replaced by joinery on 2026-11-26
+models = [dict(m, review_geometry=fr['geometry'][m['asset']]) for m in fr['models']] + ([] if retired else br['models'])
 if set(comparisons) != {m['label'] for m in models} or not joint['ok'] or not all(r['ok'] for r in comparisons.values()):
     raise SystemExit('complete passing fresh room reviews required')
 if any(r['findings'] for r in comparisons.values()) or joint['findings']:
     raise SystemExit('relative review has findings; refusing')
-furniture = models[:-1]; bed = deepcopy(br['models'])
+furniture = [m for m in models if m['role'] != 'bed']; bed = [] if retired else deepcopy(br['models'])
 inputs = room_context_inputs(raw, ctx['layout'], ctx['specification'], ctx['furniture'], furniture)
 for m in furniture:
     m['room_review'] = dict(ok=True, selection=review_selection(m), comparison=comparisons[m['label']]['comparison'],
@@ -40,11 +41,12 @@ fr.update(models=[{k: v for k, v in m.items() if k != 'review_geometry'} for m i
           room_context_components_sha256={k: digest(v) for k, v in inputs.items()})
 current = integrate(raw, furniture, ctx['layout'], ctx['specification'], ctx['furniture'], fr)
 sig = room_context(current, ctx['layout'], ctx['specification'], ctx['furniture'], bed)
-cloth = digest([c for c in raw['cloth'] if c['id'].startswith(('duvet-pb-bed', 'throw-pb-bed'))])
-print('cloth specs unchanged:', cloth == br['cloth_specs_sha256'])
-br.update(room_context_sha256=sig, combined_room_review_sha256=digest(joint), cloth_specs_sha256=cloth)
-br['room_review'] = dict(room_context_sha256=sig, selections=[bed_selection(m) for m in bed],
-                         baseline_cloth_sha256=digest(br['baseline_cloth']), review=comparisons[bed[0]['label']])
+if bed:
+    cloth = digest([c for c in raw['cloth'] if c['id'].startswith(('duvet-pb-bed', 'throw-pb-bed'))])
+    print('cloth specs unchanged:', cloth == br['cloth_specs_sha256'])
+    br.update(room_context_sha256=sig, combined_room_review_sha256=digest(joint), cloth_specs_sha256=cloth)
+    br['room_review'] = dict(room_context_sha256=sig, selections=[bed_selection(m) for m in bed],
+                             baseline_cloth_sha256=digest(br['baseline_cloth']), review=comparisons[bed[0]['label']])
 note = dict(reason='fixed-input change by approved G1 (stair overlap/infill/guards/cupboard/lounge door/core door swing), M (wall corners) '
             'the G1 store trim, and (INT2 2026-11-21) the L6b/L6c lighting fixtures + landing PATH marker hosts (all changed meshes are fix-/lens-/lamp-/marker-, 12/16 landing finish faces) and the ERCO recessed housing depth (26 fix-* meshes) and (INT2b) the lead-approved 12 mm finished-face move of marker-PATH-landing-gf-01/02 (meshes section only; evidence-int2/section-diff-approved-markers.json) and (SC2) wall-B-ext-16 raised 2.65 -> 2.80 m to the roof soffit (specification: walls[16].height only; architecture: 81 faces removed and 81 added, all inside the wall own footprint, 0 unexplained; evidence-sc2/) and (SC3) an infill appended to specification.infills closing the 150 mm slot above wall-B-ext-09 (specification: infills only; architecture: 0 faces removed, 46 added, all inside x 12.777..15.412, y -20.814..-20.601, z -0.35..-0.20, 0 unexplained; the dining pendant body/wire change no receipt section; evidence-sc3/); evidence knowledge/approvals-review/2026-11-ra2-b2.md',
             reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')

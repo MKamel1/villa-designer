@@ -128,8 +128,11 @@ class FurnishedBeds(unittest.TestCase):
         self.assertEqual({b['id']:(b['w'],b['d']) for b in beds},
                          {'pb-bed':(1.6,2.0),'kb-bed':(1.2,2.0),'ka-bunk':(.9,2.0),'library-daybed':(2.0,.95)})
         self.assertFalse(any(m['asset']==FROZEN['asset'] for m in self.scene['models']))
-        self.assertIn('actual mattress geometry required', ' '.join(self.scene['notes']))
+        self.assertIn('the parents\' bed is custom joinery', ' '.join(self.scene['notes']))
         for bed in beds:
+            if bed.get('joinery'):                       # designed joinery (2026-11-26), not a stand-in
+                self.assertFalse(any('fallback_label' in m for m in self.scene['meshes'] if m['id'].startswith('furn-pb-bed-')))
+                continue
             parts = [m for m in self.scene['meshes'] if m['id'].startswith('furn-'+bed['id']+'-')]
             self.assertTrue(parts, bed['id'])
             self.assertTrue(all('PROCEDURAL BED FALLBACK (stand-in)' in m['fallback_label'] for m in parts))

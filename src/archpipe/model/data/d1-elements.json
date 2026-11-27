@@ -44,7 +44,7 @@
   "door": 18,
   "fixture": 7,
   "floor": 30,
-  "furniture": 79,
+  "furniture": 77,
   "garden": 14,
   "luminaire": 135,
   "plant": 80,
@@ -53,7 +53,7 @@
   "slab": 6,
   "stair": 1,
   "storey": 5,
-  "type": 111,
+  "type": 110,
   "wall": 36,
   "window": 8
  },
@@ -12780,67 +12780,12 @@
    "finish_codes": [],
    "params": {
     "type": "bed_double",
-    "why": "queen 160 x 200 (answers), head on the dressing wall, east of the entry; 750 mm both sides and the foot",
+    "why": "joinery queen 1600 x 2000 (client), head on the dressing wall, east of the entry; 750 mm both sides and the foot; a hidden pull-out tray in each side rail, flush when closed",
     "extra": {
-     "headboard_m": 0.05,
-     "product_rejected": "real products available are king size (1.97-2.14 m); approved 0.35 m bedside arrangement kept"
+     "joinery": true
     },
     "size_basis": "authored in the furniture layout",
     "type_id": "type-furniture-bed_double---1600-2000-500"
-   }
-  },
-  {
-   "id": "furn-pb-ledge-w",
-   "kind": "furniture",
-   "level": "GF",
-   "placement": [
-    19390.0,
-    -26441.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    280.0,
-    300.0,
-    525.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "",
-   "finish_codes": [],
-   "params": {
-    "type": "bedside_ledge",
-    "why": "floating west ledge cantilevered from the bed-mounted headboard panel, top at the mattress top, 80 mm push-to-open drawer, no handles, no legs (client 2026-11-25)",
-    "extra": {},
-    "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-bedside_ledge---280-300-525"
-   }
-  },
-  {
-   "id": "furn-pb-ledge-e",
-   "kind": "furniture",
-   "level": "GF",
-   "placement": [
-    21270.0,
-    -26441.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    280.0,
-    300.0,
-    525.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "",
-   "finish_codes": [],
-   "params": {
-    "type": "bedside_ledge",
-    "why": "floating east ledge cantilevered from the bed-mounted headboard panel, top at the mattress top, 80 mm push-to-open drawer, no handles, no legs (client 2026-11-25)",
-    "extra": {},
-    "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-bedside_ledge---280-300-525"
    }
   },
   {
@@ -30898,46 +30843,6 @@
      1600.0,
      2000.0,
      500.0
-    ],
-    "basis": "elements of one kind with identical shared parameters, size and product share one type"
-   }
-  },
-  {
-   "id": "type-furniture-bedside_ledge---280-300-525",
-   "kind": "type",
-   "level": "SITE",
-   "placement": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    280.0,
-    300.0,
-    525.0
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "",
-   "finish_codes": [],
-   "params": {
-    "for_kind": "furniture",
-    "shared": {
-     "type": "bedside_ledge"
-    },
-    "occurrences": 2,
-    "occurrence_ids": [
-     "furn-pb-ledge-w",
-     "furn-pb-ledge-e"
-    ],
-    "key": [
-     "furniture",
-     "bedside_ledge",
-     "-",
-     280.0,
-     300.0,
-     525.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }

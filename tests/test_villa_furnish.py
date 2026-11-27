@@ -98,8 +98,7 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
             self.assertFalse(by_id[mark].get("product_rejected"))
         self.assertIn("914 mm pantry and yard routes", by_id["lounge-sofa"]["product_rejected"])
         self.assertEqual(by_id["cinema-sofa"]["product_rejected"], "product too long for the cinema width")
-        self.assertEqual(by_id["pb-bed"]["product_rejected"],
-                         "real products available are king size (1.97-2.14 m); approved 0.35 m bedside arrangement kept")
+        self.assertNotIn("product", by_id["pb-bed"])          # the parents' bed is custom joinery (client 2026-11-26), not a library product
         self.assertTrue(all(row["status"] == "pass" for row in F.check(items).values()))
 
     def test_three_recliners_close_the_store(self):
@@ -118,7 +117,9 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertEqual(res["clearances"]["status"], "fail")
 
     def test_bedside_table_outside_zone_a_is_refused(self):
-        res = _run(lambda items, ids: ids["pb-ledge-e"].update(cy=ids["pb-ledge-e"]["cy"] + 0.9))  # along the bed
+        # the bed carries its own trays now: a loose bedside table 0.9 m down the side is the real case (guard l0017)
+        res = _run(lambda items, ids: items.append(dict(ids["pb-bed"], id="pb-bedside", type="bedside_table", cx=21.305, cy=-25.491,
+                                                         w=0.35, d=0.4, h=0.55, joinery=False)))
         self.assertTrue(any("pb-bed" in p for p in res["clearances"]["problems"]))
 
     def test_bedside_table_in_zone_a_is_allowed(self):

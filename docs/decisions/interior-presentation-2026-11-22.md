@@ -74,6 +74,7 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
   - a hidden tray-drawer in each side rail at mattress height that slides out when used and sits flush when closed.
 
   Nothing may project at the entry or the dressing door. The bed position and the 0.75 m foot route are unchanged.
+- **2026-11-26 applied (lane DF round 4):** both ledges removed; the imported bed is retired and replaced by a custom joinery queen bed (mattress 1600 x 2000, bed unmoved; 50 mm walnut-and-upholstery headboard; a push-to-open tray in each side rail, Blum MOVENTO 760H NL 270 with TIP-ON as the runner basis). Closed: nothing beyond the bed footprint. Trays out 0.25 m: route entry -> dressing door 0.766 m (0.75 required), west passage 0.803 m, dressing approach 1.000 m. One honest shortfall: the tray rim is the deck, 0.19 m below the mattress top, because the runner lives under the mattress. Detail and measurements: `docs/lanes/DF.md` round 4.
 - **2026-11-26 fallback (client):** if the side-rail pull-out trays cannot meet the clearances when open, use a fold-up bedside surface instead:
   - stowed under the mattress edge, so nothing projects when closed;
   - lifted or pulled up to mattress height when needed;
