@@ -466,6 +466,11 @@ lanes:
     - tests/test_villa_render*.py
     - docs/lanes/SOFT*.md
     - docs/lessons/SOFT.md
+  PV: # villa-wide privacy audit (study only)
+    - docs/lanes/PV*.md
+    - docs/lessons/PV.md
+    - knowledge/privacy/**
+    - scripts/pv_*.py
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
