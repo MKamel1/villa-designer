@@ -3112,3 +3112,12 @@ Walkthrough full-size source-appearance checkpoint, 2026-10-16 (OPEN):
 * `approved-rows-bind-ids-and-hosts`: three approval files (`c4-bc`, `c4-e`, and the marker rows) are keyed by fixture id and host. Moving the reading lights off the head wall and the slats onto the west wall voided their rows (retired in place, listed under `retired_rows`); trimming the corridor's WW row would have renumbered `marker-PATH-corridor-07..09`, so the row keeps its old extent and WW-corridor-06 stands in the vestibule (still labelled `corridor`).
 * `desk-cluster-inside-a-window` (guard: EA1 in `tests/electrical`): a vanity under a window put its 1100 mm data/socket cluster into the glass and the engine slid or dropped it (EA1 fail: missing data). The cluster drops to 800 mm under the sill.
 * `door-leaf-hinge-does-not-change-the-open-view`: the suite door's hinge side (north or south) shows the same corridor-to-bedroom exposure with the leaf at 90 degrees along a side wall; **the leaf WIDTH does**: a 0.90 leaf (1.00 opening) shows 31 of 1092 bedroom points to the corridor, a 0.80 leaf shows 0 (`scripts/df_suite_door_choice.py`).
+
+
+## root-tests-gate-gap (2026-11-27, lane FIXR)
+
+**Defect.** Four root tests failed on `integ/aplus` unseen: the ensuite bar flux (zone-driver 0.7 -> 0.5, 37d0b63), the finish register (marble/brass ensuite names added by b3f13f4), `prepare_view` rewriting `layers_on`/`hide_meshes` without an audit chain (LG), and the two GI dusk key views cloning `v07-terrace-dusk` together with its `presentation_retired` flag.
+**Why missed.** The merge gate ran a subset of `tests/test_*.py`; lanes ran only their own suites (LANES.md rule 6), so cross-lane effects on root tests surfaced nowhere.
+**Guard.** The gate now runs ALL `tests/test_*.py`. Code fixes also leave guards: `override()` records every `layers_on`/`hide_meshes` change; clones in `key_views` drop the template's retirement flag (`test_garden_views` retirement set is the check). Expectation changes cite the commit/decision that moved them.
+
+Addendum (FIXR): the first all-root run also showed `villa_furnish_room_route_connectivity` (guard_registry) no longer firing: its real-case mutation (`ka-wardrobe` cx 13.4) stopped severing a route once the kids-A layout moved. Re-aimed to cy -26.0, which fails with 'ka-desk-2 not reached by a 750 mm path'. A guard built on a position-specific mutation decays when the layout moves; the all-root-tests gate is what catches it.

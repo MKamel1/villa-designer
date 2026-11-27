@@ -471,6 +471,13 @@ lanes:
     - docs/lessons/PV.md
     - knowledge/privacy/**
     - scripts/pv_*.py
+  FIXR: # root-test repairs (the lead gate did not run every root test)
+    - tests/test_fixture_record_phase2.py
+    - tests/test_garden_g6b.py
+    - tests/test_garden_views.py
+    - tests/test_authored_values.py
+    - docs/lanes/FIXR*.md
+    - docs/lessons/FIXR.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md

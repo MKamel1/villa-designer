@@ -419,9 +419,12 @@ def uncleared(views):
 def prepare_view(view, g):
     """Hide the other season's and the other state's meshes in this view; for a garden view drop the authored old-garden subject lists and name the garden objects in frame."""
     hid = view_hides(g["meshes"] + g["props"], season_for(view["when"]), view.get("ld_state", "closed"))
-    view["hide_meshes"] = list(dict.fromkeys(list(view.get("hide_meshes", [])) + hid))
+    from ...concept.authored_values import override
+    view.setdefault("hide_meshes", [])
+    override(view, "hide_meshes", list(dict.fromkeys(view["hide_meshes"] + hid)), "GI: hide the other season's and the other state's garden meshes in this view")
     if view.get("state") in DUSK_STATES and is_garden_view(view) and "evening-garden" not in view.get("layers_on", []):
-        view["layers_on"] = list(view.get("layers_on", [])) + ["evening-garden"]      # lane LG: the garden's lights are on in every garden view at dusk
+        view.setdefault("layers_on", [])
+        override(view, "layers_on", view["layers_on"] + ["evening-garden"], "lane LG: the garden's lights are on in every garden view at dusk")
     if not is_garden_view(view):
         return
     if view["camera"]["position"][2] < -0.5:
@@ -468,6 +471,8 @@ def key_views(base_views):
     for vid, k in KEY_VIEWS.items():
         v = copy.deepcopy(tpls[k.get("tpl", "v41-south-garden-terrace")])
         v.update(id=vid, title=k["title"], final_only=False)
+        for stale in ("presentation_retired", "presentation_decision", "overrides"):
+            v.pop(stale, None)   # a clone is a NEW client-decided camera: the template's retirement (old-garden v07 clipping, Lead 2026-10-07) and its audit chain are about that other camera
         v["camera"] = dict(position=k["position"], target=k["target"], lens_mm=24, sensor_mm=36, shift_x=0.0, shift_y=k["shift_y"])
         v["samples"] = 1024
         if k.get("when"):
