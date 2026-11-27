@@ -425,6 +425,9 @@ def add_material(name, spec, library_root, warnings):
         nt.links.new(height, bump.inputs['Height'])
         nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
         mat['mineral_pattern_scale_m'] = size
+    if spec.get("fabric_class"):                # lane SOFT: soft-goods fabric finish (sheen, fuzz, mm-scaled weave)
+        from archpipe.blender import fabric_nodes
+        fabric_nodes.finish_fabric(mat, spec)
     if spec.get("garden_look"):                 # lane GI: procedural finishes of the decided garden (water, liner, leaf cut-outs, matte stand-ins, weathered render)
         from archpipe.blender import garden_ldb
         garden_ldb.apply_look(mat, spec)
@@ -2023,6 +2026,14 @@ def render(scene_data, args):
     if needs_scene_admission(scene_data):
         require_scene(scene_data)
     os.makedirs(args.out, exist_ok=True)
+    # lane SOFT: baked cloth cushions, inflated upholstery, fabric finish. Not in the measuring modes: the dominant-light
+    # record's transport digest is taken from scene_data, which softening mutates (a record measured on softened geometry
+    # no longer matched the authored scene: "Stale dominant-light rule or transport measurement", SOFT-rebuild-1).
+    if not (args.no_soft or args.measure_exposure_groups or args.measure_lighting or args.calibrate):
+        from archpipe.blender import soft_goods
+        soft_report = soft_goods.soften_scene(scene_data)
+        print("soft goods:", soft_report)
+        soft_goods.assert_soft_goods_real(scene_data)
     if args.views == "none" and not (args.calibrate or args.measure_lighting or args.measure_exposure_groups):
         raise ValueError("--views none requires --calibrate or --measure-lighting")
     if args.views == "none" and args.calibrate:
@@ -2256,6 +2267,7 @@ def main():
     ap.add_argument("--samples", type=int)
     ap.add_argument("--res", type=lambda s: [int(v) for v in s.lower().split("x")])
     ap.add_argument("--cpu", action="store_true")
+    ap.add_argument("--no-soft", action="store_true", help="render the rigid soft goods (before/after comparison only)")
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
     ap.add_argument("--measure-exposure-groups", action="store_true")
