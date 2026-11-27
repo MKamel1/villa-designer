@@ -78,3 +78,4 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
   - stowed under the mattress edge, so nothing projects when closed;
   - lifted or pulled up to mattress height when needed;
   - concealed hinge or stay hardware from a real maker.
+- **2026-11-26 (client):** the pull-out trays are kept as built (tray rim 0.19 m below the mattress top). The lift-up tray-top that would raise it to mattress height is deferred ("skip for now"); reopen it only if the client asks.
