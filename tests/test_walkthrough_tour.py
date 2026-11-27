@@ -25,7 +25,9 @@ class Tour(unittest.TestCase):
         self.assertEqual(WT.coverage_findings(self.frames, hubs), [])
         prune = json.loads((WT.ROOT/'knowledge/flythrough/tour-prune.json').read_text())
         shares = {k: v['share'] for k, v in prune['room_coverage'].items() if v['share'] is not None}
-        self.assertEqual(len(shares), 28)                                  # every room that has surface to show (parents-entry and the dressing strip have none)
+        self.assertEqual(len(shares), 29)                                  # every room that has surface to show (the dressing strip and the 1.05 m suite vestibule have none; parents-entry has 1.5 m2)
+        self.assertIn('suite-vestibule', {f['room'] for f in self.frames})          # the walk to the parents' suite passes through the vestibule (DF, 2026-11-26)
+        self.assertIn('parents-dressing', {f['room'] for f in self.frames})
         self.assertGreaterEqual(min(shares.values()), .8)                  # each room's coverable surface is shown at least this far by the whole route
         self.assertEqual({'stair-b', 'stair-gf'}, set(WT.tour_route()['transit_rooms']))
         self.assertFalse({'stair-b', 'stair-gf'} & {s['room'].split('~')[0] for s in self.path['stations'] if s['room']})

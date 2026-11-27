@@ -12,7 +12,7 @@ from archpipe.flyaudit import audit, core
 
 def reveal(plan, door, feature, first=0, last=None, scene=None, step=1):
     R = audit.load_route(plan); frames = R['frames']; th = core.thresholds()
-    geom = audit.geometry_for(scene or ROOT/'out/wt/villa8/scene.json', ROOT/'out/flyaudit'); et = core.element_table(geom)
+    geom = audit.geometry_for(scene or ROOT/__import__('os').environ.get('SCENE','out/wt/villa8/scene.json'), ROOT/'out/flyaudit'); et = core.element_table(geom)
     geom = geom.animate(R['door_anim']); names = geom.elem_names
     i = next(k for k, n in enumerate(names) if n == feature)
     tri = np.flatnonzero(geom.elem == i); pts = geom.tris[np.random.default_rng(0).choice(tri, min(12, len(tri)), replace=False)].mean(1).astype(np.float64)

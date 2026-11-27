@@ -164,9 +164,11 @@ class Route(unittest.TestCase):
         from wt_plan import vmap
         cls.layout, cls.spec, cls.vm = vmap(); cls.path = WT.plan_tour(cls.vm); cls.spec_doors = WT.tour_doors()
 
-    def test_the_client_example_is_animated_the_parents_dressing_wardrobe_behind_its_door(self):
+    def test_the_ensuite_basin_and_the_family_bath_wc_are_revealed_by_their_animated_doors(self):
+        # revision 8: the suite change moved the dressing door, so the dressing wardrobe (pd-hang-2) is no longer hidden by its leaf; the ensuite door now hides the basin and its vanity strip
         doors = {d['record']['element']: d for d in self.spec_doors['doors']}
-        self.assertIn('furn-pd-hang-2', doors['door-GF-parents-dressing-ext-parents-ensuite']['features'])
+        self.assertIn('furn-pe-basin', doors['door-GF-parents-dressing-ext-parents-ensuite']['features'])
+        self.assertIn('furn-fb-wc', doors['door-GF-gallery-end-family-bath']['features'])      # the family-bath reveal (client, 2026-11-25), restored in revision 8
         self.assertEqual({r['element'] for r in self.path['door_anim']}, set(doors))
 
     def test_every_animated_leaf_starts_and_ends_open_closes_fully_and_holds(self):
@@ -183,7 +185,7 @@ class Route(unittest.TestCase):
             entry = sch['close_end']
             while entry > 0 and fr[entry-1]['room'] == fr[sch['close_end']]['room']: entry -= 1
             self.assertGreater(sch['close_start'], entry)                                   # the camera is already in the room
-            leave = next(f['index'] for f in fr[sch['close_end']:] if f['phase'] == 'walk')
+            leave = next((f['index'] for f in fr[sch['close_end']:] if f['phase'] == 'walk'), len(fr)-1)      # the route may end in the room: the leaf is open by the last frame
             self.assertLessEqual(sch['open_end'], leave)
 
     def test_the_camera_keeps_clear_of_every_leaf_in_every_frame_of_the_animation(self):
