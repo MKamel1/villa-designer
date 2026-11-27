@@ -74,16 +74,16 @@ Keep the door at x 21.497–22.297 but make it a flush slat-clad (jib) door, so 
 |---|---|---|---|---|---|---|
 | Door clear opening | 800 head wall | **630 (fails 750)** | 780 | 800 | 800 out-swing | 780 + 800 |
 | Entry → bed (W side) | 1.71 | 1.72 | 1.72 | 2.09 | 1.72 | 1.72 |
-| Entry → dressing | **9.19** (800) | 2.36 (**630**) | **2.32** (756) | 3.80 (800) | 2.35 (782) | 2.33 (760) |
-| Entry → ensuite | 9.55 | 3.47 | 3.49 | 4.98 | 3.51 | 3.50 |
-| Bed W side → ensuite (night) | 7.84 | 4.45 (630) | **4.62** | 4.00 | 5.20 | 4.63 |
-| Bed E side → ensuite (night) | **3.07** | 9.03 (630) | **9.39** | no 750 route (0.37) | 9.95 | **3.04** |
+| Entry → dressing | **9.19** (800) | 2.38 (**630**) | **2.32** (756) | 3.80 (800) | 2.35 (782) | 2.33 (760) |
+| Entry → ensuite | 9.55 | 3.49 | 3.49 | 4.98 | 3.51 | 3.50 |
+| Bed W side → ensuite (night) | 7.84 | 4.47 (630) | **4.62** | 4.00 | 5.20 | 4.63 |
+| Bed E side → ensuite (night) | **3.07** | 9.05 (630) | **9.39** | no 750 route (0.37) | 9.95 | **3.04** |
 | Bed on a solid head wall, slat wall whole | no (door) | yes, 2.87 m | yes, 2.87 m | no, door at the end | yes, 2.87 m | yes if the door is flush-clad |
 | Bed position (x) | 19.53–21.13, off centre | 19.637–21.237 centred | 19.637–21.237 centred | 20.427–22.027, forced | 19.637–21.237 centred | 19.637–21.237 centred |
 | Bedsides W / E (needs 750) | 1053 / 1267 | 1160 / 1160 | 1160 / 1160 | 1950 / **370** | 1160 / 1160 | 1160 / 1160 |
 | Both trays out 250: W / E | 803 / 1017 | 910 / 910 | **910 / 910** | 1700 / **120** | 910 / 910 | 910 / 910 |
 | Foot (needs 750) | 800 | 800 | 800 | 800 | 800 | 800 |
-| Hers hanging run / rail (today 1.72 / 1.10) | 1.72 / 1.10 | 1.95 / 1.33 | **2.04 / 1.42** | 1.87 / 1.25 | 2.72 / 2.10 | 1.04 / 0.42 |
+| Hers hanging run / rail (today 1.72 / 1.10) | 1.72 / 1.10 | 2.02 / 1.40 | **2.04 / 1.42** | 1.87 / 1.25 | 2.72 / 2.10 | 1.04 / 0.42 |
 | His hanging | 1.346 | same | same | same | same | same |
 | What is lost | short night route east side | fails 750 | night route east side 3.07→9.39; corridor end 1.05→0.90; 1 wall moved | the bed, both-sides access, whole slat wall | suite privacy, night route via the corridor | 0.68 m of rail; lobby wall move |
 Hanging rail = run less the drawers and hat shelf (0.62 m) kept in the run. Today's route widths are limited by the 0.80 m foot passage (matches `docs/lanes/DF.md`: 0.78 with the tucked chair).
