@@ -57,3 +57,9 @@ The client watched the first whole-villa preview (lane WT, out/wt/villa3/preview
   - re-aim the study turn and the curtain and column close-ups;
   - in corridors, look down the corridor's length instead of at the side wall.
 - **Doors that hide features:** in some rooms the open door leaf blocks features behind it. Where the audit shows a feature blocked by a door leaf, ANIMATE the door: enter, then close the leaf smoothly (eased, realistic speed) so the camera can see what was behind it, then open it again before leaving. The door is animated, never hidden or removed. Its geometry and hinge side come from the model, and the path's clearance must hold during the animation.
+
+## Final-render frame rate (client, 2026-11-26): deferred
+- Decide at the final 1080p stage, not now.
+- Lead's proposal for then: 24 fps with motion blur, compared with 30 fps on a ~20-frame pilot that includes a 360 turn.
+- Estimated final GPU time: ~25–47 h at 24 fps, about 25 % more at 30 fps.
+- Previews stay as they are.
