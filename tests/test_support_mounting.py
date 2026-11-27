@@ -81,8 +81,9 @@ class SupportMounting(unittest.TestCase):
         for row in proposal['mounting_movements']:
             if row['approval']=='PENDING':by[row['id']]['faces']=row['proposed_faces']
         proposed_findings=scene_findings(proposal)
-        self.assertEqual(len(proposed_findings),3)
-        self.assertIn('detail-headboard-slats: MISSING finite host coverage at fixing footprint',proposed_findings)
+        # R3 (2026-11-26): the slat feature is on the west wall with re-created approval rows (c4-e); its finite host coverage is no longer a pending finding
+        self.assertEqual(len(proposed_findings),2)
+        self.assertNotIn('detail-headboard-slats: MISSING finite host coverage at fixing footprint',proposed_findings)
         self.assertEqual(sum('associated assembly body penetrates' in f for f in proposed_findings),2)
 
     def test_generated_child_cannot_invent_floor_support_and_generalises(self):
