@@ -420,8 +420,8 @@ def _layout(lay=None, products=True):
     # -- dressing: hanging on both long walls
     PD = r["parents-dressing"]
     add(against("pd-hang-1", PD, "y1", VP.DRESSING_DOOR_X + 0.5, "wardrobe", w=1.87, d=0.6,
-                h=2.3, partner="hers", modules=[("hat-shelf", 0.20), ("drawers", 0.42),
-                    ("double-hang", 0.60), ("long-hang", 0.65)],
+                h=2.3, partner="hers", modules=[("long-hang", 0.65), ("double-hang", 0.60),
+                    ("drawers", 0.42), ("hat-shelf", 0.20)],     # list order = from the EAST end (the wardrobe faces -y, rot 180); from the new door (west): HS, DR, DH, LH
                 drawers=["lingerie", "headscarves", "pyjamas", "sleepwear"],
                 top_boxes_above=2.1, hanger_storage=True,
                 why="hers: 1.87 m of hanging on the freed head wall, from the new dressing door's jamb to the east wall (client R3); "

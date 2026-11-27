@@ -188,7 +188,7 @@ def test_d1_uses_the_real_l6b_lighting_zones(d1):
     h = d1["house"]
     pub = json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))["zones"]
     assert not h.provisional_zones and not any(z.id.startswith("Z-PROV") for z in h.zones)
-    assert {z.id for z in h.zones} == {z["id"] for z in pub} and len(h.zones) == 71
+    assert {z.id for z in h.zones} == {z["id"] for z in pub} and len(h.zones) == 72
     assert any("lighting zones from knowledge/lighting/zones-d1.json" in f for f in h.flags) and not any("PROVISIONAL" in f for f in h.flags)
     # published zones never lose watts (sized on rated W where the commissioned W is lower)
     assert all(z.watts >= p["watts"] - 1e-6 for z, p in zip(sorted(h.zones, key=lambda z: z.id), sorted(pub, key=lambda z: z["id"])))

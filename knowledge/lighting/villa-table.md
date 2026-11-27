@@ -1,12 +1,12 @@
 | room | plane | card lx | scene | before Em (x target) | before U0 | after Em | after Emin | after U0 | x target | LA1 | LA2 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| bar-alcove | daybed | 200 | Reading | 812 (4.1x) | 0.59 | 199 | 27 | 0.13 | 0.99 | pass | pass |
+| bar-alcove | daybed | 200 | Reading | 812 (4.1x) | 0.59 | 199 | 26 | 0.13 | 0.99 | pass | pass |
 | cinema | cinema-desk | 400 | Day | 874 (2.2x) | 0.69 | 401 | 256 | 0.64 | 1.00 | pass | pass |
 | cinema | room-cinema | 20 (min) | Day | 172 (8.6x) | 0.14 | 176 | 44 | 0.25 | 8.82 | pass | n/a |
 | corridor | room-corridor | 30 (min) | Day | 176 (5.9x) | 0.83 | 106 | 56 | 0.53 | 3.53 | pass | n/a |
 | dining | dining-table | 100 | Dinner | 858 (8.6x) | 0.43 | 102 | 56 | 0.55 | 1.02 | pass | pass |
 | dining | homework-end | 200 | Day | 641 (3.2x) | 0.48 | 201 | 105 | 0.52 | 1.00 | pass | pass |
-| dirty-kitchen | dirty-kitchen-run | 500 | Day | 958 (1.9x) | 0.61 | 498 | 428 | 0.86 | 1.00 | pass | pass |
+| dirty-kitchen | dirty-kitchen-run | 500 | Day | 958 (1.9x) | 0.61 | 497 | 428 | 0.86 | 0.99 | pass | pass |
 | dirty-kitchen | room-dirty-kitchen | 200 (min) | Day | 634 (3.2x) | 0.16 | 472 | 200 | 0.42 | 2.36 | pass | n/a |
 | family | room-family | 100 (min) | Day | 499 (5.0x) | 0.53 | 283 | 140 | 0.50 | 2.83 | pass | n/a |
 | family-bath | fb-basin | 300 | Day | 1491 (5.0x) | 0.88 | 301 | 239 | 0.79 | 1.00 | pass | pass |
@@ -14,9 +14,9 @@
 | guest-wc | gwc-basin | 300 | Day | 1324 (4.4x) | 0.80 | 300 | 244 | 0.81 | 1.00 | pass | pass |
 | guest-wc | room-guest-wc | 50 (min) | Day | 325 (6.5x) | 0.25 | 215 | 144 | 0.67 | 4.29 | pass | n/a |
 | hall-b | room-hall-b | 30 (min) | Day | 510 (17.0x) | 0.73 | 263 | 195 | 0.74 | 8.77 | pass | n/a |
-| kids-a | ka-desk-1 | 400 | Day | 513 (1.3x) | 0.27 | 431 | 234 | 0.54 | 1.08 | pass | pass |
-| kids-a | ka-desk-2 | 400 | Day | 517 (1.3x) | 0.29 | 364 | 247 | 0.68 | 0.91 | pass | pass |
-| kids-a | room-kids-a | 50 (min) | Day | 198 (4.0x) | 0.17 | 182 | 62 | 0.34 | 3.65 | pass | n/a |
+| kids-a | ka-desk-1 | 400 | Day | 513 (1.3x) | 0.27 | 363 | 242 | 0.67 | 0.91 | pass | pass |
+| kids-a | ka-desk-2 | 400 | Day | 517 (1.3x) | 0.29 | 379 | 240 | 0.63 | 0.95 | pass | pass |
+| kids-a | room-kids-a | 50 (min) | Day | 198 (4.0x) | 0.17 | 188 | 47 | 0.25 | 3.75 | pass | n/a |
 | kids-b | kb-desk | 400 | Day | 466 (1.2x) | 0.24 | 423 | 227 | 0.54 | 1.06 | pass | pass |
 | kids-b | room-kids-b | 50 (min) | Day | 165 (3.3x) | 0.15 | 136 | 33 | 0.24 | 2.71 | pass | n/a |
 | kitchen | cooktop | 300 | Cook | 1284 (4.3x) | 0.87 | 325 | 303 | 0.93 | 1.08 | pass | pass |
@@ -25,19 +25,19 @@
 | kitchen | room-kitchen | 50 (min) | Day | 928 (18.6x) | 0.17 | 167 | 62 | 0.37 | 3.34 | pass | n/a |
 | kitchen | sink | 300 | Cook | 1229 (4.1x) | 0.69 | 301 | 209 | 0.70 | 1.00 | pass | pass |
 | kitchen-island | room-kitchen-island | 50 (min) | Day | 442 (8.8x) | 0.68 | 294 | 263 | 0.89 | 5.88 | pass | n/a |
-| living | room-living | 30 (min) | Day | 337 (11.2x) | 0.45 | 134 | 55 | 0.41 | 4.45 | pass | n/a |
+| living | room-living | 30 (min) | Day | 337 (11.2x) | 0.45 | 134 | 55 | 0.42 | 4.45 | pass | n/a |
 | lounge | armchair | 200 | Reading | 893 (4.5x) | 0.59 | 201 | 149 | 0.74 | 1.00 | pass | pass |
 | lounge | room-lounge | 100 (min) | Day | 400 (4.0x) | 0.56 | 221 | 125 | 0.56 | 2.21 | pass | n/a |
 | pantry | room-pantry | 50 (min) | Day | 331 (6.6x) | 0.88 | 199 | 179 | 0.90 | 3.98 | pass | n/a |
 | parents-bed | pillow-1 | 200 | Reading | 902 (4.5x) | 0.76 | 248 | 60 | 0.24 | 1.24 | FAIL | pass |
-| parents-bed | pillow-2 | 200 | Reading | 899 (4.5x) | 0.76 | 243 | 58 | 0.24 | 1.22 | FAIL | pass |
-| parents-bed | room-parents-bed | 50 (min) | Day | 208 (4.2x) | 0.05 | 216 | 76 | 0.35 | 4.32 | pass | n/a |
-| parents-dressing | room-parents-dressing | 100 (min) | Day | 355 (3.5x) | 0.60 | 397 | 323 | 0.81 | 3.97 | pass | n/a |
+| parents-bed | pillow-2 | 200 | Reading | 899 (4.5x) | 0.76 | 243 | 58 | 0.24 | 1.21 | FAIL | pass |
+| parents-bed | room-parents-bed | 50 (min) | Day | 208 (4.2x) | 0.05 | 216 | 78 | 0.36 | 4.33 | pass | n/a |
+| parents-dressing | room-parents-dressing | 100 (min) | Day | 355 (3.5x) | 0.60 | 397 | 323 | 0.82 | 3.97 | pass | n/a |
 | parents-ensuite | pe-basin | 300 | Day | 658 (2.2x) | 0.82 | 302 | 267 | 0.88 | 1.01 | pass | pass |
 | parents-ensuite | room-parents-ensuite | 50 (min) | Day | 131 (2.6x) | 0.41 | 189 | 138 | 0.73 | 3.78 | pass | n/a |
-| parents-entry | room-parents-entry | 30 (min) | Day | - | - | 109 | 91 | 0.84 | 3.63 | pass | n/a |
+| parents-entry | room-parents-entry | 30 (min) | Day | - | - | 109 | 87 | 0.79 | 3.65 | pass | n/a |
 | store-ramp | room-store-ramp | 50 (min) | Day | 119 (2.4x) | 0.50 | 180 | 112 | 0.62 | 3.59 | pass | n/a |
-| study-game | room-study-game | 6 (min) | Day | 523 (87.2x) | 0.20 | 306 | 146 | 0.48 | 51.00 | pass | n/a |
+| study-game | room-study-game | 6 (min) | Day | 523 (87.2x) | 0.20 | 306 | 146 | 0.48 | 50.99 | pass | n/a |
 | study-game | study-adult-desk | 400 | Day | 800 (2.0x) | 0.33 | 398 | 304 | 0.76 | 0.99 | pass | pass |
 | study-game | study-desk | 400 | Day | 979 (2.4x) | 0.52 | 400 | 323 | 0.81 | 1.00 | pass | pass |
 | suite-vestibule | room-suite-vestibule | 30 (min) | Day | - | - | 265 | 240 | 0.91 | 8.84 | pass | n/a |

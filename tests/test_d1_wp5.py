@@ -43,7 +43,7 @@ def readback():
 class NativeDetails(unittest.TestCase):
     def test_approved_input_fields_reach_the_revit_payload(self):
         dressing = next(d for d in SPEC["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"})
-        self.assertAlmostEqual(dressing["x"], 21.897)
+        self.assertAlmostEqual(dressing["x"], 19.977)     # R3 (client FINAL 2026-11-26): the dressing door moved to the lobby end of the head wall (was 21.897)
         self.assertAlmostEqual(dressing["width"], 0.8)
         study = [w for w in SPEC["windows"] if w.get("room") == "study-game"]
         self.assertEqual(len(study), 2)

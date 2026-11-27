@@ -59,3 +59,14 @@ All are benchmarks, not code compliance (no jurisdiction pack). Kids-b's door (c
 * Approval rows voided and retired in place (`retired_rows`): six `WALL-READ-parents-bed` rows in `c4-bc-approvals.json` and the `detail-headboard-slats` rows in `c4-e-lead-approvals.json`.
 * The imported vanity model's stored position moved with the item (receipt `furniture-stage2`, `neutral_review.selection.position`); the neutral image approval is **retained, not repeated**.
 * The exposure record is measured on the GPU: `exposure_groups.require_record` refuses a CPU-measured record ("GPU evidence differ"), whatever the instruction to use the CPU. Renders on the GPU through jobq.
+
+## For lane WT (route data): what changed in the parents' suite
+Re-plan the route after merging this branch; the walkthrough inputs that moved (model metres; client north = -x, east = +y):
+* **New room** `suite-vestibule` (clear x 17.50..19.477, y -28.471..-27.421), no longer part of `corridor` (the corridor now ends at x 17.40). Both are GF.
+* **New wall** x 17.45 (y -28.671..-27.371, 100 mm) and **new door** `door-GF-corridor-suite-vestibule` at (17.45, -27.931): 0.80 leaf, opening 0.90 (y -28.381..-27.481), hinged on the north jamb (see the element's `hinge_xy_mm`), swings into the vestibule, **self-closing**. The door is the way into the suite from the corridor; the corridor end past kids-b is private.
+* **Door renamed**: `door-GF-corridor-parents-entry` is now `door-GF-suite-vestibule-parents-entry` (pocket, 0.90, same position x 18.977, y -27.371); its approach starts in the vestibule.
+* **Dressing door moved** from (21.897, -26.641) to **(19.977, -26.641)**, opening x 19.577..20.377, hinged at x 20.377, swings south into the dressing room. The old position is a solid wall. Route from the lobby to the dressing room is ~1 m (door to door 0.849 m clear, dressing door approach 0.988 m).
+* **Bed turned** (head at y -23.791, centre x 20.437, footprint x 19.637..21.237, y -25.791..-23.791); passages: west 1.16 m, east 1.16 m (0.76 m at the vanity), foot 0.80 m. **Vanity** now y -26.2..-25.2 (x 21.997..22.397). **Hers** x 20.477..22.347 on the head wall (y -26.691..-27.291). **New cabinet** `sv-store` x 17.65..19.35, y -28.471..-28.341.
+* **Curtains**: the window wall (`curtain-parents-bed-01`) has fixed side drapes on the piers (heavy leaves only, no sheer, no closed leaf) and a roller blackout in the reveal; `CURTAIN_PARK` is empty. `knowledge/flythrough/evaluated-obstacles.json` was re-measured for the duvet, throw and both parents' curtains (old imported-bed boxes and the old sheers removed).
+* **Privacy**: the walkthrough must not stop or pause on a line of sight into the dressing room from the corridor; with the suite door closed or open there is none (`archpipe.model.suite_privacy`).
+* Ids: lights `WW-suite-vestibule-01`, `DL-suite-vestibule-02`; element `room-suite-vestibule`; electrical device `SOC-parents-bed-068` (bed-head SELV supply).

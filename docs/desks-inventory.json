@@ -420,13 +420,13 @@
       ],
       "world_footprint_m": [
         21.997,
-        -25.3,
+        -26.2,
         22.397,
-        -24.3
+        -25.2
       ],
       "centre_m": [
         22.197,
-        -24.8
+        -25.7
       ],
       "rotation_deg": 90,
       "heights_m": {
@@ -435,7 +435,7 @@
       "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
       "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
       "native_builder": "villa_furnish3d.body (top and legs)",
-      "why": "vanity / dressing table at the garden window (answers), clear of the bed zone"
+      "why": "vanity / dressing table at the garden window (answers), moved 0.90 m toward the bed foot (client R3 asked ~0.30 m, which measures 0.50 m) so the open tray on this side keeps 750 mm past it"
     },
     {
       "id": "pb-vanity#chair-1",
@@ -445,17 +445,17 @@
       "type": "vanity_chair",
       "planned_footprint_m": [
         0.44,
-        0.42
+        0.39
       ],
       "world_footprint_m": [
-        21.967,
-        -25.02,
+        21.997,
+        -25.92,
         22.387,
-        -24.58
+        -25.48
       ],
       "centre_m": [
-        22.177,
-        -24.799999999999997
+        22.192,
+        -25.700000000000003
       ],
       "rotation_deg": -90,
       "heights_m": {

@@ -113,7 +113,7 @@ class DressingDoor(unittest.TestCase):
         self.assertAlmostEqual(x1, 22.347, places=3)
         self.assertEqual(h["rot"], 180)
         self.assertAlmostEqual(its["pd-hang-2"]["w"], 1.346, places=3)           # his run: unchanged
-        self.assertEqual([m for m, _ in h["modules"]], ["hat-shelf", "drawers", "double-hang", "long-hang"])
+        self.assertEqual([m for m, _ in h["modules"]], ["long-hang", "double-hang", "drawers", "hat-shelf"])      # listed from the east end; from the door (west): HS, DR, DH, LH
         self.assertAlmostEqual(sum(w for _, w in h["modules"]), 1.87)
 
 

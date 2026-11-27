@@ -73,7 +73,7 @@ def test_elec_counts_match_electrical_outputs(out):
     f = ifcopenshell.open(str(out[0] / "D1-ELEC.ifc"))
     assert len(f.by_type("IfcElectricDistributionBoard")) == 4            # MDB, DB-B, DB-GF + the ELV rack
     summ = json.load(open(Path(__file__).resolve().parents[1] / "electrical" / "d1" / "summary.json"))
-    assert len(f.by_type("IfcDistributionSystem")) == summ["circuits"]["total"] + 2 == 61   # 58 final circuits + 2 feeders, in step with the electrical design
+    assert len(f.by_type("IfcDistributionSystem")) == summ["circuits"]["total"] + 2 == 60   # 58 final circuits (the vestibule lighting circuit is within them) + 2 feeders, in step with the electrical design
     assert not any(s.is_a("IfcLightFixture") for s in f)                  # luminaires live in D1-LIGHT only
 
 
@@ -281,5 +281,5 @@ def test_light_zones_are_the_published_l6b_zones(out):
     f = ifcopenshell.open(str(out[0] / "D1-LIGHT.ifc"))
     pub = {z["id"] for z in json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))["zones"]}
     groups = [g for g in f.by_type("IfcGroup") if g.ObjectType == "LightingControlZone"]
-    assert {g.Name for g in groups} == pub and len(groups) == 70          # none provisional (negative: no Z-PROV-*)
+    assert {g.Name for g in groups} == pub and len(groups) == 72          # none provisional (negative: no Z-PROV-*)
     assert not any(g.Name.startswith("Z-PROV") for g in groups)
