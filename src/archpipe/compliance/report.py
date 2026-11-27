@@ -119,7 +119,7 @@ def render(m, results, cards, before=None) -> str:
                  % n(gates, "fail"))
     else:
         L.append("Grade effect under docs/quality/A-PLUS.md: no gate fails; %d gate rows are not evaluated (a "
-                 "gate that cannot be proved is not a pass). Recorded client waiver%s (G1 2026-11-21, still a "
+                 "gate that cannot be proved is not a pass). Recorded client waiver%s (G1 2026-11-21; stair infill 2026-11-25; still a "
                  "best-practice failure, kept visible as an info row): %s.\n" % (
                      n(gates, "not_evaluated"), "s" if len(waived) != 1 else "",
                      "; ".join(r.subject for r in waived) or "none"))

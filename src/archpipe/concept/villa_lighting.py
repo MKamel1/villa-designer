@@ -550,7 +550,7 @@ def design(lay=None):
     bb = fp["fb-basin"]
     strip("TOE", "family-bath", (bb[2] + 0.02, bb[1] + 0.03), (bb[2] + 0.02, bb[3] - 0.03), 0.30, (0.3, 0, -1),
           level="GF", why="glow under the basin: night light")
-    for room, desks, bed in (("kids-a", ("ka-desk-1", "ka-desk-2"), "ka-bunk"), ("kids-b", ("kb-desk",), "kb-bed")):
+    for room, desks, beds in (("kids-a", ("ka-desk-1", "ka-desk-2"), ("ka-loft-1", "ka-loft-2")), ("kids-b", ("kb-desk",), ("kb-bed",))):
         K = rc[room]
         for x, y in _grid(K, 1, 1, mx=0.9):          # L6c: 2 -> 1 ambient (ERCO DL 1065 lm); each desk gets its own task downlight
             if room == "kids-b":     # L6d LA4 (lying, looking up): the bed's pillow end is the west wall; a DL within 45 deg of the vertical
@@ -558,14 +558,31 @@ def design(lay=None):
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
+            if room == "kids-a":
+                # client 2026-11-25: the desk is under a loft bed, so a ceiling downlight is shaded by the bed above (the engine does not
+                # model shadows): the task light is an under-loft strip (iGuzzini Underscore15 ST49 basis, 680 lm/m) + the child's own lamp
+                (xa, xb) = (q[0] + 0.15, q[2] - 0.15) if it[d]["rot"] in (0, 180) else (None, None)
+                if xa is None:                                     # desk along y against a side wall: strip along y, 0.20 m off the wall
+                    x_ = (q[0] + 0.20) if it[d]["rot"] == -90 else (q[2] - 0.20)
+                    strip("UC", room, (x_, q[1] + 0.10), (x_, q[3] - 0.10), LEVEL_Z["GF"] + 1.40, (0, 0, -1), level="GF",
+                          why="under-loft desk strip (loft underside 1.42 m): task light for the desk below, shielded by the frame")
+                add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF",
+                    why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
+                        "out of the sleep zone", card="ies-res-desk-400")
+                continue
             add("DL", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.10, why="L6c: desk downlight in front of the child (Lucy alone "
                 "(234 lm) cannot reach 400 lx at a safe driver setting)", card="ies-res-desk-400", zone="task:task")
             add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", 
                 why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
                     "out of the sleep zone", card="ies-res-desk-400")
-        q = fp[bed]
-        strip("NL", room, (q[0] + 0.05, q[1] - 0.02), (q[2] - 0.05, q[1] - 0.02), 0.08, (0, -0.3, -1), level="GF",
-              why="warm glow under the bed side: kids' night light")
+        for bed in beds:
+            q = fp[bed]
+            if room == "kids-a":                        # the loft stands on the south wall: glow at its foot, inside the room
+                strip("NL", room, (q[0] + 0.05, q[1] + 0.03), (q[2] - 0.05, q[1] + 0.03), 0.08, (0, 0.3, -1), level="GF",
+                      why="warm glow at the foot of the loft bed: kids' night light")
+                continue
+            strip("NL", room, (q[0] + 0.05, q[1] - 0.02), (q[2] - 0.05, q[1] - 0.02), 0.08, (0, -0.3, -1), level="GF",
+                  why="warm glow under the bed side: kids' night light")
     # parents' bedroom: headboard cove, swing-arm bedside lights, reading spots, vanity accent, soft ambient
     PB = rc["parents-bed"]
     b = fp["pb-bed"]
@@ -646,6 +663,13 @@ def design(lay=None):
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
+    # client 2026-11-25: wall cupboards over the sink run shade the back of the worktop from the two sink downlights (probe: direct
+    # 288 -> 270 lx, min 127 -> 6 lx at the wall); an under-cupboard strip (iGuzzini Underscore15 ST49 basis) lights it. Appended last so
+    # no existing kitchen fixture id changes.
+    kr = fp["k-run"]
+    strip("UC", "kitchen", (kr[0] + 0.03, kr[3] - 0.27), (kr[2] - 0.03, kr[3] - 0.27), LEVEL_Z["B"] + 1.48, (0, 0.5, -1),
+          why="under-cupboard task strip over the sink run (cupboard underside 1.50 m, 0.27 m off the wall)", card="ies-res-kitchen-sink-300")
+    out[-1].extra["zone"] = "run-uc"
     set_out(out, rc, it, fp)
     apply_drivers(out)
     return out

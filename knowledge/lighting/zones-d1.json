@@ -278,6 +278,16 @@
    "dimming": "dali2"
   },
   {
+   "id": "Z-B-KITCHEN-RUN-UC",
+   "room": "kitchen",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-UC-kitchen-13"
+   ],
+   "watts": 21.7,
+   "dimming": "dali2"
+  },
+  {
    "id": "Z-B-LIVING-AMBIENT",
    "room": "living",
    "layer": "ambient",
@@ -512,9 +522,10 @@
    "room": "kids-a",
    "layer": "accent",
    "luminaire_ids": [
-    "lum-NL-kids-a-06"
+    "lum-NL-kids-a-06",
+    "lum-NL-kids-a-07"
    ],
-   "watts": 0.9,
+   "watts": 2.1,
    "dimming": "dali2"
   },
   {
@@ -522,12 +533,12 @@
    "room": "kids-a",
    "layer": "task",
    "luminaire_ids": [
-    "lum-DL-kids-a-02",
+    "lum-UC-kids-a-02",
     "lum-DESK-kids-a-03",
-    "lum-DL-kids-a-04",
+    "lum-UC-kids-a-04",
     "lum-DESK-kids-a-05"
    ],
-   "watts": 26.7,
+   "watts": 25.6,
    "dimming": "dali2"
   },
   {

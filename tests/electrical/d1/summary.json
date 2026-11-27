@@ -1,35 +1,35 @@
 {
  "design": "D1",
  "supply": {
-  "max_demand_kva": 76.1,
-  "single_phase_equiv_a": 346.0,
-  "line_current_a_3ph_worst_phase": 115.4,
+  "max_demand_kva": 77.5,
+  "single_phase_equiv_a": 352.4,
+  "line_current_a_3ph_worst_phase": 117.6,
   "incomer_in_a": 125.0,
   "recommendation": "three-phase",
   "single_phase_limit_a": 63.0,
   "limit_note": "policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified",
-  "connected_kva": 133.8,
+  "connected_kva": 137.3,
   "sensitivity": [
    {
     "socket_current_factor": 1.0,
-    "total_a_1ph_equiv": 346.0,
-    "kva": 76.1,
-    "line_a_3ph": 115.3
+    "total_a_1ph_equiv": 352.4,
+    "kva": 77.5,
+    "line_a_3ph": 117.5
    },
    {
     "socket_current_factor": 0.5,
-    "total_a_1ph_equiv": 258.4,
-    "kva": 56.8,
-    "line_a_3ph": 86.1
+    "total_a_1ph_equiv": 261.6,
+    "kva": 57.5,
+    "line_a_3ph": 87.2
    },
    {
     "socket_current_factor": 0.25,
-    "total_a_1ph_equiv": 214.6,
-    "kva": 47.2,
-    "line_a_3ph": 71.5
+    "total_a_1ph_equiv": 216.2,
+    "kva": 47.6,
+    "line_a_3ph": 72.1
    }
   ],
-  "rationale": "single-phase equivalent demand 346 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 115 A"
+  "rationale": "single-phase equivalent demand 352 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 118 A"
  },
  "boards": {
   "MDB": {
@@ -42,33 +42,32 @@
   "DB-B": {
    "level": "B",
    "room": "hall-b",
-   "circuits": 32,
-   "ways": 40,
+   "circuits": 33,
+   "ways": 42,
    "demand_kva": 42.1
   },
   "DB-GF": {
    "level": "GF",
    "room": "gallery-end",
-   "circuits": 19,
-   "ways": 24,
-   "demand_kva": 26.5
+   "circuits": 20,
+   "ways": 26,
+   "demand_kva": 27.9
   }
  },
  "circuits": {
-  "total": 57,
-  "lighting": 6,
-  "socket": 25,
+  "total": 59,
+  "lighting": 7,
+  "socket": 26,
   "dedicated": 26
  },
  "devices": {
   "fcu": 15,
-  "socket": 137,
+  "socket": 143,
   "led_driver": 1,
-  "switch": 35,
+  "switch": 33,
   "isolator_ac": 8,
   "data": 17,
   "tv_sat": 3,
-  "socket_selv": 1,
   "cooker_unit": 1
  },
  "elv": {
@@ -90,7 +89,7 @@
    "UK-ADB1-2019-1.1-alarm-grade",
    "UK-ADB1-2019-1.5-large-definition"
   ],
-  "reason": "no storey exceeds 200 m2 (B 168.7 m2, GF 117.7 m2), so the dwelling is not 'large'"
+  "reason": "no storey exceeds 200 m2 (B 168.7 m2, GF 117.6 m2), so the dwelling is not 'large'"
  },
  "storey_area_m2": {
   "B": {
@@ -100,49 +99,48 @@
   },
   "GF": {
    "net": 103.6,
-   "walls": 14.1,
-   "gross": 117.7
+   "walls": 14.0,
+   "gross": 117.6
   }
  },
  "provisional_zones": false,
  "phase_loads_a": {
-  "L1": 202.6,
-  "L2": 202.7,
-  "L3": 202.9
+  "L1": 207.8,
+  "L2": 208.3,
+  "L3": 208.1
  },
  "checks": {
   "EA1:not_evaluated": 1,
-  "EA1:pass": 32,
+  "EA1:pass": 31,
   "EA1:warn": 8,
   "EA10:not_evaluated": 1,
   "EA11:pass": 1,
-  "EA11:warn": 2,
+  "EA11:warn": 3,
   "EA12:pass": 4,
-  "EA13:pass": 7,
+  "EA13:pass": 8,
   "EA14:not_evaluated": 1,
-  "EA15:pass": 30,
+  "EA15:pass": 29,
   "EA2:pass": 6,
   "EA3:pass": 103,
   "EA4:not_evaluated": 4,
   "EA4:pass": 5,
-  "EA5:pass": 65,
-  "EA6:pass": 66,
+  "EA5:pass": 67,
+  "EA6:pass": 68,
   "EA7:not_evaluated": 1,
-  "EA8:pass": 57,
+  "EA8:pass": 59,
   "EA9:not_evaluated": 1
  },
  "flags": [
-  "room geometry: 31 rooms from the model polygons; 0 are not 4-vertex rectangles. The polygon-edge branch of the placement is exercised by an L-shaped test room, not by D1",
-  "door hinge/latch side is not in the model: 31 of 31 door-room records use the policy 'hinge at the end of the opening nearer the corner, switch at the latch (open) side'. Wall-mounted switches beside glazed garden doors are not placed.",
+  "room geometry: 30 rooms from the model polygons; 0 are not 4-vertex rectangles. The polygon-edge branch of the placement is exercised by an L-shaped test room, not by D1",
+  "door hinge/latch side is not in the model: 29 of 29 door-room records use the policy 'hinge at the end of the opening nearer the corner, switch at the latch (open) side'. Wall-mounted switches beside glazed garden doors are not placed.",
   "furn-gwc-shower: wet-area zone data from the model (no tray, outlet at the rain head; head height 2300 mm)",
   "furn-fb-shower: wet-area zone data from the model (tray rim 100.0 mm; head height 2250 mm)",
-  "furn-ka-bunk: bed head side is not authored and no short end is within 600 mm of a wall; bedside sockets sit at both ends of the wall it stands along (W)",
   "furn-pe-bath: wet-area zone data from the model (tray rim 550.0 mm; head height 2300 mm)",
-  "luminaire watts: 58 of 136 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
-  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 71 zones; 17 sized on rated luminaire W above the published commissioned W",
+  "luminaire watts: 62 of 137 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
+  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 70 zones; 17 sized on rated luminaire W above the published commissioned W",
   "boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; meter position and utility cabinet at the street fence are assumptions to confirm",
   "routes: Manhattan distance x 1.15 through all the circuit's load points (nearest-neighbour chain) plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops",
-  "storey areas for the alarm grade (net rooms + wall plan): B 168.7 m2 (net 153.6), GF 117.7 m2 (net 103.6)",
+  "storey areas for the alarm grade (net rooms + wall plan): B 168.7 m2 (net 153.6), GF 117.6 m2 (net 103.6)",
   "CCTV, intercom and AP positions are layout proposals from the plot fences, the gate anchor and room centroids; the plot is the fence-bounded rectangle x -123..28557, y -29916..-20601 mm",
   "board DB-GF: wall N moved 750 mm to get a 600 mm clear stretch"
  ],

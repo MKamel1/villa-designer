@@ -10,20 +10,20 @@ Threshold sources are cards in `knowledge/eg/best-practice-cards.json` (verbatim
 
 ## Result in one line
 
-Gates (79 rows): **73 pass, 0 fail, 0 warn, 6 not evaluated**. Informative/target rows (123): 107 pass, 13 fail, 3 warn, 0 not evaluated.
+Gates (78 rows): **72 pass, 0 fail, 0 warn, 6 not evaluated**. Informative/target rows (120): 102 pass, 15 fail, 3 warn, 0 not evaluated.
 
-Grade effect under docs/quality/A-PLUS.md: no gate fails; 6 gate rows are not evaluated (a gate that cannot be proved is not a pass). Recorded client waiver (G1 2026-11-21, still a best-practice failure, kept visible as an info row): cinema (cinema) escape opening.
+Grade effect under docs/quality/A-PLUS.md: no gate fails; 6 gate rows are not evaluated (a gate that cannot be proved is not a pass). Recorded client waivers (G1 2026-11-21; stair infill 2026-11-25; still a best-practice failure, kept visible as an info row): stair open-riser gap (100 mm sphere); cinema (cinema) escape opening.
 
 ## Before and after the G1 design fixes
 
-Before (integ/aplus, `knowledge/eg/baseline-before-g1.json`): 75 gate rows: 60 pass, 4 fail, 2 warn, 9 not evaluated. After: 79 gate rows: 73 pass, 0 fail, 0 warn, 6 not evaluated.
+Before (integ/aplus, `knowledge/eg/baseline-before-g1.json`): 75 gate rows: 60 pass, 4 fail, 2 warn, 9 not evaluated. After: 78 gate rows: 72 pass, 0 fail, 0 warn, 6 not evaluated.
 
 Rows whose status or gate flag changed:
 
 | criterion | subject | before | after |
 |---|---|---|---|
 | LS1 | space under the flight (soffit < 2 m) | WARN (gate) | PASS (gate) |
-| LS2 | stair open-riser gap (100 mm sphere) | FAIL (gate) | PASS (gate) |
+| LS2 | stair open-riser gap (100 mm sphere) | FAIL (gate) | FAIL (info) |
 | LS2 | stair tread overlap (open risers) | FAIL (gate) | PASS (gate) |
 | LS2 | stair closed risers (A+ target) | FAIL (gate) | FAIL (info) |
 | LS4 | GF core door onto the stair top landing (door-GF-landing-gf-core) | WARN (gate) | PASS (gate) |
@@ -73,9 +73,9 @@ Fixes, cheapest first:
 
 | subject | gate | achieved | required | unit | before | status | source | note |
 |---|---|---|---|---|---|---|---|---|
-| stair open-riser gap (100 mm sphere) | gate | 38.2 | 100 | mm | FAIL | **PASS** | ukadk-open-risers-dwelling (para 1.9); ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | riser infill modelled (horizontal flat bar, 40 mm bar): largest clear opening 38.2 mm in the 116.5 mm gap between treads; a 100 mm sphere passes if the opening is >= 1... |
+| stair open-riser gap (100 mm sphere) | info | 116.5 | 100 | mm | FAIL (gate) | **FAIL** | ukadk-open-risers-dwelling (para 1.9); ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)); g1-safety-decisions-2026-11-21 (docs/decisions/G1-safety-decisions-2026-11-21.md) | WAIVED by client 2026-11-25 (waived by client 2026-11-25): 116.5 mm gap where 100 mm is required (ukadk-open-risers-dwelling). Consequence: the gap between treads retu... |
 | stair tread overlap (open risers) | gate | 16 | 16 | mm | FAIL | **PASS** | ukadk-open-risers-dwelling (para 1.9) | consecutive treads overlap by 16.0 mm in plan vs 16 mm minimum for open risers (ADK 1.9a) |
-| stair closed risers (A+ target) | info | 0 | 1 | closed | FAIL (gate) | **FAIL** | ukadk-closed-risers (para 1.6); g1-safety-decisions-2026-11-21 (docs/decisions/G1-safety-decisions-2026-11-21.md) | DECIDED, not adopted (client G1 2026-11-21, docs/decisions/G1-safety-decisions-2026-11-21.md): open risers kept with infill so no 100 mm sphere passes and treads overl... |
+| stair closed risers (A+ target) | info | 0 | 1 | closed | FAIL (gate) | **FAIL** | ukadk-closed-risers (para 1.6); g1-safety-decisions-2026-11-21 (docs/decisions/G1-safety-decisions-2026-11-21.md) | DECIDED, not adopted (client 2026-11-25 veto of the G1 infill): open risers stay open with no infill; the 16 mm overlap is kept; closed risers (ADK 1.6) stay an unmet ... |
 
 ### LS1 Stair: geometry, headroom, landings
 
@@ -154,7 +154,6 @@ Fixes, cheapest first:
 | parents-ensuite (en-suite) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | ensuite room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | gallery-end (gallery) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | parents-entry (parents' bedroom) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
-| suite-vestibule (suite vestibule) clear height (service) | info | 2.7 | 2 | m | new | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | parents-dressing-ext (dressing) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | dressing room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | lounge (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
 | lounge-nook (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
@@ -209,8 +208,7 @@ Fixes, cheapest first:
 | door door-GF-corridor-kids-b (corridor/kids-b) | info | 0.9 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-parents-bed-parents-dressing (parents-bed/parents-dressing) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-gallery-end-family-bath (gallery-end/family-bath) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
-| door door-GF-corridor-suite-vestibule (corridor/suite-vestibule) | info | 0.8 | 0.75 | m | new | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
-| door door-GF-suite-vestibule-parents-entry (suite-vestibule/parents-entry) | info | 0.9 | 0.75 | m | new | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-corridor-parents-entry (corridor/parents-entry) | info | 0.9 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-parents-dressing-ext-parents-ensuite (parents-dressing-ext/parents-ensuite) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-landing-gf-core (landing-gf/core) | info | 1 | 0.775 | m | PASS | **PASS** | ukadm-entrance-door-min (M4(1) para 1.14a) | nominal width 1.00 m vs 0.775 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-study-game-deck (study-game/deck) | info | 1.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 1.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
@@ -272,9 +270,10 @@ Egyptian ER rows (`[ER informative]`), A+ targets and recommendations. Passing r
 | stair width [ER informative] | info | 950 | 1100 | mm | FAIL | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: clear width 950 mm vs 1100 mm (ADK sets no private-stair width) |
 | stair risers per flight [ER informative] | info | 17 | 14 | risers | FAIL | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: 17 risers in one flight vs 14 then a landing |
 | stair tread and riser [ER informative] | info | 176.5 | 170 | mm | FAIL | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: riser 176.5 mm vs 170, tread 280 vs 270 |
+| stair open risers [ER informative] | info | 116.5 | 100 | mm | FAIL | **FAIL** | er119-art103-railing (ER Article (103)) | ER Art.103: objects >= 10 cm must not fall through; largest opening 116 mm |
 | GF core door to the top step [ER informative] | info | 0.075 | 1 | m | FAIL | **FAIL** | er119-art96-door-stair (ER Article (96)) | ER Art.96: door opening directly onto a stair flight needs 1.0 m; here 0.075 m |
 
-Egyptian ER informative rows: 65, of which 6 would fail. Failing ones: GF core door to the top step; cinema (cinema); stair risers per flight; stair tread and riser; stair width; store-ramp (store under the ramp).
+Egyptian ER informative rows: 63, of which 7 would fail. Failing ones: GF core door to the top step; cinema (cinema); stair open risers; stair risers per flight; stair tread and riser; stair width; store-ramp (store under the ramp).
 
 ## Margins on ASSUMED inputs
 

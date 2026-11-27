@@ -83,6 +83,7 @@ class Stair:
     gf_floor_z_mm: float = 0.0
     b_floor_z_mm: float = -3000.0
     riser_infill: dict | None = None            # {max_clear_opening_mm, ...} when the open risers carry an infill
+    infill_waiver: dict | None = None           # client waiver of the riser infill (date, consequence); LS2 stays a visible fail
     under_flight: dict | None = None            # {enclosed, treads_enclosed, cupboard_id} when the space is enclosed
 
 
@@ -313,6 +314,7 @@ def _prefer_l2_model(m: DesignModel) -> None:
         m.stair.id = stair.id
         ri = sp.get("riser_infill")
         m.stair.riser_infill = ri if ri and ri.get("present") else None
+        m.stair.infill_waiver = sp.get("infill_waiver") or None
         uf = sp.get("under_flight") or {}
         if uf.get("enclosed") and cupboard is not None and cupboard.params.get("enclosed"):
             m.stair.under_flight = {"enclosed": True, "treads_enclosed": cupboard.params.get("treads_enclosed"),

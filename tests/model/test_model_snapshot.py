@@ -31,9 +31,9 @@ class Snapshot(unittest.TestCase):
         k = self.kinds
         self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (31, 37, 19, 8, 1))  # +1: suite-vestibule, client FINAL 2026-11-26: +1 room, +1 wall (x=17.45), +1 door
         self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
-        self.assertEqual(k["luminaire"], 135)        # +3 PCOVE (ST39 cove round the ensuite bath feature panel, L4 round 5)
+        self.assertEqual(k["luminaire"], 137)        # +3 PCOVE (ST39 cove round the ensuite bath feature panel, L4 round 5)
         self.assertEqual(k["plant"], 80)
-        self.assertEqual(k["furniture"], 78)       # +1 sv-store flat cabinet in the suite vestibule (client FINAL 2026-11-26); was 77 = 79 less the two floating ledges (DF 2026-11-26: the joinery bed carries its own trays); includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
+        self.assertEqual(k["furniture"], 79)       # +1 sv-store (and +1 FX kids loft) flat cabinet in the suite vestibule (client FINAL 2026-11-26); was 77 = 79 less the two floating ledges (DF 2026-11-26: the joinery bed carries its own trays); includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
 
     def test_spec_kinds_equal_a_fresh_derivation(self):
         from archpipe.model import geometry_complete as GC
@@ -59,13 +59,13 @@ class Snapshot(unittest.TestCase):
     def test_luminaires_carry_photometry_ref(self):
         lums = [e for e in self.els if e.kind == "luminaire"]
         with_ies = [e for e in lums if e.params["photometry"]["ies"]]
-        self.assertEqual(len(with_ies), 77)      # +3 PCOVE carry the ST39 IES (74 -> 77; generic stays 58). L6d: the entry-lobby DL became a generic cove (75 -> 74). L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
+        self.assertEqual(len(with_ies), 75)   # FX 2026-11-25: kids A desk downlights (2 ERCO) replaced by generic UC strips: 77 -> 75;      # +3 PCOVE carry the ST39 IES (74 -> 77; generic stays 58). L6d: the entry-lobby DL became a generic cove (75 -> 74). L6c design: the ERCO-bound kinds (DL, DLN, ADJ, WW, DESK, PEN-LIN) and their substitutes carry an IES
         # every luminaire without an IES must say so: generic, no product, no manufacturer code (never a silent gap)
         for e in lums:
             ph = e.params["photometry"]
             if not ph["ies"]:
                 self.assertTrue(ph["generic"] and not ph["code"] and not e.product_id, e.id)
-        self.assertEqual(len(lums) - len(with_ies), 58)
+        self.assertEqual(len(lums) - len(with_ies), 62)   # FX 2026-11-25: 58 -> 62 generic (3 UC strips: sink run + 2 under lofts; +1 kids night light)
         for e in with_ies:
             self.assertFalse(e.params["photometry"]["ies"].startswith(("C:", "/", "\\")), e.id)
             self.assertTrue(e.params["photometry"]["ies"].endswith(".ies"))

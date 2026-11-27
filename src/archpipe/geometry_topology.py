@@ -678,7 +678,10 @@ class GeometryTopology:
         from .concept.villa_furnish import _route_problems
         if self.layout is None or self.specification is None:
             raise ValueError('Routes require a layout and existing specification')
-        legacy = _route_problems(_thaw(self.layout), _thaw(self.specification), _thaw(self.furniture), level, cell, room_ids)
+        # a loft bed is overhead (frame underside 1.42 m): the desk and chair under it are the floor obstacles, the loft itself is not.
+        # Filtered here so the frozen raster body (test_route_body_is_ast_identical_to_starting_commit) stays byte-for-byte.
+        floor_items = [i for i in _thaw(self.furniture) if not i.get('loft')]
+        legacy = _route_problems(_thaw(self.layout), _thaw(self.specification), floor_items, level, cell, room_ids)
         return [_finding('route-connectivity', problem, level, 0,
                          Requirement(1, 'villa_furnish.route_problems; mitton-path-of-travel-min; ukadm-bedroom-route-750; private dressing project waiver (pending)', 'reached destinations'), problem)
                 for problem, _ in legacy]

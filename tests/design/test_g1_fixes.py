@@ -40,19 +40,15 @@ class G1(unittest.TestCase):
         self.assertEqual(st["tread_depth_mm"], 296.0)
         self.assertTrue(550 <= 2 * st["riser_mm"] + st["going_mm"] <= 700)
 
-    def test_no_100mm_sphere_through_a_riser(self):
+    def test_infill_removed_by_client_waiver_2026_11_25(self):
+        """Client veto 2026-11-25: no riser infill bars; recorded as a waiver with the consequence, overlap kept."""
         st = self.by["stair-main"].params
-        inf = st["riser_infill"]
-        self.assertTrue(inf["present"])
-        tr, bars = self.sp["stair"], self.sp["stair_infill"]
-        self.assertEqual(len(bars), 15)                                                  # one bar per gap between 16 treads
-        for i, b in enumerate(bars):
-            below_top, above_bot = tr[i][5], tr[i + 1][2]                                # tread i top, tread i+1 underside
-            self.assertAlmostEqual(b[2] - below_top, above_bot - b[5], places=3)         # bar centred in the gap
-            self.assertLess(b[2] - below_top, 100.0)
-            self.assertLess(above_bot - b[5], 100.0)
-            self.assertEqual(b[4] - b[1], 950.0)                                         # across the full flight width
-        self.assertAlmostEqual(inf["max_clear_opening_mm"], 38.24, places=2)
+        self.assertEqual(self.sp["stair_infill"], [])
+        self.assertFalse(st["riser_infill"])
+        w = st["infill_waiver"]
+        self.assertEqual((w["date"], w["by"], w["criterion"], w["required_mm"]), ("2026-11-25", "client", "LS2", 100.0))
+        self.assertIn("child", w["consequence"])
+        self.assertEqual(st["nosing_overlap_mm"], 16)                                    # the 16 mm overlap is kept
 
     def test_infill_not_counted_as_treads(self):
         self.assertTrue(all(b[5] - b[2] <= 60.0 + 1e-9 for b in self.sp["stair"]))

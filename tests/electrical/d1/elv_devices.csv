@@ -3,35 +3,35 @@ SMOKE-001,smoke,lounge,B,6637,-25531,2800,EA15-smoke-room,"interlinked, mains + 
 SMOKE-002,smoke,living,B,20482,-26131,2800,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
 SMOKE-003,smoke,cinema,B,6176,-22096,2580,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
 SMOKE-004,smoke,study-game,GF,6422,-24981,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-005,smoke,kids-a,GF,13214,-25481,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-006,smoke,kids-b,GF,16690,-25481,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-007,smoke,parents-bed,GF,20512,-25116,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-HEAT-008,heat,dirty-kitchen,B,13306,-22096,2800,EA15-heat-room,"interlinked, mains + sealed battery (Grade D1)"
-HEAT-009,heat,kitchen,B,13050,-25131,2700,EA15-heat-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-010,smoke,corridor,GF,13168,-28021,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-011,smoke,dining,B,16634,-25131,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-012,smoke,store-ramp,B,1501,-22096,1675,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-013,smoke,stair-gf,GF,7032,-27521,2800,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-014,smoke,bar-alcove,B,19932,-29294,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-015,smoke,parents-dressing,GF,21062,-27656,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-016,smoke,stair-b,B,7417,-28071,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-017,smoke,pantry,B,5278,-29294,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-018,smoke,entry-b,B,14940,-27671,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
-SMOKE-019,smoke,suite-vestibule,GF,18488,-28021,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-005,smoke,corridor,GF,11547,-28021,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-006,smoke,corridor,GF,16867,-28021,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-007,smoke,kids-a,GF,13214,-25481,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-008,smoke,kids-b,GF,16690,-25481,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-009,smoke,parents-bed,GF,20512,-25116,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+HEAT-010,heat,dirty-kitchen,B,13306,-22096,2800,EA15-heat-room,"interlinked, mains + sealed battery (Grade D1)"
+HEAT-011,heat,kitchen,B,13050,-25131,2700,EA15-heat-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-012,smoke,dining,B,16634,-25131,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-013,smoke,store-ramp,B,1501,-22096,1675,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-014,smoke,stair-gf,GF,7032,-27521,2800,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-015,smoke,bar-alcove,B,19932,-29294,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-016,smoke,parents-dressing,GF,21062,-27656,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-017,smoke,stair-b,B,7417,-28071,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-018,smoke,pantry,B,5278,-29294,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
+SMOKE-019,smoke,entry-b,B,14940,-27671,2700,EA15-smoke-room,"interlinked, mains + sealed battery (Grade D1)"
 DATA-020,data,study-game,GF,3867,-26371,1100,EA1-desk-cluster,
 DATA-021,data,study-game,GF,4017,-26371,1100,EA1-desk-cluster,
-DATA-022,data,study-game,GF,5000,-23591,800,EA1-desk-cluster,
-DATA-023,data,study-game,GF,5600,-23591,800,EA1-desk-cluster,
+DATA-022,data,study-game,GF,4250,-23591,1100,EA1-desk-cluster,
+DATA-023,data,study-game,GF,6800,-23591,1100,EA1-desk-cluster,
 TV_SAT-024,tv_sat,study-game,GF,9227,-25300,400,EA1-tv-cluster,
 DATA-025,data,study-game,GF,9227,-25100,400,EA1-tv-cluster,
-DATA-026,data,kids-a,GF,12870,-23591,800,EA1-desk-cluster,
-DATA-027,data,kids-a,GF,13470,-23591,800,EA1-desk-cluster,
-DATA-028,data,kids-a,GF,14952,-24391,1100,EA1-desk-cluster,
-DATA-029,data,kids-a,GF,14952,-23791,1100,EA1-desk-cluster,
+DATA-026,data,kids-a,GF,11477,-26741,1100,EA1-desk-cluster,
+DATA-027,data,kids-a,GF,11477,-26141,1100,EA1-desk-cluster,
+DATA-028,data,kids-a,GF,14952,-26741,1100,EA1-desk-cluster,
+DATA-029,data,kids-a,GF,14952,-26141,1100,EA1-desk-cluster,
 DATA-030,data,kids-b,GF,18427,-24391,1100,EA1-desk-cluster,
 DATA-031,data,kids-b,GF,18427,-23791,1100,EA1-desk-cluster,
-DATA-032,data,parents-bed,GF,22597,-26000,800,EA1-desk-cluster,
-DATA-033,data,parents-bed,GF,22597,-25400,800,EA1-desk-cluster,
+DATA-032,data,parents-bed,GF,22597,-24200,1100,EA1-desk-cluster,
+DATA-033,data,parents-bed,GF,22597,-24200,1100,EA1-desk-cluster,
 TV_SAT-034,tv_sat,lounge,B,6100,-23591,400,EA1-tv-cluster,
 DATA-035,data,lounge,B,6300,-23591,400,EA1-tv-cluster,
 TV_SAT-036,tv_sat,cinema,B,9227,-21646,400,EA1-tv-cluster,
@@ -42,7 +42,7 @@ RACK-040,rack,stair-b,B,7417,-28071,1200,EA15-rack,ELV cabinet assumed in the un
 AP-041,ap,hall-b,B,10427,-27671,2600,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
 AP-042,ap,living,B,20482,-26131,2700,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
 AP-043,ap,store-ramp,B,1501,-22096,1575,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
-AP-044,ap,corridor,GF,13168,-28021,2600,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
+AP-044,ap,corridor,GF,14207,-28021,2600,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
 AP-045,ap,landing-gf,GF,4397,-27521,2600,EA15-ap-coverage,"ceiling AP, 8 m radius (policy)"
 AP_OUTDOOR-046,ap_outdoor,site-garden,SITE,20557,-22470,2800,EA15-ap-outdoor,outdoor AP on the building face covering the garden
 CCTV-047,cctv,site-gate,SITE,-123,-22096,3000,EA15-cctv-gate,
@@ -53,5 +53,5 @@ CCTV-051,cctv,site-garden,SITE,27757,-29116,3000,EA15-cctv-corner-rear-a,
 CCTV-052,cctv,site-garden,SITE,27757,-21401,3000,EA15-cctv-corner-rear-b,
 INTERCOM_OUTDOOR-053,intercom_outdoor,site-gate,SITE,-123,-22096,1400,EA15-intercom-gate,video door station at the vehicle/pedestrian gate
 INTERCOM_MONITOR-054,intercom_monitor,hall-b,B,11197,-27671,1500,EA15-intercom-monitor,
-INTERCOM_MONITOR-055,intercom_monitor,corridor,GF,13168,-27371,1500,EA15-intercom-monitor,
+INTERCOM_MONITOR-055,intercom_monitor,corridor,GF,14207,-27371,1500,EA15-intercom-monitor,
 INTERCOM_MONITOR-056,intercom_monitor,parents-bed,GF,20512,-23591,1500,EA15-intercom-monitor,

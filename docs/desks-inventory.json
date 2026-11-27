@@ -244,27 +244,27 @@
       "level": "GF",
       "type": "desk",
       "planned_footprint_m": [
-        1.1,
+        1.4,
         0.6
       ],
       "world_footprint_m": [
-        12.62,
-        -24.391000000000002,
-        13.72,
-        -23.791
+        11.527,
+        -27.141,
+        12.127,
+        -25.741
       ],
       "centre_m": [
-        13.17,
-        -24.091
+        11.827,
+        -26.441
       ],
-      "rotation_deg": 180,
+      "rotation_deg": -90,
       "heights_m": {
         "desktop": 0.75
       },
       "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
       "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
       "native_builder": "villa_furnish3d.body (top and legs)",
-      "why": "desk, girl 1"
+      "why": "desk under loft 1 (IKEA SMASTAD desk is 148 x 60 x 73), against the west wall, chair on the room side under the frame"
     },
     {
       "id": "ka-desk-1#chair-1",
@@ -277,16 +277,16 @@
         0.45
       ],
       "world_footprint_m": [
-        12.95,
-        -24.691,
-        13.39,
-        -24.241
+        11.977,
+        -26.661,
+        12.427,
+        -26.221
       ],
       "centre_m": [
-        13.17,
-        -24.466
+        12.202,
+        -26.441000000000003
       ],
-      "rotation_deg": 0,
+      "rotation_deg": 90,
       "heights_m": {
         "seat": 0.46,
         "back": 0.85
@@ -301,27 +301,27 @@
       "level": "GF",
       "type": "desk",
       "planned_footprint_m": [
-        1.1,
+        1.4,
         0.6
       ],
       "world_footprint_m": [
-        13.76,
-        -24.391000000000002,
-        14.860000000000001,
-        -23.791
+        14.302,
+        -27.141,
+        14.902000000000001,
+        -25.741
       ],
       "centre_m": [
-        14.31,
-        -24.091
+        14.602,
+        -26.441
       ],
-      "rotation_deg": 180,
+      "rotation_deg": 90,
       "heights_m": {
         "desktop": 0.75
       },
       "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
       "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
       "native_builder": "villa_furnish3d.body (top and legs)",
-      "why": "desk, girl 2"
+      "why": "desk under loft 2, against the east wall"
     },
     {
       "id": "ka-desk-2#chair-1",
@@ -334,16 +334,16 @@
         0.45
       ],
       "world_footprint_m": [
-        14.09,
-        -24.691,
-        14.53,
-        -24.241
+        14.002,
+        -26.661,
+        14.452,
+        -26.221
       ],
       "centre_m": [
-        14.309999999999999,
-        -24.466
+        14.227,
+        -26.441000000000003
       ],
-      "rotation_deg": 0,
+      "rotation_deg": -90,
       "heights_m": {
         "seat": 0.46,
         "back": 0.85
@@ -445,16 +445,16 @@
       "type": "vanity_chair",
       "planned_footprint_m": [
         0.44,
-        0.45
+        0.42
       ],
       "world_footprint_m": [
-        21.697,
+        21.967,
         -25.02,
-        22.147,
+        22.387,
         -24.58
       ],
       "centre_m": [
-        21.921999999999997,
+        22.177,
         -24.799999999999997
       ],
       "rotation_deg": -90,

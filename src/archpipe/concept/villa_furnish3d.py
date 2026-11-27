@@ -13,6 +13,8 @@ mapping as in `villa_furnish` (`rot` 0 front +y, 180 front -y, -90 front +x, 90 
 """
 from __future__ import annotations
 
+import math
+
 from . import villa_furnish as F
 
 # where a part may rise above the piece's checked height h (name -> why)
@@ -43,6 +45,10 @@ PLINTH, PLINTH_SET = 0.10, 0.05
 # advisory targets adopted from villa_01_guidelines.docx (K-SPLASH / K-UPPER, K-OVERHANG): sound practice
 SPLASH = 0.60                # worktop to the underside of the wall units (units from 1.50 m)
 OVERHANG = 0.025             # worktop beyond the cabinet face
+# Client 2026-11-25: wall cupboards over the sink run. Underside 1.50 m = worktop 0.90 + K-SPLASH 0.60 (client brief K-UPPER; clear
+# of Neufert 1980 p. Habitat 75 fig. 1 ">= 500" over the worktop and of Mitton & Nystuen 4th ed. p. 121 fig. 5.28 "457 mm
+# recommended minimum above counter"); top 2.00 m = Neufert's 2000 reach line; depth 0.30 = Neufert's 300 (Mitton: 12 in / 305 mm)
+WALL_UNITS = {"z0": 1.50, "z1": 2.00, "depth": 0.30}
 
 
 def to_world(it, b):
@@ -85,6 +91,32 @@ def _stool(xc, y0, y1, seat=0.65):
             ("post", (xc - 0.025, c - 0.025, 0.02, xc + 0.025, c + 0.025, seat - 0.05)),
             ("footrest", (xc - 0.15, c - 0.15, 0.25, xc + 0.15, c + 0.15, 0.27)),
             ("seat", (xc - 0.19, y0 + 0.01, seat - 0.05, xc + 0.19, y1 - 0.01, seat))]
+
+
+def loft_parts(it):
+    """A loft bed (client 2026-11-25; product basis IKEA SMASTAD 504.540.36: frame 205 x 104, clear height under 142 cm,
+    overall 182 cm, mattress 90 x 200, <= 20 cm thick): oak posts and side rails, slat base at `under`, a 150 mm mattress
+    to `mattress_top`, guard boards up to `rail_top` on the wall side, both ends and the room side except the ladder gap,
+    and a vertical ladder on the room side (+x) at the foot end (`ladder_at` +y / -y). Local x: wall side -x, room side +x."""
+    W, D = it["w"], it["d"]
+    x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    z_base, z_mat, z_rail = it["under"], it["mattress_top"], it["rail_top"]
+    sgn = 1 if it["ladder_at"] == "+y" else -1                       # the foot (ladder) end
+    ye = yf if sgn > 0 else yb
+    gap = (ye - 0.50 * sgn, ye - 0.04 * sgn)                         # the 0.46 m ladder opening in the room-side rail
+    glo, ghi = sorted(gap)
+    p = [("post", (sx * (W / 2 - 0.03) - 0.03, sy * (D / 2 - 0.03) - 0.03, 0, sx * (W / 2 - 0.03) + 0.03,
+                   sy * (D / 2 - 0.03) + 0.03, z_rail)) for sx in (-1, 1) for sy in (-1, 1)]
+    p += [("frame", (x0, yb, z_base, x0 + 0.04, yf, z_base + 0.06)), ("frame", (x1 - 0.04, yb, z_base, x1, yf, z_base + 0.06)),
+          ("frame", (x0, yb, z_base, x1, yb + 0.04, z_base + 0.06)), ("frame", (x0, yf - 0.04, z_base, x1, yf, z_base + 0.06)),
+          ("slats", (x0 + 0.04, yb + 0.04, z_base + 0.03, x1 - 0.04, yf - 0.04, z_base + 0.06)),
+          ("mattress", (x0 + 0.07, yb + 0.025, z_base + 0.06, x1 - 0.07, yf - 0.025, z_mat))]
+    p += [("rail", (x0, yb, z_mat, x0 + 0.03, yf, z_rail)),                          # wall side
+          ("rail", (x0, yb, z_mat, x1, yb + 0.03, z_rail)), ("rail", (x0, yf - 0.03, z_mat, x1, yf, z_rail)),   # both ends
+          ("rail", (x1 - 0.03, yb, z_mat, x1, glo, z_rail)), ("rail", (x1 - 0.03, ghi, z_mat, x1, yf, z_rail))]  # room side
+    p += [("ladder-stile", (x1 - 0.045, y - 0.02, 0, x1, y + 0.02, z_mat)) for y in (glo + 0.03, ghi - 0.03)]
+    p += [("ladder-rung", (x1 - 0.04, glo + 0.03, z, x1, ghi - 0.03, z + 0.03)) for z in (0.28, 0.56, 0.84, 1.12, 1.40)]
+    return p
 
 
 # Pieces whose chair is staged TUCKED under the top, as designed furniture: a pulled-out chair at the principal
@@ -138,6 +170,8 @@ def body(it):
                 ("nook-side", (x0, yb, 0, x0 + 0.025, yf, it["nook_top"])),
                 ("nook-side", (x1 - 0.025, yb, 0, x1, yf, it["nook_top"])),
                 ("nook-top", (x0, yb, it["nook_top"] - 0.025, x1, yf, it["nook_top"]))]
+    if t.startswith("bed_") and it.get("loft"):
+        return loft_parts(it)
     if t.startswith("bed_"):
         if H >= 1.5:                                                # a bunk bed
             p = [("post", (sx * W / 2 - (0.06 if sx > 0 else 0), sy * D / 2 - (0.06 if sy > 0 else 0), 0,
@@ -260,6 +294,8 @@ def body(it):
                   ("worktop", (a, yb, COUNTER_TOP - 0.04, b, yf, COUNTER_TOP))]
             if tall_wall:
                 p.append(("wall-units", (a, yb, COUNTER_TOP + SPLASH, b, yb + 0.35, H)))
+        if it.get("wall_units"):
+            p += [("wall-units", (a, yb, w["z0"], b, yb + w["depth"], w["z1"])) for a, b, w in wall_unit_bays(it)]
         return p
     if t in ("bookcase", "pantry_shelving", "store_shelving"):
         if t == "store_shelving" and it.get("soffit") == "ramp":
@@ -358,6 +394,31 @@ def body(it):
                     ("linear-drain", (x1 - 0.04, yb + 0.06, -0.006, x1 - 0.02, yf - 0.06, 0))]
         return [("tray", (x0, yb, 0, x1, yf, H)), ("glass", (x0 + W * 0.45, yf - 0.01, H, x1, yf, 2.0))]
     return [("block", (x0, yb, 0, x1, yf, H))]
+
+
+def wall_unit_problems(it, worktop=COUNTER_TOP, soffit=2.40):
+    """Wall cupboards against their sources: underside >= worktop + 0.50 m (Neufert 1980, Habitat 75 fig. 1; Mitton & Nystuen 4th ed.
+    p. 121 fig. 5.28 gives >= 457 mm), top <= 2.00 m (Neufert's reach line), depth <= 0.305 m (Neufert 300; Mitton 12 in), and below
+    the beam soffit `soffit` (beams at z 2.40, d1-elements). Returns the failures as strings."""
+    w, out = it["wall_units"], []
+    if w["z0"] - worktop < 0.50 - 1e-9:
+        out.append("underside %.3f m is %.0f mm over the worktop, need >= 500" % (w["z0"], (w["z0"] - worktop) * 1000))
+    if w["z1"] > 2.00 + 1e-9:
+        out.append("top %.3f m is over the 2.00 m reach line" % w["z1"])
+    if w["depth"] > 0.305 + 1e-9:
+        out.append("depth %.0f mm is over 305" % (w["depth"] * 1000))
+    if w["z1"] > soffit - 1e-9:
+        out.append("top %.3f m reaches the beam soffit %.2f m" % (w["z1"], soffit))
+    return out
+
+
+def wall_unit_bays(it):
+    """The wall cupboards over a base run (it["wall_units"] = {z0, z1, depth}): equal bays no wider than 0.70 m,
+    local x span (a, b) and the dimensions."""
+    w = it["wall_units"]
+    n = max(1, math.ceil(it["w"] / 0.70 - 1e-9))
+    pitch = it["w"] / n
+    return [(-it["w"] / 2 + k * pitch, -it["w"] / 2 + (k + 1) * pitch, w) for k in range(n)]
 
 
 def _local_modules(it):

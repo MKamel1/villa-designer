@@ -24,7 +24,10 @@ class ImportedAdmission(unittest.TestCase):
 
     def test_real_twelve_refusals_get_strict_closed_component_standins_without_face_edits(self):
         self.assertEqual(sum(bool(r['physical_errors']) for r in self.before['cases']), 12)
-        for model, frozen in zip(self.models, self.before['cases']):
+        # Matched by id: the four kids A desk/chair models left the receipt when the desks moved under the lofts (docs/lanes/FX.md); their frozen cases stay in the fixture as history.
+        by_id = {c['id']: c for c in self.before['cases']}
+        for model in self.models:
+            frozen = by_id[model['id']]
             with self.subTest(model=model['id']):
                 self.assertEqual(digest(model['review_geometry']), frozen['geometry_sha256'])
                 self.assertEqual(model['review_geometry']['source_sha256'], frozen['source_sha256'])
@@ -34,8 +37,9 @@ class ImportedAdmission(unittest.TestCase):
                 with self.assertRaisesRegex(PartError, 'appearance mesh cannot'):
                     PartMeshList().extend(rows)
         physical = require_scene(self.scene)
-        self.assertEqual(len(physical), 363)
-        self.assertEqual(sum(len(p['components']) for p in physical), 680)
+        # Measured: 16 models gave 363 parts / 680 components; without the four kids A desk/chair models 261 / 500 (-102 / -180).
+        self.assertEqual(len(physical), 261)
+        self.assertEqual(sum(len(p['components']) for p in physical), 500)
         self.assertFalse(PartMeshList().extend(physical))
         self.assertTrue(all(p['render'] is False and not p.get('proxy_exemption') for p in physical))
         self.assertTrue(all(a['mesh_class'] == APPEARANCE_CLASS and a['physical_part'] is False

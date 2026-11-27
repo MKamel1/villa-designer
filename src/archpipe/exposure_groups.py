@@ -178,13 +178,20 @@ def white_balances(record):
     return result
 
 
+def device_evidence_ok(device):
+    # A GPU run, or a CPU run that was explicitly requested (--cpu). A silent CPU fallback stays refused.
+    # Why explicit CPU: exposure re-uploads the scene per metered view (13.4 GB peak, docs/lanes/WT.md Rev 6) and cannot share the GPU with the client's RAG service.
+    device = device or {}
+    return device.get('device') == 'GPU' or (device.get('device') == 'CPU' and device.get('explicit_cpu') is True)
+
+
 def require_record(scene, record, *, check_transport=True):
     if record.get('rule_sha256') not in RULE_FILES:
         raise ValueError('Stale dominant-light rule or transport measurement')
     policy = rule(record['rule_sha256'])
     if (record.get('schema') != 'exposure-groups/1'
             or record.get('runtime', {}).get('probe') != policy['source_probe']
-            or record.get('runtime', {}).get('render_device', {}).get('device') != 'GPU'):
+            or not device_evidence_ok(record.get('runtime', {}).get('render_device'))):
         raise ValueError('Frozen dominant-light source probe settings or GPU evidence differ')
     if ((check_transport and record.get('transport_sha256') != transport_digest(scene))):
         raise ValueError('Stale dominant-light rule or transport measurement')

@@ -21,9 +21,9 @@ def _dl(villa, room):
 
 def test_every_bed_in_every_bedroom_has_lying_sightlines(villa):
     ids = [s["id"] for s in VC.bed_lying_sightlines(villa)]
-    assert {i.split("-lying-up")[0] for i in ids} == {"pb-bed", "kb-bed", "ka-bunk"}
+    assert {i.split("-lying-up")[0] for i in ids} == {"pb-bed", "kb-bed", "ka-loft-1", "ka-loft-2"}   # FX 2026-11-25: two lofts replace the one bunk
     assert sum(i.startswith("pb-bed") for i in ids) == 2                  # a double bed: both pillows
-    assert sum(i.startswith("ka-bunk") for i in ids) == 2                 # the bunk's head end is undeclared: both ends
+    assert sum(i.startswith("ka-loft-1") for i in ids) == 1 and sum(i.startswith("ka-loft-2") for i in ids) == 1   # each loft has one declared head end (FX)
     assert all(s["dir"] == (0, 0, 1) and s["cards"] == ("L6-POLICY-LA4-bed-lying-looking-up",) for s in VC.bed_lying_sightlines(villa))
 
 
