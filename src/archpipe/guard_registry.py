@@ -3344,6 +3344,9 @@ def check_villa_furnish_room_route_connectivity(
 _items_route_conn_bad = copy.deepcopy(_cached_furnish_layout())
 _by_id_route_conn = {it["id"]: it for it in _items_route_conn_bad}
 _by_id_route_conn["ka-wardrobe"]["cx"] = 13.4
+# The kids-A layout moved (loft beds/cupboards): cx alone no longer severs a route (measured: 13.4..14.2 at the authored cy all pass).
+# Dropping the wardrobe to cy -26.0 leaves 'ka-desk-2 not reached by a 750 mm path' on the current D1 layout.
+_by_id_route_conn["ka-wardrobe"]["cy"] = -26.0
 
 register_guard(
     fn=check_villa_furnish_room_route_connectivity,

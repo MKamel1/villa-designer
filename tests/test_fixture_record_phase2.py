@@ -194,7 +194,7 @@ class ClientVanityDecision(unittest.TestCase):
             self.assertEqual(f.record.cct_k,2700)   # L6b LA6: one CCT per layer, 2700 K for every interior layer (was 3000 K at the branch start)
             self.assertEqual(f.extra['decision_source'],'CLIENT DECISION 2026-10-08')
             self.assertIn('ASSUMED',f.record.native_spec()['assumptions'])
-            self.assertEqual(f.record.flux_lm,53.3 if f.room=='parents-ensuite' else 100)   # L6c: the ensuite bar takes its driver from knowledge/lighting/zone-drivers.json (0.7 x 0.761 of 100 lm), no longer the flat 0.4 dimmer
+            self.assertEqual(f.record.flux_lm,38.0 if f.room=='parents-ensuite' else 100)   # 2026-11-24 ensuite LED cove (37d0b63): zone-drivers.json Z-GF-PARENTS-ENSUITE-TASK 0.7 -> 0.5 (Radiance re-solved), so 0.5 x 0.761 of 100 lm = 38.0 (was 0.7 x 0.761 = 53.3)
             for retired in f.extra['retired_fixture_ids']:
                 self.assertFalse(any(mid.endswith('-'+retired) for mid in ids))
             mirror = next(m for m in self.scene['meshes'] if m['id']==f.extra['mirror_id'])
