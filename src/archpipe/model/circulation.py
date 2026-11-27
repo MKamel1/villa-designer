@@ -82,6 +82,7 @@ def tray_boxes(items, pull):
         body = next(b for n, b in F3.body(bed) if n == "tray-body-floor-" + tag)
         bw = F3.to_world(bed, body)
         lo, hi = min(x[0], bw[0]), max(x[1], bw[3])      # front + stored body, closed
+        sx = 1 if (x[0] + x[1]) / 2 > bed["cx"] else -1     # the tray's WORLD side: the bed may be turned (R3: rot 180 puts local +x at world -x)
         out[tag] = (lo + sx * pull, y0, hi + sx * pull, y1)
     return out
 
@@ -93,6 +94,8 @@ def with_trays(items, pull):
 
 
 def _required(lay, cl):
+    if cl == {"suite-vestibule"}:               # the annexed corridor end is a passage first: the stricter figure, not the bedroom route
+        return F.BODY, "mitton-path-of-travel-min (suite vestibule is a passage; the 0.90 hall card ukadm-hall-min-m42 is met by the same width)"
     if all(lay["rooms"][c]["occupancy"] == "bedroom" for c in cl) or cl == {"parents-dressing", "parents-dressing-ext"}:
         return min(F.BODY, F.BEDROOM_ROUTE), "ukadm-bedroom-route-750 (private dressing: project waiver)"
     return F.BODY, "mitton-path-of-travel-min"

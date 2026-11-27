@@ -2106,8 +2106,9 @@ def render(scene_data, args):
         half_drawn = view.get("curtain_state") == "sheer-half"     # declared per view; default is the stacked sheer
         for spec in scene_data.get("curtains", []):
             for side in ("l", "r"):
-                objects[spec["id"] + "-sheer-" + side].hide_render = half_drawn
-                objects[spec["id"] + "-sheer-half-" + side].hide_render = not half_drawn
+                fixed = spec.get("fixed_drapes")                    # R3 head window: roller + fixed side drapes, no sheer
+                objects[spec["id"] + "-sheer-" + side].hide_render = half_drawn or bool(fixed)
+                objects[spec["id"] + "-sheer-half-" + side].hide_render = bool(fixed) or not half_drawn
         for spec in scene_data["lights"]:
             obj = lights[spec["id"]]
             factor = (view.get("dimmers", {}).get(spec["layer"], 1.0) * spec.get("dimmer", 1.0)) if spec["layer"] in view["layers_on"] else 0

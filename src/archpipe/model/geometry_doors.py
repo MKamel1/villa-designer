@@ -114,6 +114,8 @@ def _geometry(d, lay):
 
 def _hinged(i, d, lay, sp, furn, cols, stair, stair_rects, typ, sectors):
     level, w = d["level"], d["width"]
+    from ..concept import villa_furnish as F
+    key = "/".join(d["rooms"])
     horizontal, jambs, normals = _geometry(d, lay)
     reasons: list[str] = []
     probe = 0.3
@@ -156,8 +158,10 @@ def _hinged(i, d, lay, sp, furn, cols, stair, stair_rects, typ, sectors):
         hs = sw["hinge_side"]
         pick = next((o for o in opts if _side_word(horizontal, o[1], d) == hs), min(opts, key=_key))
         decided = "authored in the spec (" + ("G1 swing" if sw else "DOOR_TYPES") + ")"
-    elif authored and typ.startswith("into:") and d["rooms"] == ["parents-bed", "parents-dressing"]:
-        pick, decided = min(opts, key=_key), "swing room authored in DOOR_TYPES; hinge by rule R3"
+    elif authored and key in F.DOOR_HINGE:
+        hs = F.DOOR_HINGE[key]
+        pick = next(o for o in opts if _side_word(horizontal, o[1], d) == hs)
+        decided = "swing room and hinge jamb authored in DOOR_HINGE (privacy: the open leaf screens the view)"
     else:
         pick, decided = min(opts, key=_key), "rules R1-R3" if not authored else "swing room authored in DOOR_TYPES; hinge by rule R3"
     ((cf, near), end), (hx, hy), (ux, uy) = pick

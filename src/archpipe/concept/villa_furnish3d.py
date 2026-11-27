@@ -17,7 +17,7 @@ from . import villa_furnish as F
 
 # where a part may rise above the piece's checked height h (name -> why)
 ABOVE = {"headboard": "a bed's headboard stands against the wall, above the mattress",
-         "headboard-frame-top": "the joinery bed's 50 mm headboard frame stands above the mattress (to 1.35 m)",
+         "headboard-frame-top": "the joinery bed's 50 mm headboard frame stands above the mattress (to the 0.90 m window sill)",
          "headboard-frame-bottom": "the joinery bed's headboard frame stands above the mattress",
          "headboard-frame-stile": "the joinery bed's headboard frame stands above the mattress",
          "headboard-panel": "the joinery bed's upholstered headboard panel stands above the mattress",
@@ -386,8 +386,9 @@ def extras(it):
             xc = -W / 2 + (k + 0.5) * W / it["stools"]
             out.append(("stool-%d" % (k + 1), _stool(xc, -D / 2 - 0.05, -D / 2 + 0.35)))
     if it["type"] == "desk" and it["id"] in TUCKED_SEAT and not it.get("chair_pulled_out"):
-        # seat under the top (0.01 m clear of the wall), back against its front edge: only the 0.03 m back stands proud of the 0.40 m top
-        out.append(("chair-1", _chair(0.0, D / 2 - 0.39, D / 2 + 0.03, True)))
+        # seat wholly under the top (0.01 m clear of the wall), its back flush with the top's front edge. Client R3 (2026-11-26): the bedside passage at the
+        # vanity is 0.76 m, so nothing may stand proud of the top (the old 0.03 m back left 0.73 m, under the 0.75 m route)
+        out.append(("chair-1", _chair(0.0, D / 2 - 0.39, D / 2, True)))
     elif it["type"] == "desk":
         n = it.get("chairs", max(1, int(W // 0.9)))
         for k in range(n):

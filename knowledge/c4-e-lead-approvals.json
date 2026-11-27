@@ -163,46 +163,6 @@
       ]
     },
     {
-      "id": "host-face-support-detail-headboard-slats",
-      "host_id": "support-detail-headboard-slats",
-      "old": [
-        19.527,
-        -26.590999999999998,
-        0.0,
-        22.597,
-        -26.590999999999998,
-        2.8
-      ],
-      "new": [
-        19.527,
-        -26.577999999999996,
-        0.0,
-        22.597,
-        -26.577999999999996,
-        2.8
-      ]
-    },
-    {
-      "id": "detail-headboard-slats",
-      "host_id": "support-detail-headboard-slats",
-      "old": [
-        19.479999999999997,
-        -26.591,
-        0.0,
-        21.459999999999997,
-        -26.561,
-        2.1
-      ],
-      "new": [
-        19.479999999999997,
-        -26.577999999999996,
-        0.0,
-        21.459999999999997,
-        -26.547999999999995,
-        2.1
-      ]
-    },
-    {
       "id": "detail-stair-open-stringer",
       "host_id": "support-detail-stair-open-stringer",
       "old": [
@@ -1287,6 +1247,50 @@
         "host-face-support-marker-PATH-corridor-07",
         "host-face-support-marker-PATH-corridor-08",
         "host-face-support-marker-PATH-corridor-09"
+      ]
+    }
+  ],
+  "retired_rows": [
+    {
+      "id": "host-face-support-detail-headboard-slats",
+      "host_id": "support-detail-headboard-slats",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the slat feature moved from the old head wall (y -26.591, behind the bed) to the corridor-side west wall (x 18.477); the approved movement onto the old wall face is void and the new host is measured afresh.",
+      "old": [
+        19.527,
+        -26.590999999999998,
+        0.0,
+        22.597,
+        -26.590999999999998,
+        2.8
+      ],
+      "new": [
+        19.527,
+        -26.577999999999996,
+        0.0,
+        22.597,
+        -26.577999999999996,
+        2.8
+      ]
+    },
+    {
+      "id": "detail-headboard-slats",
+      "host_id": "support-detail-headboard-slats",
+      "reason": "R3 (client FINAL 2026-11-26, lane DF): the slat feature moved from the old head wall (y -26.591, behind the bed) to the corridor-side west wall (x 18.477); the approved movement onto the old wall face is void and the new host is measured afresh.",
+      "old": [
+        19.479999999999997,
+        -26.591,
+        0.0,
+        21.459999999999997,
+        -26.561,
+        2.1
+      ],
+      "new": [
+        19.479999999999997,
+        -26.577999999999996,
+        0.0,
+        21.459999999999997,
+        -26.547999999999995,
+        2.1
       ]
     }
   ]

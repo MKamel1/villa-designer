@@ -10,7 +10,7 @@ ROOM_AR = {
     "landing-gf": "فسحة السلم", "stair-gf": "السلم والمنور", "corridor": "الردهة", "study-game": "غرفة المذاكرة والألعاب",
     "kids-a": "غرفة الأطفال أ", "kids-b": "غرفة الأطفال ب", "family-bath": "حمام الأسرة", "parents-bed": "غرفة الوالدين",
     "parents-dressing": "غرفة الملابس", "parents-ensuite": "حمام الوالدين", "gallery-end": "الممر",
-    "parents-entry": "مدخل غرفة الوالدين", "parents-dressing-ext": "ملحق الملابس",
+    "parents-entry": "مدخل غرفة الوالدين", "suite-vestibule": "ردهة جناح الوالدين", "parents-dressing-ext": "ملحق الملابس",
     "lounge": "الصالة", "lounge-nook": "ركن الصالة", "stair-b": "السلم", "pantry": "المخزن", "hall-b": "ردهة السلم",
     "entry-b": "المدخل", "family": "جلسة العائلة", "kitchen": "المطبخ", "kitchen-island": "جزيرة المطبخ",
     "dining": "غرفة الطعام", "dining-side": "ركن الطعام", "living": "المعيشة", "bar-alcove": "ركن المكتبة",

@@ -274,6 +274,9 @@ def _build(lay):
                 w_ = 0.8
             else:
                 w_ = 0.9
+            wd = (ra.get("door_w") or {}).get(b, (rb.get("door_w") or {}).get(a))
+            if wd is not None:
+                w_ = wd                          # a width the layout fixes (the suite door)
             if {a, b} == {"parents-bed", "parents-dressing"}:
                 w_ = 0.8  # design lead: clears the 0.35 m bedside table with a 100 mm return to the east wall
             if lay["id"] == "D1" and {a, b} == {"kitchen", "dirty-kitchen"}:

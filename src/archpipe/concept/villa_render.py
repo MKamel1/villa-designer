@@ -41,6 +41,7 @@ from ..model import stair_steel as STEEL
 from . import garden_g4e
 from ..blender import element_ids as EID
 from ..interior import chosen as CH
+from ..furniture import JOINERY_BED
 from dataclasses import asdict
 
 LZ = {"B": -3.0, "GF": 0.0}
@@ -297,7 +298,7 @@ fill_defaults(FINISH, {
     "parents-ensuite": ("marble-bath", "marble-bath", "ceiling-white"),     # Marble020 read pink
 })
 for r in ("landing-gf", "corridor", "gallery-end", "study-game", "kids-a", "kids-b", "parents-bed", "parents-entry",
-          "parents-dressing", "parents-dressing-ext"):
+          "suite-vestibule", "parents-dressing", "parents-dressing-ext"):
     fill_defaults(FINISH, {r: ("oak-floor", "plaster-warm-white", "ceiling-white")})
 for _rid, (_fl, _wl) in CH.room_finish(CHOSEN).items():
     FINISH[_rid] = (_fl, _wl, FINISH[_rid][2])
@@ -536,7 +537,14 @@ def sheer_half_inner(width, opening_kind):
 def curtain_hidden_meshes(curtains, state):
     """Authored curtain visibility shared by still and moving cameras."""
     suffixes = ('-heavy-closed',) if state == 'day' else ('-heavy-open-l', '-heavy-open-r')
-    return [c['id'] + suffix for c in curtains for suffix in suffixes]
+    out = []
+    for c in curtains:
+        if c.get('fixed_drapes'):
+            # fixed side drapes always stand; the draw layer never exists; the roller is lowered at night only
+            out += [c['id'] + '-heavy-closed'] + (['detail-' + c['id'] + '-roller-fabric'] if state == 'day' else [])
+        else:
+            out += [c['id'] + suffix for suffix in suffixes]
+    return out
 
 
 def sun_for_timestamp(when, location=None):
@@ -854,16 +862,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     PB = F.clear_rect(lay, "parents-bed")
     bed = F.footprint(it["pb-bed"])
     faces = []
-    # only where the head wall is SOLID wall: the first run went 0.6 m past the bed each way and closed the
-    # parents' entry opening and the dressing door (client: "Parent's room entrance is blocked")
-    solid = [(w[0], w[2]) for w in F._walls(sp, "GF") if abs(w[3] - PB[1]) < 0.06 or abs(w[1] - PB[1]) < 0.06]
-    for k in range(int((bed[2] + 0.9 - (bed[0] - 0.6)) / 0.05)):
-        xa = bed[0] - 0.6 + k * 0.05
-        if not any(a0 <= xa and xa + 0.03 <= a1 for a0, a1 in solid):
+    # Client FINAL 2026-11-26 (R3): the slat feature is on the CORRIDOR-SIDE (west, x = PB[0]) wall, not behind the head (the head is on the
+    # window wall). Only where that wall is SOLID: from the lobby's return to the 0.16 m return at the window wall; none across the lobby
+    # mouth (y < PB[1]).  Same slat (30 x 30 at 50 pitch, to 2.10 m) as the old head-wall feature.
+    solid = [(w[1], w[3]) for w in F._walls(sp, "GF") if abs(w[2] - PB[0]) < 0.06 or abs(w[0] - PB[0]) < 0.06]
+    y_lo, y_hi = PB[1] + 0.05, PB[3] - 0.16 - 0.03
+    for k in range(int((y_hi - y_lo) / 0.05) + 1):
+        ya = y_lo + k * 0.05
+        if not any(a0 <= ya and ya + 0.03 <= a1 for a0, a1 in solid):
             continue
-        faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
+        faces += box_faces(PB[0], ya, 0.0, PB[0] + 0.03, ya + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
     mesh("detail-headboard-slats", "oak", faces, "furniture", room="parents-bed",
-         label="detail: oak slatted headboard wall", kind="wall-panel", element_ids=["furn-pb-bed"])
+         label="detail: oak slat feature wall (corridor-side wall of the parents' bedroom)", kind="wall-panel", element_ids=["furn-pb-bed"])
     op = sp["gf_opening"]
     gz = 0.0
     # Round-3 defect 4 (glass reads as a mirror): this guard was two ZERO-THICKNESS quads with a refractive
@@ -1063,15 +1073,16 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 if part == "headboard-panel":
                     key = (mat, part)
                 if part.startswith("tray-"):
-                    # each tray is its own mesh; the east tray also gets a pulled-out copy (n18 shows it, hides the closed one)
+                    # each tray is its own mesh; the tray on the world +x side (the vanity side) also gets a pulled-out copy (n18 shows it,
+                    # hides the closed one). Local 'e' is world +x for a bed with rot 0 and world -x for rot 180 (R3), so pick by rotation.
                     key = (mat, "tray-" + part[-1])
-                    if part.endswith("-e"):
+                    if part.endswith("-" + ("e" if src["rot"] == 0 else "w")):
                         tray_open.setdefault(mat, []).extend(
                             [[[vs[t[i]][0] + JOINERY_TRAY_PULL, vs[t[i]][1], vs[t[i]][2]] for i in range(3)] for t in triangles])
                 by.setdefault(key, []).extend(
                     [[vs[t[0]], vs[t[1]], vs[t[2]]] for t in triangles])
             for k, ((mat, part), faces) in enumerate(by.items()):
-                if part == "tray-e":
+                if part == "tray-" + ("e" if src["rot"] == 0 else "w") and f["mark"] == "pb-bed":
                     tray_closed.append("furn-%s-%d" % (f["mark"], k))
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"], k), group="furniture", material=mat,
                                    room=f["room"], label=f["mark"] + (" dressing: pillow" if part.startswith("pillow") else ""),
@@ -1962,6 +1973,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         else:
             overlap = max(0.0, desired_stack - pier_reach)
         stack = round(pier_reach + overlap, 3)
+        # Client FINAL 2026-11-26 (R3): the bed head stands under this window (pillows 0.07 m off the glass), so a draw curtain would cut
+        # through them. The window gets a ROLLER BLACKOUT in the reveal and FIXED side drapes: the heavy leaves stay stacked on the piers
+        # (no glazing overlap), the sheer and the closed heavy layer are not built for it.
+        fixed_drapes = room == "parents-bed" and axis == "h" and o["y"] > rcy
+        if fixed_drapes:
+            stack = pier_reach
         park, park_from = CURTAIN_PARK.get(cid, (None, None))
         if park:
             assert axis == "h" and park == "r", cid                 # only the east draw of an x-running window is built
@@ -1979,6 +1996,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             sheer_half_inner_m=sheer_half_inner(width, opening_kind),
             **({"open_clear_width_m": clear_width} if clear_width is not None else {}),
             **({"park_side": park, "park_reach_m": park_reach} if park else {}),
+            **({"fixed_drapes": True} if fixed_drapes else {}),
             # Floor-length regardless of sill height: a punched bedroom window's curtain still runs track-to-floor
             # (the norm in bedrooms/living rooms, not a curtain cut to the glass), so track_z/floor_z alone (not
             # the window's own sill/head) drive villa_scene.build_curtains' panel height.
@@ -2000,6 +2018,21 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             box = (d0, o["y"] - half_lo, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
              label="detail: curtain ceiling track (ASSUMED)", kind="curtain-track")
+        if fixed_drapes:
+            # Roller blackout in the reveal (ASSUMED product-neutral): a 60 x 60 mm cassette at the window head, tucked inside the reveal
+            # (room side of the 50 mm frame), the fabric 4 mm thick from the cassette down to the sill when lowered (hidden by day).
+            gl = o["width"] / 2 - 0.02
+            yface = wall_face                                    # the room-side face of the wall (clear_rect)
+            sgn = sign
+            ya, yb = sorted((yface - sgn * 0.02, yface - sgn * 0.08))
+            zhead = LZ[level] + o["sill"] + o["height"]
+            mesh("detail-" + cid + "-roller-cassette", "black-metal",
+                 box_faces(o["x"] - gl, ya, zhead - 0.07, o["x"] + gl, yb, zhead - 0.01), "fixture", room=room,
+                 label="detail: roller blackout cassette in the reveal (ASSUMED)", kind="curtain-track")
+            yc0, yc1 = sorted((yface - sgn * 0.03, yface - sgn * 0.034))
+            mesh("detail-" + cid + "-roller-fabric", "curtain-heavy",
+                 box_faces(o["x"] - gl + 0.01, yc0, LZ[level] + o["sill"] + 0.01, o["x"] + gl - 0.01, yc1, zhead - 0.07), "fixture",
+                 room=room, label="detail: roller blackout fabric, lowered (night views only)", kind="curtain-track")
     # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
     # track are REMOVED, not just hidden, per the design-layer review. No "curtain-library-nook" curtain and no
     # "detail-curtain-library-nook-track" mesh are emitted any more (see test_render_standard's negative assertion).
@@ -2216,7 +2249,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                                    emission_lm_per_m2=round(record.flux_lm / (4 * math.pi * inner**2), 1), cct_k=cct)
                 mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner, 24, 14), "fixture", room=f.room,
                      label="lamp inside opal globe", layer=f.layer, kind="light-bulb", smooth_shaded=True)
-            if f.kind == "WALL-READ":
+            if f.kind == "WALL-READ" and f.room == "parents-bed":
+                # Client FINAL 2026-11-26 (R3): the arm is CLAMPED TO THE HEAD PANEL's top rail (no wall beside the head: glass and piers).
+                # A vertical post from the rail's top face up to the lamp's height, then a short horizontal arm to the shade.
+                head = F.footprint(it_all["pb-bed"])[3]
+                yp = head - JOINERY_BED["panel_t"] / 2000.0              # the panel's mid-thickness (the head is the +y end)
+                ztop = LZ["GF"] + JOINERY_BED["panel_z1"] / 1000.0
+                hw = housing["bracket_half_width"]
+                mesh("bracket-" + f.id, "brass", box_faces(f.x - hw, yp - hw, ztop, f.x + hw, yp + hw, f.z + hw), "fixture", room=f.room,
+                     label="ASSUMED reading-light clamp post on the head panel " + f.id, kind="rail-bracket")
+                mesh("arm-" + f.id, "brass", box_faces(f.x - hw, f.y, f.z - hw, f.x + hw, yp + hw, f.z + hw), "fixture", room=f.room,
+                     label="ASSUMED reading-light arm " + f.id, kind="lamp-arm")
+            elif f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
                           lay["rooms"]["parents-bed"]["rect"][1])
                 mesh("bracket-" + f.id, "brass", box_faces(f.x - housing["bracket_half_width"], wall_y, f.z - housing["bracket_half_width"],
@@ -2721,7 +2765,7 @@ def bed_part_kind(part, mat, furniture_type):
     return "wall-panel" if part == "headboard-panel" else furniture_type
 
 
-JOINERY_BED_H = 1.35        # m: the parents' joinery bed's envelope height (headboard top)
+JOINERY_BED_H = 0.90        # m: the parents' joinery bed's envelope height (the head panel's top = the window sill, client R3)
 JOINERY_TRAY_PULL = 0.25    # m: the east tray pulled out for the close view (furniture.JOINERY_BED["tray_pull_m"])
 TRAY_OPEN_PREFIX = "tray-open-e-"
 TRAY_VIEW = "n18-parents-tray-open"
@@ -2729,7 +2773,9 @@ PB_DUVET_OVER, PB_DUVET_FOOT = 0.03, 0.0   # m: the parents' duvet cut beyond th
 # Open-curtain stacks parked off the route (client 2026-11-25, lead decision): curtain id -> the side the whole open stack
 # is drawn to, and the x its stacks must not start west of. The parents' south window has the SW column and the 0.77 m west passage on its west side; a stack there
 # leaves 0.58-0.63 m on the only way round the bed foot, so both leaves draw to the east pier, past the vanity.
-CURTAIN_PARK = {"curtain-parents-bed-01": ("r", 21.70)}   # (side, x where the parked stacks may start: 0.68 m of east pier)
+# R3 (client FINAL 2026-11-26): that window (curtain-parents-bed-01, the window wall) now has a roller blackout and fixed side drapes on its piers
+# (see `fixed_drapes` in _build), and the bed foot is no longer beside it: nothing is parked.
+CURTAIN_PARK = {}   # curtain id -> (side, x where the parked stacks may start)
 KITCHEN_ROOMS = ("kitchen", "kitchen-island", "dirty-kitchen")
 # rug slot of the client's schedule per room; the cinema carpet is a design finish, not a schedule slot
 SOFA_SCHEDULE = {"living-sofa": ("living-sofa", 1), "lounge-sofa": ("lounge-sofa", -1), "study-sofa": ("study-sofa", 1),

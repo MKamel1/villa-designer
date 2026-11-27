@@ -278,7 +278,7 @@ def _build(wardrobes, floor):
             emit(box_id+'-lid','garment-stone',folded(x,cy,za+.13,width+.008,.358,.016),
                  'storage-box',wardrobe,prefix,'box lid',box_id)
         # Rounded shoes, seated on the actual 100 mm plinth, inside hanging bay.
-        _,a,b=next(span for span in F.module_spans(wardrobe) if span[0] in ('long-hang','double-hang'))
+        shoe_kind,a,b=next(span for span in F.module_spans(wardrobe) if span[0] in ('long-hang','double-hang'))   # R3: hers now starts with the hat shelf, so the first module is not the hanging bay
         for foot in range(2):
             x=(a+b)/2+(foot-.5)*.11; z=floor+.10
             sole=loft([rounded_ring(x,cy,.081,.248,z,.035),
@@ -292,7 +292,7 @@ def _build(wardrobes, floor):
             # loafer opening visible while keeping the leather shell closed.
             faces=sole+loft(upper)
             emit(f'dress-{owner}-shoe-0-{foot}','leather-brown',faces,'shoe',wardrobe,
-                 f'dress-{owner}-{F.module_spans(wardrobe)[0][0]}-0','shoe',source)
+                 f'dress-{owner}-{shoe_kind}-0','shoe',source)
     return list(meshes),modules
 
 

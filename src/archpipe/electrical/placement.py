@@ -366,12 +366,26 @@ def place_devices(h: House) -> list[Device]:
                 for a in (lo - BEDSIDE_OFFSET_MM, hi + BEDSIDE_OFFSET_MM):
                     x, y = W.point(a)
                     add("socket", r.id, x, y, BEDSIDE_Z, "EA1-bedside-both-sides", furniture=f.id)
+                if f.params.get("head_panel_lights"):
+                    # R3 (client FINAL 2026-11-26): the reading lights are arms CLAMPED to the low head panel, and the head wall is glass above 0.90 m,
+                    # so there is no wall socket or wall box beside them. Power route: the lighting circuit (the lamps' own) is brought to a SELV
+                    # driver / junction in the sill wall BEHIND the panel (z 300, centred on the bed, reachable by lifting the panel off its cleats),
+                    # and a 24 V DC lead runs inside the panel's rear cavity to a connector in each arm's clamp. See docs/lanes/DF-built.md.
+                    x, y = W.point((lo + hi) / 2)
+                    lamps = [l.id for l in h.luminaires if l.room == r.id and "WALL-READ" in l.id]
+                    add("socket_selv", r.id, x, y, 300.0, "EA1-bed-head-supply", serves=lamps[0] if lamps else "", furniture=f.id,
+                        lamps=lamps)
             elif f.kind == "desk":
                 mid = (lo + hi) / 2
                 for k in (-1, 1):
                     x, y = W.point(mid + k * 300.0)
-                    add("socket", r.id, x, y, SOCKET_Z + 800.0, "EA1-desk-cluster", furniture=f.id)
-                    add("data", r.id, x, y, SOCKET_Z + 800.0, "EA1-desk-cluster", furniture=f.id)
+                    z = SOCKET_Z + 800.0
+                    # a desk or vanity under a window (sill below the 1100 mm desk-cluster height): drop the cluster 300 mm, under the sill, instead of
+                    # sliding it 1.2 m along the wall or losing it (R3 moved the parents' vanity under window-7)
+                    if not clearance(h, r.level, x, y, z)[0] and clearance(h, r.level, x, y, z - 300.0)[0]:
+                        z -= 300.0
+                    add("socket", r.id, x, y, z, "EA1-desk-cluster", furniture=f.id)
+                    add("data", r.id, x, y, z, "EA1-desk-cluster", furniture=f.id)
             elif f.kind == "tv":
                 mid = (lo + hi) / 2
                 for k, kind in ((-1, "socket"), (0, "socket"), (1, "tv_sat"), (2, "data")):
@@ -504,6 +518,8 @@ def provision_requirements(h: House, r: Room) -> list[tuple[str, int, str]]:
     for f in (f for f in h.furniture if f.room == r.id):
         if f.kind == "bed":
             req.append(("socket_bedside", 2, f"both sides of {f.id}"))
+            if f.params.get("head_panel_lights"):
+                req.append(("socket_selv", 1, f"bed-head SELV supply behind the head panel of {f.id} (reading-light arms)"))
         elif f.kind == "desk":
             req += [("socket", 2, f"desk {f.id}"), ("data", 2, f"desk {f.id}")]
         elif f.kind == "tv":

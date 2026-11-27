@@ -208,6 +208,14 @@ def migrate(scene, lay, spec, finishes):
             anchor = (x, y, lamp.z)
             host = measured_host(scene, anchor, outward, lamp.room, lamp.id, panel=True)
             fixing = x*outward[0]
+        elif lamp.kind == "WALL-READ" and lamp.room == "parents-bed":
+            # R3: clamped on the head panel's top face (joinery host, outward +z), at the panel's mid-thickness
+            outward = (0, 0, 1)
+            root = next(m for m in members if m["id"].startswith("bracket-"))
+            rp = points(root)
+            anchor = (lamp.x, sum(p[1] for p in rp)/len(rp), min(p[2] for p in rp))
+            host = measured_host(scene, anchor, outward, lamp.room, lamp.id, panel=True)
+            fixing = min(sum(p[i]*outward[i] for i in range(3)) for p in points(root))
         else:
             outward = (0,1,0) if lamp.kind == "WALL-READ" else (1 if lamp.aim[0] > 0 else -1,0,0)
             anchor = (lamp.x, lamp.y, lamp.z)

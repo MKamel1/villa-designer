@@ -46,7 +46,7 @@ def _centre(q):
 
 # room -> (general card, plane height above the floor, scene that owns it): circulation is lit on the floor/tread plane
 ROOM_PLANE_Z = {"lounge": 0.75, "family": 0.75, "living": 0.75, "kitchen": 0.92, "kitchen-island": 0.0, "hall-b": 0.0,
-                "corridor": 0.0, "study-game": 0.75, "kids-a": 0.75, "kids-b": 0.75, "parents-bed": 0.75,
+                "corridor": 0.0, "suite-vestibule": 0.0, "study-game": 0.75, "kids-a": 0.75, "kids-b": 0.75, "parents-bed": 0.75,
                 "parents-dressing": 0.0, "cinema": 0.75, "dirty-kitchen": 0.9, "pantry": 0.0, "store-ramp": 0.0,
                 "family-bath": 0.0, "parents-ensuite": 0.0, "guest-wc": 0.0}
 
@@ -101,7 +101,7 @@ def build_planes(v, filtered=True):
     # parents' bed: reading positions (each side)
     b = fp["pb-bed"]
     for k, x in enumerate((b[0] + 0.4, b[2] - 0.4)):
-        add("pillow-%d" % (k + 1), "parents-bed", _rect(x, b[1] + 0.35, 0.5, 0.4), G + 0.9, "ies-res-bed-reading-200",
+        add("pillow-%d" % (k + 1), "parents-bed", _rect(x, b[3] - 0.35, 0.5, 0.4), G + 0.9, "ies-res-bed-reading-200",
             "Reading", "reading position")
     # basins
     for basin, room in (("fb-basin", "family-bath"), ("pe-basin", "parents-ensuite"), ("gwc-basin", "guest-wc")):

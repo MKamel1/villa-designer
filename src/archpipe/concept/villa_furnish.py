@@ -32,7 +32,9 @@ DIRS = {0: {"front": (0, 1), "back": (0, -1), "right": (1, 0), "left": (-1, 0)},
         180: {"front": (0, -1), "back": (0, 1), "right": (-1, 0), "left": (1, 0)},
         -90: {"front": (1, 0), "back": (-1, 0), "right": (0, -1), "left": (0, 1)},
         90: {"front": (-1, 0), "back": (1, 0), "right": (0, 1), "left": (0, -1)}}
-PB_BED_X = 20.33        # m: the parents' bed centre. UNMOVED: the lead-approved wall fittings and slats are bound to it
+PB_VANITY_Y0 = -26.2    # m: the vanity's start along the east wall (was -25.3). Client R3 asked for ~0.30 m; MEASURED (model/circulation, 20 mm grid, both trays
+#                         open 0.25 m, chair tucked): 0.30 m leaves 0.50 m between the open tray and the vanity corner (they are corner to corner, 0.51 m apart in x),
+#                         0.60 m leaves 0.58 m, and 0.90 m leaves 0.76 m, so the vanity moves 0.90 m to keep the 0.75 m the brief asks for
 BODY = 0.914            # card mitton-path-of-travel-min: paths of travel at least 36 in (914 mm)
 PRINCIPAL_BEDROOM = "parents-bed"
 BEDROOM_ROUTE = 0.750   # card ukadm-bedroom-route-750: inside a bedroom, a 750 mm access route from the doorway
@@ -379,20 +381,25 @@ def _layout(lay=None, products=True):
     # Client 2026-11-26: a custom JOINERY queen bed (furniture.JOINERY_BED): mattress 1600 x 2000, frame = the mattress outline,
     # a 50 mm walnut-and-upholstery headboard, and a hidden push-to-open tray in each side rail. The floating ledges (2026-11-25)
     # stood in the entry opening and 9 cm from the dressing door, so nothing stands beside the bed: the trays are inside it.
-    add(item("pb-bed", None, "bed_double", PB_BED_X, PB[1] + 1.0, 0, h=0.5, joinery=True,
-             why="joinery queen 1600 x 2000 (client), head on the dressing wall, east of the entry; 750 mm both sides and "
-                 "the foot; a hidden pull-out tray in each side rail, flush when closed"),
+    # Client FINAL 2026-11-26 (R3, sheet DF-102): the bed is turned with its head to the east window wall (model +y) and centred on
+    # the room; the dressing door moves to the lobby end of the old head wall; the vanity moves 0.30 m toward the foot so the open
+    # east tray keeps 750 mm; a low upholstered head panel stands to the sill (0.90 m).
+    add(item("pb-bed", None, "bed_double", (PB[0] + PB[2]) / 2, PB[3] - 1.0, 180, h=0.5, joinery=True, head_panel_lights=True,
+             why="joinery queen 1600 x 2000 (client), head on the window wall, centred on the room: 1160 mm each side, 800 mm at the foot; "
+                 "a low upholstered head panel to the sill (0.90 m); a hidden pull-out tray in each side rail, flush when closed"),
         "parents-bed")
-    add(against("pb-vanity", PB, "x1", -25.3, "desk", w=1.0, d=0.4, h=0.75,
-                why="vanity / dressing table at the garden window (answers), clear of the bed zone"), "parents-bed")
+    add(against("pb-vanity", PB, "x1", PB_VANITY_Y0, "desk", w=1.0, d=0.4, h=0.75,
+                why="vanity / dressing table at the garden window (answers), moved 0.90 m toward the bed foot (client R3 asked ~0.30 m, which measures 0.50 m) so the open tray on this side keeps "
+                    "750 mm past it"), "parents-bed")
     # -- dressing: hanging on both long walls
     PD = r["parents-dressing"]
-    add(against("pd-hang-1", PD, "y1", PD[0] + 0.05, "wardrobe", w=VP.DRESSING_DOOR_X - 0.55 - PD[0] - 0.05, d=0.6,
-                h=2.3, partner="hers", modules=[("long-hang", 0.65), ("double-hang", 0.45),
-                    ("drawers", 0.42), ("hat-shelf", 0.20)],
+    add(against("pd-hang-1", PD, "y1", VP.DRESSING_DOOR_X + 0.5, "wardrobe", w=1.87, d=0.6,
+                h=2.3, partner="hers", modules=[("hat-shelf", 0.20), ("drawers", 0.42),
+                    ("double-hang", 0.60), ("long-hang", 0.65)],
                 drawers=["lingerie", "headscarves", "pyjamas", "sleepwear"],
                 top_boxes_above=2.1, hanger_storage=True,
-                why="hanging along the bedroom wall, up to the bedroom door"), "parents-dressing")
+                why="hers: 1.87 m of hanging on the freed head wall, from the new dressing door's jamb to the east wall (client R3); "
+                    "the open leaf (hinged on the east jamb) stops 80 mm short of it"), "parents-dressing")
     add(against("pd-hang-2", r["parents-dressing-ext"], "y0", r["parents-dressing-ext"][0] + 0.05, "wardrobe",
                 w=21.2 - r["parents-dressing-ext"][0] - 0.05,
                 d=0.6, h=2.3, partner="his", modules=[("double-hang", 0.55), ("trousers-pullout", 0.25),
@@ -400,6 +407,12 @@ def _layout(lay=None, products=True):
                 drawers=["socks", "underwear", "T-shirts", "sportswear", "pyjamas", "sleepwear"],
                 top_boxes_above=2.1, hanger_storage=True,
                 why="his dedicated hanging, trousers, drawers and shelves up to the ensuite door"), "parents-dressing-ext")
+    # -- suite vestibule (the annexed corridor end, client FINAL 2026-11-26): a flat cabinet on the south (facade) wall. 130 mm deep so the passage
+    # left is 0.92 m of the 1.05 m clear corridor (>= 0.914 card tss-front-of-storage-914 and the 0.90 hall card ukadm-hall-min-m42).
+    SV = r["suite-vestibule"]
+    add(against("sv-store", SV, "y0", SV[0] + 0.15, "store_shelving", w=1.7, d=0.13, h=2.0,
+                why="vestibule storage: a flat 130 mm cabinet along the facade wall (folded wraps, prayer mats, scarves, keys); the passage left is "
+                    "0.92 m, so the walk from the suite door to the entry stays above 0.914 m"), "suite-vestibule")
     # -- ensuite: bath, shower, double basin; WC on the south (garden) wall (client)
     PE = r["parents-ensuite"]
     add(against("pe-wc", PE, "x1", PE[1] + 0.86, "wc", d=0.5, h=0.4, why="WC on the south wall (client)"),
@@ -551,10 +564,18 @@ DOOR_TYPES = {
     # door (rooms joined by "/") -> "pocket": a sliding door into the wall, so it sweeps no floor. Parents: the king
     # bed's 750 mm zone and its bedside table sit where a swing would go; the wall beside the door has 1.18 m for
     # the pocket (Phase 2 builds it as a sliding door).
-    "corridor/parents-entry": "pocket",
+    "suite-vestibule/parents-entry": "pocket",
     "kitchen/dirty-kitchen": "pocket",
     "parents-bed/parents-dressing": "into:parents-dressing",
+    # client FINAL 2026-11-26: the suite door across the corridor swings INTO the vestibule (never out across kids-b's approach)
+    "corridor/suite-vestibule": "into:suite-vestibule",
 }
+# Authored hinge jamb (model-axis words, see model/geometry_doors) where the leaf's open position matters for privacy.
+# parents-dressing: the +x (client south) jamb, so the open leaf lies across the doorway side the lobby looks along (DF-102).
+DOOR_HINGE = {"parents-bed/parents-dressing": "east",
+              "corridor/suite-vestibule": "north"}
+# Doors fitted with a self-closer (the second privacy layer, never the first): the suite door.
+SELF_CLOSING = {"corridor/suite-vestibule"}
 
 
 def _door_zones(sp, lay, level):
@@ -604,6 +625,26 @@ def _door_approaches(sp, lay, level):
             if RS._room_at(lay, level, (z[0] + z[2]) / 2, (z[1] + z[3]) / 2):
                 out.append({"door": "/".join(d.get("rooms") or []), "rect": z})
     return out
+
+
+def _gap(a, b):
+    """Separation of two footprints (m), 0 if they touch or overlap: the larger of the x and y gaps."""
+    return max(0.0, max(a[0] - b[2], b[0] - a[2]), max(a[1] - b[3], b[1] - a[3]))
+
+
+def _front_waived(it, o, zone):
+    """Client FINAL 2026-11-26 (R3): the vanity's front zone may reach the bed's side, provided 750 mm stays clear between the two
+    (card ukadm-bedroom-route-750, applied as the bedroom access route; the chair is staged tucked, TUCKED_SEAT)."""
+    return it["id"] == "pb-vanity" and o["id"] == "pb-bed" and _gap(footprint(it), footprint(o)) >= BEDROOM_ROUTE - 1e-6
+
+
+def _corner_waived(it, zone, col):
+    """Client FINAL 2026-11-26: hers (1.87 m, lead's figure) ends 110 mm inside the dressing room's south-east column; the column only
+    clips the corner of the 914 mm front zone, by at most 50 mm. Any other piece, or a deeper intrusion, still fails."""
+    if it["id"] != "pd-hang-1":
+        return False
+    w, h = min(zone[2], col[2]) - max(zone[0], col[0]), min(zone[3], col[3]) - max(zone[1], col[1])
+    return min(w, h) <= 0.05 + 1e-9
 
 
 EXTENDED_TABLE = 2.8    # the dining table opened for 10 (ASSUMED leaf length: 10 x 600 mm place settings, less ends)
@@ -665,9 +706,10 @@ def _check(items=None, lay=None, _extended=False):
                     z = (end, z[1], z[2], z[3])
             hit = [o["id"] for o in by_level[it["level"]] if o is not it and _ov(z, footprint(o))
                    and not (it["type"].startswith("bed") and s in ("left", "right") and o["type"] == "bedside_table"
-                            and _inside(footprint(o), [head_zone(it, ZONE_A)]))]
+                            and _inside(footprint(o), [head_zone(it, ZONE_A)]))
+                   and not _front_waived(it, o, z)]
             wall = not _inside(z, rects)
-            colh = [c for c in cols if _ov(z, c)]
+            colh = [c for c in cols if _ov(z, c) and not _corner_waived(it, z, c)]
             if hit or wall or colh:
                 probs["clearances"].append("%s %s %d mm: %s" % (it["id"], s, round(dep * 1000),
                                                                 ", ".join(hit + (["a wall"] if wall else []) +
