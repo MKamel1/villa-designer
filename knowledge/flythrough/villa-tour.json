@@ -39,6 +39,9 @@
    "space": "dining~a2"
   },
   {
+   "space": "living~a3"
+  },
+  {
    "space": "living"
   },
   {
@@ -83,9 +86,6 @@
    "space": "store-ramp~a2"
   },
   {
-   "space": "store-ramp"
-  },
-  {
    "space": "lounge~a2"
   },
   {
@@ -103,6 +103,9 @@
   },
   {
    "space": "pantry~a1"
+  },
+  {
+   "space": "hall-b~a1"
   },
   {
    "stair": "up"
@@ -123,30 +126,10 @@
    "space": "kids-a"
   },
   {
-   "space": "kids-b~a2"
-  },
-  {
    "space": "kids-b"
   },
   {
    "space": "parents-bed~a2"
-  },
-  {
-   "space": "parents-dressing",
-   "via": [
-    [
-     20.4,
-     -24.215
-    ],
-    [
-     21.465,
-     -24.25
-    ],
-    [
-     21.465,
-     -25.4
-    ]
-   ]
   },
   {
    "space": "parents-ensuite"

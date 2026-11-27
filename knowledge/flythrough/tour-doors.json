@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "c9719f3939ba39d646bc76dfcdbc07849d73e762d6845d150963beb2571254d6",
+"camera_sha256": "75ada8906857d6ab55c2e8d6f93e4ff58e96607ddf64b093bf68334faa42bbe8",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -13,318 +13,158 @@
 "doors": [
 {
 "record": {
-"element": "door-GF-parents-bed-parents-dressing",
-"leaf_id": "door-leaf-300b90f850461b95a078a683",
+"element": "door-GF-parents-dressing-ext-parents-ensuite",
+"leaf_id": "door-leaf-de34774cc02dd1542f58f9d4",
 "hinge": [
-22.296999999999997,
--26.641
+22.049999999999997,
+-28.881
 ],
 "signed_open_deg": -90.0,
 "closed_faces": [
 [
 [
-21.497,
--26.590999999999998,
+21.25,
+-28.831,
 0.0
 ],
 [
-21.497,
--26.691,
+21.25,
+-28.931,
 0.0
 ],
 [
-21.497,
--26.691,
+21.25,
+-28.931,
 2.1
 ],
 [
-21.497,
--26.590999999999998,
-2.1
-]
-],
-[
-[
-21.497,
--26.590999999999998,
-0.0
-],
-[
-22.296999999999997,
--26.590999999999998,
-0.0
-],
-[
-22.296999999999997,
--26.691,
-0.0
-],
-[
-21.497,
--26.691,
-0.0
-]
-],
-[
-[
-21.497,
--26.691,
-0.0
-],
-[
-22.296999999999997,
--26.691,
-0.0
-],
-[
-22.296999999999997,
--26.691,
-2.1
-],
-[
-21.497,
--26.691,
+21.25,
+-28.831,
 2.1
 ]
 ],
 [
 [
-21.497,
--26.691,
+21.25,
+-28.831,
+0.0
+],
+[
+22.049999999999997,
+-28.831,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
+0.0
+],
+[
+21.25,
+-28.931,
+0.0
+]
+],
+[
+[
+21.25,
+-28.931,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
+0.0
+],
+[
+22.049999999999997,
+-28.931,
 2.1
 ],
 [
-22.296999999999997,
--26.691,
-2.1
-],
-[
-22.296999999999997,
--26.590999999999998,
-2.1
-],
-[
-21.497,
--26.590999999999998,
+21.25,
+-28.931,
 2.1
 ]
 ],
 [
 [
-22.296999999999997,
--26.590999999999998,
-0.0
-],
-[
-21.497,
--26.590999999999998,
-0.0
-],
-[
-21.497,
--26.590999999999998,
+21.25,
+-28.931,
 2.1
 ],
 [
-22.296999999999997,
--26.590999999999998,
+22.049999999999997,
+-28.931,
+2.1
+],
+[
+22.049999999999997,
+-28.831,
+2.1
+],
+[
+21.25,
+-28.831,
+2.1
+]
+],
+[
+[
+22.049999999999997,
+-28.831,
+0.0
+],
+[
+21.25,
+-28.831,
+0.0
+],
+[
+21.25,
+-28.831,
+2.1
+],
+[
+22.049999999999997,
+-28.831,
 2.1
 ]
 ],
 [
 [
-22.296999999999997,
--26.691,
+22.049999999999997,
+-28.931,
 0.0
 ],
 [
-22.296999999999997,
--26.590999999999998,
+22.049999999999997,
+-28.831,
 0.0
 ],
 [
-22.296999999999997,
--26.590999999999998,
+22.049999999999997,
+-28.831,
 2.1
 ],
 [
-22.296999999999997,
--26.691,
+22.049999999999997,
+-28.931,
 2.1
 ]
 ]
 ],
-"note": "hinge side is not authored; this side (hinge [np.float64(22.296999999999997), np.float64(-26.641)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+"note": "hinge side is not authored; this side (hinge [np.float64(22.049999999999997), np.float64(-28.881)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 10568,
-"close_end": 10616,
-"open_start": 10708,
-"open_end": 10756
+"close_start": 10502,
+"close_end": 10550,
+"open_start": 10862,
+"open_end": 10910
 },
 "features": [
-"furn-pd-hang-1",
-"lum-VSTRIP-parents-dressing-03",
-"lum-VSTRIP-parents-dressing-04",
-"lum-VSTRIP-parents-dressing-05"
-]
-},
-{
-"record": {
-"element": "door-B-cinema-store-ramp",
-"leaf_id": "door-leaf-e92e2c979036ab9fc6150637",
-"hinge": [
-3.125,
--21.696
-],
-"signed_open_deg": 90.0,
-"closed_faces": [
-[
-[
-3.075,
--21.696,
--3.0
-],
-[
-3.075,
--22.496,
--3.0
-],
-[
-3.075,
--22.496,
--1.12
-],
-[
-3.075,
--21.696,
--1.12
-]
-],
-[
-[
-3.075,
--22.496,
--3.0
-],
-[
-3.075,
--21.696,
--3.0
-],
-[
-3.175,
--21.696,
--3.0
-],
-[
-3.175,
--22.496,
--3.0
-]
-],
-[
-[
-3.075,
--22.496,
--3.0
-],
-[
-3.175,
--22.496,
--3.0
-],
-[
-3.175,
--22.496,
--1.12
-],
-[
-3.075,
--22.496,
--1.12
-]
-],
-[
-[
-3.175,
--21.696,
--3.0
-],
-[
-3.075,
--21.696,
--3.0
-],
-[
-3.075,
--21.696,
--1.12
-],
-[
-3.175,
--21.696,
--1.12
-]
-],
-[
-[
-3.175,
--22.496,
--1.12
-],
-[
-3.175,
--21.696,
--1.12
-],
-[
-3.075,
--21.696,
--1.12
-],
-[
-3.075,
--22.496,
--1.12
-]
-],
-[
-[
-3.175,
--22.496,
--3.0
-],
-[
-3.175,
--21.696,
--3.0
-],
-[
-3.175,
--21.696,
--1.12
-],
-[
-3.175,
--22.496,
--1.12
-]
-]
-],
-"note": "hinge side is not authored; this side (hinge [np.float64(3.125), np.float64(-21.696)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
-},
-"schedule": {
-"close_start": 4640,
-"close_end": 4688,
-"open_start": 4949,
-"open_end": 4997
-},
-"features": [
-"furn-store-shelves",
-"lum-STORE-BATTEN-store-ramp-01",
-"lum-STORE-BATTEN-store-ramp-02",
-"lum-STORE-BATTEN-store-ramp-03"
+"furn-pe-basin",
+"lum-VANITY-LIN-parents-ensuite-04"
 ]
 },
 {
@@ -473,73 +313,202 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 8076,
-"close_end": 8124,
-"open_start": 8358,
-"open_end": 8406
+"close_start": 8179,
+"close_end": 8227,
+"open_start": 8468,
+"open_end": 8516
 },
 "features": [
 "furn-fb-wc"
+]
+},
+{
+"record": {
+"element": "door-GF-corridor-kids-a",
+"leaf_id": "door-leaf-aee3799086d85d35807310fd",
+"hinge": [
+13.665,
+-27.371
+],
+"signed_open_deg": -90.0,
+"closed_faces": [
+[
+[
+12.765,
+-27.320999999999998,
+0.0
+],
+[
+12.765,
+-27.421,
+0.0
+],
+[
+12.765,
+-27.421,
+2.1
+],
+[
+12.765,
+-27.320999999999998,
+2.1
+]
+],
+[
+[
+12.765,
+-27.320999999999998,
+0.0
+],
+[
+13.665,
+-27.320999999999998,
+0.0
+],
+[
+13.665,
+-27.421,
+0.0
+],
+[
+12.765,
+-27.421,
+0.0
+]
+],
+[
+[
+12.765,
+-27.421,
+0.0
+],
+[
+13.665,
+-27.421,
+0.0
+],
+[
+13.665,
+-27.421,
+2.1
+],
+[
+12.765,
+-27.421,
+2.1
+]
+],
+[
+[
+12.765,
+-27.421,
+2.1
+],
+[
+13.665,
+-27.421,
+2.1
+],
+[
+13.665,
+-27.320999999999998,
+2.1
+],
+[
+12.765,
+-27.320999999999998,
+2.1
+]
+],
+[
+[
+13.665,
+-27.320999999999998,
+0.0
+],
+[
+12.765,
+-27.320999999999998,
+0.0
+],
+[
+12.765,
+-27.320999999999998,
+2.1
+],
+[
+13.665,
+-27.320999999999998,
+2.1
+]
+],
+[
+[
+13.665,
+-27.421,
+0.0
+],
+[
+13.665,
+-27.320999999999998,
+0.0
+],
+[
+13.665,
+-27.320999999999998,
+2.1
+],
+[
+13.665,
+-27.421,
+2.1
+]
+]
+],
+"note": "hinge side is not authored; this side (hinge [np.float64(13.665), np.float64(-27.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+},
+"schedule": {
+"close_start": 8870,
+"close_end": 8918,
+"open_start": 8942,
+"open_end": 8990
+},
+"features": [
+"furn-ka-loft-2",
+"furn-ka-desk-2"
 ]
 }
 ],
 "report": [
 {
-"door": "door-B-lounge-nook-pantry",
+"door": "door-GF-parents-bed-parents-dressing",
 "scheduled": false,
-"reason": "no swing side clears the camera in every frame of the animation",
-"blocked_frames": [
-6430,
-6494
+"reason": "the leaf only hides the feature while the camera is walking",
+"features": [
+"lum-VSTRIP-parents-dressing-05",
+"furn-pd-hang-1"
 ]
 },
 {
-"door": "door-GF-parents-bed-parents-dressing",
+"door": "door-GF-parents-dressing-ext-parents-ensuite",
 "scheduled": true,
 "features": [
-"furn-pd-hang-1",
-"lum-VSTRIP-parents-dressing-03",
-"lum-VSTRIP-parents-dressing-04",
-"lum-VSTRIP-parents-dressing-05"
+"furn-pe-basin",
+"lum-VANITY-LIN-parents-ensuite-04"
 ],
 "blocked_frames": [
-10616,
-10696
+10548,
+10908
 ],
 "schedule": {
-"close_start": 10568,
-"close_end": 10616,
-"open_start": 10708,
-"open_end": 10756
+"close_start": 10502,
+"close_end": 10550,
+"open_start": 10862,
+"open_end": 10910
 },
-"delay_frames": 0,
-"hold_after_last_blocked_frame_s": 2.5,
-"leave_frame": 10796,
-"reopened_before_leaving": true,
-"route_gap_open_m": 0.35
-},
-{
-"door": "door-B-cinema-store-ramp",
-"scheduled": true,
-"features": [
-"furn-store-shelves",
-"lum-STORE-BATTEN-store-ramp-01",
-"lum-STORE-BATTEN-store-ramp-02",
-"lum-STORE-BATTEN-store-ramp-03"
-],
-"blocked_frames": [
-4688,
-4980
-],
-"schedule": {
-"close_start": 4640,
-"close_end": 4688,
-"open_start": 4949,
-"open_end": 4997
-},
-"delay_frames": 0,
-"hold_after_last_blocked_frame_s": 0.71,
-"leave_frame": 4997,
+"delay_frames": 2,
+"hold_after_last_blocked_frame_s": 0.08,
+"leave_frame": 10910,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },
@@ -550,20 +519,43 @@
 "furn-fb-wc"
 ],
 "blocked_frames": [
-8124,
-8404
+8227,
+8515
 ],
 "schedule": {
-"close_start": 8076,
-"close_end": 8124,
-"open_start": 8358,
-"open_end": 8406
+"close_start": 8179,
+"close_end": 8227,
+"open_start": 8468,
+"open_end": 8516
 },
 "delay_frames": 0,
-"hold_after_last_blocked_frame_s": 0.08,
-"leave_frame": 8406,
+"hold_after_last_blocked_frame_s": 0.04,
+"leave_frame": 8516,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
+},
+{
+"door": "door-GF-corridor-kids-a",
+"scheduled": true,
+"features": [
+"furn-ka-loft-2",
+"furn-ka-desk-2"
+],
+"blocked_frames": [
+8918,
+8930
+],
+"schedule": {
+"close_start": 8870,
+"close_end": 8918,
+"open_start": 8942,
+"open_end": 8990
+},
+"delay_frames": 0,
+"hold_after_last_blocked_frame_s": 2.5,
+"leave_frame": 9207,
+"reopened_before_leaving": true,
+"route_gap_open_m": 0.4
 }
 ]
 }
