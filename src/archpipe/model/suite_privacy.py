@@ -58,10 +58,11 @@ def leaf_open_90(e, els, thickness=0.04):
     return LineString([(hx, hy), (ex, ey)]).buffer(thickness / 2, cap_style="flat")
 
 
-def solid(els, leaves=()):
-    """Sight-blocking solid of the GF with every door open (plus the named doors' 90-degree leaves)."""
+def solid(els, leaves=(), cuts=()):
+    """Sight-blocking solid of the GF with every door open (plus the named doors' 90-degree leaves). `cuts` are extra openings
+    (shapely boxes, model m) for what-if geometry such as the straight-vestibule option 2 of docs/lanes/DF-privacy-options.md."""
     walls = unary_union([_wall_box(e) for e in _els(els, "wall")])
-    holes = unary_union([door_opening(e) for e in _els(els, "door")])
+    holes = unary_union([door_opening(e) for e in _els(els, "door")] + list(cuts))
     extra = [leaf_open_90(e, els) for e in _els(els, "door") if e.id in leaves]
     return unary_union([walls.difference(holes), *extra])
 
@@ -124,9 +125,9 @@ def sees(blocker, a, b):
     return blocker.intersection(LineString([a, b])).length < 1e-6
 
 
-def seeing(els, leaves=(), step=0.2):
+def seeing(els, leaves=(), step=0.2, cuts=()):
     """Run the criterion. Returns viewpoints (count), the viewpoints that see a protected point and one example target each."""
-    blocker = solid(els, leaves)
+    blocker = solid(els, leaves, cuts)
     pb = prep(blocker)
     T = targets(els, step)
     V = viewpoints(els)

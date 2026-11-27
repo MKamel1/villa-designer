@@ -2258,7 +2258,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 hw = housing["bracket_half_width"]
                 mesh("bracket-" + f.id, "brass", box_faces(f.x - hw, yp - hw, ztop, f.x + hw, yp + hw, f.z + hw), "fixture", room=f.room,
                      label="ASSUMED reading-light clamp post on the head panel " + f.id, kind="rail-bracket")
-                mesh("arm-" + f.id, "brass", box_faces(f.x - hw, f.y, f.z - hw, f.x + hw, yp + hw, f.z + hw), "fixture", room=f.room,
+                mesh("arm-" + f.id, "brass", round_tube((f.x, yp, f.z), (f.x, f.y, f.z), 0.008), "fixture", room=f.room,
                      label="ASSUMED reading-light arm " + f.id, kind="lamp-arm")
             elif f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
@@ -2968,7 +2968,7 @@ def props(lay):
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
     # bedroom one moved out of the vanity chair's way into the window corner beside the vanity; the study one out of
     # the new low window into the corner beside the TV unit
-    plant("bedroom-plant", "potted_plant_01", fp["pb-vanity"][2] - 0.17, fp["pb-vanity"][3] + 0.32, G,
+    plant("bedroom-plant", "potted_plant_01", fp["pb-vanity"][2] - 0.17, F.clear_rect(lay, "parents-bed")[3] - 0.19, G,   # R3: the head-corner spot it always had (-23.98); the vanity moved 0.90 m away
         "parents-bed", s=0.58,
         label="Ficus lyrata look-alike proxy, 0.341 x 0.367 m footprint, 0.783 m tall")
     plant("study-plant", "potted_plant_01", (fp["study-tv"][0] + fp["study-tv"][2]) / 2,
