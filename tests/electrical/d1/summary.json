@@ -2,7 +2,7 @@
  "design": "D1",
  "supply": {
   "max_demand_kva": 77.5,
-  "single_phase_equiv_a": 352.3,
+  "single_phase_equiv_a": 352.4,
   "line_current_a_3ph_worst_phase": 117.6,
   "incomer_in_a": 125.0,
   "recommendation": "three-phase",
@@ -12,21 +12,21 @@
   "sensitivity": [
    {
     "socket_current_factor": 1.0,
-    "total_a_1ph_equiv": 352.3,
+    "total_a_1ph_equiv": 352.4,
     "kva": 77.5,
-    "line_a_3ph": 117.4
+    "line_a_3ph": 117.5
    },
    {
     "socket_current_factor": 0.5,
-    "total_a_1ph_equiv": 261.5,
+    "total_a_1ph_equiv": 261.6,
     "kva": 57.5,
     "line_a_3ph": 87.2
    },
    {
     "socket_current_factor": 0.25,
-    "total_a_1ph_equiv": 216.1,
+    "total_a_1ph_equiv": 216.2,
     "kva": 47.6,
-    "line_a_3ph": 72.0
+    "line_a_3ph": 72.1
    }
   ],
   "rationale": "single-phase equivalent demand 352 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 118 A"
@@ -42,8 +42,8 @@
   "DB-B": {
    "level": "B",
    "room": "hall-b",
-   "circuits": 32,
-   "ways": 40,
+   "circuits": 33,
+   "ways": 42,
    "demand_kva": 42.1
   },
   "DB-GF": {
@@ -55,14 +55,14 @@
   }
  },
  "circuits": {
-  "total": 58,
-  "lighting": 6,
+  "total": 59,
+  "lighting": 7,
   "socket": 26,
   "dedicated": 26
  },
  "devices": {
   "fcu": 15,
-  "socket": 140,
+  "socket": 143,
   "led_driver": 1,
   "switch": 33,
   "isolator_ac": 8,
@@ -105,9 +105,9 @@
  },
  "provisional_zones": false,
  "phase_loads_a": {
-  "L1": 208.3,
-  "L2": 207.6,
-  "L3": 208.2
+  "L1": 207.8,
+  "L2": 208.3,
+  "L3": 208.1
  },
  "checks": {
   "EA1:not_evaluated": 1,
@@ -117,17 +117,17 @@
   "EA11:pass": 1,
   "EA11:warn": 3,
   "EA12:pass": 4,
-  "EA13:pass": 7,
+  "EA13:pass": 8,
   "EA14:not_evaluated": 1,
   "EA15:pass": 29,
   "EA2:pass": 6,
-  "EA3:pass": 101,
+  "EA3:pass": 103,
   "EA4:not_evaluated": 4,
   "EA4:pass": 5,
-  "EA5:pass": 66,
-  "EA6:pass": 67,
+  "EA5:pass": 67,
+  "EA6:pass": 68,
   "EA7:not_evaluated": 1,
-  "EA8:pass": 58,
+  "EA8:pass": 59,
   "EA9:not_evaluated": 1
  },
  "flags": [
@@ -135,10 +135,9 @@
   "door hinge/latch side is not in the model: 29 of 29 door-room records use the policy 'hinge at the end of the opening nearer the corner, switch at the latch (open) side'. Wall-mounted switches beside glazed garden doors are not placed.",
   "furn-gwc-shower: wet-area zone data from the model (no tray, outlet at the rain head; head height 2300 mm)",
   "furn-fb-shower: wet-area zone data from the model (tray rim 100.0 mm; head height 2250 mm)",
-  "furn-ka-bunk: bed head side is not authored and no short end is within 600 mm of a wall; bedside sockets sit at both ends of the wall it stands along (W)",
   "furn-pe-bath: wet-area zone data from the model (tray rim 550.0 mm; head height 2300 mm)",
-  "luminaire watts: 58 of 135 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
-  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 69 zones; 17 sized on rated luminaire W above the published commissioned W",
+  "luminaire watts: 62 of 137 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
+  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 70 zones; 17 sized on rated luminaire W above the published commissioned W",
   "boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; meter position and utility cabinet at the street fence are assumptions to confirm",
   "routes: Manhattan distance x 1.15 through all the circuit's load points (nearest-neighbour chain) plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops",
   "storey areas for the alarm grade (net rooms + wall plan): B 168.7 m2 (net 153.6), GF 117.6 m2 (net 103.6)",

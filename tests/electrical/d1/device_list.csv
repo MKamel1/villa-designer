@@ -10,13 +10,13 @@ bar-alcove,B,lum-BACK-bar-alcove-07,luminaire,accent,21434,-29666,,,Z-B-BAR-ALCO
 bar-alcove,B,lum-BACK-bar-alcove-08,luminaire,accent,21434,-29666,,,Z-B-BAR-ALCOVE-ACCENT,DB-B/L2,6.36 W
 bar-alcove,B,lum-SWING-bar-alcove-09,luminaire,task,19283,-29241,,,Z-B-BAR-ALCOVE-DAYBED-READING,DB-B/L2,1.26 W
 bar-alcove,B,lum-SWING-bar-alcove-10,luminaire,task,20053,-29241,,,Z-B-BAR-ALCOVE-DAYBED-READING,DB-B/L2,1.26 W
-bar-alcove,B,SOC-bar-alcove-168,power/lighting control,socket,17550,-28671,300,EA1-general-pitch,,DB-B/S13,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-bar-alcove,B,SOC-bar-alcove-169,power/lighting control,socket,22315,-28671,300,EA1-general-pitch,,DB-B/S13,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-bar-alcove,B,SOC-bar-alcove-170,power/lighting control,socket,22597,-29294,300,EA1-general-pitch,,DB-B/S13,
-bar-alcove,B,SOC-bar-alcove-171,power/lighting control,socket,18600,-29916,300,EA1-general-pitch,,DB-B/S13,
-bar-alcove,B,SOC-bar-alcove-172,power/lighting control,socket,21265,-29916,300,EA1-general-pitch,,DB-B/S13,
-bar-alcove,B,SOC-bar-alcove-173,power/lighting control,socket,17268,-29294,300,EA1-general-pitch,,DB-B/S13,
-bar-alcove,B,SWI-bar-alcove-167,power/lighting control,switch,17668,-28671,1150,EA1-switch-open-plan,,DB-B/L2,
+bar-alcove,B,SOC-bar-alcove-171,power/lighting control,socket,17550,-28671,300,EA1-general-pitch,,DB-B/S13,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+bar-alcove,B,SOC-bar-alcove-172,power/lighting control,socket,22315,-28671,300,EA1-general-pitch,,DB-B/S13,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+bar-alcove,B,SOC-bar-alcove-173,power/lighting control,socket,22597,-29294,300,EA1-general-pitch,,DB-B/S13,
+bar-alcove,B,SOC-bar-alcove-174,power/lighting control,socket,18600,-29916,300,EA1-general-pitch,,DB-B/S13,
+bar-alcove,B,SOC-bar-alcove-175,power/lighting control,socket,21265,-29916,300,EA1-general-pitch,,DB-B/S13,
+bar-alcove,B,SOC-bar-alcove-176,power/lighting control,socket,17268,-29294,300,EA1-general-pitch,,DB-B/S13,
+bar-alcove,B,SWI-bar-alcove-170,power/lighting control,switch,17668,-28671,1150,EA1-switch-open-plan,,DB-B/L2,
 cinema,B,DATA-037,ELV/fire,data,9227,-21446,400,EA1-tv-cluster,,,
 cinema,B,DATA-038,ELV/fire,data,4980,-20601,1100,EA1-desk-cluster,,,
 cinema,B,DATA-039,ELV/fire,data,5580,-20601,1100,EA1-desk-cluster,,,
@@ -30,38 +30,38 @@ cinema,B,lum-DL-cinema-02,luminaire,ambient,6577,-21351,,,Z-B-CINEMA-AMBIENT,DB-
 cinema,B,lum-NL-cinema-06,luminaire,night,6176,-23491,,,Z-B-CINEMA-NIGHT,DB-B/L1,6 W
 cinema,B,lum-DESK-cinema-07,luminaire,task,4970,-21071,,,Z-B-CINEMA-TASK,DB-B/L1,12 W
 cinema,B,lum-DESK-cinema-08,luminaire,task,5590,-21071,,,Z-B-CINEMA-TASK,DB-B/L1,12 W
-cinema,B,DAT-cinema-187,power/lighting control,data,9227,-21446,400,EA1-tv-cluster,,,
-cinema,B,DAT-cinema-191,power/lighting control,data,4980,-20601,1100,EA1-desk-cluster,,,
-cinema,B,DAT-cinema-193,power/lighting control,data,5580,-20601,1100,EA1-desk-cluster,,,
-cinema,B,ISO-cinema-183,power/lighting control,isolator_ac,6176,-20601,2200,EA1-ac-point,AC-CINEMA,DB-B/D2,
-cinema,B,SOC-cinema-184,power/lighting control,socket,9227,-22046,400,EA1-tv-cluster,,DB-B/S7,
-cinema,B,SOC-cinema-185,power/lighting control,socket,9227,-21846,400,EA1-tv-cluster,,DB-B/S7,
-cinema,B,SOC-cinema-188,power/lighting control,socket,5602,-20601,300,EA1-sofa-ends,,DB-B/S7,
-cinema,B,SOC-cinema-189,power/lighting control,socket,7152,-20601,300,EA1-sofa-ends,,DB-B/S7,
-cinema,B,SOC-cinema-190,power/lighting control,socket,4980,-20601,1100,EA1-desk-cluster,,DB-B/S7,
-cinema,B,SOC-cinema-192,power/lighting control,socket,5580,-20601,1100,EA1-desk-cluster,,DB-B/S7,
-cinema,B,SOC-cinema-194,power/lighting control,socket,4142,-20601,300,EA1-general-pitch,,DB-B/S7,
-cinema,B,SOC-cinema-195,power/lighting control,socket,8210,-20601,300,EA1-general-pitch,,DB-B/S7,
-cinema,B,SOC-cinema-196,power/lighting control,socket,4142,-23591,300,EA1-general-pitch,,DB-B/S8,
-cinema,B,SOC-cinema-197,power/lighting control,socket,6176,-23591,300,EA1-general-pitch,,DB-B/S8,
-cinema,B,SWI-cinema-181,power/lighting control,switch,8077,-23591,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
-cinema,B,SWI-cinema-182,power/lighting control,switch,3125,-21546,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
-cinema,B,TV_-cinema-186,power/lighting control,tv_sat,9227,-21646,400,EA1-tv-cluster,,,
+cinema,B,DAT-cinema-190,power/lighting control,data,9227,-21446,400,EA1-tv-cluster,,,
+cinema,B,DAT-cinema-194,power/lighting control,data,4980,-20601,1100,EA1-desk-cluster,,,
+cinema,B,DAT-cinema-196,power/lighting control,data,5580,-20601,1100,EA1-desk-cluster,,,
+cinema,B,ISO-cinema-186,power/lighting control,isolator_ac,6176,-20601,2200,EA1-ac-point,AC-CINEMA,DB-B/D2,
+cinema,B,SOC-cinema-187,power/lighting control,socket,9227,-22046,400,EA1-tv-cluster,,DB-B/S7,
+cinema,B,SOC-cinema-188,power/lighting control,socket,9227,-21846,400,EA1-tv-cluster,,DB-B/S7,
+cinema,B,SOC-cinema-191,power/lighting control,socket,5602,-20601,300,EA1-sofa-ends,,DB-B/S7,
+cinema,B,SOC-cinema-192,power/lighting control,socket,7152,-20601,300,EA1-sofa-ends,,DB-B/S7,
+cinema,B,SOC-cinema-193,power/lighting control,socket,4980,-20601,1100,EA1-desk-cluster,,DB-B/S7,
+cinema,B,SOC-cinema-195,power/lighting control,socket,5580,-20601,1100,EA1-desk-cluster,,DB-B/S7,
+cinema,B,SOC-cinema-197,power/lighting control,socket,4142,-20601,300,EA1-general-pitch,,DB-B/S7,
+cinema,B,SOC-cinema-198,power/lighting control,socket,8210,-20601,300,EA1-general-pitch,,DB-B/S7,
+cinema,B,SOC-cinema-199,power/lighting control,socket,4142,-23591,300,EA1-general-pitch,,DB-B/S8,
+cinema,B,SOC-cinema-200,power/lighting control,socket,6176,-23591,300,EA1-general-pitch,,DB-B/S8,
+cinema,B,SWI-cinema-184,power/lighting control,switch,8077,-23591,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
+cinema,B,SWI-cinema-185,power/lighting control,switch,3125,-21546,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
+cinema,B,TV_-cinema-189,power/lighting control,tv_sat,9227,-21646,400,EA1-tv-cluster,,,
 dining,B,SMOKE-012,ELV/fire,smoke,16634,-25131,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 dining,B,lum-PEN-LIN-dining-01,luminaire,task,16950,-25900,,,Z-B-DINING-TABLE-PENDANT,DB-B/L2,9.7 W
-dining,B,ISO-dining-150,power/lighting control,isolator_ac,15584,-23591,2200,EA1-ac-point,AC-DINING,DB-B/D4,moved 1050 mm along the wall (inside door door-B-dining-yard)
-dining,B,SOC-dining-151,power/lighting control,socket,18367,-23911,300,EA1-general-pitch,,DB-B/S12,moved 450 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-dining,B,SOC-dining-152,power/lighting control,socket,15768,-26071,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
-dining,B,SOC-dining-153,power/lighting control,socket,15502,-25901,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
-dining,B,SOC-dining-154,power/lighting control,socket,15502,-24361,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
-dining,B,SWI-dining-149,power/lighting control,switch,15002,-23591,1150,EA1-switch-open-plan,,DB-B/L2,
+dining,B,ISO-dining-153,power/lighting control,isolator_ac,15584,-23591,2200,EA1-ac-point,AC-DINING,DB-B/D4,moved 1050 mm along the wall (inside door door-B-dining-yard)
+dining,B,SOC-dining-154,power/lighting control,socket,18367,-23911,300,EA1-general-pitch,,DB-B/S12,moved 450 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+dining,B,SOC-dining-155,power/lighting control,socket,15768,-26071,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
+dining,B,SOC-dining-156,power/lighting control,socket,15502,-25901,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
+dining,B,SOC-dining-157,power/lighting control,socket,15502,-24361,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
+dining,B,SWI-dining-152,power/lighting control,switch,15002,-23591,1150,EA1-switch-open-plan,,DB-B/L2,
 dining-side,B,lum-ADJ-dining-side-01,luminaire,accent,16650,-27121,,,Z-B-DINING-SIDE-SIDEBOARD-ACCENT,DB-B/L2,11.7 W
 dining-side,B,lum-ADJ-dining-side-02,luminaire,accent,16950,-27121,,,Z-B-DINING-SIDE-SIDEBOARD-ACCENT,DB-B/L2,11.7 W
-dining-side,B,SOC-dining-side-156,power/lighting control,socket,17056,-27271,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
-dining-side,B,SOC-dining-side-157,power/lighting control,socket,17767,-27671,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
-dining-side,B,SOC-dining-side-158,power/lighting control,socket,17056,-28671,300,EA1-general-pitch,,DB-B/S12,
-dining-side,B,SOC-dining-side-159,power/lighting control,socket,15745,-28271,300,EA1-general-pitch,,DB-B/S12,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-dining-side,B,SWI-dining-side-155,power/lighting control,switch,15745,-28271,1150,EA1-switch-open-plan,,DB-B/L2,
+dining-side,B,SOC-dining-side-159,power/lighting control,socket,17056,-27271,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
+dining-side,B,SOC-dining-side-160,power/lighting control,socket,17767,-27671,0,EA1-general-pitch,,DB-B/S12,floor box: no wall element on this edge
+dining-side,B,SOC-dining-side-161,power/lighting control,socket,17056,-28671,300,EA1-general-pitch,,DB-B/S12,
+dining-side,B,SOC-dining-side-162,power/lighting control,socket,15745,-28271,300,EA1-general-pitch,,DB-B/S12,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+dining-side,B,SWI-dining-side-158,power/lighting control,switch,15745,-28271,1150,EA1-switch-open-plan,,DB-B/L2,
 dirty-kitchen,B,HEAT-010,ELV/fire,heat,13306,-22096,2800,EA15-heat-room,,,"interlinked, mains + sealed battery (Grade D1)"
 dirty-kitchen,B,lum-DL-dirty-kitchen-01,luminaire,ambient,12060,-21501,,,Z-B-DIRTY-KITCHEN-RUN-TASK,DB-B/L2,14.4 W
 dirty-kitchen,B,lum-DL-dirty-kitchen-02,luminaire,ambient,12943,-21501,,,Z-B-DIRTY-KITCHEN-RUN-TASK,DB-B/L2,14.4 W
@@ -69,43 +69,43 @@ dirty-kitchen,B,lum-DL-dirty-kitchen-03,luminaire,ambient,13827,-21501,,,Z-B-DIR
 dirty-kitchen,B,lum-DL-dirty-kitchen-04,luminaire,ambient,14710,-21501,,,Z-B-DIRTY-KITCHEN-RUN-TASK,DB-B/L2,14.4 W
 dirty-kitchen,B,lum-DL-dirty-kitchen-05,luminaire,ambient,12450,-22641,,,Z-B-DIRTY-KITCHEN-AMBIENT,DB-B/L2,14.4 W
 dirty-kitchen,B,lum-DL-dirty-kitchen-06,luminaire,ambient,14012,-22641,,,Z-B-DIRTY-KITCHEN-AMBIENT,DB-B/L2,14.4 W
-dirty-kitchen,B,FCU-dirty-kitchen-207,power/lighting control,fcu,11960,-20601,600,EA1-dedicated-appliance,WASHER,DB-B/D11,
-dirty-kitchen,B,FCU-dirty-kitchen-208,power/lighting control,fcu,12560,-20601,600,EA1-dedicated-appliance,DRYER,DB-B/D12,
-dirty-kitchen,B,SOC-dirty-kitchen-201,power/lighting control,socket,12235,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SOC-dirty-kitchen-202,power/lighting control,socket,13385,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SOC-dirty-kitchen-203,power/lighting control,socket,14535,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SOC-dirty-kitchen-204,power/lighting control,socket,11200,-22300,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SOC-dirty-kitchen-205,power/lighting control,socket,12212,-23591,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SOC-dirty-kitchen-206,power/lighting control,socket,12838,-23591,1100,EA1-worktop-pitch,,DB-B/S2,
-dirty-kitchen,B,SWI-dirty-kitchen-200,power/lighting control,switch,13452,-23591,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
+dirty-kitchen,B,FCU-dirty-kitchen-210,power/lighting control,fcu,11960,-20601,600,EA1-dedicated-appliance,WASHER,DB-B/D11,
+dirty-kitchen,B,FCU-dirty-kitchen-211,power/lighting control,fcu,12560,-20601,600,EA1-dedicated-appliance,DRYER,DB-B/D12,
+dirty-kitchen,B,SOC-dirty-kitchen-204,power/lighting control,socket,12235,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SOC-dirty-kitchen-205,power/lighting control,socket,13385,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SOC-dirty-kitchen-206,power/lighting control,socket,14535,-20601,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SOC-dirty-kitchen-207,power/lighting control,socket,11200,-22300,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SOC-dirty-kitchen-208,power/lighting control,socket,12212,-23591,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SOC-dirty-kitchen-209,power/lighting control,socket,12838,-23591,1100,EA1-worktop-pitch,,DB-B/S2,
+dirty-kitchen,B,SWI-dirty-kitchen-203,power/lighting control,switch,13452,-23591,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
 entry-b,B,SMOKE-019,ELV/fire,smoke,14940,-27671,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 entry-b,B,lum-WW-entry-b-02,luminaire,accent,14939,-28121,,,Z-B-ENTRY-B-ACCENT,DB-B/L2,10.1 W
 entry-b,B,lum-DL-entry-b-01,luminaire,ambient,14939,-27571,,,Z-B-ENTRY-B-AMBIENT,DB-B/L2,14.4 W
-entry-b,B,SOC-entry-b-124,power/lighting control,socket,14940,-27271,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
-entry-b,B,SOC-entry-b-125,power/lighting control,socket,15745,-28271,300,EA1-general-pitch,,DB-B/S11,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-entry-b,B,SOC-entry-b-126,power/lighting control,socket,14134,-28271,300,EA1-general-pitch,,DB-B/S11,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-entry-b,B,SWI-entry-b-123,power/lighting control,switch,15589,-28671,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
+entry-b,B,SOC-entry-b-127,power/lighting control,socket,14940,-27271,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
+entry-b,B,SOC-entry-b-128,power/lighting control,socket,15745,-28271,300,EA1-general-pitch,,DB-B/S11,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+entry-b,B,SOC-entry-b-129,power/lighting control,socket,14134,-28271,300,EA1-general-pitch,,DB-B/S11,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+entry-b,B,SWI-entry-b-126,power/lighting control,switch,15589,-28671,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
 family,B,lum-DL-family-01,luminaire,ambient,10427,-25156,,,Z-B-FAMILY-AMBIENT,DB-B/L1,14.4 W
-family,B,lum-NL-family-02,luminaire,night,9907,-25156,,,Z-B-FAMILY-NIGHT,DB-B/L3,2.03 W
-family,B,SOC-family-128,power/lighting control,socket,10597,-25901,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
-family,B,SOC-family-129,power/lighting control,socket,10597,-24361,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
-family,B,SOC-family-130,power/lighting control,socket,10427,-26071,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
-family,B,SOC-family-131,power/lighting control,socket,10257,-25901,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
-family,B,SOC-family-132,power/lighting control,socket,9657,-23761,300,EA1-general-pitch,,DB-B/S10,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-family,B,SWI-family-127,power/lighting control,switch,10147,-23591,1150,EA1-switch-latch-side,,DB-B/L1+DB-B/L3,hinge assumed (policy)
+family,B,lum-NL-family-02,luminaire,night,9907,-25156,,,Z-B-FAMILY-NIGHT,DB-B/L4,2.03 W
+family,B,SOC-family-131,power/lighting control,socket,10597,-25901,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
+family,B,SOC-family-132,power/lighting control,socket,10597,-24361,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
+family,B,SOC-family-133,power/lighting control,socket,10427,-26071,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
+family,B,SOC-family-134,power/lighting control,socket,10257,-25901,0,EA1-general-pitch,,DB-B/S10,floor box: no wall element on this edge
+family,B,SOC-family-135,power/lighting control,socket,9657,-23761,300,EA1-general-pitch,,DB-B/S10,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+family,B,SWI-family-130,power/lighting control,switch,10147,-23591,1150,EA1-switch-latch-side,,DB-B/L1+DB-B/L4,hinge assumed (policy)
 guest-wc,B,lum-DL-guest-wc-01,luminaire,ambient,10213,-22171,,,Z-B-GUEST-WC-AMBIENT,DB-B/L2,14.4 W
 guest-wc,B,lum-DL-guest-wc-02,luminaire,ambient,9627,-23150,,,Z-B-GUEST-WC-BASIN-TASK,DB-B/L2,14.4 W
 guest-wc,B,lum-VANITY-LIN-guest-wc-03,luminaire,task,9320,-23150,,,Z-B-GUEST-WC-TASK,DB-B/L2,1.11 W
-guest-wc,B,FCU-guest-wc-199,power/lighting control,fcu,9720,-20601,2300,EA2-fcu-outside-zones,WH-GUEST,DB-B/D5,
-guest-wc,B,SWI-guest-wc-198,power/lighting control,switch,10147,-23591,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
+guest-wc,B,FCU-guest-wc-202,power/lighting control,fcu,9720,-20601,2300,EA2-fcu-outside-zones,WH-GUEST,DB-B/D5,
+guest-wc,B,SWI-guest-wc-201,power/lighting control,switch,10147,-23591,1150,EA1-switch-latch-side,,DB-B/L2,hinge assumed (policy)
 hall-b,B,AP-041,ELV/fire,ap,10427,-27671,2600,EA15-ap-coverage,,,"ceiling AP, 8 m radius (policy)"
 hall-b,B,INTERCOM_MONITOR-054,ELV/fire,intercom_monitor,11197,-27671,1500,EA15-intercom-monitor,,,
 hall-b,B,lum-DL-hall-b-01,luminaire,ambient,10427,-27571,,,Z-B-HALL-B-AMBIENT,DB-B/L1,14.4 W
-hall-b,B,SOC-hall-b-119,power/lighting control,socket,10427,-27271,0,EA1-general-pitch,,DB-B/S8,floor box: no wall element on this edge
-hall-b,B,SOC-hall-b-120,power/lighting control,socket,11197,-28271,300,EA1-general-pitch,,DB-B/S8,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-hall-b,B,SOC-hall-b-121,power/lighting control,socket,10427,-28671,300,EA1-general-pitch,,DB-B/S8,
-hall-b,B,SOC-hall-b-122,power/lighting control,socket,9657,-28271,300,EA1-general-pitch,,DB-B/S8,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-hall-b,B,SWI-hall-b-118,power/lighting control,switch,11197,-28571,1150,EA1-switch-open-plan,,DB-B/L1,
+hall-b,B,SOC-hall-b-122,power/lighting control,socket,10427,-27271,0,EA1-general-pitch,,DB-B/S8,floor box: no wall element on this edge
+hall-b,B,SOC-hall-b-123,power/lighting control,socket,11197,-28271,300,EA1-general-pitch,,DB-B/S8,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+hall-b,B,SOC-hall-b-124,power/lighting control,socket,10427,-28671,300,EA1-general-pitch,,DB-B/S8,
+hall-b,B,SOC-hall-b-125,power/lighting control,socket,9657,-28271,300,EA1-general-pitch,,DB-B/S8,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+hall-b,B,SWI-hall-b-121,power/lighting control,switch,11197,-28571,1150,EA1-switch-open-plan,,DB-B/L1,
 kitchen,B,HEAT-011,ELV/fire,heat,13050,-25131,2700,EA15-heat-room,,,"interlinked, mains + sealed battery (Grade D1)"
 kitchen,B,lum-DL-kitchen-04,luminaire,ambient,11575,-25660,,,Z-B-KITCHEN-ISLAND-PREP,DB-B/L2,14.4 W
 kitchen,B,lum-DL-kitchen-05,luminaire,ambient,11875,-25660,,,Z-B-KITCHEN-ISLAND-PREP,DB-B/L2,14.4 W
@@ -119,37 +119,38 @@ kitchen,B,lum-PEN-GLOBE-kitchen-01,luminaire,decorative,12058,-26010,,,Z-B-KITCH
 kitchen,B,lum-PEN-GLOBE-kitchen-02,luminaire,decorative,13075,-26010,,,Z-B-KITCHEN-ISLAND-PENDANTS,DB-B/L1,4.39 W
 kitchen,B,lum-PEN-GLOBE-kitchen-03,luminaire,decorative,14092,-26010,,,Z-B-KITCHEN-ISLAND-PENDANTS,DB-B/L1,4.39 W
 kitchen,B,lum-TOE-kitchen-12,luminaire,night,13075,-25510,,,Z-B-KITCHEN-NIGHT,DB-B/L1,4.92 W
-kitchen,B,COO-kitchen-138,power/lighting control,cooker_unit,11840,-23591,1100,EA1-dedicated-cooker,COOK-OVEN,DB-B/D6,
-kitchen,B,FCU-kitchen-139,power/lighting control,fcu,12440,-23591,600,EA1-dedicated-appliance,COOK-HOOD,DB-B/D7,
-kitchen,B,FCU-kitchen-140,power/lighting control,fcu,13040,-23591,600,EA1-dedicated-appliance,DISHWASHER,DB-B/D8,
-kitchen,B,FCU-kitchen-141,power/lighting control,fcu,13490,-23591,600,EA1-dedicated-appliance,FRIDGE,DB-B/D9,moved 150 mm along the wall (inside door door-B-kitchen-dirty-kitchen)
-kitchen,B,SOC-kitchen-134,power/lighting control,socket,12042,-23591,1100,EA1-worktop-pitch,,DB-B/S1,
-kitchen,B,SOC-kitchen-135,power/lighting control,socket,13048,-23591,1100,EA1-worktop-pitch,,DB-B/S1,
-kitchen,B,SOC-kitchen-136,power/lighting control,socket,12312,-26560,900,EA1-island-sockets,,DB-B/S11,
-kitchen,B,SOC-kitchen-137,power/lighting control,socket,13838,-26560,900,EA1-island-sockets,,DB-B/S11,
-kitchen,B,SOC-kitchen-142,power/lighting control,socket,14302,-24361,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
-kitchen,B,SOC-kitchen-143,power/lighting control,socket,11797,-24361,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
-kitchen,B,SWI-kitchen-133,power/lighting control,switch,13452,-23591,1150,EA1-switch-latch-side,,DB-B/L1+DB-B/L2,hinge assumed (policy)
+kitchen,B,lum-UC-kitchen-13,luminaire,task,12545,-23911,,,Z-B-KITCHEN-RUN-UC,DB-B/L2,21.67 W
+kitchen,B,COO-kitchen-141,power/lighting control,cooker_unit,11840,-23591,1100,EA1-dedicated-cooker,COOK-OVEN,DB-B/D6,
+kitchen,B,FCU-kitchen-142,power/lighting control,fcu,12440,-23591,600,EA1-dedicated-appliance,COOK-HOOD,DB-B/D7,
+kitchen,B,FCU-kitchen-143,power/lighting control,fcu,13040,-23591,600,EA1-dedicated-appliance,DISHWASHER,DB-B/D8,
+kitchen,B,FCU-kitchen-144,power/lighting control,fcu,13490,-23591,600,EA1-dedicated-appliance,FRIDGE,DB-B/D9,moved 150 mm along the wall (inside door door-B-kitchen-dirty-kitchen)
+kitchen,B,SOC-kitchen-137,power/lighting control,socket,12042,-23591,1100,EA1-worktop-pitch,,DB-B/S1,
+kitchen,B,SOC-kitchen-138,power/lighting control,socket,13048,-23591,1100,EA1-worktop-pitch,,DB-B/S1,
+kitchen,B,SOC-kitchen-139,power/lighting control,socket,12312,-26560,900,EA1-island-sockets,,DB-B/S11,
+kitchen,B,SOC-kitchen-140,power/lighting control,socket,13838,-26560,900,EA1-island-sockets,,DB-B/S11,
+kitchen,B,SOC-kitchen-145,power/lighting control,socket,14302,-24361,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
+kitchen,B,SOC-kitchen-146,power/lighting control,socket,11797,-24361,0,EA1-general-pitch,,DB-B/S11,floor box: no wall element on this edge
+kitchen,B,SWI-kitchen-136,power/lighting control,switch,13452,-23591,1150,EA1-switch-latch-side,,DB-B/L1+DB-B/L2,hinge assumed (policy)
 kitchen-island,B,lum-DL-kitchen-island-01,luminaire,ambient,11897,-27516,,,Z-B-KITCHEN-ISLAND-AMBIENT,DB-B/L1,14.4 W
 kitchen-island,B,lum-DL-kitchen-island-02,luminaire,ambient,13434,-27516,,,Z-B-KITCHEN-ISLAND-AMBIENT,DB-B/L1,14.4 W
-kitchen-island,B,SOC-kitchen-island-145,power/lighting control,socket,12666,-27271,0,EA1-general-pitch,,DB-B/S9,floor box: no wall element on this edge
-kitchen-island,B,SOC-kitchen-island-146,power/lighting control,socket,14134,-28271,300,EA1-general-pitch,,DB-B/S9,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-kitchen-island,B,SOC-kitchen-island-147,power/lighting control,socket,12666,-28671,300,EA1-general-pitch,,DB-B/S9,
-kitchen-island,B,SOC-kitchen-island-148,power/lighting control,socket,11197,-28271,300,EA1-general-pitch,,DB-B/S9,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-kitchen-island,B,SWI-kitchen-island-144,power/lighting control,switch,11197,-28271,1150,EA1-switch-open-plan,,DB-B/L1,
+kitchen-island,B,SOC-kitchen-island-148,power/lighting control,socket,12666,-27271,0,EA1-general-pitch,,DB-B/S9,floor box: no wall element on this edge
+kitchen-island,B,SOC-kitchen-island-149,power/lighting control,socket,14134,-28271,300,EA1-general-pitch,,DB-B/S9,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+kitchen-island,B,SOC-kitchen-island-150,power/lighting control,socket,12666,-28671,300,EA1-general-pitch,,DB-B/S9,
+kitchen-island,B,SOC-kitchen-island-151,power/lighting control,socket,11197,-28271,300,EA1-general-pitch,,DB-B/S9,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+kitchen-island,B,SWI-kitchen-island-147,power/lighting control,switch,11197,-28271,1150,EA1-switch-open-plan,,DB-B/L1,
 living,B,AP-042,ELV/fire,ap,20482,-26131,2700,EA15-ap-coverage,,,"ceiling AP, 8 m radius (policy)"
 living,B,SMOKE-002,ELV/fire,smoke,20482,-26131,2800,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 living,B,lum-DL-living-03,luminaire,ambient,19567,-26000,,,Z-B-LIVING-AMBIENT,DB-B/L2,14.4 W
 living,B,lum-DL-living-04,luminaire,ambient,21497,-26000,,,Z-B-LIVING-AMBIENT,DB-B/L2,14.4 W
-living,B,lum-COVE-living-01,luminaire,decorative,18767,-26231,,,Z-B-LIVING-DECORATIVE,DB-B/L2,17.4 W
-living,B,lum-COVE-living-02,luminaire,decorative,20382,-28271,,,Z-B-LIVING-DECORATIVE,DB-B/L2,13.15 W
-living,B,ISO-living-161,power/lighting control,isolator_ac,22597,-24781,2200,EA1-ac-point,AC-LIVING,DB-B/D3,moved 1350 mm along the wall (inside door door-B-living-yard-2)
-living,B,SOC-living-162,power/lighting control,socket,18967,-28070,0,EA1-sofa-ends,,DB-B/S14,floor box: no wall element on this edge
-living,B,SOC-living-163,power/lighting control,socket,18967,-26408,0,EA1-sofa-ends,,DB-B/S14,floor box: no wall element on this edge
-living,B,SOC-living-164,power/lighting control,socket,19424,-28071,0,EA1-general-pitch,,DB-B/S14,floor box: no wall element on this edge
-living,B,SOC-living-165,power/lighting control,socket,22290,-28671,300,EA1-general-pitch,,DB-B/S14,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-living,B,SOC-living-166,power/lighting control,socket,18367,-23961,300,EA1-general-pitch,,DB-B/S14,moved 900 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-living,B,SWI-living-160,power/lighting control,switch,22217,-28671,1150,EA1-switch-open-plan,,DB-B/L2,
+living,B,lum-COVE-living-01,luminaire,decorative,18767,-26231,,,Z-B-LIVING-DECORATIVE,DB-B/L3,17.4 W
+living,B,lum-COVE-living-02,luminaire,decorative,20382,-28271,,,Z-B-LIVING-DECORATIVE,DB-B/L3,13.15 W
+living,B,ISO-living-164,power/lighting control,isolator_ac,22597,-24781,2200,EA1-ac-point,AC-LIVING,DB-B/D3,moved 1350 mm along the wall (inside door door-B-living-yard-2)
+living,B,SOC-living-165,power/lighting control,socket,18967,-28070,0,EA1-sofa-ends,,DB-B/S14,floor box: no wall element on this edge
+living,B,SOC-living-166,power/lighting control,socket,18967,-26408,0,EA1-sofa-ends,,DB-B/S14,floor box: no wall element on this edge
+living,B,SOC-living-167,power/lighting control,socket,19424,-28071,0,EA1-general-pitch,,DB-B/S14,floor box: no wall element on this edge
+living,B,SOC-living-168,power/lighting control,socket,22290,-28671,300,EA1-general-pitch,,DB-B/S14,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+living,B,SOC-living-169,power/lighting control,socket,18367,-23961,300,EA1-general-pitch,,DB-B/S14,moved 900 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+living,B,SWI-living-163,power/lighting control,switch,22217,-28671,1150,EA1-switch-open-plan,,DB-B/L2+DB-B/L3,
 lounge,B,DATA-035,ELV/fire,data,6300,-23591,400,EA1-tv-cluster,,,
 lounge,B,SMOKE-001,ELV/fire,smoke,6637,-25531,2800,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 lounge,B,TV_SAT-034,ELV/fire,tv_sat,6100,-23591,400,EA1-tv-cluster,,,
@@ -162,53 +163,53 @@ lounge,B,lum-DL-lounge-07,luminaire,ambient,4717,-25556,,,Z-B-LOUNGE-ROUTE-NIGHT
 lounge,B,lum-DL-lounge-08,luminaire,ambient,7637,-25556,,,Z-B-LOUNGE-ROUTE-NIGHT,DB-B/L1,14.4 W
 lounge,B,lum-COVE-lounge-05,luminaire,decorative,4217,-25556,,,Z-B-LOUNGE-DECORATIVE,DB-B/L1,12.15 W
 lounge,B,lum-COVE-lounge-06,luminaire,decorative,6737,-27071,,,Z-B-LOUNGE-DECORATIVE,DB-B/L1,22.2 W
-lounge,B,DAT-lounge-100,power/lighting control,data,6300,-23591,400,EA1-tv-cluster,,,
-lounge,B,ISO-lounge-096,power/lighting control,isolator_ac,6637,-23591,2200,EA1-ac-point,AC-LOUNGE,DB-B/D1,
-lounge,B,SOC-lounge-097,power/lighting control,socket,5700,-23591,400,EA1-tv-cluster,,DB-B/S5,
-lounge,B,SOC-lounge-098,power/lighting control,socket,5900,-23591,400,EA1-tv-cluster,,DB-B/S5,
-lounge,B,SOC-lounge-101,power/lighting control,socket,3870,-27471,300,EA1-sofa-ends,,DB-B/S5,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-lounge,B,SOC-lounge-102,power/lighting control,socket,7820,-26871,0,EA1-sofa-ends,,DB-B/S5,floor box: no wall element on this edge
-lounge,B,SOC-lounge-103,power/lighting control,socket,4624,-23591,300,EA1-general-pitch,,DB-B/S5,
-lounge,B,SOC-lounge-104,power/lighting control,socket,6637,-23591,300,EA1-general-pitch,,DB-B/S5,
-lounge,B,SOC-lounge-105,power/lighting control,socket,9057,-26501,0,EA1-general-pitch,,DB-B/S5,floor box: no wall element on this edge
-lounge,B,SOC-lounge-106,power/lighting control,socket,9657,-23811,300,EA1-general-pitch,,DB-B/S5,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-lounge,B,SOC-lounge-107,power/lighting control,socket,3874,-27471,300,EA1-general-pitch,,DB-B/S6,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-lounge,B,SOC-lounge-108,power/lighting control,socket,8650,-26871,0,EA1-general-pitch,,DB-B/S6,floor box: no wall element on this edge
-lounge,B,SWI-lounge-095,power/lighting control,switch,8077,-23591,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
-lounge,B,TV_-lounge-099,power/lighting control,tv_sat,6100,-23591,400,EA1-tv-cluster,,,
+lounge,B,DAT-lounge-103,power/lighting control,data,6300,-23591,400,EA1-tv-cluster,,,
+lounge,B,ISO-lounge-099,power/lighting control,isolator_ac,6637,-23591,2200,EA1-ac-point,AC-LOUNGE,DB-B/D1,
+lounge,B,SOC-lounge-100,power/lighting control,socket,5700,-23591,400,EA1-tv-cluster,,DB-B/S5,
+lounge,B,SOC-lounge-101,power/lighting control,socket,5900,-23591,400,EA1-tv-cluster,,DB-B/S5,
+lounge,B,SOC-lounge-104,power/lighting control,socket,3870,-27471,300,EA1-sofa-ends,,DB-B/S5,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+lounge,B,SOC-lounge-105,power/lighting control,socket,7820,-26871,0,EA1-sofa-ends,,DB-B/S5,floor box: no wall element on this edge
+lounge,B,SOC-lounge-106,power/lighting control,socket,4624,-23591,300,EA1-general-pitch,,DB-B/S5,
+lounge,B,SOC-lounge-107,power/lighting control,socket,6637,-23591,300,EA1-general-pitch,,DB-B/S5,
+lounge,B,SOC-lounge-108,power/lighting control,socket,9057,-26501,0,EA1-general-pitch,,DB-B/S5,floor box: no wall element on this edge
+lounge,B,SOC-lounge-109,power/lighting control,socket,9657,-23811,300,EA1-general-pitch,,DB-B/S5,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+lounge,B,SOC-lounge-110,power/lighting control,socket,3874,-27471,300,EA1-general-pitch,,DB-B/S6,moved 750 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+lounge,B,SOC-lounge-111,power/lighting control,socket,8650,-26871,0,EA1-general-pitch,,DB-B/S6,floor box: no wall element on this edge
+lounge,B,SWI-lounge-098,power/lighting control,switch,8077,-23591,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
+lounge,B,TV_-lounge-102,power/lighting control,tv_sat,6100,-23591,400,EA1-tv-cluster,,,
 lounge-nook,B,lum-BACK-lounge-nook-01,luminaire,accent,4090,-28595,,,Z-B-LOUNGE-NOOK-ACCENT,DB-B/L1,0.58 W
 lounge-nook,B,lum-DL-lounge-nook-02,luminaire,ambient,4497,-28046,,,Z-B-LOUNGE-NOOK-AMBIENT,DB-B/L1,14.4 W
-lounge-nook,B,SWI-lounge-nook-109,power/lighting control,switch,4017,-27471,1150,EA1-switch-open-plan,,DB-B/L1,
+lounge-nook,B,SWI-lounge-nook-112,power/lighting control,switch,4017,-27471,1150,EA1-switch-open-plan,,DB-B/L1,
 pantry,B,SMOKE-018,ELV/fire,smoke,5278,-29294,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 pantry,B,lum-DL-pantry-01,luminaire,ambient,5279,-29218,,,Z-B-PANTRY-AMBIENT,DB-B/L1,14.4 W
-pantry,B,FCU-pantry-112,power/lighting control,fcu,5278,-28671,600,EA1-dedicated-appliance,FREEZER-PANTRY,DB-B/D10,
-pantry,B,SOC-pantry-113,power/lighting control,socket,6109,-28671,300,EA1-general-pitch,,DB-B/S4,
-pantry,B,SOC-pantry-114,power/lighting control,socket,6940,-29294,300,EA1-general-pitch,,DB-B/S4,
-pantry,B,SOC-pantry-115,power/lighting control,socket,4448,-29916,300,EA1-general-pitch,,DB-B/S4,
-pantry,B,SOC-pantry-116,power/lighting control,socket,6109,-29916,300,EA1-general-pitch,,DB-B/S4,
-pantry,B,SOC-pantry-117,power/lighting control,socket,3617,-29294,300,EA1-general-pitch,,DB-B/S4,
-pantry,B,SWI-pantry-111,power/lighting control,switch,5152,-28671,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
+pantry,B,FCU-pantry-115,power/lighting control,fcu,5278,-28671,600,EA1-dedicated-appliance,FREEZER-PANTRY,DB-B/D10,
+pantry,B,SOC-pantry-116,power/lighting control,socket,6109,-28671,300,EA1-general-pitch,,DB-B/S4,
+pantry,B,SOC-pantry-117,power/lighting control,socket,6940,-29294,300,EA1-general-pitch,,DB-B/S4,
+pantry,B,SOC-pantry-118,power/lighting control,socket,4448,-29916,300,EA1-general-pitch,,DB-B/S4,
+pantry,B,SOC-pantry-119,power/lighting control,socket,6109,-29916,300,EA1-general-pitch,,DB-B/S4,
+pantry,B,SOC-pantry-120,power/lighting control,socket,3617,-29294,300,EA1-general-pitch,,DB-B/S4,
+pantry,B,SWI-pantry-114,power/lighting control,switch,5152,-28671,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
 stair-b,B,RACK-040,ELV/fire,rack,7417,-28071,1200,EA15-rack,,,ELV cabinet assumed in the under-stair cupboard (client to confirm)
 stair-b,B,SMOKE-017,ELV/fire,smoke,7417,-28071,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 stair-b,B,lum-BACK-stair-b-01,luminaire,accent,5575,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,2.13 W
 stair-b,B,lum-BACK-stair-b-02,luminaire,accent,6025,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,1.24 W
 stair-b,B,lum-BACK-stair-b-03,luminaire,accent,6350,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,1.02 W
-stair-b,B,lum-STEP-stair-b-04,luminaire,night,7269,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W
-stair-b,B,lum-STEP-stair-b-05,luminaire,night,8109,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W
-stair-b,B,lum-STEP-stair-b-06,luminaire,night,8949,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W
-stair-b,B,SWI-stair-b-110,power/lighting control,switch,9657,-28571,1150,EA1-switch-open-plan,,DB-B/L1+DB-B/L3,
+stair-b,B,lum-STEP-stair-b-04,luminaire,night,7269,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L4,0.67 W
+stair-b,B,lum-STEP-stair-b-05,luminaire,night,8109,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L4,0.67 W
+stair-b,B,lum-STEP-stair-b-06,luminaire,night,8949,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L4,0.67 W
+stair-b,B,SWI-stair-b-113,power/lighting control,switch,9657,-28571,1150,EA1-switch-open-plan,,DB-B/L1+DB-B/L4,
 store-ramp,B,AP-043,ELV/fire,ap,1501,-22096,1575,EA15-ap-coverage,,,"ceiling AP, 8 m radius (policy)"
 store-ramp,B,SMOKE-013,ELV/fire,smoke,1501,-22096,1675,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 store-ramp,B,lum-STORE-BATTEN-store-ramp-01,luminaire,task,652,-21581,,,Z-B-STORE-RAMP-TASK,DB-B/L1,7 W
 store-ramp,B,lum-STORE-BATTEN-store-ramp-02,luminaire,task,1602,-21581,,,Z-B-STORE-RAMP-TASK,DB-B/L1,7 W
 store-ramp,B,lum-STORE-BATTEN-store-ramp-03,luminaire,task,2552,-21581,,,Z-B-STORE-RAMP-TASK,DB-B/L1,7 W
-store-ramp,B,FCU-store-ramp-175,power/lighting control,fcu,1501,-20601,600,EA1-dedicated-appliance,PUMP-BOOSTER,DB-B/D13,
-store-ramp,B,SOC-store-ramp-176,power/lighting control,socket,689,-20601,300,EA1-general-pitch,,DB-B/S3,
-store-ramp,B,SOC-store-ramp-177,power/lighting control,socket,2313,-20601,300,EA1-general-pitch,,DB-B/S3,
-store-ramp,B,SOC-store-ramp-178,power/lighting control,socket,239,-23591,300,EA1-general-pitch,,DB-B/S3,moved 450 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-store-ramp,B,SOC-store-ramp-179,power/lighting control,socket,2913,-23591,300,EA1-general-pitch,,DB-B/S3,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-store-ramp,B,SOC-store-ramp-180,power/lighting control,socket,-123,-22096,300,EA1-general-pitch,,DB-B/S3,
-store-ramp,B,SWI-store-ramp-174,power/lighting control,switch,3125,-21546,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
+store-ramp,B,FCU-store-ramp-178,power/lighting control,fcu,1501,-20601,600,EA1-dedicated-appliance,PUMP-BOOSTER,DB-B/D13,
+store-ramp,B,SOC-store-ramp-179,power/lighting control,socket,689,-20601,300,EA1-general-pitch,,DB-B/S3,
+store-ramp,B,SOC-store-ramp-180,power/lighting control,socket,2313,-20601,300,EA1-general-pitch,,DB-B/S3,
+store-ramp,B,SOC-store-ramp-181,power/lighting control,socket,239,-23591,300,EA1-general-pitch,,DB-B/S3,moved 450 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+store-ramp,B,SOC-store-ramp-182,power/lighting control,socket,2913,-23591,300,EA1-general-pitch,,DB-B/S3,moved 600 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+store-ramp,B,SOC-store-ramp-183,power/lighting control,socket,-123,-22096,300,EA1-general-pitch,,DB-B/S3,
+store-ramp,B,SWI-store-ramp-177,power/lighting control,switch,3125,-21546,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
 corridor,GF,AP-044,ELV/fire,ap,14207,-28021,2600,EA15-ap-coverage,,,"ceiling AP, 8 m radius (policy)"
 corridor,GF,INTERCOM_MONITOR-055,ELV/fire,intercom_monitor,14207,-27371,1500,EA15-intercom-monitor,,,
 corridor,GF,SMOKE-005,ELV/fire,smoke,11547,-28021,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
@@ -240,38 +241,42 @@ family-bath,GF,lum-DL-family-bath-03,luminaire,ambient,9627,-25686,,,Z-GF-FAMILY
 family-bath,GF,lum-TOE-family-bath-06,luminaire,night,9747,-25686,,,Z-GF-FAMILY-BATH-NIGHT,DB-GF/L1,0.62 W
 family-bath,GF,lum-SCONCE-family-bath-04,luminaire,task,9337,-26161,,,Z-GF-FAMILY-BATH-TASK,DB-GF/L1,1.13 W
 family-bath,GF,lum-SCONCE-family-bath-05,luminaire,task,9337,-25211,,,Z-GF-FAMILY-BATH-TASK,DB-GF/L1,1.13 W
-family-bath,GF,FCU-family-bath-067,power/lighting control,fcu,11477,-25676,2300,EA2-fcu-outside-zones,WH-FAMILY,DB-GF/D5,
-family-bath,GF,SWI-family-bath-066,power/lighting control,switch,10902,-26371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
+family-bath,GF,FCU-family-bath-070,power/lighting control,fcu,11477,-25676,2300,EA2-fcu-outside-zones,WH-FAMILY,DB-GF/D5,
+family-bath,GF,SWI-family-bath-069,power/lighting control,switch,10902,-26371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
 gallery-end,GF,lum-DL-gallery-end-01,luminaire,ambient,10157,-26896,,,Z-GF-GALLERY-END-AMBIENT,DB-GF/L1,14.4 W
-gallery-end,GF,SOC-gallery-end-090,power/lighting control,socket,11477,-26871,300,EA1-general-pitch,,DB-GF/S3,
-gallery-end,GF,SOC-gallery-end-091,power/lighting control,socket,11232,-27371,300,EA1-general-pitch,,DB-GF/S3,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-gallery-end,GF,SOC-gallery-end-092,power/lighting control,socket,9487,-26871,0,EA1-general-pitch,,DB-GF/S3,floor box: no wall element on this edge
-gallery-end,GF,SWI-gallery-end-089,power/lighting control,switch,9802,-26371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
-kids-a,GF,DATA-026,ELV/fire,data,11820,-23591,1100,EA1-desk-cluster,,,
-kids-a,GF,DATA-027,ELV/fire,data,14670,-23591,1100,EA1-desk-cluster,,,
-kids-a,GF,DATA-028,ELV/fire,data,14952,-24391,1100,EA1-desk-cluster,,,
-kids-a,GF,DATA-029,ELV/fire,data,14952,-23791,1100,EA1-desk-cluster,,,
+gallery-end,GF,SOC-gallery-end-093,power/lighting control,socket,11477,-26871,300,EA1-general-pitch,,DB-GF/S3,
+gallery-end,GF,SOC-gallery-end-094,power/lighting control,socket,11232,-27371,300,EA1-general-pitch,,DB-GF/S3,moved 1050 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+gallery-end,GF,SOC-gallery-end-095,power/lighting control,socket,9487,-26871,0,EA1-general-pitch,,DB-GF/S3,floor box: no wall element on this edge
+gallery-end,GF,SWI-gallery-end-092,power/lighting control,switch,9802,-26371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
+kids-a,GF,DATA-026,ELV/fire,data,11477,-26741,1100,EA1-desk-cluster,,,
+kids-a,GF,DATA-027,ELV/fire,data,11477,-26141,1100,EA1-desk-cluster,,,
+kids-a,GF,DATA-028,ELV/fire,data,14952,-26741,1100,EA1-desk-cluster,,,
+kids-a,GF,DATA-029,ELV/fire,data,14952,-26141,1100,EA1-desk-cluster,,,
 kids-a,GF,SMOKE-007,ELV/fire,smoke,13214,-25481,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 kids-a,GF,lum-DL-kids-a-01,luminaire,ambient,13214,-25856,,,Z-GF-KIDS-A-AMBIENT,DB-GF/L1,14.4 W
-kids-a,GF,lum-DL-kids-a-02,luminaire,ambient,13170,-23991,,,Z-GF-KIDS-A-TASK,DB-GF/L1,14.4 W
-kids-a,GF,lum-DL-kids-a-04,luminaire,ambient,14310,-23991,,,Z-GF-KIDS-A-TASK,DB-GF/L1,14.4 W
-kids-a,GF,lum-NL-kids-a-06,luminaire,night,11977,-26470,,,Z-GF-KIDS-A-NIGHT,DB-GF/L1,0.89 W
-kids-a,GF,lum-DESK-kids-a-03,luminaire,task,13170,-24041,,,Z-GF-KIDS-A-TASK,DB-GF/L1,12 W
-kids-a,GF,lum-DESK-kids-a-05,luminaire,task,14310,-24041,,,Z-GF-KIDS-A-TASK,DB-GF/L1,12 W
-kids-a,GF,DAT-kids-a-043,power/lighting control,data,11820,-23591,1100,EA1-desk-cluster,,,moved 1050 mm along the wall (inside window window-GF-kids-a-3)
-kids-a,GF,DAT-kids-a-045,power/lighting control,data,14670,-23591,1100,EA1-desk-cluster,,,moved 1200 mm along the wall (inside window window-GF-kids-a-3)
-kids-a,GF,DAT-kids-a-047,power/lighting control,data,14952,-24391,1100,EA1-desk-cluster,,,
-kids-a,GF,DAT-kids-a-049,power/lighting control,data,14952,-23791,1100,EA1-desk-cluster,,,
+kids-a,GF,lum-NL-kids-a-06,luminaire,night,12047,-27291,,,Z-GF-KIDS-A-NIGHT,DB-GF/L1,1.04 W
+kids-a,GF,lum-NL-kids-a-07,luminaire,night,14382,-27291,,,Z-GF-KIDS-A-NIGHT,DB-GF/L1,1.04 W
+kids-a,GF,lum-DESK-kids-a-03,luminaire,task,11827,-26391,,,Z-GF-KIDS-A-TASK,DB-GF/L1,12 W
+kids-a,GF,lum-DESK-kids-a-05,luminaire,task,14602,-26391,,,Z-GF-KIDS-A-TASK,DB-GF/L1,12 W
+kids-a,GF,lum-UC-kids-a-02,luminaire,task,11727,-26441,,,Z-GF-KIDS-A-TASK,DB-GF/L1,6.73 W
+kids-a,GF,lum-UC-kids-a-04,luminaire,task,14702,-26441,,,Z-GF-KIDS-A-TASK,DB-GF/L1,6.73 W
+kids-a,GF,DAT-kids-a-045,power/lighting control,data,11477,-26741,1100,EA1-desk-cluster,,,
+kids-a,GF,DAT-kids-a-047,power/lighting control,data,11477,-26141,1100,EA1-desk-cluster,,,
+kids-a,GF,DAT-kids-a-049,power/lighting control,data,14952,-26741,1100,EA1-desk-cluster,,,
+kids-a,GF,DAT-kids-a-051,power/lighting control,data,14952,-26141,1100,EA1-desk-cluster,,,
 kids-a,GF,ISO-kids-a-039,power/lighting control,isolator_ac,14952,-25481,2200,EA1-ac-point,AC-KIDS-A,DB-GF/D1,
-kids-a,GF,SOC-kids-a-040,power/lighting control,socket,11477,-26750,450,EA1-bedside-both-sides,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-041,power/lighting control,socket,11477,-24150,450,EA1-bedside-both-sides,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-042,power/lighting control,socket,11820,-23591,1100,EA1-desk-cluster,,DB-GF/S4,moved 1050 mm along the wall (inside window window-GF-kids-a-3)
-kids-a,GF,SOC-kids-a-044,power/lighting control,socket,14670,-23591,1100,EA1-desk-cluster,,DB-GF/S4,moved 1200 mm along the wall (inside window window-GF-kids-a-3)
-kids-a,GF,SOC-kids-a-046,power/lighting control,socket,14952,-24391,1100,EA1-desk-cluster,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-048,power/lighting control,socket,14952,-23791,1100,EA1-desk-cluster,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-050,power/lighting control,socket,14952,-26426,300,EA1-general-pitch,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-051,power/lighting control,socket,12346,-27371,300,EA1-general-pitch,,DB-GF/S4,
-kids-a,GF,SOC-kids-a-052,power/lighting control,socket,14083,-27371,300,EA1-general-pitch,,DB-GF/S5,
+kids-a,GF,SOC-kids-a-040,power/lighting control,socket,11227,-27371,450,EA1-bedside-both-sides,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-041,power/lighting control,socket,12567,-27371,450,EA1-bedside-both-sides,,DB-GF/S4,moved 300 mm along the wall (inside door door-GF-corridor-kids-a)
+kids-a,GF,SOC-kids-a-042,power/lighting control,socket,13862,-27371,450,EA1-bedside-both-sides,,DB-GF/S4,moved 300 mm along the wall (inside door door-GF-corridor-kids-a)
+kids-a,GF,SOC-kids-a-043,power/lighting control,socket,15202,-27371,450,EA1-bedside-both-sides,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-044,power/lighting control,socket,11477,-26741,1100,EA1-desk-cluster,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-046,power/lighting control,socket,11477,-26141,1100,EA1-desk-cluster,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-048,power/lighting control,socket,14952,-26741,1100,EA1-desk-cluster,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-050,power/lighting control,socket,14952,-26141,1100,EA1-desk-cluster,,DB-GF/S4,
+kids-a,GF,SOC-kids-a-052,power/lighting control,socket,12346,-23591,300,EA1-general-pitch,,DB-GF/S5,
+kids-a,GF,SOC-kids-a-053,power/lighting control,socket,14083,-23591,300,EA1-general-pitch,,DB-GF/S5,
+kids-a,GF,SOC-kids-a-054,power/lighting control,socket,14952,-24536,300,EA1-general-pitch,,DB-GF/S5,
+kids-a,GF,SOC-kids-a-055,power/lighting control,socket,11477,-24536,300,EA1-general-pitch,,DB-GF/S5,
 kids-a,GF,SWI-kids-a-038,power/lighting control,switch,12615,-27371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
 kids-b,GF,DATA-030,ELV/fire,data,18427,-24391,1100,EA1-desk-cluster,,,
 kids-b,GF,DATA-031,ELV/fire,data,18427,-23791,1100,EA1-desk-cluster,,,
@@ -280,19 +285,19 @@ kids-b,GF,lum-DL-kids-b-01,luminaire,ambient,17650,-25856,,,Z-GF-KIDS-B-AMBIENT,
 kids-b,GF,lum-DL-kids-b-02,luminaire,ambient,17650,-23991,,,Z-GF-KIDS-B-TASK,DB-GF/L1,14.4 W
 kids-b,GF,lum-NL-kids-b-04,luminaire,night,16002,-25920,,,Z-GF-KIDS-B-NIGHT,DB-GF/L1,2.11 W
 kids-b,GF,lum-DESK-kids-b-03,luminaire,task,17650,-24041,,,Z-GF-KIDS-B-TASK,DB-GF/L1,12 W
-kids-b,GF,DAT-kids-b-058,power/lighting control,data,18427,-24391,1100,EA1-desk-cluster,,,
-kids-b,GF,DAT-kids-b-060,power/lighting control,data,18427,-23791,1100,EA1-desk-cluster,,,
-kids-b,GF,ISO-kids-b-054,power/lighting control,isolator_ac,18427,-25481,2200,EA1-ac-point,AC-KIDS-B,DB-GF/D2,
-kids-b,GF,SOC-kids-b-055,power/lighting control,socket,14952,-26200,450,EA1-bedside-both-sides,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-056,power/lighting control,socket,14952,-24400,450,EA1-bedside-both-sides,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-057,power/lighting control,socket,18427,-24391,1100,EA1-desk-cluster,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-059,power/lighting control,socket,18427,-23791,1100,EA1-desk-cluster,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-061,power/lighting control,socket,15821,-23591,300,EA1-general-pitch,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-062,power/lighting control,socket,17558,-23591,300,EA1-general-pitch,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-063,power/lighting control,socket,18427,-26426,300,EA1-general-pitch,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-064,power/lighting control,socket,15821,-27371,300,EA1-general-pitch,,DB-GF/S8,
-kids-b,GF,SOC-kids-b-065,power/lighting control,socket,17558,-27371,300,EA1-general-pitch,,DB-GF/S9,
-kids-b,GF,SWI-kids-b-053,power/lighting control,switch,17289,-27371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
+kids-b,GF,DAT-kids-b-061,power/lighting control,data,18427,-24391,1100,EA1-desk-cluster,,,
+kids-b,GF,DAT-kids-b-063,power/lighting control,data,18427,-23791,1100,EA1-desk-cluster,,,
+kids-b,GF,ISO-kids-b-057,power/lighting control,isolator_ac,18427,-25481,2200,EA1-ac-point,AC-KIDS-B,DB-GF/D2,
+kids-b,GF,SOC-kids-b-058,power/lighting control,socket,14952,-26200,450,EA1-bedside-both-sides,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-059,power/lighting control,socket,14952,-24400,450,EA1-bedside-both-sides,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-060,power/lighting control,socket,18427,-24391,1100,EA1-desk-cluster,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-062,power/lighting control,socket,18427,-23791,1100,EA1-desk-cluster,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-064,power/lighting control,socket,15821,-23591,300,EA1-general-pitch,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-065,power/lighting control,socket,17558,-23591,300,EA1-general-pitch,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-066,power/lighting control,socket,18427,-26426,300,EA1-general-pitch,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-067,power/lighting control,socket,15821,-27371,300,EA1-general-pitch,,DB-GF/S8,
+kids-b,GF,SOC-kids-b-068,power/lighting control,socket,17558,-27371,300,EA1-general-pitch,,DB-GF/S9,
+kids-b,GF,SWI-kids-b-056,power/lighting control,switch,17289,-27371,1150,EA1-switch-latch-side,,DB-GF/L1,hinge assumed (policy)
 landing-gf,GF,AP-045,ELV/fire,ap,4397,-27521,2600,EA15-ap-coverage,,,"ceiling AP, 8 m radius (policy)"
 landing-gf,GF,lum-DL-landing-gf-03,luminaire,ambient,4497,-27421,,,Z-GF-LANDING-GF-AMBIENT,DB-GF/L1,14.4 W
 landing-gf,GF,lum-PATH-landing-gf-01,luminaire,night,3887,-28451,,,Z-GF-LANDING-GF-NIGHT,DB-GF/L3,0.67 W
@@ -310,19 +315,19 @@ parents-bed,GF,lum-DL-parents-bed-04,luminaire,ambient,20330,-23951,,,Z-GF-PAREN
 parents-bed,GF,lum-COVE-parents-bed-01,luminaire,decorative,20330,-26471,,,Z-GF-PARENTS-BED-DECORATIVE,DB-GF/L2,10.5 W
 parents-bed,GF,lum-WALL-READ-parents-bed-02,luminaire,decorative,19710,-26461,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.86 W
 parents-bed,GF,lum-WALL-READ-parents-bed-03,luminaire,decorative,20950,-26461,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.86 W
-parents-bed,GF,DAT-parents-bed-073,power/lighting control,data,22597,-24200,1100,EA1-desk-cluster,,,moved 900 mm along the wall (inside window window-GF-parents-bed-7)
-parents-bed,GF,DAT-parents-bed-075,power/lighting control,data,22597,-24200,1100,EA1-desk-cluster,,,moved 300 mm along the wall (inside window window-GF-parents-bed-7)
-parents-bed,GF,ISO-parents-bed-069,power/lighting control,isolator_ac,21862,-23591,2200,EA1-ac-point,AC-PARENTS,DB-GF/D3,moved 1350 mm along the wall (inside window window-GF-parents-bed-6)
-parents-bed,GF,SOC-parents-bed-070,power/lighting control,socket,19380,-26641,450,EA1-bedside-both-sides,,DB-GF/S10,moved 150 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
-parents-bed,GF,SOC-parents-bed-071,power/lighting control,socket,21280,-26641,450,EA1-bedside-both-sides,,DB-GF/S10,moved 150 mm along the wall (inside door door-GF-parents-bed-parents-dressing)
-parents-bed,GF,SOC-parents-bed-072,power/lighting control,socket,22597,-24200,1100,EA1-desk-cluster,,DB-GF/S10,moved 900 mm along the wall (inside window window-GF-parents-bed-7)
-parents-bed,GF,SOC-parents-bed-074,power/lighting control,socket,22597,-24200,1100,EA1-desk-cluster,,DB-GF/S10,moved 300 mm along the wall (inside window window-GF-parents-bed-7)
-parents-bed,GF,SOC-parents-bed-076,power/lighting control,socket,19470,-23591,300,EA1-general-pitch,,DB-GF/S10,
-parents-bed,GF,SOC-parents-bed-077,power/lighting control,socket,21554,-23591,300,EA1-general-pitch,,DB-GF/S10,
-parents-bed,GF,SOC-parents-bed-078,power/lighting control,socket,22597,-25878,300,EA1-general-pitch,,DB-GF/S10,
-parents-bed,GF,SOC-parents-bed-079,power/lighting control,socket,18427,-25878,300,EA1-general-pitch,,DB-GF/S10,
-parents-bed,GF,SOC-parents-bed-080,power/lighting control,socket,18427,-24354,300,EA1-general-pitch,,DB-GF/S11,
-parents-bed,GF,SWI-parents-bed-068,power/lighting control,switch,21347,-26641,1150,EA1-switch-latch-side,,DB-GF/L2,hinge assumed (policy)
+parents-bed,GF,DAT-parents-bed-076,power/lighting control,data,22597,-24200,1100,EA1-desk-cluster,,,moved 900 mm along the wall (inside window window-GF-parents-bed-7)
+parents-bed,GF,DAT-parents-bed-078,power/lighting control,data,22597,-24200,1100,EA1-desk-cluster,,,moved 300 mm along the wall (inside window window-GF-parents-bed-7)
+parents-bed,GF,ISO-parents-bed-072,power/lighting control,isolator_ac,21862,-23591,2200,EA1-ac-point,AC-PARENTS,DB-GF/D3,moved 1350 mm along the wall (inside window window-GF-parents-bed-6)
+parents-bed,GF,SOC-parents-bed-073,power/lighting control,socket,19380,-26641,450,EA1-bedside-both-sides,,DB-GF/S10,moved 150 mm along the wall (not on a wall element (open-plan edge or no wall in the model))
+parents-bed,GF,SOC-parents-bed-074,power/lighting control,socket,21280,-26641,450,EA1-bedside-both-sides,,DB-GF/S10,moved 150 mm along the wall (inside door door-GF-parents-bed-parents-dressing)
+parents-bed,GF,SOC-parents-bed-075,power/lighting control,socket,22597,-24200,1100,EA1-desk-cluster,,DB-GF/S10,moved 900 mm along the wall (inside window window-GF-parents-bed-7)
+parents-bed,GF,SOC-parents-bed-077,power/lighting control,socket,22597,-24200,1100,EA1-desk-cluster,,DB-GF/S10,moved 300 mm along the wall (inside window window-GF-parents-bed-7)
+parents-bed,GF,SOC-parents-bed-079,power/lighting control,socket,19470,-23591,300,EA1-general-pitch,,DB-GF/S10,
+parents-bed,GF,SOC-parents-bed-080,power/lighting control,socket,21554,-23591,300,EA1-general-pitch,,DB-GF/S10,
+parents-bed,GF,SOC-parents-bed-081,power/lighting control,socket,22597,-25878,300,EA1-general-pitch,,DB-GF/S10,
+parents-bed,GF,SOC-parents-bed-082,power/lighting control,socket,18427,-25878,300,EA1-general-pitch,,DB-GF/S10,
+parents-bed,GF,SOC-parents-bed-083,power/lighting control,socket,18427,-24354,300,EA1-general-pitch,,DB-GF/S11,
+parents-bed,GF,SWI-parents-bed-071,power/lighting control,switch,21347,-26641,1150,EA1-switch-latch-side,,DB-GF/L2,hinge assumed (policy)
 parents-dressing,GF,SMOKE-016,ELV/fire,smoke,21062,-27656,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 parents-dressing,GF,lum-DL-parents-dressing-06,luminaire,ambient,20277,-27681,,,Z-GF-PARENTS-DRESSING-AMBIENT,DB-GF/L2,14.4 W
 parents-dressing,GF,lum-DL-parents-dressing-07,luminaire,ambient,21597,-27681,,,Z-GF-PARENTS-DRESSING-AMBIENT,DB-GF/L2,14.4 W
@@ -331,15 +336,15 @@ parents-dressing,GF,lum-RAIL-parents-dressing-02,luminaire,task,20527,-28531,,,Z
 parents-dressing,GF,lum-VSTRIP-parents-dressing-03,luminaire,task,19657,-26691,,,Z-GF-PARENTS-DRESSING-TASK,DB-GF/L2,10 W
 parents-dressing,GF,lum-VSTRIP-parents-dressing-04,luminaire,task,20487,-26691,,,Z-GF-PARENTS-DRESSING-TASK,DB-GF/L2,10 W
 parents-dressing,GF,lum-VSTRIP-parents-dressing-05,luminaire,task,21317,-26691,,,Z-GF-PARENTS-DRESSING-TASK,DB-GF/L2,10 W
-parents-dressing,GF,SOC-parents-dressing-082,power/lighting control,socket,20294,-26641,300,EA1-general-pitch,,DB-GF/S9,
-parents-dressing,GF,SOC-parents-dressing-083,power/lighting control,socket,22597,-27656,300,EA1-general-pitch,,DB-GF/S9,
-parents-dressing,GF,SOC-parents-dressing-084,power/lighting control,socket,20294,-28671,300,EA1-general-pitch,,DB-GF/S9,
-parents-dressing,GF,SOC-parents-dressing-085,power/lighting control,socket,22280,-28671,300,EA1-general-pitch,,DB-GF/S9,moved 450 mm along the wall (inside door door-GF-parents-dressing-ext-parents-ensuite)
-parents-dressing,GF,SOC-parents-dressing-086,power/lighting control,socket,19527,-27656,300,EA1-general-pitch,,DB-GF/S9,
-parents-dressing,GF,SWI-parents-dressing-081,power/lighting control,switch,21347,-26641,1150,EA1-switch-latch-side,,DB-GF/L2,hinge assumed (policy)
+parents-dressing,GF,SOC-parents-dressing-085,power/lighting control,socket,20294,-26641,300,EA1-general-pitch,,DB-GF/S9,
+parents-dressing,GF,SOC-parents-dressing-086,power/lighting control,socket,22597,-27656,300,EA1-general-pitch,,DB-GF/S9,
+parents-dressing,GF,SOC-parents-dressing-087,power/lighting control,socket,20294,-28671,300,EA1-general-pitch,,DB-GF/S9,
+parents-dressing,GF,SOC-parents-dressing-088,power/lighting control,socket,22280,-28671,300,EA1-general-pitch,,DB-GF/S9,moved 450 mm along the wall (inside door door-GF-parents-dressing-ext-parents-ensuite)
+parents-dressing,GF,SOC-parents-dressing-089,power/lighting control,socket,19527,-27656,300,EA1-general-pitch,,DB-GF/S9,
+parents-dressing,GF,SWI-parents-dressing-084,power/lighting control,switch,21347,-26641,1150,EA1-switch-latch-side,,DB-GF/L2,hinge assumed (policy)
 parents-dressing-ext,GF,lum-VSTRIP-parents-dressing-ext-01,luminaire,task,19884,-28831,,,Z-GF-PARENTS-DRESSING-EXT-TASK,DB-GF/L2,10 W
 parents-dressing-ext,GF,lum-VSTRIP-parents-dressing-ext-02,luminaire,task,21170,-28831,,,Z-GF-PARENTS-DRESSING-EXT-TASK,DB-GF/L2,10 W
-parents-dressing-ext,GF,SWI-parents-dressing-ext-094,power/lighting control,switch,19704,-28671,1150,EA1-switch-open-plan,,DB-GF/L2,
+parents-dressing-ext,GF,SWI-parents-dressing-ext-097,power/lighting control,switch,19704,-28671,1150,EA1-switch-open-plan,,DB-GF/L2,
 parents-ensuite,GF,lum-WW-parents-ensuite-01,luminaire,accent,20104,-29646,,,Z-GF-PARENTS-ENSUITE-ACCENT,DB-GF/L1,10.1 W
 parents-ensuite,GF,lum-WW-parents-ensuite-02,luminaire,accent,21824,-29646,,,Z-GF-PARENTS-ENSUITE-ACCENT,DB-GF/L1,10.1 W
 parents-ensuite,GF,lum-DL-parents-ensuite-03,luminaire,ambient,20154,-29281,,,Z-GF-PARENTS-ENSUITE-BASIN-TASK,DB-GF/L2,14.4 W
@@ -349,11 +354,11 @@ parents-ensuite,GF,lum-PCOVE-parents-ensuite-09,luminaire,decorative,20704,-3108
 parents-ensuite,GF,lum-TOE-parents-ensuite-10,luminaire,night,20324,-29281,,,Z-GF-PARENTS-ENSUITE-NIGHT,DB-GF/L1,0.9 W
 parents-ensuite,GF,lum-MIRROR-parents-ensuite-06,luminaire,task,19874,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L2,0.74 W
 parents-ensuite,GF,lum-VANITY-LIN-parents-ensuite-04,luminaire,task,19847,-29281,,,Z-GF-PARENTS-ENSUITE-TASK,DB-GF/L2,0.42 W
-parents-ensuite,GF,FCU-parents-ensuite-088,power/lighting control,fcu,20284,-28881,2300,EA2-fcu-outside-zones,WH-ENSUITE,DB-GF/D6,
+parents-ensuite,GF,FCU-parents-ensuite-091,power/lighting control,fcu,20284,-28881,2300,EA2-fcu-outside-zones,WH-ENSUITE,DB-GF/D6,
 parents-ensuite,GF,DRV-PCOVE-parents-ensuite,power/lighting control,led_driver,19904,-31011,2400,EA3-lighting-driver,,,
-parents-ensuite,GF,SWI-parents-ensuite-087,power/lighting control,switch,21100,-28881,1150,EA1-switch-latch-side,,DB-GF/L1+DB-GF/L2,hinge assumed (policy)
+parents-ensuite,GF,SWI-parents-ensuite-090,power/lighting control,switch,21100,-28881,1150,EA1-switch-latch-side,,DB-GF/L1+DB-GF/L2,hinge assumed (policy)
 parents-entry,GF,lum-COVE-parents-entry-01,luminaire,decorative,18977,-26911,,,Z-GF-PARENTS-ENTRY-DECORATIVE,DB-GF/L2,8 W
-parents-entry,GF,SWI-parents-entry-093,power/lighting control,switch,18427,-26971,1150,EA1-switch-open-plan,,DB-GF/L2,
+parents-entry,GF,SWI-parents-entry-096,power/lighting control,switch,18427,-26971,1150,EA1-switch-open-plan,,DB-GF/L2,
 stair-gf,GF,SMOKE-014,ELV/fire,smoke,7032,-27521,2800,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
 stair-gf,GF,lum-PEN-GLOBE-stair-gf-01,luminaire,decorative,6290,-28088,,,Z-GF-STAIR-GF-DECORATIVE,DB-GF/L1,8.89 W
 stair-gf,GF,lum-PEN-GLOBE-stair-gf-02,luminaire,decorative,7218,-27851,,,Z-GF-STAIR-GF-DECORATIVE,DB-GF/L1,8.89 W

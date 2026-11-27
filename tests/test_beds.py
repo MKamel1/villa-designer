@@ -126,7 +126,7 @@ class FurnishedBeds(unittest.TestCase):
     def test_all_four_beds_keep_layout_sizes_and_explicit_fallbacks(self):
         beds = bed_items(self.items)
         self.assertEqual({b['id']:(b['w'],b['d']) for b in beds},
-                         {'pb-bed':(1.6,2.0),'kb-bed':(1.2,2.0),'ka-bunk':(.9,2.0),'library-daybed':(2.0,.95)})
+                         {'pb-bed':(1.6,2.0),'kb-bed':(1.2,2.0),'ka-loft-1':(1.04,2.05),'ka-loft-2':(1.04,2.05),'library-daybed':(2.0,.95)})
         self.assertFalse(any(m['asset']==FROZEN['asset'] for m in self.scene['models']))
         self.assertIn('the parents\' bed is custom joinery', ' '.join(self.scene['notes']))
         for bed in beds:

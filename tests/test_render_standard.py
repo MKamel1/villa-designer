@@ -538,7 +538,7 @@ class RenderStandard(unittest.TestCase):
 
     def test_every_bed_is_dressed_with_cloth(self):                 # ADR-0013 part 9
         ids = {c["id"] for c in SCENE["cloth"]}
-        for bed in ("pb-bed", "kb-bed", "ka-bunk"):
+        for bed in ("pb-bed", "kb-bed", "ka-loft-1", "ka-loft-2"):
             self.assertIn("duvet-" + bed, ids)
         self.assertFalse(any(m["id"].startswith("dress-duvet-") for m in SCENE["meshes"]), "box duvets are back")
 
@@ -806,14 +806,14 @@ class RenderStandard(unittest.TestCase):
         self.assertLess(mean_y(heights[-2]), mean_y(heights[1]) - 0.01 * 1000)
         self.assertTrue(all(m["subdivide"] == 1 for m in SCENE["meshes"] if
                             m["id"].startswith("furn-living-sofa-") and m["material"] == "boucle"))
-        bunk = items["ka-bunk"]
+        bunk = items["ka-loft-1"]
         bed_parts = F3.body(bunk)
-        self.assertEqual(sum(name == "ladder-rung" for name, _ in bed_parts), 4)
+        self.assertEqual(sum(name == "ladder-rung" for name, _ in bed_parts), 5)
         self.assertEqual(sum(name == "ladder-stile" for name, _ in bed_parts), 2)
         self.assertTrue(all(-bunk["w"]/2 <= b[0] <= b[3] <= bunk["w"]/2 and
                             -bunk["d"]/2 <= b[1] <= b[4] <= bunk["d"]/2 and 0 <= b[2] <= b[5] <= bunk["h"]
                             for name, b in bed_parts if name.startswith("ladder-")))
-        self.assertTrue(any(m["id"].startswith("furn-ka-bunk-") for m in SCENE["meshes"]))
+        self.assertTrue(any(m["id"].startswith("furn-ka-loft-1-") for m in SCENE["meshes"]))
 
     def test_bed_pillows_are_puffed_and_rest_on_the_mattress(self):
         for bed in ("pb-bed", "kb-bed"):
@@ -900,9 +900,9 @@ class RenderStandard(unittest.TestCase):
         # Draft 9 preceded the assumed stair steel; leaving it in the reproduction would support the old marker.
         sc["meshes"] = [m for m in sc["meshes"] if not m["id"].startswith(
             ("detail-stair-wall-stringer-", "detail-stair-wall-plate"))]
-        # draft 9's desk lamp: no base or stem, an arm bracketed to the window (kids A, north glazing y -23.591)
-        sc["meshes"] = [m for m in sc["meshes"] if m["id"] != "lamp-arm-DESK-kids-a-03"]
-        shade = next(m for m in sc["meshes"] if m["id"] == "lamp-shade-DESK-kids-a-03")
+        # draft 9's desk lamp: no base or stem, an arm bracketed to the window (kids B, north glazing y -23.591; kids A's lamps now stand under the loft beds, client 2026-11-25)
+        sc["meshes"] = [m for m in sc["meshes"] if m["id"] != "lamp-arm-DESK-kids-b-03"]
+        shade = next(m for m in sc["meshes"] if m["id"] == "lamp-shade-DESK-kids-b-03")
         zs = [v[2] for f in shade["faces"] for v in f]
         x = sum(v[0] for f in shade["faces"] for v in f) / sum(len(f) for f in shade["faces"])
         y = sum(v[1] for f in shade["faces"] for v in f) / sum(len(f) for f in shade["faces"])
@@ -914,7 +914,7 @@ class RenderStandard(unittest.TestCase):
             for v in f:
                 v[1] += 0.068
         found = {u[0] for u in S.unsupported(sc)}
-        self.assertIn("lamp-shade-DESK-kids-a-03", found)
+        self.assertIn("lamp-shade-DESK-kids-b-03", found)
         self.assertIn(mk["id"], found)
 
     def test_every_bedroom_and_living_window_has_a_curtain(self):

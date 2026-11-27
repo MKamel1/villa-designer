@@ -55,16 +55,21 @@ class Shapes(unittest.TestCase):
             e = s["envelope"]
             plan = (e[0], e[1], e[3], e[4])
             owner = s["mark"].split("#")[0]
+            under = ITEMS[owner].get("under") if owner in ITEMS else None      # a desk chair stands under its loft bed (FX 2026-11-25)
             for q in walls[s["level"]] + F._columns():
                 self.assertFalse(F._ov(plan, q), (s["mark"], q))
             for m, lv, fp in bodies:
-                if lv == s["level"] and m != owner and s["type"] == "chair":
+                if lv == s["level"] and m != owner and m != under and s["type"] == "chair":
                     self.assertFalse(F._ov(plan, fp), (s["mark"], m))
 
-    def test_a_bunk_bed_has_two_tiers(self):
-        s = next(x for x in SPEC if x["mark"] == "ka-bunk")
-        self.assertIn("upper-mattress", s["parts"])
-        self.assertAlmostEqual(s["envelope"][5], 1.7)
+    def test_a_loft_bed_has_one_raised_mattress_and_a_ladder(self):       # client 2026-11-25: replaces the bunk
+        for mark in ("ka-loft-1", "ka-loft-2"):
+            s = next(x for x in SPEC if x["mark"] == mark)
+            self.assertIn("mattress", s["parts"])
+            self.assertNotIn("upper-mattress", s["parts"])
+            self.assertIn("ladder-rung", s["parts"])
+            self.assertAlmostEqual(s["envelope"][5], 1.82)
+        self.assertNotIn("ka-bunk", [x["mark"] for x in SPEC])
 
     def test_island_stone_returns_and_open_shower_are_in_revit_input(self):
         island = next(x for x in SPEC if x["mark"] == "k-island")
