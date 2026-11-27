@@ -89,3 +89,6 @@ engine has no furniture shadows (documented limit) and the final Radiance rows (
 
 See the hand-back report: photoreal renders of the four views and the exposure re-measure on the final merged tree were blocked by the shared queue (jobq GPU/RAM starvation,
 repeated host OOM kills of Blender). Geometry previews (matplotlib, not presentation renders) were looked at instead: `out/fx/preview/`.
+
+## Integration round 2026-11-26 (merge of origin/integ/aplus with DF's joinery bed)
+Conflicts: villa_furnish.py (both kept: curved dining chair, no `pb-bed` imported-asset entry), snapshot/wp6 counts (furniture 77+1=78, spec 71+1=72), support-mounting added/removed sets (loft ids, DF bed meshes, bunk and bedside removed). Generated files taken from theirs, then regenerated: stage-2 receipt (kids A desks/chairs dropped, v06 camera removed, 11 reviews + joint, 0 findings, record `refresh_2026_11_25_FX`; parents-bed stays `retired`), d1-elements snapshot, electrical/exchange/documents (`exchange.integrate`), `docs/desks-inventory.json`. Exposure records re-measured on CPU (explicit) as `FX-int2-measure-{prod,set}-1`, then again after the v06 subject change as `FX-int3-measure-{prod,set}-1` (final). Renders `FX-int3-render-1` (v06 v09 v11 v20 n17) looked at: see hand-back.
