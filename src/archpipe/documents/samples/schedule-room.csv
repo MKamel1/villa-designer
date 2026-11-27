@@ -16,7 +16,7 @@ R14,lounge-nook,B,lounge (under the stair's top landing),living,1.87,1.49,2700
 R15,pantry,B,pantry / store,store,4.14,2.91,2700
 R16,stair-b,B,"stair (straight, to the GF)",stair,5.38,4.71,2700
 R17,store-ramp,B,store under the ramp (1.45-2.0 m clear),store,9.71,8.36,1674
-R18,corridor,GF,hall,corridor,13.83,11.25,2700
+R18,corridor,GF,hall,corridor,11.13,9.07,2700
 R19,family-bath,GF,family bathroom,bathroom,6.25,5.24,2700
 R20,gallery-end,GF,gallery (round the stair void to the bedrooms),corridor,2.59,2.43,2700
 R21,kids-a,GF,kids bedroom A,bedroom,13.14,11.91,2700
@@ -29,3 +29,4 @@ R27,parents-ensuite,GF,en-suite,ensuite,6.61,5.06,2700
 R28,parents-entry,GF,parents' bedroom (entry),bedroom,0.8,0.68,2800
 R29,stair-gf,GF,stair void + gallery,stair,8.53,7.79,2800
 R30,study-game,GF,study / game room (open to the stair; sliding door to the deck),study,15.6,13.66,2700
+R31,suite-vestibule,GF,suite vestibule (corridor end annexed to the parents' suite),corridor,2.7,2.08,2700

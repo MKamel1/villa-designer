@@ -13,10 +13,10 @@ DECISION = "docs/decisions/interior-presentation-2026-11-22.md#client-decisions-
 KITCHEN_ROOMS = ["kitchen", "kitchen-island", "dirty-kitchen"]
 BASEMENT = ["lounge", "lounge-nook", "stair-b", "hall-b", "entry-b", "family", "kitchen", "kitchen-island", "dining",
             "dining-side", "living", "bar-alcove", "dirty-kitchen", "pantry", "store-ramp"]
-GF = ["landing-gf", "corridor", "gallery-end", "study-game", "kids-a", "kids-b", "parents-bed", "parents-entry",
+GF = ["landing-gf", "corridor", "gallery-end", "study-game", "kids-a", "kids-b", "parents-bed", "parents-entry", "suite-vestibule",
       "parents-dressing", "parents-dressing-ext"]
 WET = ["guest-wc", "family-bath", "parents-ensuite"]
-PARENTS = ["parents-bed", "parents-entry", "parents-dressing", "parents-dressing-ext", "parents-ensuite"]
+PARENTS = ["parents-bed", "parents-entry", "suite-vestibule", "parents-dressing", "parents-dressing-ext", "parents-ensuite"]
 
 # slot id -> (palette item id, scene materials it drives, applies_to, who decided)
 HARD = {

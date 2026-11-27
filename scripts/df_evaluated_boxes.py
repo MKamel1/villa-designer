@@ -47,5 +47,5 @@ def dump(scene_data, args, env):
 
 args = Namespace(scene=scene_path, views="all", out=str(Path(out_path).parent), ies_dir=ies_dir,
                  library_root=str(Path.home() / "archpipe/assets/library"), samples=None, res=None, cpu=True, calibrate=False,
-                 measure_lighting=False, measure_exposure_groups=False, blend_cache=None, walkthrough_callback=dump)
+                 measure_lighting=False, measure_exposure_groups=False, blend_cache=None, no_soft=False, walkthrough_callback=dump)
 VS.render(without_ids(data), args)

@@ -1,3 +1,9 @@
+# AS-BUILT (2026-11-26): the plan sheets DF-101 / DF-102 are superseded
+
+`docs/lanes/DF-plans/DF-102-plan-AS-BUILT.{pdf,png}` (sheet DF-102 rev P02, green banner "AS-BUILT / DESIGN MODEL D1") is drawn from the built design model by `scripts/df_asbuilt.py`
+and replaces the two proposal plans below; DF-101 (today 1a) and DF-102-plan-R3 (PROPOSAL, red banner) stay in the folder as the record of what was proposed. DF-103/104 (elevations,
+PROPOSAL) are not redrawn. What differs from the R3 proposal and why: `docs/lanes/DF-built.md`.
+
 # Lane DF: parents' suite options as plans (2026-11-26)
 
 PROPOSAL ONLY. The design model D1 is loaded and varied in memory (one door moved); nothing is written back. Reproduce: `PYTHONPATH=src python scripts/df_plans.py`.

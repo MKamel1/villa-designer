@@ -419,10 +419,9 @@
     "lum-WW-corridor-02",
     "lum-WW-corridor-03",
     "lum-WW-corridor-04",
-    "lum-WW-corridor-05",
-    "lum-WW-corridor-06"
+    "lum-WW-corridor-05"
    ],
-   "watts": 60.6,
+   "watts": 50.5,
    "dimming": "dali2"
   },
   {
@@ -621,7 +620,7 @@
    "luminaire_ids": [
     "lum-COVE-parents-bed-01"
    ],
-   "watts": 10.5,
+   "watts": 12.5,
    "dimming": "dali2"
   },
   {
@@ -657,7 +656,7 @@
     "lum-VSTRIP-parents-dressing-04",
     "lum-VSTRIP-parents-dressing-05"
    ],
-   "watts": 45.9,
+   "watts": 46.8,
    "dimming": "dali2"
   },
   {
@@ -766,6 +765,26 @@
     "lum-DL-study-game-04"
    ],
    "watts": 15.2,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-SUITE-VESTIBULE-ACCENT",
+   "room": "suite-vestibule",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-WW-suite-vestibule-01"
+   ],
+   "watts": 10.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-SUITE-VESTIBULE-AMBIENT",
+   "room": "suite-vestibule",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-suite-vestibule-02"
+   ],
+   "watts": 14.4,
    "dimming": "dali2"
   }
  ],

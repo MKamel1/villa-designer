@@ -508,17 +508,25 @@ def design(lay=None):
             why="L6b LA13: low marker on the landing's south wall stub: lights the top treads of the flight and the landing (night layer)")
     add("DL", "landing-gf", (Lg[0] + Lg[2]) / 2, (Lg[1] + Lg[3]) / 2, why="stair top", card="ies-res-stairs-50")
     Co = rc["corridor"]
-    # client FINAL 2026-11-26: the corridor end past kids-b (x >= 17.45) is annexed to the suite as its vestibule. The row is laid out to the OLD
-    # corridor end (the vestibule's far wall) so every fixture keeps its id and position: the approved marker rows (marker-PATH-corridor-07..09)
-    # are bound to those ids. WW-corridor-06 (x 18.537) therefore stands inside the vestibule and is its light; it is still labelled `corridor`.
+    # client FINAL 2026-11-26: the corridor end past kids-b (x >= 17.45) is annexed to the suite as its vestibule. The row is laid out to the OLD corridor end so
+    # every fixture keeps its position; the last washer (x 18.537) is inside the vestibule and is built as WW-suite-vestibule-01, while the corridor's counter skips its old
+    # slot so the approved marker rows (marker-PATH-corridor-07..09) keep their ids.
     corridor_end = rc["suite-vestibule"][2]
     xs = [Co[0] + 0.9 + i * 1.75 for i in range(int((corridor_end - Co[0] - 1.0) / 1.75) + 1)]
     for x in xs:
+        if x > Co[2]:        # past the suite door: the vestibule's own wall washer; the corridor's numbering keeps its slot (06) so marker-PATH-corridor-07..09 stay put
+            add("WW", "suite-vestibule", x, Co[1] + 0.30, aim=(0, -0.25, -1), why="the corridor's last wall washer, now inside the suite vestibule",
+                card="ies-res-passage-30")
+            n["corridor"] = n.get("corridor", 0) + 1
+            continue
         add("WW", "corridor", x, Co[1] + 0.30, aim=(0, -0.25, -1), why="grazing the long party wall: the corridor "
             "is lit by its wall, not by a row of spots", card="ies-res-passage-30")
     for x in xs[::2]:
         add("PATH", "corridor", x + 0.4, Co[1] + 0.02, z=0.30, aim=(0, 1, -0.4), level="GF",
             why="low path light to the bathrooms at night")
+    SVr = rc["suite-vestibule"]       # client FINAL 2026-11-26: the annexed corridor end has its own ambient light (WW-corridor-06 only washes its far wall)
+    add("DL", "suite-vestibule", (SVr[0] + SVr[2]) / 2, (SVr[1] + SVr[3]) / 2, why="suite vestibule ambient (the corridor's lights stop at the suite door)",
+        card="ies-res-passage-30")
     Ge = rc["gallery-end"]
     add("DL", "gallery-end", (Ge[0] + Ge[2]) / 2, (Ge[1] + Ge[3]) / 2, why="gallery end", card="ies-res-passage-30")
     S = rc["study-game"]
@@ -577,7 +585,7 @@ def design(lay=None):
     # L6d LA4 'lying, looking up': that DL (19.03, -25.19) was 89 953 cd/m2 at 39.4 deg off the vertical of a person lying on the pillow
     # (118 820 at pillow 1, 34 deg). The 45 deg cone over the pillows (eye 0.7 m, ceiling 2.7 m) has a 2.0 m radius: the ambient DL
     # now stands at the foot of the bed on its axis, 0.16 m off the south wall, 2.28 m from the nearer pillow
-    for x, y in (((b[0] + b[2]) / 2, PB[3] - 0.16),):
+    for x, y in (((b[0] + b[2]) / 2, PB[1] + 0.16),):       # R3: the foot of the bed is now on the south side (head on the window wall)
         add("DL", "parents-bed", x, y, why="ambient, dimmable (foot of the bed: outside the 45 deg cone over the pillows)",
             card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]

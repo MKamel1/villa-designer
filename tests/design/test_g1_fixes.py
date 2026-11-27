@@ -165,7 +165,7 @@ class G1(unittest.TestCase):
         kinds = {}
         for e in self.els:
             kinds[e.kind] = kinds.get(e.kind, 0) + 1
-        self.assertEqual((kinds["wall"], kinds["door"], kinds["window"], kinds["stair"]), (36, 18, 8, 1))
+        self.assertEqual((kinds["wall"], kinds["door"], kinds["window"], kinds["stair"]), (37, 19, 8, 1))  # +1: suite-vestibule, client FINAL 2026-11-26
 
 
 if __name__ == "__main__":

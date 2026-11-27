@@ -10,7 +10,7 @@ Threshold sources are cards in `knowledge/eg/best-practice-cards.json` (verbatim
 
 ## Result in one line
 
-Gates (79 rows): **73 pass, 0 fail, 0 warn, 6 not evaluated**. Informative/target rows (119): 103 pass, 13 fail, 3 warn, 0 not evaluated.
+Gates (79 rows): **73 pass, 0 fail, 0 warn, 6 not evaluated**. Informative/target rows (123): 107 pass, 13 fail, 3 warn, 0 not evaluated.
 
 Grade effect under docs/quality/A-PLUS.md: no gate fails; 6 gate rows are not evaluated (a gate that cannot be proved is not a pass). Recorded client waiver (G1 2026-11-21, still a best-practice failure, kept visible as an info row): cinema (cinema) escape opening.
 
@@ -50,7 +50,7 @@ Fixes, cheapest first:
 ### 3. Habitable room glazing under 8 % of floor
 
 - **EG7 FAIL** `cinema (cinema) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 16.45 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
-- **EG7 FAIL** `kitchen (open kitchen) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 16.28 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
+- **EG7 FAIL** `kitchen (open kitchen) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 15.70 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
 
 Fixes, cheapest first:
 1. See daylight row: only the kitchen and cinema have no own opening.
@@ -154,6 +154,7 @@ Fixes, cheapest first:
 | parents-ensuite (en-suite) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | ensuite room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | gallery-end (gallery) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | parents-entry (parents' bedroom) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| suite-vestibule (suite vestibule) clear height (service) | info | 2.7 | 2 | m | new | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | parents-dressing-ext (dressing) clear height (service) | info | 2.7 | 2 | m | PASS | **PASS** | policy-service-clear-2000 (project judgement) | dressing room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
 | lounge (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
 | lounge-nook (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | PASS | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
@@ -179,15 +180,15 @@ Fixes, cheapest first:
 
 | subject | gate | achieved | required | unit | before | status | source | note |
 |---|---|---|---|---|---|---|---|---|
-| kids-a (kids bedroom A) area | gate | 11.81 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.81 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.31 m2 |
+| kids-a (kids bedroom A) area | gate | 11.91 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.91 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.41 m2 |
 | kids-a (kids bedroom A) width | gate | 3.38 | 2.75 | m | PASS | **PASS** | ndss-first-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.38 m vs 2.75 m (NDSS) |
-| kids-b (kids bedroom B) area | gate | 11.75 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.75 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.25 m2 |
+| kids-b (kids bedroom B) area | gate | 11.91 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.91 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.41 m2 |
 | kids-b (kids bedroom B) width | gate | 3.38 | 2.55 | m | PASS | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.38 m vs 2.55 m (NDSS) |
-| parents-bed (parents' bedroom) area | gate | 11.52 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.52 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.02 m2 |
+| parents-bed (parents' bedroom) area | gate | 11.61 | 11.5 | m2 | PASS | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.61 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.11 m2 |
 | parents-bed (parents' bedroom) width | gate | 2.8 | 2.55 | m | PASS | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 2.80 m vs 2.55 m (NDSS) |
-| family-bath (family bathroom) area (target) | info | 5.18 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.18 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
-| parents-ensuite (en-suite) area (target) | info | 5.03 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.03 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
-| guest-wc (guest bathroom) area (target) | info | 5.06 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.06 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+| family-bath (family bathroom) area (target) | info | 5.44 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.44 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+| parents-ensuite (en-suite) area (target) | info | 5.06 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.06 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+| guest-wc (guest bathroom) area (target) | info | 5.13 | 4.3 | m2 | PASS | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.13 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
 
 ### EG6 Doors
 
@@ -208,7 +209,8 @@ Fixes, cheapest first:
 | door door-GF-corridor-kids-b (corridor/kids-b) | info | 0.9 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-parents-bed-parents-dressing (parents-bed/parents-dressing) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-gallery-end-family-bath (gallery-end/family-bath) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
-| door door-GF-corridor-parents-entry (corridor/parents-entry) | info | 0.9 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-corridor-suite-vestibule (corridor/suite-vestibule) | info | 0.8 | 0.75 | m | new | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-suite-vestibule-parents-entry (suite-vestibule/parents-entry) | info | 0.9 | 0.75 | m | new | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-parents-dressing-ext-parents-ensuite (parents-dressing-ext/parents-ensuite) | info | 0.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-landing-gf-core (landing-gf/core) | info | 1 | 0.775 | m | PASS | **PASS** | ukadm-entrance-door-min (M4(1) para 1.14a) | nominal width 1.00 m vs 0.775 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
 | door door-GF-study-game-deck (study-game/deck) | info | 1.8 | 0.75 | m | PASS | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 1.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
@@ -218,14 +220,14 @@ Fixes, cheapest first:
 | subject | gate | achieved | required | unit | before | status | source | note |
 |---|---|---|---|---|---|---|---|---|
 | cinema (cinema) glazing / floor area | info | 0 | 8 | % | FAIL | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 16.45 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
-| dining (dining) glazing / floor area | info | 34.9 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 5.17 m2 of glazed openings on 14.82 m2 of floor = 34.9 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
-| kids-a (kids bedroom A) glazing / floor area | info | 28.5 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.36 m2 of glazed openings on 11.81 m2 of floor = 28.5 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
-| kids-b (kids bedroom B) glazing / floor area | info | 28 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.29 m2 of glazed openings on 11.75 m2 of floor = 28.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
-| kitchen (open kitchen) glazing / floor area | info | 0 | 8 | % | FAIL | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 16.28 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
-| living (garden living) glazing / floor area | info | 46.1 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 11.35 m2 of glazed openings on 24.60 m2 of floor = 46.1 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames... |
-| lounge (lounge) glazing / floor area | info | 29.2 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 8.16 m2 of glazed openings on 28.00 m2 of floor = 29.2 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
-| parents-bed (parents' bedroom) glazing / floor area | info | 54 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 6.22 m2 of glazed openings on 11.52 m2 of floor = 54.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
-| study-game (study / game room) glazing / floor area | info | 66.4 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 9.04 m2 of glazed openings on 13.63 m2 of floor = 66.4 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| dining (dining) glazing / floor area | info | 37.1 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 5.17 m2 of glazed openings on 13.93 m2 of floor = 37.1 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kids-a (kids bedroom A) glazing / floor area | info | 28.2 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.36 m2 of glazed openings on 11.91 m2 of floor = 28.2 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kids-b (kids bedroom B) glazing / floor area | info | 27.6 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.29 m2 of glazed openings on 11.91 m2 of floor = 27.6 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kitchen (open kitchen) glazing / floor area | info | 0 | 8 | % | FAIL | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 15.70 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
+| living (garden living) glazing / floor area | info | 47.1 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 11.35 m2 of glazed openings on 24.12 m2 of floor = 47.1 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames... |
+| lounge (lounge) glazing / floor area | info | 29.6 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 8.16 m2 of glazed openings on 27.62 m2 of floor = 29.6 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| parents-bed (parents' bedroom) glazing / floor area | info | 53.5 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 6.22 m2 of glazed openings on 11.61 m2 of floor = 53.5 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| study-game (study / game room) glazing / floor area | info | 66.7 | 8 | % | PASS | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 9.04 m2 of glazed openings on 13.56 m2 of floor = 66.7 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
 
 ### CL2 Daylight factor per room
 
@@ -233,14 +235,14 @@ Fixes, cheapest first:
 |---|---|---|---|---|---|---|---|---|
 | cinema (cinema) daylight factor reported | gate | 0.04 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.04 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
 | cinema (cinema) DF vs SLL minimum | info | 0.04 | 1.5 | % | FAIL | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.04 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
-| dining (dining) daylight factor reported | gate | 1.88 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 1.88 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
-| dining (dining) DF vs SLL minimum | info | 1.88 | 1.5 | % | PASS | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 1.88 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| dining (dining) daylight factor reported | gate | 1.9 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 1.90 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
+| dining (dining) DF vs SLL minimum | info | 1.9 | 1.5 | % | PASS | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 1.90 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
 | kids-a (kids bedroom A) daylight factor | gate | - | - |  | NOT_EVALUATED | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
 | kids-b (kids bedroom B) daylight factor | gate | - | - |  | NOT_EVALUATED | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
 | kitchen (open kitchen) daylight factor reported | gate | 0.33 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.33 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
 | kitchen (open kitchen) DF vs SLL minimum | info | 0.33 | 2 | % | FAIL | **FAIL** | sll-min-adf-kitchen (Chapter 5 Table 5.2) | simulated mean DF 0.33 % vs 2.0 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
-| living (garden living) daylight factor reported | gate | 3.48 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 3.48 %, read as moderate (2-5 %) (Metric Handbook bands, descriptive only) |
-| living (garden living) DF vs SLL minimum | info | 3.48 | 1.5 | % | PASS | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 3.48 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| living (garden living) daylight factor reported | gate | 3.5 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 3.50 %, read as moderate (2-5 %) (Metric Handbook bands, descriptive only) |
+| living (garden living) DF vs SLL minimum | info | 3.5 | 1.5 | % | PASS | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 3.50 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
 | lounge (lounge) daylight factor reported | gate | 0.59 | - | % | PASS | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.59 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
 | lounge (lounge) DF vs SLL minimum | info | 0.59 | 1.5 | % | FAIL | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.59 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
 | parents-bed (parents' bedroom) daylight factor | gate | - | - |  | NOT_EVALUATED | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
@@ -272,7 +274,7 @@ Egyptian ER rows (`[ER informative]`), A+ targets and recommendations. Passing r
 | stair tread and riser [ER informative] | info | 176.5 | 170 | mm | FAIL | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: riser 176.5 mm vs 170, tread 280 vs 270 |
 | GF core door to the top step [ER informative] | info | 0.075 | 1 | m | FAIL | **FAIL** | er119-art96-door-stair (ER Article (96)) | ER Art.96: door opening directly onto a stair flight needs 1.0 m; here 0.075 m |
 
-Egyptian ER informative rows: 63, of which 6 would fail. Failing ones: GF core door to the top step; cinema (cinema); stair risers per flight; stair tread and riser; stair width; store-ramp (store under the ramp).
+Egyptian ER informative rows: 65, of which 6 would fail. Failing ones: GF core door to the top step; cinema (cinema); stair risers per flight; stair tread and riser; stair width; store-ramp (store under the ramp).
 
 ## Margins on ASSUMED inputs
 

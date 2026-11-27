@@ -29,11 +29,11 @@ class Snapshot(unittest.TestCase):
 
     def test_counts_by_kind(self):
         k = self.kinds
-        self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (30, 36, 18, 8, 1))
+        self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (31, 37, 19, 8, 1))  # +1: suite-vestibule, client FINAL 2026-11-26: +1 room, +1 wall (x=17.45), +1 door
         self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
         self.assertEqual(k["luminaire"], 135)        # +3 PCOVE (ST39 cove round the ensuite bath feature panel, L4 round 5)
         self.assertEqual(k["plant"], 80)
-        self.assertEqual(k["furniture"], 77)       # 79 less the two floating ledges (DF 2026-11-26: the joinery bed carries its own trays); includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
+        self.assertEqual(k["furniture"], 78)       # +1 sv-store flat cabinet in the suite vestibule (client FINAL 2026-11-26); was 77 = 79 less the two floating ledges (DF 2026-11-26: the joinery bed carries its own trays); includes the G1 under-stair cupboard; the two throw-pillow props were replaced by the L4 cushion schedule (2026-11-23)
 
     def test_spec_kinds_equal_a_fresh_derivation(self):
         from archpipe.model import geometry_complete as GC

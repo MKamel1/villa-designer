@@ -30,7 +30,7 @@ class Completed(unittest.TestCase):
         self.assertEqual([f for f in VR.check(self.els, self.lay, self.sp, E.COLUMNS) if f["severity"] == "error"], [])
 
     def test_new_kinds_counts(self):
-        self.assertEqual((self.k["floor"], self.k["ceiling"], self.k["storey"]), (30, 30, 5))
+        self.assertEqual((self.k["floor"], self.k["ceiling"], self.k["storey"]), (31, 31, 5))  # +1: suite-vestibule, client FINAL 2026-11-26
         self.assertGreaterEqual(self.k["slab"], 6)                       # + B and GF floor slabs
         self.assertIn("slab-B-floor", self.by)
         self.assertIn("slab-GF-floor", self.by)
@@ -89,7 +89,7 @@ class Completed(unittest.TestCase):
         core = self.by["door-GF-landing-gf-core"].params
         self.assertEqual((core["swing_into"], core["hinge_side"]), ("core", "west"))      # authored G1 swing kept
         self.assertEqual(self.by["door-B-lounge-nook-pantry"].params["swing_into"], "lounge-nook")
-        self.assertTrue(self.by["door-GF-corridor-parents-entry"].params["judgement"])    # pocket side not authored
+        self.assertTrue(self.by["door-GF-suite-vestibule-parents-entry"].params["judgement"])    # pocket side not authored
 
     def test_sizes_have_a_basis_and_are_not_invented(self):
         for e in self.els:
@@ -122,8 +122,15 @@ class Completed(unittest.TestCase):
 
     def test_net_areas_from_walls_within_tolerance_of_frozen_revit(self):
         rows = {e.room: e.params for e in self.els if e.kind == "room"}
-        dev = [abs(p["net_area_deviation_m2"]) for p in rows.values() if p["net_area_deviation_m2"] is not None]
-        self.assertEqual(len(dev), 27)                                   # Revit read 27 of 30 rooms
+        # Client FINAL 2026-11-26: the corridor end (suite-vestibule) is annexed to the parents' suite. The frozen Revit
+        # area is of the OLD, longer corridor, so the corridor now reads smaller by about the vestibule's area (measured:
+        # 9.068 vs 11.16 frozen = -2.092; vestibule 2.076). Checked against that, not just excluded.
+        corr, vest = rows["corridor"], rows["suite-vestibule"]
+        self.assertIsNone(vest["revit_net_area_m2"])                     # new room: nothing frozen
+        self.assertLessEqual(abs(-corr["net_area_deviation_m2"] - vest["net_area_m2"]), GN.TOLERANCE_M2)
+        dev = [abs(p["net_area_deviation_m2"]) for r, p in rows.items()
+               if p["net_area_deviation_m2"] is not None and r != "corridor"]
+        self.assertEqual(len(dev), 26)                                   # Revit read 27 of the old 30 rooms; 26 unchanged
         self.assertLessEqual(max(dev), GN.TOLERANCE_M2)
         for rid in ("store-ramp", "cinema", "parents-dressing-ext"):
             self.assertIsNone(rows[rid]["revit_net_area_m2"])

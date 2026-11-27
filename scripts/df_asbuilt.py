@@ -63,7 +63,7 @@ def plan():
     P.slats(fig, -26.541, -23.981, deep=0.03)
     fig.text(18.66, -25.1, "slat wall", size=7, color="#6b4a1c", z=9)
     P.labels(fig, KEY)
-    fig.sh.text(fig.P(18.55, -27.82), "VESTIBULE", size=7, weight="bold", rot=90, z=9)
+    fig.sh.text(fig.P(19.15, -27.99), "VESTIBULE", size=6, weight="bold", rot=90, z=9)
     sv = F.footprint(ITEMS["sv-store"])
     fig.rect(box(*sv), fc=P.TAN, ec=P.BROWN, z=6)
     gx = dict(geo, bbox=(P.CROP[1] * 1000, -P.CROP[2] * 1000, P.CROP[3] * 1000, -P.CROP[0] * 1000))

@@ -46,7 +46,7 @@
   "floor": 31,
   "furniture": 78,
   "garden": 14,
-  "luminaire": 135,
+  "luminaire": 136,
   "plant": 80,
   "railing": 8,
   "room": 31,
@@ -1361,7 +1361,7 @@
    "finish_codes": [],
    "params": {
     "name": "suite vestibule (corridor end annexed to the parents' suite)",
-    "occupancy": "bedroom",
+    "occupancy": "corridor",
     "polygon_mm": [
      [
       17450.0,
@@ -17872,12 +17872,12 @@
    }
   },
   {
-   "id": "lum-WW-corridor-06",
+   "id": "lum-WW-suite-vestibule-01",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    18537.0,
-    -27946.0,
+    18500.0,
+    -28171.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17887,7 +17887,7 @@
     0.0
    ],
    "host": "",
-   "room": "corridor",
+   "room": "suite-vestibule",
    "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
@@ -17919,7 +17919,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-passage-30",
-    "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
+    "why": "the corridor's last wall washer, now inside the suite vestibule",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
     "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
@@ -18085,6 +18085,60 @@
     "emitter_z_scene_mm": 300.0,
     "size_basis": "authored in the requirement text ('0.3 m'): length; section not given",
     "type_id": "type-luminaire---PATH-wall-marker-300-0"
+   }
+  },
+  {
+   "id": "lum-DL-suite-vestibule-02",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    18489.0,
+    -27946.0,
+    2700.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    76.0,
+    76.0,
+    0.0
+   ],
+   "host": "",
+   "room": "suite-vestibule",
+   "product_id": "erco/41321",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 1065.0,
+    "watts": 14.4,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 57.0,
+    "photometry": {
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-passage-30",
+    "why": "suite vestibule ambient (the corridor's lights stop at the suite door)",
+    "emitter_z_scene_mm": 2700.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -19443,7 +19497,7 @@
    "level": "GF",
    "placement": [
     20437.0,
-    -23951.0,
+    -26431.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -21221,7 +21275,7 @@
    "level": "GF",
    "placement": [
     22227.0,
-    -24880.0,
+    -23981.0,
     0.0
    ],
    "rotation_deg": 0.0,
@@ -31511,7 +31565,7 @@
       "generic": false
      }
     },
-    "occurrences": 52,
+    "occurrences": 53,
     "occurrence_ids": [
      "lum-DL-lounge-01",
      "lum-DL-lounge-02",
@@ -31547,6 +31601,7 @@
      "lum-DL-dirty-kitchen-05",
      "lum-DL-dirty-kitchen-06",
      "lum-DL-landing-gf-03",
+     "lum-DL-suite-vestibule-02",
      "lum-DL-gallery-end-01",
      "lum-DL-study-game-01",
      "lum-DL-study-game-02",
@@ -32055,7 +32110,7 @@
      "lum-WW-corridor-03",
      "lum-WW-corridor-04",
      "lum-WW-corridor-05",
-     "lum-WW-corridor-06",
+     "lum-WW-suite-vestibule-01",
      "lum-WW-parents-ensuite-01",
      "lum-WW-parents-ensuite-02"
     ],

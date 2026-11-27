@@ -34,7 +34,7 @@ class SpecDerived(unittest.TestCase):
     def test_rooms_on_both_levels(self):
         levels = Counter(e.level for e in self.els if e.kind == "room")
         self.assertEqual(set(levels), {"B", "GF"})
-        self.assertEqual(sum(levels.values()), 30)
+        self.assertEqual(sum(levels.values()), 31)  # +1: suite-vestibule, client FINAL 2026-11-26
 
     def test_lounge_polygon_and_area(self):
         r = self.by["room-lounge"]

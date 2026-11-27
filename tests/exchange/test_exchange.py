@@ -273,7 +273,7 @@ def test_xlsx_sheets(out):
     import openpyxl
     wb = openpyxl.load_workbook(out[0] / "quantities" / "D1-takeoff.xlsx")
     assert {"README", "by_type", "by_room", "by_layer", "elements", "reconciliation"} <= set(wb.sheetnames)
-    assert wb["by_room"].max_row == 31
+    assert wb["by_room"].max_row == 32  # +1: suite-vestibule, client FINAL 2026-11-26
 
 
 def test_light_zones_are_the_published_l6b_zones(out):

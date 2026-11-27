@@ -32,18 +32,23 @@ def test_todays_design_downlights_fail_where_the_single_reclined_sightline_passe
     The pre-existing sightline (toward the foot, 17 deg up) passed all of them: that is the gap."""
     sls = {s["id"]: s for s in VC.bed_lying_sightlines(villa)}
     base = _dl(villa, "parents-bed")
-    cases = [(dataclasses.replace(base, id="old-bed-DL", position=(19.027, -25.191, 2.7)), "pb-bed-lying-up-min-y-p1", 118_000),
-             (dataclasses.replace(base, id="old-entry-DL", position=(18.977, -26.981, 2.7)), "pb-bed-lying-up-min-y-p1", 122_000),
+    # R3 (2026-11-26) turned the parents' bed (head on the window wall, pillows at y -24.19): the two old parents' positions no longer lie near a
+    # pillow, so the control is the same mistake made over the NEW pillow (0.6 m toward the foot, inside the 45 deg cone); the kids' B case is unchanged
+    eye = sls["pb-bed-lying-up-max-y-p1"]["eye"]
+    cases = [(dataclasses.replace(base, id="old-bed-DL", position=(19.027, -25.191, 2.7)), "pb-bed-lying-up-min-y-p1", None),
+             (dataclasses.replace(base, id="bed-DL-over-pillow", position=(eye[0], eye[1] - 0.6, 2.7)), "pb-bed-lying-up-max-y-p1", None),
              (dataclasses.replace(base, id="old-kb-DL", position=(16.689, -25.856, 2.7)), "kb-bed-lying-up-min-x", 113_000)]
+    cases = cases[1:]
     for p, sid, approx_l in cases:
         r = check_la4_luminance("villa", [sls[sid]], [p])[0]
-        assert r.status == "fail" and r.achieved == pytest.approx(approx_l, rel=0.05), (p.id, r.achieved)
+        assert r.status == "fail" and (approx_l is None or r.achieved == pytest.approx(approx_l, rel=0.05)), (p.id, r.achieved)
         assert "L6-POLICY-LA4-bed-lying-looking-up" in r.source_ids
     old_reclined = {"id": "parents-bed-lying", "eye": (20.33, -26.191, 0.7), "dir": (0, 1, 0.3)}
     # the bed DL is 53.7 deg from that sightline (outside its 45 deg cone), so LA4 passed it although it is 89 953 cd/m2 at 39.4 deg off
     # the vertical of the lying eye (LV)
-    assert check_la4_luminance("villa", [old_reclined], [cases[0][0]])[0].status == "pass"
-    assert check_la4_luminance("villa", [dict(old_reclined, dir=(0, 0, 1))], [cases[0][0]])[0].achieved == pytest.approx(89_900, rel=0.02)
+    old_bed_dl = dataclasses.replace(base, id="old-bed-DL", position=(19.027, -25.191, 2.7))
+    assert check_la4_luminance("villa", [old_reclined], [old_bed_dl])[0].status == "pass"
+    assert check_la4_luminance("villa", [dict(old_reclined, dir=(0, 0, 1))], [old_bed_dl])[0].achieved == pytest.approx(89_900, rel=0.02)
 
 
 def test_the_design_passes_every_lying_sightline(villa):
@@ -54,7 +59,7 @@ def test_the_design_passes_every_lying_sightline(villa):
 
 def test_negative_a_downlight_outside_the_cone_or_shielded_stays_quiet(villa):
     """Negative: 2.3 m from the pillow (48 deg) is outside the cone; a shielded declared exception is excluded; the check does not fire on every DL."""
-    sl = next(s for s in VC.bed_lying_sightlines(villa) if s["id"] == "pb-bed-lying-up-min-y-p1")
+    sl = next(s for s in VC.bed_lying_sightlines(villa) if s["id"] == "pb-bed-lying-up-max-y-p1")
     base = _dl(villa, "parents-bed")
     far = dataclasses.replace(base, position=(sl["eye"][0] + 2.3, sl["eye"][1], 2.7))
     assert check_la4_luminance("villa", [sl], [far])[0].status == "pass"

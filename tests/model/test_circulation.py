@@ -16,13 +16,18 @@ def _items(**vanity):
 
 
 class StagedCirculation(unittest.TestCase):
-    def test_pulled_out_vanity_chair_pinches_the_way_to_the_dressing_door(self):
-        bad = C.pinches(LAY, _items(chair_pulled_out=True))
-        self.assertEqual(len(bad), 1, [C.describe(r) for r in bad])
-        r = bad[0]
-        self.assertIn("parents-bed", r["cluster"])
-        self.assertEqual(r["required"], F.BEDROOM_ROUTE)          # card ukadm-bedroom-route-750
-        self.assertLess(r["achieved"], 0.60)                       # measured 0.56 m: bed side 21.13 -> chair 21.697
+    def test_a_chest_across_the_lobby_mouth_pinches_the_way_to_the_dressing_door(self):
+        # positive control (R3, 2026-11-26). The old control was the pulled-out vanity chair at the old vanity position (0.56 m); the vanity now
+        # stands 0.90 m further toward the foot, out of the way, so the same chair pulled out pinches nothing. A low chest left across the lobby mouth
+        # passage still must: the gate has not gone blind.
+        seat = dict(id="loose-seat", room="parents-bed", level="GF", type="loose_seat", cx=18.98, cy=-26.3, w=0.9, d=0.5, h=0.45, rot=0)
+        bad = C.pinches(LAY, F.layout(LAY) + [seat])
+        self.assertTrue(bad)
+        self.assertIn("parents-bed", bad[0]["cluster"])
+        self.assertEqual(bad[0]["required"], F.BEDROOM_ROUTE)          # card ukadm-bedroom-route-750
+
+    def test_the_vanity_chair_pulled_out_no_longer_pinches(self):
+        self.assertEqual([C.describe(r) for r in C.pinches(LAY, _items(chair_pulled_out=True))], [])
 
     def test_tucked_vanity_stool_leaves_the_route(self):
         r = next(r for r in C.routes(LAY) if "parents-bed" in r["cluster"] and r["to"] != "its own approach")
@@ -33,13 +38,13 @@ class StagedCirculation(unittest.TestCase):
         self.assertEqual([C.describe(r) for r in C.pinches(LAY)], [])
         self.assertGreater(len(C.routes(LAY)), 30)                 # it did look at every door approach
 
-    def test_tucked_chair_projects_only_its_back(self):
+    def test_tucked_chair_projects_nothing(self):
         v = next(i for i in F.layout(LAY) if i["id"] == "pb-vanity")
         fx0, fy0, fx1, fy1 = F.footprint(v)
         for _, parts in F3.extras(v):
             for _, b in parts:
                 x0, y0, _, x1, y1, _ = F3.to_world(v, b)
-                m = 0.03 + 1e-6                      # only the back (0.03 m) may stand proud of the top's front edge
+                m = 1e-6                             # R3: the tucked chair is flush, nothing stands proud of the top (the 0.03 m back cost the bedside 0.03 m)
                 self.assertTrue(fx0 - m <= x0 and x1 <= fx1 + m and fy0 - m <= y0 and y1 <= fy1 + m)
 
     def test_a_chair_elsewhere_is_not_flagged(self):
@@ -57,12 +62,12 @@ class JoineryBedTrays(unittest.TestCase):
 
     def _route(self, items, dressed=False):
         return next(r for r in C.routes(LAY, items=items, dressed=dressed)
-                    if "parents-bed" in r["cluster"] and r["to"].startswith("door corridor") and r["frm"].startswith("door parents-bed"))
+                    if "parents-bed" in r["cluster"] and r["to"].startswith("door suite-vestibule") and r["frm"].startswith("door parents-bed"))
 
-    def test_no_ledge_no_bedside_and_the_bed_is_where_it_was(self):
+    def test_no_ledge_no_bedside_and_the_bed_is_turned_and_centred(self):
         self.assertFalse({"pb-ledge-w", "pb-ledge-e", "pb-bedside"} & set(self.ITEMS))
         bed = self.ITEMS["pb-bed"]
-        self.assertEqual((bed["cx"], bed["cy"], bed["w"], bed["d"]), (20.33, -25.591, 1.6, 2.0))     # mattress 1600 x 2000, unmoved
+        self.assertEqual((bed["cx"], bed["cy"], bed["w"], bed["d"], bed["rot"]), (20.437, -24.791, 1.6, 2.0, 180))   # R3: head to the window wall, centred
         self.assertTrue(bed["joinery"])
 
     def test_mattress_is_1600_by_2000_with_its_top_at_0p525(self):
@@ -84,34 +89,35 @@ class JoineryBedTrays(unittest.TestCase):
         self.assertAlmostEqual(parts["tray-front-w"][0], -0.8, 6)
         self.assertAlmostEqual(parts["tray-front-e"][3], 0.8, 6)
 
-    def test_headboard_is_50_mm_and_floats_on_the_mattress_top(self):
+    def test_head_panel_is_50_mm_floats_on_the_mattress_top_and_stops_at_the_sill(self):
         parts = F3.body(self.ITEMS["pb-bed"])
         for n, b in parts:
             if n.startswith("headboard-frame"):
                 self.assertAlmostEqual(b[4] - b[1], 0.05, 6)
                 self.assertGreaterEqual(b[2], 0.525 - 1e-9)
-        self.assertAlmostEqual(max(b[5] for n, b in parts if n.startswith("headboard")), 1.35, 6)
+        self.assertAlmostEqual(max(b[5] for n, b in parts if n.startswith("headboard")), 0.90, 6)     # R3: the window sill
 
     def test_open_trays_leave_the_route_and_both_door_approaches_their_750(self):
         items = C.with_trays(self.BASE, 0.25)
         r = self._route(items)
         self.assertGreaterEqual(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))                 # 0.766 m with both trays out
-        for frm in ("door parents-bed/parents-dressing", "door corridor/parents-entry"):
+        for frm in ("door parents-bed/parents-dressing", "door suite-vestibule/parents-entry"):
             a = next(x for x in C.routes(LAY, items=items) if x["frm"] == frm and x["to"] == "its own approach" and "parents-bed" in x["cluster"])
             self.assertTrue(a["ok"], C.describe(a))
 
-    def test_the_first_draft_window_would_have_pinched_the_vanity_corner(self):
-        # negative control from the real first draft: trays 0.10 m further down the bed (v 0.45-0.90), pulled 0.25 m,
-        # left 0.708 m between the east tray corner and the vanity: the gate must catch it
-        shifted = [dict(i, cy=i["cy"] + 0.10) if i["id"].startswith("pb-tray-open") else i for i in C.with_trays(self.BASE, 0.25)]
-        self.assertLess(self._route(shifted)["achieved"], F.BEDROOM_ROUTE)
+    def test_the_old_vanity_position_would_have_pinched_the_open_tray(self):
+        # negative control (R3): with the vanity where it was (y -25.3) the way past the open east tray is 0.66 m; the brief's ~0.30 m move gives 0.50 m,
+        # because the tray corner and the vanity corner are 0.51 m apart (tests/model/test_suite_built.py measures all three positions)
+        from tests.model.test_suite_built import _east_head_width
+        old = [dict(i, cy=-24.8) if i["id"] == "pb-vanity" else i for i in self.BASE]
+        self.assertLess(_east_head_width(C.with_trays(old, 0.25)), F.BEDROOM_ROUTE - 0.05)
 
     def test_closed_trays_change_nothing(self):
         self.assertAlmostEqual(self._route(self.BASE)["achieved"], self._route(C.with_trays(self.BASE, 0.0))["achieved"], 6)
 
     def test_dressed_route_with_the_evaluated_cloth_as_obstacles(self):
         # evaluated cloth (duvet, throw, parked curtain stacks) from the Blender build; see knowledge/flythrough
-        r = next(r for r in C.routes(LAY, dressed=True) if "parents-bed" in r["cluster"] and r["to"].startswith("door corridor"))
+        r = next(r for r in C.routes(LAY, dressed=True) if "parents-bed" in r["cluster"] and r["to"].startswith("door suite-vestibule"))
         self.assertGreaterEqual(r["achieved"], F.BEDROOM_ROUTE, C.describe(r))
 
 
@@ -127,7 +133,7 @@ class DressingOverhang(unittest.TestCase):
     def test_books_with_origin_at_the_top_centre_overhang_the_top(self):
         # the same mistake as the pre-fix bedside books (scale 1, origin at the top's centre, 0.357 m past the top into the dressing
         # door's opening), reproduced on the vanity, the one piece in the room that still carries a top: the set hangs past its east edge
-        old = {"id": "vanity-books", "asset": "book_encyclopedia_set_01", "position": [22.30, -24.8, 0.75],
+        old = {"id": "vanity-books", "asset": "book_encyclopedia_set_01", "position": [22.30, -25.7, 0.75],
                "rotation_deg": [0, 0, 0.0], "scale": 1.0}
         bad = VR.dressing_overhang_violations([old], LAY)
         self.assertEqual(len(bad), 1, bad)

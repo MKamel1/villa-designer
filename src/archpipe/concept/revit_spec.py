@@ -158,6 +158,8 @@ def _room_at_strict(lay, level, x, y):
 def is_open(room):
     """Open-plan room: its occupancy is open, or the layout marks it open (client r9: the GF study is open to the
     stair, no wall and no door)."""
+    if room.get("closed"):                       # a room of an open occupancy that has its own walls and doors (the suite vestibule)
+        return False
     return room["occupancy"] in OPEN or bool(room.get("open"))
 
 

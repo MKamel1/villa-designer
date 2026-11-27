@@ -172,6 +172,16 @@ class Bedroom(unittest.TestCase):
                 F.PB_VANITY_Y0 = old
             self.assertEqual(w >= F.BEDROOM_ROUTE - 0.01, ok, (y0, w))
 
+    def test_open_trays_are_drawn_outside_the_turned_bed_on_their_own_side(self):
+        """circulation.tray_boxes once shifted by the LOCAL side sign: a bed turned 180 degrees pulled its trays INTO the mattress."""
+        items = F.layout(LAY)
+        bed = next(i for i in items if i["id"] == "pb-bed")
+        x0, _, x1, _ = F.footprint(bed)
+        t = C.tray_boxes(items, 0.25)
+        east = max(t.values(), key=lambda b: b[2]); west = min(t.values(), key=lambda b: b[0])
+        self.assertAlmostEqual(east[2], x1 + 0.25, places=2)
+        self.assertAlmostEqual(west[0], x0 - 0.25, places=2)
+
     def test_every_route_incl_trays_open_meets_its_figure(self):
         for pull in (0.0, 0.25):
             items = C.with_trays(F.layout(LAY), pull) if pull else None
@@ -181,9 +191,10 @@ class Bedroom(unittest.TestCase):
 
 def _east_head_width(items):
     import numpy as np
-    sp = F.RS.build(LAY)
-    cl = F._cluster(LAY, "parents-bed")
-    rects = [LAY["rooms"][c]["rect"] for c in cl]
+    lay = LAY or R.design("D1")
+    sp = F.RS.build(lay)
+    cl = F._cluster(lay, "parents-bed")
+    rects = [lay["rooms"][c]["rect"] for c in cl]
     x0, y0 = min(q[0] for q in rects), min(q[1] for q in rects)
     x1, y1 = max(q[2] for q in rects), max(q[3] for q in rects)
     cell = C.CELL
@@ -192,7 +203,7 @@ def _east_head_width(items):
     free = np.zeros((nx, ny), bool)
     for a, b, c, d in rects:
         free |= (X >= a) & (X < c) & (Y >= b) & (Y < d)
-    obst = [F.footprint(i) for i in C.staged_items(LAY, items) if i["room"] in cl and i["h"] >= 0.3] + F._columns() + F._walls(sp, "GF")
+    obst = [F.footprint(i) for i in C.staged_items(lay, items) if i["room"] in cl and i["h"] >= 0.3] + F._columns() + F._walls(sp, "GF")
     for a, b, c, d in obst:
         free &= ~((X > a) & (X < c) & (Y > b) & (Y < d))
     clear = np.full((nx, ny), np.inf)

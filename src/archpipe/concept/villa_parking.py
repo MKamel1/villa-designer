@@ -309,8 +309,8 @@ def _gf_straight(bath_north=True):
         # client FINAL 2026-11-26: the corridor end east of SUITE_DOOR_X becomes the suite vestibule behind a new suite door
         cx0, cy0, cx1, cy1 = rooms["corridor"]["rect"]
         rooms["corridor"]["rect"] = [cx0, cy0, SUITE_DOOR_X, cy1]
-        rooms["suite-vestibule"] = _room("suite-vestibule", "GF", (SUITE_DOOR_X, cy0, cx1, cy1), "bedroom",
-                                         "suite vestibule (corridor end annexed to the parents' suite)", suite=True,
+        rooms["suite-vestibule"] = _room("suite-vestibule", "GF", (SUITE_DOOR_X, cy0, cx1, cy1), "corridor",
+                                         "suite vestibule (corridor end annexed to the parents' suite)", suite=True, closed=True,
                                          door_at={"corridor": SUITE_DOOR_Y}, door_w={"corridor": SUITE_DOOR_W})
         rooms["kids-b"]["door_at"] = {"corridor": KIDS_B_DOOR_X}      # kids-b's door stays exactly where it was (public, unmoved)
         rooms["parents-dressing"]["door_at"] = {"parents-bed": DRESSING_DOOR_X}
