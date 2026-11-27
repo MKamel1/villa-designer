@@ -275,6 +275,11 @@ def _runs(it, W, D, H, island):
             wu0 = (F3.COUNTER_TOP + F3.SPLASH) * 1000
             out.append(("wall-units", G._box(a, b, yb, yb + 350 - FRONT_T, wu0, H)))
             out += [(n, g) for n, g in _fronts(a, b, yb + 350, wu0, H, "wall-units", handle=None)]
+    if it.get("wall_units") and not island:           # client 2026-11-25: wall cupboards, walnut fronts, 3 mm gaps
+        for a, b, w in F3.wall_unit_bays(it):
+            a, b, z0, z1, dep = a * 1000, b * 1000, w["z0"] * 1000, w["z1"] * 1000, w["depth"] * 1000
+            out.append(("wall-units", G._box(a, b, yb, yb + dep - FRONT_T, z0, z1)))
+            out += [(n, g) for n, g in _fronts(a, b, yb + dep, z0, z1, "wall-units", handle=None)]
     # worktop, cut around each sink
     edges = [x0] + [v for a, b in sink_holes for v in (a + 60, b - 60)] + [x1]
     y_hole0, y_hole1 = (yb + yf) / 2 - 220, (yb + yf) / 2 + 220
@@ -291,6 +296,20 @@ def _runs(it, W, D, H, island):
         tx, ty = (a + b) / 2, y_hole0 - 60
         out.append(("tap", G._cylinder(tx, ty, top, top + 330, 14, seg=16)))
         out.append(("tap", G._box(tx - 12, tx + 12, ty, ty + 200, top + 300, top + 330)))
+    return out
+
+
+def _loft(it):
+    """Loft bed (client 2026-11-25) from `villa_furnish3d.loft_parts`: rounded slats, rails, frame and mattress (a pure box is a
+    refused proxy), square posts and the ladder."""
+    soft = {"mattress": (60, 40), "slats": (10, 8), "rail": (8, 6), "frame": (10, 8)}
+    out = []
+    for name, (x0, y0, z0, x1, y1, z1) in F3.loft_parts(it):
+        x0, y0, z0, x1, y1, z1 = (v * 1000 for v in (x0, y0, z0, x1, y1, z1))
+        if name in soft:
+            out.append((name, _slab(x0, x1, y0, y1, z0, z1, *soft[name])))
+        else:
+            out.append((name, G._box(x0, x1, y0, y1, z0, z1)))
     return out
 
 
@@ -417,6 +436,8 @@ def local_parts(it):
         return _folding_counter(W, D, H)
     if t in ("base_run", "island"):
         return _runs(it, W, D, H, t == "island")
+    if t.startswith("bed_") and it.get("loft"):
+        return _loft(it)
     if t == "sideboard":
         return _cabinet(W, D, H, t)
     if t == "tv_unit":
@@ -451,6 +472,8 @@ def world_parts(it, level_z, parts=None):
     """{part: [triangle, ...]} in world metres, each vertex inside the piece's footprint and height (+1 mm)."""
     parts = parts if parts is not None else local_parts(it)
     W, D, H = it["w"] * 1000, it["d"] * 1000, (it.get("nook_top", it["h"]) if it.get("type") == "daybed_nook" else it["h"]) * 1000
+    if it.get("wall_units"):                                   # client 2026-11-25 wall cupboards stand above the run's h
+        H = max(H, it["wall_units"]["z1"] * 1000)
     out = {}
     for name, (verts, tris) in parts:
         for x, y, z in verts:

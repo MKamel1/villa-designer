@@ -328,13 +328,47 @@ def test_policy_cards_are_marked_policy():
 def test_d1_loads_g1_fields_and_has_no_failed_or_warned_gate(tmp_path):
     from archpipe.compliance.model import load_d1
     m = load_d1(tmp_path)
-    assert m.stair.riser_infill and m.stair.under_flight and m.stair.under_flight["enclosed"]
+    assert not m.stair.riser_infill                                   # client veto 2026-11-25: bars removed
+    assert m.stair.infill_waiver["date"] == "2026-11-25"
+    assert m.stair.under_flight and m.stair.under_flight["enclosed"]
     ids = {g.id for g in m.guards}
     assert {"rail-gf-stair-void", "rail-gf-terrace-edge", "rail-patio-steps-edge"} <= ids
     assert m.needed_but_unmodelled == []
     res = C.run_all(m)
     assert {r.status for r in res if r.gate} <= {"pass", "not_evaluated"}
     assert any(r.status == "fail" and not r.gate and "WAIVED" in r.message for r in res)
+    ls2 = [r for r in res if r.criterion == "LS2" and "100 mm sphere" in r.subject][0]      # the waiver stays visible
+    assert ls2.status == "fail" and ls2.achieved > 100 and "waived by client 2026-11-25" in ls2.message
     door = [r for r in res if r.criterion == "LS4" and r.gate][0]
     assert door.status == "pass" and "OUTWARD" in door.message
     assert sources.missing_sources(res, sources.load_cards()) == []
+
+
+# ---- LS2 client waiver 2026-11-25: the finding must stay visible --------------------------------------------------
+WAIVER = {"date": "2026-11-25", "by": "client", "criterion": "LS2", "card": "ukadk-open-risers-dwelling",
+          "consequence": "a child under about 5 can get a foot, leg or head through.", "reversible": "refit the bar"}
+
+
+def test_waived_infill_keeps_ls2_a_visible_fail_with_numbers():
+    st = make_stair(thick=60.0, overlap=16.0)
+    st.infill_waiver = WAIVER
+    res = C.check_open_risers(model_with(stair=st))
+    row = [r for r in res if "100 mm sphere" in r.subject][0]
+    assert row.status == "fail" and row.gate is False             # off the gate, but never a pass and never dropped
+    assert "waived by client 2026-11-25" in row.message and "WAIVED" in row.message
+    assert "100 mm is required" in row.message or "where 100 mm" in row.message
+    assert row.achieved > 100.0 and row.required == 100.0
+
+
+def test_unwaived_open_stair_still_fails_the_gate():           # negative: no waiver, no silence
+    res = C.check_open_risers(model_with(stair=make_stair(thick=60.0, overlap=16.0)))
+    row = [r for r in res if "100 mm sphere" in r.subject][0]
+    assert row.status == "fail" and row.gate is True and "WAIVED" not in row.message
+
+
+def test_waiver_does_not_hide_a_pass_or_an_infilled_stair():   # a waiver on a stair that has an infill changes nothing
+    st = make_stair(thick=60.0, overlap=16.0)
+    st.infill_waiver = WAIVER
+    st.riser_infill = {"present": True, "max_clear_opening_mm": 38.24, "bar_h_mm": 40, "type": "horizontal flat bar"}
+    row = [r for r in C.check_open_risers(model_with(stair=st)) if "100 mm sphere" in r.subject][0]
+    assert row.status == "pass" and "WAIVED" not in row.message

@@ -256,7 +256,9 @@ class FinalPhysicalScene(unittest.TestCase):
         # Historical side-pair fixtures are retired by the branch-start C5
         # decision. No phase 2c deletion is accepted as a geometric remedy.
         by_id = {m['id']:m for m in self.scene['meshes']}
-        retired = {'lamp-VSCONCE-parents-ensuite-04','lamp-VSCONCE-parents-ensuite-05'}
+        retired = {'lamp-VSCONCE-parents-ensuite-04','lamp-VSCONCE-parents-ensuite-05',
+                   # FX 2026-11-25: the kids A bunk, its pillow and the rug anchored on it are removed (two loft beds replace them)
+                   'dress-pillow-ka-bunk-0', 'rug-kids-a'}
         leaves = [m for m in self.scene['meshes'] if m['part_kind']=='door-leaf'
                   and m['group'] in ('shell','context')]
         face_key = lambda face: tuple(tuple(round(c, 4) for c in p) for p in face)   # 0.1 mm: -0.8999999999999999 vs -0.9 is float noise, a moved leaf is not
@@ -275,7 +277,7 @@ class FinalPhysicalScene(unittest.TestCase):
         # with unrelated identifiers. Neither room nor identifier is a waiver.
         covered = set()
         for mesh in FROZEN['meshes']:
-            if mesh['part_kind'] in covered:
+            if mesh['id'] in retired or mesh['part_kind'] in covered:
                 continue
             current = by_id.get(mesh['id'])
             if current is None and mesh['part_kind']=='door-leaf':
@@ -292,7 +294,7 @@ class FinalPhysicalScene(unittest.TestCase):
             sibling['room'] = 'another-room'
             PartMeshList().append(sibling)
             covered.add(mesh['part_kind'])
-        self.assertEqual(covered, {m['part_kind'] for m in FROZEN['meshes']})
+        self.assertEqual(covered, {m['part_kind'] for m in FROZEN['meshes'] if m['id'] not in retired})
 
     def test_new_open_proxy_and_post_build_mutation_fail(self):
         fresh = deepcopy(next(m for m in self.scene['meshes'] if m['part_kind']=='glass-pane'))

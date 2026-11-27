@@ -362,15 +362,23 @@ def check_open_risers(m: DesignModel) -> list:
         basis = ("no riser boards or infill: the gap between treads is %.1f mm (rise %.1f less a %.0f mm tread)"
                  % (gap, g["rise"], g["tread_t"]))
     sphere_passes = gap >= SPHERE_MM
+    wv = st.infill_waiver if sphere_passes and not infill else None
+    msg = "%s; a 100 mm sphere passes if the opening is >= 100 mm, so it must be under 100 mm" % basis
+    if wv:      # a recorded client veto: still a FAIL with the numbers and the consequence, off the gate, never hidden
+        msg = ("WAIVED by client %s (waived by client %s): %.1f mm gap where %.0f mm is required (%s). Consequence: %s "
+               "Reversible: %s. %s" % (wv["date"], wv["date"], gap, SPHERE_MM, wv["card"], wv["consequence"],
+                                       wv["reversible"], basis))
     out.append(_res("LS2", "fail" if sphere_passes else "pass", "stair open-riser gap (100 mm sphere)", round(gap, 1),
-                    SPHERE_MM, "mm", "%s; a 100 mm sphere passes if the opening is >= 100 mm, so it must be under "
-                    "100 mm" % basis, ["ukadk-open-risers-dwelling", "ukadk-guard-sphere"], el))
+                    SPHERE_MM, "mm", msg, ["ukadk-open-risers-dwelling", "ukadk-guard-sphere"]
+                    + (["g1-safety-decisions-2026-11-21"] if wv else []), el, gate=not wv))
     ok = g["overlap_min"] >= 16 - 1e-9
     out.append(_res("LS2", "pass" if ok else "fail", "stair tread overlap (open risers)", round(g["overlap_min"], 1),
                     16.0, "mm", "consecutive treads overlap by %.1f mm in plan vs 16 mm minimum for open risers (ADK 1.9a)"
                     % g["overlap_min"], ["ukadk-open-risers-dwelling"], el))
-    decided = bool(infill)            # the G1 decision (open risers kept with infill) is implemented in the model
+    decided = bool(infill) or bool(wv)            # the G1 decision (open risers kept with infill) is implemented in the model
     out.append(_res("LS2", "fail", "stair closed risers (A+ target)", 0.0, 1.0, "closed",
+                    ("DECIDED, not adopted (client 2026-11-25 veto of the G1 infill): open risers stay open with no infill; "
+                     "the 16 mm overlap is kept; closed risers (ADK 1.6) stay an unmet A+ target") if wv else
                     ("DECIDED, not adopted (client G1 2026-11-21, %s): open risers kept with infill so no 100 mm "
                      "sphere passes and treads overlap 16 mm; closed risers (ADK 1.6) stay an unmet A+ target"
                      % "docs/decisions/G1-safety-decisions-2026-11-21.md") if decided else

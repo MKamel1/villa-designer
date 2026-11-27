@@ -44,7 +44,7 @@ PRODUCT_ASSETS = {
     "living-sofa": "sf_minotti_sofa", "living-chair-1": "sf_probber_cane_armchair",
     "living-chair-2": "sf_probber_cane_armchair", "lounge-sofa": "sf_modern_low_sofa",
     "lounge-armchair": "sf_probber_cane_armchair", "cinema-sofa": "sf_cinema_sofa_velvet",
-    "dining-table#chair-": "sf_dining_chair_boucle",
+    "dining-table#chair-": "sf_dining_chair_curved_armchair",
     "ka-desk-1#chair-": "sf_kidschair_oak", "ka-desk-2#chair-": "sf_kidschair_oak",
     "kb-desk#chair-": "sf_kidschair_oak", "study-desk#chair-": "modern_arm_chair_01",
     "study-adult-desk#chair-": "modern_arm_chair_01", "rug-living": "sf_rug_round_jute",
@@ -53,6 +53,10 @@ _MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manif
 _PROPS = {p["id"]: p for p in json.loads(_MANIFEST.read_text(encoding="utf-8"))["props"]}
 # These overall heights are ASSUMED from the former catalogue envelopes where the
 # native units cannot be inferred safely. They affect only uniform scale.
+# Client 2026-11-25 dining chair: one uniform scale to the real product's SEAT height (Audo Harbour Arm Chair dining height: seat
+# 478 mm, W 584, D 574, H 810; model seat 0.647 m -> 0.739). The model then is W 584, D 518 (-9.7 %), H 870 (+7.4 %): a look-alike.
+_PRODUCT_SEAT_SCALE = {"sf_dining_chair_curved_armchair": (0.739, "uniform scale to the product seat height 478 mm (look-alike of "
+                                                           "Audo Harbour Arm Chair; D -9.7 %, H +7.4 % vs the product)")}
 _AMBIGUOUS_HEIGHT = {"sf_probber_cane_armchair": 0.85, "sf_kidschair_oak": 0.80}
 
 
@@ -65,6 +69,8 @@ def product(asset):
     if asset == "sf_rug_round_jute":
         scale = 2.4 / native[0]
         basis = "ASSUMED 2.4 m diameter from living rug envelope; native units ambiguous"
+    elif asset in _PRODUCT_SEAT_SCALE:
+        scale, basis = _PRODUCT_SEAT_SCALE[asset]
     elif asset in _AMBIGUOUS_HEIGHT:
         scale = _AMBIGUOUS_HEIGHT[asset] / native[2]
         basis = "ASSUMED overall height from catalogue envelope"
@@ -151,6 +157,11 @@ def head_zone(it, length):
     if dy < 0:
         return (x0 - big, y0, x1 + big, y0 + length)
     return (x0 - big, y1 - length, x1 + big, y1)
+
+
+def _stacked(a, b):
+    """One piece stands under the other (a desk under its loft bed, client 2026-11-25): plan overlap is by design."""
+    return a.get("under") == b["id"] or b.get("under") == a["id"]
 
 
 def _ov(a, b, tol=1e-3):            # 1 mm: a piece set against a wall touches it, it does not overlap
@@ -242,7 +253,9 @@ def _layout(lay=None, products=True):
     K, KI = r["kitchen"], r["kitchen-island"]
     add(against("k-run", K, "y1", 11.54, "base_run", w=2.01, d=0.6, h=0.9,
                 modules=[("dw", 0.6), ("counter", 0.05), ("sink", 0.9), ("counter", 0.46)],
-                why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
+                wall_units={"z0": 1.50, "z1": 2.00, "depth": 0.30},
+                why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it; "
+                    "client 2026-11-25: wall cupboards above (underside 1.50 m, top 2.00 m, 300 deep)"),
         "kitchen")
     run_front = K[3] - 0.6
     island = item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
@@ -359,13 +372,26 @@ def _layout(lay=None, products=True):
     add(against("fb-basin", FB, "x0", FB[1] + 0.42, "washbasin", w=0.43, d=0.45, h=0.85,
                 why="compact basin beside the WC"),
         "family-bath")
-    # -- kids A (two girls): bunk bed, two desks, a 1.5 m wardrobe
+    # -- kids A (two girls): two loft beds with a desk under each (client 2026-11-25, replacing the bunk), a wardrobe
+    # Basis: IKEA SMASTAD loft bed frame with desk, 504.540.36 (ikea.com/gb, read 2026-11-25): mattress 90 x 200, frame 205 x 104 (w x d),
+    # overall height 182, clear height under the loft 142, desk 148 x 60 x 73, minimum ceiling 240 (room: 2.70). Built here as oak joinery.
+    # Both lofts stand at the SOUTH ends of the long walls, flanking the door: the north half (window, sill 0.9) stays clear.
     KA = r["kids-a"]
-    add(item("ka-bunk", None, "bed_single", KA[0] + 0.45, -25.45, 0, h=1.7, berths=2,
-             why="bunk bed against the west wall (answers)"), "kids-a")
-    add(against("ka-desk-1", KA, "y1", 12.62, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 1"), "kids-a")
-    add(against("ka-desk-2", KA, "y1", 13.76, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 2"), "kids-a")
-    add(against("ka-wardrobe", KA, "x1", KA[1] + 0.02, "wardrobe", w=1.5, d=0.6, h=2.2, why="1.5 m wardrobe"),
+    LOFT = dict(loft=True, berths=1, mattress_top=1.63, under=1.42, rail_top=1.82)
+    add(item("ka-loft-1", None, "bed_single", KA[0] + 0.52, KA[1] + 1.025, 0, w=1.04, d=2.05, h=1.82, ladder_at="+y", **LOFT,
+             why="loft bed 1 against the west wall, south end: head to the south wall, ladder at the north foot end on the room side (the head end is local -y)"),
+        "kids-a")
+    add(item("ka-loft-2", None, "bed_single", KA[2] - 0.52, KA[1] + 1.025, 180, w=1.04, d=2.05, h=1.82, ladder_at="+y", **LOFT,
+             why="loft bed 2 against the east wall, south end: head to the north (local -y at rot 180), ladder at the south foot end on the room side, beside the door"),
+        "kids-a")
+    add(against("ka-desk-1", KA, "x0", KA[1] + 0.18, "desk", w=1.4, d=0.6, h=0.75, under="ka-loft-1",
+                why="desk under loft 1 (IKEA SMASTAD desk is 148 x 60 x 73), against the west wall, chair on the room side under the frame"),
+        "kids-a")
+    add(against("ka-desk-2", KA, "x1", KA[1] + 0.18, "desk", w=1.4, d=0.6, h=0.75, under="ka-loft-2",
+                why="desk under loft 2, against the east wall"), "kids-a")
+    add(against("ka-wardrobe", KA, "x1", KA[1] + 2.05 + 0.01, "wardrobe", w=1.36, d=0.6, h=2.2,
+                why="wardrobe north of loft 2, ending 0.30 m short of the window wall (the window check: nothing taller than the sill "
+                    "within 0.30 m of it): 1.36 m where 1.5 m was asked; the 2.05 m loft frame leaves 1.48 m of the 3.53 m wall"),
         "kids-a")
     # -- kids B (boy): 120 bed, desk, 1.5 m wardrobe
     KB = r["kids-b"]
@@ -663,7 +689,7 @@ def _check(items=None, lay=None, _extended=False):
                 end = footprint(next(p for p in items if p["id"] == "dk-appliance-bank"))[2]
                 if end - z[0] <= 0.2 + 1e-6:
                     z = (end, z[1], z[2], z[3])
-            hit = [o["id"] for o in by_level[it["level"]] if o is not it and _ov(z, footprint(o))
+            hit = [o["id"] for o in by_level[it["level"]] if o is not it and _ov(z, footprint(o)) and not _stacked(it, o)
                    and not (it["type"].startswith("bed") and s in ("left", "right") and o["type"] == "bedside_table"
                             and _inside(footprint(o), [head_zone(it, ZONE_A)]))]
             wall = not _inside(z, rects)
@@ -675,7 +701,7 @@ def _check(items=None, lay=None, _extended=False):
     for lv, its in by_level.items():
         for i, a in enumerate(its):
             for b in its[i + 1:]:
-                if _ov(footprint(a), footprint(b)):
+                if _ov(footprint(a), footprint(b)) and not _stacked(a, b):
                     probs["overlap"].append("%s / %s" % (a["id"], b["id"]))
         for z in _door_zones(sp, lay, lv):
             for it in its:

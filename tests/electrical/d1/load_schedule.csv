@@ -2,7 +2,7 @@ scope,category,n_circuits,connected_a_1ph_equiv,demand_a_1ph_equiv,demand_kva
 installation,ac,8,68.2,68.2,15.0
 installation,cooker,1,13.6,11.1,2.4
 installation,ev,1,33.6,33.6,7.4
-installation,lighting,7,8.2,5.4,1.2
+installation,lighting,8,8.2,5.4,1.2
 installation,sockets,26,424.0,181.6,40.0
 installation,standard,12,51.5,27.4,6.0
 installation,thermo_wh,3,25.0,25.0,5.5
@@ -12,11 +12,11 @@ MDB,sockets,1,16.0,16.0,3.5
 MDB,standard,3,6.4,4.4,1.0
 DB-B,ac,4,41.4,41.4,9.1
 DB-B,cooker,1,13.6,11.1,2.4
-DB-B,lighting,3,3.8,2.5,0.6
+DB-B,lighting,4,3.9,2.6,0.6
 DB-B,sockets,14,232.0,104.8,23.1
 DB-B,standard,9,45.1,24.8,5.5
 DB-B,thermo_wh,1,6.8,6.8,1.5
 DB-GF,ac,4,26.8,26.8,5.9
-DB-GF,lighting,3,2.9,1.9,0.4
+DB-GF,lighting,3,2.8,1.9,0.4
 DB-GF,sockets,11,176.0,80.0,17.6
 DB-GF,thermo_wh,2,18.2,18.2,4.0

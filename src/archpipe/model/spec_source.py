@@ -12,6 +12,7 @@ import math
 
 from ..contracts import DesignElement
 from . import stair_steel as SS
+from ..concept.stairs import INFILL_WAIVER
 
 # Scene datum: GF finished floor = 0. Revit datum is 1.2 m higher (spec levels "B -1.80", "GF +1.20").
 LEVELS = {
@@ -235,7 +236,7 @@ def stairs(lay, sp) -> list[DesignElement]:
                     tread_top_z_mm=[round(z, 1) for z in z_tops],
                     going_mm=tread, tread_depth_mm=depth, nosing_overlap_mm=sp.get("stair_nosing_overlap_mm", 0),
                     tread_thickness_mm=round(boxes[0][5] - boxes[0][2], 1),
-                    riser_infill=_riser_infill(sp),
+                    riser_infill=_riser_infill(sp), infill_waiver={} if sp.get("stair_infill_spec") else dict(INFILL_WAIVER),
                     steel=dict(members=SS.members(sp), wall_side_y_mm=mm(SS.clear_y(sp)[0]), open_side_y_mm=mm(SS.clear_y(sp)[1]),
                                basis=SS.BASIS),
                     under_flight=_under_flight(sp),

@@ -10,7 +10,7 @@ class ModelTaskHost(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         receipt=json.loads(gzip.decompress(Path('knowledge/furniture-stage2.json.gz').read_bytes()))
-        m=next(m for m in receipt['models'] if m['label']=='ka-desk-1')
+        m=next(m for m in receipt['models'] if m['label']=='kb-desk')
         cls.model=dict(m,review_geometry=receipt['geometry'][m['asset']])
 
     def scene(self):
