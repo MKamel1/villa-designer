@@ -132,7 +132,10 @@ class AppearanceTests(unittest.TestCase):
         self.assertEqual(set(unregistered_render_finishes(V.M,old)),{
             'g6-jasmine-leaf','g6-petrea-leaf','g6-pittosporum-leaf','g6-leaf-vein',
             'g6-wire-tie','g6-loquat-leaf','g6-outdoor-timber','g6-shrub-wood',
-            'north-light-stone','north-pale-gravel','aspidistra-leaf'}|fin)
+            'north-light-stone','north-pale-gravel','aspidistra-leaf',
+            # b3f13f4 kitchen/ensuite geometry (client-chosen marble/brass ensuite finishes): new names against this OLD register,
+            # registered in tests/test_render_standard.ALLOWED_MATERIALS (asserted below via registered_render_finishes).
+            'marble-ensuite-floor','marble-backsplash','marble-bath-panel','brass-ensuite'}|fin)
         self.assertEqual(unregistered_render_finishes(V.M,{n for n in V.M if n not in fin}|fin),[])
         self.assertTrue(fin and fin<=__import__('scripts.verify',fromlist=['x']).registered_render_finishes())
         self.assertEqual(unregistered_render_finishes(V.M),[])
