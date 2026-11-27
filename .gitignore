@@ -49,3 +49,6 @@ sources/
 # local secrets and manual downloads (never commit)
 sketchfab-api.txt
 assets-incoming/
+
+# generated PDFs of the DF plan sheets (verify.py: no book or standard PDF committed); the PNGs are tracked
+docs/lanes/DF-plans/*.pdf

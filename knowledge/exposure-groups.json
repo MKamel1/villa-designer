@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "7bc36bbd65772659bbce5dcee3efe0c5fca50c22da1ca2aa45ea17acc09cadec",
-  "transport_sha256": "c52772813696149325f65a9b69aebebd34700aa1e19bde46c19613fdb7c158f0",
+  "transport_sha256": "ee7c1d83eebcfe70af92b0c780500760a991bf522380a9824ce9c8a8814f448c",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -27,11 +27,11 @@
   },
   "measurements": {
     "v01-kitchen-garden": {
-      "lamp_luminance_sum": 604687.9877757007,
-      "daylight_luminance_sum": 568068.2635718929,
+      "lamp_luminance_sum": 604687.9877615931,
+      "daylight_luminance_sum": 568068.2632917946,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5156126749108048,
+      "lamp_fraction": 0.5156126750281254,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -562,11 +562,11 @@
       "group": "lamp-dominant"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 73624.54775255764,
-      "daylight_luminance_sum": 2231313.568592099,
+      "lamp_luminance_sum": 73624.54774913385,
+      "daylight_luminance_sum": 2231313.568402308,
       "sky_luminance_sum": null,
       "metered_pixels": 13404,
-      "lamp_fraction": 0.03194209303515574,
+      "lamp_fraction": 0.031942093036347916,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1053,11 +1053,11 @@
       "group": "day"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 236783.0935824577,
-      "daylight_luminance_sum": 132142.9032733983,
+      "lamp_luminance_sum": 236783.09382678248,
+      "daylight_luminance_sum": 132142.90334054088,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.6418173172951317,
+      "lamp_fraction": 0.6418173174155343,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1544,11 +1544,11 @@
       "group": "lamp-dominant"
     },
     "v04-study-deck": {
-      "lamp_luminance_sum": 0.32807792912715106,
-      "daylight_luminance_sum": 2754837.986559992,
+      "lamp_luminance_sum": 0.3280779241761086,
+      "daylight_luminance_sum": 2754837.9926236756,
       "sky_luminance_sum": null,
       "metered_pixels": 13112,
-      "lamp_fraction": 1.1909153701830649e-07,
+      "lamp_fraction": 1.1909153495895687e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -1633,11 +1633,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 73567.38536012812,
-      "daylight_luminance_sum": 140.82858751589328,
+      "lamp_luminance_sum": 73325.87126178978,
+      "daylight_luminance_sum": 140.8284176908471,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.998089377289539,
+      "lamp_fraction": 0.9980830986242032,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2351,11 +2351,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.016242960101072484,
-      "daylight_luminance_sum": 1329550.3123979548,
+      "lamp_luminance_sum": 0.016242960098970666,
+      "daylight_luminance_sum": 1329550.3129645006,
       "sky_luminance_sum": null,
       "metered_pixels": 12826,
-      "lamp_fraction": 1.2216882468583396e-08,
+      "lamp_fraction": 1.2216882461796708e-08,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -2440,11 +2440,11 @@
       "group": "day"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 6051.278652547438,
-      "daylight_luminance_sum": 44108.139763064064,
+      "lamp_luminance_sum": 6048.440358726654,
+      "daylight_luminance_sum": 44108.13970769862,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.12064092534741296,
+      "lamp_fraction": 0.12059116372600272,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3239,7 +3239,7 @@
       "group": "exterior-dusk"
     },
     "v08-cinema": {
-      "lamp_luminance_sum": 62132.31062088849,
+      "lamp_luminance_sum": 62132.310710805716,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13402,
@@ -3952,11 +3952,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 331449.49888567085,
-      "daylight_luminance_sum": 44.74647977575802,
+      "lamp_luminance_sum": 331648.93517497,
+      "daylight_luminance_sum": 44.75807754455404,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.999865015817314,
+      "lamp_fraction": 0.9998650620181961,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4667,11 +4667,11 @@
       "group": "evening"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 78441.21610129498,
-      "daylight_luminance_sum": 39.55558647527084,
+      "lamp_luminance_sum": 78609.97987062707,
+      "daylight_luminance_sum": 39.56428996638495,
       "sky_luminance_sum": null,
       "metered_pixels": 13407,
-      "lamp_fraction": 0.9994959837215588,
+      "lamp_fraction": 0.9994969546182545,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5382,11 +5382,11 @@
       "group": "evening"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 309792.5950188269,
-      "daylight_luminance_sum": 61.081458765175384,
+      "lamp_luminance_sum": 309548.9427891975,
+      "daylight_luminance_sum": 60.96617829800016,
       "sky_luminance_sum": null,
-      "metered_pixels": 13407,
-      "lamp_fraction": 0.999802869988636,
+      "metered_pixels": 13406,
+      "lamp_fraction": 0.9998030871217872,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -6072,7 +6072,7 @@
       "group": "evening"
     },
     "v12-ensuite": {
-      "lamp_luminance_sum": 108467.77483316473,
+      "lamp_luminance_sum": 109199.87229502093,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -6831,11 +6831,11 @@
       "group": "evening"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 108056.86802431893,
-      "daylight_luminance_sum": 87.3556010960654,
+      "lamp_luminance_sum": 108013.60759019325,
+      "daylight_luminance_sum": 87.36607071071893,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9991922305402215,
+      "lamp_fraction": 0.9991918105105624,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7545,11 +7545,11 @@
       "group": "evening"
     },
     "v15-family-bath": {
-      "lamp_luminance_sum": 70748.03619039418,
-      "daylight_luminance_sum": 85788.96214772761,
+      "lamp_luminance_sum": 70753.13855407867,
+      "daylight_luminance_sum": 85788.9620915766,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.4519572812912738,
+      "lamp_fraction": 0.45197514446438714,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8209,11 +8209,11 @@
       "group": "day"
     },
     "v35-family-bath-wc": {
-      "lamp_luminance_sum": 38029.12654595834,
-      "daylight_luminance_sum": 68945.00706102485,
+      "lamp_luminance_sum": 38029.19436853923,
+      "daylight_luminance_sum": 68945.0070701401,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3554983365013748,
+      "lamp_fraction": 0.3554987450907839,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8872,11 +8872,11 @@
       "group": "day"
     },
     "v16-guest-wc": {
-      "lamp_luminance_sum": 105691.3623766501,
-      "daylight_luminance_sum": 3.476369094258861,
+      "lamp_luminance_sum": 105722.08604212897,
+      "daylight_luminance_sum": 3.495776716359938,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999671093769997,
+      "lamp_fraction": 0.9999669353749943,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9629,11 +9629,11 @@
       "group": "evening"
     },
     "v17-dirty-kitchen": {
-      "lamp_luminance_sum": 363131.03075277613,
-      "daylight_luminance_sum": 644310.5348973785,
+      "lamp_luminance_sum": 362725.34160906007,
+      "daylight_luminance_sum": 644268.8710817589,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3604487278807369,
+      "lamp_fraction": 0.36020598434206585,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10164,11 +10164,11 @@
       "group": "day"
     },
     "v18-study-evening": {
-      "lamp_luminance_sum": 98495.8493214675,
-      "daylight_luminance_sum": 1461.4832698456794,
+      "lamp_luminance_sum": 98381.32587540457,
+      "daylight_luminance_sum": 1461.1863414659265,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9853789288693695,
+      "lamp_fraction": 0.9853650883874792,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10879,12 +10879,12 @@
       "group": "evening"
     },
     "v19-garden-facade": {
-      "lamp_luminance_sum": 0.026427774040885723,
-      "daylight_luminance_sum": 13351372.273986556,
-      "sky_luminance_sum": 5350679.84554911,
+      "lamp_luminance_sum": 0.02642777409732817,
+      "daylight_luminance_sum": 13351372.253845228,
+      "sky_luminance_sum": 5350679.8169395095,
       "metered_pixels": 13408,
-      "lamp_fraction": 1.97940507134728e-09,
-      "solar_fraction": 0.5992412063908796,
+      "lamp_fraction": 1.979405078560793e-09,
+      "solar_fraction": 0.5992412079291325,
       "lamp_population": [],
       "view_input": {
         "id": "v19-garden-facade",
@@ -10960,11 +10960,11 @@
       "group": "exterior-day"
     },
     "v20-kitchen-run": {
-      "lamp_luminance_sum": 612749.9959431143,
-      "daylight_luminance_sum": 234.46545370141448,
+      "lamp_luminance_sum": 612511.6783570858,
+      "daylight_luminance_sum": 234.46545350254135,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9996175017990389,
+      "lamp_fraction": 0.9996173530329471,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11719,11 +11719,11 @@
       "group": "evening"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 145178.9397100827,
-      "daylight_luminance_sum": 16.5036765139384,
+      "lamp_luminance_sum": 145305.71127819762,
+      "daylight_luminance_sum": 16.538177320117246,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998863347490183,
+      "lamp_fraction": 0.9998861965226792,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12434,11 +12434,11 @@
       "group": "evening"
     },
     "v22-parents-day": {
-      "lamp_luminance_sum": 3.2537961218826177,
-      "daylight_luminance_sum": 18217403.34364841,
+      "lamp_luminance_sum": 3.2537840232820554,
+      "daylight_luminance_sum": 18215239.944704227,
       "sky_luminance_sum": null,
-      "metered_pixels": 13387,
-      "lamp_fraction": 1.7860918372097198e-07,
+      "metered_pixels": 13386,
+      "lamp_fraction": 1.786297326819166e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -12525,7 +12525,7 @@
       "group": "day"
     },
     "v23-gf-gallery": {
-      "lamp_luminance_sum": 418105.7855812644,
+      "lamp_luminance_sum": 418105.7856749133,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -12991,11 +12991,11 @@
       "group": "evening"
     },
     "v24-bar-alcove": {
-      "lamp_luminance_sum": 79930.14974230486,
-      "daylight_luminance_sum": 36.85996120335126,
+      "lamp_luminance_sum": 79922.79244195046,
+      "daylight_luminance_sum": 36.85996119193496,
       "sky_luminance_sum": null,
       "metered_pixels": 13397,
-      "lamp_fraction": 0.9995390604032836,
+      "lamp_fraction": 0.9995390179911476,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13706,12 +13706,12 @@
       "group": "evening"
     },
     "v25-top-garden-gate": {
-      "lamp_luminance_sum": 0.8625325369486971,
-      "daylight_luminance_sum": 46574398.60791933,
-      "sky_luminance_sum": 11465963.052883264,
+      "lamp_luminance_sum": 0.8625325373012872,
+      "daylight_luminance_sum": 46574398.5532562,
+      "sky_luminance_sum": 11465962.97367688,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.8519455897566914e-08,
-      "solar_fraction": 0.7538140395669299,
+      "lamp_fraction": 1.8519455926873176e-08,
+      "solar_fraction": 0.75381404097863,
       "lamp_population": [],
       "view_input": {
         "id": "v25-top-garden-gate",
@@ -13771,12 +13771,12 @@
       "group": "exterior-day"
     },
     "v26-top-garden-east": {
-      "lamp_luminance_sum": 0.5239955447391953,
-      "daylight_luminance_sum": 36556998.98256583,
-      "sky_luminance_sum": 8321684.915534861,
+      "lamp_luminance_sum": 0.5239955447726452,
+      "daylight_luminance_sum": 36556998.92978776,
+      "sky_luminance_sum": 8321684.883561578,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.4333658446042512e-08,
-      "solar_fraction": 0.7723641122865829,
+      "lamp_fraction": 1.4333658467651302e-08,
+      "solar_fraction": 0.7723641128325549,
       "lamp_population": [],
       "view_input": {
         "id": "v26-top-garden-east",
@@ -13836,12 +13836,12 @@
       "group": "exterior-day"
     },
     "v27-east-yard-above": {
-      "lamp_luminance_sum": 0.03734974962764275,
-      "daylight_luminance_sum": 7627121.33758919,
-      "sky_luminance_sum": 1246888.2109510673,
+      "lamp_luminance_sum": 0.037349749651062594,
+      "daylight_luminance_sum": 7627121.340293763,
+      "sky_luminance_sum": 1246888.2099139453,
       "metered_pixels": 13310,
-      "lamp_fraction": 4.896965420055579e-09,
-      "solar_fraction": 0.8365191589642144,
+      "lamp_fraction": 4.896965421389718e-09,
+      "solar_fraction": 0.8365191591581628,
       "lamp_population": [],
       "view_input": {
         "id": "v27-east-yard-above",
@@ -13901,12 +13901,12 @@
       "group": "exterior-day"
     },
     "v28-east-yard-below": {
-      "lamp_luminance_sum": 0.04895118006096131,
-      "daylight_luminance_sum": 5424941.254966059,
-      "sky_luminance_sum": 1114045.0099052037,
+      "lamp_luminance_sum": 0.04895118009167396,
+      "daylight_luminance_sum": 5424941.262982312,
+      "sky_luminance_sum": 1114045.0094269447,
       "metered_pixels": 13231,
-      "lamp_fraction": 9.023356626110345e-09,
-      "solar_fraction": 0.7946438574085217,
+      "lamp_fraction": 9.023356618438214e-09,
+      "solar_fraction": 0.7946438578001287,
       "lamp_population": [],
       "view_input": {
         "id": "v28-east-yard-below",
@@ -13966,12 +13966,12 @@
       "group": "exterior-day"
     },
     "v36-north-garden": {
-      "lamp_luminance_sum": 1.1644231034606698,
-      "daylight_luminance_sum": 1414143.1901831997,
-      "sky_luminance_sum": 704406.5590379778,
+      "lamp_luminance_sum": 1.164423104603881,
+      "daylight_luminance_sum": 1414143.193004777,
+      "sky_luminance_sum": 704406.5587197158,
       "metered_pixels": 13365,
-      "lamp_fraction": 8.23411768160574e-07,
-      "solar_fraction": 0.5018845588425008,
+      "lamp_fraction": 8.234117673260696e-07,
+      "solar_fraction": 0.5018845600614249,
       "lamp_population": [],
       "view_input": {
         "id": "v36-north-garden",
@@ -14047,12 +14047,12 @@
       "group": "exterior-shade"
     },
     "v37-north-garden-lounge": {
-      "lamp_luminance_sum": 0.7138252014646798,
-      "daylight_luminance_sum": 515365.58637826226,
-      "sky_luminance_sum": 303028.52285879076,
+      "lamp_luminance_sum": 0.7138252016994879,
+      "daylight_luminance_sum": 515365.58631936036,
+      "sky_luminance_sum": 303028.5224919093,
       "metered_pixels": 13337,
-      "lamp_fraction": 1.3850831945799824e-06,
-      "solar_fraction": 0.4120124997318364,
+      "lamp_fraction": 1.385083195193899e-06,
+      "solar_fraction": 0.4120125003765203,
       "lamp_population": [],
       "view_input": {
         "id": "v37-north-garden-lounge",
@@ -14112,12 +14112,12 @@
       "group": "exterior-shade"
     },
     "v38-north-garden-floor-bed": {
-      "lamp_luminance_sum": 0.7023354460403473,
-      "daylight_luminance_sum": 961539.6266702953,
-      "sky_luminance_sum": 290021.3264621096,
+      "lamp_luminance_sum": 0.7023354448683361,
+      "daylight_luminance_sum": 961539.6248231754,
+      "sky_luminance_sum": 290021.3267115723,
       "metered_pixels": 13319,
-      "lamp_fraction": 7.304274452706327e-07,
-      "solar_fraction": 0.6983781859657504,
+      "lamp_fraction": 7.304274454548961e-07,
+      "solar_fraction": 0.6983781851268933,
       "lamp_population": [],
       "view_input": {
         "id": "v38-north-garden-floor-bed",
@@ -14177,12 +14177,12 @@
       "group": "exterior-shade"
     },
     "v39-north-garden-hanging-retreat": {
-      "lamp_luminance_sum": 1.5798070326136997,
-      "daylight_luminance_sum": 1069865.6285042868,
-      "sky_luminance_sum": 589005.6739857808,
+      "lamp_luminance_sum": 1.5798070313231187,
+      "daylight_luminance_sum": 1069865.6283234258,
+      "sky_luminance_sum": 589005.6738207774,
       "metered_pixels": 13392,
-      "lamp_fraction": 1.4766384279664675e-06,
-      "solar_fraction": 0.44945826999860405,
+      "lamp_fraction": 1.4766384270097944e-06,
+      "solar_fraction": 0.449458270059763,
       "lamp_population": [],
       "view_input": {
         "id": "v39-north-garden-hanging-retreat",
@@ -14260,11 +14260,11 @@
       "group": "exterior-shade"
     },
     "v29-under-stair-store": {
-      "lamp_luminance_sum": 120430.36388666036,
-      "daylight_luminance_sum": 39610.30112800521,
+      "lamp_luminance_sum": 120430.3637340599,
+      "daylight_luminance_sum": 39610.30114457988,
       "sky_luminance_sum": null,
       "metered_pixels": 13407,
-      "lamp_fraction": 0.7524985220201662,
+      "lamp_fraction": 0.7524985217062381,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14729,11 +14729,11 @@
       "group": "lamp-dominant"
     },
     "v30-under-ramp-store": {
-      "lamp_luminance_sum": 9545.471548636266,
+      "lamp_luminance_sum": 9545.47154251143,
       "daylight_luminance_sum": 0.050581206430541356,
       "sky_luminance_sum": null,
       "metered_pixels": 12819,
-      "lamp_fraction": 0.9999947010539871,
+      "lamp_fraction": 0.9999947010539837,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14960,10 +14960,10 @@
       "group": "lamp-low-key"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 74958.68164732153,
+      "lamp_luminance_sum": 87172.31421564451,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13324,
+      "metered_pixels": 13289,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -15675,10 +15675,10 @@
       "group": "evening"
     },
     "v32-dressing-his": {
-      "lamp_luminance_sum": 107645.18117344803,
+      "lamp_luminance_sum": 101627.40339120195,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13357,
+      "metered_pixels": 13343,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -16368,11 +16368,11 @@
       "group": "evening"
     },
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 95946.82151323925,
-      "daylight_luminance_sum": 2132462.8250131365,
+      "lamp_luminance_sum": 95790.68888622698,
+      "daylight_luminance_sum": 2132462.8231481113,
       "sky_luminance_sum": null,
-      "metered_pixels": 13398,
-      "lamp_fraction": 0.043056186578082835,
+      "metered_pixels": 13397,
+      "lamp_fraction": 0.04298913403204851,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -16835,11 +16835,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 66948.6379283152,
-      "daylight_luminance_sum": 2490781.2132354677,
+      "lamp_luminance_sum": 66906.43871872214,
+      "daylight_luminance_sum": 2490781.2097273334,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.026175023096302822,
+      "lamp_fraction": 0.026158956023958478,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17302,12 +17302,12 @@
       "group": "day"
     },
     "v40-south-garden-espalier": {
-      "lamp_luminance_sum": 0.04033763913167502,
-      "daylight_luminance_sum": 10283655.499062499,
-      "sky_luminance_sum": 2363864.6156574492,
+      "lamp_luminance_sum": 0.0403376391205914,
+      "daylight_luminance_sum": 10283655.485718975,
+      "sky_luminance_sum": 2363864.610732278,
       "metered_pixels": 13405,
-      "lamp_fraction": 3.922500027069944e-09,
-      "solar_fraction": 0.7701338190614273,
+      "lamp_fraction": 3.922500031081781e-09,
+      "solar_fraction": 0.7701338192420971,
       "lamp_population": [],
       "view_input": {
         "id": "v40-south-garden-espalier",
@@ -17385,12 +17385,12 @@
       "group": "exterior-day"
     },
     "v41-south-garden-terrace": {
-      "lamp_luminance_sum": 0.032304212431045816,
-      "daylight_luminance_sum": 16238634.056876503,
-      "sky_luminance_sum": 7465210.688940411,
+      "lamp_luminance_sum": 0.03230421241167243,
+      "daylight_luminance_sum": 16238634.04080794,
+      "sky_luminance_sum": 7465210.677820686,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.989342961583763e-09,
-      "solar_fraction": 0.5402808719752416,
+      "lamp_fraction": 1.9893429623592283e-09,
+      "solar_fraction": 0.5402808722051069,
       "lamp_population": [],
       "view_input": {
         "id": "v41-south-garden-terrace",
@@ -17466,11 +17466,11 @@
       "group": "exterior-day"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 3361.171324635203,
-      "daylight_luminance_sum": 2456.649534217612,
+      "lamp_luminance_sum": 3361.1713166077907,
+      "daylight_luminance_sum": 2456.649533643468,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5777371641687115,
+      "lamp_fraction": 0.5777371636430897,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17634,12 +17634,12 @@
       "group": "exterior-dusk-dim"
     },
     "gi-living-door": {
-      "lamp_luminance_sum": 0.04948044660877565,
-      "daylight_luminance_sum": 14656166.324305212,
-      "sky_luminance_sum": 2059052.8140603893,
+      "lamp_luminance_sum": 0.0494804465896771,
+      "daylight_luminance_sum": 14656166.324145915,
+      "sky_luminance_sum": 2059052.8170485718,
       "metered_pixels": 13409,
-      "lamp_fraction": 3.3760838507727006e-09,
-      "solar_fraction": 0.8595094536662198,
+      "lamp_fraction": 3.3760838495062883e-09,
+      "solar_fraction": 0.8595094534608072,
       "lamp_population": [],
       "view_input": {
         "id": "gi-living-door",
@@ -17701,12 +17701,12 @@
       "group": "exterior-day"
     },
     "gi-dining-firepit": {
-      "lamp_luminance_sum": 0.097162737701069,
-      "daylight_luminance_sum": 62615970.84936287,
-      "sky_luminance_sum": 8170178.597339356,
+      "lamp_luminance_sum": 0.09716273778384789,
+      "daylight_luminance_sum": 62615970.90942037,
+      "sky_luminance_sum": 8170178.576533583,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.5517245238286972e-09,
-      "solar_fraction": 0.8695192538498748,
+      "lamp_fraction": 1.5517245236623851e-09,
+      "solar_fraction": 0.8695192543072999,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-firepit",
@@ -17812,12 +17812,12 @@
       "group": "exterior-day"
     },
     "gi-north-court-pond": {
-      "lamp_luminance_sum": 0.5446743587764178,
-      "daylight_luminance_sum": 476775.519382869,
-      "sky_luminance_sum": 325774.23051058943,
+      "lamp_luminance_sum": 0.5446743588311318,
+      "daylight_luminance_sum": 476775.5201477556,
+      "sky_luminance_sum": 325774.2305391347,
       "metered_pixels": 13338,
-      "lamp_fraction": 1.1424112908299023e-06,
-      "solar_fraction": 0.31671359525282117,
+      "lamp_fraction": 1.1424112891119024e-06,
+      "solar_fraction": 0.3167135962891398,
       "lamp_population": [],
       "view_input": {
         "id": "gi-north-court-pond",
@@ -17879,11 +17879,11 @@
       "group": "exterior-shade"
     },
     "gi-dining-firepit-dusk": {
-      "lamp_luminance_sum": 8521.09501332222,
-      "daylight_luminance_sum": 36790.00120182229,
+      "lamp_luminance_sum": 8517.623981789588,
+      "daylight_luminance_sum": 36790.00124563237,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.18805757805687737,
+      "lamp_fraction": 0.18799537470867897,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -18678,11 +18678,11 @@
       "group": "exterior-dusk"
     },
     "gi-north-court-pond-dusk": {
-      "lamp_luminance_sum": 2347.7125159872126,
-      "daylight_luminance_sum": 2043.918954988771,
+      "lamp_luminance_sum": 2332.848757976551,
+      "daylight_luminance_sum": 2043.2962395276488,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5345877793943087,
+      "lamp_fraction": 0.5330830581041122,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -19461,12 +19461,12 @@
       "group": "exterior-dusk-dim"
     },
     "gi-dining-crown-summer": {
-      "lamp_luminance_sum": 0.1658186009786674,
-      "daylight_luminance_sum": 12202829.556160416,
-      "sky_luminance_sum": 2941213.672702286,
+      "lamp_luminance_sum": 0.16581860375510823,
+      "daylight_luminance_sum": 12202829.554795409,
+      "sky_luminance_sum": 2941213.672668456,
       "metered_pixels": 13408,
-      "lamp_fraction": 1.3588536819456287e-08,
-      "solar_fraction": 0.7589728137096319,
+      "lamp_fraction": 1.3588537048500641e-08,
+      "solar_fraction": 0.758972813685443,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-summer",
@@ -19528,12 +19528,12 @@
       "group": "exterior-day"
     },
     "gi-dining-crown-winter": {
-      "lamp_luminance_sum": 0.8879742484945624,
-      "daylight_luminance_sum": 14542111.757750412,
-      "sky_luminance_sum": 3691261.3067310727,
+      "lamp_luminance_sum": 0.8879742773889322,
+      "daylight_luminance_sum": 14542111.743217904,
+      "sky_luminance_sum": 3691261.309754886,
       "metered_pixels": 13409,
-      "lamp_fraction": 6.106225898034315e-08,
-      "solar_fraction": 0.7461674502148035,
+      "lamp_fraction": 6.10622610283094e-08,
+      "solar_fraction": 0.7461674497532037,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-winter",
@@ -19595,15 +19595,15 @@
       "group": "exterior-day"
     }
   },
-  "measurement_sha256": "9c7c3ab9f9ec0a2838b78b5cd0032b96bc738bad2b040cc39aaff21ac1422a7b",
+  "measurement_sha256": "9c21dc2e2913e8bceaa521691d93b7a3e42f8e7d775fea27679dbc5b2f3d6df2",
   "white_balance_k": {
+    "exterior-day": 5500,
     "day": 5500,
     "exterior-dusk": 4300,
-    "lamp-dominant": 2700,
-    "evening": 3000,
     "exterior-shade": 5500,
-    "exterior-dusk-dim": 4300,
+    "evening": 3000,
+    "lamp-dominant": 2700,
     "lamp-low-key": 2700,
-    "exterior-day": 5500
+    "exterior-dusk-dim": 4300
   }
 }

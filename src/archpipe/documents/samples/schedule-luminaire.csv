@@ -19,5 +19,5 @@ TOE,,,toe-kick LED strip,2200,442.5,0.0,,1,2,0.0,type-luminaire---TOE-strip-2950
 UC,,,under-cabinet LED strip,2700,606.0,0.0,,1,2,0.0,type-luminaire---UC-strip-1200-0
 VANITY-LIN,,,ASSUMED generic linear LED bar over the mirror,2700,100.0,0.0,,1,1,0.0,type-luminaire---VANITY-LIN-wall-500-0
 VSTRIP,,,vertical LED strip at a hanging-section edge (shadow-free dressing light),2700,900.0,0.0,,0,5,0.0,type-luminaire---VSTRIP-strip-1800-0
-WALL-READ,,,adjustable wall-mounted swing-arm reading light (ASSUMED product),2700,167.8,0.0,,0,2,0.0,type-luminaire---WALL-READ-wall-0-0
+WALL-READ,,,adjustable wall-mounted swing-arm reading light (ASSUMED product),2700,134.2,0.0,,0,2,0.0,type-luminaire---WALL-READ-wall-0-0
 WW,erco,41374,flush trimless wall washer,2700.0,399.0,10.1,39.5,4,8,121.2,type-luminaire-erco-41374-WW-recessed-50-75

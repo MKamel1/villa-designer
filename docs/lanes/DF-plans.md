@@ -1,6 +1,6 @@
 # AS-BUILT (2026-11-26): the plan sheets DF-101 / DF-102 are superseded
 
-`docs/lanes/DF-plans/DF-102-plan-AS-BUILT.{pdf,png}` (sheet DF-102 rev P02, green banner "AS-BUILT / DESIGN MODEL D1") is drawn from the built design model by `scripts/df_asbuilt.py`
+`docs/lanes/DF-plans/DF-102-plan-AS-BUILT.png` (the PDF is regenerated, not tracked: verify.py refuses committed PDFs) (sheet DF-102 rev P02, green banner "AS-BUILT / DESIGN MODEL D1") is drawn from the built design model by `scripts/df_asbuilt.py`
 and replaces the two proposal plans below; DF-101 (today 1a) and DF-102-plan-R3 (PROPOSAL, red banner) stay in the folder as the record of what was proposed. DF-103/104 (elevations,
 PROPOSAL) are not redrawn. What differs from the R3 proposal and why: `docs/lanes/DF-built.md`.
 

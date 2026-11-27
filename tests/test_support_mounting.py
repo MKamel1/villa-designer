@@ -37,7 +37,8 @@ class SupportMounting(unittest.TestCase):
                  'marker-PATH-landing-gf-01', 'marker-PATH-landing-gf-02',            # INT2 landing PATH markers
                  'furn-library-daybed-2', 'furn-library-daybed-3',
                  'furn-ka-loft-1-0', 'furn-ka-loft-1-1', 'furn-ka-loft-2-0', 'furn-ka-loft-2-1',  # FX 2026-11-25: kids A loft beds (mattress and slats) replace the bunk
-                 'furn-pb-bed-6', 'furn-pb-bed-7', 'furn-pb-bed-8'}                 # DF 2026-11-26: the joinery bed's upholstered panel and two pillows are separate meshes                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
+                 'furn-pb-bed-6', 'furn-pb-bed-7', 'furn-pb-bed-8',
+                 'furn-sv-store-0', 'furn-sv-store-1', 'furn-sv-store-2'}           # R3 2026-11-26: the suite vestibule's flat cabinet (back, sides, shelves)                 # DF 2026-11-26: the joinery bed's upholstered panel and two pillows are separate meshes                  # L4 2026-11-23: the daybed's two cushions are coloured per the cushion schedule, so the builder part became two meshes
         removed = {'fix-DLN-bar-alcove-11', 'fix-DLN-bar-alcove-12', 'lens-DLN-bar-alcove-11', 'lens-DLN-bar-alcove-12',  # L6b redesign
                    'furn-stair-flight-store-storage-box-35', 'furn-stair-flight-store-storage-box-35-handle',
                    'furn-stair-flight-store-storage-box-40', 'furn-stair-flight-store-storage-box-40-handle',

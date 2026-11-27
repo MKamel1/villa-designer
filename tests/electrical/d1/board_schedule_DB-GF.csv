@@ -5,7 +5,7 @@ way,circuit,phase,description,device,ib_a,in_a,connected_w,cable,method,length_m
 4,DB-GF/S8,L1,Sockets kids-b +1,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,18.0,16.1,0.7,3.13,5.0,,RA not known,
 5,DB-GF/D1,L2,Split AC 1.5 HP AC-KIDS-A,RCBO 10 A C 30 mA Type A,6.06,10.0,1200,2C+E 2.5 mm2 PVC,conduit_wall_2,10.4,16.1,0.7,1.29,5.0,,RA not known,
 6,DB-GF/D3,L2,Split AC 2 HP AC-PARENTS,RCBO 10 A C 30 mA Type A,8.59,10.0,1700,2C+E 2.5 mm2 PVC,conduit_wall_2,20.5,16.1,0.7,2.22,5.0,,RA not known,
-7,DB-GF/L2,L2,Lighting parents-ensuite +5,RCBO 6 A B 30 mA Type A,0.94,6.0,186,2C+E 1.5 mm2 PVC,in_insulation_2,56.6,7.0,0.497,1.48,3.0,,RA not known,
+7,DB-GF/L2,L2,Lighting parents-ensuite +5,RCBO 6 A B 30 mA Type A,0.94,6.0,185,2C+E 1.5 mm2 PVC,in_insulation_2,56.6,7.0,0.497,1.48,3.0,,RA not known,
 8,DB-GF/L3,L2,Escape/night marker lighting DB-GF,RCBO 6 A B 30 mA Type A,0.02,6.0,3,2C+E 1.5 mm2 PVC,in_insulation_2,29.1,7.0,0.497,0.78,3.0,,RA not known,
 9,DB-GF/S3,L2,Sockets study-game +1,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 4 mm2 PVC,conduit_wall_2,36.0,21.0,0.7,3.66,5.0,,RA not known,
 10,DB-GF/S6,L2,Sockets kids-a,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,13.6,16.1,0.7,2.56,5.0,,RA not known,

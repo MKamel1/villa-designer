@@ -953,6 +953,11 @@ class RenderStandard(unittest.TestCase):
         replaces it. This checks the stack is the full ratio (not silently clamped) for the villa's actual doors,
         and that windows (never walked through) carry no clear-width field at all."""
         for c in SCENE["curtains"]:
+            if c.get("fixed_drapes"):
+                # R3 (client FINAL 2026-11-26): the parents' window wall carries FIXED side drapes on its piers (stack = the pier reach 0.18 m, nothing over the glass)
+                # and a roller blackout; there is no draw stack to be "realistic"
+                self.assertAlmostEqual(c["open_stack_m"], c["open_pier_reach_m"], places=3, msg=c["id"])
+                continue
             if c["id"] in VR.CURTAIN_PARK:
                 # parked off the bed-foot route (lead decision 2026-11-25): both leaves gather to the east pier, each into half the room left
                 # east of park_from, so the stack is the full ratio OR the tighter parked gather, never more than the ratio

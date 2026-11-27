@@ -1216,6 +1216,48 @@
         },
         "approved_by": "lead (orchestrator) 2026-11-21"
       }
+    },
+    {
+      "id": "host-face-support-detail-headboard-slats",
+      "host_id": "support-detail-headboard-slats",
+      "old": [
+        18.477,
+        -27.371,
+        0.0,
+        18.477,
+        -23.591,
+        2.8
+      ],
+      "new": [
+        18.490000000000002,
+        -27.371,
+        0.0,
+        18.490000000000002,
+        -23.591,
+        2.8
+      ],
+      "mm": 13.0
+    },
+    {
+      "id": "detail-headboard-slats",
+      "host_id": "support-detail-headboard-slats",
+      "old": [
+        18.477,
+        -26.541,
+        0.0,
+        18.507,
+        -23.961,
+        2.1
+      ],
+      "new": [
+        18.490000000000002,
+        -26.541,
+        0.0,
+        18.520000000000003,
+        -23.961,
+        2.1
+      ],
+      "mm": 13.0
     }
   ],
   "rejected": [
@@ -1293,5 +1335,6 @@
         2.1
       ]
     }
-  ]
+  ],
+  "re_approved_2026_11_26_DF": "Lane DF R3: the two slat-wall rows were re-created for the slat feature's NEW host (the corridor-side west wall, x 18.477). Same decision as the 2026-10-05 row for the old head wall: seat the panel 13 mm on the interior-plaster finished face. Re-approval recorded by the lane; the lead confirms in the hand-back review."
 }

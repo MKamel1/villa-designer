@@ -621,7 +621,7 @@
     "lum-WALL-READ-parents-bed-02",
     "lum-WALL-READ-parents-bed-03"
    ],
-   "watts": 3.7,
+   "watts": 3.0,
    "dimming": "dali2"
   },
   {

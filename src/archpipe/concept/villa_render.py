@@ -541,7 +541,7 @@ def curtain_hidden_meshes(curtains, state):
     for c in curtains:
         if c.get('fixed_drapes'):
             # fixed side drapes always stand; the draw layer never exists; the roller is lowered at night only
-            out += [c['id'] + '-heavy-closed'] + (['detail-' + c['id'] + '-roller-fabric'] if state == 'day' else [])
+            out += [c['id'] + '-heavy-closed'] + (['detail-roller-' + c['id'] + '-fabric'] if state == 'day' else [])
         else:
             out += [c['id'] + suffix for suffix in suffixes]
     return out
@@ -866,7 +866,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     # window wall). Only where that wall is SOLID: from the lobby's return to the 0.16 m return at the window wall; none across the lobby
     # mouth (y < PB[1]).  Same slat (30 x 30 at 50 pitch, to 2.10 m) as the old head-wall feature.
     solid = [(w[1], w[3]) for w in F._walls(sp, "GF") if abs(w[2] - PB[0]) < 0.06 or abs(w[0] - PB[0]) < 0.06]
-    y_lo, y_hi = PB[1] + 0.05, PB[3] - 0.16 - 0.03
+    y_lo, y_hi = PB[1] + 0.30, PB[3] - 0.16 - 0.03      # starts 0.30 m past the lobby mouth: the passage guard keeps the opening clear
     for k in range(int((y_hi - y_lo) / 0.05) + 1):
         ya = y_lo + k * 0.05
         if not any(a0 <= ya and ya + 0.03 <= a1 for a0, a1 in solid):
@@ -2032,13 +2032,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             sgn = sign
             ya, yb = sorted((yface - sgn * 0.02, yface - sgn * 0.08))
             zhead = LZ[level] + o["sill"] + o["height"]
-            mesh("detail-" + cid + "-roller-cassette", "black-metal",
+            mesh("detail-roller-" + cid + "-cassette", "black-metal",
                  box_faces(o["x"] - gl, ya, zhead - 0.07, o["x"] + gl, yb, zhead - 0.01), "fixture", room=room,
-                 label="detail: roller blackout cassette in the reveal (ASSUMED)", kind="curtain-track")
+                 label="detail: roller blackout cassette in the reveal (ASSUMED)", kind="roller-blind")
             yc0, yc1 = sorted((yface - sgn * 0.03, yface - sgn * 0.034))
-            mesh("detail-" + cid + "-roller-fabric", "curtain-heavy",
+            mesh("detail-roller-" + cid + "-fabric", "curtain-heavy",
                  box_faces(o["x"] - gl + 0.01, yc0, LZ[level] + o["sill"] + 0.01, o["x"] + gl - 0.01, yc1, zhead - 0.07), "fixture",
-                 room=room, label="detail: roller blackout fabric, lowered (night views only)", kind="curtain-track")
+                 room=room, label="detail: roller blackout fabric, lowered (night views only)", kind="roller-blind")
     # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
     # track are REMOVED, not just hidden, per the design-layer review. No "curtain-library-nook" curtain and no
     # "detail-curtain-library-nook-track" mesh are emitted any more (see test_render_standard's negative assertion).

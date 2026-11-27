@@ -1548,12 +1548,12 @@
     {
       "criterion": "LA1",
       "lane": "L6",
-      "status": "fail",
+      "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 248.3986464724,
+      "achieved": 201.42163445472002,
       "required": 200,
       "unit": "lx",
-      "message": "Eavg 248 lx vs card 200 lx; allowed 180-220 lx (1.24x of target)",
+      "message": "Eavg 201 lx vs card 200 lx; allowed 180-220 lx (1.01x of target)",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1565,10 +1565,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 248.3986464724,
+      "achieved": 201.42163445472002,
       "required": 300.0,
       "unit": "lx",
-      "message": "Eavg 248 lx vs cap 300 lx (1.5 x card 200 lx): 1.24 x target",
+      "message": "Eavg 201 lx vs cap 300 lx (1.5 x card 200 lx): 1.01 x target",
       "source_ids": [
         "L6-POLICY-LA2-over-lighting-1.5x"
       ],
@@ -1580,10 +1580,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-1/Reading",
-      "achieved": 0.24017636601183684,
+      "achieved": 0.25436424095504806,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=20 Em 248 Emin 60 Emax 639 lx; U0 0.24; max:avg 2.57; avg:min 4.16",
+      "message": "reported: n=20 Em 201 Emin 51 Emax 512 lx; U0 0.25; max:avg 2.54; avg:min 3.93",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1593,12 +1593,12 @@
     {
       "criterion": "LA1",
       "lane": "L6",
-      "status": "fail",
+      "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 242.59522383432005,
+      "achieved": 197.10126004620003,
       "required": 200,
       "unit": "lx",
-      "message": "Eavg 243 lx vs card 200 lx; allowed 180-220 lx (1.21x of target)",
+      "message": "Eavg 197 lx vs card 200 lx; allowed 180-220 lx (0.99x of target)",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1610,10 +1610,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 242.59522383432005,
+      "achieved": 197.10126004620003,
       "required": 300.0,
       "unit": "lx",
-      "message": "Eavg 243 lx vs cap 300 lx (1.5 x card 200 lx): 1.21 x target",
+      "message": "Eavg 197 lx vs cap 300 lx (1.5 x card 200 lx): 0.99 x target",
       "source_ids": [
         "L6-POLICY-LA2-over-lighting-1.5x"
       ],
@@ -1625,10 +1625,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/pillow-2/Reading",
-      "achieved": 0.23957310447172062,
+      "achieved": 0.2578398499577719,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=20 Em 243 Emin 58 Emax 624 lx; U0 0.24; max:avg 2.57; avg:min 4.17",
+      "message": "reported: n=20 Em 197 Emin 51 Emax 500 lx; U0 0.26; max:avg 2.54; avg:min 3.88",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1640,10 +1640,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-bed/Day",
-      "achieved": 216.4690601252069,
+      "achieved": 212.73277038603453,
       "required": 50,
       "unit": "lx",
-      "message": "minimum-gauged task: achieved 216 lx vs card 50 lx minimum",
+      "message": "minimum-gauged task: achieved 213 lx vs card 50 lx minimum",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1655,10 +1655,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-bed/Day",
-      "achieved": 0.36072392078034105,
+      "achieved": 0.35589657269358,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=232 Em 216 Emin 78 Emax 714 lx; U0 0.36; max:avg 3.30; avg:min 2.77",
+      "message": "reported: n=232 Em 213 Emin 76 Emax 712 lx; U0 0.36; max:avg 3.35; avg:min 2.81",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -1670,10 +1670,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-entry/Day",
-      "achieved": 109.4682707508,
+      "achieved": 109.72094647060001,
       "required": 30,
       "unit": "lx",
-      "message": "minimum-gauged task: achieved 109 lx vs card 30 lx minimum",
+      "message": "minimum-gauged task: achieved 110 lx vs card 30 lx minimum",
       "source_ids": [
         "IES-HB10-p33.25-avg-allowance"
       ],
@@ -1685,10 +1685,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/room-parents-entry/Day",
-      "achieved": 0.7938451607573688,
+      "achieved": 0.8389988348548066,
       "required": null,
       "unit": "U0",
-      "message": "reported: n=40 Em 109 Emin 87 Emax 134 lx; U0 0.79; max:avg 1.22; avg:min 1.26",
+      "message": "reported: n=40 Em 110 Emin 92 Emax 143 lx; U0 0.84; max:avg 1.31; avg:min 1.19",
       "source_ids": [
         "IES-HB10-p33.25-uniformity-targets"
       ],
@@ -2727,10 +2727,10 @@
       "lane": "L6",
       "status": "pass",
       "subject": "villa/V12-driver/Z-GF-PARENTS-BED-BED-READING",
-      "achieved": 0.7,
+      "achieved": 0.56,
       "required": 0.8,
       "unit": "x max output",
-      "message": "zone driver 0.700 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "message": "zone driver 0.560 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
       "source_ids": [
         "L6-POLICY-V12-headroom"
       ],

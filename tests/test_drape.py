@@ -284,6 +284,9 @@ class SceneAdmission(unittest.TestCase):
         self.assertEqual(D.collision_findings(scene),[])
         baseline={p['id']:p for p in frozen()['parts']}
         for part in scene['meshes']:
+            # R3 (client FINAL 2026-11-26): hers' hanging run moved to the freed wall (new door jamb to the east wall, 1.87 m), so its contents are
+            # deliberately somewhere else than in the frozen pre-R3 scene; every other eligible part must still equal the baseline
+            if part['id'].startswith(('dress-hers-', 'furn-pd-hang-1-')):continue
             if D.eligible(part):self.assertEqual(part['faces'],baseline[part['id']]['faces'])
 
     def test_identity_fields_do_not_stale_the_binding_but_geometry_does(self):

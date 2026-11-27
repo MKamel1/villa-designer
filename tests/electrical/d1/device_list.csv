@@ -307,8 +307,8 @@ parents-bed,GF,SMOKE-007,ELV/fire,smoke,20512,-25116,2700,EA15-smoke-room,,,"int
 parents-bed,GF,lum-ADJ-parents-bed-05,luminaire,accent,21647,-25700,,,Z-GF-PARENTS-BED-ACCENT,DB-GF/L2,11.7 W
 parents-bed,GF,lum-DL-parents-bed-04,luminaire,ambient,20437,-26431,,,Z-GF-PARENTS-BED-AMBIENT,DB-GF/L2,14.4 W
 parents-bed,GF,lum-COVE-parents-bed-01,luminaire,decorative,18597,-25191,,,Z-GF-PARENTS-BED-DECORATIVE,DB-GF/L2,12.5 W
-parents-bed,GF,lum-WALL-READ-parents-bed-02,luminaire,decorative,19817,-23891,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.86 W
-parents-bed,GF,lum-WALL-READ-parents-bed-03,luminaire,decorative,21057,-23891,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.86 W
+parents-bed,GF,lum-WALL-READ-parents-bed-02,luminaire,decorative,19817,-23891,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.49 W
+parents-bed,GF,lum-WALL-READ-parents-bed-03,luminaire,decorative,21057,-23891,,,Z-GF-PARENTS-BED-BED-READING,DB-GF/L2,1.49 W
 parents-bed,GF,DAT-parents-bed-072,power/lighting control,data,22597,-26000,800,EA1-desk-cluster,,,
 parents-bed,GF,DAT-parents-bed-074,power/lighting control,data,22597,-25400,800,EA1-desk-cluster,,,
 parents-bed,GF,ISO-parents-bed-067,power/lighting control,isolator_ac,21862,-23591,2200,EA1-ac-point,AC-PARENTS,DB-GF/D3,moved 1350 mm along the wall (inside window window-GF-parents-bed-6)

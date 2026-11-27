@@ -53,7 +53,7 @@ class Layout(unittest.TestCase):
         finally:
             F.TRACE = None
         self.assertEqual(nodes.count("window of parents-bed"), 2)
-        self.assertIn("door corridor/parents-entry", nodes)      # a pocket door still gives a route node
+        self.assertIn("door suite-vestibule/parents-entry", nodes)      # a pocket door still gives a route node
 
     def test_every_item_has_a_reason_and_a_catalogue_type(self):
         for it in F.layout():
