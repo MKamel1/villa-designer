@@ -17,6 +17,11 @@ from . import villa_furnish as F
 
 # where a part may rise above the piece's checked height h (name -> why)
 ABOVE = {"headboard": "a bed's headboard stands against the wall, above the mattress",
+         "headboard-frame-top": "the joinery bed's 50 mm headboard frame stands above the mattress (to 1.35 m)",
+         "headboard-frame-bottom": "the joinery bed's headboard frame stands above the mattress",
+         "headboard-frame-stile": "the joinery bed's headboard frame stands above the mattress",
+         "headboard-panel": "the joinery bed's upholstered headboard panel stands above the mattress",
+         "mattress": "the joinery bed's mattress top is 0.525 m (170 mm mattress on a 355 mm deck); the plan's h 0.5 is the older reference",
          "flush-plate": "a wall-hung WC's flush plate on the wall",
          "screen": "the TV screen above its unit / on the wall",
          "glass": "a walk-in shower's fixed glass screen",
@@ -106,8 +111,13 @@ def joinery_bed_parts(W, D):
         xa, xb = sorted((sx * hw, sx * (hw - ft)))
         p.append(("tray-front-" + tag, (xa, y0 + rv, zt + rv, xb, y1 - rv, z1 - rv)))
         xa, xb = sorted((sx * (hw - ft), sx * (hw - dep + 0.01)))
-        p.append(("tray-body-" + tag, (xa, y0 + J["tray_wall"] * m, zt + rv + 0.008, xb, y1 - J["tray_wall"] * m,
-                                       zt + rv + 0.008 + J["tray_box_h"] * m)))
+        tw, zb = J["tray_wall"] * m, zt + rv + 0.008
+        zr, ya, yb2 = zb + J["tray_box_h"] * m, y0 + rv, y1 - rv
+        xa2, xb2 = (xb - tw, xb) if sx < 0 else (xa, xa + tw)
+        p += [("tray-body-floor-" + tag, (xa, ya, zb, xb, yb2, zb + tw)),             # an open box: floor, two sides, inner end
+              ("tray-body-side-" + tag, (xa, ya, zb + tw, xb, ya + tw, zr)),
+              ("tray-body-side-" + tag, (xa, yb2 - tw, zb + tw, xb, yb2, zr)),
+              ("tray-body-back-" + tag, (xa2, ya + tw, zb + tw, xb2, yb2 - tw, zr))]
     p += [("mattress", (-hw, yb, ztop, hw, yf, mt)),
           ("headboard-frame-top", (-hw, yb, pz1 - fw, hw, yb + pt, pz1)),
           ("headboard-frame-bottom", (-hw, yb, pz0, hw, yb + pt, pz0 + fw)),

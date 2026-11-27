@@ -79,7 +79,7 @@ def tray_boxes(items, pull):
         fr = next(b for n, b in F3.body(bed) if n == "tray-front-" + tag)
         x = [F3.to_world(bed, fr)[0], F3.to_world(bed, fr)[3]]
         y0, y1 = F3.to_world(bed, fr)[1], F3.to_world(bed, fr)[4]
-        body = next(b for n, b in F3.body(bed) if n == "tray-body-" + tag)
+        body = next(b for n, b in F3.body(bed) if n == "tray-body-floor-" + tag)
         bw = F3.to_world(bed, body)
         lo, hi = min(x[0], bw[0]), max(x[1], bw[3])      # front + stored body, closed
         out[tag] = (lo + sx * pull, y0, hi + sx * pull, y1)

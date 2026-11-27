@@ -444,7 +444,7 @@ class RenderStandard(unittest.TestCase):
         bed = next(i for i in F.layout(VR.R.design("D1")) if i["id"] == "pb-bed")
         x0, y0, x1, y1 = F.footprint(bed)
         headboard = next(c for c in VR.generated_components(bed, bed["type"], 1.05)
-                         if c["name"].endswith(":headboard"))
+                         if c["name"].endswith(":headboard-frame-top"))              # the joinery bed's headboard (to 1.35 m)
         head_top = max(v[2] for v in headboard["vertices_mm"]) / 1000
         pillows = [m for m in SCENE["meshes"] if m["id"].startswith("furn-pb-bed-") and
                    "dressing: pillow" in m["label"]]
@@ -575,7 +575,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import villa_furnish as F, villa_furnish3d as F3
         items = {i["id"]: i for i in F.layout(VR.R.design("D1"))}
         checked = 0
-        for mid, kind, part, f3part in (("pb-bed", "bed_double", "headboard", "headboard"),
+        for mid, kind, part, f3part in (("pb-bed", "bed_double", "headboard-panel", "headboard-panel"),
                                         ("kb-bed", "bed_double", "headboard", "headboard")):
             it = items[mid]
             comps = {c["name"].split(":")[1]: c["vertices_mm"] for c in VR.generated_components(it, kind)}
@@ -606,6 +606,12 @@ class RenderStandard(unittest.TestCase):
                 self.assertTrue(q[0] < lo_x and hi_x < q[2] and q[1] < lo_y and hi_y < q[3], c["id"] + " leaves its frame")
                 continue
             over = [q[0] - lo_x, hi_x - q[2], q[1] - lo_y, hi_y - q[3]]
+            if bid == "pb-bed":
+                # client route decision (DF 2026-11-25/26): the parents' duvet is cut near the mattress sides and ends at the bed foot, so the
+                # cloth does not narrow the 0.75 m foot route (evaluated duvet 0.028 m inside the foot); it must not overhang by more
+                self.assertLessEqual(max(over[0], over[1], over[3]), VR.PB_DUVET_OVER + 0.03, c["id"])
+                self.assertLessEqual(hi_y, q[3] + 1e-6, c["id"])
+                continue
             self.assertEqual(sum(o >= 0.25 for o in over), 3, "%s: overhangs %s (sides and foot must hang)" %
                              (c["id"], [round(o, 2) for o in over]))
             self.assertGreaterEqual(c["z_start"] - c["mattress_top"], 0.03, c["id"] + " starts inside the mattress")
@@ -947,6 +953,12 @@ class RenderStandard(unittest.TestCase):
         replaces it. This checks the stack is the full ratio (not silently clamped) for the villa's actual doors,
         and that windows (never walked through) carry no clear-width field at all."""
         for c in SCENE["curtains"]:
+            if c["id"] in VR.CURTAIN_PARK:
+                # parked off the bed-foot route (lead decision 2026-11-25): both leaves gather to the east pier, each into half the room left
+                # east of park_from, so the stack is the full ratio OR the tighter parked gather, never more than the ratio
+                self.assertLessEqual(c["open_stack_m"], round(0.18 * c["width"], 3) + 0.005, c["id"])
+                self.assertGreaterEqual(c["open_stack_m"], 0.30, c["id"] + ": a parked stack tighter than 0.30 m holds no real fabric")
+                continue
             self.assertAlmostEqual(c["open_stack_m"], round(0.18 * c["width"], 3), places=2, msg=c["id"])
             if c["opening_kind"] == "window":
                 self.assertNotIn("open_clear_width_m", c, c["id"] + ": a window has no passage rule")

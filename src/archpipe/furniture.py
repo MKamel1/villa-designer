@@ -55,7 +55,7 @@ MATERIAL_TRAY = {"name": "archpipe tray lining", "rgb": [196, 178, 150]}
 JOINERY_BED = dict(
     plinth_h=100.0, plinth_inset=60.0,            # recessed plinth: a 60 mm shadow gap under the deck
     deck_top=355.0, mattress_top=525.0,           # a 170 mm mattress; deck top = rail top
-    panel_t=50.0, panel_z0=525.0, panel_z1=1350.0, frame_w=50.0, fabric_recess=8.0,   # headboard: floats from the mattress top, 50 mm
+    panel_t=50.0, panel_z0=525.0, panel_z1=1350.0, frame_w=50.0, fabric_recess=-3.0,   # upholstery stands 3 mm PROUD of the frame (a recessed panel let the slat fronts, 1 mm proud of it, show through); headboard: floats from the mattress top, 50 mm
     tray_v0=350.0, tray_v1=800.0,                 # tray window along the bed, from the head wall (beside the chest when sitting up)
     tray_z0=215.0, tray_z1=337.0, tray_front_t=18.0, reveal=3.0,
     tray_stored_depth=300.0,                      # stored length across the bed, under the mattress: front 18 + Blum MOVENTO 760H NL 270 body
@@ -495,9 +495,15 @@ def _build_bed_joinery(w, d, h):
         xo = sx * hw                                                  # the rail's outer face
         xs = sorted((xo, xo - sx * ft))
         add("tray-front-" + ("w" if sx < 0 else "e"), (xs[0], xs[1], y0 + rv, y1 - rv, zt + rv, z1 - rv), MATERIAL_WALNUT)
-        xi = sorted((xo - sx * ft, xo - sx * (dep - 10.0)))           # the stored tray body, inside the pocket
-        add("tray-body-" + ("w" if sx < 0 else "e"), (xi[0], xi[1], y0 + J["tray_wall"], y1 - J["tray_wall"],
-                                                       zt + rv + 8.0, zt + rv + 8.0 + J["tray_box_h"]), MATERIAL_TRAY)
+        xi = sorted((xo - sx * ft, xo - sx * (dep - 10.0)))           # the stored tray body, inside the pocket: an OPEN box (floor + 3 walls)
+        tag, tw, zb = ("w" if sx < 0 else "e"), J["tray_wall"], zt + rv + 8.0
+        zr = zb + J["tray_box_h"]
+        ya, yb2 = y0 + rv, y1 - rv
+        add("tray-body-floor-" + tag, (xi[0], xi[1], ya, yb2, zb, zb + tw), MATERIAL_TRAY)
+        add("tray-body-side-" + tag, (xi[0], xi[1], ya, ya + tw, zb + tw, zr), MATERIAL_TRAY)
+        add("tray-body-side-" + tag, (xi[0], xi[1], yb2 - tw, yb2, zb + tw, zr), MATERIAL_TRAY)
+        xa2, xb2 = (xi[1] - tw, xi[1]) if sx < 0 else (xi[0], xi[0] + tw)      # the inner end wall
+        add("tray-body-back-" + tag, (xa2, xb2, ya + tw, yb2 - tw, zb + tw, zr), MATERIAL_TRAY)
     mt = J["mattress_top"]
     v, t = _beveled_box(-hw, hw, -hd, hd, ztop, mt, 40.0, 25.0)
     comps.append(("mattress", v, t, MATERIAL_BEDDING))

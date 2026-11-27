@@ -379,7 +379,7 @@ def main() -> int:
     expect('correct mattress permits real frame/headboard overhang', fit_bed(
         {'min':[0,0,0], 'max':[1.8,1.2,2.3]},1.6,2.,None,'+Z',mattress_bounds={'lower':mattress})['ok'])
     from archpipe.concept import villa_furnish
-    fallback_ids = {b['id'] for b in bed_items(villa_furnish.layout(villa_r11.design('D1')))}
+    fallback_ids = {b['id'] for b in bed_items(villa_furnish.layout(villa_r11.design('D1'))) if not b.get('joinery')}   # the parents' joinery bed (2026-11-26) is designed, not a stand-in
     expect("bed fallback disclosures preserve camera subject identity",
            all(m.get('fallback_label') == 'PROCEDURAL BED FALLBACK (stand-in): ' + m['label']
                and not m['label'].startswith('PROCEDURAL BED FALLBACK')
@@ -415,11 +415,8 @@ def main() -> int:
     expect('eight task chairs retain seat-driven cited back-height acceptance',
            len([m for m in measured if m['role']=='task_chair'])==8 and all(
                m['furniture_fitting'].get('back_height_range') for m in measured if m['role']=='task_chair'))
-    expect('parents bed omits only separable source covers and has both activation gates',
-           scene.get('parents_bed',{}).get('status')=='active' and all(
-               set(m['omitted_meshes'])=={'source-quilt','source-throw'} and
-               m['physical_cloth_review']['status']=='accepted'
-               for m in scene['models'] if m.get('role')=='bed'))
+    expect('the imported parents bed is retired for the custom joinery bed and no bed model is integrated',
+           scene.get('parents_bed',{}).get('status')=='retired' and not [m for m in scene['models'] if m.get('role')=='bed'])
     furniture_registry=json.loads((ROOT/'knowledge/furniture-fit-guards.json').read_text())
     from archpipe.furniture_fit import model_fit,replacement_floor
     chair_case=json.loads(gzip.decompress((ROOT/'tests/fixtures/chair-seat-rule-real.json.gz').read_bytes()))

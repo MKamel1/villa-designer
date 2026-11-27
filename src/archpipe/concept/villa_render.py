@@ -1005,7 +1005,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
            "wardrobe": ("wardrobe", None), "bedside_table": ("bedside_table", None)}
     GEN_MAT = {"archpipe oak": "oak", "archpipe warm linen": "linen", "archpipe ivory bedding": "bedding-white",
                "archpipe muted taupe throw": "linen", "archpipe dark metal": "black-metal",
-               "archpipe walnut": "walnut-grain-x", "archpipe taupe upholstery": "taupe-fabric", "archpipe tray lining": "linen"}
+               "archpipe walnut": "walnut-grain-x", "archpipe taupe upholstery": "boucle", "archpipe tray lining": "linen"}
     generated = set()
     detailed = set()
     from . import villa_furniture_detail as FD
@@ -1015,8 +1015,6 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         src = it_all.get(f["mark"])
         if src is not None and src["type"] in GEN and not str(src["room"]).startswith("parents-dressing"):
             kind, hh = GEN[src["type"]]
-            if src.get("joinery"):
-                hh = JOINERY_BED_H                           # envelope: up to the headboard top (1.35 m), not the 1.05 m of the stock bed
             comps = generated_components(src, kind, hh)
             z = LZ[f["level"]]
             by = {}
@@ -2706,6 +2704,8 @@ def generator_rotation(rot):
 
 def generated_components(src, kind, hh=None):
     from .. import furniture as FG
+    if src.get("joinery"):
+        hh = JOINERY_BED_H                  # the envelope runs up to the headboard top, whatever height the caller passes
     return FG.build_furniture({"id": src["id"], "type": kind, "at": [src["cx"] * 1000, src["cy"] * 1000],
                                "size": [src["w"] * 1000, src["d"] * 1000],
                                "height": (hh or src["h"]) * 1000, "rotation": generator_rotation(src["rot"]),

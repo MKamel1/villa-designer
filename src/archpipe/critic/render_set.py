@@ -112,14 +112,16 @@ def resolve(data: dict, lay: dict, base_views: list[dict]) -> list[dict]:
         if "camera" in e:      # authored standing point: x, y only; level and eye height from the entry
             room = None
             got = {"position": e["camera"]["position"], "target": e["camera"]["target"]}
-            z = LZ[e["level"]] + 1.35
+            z = LZ[e["level"]] + e.get("eye_m", 1.35)
+            tz = LZ[e["level"]] + e.get("target_m", e.get("eye_m", 1.35))     # a close view of something low looks DOWN: target below the eye
         else:
             room = e["room"]
             got = RV.choose(lay, room, e["subjects"], lens_mm=MIN_INTERIOR_LENS, sensor_mm=36, sp=sp, eye_m=1.35)
             if not got["subjects_in_frame"]:
                 raise ValueError(f"{e['id']}: 24 mm cannot hold {e['subjects']} in {room}; split the view")
             z = LZ[lay["rooms"][room]["level"]] + 1.35
-        c = {"position": got["position"] + [round(z, 3)], "target": got["target"] + [round(z, 3)],
+            tz = z
+        c = {"position": got["position"] + [round(z, 3)], "target": got["target"] + [round(tz, 3)],
              "lens_mm": e.get("lens_mm", MIN_INTERIOR_LENS), "sensor_mm": 36, "shift_x": e.get("shift_x", 0.0), "shift_y": e.get("shift_y", 0.0)}
         c["overrides"] = [{"field": "position", "prior": None, "new": c["position"],
                            "reason": "room chooser positions the camera to include declared subjects"},
