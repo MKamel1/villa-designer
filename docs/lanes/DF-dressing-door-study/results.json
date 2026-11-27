@@ -1,0 +1,347 @@
+{
+ "O": {
+  "title": "Today: door at the east end of the head wall",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0
+  ],
+  "bed_x0": 19.53,
+  "bed_centre_x": 20.33,
+  "west_side_m": 1.053,
+  "east_side_m": 1.267,
+  "east_with_tray_m": 1.017,
+  "west_with_tray_m": 0.803,
+  "foot_m": 0.8,
+  "hang1": [
+   19.627,
+   21.347
+  ],
+  "hang1_run_m": 1.72,
+  "hang1_rail_m": 1.1,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.71,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 9.19,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "entry>ensuite": {
+    "length": 9.55,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 7.84,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 3.07,
+    "widest_m": 0.8,
+    "at_750": true
+   }
+  },
+  "lobby_depth_m": 0.68
+ },
+ "A1": {
+  "title": "A1: hinged door lobby -> dressing (as the wall allows)",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0
+  ],
+  "bed_x0": 19.637,
+  "bed_centre_x": 20.437,
+  "west_side_m": 1.16,
+  "east_side_m": 1.16,
+  "east_with_tray_m": 0.91,
+  "west_with_tray_m": 0.91,
+  "foot_m": 0.8,
+  "hang1": [
+   20.33,
+   22.347
+  ],
+  "hang1_run_m": 2.02,
+  "hang1_rail_m": 1.4,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.72,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 2.38,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "entry>ensuite": {
+    "length": 3.49,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "bedW>ensuite": {
+    "length": 4.47,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "bedE>ensuite": {
+    "length": 9.05,
+    "widest_m": 0.63,
+    "at_750": false
+   }
+  },
+  "lobby_depth_m": 0.68
+ },
+ "A2": {
+  "title": "A2: sliding door lobby -> dressing, lobby unchanged",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0
+  ],
+  "bed_x0": 19.637,
+  "bed_centre_x": 20.437,
+  "west_side_m": 1.16,
+  "east_side_m": 1.16,
+  "east_with_tray_m": 0.91,
+  "west_with_tray_m": 0.91,
+  "foot_m": 0.8,
+  "hang1": [
+   20.33,
+   22.347
+  ],
+  "hang1_run_m": 2.02,
+  "hang1_rail_m": 1.4,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.72,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 2.38,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "entry>ensuite": {
+    "length": 3.49,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "bedW>ensuite": {
+    "length": 4.47,
+    "widest_m": 0.63,
+    "at_750": false
+   },
+   "bedE>ensuite": {
+    "length": 9.05,
+    "widest_m": 0.63,
+    "at_750": false
+   }
+  },
+  "lobby_depth_m": 0.68
+ },
+ "A3": {
+  "title": "A3: sliding door, lobby enlarged 0.15 m into the corridor",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0
+  ],
+  "bed_x0": 19.637,
+  "bed_centre_x": 20.437,
+  "west_side_m": 1.16,
+  "east_side_m": 1.16,
+  "east_with_tray_m": 0.91,
+  "west_with_tray_m": 0.91,
+  "foot_m": 0.8,
+  "hang1": [
+   20.31,
+   22.347
+  ],
+  "hang1_run_m": 2.04,
+  "hang1_rail_m": 1.42,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.72,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 2.32,
+    "widest_m": 0.756,
+    "at_750": true
+   },
+   "entry>ensuite": {
+    "length": 3.49,
+    "widest_m": 0.756,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 4.62,
+    "widest_m": 0.756,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 9.39,
+    "widest_m": 0.756,
+    "at_750": true
+   }
+  },
+  "lobby_depth_m": 0.83
+ },
+ "D": {
+  "title": "D: A3 plus the head-wall door kept, hidden behind the slats",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "bed_x0": 19.637,
+  "bed_centre_x": 20.437,
+  "west_side_m": 1.16,
+  "east_side_m": 1.16,
+  "east_with_tray_m": 0.91,
+  "west_with_tray_m": 0.91,
+  "foot_m": 0.8,
+  "hang1": [
+   20.31,
+   21.347
+  ],
+  "hang1_run_m": 1.04,
+  "hang1_rail_m": 0.42,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.72,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 2.33,
+    "widest_m": 0.76,
+    "at_750": true
+   },
+   "entry>ensuite": {
+    "length": 3.5,
+    "widest_m": 0.76,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 4.63,
+    "widest_m": 0.76,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 3.04,
+    "widest_m": 0.8,
+    "at_750": true
+   }
+  },
+  "lobby_depth_m": 0.83
+ },
+ "B": {
+  "title": "B: door in the west end of the head wall",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   0.0
+  ],
+  "bed_x0": 20.427,
+  "bed_centre_x": 21.227,
+  "west_side_m": 1.95,
+  "east_side_m": 0.37,
+  "east_with_tray_m": 0.12,
+  "west_with_tray_m": 1.7,
+  "foot_m": 0.8,
+  "hang1": [
+   20.477,
+   22.347
+  ],
+  "hang1_run_m": 1.87,
+  "hang1_rail_m": 1.25,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 2.09,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 3.8,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "entry>ensuite": {
+    "length": 4.98,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 4.0,
+    "widest_m": 0.8,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": null,
+    "widest_m": 0.37,
+    "at_750": false
+   }
+  },
+  "lobby_depth_m": 0.68
+ },
+ "C": {
+  "title": "C: door from the corridor's east end into the dressing room",
+  "approach_strip_overlap_cm2": [
+   0.0,
+   15.9
+  ],
+  "bed_x0": 19.637,
+  "bed_centre_x": 20.437,
+  "west_side_m": 1.16,
+  "east_side_m": 1.16,
+  "east_with_tray_m": 0.91,
+  "west_with_tray_m": 0.91,
+  "foot_m": 0.8,
+  "hang1": [
+   19.627,
+   22.347
+  ],
+  "hang1_run_m": 2.72,
+  "hang1_rail_m": 2.1,
+  "bed_centred_on_wall_x20.962_east_gap_m": 0.635,
+  "routes": {
+   "entry>bed (W side)": {
+    "length": 1.72,
+    "widest_m": 1.0,
+    "at_750": true
+   },
+   "entry>dressing": {
+    "length": 2.35,
+    "widest_m": 0.782,
+    "at_750": true
+   },
+   "entry>ensuite": {
+    "length": 3.51,
+    "widest_m": 0.782,
+    "at_750": true
+   },
+   "bedW>ensuite": {
+    "length": 5.2,
+    "widest_m": 0.782,
+    "at_750": true
+   },
+   "bedE>ensuite": {
+    "length": 9.95,
+    "widest_m": 0.76,
+    "at_750": true
+   }
+  },
+  "lobby_depth_m": 0.68
+ }
+}
