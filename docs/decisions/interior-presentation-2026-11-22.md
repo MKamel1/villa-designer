@@ -74,3 +74,7 @@ Kitchen and ensuite decisions 1 and 2 are applied in `chosen.json` and the scene
   - a hidden tray-drawer in each side rail at mattress height that slides out when used and sits flush when closed.
 
   Nothing may project at the entry or the dressing door. The bed position and the 0.75 m foot route are unchanged.
+- **2026-11-26 fallback (client):** if the side-rail pull-out trays cannot meet the clearances when open, use a fold-up bedside surface instead:
+  - stowed under the mattress edge, so nothing projects when closed;
+  - lifted or pulled up to mattress height when needed;
+  - concealed hinge or stay hardware from a real maker.
