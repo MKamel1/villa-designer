@@ -159,8 +159,8 @@
 "schedule": {
 "close_start": 10502,
 "close_end": 10550,
-"open_start": 10862,
-"open_end": 10910
+"open_start": 10861,
+"open_end": 10909
 },
 "features": [
 "furn-pe-basin",
@@ -503,12 +503,12 @@
 "schedule": {
 "close_start": 10502,
 "close_end": 10550,
-"open_start": 10862,
-"open_end": 10910
+"open_start": 10861,
+"open_end": 10909
 },
 "delay_frames": 2,
-"hold_after_last_blocked_frame_s": 0.08,
-"leave_frame": 10910,
+"hold_after_last_blocked_frame_s": 0.04,
+"leave_frame": 10909,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },

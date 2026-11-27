@@ -123,7 +123,7 @@ def schedule(plan_file=None):
             got = None
             room = frames[c0]['room']; entry = c0
             while entry > 0 and frames[entry-1]['room'] == room: entry -= 1       # first frame of this visit to the room: the leaf closes only after the camera is in
-            leave = next((f['index'] for f in frames[c1:] if f['phase'] == 'walk'), len(frames))      # the camera starts walking out: the leaf must be fully open again by then
+            leave = next((f['index'] for f in frames[c1:] if f['phase'] == 'walk'), len(frames)-1)      # the camera starts walking out: the leaf must be fully open again by then
             for gap, r in sorted(swing_options(rec, vm, track), key=lambda t: (-(t[1]['hinge'] == rec['hinge'] and t[1]['signed_open_deg'] == rec['signed_open_deg']), -t[0])):
                 cs = max(c0-int(CLOSE_S*fps), entry+int(ENTER_PAUSE_S*fps))
                 while cs < c0+int(CLOSE_S*fps*.5):
