@@ -1,0 +1,20 @@
+{
+ "both_open": {
+  "viewpoints": 371,
+  "seeing": 367
+ },
+ "suite_open_dressing_shut": {
+  "viewpoints": 371,
+  "seeing": 0
+ },
+ "dressing_open_suite_shut": {
+  "viewpoints": 371,
+  "seeing": 0
+ },
+ "both_shut": {
+  "viewpoints": 371,
+  "seeing": 0
+ },
+ "route_m": 3.81,
+ "narrowest_mm": 802
+}
