@@ -1,0 +1,57 @@
+{
+ "1a": {
+  "title": "1a TODAY as modelled: dressing door in the head wall (east end)",
+  "viewpoints": 451,
+  "seeing": 0,
+  "pass_": true,
+  "farthest_m": 0,
+  "route_m": 11.22,
+  "narrowest_mm": 800,
+  "landing_sees": false,
+  "kidsb_sees": false
+ },
+ "1b": {
+  "title": "1b TODAY + the A3 dressing door we last proposed (lobby wall, sliding)",
+  "viewpoints": 451,
+  "seeing": 399,
+  "pass_": false,
+  "farthest_m": 17.0,
+  "route_m": 4.45,
+  "narrowest_mm": 756,
+  "landing_sees": true,
+  "kidsb_sees": false
+ },
+ "2": {
+  "title": "2 CLIENT IDEA: annex vestibule, suite door across the corridor, door straight into the dressing room",
+  "viewpoints": 371,
+  "seeing": 367,
+  "pass_": false,
+  "farthest_m": 18.4,
+  "route_m": 3.83,
+  "narrowest_mm": 702,
+  "landing_sees": true,
+  "kidsb_sees": true
+ },
+ "3": {
+  "title": "3 DOG-LEG: annex vestibule with a cross wall and a 1.2 m south bump-out, so the three openings never line up",
+  "viewpoints": 371,
+  "seeing": 0,
+  "pass_": true,
+  "farthest_m": 0,
+  "route_m": 4.58,
+  "narrowest_mm": 739,
+  "landing_sees": false,
+  "kidsb_sees": false
+ },
+ "4": {
+  "title": "4 MINIMAL: no annex; dressing door moved to the WEST end of the head wall",
+  "viewpoints": 451,
+  "seeing": 0,
+  "pass_": true,
+  "farthest_m": 0,
+  "route_m": 5.86,
+  "narrowest_mm": 800,
+  "landing_sees": false,
+  "kidsb_sees": false
+ }
+}

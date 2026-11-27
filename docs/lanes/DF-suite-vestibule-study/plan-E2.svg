@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140.0mm" height="147.0mm" viewBox="0 0 7000 7350">
+<rect width="7000" height="7350" fill="#fff"/>
+<rect width="7000" height="5450" fill="#9a9a9a"/>
+<path d="M0,3871 L1650,3871 L1650,3921 L1750,3921 L1750,3871 L2727,3871 L2727,3771 L2677,3771 L2677,3150 L2677,3091 L2677,2990 L2677,401 L3077,401 L3077,241 L6437,241 L6437,551 L6597,551 L6597,3041 L3727,3041 L3727,3091 L3677,3091 L3677,3150 L3677,3771 L3627,3771 L3627,3871 L3677,3871 L3677,3946 L3777,3946 L3777,3141 L6597,3141 L6597,4611 L6437,4611 L6437,4921 L6324,4921 L6324,5281 L4004,5281 L4004,4921 L3777,4921 L3777,4846 L3677,4846 L3677,4921 L1750,4921 L1750,4871 L1650,4871 L1650,4921 L0,4921 L0,3871Z " fill-rule="evenodd" fill="#fbf7ef" stroke="none"/>
+<path d="M1650,4921 L1650,3871 L0,3871 L0,4921 L1650,4921Z " fill-rule="evenodd" fill="#e9e9f2" stroke="none"/>
+<path d="M3677,4921 L3677,3871 L1750,3871 L1750,4921 L3677,4921Z " fill-rule="evenodd" fill="#f3e9d6" stroke="none"/>
+<path d="M1339,3871 L1339,3771 L439,3771 L439,3871 L1339,3871Z " fill-rule="evenodd" fill="#fbf7ef" stroke="none"/>
+<line x1="439" y1="3821" x2="439" y2="2921" stroke="#036" stroke-width="12"/>
+<path d="M1339,3821 A900,900 0 0 0 439,2921" fill="none" stroke="#036" stroke-width="5" stroke-dasharray="20 14"/>
+<path d="M1339,4171 L1339,3871 L439,3871 L439,4171 L1339,4171Z " fill-rule="evenodd" fill="#9bd" fill-opacity=".35" stroke="#369" stroke-width="4" stroke-dasharray="10 8"/>
+<path d="M2577,3771 L2577,3171 L1400,3171 L1400,3771 L2577,3771Z " fill-rule="evenodd" fill="#e5d3b3" stroke="#543" stroke-width="5"/>
+<text x="1990" y="3450" font-size="52" fill="#432" text-anchor="middle" font-family="Arial" font-weight="normal">kids-b wardrobe</text>
+<text x="890" y="3400" font-size="52" fill="#036" text-anchor="middle" font-family="Arial" font-weight="normal">kids-b door 0.90</text>
+<text x="890" y="4070" font-size="46" fill="#369" text-anchor="middle" font-family="Arial" font-weight="normal">approach 0.30</text>
+<path d="M1750,4921 L1750,3871 L1650,3871 L1650,4921 L1750,4921Z " fill-rule="evenodd" fill="#555" stroke="none"/>
+<path d="M1750,4871 L1750,3921 L1650,3921 L1650,4871 L1750,4871Z " fill-rule="evenodd" fill="#fbf7ef" stroke="none"/>
+<path d="M2600,3961 L2600,3921 L1750,3921 L1750,3961 L2600,3961Z " fill-rule="evenodd" fill="#036" stroke="#036" stroke-width="4"/>
+<path d="M2600,3921 A850,850 0 0 1 1750,4771" fill="none" stroke="#036" stroke-width="5" stroke-dasharray="20 14"/>
+<text x="1700" y="5050" font-size="50" fill="#036" text-anchor="middle" font-family="Arial" font-weight="normal">suite door 0.85</text>
+<path d="M4577,3986 L4577,3946 L3777,3946 L3777,3986 L4577,3986Z " fill-rule="evenodd" fill="#036" stroke="#036" stroke-width="4"/>
+<path d="M3350,4921 L3350,4621 L1800,4621 L1800,4921 L3350,4921Z " fill-rule="evenodd" fill="#e5d3b3" stroke="#543" stroke-width="5"/>
+<text x="2575" y="4790" font-size="50" fill="#432" text-anchor="middle" font-family="Arial" font-weight="normal">storage 300</text>
+<rect x="3727" y="3037" width="2870" height="60" fill="#8b5a2b"/>
+<text x="5160" y="2950" font-size="55" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="normal">slat wall (solid, no door)</text>
+<path d="M5437,3041 L5437,1041 L3837,1041 L3837,3041 L5437,3041Z " fill-rule="evenodd" fill="#d8e4ee" stroke="#345" stroke-width="6"/>
+<text x="4637" y="1850" font-size="70" fill="#234" text-anchor="middle" font-family="Arial" font-weight="normal">bed 1.60 x 2.00</text>
+<path d="M3837,2350 L3837,1450 L3587,1450 L3587,2350 L3837,2350Z " fill-rule="evenodd" fill="none" stroke="#c33" stroke-width="5" stroke-dasharray="25 15"/>
+<path d="M5687,2350 L5687,1450 L5437,1450 L5437,2350 L5687,2350Z " fill-rule="evenodd" fill="none" stroke="#c33" stroke-width="5" stroke-dasharray="25 15"/>
+<path d="M6597,1750 L6597,750 L6197,750 L6197,1750 L6597,1750Z " fill-rule="evenodd" fill="#e6dccb" stroke="#543" stroke-width="5"/>
+<path d="M6597,614 L6597,246 L6256,246 L6256,614 L6597,614Z " fill-rule="evenodd" fill="#cfe5c4" stroke="#363" stroke-width="5"/>
+<path d="M5400,5281 L5400,4681 L4054,4681 L4054,5281 L5400,5281Z " fill-rule="evenodd" fill="#e5d3b3" stroke="#543" stroke-width="5"/>
+<text x="4730" y="5000" font-size="60" fill="#432" text-anchor="middle" font-family="Arial" font-weight="normal">his hanging</text>
+<path d="M6547,3741 L6547,3141 L3827,3141 L3827,3741 L6547,3741Z " fill-rule="evenodd" fill="#e5d3b3" stroke="#543" stroke-width="5"/>
+<text x="5200" y="3480" font-size="60" fill="#432" text-anchor="middle" font-family="Arial" font-weight="normal">hers hanging 2.72 m</text>
+<polyline points="1400,4396 1707,4315 1769,4302 2631,4280 2693,4267 2751,4243 2905,4137 2953,4097 2993,4049 3023,3993 3041,3933 3437,2050" fill="none" stroke="#d62" stroke-width="14" stroke-opacity=".85" stroke-linejoin="round"/>
+<polyline points="1400,4396 1707,4315 1769,4302 3381,4302 3746,4305 4577,4306 4639,4300 5200,4210" fill="none" stroke="#07a" stroke-width="14" stroke-opacity=".85" stroke-linejoin="round"/>
+<polyline points="3437,2050 3340,3091 3292,3738 3292,3904 3304,3969 3330,4030 3416,4160 3463,4207 3518,4243 3648,4297 3711,4317 3777,4323 5400,4344 5466,4350 5529,4370 5587,4401 5638,4443 5680,4494 5711,4552 5731,4615 5850,5050" fill="none" stroke="#a0a" stroke-width="14" stroke-opacity=".85" stroke-linejoin="round"/>
+<polyline points="5837,2050 5774,1041 5768,975 5748,912 5717,854 5675,803 5624,761 5566,730 5503,710 5437,704 3837,704 3771,710 3708,730 3650,761 3599,803 3557,854 3526,912 3506,975 3500,1041 3340,3091 3292,3738 3292,3904 3304,3969 3330,4030 3416,4160 3463,4207 3518,4243 3648,4297 3711,4317 3777,4323 5400,4344 5466,4350 5529,4370 5587,4401 5638,4443 5680,4494 5711,4552 5731,4615 5850,5050" fill="none" stroke="#090" stroke-width="14" stroke-opacity=".85" stroke-linejoin="round"/>
+<text x="200" y="4550" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">public corridor</text>
+<text x="2700" y="4450" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">VESTIBULE (private)</text>
+<text x="3200" y="3400" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">lobby</text>
+<text x="5100" y="450" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">bedroom</text>
+<text x="5200" y="4210" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">dressing walkway</text>
+<text x="3200" y="3750" font-size="52" fill="#556" text-anchor="middle" font-family="Arial" font-weight="normal">old entry pocket door 0.90</text>
+<text x="200" y="3450" font-size="50" fill="#a00" text-anchor="middle" font-family="Arial" font-weight="normal">to stair <-- kids' escape route</text>
+<line x1="200" y1="200" x2="1200" y2="200" stroke="#000" stroke-width="14"/><text x="700" y="130" font-size="55" fill="#000" text-anchor="middle" font-family="Arial" font-weight="normal">1 m</text>
+<text x="30" y="5540" font-size="85" font-weight="bold" font-family="Arial">E2: as E1 but dressing door swings into the dressing room (hinge N), storage the full vestibule</text>
+<text x="30" y="5640" font-size="62" font-family="Arial" fill="#222">orange public>bed (W) 3.7 m (widest 660)</text>
+<text x="30" y="5745" font-size="62" font-family="Arial" fill="#222">blue public>dressing 3.8 m (widest 660)</text>
+<text x="30" y="5850" font-size="62" font-family="Arial" fill="#222">purple W bedside>ensuite 5.1 m (widest 695)</text>
+<text x="30" y="5955" font-size="62" font-family="Arial" fill="#222">green E bedside>ensuite 9.8 m (widest 695)</text>
+<text x="30" y="6060" font-size="62" font-family="Arial" fill="#222">scale 1:50 at print size; design-model metres; routes = centrelines of a 750 body where one exists, widest = narrowest clear point (mm); open leaves drawn at 90 deg</text>
+</svg>
