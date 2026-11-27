@@ -1067,7 +1067,7 @@ def _rect_to_poly(r, grow=0.):
     return np.array([[r[0]-grow, r[1]-grow], [r[2]+grow, r[1]-grow], [r[2]+grow, r[3]+grow], [r[0]-grow, r[3]+grow]])
 
 
-def open_interior_doors(scene, vm, frames, policy_=None):
+def open_interior_doors(scene, vm, frames, policy_=None, door_anim=None):
     """Swing every interior door leaf open about a jamb, in place, and report what was done.
 
     The leaf keeps every vertex and face (it is rotated, not removed); its lever handle follows it. The hinge
@@ -1075,11 +1075,16 @@ def open_interior_doors(scene, vm, frames, policy_=None):
     angle and the first with no contact with furniture, walls or the walked route (0.35 m, then 0.25 m as a fallback) is taken: the
     largest angle that works, then the largest clearance. Entrance leaves are left closed. A door with no
     collision-free option stays closed and is reported so the route test fails loudly.
+
+    Doors named in `door_anim` (the path's animated leaves, see door_anim.py) take their hinge, swing side and open angle from that record instead of
+    the search: the animation was planned with them. Their handle faces are split into their own mesh `door-handle-<element>` so Blender can turn the
+    handle with the leaf.
     """
     policy_ = policy_ or villa_policy(); F = vm.F; report = []
     route = {lv: np.array([f['camera']['position'][:2] for f in frames if f['level'] == lv and not f['stair']])
              for lv in LEVEL_Z}
     handle = next((m for m in scene['meshes'] if m['id'] == 'detail-door-handles'), None)
+    anim = {r['element']: r for r in (door_anim or [])}; split = []
     for mesh in scene['meshes']:
         if mesh.get('part_kind') != 'door-leaf' or not mesh['id'].startswith('door-leaf-'):
             continue
@@ -1089,6 +1094,19 @@ def open_interior_doors(scene, vm, frames, policy_=None):
         entry = dict(id=mesh['id'], element=name)
         if 'core' in name:
             report.append(dict(entry, state='closed', reason='entrance to the unmodelled shared core; not on the route'))
+            continue
+        if name in anim:
+            rec = anim[name]; hinge = rec['hinge']; sign = 1 if rec['signed_open_deg'] >= 0 else -1; angle = abs(rec['signed_open_deg']); a = math.radians(rec['signed_open_deg'])
+            c, s_ = math.cos(a), math.sin(a)
+            rot = lambda v: [hinge[0]+(v[0]-hinge[0])*c-(v[1]-hinge[1])*s_, hinge[1]+(v[0]-hinge[0])*s_+(v[1]-hinge[1])*c, v[2]]
+            mesh['faces'] = [[rot(v) for v in face] for face in mesh['faces']]
+            moved = 0
+            if handle and name in (handle.get('faces_by_element') or {}):
+                idx = list(handle['faces_by_element'][name]); h2 = {k: v for k, v in handle.items() if k not in ('faces', 'faces_by_element', 'element_ids')}
+                split.append(dict(h2, id='door-handle-'+name, label='animated lever handle: '+name, faces=[[rot(v) for v in handle['faces'][k]] for k in idx],
+                                  faces_by_element={name: list(range(len(idx)))}, element_ids=[name]))
+                moved = len(idx)
+            report.append(dict(entry, state='open', angle_deg=angle, swing_sign=sign, hinge=[round(hinge[0], 3), round(hinge[1], 3)], animated=True, handle_faces_moved=moved))
             continue
         lv = level_at((lo[2]+hi[2])/2)
         along_x = (hi[0]-lo[0]) >= (hi[1]-lo[1])
@@ -1137,6 +1155,12 @@ def open_interior_doors(scene, vm, frames, policy_=None):
                     handle['faces'][k] = [rot(v) for v in face]; moved += 1
         report.append(dict(entry, state='open', angle_deg=angle, swing_sign=sign, hinge=[round(hinge[0], 3), round(hinge[1], 3)],
                            route_gap_m=round(gap, 3), handle_faces_moved=moved))
+    if split and handle:
+        gone = {k for sp in split for k in handle['faces_by_element'][sp['element_ids'][0]]}
+        keep = [k for k in range(len(handle['faces'])) if k not in gone]; remap = {k: j for j, k in enumerate(keep)}
+        handle['faces_by_element'] = {e: [remap[k] for k in idx if k in remap] for e, idx in handle['faces_by_element'].items() if not any(sp['element_ids'][0] == e for sp in split)}
+        handle['element_ids'] = list(handle['faces_by_element']); handle['faces'] = [handle['faces'][k] for k in keep]
+        scene['meshes'].extend(split)
     return report
 
 
@@ -1183,6 +1207,10 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
     rows = motion_findings(path['frames'], settings)
     plan = plan_findings(path, vm)
     previous = path['frames'][0]
+    from .door_anim import clearance_findings
+    leaf_hits = {}
+    for index, element, dist in clearance_findings(path, settings.get('door_leaf_clearance_m', settings['wall_clearance_m'])):
+        leaf_hits.setdefault(index, []).append(f'camera {dist} m from the animated leaf {element} (needs {settings.get("door_leaf_clearance_m", settings["wall_clearance_m"])} m)')
     for frame, view, row in zip(path['frames'], villa_frame_views(path, scene), rows):
         pos = frame['camera']['position']; x, y = pos[:2]; lv = frame['level']
         if abs(pos[2]-frame['ground_m']-settings['eye_height_m']) > 1e-9:
@@ -1194,6 +1222,7 @@ def admit_villa_path(path, scene, layout, spec, evaluated_meshes=None, vm=None, 
             row['failures'].extend(sight)
         room = frame['room']
         row['failures'].extend(plan.get(frame['index'], []))
+        row['failures'].extend(leaf_hits.get(frame['index'], []))
         view['standing_room'] = room or ('stair-b' if frame['ground_m'] < -1.5 else 'stair-gf')
         row['lens_clearance'] = camera_proximity_violations(view, scene, {} if frame['stair'] else items, geometry=geometry)
         if row['lens_clearance']:

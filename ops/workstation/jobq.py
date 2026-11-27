@@ -19,8 +19,7 @@ ones), and only while nvidia-smi shows >= --vram-mb free (reserving that for job
 1 GB margin. --exclusive jobs hold every slot, i.e. run with no other queue GPU job. CPU jobs run up to
 --cpu-slots at once.
 
-RAM guard (all jobs): a job is admitted only if /proc/meminfo MemAvailable, minus the --ram-mb of jobs launched in the
-last RAM_RESERVE_S seconds (still growing, so not yet in MemAvailable), is >= its --ram-mb + 6 GB. Default --ram-mb is
+RAM guard (all jobs): a job is admitted only if /proc/meminfo MemAvailable, minus the sum over active jobs of max(0, ram_mb - RSS of the job tree), is >= its --ram-mb + 6 GB. Default --ram-mb is
 4000, or 24000 when argv runs Blender. A job the RAM guard holds also holds every later job (strict submit order).
 
     jobq submit [--id ID] [--gpu [--vram-mb M] [--exclusive]] [--ram-mb M] [--timeout S] [--attempts N] [--cwd D] [--env K=V] [--retry] -- argv...
@@ -53,7 +52,6 @@ VRAM_MARGIN_MB = 1024
 DEFAULT_RAM_MB = 4000
 BLENDER_RAM_MB = 24000  # a villa scene build peaks near 23 GB
 RAM_MARGIN_MB = 6000
-RAM_RESERVE_S = 300  # a scene build takes minutes to reach its peak; reserve that long
 VRAM_RESERVE_S = 60  # a freshly launched job's VRAM is not on nvidia-smi yet; reserve it this long
 # Dirs put in front of PATH for every job: the service's own PATH lacks them (`blender` died with FileNotFoundError).
 EXTRA_PATH = [Path.home() / "opt" / "blender", Path.home() / "archpipe" / "envs" / "laneP-venv" / "bin"]
@@ -203,15 +201,83 @@ def mem_available_mb(path="/proc/meminfo"):
     return None
 
 
+def _runs_blender(argv) -> bool:
+    """Blender is the executable, or a wrapper (argv, or the script file it runs) mentions it."""
+    if any("blender" in a.lower() for a in argv):
+        return True
+    for a in argv:  # ponytail: only argv files are read (<=1 MB); scripts a wrapper calls in turn are not followed
+        try:
+            p = Path(a)
+            if p.is_file() and p.stat().st_size <= 1_000_000 and b"blender" in p.read_bytes().lower():
+                return True
+        except OSError:
+            pass
+    return False
+
+
 def default_ram_mb(argv) -> int:
-    return BLENDER_RAM_MB if any(Path(a).name.lower().startswith("blender") for a in argv) else DEFAULT_RAM_MB
+    return BLENDER_RAM_MB if _runs_blender(argv) else DEFAULT_RAM_MB
+
+
+def proc_tree(pid: int) -> set:
+    """pid and all its descendants, from /proc (just {pid} where /proc is unavailable)."""
+    kids = {}
+    try:
+        for d in os.listdir("/proc"):
+            if d.isdigit():
+                try:
+                    ppid = int(Path(f"/proc/{d}/stat").read_text().rsplit(")", 1)[1].split()[1])
+                except (OSError, IndexError, ValueError):
+                    continue
+                kids.setdefault(ppid, []).append(int(d))
+    except OSError:
+        pass
+    found, todo = set(), [pid]
+    while todo:
+        cur = todo.pop()
+        if cur not in found:
+            found.add(cur)
+            todo.extend(kids.get(cur, []))
+    return found
+
+
+def tree_rss_mb(pid) -> int:
+    """Resident memory of pid's whole process tree in MB (0 if gone/unreadable)."""
+    total = 0
+    for p in proc_tree(int(pid)) if pid else ():
+        try:
+            for line in Path(f"/proc/{p}/status").read_text().splitlines():
+                if line.startswith("VmRSS:"):
+                    total += int(line.split()[1])
+        except (OSError, ValueError, IndexError):
+            pass
+    return total // 1024
+
+
+def vram_foreign_mb(queue_pids):
+    """(total MB, MB used by GPU 0 compute processes outside queue_pids), or None if nvidia-smi fails."""
+    def run(*a):
+        return subprocess.run(["nvidia-smi", *a, "--format=csv,noheader,nounits"], capture_output=True,
+                              text=True, timeout=10, check=True).stdout
+    try:
+        total = int(run("--query-gpu=memory.total").splitlines()[0])
+        foreign = 0
+        for line in run("--query-compute-apps=pid,used_memory").splitlines():
+            if line.strip():
+                pid, mb = (int(x) for x in line.split(","))
+                if pid not in queue_pids:
+                    foreign += mb
+        return total, foreign
+    except (OSError, ValueError, IndexError, subprocess.SubprocessError):
+        return None
 
 
 # ---- queue ------------------------------------------------------------------------------------
 
 class Queue:
     def __init__(self, root=DEFAULT_ROOT, gpu_lock=DEFAULT_GPU_LOCK, cpu_slots=2, launcher=None, alive=pid_alive,
-                 gpu_slots=3, vram_free=vram_free_mb, mem_available=mem_available_mb):
+                 gpu_slots=3, vram_free=vram_free_mb, mem_available=mem_available_mb, rss_of=tree_rss_mb,
+                 vram_foreign=None):
         self.root = Path(root)
         self.gpu_lock = Path(gpu_lock)
         self.cpu_slots = cpu_slots
@@ -220,6 +286,16 @@ class Queue:
         self.gpu_slots = gpu_slots
         self.vram_free = vram_free
         self.mem_available = mem_available
+        self.rss_of = rss_of
+        self.vram_foreign = vram_foreign  # callable(queue_pids) -> (total, foreign) | None; None disables never-fits
+
+    def refresh_slots(self) -> None:
+        """Re-read <root>/slots.json ({"cpu": n, "gpu": n}) so slot counts change without a daemon restart."""
+        cfg = read_json(self.root / "slots.json")
+        if isinstance(cfg, dict):
+            for key, attr, low in (("cpu", "cpu_slots", 0), ("gpu", "gpu_slots", 1)):
+                if type(cfg.get(key)) is int and cfg[key] >= low:
+                    setattr(self, attr, cfg[key])
 
     def jobdir(self, job_id: str) -> Path:
         return self.root / "jobs" / job_id
@@ -308,6 +384,7 @@ class Queue:
                             runner_pid=None, command_pid=None)
 
     def tick(self) -> dict:
+        self.refresh_slots()
         reaped = self.reap()
         sts = {j: self.status(j) for j in self.job_ids()}
         active = [j for j, s in sts.items() if s and s["state"] in ACTIVE]
@@ -320,13 +397,16 @@ class Queue:
         cache = [None]  # nvidia-smi read once per tick
         ram_blocked = False  # same rule for RAM, across CPU and GPU jobs
         avail = self.mem_available()
+        # RAM every active job may still claim, for its whole life: its reservation minus what its tree holds now
+        promised = sum(max(0, self._ram_mb(a, sts) - self._rss(sts[a])) for a in active)
+        foreign = [None]
         for j in queued:
+            if sts[j].get("gpu") and self._never_fits(j, sts, active, foreign):
+                continue  # can never run on this GPU as it is used now: skip it, do not block later jobs
             if ram_blocked:
                 continue
             if avail is not None:
                 need = self._ram_mb(j, sts) + RAM_MARGIN_MB
-                promised = sum(self._ram_mb(a, sts) for a in active if now() - (
-                    sts[a].get("run_started") or sts[a].get("launched") or 0) < RAM_RESERVE_S)
                 if avail - promised < need:
                     ram_blocked = True
                     continue
@@ -340,6 +420,7 @@ class Queue:
                     continue
                 cpu_busy += 1
             active.append(j)
+            promised += self._ram_mb(j, sts)  # just launched: nothing resident yet
             sts[j] = dict(sts[j], launched=now(), run_started=None)  # later admits this tick reserve its VRAM and RAM
             attempt = sts[j].get("attempt", 0) + 1
             self.set_status(j, state="launching", attempt=attempt, launched=now(), runner_pid=None,
@@ -347,6 +428,33 @@ class Queue:
             self.launcher(j)
             started.append(j)
         return {"reaped": reaped, "started": started}
+
+    def _rss(self, st) -> int:
+        return self.rss_of(st["command_pid"]) if st.get("command_pid") else 0
+
+    def _never_fits(self, j, sts, active, cache) -> bool:
+        """vram_mb + margin > total VRAM - VRAM used by non-queue processes: record why, keep it queued."""
+        if not self.vram_foreign:
+            return False
+        if cache[0] is None:
+            pids = set()
+            for a in active:
+                for key in ("runner_pid", "command_pid"):
+                    if sts[a].get(key):
+                        pids |= proc_tree(sts[a][key])
+            cache[0] = self.vram_foreign(pids) or ()
+        if not cache[0]:
+            return False
+        total, other = cache[0]
+        need = sts[j].get("vram_mb", DEFAULT_VRAM_MB) + VRAM_MARGIN_MB
+        if need <= total - other:
+            if (sts[j].get("reason") or "").startswith("never fits"):
+                self.set_status(j, reason=None)
+            return False
+        why = f"never fits: needs {need} MB, only {total - other} of {total} MB are not used by non-queue processes"
+        if sts[j].get("reason") != why:
+            self.set_status(j, reason=why)
+        return True
 
     def _ram_mb(self, j, sts) -> int:
         return sts[j].get("ram_mb") or default_ram_mb((self.spec(j) or {}).get("argv", []))
@@ -477,7 +585,7 @@ def main(argv=None) -> int:
     d = sub.add_parser("daemon")
     d.add_argument("--interval", type=float, default=3.0)
     a = ap.parse_args(argv)
-    q = Queue(a.root, a.gpu_lock, a.cpu_slots, gpu_slots=a.gpu_slots)
+    q = Queue(a.root, a.gpu_lock, a.cpu_slots, gpu_slots=a.gpu_slots, vram_foreign=vram_foreign_mb)
     if a.cmd == "submit":
         cmd = a.command[1:] if a.command and a.command[0] == "--" else a.command
         env = dict(kv.split("=", 1) for kv in a.env)

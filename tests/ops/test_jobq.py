@@ -285,16 +285,92 @@ class GpuSlotsTest(unittest.TestCase):
         self.ram = 10**6
         self.assertEqual(q.tick()["started"], ["cpu"])
 
-    def test_ram_explicit_override_and_reservation_expires(self):
+    def test_ram_explicit_override_and_reservation_shrinks_with_rss(self):
         q = self.queue(cpu_slots=4)
         q.mem_available = lambda: 15000
         q.submit(py("pass"), job_id="a", ram_mb=9000)   # needs 15000: exactly enough
         q.submit(py("pass"), job_id="b", ram_mb=1000)   # needs 7000; 15000-9000 promised = 6000: waits
         self.assertEqual(q.tick()["started"], ["a"])
-        self.assertEqual(q.tick()["started"], [])
         q.alive = lambda *a: True
-        q.set_status("a", runner_pid=1, launched=jobq.now() - jobq.RAM_RESERVE_S - 1)  # now visible in MemAvailable
+        q.set_status("a", runner_pid=1, command_pid=2, state="running")
+        q.rss_of = lambda pid: 0                          # a holds nothing yet: still fully promised
+        self.assertEqual(q.tick()["started"], [])
+        q.rss_of = lambda pid: 9000                       # a now holds all it reserved (and is in MemAvailable)
         self.assertEqual(q.tick()["started"], ["b"])
+
+    def test_reservation_never_expires_while_job_is_growing(self):
+        # the OOM cause: a job older than the old 300 s window, still growing, must stay reserved
+        q = self.queue(cpu_slots=4)
+        q.mem_available = lambda: 25000
+        q.submit(py("pass"), job_id="old", ram_mb=16000)
+        q.submit(py("pass"), job_id="new", ram_mb=5000)
+        q.tick()
+        q.alive = lambda *a: True
+        q.set_status("old", runner_pid=1, command_pid=2, state="running", launched=jobq.now() - 3600)
+        q.rss_of = lambda pid: 1000                       # 15000 still to come: 25000-15000 < 11000
+        self.assertEqual(q.tick()["started"], [])
+
+    def test_guard_quiet_when_memory_plentiful(self):
+        q = self.queue(cpu_slots=4)
+        q.mem_available = lambda: 80000
+        q.alive = lambda *a: True
+        for j in "abc":
+            q.submit(["blender", "-b"], job_id=j)         # three 24 GB jobs fit in 80 GB with margin, one at a time
+        # 80000-0 >= 30000; then 80000-24000 >= 30000; then 80000-48000 = 32000 >= 30000: all three start
+        self.assertEqual(q.tick()["started"], ["a", "b", "c"])
+
+    def test_rss_of_real_process_tree_counts_children(self):
+        import subprocess
+        p = subprocess.Popen(["sh", "-c", f"{PY} -c 'import time; x=bytearray(200*2**20); time.sleep(20)' & wait"])
+        self.addCleanup(p.kill)
+        time.sleep(1.5)
+        self.assertGreaterEqual(jobq.tree_rss_mb(p.pid), 200)
+        self.assertEqual(jobq.tree_rss_mb(0), 0)
+
+    def test_wrapper_script_mentioning_blender_gets_blender_reservation(self):
+        sh = self.root / "chain.sh"
+        sh.write_text("#!/bin/sh\n~/opt/blender/blender -b x.blend\n")
+        plain = self.root / "plain.sh"
+        plain.write_text("#!/bin/sh\necho hi\n")
+        self.assertEqual(jobq.default_ram_mb(["sh", str(sh)]), 24000)
+        self.assertEqual(jobq.default_ram_mb(["sh", "-c", "run blender now"]), 24000)
+        self.assertEqual(jobq.default_ram_mb(["sh", str(plain)]), 4000)   # negative
+
+    def test_slots_file_changes_slots_without_restart(self):
+        q = self.queue(cpu_slots=1)
+        for j in "abc":
+            q.submit(py("pass"), job_id=j)
+        self.assertEqual(q.tick()["started"], ["a"])
+        (self.root / "q" / "slots.json").write_text('{"cpu": 3, "gpu": 2}')
+        self.assertEqual(q.tick()["started"], ["b", "c"])
+        self.assertEqual((q.cpu_slots, q.gpu_slots), (3, 2))
+        (self.root / "q" / "slots.json").write_text("garbage")        # bad file: keep the last good values
+        q.tick()
+        self.assertEqual((q.cpu_slots, q.gpu_slots), (3, 2))
+
+    def test_gpu_job_that_never_fits_is_skipped_not_blocking(self):
+        q = self.queue()
+        q.vram_foreign = lambda pids: (24000, 9700)       # RAG service holds 9.7 GB
+        self.submit(q, "huge", vram_mb=14000)             # 15024 > 14300
+        self.submit(q, "ok", vram_mb=6000)
+        self.assertEqual(q.tick()["started"], ["ok"])
+        st = q.status("huge")
+        self.assertEqual(st["state"], "queued")
+        self.assertIn("never fits", st["reason"])
+        n = len((q.jobdir("huge") / "history.jsonl").read_text().splitlines())
+        q.tick()
+        self.assertEqual(len((q.jobdir("huge") / "history.jsonl").read_text().splitlines()), n)  # no spam
+        q.vram_foreign = lambda pids: (24000, 0)          # RAG gone: it fits and is no longer marked
+        q.set_status("ok", state="done")
+        self.assertEqual(q.tick()["started"], ["huge"])
+
+    def test_fits_job_waiting_for_free_vram_is_not_marked_never_fits(self):
+        q = self.queue()
+        q.vram_foreign = lambda pids: (24000, 9700)
+        self.free = 100                                   # busy right now, but 6000 fits the budget
+        self.submit(q, "wait", vram_mb=6000)
+        self.assertEqual(q.tick()["started"], [])
+        self.assertIsNone(q.status("wait").get("reason"))
 
     def test_ram_unreadable_meminfo_does_not_block(self):
         q = self.queue(cpu_slots=4)
@@ -367,3 +443,46 @@ class GpuSlotsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipIf(os.name == "nt", "needs /proc and POSIX sessions")
+class RestartSurvivalTest(unittest.TestCase):
+    def test_daemon_restart_adopts_running_job_without_relaunch(self):
+        import signal, subprocess
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "q"
+            cli = [PY, str(Path(SPEC.origin)), "--root", root, "--gpu-lock", Path(tmp) / "g.lock", "--cpu-slots", "2"]
+            cli = [str(c) for c in cli]
+            daemons = []
+            def start():
+                d = subprocess.Popen(cli + ["daemon", "--interval", "0.2"], stdout=subprocess.DEVNULL,
+                                     stderr=subprocess.DEVNULL, start_new_session=True)
+                daemons.append(d)
+                return d
+            self.addCleanup(lambda: [d.kill() for d in daemons])
+            marker = Path(tmp) / "starts"
+            code = f"open({str(marker)!r},'a').write('x'); import time; time.sleep(6)"
+            q = jobq.Queue(root, Path(tmp) / "g.lock")
+            q.submit([PY, "-c", code], job_id="long", max_attempts=2)
+            d1 = start()
+            for _ in range(100):
+                st = q.status("long")
+                if st["state"] == "running" and st.get("command_pid"):
+                    break
+                time.sleep(0.1)
+            self.assertEqual(st["state"], "running")
+            before = (st["runner_pid"], st["command_pid"], st["attempt"])
+            os.killpg(d1.pid, signal.SIGKILL)               # daemon dies hard, as in a restart
+            d1.wait()
+            time.sleep(0.5)
+            self.assertTrue(jobq.pid_alive(st["command_pid"]))   # the job did not die with it
+            start()                                           # new daemon
+            for _ in range(150):
+                st = q.status("long")
+                if st["state"] in jobq.TERMINAL:
+                    break
+                time.sleep(0.1)
+            self.assertEqual(st["state"], "done")
+            self.assertEqual(st["attempt"], 1)                # never relaunched
+            self.assertEqual(marker.read_text(), "x")         # command ran exactly once
+            self.assertEqual(before[2], 1)

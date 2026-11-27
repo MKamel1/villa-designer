@@ -64,7 +64,7 @@ def prepare(out,route='clip'):
         else:
             nodes,stations=FT.plan_villa_route(vm);path=FT.sample_villa_path(vm,nodes,stations)
         # interior door leaves swing open (rotated, never hidden); the report travels with the scene
-        scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'])
+        scene['door_states']=FT.open_interior_doors(scene,vm,path['frames'],door_anim=path.get('door_anim'))
         save(out/'door-states.json',scene['door_states'])
     else:path=authored_path()
     save(out/'path.json',path)
@@ -127,7 +127,7 @@ def graphics(out,stage,blender,samples=64,frames=None,segments=None,extra=()):
     context=project_context(ROOT,Path(__file__).resolve(),'flythrough-'+stage,output=out,
                             tools=[Tool('blender',blender.resolve(),'4.5.14')])
     write_record(context,out/(stage+'-execution-context.json'))
-    command=[str(blender.resolve()),'-b','-t','8','--python-exit-code','1','-P',
+    command=[str(blender.resolve()),'-b','-t',os.environ.get('WT_BLENDER_THREADS','8'),'--python-exit-code','1','-P',
              str(ROOT/'src/archpipe/blender/walkthrough.py'),'--','--root',str(out),'--stage',stage,'--samples',str(samples)]
     if frames:command+=['--frames',frames]
     if segments:command+=['--segments',segments]
