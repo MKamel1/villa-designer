@@ -1,7 +1,7 @@
 {
   "schema": "exposure-groups/1",
   "rule_sha256": "7bc36bbd65772659bbce5dcee3efe0c5fca50c22da1ca2aa45ea17acc09cadec",
-  "transport_sha256": "ee7c1d83eebcfe70af92b0c780500760a991bf522380a9824ce9c8a8814f448c",
+  "transport_sha256": "27e59c8cb42207d364220b8d4423fb5b1492f7515a956d019da1ddf0d614e54e",
   "runtime": {
     "blender": "4.5.14 LTS",
     "render_device": {
@@ -27,11 +27,11 @@
   },
   "measurements": {
     "v01-kitchen-garden": {
-      "lamp_luminance_sum": 604687.9877615931,
-      "daylight_luminance_sum": 568068.2632917946,
+      "lamp_luminance_sum": 604688.0253095273,
+      "daylight_luminance_sum": 568069.6090278556,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5156126750281254,
+      "lamp_fraction": 0.5156120988725694,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -538,7 +538,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -562,11 +562,11 @@
       "group": "lamp-dominant"
     },
     "v02-garden-living": {
-      "lamp_luminance_sum": 73624.54774913385,
-      "daylight_luminance_sum": 2231313.568402308,
+      "lamp_luminance_sum": 73624.62437153133,
+      "daylight_luminance_sum": 2231344.747861006,
       "sky_luminance_sum": null,
       "metered_pixels": 13404,
-      "lamp_fraction": 0.031942093036347916,
+      "lamp_fraction": 0.031941693134178314,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1029,7 +1029,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -1053,11 +1053,11 @@
       "group": "day"
     },
     "v03-street-lounge": {
-      "lamp_luminance_sum": 236783.09382678248,
-      "daylight_luminance_sum": 132142.90334054088,
+      "lamp_luminance_sum": 236783.0936871375,
+      "daylight_luminance_sum": 132142.9032948132,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.6418173174155343,
+      "lamp_fraction": 0.6418173173595079,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -1520,7 +1520,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -1544,11 +1544,11 @@
       "group": "lamp-dominant"
     },
     "v04-study-deck": {
-      "lamp_luminance_sum": 0.3280779241761086,
-      "daylight_luminance_sum": 2754837.9926236756,
+      "lamp_luminance_sum": 0.3280779283399264,
+      "daylight_luminance_sum": 2754837.9951732564,
       "sky_luminance_sum": null,
       "metered_pixels": 13112,
-      "lamp_fraction": 1.1909153495895687e-07,
+      "lamp_fraction": 1.1909153636019476e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -1609,7 +1609,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -1633,11 +1633,11 @@
       "group": "day"
     },
     "v05-parents-bedroom": {
-      "lamp_luminance_sum": 73325.87126178978,
-      "daylight_luminance_sum": 140.8284176908471,
+      "lamp_luminance_sum": 68920.1863634672,
+      "daylight_luminance_sum": 141.18703405570574,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.9980830986242032,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.9979556295059031,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -2232,12 +2232,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -2351,11 +2351,11 @@
       "group": "evening"
     },
     "v06-kids-room": {
-      "lamp_luminance_sum": 0.016242960098970666,
-      "daylight_luminance_sum": 1329550.3129645006,
+      "lamp_luminance_sum": 0.016242960096842812,
+      "daylight_luminance_sum": 1329554.4584092826,
       "sky_luminance_sum": null,
       "metered_pixels": 12826,
-      "lamp_fraction": 1.2216882461796708e-08,
+      "lamp_fraction": 1.2216844368931412e-08,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -2416,7 +2416,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -2440,11 +2440,11 @@
       "group": "day"
     },
     "v07-terrace-dusk": {
-      "lamp_luminance_sum": 6048.440358726654,
-      "daylight_luminance_sum": 44108.13970769862,
+      "lamp_luminance_sum": 6052.766130070756,
+      "daylight_luminance_sum": 44108.143327896745,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.12059116372600272,
+      "lamp_fraction": 0.12066699339139159,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -3149,12 +3149,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -3239,7 +3239,7 @@
       "group": "exterior-dusk"
     },
     "v08-cinema": {
-      "lamp_luminance_sum": 62132.310710805716,
+      "lamp_luminance_sum": 62141.17045714841,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13402,
@@ -3838,12 +3838,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -3952,11 +3952,11 @@
       "group": "evening"
     },
     "v09-dining-evening": {
-      "lamp_luminance_sum": 331648.93517497,
-      "daylight_luminance_sum": 44.75807754455404,
+      "lamp_luminance_sum": 331170.4816218749,
+      "daylight_luminance_sum": 44.75472075044797,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998650620181961,
+      "lamp_fraction": 0.9998648772283406,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -4551,12 +4551,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -4667,11 +4667,11 @@
       "group": "evening"
     },
     "v10-living-evening": {
-      "lamp_luminance_sum": 78609.97987062707,
-      "daylight_luminance_sum": 39.56428996638495,
+      "lamp_luminance_sum": 78308.69156414122,
+      "daylight_luminance_sum": 39.54746481406021,
       "sky_luminance_sum": null,
       "metered_pixels": 13407,
-      "lamp_fraction": 0.9994969546182545,
+      "lamp_fraction": 0.9994952347965415,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5266,12 +5266,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -5382,11 +5382,11 @@
       "group": "evening"
     },
     "v11-stair-void": {
-      "lamp_luminance_sum": 309548.9427891975,
-      "daylight_luminance_sum": 60.96617829800016,
+      "lamp_luminance_sum": 310111.1421617303,
+      "daylight_luminance_sum": 61.07907746063432,
       "sky_luminance_sum": null,
-      "metered_pixels": 13406,
-      "lamp_fraction": 0.9998030871217872,
+      "metered_pixels": 13407,
+      "lamp_fraction": 0.9998030801171794,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -5981,12 +5981,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -6072,7 +6072,7 @@
       "group": "evening"
     },
     "v12-ensuite": {
-      "lamp_luminance_sum": 109199.87229502093,
+      "lamp_luminance_sum": 109144.55538577308,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -6671,12 +6671,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -6831,11 +6831,11 @@
       "group": "evening"
     },
     "v13-kids-b": {
-      "lamp_luminance_sum": 108013.60759019325,
-      "daylight_luminance_sum": 87.36607071071893,
+      "lamp_luminance_sum": 107821.81287767034,
+      "daylight_luminance_sum": 87.32948474168651,
       "sky_luminance_sum": null,
-      "metered_pixels": 13409,
-      "lamp_fraction": 0.9991918105105624,
+      "metered_pixels": 13408,
+      "lamp_fraction": 0.9991907128272006,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -7430,12 +7430,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -7545,11 +7545,11 @@
       "group": "evening"
     },
     "v15-family-bath": {
-      "lamp_luminance_sum": 70753.13855407867,
-      "daylight_luminance_sum": 85788.9620915766,
+      "lamp_luminance_sum": 70833.26304246236,
+      "daylight_luminance_sum": 85734.67248195919,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.45197514446438714,
+      "lamp_fraction": 0.4524123206019648,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8185,7 +8185,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -8209,11 +8209,11 @@
       "group": "day"
     },
     "v35-family-bath-wc": {
-      "lamp_luminance_sum": 38029.19436853923,
-      "daylight_luminance_sum": 68945.0070701401,
+      "lamp_luminance_sum": 37694.36368039944,
+      "daylight_luminance_sum": 68787.21900953227,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.3554987450907839,
+      "lamp_fraction": 0.35399890505162074,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -8848,7 +8848,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -8872,11 +8872,11 @@
       "group": "day"
     },
     "v16-guest-wc": {
-      "lamp_luminance_sum": 105722.08604212897,
-      "daylight_luminance_sum": 3.495776716359938,
+      "lamp_luminance_sum": 105737.08869805018,
+      "daylight_luminance_sum": 3.525117949461648,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9999669353749943,
+      "lamp_fraction": 0.9999666625923356,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -9471,12 +9471,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -9629,11 +9629,11 @@
       "group": "evening"
     },
     "v17-dirty-kitchen": {
-      "lamp_luminance_sum": 362725.34160906007,
-      "daylight_luminance_sum": 644268.8710817589,
+      "lamp_luminance_sum": 362774.54604948935,
+      "daylight_luminance_sum": 644376.011936087,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.36020598434206585,
+      "lamp_fraction": 0.3601989227659096,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10140,7 +10140,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -10164,11 +10164,11 @@
       "group": "day"
     },
     "v18-study-evening": {
-      "lamp_luminance_sum": 98381.32587540457,
-      "daylight_luminance_sum": 1461.1863414659265,
+      "lamp_luminance_sum": 98597.38469630221,
+      "daylight_luminance_sum": 1462.744953713195,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9853650883874792,
+      "lamp_fraction": 0.9853813406115953,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -10763,12 +10763,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -10879,12 +10879,12 @@
       "group": "evening"
     },
     "v19-garden-facade": {
-      "lamp_luminance_sum": 0.02642777409732817,
-      "daylight_luminance_sum": 13351372.253845228,
-      "sky_luminance_sum": 5350679.8169395095,
+      "lamp_luminance_sum": 0.02642777406477485,
+      "daylight_luminance_sum": 13351275.213897213,
+      "sky_luminance_sum": 5350676.580141415,
       "metered_pixels": 13408,
-      "lamp_fraction": 1.979405078560793e-09,
-      "solar_fraction": 0.5992412079291325,
+      "lamp_fraction": 1.9794194628655983e-09,
+      "solar_fraction": 0.5992385375614198,
       "lamp_population": [],
       "view_input": {
         "id": "v19-garden-facade",
@@ -10936,7 +10936,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -10960,11 +10960,11 @@
       "group": "exterior-day"
     },
     "v20-kitchen-run": {
-      "lamp_luminance_sum": 612511.6783570858,
-      "daylight_luminance_sum": 234.46545350254135,
+      "lamp_luminance_sum": 611614.2980103105,
+      "daylight_luminance_sum": 234.46545301151778,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9996173530329471,
+      "lamp_fraction": 0.9996167918168464,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -11559,12 +11559,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -11719,11 +11719,11 @@
       "group": "evening"
     },
     "v21-lounge-evening": {
-      "lamp_luminance_sum": 145305.71127819762,
-      "daylight_luminance_sum": 16.538177320117246,
+      "lamp_luminance_sum": 145045.63514315413,
+      "daylight_luminance_sum": 16.55584047987044,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.9998861965226792,
+      "lamp_fraction": 0.9998858707402142,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -12318,12 +12318,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -12434,11 +12434,11 @@
       "group": "evening"
     },
     "v22-parents-day": {
-      "lamp_luminance_sum": 3.2537840232820554,
-      "daylight_luminance_sum": 18215239.944704227,
+      "lamp_luminance_sum": 3.256020103625766,
+      "daylight_luminance_sum": 18206259.047528192,
       "sky_luminance_sum": null,
-      "metered_pixels": 13386,
-      "lamp_fraction": 1.786297326819166e-07,
+      "metered_pixels": 13376,
+      "lamp_fraction": 1.7884066753180783e-07,
       "solar_fraction": null,
       "lamp_population": [],
       "view_input": {
@@ -12501,7 +12501,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -12525,7 +12525,7 @@
       "group": "day"
     },
     "v23-gf-gallery": {
-      "lamp_luminance_sum": 418105.7856749133,
+      "lamp_luminance_sum": 418105.78585256677,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
@@ -12967,7 +12967,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -12991,11 +12991,11 @@
       "group": "evening"
     },
     "v24-bar-alcove": {
-      "lamp_luminance_sum": 79922.79244195046,
-      "daylight_luminance_sum": 36.85996119193496,
+      "lamp_luminance_sum": 80185.461625655,
+      "daylight_luminance_sum": 36.85477320974776,
       "sky_luminance_sum": null,
-      "metered_pixels": 13397,
-      "lamp_fraction": 0.9995390179911476,
+      "metered_pixels": 13399,
+      "lamp_fraction": 0.9995405920090052,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -13590,12 +13590,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -13706,12 +13706,12 @@
       "group": "evening"
     },
     "v25-top-garden-gate": {
-      "lamp_luminance_sum": 0.8625325373012872,
-      "daylight_luminance_sum": 46574398.5532562,
-      "sky_luminance_sum": 11465962.97367688,
+      "lamp_luminance_sum": 0.8625325372635085,
+      "daylight_luminance_sum": 46574441.14292464,
+      "sky_luminance_sum": 11465960.603623891,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.8519455926873176e-08,
-      "solar_fraction": 0.75381404097863,
+      "lamp_fraction": 1.85194389910768e-08,
+      "solar_fraction": 0.7538143169890565,
       "lamp_population": [],
       "view_input": {
         "id": "v25-top-garden-gate",
@@ -13747,7 +13747,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -13771,12 +13771,12 @@
       "group": "exterior-day"
     },
     "v26-top-garden-east": {
-      "lamp_luminance_sum": 0.5239955447726452,
-      "daylight_luminance_sum": 36556998.92978776,
-      "sky_luminance_sum": 8321684.883561578,
+      "lamp_luminance_sum": 0.5239955456593002,
+      "daylight_luminance_sum": 36557032.478683054,
+      "sky_luminance_sum": 8321683.030906963,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.4333658467651302e-08,
-      "solar_fraction": 0.7723641128325549,
+      "lamp_fraction": 1.4333645337708506e-08,
+      "solar_fraction": 0.7723643724156368,
       "lamp_population": [],
       "view_input": {
         "id": "v26-top-garden-east",
@@ -13812,7 +13812,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -13836,12 +13836,12 @@
       "group": "exterior-day"
     },
     "v27-east-yard-above": {
-      "lamp_luminance_sum": 0.037349749651062594,
-      "daylight_luminance_sum": 7627121.340293763,
-      "sky_luminance_sum": 1246888.2099139453,
+      "lamp_luminance_sum": 0.037323049140728044,
+      "daylight_luminance_sum": 7627115.123844677,
+      "sky_luminance_sum": 1246883.2202143485,
       "metered_pixels": 13310,
-      "lamp_fraction": 4.896965421389718e-09,
-      "solar_fraction": 0.8365191591581628,
+      "lamp_fraction": 4.8934686774827475e-09,
+      "solar_fraction": 0.8365196801191301,
       "lamp_population": [],
       "view_input": {
         "id": "v27-east-yard-above",
@@ -13877,7 +13877,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -13901,12 +13901,12 @@
       "group": "exterior-day"
     },
     "v28-east-yard-below": {
-      "lamp_luminance_sum": 0.04895118009167396,
-      "daylight_luminance_sum": 5424941.262982312,
-      "sky_luminance_sum": 1114045.0094269447,
+      "lamp_luminance_sum": 0.04895118006119036,
+      "daylight_luminance_sum": 5424924.321695377,
+      "sky_luminance_sum": 1114051.2755211124,
       "metered_pixels": 13231,
-      "lamp_fraction": 9.023356618438214e-09,
-      "solar_fraction": 0.7946438578001287,
+      "lamp_fraction": 9.023384791511154e-09,
+      "solar_fraction": 0.79464206144484,
       "lamp_population": [],
       "view_input": {
         "id": "v28-east-yard-below",
@@ -13942,7 +13942,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -13966,12 +13966,12 @@
       "group": "exterior-day"
     },
     "v36-north-garden": {
-      "lamp_luminance_sum": 1.164423104603881,
-      "daylight_luminance_sum": 1414143.193004777,
-      "sky_luminance_sum": 704406.5587197158,
+      "lamp_luminance_sum": 1.1644231034048935,
+      "daylight_luminance_sum": 1414143.1909261243,
+      "sky_luminance_sum": 704406.5595191566,
       "metered_pixels": 13365,
-      "lamp_fraction": 8.234117673260696e-07,
-      "solar_fraction": 0.5018845600614249,
+      "lamp_fraction": 8.234117676885506e-07,
+      "solar_fraction": 0.5018845587639257,
       "lamp_population": [],
       "view_input": {
         "id": "v36-north-garden",
@@ -14023,7 +14023,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -14047,12 +14047,12 @@
       "group": "exterior-shade"
     },
     "v37-north-garden-lounge": {
-      "lamp_luminance_sum": 0.7138252016994879,
-      "daylight_luminance_sum": 515365.58631936036,
-      "sky_luminance_sum": 303028.5224919093,
+      "lamp_luminance_sum": 0.7138252018987693,
+      "daylight_luminance_sum": 515365.58618409856,
+      "sky_luminance_sum": 303028.52303919476,
       "metered_pixels": 13337,
-      "lamp_fraction": 1.385083195193899e-06,
-      "solar_fraction": 0.4120125003765203,
+      "lamp_fraction": 1.385083195944103e-06,
+      "solar_fraction": 0.41201249916026195,
       "lamp_population": [],
       "view_input": {
         "id": "v37-north-garden-lounge",
@@ -14088,7 +14088,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -14112,12 +14112,12 @@
       "group": "exterior-shade"
     },
     "v38-north-garden-floor-bed": {
-      "lamp_luminance_sum": 0.7023354448683361,
-      "daylight_luminance_sum": 961539.6248231754,
-      "sky_luminance_sum": 290021.3267115723,
+      "lamp_luminance_sum": 0.7023354446124457,
+      "daylight_luminance_sum": 961539.6264760102,
+      "sky_luminance_sum": 290021.32646056334,
       "metered_pixels": 13319,
-      "lamp_fraction": 7.304274454548961e-07,
-      "solar_fraction": 0.6983781851268933,
+      "lamp_fraction": 7.304274439332063e-07,
+      "solar_fraction": 0.6983781859064139,
       "lamp_population": [],
       "view_input": {
         "id": "v38-north-garden-floor-bed",
@@ -14153,7 +14153,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -14177,12 +14177,12 @@
       "group": "exterior-shade"
     },
     "v39-north-garden-hanging-retreat": {
-      "lamp_luminance_sum": 1.5798070313231187,
-      "daylight_luminance_sum": 1069865.6283234258,
-      "sky_luminance_sum": 589005.6738207774,
+      "lamp_luminance_sum": 1.579807033075738,
+      "daylight_luminance_sum": 1069865.6283286444,
+      "sky_luminance_sum": 589005.6741230184,
       "metered_pixels": 13392,
-      "lamp_fraction": 1.4766384270097944e-06,
-      "solar_fraction": 0.449458270059763,
+      "lamp_fraction": 1.4766384286407546e-06,
+      "solar_fraction": 0.4494582697799448,
       "lamp_population": [],
       "view_input": {
         "id": "v39-north-garden-hanging-retreat",
@@ -14236,7 +14236,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -14260,11 +14260,11 @@
       "group": "exterior-shade"
     },
     "v29-under-stair-store": {
-      "lamp_luminance_sum": 120430.3637340599,
-      "daylight_luminance_sum": 39610.30114457988,
+      "lamp_luminance_sum": 120430.36388663722,
+      "daylight_luminance_sum": 39610.30116477145,
       "sky_luminance_sum": null,
       "metered_pixels": 13407,
-      "lamp_fraction": 0.7524985217062381,
+      "lamp_fraction": 0.7524985218472585,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14705,7 +14705,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -14729,11 +14729,11 @@
       "group": "lamp-dominant"
     },
     "v30-under-ramp-store": {
-      "lamp_luminance_sum": 9545.47154251143,
+      "lamp_luminance_sum": 9545.471549851505,
       "daylight_luminance_sum": 0.050581206430541356,
       "sky_luminance_sum": null,
       "metered_pixels": 12819,
-      "lamp_fraction": 0.9999947010539837,
+      "lamp_fraction": 0.9999947010539878,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -14960,10 +14960,10 @@
       "group": "lamp-low-key"
     },
     "v31-dressing-hers": {
-      "lamp_luminance_sum": 87172.31421564451,
+      "lamp_luminance_sum": 87228.58651172653,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13289,
+      "metered_pixels": 13288,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -15559,12 +15559,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -15675,10 +15675,10 @@
       "group": "evening"
     },
     "v32-dressing-his": {
-      "lamp_luminance_sum": 101627.40339120195,
+      "lamp_luminance_sum": 101556.70397231731,
       "daylight_luminance_sum": 0.0,
       "sky_luminance_sum": null,
-      "metered_pixels": 13343,
+      "metered_pixels": 13346,
       "lamp_fraction": 1.0,
       "solar_fraction": null,
       "lamp_population": [
@@ -16274,12 +16274,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -16368,11 +16368,11 @@
       "group": "evening"
     },
     "v33-basement-north-south": {
-      "lamp_luminance_sum": 95790.68888622698,
-      "daylight_luminance_sum": 2132462.8231481113,
+      "lamp_luminance_sum": 95613.88360050236,
+      "daylight_luminance_sum": 2132466.989159871,
       "sky_luminance_sum": null,
-      "metered_pixels": 13397,
-      "lamp_fraction": 0.04298913403204851,
+      "metered_pixels": 13400,
+      "lamp_fraction": 0.04291311180372289,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -16811,7 +16811,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -16835,11 +16835,11 @@
       "group": "day"
     },
     "v34-basement-south-north": {
-      "lamp_luminance_sum": 66906.43871872214,
-      "daylight_luminance_sum": 2490781.2097273334,
+      "lamp_luminance_sum": 67084.328863778,
+      "daylight_luminance_sum": 2490781.2270892947,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.026158956023958478,
+      "lamp_fraction": 0.02622668291054182,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17278,7 +17278,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17302,12 +17302,12 @@
       "group": "day"
     },
     "v40-south-garden-espalier": {
-      "lamp_luminance_sum": 0.0403376391205914,
-      "daylight_luminance_sum": 10283655.485718975,
-      "sky_luminance_sum": 2363864.610732278,
+      "lamp_luminance_sum": 0.040336467527268806,
+      "daylight_luminance_sum": 10283684.418625543,
+      "sky_luminance_sum": 2363815.043634199,
       "metered_pixels": 13405,
-      "lamp_fraction": 3.922500031081781e-09,
-      "solar_fraction": 0.7701338192420971,
+      "lamp_fraction": 3.922375067830522e-09,
+      "solar_fraction": 0.7701392859398799,
       "lamp_population": [],
       "view_input": {
         "id": "v40-south-garden-espalier",
@@ -17361,7 +17361,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17385,12 +17385,12 @@
       "group": "exterior-day"
     },
     "v41-south-garden-terrace": {
-      "lamp_luminance_sum": 0.03230421241167243,
-      "daylight_luminance_sum": 16238634.04080794,
-      "sky_luminance_sum": 7465210.677820686,
+      "lamp_luminance_sum": 0.03230421241541945,
+      "daylight_luminance_sum": 16238583.553507874,
+      "sky_luminance_sum": 7465218.956208792,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.9893429623592283e-09,
-      "solar_fraction": 0.5402808722051069,
+      "lamp_fraction": 1.9893491476463602e-09,
+      "solar_fraction": 0.5402789330972068,
       "lamp_population": [],
       "view_input": {
         "id": "v41-south-garden-terrace",
@@ -17442,7 +17442,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17466,11 +17466,11 @@
       "group": "exterior-day"
     },
     "v42-north-garden-evening": {
-      "lamp_luminance_sum": 3361.1713166077907,
-      "daylight_luminance_sum": 2456.649533643468,
+      "lamp_luminance_sum": 3361.1293316670444,
+      "daylight_luminance_sum": 2456.653193611134,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5777371636430897,
+      "lamp_fraction": 0.5777337528625361,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -17634,12 +17634,12 @@
       "group": "exterior-dusk-dim"
     },
     "gi-living-door": {
-      "lamp_luminance_sum": 0.0494804465896771,
-      "daylight_luminance_sum": 14656166.324145915,
-      "sky_luminance_sum": 2059052.8170485718,
+      "lamp_luminance_sum": 0.04945022446643487,
+      "daylight_luminance_sum": 14656204.906250387,
+      "sky_luminance_sum": 2059061.9354230019,
       "metered_pixels": 13409,
-      "lamp_fraction": 3.3760838495062883e-09,
-      "solar_fraction": 0.8595094534608072,
+      "lamp_fraction": 3.3740128918708206e-09,
+      "solar_fraction": 0.8595092011476395,
       "lamp_population": [],
       "view_input": {
         "id": "gi-living-door",
@@ -17677,7 +17677,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17701,12 +17701,12 @@
       "group": "exterior-day"
     },
     "gi-dining-firepit": {
-      "lamp_luminance_sum": 0.09716273778384789,
-      "daylight_luminance_sum": 62615970.90942037,
-      "sky_luminance_sum": 8170178.576533583,
+      "lamp_luminance_sum": 0.0971285508080492,
+      "daylight_luminance_sum": 62616050.76986179,
+      "sky_luminance_sum": 8170186.83824166,
       "metered_pixels": 13409,
-      "lamp_fraction": 1.5517245236623851e-09,
-      "solar_fraction": 0.8695192543072999,
+      "lamp_fraction": 1.5511765667619422e-09,
+      "solar_fraction": 0.8695192887799607,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-firepit",
@@ -17788,7 +17788,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17812,12 +17812,12 @@
       "group": "exterior-day"
     },
     "gi-north-court-pond": {
-      "lamp_luminance_sum": 0.5446743588311318,
-      "daylight_luminance_sum": 476775.5201477556,
-      "sky_luminance_sum": 325774.2305391347,
+      "lamp_luminance_sum": 0.5446743588269446,
+      "daylight_luminance_sum": 476775.51911467983,
+      "sky_luminance_sum": 325774.2309138969,
       "metered_pixels": 13338,
-      "lamp_fraction": 1.1424112891119024e-06,
-      "solar_fraction": 0.3167135962891398,
+      "lamp_fraction": 1.1424112915784907e-06,
+      "solar_fraction": 0.3167135940225619,
       "lamp_population": [],
       "view_input": {
         "id": "gi-north-court-pond",
@@ -17855,7 +17855,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -17879,11 +17879,11 @@
       "group": "exterior-shade"
     },
     "gi-dining-firepit-dusk": {
-      "lamp_luminance_sum": 8517.623981789588,
-      "daylight_luminance_sum": 36790.00124563237,
+      "lamp_luminance_sum": 8533.263095860042,
+      "daylight_luminance_sum": 36790.00630481906,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.18799537470867897,
+      "lamp_fraction": 0.18827554165216917,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -18588,12 +18588,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -18678,11 +18678,11 @@
       "group": "exterior-dusk"
     },
     "gi-north-court-pond-dusk": {
-      "lamp_luminance_sum": 2332.848757976551,
-      "daylight_luminance_sum": 2043.2962395276488,
+      "lamp_luminance_sum": 2331.423549086623,
+      "daylight_luminance_sum": 2043.9558699483541,
       "sky_luminance_sum": null,
       "metered_pixels": 13409,
-      "lamp_fraction": 0.5330830581041122,
+      "lamp_fraction": 0.532850600097405,
       "solar_fraction": null,
       "lamp_population": [
         {
@@ -19387,12 +19387,12 @@
         },
         {
           "id": "lamp-WALL-READ-parents-bed-02",
-          "flux_lm": 163.61354538087033,
+          "flux_lm": 130.85290153465758,
           "cct_k": 2700
         },
         {
           "id": "lamp-WALL-READ-parents-bed-03",
-          "flux_lm": 163.61291898980852,
+          "flux_lm": 130.8524005670406,
           "cct_k": 2700
         },
         {
@@ -19461,12 +19461,12 @@
       "group": "exterior-dusk-dim"
     },
     "gi-dining-crown-summer": {
-      "lamp_luminance_sum": 0.16581860375510823,
-      "daylight_luminance_sum": 12202829.554795409,
-      "sky_luminance_sum": 2941213.672668456,
+      "lamp_luminance_sum": 0.16584815038452388,
+      "daylight_luminance_sum": 12202840.423712991,
+      "sky_luminance_sum": 2941228.7553232056,
       "metered_pixels": 13408,
-      "lamp_fraction": 1.3588537048500641e-08,
-      "solar_fraction": 0.758972813685443,
+      "lamp_fraction": 1.3590946236435953e-08,
+      "solar_fraction": 0.7589717923699383,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-summer",
@@ -19504,7 +19504,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -19528,12 +19528,12 @@
       "group": "exterior-day"
     },
     "gi-dining-crown-winter": {
-      "lamp_luminance_sum": 0.8879742773889322,
-      "daylight_luminance_sum": 14542111.743217904,
-      "sky_luminance_sum": 3691261.309754886,
+      "lamp_luminance_sum": 0.8880017970822309,
+      "daylight_luminance_sum": 14541999.385431034,
+      "sky_luminance_sum": 3691265.039327774,
       "metered_pixels": 13409,
-      "lamp_fraction": 6.10622610283094e-08,
-      "solar_fraction": 0.7461674497532037,
+      "lamp_fraction": 6.106462524997644e-08,
+      "solar_fraction": 0.7461652320639015,
       "lamp_population": [],
       "view_input": {
         "id": "gi-dining-crown-winter",
@@ -19571,7 +19571,7 @@
           "curtain-kids-a-01-heavy-closed",
           "curtain-kids-b-01-heavy-closed",
           "curtain-parents-bed-01-heavy-closed",
-          "detail-curtain-parents-bed-01-roller-fabric",
+          "detail-roller-curtain-parents-bed-01-fabric",
           "curtain-parents-bed-02-heavy-closed",
           "curtain-dining-01-heavy-closed",
           "curtain-living-01-heavy-closed",
@@ -19595,15 +19595,15 @@
       "group": "exterior-day"
     }
   },
-  "measurement_sha256": "9c21dc2e2913e8bceaa521691d93b7a3e42f8e7d775fea27679dbc5b2f3d6df2",
+  "measurement_sha256": "5ba0a98487738dc36e65111bf6133733fb63611c39f9c7d2348c3d1d288b3b8b",
   "white_balance_k": {
-    "exterior-day": 5500,
-    "day": 5500,
     "exterior-dusk": 4300,
-    "exterior-shade": 5500,
-    "evening": 3000,
     "lamp-dominant": 2700,
     "lamp-low-key": 2700,
-    "exterior-dusk-dim": 4300
+    "exterior-dusk-dim": 4300,
+    "day": 5500,
+    "exterior-day": 5500,
+    "exterior-shade": 5500,
+    "evening": 3000
   }
 }

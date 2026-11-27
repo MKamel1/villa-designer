@@ -60,7 +60,7 @@ def plan():
     P.sill_marks(fig)
     P.furniture(fig, KEY)
     P.curtains(fig, KEY)
-    P.slats(fig, -26.541, -23.981, deep=0.03)
+    P.slats(fig, -26.291, -23.961, deep=0.03)
     fig.text(18.66, -25.1, "slat wall", size=7, color="#6b4a1c", z=9)
     P.labels(fig, KEY)
     fig.sh.text(fig.P(19.15, -27.99), "VESTIBULE", size=6, weight="bold", rot=90, z=9)
@@ -105,7 +105,7 @@ def main():
         "1. Bed turned: head to the east window wall, centred on the room (x 20.437), 1160 clear each side, 800 at the foot. Low upholstered head panel to the 0.90 m sill; reading-light arms clamped to the panel's top rail; power from a 24 V DC SELV driver in the sill wall behind the panel (device SOC-parents-bed-068, circuit DB-GF/L2).",
         "2. Dressing door moved to the lobby end of the old head wall (x 19.577..20.377, 800 x 2100), hinged on the south (+x model) jamb, swings into the dressing room. The old east door is built in.",
         "3. Hers hanging 1870 from the new door's jamb to the east wall (HS, DR, DH, LH from the door); his unchanged. Open leaf 80 mm clear of hers.",
-        "4. Slat feature on the corridor-side wall (2.69 m run). Cove moved to that wall. Roller blackout in the window reveal and fixed side drapes on the piers.",
+        "4. Slat feature on the corridor-side wall (2.33 m run, from 0.30 m past the lobby mouth). Cove moved to that wall. Roller blackout in the window reveal and fixed side drapes on the piers.",
         "5. Vanity moved 0.90 m toward the bed foot (the brief's ~0.30 m measures 0.50 m between the open tray and the vanity corner; 0.90 m measures 0.76 m).",
         "6. ANNEX: a new suite door (800 leaf, hinged north jamb, swings INTO the vestibule, self-closing) across the corridor 0.26 m past kids-b's jamb; the corridor end is the suite vestibule with a flat 130 mm storage cabinet on the facade wall. Kids-b's door, swing and approach are unchanged and public."], width=116)
     y -= 2
