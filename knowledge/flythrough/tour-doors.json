@@ -1,6 +1,6 @@
 {
 "schema": "flythrough-tour-doors/1",
-"camera_sha256": "61926492469b0ef5131a98057f4e1d4d8a356ff247b121809cbddfaf8d1215d0",
+"camera_sha256": "c9719f3939ba39d646bc76dfcdbc07849d73e762d6845d150963beb2571254d6",
 "clearance_m": 0.3,
 "rule": {
 "min_blocked_s": 1.0,
@@ -157,17 +157,16 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(22.296999999999997), np.float64(-26.641)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 12122,
-"close_end": 12170,
-"open_start": 12418,
-"open_end": 12466
+"close_start": 10568,
+"close_end": 10616,
+"open_start": 10708,
+"open_end": 10756
 },
 "features": [
+"furn-pd-hang-1",
 "lum-VSTRIP-parents-dressing-03",
 "lum-VSTRIP-parents-dressing-04",
-"lum-VSTRIP-parents-dressing-05",
-"furn-pd-hang-1",
-"furn-pd-hang-2"
+"lum-VSTRIP-parents-dressing-05"
 ]
 },
 {
@@ -316,16 +315,171 @@
 "note": "hinge side is not authored; this side (hinge [np.float64(3.125), np.float64(-21.696)], swing +) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
 },
 "schedule": {
-"close_start": 4882,
-"close_end": 4930,
-"open_start": 5191,
-"open_end": 5239
+"close_start": 4640,
+"close_end": 4688,
+"open_start": 4949,
+"open_end": 4997
 },
 "features": [
 "furn-store-shelves",
 "lum-STORE-BATTEN-store-ramp-01",
 "lum-STORE-BATTEN-store-ramp-02",
 "lum-STORE-BATTEN-store-ramp-03"
+]
+},
+{
+"record": {
+"element": "door-GF-gallery-end-family-bath",
+"leaf_id": "door-leaf-5f1588d0f1035d78da422d9c",
+"hinge": [
+10.752,
+-26.371
+],
+"signed_open_deg": -90.0,
+"closed_faces": [
+[
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+]
+],
+[
+[
+10.752,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+],
+[
+10.752,
+-26.421,
+2.1
+]
+],
+[
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.320999999999998,
+0.0
+],
+[
+10.752,
+-26.421,
+0.0
+],
+[
+9.952,
+-26.421,
+0.0
+]
+],
+[
+[
+9.952,
+-26.320999999999998,
+0.0
+],
+[
+9.952,
+-26.421,
+0.0
+],
+[
+9.952,
+-26.421,
+2.1
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+]
+],
+[
+[
+9.952,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.421,
+0.0
+],
+[
+10.752,
+-26.421,
+2.1
+],
+[
+9.952,
+-26.421,
+2.1
+]
+],
+[
+[
+9.952,
+-26.421,
+2.1
+],
+[
+10.752,
+-26.421,
+2.1
+],
+[
+10.752,
+-26.320999999999998,
+2.1
+],
+[
+9.952,
+-26.320999999999998,
+2.1
+]
+]
+],
+"note": "hinge side is not authored; this side (hinge [np.float64(10.752), np.float64(-26.371)], swing -) clears furniture and walls over the whole swing and keeps >= 0.3 m from the camera in every frame of the animation"
+},
+"schedule": {
+"close_start": 8076,
+"close_end": 8124,
+"open_start": 8358,
+"open_end": 8406
+},
+"features": [
+"furn-fb-wc"
 ]
 }
 ],
@@ -335,33 +489,32 @@
 "scheduled": false,
 "reason": "no swing side clears the camera in every frame of the animation",
 "blocked_frames": [
-6672,
-6738
+6430,
+6494
 ]
 },
 {
 "door": "door-GF-parents-bed-parents-dressing",
 "scheduled": true,
 "features": [
+"furn-pd-hang-1",
 "lum-VSTRIP-parents-dressing-03",
 "lum-VSTRIP-parents-dressing-04",
-"lum-VSTRIP-parents-dressing-05",
-"furn-pd-hang-1",
-"furn-pd-hang-2"
+"lum-VSTRIP-parents-dressing-05"
 ],
 "blocked_frames": [
-12170,
-12464
+10616,
+10696
 ],
 "schedule": {
-"close_start": 12122,
-"close_end": 12170,
-"open_start": 12418,
-"open_end": 12466
+"close_start": 10568,
+"close_end": 10616,
+"open_start": 10708,
+"open_end": 10756
 },
 "delay_frames": 0,
-"hold_after_last_blocked_frame_s": 0.08,
-"leave_frame": 12466,
+"hold_after_last_blocked_frame_s": 2.5,
+"leave_frame": 10796,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },
@@ -375,29 +528,42 @@
 "lum-STORE-BATTEN-store-ramp-03"
 ],
 "blocked_frames": [
-4930,
-5222
+4688,
+4980
 ],
 "schedule": {
-"close_start": 4882,
-"close_end": 4930,
-"open_start": 5191,
-"open_end": 5239
+"close_start": 4640,
+"close_end": 4688,
+"open_start": 4949,
+"open_end": 4997
 },
 "delay_frames": 0,
 "hold_after_last_blocked_frame_s": 0.71,
-"leave_frame": 5239,
+"leave_frame": 4997,
 "reopened_before_leaving": true,
 "route_gap_open_m": 0.35
 },
 {
 "door": "door-GF-gallery-end-family-bath",
-"scheduled": false,
-"reason": "no swing side clears the camera in every frame of the animation",
+"scheduled": true,
+"features": [
+"furn-fb-wc"
+],
 "blocked_frames": [
-8566,
-8836
-]
+8124,
+8404
+],
+"schedule": {
+"close_start": 8076,
+"close_end": 8124,
+"open_start": 8358,
+"open_end": 8406
+},
+"delay_frames": 0,
+"hold_after_last_blocked_frame_s": 0.08,
+"leave_frame": 8406,
+"reopened_before_leaving": true,
+"route_gap_open_m": 0.35
 }
 ]
 }
